@@ -129,7 +129,7 @@
 ; Parameters ....: $oRange              - A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. AutoOutline was successfully processed for range.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  --Processing Errors--
@@ -165,7 +165,7 @@ EndFunc   ;==>_LOCalc_RangeAutoOutline
 ;                  $iFlags              - (1-1023) The Cell Content type to delete. Can be BitOR'd together. See Constants $LOC_CELL_FLAG_* as defined in LibreOfficeCalc_Constants.au3
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Contents specified was successfully cleared from the cell range.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $iFlags not an Integer, less than 1 or greater than 1023. See Constants $LOC_CELL_FLAG_* as defined in LibreOfficeCalc_Constants.au3.
@@ -197,7 +197,7 @@ EndFunc   ;==>_LOCalc_RangeClearContents
 ;                  $iCount              - [optional] Default is 1. The number of columns to delete after the called column.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully deleted requested columns.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $iColumns not an Integer, less than 0 or greater than number of Columns contained in the Range.
@@ -237,7 +237,7 @@ EndFunc   ;==>_LOCalc_RangeColumnDelete
 ; Parameters ....: $oColumn             - A Column object returned by a previous _LOCalc_RangeColumnGetObjByPosition, or _LOCalc_RangeColumnGetObjByName function.
 ; Return values .: Success: String
 ;                  @Error: 0, @Extended: 0, Return: String = Success. Success, returning Column's name.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oColumn not an Object.
 ;                  --Processing Errors--
@@ -271,7 +271,7 @@ EndFunc   ;==>_LOCalc_RangeColumnGetName
 ;                  $sName               - The Column name to retrieve the Object for, such as "A".
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Success, returning Column's Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $sName not a String.
@@ -313,7 +313,7 @@ EndFunc   ;==>_LOCalc_RangeColumnGetObjByName
 ;                  $iColumn             - The Column number to retrieve the Object for. See remarks.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Success, returning Column's Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $iColumn not an Integer, less than 0 or greater than number of columns contained in the Range.
@@ -354,7 +354,7 @@ EndFunc   ;==>_LOCalc_RangeColumnGetObjByPosition
 ;                  $iCount              - [optional] Default is 1. The number of blank columns to insert after the Column called.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully inserted blank columns.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $iColumn not an Integer, less than 0 or greater than number of Columns contained in the Range.
@@ -397,7 +397,7 @@ EndFunc   ;==>_LOCalc_RangeColumnInsert
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oColumn not an Object.
 ;                  @Error: 1, @Extended: 2 = $bManualPageBreak not a Boolean.
@@ -455,7 +455,7 @@ EndFunc   ;==>_LOCalc_RangeColumnPageBreak
 ; Parameters ....: $oRange              - A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning number of Columns contained in the Range.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  --Processing Errors--
@@ -495,7 +495,7 @@ EndFunc   ;==>_LOCalc_RangeColumnsGetCount
 ; Return values .: Success: 1 or Boolean
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Boolean = Success. All optional parameters were called with Null, returning Column's current visibility setting.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oColumn not an Object.
 ;                  @Error: 1, @Extended: 2 = $bVisible not a Boolean.
@@ -545,7 +545,7 @@ EndFunc   ;==>_LOCalc_RangeColumnVisible
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oColumn not an Object.
 ;                  @Error: 1, @Extended: 2 = $bOptimal not a Boolean.
@@ -603,7 +603,7 @@ EndFunc   ;==>_LOCalc_RangeColumnWidth
 ;                  $iFunction           - (0-12) The Computation Function to perform. See Constants $LOC_COMPUTE_FUNC_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: Number
 ;                  @Error: 0, @Extended: 0, Return: Number = Success. Successfully performed the requested computation, returning the result as a Numerical value.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $iFunction not an Integer, less than 0 or greater than 12. See Constants $LOC_COMPUTE_FUNC_* as defined in LibreOfficeCalc_Constants.au3.
@@ -642,7 +642,7 @@ EndFunc   ;==>_LOCalc_RangeCompute
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Cell or Cell range was successfully copied to destination.
 ;                  @Error: 0, @Extended: 1, Return: 1 = Success. Cell or Cell range was successfully moved to destination.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSheet not an Object.
 ;                  @Error: 1, @Extended: 2 = $oRangeSrc not an Object.
@@ -705,7 +705,7 @@ EndFunc   ;==>_LOCalc_RangeCopyMove
 ;                  $oRange              - A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully created a Sheet Cursor for the specified Range, returning its Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSheet not an Object.
 ;                  @Error: 1, @Extended: 2 = $oRange not an Object.
@@ -743,7 +743,7 @@ EndFunc   ;==>_LOCalc_RangeCreateCursor
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Data was successfully set for the cell range.
 ;                  @Error: 0, @Extended: 1, Return: Array of Arrays = Success. $aavData called with Null, returning an array containing arrays, which contain any data content contained in the cell range.
-;                  Failure: 0 or ? and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $aavData not an Array.
@@ -857,7 +857,7 @@ EndFunc   ;==>_LOCalc_RangeData
 ;                  $bAutoFilter         - [optional] Default is False. If True, the Auto Filter option is enabled.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully added a new Database Range, returning its Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oRange not an Object.
@@ -924,7 +924,7 @@ EndFunc   ;==>_LOCalc_RangeDatabaseAdd
 ;                  $oDatabaseRange      - A Database Range Object as returned from _LOCalc_RangeDatabaseAdd or _LOCalc_RangeDatabaseGetObjByName.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully deleted the requested Database Range.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oDatabaseRange not an Object and not a String.
@@ -972,7 +972,7 @@ EndFunc   ;==>_LOCalc_RangeDatabaseDelete
 ;                  $sName               - The Database Range name to search for.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the document contains a Database Range by the called name. Else False.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sName not a String.
@@ -1012,7 +1012,7 @@ EndFunc   ;==>_LOCalc_RangeDatabaseExists
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning an array of Database Ranges contained in the document. @Extended set to number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
@@ -1055,7 +1055,7 @@ EndFunc   ;==>_LOCalc_RangeDatabaseGetNames
 ;                  $sName               - The name of the Database Range to retrieve the Object for.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested Database Range Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sName not a String.
@@ -1106,7 +1106,7 @@ EndFunc   ;==>_LOCalc_RangeDatabaseGetObjByName
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oDatabaseRange not an Object.
@@ -1231,7 +1231,7 @@ EndFunc   ;==>_LOCalc_RangeDatabaseModify
 ;                  $iMode               - (0-4) The Cell Deletion Mode. See Constants $LOC_CELL_DELETE_MODE_* as defined in LibreOfficeCalc_Constants.au3
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Cell range was successfully cleared.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSheet not an Object.
 ;                  @Error: 1, @Extended: 2 = $oRange not an Object.
@@ -1271,7 +1271,7 @@ EndFunc   ;==>_LOCalc_RangeDelete
 ;                  $bShow               - [optional] Default is True. If True, grouped cells are expanded, If False, grouped cells are collapsed.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Expand or Hiding of Grouped cells was successfully processed for Range.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $bShow not a Boolean.
@@ -1315,7 +1315,7 @@ EndFunc   ;==>_LOCalc_RangeDetail
 ;                  $iCount              - [optional] Default is 1. The number of Cells to take into account at the beginning of the range to constitute the fill algorithm.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Fill operation was successfully processed.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $iDirection not an Integer, less than 0 or greater than 3. See Constants $LOC_FILL_DIR_* as defined in LibreOfficeCalc_Constants.au3.
@@ -1352,7 +1352,7 @@ EndFunc   ;==>_LOCalc_RangeFill
 ;                  $bFillByRows         - [optional] Default is True. If True, the range is filled top to bottom, left to right. If False, the range is filled left to right, top to bottom.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Range successfully filled with random values.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $nMin not a number, less than -2^31 or greater then 2^31.
@@ -1413,7 +1413,7 @@ EndFunc   ;==>_LOCalc_RangeFillRandom
 ;                  $iDateMode           - [optional] (0-3) Default is $LOC_FILL_DATE_MODE_DAY. The mode to calculate dates if $iMode is set to $LOC_FILL_MODE_DATE. See Constants $LOC_FILL_DATE_MODE_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Fill series was successfully processed.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $iDirection not an Integer, less than 0 or greater than 3. See Constants $LOC_FILL_DIR_* as defined in LibreOfficeCalc_Constants.au3.
@@ -1452,7 +1452,7 @@ EndFunc   ;==>_LOCalc_RangeFillSeries
 ;                  $oFilterDesc         - A Filter Descriptor created by a previous _LOCalc_FilterDescriptorCreate function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully processed Filter operation.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFilterDesc not an Object.
@@ -1502,7 +1502,7 @@ EndFunc   ;==>_LOCalc_RangeFilter
 ;                  $oFilterDescRange    - The Range containing the Filter Criteria. See remarks. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Range was successfully filtered.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFilterDescRange not an Object.
@@ -1539,7 +1539,7 @@ EndFunc   ;==>_LOCalc_RangeFilterAdvanced
 ; Parameters ....: $oRange              - The Range to clear filtering for. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully cleared any old Filters for the Range.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  --Initialization Errors--
@@ -1576,7 +1576,7 @@ EndFunc   ;==>_LOCalc_RangeFilterClear
 ;                  $sSearchString       - A String of text or regular expression to search for.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Search was Successful, returning 1 dimensional array containing the objects to each match, @Extended is set to the number of matches.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $oSrchDescript not an Object.
@@ -1631,7 +1631,7 @@ EndFunc   ;==>_LOCalc_RangeFindAll
 ; Return values .: Success: Object or 1.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Search was successful but found no matches.
 ;                  @Error: 0, @Extended: 1, Return: Object = Success. Search was successful, returning the resulting Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $oSrchDescript not an Object.
@@ -1686,7 +1686,7 @@ EndFunc   ;==>_LOCalc_RangeFindNext
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Formulas were successfully set for the cell range.
 ;                  @Error: 0, @Extended: 1, Return: Array of Arrays = Success. $aasFormulas called with Null, returning an array containing arrays, which contain any Formula content contained in the cell range.
-;                  Failure: 0 or ? and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $aasFormulas not an Array.
@@ -1791,7 +1791,7 @@ EndFunc   ;==>_LOCalc_RangeFormula
 ; Parameters ....: $oRange              - A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: String
 ;                  @Error: 0, @Extended: 0, Return: String = Success. Successfully retrieved Range's address, returning it as a string.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  --Processing Errors--
@@ -1824,7 +1824,7 @@ EndFunc   ;==>_LOCalc_RangeGetAddressAsName
 ; Parameters ....: $oRange              - A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: 0, Return: Array = Success. Successfully retrieved Range's address, returning it as a 5 element Array. See remarks.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  --Processing Errors--
@@ -1866,7 +1866,7 @@ EndFunc   ;==>_LOCalc_RangeGetAddressAsPosition
 ;                  $sToCellName         - [optional] Default is Null. The cell to end the Cell Range at.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully retrieved and returning requested Cell or Cell Range Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $sFromCellName not a String.
@@ -1911,7 +1911,7 @@ EndFunc   ;==>_LOCalc_RangeGetCellByName
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully retrieved and returned an Individual Cell's Object.
 ;                  @Error: 0, @Extended: 1, Return: Object = Success. Successfully retrieved and returned a Cell Range Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $iColumn not an Integer, less than 0 or greater than number of Columns contained in the Range.
@@ -1969,7 +1969,7 @@ EndFunc   ;==>_LOCalc_RangeGetCellByPosition
 ; Parameters ....: $oRange              - A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully retrieved Range's parent Sheet, returning the Sheet's Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  --Processing Errors--
@@ -2004,7 +2004,7 @@ EndFunc   ;==>_LOCalc_RangeGetSheet
 ;                  $bGroup              - [optional] Default is True. If True Cells are Grouped, if False, cells are Ungrouped.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Group or Ungroup was successfully processed for range.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants $LOC_GROUP_ORIENT_* as defined in LibreOfficeCalc_Constants.au3.
@@ -2050,7 +2050,7 @@ EndFunc   ;==>_LOCalc_RangeGroup
 ;                  $iMode               - (0-4) The Cell Insertion Mode. See Constants $LOC_CELL_INSERT_MODE_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Blank cells were successfully inserted.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSheet not an Object.
 ;                  @Error: 1, @Extended: 2 = $oRange not an Object.
@@ -2091,7 +2091,7 @@ EndFunc   ;==>_LOCalc_RangeInsert
 ; Parameters ....: $oRange              - A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if Range is merged, else False. See remarks.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  --Processing Errors--
@@ -2125,7 +2125,7 @@ EndFunc   ;==>_LOCalc_RangeIsMerged
 ;                  $bMerge              - If True, the Cells within the range are merged. If False, any merged cells intercepting the Range will be unmurged. See remarks.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Range was successfully merged or unmerged.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $bMerge not a Boolean.
@@ -2159,7 +2159,7 @@ EndFunc   ;==>_LOCalc_RangeMerge
 ;                  $oRefCell            - [optional] Default is Null. The reference cell for the Range or Formula set in $vRange.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully added a new Named Range, returning its Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $vRange not an Object and not a String.
@@ -2252,7 +2252,7 @@ EndFunc   ;==>_LOCalc_RangeNamedAdd
 ;                  $sNewName            - [optional] Default is "". A new name for the Range. Empty String means the name is reused.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully changed the scope of the Named Range.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oNamedRange not an Object.
@@ -2334,7 +2334,7 @@ EndFunc   ;==>_LOCalc_RangeNamedChangeScope
 ;                  $sNamedRange         - The name of the Named Range to delete.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully deleted the requested Named Range.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $sNamedRange not a String.
@@ -2377,7 +2377,7 @@ EndFunc   ;==>_LOCalc_RangeNamedDeleteByName
 ;                  $oNamedRange         - The Named Range Object to delete as returned from _LOCalc_RangeNamedAdd or _LOCalc_RangeNamedGetObjByName.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully deleted the requested Named Range.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $oNamedRange not an Object.
@@ -2427,7 +2427,7 @@ EndFunc   ;==>_LOCalc_RangeNamedDeleteByObj
 ;                  $sName               - The Named Range name to look for.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Scope contains a Named Range by the called name. Else False.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $sName not a String.
@@ -2467,7 +2467,7 @@ EndFunc   ;==>_LOCalc_RangeNamedExists
 ; Parameters ....: $oObj                - See remarks. A Document or Sheet object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, _LOCalc_DocCreate, _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning an array of Named Ranges contained in the called scope. @Extended set to number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  --Processing Errors--
@@ -2510,7 +2510,7 @@ EndFunc   ;==>_LOCalc_RangeNamedGetNames
 ;                  $sName               - The name of the Named Range to retrieve the Object for.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested Named Range Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $sName not a String.
@@ -2557,7 +2557,7 @@ EndFunc   ;==>_LOCalc_RangeNamedGetObjByName
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oNamedRange not an Object.
@@ -2681,7 +2681,7 @@ EndFunc   ;==>_LOCalc_RangeNamedModify
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Values were successfully set for the cell range.
 ;                  @Error: 0, @Extended: 1, Return: Array of Arrays = Success. $aanNumbers called with Null, returning an array containing arrays, which contain any numerical content contained in the cell range.
-;                  Failure: 0 or ? and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $aanNumbers not an Array.
@@ -2786,7 +2786,7 @@ EndFunc   ;==>_LOCalc_RangeNumbers
 ; Parameters ....: $oSheet              - A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Outlining successfully cleared.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSheet not an Object.
 ; Author ........: donnyh13
@@ -2816,7 +2816,7 @@ EndFunc   ;==>_LOCalc_RangeOutlineClearAll
 ;                  $iOrientation        - [optional] (0-1) Default is $LOC_GROUP_ORIENT_ROWS. The orientation of the Outlines. See Constants $LOC_GROUP_ORIENT_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. command was successfully processed for the Sheet.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSheet not an Object.
 ;                  @Error: 1, @Extended: 2 = $iLevel not an Integer, or less than 0.
@@ -2849,7 +2849,7 @@ EndFunc   ;==>_LOCalc_RangeOutlineShow
 ;                  $oPivotTable         - A Pivot Table object returned by a previous _LOCalc_RangePivotInsert, _LOCalc_RangePivotGetObjByName or _LOCalc_RangePivotGetObjByIndex function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Pivot Table was deleted successfully.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an object.
 ;                  @Error: 1, @Extended: 2 = $oPivotTable not an Object.
@@ -2901,7 +2901,7 @@ EndFunc   ;==>_LOCalc_RangePivotDelete
 ; Return values .: Success: 1 or Object
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Object = Success. All optional parameters were called with Null, returning current destination Range Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPivotTable not an Object.
@@ -3070,7 +3070,7 @@ EndFunc   ;==>_LOCalc_RangePivotDest
 ;                  $sName               - The Pivot Table name to look for.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning Boolean whether the Sheet contains a Pivot Table with the called name (True) or not (False).
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSheet not an Object.
 ;                  @Error: 1, @Extended: 2 = $sName not a String.
@@ -3106,7 +3106,7 @@ EndFunc   ;==>_LOCalc_RangePivotExists
 ;                  $sName               - The Pivot Field name to retrieve the Object for.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested Pivot Table Field Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPivotTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $sName not a String.
@@ -3143,7 +3143,7 @@ EndFunc   ;==>_LOCalc_RangePivotFieldGetObjByName
 ; Parameters ....: $oPivotField         - A Pivot Table Field object returned by a previous _LOCalc_RangePivotFieldGetObjByName function.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning array of Item names contained in the Column/Field. @Extended is set to the number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPivotField not an Object.
 ;                  --Processing Errors--
@@ -3176,7 +3176,7 @@ EndFunc   ;==>_LOCalc_RangePivotFieldItemsGetNames
 ; Parameters ....: $oPivotTable         - A Pivot Table object returned by a previous _LOCalc_RangePivotInsert, _LOCalc_RangePivotGetObjByName or _LOCalc_RangePivotGetObjByIndex function.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning an array of Pivot Table Field Names currently set as Column Fields, contained in the Pivot Table. @Extended is set to number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPivotTable not an Object.
 ;                  --Processing Errors--
@@ -3220,7 +3220,7 @@ EndFunc   ;==>_LOCalc_RangePivotFieldsColumnsGetNames
 ; Parameters ....: $oPivotTable         - A Pivot Table object returned by a previous _LOCalc_RangePivotInsert, _LOCalc_RangePivotGetObjByName or _LOCalc_RangePivotGetObjByIndex function.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning an array of Pivot Table Field Names currently set as Data Fields, contained in the Pivot Table. @Extended is set to number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPivotTable not an Object.
 ;                  --Processing Errors--
@@ -3272,7 +3272,7 @@ EndFunc   ;==>_LOCalc_RangePivotFieldsDataGetNames
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPivotField not an Object.
 ;                  @Error: 1, @Extended: 2 = $iFieldType not an Integer, less than 0 or greater than 4. See Constants $LOC_PIVOT_TBL_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
@@ -3403,7 +3403,7 @@ EndFunc   ;==>_LOCalc_RangePivotFieldSettings
 ; Parameters ....: $oPivotTable         - A Pivot Table object returned by a previous _LOCalc_RangePivotInsert, _LOCalc_RangePivotGetObjByName or _LOCalc_RangePivotGetObjByIndex function.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning an array of Pivot Table Field Names currently set as Filter Fields, contained in the Pivot Table. @Extended is set to number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPivotTable not an Object.
 ;                  --Processing Errors--
@@ -3447,7 +3447,7 @@ EndFunc   ;==>_LOCalc_RangePivotFieldsFiltersGetNames
 ; Parameters ....: $oPivotTable         - A Pivot Table object returned by a previous _LOCalc_RangePivotInsert, _LOCalc_RangePivotGetObjByName or _LOCalc_RangePivotGetObjByIndex function.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning an array of Pivot Table Field Names contained in the Pivot Table. @Extended is set to number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPivotTable not an Object.
 ;                  --Processing Errors--
@@ -3491,7 +3491,7 @@ EndFunc   ;==>_LOCalc_RangePivotFieldsGetNames
 ; Parameters ....: $oPivotTable         - A Pivot Table object returned by a previous _LOCalc_RangePivotInsert, _LOCalc_RangePivotGetObjByName or _LOCalc_RangePivotGetObjByIndex function.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning an array of Pivot Table Field Names currently set as Row Fields, contained in the Pivot Table. @Extended is set to number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPivotTable not an Object.
 ;                  --Processing Errors--
@@ -3535,7 +3535,7 @@ EndFunc   ;==>_LOCalc_RangePivotFieldsRowsGetNames
 ; Parameters ....: $oPivotTable         - A Pivot Table object returned by a previous _LOCalc_RangePivotInsert, _LOCalc_RangePivotGetObjByName or _LOCalc_RangePivotGetObjByIndex function.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning an array of Pivot Table Field Names currently not used in any field types, contained in the Pivot Table. @Extended is set to number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPivotTable not an Object.
 ;                  --Processing Errors--
@@ -3584,7 +3584,7 @@ EndFunc   ;==>_LOCalc_RangePivotFieldsUnusedGetNames
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPivotTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $atFilterField not an array or has more than 3 elements.
@@ -3664,7 +3664,7 @@ EndFunc   ;==>_LOCalc_RangePivotFilter
 ; Parameters ....: $oPivotTable         - A Pivot Table object returned by a previous _LOCalc_RangePivotInsert, _LOCalc_RangePivotGetObjByName or _LOCalc_RangePivotGetObjByIndex function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully cleared the Pivot Table Filter.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPivotTable not an Object.
 ;                  --Processing Errors--
@@ -3703,7 +3703,7 @@ EndFunc   ;==>_LOCalc_RangePivotFilterClear
 ;                  $iIndex              - The Index number of the Pivot Table to retrieve the Object for. 0 Based.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested Pivot Table's Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSheet not an Object.
 ;                  @Error: 1, @Extended: 2 = $iIndex not an Integer, less than 0 or greater than number of Pivot Tables contained in Sheet.
@@ -3739,7 +3739,7 @@ EndFunc   ;==>_LOCalc_RangePivotGetObjByIndex
 ;                  $sName               - The name of the Pivot Table to retrieve the Object for.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested Pivot Table's Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSheet not an Object.
 ;                  @Error: 1, @Extended: 2 = $sName not a String.
@@ -3781,7 +3781,7 @@ EndFunc   ;==>_LOCalc_RangePivotGetObjByName
 ;                  $iFunc               - [optional] (0-12) Default is $LOC_COMPUTE_FUNC_NONE. The function to set for the Field. See Constants $LOC_COMPUTE_FUNC_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning new Pivot Table's Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSourceRange not an object.
 ;                  @Error: 1, @Extended: 2 = $oDestRange not an object.
@@ -3890,7 +3890,7 @@ EndFunc   ;==>_LOCalc_RangePivotInsert
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Name was successfully set.
 ;                  @Error: 0, @Extended: 1, Return: String = Success. All optional parameters were called with Null, returning Pivot Table's current Name as a string.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPivotTable not an Object.
@@ -3948,7 +3948,7 @@ EndFunc   ;==>_LOCalc_RangePivotName
 ; Parameters ....: $oPivotTable         - A Pivot Table object returned by a previous _LOCalc_RangePivotInsert, _LOCalc_RangePivotGetObjByName or _LOCalc_RangePivotGetObjByIndex function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Pivot Table was successfully refreshed.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPivotTable not an Object.
 ; Author ........: donnyh13
@@ -3983,7 +3983,7 @@ EndFunc   ;==>_LOCalc_RangePivotRefresh
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPivotTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $bIgnoreEmpty not a Boolean.
@@ -4077,7 +4077,7 @@ EndFunc   ;==>_LOCalc_RangePivotSettings
 ; Parameters ....: $oSheet              - A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning a Count of Pivot tables contained in the Sheet.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSheet not an Object.
 ;                  --Processing Errors--
@@ -4110,7 +4110,7 @@ EndFunc   ;==>_LOCalc_RangePivotsGetCount
 ; Parameters ....: $oSheet              - A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning an array of Pivot Table Names contained in the Sheet. @Extended is set to number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSheet not an Object.
 ;                  --Processing Errors--
@@ -4157,7 +4157,7 @@ EndFunc   ;==>_LOCalc_RangePivotsGetNames
 ; Return values .: Success: 1 or Object
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Source Range was successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Object = Success. All optional parameters were called with Null, returning current source Range Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oPivotTable not an Object.
@@ -4213,7 +4213,7 @@ EndFunc   ;==>_LOCalc_RangePivotSource
 ;                  $oCellToCompare      - A single Cell object (not a range) returned by a previous _LOCalc_RangeGetCellByName, or _LOCalc_RangeGetCellByPosition function. The Row this cell is located in will be used for the query.
 ; Return values .: Success: Array.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning query results array of Cell Range Objects. @Extended set to number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $oCellToCompare not an Object.
@@ -4269,7 +4269,7 @@ EndFunc   ;==>_LOCalc_RangeQueryColumnDiff
 ;                  $iFlags              - (1-1023) The Cell content type flag. Can be BitOR'd together. See Constants $LOC_CELL_FLAG_* as defined in LibreOfficeCalc_Constants.au3
 ; Return values .: Success: Array.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning query results array of Cell Range Objects. @Extended set to number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $iFlags not an Integer, less than 1 or greater than 1023. See Constants $LOC_CELL_FLAG_* as defined in LibreOfficeCalc_Constants.au3
@@ -4318,7 +4318,7 @@ EndFunc   ;==>_LOCalc_RangeQueryContents
 ;                  $bRecursive          - [optional] Default is False. If True, the query is repeated for each found cell.
 ; Return values .: Success: Array.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning query results array of Cell Range Objects. @Extended set to number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $bRecursive not a Boolean.
@@ -4366,7 +4366,7 @@ EndFunc   ;==>_LOCalc_RangeQueryDependents
 ; Parameters ....: $oRange              - A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: Array.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning query results array of Cell Range Objects. @Extended set to number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  --Processing Errors--
@@ -4413,7 +4413,7 @@ EndFunc   ;==>_LOCalc_RangeQueryEmpty
 ;                  $iResultType         - (1-7) The Formula result type. Can be BitOR'd together. See Constants $LOC_FORMULA_RESULT_TYPE_* as defined in LibreOfficeCalc_Constants.au3
 ; Return values .: Success: Array.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning query results array of Cell Range Objects. @Extended set to number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $iResultType not an Integer, less than 1 or greater than 7. See Constants $LOC_FORMULA_RESULT_TYPE_* as defined in LibreOfficeCalc_Constants.au3
@@ -4462,7 +4462,7 @@ EndFunc   ;==>_LOCalc_RangeQueryFormula
 ;                  $oCell               - A Cell or Cell Range located inside of the cell range called in $oRange. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: Array.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning query results array of Cell Range Objects. @Extended set to number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $oCell not an Object.
@@ -4516,7 +4516,7 @@ EndFunc   ;==>_LOCalc_RangeQueryIntersection
 ;                  $bRecursive          - [optional] Default is False. If True, the query is repeated for each found cell.
 ; Return values .: Success: Array.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning query results array of Cell Range Objects. @Extended set to number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $bRecursive not a Boolean.
@@ -4565,7 +4565,7 @@ EndFunc   ;==>_LOCalc_RangeQueryPrecedents
 ;                  $oCellToCompare      - A single Cell object (not a range) returned by a previous _LOCalc_RangeGetCellByName, or _LOCalc_RangeGetCellByPosition function. The Column this cell is located in will be used for the query.
 ; Return values .: Success: Array.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning query results array of Cell Range Objects. @Extended set to number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $oCellToCompare not an Object.
@@ -4620,7 +4620,7 @@ EndFunc   ;==>_LOCalc_RangeQueryRowDiff
 ; Parameters ....: $oRange              - A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: Array.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning query results array of Cell Range Objects. @Extended set to number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  --Processing Errors--
@@ -4670,7 +4670,7 @@ EndFunc   ;==>_LOCalc_RangeQueryVisible
 ; Return values .: Success: 0 or Object
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Search and replace was successful, no results found.
 ;                  @Error: 0, @Extended: 1, Return: Object = Success. Search and Replace was successful, returning Object for Cell that the find and replace was performed upon.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $oSrchDescript not an Object.
@@ -4722,7 +4722,7 @@ EndFunc   ;==>_LOCalc_RangeReplace
 ; Return values .: Success: 0 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Search was successful, no results found.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Search and Replace was successful, @Extended set to number of replacements made, returning array Cell/CellRange Objects of all Cells modified.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $oSrchDescript not an Object.
@@ -4782,7 +4782,7 @@ EndFunc   ;==>_LOCalc_RangeReplaceAll
 ;                  $iCount              - [optional] Default is 1. The number of rows to delete, including the row called in $iRow.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully deleted requested rows.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $iRow not an Integer, less than 0 or greater than number of Rows contained in the Range.
@@ -4823,7 +4823,7 @@ EndFunc   ;==>_LOCalc_RangeRowDelete
 ;                  $iRow                - The Row number to retrieve the Row Object for. See remarks.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Success, returning Row's Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $iRow not an Integer, less than 0 or greater than number of Rows contained in the Range.
@@ -4865,7 +4865,7 @@ EndFunc   ;==>_LOCalc_RangeRowGetObjByPosition
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oColumn not an Object.
 ;                  @Error: 1, @Extended: 2 = $bOptimal not a Boolean.
@@ -4923,7 +4923,7 @@ EndFunc   ;==>_LOCalc_RangeRowHeight
 ;                  $iCount              - [optional] Default is 1. The number of blank rows to insert.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully inserted blank rows.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $iRow not an Integer, less than 0 or greater than number of Rows contained in the Range.
@@ -4966,7 +4966,7 @@ EndFunc   ;==>_LOCalc_RangeRowInsert
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRow not an Object.
 ;                  @Error: 1, @Extended: 2 = $bManualPageBreak not a Boolean.
@@ -5024,7 +5024,7 @@ EndFunc   ;==>_LOCalc_RangeRowPageBreak
 ; Parameters ....: $oRange              - A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning number of Rows contained in the Range.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  --Processing Errors--
@@ -5064,7 +5064,7 @@ EndFunc   ;==>_LOCalc_RangeRowsGetCount
 ; Return values .: Success: 1 or Boolean
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Boolean = Success. All optional parameters were called with Null, returning Row's current visibility setting.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRow not an Object.
 ;                  @Error: 1, @Extended: 2 = $bVisible not a Boolean.
@@ -5120,7 +5120,7 @@ EndFunc   ;==>_LOCalc_RangeRowVisible
 ;                  $tSortField3         - [optional] Default is Null. Another Sort Field Struct created by a previous _LOCalc_SortFieldCreate function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Sort was successfully processed for requested Range.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oRange not an Object.
@@ -5310,7 +5310,7 @@ EndFunc   ;==>_LOCalc_RangeSort
 ;                  $tSortField3         - [optional] Default is Null. Another Sort Field Struct created by a previous _LOCalc_SortFieldCreate function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Sort was successfully processed for requested Range.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oRange not an Object.
@@ -5488,7 +5488,7 @@ EndFunc   ;==>_LOCalc_RangeSortAlt
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 0 or greater than 7. See Constants $LOC_VALIDATION_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
@@ -5624,7 +5624,7 @@ EndFunc   ;==>_LOCalc_RangeValidation
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $bInputMsg not a Boolean.

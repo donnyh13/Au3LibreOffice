@@ -64,7 +64,7 @@
 ; Return values .: Success: 1 or Object.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Sheet was successfully activated.
 ;                  @Error: 0, @Extended: 0, Return: Object = Returning currently active sheet's Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oSheet not an Object.
@@ -113,7 +113,7 @@ EndFunc   ;==>_LOCalc_SheetActive
 ;                  $iPosition           - [optional] Default is Null. The position to insert the new sheet. If left as Null, new sheet is inserted at the end. See remarks.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. New sheet was successfully inserted, returning its Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sName not a String.
@@ -179,7 +179,7 @@ EndFunc   ;==>_LOCalc_SheetAdd
 ;                  $iPosition           - [optional] Default is Null. The position to place the copied sheet at. 0 = the beginning.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully copied the Sheet. Returning the new Sheet's Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oSheet not an Object.
@@ -249,7 +249,7 @@ EndFunc   ;==>_LOCalc_SheetCopy
 ; Parameters ....: $oSheet              - A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully created a Sheet Cursor, returning its Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSheet not an Object.
 ;                  --Initialization Errors--
@@ -282,7 +282,7 @@ EndFunc   ;==>_LOCalc_SheetCreateCursor
 ; Parameters ....: $oSheet              - A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. All Detective arrows were successfully cleared.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSheet not an Object.
 ; Author ........: donnyh13
@@ -311,7 +311,7 @@ EndFunc   ;==>_LOCalc_SheetDetectiveClear
 ;                  $bShow               - [optional] Default is True. If True, Dependent marking arrows will be added one level, if False, marking arrows will be removed one level.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if Dependents were marked/cleared one level, else False.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCell not an Object.
 ;                  @Error: 1, @Extended: 2 = $oCell not a Cell Object.
@@ -359,7 +359,7 @@ EndFunc   ;==>_LOCalc_SheetDetectiveDependent
 ; Parameters ....: $oSheet              - A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if invalid data was marked, else False.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSheet not an Object.
 ;                  --Processing Errors--
@@ -393,7 +393,7 @@ EndFunc   ;==>_LOCalc_SheetDetectiveInvalidData
 ;                  $bShow               - [optional] Default is True. If True, Precedent marking arrows will be added one level, if False, marking arrows will be removed one level.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if precedents were marked/cleared one level, else False.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCell not an Object.
 ;                  @Error: 1, @Extended: 2 = $oCell not a Cell Object.
@@ -441,7 +441,7 @@ EndFunc   ;==>_LOCalc_SheetDetectivePrecedent
 ; Parameters ....: $oCell               - A Cell object returned by a previous _LOCalc_RangeGetCellByName, or _LOCalc_RangeGetCellByPosition function.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if Errors were marked, else False.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCell not an Object.
 ;                  @Error: 1, @Extended: 2 = $oCell not a Cell Object.
@@ -482,7 +482,7 @@ EndFunc   ;==>_LOCalc_SheetDetectiveTraceError
 ;                  $sName               - The sheet name to check for.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the document contains a Sheet matching $sName, True is returned. Else False.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sName not a String.
@@ -520,7 +520,7 @@ EndFunc   ;==>_LOCalc_SheetExists
 ;                  $sName               - The sheet name to retrieve the Object for.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested Sheet's object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sName not a String.
@@ -562,7 +562,7 @@ EndFunc   ;==>_LOCalc_SheetGetObjByName
 ;                  $iPosition           - The 0 based position of the Sheet, to retrieve the Object for.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested Sheet's object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $iPosition not an Integer, less than 0 or greater than number of Sheets contained in the document.
@@ -604,7 +604,7 @@ EndFunc   ;==>_LOCalc_SheetGetObjByPosition
 ;                  $bInsertAfter        - [optional] Default is False. If True, the Sheet is inserted after the currently active Sheet. If False, the Sheet is inserted before the currently active Sheet.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully imported the requested Sheet, returning the new Sheet's Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSourceDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oDestDoc not an Object.
@@ -660,7 +660,7 @@ EndFunc   ;==>_LOCalc_SheetImport
 ;                  $oSheet              - A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the called Sheet is the currently active sheet, True is returned. Else False.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oSheet not an Object.
@@ -697,7 +697,7 @@ EndFunc   ;==>_LOCalc_SheetIsActive
 ; Parameters ....: $oSheet              - A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Successfully queried Sheet's protection status, returning a boolean indicating if the sheet is currently protected (True), or not (False).
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSheet not an Object.
 ;                  --Processing Errors--
@@ -734,7 +734,7 @@ EndFunc   ;==>_LOCalc_SheetIsProtected
 ;                  $bInsertAfter        - [optional] Default is False. If True, the Sheet is inserted after the currently active Sheet. If False, the Sheet is inserted before the currently active Sheet.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully inserted and linked the new Sheet, returning the new Sheet's Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSourceDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oDestDoc not an Object.
@@ -812,7 +812,7 @@ EndFunc   ;==>_LOCalc_SheetLink
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSheet not an Object.
 ;                  @Error: 1, @Extended: 2 = $oNewDoc not an Object.
@@ -923,7 +923,7 @@ EndFunc   ;==>_LOCalc_SheetLinkModify
 ; Return values .: Success: 1 or Integer
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Sheet was successfully moved.
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. $iPosition called with Null, returning Sheet's current position.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oSheet not an Object.
@@ -979,7 +979,7 @@ EndFunc   ;==>_LOCalc_SheetMove
 ; Return values .: Success: 1 or String
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Sheet's new name was successfully set.
 ;                  @Error: 0, @Extended: 1, Return: String = Success. All optional parameters were called with Null, returning the Sheet's current name.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oSheet not an Object.
@@ -1039,7 +1039,7 @@ EndFunc   ;==>_LOCalc_SheetName
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSheet not an Object.
 ;                  @Error: 1, @Extended: 2 = $oRange not an Object.
@@ -1137,7 +1137,7 @@ EndFunc   ;==>_LOCalc_SheetPrintColumnsRepeat
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Print Range was successfully set.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning Array of Range Objects set to be printed. @Extended set to number of Ranges. See remarks.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSheet not an Object.
 ;                  @Error: 1, @Extended: 2 = $aoRange not an Array.
@@ -1203,7 +1203,7 @@ EndFunc   ;==>_LOCalc_SheetPrintRangeModify
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSheet not an Object.
 ;                  @Error: 1, @Extended: 2 = $oRange not an Object.
@@ -1300,7 +1300,7 @@ EndFunc   ;==>_LOCalc_SheetPrintRowsRepeat
 ;                  $sPassword           - The password to protect the sheet with.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Sheet was successfully protected with the called password.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSheet not an Object.
 ;                  @Error: 1, @Extended: 2 = $sPassword not a String.
@@ -1336,7 +1336,7 @@ EndFunc   ;==>_LOCalc_SheetProtect
 ;                  $oSheet              - A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully removed the requested sheet.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oSheet not an Object.
@@ -1383,7 +1383,7 @@ EndFunc   ;==>_LOCalc_SheetRemove
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning count of Sheets contained in the Calc Document.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
@@ -1422,7 +1422,7 @@ EndFunc   ;==>_LOCalc_SheetsGetCount
 ;                  $bLinkedOnly         - [optional] Default is False. If True, only Sheets that are linked will be returned. If False, all Sheets will be returned.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning Array of Sheet names for this document. @Extended set to number of results.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $bLinkedOnly not a Boolean.
@@ -1504,7 +1504,7 @@ EndFunc   ;==>_LOCalc_SheetsGetNames
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current Tab Color as an Integer
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSheet not an Object.
 ;                  @Error: 1, @Extended: 2 = $iColor not an Integer, less than -1 or greater than 16777215.
@@ -1551,7 +1551,7 @@ EndFunc   ;==>_LOCalc_SheetTabColor
 ;                  $sPassword           - The password previously used to protect the sheet.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Sheet was successfully unprotected with the called password.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSheet not an Object.
 ;                  @Error: 1, @Extended: 2 = $sPassword not a String.
@@ -1591,7 +1591,7 @@ EndFunc   ;==>_LOCalc_SheetUnprotect
 ; Return values .: Success: 1 or Boolean
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Sheet Visibility setting was successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Boolean = Success. $bVisible called with Null, returning current visibility setting. True indicates the Sheet is currently visible.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSheet not an Object.
 ;                  @Error: 1, @Extended: 2 = $bVisible not a Boolean.

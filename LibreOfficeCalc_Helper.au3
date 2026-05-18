@@ -58,7 +58,7 @@
 ;                  @Error: 0, @Extended: 0, Return: 1 = Successfully set the UserFunction.
 ;                  @Error: 0, @Extended: 0, Return: 2 = Successfully cleared the set UserFunction.
 ;                  @Error: 0, @Extended: 0, Return: Function = Returning the set UserFunction.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $vUserFunction Not a Function, or Default keyword, or Null Keyword.
 ; Author ........: mLipok
@@ -139,7 +139,7 @@ EndFunc   ;==>_LOCalc_ComError_UserFunction
 ;                  $bSaveCriteria       - [optional] Default is True. If True, the output range remains linked to the source range, allowing for future re-application of the same filter to the range. Source Range must be previously defined as a Database range.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully created a Filter descriptor Object, returning its Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $atFilterField not an Array, or Array contains more than 8 elements.
@@ -240,7 +240,7 @@ EndFunc   ;==>_LOCalc_FilterDescriptorCreate
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Filter Descriptor was successfully modified.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFilterDesc not an Object.
@@ -367,7 +367,7 @@ EndFunc   ;==>_LOCalc_FilterDescriptorModify
 ;                  $iOperator           - [optional] (0, 1) Default is $LOC_FILTER_OPERATOR_AND. The connection this filter field has with the previous filter field. See Constants $LOC_FILTER_OPERATOR_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: Struct
 ;                  @Error: 0, @Extended: 0, Return: Struct = Success. Successfully created and returned the Filter Field Structure.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $iColumn not an Integer.
 ;                  @Error: 1, @Extended: 2 = $bIsNumeric not a Boolean.
@@ -426,7 +426,7 @@ EndFunc   ;==>_LOCalc_FilterFieldCreate
 ; Return values .: Success: Struct
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Filter Field Structure was successfully modified.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $tFilterField not an Object.
 ;                  @Error: 1, @Extended: 2 = $iColumn not an Integer.
@@ -505,7 +505,7 @@ EndFunc   ;==>_LOCalc_FilterFieldModify
 ;                  $oDoc                - [optional] Default is Null. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: Boolean.
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Font is available, else False.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $sFontName not a String.
 ;                  --Initialization Errors--
@@ -577,7 +577,7 @@ EndFunc   ;==>_LOCalc_FontExists
 ; Parameters ....: $oDoc                - [optional] Default is Null. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning a 4 Column Array, @Extended is set to the number of results. See remarks
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create a "com.sun.star.ServiceManager" Object.
 ;                  @Error: 2, @Extended: 2 = Failed to create a "com.sun.star.frame.Desktop" Object.
@@ -656,7 +656,7 @@ EndFunc   ;==>_LOCalc_FontsGetNames
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Format Key was successfully created, returning Format Key Integer.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. Format Key already existed, returning Format Key Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sFormat not a String.
@@ -705,7 +705,7 @@ EndFunc   ;==>_LOCalc_FormatKeyCreate
 ;                  $iFormatKey          - The User-Created format Key to delete.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Format Key was successfully deleted.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $iFormatKey not an Integer.
@@ -750,7 +750,7 @@ EndFunc   ;==>_LOCalc_FormatKeyDelete
 ;                  $iFormatType         - [optional] (0-15881) Default is $LOC_FORMAT_KEYS_ALL. The Format Key type to search in. Values can be BitOr'd together. See Constants, $LOC_FORMAT_KEYS_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the Format Key exists in document, True is returned, else False.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $iFormatKey not an Integer.
@@ -804,7 +804,7 @@ EndFunc   ;==>_LOCalc_FormatKeyExists
 ;                  $iFormatKeyType      - (1-8196) The Format Key type to retrieve the standard Format for. See Constants $LOC_FORMAT_KEYS_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning the Standard Format for the requested Format Key Type.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $iFormatKeyType not an Integer, less than 1 or greater than 8196. See Constants $LOC_FORMAT_KEYS_* as defined in LibreOfficeCalc_Constants.au3.
@@ -851,7 +851,7 @@ EndFunc   ;==>_LOCalc_FormatKeyGetStandard
 ;                  $iFormatKey          - The Format Key to retrieve the string for.
 ; Return values .: Success: String
 ;                  @Error: 0, @Extended: 0, Return: String = Success. Returning Format Key's Format String.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $iFormatKey not an Integer.
@@ -896,7 +896,7 @@ EndFunc   ;==>_LOCalc_FormatKeyGetString
 ;                  $iFormatKeyType      - [optional] (0-15881) Default is $LOC_FORMAT_KEYS_ALL. The Format Key type to retrieve an array of. Values can be BitOr'd together. See Constants, $LOC_FORMAT_KEYS_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning a 2 or 3 column Array, depending on current $bIsUser setting. See remarks. @Extended is set to the number of Keys returned.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $bIsUser not a Boolean.
@@ -982,7 +982,7 @@ EndFunc   ;==>_LOCalc_FormatKeysGetList
 ;                  $bStyles             - [optional] Default is False. If True, the search string is considered a Cell Style name, and the search will return any Cell utilizing the specified name.
 ; Return values .: Success: Object.
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning a Search Descriptor Object for setting Search options.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $bBackwards not a Boolean.
@@ -1055,7 +1055,7 @@ EndFunc   ;==>_LOCalc_SearchDescriptorCreate
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Returning 1 after directly modifying Search Descriptor Object.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSrchDescript not an Object.
 ;                  @Error: 1, @Extended: 2 = $oSrchDescript Object not a Search Descriptor Object.
@@ -1161,7 +1161,7 @@ EndFunc   ;==>_LOCalc_SearchDescriptorModify
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Returning 1 after directly modifying Search Descriptor Object.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSrchDescript not an Object.
 ;                  @Error: 1, @Extended: 2 = $oSrchDescript Object not a Search Descriptor Object.
@@ -1245,7 +1245,7 @@ EndFunc   ;==>_LOCalc_SearchDescriptorSimilarityModify
 ;                  $bCaseSensitive      - [optional] Default is False. If True, sort will be case sensitive.
 ; Return values .: Success: Struct
 ;                  @Error: 0, @Extended: 0, Return: Struct = Success. Successfully created and returned a Sort Field Struct.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $iIndex not an Integer, or less than 0.
 ;                  @Error: 1, @Extended: 2 = $iDataType not an Integer, less than 0 or greater than 2. See Constants $LOC_SORT_DATA_TYPE_* as defined in LibreOfficeCalc_Constants.au3
@@ -1296,7 +1296,7 @@ EndFunc   ;==>_LOCalc_SortFieldCreate
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $tSortField not an Object.
 ;                  @Error: 1, @Extended: 2 = $iIndex not an Integer, or less than 0.

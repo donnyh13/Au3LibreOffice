@@ -45,7 +45,7 @@
 ;                  $bFieldName          - [optional] Default is False. If True, the Field command name is returned, else the current Field display is returned.
 ; Return values .: Success: String
 ;                  @Error: 0, @Extended: 0, Return: String = Success. Returning current Field display content in String format.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oField not a map.
 ;                  @Error: 1, @Extended: 2 = $bFieldName not a Boolean.
@@ -84,7 +84,7 @@ EndFunc   ;==>_LOCalc_FieldCurrentDisplayGet
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Map
 ;                  @Error: 0, @Extended: 0, Return: Map = Success. Successfully inserted the field, returning a Map containing the Field's Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oTextCursor not an Object.
@@ -138,7 +138,7 @@ EndFunc   ;==>_LOCalc_FieldDateTimeInsert
 ; Parameters ....: $mField              - A Map containing a Field Object as returned from a previous insert, or _LOCalc_FieldsGetList function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully deleted the field.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $mField not a map.
 ;                  --Initialization Errors--
@@ -181,7 +181,7 @@ EndFunc   ;==>_LOCalc_FieldDelete
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Map
 ;                  @Error: 0, @Extended: 0, Return: Map = Success. Successfully inserted the field, returning a map containing the Field's Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oTextCursor not an Object.
@@ -232,7 +232,7 @@ EndFunc   ;==>_LOCalc_FieldFileNameInsert
 ; Parameters ....: $mField              - A Map containing a Field Object as returned from a previous insert, or _LOCalc_FieldsGetList function.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested Field Anchor Cursor Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $mField not a map.
 ;                  --Initialization Errors--
@@ -270,7 +270,7 @@ EndFunc   ;==>_LOCalc_FieldGetAnchor
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Map
 ;                  @Error: 0, @Extended: 0, Return: Map = Success. Successfully inserted the field, returning a map containing the Field's Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oTextCursor not an Object.
@@ -330,7 +330,7 @@ EndFunc   ;==>_LOCalc_FieldHyperlinkInsert
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $mHyperlinkField not a map.
 ;                  @Error: 1, @Extended: 2 = $sURL not a String.
@@ -397,7 +397,7 @@ EndFunc   ;==>_LOCalc_FieldHyperlinkModify
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Map
 ;                  @Error: 0, @Extended: 0, Return: Map = Success. Successfully inserted the field, returning a map containing the Field's Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oTextCursor not an Object.
@@ -445,7 +445,7 @@ EndFunc   ;==>_LOCalc_FieldPageCountInsert
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Map
 ;                  @Error: 0, @Extended: 0, Return: Map = Success. Successfully inserted the field, returning a map containing the Field's Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oTextCursor not an Object.
@@ -493,7 +493,7 @@ EndFunc   ;==>_LOCalc_FieldPageNumberInsert
 ;                  $bFieldTypeNum       - [optional] Default is True. If True, adds a column to the array that has the Field Type Constant Integer for that particular Field, to assist in identifying the Field type. See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning Array of maps containing Text Field Objects with @Extended set to number of results. See Remarks for Array sizing.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
 ;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 1 or greater than 255. (The total of all Constants added together.) See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
@@ -621,7 +621,7 @@ EndFunc   ;==>_LOCalc_FieldsGetList
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Map
 ;                  @Error: 0, @Extended: 0, Return: Map = Success. Successfully inserted the field, returning a map containing the Field's Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oTextCursor not an Object.
@@ -669,7 +669,7 @@ EndFunc   ;==>_LOCalc_FieldSheetNameInsert
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Map
 ;                  @Error: 0, @Extended: 0, Return: Map = Success. Successfully inserted the field, returning a map containing the Field's Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oTextCursor not an Object.
