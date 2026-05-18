@@ -55,24 +55,24 @@
 ;                  $sInputForm          - The Name of the Form to Copy. Also the Sub-directory the Form is in. See Remarks.
 ;                  $sOutputForm         - The Name of the Form to Create. Also the Sub-directory to place the Form in. See Remarks.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Copied Form successfully inserted.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Copied Form successfully inserted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oConnection not an Object.
-;                  @Error 1 @Extended 2 = $sInputForm not a String.
-;                  @Error 1 @Extended 3 = $sOutputForm not a String.
-;                  @Error 1 @Extended 4 = Requested Form not found.
-;                  @Error 1 @Extended 5 = Form name called in $sInputForm not a Form.
-;                  @Error 1 @Extended 6 = Folder name called in $sOutputForm not found.
-;                  @Error 1 @Extended 7 = Form already exists with called name in Destination.
+;                  @Error: 1, @Extended: 1 = $oConnection not an Object.
+;                  @Error: 1, @Extended: 2 = $sInputForm not a String.
+;                  @Error: 1, @Extended: 3 = $sOutputForm not a String.
+;                  @Error: 1, @Extended: 4 = Requested Form not found.
+;                  @Error: 1, @Extended: 5 = Form name called in $sInputForm not a Form.
+;                  @Error: 1, @Extended: 6 = Folder name called in $sOutputForm not found.
+;                  @Error: 1, @Extended: 7 = Form already exists with called name in Destination.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.sdb.DocumentDefinition" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.sdb.DocumentDefinition" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Connection called in $oConnection is closed.
-;                  @Error 3 @Extended 2 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 3 = Failed to retrieve Source Form Object.
-;                  @Error 3 @Extended 4 = Failed to retrieve Destination Form name.
-;                  @Error 3 @Extended 5 = Failed to insert copied Form.
+;                  @Error: 3, @Extended: 1 = Connection called in $oConnection is closed.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Form Documents Object.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve Source Form Object.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve Destination Form name.
+;                  @Error: 3, @Extended: 5 = Failed to insert copied Form.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To copy a Form located inside a folder, the Form name MUST be prefixed by the folder path, separated by forward slashes (/). e.g. to create FormXYZ contained in folder 3, which is located in Folder 2, which is located inside folder 1, you would call $sInputForm with the following path: Folder1/Folder2/Folder3/FormXYZ.
@@ -131,28 +131,28 @@ EndFunc   ;==>_LOBase_FormCopy
 ;                  $bDesign             - [optional] Default is True. If True, and $bOpen is True, the Form will be opened in Design mode. Else in Form mode.
 ;                  $bHidden             - [optional] Default is False. If True, the Form will be invisible when opened.
 ; Return values .: Success: 1 or Object
-;                  @Error 0 @Extended 0 Return 1 = Success. New Form was successfully inserted.
-;                  @Error 0 @Extended 1 Return Object = Success. Returning opened Form Document's Object.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. New Form was successfully inserted.
+;                  @Error: 0, @Extended: 1, Return: Object = Success. Returning opened Form Document's Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oConnection not an Object.
-;                  @Error 1 @Extended 2 = $sForm not a String.
-;                  @Error 1 @Extended 3 = $bOpen not a Boolean.
-;                  @Error 1 @Extended 4 = $bDesign not a Boolean.
-;                  @Error 1 @Extended 5 = $bHidden not a Boolean.
-;                  @Error 1 @Extended 6 = Folder or Sub-Folder not found.
-;                  @Error 1 @Extended 7 = Form name called in $sForm already exists in Folder.
+;                  @Error: 1, @Extended: 1 = $oConnection not an Object.
+;                  @Error: 1, @Extended: 2 = $sForm not a String.
+;                  @Error: 1, @Extended: 3 = $bOpen not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bDesign not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bHidden not a Boolean.
+;                  @Error: 1, @Extended: 6 = Folder or Sub-Folder not found.
+;                  @Error: 1, @Extended: 7 = Form name called in $sForm already exists in Folder.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create com.sun.star.ServiceManager Object.
-;                  @Error 2 @Extended 2 = Failed to create com.sun.star.frame.Desktop Object.
-;                  @Error 2 @Extended 3 = Failed to open a new Writer Document instance.
-;                  @Error 2 @Extended 4 = Failed to create com.sun.star.sdb.DocumentDefinition Object.
+;                  @Error: 2, @Extended: 1 = Failed to create com.sun.star.ServiceManager Object.
+;                  @Error: 2, @Extended: 2 = Failed to create com.sun.star.frame.Desktop Object.
+;                  @Error: 2, @Extended: 3 = Failed to open a new Writer Document instance.
+;                  @Error: 2, @Extended: 4 = Failed to create com.sun.star.sdb.DocumentDefinition Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Connection called in $oConnection is closed.
-;                  @Error 3 @Extended 2 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 3 = Failed to retrieve Form Name.
-;                  @Error 3 @Extended 4 = Failed to insert new Form into Base Document.
-;                  @Error 3 @Extended 5 = Failed to open new Form Document.
+;                  @Error: 3, @Extended: 1 = Connection called in $oConnection is closed.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Form Documents Object.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve Form Name.
+;                  @Error: 3, @Extended: 4 = Failed to insert new Form into Base Document.
+;                  @Error: 3, @Extended: 5 = Failed to open new Form Document.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To create a form inside a folder, the form name MUST be prefixed by the folder path, separated by forward slashes (/). e.g. to create FormXYZ contained in folder 3, which is located in Folder 2, which is located inside folder 1, you would call $sForm with the following path: Folder1/Folder2/Folder3/FormXYZ.
@@ -249,16 +249,16 @@ EndFunc   ;==>_LOBase_FormCreate
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ;                  $sName               - The Form name to Delete. See remarks.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Form was successfully deleted.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Form was successfully deleted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $sName not a String.
-;                  @Error 1 @Extended 3 = Name called in $sName not found in Folder.
-;                  @Error 1 @Extended 4 = Name called in $sName not a Form.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sName not a String.
+;                  @Error: 1, @Extended: 3 = Name called in $sName not found in Folder.
+;                  @Error: 1, @Extended: 4 = Name called in $sName not a Form.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 2 = Failed to delete form.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Form Documents Object.
+;                  @Error: 3, @Extended: 2 = Failed to delete form.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To delete a form contained in a folder, you MUST prefix the Form name called in $sName by the folder path it is located in, separated by forward slashes (/). e.g. to delete FormXYZ located in folder3, which is located in Folder 2, which is located inside folder 1, you would call $sName with the following path: Folder1/Folder2/Folder3/FormXYZ
@@ -294,17 +294,17 @@ EndFunc   ;==>_LOBase_FormDelete
 ; Parameters ....: $oFormDoc            - A Form Document object returned by a previous _LOBase_FormDocOpen, _LOBase_FormDocConnect, or _LOBase_FormCreate function.
 ;                  $bForceClose         - [optional] Default is False. If True, the Form document will be closed regardless if there are unsaved changes. See remarks.
 ; Return values .: Success: Boolean
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning a Boolean value of whether the Form Document was successfully closed (True), or not.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning a Boolean value of whether the Form Document was successfully closed (True), or not.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oFormDoc not an Object.
-;                  @Error 1 @Extended 2 = $bForceClose not a Boolean.
-;                  @Error 1 @Extended 3 = Document called in $oFormDoc has not been saved to a Base Document yet.
+;                  @Error: 1, @Extended: 1 = $oFormDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $bForceClose not a Boolean.
+;                  @Error: 1, @Extended: 3 = Document called in $oFormDoc has not been saved to a Base Document yet.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Document has been modified and not saved, and $bForceClose is False.
-;                  @Error 3 @Extended 2 = Failed to retrieve Form Document's Object.
-;                  @Error 3 @Extended 3 = Failed to retrieve Form Document's properties.
-;                  @Error 3 @Extended 4 = Failed to identify Form in Parent Document.
+;                  @Error: 3, @Extended: 1 = Document has been modified and not saved, and $bForceClose is False.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Form Document's Object.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve Form Document's properties.
+;                  @Error: 3, @Extended: 4 = Failed to identify Form in Parent Document.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If there are unsaved changes in the document when close is called, and $bForceClose is True, they will be lost.
@@ -349,21 +349,21 @@ EndFunc   ;==>_LOBase_FormDocClose
 ; Syntax ........: _LOBase_FormDocConnect([$iMode = $LO_DOC_CONNECT_MODE_CURRENT])
 ; Parameters ....: $iMode               - [optional] (0-1) Default is $LO_DOC_CONNECT_MODE_CURRENT. The Connect mode. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: Object or Array.
-;                  @Error 0 @Extended ? Return Object = Success, The Object for the current, or last active Base Form document is returned. @Extended set to Document type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3.
-;                  @Error 0 @Extended ? Return Array = Success, A two columned Array of all open LibreOffice Base Form Documents. @Extended is set to number of results. See remarks.
+;                  @Error: 0, @Extended: ?, Return: Object = Success, The Object for the current, or last active Base Form document is returned. @Extended set to Document type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3.
+;                  @Error: 0, @Extended: ?, Return: Array = Success, A two columned Array of all open LibreOffice Base Form Documents. @Extended is set to number of results. See remarks.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $iMode not an Integer, less than 0 or greater than 1. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $iMode not an Integer, less than 0 or greater than 1. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error creating ServiceManager object.
-;                  @Error 2 @Extended 2 = Error creating Desktop object.
-;                  @Error 2 @Extended 3 = Error creating enumeration of open documents.
+;                  @Error: 2, @Extended: 1 = Error creating ServiceManager object.
+;                  @Error: 2, @Extended: 2 = Error creating Desktop object.
+;                  @Error: 2, @Extended: 3 = Error creating enumeration of open documents.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = No open LibreOffice documents.
-;                  @Error 3 @Extended 2 = Failed to retrieve Document Object.
-;                  @Error 3 @Extended 3 = Failed to identify Document type.
-;                  @Error 3 @Extended 4 = Current Document not a Base Form Document.
-;                  @Error 3 @Extended 5 = No matches found.
+;                  @Error: 3, @Extended: 1 = No open LibreOffice documents.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Document Object.
+;                  @Error: 3, @Extended: 3 = Failed to identify Document type.
+;                  @Error: 3, @Extended: 4 = Current Document not a Base Form Document.
+;                  @Error: 3, @Extended: 5 = No matches found.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Only Base Form documents are returned using either of the flags.
@@ -436,14 +436,14 @@ EndFunc   ;==>_LOBase_FormDocConnect
 ; Parameters ....: $oFormDoc            - A Form Document object returned by a previous _LOBase_FormDocOpen, _LOBase_FormDocConnect, or _LOBase_FormCreate function.
 ;                  $bReturnFull         - [optional] Default is False. If True, the full window title is returned, such as is used by AutoIt window related functions.
 ; Return values .: Success: String
-;                  @Error 0 @Extended 0 Return String = Success. Returning the document's Name as a String. See remarks.
+;                  @Error: 0, @Extended: 0, Return: String = Success. Returning the document's Name as a String. See remarks.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oFormDoc not an Object.
-;                  @Error 1 @Extended 2 = $bReturnFull not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oFormDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $bReturnFull not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Form Document called in $oFormDoc was opened "Hidden", can't return full document name. Document must be re-opened.
-;                  @Error 3 @Extended 2 = Failed to retrieve Document's name.
+;                  @Error: 3, @Extended: 1 = Form Document called in $oFormDoc was opened "Hidden", can't return full document name. Document must be re-opened.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Document's name.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $bReturnFull is True, the return value will be like: "<Database Doc name>.<extension> : <Form name> — LibreOffice Base: Database Form" e.g. "Testing.odb : frmForm2 — LibreOffice Base: Database Form".
@@ -480,12 +480,12 @@ EndFunc   ;==>_LOBase_FormDocGetName
 ; Syntax ........: _LOBase_FormDocIsModified(ByRef $oFormDoc)
 ; Parameters ....: $oFormDoc            - A Form Document object returned by a previous _LOBase_FormDocOpen, _LOBase_FormDocConnect, or _LOBase_FormCreate function.
 ; Return values .: Success: Boolean
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Form has been modified since last being saved.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Form has been modified since last being saved.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oFormDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oFormDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to query whether the Document has been modified.
+;                  @Error: 3, @Extended: 1 = Failed to query whether the Document has been modified.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -516,19 +516,19 @@ EndFunc   ;==>_LOBase_FormDocIsModified
 ;                  $bDesign             - [optional] Default is True. If True, the form is opened in Design mode.
 ;                  $bHidden             - [optional] Default is False. If True, the form document will be invisible when opened.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Returning opened Form Document's Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning opened Form Document's Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oConnection not an Object.
-;                  @Error 1 @Extended 2 = $sName not a String.
-;                  @Error 1 @Extended 3 = $bDesign not a Boolean.
-;                  @Error 1 @Extended 4 = $bHidden not a Boolean.
-;                  @Error 1 @Extended 5 = Name called in $sName not found.
-;                  @Error 1 @Extended 6 = Name called in $sName not a Form.
+;                  @Error: 1, @Extended: 1 = $oConnection not an Object.
+;                  @Error: 1, @Extended: 2 = $sName not a String.
+;                  @Error: 1, @Extended: 3 = $bDesign not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bHidden not a Boolean.
+;                  @Error: 1, @Extended: 5 = Name called in $sName not found.
+;                  @Error: 1, @Extended: 6 = Name called in $sName not a Form.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Connection called in $oConnection is closed.
-;                  @Error 3 @Extended 2 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 3 = Failed to open Form Document.
+;                  @Error: 3, @Extended: 1 = Connection called in $oConnection is closed.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Form Documents Object.
+;                  @Error: 3, @Extended: 3 = Failed to open Form Document.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To open a form located inside a folder, the form name MUST be prefixed by the folder path, separated by forward slashes (/). e.g. to open FormXYZ contained in folder 3, which is located in Folder 2, which is located inside folder 1, you would call $sName with the following path: Folder1/Folder2/Folder3/FormXYZ.
@@ -572,15 +572,15 @@ EndFunc   ;==>_LOBase_FormDocOpen
 ; Syntax ........: _LOBase_FormDocSave(ByRef $oFormDoc)
 ; Parameters ....: $oFormDoc            - A Form Document object returned by a previous _LOBase_FormDocOpen, _LOBase_FormDocConnect, or _LOBase_FormCreate function.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Form was successfully saved.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Form was successfully saved.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oFormDoc not an Object.
-;                  @Error 1 @Extended 2 = Document called in $oFormDoc has not been saved to a Base Document yet or is read only.
+;                  @Error: 1, @Extended: 1 = $oFormDoc not an Object.
+;                  @Error: 1, @Extended: 2 = Document called in $oFormDoc has not been saved to a Base Document yet or is read only.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve Form Document's properties.
-;                  @Error 3 @Extended 3 = Failed to identify Form in Parent Document.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Form Documents Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Form Document's properties.
+;                  @Error: 3, @Extended: 3 = Failed to identify Form in Parent Document.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -619,17 +619,17 @@ EndFunc   ;==>_LOBase_FormDocSave
 ; Parameters ....: $oFormDoc            - A Form Document object returned by a previous _LOBase_FormDocOpen, _LOBase_FormDocConnect, or _LOBase_FormCreate function.
 ;                  $bVisible            - [optional] Default is Null. If True, the document is visible.
 ; Return values .: Success: 1 or Boolean.
-;                  @Error 0 @Extended 0 Return 1 = Success. $bVisible successfully set.
-;                  @Error 0 @Extended 1 Return Boolean = Success. Returning current visibility state of the Document, True if visible, False if invisible.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. $bVisible successfully set.
+;                  @Error: 0, @Extended: 1, Return: Boolean = Success. Returning current visibility state of the Document, True if visible, False if invisible.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oFormDoc not an Object.
-;                  @Error 1 @Extended 2 = $bVisible not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oFormDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $bVisible not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Form Document called in $oFormDoc was opened "Hidden", document must be re-opened.
-;                  @Error 3 @Extended 2 = Failed to query whether the Document is Visible.
+;                  @Error: 3, @Extended: 1 = Form Document called in $oFormDoc was opened "Hidden", document must be re-opened.
+;                  @Error: 3, @Extended: 2 = Failed to query whether the Document is Visible.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bVisible
 ; Author ........: donnyh13
 ; Modified ......:
@@ -672,20 +672,20 @@ EndFunc   ;==>_LOBase_FormDocVisible
 ;                  $sName               - The name of the Form to look for. See remarks.
 ;                  $bExhaustive         - [optional] Default is True. If True, the search looks inside sub-folders.
 ; Return values .: Success: Boolean
-;                  @Error 0 @Extended ? Return Boolean = Success. Returning a Boolean value indicating if the Document contains a Form by the called name (True) or not. If True, and $bExhaustive is True, @Extended is set to the number of times a Form with the same name is found in the Document (In sub-folders).
+;                  @Error: 0, @Extended: ?, Return: Boolean = Success. Returning a Boolean value indicating if the Document contains a Form by the called name (True) or not. If True, and $bExhaustive is True, @Extended is set to the number of times a Form with the same name is found in the Document (In sub-folders).
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $sName not a String.
-;                  @Error 1 @Extended 3 = $bExhaustive not a Boolean.
-;                  @Error 1 @Extended 4 = Folder or Sub-Folder not found.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sName not a String.
+;                  @Error: 1, @Extended: 3 = $bExhaustive not a Boolean.
+;                  @Error: 1, @Extended: 4 = Folder or Sub-Folder not found.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve Destination Folder Object.
-;                  @Error 3 @Extended 3 = Failed to retrieve Array of Form and Folder names.
-;                  @Error 3 @Extended 4 = Failed to retrieve Form or Folder Object.
-;                  @Error 3 @Extended 5 = Failed to retrieve Array of Form and Folder names for Sub-Folder.
-;                  @Error 3 @Extended 6 = Failed to retrieve Object in Sub-Folder.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Form Documents Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Destination Folder Object.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve Array of Form and Folder names.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve Form or Folder Object.
+;                  @Error: 3, @Extended: 5 = Failed to retrieve Array of Form and Folder names for Sub-Folder.
+;                  @Error: 3, @Extended: 6 = Failed to retrieve Object in Sub-Folder.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To narrow the search for a form down to a specific folder, you MUST prefix the Form name called in $sName by the folder path to look in, separated by forward slashes (/). e.g. to search for FormXYZ located in folder3, which is located in Folder 2, which is located inside folder 1, you would call $sName with the following path: Folder1/Folder2/Folder3/FormXYZ
@@ -783,22 +783,22 @@ EndFunc   ;==>_LOBase_FormExists
 ;                  $sInputFolder        - The Name of the Folder to Copy. Also the Sub-directory the Folder is in. See Remarks.
 ;                  $sOutputFolder       - The Name of the Folder to Create. Also the Sub-directory to place the Folder in. See Remarks.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Copied Folder successfully inserted.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Copied Folder successfully inserted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $sInputFolder not a String.
-;                  @Error 1 @Extended 3 = $sOutputFolder not a String.
-;                  @Error 1 @Extended 4 = Requested Folder not found.
-;                  @Error 1 @Extended 5 = Name called in $sInputFolder not a Folder.
-;                  @Error 1 @Extended 6 = Folder already exists with called name in Destination.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sInputFolder not a String.
+;                  @Error: 1, @Extended: 3 = $sOutputFolder not a String.
+;                  @Error: 1, @Extended: 4 = Requested Folder not found.
+;                  @Error: 1, @Extended: 5 = Name called in $sInputFolder not a Folder.
+;                  @Error: 1, @Extended: 6 = Folder already exists with called name in Destination.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.sdb.Forms" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.sdb.Forms" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve Source Folder Object.
-;                  @Error 3 @Extended 3 = Failed to retrieve Destination Folder Name.
-;                  @Error 3 @Extended 4 = Failed to insert copied Folder.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Form Documents Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Source Folder Object.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve Destination Folder Name.
+;                  @Error: 3, @Extended: 4 = Failed to insert copied Folder.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To create a Folder contained in a folder, you MUST prefix the Folder name called in $sInputFolder by the folder path it is located in, separated by forward slashes (/). e.g. to copy FolderXYZ located in folder3, which is located in Folder 2, which is located inside folder 1, you would call $sInputFolder with the following path: Folder1/Folder2/Folder3/FolderXYZ
@@ -853,19 +853,19 @@ EndFunc   ;==>_LOBase_FormFolderCopy
 ;                  $sFolder             - The Folder name to create. Can also include the sub-folder path. See Remarks.
 ;                  $bCreateMulti        - [optional] Default is False. If True, multiple folders in a path will be created if they do not exist.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully created the Folder(s).
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully created the Folder(s).
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $sFolder not a String.
-;                  @Error 1 @Extended 3 = $bCreateMulti not a Boolean.
-;                  @Error 1 @Extended 4 = Name called in $sFolder already exists in Folder.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sFolder not a String.
+;                  @Error: 1, @Extended: 3 = $bCreateMulti not a Boolean.
+;                  @Error: 1, @Extended: 4 = Name called in $sFolder already exists in Folder.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create Folder Object.
+;                  @Error: 2, @Extended: 1 = Failed to create Folder Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 2 = Failed to insert new Folder into Base Document.
-;                  @Error 3 @Extended 3 = Failed to retrieve Destination Folder Object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Form Documents Object.
+;                  @Error: 3, @Extended: 2 = Failed to insert new Folder into Base Document.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve Destination Folder Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To create a Folder inside a folder, the Folder name MUST be prefixed by the folder path, separated by forward slashes (/). e.g. to create FolderXYZ contained in folder 3, which is located in Folder 2, which is located inside folder 1, you would call $sFolder with the following path: Folder1/Folder2/Folder3/FolderXYZ.
@@ -928,16 +928,16 @@ EndFunc   ;==>_LOBase_FormFolderCreate
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
 ;                  $sName               - The Folder name to Delete. See remarks.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Folder was successfully deleted.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Folder was successfully deleted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $sName not a String.
-;                  @Error 1 @Extended 3 = Name called in $sName not found in Folder.
-;                  @Error 1 @Extended 4 = Name called in $sName not a Folder.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sName not a String.
+;                  @Error: 1, @Extended: 3 = Name called in $sName not found in Folder.
+;                  @Error: 1, @Extended: 4 = Name called in $sName not a Folder.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 2 = Failed to delete Folder.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Form Documents Object.
+;                  @Error: 3, @Extended: 2 = Failed to delete Folder.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To delete a Folder contained in a folder, you MUST prefix the Folder name called in $sName by the folder path it is located in, separated by forward slashes (/). e.g. to delete FolderXYZ located in folder3, which is located in Folder 2, which is located inside folder 1, you would call $sName with the following path: Folder1/Folder2/Folder3/FolderXYZ
@@ -975,20 +975,20 @@ EndFunc   ;==>_LOBase_FormFolderDelete
 ;                  $sName               - The name of the Folder to look for.
 ;                  $bExhaustive         - [optional] Default is True. If True, the search looks inside sub-folders.
 ; Return values .: Success: Boolean
-;                  @Error 0 @Extended ? Return Boolean = Success. Returning a Boolean value indicating if the Document contains a Folder by the called name (True) or not. If True, and $bExhaustive is True, @Extended is set to the number of times a Folder with the same name is found in the Document (In sub-folders).
+;                  @Error: 0, @Extended: ?, Return: Boolean = Success. Returning a Boolean value indicating if the Document contains a Folder by the called name (True) or not. If True, and $bExhaustive is True, @Extended is set to the number of times a Folder with the same name is found in the Document (In sub-folders).
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $sName not a String.
-;                  @Error 1 @Extended 3 = $bExhaustive not a Boolean.
-;                  @Error 1 @Extended 4 = Folder or Sub-Folder not found.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sName not a String.
+;                  @Error: 1, @Extended: 3 = $bExhaustive not a Boolean.
+;                  @Error: 1, @Extended: 4 = Folder or Sub-Folder not found.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve Destination Folder Object.
-;                  @Error 3 @Extended 3 = Failed to retrieve Array of Form and Folder names.
-;                  @Error 3 @Extended 4 = Failed to retrieve Form or Folder Object.
-;                  @Error 3 @Extended 5 = Failed to retrieve Array of Form and Folder names for Sub-Folder.
-;                  @Error 3 @Extended 6 = Failed to retrieve Object in Sub-Folder.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Form Documents Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Destination Folder Object.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve Array of Form and Folder names.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve Form or Folder Object.
+;                  @Error: 3, @Extended: 5 = Failed to retrieve Array of Form and Folder names for Sub-Folder.
+;                  @Error: 3, @Extended: 6 = Failed to retrieve Object in Sub-Folder.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To narrow the search for a Folder down to a specific folder, you MUST prefix the Folder name called in $sName by the folder path to look in, separated by forward slashes (/). e.g. to search for FolderXYZ located in folder3, which is located in Folder 2, which is located inside folder 1, you would call $sName with the following path: Folder1/Folder2/Folder3/FolderXYZ
@@ -1086,17 +1086,17 @@ EndFunc   ;==>_LOBase_FormFolderExists
 ;                  $sFolder             - The Folder to rename, including the Sub-Folder path, if applicable. See Remarks.
 ;                  $sNewName            - The New name to rename the form Folder to.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully renamed the Folder
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully renamed the Folder
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $sFolder not a String.
-;                  @Error 1 @Extended 3 = $sNewName not a String.
-;                  @Error 1 @Extended 4 = Folder name called in $sFolder not found in Folder or is not a Folder.
-;                  @Error 1 @Extended 5 = Name called in $sNewName already exists in Folder.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sFolder not a String.
+;                  @Error: 1, @Extended: 3 = $sNewName not a String.
+;                  @Error: 1, @Extended: 4 = Folder name called in $sFolder not found in Folder or is not a Folder.
+;                  @Error: 1, @Extended: 5 = Name called in $sNewName already exists in Folder.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 2 = Failed to rename folder.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Form Documents Object.
+;                  @Error: 3, @Extended: 2 = Failed to rename folder.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To rename a Folder inside a folder, the original Folder name MUST be prefixed by the folder path, separated by forward slashes (/). e.g. to rename FolderXYZ contained in folder 3, which is located in Folder 2, which is located inside folder 1, you would call $sFolder with the following path: Folder1/Folder2/Folder3/FolderXYZ.
@@ -1134,20 +1134,20 @@ EndFunc   ;==>_LOBase_FormFolderRename
 ;                  $bExhaustive         - [optional] Default is True. If True, retrieves a count of all folders, including those in sub-folders.
 ;                  $sFolder             - [optional] Default is "". The Folder to return the count of folders for. See remarks.
 ; Return values .: Success: Integer
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning count of Form Folders contained in the Document as an Integer.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning count of Form Folders contained in the Document as an Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $bExhaustive not a Boolean.
-;                  @Error 1 @Extended 3 = $sFolder not a String.
-;                  @Error 1 @Extended 4 = Folder or Sub-Folder called in $sFolder not found.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $bExhaustive not a Boolean.
+;                  @Error: 1, @Extended: 3 = $sFolder not a String.
+;                  @Error: 1, @Extended: 4 = Folder or Sub-Folder called in $sFolder not found.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve Destination Folder Object.
-;                  @Error 3 @Extended 3 = Failed to retrieve Array of Form and Folder names.
-;                  @Error 3 @Extended 4 = Failed to retrieve Form or Folder Object.
-;                  @Error 3 @Extended 5 = Failed to retrieve Array of Form and Folder names for Sub-Folder.
-;                  @Error 3 @Extended 6 = Failed to retrieve Object in Sub-Folder.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Form Documents Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Destination Folder Object.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve Array of Form and Folder names.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve Form or Folder Object.
+;                  @Error: 3, @Extended: 5 = Failed to retrieve Array of Form and Folder names for Sub-Folder.
+;                  @Error: 3, @Extended: 6 = Failed to retrieve Object in Sub-Folder.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $sFolder can be left as a blank string "", which will either return only the count of main level Folders (not located in folders), or if $bExhaustive is called with True, it will return a count of all Folders contained in the document.
@@ -1237,20 +1237,20 @@ EndFunc   ;==>_LOBase_FormFoldersGetCount
 ;                  $bExhaustive         - [optional] Default is True. If True, the search looks inside sub-folders.
 ;                  $sFolder             - [optional] Default is "". The Sub-Folder to return the array of Folder names from. See remarks.
 ; Return values .: Success: Array
-;                  @Error 0 @Extended ? Return Array = Success. Returning Array of Folder names contained in this Document. @Extended is set to number of results.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning Array of Folder names contained in this Document. @Extended is set to number of results.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $bExhaustive not a Boolean.
-;                  @Error 1 @Extended 3 = $sFolder not a String.
-;                  @Error 1 @Extended 4 = Folder or Sub-Folder called in $sFolder not found.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $bExhaustive not a Boolean.
+;                  @Error: 1, @Extended: 3 = $sFolder not a String.
+;                  @Error: 1, @Extended: 4 = Folder or Sub-Folder called in $sFolder not found.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve Destination Folder Object.
-;                  @Error 3 @Extended 3 = Failed to retrieve Array of Form and Folder names.
-;                  @Error 3 @Extended 4 = Failed to retrieve Form or Folder Object.
-;                  @Error 3 @Extended 5 = Failed to retrieve Array of Form and Folder names for Sub-Folder.
-;                  @Error 3 @Extended 6 = Failed to retrieve Object in Sub-Folder.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Form Documents Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Destination Folder Object.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve Array of Form and Folder names.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve Form or Folder Object.
+;                  @Error: 3, @Extended: 5 = Failed to retrieve Array of Form and Folder names for Sub-Folder.
+;                  @Error: 3, @Extended: 6 = Failed to retrieve Object in Sub-Folder.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $sFolder can be left as a blank string "", which will either return only an array of main level Folder names (not located in sub-folders), or if $bExhaustive is called with True, it will return an array of all folders contained in the document.
@@ -1350,17 +1350,17 @@ EndFunc   ;==>_LOBase_FormFoldersGetNames
 ;                  $sForm               - The Form to rename, including the Sub-Folder path, if applicable. See Remarks.
 ;                  $sNewName            - The New name to rename the form to.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully renamed the Form.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully renamed the Form.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $sForm not a String.
-;                  @Error 1 @Extended 3 = $sNewName not a String.
-;                  @Error 1 @Extended 4 = Form name called in $sForm not found in Folder or is not a Form.
-;                  @Error 1 @Extended 5 = Name called in $sNewName already exists in Folder.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sForm not a String.
+;                  @Error: 1, @Extended: 3 = $sNewName not a String.
+;                  @Error: 1, @Extended: 4 = Form name called in $sForm not found in Folder or is not a Form.
+;                  @Error: 1, @Extended: 5 = Name called in $sNewName already exists in Folder.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 2 = Failed to rename form.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Form Documents Object.
+;                  @Error: 3, @Extended: 2 = Failed to rename form.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To rename a Form inside a folder, the original Form name MUST be prefixed by the folder path, separated by forward slashes (/). e.g. to rename FormXYZ contained in folder 3, which is located in Folder 2, which is located inside folder 1, you would call $sForm with the following path: Folder1/Folder2/Folder3/FormXYZ.
@@ -1398,20 +1398,20 @@ EndFunc   ;==>_LOBase_FormRename
 ;                  $bExhaustive         - [optional] Default is True. If True, retrieves a count of all forms, including those in sub-folders.
 ;                  $sFolder             - [optional] Default is "". The Folder to return the count of forms for. See remarks.
 ; Return values .: Success: Integer
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning count of Forms contained in the Document as an Integer.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning count of Forms contained in the Document as an Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $bExhaustive not a Boolean.
-;                  @Error 1 @Extended 3 = $sFolder not a String.
-;                  @Error 1 @Extended 4 = Folder or Sub-Folder called in $sFolder not found.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $bExhaustive not a Boolean.
+;                  @Error: 1, @Extended: 3 = $sFolder not a String.
+;                  @Error: 1, @Extended: 4 = Folder or Sub-Folder called in $sFolder not found.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve Destination Folder Object.
-;                  @Error 3 @Extended 3 = Failed to retrieve Array of Form and Folder names.
-;                  @Error 3 @Extended 4 = Failed to retrieve Form or Folder Object.
-;                  @Error 3 @Extended 5 = Failed to retrieve Array of Form and Folder names for Sub-Folder.
-;                  @Error 3 @Extended 6 = Failed to retrieve Object in Sub-Folder.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Form Documents Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Destination Folder Object.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve Array of Form and Folder names.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve Form or Folder Object.
+;                  @Error: 3, @Extended: 5 = Failed to retrieve Array of Form and Folder names for Sub-Folder.
+;                  @Error: 3, @Extended: 6 = Failed to retrieve Object in Sub-Folder.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $sFolder can be left as a blank string "", which will either return only the count of main level Forms (not located in folders), or if $bExhaustive is called with True, the return will be a count of all forms contained in the document.
@@ -1505,20 +1505,20 @@ EndFunc   ;==>_LOBase_FormsGetCount
 ;                  $bExhaustive         - [optional] Default is True. If True, retrieves all form names, including those in sub-folders.
 ;                  $sFolder             - [optional] Default is "". The Sub-Folder to return the array of form names from. See remarks.
 ; Return values .: Success: Array
-;                  @Error 0 @Extended ? Return Array = Success. Returning Array of Form names contained in this Document. @Extended is set to number of results.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning Array of Form names contained in this Document. @Extended is set to number of results.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $bExhaustive not a Boolean.
-;                  @Error 1 @Extended 3 = $sFolder not a String.
-;                  @Error 1 @Extended 4 = Folder or Sub-Folder called in $sFolder not found.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $bExhaustive not a Boolean.
+;                  @Error: 1, @Extended: 3 = $sFolder not a String.
+;                  @Error: 1, @Extended: 4 = Folder or Sub-Folder called in $sFolder not found.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Form Documents Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve Destination Folder Object.
-;                  @Error 3 @Extended 3 = Failed to retrieve Array of Form and Folder names.
-;                  @Error 3 @Extended 4 = Failed to retrieve Form or Folder Object.
-;                  @Error 3 @Extended 5 = Failed to retrieve Array of Form and Folder names for Sub-Folder.
-;                  @Error 3 @Extended 6 = Failed to retrieve Object in Sub-Folder.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Form Documents Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Destination Folder Object.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve Array of Form and Folder names.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve Form or Folder Object.
+;                  @Error: 3, @Extended: 5 = Failed to retrieve Array of Form and Folder names for Sub-Folder.
+;                  @Error: 3, @Extended: 6 = Failed to retrieve Object in Sub-Folder.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $sFolder can be left as a blank string "", which will either return only an array of main level Form names (not located in folders), or if $bExhaustive is called with True, it will return an array of all forms contained in the document.
