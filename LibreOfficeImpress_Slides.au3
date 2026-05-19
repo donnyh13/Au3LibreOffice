@@ -617,7 +617,7 @@ EndFunc   ;==>_LOImpress_SlideBackTransparency
 ;                  @Error: 1, @Extended: 7 = $iStart Not an Integer, less than 0 or greater than 100.
 ;                  @Error: 1, @Extended: 8 = $iEnd Not an Integer, less than 0 or greater than 100.
 ;                  --Initialization Errors--
-;                  @Error: 2, @Extended: 1 =
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.drawing.Background" service.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Error retrieving "FillTransparenceGradient" Struct.
 ;                  @Error: 3, @Extended: 2 = Failed to retrieve parent Document.
