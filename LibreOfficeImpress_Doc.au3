@@ -70,16 +70,16 @@
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bSaveChanges not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $sSaveName not a String.
-;                  @Error 1 @Extended 4 Return 0 = $bDeliverOwnership not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $bSaveChanges not a Boolean.
+;                  @Error 1 @Extended 3 = $sSaveName not a String.
+;                  @Error 1 @Extended 4 = $bDeliverOwnership not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error while creating Filter Name properties.
+;                  @Error 2 @Extended 1 = Error while creating Filter Name properties.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Path Conversion to L.O. URL Failed.
-;                  @Error 3 @Extended 2 Return 0 = Error while retrieving Filter Name.
-;                  @Error 3 @Extended 3 Return 0 = Failed to close Document.
+;                  @Error 3 @Extended 1 = Path Conversion to L.O. URL Failed.
+;                  @Error 3 @Extended 2 = Error while retrieving Filter Name.
+;                  @Error 3 @Extended 3 = Failed to close Document.
 ;                  --Success--
 ;                  @Error 0 @Extended 1 Return String = Success, Document was successfully closed, and was saved to the returned file Path.
 ;                  @Error 0 @Extended 2 Return String = Success, Document was successfully closed, document's changes were saved to its existing location.
@@ -165,20 +165,20 @@ EndFunc   ;==>_LOImpress_DocClose
 ; Return values .: Success: Object or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $iMode not an Integer, less than 0 or greater than 4. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
-;                  @Error 1 @Extended 2 Return 0 = $sSearch not a String.
-;                  @Error 1 @Extended 3 Return 0 = $bCaseless not a Boolean.
+;                  @Error 1 @Extended 1 = $iMode not an Integer, less than 0 or greater than 4. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
+;                  @Error 1 @Extended 2 = $sSearch not a String.
+;                  @Error 1 @Extended 3 = $bCaseless not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error creating ServiceManager object.
-;                  @Error 2 @Extended 2 Return 0 = Error creating Desktop object.
-;                  @Error 2 @Extended 3 Return 0 = Error creating enumeration of open documents.
+;                  @Error 2 @Extended 1 = Error creating ServiceManager object.
+;                  @Error 2 @Extended 2 = Error creating Desktop object.
+;                  @Error 2 @Extended 3 = Error creating enumeration of open documents.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = No open LibreOffice documents.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Document Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to identify Document type.
-;                  @Error 3 @Extended 4 Return 0 = Error converting path to LibreOffice URL.
-;                  @Error 3 @Extended 5 Return 0 = Current Document not a Impress Document.
-;                  @Error 3 @Extended 6 Return 0 = No matches found.
+;                  @Error 3 @Extended 1 = No open LibreOffice documents.
+;                  @Error 3 @Extended 2 = Failed to retrieve Document Object.
+;                  @Error 3 @Extended 3 = Failed to identify Document type.
+;                  @Error 3 @Extended 4 = Error converting path to LibreOffice URL.
+;                  @Error 3 @Extended 5 = Current Document not a Impress Document.
+;                  @Error 3 @Extended 6 = No matches found.
 ;                  --Success--
 ;                  @Error 0 @Extended 1 Return Object = Success, The Object for the current, or last active Impress document is returned.
 ;                  @Error 0 @Extended 1 Return Object = Success, The Object for the found Document with matching Name, Title or Path.
@@ -315,15 +315,15 @@ EndFunc   ;==>_LOImpress_DocConnect
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $bForceNew not a Boolean.
-;                  @Error 1 @Extended 2 Return 0 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 1 = $bForceNew not a Boolean.
+;                  @Error 1 @Extended 2 = $bHidden not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failure Creating Object com.sun.star.ServiceManager.
-;                  @Error 2 @Extended 2 Return 0 = Failure Creating Object com.sun.star.frame.Desktop.
-;                  @Error 2 @Extended 3 Return 0 = Failed to enumerate available documents.
-;                  @Error 2 @Extended 4 Return 0 = Failure Creating New Document.
+;                  @Error 2 @Extended 1 = Failure Creating Object com.sun.star.ServiceManager.
+;                  @Error 2 @Extended 2 = Failure Creating Object com.sun.star.frame.Desktop.
+;                  @Error 2 @Extended 3 = Failed to enumerate available documents.
+;                  @Error 2 @Extended 4 = Failure Creating New Document.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Document Object is still returned. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Document Object is still returned. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bHidden
 ;                  --Success--
 ;                  @Error 0 @Extended 1 Return Object = Successfully connected to an existing Document. Returning Document's Object
@@ -388,11 +388,11 @@ EndFunc   ;==>_LOImpress_DocCreate
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sDispatch not a String.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sDispatch not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error creating "com.sun.star.ServiceManager" Object.
-;                  @Error 2 @Extended 2 Return 0 = Error creating "com.sun.star.frame.DispatchHelper" Object.
+;                  @Error 2 @Extended 1 = Error creating "com.sun.star.ServiceManager" Object.
+;                  @Error 2 @Extended 2 = Error creating "com.sun.star.frame.DispatchHelper" Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully executed dispatch command.
 ; Author ........: donnyh13
@@ -472,20 +472,20 @@ EndFunc   ;==>_LOImpress_DocExecuteDispatch
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sFilePath not a String.
-;                  @Error 1 @Extended 3 Return 0 = $bSamePath not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $sFilterName not a String.
-;                  @Error 1 @Extended 5 Return 0 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $sPassword not a String.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sFilePath not a String.
+;                  @Error 1 @Extended 3 = $bSamePath not a Boolean.
+;                  @Error 1 @Extended 4 = $sFilterName not a String.
+;                  @Error 1 @Extended 5 = $bOverwrite not a Boolean.
+;                  @Error 1 @Extended 6 = $sPassword not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error creating Filter Name Property
-;                  @Error 2 @Extended 2 Return 0 = Error creating Overwrite Property
-;                  @Error 2 @Extended 3 Return 0 = Error creating Password Property
+;                  @Error 2 @Extended 1 = Error creating Filter Name Property
+;                  @Error 2 @Extended 2 = Error creating Overwrite Property
+;                  @Error 2 @Extended 3 = Error creating Password Property
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error Converting Path to/from L.O. URL
-;                  @Error 3 @Extended 2 Return 0 = Document has no save path, and $bSamePath is called with True.
-;                  @Error 3 @Extended 3 Return 0 = Error retrieving Filter Name.
+;                  @Error 3 @Extended 1 = Error Converting Path to/from L.O. URL
+;                  @Error 3 @Extended 2 = Document has no save path, and $bSamePath is called with True.
+;                  @Error 3 @Extended 3 = Error retrieving Filter Name.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Returning save path for exported document.
 ; Author ........: donnyh13
@@ -565,10 +565,10 @@ EndFunc   ;==>_LOImpress_DocExport
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bReturnFull not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $bReturnFull not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Document's name.
+;                  @Error 3 @Extended 1 = Failed to retrieve Document's name.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Returning the document's Name as a String. See remarks.
 ; Author ........: donnyh13
@@ -609,11 +609,11 @@ EndFunc   ;==>_LOImpress_DocGetName
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bReturnLibreURL not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = Document has no save path.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $bReturnLibreURL not a Boolean.
+;                  @Error 1 @Extended 3 = Document has no save path.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error converting Libre URL to Computer path format.
+;                  @Error 3 @Extended 1 = Error converting Libre URL to Computer path format.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Success. Returning the document's save path as a String.
 ; Author ........: donnyh13
@@ -651,9 +651,9 @@ EndFunc   ;==>_LOImpress_DocGetPath
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to query Document whether it has a path.
+;                  @Error 3 @Extended 1 = Failed to query Document whether it has a path.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the document has a save location. Else False.
 ; Author ........: donnyh13
@@ -685,9 +685,9 @@ EndFunc   ;==>_LOImpress_DocHasPath
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to query Document whether it is active.
+;                  @Error 3 @Extended 1 = Failed to query Document whether it is active.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if document is the currently active Libre window. See remarks.
 ; Author ........: donnyh13
@@ -719,9 +719,9 @@ EndFunc   ;==>_LOImpress_DocIsActive
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to query Document whether it has been modified.
+;                  @Error 3 @Extended 1 = Failed to query Document whether it has been modified.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the document has been modified since last being saved.
 ; Author ........: donnyh13
@@ -753,9 +753,9 @@ EndFunc   ;==>_LOImpress_DocIsModified
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to query whether Document is Read-Only.
+;                  @Error 3 @Extended 1 = Failed to query whether Document is Read-Only.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True is document is currently Read Only, else False.
 ; Author ........: donnyh13
@@ -788,12 +788,12 @@ EndFunc   ;==>_LOImpress_DocIsReadOnly
 ; Return values .: Success: 1 or Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bMaximize not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $bMaximize not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to query whether Document is Maximized.
+;                  @Error 3 @Extended 1 = Failed to query whether Document is Maximized.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bMaximize
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Document was successfully maximized.
@@ -838,12 +838,12 @@ EndFunc   ;==>_LOImpress_DocMaximize
 ; Return values .: Success: 1 or Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bMinimize not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $bMinimize not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to query whether Document is Minimized.
+;                  @Error 3 @Extended 1 = Failed to query whether Document is Minimized.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bMinimize
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Document was successfully minimized.
@@ -893,20 +893,20 @@ EndFunc   ;==>_LOImpress_DocMinimize
 ; Return values .: Success: Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $sFilePath not string, or file not found.
-;                  @Error 1 @Extended 2 Return 0 = Error converting file path to URL path.
-;                  @Error 1 @Extended 3 Return 0 = $bConnectIfOpen not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bHidden not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $bReadOnly not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $sPassword not a string.
-;                  @Error 1 @Extended 7 Return 0 = $bLoadAsTemplate not a Boolean.
-;                  @Error 1 @Extended 8 Return 0 = $sFilterName not a string.
+;                  @Error 1 @Extended 1 = $sFilePath not string, or file not found.
+;                  @Error 1 @Extended 2 = Error converting file path to URL path.
+;                  @Error 1 @Extended 3 = $bConnectIfOpen not a Boolean.
+;                  @Error 1 @Extended 4 = $bHidden not a Boolean.
+;                  @Error 1 @Extended 5 = $bReadOnly not a Boolean.
+;                  @Error 1 @Extended 6 = $sPassword not a string.
+;                  @Error 1 @Extended 7 = $bLoadAsTemplate not a Boolean.
+;                  @Error 1 @Extended 8 = $sFilterName not a string.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create ServiceManager Object
-;                  @Error 2 @Extended 2 Return 0 = Failed to create Desktop Object
-;                  @Error 2 @Extended 3 Return 0 = Failed opening or connecting to document.
+;                  @Error 2 @Extended 1 = Failed to create ServiceManager Object
+;                  @Error 2 @Extended 2 = Failed to create Desktop Object
+;                  @Error 2 @Extended 3 = Failed opening or connecting to document.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bHidden
 ;                  |                               2 = Error setting $bReadOnly
 ;                  |                               4 = Error setting $sPassword
@@ -1008,16 +1008,16 @@ EndFunc   ;==>_LOImpress_DocOpen
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iX not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = $iY not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = $iWidth not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $iHeight not an Integer.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $iX not an Integer.
+;                  @Error 1 @Extended 3 = $iY not an Integer.
+;                  @Error 1 @Extended 4 = $iWidth not an Integer.
+;                  @Error 1 @Extended 5 = $iHeight not an Integer.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Position and Size Structure Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving Position and Size Structure Object for error checking.
+;                  @Error 3 @Extended 1 = Error retrieving Position and Size Structure Object.
+;                  @Error 3 @Extended 2 = Error retrieving Position and Size Structure Object for error checking.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iX
 ;                  |                               2 = Error setting $iY
 ;                  |                               4 = Error setting $iWidth
@@ -1100,9 +1100,9 @@ EndFunc   ;==>_LOImpress_DocPosAndSize
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Document does not have a redo action to perform.
+;                  @Error 3 @Extended 1 = Document does not have a redo action to perform.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Successfully performed a redo action.
 ; Author ........: donnyh13
@@ -1137,7 +1137,7 @@ EndFunc   ;==>_LOImpress_DocRedo
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully cleared all Redo Actions.
 ; Author ........: donnyh13
@@ -1166,9 +1166,9 @@ EndFunc   ;==>_LOImpress_DocRedoClear
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Redo Action.
+;                  @Error 3 @Extended 1 = Failed to retrieve current Redo Action.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Returning the current available redo action title as a String. Will be an empty String if no action is available.
 ; Author ........: donnyh13
@@ -1201,9 +1201,9 @@ EndFunc   ;==>_LOImpress_DocRedoCurActionTitle
 ; Return values .: Success: Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve an array of Redo action titles.
+;                  @Error 3 @Extended 1 = Failed to retrieve an array of Redo action titles.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Returning all available redo action Titles in an array of Strings. @Extended set to number of results.
 ; Author ........: donnyh13
@@ -1235,9 +1235,9 @@ EndFunc   ;==>_LOImpress_DocRedoGetAllActionTitles
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to query whether a Redo is possible.
+;                  @Error 3 @Extended 1 = Failed to query whether a Redo is possible.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = If the document has a redo action to perform, True is returned, else False.
 ; Author ........: donnyh13
@@ -1269,9 +1269,9 @@ EndFunc   ;==>_LOImpress_DocRedoIsPossible
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Document is Read Only or Document has no save location, try SaveAs.
+;                  @Error 3 @Extended 1 = Document is Read Only or Document has no save location, try SaveAs.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Document Successfully saved.
 ; Author ........: donnyh13
@@ -1305,18 +1305,18 @@ EndFunc   ;==>_LOImpress_DocSave
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sFilePath not a String.
-;                  @Error 1 @Extended 3 Return 0 = $sFilterName not a String.
-;                  @Error 1 @Extended 4 Return 0 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $sPassword not a String.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sFilePath not a String.
+;                  @Error 1 @Extended 3 = $sFilterName not a String.
+;                  @Error 1 @Extended 4 = $bOverwrite not a Boolean.
+;                  @Error 1 @Extended 5 = $sPassword not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error creating Filter Name Property
-;                  @Error 2 @Extended 2 Return 0 = Error creating Overwrite Property
-;                  @Error 2 @Extended 3 Return 0 = Error creating Password Property
+;                  @Error 2 @Extended 1 = Error creating Filter Name Property
+;                  @Error 2 @Extended 2 = Error creating Overwrite Property
+;                  @Error 2 @Extended 3 = Error creating Password Property
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error Converting Path to/from L.O. URL
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving Filter Name.
+;                  @Error 3 @Extended 1 = Error Converting Path to/from L.O. URL
+;                  @Error 3 @Extended 2 = Error retrieving Filter Name.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Successfully Saved the document. Returning document save path.
 ; Author ........: donnyh13
@@ -1378,7 +1378,7 @@ EndFunc   ;==>_LOImpress_DocSaveAs
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Window was successfully brought to the front of the open windows.
 ; Author ........: donnyh13
@@ -1407,9 +1407,9 @@ EndFunc   ;==>_LOImpress_DocToFront
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Document does not have an undo action to perform.
+;                  @Error 3 @Extended 1 = Document does not have an undo action to perform.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Successfully performed an undo action.
 ; Author ........: donnyh13
@@ -1445,8 +1445,8 @@ EndFunc   ;==>_LOImpress_DocUndo
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sName not a String.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $sName not a String.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully began an Undo Action group recording.
 ; Author ........: donnyh13
@@ -1478,7 +1478,7 @@ EndFunc   ;==>_LOImpress_DocUndoActionBegin
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully ended the last Undo Action group recording.
 ; Author ........: donnyh13
@@ -1507,7 +1507,7 @@ EndFunc   ;==>_LOImpress_DocUndoActionEnd
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully cleared all Undo and Redo Actions.
 ; Author ........: donnyh13
@@ -1536,9 +1536,9 @@ EndFunc   ;==>_LOImpress_DocUndoClear
 ; Return values .: Success: String
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Undo Action.
+;                  @Error 3 @Extended 1 = Failed to retrieve current Undo Action.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return String = Returning the current available Undo action title as a String. Will be an empty String if no action is available.
 ; Author ........: donnyh13
@@ -1571,9 +1571,9 @@ EndFunc   ;==>_LOImpress_DocUndoCurActionTitle
 ; Return values .: Success: Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve an array of Undo action titles.
+;                  @Error 3 @Extended 1 = Failed to retrieve an array of Undo action titles.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Returning all available undo action Titles in an array of Strings. @Extended set to number of results.
 ; Author ........: donnyh13
@@ -1605,9 +1605,9 @@ EndFunc   ;==>_LOImpress_DocUndoGetAllActionTitles
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to query whether an Undo is possible.
+;                  @Error 3 @Extended 1 = Failed to query whether an Undo is possible.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = If the document has an undo action to perform, True is returned, else False.
 ; Author ........: donnyh13
@@ -1639,7 +1639,7 @@ EndFunc   ;==>_LOImpress_DocUndoIsPossible
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. Successfully reset the undo manager.
 ; Author ........: donnyh13
@@ -1669,12 +1669,12 @@ EndFunc   ;==>_LOImpress_DocUndoReset
 ; Return values .: Success: 1 or Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bVisible not a Boolean.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $bVisible not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to query whether Document is visible.
+;                  @Error 3 @Extended 1 = Failed to query whether Document is visible.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bVisible
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Success. $bVisible successfully set.
@@ -1720,11 +1720,11 @@ EndFunc   ;==>_LOImpress_DocVisible
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iZoomType not an Integer, less than 0 or greater than 4. See constants $LOI_ZOOMTYPE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iZoom not an Integer, less than 20 or greater than 600.
+;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error 1 @Extended 2 = $iZoomType not an Integer, less than 0 or greater than 4. See constants $LOI_ZOOMTYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error 1 @Extended 3 = $iZoom not an Integer, less than 20 or greater than 600.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iZoom
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Settings were successfully set.

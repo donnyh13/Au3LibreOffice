@@ -42,7 +42,7 @@
 ; Return values .: Success: 1 or UserFunction.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $vUserFunction Not a Function, or Default keyword, or Null Keyword.
+;                  @Error 1 @Extended 1 = $vUserFunction Not a Function, or Default keyword, or Null Keyword.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Successfully set the UserFunction.
 ;                  @Error 0 @Extended 0 Return 2 = Successfully cleared the set UserFunction.
@@ -119,14 +119,14 @@ EndFunc   ;==>_LOImpress_ComError_UserFunction
 ; Return values .: Success: Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $sFontName not a String.
+;                  @Error 1 @Extended 1 = $sFontName not a String.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create a "com.sun.star.ServiceManager" Object.
-;                  @Error 2 @Extended 2 Return 0 = Failed to create a "com.sun.star.frame.Desktop" Object.
-;                  @Error 2 @Extended 3 Return 0 = Failed to create a Property Struct.
-;                  @Error 2 @Extended 4 Return 0 = Failed to create a new Document.
+;                  @Error 2 @Extended 1 = Failed to create a "com.sun.star.ServiceManager" Object.
+;                  @Error 2 @Extended 2 = Failed to create a "com.sun.star.frame.Desktop" Object.
+;                  @Error 2 @Extended 3 = Failed to create a Property Struct.
+;                  @Error 2 @Extended 4 = Failed to create a new Document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Font list.
+;                  @Error 3 @Extended 1 = Failed to retrieve Font list.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Font is available, else False.
 ; Author ........: donnyh13
@@ -192,12 +192,12 @@ EndFunc   ;==>_LOImpress_FontExists
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create a "com.sun.star.ServiceManager" Object.
-;                  @Error 2 @Extended 2 Return 0 = Failed to create a "com.sun.star.frame.Desktop" Object.
-;                  @Error 2 @Extended 3 Return 0 = Failed to create a Property Struct.
-;                  @Error 2 @Extended 4 Return 0 = Failed to create a new Document.
+;                  @Error 2 @Extended 1 = Failed to create a "com.sun.star.ServiceManager" Object.
+;                  @Error 2 @Extended 2 = Failed to create a "com.sun.star.frame.Desktop" Object.
+;                  @Error 2 @Extended 3 = Failed to create a Property Struct.
+;                  @Error 2 @Extended 4 = Failed to create a new Document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Font list.
+;                  @Error 3 @Extended 1 = Failed to retrieve Font list.
 ;                  --Success--
 ;                  @Error 0 @Extended ? Return Array = Success. Returning a 4 Column Array, @Extended is set to the number of results. See remarks
 ; Author ........: donnyh13
