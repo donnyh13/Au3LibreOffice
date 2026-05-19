@@ -446,7 +446,7 @@ EndFunc   ;==>_LOImpress_ShapeAreaGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapeAreaGradientMulticolor
-; Description ...: Set or Retrieve a Shape's Multicolor Gradient settings. See remarks.
+; Description ...: Set or Retrieve a Shape's Multicolor Gradient settings.
 ; Syntax ........: _LOImpress_ShapeAreaGradientMulticolor(ByRef $oShape[, $avColorStops = Null])
 ; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
@@ -789,7 +789,7 @@ EndFunc   ;==>_LOImpress_ShapeAreaTransparencyGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapeAreaTransparencyGradientMulti
-; Description ...: Set or Retrieve a Shape's Multi Transparency Gradient settings. See remarks.
+; Description ...: Set or Retrieve a Shape's Multi Transparency Gradient settings.
 ; Syntax ........: _LOImpress_ShapeAreaTransparencyGradientMulti(ByRef $oShape[, $avColorStops = Null])
 ; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
@@ -2696,7 +2696,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleAreaGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapePresStyleAreaGradientMulticolor
-; Description ...: Set or Retrieve a Presentation Style's Multicolor Gradient settings. See remarks.
+; Description ...: Set or Retrieve a Presentation Style's Multicolor Gradient settings.
 ; Syntax ........: _LOImpress_ShapePresStyleAreaGradientMulticolor(ByRef $oPresStyle[, $avColorStops = Null])
 ; Parameters ....: $oPresStyle          - A Presentation Style object returned by a previous _LOImpress_ShapePresStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
@@ -2911,7 +2911,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleAreaTransparencyGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapePresStyleAreaTransparencyGradientMulti
-; Description ...: Set or Retrieve a Presentation Style's Multi Transparency Gradient settings. See remarks.
+; Description ...: Set or Retrieve a Presentation Style's Multi Transparency Gradient settings.
 ; Syntax ........: _LOImpress_ShapePresStyleAreaTransparencyGradientMulti(ByRef $oPresStyle[, $avColorStops = Null])
 ; Parameters ....: $oPresStyle          - A Presentation Style object returned by a previous _LOImpress_ShapePresStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
@@ -3402,7 +3402,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleLineProperties
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapePresStyleNumCustomize
-; Description ...: Retrieve and Set Numbering Customize settings for a Presentation Style. See Remarks.
+; Description ...: Retrieve and Set Numbering Customize settings for a Presentation Style.
 ; Syntax ........: _LOImpress_ShapePresStyleNumCustomize(ByRef $oDoc, ByRef $oPresStyle, $iLevel[, $iNumFormat = Null[, $iStartAt = Null[, $iColor = Null[, $iRelSize = Null[, $sSepBefore = Null[, $sSepAfter = Null[, $iCharDecimal = Null]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $oPresStyle          - A Presentation Style object returned by a previous _LOImpress_ShapePresStyleGetObjByName function.
@@ -4465,7 +4465,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleAreaGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapeStyleAreaGradientMulticolor
-; Description ...: Set or Retrieve a Shape Style's Multicolor Gradient settings. See remarks.
+; Description ...: Set or Retrieve a Shape Style's Multicolor Gradient settings.
 ; Syntax ........: _LOImpress_ShapeStyleAreaGradientMulticolor(ByRef $oShapeStyle[, $avColorStops = Null])
 ; Parameters ....: $oShapeStyle         - A Shape Style object returned by a previous _LOImpress_ShapeStyleCreate, or _LOImpress_ShapeStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
@@ -4680,7 +4680,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleAreaTransparencyGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapeStyleAreaTransparencyGradientMulti
-; Description ...: Set or Retrieve a Shape Style's Multi Transparency Gradient settings. See remarks.
+; Description ...: Set or Retrieve a Shape Style's Multi Transparency Gradient settings.
 ; Syntax ........: _LOImpress_ShapeStyleAreaTransparencyGradientMulti(ByRef $oShapeStyle[, $avColorStops = Null])
 ; Parameters ....: $oShapeStyle         - A Shape Style object returned by a previous _LOImpress_ShapeStyleCreate, or _LOImpress_ShapeStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
@@ -6426,7 +6426,7 @@ EndFunc   ;==>_LOImpress_ShapeTextAttrColumns
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapeTextAttrFit
-; Description ...: Set or Retrieve Shape Text Attribute Fit properties. See Remarks.
+; Description ...: Set or Retrieve Shape Text Attribute Fit properties.
 ; Syntax ........: _LOImpress_ShapeTextAttrFit(ByRef $oShape[, $bFitWidth = Null[, $bFitHeight = Null[, $bFitToFrame = Null[, $bAdjustContour = Null[, $bWordWrap = Null[, $bResizeShape = Null]]]]]])
 ; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
 ;                  $bFitWidth           - [optional] Default is Null. If True, Expands the width of the object to the width of the text.

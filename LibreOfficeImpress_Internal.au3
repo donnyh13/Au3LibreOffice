@@ -5896,7 +5896,7 @@ EndFunc   ;==>__LOImpress_ShapeAreaColor
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_ShapeAreaGradientMulticolor
-; Description ...: Set or Retrieve a Shape, Shape Style, or Presentation Style's Multicolor Gradient settings. See remarks.
+; Description ...: Set or Retrieve a Shape, Shape Style, or Presentation Style's Multicolor Gradient settings.
 ; Syntax ........: __LOImpress_ShapeAreaGradientMulticolor(ByRef $oObj[, $avColorStops = Null])
 ; Parameters ....: $oObj                - A Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
@@ -6329,7 +6329,7 @@ EndFunc   ;==>__LOImpress_ShapeAreaTransparency
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_ShapeAreaTransparencyGradientMulti
-; Description ...: Set or Retrieve a Shape, Shape Style, or Presentation Style's Multi Transparency Gradient settings. See remarks.
+; Description ...: Set or Retrieve a Shape, Shape Style, or Presentation Style's Multi Transparency Gradient settings.
 ; Syntax ........: __LOImpress_ShapeAreaTransparencyGradientMulti(ByRef $oObj[, $avColorStops = Null])
 ; Parameters ....: $oObj                - A Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
@@ -8818,7 +8818,7 @@ EndFunc   ;==>__LOImpress_ShapeTextAttrAnimation
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_ShapeTextAttrFit
-; Description ...: Set or Retrieve Shape or Shape Style Text Attribute Fit properties. See Remarks.
+; Description ...: Set or Retrieve Shape or Shape Style Text Attribute Fit properties.
 ; Syntax ........: __LOImpress_ShapeTextAttrFit(ByRef $oObj[, $bFitWidth = Null[, $bFitHeight = Null[, $bFitToFrame = Null[, $bAdjustContour = Null[, $bWordWrap = Null[, $bResizeShape = Null]]]]]])
 ; Parameters ....: $oObj                - A Shape or Shape Style object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, or _LOImpress_ShapeStyleGetObjByName function.
 ;                  $bFitWidth           - [optional] Default is Null. If True, Expands the width of the object to the width of the text.
