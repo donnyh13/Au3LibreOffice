@@ -43,7 +43,7 @@
 ;                  @Error: 0, @Extended: 0, Return: 1 = Successfully set the UserFunction.
 ;                  @Error: 0, @Extended: 0, Return: 2 = Successfully cleared the set UserFunction.
 ;                  @Error: 0, @Extended: 0, Return: Function = Returning the set UserFunction.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $vUserFunction Not a Function, or Default keyword, or Null Keyword.
 ; Author ........: mLipok
@@ -117,7 +117,7 @@ EndFunc   ;==>_LOImpress_ComError_UserFunction
 ;                  $oDoc                - [optional] Default is Null. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: Boolean.
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Font is available, else False.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $sFontName not a String.
 ;                  --Initialization Errors--
@@ -189,7 +189,7 @@ EndFunc   ;==>_LOImpress_FontExists
 ; Parameters ....: $oDoc                - [optional] Default is Null. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning a 4 Column Array, @Extended is set to the number of results. See remarks
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create a "com.sun.star.ServiceManager" Object.
 ;                  @Error: 2, @Extended: 2 = Failed to create a "com.sun.star.frame.Desktop" Object.
