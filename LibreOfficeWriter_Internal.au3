@@ -10151,7 +10151,7 @@ EndFunc   ;==>__LOWriter_TextCursorMove
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. The requested Integer value converted from percentage to a RGB Color Integer.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. The requested Integer value from a RGB Color Integer to percentage.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: Null and sets @Error and @Extended to non-zero.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = No values called in parameters.
 ; Author ........: donnyh13
@@ -10178,7 +10178,7 @@ Func __LOWriter_TransparencyGradientConvert($iPercentToLong = Null, $iLongToPerc
 
 	Else
 
-		Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+		Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, Null)
 	EndIf
 EndFunc   ;==>__LOWriter_TransparencyGradientConvert
 
