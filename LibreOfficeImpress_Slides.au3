@@ -1554,8 +1554,8 @@ EndFunc   ;==>_LOImpress_SlideshowActiveSettings
 ;                  @Error 1 @Extended 3 = Name called in $sName already exists as a Custom Slideshow in Document.
 ;                  @Error 1 @Extended 4 = $asSlides not an Array.
 ;                  @Error 1 @Extended 5 = Array called in $asSlides has 0 elements.
-;                  @Error 1 @Extended 6 Return ? = Element contained in $asSlides not a String. Returning problem element number.
-;                  @Error 1 @Extended 7 Return ? = Slide name contained in $asSlides not found in Document. Returning problem element number.
+;                  @Error 1 @Extended 6 = Element contained in $asSlides not a String. Returning problem element number.
+;                  @Error 1 @Extended 7 = Slide name contained in $asSlides not found in Document. Returning problem element number.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 = Failed to create a CustomPresentation Object.
 ;                  --Processing Errors--
@@ -1659,8 +1659,8 @@ EndFunc   ;==>_LOImpress_SlideshowCustomDelete
 ;                  @Error 1 @Extended 3 = Name called in $sName already exists as a Custom Slideshow in Document.
 ;                  @Error 1 @Extended 4 = $asSlides not an Array.
 ;                  @Error 1 @Extended 5 = Array called in $asSlides has 0 elements.
-;                  @Error 1 @Extended 6 Return ? = Element contained in $asSlides not a String. Returning problem element number.
-;                  @Error 1 @Extended 7 Return ? = Slide name contained in $asSlides not found in Document. Returning problem element number.
+;                  @Error 1 @Extended 6 = Element contained in $asSlides not a String. Returning problem element number.
+;                  @Error 1 @Extended 7 = Slide name contained in $asSlides not found in Document. Returning problem element number.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 = Failed to create a CustomPresentation Object.
 ;                  --Processing Errors--
