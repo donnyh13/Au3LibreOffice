@@ -68,6 +68,9 @@
 ;                  $sSaveName           - [optional] Default is "". The file name to save the file as, if the file hasn't been saved before. See Remarks.
 ;                  $bDeliverOwnership   - [optional] Default is True. If True, deliver ownership of the document Object from the script to LibreOffice, recommended is True.
 ; Return values .: Success: String
+;                  @Error 0 @Extended 1 Return String = Success, Document was successfully closed, and was saved to the returned file Path.
+;                  @Error 0 @Extended 2 Return String = Success, Document was successfully closed, document's changes were saved to its existing location.
+;                  @Error 0 @Extended 3 Return String = Success, Document was successfully closed, document either had no changes to save, or $bSaveChanges was called with False. If document had a save location, or if document was saved to a location, it is returned, else an empty string is returned.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -80,10 +83,6 @@
 ;                  @Error 3 @Extended 1 = Path Conversion to L.O. URL Failed.
 ;                  @Error 3 @Extended 2 = Error while retrieving Filter Name.
 ;                  @Error 3 @Extended 3 = Failed to close Document.
-;                  --Success--
-;                  @Error 0 @Extended 1 Return String = Success, Document was successfully closed, and was saved to the returned file Path.
-;                  @Error 0 @Extended 2 Return String = Success, Document was successfully closed, document's changes were saved to its existing location.
-;                  @Error 0 @Extended 3 Return String = Success, Document was successfully closed, document either had no changes to save, or $bSaveChanges was called with False. If document had a save location, or if document was saved to a location, it is returned, else an empty string is returned.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $bSaveChanges is True and the document hasn't been saved yet, the document is saved to the desktop.
@@ -163,6 +162,9 @@ EndFunc   ;==>_LOImpress_DocClose
 ;                  $sSearch             - [optional] Default is "". The Name, Title or Path of the Document to search for. See remarks.
 ;                  $bCaseless           - [optional] Default is False. If True, searches are caseless when using $LO_DOC_CONNECT_MODE_SEARCH_* flags.
 ; Return values .: Success: Object or Array.
+;                  @Error 0 @Extended 1 Return Object = Success, The Object for the current, or last active Impress document is returned.
+;                  @Error 0 @Extended 1 Return Object = Success, The Object for the found Document with matching Name, Title or Path.
+;                  @Error 0 @Extended ? Return Array = Success, An Array of all open LibreOffice Impress Documents. @Extended is set to number of results. See remarks.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $iMode not an Integer, less than 0 or greater than 4. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
@@ -179,10 +181,6 @@ EndFunc   ;==>_LOImpress_DocClose
 ;                  @Error 3 @Extended 4 = Error converting path to LibreOffice URL.
 ;                  @Error 3 @Extended 5 = Current Document not a Impress Document.
 ;                  @Error 3 @Extended 6 = No matches found.
-;                  --Success--
-;                  @Error 0 @Extended 1 Return Object = Success, The Object for the current, or last active Impress document is returned.
-;                  @Error 0 @Extended 1 Return Object = Success, The Object for the found Document with matching Name, Title or Path.
-;                  @Error 0 @Extended ? Return Array = Success, An Array of all open LibreOffice Impress Documents. @Extended is set to number of results. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Only Impress documents are searched or returned using any of the flags.
@@ -313,6 +311,8 @@ EndFunc   ;==>_LOImpress_DocConnect
 ; Parameters ....: $bForceNew           - [optional] Default is True. If True, force opening a new Impress Document instead of checking for a usable blank.
 ;                  $bHidden             - [optional] Default is False. If True opens the new document invisible or changes the existing document to invisible.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 1 Return Object = Successfully connected to an existing Document. Returning Document's Object
+;                  @Error 0 @Extended 2 Return Object = Successfully created a new document. Returning Document's Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $bForceNew not a Boolean.
@@ -325,9 +325,6 @@ EndFunc   ;==>_LOImpress_DocConnect
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Document Object is still returned. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bHidden
-;                  --Success--
-;                  @Error 0 @Extended 1 Return Object = Successfully connected to an existing Document. Returning Document's Object
-;                  @Error 0 @Extended 2 Return Object = Successfully created a new document. Returning Document's Object
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -386,6 +383,7 @@ EndFunc   ;==>_LOImpress_DocCreate
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $sDispatch           - The Dispatch command to execute. See List of commands below.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Successfully executed dispatch command.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -393,8 +391,6 @@ EndFunc   ;==>_LOImpress_DocCreate
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 = Error creating "com.sun.star.ServiceManager" Object.
 ;                  @Error 2 @Extended 2 = Error creating "com.sun.star.frame.DispatchHelper" Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully executed dispatch command.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: A Dispatch is essentially a simulation of the user performing an action, such as pressing Ctrl+A to select all, etc.
@@ -470,6 +466,7 @@ EndFunc   ;==>_LOImpress_DocExecuteDispatch
 ;                  $bOverwrite          - [optional] Default is Null. If True, file will be overwritten.
 ;                  $sPassword           - [optional] Default is Null. Password String to set for the document. (Not all file formats can have a Password set). "" (blank string) or Null = No Password.
 ; Return values .: Success: String
+;                  @Error 0 @Extended 0 Return String = Success. Returning save path for exported document.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -486,8 +483,6 @@ EndFunc   ;==>_LOImpress_DocExecuteDispatch
 ;                  @Error 3 @Extended 1 = Error Converting Path to/from L.O. URL
 ;                  @Error 3 @Extended 2 = Document has no save path, and $bSamePath is called with True.
 ;                  @Error 3 @Extended 3 = Error retrieving Filter Name.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Returning save path for exported document.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Does not alter the original save path (if there was one), saves a copy of the document to the new path, in the new file format if one is chosen.
@@ -563,14 +558,13 @@ EndFunc   ;==>_LOImpress_DocExport
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $bReturnFull         - [optional] Default is False. If True, the full window title is returned, such as is used by AutoIt window related functions.
 ; Return values .: Success: String
+;                  @Error 0 @Extended 0 Return String = Success. Returning the document's Name as a String. See remarks.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 = $bReturnFull not a Boolean.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Document's name.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Returning the document's Name as a String. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $bReturnFull is True, the return value will be like: "<Impress Doc name>.<extension> — LibreOffice Impress" e.g. "Testing.odp — LibreOffice Impress".
@@ -607,6 +601,7 @@ EndFunc   ;==>_LOImpress_DocGetName
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $bReturnLibreURL     - [optional] Default is False. If True, returns a path in LibreOffice URL format, else False returns a regular Windows path.
 ; Return values .: Success: String
+;                  @Error 0 @Extended 0 Return String = Success. Returning the document's save path as a String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -614,8 +609,6 @@ EndFunc   ;==>_LOImpress_DocGetName
 ;                  @Error 1 @Extended 3 = Document has no save path.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Error converting Libre URL to Computer path format.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Returning the document's save path as a String.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -649,13 +642,12 @@ EndFunc   ;==>_LOImpress_DocGetPath
 ; Syntax ........: _LOImpress_DocHasPath(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: Boolean
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the document has a save location. Else False.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to query Document whether it has a path.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the document has a save location. Else False.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -683,13 +675,12 @@ EndFunc   ;==>_LOImpress_DocHasPath
 ; Syntax ........: _LOImpress_DocIsActive(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: Boolean
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if document is the currently active Libre window. See remarks.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to query Document whether it is active.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if document is the currently active Libre window. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This does NOT test if the document is the current active window in Windows, it only tests if the document is the current active document among other LibreOffice documents.
@@ -717,13 +708,12 @@ EndFunc   ;==>_LOImpress_DocIsActive
 ; Syntax ........: _LOImpress_DocIsModified(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: Boolean
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the document has been modified since last being saved.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to query Document whether it has been modified.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the document has been modified since last being saved.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -751,13 +741,12 @@ EndFunc   ;==>_LOImpress_DocIsModified
 ; Syntax ........: _LOImpress_DocIsReadOnly(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: Boolean
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True is document is currently Read Only, else False.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to query whether Document is Read-Only.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True is document is currently Read Only, else False.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Only documents that have been saved to a location, will ever be "ReadOnly".
@@ -786,6 +775,8 @@ EndFunc   ;==>_LOImpress_DocIsReadOnly
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $bMaximize           - [optional] Default is Null. If True, document window is maximized, else if False, document is restored to its previous size and location.
 ; Return values .: Success: 1 or Boolean.
+;                  @Error 0 @Extended 0 Return 1 = Success. Document was successfully maximized.
+;                  @Error 0 @Extended 1 Return Boolean = Success. $bMaximize called with Null, returning boolean indicating if Document is currently maximized (True) or not (False).
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -795,9 +786,6 @@ EndFunc   ;==>_LOImpress_DocIsReadOnly
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bMaximize
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Document was successfully maximized.
-;                  @Error 0 @Extended 1 Return Boolean = Success. $bMaximize called with Null, returning boolean indicating if Document is currently maximized (True) or not (False).
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -836,6 +824,8 @@ EndFunc   ;==>_LOImpress_DocMaximize
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $bMinimize           - [optional] Default is Null. If True, document window is minimized, else if False, document is restored to its previous size and location.
 ; Return values .: Success: 1 or Boolean
+;                  @Error 0 @Extended 0 Return 1 = Success. Document was successfully minimized.
+;                  @Error 0 @Extended 1 Return Boolean = Success. $bMinimize called with Null, returning boolean indicating if Document is currently minimized (True) or not (False).
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -845,9 +835,6 @@ EndFunc   ;==>_LOImpress_DocMaximize
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bMinimize
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Document was successfully minimized.
-;                  @Error 0 @Extended 1 Return Boolean = Success. $bMinimize called with Null, returning boolean indicating if Document is currently minimized (True) or not (False).
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -891,6 +878,8 @@ EndFunc   ;==>_LOImpress_DocMinimize
 ;                  $bLoadAsTemplate     - [optional] Default is Null. If True, opens the document as a Template, i.e. an untitled copy of the specified document is made instead of modifying the original document.
 ;                  $sFilterName         - [optional] Default is Null. Name of a LibreOffice filter to use to load the specified document. LibreOffice automatically selects which to use by default.
 ; Return values .: Success: Object.
+;                  @Error 0 @Extended 1 Return Object = Successfully connected to requested Document without requested parameters. Returning Document's Object.
+;                  @Error 0 @Extended 2 Return Object = Successfully opened requested Document with requested parameters. Returning Document's Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $sFilePath not string, or file not found.
@@ -912,9 +901,6 @@ EndFunc   ;==>_LOImpress_DocMinimize
 ;                  |                               4 = Error setting $sPassword
 ;                  |                               8 = Error setting $bLoadAsTemplate
 ;                  |                               16 = Error setting $sFilterName
-;                  --Success--
-;                  @Error 0 @Extended 1 Return Object = Successfully connected to requested Document without requested parameters. Returning Document's Object.
-;                  @Error 0 @Extended 2 Return Object = Successfully opened requested Document with requested parameters. Returning Document's Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Any parameters (Hidden, template etc.,) will not be applied when connecting to a document.
@@ -1006,6 +992,8 @@ EndFunc   ;==>_LOImpress_DocOpen
 ;                  $iWidth              - [optional] Default is Null. The width of the window, in pixels(?).
 ;                  $iHeight             - [optional] Default is Null. The height of the window, in pixels(?).
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -1022,9 +1010,6 @@ EndFunc   ;==>_LOImpress_DocOpen
 ;                  |                               2 = Error setting $iY
 ;                  |                               4 = Error setting $iWidth
 ;                  |                               8 = Error setting $iHeight
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: X & Y, on my computer at least, seem to go no lower than 8(X) and 30(Y), if you enter lower than this, it will cause a "property setting Error".
@@ -1098,13 +1083,12 @@ EndFunc   ;==>_LOImpress_DocPosAndSize
 ; Syntax ........: _LOImpress_DocRedo(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Successfully performed a redo action.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Document does not have a redo action to perform.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Successfully performed a redo action.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1135,11 +1119,10 @@ EndFunc   ;==>_LOImpress_DocRedo
 ; Syntax ........: _LOImpress_DocRedoClear(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Successfully cleared all Redo Actions.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully cleared all Redo Actions.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This will silently fail if there are any _LOImpress_DocUndoActionBegin still active.
@@ -1164,13 +1147,12 @@ EndFunc   ;==>_LOImpress_DocRedoClear
 ; Syntax ........: _LOImpress_DocRedoCurActionTitle(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: String
+;                  @Error 0 @Extended 0 Return String = Returning the current available redo action title as a String. Will be an empty String if no action is available.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve current Redo Action.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Returning the current available redo action title as a String. Will be an empty String if no action is available.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1199,13 +1181,12 @@ EndFunc   ;==>_LOImpress_DocRedoCurActionTitle
 ; Syntax ........: _LOImpress_DocRedoGetAllActionTitles(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: Array.
+;                  @Error 0 @Extended ? Return Array = Returning all available redo action Titles in an array of Strings. @Extended set to number of results.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve an array of Redo action titles.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Returning all available redo action Titles in an array of Strings. @Extended set to number of results.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1233,13 +1214,12 @@ EndFunc   ;==>_LOImpress_DocRedoGetAllActionTitles
 ; Syntax ........: _LOImpress_DocRedoIsPossible(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: Boolean
+;                  @Error 0 @Extended 0 Return Boolean = If the document has a redo action to perform, True is returned, else False.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to query whether a Redo is possible.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = If the document has a redo action to perform, True is returned, else False.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1267,13 +1247,12 @@ EndFunc   ;==>_LOImpress_DocRedoIsPossible
 ; Syntax ........: _LOImpress_DocSave(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Document Successfully saved.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Document is Read Only or Document has no save location, try SaveAs.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Document Successfully saved.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1303,6 +1282,7 @@ EndFunc   ;==>_LOImpress_DocSave
 ;                  $bOverwrite          - [optional] Default is Null. If True, the existing file will be overwritten.
 ;                  $sPassword           - [optional] Default is Null. Sets a password for the document. (Not all file formats can have a Password set). Null or "" (blank string) = No Password.
 ; Return values .: Success: String
+;                  @Error 0 @Extended 0 Return String = Successfully Saved the document. Returning document save path.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -1317,8 +1297,6 @@ EndFunc   ;==>_LOImpress_DocSave
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Error Converting Path to/from L.O. URL
 ;                  @Error 3 @Extended 2 = Error retrieving Filter Name.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Successfully Saved the document. Returning document save path.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Alters original save path (if there was one) to the new path.
@@ -1376,11 +1354,10 @@ EndFunc   ;==>_LOImpress_DocSaveAs
 ; Syntax ........: _LOImpress_DocToFront(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Window was successfully brought to the front of the open windows.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Window was successfully brought to the front of the open windows.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If minimized, the document is restored and brought to the front of the visible pages. Generally only brings the document to the front of other LibreOffice windows.
@@ -1405,13 +1382,12 @@ EndFunc   ;==>_LOImpress_DocToFront
 ; Syntax ........: _LOImpress_DocUndo(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Successfully performed an undo action.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Document does not have an undo action to perform.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Successfully performed an undo action.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1443,12 +1419,11 @@ EndFunc   ;==>_LOImpress_DocUndo
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $sName               - [optional] Default is "AU3LO-Automation". The name of the Undo Action to display in the UI when completed.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Successfully began an Undo Action group recording.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 = $sName not a String.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully began an Undo Action group recording.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This begins an Undo Action Group, any functions and actions done after this function is called will be grouped together, and if undone, all actions will be undone together at once.
@@ -1476,11 +1451,10 @@ EndFunc   ;==>_LOImpress_DocUndoActionBegin
 ; Syntax ........: _LOImpress_DocUndoActionEnd(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Successfully ended the last Undo Action group recording.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully ended the last Undo Action group recording.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This stops the grouping of actions into the last created Undo Action Group.
@@ -1505,11 +1479,10 @@ EndFunc   ;==>_LOImpress_DocUndoActionEnd
 ; Syntax ........: _LOImpress_DocUndoClear(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Successfully cleared all Undo and Redo Actions.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully cleared all Undo and Redo Actions.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This will silently fail if there are any _LOImpress_DocUndoActionBegin still active.
@@ -1534,13 +1507,12 @@ EndFunc   ;==>_LOImpress_DocUndoClear
 ; Syntax ........: _LOImpress_DocUndoCurActionTitle(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: String
+;                  @Error 0 @Extended 0 Return String = Returning the current available Undo action title as a String. Will be an empty String if no action is available.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve current Undo Action.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Returning the current available Undo action title as a String. Will be an empty String if no action is available.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1569,13 +1541,12 @@ EndFunc   ;==>_LOImpress_DocUndoCurActionTitle
 ; Syntax ........: _LOImpress_DocUndoGetAllActionTitles(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: Array.
+;                  @Error 0 @Extended ? Return Array = Returning all available undo action Titles in an array of Strings. @Extended set to number of results.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve an array of Undo action titles.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Returning all available undo action Titles in an array of Strings. @Extended set to number of results.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1603,13 +1574,12 @@ EndFunc   ;==>_LOImpress_DocUndoGetAllActionTitles
 ; Syntax ........: _LOImpress_DocUndoIsPossible(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: Boolean
+;                  @Error 0 @Extended 0 Return Boolean = If the document has an undo action to perform, True is returned, else False.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to query whether an Undo is possible.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = If the document has an undo action to perform, True is returned, else False.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1637,11 +1607,10 @@ EndFunc   ;==>_LOImpress_DocUndoIsPossible
 ; Syntax ........: _LOImpress_DocUndoReset(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Successfully reset the undo manager.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully reset the undo manager.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Calling this function does the following: remove all locks from the undo manager; closes all open undo group actions, clears all undo actions, clears all redo actions.
@@ -1667,6 +1636,8 @@ EndFunc   ;==>_LOImpress_DocUndoReset
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $bVisible            - [optional] Default is Null. If True, the document is visible.
 ; Return values .: Success: 1 or Boolean.
+;                  @Error 0 @Extended 0 Return 1 = Success. $bVisible successfully set.
+;                  @Error 0 @Extended 1 Return Boolean = Success. Returning current visibility state of the Document, True if visible, False if invisible.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -1676,9 +1647,6 @@ EndFunc   ;==>_LOImpress_DocUndoReset
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bVisible
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. $bVisible successfully set.
-;                  @Error 0 @Extended 1 Return Boolean = Success. Returning current visibility state of the Document, True if visible, False if invisible.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current visibility setting.
@@ -1718,6 +1686,8 @@ EndFunc   ;==>_LOImpress_DocVisible
 ;                  $iZoomType           - [optional] (0-4) Default is Null. The Zoom type, See remarks. See constants $LOI_ZOOMTYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iZoom               - [optional] (20-600) Default is Null. The zoom percentage. Only valid if Zoom type is set to "By Value"
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -1726,9 +1696,6 @@ EndFunc   ;==>_LOImpress_DocVisible
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iZoom
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Zoom type always has the value of $LOI_ZOOMTYPE_BY_VALUE(3), when using the other zoom types, the value stays the same, but the zoom level is modified. Consequently, I have not added an error check for the Zoom Type property being correctly set.

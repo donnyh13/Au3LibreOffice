@@ -40,13 +40,12 @@
 ;                  $vParam4             - [optional] Default is Null. Any optional parameter to be called with the user function.
 ;                  $vParam5             - [optional] Default is Null. Any optional parameter to be called with the user function.
 ; Return values .: Success: 1 or UserFunction.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
-;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $vUserFunction Not a Function, or Default keyword, or Null Keyword.
-;                  --Success--
 ;                  @Error 0 @Extended 0 Return 1 = Successfully set the UserFunction.
 ;                  @Error 0 @Extended 0 Return 2 = Successfully cleared the set UserFunction.
 ;                  @Error 0 @Extended 0 Return Function = Returning the set UserFunction.
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  --Input Errors--
+;                  @Error 1 @Extended 1 = $vUserFunction Not a Function, or Default keyword, or Null Keyword.
 ; Author ........: mLipok
 ; Modified ......: donnyh13 - Added a clear UserFunction without error option. Also added parameters option.
 ; Remarks .......: The first parameter passed to the User function will always be the COM Error object. See below.
@@ -117,6 +116,7 @@ EndFunc   ;==>_LOImpress_ComError_UserFunction
 ; Parameters ....: $sFontName           - The Font name to search for.
 ;                  $oDoc                - [optional] Default is Null. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: Boolean.
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Font is available, else False.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $sFontName not a String.
@@ -127,8 +127,6 @@ EndFunc   ;==>_LOImpress_ComError_UserFunction
 ;                  @Error 2 @Extended 4 = Failed to create a new Document.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Font list.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Font is available, else False.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $oDoc is optional, if not called, an Impress Document is created invisibly to perform the check.
@@ -190,6 +188,7 @@ EndFunc   ;==>_LOImpress_FontExists
 ; Syntax ........: _LOImpress_FontsGetNames([$oDoc = Null])
 ; Parameters ....: $oDoc                - [optional] Default is Null. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: Array
+;                  @Error 0 @Extended ? Return Array = Success. Returning a 4 Column Array, @Extended is set to the number of results. See remarks
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 = Failed to create a "com.sun.star.ServiceManager" Object.
@@ -198,8 +197,6 @@ EndFunc   ;==>_LOImpress_FontExists
 ;                  @Error 2 @Extended 4 = Failed to create a new Document.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Font list.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. Returning a 4 Column Array, @Extended is set to the number of results. See remarks
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $oDoc is optional, if not called, an Impress Document is created invisibly to perform the check.

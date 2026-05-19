@@ -66,6 +66,7 @@
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $iPos                - [optional] Default is Null. The position to insert the new slide in the collection of slides. 0 Based. See remarks.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Returning new slide's Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -76,8 +77,6 @@
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to create a slide.
 ;                  @Error 3 @Extended 2 = Failed to backup currently active slide.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning new slide's Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $iPos is called with Null, the new slide is inserted at the end.
@@ -137,6 +136,8 @@ EndFunc   ;==>_LOImpress_SlideAdd
 ; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
 ;                  $iColor              - [optional] (0-16777215) Default is Null. The Slide background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1 or Integer
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting as an Integer value. See remarks.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oSlide not an Object.
@@ -149,9 +150,6 @@ EndFunc   ;==>_LOImpress_SlideAdd
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iColor
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting as an Integer value. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current setting.
@@ -206,15 +204,14 @@ EndFunc   ;==>_LOImpress_SlideBackColor
 ; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
 ;                  $bFillOff            - [optional] Default is False. If True, the Fill style will be set to Off. See remarks.
 ; Return values .: Success: Integer
+;                  @Error 0 @Extended 0 Return Integer = Success. Returning current background fill style. Return will be one of the constants $LOI_AREA_FILL_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error 0 @Extended 1 Return 0 = Success. Fill style was successfully turned off.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oSlide not an Object.
 ;                  @Error 1 @Extended 2 = $bFillOff not a Boolean.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve current Fill Style.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning current background fill style. Return will be one of the constants $LOI_AREA_FILL_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 0 @Extended 1 Return 0 = Success. Fill style was successfully turned off.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function is to help determine if a Gradient background, or a solid color background is currently active.
@@ -273,6 +270,10 @@ EndFunc   ;==>_LOImpress_SlideBackFillStyle
 ;                  $iFromIntense        - [optional] (0-100) Default is Null. Enter the intensity for the color in the "From Color", where 0% corresponds to black, and 100 % to the selected color.
 ;                  $iToIntense          - [optional] (0-100) Default is Null. Enter the intensity for the color in the "To Color", where 0% corresponds to black, and 100 % to the selected color.
 ; Return values .: Success: Integer or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
+;                  @Error 0 @Extended 0 Return 2 = Success. Gradient has been successfully turned off.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 2 Return -1 = Success. All optional parameters were called with Null, no background is currently active for the slide. Returning -1.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oSlide not an Object.
@@ -310,11 +311,6 @@ EndFunc   ;==>_LOImpress_SlideBackFillStyle
 ;                  |                               256 = Error setting $iToColor
 ;                  |                               512 = Error setting $iFromIntense
 ;                  |                               1024 = Error setting $iToIntense
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 0 Return 2 = Success. Gradient has been successfully turned off.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
-;                  @Error 0 @Extended 2 Return -1 = Success. All optional parameters were called with Null, no background is currently active for the slide. Returning -1.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -531,6 +527,8 @@ EndFunc   ;==>_LOImpress_SlideBackGradient
 ; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
+;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer. See remarks.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oSlide not an Object.
@@ -543,9 +541,6 @@ EndFunc   ;==>_LOImpress_SlideBackGradient
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTransparency
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -607,6 +602,10 @@ EndFunc   ;==>_LOImpress_SlideBackTransparency
 ;                  $iStart              - [optional] (0-100) Default is Null. The transparency value for the beginning point of the gradient, where 0% is fully opaque and 100% is fully transparent.
 ;                  $iEnd                - [optional] (0-100) Default is Null. The transparency value for the endpoint of the gradient, where 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
+;                  @Error 0 @Extended 0 Return 2 = Success. Transparency Gradient has been successfully turned off.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
+;                  @Error 0 @Extended 1 Return -1 = Success. All optional parameters were called with Null no background is currently active for the slide. Returning -1.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oSlide not an Object.
@@ -635,11 +634,6 @@ EndFunc   ;==>_LOImpress_SlideBackTransparency
 ;                  |                               16 = Error setting $iTransitionStart
 ;                  |                               32 = Error setting $iStart
 ;                  |                               64 = Error setting $iEnd
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 0 Return 2 = Success. Transparency Gradient has been successfully turned off.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
-;                  @Error 0 @Extended 1 Return -1 = Success. All optional parameters were called with Null no background is currently active for the slide. Returning -1.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -808,6 +802,7 @@ EndFunc   ;==>_LOImpress_SlideBackTransparencyGradient
 ; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
 ;                  $iPos                - [optional] Default is Null. The position to insert the new slide in the collection of slides. 0 Based. See remarks.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Successfully copied the slide, returning the new slide's Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oSlide not an Object.
@@ -821,8 +816,6 @@ EndFunc   ;==>_LOImpress_SlideBackTransparencyGradient
 ;                  @Error 3 @Extended 3 = Failed to identify copied slide's position.
 ;                  @Error 3 @Extended 4 = Failed to backup currently active slide.
 ;                  @Error 3 @Extended 5 = Failed to move copied slide.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully copied the slide, returning the new slide's Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The copied slide is inserted after the slide to be copied.
@@ -910,6 +903,8 @@ EndFunc   ;==>_LOImpress_SlideCopy
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $oSlide              - [optional] Default is Null. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
 ; Return values .: Success: 1 or Object
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Object = Success. All optional parameters were called with Null, returning currently active slide.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -919,9 +914,6 @@ EndFunc   ;==>_LOImpress_SlideCopy
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $oSlide
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Object = Success. All optional parameters were called with Null, returning currently active slide.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current slide.
@@ -960,6 +952,7 @@ EndFunc   ;==>_LOImpress_SlideCurrent
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $iSlide              - The slide to delete. 0 based.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Slide was successfully deleted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oSlide not an Object.
@@ -968,8 +961,6 @@ EndFunc   ;==>_LOImpress_SlideCurrent
 ;                  @Error 3 @Extended 1 = Failed to retrieve count of slides.
 ;                  @Error 3 @Extended 2 = Failed to retrieve slide's Object.
 ;                  @Error 3 @Extended 3 = Failed to delete slide.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Slide was successfully deleted.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1005,6 +996,7 @@ EndFunc   ;==>_LOImpress_SlideDeleteByIndex
 ; Syntax ........: _LOImpress_SlideDeleteByObj(ByRef $oSlide)
 ; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Slide was successfully deleted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oSlide not an Object.
@@ -1012,8 +1004,6 @@ EndFunc   ;==>_LOImpress_SlideDeleteByIndex
 ;                  @Error 3 @Extended 1 = Failed to retrieve Parent Document.
 ;                  @Error 3 @Extended 2 = Failed to retrieve count of slides.
 ;                  @Error 3 @Extended 3 = Failed to delete slide.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Slide was successfully deleted.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1051,14 +1041,13 @@ EndFunc   ;==>_LOImpress_SlideDeleteByObj
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $sName               - The slide name to check for.
 ; Return values .: Success: Boolean.
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Document contains a Slide with the called name, else False.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 = $sName not a String.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to query for Slide name.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Document contains a Slide with the called name, else False.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1088,14 +1077,13 @@ EndFunc   ;==>_LOImpress_SlideExists
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $iSlide              - The slide to retrieve. 0 based.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Returning requested slide's Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  @Error 1 @Extended 2 = $iSlide not an Integer, less than 0 or greater than number of slides minus one.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve requested slide.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning requested slide's Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1125,6 +1113,7 @@ EndFunc   ;==>_LOImpress_SlideGetObjByIndex
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $sName               - The Slide's name to retrieve the Object for.
 ; Return values .: Success: Object
+;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Slide's Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -1132,8 +1121,6 @@ EndFunc   ;==>_LOImpress_SlideGetObjByIndex
 ;                  @Error 1 @Extended 3 = Slide name called in $sName not found.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve requested Slide.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Slide's Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1164,6 +1151,8 @@ EndFunc   ;==>_LOImpress_SlideGetObjByName
 ; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
 ;                  $iLayout             - [optional] (0-34) Default is Null. The layout format of the Slide. See Constants, $LOI_SLIDE_LAYOUT_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1 or Integer.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current layout setting as an Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oSlide not an Object.
@@ -1173,9 +1162,6 @@ EndFunc   ;==>_LOImpress_SlideGetObjByName
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iLayout
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current layout setting as an Integer.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1214,6 +1200,7 @@ EndFunc   ;==>_LOImpress_SlideLayout
 ; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
 ;                  $iPos                - The position to move the slide to in the collection of slides. 0 Based. See remarks.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Slide was successfully moved.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oSlide not an Object.
@@ -1226,8 +1213,6 @@ EndFunc   ;==>_LOImpress_SlideLayout
 ;                  @Error 3 @Extended 2 = Failed to identify slide's current position.
 ;                  @Error 3 @Extended 3 = Failed to backup currently active slide.
 ;                  @Error 3 @Extended 4 = Failed to move slide.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Slide was successfully moved.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Due to limitations in the API, some dispatches are executed to move the slide. The current slide will temporarily be set to the new slide in order to move it.
@@ -1309,6 +1294,8 @@ EndFunc   ;==>_LOImpress_SlideMove
 ; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
 ;                  $sName               - [optional] Default is Null. The new name to set the slide to. See Remarks.
 ; Return values .: Success: 1 or String.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning current Slide name as a String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oSlide not an Object.
@@ -1320,9 +1307,6 @@ EndFunc   ;==>_LOImpress_SlideMove
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sName
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning current Slide name as a String.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If setting the slide name to a name and a number, there is a good chance the name won't stay applied, as LibreOffice will assume it is an auto-numbered slide.
@@ -1366,13 +1350,12 @@ EndFunc   ;==>_LOImpress_SlideName
 ; Syntax ........: _LOImpress_SlidesGetCount(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: Integer
+;                  @Error 0 @Extended 0 Return Integer = Success. Returning count of slides contained in the document.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve a count of slides.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning count of slides contained in the document.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1400,13 +1383,12 @@ EndFunc   ;==>_LOImpress_SlidesGetCount
 ; Syntax ........: _LOImpress_SlidesGetNames(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: Array
+;                  @Error 0 @Extended ? Return Array = Success. An Array containing all Slide names. @Extended is set to the number of slide names returned.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve array of Slide names.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. An Array containing all Slide names. @Extended is set to the number of slide names returned.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1439,6 +1421,8 @@ EndFunc   ;==>_LOImpress_SlidesGetNames
 ;                  $iPenColor           - [optional] (0-16777215) Default is Null. If $bMouseAsPen is True, the color of the drawn line, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iPenWidth           - [optional] (4-400) Default is Null. The width of the drawn line. L.O. 4.2+. See Constants, $LOI_SLIDESHOW_PEN_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters. If The current LibreOffice version is below 4.2, the $iPenWidth parameter will return a Null value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -1459,9 +1443,6 @@ EndFunc   ;==>_LOImpress_SlidesGetNames
 ;                  |                               4 = Error setting $bMouseAsPen
 ;                  |                               8 = Error setting $iPenColor
 ;                  |                               16 = Error setting $iPenWidth
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters. If The current LibreOffice version is below 4.2, the $iPenWidth parameter will return a Null value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -1547,6 +1528,7 @@ EndFunc   ;==>_LOImpress_SlideshowActiveSettings
 ;                  $sName               - The name of the Custom Slideshow to create.
 ;                  $asSlides            - A single column Array of Slide names. See remarks.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Successfully created new Custom Slideshow.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -1562,8 +1544,6 @@ EndFunc   ;==>_LOImpress_SlideshowActiveSettings
 ;                  @Error 3 @Extended 1 = Failed to retrieve the Links Object.
 ;                  @Error 3 @Extended 2 = Failed to retrieve Slide's Object.
 ;                  @Error 3 @Extended 3 = Failed to insert new Custom Slideshow.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully created new Custom Slideshow.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The expected input for $asSlides is a single column array having the Slide names in the order the user wishes the Slides to appear in the presentation, slide names can be placed in the Array multiple times.
@@ -1614,6 +1594,7 @@ EndFunc   ;==>_LOImpress_SlideshowCustomCreate
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $sName               - The Custom Slideshow's name to delete.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Custom Slideshow was successfully deleted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -1621,8 +1602,6 @@ EndFunc   ;==>_LOImpress_SlideshowCustomCreate
 ;                  @Error 1 @Extended 3 = Name called in $sName not found as a Custom Slideshow in Document.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to delete the requested Custom Slideshow.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Custom Slideshow was successfully deleted.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1652,6 +1631,8 @@ EndFunc   ;==>_LOImpress_SlideshowCustomDelete
 ;                  $sName               - The name of the Custom Slideshow to modify.
 ;                  $asSlides            - [optional] Default is Null. A single column Array of Slide names. See remarks.
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Custom Slideshow successfully modified.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning Array of Slide names contained in the Custom Slideshow. See remarks.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -1671,9 +1652,6 @@ EndFunc   ;==>_LOImpress_SlideshowCustomDelete
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $asSlides
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Custom Slideshow successfully modified.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning Array of Slide names contained in the Custom Slideshow. See remarks.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The expected input for $asSlides is a single column array having the Slide names in the order the user wishes the Slides to appear in the presentation, slide names can be placed in the Array multiple times.
@@ -1745,6 +1723,7 @@ EndFunc   ;==>_LOImpress_SlideshowCustomModify
 ;                  $sName               - The name of the Custom Slideshow to rename.
 ;                  $sNewName            - The name to rename the Custom Slideshow to.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Custom Slideshow was successfully renamed.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -1757,8 +1736,6 @@ EndFunc   ;==>_LOImpress_SlideshowCustomModify
 ;                  --Property Setting Errors--
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sNewName
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Custom Slideshow was successfully renamed.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1794,13 +1771,12 @@ EndFunc   ;==>_LOImpress_SlideshowCustomSetName
 ; Syntax ........: _LOImpress_SlideshowIsRunning(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: Boolean
+;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if there is currently a Presentation running, else False.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to determine if a Presentation is currently active.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if there is currently a Presentation running, else False.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1830,6 +1806,10 @@ EndFunc   ;==>_LOImpress_SlideshowIsRunning
 ;                  $iAction             - The Query or Command to perform on the presentation. See Constants, $LOI_SLIDESHOW_PRES_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $vValue              - [optional] Default is Null. If the Query or Command requires an input value, it goes here. See Remarks.
 ; Return values .: Success: Boolean, Integer, or Object.
+;                  @Error 0 @Extended 0 Return 1 = Success. Successfully processed a command.
+;                  @Error 0 @Extended 0 Return Boolean = Success. Successfully processed a query that returns a Boolean. (See description of the specific query to see what is returned.)
+;                  @Error 0 @Extended 0 Return Integer = Success. Successfully processed a query that returns an Integer. (See description of the specific query to see what is returned.)
+;                  @Error 0 @Extended 0 Return Object = Success. Successfully processed a query that returns an Object. (See description of the specific query to see what is returned.)
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -1863,11 +1843,6 @@ EndFunc   ;==>_LOImpress_SlideshowIsRunning
 ;                  @Error 3 @Extended 20 = Failed to Resume the presentation.
 ;                  --Version Related Errors--
 ;                  @Error 6 @Extended 1 = $iAction called with $LOI_SLIDESHOW_PRES_COMMAND_ERASE_ALL_INK, and current LibreOffice version is less than 7.2.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully processed a command.
-;                  @Error 0 @Extended 0 Return Boolean = Success. Successfully processed a query that returns a Boolean. (See description of the specific query to see what is returned.)
-;                  @Error 0 @Extended 0 Return Integer = Success. Successfully processed a query that returns an Integer. (See description of the specific query to see what is returned.)
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully processed a query that returns an Object. (See description of the specific query to see what is returned.)
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Any queries or commands that require an input parameter will have the type of input required indicated in the description for the Constant.
@@ -2007,13 +1982,12 @@ EndFunc   ;==>_LOImpress_SlideshowPresentationControl
 ; Syntax ........: _LOImpress_SlideshowsCustomGetNames(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: Array.
+;                  @Error 0 @Extended ? Return Array = Success. An Array containing all Custom Slideshow names. @Extended is set to the number of names returned.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve Custom Presentations Object.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. An Array containing all Custom Slideshow names. @Extended is set to the number of names returned.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2044,6 +2018,8 @@ EndFunc   ;==>_LOImpress_SlideshowsCustomGetNames
 ;                  $iRepeatPause        - [optional] (0-86399) Default is Null. If $iPresMode is set to $LOI_SLIDESHOW_VIEW_MODE_LOOP, the amount of seconds before the presentation is played again.
 ;                  $bShowLogo           - [optional] Default is Null. If True, the LibreOffice logo is displayed during the pause.
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -2058,9 +2034,6 @@ EndFunc   ;==>_LOImpress_SlideshowsCustomGetNames
 ;                  |                               1 = Error setting $iPresMode
 ;                  |                               2 = Error setting $iRepeatPause
 ;                  |                               4 = Error setting $bShowLogo
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -2153,6 +2126,8 @@ EndFunc   ;==>_LOImpress_SlideshowSettingsMode
 ;                  $bPlayAnimatedFiles  - [optional] Default is Null. If True, animated files (such as GIFs) will be played.
 ;                  $bKeepOnTop          - [optional] Default is Null. If True, the presentation will be always kept on top of other programs.
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -2172,9 +2147,6 @@ EndFunc   ;==>_LOImpress_SlideshowSettingsMode
 ;                  |                               8 = Error setting $bMouseAsPen
 ;                  |                               16 = Error setting $bPlayAnimatedFiles
 ;                  |                               32 = Error setting $bKeepOnTop
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -2256,6 +2228,8 @@ EndFunc   ;==>_LOImpress_SlideshowSettingsOptions
 ;                  $iRange              - [optional] (0-2) Default is Null. The Range of slides that will be shown when the Presentation is started. See Constants, $LOI_SLIDESHOW_RANGE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $sValue              - [optional] Default is Null. The "From" slide or Custom Slide Show name. See remarks.
 ; Return values .: Success: 1 or Array.
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -2273,9 +2247,6 @@ EndFunc   ;==>_LOImpress_SlideshowSettingsOptions
 ;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iRange
 ;                  |                               2 = Error setting $sValue
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If you call $iRange with any other value than $LOI_SLIDESHOW_RANGE_ALL, $sValue must be called with an appropriate name, either a Slide name to start from, or a Custom Slideshow name.
@@ -2399,6 +2370,7 @@ EndFunc   ;==>_LOImpress_SlideshowSettingsRange
 ;                  $sStartSlide         - [optional] Default is "". The Slide's name to begin this presentation from.
 ;                  $sCustomShow         - [optional] Default is "". The Custom Slideshow's name to play for this presentation.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. The Presentation was started successfully.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
@@ -2413,8 +2385,6 @@ EndFunc   ;==>_LOImpress_SlideshowSettingsRange
 ;                  @Error 3 @Extended 1 = Failed to retrieve Presentation Object.
 ;                  @Error 3 @Extended 2 = There is already a presentation running.
 ;                  @Error 3 @Extended 3 = Failed to start the presentation.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. The Presentation was started successfully.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $bRehearse is called with True, both $sStartSlide and $sCustomShow will be ignored.
@@ -2492,13 +2462,12 @@ EndFunc   ;==>_LOImpress_SlideshowStart
 ; Syntax ........: _LOImpress_SlideshowStop(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: 1
+;                  @Error 0 @Extended 0 Return 1 = Success. Presentation was successfully stopped.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oDoc not an Object.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to stop the running presentation.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Presentation was successfully stopped.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2526,14 +2495,14 @@ EndFunc   ;==>_LOImpress_SlideshowStop
 ; Syntax ........: _LOImpress_SlideSoundsGetNames()
 ; Parameters ....: None
 ; Return values .: Success: Array
+;                  @Error 0 @Extended ? Return Array = Success. Returning array of included Impress Sound files. @Extended will be set to number of results.
+;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Initialization Errors--
 ;                  @Error 2 @Extended 1 = Failed to create the ServiceManager.
 ;                  --Processing Errors--
 ;                  @Error 3 @Extended 1 = Failed to retrieve the DefaultContext Object.
 ;                  @Error 3 @Extended 2 = Failed to retrieve the "/singletons/com.sun.star.util.thePathSettings" Object.
 ;                  @Error 3 @Extended 3 = Failed to retrieve the LibreOffice gallery path.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. Returning array of included Impress Sound files. @Extended will be set to number of results.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: An example path that may be returned is: "C:\Program Files\LibreOffice\program\..\share\gallery\curve.wav"
@@ -2598,6 +2567,8 @@ EndFunc   ;==>_LOImpress_SlideSoundsGetNames
 ;                  $bLoopSound          - [optional] Default is Null. If True, the sound is repeated.
 ;                  $nSlideAdvance       - [optional] (-1-1000) Default is Null. The number of seconds before automatically advance the slide. Call with -1 to set to On Mouse Click.
 ; Return values .: Success: 1 or Array
+;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
 ;                  @Error 1 @Extended 1 = $oSlide not an Object.
@@ -2621,9 +2592,6 @@ EndFunc   ;==>_LOImpress_SlideSoundsGetNames
 ;                  |                               4 = Error setting $sSound
 ;                  |                               8 = Error setting $bLoopSound
 ;                  |                               16 = Error setting $nSlideAdvance
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Previous to LibreOffice 6.1 $nDuration was simply a three option selection of Slow, Medium, and Fast. To make both these work with this UDF the following method has been adopted:
