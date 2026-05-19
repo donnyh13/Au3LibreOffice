@@ -777,7 +777,7 @@ EndFunc   ;==>__LOImpress_CharUnderLine
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return $iColor = $iColor not an Integer. Returning $iColor to be sure not to lose the value.
+;                  @Error 1 @Extended 1 = $iColor not an Integer. Returning $iColor to be sure not to lose the value.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. Color already has no Alpha value, returning same color.
 ;                  @Error 0 @Extended 1 Return Integer = Success. Removed Alpha value from RGB Color Integer, returning new Color value.
@@ -5503,7 +5503,7 @@ EndFunc   ;==>__LOImpress_ParSpacing
 ;                  @Error 3 @Extended 2 = Error retrieving list of TabStop Positions.
 ;                  @Error 3 @Extended 3 = Failed to identify the new Tabstop once inserted.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return Integer = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iPosition
 ;                  |                               2 = Error setting $iAlignment
 ;                  |                               4 = Error setting $iDecChar
@@ -10005,7 +10005,7 @@ EndFunc   ;==>__LOImpress_Transition
 ; Return values .: Success: Integer.
 ;                  Failure: Null and sets the @Error and @Extended flags to non-zero.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return Null = No values called in parameters.
+;                  @Error 3 @Extended 1 = No values called in parameters.
 ;                  --Success--
 ;                  @Error 0 @Extended 0 Return Integer = Success. The requested Integer value converted from percentage to a RGB Color Integer.
 ;                  @Error 0 @Extended 1 Return Integer = Success. The requested Integer value from a RGB Color Integer to percentage.

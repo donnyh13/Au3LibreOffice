@@ -846,7 +846,7 @@ EndFunc   ;==>_LOImpress_CursorParSpacing
 ;                  @Error 3 @Extended 2 = Error retrieving list of TabStop Positions.
 ;                  @Error 3 @Extended 3 = Failed to identify the new Tabstop once inserted.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return Integer = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iPosition
 ;                  |                               2 = Error setting $iAlignment
 ;                  |                               4 = Error setting $iDecChar
