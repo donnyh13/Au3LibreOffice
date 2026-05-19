@@ -334,7 +334,6 @@ EndFunc   ;==>__LO_IntIsBetween
 ; Parameters ....: $oObject             - Any Object.
 ;                  $sTestMethod         - [optional] Default is "getCurrentController". The Method or Property to try calling.
 ; Return values .: Success: Boolean
-;                  --Success--
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Object is not invalid. Else False.
 ; Author ........: donnyh13
 ; Modified ......:
