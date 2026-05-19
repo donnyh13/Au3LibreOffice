@@ -1481,7 +1481,6 @@ EndFunc   ;==>__LOWriter_DateStructCompare
 ; Parameters ....: $oSelection          - The Object to check, which should be either a cursor with data selected or a paragraph object.
 ;                  $bCheckSelection     - [optional] Default is False. If True, check for whether the cursor object is collapsed (no data selected).
 ; Return values .: Success: Boolean.
-;                  --Success--
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True, if called Object is fit for Direct Formatting use, else False.
 ; Author ........: donnyh13
 ; Modified ......:
