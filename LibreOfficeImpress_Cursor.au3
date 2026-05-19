@@ -57,17 +57,17 @@
 ;                  $bOutline            - [optional] Default is Null. If True, the characters have an outline around the outside.
 ;                  $bShadow             - [optional] Default is Null. If True, the characters have a shadow.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOI_CHAR_CASEMAP_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 3 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOI_CHAR_RELIEF_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 4 = $bOutline not a Boolean.
-;                  @Error 1 @Extended 5 = $bShadow not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 2 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOI_CHAR_CASEMAP_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOI_CHAR_RELIEF_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $bOutline not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bShadow not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iCase
 ;                  |                               2 = Error setting $iRelief
 ;                  |                               4 = Error setting $bOutline
@@ -103,18 +103,18 @@ EndFunc   ;==>_LOImpress_CursorCharEffect
 ;                  $iPosture            - [optional] (0-5) Default is Null. The Font Italic setting. See Constants, $LOI_CHAR_POSTURE_* as defined in LibreOfficeImpress_Constants.au3. Also see remarks.
 ;                  $iWeight             - [optional] (0, 50-200) Default is Null. The Font Bold settings see Constants, $LOI_CHAR_WEIGHT_* as defined in LibreOfficeImpress_Constants.au3. Also see remarks.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 = $sFontName not a String.
-;                  @Error 1 @Extended 3 = Font called in $sFontName not available.
-;                  @Error 1 @Extended 4 = $nFontSize not a number.
-;                  @Error 1 @Extended 5 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOI_CHAR_POSTURE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 6 = $iWeight not an Integer, less than 50 but not equal to 0, or greater than 200. See Constants, $LOI_CHAR_WEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 2 = $sFontName not a String.
+;                  @Error: 1, @Extended: 3 = Font called in $sFontName not available.
+;                  @Error: 1, @Extended: 4 = $nFontSize not a number.
+;                  @Error: 1, @Extended: 5 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOI_CHAR_POSTURE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iWeight not an Integer, less than 50 but not equal to 0, or greater than 200. See Constants, $LOI_CHAR_WEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sFontName
 ;                  |                               2 = Error setting $nFontSize
 ;                  |                               4 = Error setting $iPosture
@@ -151,23 +151,23 @@ EndFunc   ;==>_LOImpress_CursorCharFont
 ;                  $iTransparency       - [optional] (0-100) Default is Null. Transparency percentage. 0 is visible, 100 is invisible. Available for LibreOffice 7.0 and up.
 ;                  $iHighlight          - [optional] (-1-16777215) Default is Null. The highlight Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for No color.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters. If The current LibreOffice version is below 7.0 the $iTransparency parameter will return a Null value.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters. If The current LibreOffice version is below 7.0 the $iTransparency parameter will return a Null value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 = $iFontColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 3 = $iTransparency not an Integer, less than 0 or greater than 100%.
-;                  @Error 1 @Extended 4 = $iHighlight not an Integer, less than -1 or greater than 16777215.
+;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 2 = $iFontColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error: 1, @Extended: 3 = $iTransparency not an Integer, less than 0 or greater than 100%.
+;                  @Error: 1, @Extended: 4 = $iHighlight not an Integer, less than -1 or greater than 16777215.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve old Transparency value.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $FontColor
 ;                  |                               2 = Error setting $iTransparency.
 ;                  |                               4 = Error setting $iHighlight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 7.0.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 7.0.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -198,16 +198,16 @@ EndFunc   ;==>_LOImpress_CursorCharFontColor
 ;                  $iOLColor            - [optional] (-1-16777215) Default is Null. The Overline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
 ;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not Overlined.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOI_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
-;                  @Error 1 @Extended 3 = $iOLColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 4 = $bWordOnly not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 2 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOI_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
+;                  @Error: 1, @Extended: 3 = $iOLColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error: 1, @Extended: 4 = $bWordOnly not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iOverLineStyle
 ;                  |                               2 = Error setting $iOLColor
 ;                  |                               4 = Error setting $bWordOnly
@@ -242,17 +242,17 @@ EndFunc   ;==>_LOImpress_CursorCharOverLine
 ;                  $iSubScript          - [optional] (-1-100) Default is Null. Subscript percentage value. Call with -1 for Automatic SubScript. See Remarks.
 ;                  $iRelativeSize       - [optional] (1-100) Default is Null. The size percentage relative to current font size.
 ; Return values .: Success: Integer or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 = $oTextCursor does not support Character properties.
-;                  @Error 1 @Extended 3 = $iSuperScript not an Integer, less than 0 or greater than 100, but not 14000.
-;                  @Error 1 @Extended 4 = $iSubScript not an Integer, less than -100 or greater than 100, but not 14000 or -14000.
-;                  @Error 1 @Extended 5 = $iRelativeSize not an Integer, less than 1 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 2 = $oTextCursor does not support Character properties.
+;                  @Error: 1, @Extended: 3 = $iSuperScript not an Integer, less than 0 or greater than 100, but not 14000.
+;                  @Error: 1, @Extended: 4 = $iSubScript not an Integer, less than -100 or greater than 100, but not 14000 or -14000.
+;                  @Error: 1, @Extended: 5 = $iRelativeSize not an Integer, less than 1 or greater than 100.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iSuperScript
 ;                  |                               2 = Error setting $iSubScript
 ;                  |                               4 = Error setting $iRelativeSize.
@@ -288,16 +288,16 @@ EndFunc   ;==>_LOImpress_CursorCharPosition
 ; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LOImpress_ShapeCreateTextCursor function.
 ;                  $iScaleWidth         - [optional] (1-100) Default is Null. The percentage to horizontally stretch or compress the text. 100 is normal sizing.
 ; Return values .: Success: 1 or Integer.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current Scale Width value as an Integer.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current Scale Width value as an Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 = $iScaleWidth not an Integer or less than 1% or greater than 100%.
+;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 2 = $iScaleWidth not an Integer or less than 1% or greater than 100%.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve current Scale width.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Scale width.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iScaleWidth
 ; Author ........: donnyh13
 ; Modified ......:
@@ -329,15 +329,15 @@ EndFunc   ;==>_LOImpress_CursorCharScaling
 ;                  $bAutoKerning        - [optional] Default is Null. If True, applies a spacing in between certain pairs of characters.
 ;                  $nKerning            - [optional] (-928.8-928.8) Default is Null. The kerning value of the characters. See Remarks. Values are in Printer's Points as set in the LibreOffice UI.
 ; Return values .: Success: Integer or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 = $bAutoKerning not a Boolean.
-;                  @Error 1 @Extended 3 = $nKerning not a number, less than -928.8 or greater than 928.8 Points.
+;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 2 = $bAutoKerning not a Boolean.
+;                  @Error: 1, @Extended: 3 = $nKerning not a number, less than -928.8 or greater than 928.8 Points.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bAutoKerning
 ;                  |                               2 = Error setting $nKerning.
 ; Author ........: donnyh13
@@ -372,15 +372,15 @@ EndFunc   ;==>_LOImpress_CursorCharSpacing
 ;                  $iStrikeLineStyle    - [optional] (0-6) Default is Null. The Strikeout Line Style, see constants, $LOI_CHAR_STRIKEOUT_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $bWordOnly           - [optional] Default is Null. If True, strike out is applied to words only, skipping whitespaces.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOI_CHAR_STRIKEOUT_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 3 = $bWordOnly not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 2 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOI_CHAR_STRIKEOUT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $bWordOnly not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iStrikeLineStyle
 ;                  |                               2 = Error setting $bWordOnly
 ; Author ........: donnyh13
@@ -413,16 +413,16 @@ EndFunc   ;==>_LOImpress_CursorCharStrikeOut
 ;                  $iULColor            - [optional] (-1-16777215) Default is Null. The underline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
 ;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not underlined.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTextCursor an Object.
-;                  @Error 1 @Extended 2 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOI_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 3 = $iULColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 4 = $bWordOnly not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oTextCursor an Object.
+;                  @Error: 1, @Extended: 2 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOI_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iULColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error: 1, @Extended: 4 = $bWordOnly not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iUnderLineStyle
 ;                  |                               2 = Error setting $iULColor
 ;                  |                               4 = Error setting $bWordOnly
@@ -453,12 +453,12 @@ EndFunc   ;==>_LOImpress_CursorCharUnderLine
 ; Syntax ........: _LOImpress_CursorGetString(ByRef $oTextCursor)
 ; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LOImpress_ShapeCreateTextCursor function.
 ; Return values .: Success: String
-;                  @Error 0 @Extended 0 Return String = Success. The selected text as a String.
+;                  @Error: 0, @Extended: 0, Return: String = Success. The selected text as a String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving String.
+;                  @Error: 3, @Extended: 1 = Error retrieving String.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: LibreOffice documentation states that when used in Libre Basic, GetString is limited to 64kb's in size. I do not know if the same limitation applies to any outside use of GetString (such as through Autoit).
@@ -488,12 +488,12 @@ EndFunc   ;==>_LOImpress_CursorGetString
 ;                  $oRange              - an object. The Cursor to move cursor called in $oTextCursor to. A Text Cursor Object returned by a previous _LOImpress_ShapeCreateTextCursor function.
 ;                  $bSelect             - [optional] Default is False. If True, the selection is expanded or created from original cursor location to Range location.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Cursor successfully moved to $oRange position.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Cursor successfully moved to $oRange position.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 = $oRange not an Object.
-;                  @Error 1 @Extended 3 = $bSelect not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 2 = $oRange not an Object.
+;                  @Error: 1, @Extended: 3 = $bSelect not a Boolean.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If the Cursor being used as a range has anything selected, the selection will be selected in the Cursor called in $oTextCursor also.
@@ -522,12 +522,12 @@ EndFunc   ;==>_LOImpress_CursorGoToRange
 ;                  $sString             - A String to insert.
 ;                  $bOverwrite          - [optional] Default is False. If True, and the cursor object has text selected, the selection is overwritten, else if False, the string is inserted to the left of the selection. If there are multiple selections, the string is inserted to the left of the last selection, and none are overwritten.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. String was successfully inserted.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. String was successfully inserted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oCursor not an Object.
-;                  @Error 1 @Extended 2 = $sString not a string..
-;                  @Error 1 @Extended 3 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 2 = $sString not a string..
+;                  @Error: 1, @Extended: 3 = $bOverwrite not a Boolean.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Warning! For some reason this function doesn't seem to set the modified status to True. Changes could be inadvertently lost due to this, if the user closes without saving.
@@ -554,12 +554,12 @@ EndFunc   ;==>_LOImpress_CursorInsertString
 ; Syntax ........: _LOImpress_CursorIsCollapsed(ByRef $oTextCursor)
 ; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LOImpress_ShapeCreateTextCursor function.
 ; Return values .: Success: Boolean.
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning Boolean, True if Cursor has no data selected, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning Boolean, True if Cursor has no data selected, else False.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to query Cursor.
+;                  @Error: 3, @Extended: 1 = Failed to query Cursor.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -590,13 +590,13 @@ EndFunc   ;==>_LOImpress_CursorIsCollapsed
 ;                  $iCount              - [optional] Default is 1. Number of movements to make. See remarks.
 ;                  $bSelect             - [optional] Default is False. Whether to select data during this cursor movement. See remarks.
 ; Return values .: Success: Boolean.
-;                  @Error 0 @Extended ? Return Boolean = Success, Cursor object movement was processed successfully. Returning True if the full count of movements were successful, else False if none or only partially successful. @Extended set to number of successful movements. See Remarks
+;                  @Error: 0, @Extended: ?, Return: Boolean = Success, Cursor object movement was processed successfully. Returning True if the full count of movements were successful, else False if none or only partially successful. @Extended set to number of successful movements. See Remarks
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 = $iMove not an Integer, less than 0 or greater than 5. See Constants, $LOI_TEXTCUR_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 3 = $iCount not an Integer or less than 0.
-;                  @Error 1 @Extended 4 = $bSelect not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 2 = $iMove not an Integer, less than 0 or greater than 5. See Constants, $LOI_TEXTCUR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iCount not an Integer or less than 0.
+;                  @Error: 1, @Extended: 4 = $bSelect not a Boolean.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Only some movements accept movement amounts and selecting (such as $LOI_TEXTCUR_GO_RIGHT 2, True) etc. Also only some accept creating/ extending a selection of text/ data. They will be specified below.
@@ -668,16 +668,16 @@ EndFunc   ;==>_LOImpress_CursorMove
 ;                  $iLastLineAlign      - [optional] (0-3) Default is Null. Specify the alignment for the last line in the paragraph. See Constants, $LOI_PAR_LAST_LINE_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
 ;                  $iTxtDirection       - [optional] (0-5) Default is Null. The Text Writing Direction. See Constants, $LOI_PAR_TXT_DIR_* as defined in LibreOfficeImpress_Constants.au3. [LibreOffice Default is 4]
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 = $iHorAlign not an Integer, less than 0 or greater than 3. See Constants, $LOI_PAR_ALIGN_HOR_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 3 = $iLastLineAlign not an Integer, less than 0 or greater than 3. See Constants, $LOI_PAR_LAST_LINE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 4 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOI_PAR_TXT_DIR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 2 = $iHorAlign not an Integer, less than 0 or greater than 3. See Constants, $LOI_PAR_ALIGN_HOR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iLastLineAlign not an Integer, less than 0 or greater than 3. See Constants, $LOI_PAR_LAST_LINE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOI_PAR_TXT_DIR_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iHorAlign
 ;                  |                               2 = Error setting $iLastLineALign
 ;                  |                               4 = Error setting $iTxtDirection
@@ -714,16 +714,16 @@ EndFunc   ;==>_LOImpress_CursorParAlignment
 ;                  $iAfterTxt           - [optional] (0-1162202) Default is Null. The amount of space that you want to indent the paragraph from the page margin. Set in Hundredths of a Millimeter (HMM)
 ;                  $iFirstLine          - [optional] (0-1162202) Default is Null. Indentation distance of the first line of a paragraph. Set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 = $iBeforeText not an Integer, less than 0 or greater than 1162202.
-;                  @Error 1 @Extended 3 = $iAfterText not an Integer, less than 0 or greater than 1162202.
-;                  @Error 1 @Extended 4 = $iFirstLine not an Integer, less than 0 or greater than 1162202.
+;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 2 = $iBeforeText not an Integer, less than 0 or greater than 1162202.
+;                  @Error: 1, @Extended: 3 = $iAfterText not an Integer, less than 0 or greater than 1162202.
+;                  @Error: 1, @Extended: 4 = $iFirstLine not an Integer, less than 0 or greater than 1162202.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iBeforeTxt
 ;                  |                               2 = Error setting $iAfterTxt
 ;                  |                               4 = Error setting $iFirstLine
@@ -759,22 +759,22 @@ EndFunc   ;==>_LOImpress_CursorParIndent
 ;                  $iLineSpcMode        - [optional] (0-3) Default is Null. The line spacing type of the paragraph. See Constants, $LOI_PAR_LINE_SPC_MODE_* as defined in LibreOfficeImpress_Constants.au3, also notice min and max values for each.
 ;                  $iLineSpcHeight      - [optional] Default is Null. This value specifies the height in regard to Mode. See Remarks.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 = $iAbovePar not an Integer, less than 0 or greater than 100000.
-;                  @Error 1 @Extended 3 = $iBelowPar not an Integer, less than 0 or greater than 100000.
-;                  @Error 1 @Extended 4 = $iLineSpcMode not an Integer, less than 0 or greater than 3. See Constants, $LOI_PAR_LINE_SPC_MODE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 5 = $iLineSpcHeight not an Integer.
-;                  @Error 1 @Extended 6 = $iLineSpcMode set to 0(Proportional) and $iLineSpcHeight less than 6(%) or greater than 65535(%).
-;                  @Error 1 @Extended 7 = $iLineSpcMode set to 1 or 2(Minimum, or Leading) and $iLineSpcHeight less than 0 or greater than 100000.
-;                  @Error 1 @Extended 8 = $iLineSpcMode set to 3(Fixed) and $iLineSpcHeight less than 51 or greater than 100000.
+;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 2 = $iAbovePar not an Integer, less than 0 or greater than 100000.
+;                  @Error: 1, @Extended: 3 = $iBelowPar not an Integer, less than 0 or greater than 100000.
+;                  @Error: 1, @Extended: 4 = $iLineSpcMode not an Integer, less than 0 or greater than 3. See Constants, $LOI_PAR_LINE_SPC_MODE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iLineSpcHeight not an Integer.
+;                  @Error: 1, @Extended: 6 = $iLineSpcMode set to 0(Proportional) and $iLineSpcHeight less than 6(%) or greater than 65535(%).
+;                  @Error: 1, @Extended: 7 = $iLineSpcMode set to 1 or 2(Minimum, or Leading) and $iLineSpcHeight less than 0 or greater than 100000.
+;                  @Error: 1, @Extended: 8 = $iLineSpcMode set to 3(Fixed) and $iLineSpcHeight less than 51 or greater than 100000.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving ParaLineSpacing Object.
+;                  @Error: 3, @Extended: 1 = Error retrieving ParaLineSpacing Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iAbovePar
 ;                  |                               2 = Error setting $iBelowPar
 ;                  |                               4 = Error setting $iLineSpcMode
@@ -814,23 +814,23 @@ EndFunc   ;==>_LOImpress_CursorParSpacing
 ;                  $iDecChar            - [optional] Enter a character(in Asc Value(See AutoIt Asc Function)) that you want the decimal tab to use as a decimal separator. Can only be set if $iAlignment is set to $LOI_PAR_TAB_ALIGN_DECIMAL.
 ;                  $iFillChar           - [optional] The Asc (see AutoIt function) value of any character (except 0/Null) you want to act as a Tab Fill character. See remarks.
 ; Return values .: Success: Integer.
-;                  @Error 0 @Extended 0 Return Integer = Success. Settings were successfully set. New TabStop position is returned.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Settings were successfully set. New TabStop position is returned.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 = $iPosition not an Integer.
-;                  @Error 1 @Extended 3 = Tab Stop position called in $iPosition already exists in this Paragraph.
-;                  @Error 1 @Extended 4 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOI_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 5 = $iDecChar not an Integer.
-;                  @Error 1 @Extended 6 = $iFillChar not an Integer.
+;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 2 = $iPosition not an Integer.
+;                  @Error: 1, @Extended: 3 = Tab Stop position called in $iPosition already exists in this Paragraph.
+;                  @Error: 1, @Extended: 4 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOI_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iDecChar not an Integer.
+;                  @Error: 1, @Extended: 6 = $iFillChar not an Integer.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error creating "com.sun.star.style.TabStop" Object.
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.style.TabStop" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving ParaTabStops Array Object.
-;                  @Error 3 @Extended 2 = Error retrieving list of TabStop Positions.
-;                  @Error 3 @Extended 3 = Failed to identify the new Tabstop once inserted.
+;                  @Error: 3, @Extended: 1 = Error retrieving ParaTabStops Array Object.
+;                  @Error: 3, @Extended: 2 = Error retrieving list of TabStop Positions.
+;                  @Error: 3, @Extended: 3 = Failed to identify the new Tabstop once inserted.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iPosition
 ;                  |                               2 = Error setting $iAlignment
 ;                  |                               4 = Error setting $iDecChar
@@ -866,14 +866,14 @@ EndFunc   ;==>_LOImpress_CursorParTabStopCreate
 ; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LOImpress_ShapeCreateTextCursor function.
 ;                  $iTabStop            - The Tab position of the TabStop to modify. See Remarks.
 ; Return values .: Success: Boolean.
-;                  @Error 0 @Extended 0 Return Boolean = Returning True if TabStop was successfully deleted, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Returning True if TabStop was successfully deleted, else False.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 = $iTabStop not an Integer.
-;                  @Error 1 @Extended 3 = $iTabStop not found.
+;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 2 = $iTabStop not an Integer.
+;                  @Error: 1, @Extended: 3 = $iTabStop not found.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving ParaTabStops Object.
+;                  @Error: 3, @Extended: 1 = Error retrieving ParaTabStops Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $iTabStop refers to the position, or essential the "length" of a TabStop from the edge of a page margin. This is the only reliable way to identify a Tabstop to be able to interact with it, as there can only be one of a certain length per paragraph.
@@ -905,25 +905,25 @@ EndFunc   ;==>_LOImpress_CursorParTabStopDelete
 ;                  $iDecChar            - [optional] Default is Null. Enter a character(in Asc Value(See AutoIt Asc Function)) that you want the decimal tab to use as a decimal separator. Can only be set if $iAlignment is set to $LOI_PAR_TAB_ALIGN_DECIMAL.
 ;                  $iFillChar           - [optional] Default is Null. The Asc (see AutoIt function) value of any character (except 0/Null) you want to act as a Tab Fill character. See remarks.
 ; Return values .: Success: Integer or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  @Error 0 @Extended ? Return 2 = Success. Settings were successfully set. New TabStop position is returned in @Extended.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: ?, Return: 2 = Success. Settings were successfully set. New TabStop position is returned in @Extended.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 = $iTabStop not an Integer.
-;                  @Error 1 @Extended 3 = TabStop called in $iTabStop not found.
-;                  @Error 1 @Extended 4 = $iPosition not an Integer.
-;                  @Error 1 @Extended 5 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOI_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 6 = $iDecChar not an Integer.
-;                  @Error 1 @Extended 7 = $iFillChar not an Integer.
+;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 2 = $iTabStop not an Integer.
+;                  @Error: 1, @Extended: 3 = TabStop called in $iTabStop not found.
+;                  @Error: 1, @Extended: 4 = $iPosition not an Integer.
+;                  @Error: 1, @Extended: 5 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOI_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iDecChar not an Integer.
+;                  @Error: 1, @Extended: 7 = $iFillChar not an Integer.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving ParaTabStops Object.
-;                  @Error 3 @Extended 2 = Error retrieving Requested TabStop Object.
-;                  @Error 3 @Extended 3 = Paragraph already contains a TabStop at the length/Position specified in $iPosition.
-;                  @Error 3 @Extended 4 = Error retrieving list of TabStop Positions.
+;                  @Error: 3, @Extended: 1 = Error retrieving ParaTabStops Object.
+;                  @Error: 3, @Extended: 2 = Error retrieving Requested TabStop Object.
+;                  @Error: 3, @Extended: 3 = Paragraph already contains a TabStop at the length/Position specified in $iPosition.
+;                  @Error: 3, @Extended: 4 = Error retrieving list of TabStop Positions.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iPosition
 ;                  |                               2 = Error setting $iAlignment
 ;                  |                               4 = Error setting $iDecChar
@@ -959,12 +959,12 @@ EndFunc   ;==>_LOImpress_CursorParTabStopMod
 ; Syntax ........: _LOImpress_CursorParTabStopsGetList(ByRef $oTextCursor)
 ; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LOImpress_ShapeCreateTextCursor function.
 ; Return values .: Success: Array.
-;                  @Error 0 @Extended ? Return Array = Success. An Array of TabStops. @Extended set to number of results.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. An Array of TabStops. @Extended set to number of results.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving ParaTabStops Object.
+;                  @Error: 3, @Extended: 1 = Error retrieving ParaTabStops Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:

@@ -46,22 +46,22 @@
 ;                  $sAltText            - [optional] Default is Null. Detailed alternative text of the Image.
 ;                  $bDecorative         - [optional] Default is Null. If True, the image is considered decorative and is ignored by assistive readers. L.O. 7.6+.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters. If The current LibreOffice version is below 7.6 the $bDecorative parameter will return a Null value.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters. If The current LibreOffice version is below 7.6 the $bDecorative parameter will return a Null value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDrawShape not an Object.
-;                  @Error 1 @Extended 2 = Shape called in $oDrawShape not a drawing shape.
-;                  @Error 1 @Extended 3 = $sText not a string.
-;                  @Error 1 @Extended 4 = $sAltText not a string.
-;                  @Error 1 @Extended 5 = $bDecorative not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDrawShape not an Object.
+;                  @Error: 1, @Extended: 2 = Shape called in $oDrawShape not a drawing shape.
+;                  @Error: 1, @Extended: 3 = $sText not a string.
+;                  @Error: 1, @Extended: 4 = $sAltText not a string.
+;                  @Error: 1, @Extended: 5 = $bDecorative not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sText
 ;                  |                               2 = Error setting $sAltText
 ;                  |                               4 = Error setting $bDecorative
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current LibreOffice version less than 7.6.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version less than 7.6.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -131,24 +131,24 @@ EndFunc   ;==>_LOImpress_DrawShapeAltText
 ;                  $oEndShape           - [optional] Default is Null. The Shape to attach the End of the line to.
 ;                  $iEndGluePoint       - [optional] Default is Null. If the End of the line is connected to a Shape, this is the Glue point it is attached to. 0 Based. See remarks.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oShape not an Object.
-;                  @Error 1 @Extended 2 = $iStartX not an Integer.
-;                  @Error 1 @Extended 3 = $iStartY not an Integer.
-;                  @Error 1 @Extended 4 = $oStartShape not an Object.
-;                  @Error 1 @Extended 5 = $iStartGluePoint not an Integer, or less than -1.
-;                  @Error 1 @Extended 6 = $iEndX not an Integer.
-;                  @Error 1 @Extended 7 = $iEndY not an Integer.
-;                  @Error 1 @Extended 8 = $oEndShape not an Object.
-;                  @Error 1 @Extended 9 = $iEndGluePoint not an Integer, or less than -1.
+;                  @Error: 1, @Extended: 1 = $oShape not an Object.
+;                  @Error: 1, @Extended: 2 = $iStartX not an Integer.
+;                  @Error: 1, @Extended: 3 = $iStartY not an Integer.
+;                  @Error: 1, @Extended: 4 = $oStartShape not an Object.
+;                  @Error: 1, @Extended: 5 = $iStartGluePoint not an Integer, or less than -1.
+;                  @Error: 1, @Extended: 6 = $iEndX not an Integer.
+;                  @Error: 1, @Extended: 7 = $iEndY not an Integer.
+;                  @Error: 1, @Extended: 8 = $oEndShape not an Object.
+;                  @Error: 1, @Extended: 9 = $iEndGluePoint not an Integer, or less than -1.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Start Position.
-;                  @Error 3 @Extended 2 = Failed to retrieve End Position.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Start Position.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve End Position.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iStartX
 ;                  |                               2 = Error setting $iStartY
 ;                  |                               4 = Error setting $oStartShape
@@ -281,21 +281,21 @@ EndFunc   ;==>_LOImpress_DrawShapeConnectorModify
 ;                  $iVertBeg            - [optional] (0-10008) Default is Null. The amount of vertical spacing, in Hundredths of a Millimeter (HMM), at the beginning of the connector.
 ;                  $iVertEnd            - [optional] (0-10008) Default is Null. The amount of vertical spacing, in Hundredths of a Millimeter (HMM), at the end of the connector.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oShape not an Object.
-;                  @Error 1 @Extended 2 = $iType not an Integer, less than 0 or greater than 3. See Constants, $LOI_DRAWSHAPE_CONNECTOR_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 3 = $iL1Skew not an Integer, less than -100,000 or greater than 100,000.
-;                  @Error 1 @Extended 4 = $iL2Skew not an Integer, less than -100,000 or greater than 100,000.
-;                  @Error 1 @Extended 5 = $iL3Skew not an Integer, less than -100,000 or greater than 100,000.
-;                  @Error 1 @Extended 6 = $iHoriBeg not an Integer, less than 0 or greater than 10,008.
-;                  @Error 1 @Extended 7 = $iHoriEnd not an Integer, less than 0 or greater than 10,008.
-;                  @Error 1 @Extended 8 = $iVertBeg not an Integer, less than 0 or greater than 10,008.
-;                  @Error 1 @Extended 9 = $iVertEnd not an Integer, less than 0 or greater than 10,008.
+;                  @Error: 1, @Extended: 1 = $oShape not an Object.
+;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 0 or greater than 3. See Constants, $LOI_DRAWSHAPE_CONNECTOR_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iL1Skew not an Integer, less than -100,000 or greater than 100,000.
+;                  @Error: 1, @Extended: 4 = $iL2Skew not an Integer, less than -100,000 or greater than 100,000.
+;                  @Error: 1, @Extended: 5 = $iL3Skew not an Integer, less than -100,000 or greater than 100,000.
+;                  @Error: 1, @Extended: 6 = $iHoriBeg not an Integer, less than 0 or greater than 10,008.
+;                  @Error: 1, @Extended: 7 = $iHoriEnd not an Integer, less than 0 or greater than 10,008.
+;                  @Error: 1, @Extended: 8 = $iVertBeg not an Integer, less than 0 or greater than 10,008.
+;                  @Error: 1, @Extended: 9 = $iVertEnd not an Integer, less than 0 or greater than 10,008.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iType
 ;                  |                               2 = Error setting $iL1Skew
 ;                  |                               4 = Error setting $iL2Skew
@@ -404,24 +404,24 @@ EndFunc   ;==>_LOImpress_DrawShapeConnectorSettings
 ;                  $bParallel           - [optional] Default is Null. If True, Displays the text parallel to or at 90 degrees to the dimension line.
 ;                  $iUnitType           - [optional] (-1-15) Default is Null. The type of measurement units, if any, to display. See Constants, $LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oShape not an Object.
-;                  @Error 1 @Extended 2 = $iDistance not an Integer, less than -10,008 or greater than 10,008.
-;                  @Error 1 @Extended 3 = $iGuideOverhang not an Integer, less than -10,008 or greater than 10,008.
-;                  @Error 1 @Extended 4 = $iGuideDistance not an Integer, less than -10,008 or greater than 10,008.
-;                  @Error 1 @Extended 5 = $iLGuide not an Integer, less than -10,008 or greater than 10,008.
-;                  @Error 1 @Extended 6 = $iRGuide not an Integer, less than -10,008 or greater than 10,008.
-;                  @Error 1 @Extended 7 = $bBelow not a Boolean.
-;                  @Error 1 @Extended 8 = $iDecimal not an Integer, less than 0 or greater than 99.
-;                  @Error 1 @Extended 9 = $iVertPos not an Integer, less than 0 or greater than 4. See Constants, $LOI_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 10 = $iHoriPos not an Integer, less than 0 or greater than 3. See Constants, $LOI_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 11 = $bParallel not a Boolean.
-;                  @Error 1 @Extended 12 = $iUnitType not an Integer, less than -1 or greater than 15. See Constants, $LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oShape not an Object.
+;                  @Error: 1, @Extended: 2 = $iDistance not an Integer, less than -10,008 or greater than 10,008.
+;                  @Error: 1, @Extended: 3 = $iGuideOverhang not an Integer, less than -10,008 or greater than 10,008.
+;                  @Error: 1, @Extended: 4 = $iGuideDistance not an Integer, less than -10,008 or greater than 10,008.
+;                  @Error: 1, @Extended: 5 = $iLGuide not an Integer, less than -10,008 or greater than 10,008.
+;                  @Error: 1, @Extended: 6 = $iRGuide not an Integer, less than -10,008 or greater than 10,008.
+;                  @Error: 1, @Extended: 7 = $bBelow not a Boolean.
+;                  @Error: 1, @Extended: 8 = $iDecimal not an Integer, less than 0 or greater than 99.
+;                  @Error: 1, @Extended: 9 = $iVertPos not an Integer, less than 0 or greater than 4. See Constants, $LOI_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 10 = $iHoriPos not an Integer, less than 0 or greater than 3. See Constants, $LOI_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 11 = $bParallel not a Boolean.
+;                  @Error: 1, @Extended: 12 = $iUnitType not an Integer, less than -1 or greater than 15. See Constants, $LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iDistance
 ;                  |                               2 = Error setting $iGuideOverhang
 ;                  |                               4 = Error setting $iGuideDistance
@@ -460,27 +460,27 @@ EndFunc   ;==>_LOImpress_DrawShapeDimensionSettings
 ; Syntax ........: _LOImpress_DrawShapeGetType(ByRef $oShape)
 ; Parameters ....: $oShape              - A Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
 ; Return values .: Success: Integer
-;                  @Error 0 @Extended 1 Return Integer = Success. Shape is a $LOI_DRAWSHAPE_TYPE_CONNECTOR_* Type Shape. Returning $LOI_DRAWSHAPE_TYPE_CONNECTOR Constant Value. See Remarks #4.
-;                  @Error 0 @Extended 2 Return Integer = Success. Shape is a Custom Shape Type. Returning appropriate Constant for shape type if successfully identified, else -1 if identification failed. See Remarks #1. See Constants, $LOI_DRAWSHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3
-;                  @Error 0 @Extended 3 Return Integer = Success. Shape is a*_BASIC_CIRCLE_SEGMENT or *_BASIC_ARC Type Shape. Returning appropriate Constant, See Constants, $LOI_DRAWSHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3
-;                  @Error 0 @Extended 4 Return Integer = Success. Shape is a $LOI_DRAWSHAPE_TYPE_LINE_CURVE Shape.
-;                  @Error 0 @Extended 5 Return Integer = Success. Shape is a $LOI_DRAWSHAPE_TYPE_LINE_CURVE_FILLED Shape.
-;                  @Error 0 @Extended 6 Return Integer = Success. Shape is a $LOI_DRAWSHAPE_TYPE_LINE_FREEFORM_LINE Shape.
-;                  @Error 0 @Extended 7 Return Integer = Success. Shape is a $LOI_DRAWSHAPE_TYPE_LINE_FREEFORM_LINE_FILLED Shape.
-;                  @Error 0 @Extended 8 Return Integer = Success. Shape is a *_LINE_LINE, *_LINE_LINE_45 or $LOI_DRAWSHAPE_TYPE_LINE_ARROW_* Type Shape. Returning $LOI_DRAWSHAPE_TYPE_LINE_LINE Constant Value. See Remarks #4.
-;                  @Error 0 @Extended 9 Return Integer = Success. Shape is a $LOI_DRAWSHAPE_TYPE_LINE_DIMENSION Shape.
-;                  @Error 0 @Extended 10 Return Integer = Success. Shape is a *_LINE_POLYGON, or *_LINE_POLYGON_45 Type Shape. Returning $LOI_DRAWSHAPE_TYPE_LINE_POLYGON Constant Value. See Remarks #2.
-;                  @Error 0 @Extended 11 Return Integer = Success. Shape is a *_LINE_POLYGON_FILLED, or *_LINE_POLYGON_45_FILLED Type Shape. Returning $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_FILLED Constant Value. See Remarks #2.
-;                  @Error 0 @Extended 11 Return Integer = Success. Shape is a $LOI_DRAWSHAPE_TYPE_3D_* Type Shape. Returning $LOI_DRAWSHAPE_TYPE_3D_CONE Constant Value. See Remarks #5.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. Shape is a $LOI_DRAWSHAPE_TYPE_CONNECTOR_* Type Shape. Returning $LOI_DRAWSHAPE_TYPE_CONNECTOR Constant Value. See Remarks #4.
+;                  @Error: 0, @Extended: 2, Return: Integer = Success. Shape is a Custom Shape Type. Returning appropriate Constant for shape type if successfully identified, else -1 if identification failed. See Remarks #1. See Constants, $LOI_DRAWSHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3
+;                  @Error: 0, @Extended: 3, Return: Integer = Success. Shape is a*_BASIC_CIRCLE_SEGMENT or *_BASIC_ARC Type Shape. Returning appropriate Constant, See Constants, $LOI_DRAWSHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3
+;                  @Error: 0, @Extended: 4, Return: Integer = Success. Shape is a $LOI_DRAWSHAPE_TYPE_LINE_CURVE Shape.
+;                  @Error: 0, @Extended: 5, Return: Integer = Success. Shape is a $LOI_DRAWSHAPE_TYPE_LINE_CURVE_FILLED Shape.
+;                  @Error: 0, @Extended: 6, Return: Integer = Success. Shape is a $LOI_DRAWSHAPE_TYPE_LINE_FREEFORM_LINE Shape.
+;                  @Error: 0, @Extended: 7, Return: Integer = Success. Shape is a $LOI_DRAWSHAPE_TYPE_LINE_FREEFORM_LINE_FILLED Shape.
+;                  @Error: 0, @Extended: 8, Return: Integer = Success. Shape is a *_LINE_LINE, *_LINE_LINE_45 or $LOI_DRAWSHAPE_TYPE_LINE_ARROW_* Type Shape. Returning $LOI_DRAWSHAPE_TYPE_LINE_LINE Constant Value. See Remarks #4.
+;                  @Error: 0, @Extended: 9, Return: Integer = Success. Shape is a $LOI_DRAWSHAPE_TYPE_LINE_DIMENSION Shape.
+;                  @Error: 0, @Extended: 10, Return: Integer = Success. Shape is a *_LINE_POLYGON, or *_LINE_POLYGON_45 Type Shape. Returning $LOI_DRAWSHAPE_TYPE_LINE_POLYGON Constant Value. See Remarks #2.
+;                  @Error: 0, @Extended: 11, Return: Integer = Success. Shape is a *_LINE_POLYGON_FILLED, or *_LINE_POLYGON_45_FILLED Type Shape. Returning $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_FILLED Constant Value. See Remarks #2.
+;                  @Error: 0, @Extended: 11, Return: Integer = Success. Shape is a $LOI_DRAWSHAPE_TYPE_3D_* Type Shape. Returning $LOI_DRAWSHAPE_TYPE_3D_CONE Constant Value. See Remarks #5.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oShape not an Object.
+;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve CustomShapeGeometry Array.
-;                  @Error 3 @Extended 2 = Failed to retrieve CustomShapeGeometry "Type" value.
-;                  @Error 3 @Extended 3 = Failed to determine CustomShape's type.
-;                  @Error 3 @Extended 4 = Failed to identify what type of "com.sun.star.drawing.EllipseShape" called shape is.
-;                  @Error 3 @Extended 5 = Called Shape is a unknown shape type.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve CustomShapeGeometry Array.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve CustomShapeGeometry "Type" value.
+;                  @Error: 3, @Extended: 3 = Failed to determine CustomShape's type.
+;                  @Error: 3, @Extended: 4 = Failed to identify what type of "com.sun.star.drawing.EllipseShape" called shape is.
+;                  @Error: 3, @Extended: 5 = Called Shape is a unknown shape type.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: #1 Some shapes are not implemented, or not fully implemented into LibreOffice for automation, consequently they do not have appropriate type names as of yet. Many have simply ambiguous names, such as "non-primitive".
@@ -750,20 +750,20 @@ EndFunc   ;==>_LOImpress_DrawShapeGetType
 ;                  $iX                  - [optional] Default is 0. The X position from the top-left of the page, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - [optional] Default is 0. The Y position from the top-left of the page, in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. The Shape was successfully inserted. Returning the Shape's Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. The Shape was successfully inserted. Returning the Shape's Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oSlide not an Object.
-;                  @Error 1 @Extended 2 = $iShapeType not an Integer, less than 0 or greater than 187. See $LOI_DRAWSHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3
-;                  @Error 1 @Extended 3 = $iWidth not an Integer.
-;                  @Error 1 @Extended 4 = $iHeight not an Integer.
-;                  @Error 1 @Extended 5 = $iX not an Integer.
-;                  @Error 1 @Extended 6 = $iY not an Integer.
+;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
+;                  @Error: 1, @Extended: 2 = $iShapeType not an Integer, less than 0 or greater than 187. See $LOI_DRAWSHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3
+;                  @Error: 1, @Extended: 3 = $iWidth not an Integer.
+;                  @Error: 1, @Extended: 4 = $iHeight not an Integer.
+;                  @Error: 1, @Extended: 5 = $iX not an Integer.
+;                  @Error: 1, @Extended: 6 = $iY not an Integer.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create requested Shape.
+;                  @Error: 2, @Extended: 1 = Failed to create requested Shape.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Can't insert 3D shapes.
-;                  @Error 3 @Extended 2 = Can't insert Fontwork shapes.
+;                  @Error: 3, @Extended: 1 = Can't insert 3D shapes.
+;                  @Error: 3, @Extended: 2 = Can't insert Fontwork shapes.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Line Shapes, such as Curves etc., may not be smoothly curved. This is due to my lack of understanding of setting Point type settings. You will need to manually select the individual points and set the Point type in L.O. UI.
@@ -850,29 +850,29 @@ EndFunc   ;==>_LOImpress_DrawShapeInsert
 ;                  $iPointType          - [optional] (0, 1, 3) Default is $LOI_DRAWSHAPE_POINT_TYPE_NORMAL. The Type of Point this new Point is. See Remarks. See constants $LOI_DRAWSHAPE_POINT_TYPE_* as defined in LibreOfficeImpress_Constants.au3
 ;                  $bIsCurve            - [optional] Default is False. If True, the Normal Point is a Curve. See remarks.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. New Position Point was successfully added to the Shape.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. New Position Point was successfully added to the Shape.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oShape not an Object.
-;                  @Error 1 @Extended 2 = $oShape does not have property "PolyPolygonBezier", and consequently does not have Position Points that can be modified.
-;                  @Error 1 @Extended 3 = $iPoint not an Integer, less than 0 or greater than number of points in the shape.
-;                  @Error 1 @Extended 4 = $iX not an Integer.
-;                  @Error 1 @Extended 5 = $iY not an Integer
-;                  @Error 1 @Extended 6 = $iPointType not an Integer, less than 0 or greater than 3, or equal to 2. See constants $LOI_DRAWSHAPE_POINT_TYPE_* as defined in LibreOfficeImpress_Constants.au3
-;                  @Error 1 @Extended 7 = $bIsCurve not a Boolean.
-;                  @Error 1 @Extended 8 = First or Last Points in a shape can only be a "Normal" type point.
+;                  @Error: 1, @Extended: 1 = $oShape not an Object.
+;                  @Error: 1, @Extended: 2 = $oShape does not have property "PolyPolygonBezier", and consequently does not have Position Points that can be modified.
+;                  @Error: 1, @Extended: 3 = $iPoint not an Integer, less than 0 or greater than number of points in the shape.
+;                  @Error: 1, @Extended: 4 = $iX not an Integer.
+;                  @Error: 1, @Extended: 5 = $iY not an Integer
+;                  @Error: 1, @Extended: 6 = $iPointType not an Integer, less than 0 or greater than 3, or equal to 2. See constants $LOI_DRAWSHAPE_POINT_TYPE_* as defined in LibreOfficeImpress_Constants.au3
+;                  @Error: 1, @Extended: 7 = $bIsCurve not a Boolean.
+;                  @Error: 1, @Extended: 8 = First or Last Points in a shape can only be a "Normal" type point.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to Create a new Position Point Structure.
-;                  @Error 2 @Extended 2 = Failed to Create a new Position Point Structure for the First Control Point.
-;                  @Error 2 @Extended 3 = Failed to Create a new Position Point Structure for the Second Control Point.
-;                  @Error 2 @Extended 4 = Failed to Create a new Position Point Structure for the Third Control Point.
-;                  @Error 2 @Extended 5 = Failed to Create a new Position Point Structure for the Fourth Control Point.
+;                  @Error: 2, @Extended: 1 = Failed to Create a new Position Point Structure.
+;                  @Error: 2, @Extended: 2 = Failed to Create a new Position Point Structure for the First Control Point.
+;                  @Error: 2, @Extended: 3 = Failed to Create a new Position Point Structure for the Second Control Point.
+;                  @Error: 2, @Extended: 4 = Failed to Create a new Position Point Structure for the Third Control Point.
+;                  @Error: 2, @Extended: 5 = Failed to Create a new Position Point Structure for the Fourth Control Point.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to Retrieve Array of Point Type Flags.
-;                  @Error 3 @Extended 2 = Failed to Retrieve Array of Points.
-;                  @Error 3 @Extended 3 = Failed to identify the requested Array element.
-;                  @Error 3 @Extended 4 = Failed to identify the next normal Point in the Array of Points.
-;                  @Error 3 @Extended 5 = Failed to Retrieve PolyPolygonBezier Structure.
+;                  @Error: 3, @Extended: 1 = Failed to Retrieve Array of Point Type Flags.
+;                  @Error: 3, @Extended: 2 = Failed to Retrieve Array of Points.
+;                  @Error: 3, @Extended: 3 = Failed to identify the requested Array element.
+;                  @Error: 3, @Extended: 4 = Failed to identify the next normal Point in the Array of Points.
+;                  @Error: 3, @Extended: 5 = Failed to Retrieve PolyPolygonBezier Structure.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Only $LOI_DRAWSHAPE_TYPE_LINE_* type shapes have Points that can be added to, removed, or modified.
@@ -1292,13 +1292,13 @@ EndFunc   ;==>_LOImpress_DrawShapePointsAdd
 ; Syntax ........: _LOImpress_DrawShapePointsGetCount(ByRef $oShape)
 ; Parameters ....: $oShape              - A Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function. See remarks.
 ; Return values .: Success: Integer
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning total number of points present in a shape.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning total number of points present in a shape.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oShape not an Object.
-;                  @Error 1 @Extended 2 = $oShape does not have property "PolyPolygonBezier", and consequently does not have Position Points that can be modified.
+;                  @Error: 1, @Extended: 1 = $oShape not an Object.
+;                  @Error: 1, @Extended: 2 = $oShape does not have property "PolyPolygonBezier", and consequently does not have Position Points that can be modified.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to Retrieve Array of Point Type Flags.
+;                  @Error: 3, @Extended: 1 = Failed to Retrieve Array of Point Type Flags.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Only $LOI_DRAWSHAPE_TYPE_LINE_* type shapes have Points that can be added to, removed, or modified.
@@ -1340,26 +1340,26 @@ EndFunc   ;==>_LOImpress_DrawShapePointsGetCount
 ;                  $iPointType          - [optional] (0, 1, 3) Default is Null. The Type of Point to change the called point to. See Remarks. See constants $LOI_DRAWSHAPE_POINT_TYPE_* as defined in LibreOfficeImpress_Constants.au3
 ;                  $bIsCurve            - [optional] Default is Null. If True, the Normal Point is a Curve. See remarks.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oShape not an Object.
-;                  @Error 1 @Extended 2 = $oShape does not have property "PolyPolygonBezier", and consequently does not have Position Points that can be modified.
-;                  @Error 1 @Extended 3 = $iPoint not an Integer, less than 1 or greater than number of points in the shape.
-;                  @Error 1 @Extended 4 = $iX not an Integer.
-;                  @Error 1 @Extended 5 = $iY not an Integer
-;                  @Error 1 @Extended 6 = $PointType not an Integer, less than 0 or greater than 3, or equal to 2.
-;                  @Error 1 @Extended 7 = $PointType called with other than Normal while $iPoint is referencing first or last point.
-;                  @Error 1 @Extended 8 = $bIsCurve not a Boolean.
-;                  @Error 1 @Extended 9 = $bIsCurve cannot be set for last point in a shape.
+;                  @Error: 1, @Extended: 1 = $oShape not an Object.
+;                  @Error: 1, @Extended: 2 = $oShape does not have property "PolyPolygonBezier", and consequently does not have Position Points that can be modified.
+;                  @Error: 1, @Extended: 3 = $iPoint not an Integer, less than 1 or greater than number of points in the shape.
+;                  @Error: 1, @Extended: 4 = $iX not an Integer.
+;                  @Error: 1, @Extended: 5 = $iY not an Integer
+;                  @Error: 1, @Extended: 6 = $PointType not an Integer, less than 0 or greater than 3, or equal to 2.
+;                  @Error: 1, @Extended: 7 = $PointType called with other than Normal while $iPoint is referencing first or last point.
+;                  @Error: 1, @Extended: 8 = $bIsCurve not a Boolean.
+;                  @Error: 1, @Extended: 9 = $bIsCurve cannot be set for last point in a shape.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to Retrieve Array of Point Type Flags.
-;                  @Error 3 @Extended 2 = Failed to Retrieve Array of Points.
-;                  @Error 3 @Extended 3 = Failed to identify the requested Array element.
-;                  @Error 3 @Extended 4 = Failed to retrieve current settings for requested point.
-;                  @Error 3 @Extended 5 = Failed to modify the requested point.
-;                  @Error 3 @Extended 6 = Failed to Retrieve PolyPolygonBezier Structure.
+;                  @Error: 3, @Extended: 1 = Failed to Retrieve Array of Point Type Flags.
+;                  @Error: 3, @Extended: 2 = Failed to Retrieve Array of Points.
+;                  @Error: 3, @Extended: 3 = Failed to identify the requested Array element.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve current settings for requested point.
+;                  @Error: 3, @Extended: 5 = Failed to modify the requested point.
+;                  @Error: 3, @Extended: 6 = Failed to Retrieve PolyPolygonBezier Structure.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings for the Array Element called in $iArrayElement.
@@ -1464,23 +1464,23 @@ EndFunc   ;==>_LOImpress_DrawShapePointsModify
 ; Parameters ....: $oShape              - A Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
 ;                  $iPoint              - The Point to in the Shape to delete, beginning at 1.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Position Point was successfully deleted from the Shape.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Position Point was successfully deleted from the Shape.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oShape not an Object.
-;                  @Error 1 @Extended 2 = $oShape does not have property "PolyPolygonBezier", and consequently does not have Position Points that can be modified.
-;                  @Error 1 @Extended 3 = $iPoint not an Integer, less than 1 or greater than number of points in the shape.
+;                  @Error: 1, @Extended: 1 = $oShape not an Object.
+;                  @Error: 1, @Extended: 2 = $oShape does not have property "PolyPolygonBezier", and consequently does not have Position Points that can be modified.
+;                  @Error: 1, @Extended: 3 = $iPoint not an Integer, less than 1 or greater than number of points in the shape.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to Create a new Position Point Structure for the Second Control Point.
-;                  @Error 2 @Extended 2 = Failed to Create a new Position Point Structure for the Third Control Point.
-;                  @Error 2 @Extended 3 = Failed to Create a new Position Point Structure for the Fourth Control Point.
+;                  @Error: 2, @Extended: 1 = Failed to Create a new Position Point Structure for the Second Control Point.
+;                  @Error: 2, @Extended: 2 = Failed to Create a new Position Point Structure for the Third Control Point.
+;                  @Error: 2, @Extended: 3 = Failed to Create a new Position Point Structure for the Fourth Control Point.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to Retrieve Array of Point Type Flags.
-;                  @Error 3 @Extended 2 = Failed to Retrieve Array of Points.
-;                  @Error 3 @Extended 3 = Failed to identify the requested Array element.
-;                  @Error 3 @Extended 4 = Failed to identify the next normal Point in the Array of Points.
-;                  @Error 3 @Extended 5 = Failed to identify the Previous normal Point in the Array of Points.
-;                  @Error 3 @Extended 6 = Failed to Retrieve PolyPolygonBezier Structure.
+;                  @Error: 3, @Extended: 1 = Failed to Retrieve Array of Point Type Flags.
+;                  @Error: 3, @Extended: 2 = Failed to Retrieve Array of Points.
+;                  @Error: 3, @Extended: 3 = Failed to identify the requested Array element.
+;                  @Error: 3, @Extended: 4 = Failed to identify the next normal Point in the Array of Points.
+;                  @Error: 3, @Extended: 5 = Failed to identify the Previous normal Point in the Array of Points.
+;                  @Error: 3, @Extended: 6 = Failed to Retrieve PolyPolygonBezier Structure.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Only $LOI_DRAWSHAPE_TYPE_LINE_* type shapes have Points that can be added to, removed, or modified.
@@ -1793,16 +1793,16 @@ EndFunc   ;==>_LOImpress_DrawShapePointsRemove
 ; Parameters ....: $oShape              - A Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
 ;                  $sText               - [optional] Default is Null. The text to display in the Shape's text box.
 ; Return values .: Success: 1 or String
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning shape's current text content.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: String = Success. All optional parameters were called with Null, returning shape's current text content.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oShape not an object.
-;                  @Error 1 @Extended 2 = $sText not a String.
+;                  @Error: 1, @Extended: 1 = $oShape not an object.
+;                  @Error: 1, @Extended: 2 = $sText not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve shape's current text.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve shape's current text.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sText
 ; Author ........: donnyh13
 ; Modified ......:

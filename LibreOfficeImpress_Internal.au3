@@ -98,17 +98,17 @@
 ;                  $bOutline            - [optional] Default is Null. If True, the characters have an outline around the outside.
 ;                  $bShadow             - [optional] Default is Null. If True, the characters have a shadow.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOI_CHAR_CASEMAP_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 3 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOI_CHAR_RELIEF_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 4 = $bOutline not a Boolean.
-;                  @Error 1 @Extended 5 = $bShadow not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOI_CHAR_CASEMAP_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOI_CHAR_RELIEF_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $bOutline not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bShadow not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iCase
 ;                  |                               2 = Error setting $iRelief
 ;                  |                               4 = Error setting $bOutline
@@ -177,18 +177,18 @@ EndFunc   ;==>__LOImpress_CharEffect
 ;                  $iPosture            - [optional] (0-5) Default is Null. The Font Italic setting. See Constants, $LOI_CHAR_POSTURE_* as defined in LibreOfficeImpress_Constants.au3. Also see remarks.
 ;                  $iWeight             - [optional] (0, 50-200) Default is Null. The Font Bold settings see Constants, $LOI_CHAR_WEIGHT_* as defined in LibreOfficeImpress_Constants.au3. Also see remarks.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = $sFontName not a String.
-;                  @Error 1 @Extended 3 = Font called in $sFontName not available.
-;                  @Error 1 @Extended 4 = $nFontSize not a number.
-;                  @Error 1 @Extended 5 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOI_CHAR_POSTURE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 6 = $iWeight not an Integer, less than 50 but not equal to 0, or greater than 200. See Constants, $LOI_CHAR_WEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $sFontName not a String.
+;                  @Error: 1, @Extended: 3 = Font called in $sFontName not available.
+;                  @Error: 1, @Extended: 4 = $nFontSize not a number.
+;                  @Error: 1, @Extended: 5 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOI_CHAR_POSTURE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iWeight not an Integer, less than 50 but not equal to 0, or greater than 200. See Constants, $LOI_CHAR_WEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sFontName
 ;                  |                               2 = Error setting $nFontSize
 ;                  |                               4 = Error setting $iPosture
@@ -259,23 +259,23 @@ EndFunc   ;==>__LOImpress_CharFont
 ;                  $iTransparency       - [optional] (0-100) Default is Null. Transparency percentage. 0 is visible, 100 is invisible. Available for LibreOffice 7.0 and up.
 ;                  $iHighlight          - [optional] (-1-16777215) Default is Null. The highlight Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for No color.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters. If The current LibreOffice version is below 7.0 the $iTransparency parameter will return a Null value.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters. If The current LibreOffice version is below 7.0 the $iTransparency parameter will return a Null value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = $iFontColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 3 = $iTransparency not an Integer, less than 0 or greater than 100%.
-;                  @Error 1 @Extended 4 = $iHighlight not an Integer, less than -1 or greater than 16777215.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $iFontColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error: 1, @Extended: 3 = $iTransparency not an Integer, less than 0 or greater than 100%.
+;                  @Error: 1, @Extended: 4 = $iHighlight not an Integer, less than -1 or greater than 16777215.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve old Transparency value.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $FontColor
 ;                  |                               2 = Error setting $iTransparency.
 ;                  |                               4 = Error setting $iHighlight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current LibreOffice version lower than 7.0.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 7.0.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
@@ -349,16 +349,16 @@ EndFunc   ;==>__LOImpress_CharFontColor
 ;                  $iOLColor            - [optional] (-1-16777215) Default is Null. The Overline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
 ;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not Overlined.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOI_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
-;                  @Error 1 @Extended 3 = $iOLColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 4 = $bWordOnly not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOI_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
+;                  @Error: 1, @Extended: 3 = $iOLColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error: 1, @Extended: 4 = $bWordOnly not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iOverLineStyle
 ;                  |                               2 = Error setting $iOLColor
 ;                  |                               4 = Error setting $bWordOnly
@@ -428,17 +428,17 @@ EndFunc   ;==>__LOImpress_CharOverLine
 ;                  $iSubScript          - [optional] (-1-100) Default is Null. Subscript percentage value. Call with -1 for Automatic SubScript. See Remarks.
 ;                  $iRelativeSize       - [optional] (1-100) Default is Null. The size percentage relative to current font size.
 ; Return values .: Success: Integer or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = $oObj does not support Character properties.
-;                  @Error 1 @Extended 3 = $iSuperScript not an Integer, less than 0 or greater than 100, but not 14000.
-;                  @Error 1 @Extended 4 = $iSubScript not an Integer, less than -100 or greater than 100, but not 14000 or -14000.
-;                  @Error 1 @Extended 5 = $iRelativeSize not an Integer, less than 1 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $oObj does not support Character properties.
+;                  @Error: 1, @Extended: 3 = $iSuperScript not an Integer, less than 0 or greater than 100, but not 14000.
+;                  @Error: 1, @Extended: 4 = $iSubScript not an Integer, less than -100 or greater than 100, but not 14000 or -14000.
+;                  @Error: 1, @Extended: 5 = $iRelativeSize not an Integer, less than 1 or greater than 100.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iSuperScript
 ;                  |                               2 = Error setting $iSubScript
 ;                  |                               4 = Error setting $iRelativeSize.
@@ -516,16 +516,16 @@ EndFunc   ;==>__LOImpress_CharPosition
 ; Parameters ....: $oObj                - A Text Cursor or Shape object returned by a previous  _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert or _LOImpress_ShapesGetList function.
 ;                  $iScaleWidth         - [optional] (1-100) Default is Null. The percentage to horizontally stretch or compress the text. 100 is normal sizing.
 ; Return values .: Success: 1 or Integer.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current Scale Width value as an Integer.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current Scale Width value as an Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = $iScaleWidth not an Integer or less than 1% or greater than 100%.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $iScaleWidth not an Integer or less than 1% or greater than 100%.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve current Scale width.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Scale width.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iScaleWidth
 ; Author ........: donnyh13
 ; Modified ......:
@@ -568,15 +568,15 @@ EndFunc   ;==>__LOImpress_CharScaling
 ;                  $bAutoKerning        - [optional] Default is Null. If True, applies a spacing in between certain pairs of characters.
 ;                  $nKerning            - [optional] (-928.8-928.8) Default is Null. The kerning value of the characters. See Remarks. Values are in Printer's Points as set in the LibreOffice UI.
 ; Return values .: Success: Integer or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = $bAutoKerning not a Boolean.
-;                  @Error 1 @Extended 3 = $nKerning not a number, less than -928.8 or greater than 928.8 Points.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $bAutoKerning not a Boolean.
+;                  @Error: 1, @Extended: 3 = $nKerning not a number, less than -928.8 or greater than 928.8 Points.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bAutoKerning
 ;                  |                               2 = Error setting $nKerning.
 ; Author ........: donnyh13
@@ -632,15 +632,15 @@ EndFunc   ;==>__LOImpress_CharSpacing
 ;                  $iStrikeLineStyle    - [optional] (0-6) Default is Null. The Strikeout Line Style, see constants, $LOI_CHAR_STRIKEOUT_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $bWordOnly           - [optional] Default is Null. If True, strike out is applied to words only, skipping whitespaces.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOI_CHAR_STRIKEOUT_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 3 = $bWordOnly not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOI_CHAR_STRIKEOUT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $bWordOnly not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iStrikeLineStyle
 ;                  |                               2 = Error setting $bWordOnly
 ; Author ........: donnyh13
@@ -692,16 +692,16 @@ EndFunc   ;==>__LOImpress_CharStrikeOut
 ;                  $iULColor            - [optional] (-1-16777215) Default is Null. The underline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
 ;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not underlined.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj an Object.
-;                  @Error 1 @Extended 2 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOI_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 3 = $iULColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 4 = $bWordOnly not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oObj an Object.
+;                  @Error: 1, @Extended: 2 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOI_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iULColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error: 1, @Extended: 4 = $bWordOnly not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iUnderLineStyle
 ;                  |                               2 = Error setting $iULColor
 ;                  |                               4 = Error setting $bWordOnly
@@ -766,11 +766,11 @@ EndFunc   ;==>__LOImpress_CharUnderLine
 ; Syntax ........: __LOImpress_ColorRemoveAlpha($iColor)
 ; Parameters ....: $iColor              - A RGB Color Integer to remove Alpha from.
 ; Return values .: Success: Integer
-;                  @Error 0 @Extended 0 Return Integer = Success. Color already has no Alpha value, returning same color.
-;                  @Error 0 @Extended 1 Return Integer = Success. Removed Alpha value from RGB Color Integer, returning new Color value.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Color already has no Alpha value, returning same color.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. Removed Alpha value from RGB Color Integer, returning new Color value.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $iColor not an Integer. Returning $iColor to be sure not to lose the value.
+;                  @Error: 1, @Extended: 1 = $iColor not an Integer. Returning $iColor to be sure not to lose the value.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: In functions which return the current color value, generally background colors, if Transparency (alpha) is set, the background color value is not the literal color set, but also includes the transparency value added to it. This functions removes that value for simpler color values.
@@ -801,13 +801,13 @@ EndFunc   ;==>__LOImpress_ColorRemoveAlpha
 ; Parameters ....: $iX                  - The X position, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - The Y position, in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: Structure
-;                  @Error 0 @Extended 0 Return Structure = Success. Returning created Position Structure using $iX and $iY values.
+;                  @Error: 0, @Extended: 0, Return: Structure = Success. Returning created Position Structure using $iX and $iY values.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $iX not an Integer.
-;                  @Error 1 @Extended 2 = $iY not an Integer.
+;                  @Error: 1, @Extended: 1 = $iX not an Integer.
+;                  @Error: 1, @Extended: 2 = $iY not an Integer.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to Create a Position Structure.
+;                  @Error: 2, @Extended: 1 = Failed to Create a Position Structure.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Modified from A. Pitonyak, Listing 493. in OOME 3.0
@@ -840,13 +840,13 @@ EndFunc   ;==>__LOImpress_CreatePoint
 ; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LOImpress_ShapeCreateTextCursor function.
 ;                  $iTabStop            - The Tab Stop to look for.
 ; Return values .: Success: Boolean
-;                  @Error 0 @Extended 0 Return Boolean = True if Paragraph has the requested TabStop. Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = True if Paragraph has the requested TabStop. Else False.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 = $iTabStop not an Integer.
+;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 2 = $iTabStop not an Integer.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve ParaTabStops Object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve ParaTabStops Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -891,24 +891,24 @@ EndFunc   ;==>__LOImpress_CursorParHasTabStop
 ;                  $bParallel           - [optional] Default is Null. If True, Displays the text parallel to or at 90 degrees to the dimension line.
 ;                  $iUnitType           - [optional] (-1-15) Default is Null. The type of measurement units, if any, to display. See Constants, $LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = $iDistance not an Integer, less than -10,008 or greater than 10,008.
-;                  @Error 1 @Extended 3 = $iGuideOverhang not an Integer, less than -10,008 or greater than 10,008.
-;                  @Error 1 @Extended 4 = $iGuideDistance not an Integer, less than -10,008 or greater than 10,008.
-;                  @Error 1 @Extended 5 = $iLGuide not an Integer, less than -10,008 or greater than 10,008.
-;                  @Error 1 @Extended 6 = $iRGuide not an Integer, less than -10,008 or greater than 10,008.
-;                  @Error 1 @Extended 7 = $bBelow not a Boolean.
-;                  @Error 1 @Extended 8 = $iDecimal not an Integer, less than 0 or greater than 99.
-;                  @Error 1 @Extended 9 = $iVertPos not an Integer, less than 0 or greater than 4. See Constants, $LOI_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 10 = $iHoriPos not an Integer, less than 0 or greater than 3. See Constants, $LOI_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 11 = $bParallel not a Boolean.
-;                  @Error 1 @Extended 12 = $iUnitType not an Integer, less than -1 or greater than 15. See Constants, $LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $iDistance not an Integer, less than -10,008 or greater than 10,008.
+;                  @Error: 1, @Extended: 3 = $iGuideOverhang not an Integer, less than -10,008 or greater than 10,008.
+;                  @Error: 1, @Extended: 4 = $iGuideDistance not an Integer, less than -10,008 or greater than 10,008.
+;                  @Error: 1, @Extended: 5 = $iLGuide not an Integer, less than -10,008 or greater than 10,008.
+;                  @Error: 1, @Extended: 6 = $iRGuide not an Integer, less than -10,008 or greater than 10,008.
+;                  @Error: 1, @Extended: 7 = $bBelow not a Boolean.
+;                  @Error: 1, @Extended: 8 = $iDecimal not an Integer, less than 0 or greater than 99.
+;                  @Error: 1, @Extended: 9 = $iVertPos not an Integer, less than 0 or greater than 4. See Constants, $LOI_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 10 = $iHoriPos not an Integer, less than 0 or greater than 3. See Constants, $LOI_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 11 = $bParallel not a Boolean.
+;                  @Error: 1, @Extended: 12 = $iUnitType not an Integer, less than -1 or greater than 15. See Constants, $LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iDistance
 ;                  |                               2 = Error setting $iGuideOverhang
 ;                  |                               4 = Error setting $iGuideDistance
@@ -1045,24 +1045,24 @@ EndFunc   ;==>__LOImpress_DimensionSettings
 ;                  $iY                  - The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iShapeType          - (0-25) The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_ARROWS_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Returning the newly created shape.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oSlide not an Object.
-;                  @Error 1 @Extended 2 = $iWidth not an Integer.
-;                  @Error 1 @Extended 3 = $iHeight not an Integer.
-;                  @Error 1 @Extended 4 = $iX not an Integer.
-;                  @Error 1 @Extended 5 = $iY not an Integer.
-;                  @Error 1 @Extended 6 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_ARROWS_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
+;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
+;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
+;                  @Error: 1, @Extended: 4 = $iX not an Integer.
+;                  @Error: 1, @Extended: 5 = $iY not an Integer.
+;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_ARROWS_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.drawing.CustomShape" or "com.sun.star.drawing.EllipseShape" Object.
-;                  @Error 2 @Extended 2 = Failed to create a property structure.
-;                  @Error 2 @Extended 3 = Failed to create "MirroredX" property structure.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.drawing.CustomShape" or "com.sun.star.drawing.EllipseShape" Object.
+;                  @Error: 2, @Extended: 2 = Failed to create a property structure.
+;                  @Error: 2, @Extended: 3 = Failed to create "MirroredX" property structure.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Parent Document Object.
-;                  @Error 3 @Extended 2 = Failed to create a unique Shape name.
-;                  @Error 3 @Extended 3 = Failed to retrieve the Position Structure.
-;                  @Error 3 @Extended 4 = Failed to retrieve the Size Structure.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Parent Document Object.
+;                  @Error: 3, @Extended: 2 = Failed to create a unique Shape name.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve the Position Structure.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve the Size Structure.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The following shapes are not implemented into LibreOffice as of L.O. Version 7.3.4.2 for automation, and thus will not work:
@@ -1227,23 +1227,23 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateArrow
 ;                  $iY                  - The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iShapeType          - (26-49) The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_BASIC_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Returning the newly created shape.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oSlide not an Object.
-;                  @Error 1 @Extended 2 = $iWidth not an Integer.
-;                  @Error 1 @Extended 3 = $iHeight not an Integer.
-;                  @Error 1 @Extended 4 = $iX not an Integer.
-;                  @Error 1 @Extended 5 = $iY not an Integer.
-;                  @Error 1 @Extended 6 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_BASIC_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
+;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
+;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
+;                  @Error: 1, @Extended: 4 = $iX not an Integer.
+;                  @Error: 1, @Extended: 5 = $iY not an Integer.
+;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_BASIC_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.drawing.CustomShape" or "com.sun.star.drawing.EllipseShape" Object.
-;                  @Error 2 @Extended 2 = Failed to create a property structure.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.drawing.CustomShape" or "com.sun.star.drawing.EllipseShape" Object.
+;                  @Error: 2, @Extended: 2 = Failed to create a property structure.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Parent Document Object.
-;                  @Error 3 @Extended 2 = Failed to create a unique Shape name.
-;                  @Error 3 @Extended 3 = Failed to retrieve the Position Structure.
-;                  @Error 3 @Extended 4 = Failed to retrieve the Size Structure.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Parent Document Object.
+;                  @Error: 3, @Extended: 2 = Failed to create a unique Shape name.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve the Position Structure.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve the Size Structure.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The following shapes are not implemented into LibreOffice as of L.O. Version 7.3.4.2 for automation, and thus will not work:
@@ -1414,23 +1414,23 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateBasic
 ;                  $iY                  - The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iShapeType          - (50-56) The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_CALLOUT_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Returning the newly created shape.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oSlide not an Object.
-;                  @Error 1 @Extended 2 = $iWidth not an Integer.
-;                  @Error 1 @Extended 3 = $iHeight not an Integer.
-;                  @Error 1 @Extended 4 = $iX not an Integer.
-;                  @Error 1 @Extended 5 = $iY not an Integer.
-;                  @Error 1 @Extended 6 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_CALLOUT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
+;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
+;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
+;                  @Error: 1, @Extended: 4 = $iX not an Integer.
+;                  @Error: 1, @Extended: 5 = $iY not an Integer.
+;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_CALLOUT_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.drawing.CustomShape" Object.
-;                  @Error 2 @Extended 2 = Failed to create a property structure.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.drawing.CustomShape" Object.
+;                  @Error: 2, @Extended: 2 = Failed to create a property structure.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Parent Document Object.
-;                  @Error 3 @Extended 2 = Failed to create a unique Shape name.
-;                  @Error 3 @Extended 3 = Failed to retrieve the Position Structure.
-;                  @Error 3 @Extended 4 = Failed to retrieve the Size Structure.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Parent Document Object.
+;                  @Error: 3, @Extended: 2 = Failed to create a unique Shape name.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve the Position Structure.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve the Size Structure.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1530,23 +1530,23 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateCallout
 ;                  $iY                  - The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iShapeType          - (57-84) The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_FLOWCHART_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Returning the newly created shape.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oSlide not an Object.
-;                  @Error 1 @Extended 2 = $iWidth not an Integer.
-;                  @Error 1 @Extended 3 = $iHeight not an Integer.
-;                  @Error 1 @Extended 4 = $iX not an Integer.
-;                  @Error 1 @Extended 5 = $iY not an Integer.
-;                  @Error 1 @Extended 6 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_FLOWCHART_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
+;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
+;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
+;                  @Error: 1, @Extended: 4 = $iX not an Integer.
+;                  @Error: 1, @Extended: 5 = $iY not an Integer.
+;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_FLOWCHART_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.drawing.CustomShape" Object.
-;                  @Error 2 @Extended 2 = Failed to create a property structure.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.drawing.CustomShape" Object.
+;                  @Error: 2, @Extended: 2 = Failed to create a property structure.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Parent Document Object.
-;                  @Error 3 @Extended 2 = Failed to create a unique Shape name.
-;                  @Error 3 @Extended 3 = Failed to retrieve the Position Structure.
-;                  @Error 3 @Extended 4 = Failed to retrieve the Size Structure.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Parent Document Object.
+;                  @Error: 3, @Extended: 2 = Failed to create a unique Shape name.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve the Position Structure.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve the Size Structure.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1709,24 +1709,24 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateFlowchart
 ;                  $iY                  - The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iShapeType          - (85-92) The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_LINE_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Returning the newly created shape.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oSlide not an Object.
-;                  @Error 1 @Extended 2 = $iWidth not an Integer.
-;                  @Error 1 @Extended 3 = $iHeight not an Integer.
-;                  @Error 1 @Extended 4 = $iX not an Integer.
-;                  @Error 1 @Extended 5 = $iY not an Integer.
-;                  @Error 1 @Extended 6 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_LINE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
+;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
+;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
+;                  @Error: 1, @Extended: 4 = $iX not an Integer.
+;                  @Error: 1, @Extended: 5 = $iY not an Integer.
+;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_LINE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create the requested Line type Object.
-;                  @Error 2 @Extended 2 = Failed to create a Position structure.
-;                  @Error 2 @Extended 3 = Failed to create "com.sun.star.drawing.PolyPolygonBezierCoords" Structure.
+;                  @Error: 2, @Extended: 1 = Failed to create the requested Line type Object.
+;                  @Error: 2, @Extended: 2 = Failed to create a Position structure.
+;                  @Error: 2, @Extended: 3 = Failed to create "com.sun.star.drawing.PolyPolygonBezierCoords" Structure.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Parent Document Object.
-;                  @Error 3 @Extended 2 = Failed to create a unique Shape name.
-;                  @Error 3 @Extended 3 = Failed to retrieve the Position Structure.
-;                  @Error 3 @Extended 4 = Failed to retrieve the Size Structure.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Parent Document Object.
+;                  @Error: 3, @Extended: 2 = Failed to create a unique Shape name.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve the Position Structure.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve the Size Structure.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -2166,23 +2166,23 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateLine
 ;                  $iY                  - The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iShapeType          - (93-104) The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_STARS_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Returning the newly created shape.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oSlide not an Object.
-;                  @Error 1 @Extended 2 = $iWidth not an Integer.
-;                  @Error 1 @Extended 3 = $iHeight not an Integer.
-;                  @Error 1 @Extended 4 = $iX not an Integer.
-;                  @Error 1 @Extended 5 = $iY not an Integer.
-;                  @Error 1 @Extended 6 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_STARS_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
+;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
+;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
+;                  @Error: 1, @Extended: 4 = $iX not an Integer.
+;                  @Error: 1, @Extended: 5 = $iY not an Integer.
+;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_STARS_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.drawing.CustomShape" Object.
-;                  @Error 2 @Extended 2 = Failed to create a property structure.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.drawing.CustomShape" Object.
+;                  @Error: 2, @Extended: 2 = Failed to create a property structure.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Parent Document Object.
-;                  @Error 3 @Extended 2 = Failed to create a unique Shape name.
-;                  @Error 3 @Extended 3 = Failed to retrieve the Position Structure.
-;                  @Error 3 @Extended 4 = Failed to retrieve the Size Structure.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Parent Document Object.
+;                  @Error: 3, @Extended: 2 = Failed to create a unique Shape name.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve the Position Structure.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve the Size Structure.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The following shapes are not implemented into LibreOffice as of L.O. Version 7.3.4.2 for automation, and thus will not work:
@@ -2298,23 +2298,23 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateStars
 ;                  $iY                  - The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iShapeType          - (105-122) The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_SYMBOL_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Returning the newly created shape.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oSlide not an Object.
-;                  @Error 1 @Extended 2 = $iWidth not an Integer.
-;                  @Error 1 @Extended 3 = $iHeight not an Integer.
-;                  @Error 1 @Extended 4 = $iX not an Integer.
-;                  @Error 1 @Extended 5 = $iY not an Integer.
-;                  @Error 1 @Extended 6 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_SYMBOL_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
+;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
+;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
+;                  @Error: 1, @Extended: 4 = $iX not an Integer.
+;                  @Error: 1, @Extended: 5 = $iY not an Integer.
+;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_SYMBOL_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create "com.sun.star.drawing.CustomShape" Object.
-;                  @Error 2 @Extended 2 = Failed to create a property structure.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.drawing.CustomShape" Object.
+;                  @Error: 2, @Extended: 2 = Failed to create a property structure.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Parent Document Object.
-;                  @Error 3 @Extended 2 = Failed to create a unique Shape name.
-;                  @Error 3 @Extended 3 = Failed to retrieve the Position Structure.
-;                  @Error 3 @Extended 4 = Failed to retrieve the Size Structure.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Parent Document Object.
+;                  @Error: 3, @Extended: 2 = Failed to create a unique Shape name.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve the Position Structure.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve the Size Structure.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The following shapes are not implemented into LibreOffice as of L.O. Version 7.3.4.2 for automation, and thus will not work:
@@ -2454,11 +2454,11 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateSymbol
 ; Syntax ........: __LOImpress_DrawShape_GetCustomType($sCusShapeType)
 ; Parameters ....: $sCusShapeType       - The Returned Custom Shape Type Value from CustomShapeGeometry Array of properties.
 ; Return values .: Success: Integer or -1
-;                  @Error 0 @Extended 0 Return Integer = Success. Custom Shape Type was successfully identified. Returning the Constant value of the Shape, see Constants $LOI_DRAWSHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3
-;                  @Error 0 @Extended 0 Return -1 = Success. Custom Shape is of an unimplemented type that has an ambiguous name, and cannot be identified. See Remarks.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Custom Shape Type was successfully identified. Returning the Constant value of the Shape, see Constants $LOI_DRAWSHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3
+;                  @Error: 0, @Extended: 0, Return: -1 = Success. Custom Shape is of an unimplemented type that has an ambiguous name, and cannot be identified. See Remarks.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $sCusShapeType not a String.
+;                  @Error: 1, @Extended: 1 = $sCusShapeType not a String.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Some shapes are not implemented, or not fully implemented into LibreOffice for automation, consequently they do not have appropriate type names as of yet. Many have simply ambiguous names, such as "non-primitive".
@@ -2966,18 +2966,18 @@ EndFunc   ;==>__LOImpress_DrawShape_GetCustomType
 ;                  $atPoints            - An Array of Points returned from the Shape.
 ;                  $iArrayElement       - The Array element that contains the point to retrieve the settings for.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Current Settings were successfully retrieved, $avArray has been filled with the current settings.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Current Settings were successfully retrieved, $avArray has been filled with the current settings.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $avArray is not an Array.
-;                  @Error 1 @Extended 2 = $aiFlags is not an Array.
-;                  @Error 1 @Extended 3 = $atPoints is not an Array.
-;                  @Error 1 @Extended 4 = $iArrayElement not an Integer.
+;                  @Error: 1, @Extended: 1 = $avArray is not an Array.
+;                  @Error: 1, @Extended: 2 = $aiFlags is not an Array.
+;                  @Error: 1, @Extended: 3 = $atPoints is not an Array.
+;                  @Error: 1, @Extended: 4 = $iArrayElement not an Integer.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve the current X coordinate.
-;                  @Error 3 @Extended 2 = Failed to retrieve the current Y coordinate.
-;                  @Error 3 @Extended 3 = Failed to retrieve the current Point Type Flag.
-;                  @Error 3 @Extended 4 = Failed to determine if the Point is a Curve or not.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve the current X coordinate.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve the current Y coordinate.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve the current Point Type Flag.
+;                  @Error: 3, @Extended: 4 = Failed to determine if the Point is a Curve or not.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -3050,20 +3050,20 @@ EndFunc   ;==>__LOImpress_DrawShapePointGetSettings
 ;                  $iPointType          - [optional] (0, 1, 3) Default is Null. The Type of Point to change the called point to. See Remarks. See constants $LOI_DRAWSHAPE_POINT_TYPE_* as defined in LibreOfficeImpress_Constants.au3
 ;                  $bIsCurve            - [optional] Default is Null. If True, the Normal Point is a Curve. See remarks.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $aiFlags not an Array.
-;                  @Error 1 @Extended 2 = $atPoints not an Array.
-;                  @Error 1 @Extended 3 = $iArrayElement not an Integer.
+;                  @Error: 1, @Extended: 1 = $aiFlags not an Array.
+;                  @Error: 1, @Extended: 2 = $atPoints not an Array.
+;                  @Error: 1, @Extended: 3 = $iArrayElement not an Integer.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to Create a new Position Point Structure for the First Control Point.
-;                  @Error 2 @Extended 2 = Failed to Create a new Position Point Structure for the Second Control Point.
-;                  @Error 2 @Extended 3 = Failed to Create a new Position Point Structure for the Third Control Point.
-;                  @Error 2 @Extended 4 = Failed to Create a new Position Point Structure for the Fourth Control Point.
+;                  @Error: 2, @Extended: 1 = Failed to Create a new Position Point Structure for the First Control Point.
+;                  @Error: 2, @Extended: 2 = Failed to Create a new Position Point Structure for the Second Control Point.
+;                  @Error: 2, @Extended: 3 = Failed to Create a new Position Point Structure for the Third Control Point.
+;                  @Error: 2, @Extended: 4 = Failed to Create a new Position Point Structure for the Fourth Control Point.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to identify the next position point in the shape.
-;                  @Error 3 @Extended 2 = Failed to identify the previous position point in the shape.
+;                  @Error: 3, @Extended: 1 = Failed to identify the next position point in the shape.
+;                  @Error: 3, @Extended: 2 = Failed to identify the previous position point in the shape.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call any optional parameter with Null keyword to skip it.
@@ -3598,14 +3598,14 @@ EndFunc   ;==>__LOImpress_DrawShapePointModify
 ; Parameters ....: $sDocSavePath        - Full path with extension.
 ;                  $bExportFilters      - [optional] Default is False. If True, includes the Filter Names that can be used to Export only, in the search.
 ; Return values .: Success: String.
-;                  @Error 0 @Extended 1 Return String = Success. Returning required filter name from "SaveAs" Filter Names.
-;                  @Error 0 @Extended 2 Return String = Success. Returning required filter name from "Export" Filter Names.
-;                  @Error 0 @Extended 3 Return String = Filter Name not found for given file extension, defaulting to .odp file format and updating save path accordingly.
+;                  @Error: 0, @Extended: 1, Return: String = Success. Returning required filter name from "SaveAs" Filter Names.
+;                  @Error: 0, @Extended: 2, Return: String = Success. Returning required filter name from "Export" Filter Names.
+;                  @Error: 0, @Extended: 3, Return: String = Filter Name not found for given file extension, defaulting to .odp file format and updating save path accordingly.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $sDocSavePath is not a string.
-;                  @Error 1 @Extended 2 = $bExportFilters not a Boolean.
-;                  @Error 1 @Extended 3 = $sDocSavePath is not a correct path or URL.
+;                  @Error: 1, @Extended: 1 = $sDocSavePath is not a string.
+;                  @Error: 1, @Extended: 2 = $bExportFilters not a Boolean.
+;                  @Error: 1, @Extended: 3 = $sDocSavePath is not a correct path or URL.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Searches a predefined list of extensions stored in an array. Not all FilterNames are listed.
@@ -3705,12 +3705,12 @@ EndFunc   ;==>__LOImpress_FilterNameGet
 ; Parameters ....: $oSlide              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
 ;                  $sShapeName          - The Shape name to begin with.
 ; Return values .: Success: String
-;                  @Error 0 @Extended 0 Return String = Success. Slide contained no shapes, returning the Shape name with a "1" appended.
-;                  @Error 0 @Extended 1 Return String = Success. Returning the unique Shape name to use.
+;                  @Error: 0, @Extended: 0, Return: String = Success. Slide contained no shapes, returning the Shape name with a "1" appended.
+;                  @Error: 0, @Extended: 1, Return: String = Success. Returning the unique Shape name to use.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oSlide not an Object.
-;                  @Error 1 @Extended 2 = $sShapeName not a String.
+;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
+;                  @Error: 1, @Extended: 2 = $sShapeName not a String.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function adds a digit after the shape name, incrementing it until that name hasn't been used yet in L.O.
@@ -3753,13 +3753,13 @@ EndFunc   ;==>__LOImpress_GetShapeName
 ; Parameters ....: $tGradient           - A Gradient Structure to compare property values with.
 ;                  $sGradientName       - The Gradient's current name.
 ; Return values .: Success: Boolean
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Gradient has been modified, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Gradient has been modified, else False.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $tGradient not an Object.
-;                  @Error 1 @Extended 2 = $sGradientName not a String.
+;                  @Error: 1, @Extended: 1 = $tGradient not an Object.
+;                  @Error: 1, @Extended: 2 = $sGradientName not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve current color stop array.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current color stop array.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -4440,17 +4440,17 @@ EndFunc   ;==>__LOImpress_GradientIsModified
 ;                  $tGradient           - A Gradient Structure to copy settings from.
 ;                  $sGradientName       - [optional] Default is "Gradient ". The Gradient name to create.
 ; Return values .: Success: String.
-;                  @Error 0 @Extended 0 Return String = Success. A new Gradient name was created. Returning the new name as a string.
+;                  @Error: 0, @Extended: 0, Return: String = Success. A new Gradient name was created. Returning the new name as a string.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $tGradient not an Object.
-;                  @Error 1 @Extended 3 = $sGradientName not a string.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $tGradient not an Object.
+;                  @Error: 1, @Extended: 3 = $sGradientName not a string.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error creating "com.sun.star.drawing.GradientTable" Object.
-;                  @Error 2 @Extended 2 = Error creating "com.sun.star.awt.Gradient" or "com.sun.star.awt.Gradient2" structure.
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.drawing.GradientTable" Object.
+;                  @Error: 2, @Extended: 2 = Error creating "com.sun.star.awt.Gradient" or "com.sun.star.awt.Gradient2" structure.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error creating Gradient Name.
+;                  @Error: 3, @Extended: 1 = Error creating Gradient Name.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If The Gradient name is blank, I need to create a new name and apply it. I think I could re-use an old one without problems, but I'm not sure, so to be safe, I will create a new one.
@@ -4522,12 +4522,12 @@ EndFunc   ;==>__LOImpress_GradientNameInsert
 ;                  $tGradient           - The Fill Gradient Object to modify the Gradient settings for.
 ;                  $sGradientName       - The Gradient Preset name to apply.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return Integer = Success. The Style Gradient settings were successfully set.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. The Style Gradient settings were successfully set.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create a "com.sun.star.awt.ColorStop" Struct.
+;                  @Error: 2, @Extended: 1 = Failed to create a "com.sun.star.awt.ColorStop" Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to create Gradient name.
+;                  @Error: 3, @Extended: 1 = Failed to create Gradient name.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -5170,10 +5170,10 @@ EndFunc   ;==>__LOImpress_InternalComErrorHandler
 ; Syntax ........: __LOImpress_NumRuleCreateMap(ByRef $atNumLevel)
 ; Parameters ....: $atNumLevel          - An Array of Property Structures for a Numbering Rule.
 ; Return values .: Success: Map
-;                  @Error 0 @Extended 0 Return Map = Success. Returning a Map containing the location in the array for each setting.
+;                  @Error: 0, @Extended: 0, Return: Map = Success. Returning a Map containing the location in the array for each setting.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $atNumLevel not an Array.
+;                  @Error: 1, @Extended: 1 = $atNumLevel not an Array.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -5206,16 +5206,16 @@ EndFunc   ;==>__LOImpress_NumRuleCreateMap
 ;                  $iLastLineAlign      - [optional] (0-3) Default is Null. Specify the alignment for the last line in the paragraph. See Constants, $LOI_PAR_LAST_LINE_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
 ;                  $iTxtDirection       - [optional] (0-5) Default is Null. The Text Writing Direction. See Constants, $LOI_PAR_TXT_DIR_* as defined in LibreOfficeImpress_Constants.au3. [LibreOffice Default is 4]
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = $iHorAlign not an Integer, less than 0 or greater than 3. See Constants, $LOI_PAR_ALIGN_HOR_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 3 = $iLastLineAlign not an Integer, less than 0 or greater than 3. See Constants, $LOI_PAR_LAST_LINE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 4 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOI_PAR_TXT_DIR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $iHorAlign not an Integer, less than 0 or greater than 3. See Constants, $LOI_PAR_ALIGN_HOR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iLastLineAlign not an Integer, less than 0 or greater than 3. See Constants, $LOI_PAR_LAST_LINE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOI_PAR_TXT_DIR_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iHorAlign
 ;                  |                               2 = Error setting $iLastLineALign
 ;                  |                               4 = Error setting $iTxtDirection
@@ -5278,16 +5278,16 @@ EndFunc   ;==>__LOImpress_ParAlignment
 ;                  $iAfterTxt           - [optional] (0-1162202) Default is Null. The amount of space that you want to indent the paragraph from the page margin. Set in Hundredths of a Millimeter (HMM)
 ;                  $iFirstLine          - [optional] (0-1162202) Default is Null. Indentation distance of the first line of a paragraph. Set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = $iBeforeText not an Integer, less than 0 or greater than 1162202.
-;                  @Error 1 @Extended 3 = $iAfterText not an Integer, less than 0 or greater than 1162202.
-;                  @Error 1 @Extended 4 = $iFirstLine not an Integer, less than 0 or greater than 1162202.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $iBeforeText not an Integer, less than 0 or greater than 1162202.
+;                  @Error: 1, @Extended: 3 = $iAfterText not an Integer, less than 0 or greater than 1162202.
+;                  @Error: 1, @Extended: 4 = $iFirstLine not an Integer, less than 0 or greater than 1162202.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iBeforeTxt
 ;                  |                               2 = Error setting $iAfterTxt
 ;                  |                               4 = Error setting $iFirstLine
@@ -5349,22 +5349,22 @@ EndFunc   ;==>__LOImpress_ParIndent
 ;                  $iLineSpcMode        - [optional] (0-3) Default is Null. The line spacing type of the paragraph. See Constants, $LOI_PAR_LINE_SPC_MODE_* as defined in LibreOfficeImpress_Constants.au3, also notice min and max values for each.
 ;                  $iLineSpcHeight      - [optional] Default is Null. This value specifies the height in regard to Mode. See Remarks.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = $iAbovePar not an Integer, less than 0 or greater than 100000.
-;                  @Error 1 @Extended 3 = $iBelowPar not an Integer, less than 0 or greater than 100000.
-;                  @Error 1 @Extended 4 = $iLineSpcMode not an Integer, less than 0 or greater than 3. See Constants, $LOI_PAR_LINE_SPC_MODE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 5 = $iLineSpcHeight not an Integer.
-;                  @Error 1 @Extended 6 = $iLineSpcMode set to 0(Proportional) and $iLineSpcHeight less than 6(%) or greater than 65535(%).
-;                  @Error 1 @Extended 7 = $iLineSpcMode set to 1 or 2(Minimum, or Leading) and $iLineSpcHeight less than 0 or greater than 100000.
-;                  @Error 1 @Extended 8 = $iLineSpcMode set to 3(Fixed) and $iLineSpcHeight less than 51 or greater than 100000.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $iAbovePar not an Integer, less than 0 or greater than 100000.
+;                  @Error: 1, @Extended: 3 = $iBelowPar not an Integer, less than 0 or greater than 100000.
+;                  @Error: 1, @Extended: 4 = $iLineSpcMode not an Integer, less than 0 or greater than 3. See Constants, $LOI_PAR_LINE_SPC_MODE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iLineSpcHeight not an Integer.
+;                  @Error: 1, @Extended: 6 = $iLineSpcMode set to 0(Proportional) and $iLineSpcHeight less than 6(%) or greater than 65535(%).
+;                  @Error: 1, @Extended: 7 = $iLineSpcMode set to 1 or 2(Minimum, or Leading) and $iLineSpcHeight less than 0 or greater than 100000.
+;                  @Error: 1, @Extended: 8 = $iLineSpcMode set to 3(Fixed) and $iLineSpcHeight less than 51 or greater than 100000.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving ParaLineSpacing Object.
+;                  @Error: 3, @Extended: 1 = Error retrieving ParaLineSpacing Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iAbovePar
 ;                  |                               2 = Error setting $iBelowPar
 ;                  |                               4 = Error setting $iLineSpcMode
@@ -5456,23 +5456,23 @@ EndFunc   ;==>__LOImpress_ParSpacing
 ;                  $iDecChar            - [optional] Enter a character(in Asc Value(See AutoIt Asc Function)) that you want the decimal tab to use as a decimal separator. Can only be set if $iAlignment is set to $LOI_PAR_TAB_ALIGN_DECIMAL.
 ;                  $iFillChar           - [optional] The Asc (see AutoIt function) value of any character (except 0/Null) you want to act as a Tab Fill character. See remarks.
 ; Return values .: Success: Integer.
-;                  @Error 0 @Extended 0 Return Integer = Success. Settings were successfully set. New TabStop position is returned.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Settings were successfully set. New TabStop position is returned.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = $iPosition not an Integer.
-;                  @Error 1 @Extended 3 = Tab Stop position called in $iPosition already exists in this Paragraph.
-;                  @Error 1 @Extended 4 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOI_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 5 = $iDecChar not an Integer.
-;                  @Error 1 @Extended 6 = $iFillChar not an Integer.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $iPosition not an Integer.
+;                  @Error: 1, @Extended: 3 = Tab Stop position called in $iPosition already exists in this Paragraph.
+;                  @Error: 1, @Extended: 4 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOI_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iDecChar not an Integer.
+;                  @Error: 1, @Extended: 6 = $iFillChar not an Integer.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error creating "com.sun.star.style.TabStop" Object.
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.style.TabStop" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving ParaTabStops Array Object.
-;                  @Error 3 @Extended 2 = Error retrieving list of TabStop Positions.
-;                  @Error 3 @Extended 3 = Failed to identify the new Tabstop once inserted.
+;                  @Error: 3, @Extended: 1 = Error retrieving ParaTabStops Array Object.
+;                  @Error: 3, @Extended: 2 = Error retrieving list of TabStop Positions.
+;                  @Error: 3, @Extended: 3 = Failed to identify the new Tabstop once inserted.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iPosition
 ;                  |                               2 = Error setting $iAlignment
 ;                  |                               4 = Error setting $iDecChar
@@ -5568,14 +5568,14 @@ EndFunc   ;==>__LOImpress_ParTabStopCreate
 ; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous  _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
 ;                  $iTabStop            - The Tab position of the TabStop to modify. See Remarks.
 ; Return values .: Success: Boolean.
-;                  @Error 0 @Extended 0 Return Boolean = Returning True if TabStop was successfully deleted, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Returning True if TabStop was successfully deleted, else False.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = $iTabStop not an Integer.
-;                  @Error 1 @Extended 3 = $iTabStop not found.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $iTabStop not an Integer.
+;                  @Error: 1, @Extended: 3 = $iTabStop not found.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving ParaTabStops Object.
+;                  @Error: 3, @Extended: 1 = Error retrieving ParaTabStops Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $iTabStop refers to the position, or essential the "length" of a TabStop from the edge of a page margin. This is the only reliable way to identify a Tabstop to be able to interact with it, as there can only be one of a certain length per paragraph.
@@ -5627,25 +5627,25 @@ EndFunc   ;==>__LOImpress_ParTabStopDelete
 ;                  $iDecChar            - [optional] Default is Null. Enter a character(in Asc Value(See AutoIt Asc Function)) that you want the decimal tab to use as a decimal separator. Can only be set if $iAlignment is set to $LOI_PAR_TAB_ALIGN_DECIMAL.
 ;                  $iFillChar           - [optional] Default is Null. The Asc (see AutoIt function) value of any character (except 0/Null) you want to act as a Tab Fill character. See remarks.
 ; Return values .: Success: Integer or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  @Error 0 @Extended ? Return 2 = Success. Settings were successfully set. New TabStop position is returned in @Extended.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: ?, Return: 2 = Success. Settings were successfully set. New TabStop position is returned in @Extended.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = $iTabStop not an Integer.
-;                  @Error 1 @Extended 3 = TabStop called in $iTabStop not found.
-;                  @Error 1 @Extended 4 = $iPosition not an Integer.
-;                  @Error 1 @Extended 5 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOI_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 6 = $iDecChar not an Integer.
-;                  @Error 1 @Extended 7 = $iFillChar not an Integer.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $iTabStop not an Integer.
+;                  @Error: 1, @Extended: 3 = TabStop called in $iTabStop not found.
+;                  @Error: 1, @Extended: 4 = $iPosition not an Integer.
+;                  @Error: 1, @Extended: 5 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOI_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iDecChar not an Integer.
+;                  @Error: 1, @Extended: 7 = $iFillChar not an Integer.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving ParaTabStops Object.
-;                  @Error 3 @Extended 2 = Error retrieving Requested TabStop Object.
-;                  @Error 3 @Extended 3 = Paragraph already contains a TabStop at the length/Position specified in $iPosition.
-;                  @Error 3 @Extended 4 = Error retrieving list of TabStop Positions.
+;                  @Error: 3, @Extended: 1 = Error retrieving ParaTabStops Object.
+;                  @Error: 3, @Extended: 2 = Error retrieving Requested TabStop Object.
+;                  @Error: 3, @Extended: 3 = Paragraph already contains a TabStop at the length/Position specified in $iPosition.
+;                  @Error: 3, @Extended: 4 = Error retrieving list of TabStop Positions.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iPosition
 ;                  |                               2 = Error setting $iAlignment
 ;                  |                               4 = Error setting $iDecChar
@@ -5755,12 +5755,12 @@ EndFunc   ;==>__LOImpress_ParTabStopMod
 ; Syntax ........: __LOImpress_ParTabStopsGetList(ByRef $oObj)
 ; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous  _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
 ; Return values .: Success: Array.
-;                  @Error 0 @Extended ? Return Array = Success. An Array of TabStops. @Extended set to number of results.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. An Array of TabStops. @Extended set to number of results.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving ParaTabStops Object.
+;                  @Error: 3, @Extended: 1 = Error retrieving ParaTabStops Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -5797,17 +5797,17 @@ EndFunc   ;==>__LOImpress_ParTabStopsGetList
 ; Parameters ....: $oObj                - A Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
 ;                  $iColor              - [optional] (-1-16777215) Default is Null. The Fill color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for "None".
 ; Return values .: Success: 1 or Integer.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current Fill color as an Integer.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current Fill color as an Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = $iColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $iColor not an Integer, less than -1 or greater than 16777215.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve current color value.
-;                  @Error 3 @Extended 2 = Failed to retrieve old Transparency value.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current color value.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iColor
 ; Author ........: donnyh13
 ; Modified ......:
@@ -5864,25 +5864,25 @@ EndFunc   ;==>__LOImpress_ShapeAreaColor
 ; Parameters ....: $oObj                - A Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = $avColorStops not an Array, or does not contain two columns.
-;                  @Error 1 @Extended 3 = $avColorStops contains less than two rows.
-;                  @Error 1 @Extended 4 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
-;                  @Error 1 @Extended 5 = ColorStop color not an Integer, less than 0 or greater than 16777215. Returning problem element index.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $avColorStops not an Array, or does not contain two columns.
+;                  @Error: 1, @Extended: 3 = $avColorStops contains less than two rows.
+;                  @Error: 1, @Extended: 4 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
+;                  @Error: 1, @Extended: 5 = ColorStop color not an Integer, less than 0 or greater than 16777215. Returning problem element index.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create com.sun.star.awt.ColorStop Struct.
+;                  @Error: 2, @Extended: 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve FillGradient Struct.
-;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 = Failed to retrieve StopColor Struct.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve FillGradient Struct.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve StopColor Struct.
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current version less than 7.6.
+;                  @Error: 6, @Extended: 1 = Current version less than 7.6.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColorStops
 ; Author ........: donnyh13
 ; Modified ......:
@@ -5978,23 +5978,23 @@ EndFunc   ;==>__LOImpress_ShapeAreaGradientMulticolor
 ;                  $iBlur               - [optional] (0-150) Default is Null. The amount of blur applied to the Shadow, set in Printer's Points.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The percentage of Shadow transparency. 100% means completely transparent.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = $bShadow not a Boolean.
-;                  @Error 1 @Extended 3 = $iLocation not an Integer, less than 0 or greater than 8. See Constants, $LOI_SHAPE_SHADOW_LOCATION_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 4 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 5 = $iDistance not an Integer, or less than 0.
-;                  @Error 1 @Extended 6 = $iBlur not an Integer, less than 0 or greater than 150 Printer's Points.
-;                  @Error 1 @Extended 7 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $bShadow not a Boolean.
+;                  @Error: 1, @Extended: 3 = $iLocation not an Integer, less than 0 or greater than 8. See Constants, $LOI_SHAPE_SHADOW_LOCATION_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 5 = $iDistance not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 6 = $iBlur not an Integer, less than 0 or greater than 150 Printer's Points.
+;                  @Error: 1, @Extended: 7 = $iTransparency not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve current Distance and Location Values.
-;                  @Error 3 @Extended 2 = Failed to modify Location property.
-;                  @Error 3 @Extended 3 = Failed to modify Distance property.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Distance and Location Values.
+;                  @Error: 3, @Extended: 2 = Failed to modify Location property.
+;                  @Error: 3, @Extended: 3 = Failed to modify Distance property.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bShadow
 ;                  |                               2 = Error setting $iLocation
 ;                  |                               4 = Error setting $iColor
@@ -6097,13 +6097,13 @@ EndFunc   ;==>__LOImpress_ShapeAreaShadow
 ;                  $iLocation           - [optional] (0-8) Default is Null. The Location of the Shadow, must be one of the Constants, $LOI_SHAPE_SHADOW_LOCATION_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iDistance           - [optional] Default is Null. The distance of the Shadow from the Shape's edges, set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Integer
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully set the settings.
-;                  @Error 0 @Extended ? Return Integer = Success. $iLocation and $iDistance called with Null, returning current Values. Return will be current distance, and @Extended will be the current Location.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully set the settings.
+;                  @Error: 0, @Extended: ?, Return: Integer = Success. $iLocation and $iDistance called with Null, returning current Values. Return will be current distance, and @Extended will be the current Location.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oShape not an Object.
+;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iLocation
 ;                  |                               2 = Error setting $iDistance
 ; Author ........: donnyh13
@@ -6242,16 +6242,16 @@ EndFunc   ;==>__LOImpress_ShapeAreaShadowModify
 ; Parameters ....: $oObj                - A Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $iTransparency not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve current Transparency value.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Transparency value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTransparency
 ; Author ........: donnyh13
 ; Modified ......:
@@ -6293,25 +6293,25 @@ EndFunc   ;==>__LOImpress_ShapeAreaTransparency
 ; Parameters ....: $oObj                - A Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = $avColorStops not an Array, or does not contain two columns.
-;                  @Error 1 @Extended 3 = $avColorStops contains less than two rows.
-;                  @Error 1 @Extended 4 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
-;                  @Error 1 @Extended 5 = ColorStop Transparency value not an Integer, less than 0 or greater than 100. Returning problem element index.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $avColorStops not an Array, or does not contain two columns.
+;                  @Error: 1, @Extended: 3 = $avColorStops contains less than two rows.
+;                  @Error: 1, @Extended: 4 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
+;                  @Error: 1, @Extended: 5 = ColorStop Transparency value not an Integer, less than 0 or greater than 100. Returning problem element index.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create com.sun.star.awt.ColorStop Struct.
+;                  @Error: 2, @Extended: 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve FillTransparenceGradient Struct.
-;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 = Failed to retrieve StopColor Struct.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve FillTransparenceGradient Struct.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve StopColor Struct.
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 = Current version less than 7.6.
+;                  @Error: 6, @Extended: 1 = Current version less than 7.6.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColorStops
 ; Author ........: donnyh13
 ; Modified ......:
@@ -6401,13 +6401,13 @@ EndFunc   ;==>__LOImpress_ShapeAreaTransparencyGradientMulti
 ; Syntax ........: __LOImpress_ShapeGetType(ByRef $oShape)
 ; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
 ; Return values .: Success: Integer
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning the Shape's Type, corresponding to one of the Constants $LOI_SHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning the Shape's Type, corresponding to one of the Constants $LOI_SHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oShape not an Object.
+;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Shape's type.
-;                  @Error 3 @Extended 2 = Failed to identify Shape.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Shape's type.
+;                  @Error: 3, @Extended: 2 = Failed to identify Shape.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -6451,18 +6451,18 @@ EndFunc   ;==>__LOImpress_ShapeGetType
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $iArrowStyle         - The Arrowhead style to insert. See Constants, $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1.
-;                  @Error 0 @Extended 0 Return 1 = Success. The Arrowhead name was successfully inserted.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. The Arrowhead name was successfully inserted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $iArrowStyle not an Integer, less than 0 or greater than 32. See Constants, $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $iArrowStyle not an Integer, less than 0 or greater than 32. See Constants, $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error creating "com.sun.star.drawing.MarkerTable" Object.
-;                  @Error 2 @Extended 2 = Error creating "com.sun.star.drawing.PolyPolygonBezierCoords" structure.
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.drawing.MarkerTable" Object.
+;                  @Error: 2, @Extended: 2 = Error creating "com.sun.star.drawing.PolyPolygonBezierCoords" structure.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Arrowhead Name.
-;                  @Error 3 @Extended 2 = Failed to retrieve Arrowhead preset values.
-;                  @Error 3 @Extended 3 = Error inserting preset Arrowhead Name.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Arrowhead Name.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Arrowhead preset values.
+;                  @Error: 3, @Extended: 3 = Error inserting preset Arrowhead Name.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If I don't pre-insert preset Arrowhead styles, the relavent functions will fail when trying to set a line start/end style to them.
@@ -6512,19 +6512,19 @@ EndFunc   ;==>__LOImpress_ShapeLineArrowheadNameInsert
 ;                  $bReturnPresets      - [optional] Default is False. If True, the function will try to fill and return a Structure with preset values.
 ;                  $tPolyCoords         - [optional] Default is Null. If $bReturnPresets is True, this is a PolyPolygonBezierCoords Structure to fill.
 ; Return values .: Success: String or Integer
-;                  @Error 0 @Extended 0 Return String = Success. Constant called in $iArrowStyle was successfully converted to its corresponding Arrow Type Name.
-;                  @Error 0 @Extended 1 Return Integer = Success. Arrow Type Name called in $sArrowStyle was successfully converted to its corresponding Constant value.
-;                  @Error 0 @Extended 2 Return String = Success. Arrow Type Name called in $sArrowStyle was not matched to an existing Constant value, returning called name. Possibly a custom value.
-;                  @Error 0 @Extended 3 Return String = Success. $bReturnPresets called with True, returning $tPolyCoords filled with preset values.
+;                  @Error: 0, @Extended: 0, Return: String = Success. Constant called in $iArrowStyle was successfully converted to its corresponding Arrow Type Name.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. Arrow Type Name called in $sArrowStyle was successfully converted to its corresponding Constant value.
+;                  @Error: 0, @Extended: 2, Return: String = Success. Arrow Type Name called in $sArrowStyle was not matched to an existing Constant value, returning called name. Possibly a custom value.
+;                  @Error: 0, @Extended: 3, Return: String = Success. $bReturnPresets called with True, returning $tPolyCoords filled with preset values.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $iArrowStyle not an Integer, less than 0 or greater than Arrow type constants. See $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3
-;                  @Error 1 @Extended 2 = $sArrowStyle not a String.
-;                  @Error 1 @Extended 3 = $bReturnPresets not a Boolean.
-;                  @Error 1 @Extended 4 = $tPolyCoords not an Object.
-;                  @Error 1 @Extended 5 = Both $iArrowStyle and $sArrowStyle called with Null.
+;                  @Error: 1, @Extended: 1 = $iArrowStyle not an Integer, less than 0 or greater than Arrow type constants. See $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3
+;                  @Error: 1, @Extended: 2 = $sArrowStyle not a String.
+;                  @Error: 1, @Extended: 3 = $bReturnPresets not a Boolean.
+;                  @Error: 1, @Extended: 4 = $tPolyCoords not an Object.
+;                  @Error: 1, @Extended: 5 = Both $iArrowStyle and $sArrowStyle called with Null.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Failed to create a Shape position point.
+;                  @Error: 2, @Extended: 1 = Failed to create a Shape position point.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
@@ -7164,18 +7164,18 @@ EndFunc   ;==>__LOImpress_ShapeLineArrowStyleName
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $iLineDashType       - The Line Dash style to insert. See Constants, $LOI_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1.
-;                  @Error 0 @Extended 0 Return 1 = Success. The Line Dash name was successfully inserted.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. The Line Dash name was successfully inserted.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $iLineDashType not an Integer, less than 0 or greater than 31. See Constants, $LOI_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $iLineDashType not an Integer, less than 0 or greater than 31. See Constants, $LOI_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error creating "com.sun.star.drawing.DashTable" Object.
-;                  @Error 2 @Extended 2 = Error creating "com.sun.star.drawing.LineDash" structure.
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.drawing.DashTable" Object.
+;                  @Error: 2, @Extended: 2 = Error creating "com.sun.star.drawing.LineDash" structure.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Line Dash name.
-;                  @Error 3 @Extended 2 = Failed to retrieve Line Dash preset values.
-;                  @Error 3 @Extended 3 = Error inserting Line Dash Name.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Line Dash name.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Line Dash preset values.
+;                  @Error: 3, @Extended: 3 = Error inserting Line Dash Name.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If I don't pre-insert preset line dash styles, the relavent functions will fail when trying to set a line style to them.
@@ -7224,17 +7224,17 @@ EndFunc   ;==>__LOImpress_ShapeLineDashNameInsert
 ;                  $bReturnPresets      - [optional] Default is False. If True, the function will try to fill and return a Structure with preset values.
 ;                  $tDash               - [optional] Default is Null. If $bReturnPresets is True, this is a Dash Structure to fill.
 ; Return values .: Success: String, Structure or Integer
-;                  @Error 0 @Extended 0 Return String = Success. Constant called in $iLineStyle was successfully converted to its corresponding Line Style Name.
-;                  @Error 0 @Extended 1 Return Integer = Success. Line Style Name called in $sLineStyle was successfully converted to its corresponding Constant value.
-;                  @Error 0 @Extended 2 Return String = Success. Line Style Name called in $sLineStyle was not matched to an existing Constant value, returning called name. Possibly a custom value.
-;                  @Error 0 @Extended 3 Return Struct = Success. $bReturnPresets called with True, returning $tDash filled with preset values.
+;                  @Error: 0, @Extended: 0, Return: String = Success. Constant called in $iLineStyle was successfully converted to its corresponding Line Style Name.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. Line Style Name called in $sLineStyle was successfully converted to its corresponding Constant value.
+;                  @Error: 0, @Extended: 2, Return: String = Success. Line Style Name called in $sLineStyle was not matched to an existing Constant value, returning called name. Possibly a custom value.
+;                  @Error: 0, @Extended: 3, Return: Struct = Success. $bReturnPresets called with True, returning $tDash filled with preset values.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $iLineStyle not an Integer, less than 0 or greater than Line Style constants. See $LOI_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3
-;                  @Error 1 @Extended 2 = $sLineStyle not a String.
-;                  @Error 1 @Extended 3 = $bReturnPresets not a Boolean.
-;                  @Error 1 @Extended 4 = $tDash not an Object.
-;                  @Error 1 @Extended 5 = Both $iLineStyle and $sLineStyle called with Null.
+;                  @Error: 1, @Extended: 1 = $iLineStyle not an Integer, less than 0 or greater than Line Style constants. See $LOI_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3
+;                  @Error: 1, @Extended: 2 = $sLineStyle not a String.
+;                  @Error: 1, @Extended: 3 = $bReturnPresets not a Boolean.
+;                  @Error: 1, @Extended: 4 = $tDash not an Object.
+;                  @Error: 1, @Extended: 5 = Both $iLineStyle and $sLineStyle called with Null.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
@@ -7619,14 +7619,14 @@ EndFunc   ;==>__LOImpress_ShapeLineStyleName
 ; Syntax ........: __LOImpress_ShapePresStyleNumCreateScript(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. Function successfully created the Macro in Document. Returning Script Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Function successfully created the Macro in Document. Returning Script Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving Standard Macro Library.
-;                  @Error 3 @Extended 2 = Error creating Macro in Document.
-;                  @Error 3 @Extended 3 = Error retrieving Script Object.
+;                  @Error: 3, @Extended: 1 = Error retrieving Standard Macro Library.
+;                  @Error: 3, @Extended: 2 = Error creating Macro in Document.
+;                  @Error: 3, @Extended: 3 = Error retrieving Script Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -7670,13 +7670,13 @@ EndFunc   ;==>__LOImpress_ShapePresStyleNumCreateScript
 ; Syntax ........: __LOImpress_ShapePresStyleNumDeleteScript(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: 1.
-;                  @Error 0 @Extended 0 Return 1 = Success. Function successfully deleted the Macro in Document.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Function successfully deleted the Macro in Document.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving Standard Macro Library.
-;                  @Error 3 @Extended 2 = Error deleting Macro.
+;                  @Error: 3, @Extended: 1 = Error retrieving Standard Macro Library.
+;                  @Error: 3, @Extended: 2 = Error deleting Macro.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -7712,15 +7712,15 @@ EndFunc   ;==>__LOImpress_ShapePresStyleNumDeleteScript
 ; Syntax ........: __LOImpress_ShapePresStyleNumInitiateDocument()
 ; Parameters ....: None
 ; Return values .: Success: Object
-;                  @Error 0 @Extended 0 Return Object = Success. The Numbering Style Modification Document was successfully created.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. The Numbering Style Modification Document was successfully created.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error creating "com.sun.star.ServiceManager" Object.
-;                  @Error 2 @Extended 2 = Error creating "com.sun.star.frame.Desktop" Object.
-;                  @Error 2 @Extended 3 = Error Creating document.
-;                  @Error 2 @Extended 4 = Error creating AU3LibreOffice_UDF_Macros Module in document.
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.ServiceManager" Object.
+;                  @Error: 2, @Extended: 2 = Error creating "com.sun.star.frame.Desktop" Object.
+;                  @Error: 2, @Extended: 3 = Error Creating document.
+;                  @Error: 2, @Extended: 4 = Error creating AU3LibreOffice_UDF_Macros Module in document.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting Hidden
 ;                  |                               2 = Error setting MacroExecutionMode
 ;                  |                               4 = Error setting ReadOnly
@@ -7777,17 +7777,17 @@ EndFunc   ;==>__LOImpress_ShapePresStyleNumInitiateDocument
 ;                  $iLevel              - (-1-9) The Numbering Style level to modify. -1 = all levels.
 ;                  $atNumLevel          - An array of Numbering Rule settings retrieved from a Numbering Style.
 ; Return values .: Success: 1
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully set the requested settings.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully set the requested settings.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oNumRules not an Object.
-;                  @Error 1 @Extended 3 = $iLevel not between -1 and 9 to indicate correct level.
-;                  @Error 1 @Extended 4 = $atNumLevel not an array.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oNumRules not an Object.
+;                  @Error: 1, @Extended: 3 = $iLevel not between -1 and 9 to indicate correct level.
+;                  @Error: 1, @Extended: 4 = $atNumLevel not an array.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error opening new document, and inserting ReplaceByIndex Script.
-;                  @Error 3 @Extended 2 = Error retrieving "Standard.AU3LibreOffice_UDF_Macros.ReplaceByIndex" Macro in new document.
-;                  @Error 3 @Extended 3 = Error deleting ReplaceByIndex Macro from Document.
+;                  @Error: 3, @Extended: 1 = Error opening new document, and inserting ReplaceByIndex Script.
+;                  @Error: 3, @Extended: 2 = Error retrieving "Standard.AU3LibreOffice_UDF_Macros.ReplaceByIndex" Macro in new document.
+;                  @Error: 3, @Extended: 3 = Error deleting ReplaceByIndex Macro from Document.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This works, but only with a work-around method, see inside this function for a description of why a work-around method is necessary.
@@ -7860,31 +7860,31 @@ EndFunc   ;==>__LOImpress_ShapePresStyleNumModify
 ;                  $iFromIntense        - [optional] (0-100) Default is Null. Enter the intensity for the color in the "From Color", where 0% corresponds to black, and 100 % to the selected color.
 ;                  $iToIntense          - [optional] (0-100) Default is Null. Enter the intensity for the color in the "To Color", where 0% corresponds to black, and 100 % to the selected color.
 ; Return values .: Success: Integer or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 0 Return 2 = Success. Gradient has been successfully turned off.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 0, Return: 2 = Success. Gradient has been successfully turned off.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oObj not an Object.
-;                  @Error 1 @Extended 3 = $sGradientName not a String.
-;                  @Error 1 @Extended 4 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 5 = $iIncrement not an Integer, less than 3, but not 0, or greater than 256.
-;                  @Error 1 @Extended 6 = $iXCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 7 = $iYCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 8 = $iAngle not an Integer, less than 0 or greater than 359.
-;                  @Error 1 @Extended 9 = $iTransitionStart not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 10 = $iFromColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 11 = $iToColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 12 = $iFromIntense not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 13 = $iToIntense not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oObj not an Object.
+;                  @Error: 1, @Extended: 3 = $sGradientName not a String.
+;                  @Error: 1, @Extended: 4 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iIncrement not an Integer, less than 3, but not 0, or greater than 256.
+;                  @Error: 1, @Extended: 6 = $iXCenter not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 7 = $iYCenter not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 8 = $iAngle not an Integer, less than 0 or greater than 359.
+;                  @Error: 1, @Extended: 9 = $iTransitionStart not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 10 = $iFromColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 11 = $iToColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 12 = $iFromIntense not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 13 = $iToIntense not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving "FillGradient" Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 = Error creating Gradient Name.
-;                  @Error 3 @Extended 4 = Error setting Gradient Name.
+;                  @Error: 3, @Extended: 1 = Error retrieving "FillGradient" Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 3 = Error creating Gradient Name.
+;                  @Error: 3, @Extended: 4 = Error setting Gradient Name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sGradientName
 ;                  |                               2 = Error setting $iType
 ;                  |                               4 = Error setting $iIncrement
@@ -8084,27 +8084,27 @@ EndFunc   ;==>__LOImpress_ShapeStyleAreaGradient
 ;                  $iStart              - [optional] (0-100) Default is Null. The transparency value for the beginning point of the gradient, where 0% is fully opaque and 100% is fully transparent.
 ;                  $iEnd                - [optional] (0-100) Default is Null. The transparency value for the endpoint of the gradient, where 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 0 Return 2 = Success. Transparency Gradient has been successfully turned off.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 0, Return: 2 = Success. Transparency Gradient has been successfully turned off.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oObj not an Object.
-;                  @Error 1 @Extended 3 = $iType not an Integer, less than -1 or greater than 5. See constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 4 = $iXCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 5 = $iYCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 6 = $iAngle not an Integer, less than 0 or greater than 359.
-;                  @Error 1 @Extended 7 = $iTransitionStart not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 8 = $iStart not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 9 = $iEnd not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oObj not an Object.
+;                  @Error: 1, @Extended: 3 = $iType not an Integer, less than -1 or greater than 5. See constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iXCenter not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 5 = $iYCenter not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 6 = $iAngle not an Integer, less than 0 or greater than 359.
+;                  @Error: 1, @Extended: 7 = $iTransitionStart not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 8 = $iStart not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 9 = $iEnd not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error retrieving "FillTransparenceGradient" Object.
-;                  @Error 3 @Extended 2 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 = Error creating Transparency Gradient Name.
-;                  @Error 3 @Extended 4 = Error setting Transparency Gradient Name.
+;                  @Error: 3, @Extended: 1 = Error retrieving "FillTransparenceGradient" Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 3 = Error creating Transparency Gradient Name.
+;                  @Error: 3, @Extended: 4 = Error setting Transparency Gradient Name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iType
 ;                  |                               2 = Error setting $iXCenter
 ;                  |                               4 = Error setting $iYCenter
@@ -8264,14 +8264,14 @@ EndFunc   ;==>__LOImpress_ShapeStyleAreaTransparencyGradient
 ;                  $sCurShapeStyle      - The currently set Shape Style's name.
 ;                  $sSetShapeStyle      - The Shape Style's name intended to be set.
 ; Return values .: Success: Boolean
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if both style names are the same, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if both style names are the same, else False.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $sCurShapeStyle not a String.
-;                  @Error 1 @Extended 3 = $sSetShapeStyle not a String.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sCurShapeStyle not a String.
+;                  @Error: 1, @Extended: 3 = $sSetShapeStyle not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve Shape Style's internal name.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Shape Style's internal name.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This is to aid in preventing false Property setting errors if a Display name is used instead of the Internal name for a style.
@@ -8315,26 +8315,26 @@ EndFunc   ;==>__LOImpress_ShapeStyleCompare
 ;                  $iEndWidth           - [optional] (0-5004) Default is Null. The Width of the Ending Arrowhead, in Hundredths of a Millimeter (HMM).
 ;                  $bEndCenter          - [optional] Default is Null. If True, Places the center of the End arrowhead on the endpoint of the line.
 ; Return values .: Success: Integer or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oObj not an Object.
-;                  @Error 1 @Extended 3 = $vStartStyle not a String, and not an Integer.
-;                  @Error 1 @Extended 4 = $vStartStyle is an Integer, but less than 0 or greater than 32. See constants $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 5 = $iStartWidth not an Integer, less than 0 or greater than 5004.
-;                  @Error 1 @Extended 6 = $bStartCenter not a Boolean.
-;                  @Error 1 @Extended 7 = $bSync not a Boolean.
-;                  @Error 1 @Extended 8 = $vEndStyle not a String, and not an Integer.
-;                  @Error 1 @Extended 9 = $vSEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 10 = $iEndWidth not an Integer, less than 0 or greater than 5004.
-;                  @Error 1 @Extended 11 = $bEndCenter not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oObj not an Object.
+;                  @Error: 1, @Extended: 3 = $vStartStyle not a String, and not an Integer.
+;                  @Error: 1, @Extended: 4 = $vStartStyle is an Integer, but less than 0 or greater than 32. See constants $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iStartWidth not an Integer, less than 0 or greater than 5004.
+;                  @Error: 1, @Extended: 6 = $bStartCenter not a Boolean.
+;                  @Error: 1, @Extended: 7 = $bSync not a Boolean.
+;                  @Error: 1, @Extended: 8 = $vEndStyle not a String, and not an Integer.
+;                  @Error: 1, @Extended: 9 = $vSEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 10 = $iEndWidth not an Integer, less than 0 or greater than 5004.
+;                  @Error: 1, @Extended: 11 = $bEndCenter not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to convert Constant to Arrowhead name.
-;                  @Error 3 @Extended 2 = Failed to insert preset Arrowhead name and style.
+;                  @Error: 3, @Extended: 1 = Failed to convert Constant to Arrowhead name.
+;                  @Error: 3, @Extended: 2 = Failed to insert preset Arrowhead name and style.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $vStartStyle
 ;                  |                               2 = Error setting $iStartWidth
 ;                  |                               4 = Error setting $bStartCenter
@@ -8474,24 +8474,24 @@ EndFunc   ;==>__LOImpress_ShapeStyleLineArrowStyles
 ;                  $iCornerStyle        - [optional] (0, 2-4) Default is Null. The Line Corner Style. See Constants $LOI_SHAPE_LINE_JOINT_* as defined in LibreOfficeImpress_Constants.au3
 ;                  $iCapStyle           - [optional] (0-2) Default is Null. The Line Cap Style. See Constants $LOI_SHAPE_LINE_CAP_* as defined in LibreOfficeImpress_Constants.au3
 ; Return values .: Success: Integer or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $oObj not an Object.
-;                  @Error 1 @Extended 3 = $vStyle not a String, and not an Integer.
-;                  @Error 1 @Extended 4 = $vStyle is an Integer, but less than 0 or greater than 31. See constants $LOI_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 5 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 6 = $iWidth not an Integer, less than 0 or greater than 5004.
-;                  @Error 1 @Extended 7 = $iTransparency not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 8 = $iCornerStyle not an Integer, not equal to 0, equal to 1, not equal to 2 or greater than 4. See Constants $LOI_SHAPE_LINE_JOINT_* as defined in LibreOfficeImpress_Constants.au3
-;                  @Error 1 @Extended 9 = $iCapStyle is an Integer, but less than 0 or greater than 2. See constants $LOI_SHAPE_LINE_CAP_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oObj not an Object.
+;                  @Error: 1, @Extended: 3 = $vStyle not a String, and not an Integer.
+;                  @Error: 1, @Extended: 4 = $vStyle is an Integer, but less than 0 or greater than 31. See constants $LOI_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 6 = $iWidth not an Integer, less than 0 or greater than 5004.
+;                  @Error: 1, @Extended: 7 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 8 = $iCornerStyle not an Integer, not equal to 0, equal to 1, not equal to 2 or greater than 4. See Constants $LOI_SHAPE_LINE_JOINT_* as defined in LibreOfficeImpress_Constants.au3
+;                  @Error: 1, @Extended: 9 = $iCapStyle is an Integer, but less than 0 or greater than 2. See constants $LOI_SHAPE_LINE_CAP_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to convert Constant to Line Style name.
-;                  @Error 3 @Extended 2 = Failed to insert Line Style name.
+;                  @Error: 3, @Extended: 1 = Failed to convert Constant to Line Style name.
+;                  @Error: 3, @Extended: 2 = Failed to insert Line Style name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $vStyle
 ;                  |                               2 = Error setting $iColor
 ;                  |                               4 = Error setting $iWidth
@@ -8625,23 +8625,23 @@ EndFunc   ;==>__LOImpress_ShapeStyleLineProperties
 ;                  $bPixels             - [optional] Default is Null. If True, $iInc is set in pixels, else in Hundredths of a Millimeter (HMM).
 ;                  $iDelay              - [optional] (0-30000) Default is Null. The amount time (ms) to wait before repeating the effect.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = $iEffect not an Integer, less than 0 or greater than 4. See Constants, $LOI_ANIMATION_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 3 = $iDirection not an Integer, less than 0 or greater than 3. See Constants, $LOI_ANIMATION_DIR_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 4 = $bStartInside not a Boolean.
-;                  @Error 1 @Extended 5 = $bVisibleOnExit not a Boolean.
-;                  @Error 1 @Extended 6 = $iCycles not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 7 = $iInc not an Integer, less than 1 or greater than 100 pixels, less than 25 or greater than 32766 Hundredths of a Millimeter (HMM).
-;                  @Error 1 @Extended 8 = $bPixels not a Boolean.
-;                  @Error 1 @Extended 9 = $iDelay not an Integer, less than 0 or greater than 30000.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $iEffect not an Integer, less than 0 or greater than 4. See Constants, $LOI_ANIMATION_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iDirection not an Integer, less than 0 or greater than 3. See Constants, $LOI_ANIMATION_DIR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $bStartInside not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bVisibleOnExit not a Boolean.
+;                  @Error: 1, @Extended: 6 = $iCycles not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 7 = $iInc not an Integer, less than 1 or greater than 100 pixels, less than 25 or greater than 32766 Hundredths of a Millimeter (HMM).
+;                  @Error: 1, @Extended: 8 = $bPixels not a Boolean.
+;                  @Error: 1, @Extended: 9 = $iDelay not an Integer, less than 0 or greater than 30000.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve current TextAnimationAmount value.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current TextAnimationAmount value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iEffect
 ;                  |                               2 = Error setting $iDirection
 ;                  |                               4 = Error setting $bStartInside
@@ -8771,19 +8771,19 @@ EndFunc   ;==>__LOImpress_ShapeTextAttrAnimation
 ;                  $bWordWrap           - [optional] Default is Null. If True, Wraps the text to fit inside the shape.
 ;                  $bResizeShape        - [optional] Default is Null. If True, Resizes a custom shape to fit the text that you enter.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = $bFitWidth not a Boolean.
-;                  @Error 1 @Extended 3 = $bFitHeight not a Boolean.
-;                  @Error 1 @Extended 4 = $bFitToFrame not a Boolean.
-;                  @Error 1 @Extended 5 = $bAdjustContour not a Boolean.
-;                  @Error 1 @Extended 6 = $bWordWrap not a Boolean.
-;                  @Error 1 @Extended 7 = $bResizeShape not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $bFitWidth not a Boolean.
+;                  @Error: 1, @Extended: 3 = $bFitHeight not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bFitToFrame not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bAdjustContour not a Boolean.
+;                  @Error: 1, @Extended: 6 = $bWordWrap not a Boolean.
+;                  @Error: 1, @Extended: 7 = $bResizeShape not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bFitWidth
 ;                  |                               2 = Error setting $bFitHeight
 ;                  |                               4 = Error setting $bFitToFrame
@@ -8881,19 +8881,19 @@ EndFunc   ;==>__LOImpress_ShapeTextAttrFit
 ;                  $iAnchor             - [optional] (0-8) Default is Null. The text anchor position. See Constants, $LOI_PAR_TEXT_ANCHOR_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $bFullWidth          - [optional] Default is Null. If True, Anchors the text to the full width of the drawing object.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = $iLeft not an Integer, less than -100000 or greater than 100000.
-;                  @Error 1 @Extended 3 = $iRight not an Integer, less than -100000 or greater than 100000.
-;                  @Error 1 @Extended 4 = $iTop not an Integer, less than -100000 or greater than 100000.
-;                  @Error 1 @Extended 5 = $iBottom not an Integer, less than -100000 or greater than 100000.
-;                  @Error 1 @Extended 6 = $iAnchor  not an Integer, less than 0 or greater than 8. See Constants, $LOI_PAR_TEXT_ANCHOR_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error 1 @Extended 7 = $bFullWidth not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $iLeft not an Integer, less than -100000 or greater than 100000.
+;                  @Error: 1, @Extended: 3 = $iRight not an Integer, less than -100000 or greater than 100000.
+;                  @Error: 1, @Extended: 4 = $iTop not an Integer, less than -100000 or greater than 100000.
+;                  @Error: 1, @Extended: 5 = $iBottom not an Integer, less than -100000 or greater than 100000.
+;                  @Error: 1, @Extended: 6 = $iAnchor  not an Integer, less than 0 or greater than 8. See Constants, $LOI_PAR_TEXT_ANCHOR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 7 = $bFullWidth not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iLeft
 ;                  |                               2 = Error setting $iRight
 ;                  |                               4 = Error setting $iTop
@@ -9068,15 +9068,15 @@ EndFunc   ;==>__LOImpress_ShapeTextAttrSettings
 ;                  $iFontColor          - [optional] (-1-16777215) Default is Null. The font Color value, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
 ;                  $iHighlight          - [optional] (-1-16777215) Default is Null. The highlight Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for No color.
 ; Return values .: Success: 1 or Array.
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oObj not an Object.
-;                  @Error 1 @Extended 2 = $iFontColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error 1 @Extended 3 = $iHighlight not an Integer, less than -1 or greater than 16777215.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $iFontColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error: 1, @Extended: 3 = $iHighlight not an Integer, less than -1 or greater than 16777215.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $FontColor
 ;                  |                               2 = Error setting $iHighlight
 ; Author ........: donnyh13
@@ -9130,19 +9130,19 @@ EndFunc   ;==>__LOImpress_StyleCharFontColor
 ; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
 ;                  $iTransition         - [optional] (0-78) Default is Null. The Transition effect. See Constants, $LOI_SLIDE_TRANSITION_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1 or Integer
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current Transition effect type.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current Transition effect type.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oSlide not an Object.
-;                  @Error 1 @Extended 2 = $iTransition not an Integer, less then 0 or greater than 78. See Constants, $LOI_SLIDE_TRANSITION_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
+;                  @Error: 1, @Extended: 2 = $iTransition not an Integer, less then 0 or greater than 78. See Constants, $LOI_SLIDE_TRANSITION_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Failed to retrieve current Effect value.
-;                  @Error 3 @Extended 2 = Failed to retrieve current Transition Type value.
-;                  @Error 3 @Extended 3 = Failed to retrieve current Transition SubType value.
-;                  @Error 3 @Extended 4 = Failed to identify current Transition type.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Effect value.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve current Transition Type value.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve current Transition SubType value.
+;                  @Error: 3, @Extended: 4 = Failed to identify current Transition type.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTransition
 ; Author ........: donnyh13
 ; Modified ......:
@@ -9942,11 +9942,11 @@ EndFunc   ;==>__LOImpress_Transition
 ; Parameters ....: $iPercentToLong      - [optional] Default is Null. The percentage to convert to a RGB Color Integer.
 ;                  $iLongToPercent      - [optional] Default is Null. The RGB Color Integer to convert to percentage.
 ; Return values .: Success: Integer.
-;                  @Error 0 @Extended 0 Return Integer = Success. The requested Integer value converted from percentage to a RGB Color Integer.
-;                  @Error 0 @Extended 1 Return Integer = Success. The requested Integer value from a RGB Color Integer to percentage.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. The requested Integer value converted from percentage to a RGB Color Integer.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. The requested Integer value from a RGB Color Integer to percentage.
 ;                  Failure: Null and sets the @Error and @Extended flags to non-zero.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = No values called in parameters.
+;                  @Error: 3, @Extended: 1 = No values called in parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -9982,16 +9982,16 @@ EndFunc   ;==>__LOImpress_TransparencyGradientConvert
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $tTGradient          - A Gradient Structure to copy settings from.
 ; Return values .: Success: String.
-;                  @Error 0 @Extended 0 Return String = Success. A new transparency Gradient name was created. Returning the new name as a string.
+;                  @Error: 0, @Extended: 0, Return: String = Success. A new transparency Gradient name was created. Returning the new name as a string.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 = $tTGradient not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $tTGradient not an Object.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 = Error creating "com.sun.star.drawing.TransparencyGradientTable" Object.
-;                  @Error 2 @Extended 2 = Error creating "com.sun.star.awt.Gradient" structure.
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.drawing.TransparencyGradientTable" Object.
+;                  @Error: 2, @Extended: 2 = Error creating "com.sun.star.awt.Gradient" structure.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 = Error creating Transparency Gradient Name.
+;                  @Error: 3, @Extended: 1 = Error creating Transparency Gradient Name.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If The Transparency Gradient name is blank, I need to create a new name and apply it. I think I could re-use an old one without problems, but I'm not sure, so to be safe, I will create a new one.
