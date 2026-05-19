@@ -1819,6 +1819,10 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Add an error return to Style Organizer functions for trying to rename built-in styles.
 - Removed static $bKeepScale from `_LOWriter_ImageCrop`. Return is now always Null, and default state is True.
 
+#### Documented
+
+- Removed "[in/out]", Return (integer, String, 0) and parameter descriptions, such as "a string value", from Header parameter descriptions for chm compatibility.
+
 #### Refactored
 
 - Changed checks for a variable being null to use internal function `__LO_VarsAreNull`.

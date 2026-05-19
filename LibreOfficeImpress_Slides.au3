@@ -63,8 +63,8 @@
 ; Name ..........: _LOImpress_SlideAdd
 ; Description ...: Add a slide to a presentation.
 ; Syntax ........: _LOImpress_SlideAdd(ByRef $oDoc[, $iPos = Null])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $iPos                - [optional] an integer value. Default is Null. The position to insert the new slide in the collection of slides. 0 Based. See remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $iPos                - [optional] Default is Null. The position to insert the new slide in the collection of slides. 0 Based. See remarks.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -134,8 +134,8 @@ EndFunc   ;==>_LOImpress_SlideAdd
 ; Name ..........: _LOImpress_SlideBackColor
 ; Description ...: Set or Retrieve the Slide's background color.
 ; Syntax ........: _LOImpress_SlideBackColor(ByRef $oSlide[, $iColor = Null])
-; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
-;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The Slide background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+;                  $iColor              - [optional] (0-16777215) Default is Null. The Slide background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1 or Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -203,8 +203,8 @@ EndFunc   ;==>_LOImpress_SlideBackColor
 ; Name ..........: _LOImpress_SlideBackFillStyle
 ; Description ...: Retrieve what kind of background fill is active, if any.
 ; Syntax ........: _LOImpress_SlideBackFillStyle(ByRef $oSlide[, $bFillOff = False])
-; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
-;                  $bFillOff            - [optional] a boolean value. Default is False. If True, the Fill style will be set to Off. See remarks.
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+;                  $bFillOff            - [optional] Default is False. If True, the Fill style will be set to Off. See remarks.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -260,18 +260,18 @@ EndFunc   ;==>_LOImpress_SlideBackFillStyle
 ; Name ..........: _LOImpress_SlideBackGradient
 ; Description ...: Modify or retrieve the settings for Slide Background color Gradient.
 ; Syntax ........: _LOImpress_SlideBackGradient(ByRef $oSlide[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
-; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
-;                  $sGradientName       - [optional] a string value. Default is Null. A Preset Gradient Name. See remarks. See constants, $LOI_GRAD_NAME_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iType               - [optional] an integer value (-1-5). Default is Null. The gradient type to apply. See Constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iIncrement          - [optional] an integer value (0, 3-256). Default is Null. The number of steps of color change. 0 = Automatic.
-;                  $iXCenter            - [optional] an integer value (0-100). Default is Null. The horizontal offset for the gradient, where 0% corresponds to the current horizontal location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" setting. Set in percentage. $iType must be other than "Linear", or "Axial".
-;                  $iYCenter            - [optional] an integer value (0-100). Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage. $iType must be other than "Linear", or "Axial".
-;                  $iAngle              - [optional] an integer value (0-359). Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
-;                  $iTransitionStart    - [optional] an integer value (0-100). Default is Null. The amount by which to adjust the transparent area of the gradient. Set in percentage.
-;                  $iFromColor          - [optional] an integer value (0-16777215). Default is Null. A color for the beginning point of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iToColor            - [optional] an integer value (0-16777215). Default is Null. A color for the endpoint of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iFromIntense        - [optional] an integer value (0-100). Default is Null. Enter the intensity for the color in the "From Color", where 0% corresponds to black, and 100 % to the selected color.
-;                  $iToIntense          - [optional] an integer value (0-100). Default is Null. Enter the intensity for the color in the "To Color", where 0% corresponds to black, and 100 % to the selected color.
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOI_GRAD_NAME_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iIncrement          - [optional] (0, 3-256) Default is Null. The number of steps of color change. 0 = Automatic.
+;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient, where 0% corresponds to the current horizontal location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" setting. Set in percentage. $iType must be other than "Linear", or "Axial".
+;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage. $iType must be other than "Linear", or "Axial".
+;                  $iAngle              - [optional] (0-359) Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
+;                  $iTransitionStart    - [optional] (0-100) Default is Null. The amount by which to adjust the transparent area of the gradient. Set in percentage.
+;                  $iFromColor          - [optional] (0-16777215) Default is Null. A color for the beginning point of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iToColor            - [optional] (0-16777215) Default is Null. A color for the endpoint of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iFromIntense        - [optional] (0-100) Default is Null. Enter the intensity for the color in the "From Color", where 0% corresponds to black, and 100 % to the selected color.
+;                  $iToIntense          - [optional] (0-100) Default is Null. Enter the intensity for the color in the "To Color", where 0% corresponds to black, and 100 % to the selected color.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -528,8 +528,8 @@ EndFunc   ;==>_LOImpress_SlideBackGradient
 ; Name ..........: _LOImpress_SlideBackTransparency
 ; Description ...: Set or retrieve Transparency settings for a Slide.
 ; Syntax ........: _LOImpress_SlideBackTransparency(ByRef $oSlide[, $iTransparency = Null])
-; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
-;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -598,14 +598,14 @@ EndFunc   ;==>_LOImpress_SlideBackTransparency
 ; Name ..........: _LOImpress_SlideBackTransparencyGradient
 ; Description ...: Set or retrieve the Slide's transparency gradient settings.
 ; Syntax ........: _LOImpress_SlideBackTransparencyGradient(ByRef $oSlide[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
-; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
-;                  $iType               - [optional] an integer value (-1-5). Default is Null. The type of transparency gradient to apply. See Constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3. Call with $LOI_GRAD_TYPE_OFF to turn Transparency Gradient off.
-;                  $iXCenter            - [optional] an integer value (0-100). Default is Null. The horizontal offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
-;                  $iYCenter            - [optional] an integer value (0-100). Default is Null. The vertical offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
-;                  $iAngle              - [optional] an integer value (0-359). Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
-;                  $iTransitionStart    - [optional] an integer value (0-100). Default is Null. The amount by which you want to adjust the transparent area of the gradient. Set in percentage.
-;                  $iStart              - [optional] an integer value (0-100). Default is Null. The transparency value for the beginning point of the gradient, where 0% is fully opaque and 100% is fully transparent.
-;                  $iEnd                - [optional] an integer value (0-100). Default is Null. The transparency value for the endpoint of the gradient, where 0% is fully opaque and 100% is fully transparent.
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+;                  $iType               - [optional] (-1-5) Default is Null. The type of transparency gradient to apply. See Constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3. Call with $LOI_GRAD_TYPE_OFF to turn Transparency Gradient off.
+;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
+;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
+;                  $iAngle              - [optional] (0-359) Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
+;                  $iTransitionStart    - [optional] (0-100) Default is Null. The amount by which you want to adjust the transparent area of the gradient. Set in percentage.
+;                  $iStart              - [optional] (0-100) Default is Null. The transparency value for the beginning point of the gradient, where 0% is fully opaque and 100% is fully transparent.
+;                  $iEnd                - [optional] (0-100) Default is Null. The transparency value for the endpoint of the gradient, where 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -805,8 +805,8 @@ EndFunc   ;==>_LOImpress_SlideBackTransparencyGradient
 ; Name ..........: _LOImpress_SlideCopy
 ; Description ...: Create a copy of a slide.
 ; Syntax ........: _LOImpress_SlideCopy(ByRef $oSlide[, $iPos = Null])
-; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
-;                  $iPos                - [optional] an integer value. Default is Null. The position to insert the new slide in the collection of slides. 0 Based. See remarks.
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+;                  $iPos                - [optional] Default is Null. The position to insert the new slide in the collection of slides. 0 Based. See remarks.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -907,8 +907,8 @@ EndFunc   ;==>_LOImpress_SlideCopy
 ; Name ..........: _LOImpress_SlideCurrent
 ; Description ...: Set or Retrieve the currently active slide.
 ; Syntax ........: _LOImpress_SlideCurrent(ByRef $oDoc[, $oSlide = Null])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $oSlide              - [optional] an object. Default is Null. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $oSlide              - [optional] Default is Null. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
 ; Return values .: Success: 1 or Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -957,8 +957,8 @@ EndFunc   ;==>_LOImpress_SlideCurrent
 ; Name ..........: _LOImpress_SlideDeleteByIndex
 ; Description ...: Delete a slide by index.
 ; Syntax ........: _LOImpress_SlideDeleteByIndex(ByRef $oDoc, $iSlide)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $iSlide              - an integer value. The slide to delete. 0 based.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $iSlide              - The slide to delete. 0 based.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1003,7 +1003,7 @@ EndFunc   ;==>_LOImpress_SlideDeleteByIndex
 ; Name ..........: _LOImpress_SlideDeleteByObj
 ; Description ...: Delete a slide using its Object.
 ; Syntax ........: _LOImpress_SlideDeleteByObj(ByRef $oSlide)
-; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1048,8 +1048,8 @@ EndFunc   ;==>_LOImpress_SlideDeleteByObj
 ; Name ..........: _LOImpress_SlideExists
 ; Description ...: Check whether a slide with a certain name exists in a document.
 ; Syntax ........: _LOImpress_SlideExists(ByRef $oDoc, $sName)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $sName               - a string value. The slide name to check for.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $sName               - The slide name to check for.
 ; Return values .: Success: Boolean.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1085,8 +1085,8 @@ EndFunc   ;==>_LOImpress_SlideExists
 ; Name ..........: _LOImpress_SlideGetObjByIndex
 ; Description ...: Retrieve a Slide's Object by index.
 ; Syntax ........: _LOImpress_SlideGetObjByIndex(ByRef $oDoc, $iSlide)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $iSlide              - an integer value. The slide to retrieve. 0 based.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $iSlide              - The slide to retrieve. 0 based.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1122,8 +1122,8 @@ EndFunc   ;==>_LOImpress_SlideGetObjByIndex
 ; Name ..........: _LOImpress_SlideGetObjByName
 ; Description ...: Retrieve a Slide's Object by name.
 ; Syntax ........: _LOImpress_SlideGetObjByName(ByRef $oDoc, $sName)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $sName               - a string value. The Slide's name to retrieve the Object for.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $sName               - The Slide's name to retrieve the Object for.
 ; Return values .: Success: Object
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1161,8 +1161,8 @@ EndFunc   ;==>_LOImpress_SlideGetObjByName
 ; Name ..........: _LOImpress_SlideLayout
 ; Description ...: Set or Retrieve the current Slide's layout.
 ; Syntax ........: _LOImpress_SlideLayout(ByRef $oSlide[, $iLayout = Null])
-; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
-;                  $iLayout             - [optional] an integer value (0-34). Default is Null. The layout format of the Slide. See Constants, $LOI_SLIDE_LAYOUT_* as defined in LibreOfficeImpress_Constants.au3.
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+;                  $iLayout             - [optional] (0-34) Default is Null. The layout format of the Slide. See Constants, $LOI_SLIDE_LAYOUT_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1 or Integer.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1211,8 +1211,8 @@ EndFunc   ;==>_LOImpress_SlideLayout
 ; Name ..........: _LOImpress_SlideMove
 ; Description ...: Move a slide in the collection of slides.
 ; Syntax ........: _LOImpress_SlideMove(ByRef $oSlide, $iPos)
-; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
-;                  $iPos                - an integer value. The position to move the slide to in the collection of slides. 0 Based. See remarks.
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+;                  $iPos                - The position to move the slide to in the collection of slides. 0 Based. See remarks.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1306,8 +1306,8 @@ EndFunc   ;==>_LOImpress_SlideMove
 ; Name ..........: _LOImpress_SlideName
 ; Description ...: Set or Retrieve a Slide's name.
 ; Syntax ........: _LOImpress_SlideName(ByRef $oSlide[, $sName = Null])
-; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
-;                  $sName               - [optional] a string value. Default is Null. The new name to set the slide to. See Remarks.
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+;                  $sName               - [optional] Default is Null. The new name to set the slide to. See Remarks.
 ; Return values .: Success: 1 or String.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1364,7 +1364,7 @@ EndFunc   ;==>_LOImpress_SlideName
 ; Name ..........: _LOImpress_SlidesGetCount
 ; Description ...: Retrieve a count of slides.
 ; Syntax ........: _LOImpress_SlidesGetCount(ByRef $oDoc)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: Integer
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1398,7 +1398,7 @@ EndFunc   ;==>_LOImpress_SlidesGetCount
 ; Name ..........: _LOImpress_SlidesGetNames
 ; Description ...: Retrieve an array of names for all Slides contained in the document.
 ; Syntax ........: _LOImpress_SlidesGetNames(ByRef $oDoc)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1432,12 +1432,12 @@ EndFunc   ;==>_LOImpress_SlidesGetNames
 ; Name ..........: _LOImpress_SlideshowActiveSettings
 ; Description ...: Set or Retrieve settings for an actively running presentation.
 ; Syntax ........: _LOImpress_SlideshowActiveSettings(ByRef $oDoc[, $bKeepOnTop = Null[, $bMouseVisible = Null[, $bMouseAsPen = Null[, $iPenColor = Null[, $iPenWidth = Null]]]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $bKeepOnTop          - [optional] a boolean value. Default is Null. If True, the presentation will be always kept on top of other programs.
-;                  $bMouseVisible       - [optional] a boolean value. Default is Null. If True, the mouse is visible in the presentation.
-;                  $bMouseAsPen         - [optional] a boolean value. Default is Null. If True, the mouse can be used as a pen to draw on slides.
-;                  $iPenColor           - [optional] an integer value (0-16777215). Default is Null. If $bMouseAsPen is True, the color of the drawn line, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iPenWidth           - [optional] an integer value (4-400). Default is Null. The width of the drawn line. L.O. 4.2+. See Constants, $LOI_SLIDESHOW_PEN_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $bKeepOnTop          - [optional] Default is Null. If True, the presentation will be always kept on top of other programs.
+;                  $bMouseVisible       - [optional] Default is Null. If True, the mouse is visible in the presentation.
+;                  $bMouseAsPen         - [optional] Default is Null. If True, the mouse can be used as a pen to draw on slides.
+;                  $iPenColor           - [optional] (0-16777215) Default is Null. If $bMouseAsPen is True, the color of the drawn line, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iPenWidth           - [optional] (4-400) Default is Null. The width of the drawn line. L.O. 4.2+. See Constants, $LOI_SLIDESHOW_PEN_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1543,9 +1543,9 @@ EndFunc   ;==>_LOImpress_SlideshowActiveSettings
 ; Name ..........: _LOImpress_SlideshowCustomCreate
 ; Description ...: Create a Custom Slideshow.
 ; Syntax ........: _LOImpress_SlideshowCustomCreate(ByRef $oDoc, $sName, $asSlides)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $sName               - a string value. The name of the Custom Slideshow to create.
-;                  $asSlides            - an array of strings. A single column Array of Slide names. See remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $sName               - The name of the Custom Slideshow to create.
+;                  $asSlides            - A single column Array of Slide names. See remarks.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1611,8 +1611,8 @@ EndFunc   ;==>_LOImpress_SlideshowCustomCreate
 ; Name ..........: _LOImpress_SlideshowCustomDelete
 ; Description ...: Deletes a Custom Slideshow.
 ; Syntax ........: _LOImpress_SlideshowCustomDelete(ByRef $oDoc, $sName)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $sName               - a string value. The Custom Slideshow's name to delete.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $sName               - The Custom Slideshow's name to delete.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1648,9 +1648,9 @@ EndFunc   ;==>_LOImpress_SlideshowCustomDelete
 ; Name ..........: _LOImpress_SlideshowCustomModify
 ; Description ...: Set or Retrieve the Slides and order of the slides contained in a Custom Slideshow.
 ; Syntax ........: _LOImpress_SlideshowCustomModify(ByRef $oDoc, $sName[, $asSlides = Null])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $sName               - a string value. The name of the Custom Slideshow to modify.
-;                  $asSlides            - [optional] an array of strings. Default is Null. A single column Array of Slide names. See remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $sName               - The name of the Custom Slideshow to modify.
+;                  $asSlides            - [optional] Default is Null. A single column Array of Slide names. See remarks.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1741,9 +1741,9 @@ EndFunc   ;==>_LOImpress_SlideshowCustomModify
 ; Name ..........: _LOImpress_SlideshowCustomSetName
 ; Description ...: Rename a Custom Slideshow.
 ; Syntax ........: _LOImpress_SlideshowCustomSetName(ByRef $oDoc, $sName, $sNewName)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $sName               - a string value. The name of the Custom Slideshow to rename.
-;                  $sNewName            - a string value. The name to rename the Custom Slideshow to.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $sName               - The name of the Custom Slideshow to rename.
+;                  $sNewName            - The name to rename the Custom Slideshow to.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1792,7 +1792,7 @@ EndFunc   ;==>_LOImpress_SlideshowCustomSetName
 ; Name ..........: _LOImpress_SlideshowIsRunning
 ; Description ...: Check whether there is a presentation currently running.
 ; Syntax ........: _LOImpress_SlideshowIsRunning(ByRef $oDoc)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: Boolean
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -1826,9 +1826,9 @@ EndFunc   ;==>_LOImpress_SlideshowIsRunning
 ; Name ..........: _LOImpress_SlideshowPresentationControl
 ; Description ...: Query the status of, or send commands to, a currently running presentation.
 ; Syntax ........: _LOImpress_SlideshowPresentationControl(ByRef $oDoc, $iAction[, $vValue = Null])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $iAction             - an integer value. The Query or Command to perform on the presentation. See Constants, $LOI_SLIDESHOW_PRES_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $vValue              - [optional] a variant value. Default is Null. If the Query or Command requires an input value, it goes here. See Remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $iAction             - The Query or Command to perform on the presentation. See Constants, $LOI_SLIDESHOW_PRES_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $vValue              - [optional] Default is Null. If the Query or Command requires an input value, it goes here. See Remarks.
 ; Return values .: Success: Boolean, Integer, or Object.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2005,7 +2005,7 @@ EndFunc   ;==>_LOImpress_SlideshowPresentationControl
 ; Name ..........: _LOImpress_SlideshowsCustomGetNames
 ; Description ...: Retrieve an array of Custom Slideshow names available in the document.
 ; Syntax ........: _LOImpress_SlideshowsCustomGetNames(ByRef $oDoc)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2039,10 +2039,10 @@ EndFunc   ;==>_LOImpress_SlideshowsCustomGetNames
 ; Name ..........: _LOImpress_SlideshowSettingsMode
 ; Description ...: Set or Retrieve the Slideshow's play mode settings.
 ; Syntax ........: _LOImpress_SlideshowSettingsMode(ByRef $oDoc[, $iPresMode = Null[, $iRepeatPause = Null[, $bShowLogo = Null]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $iPresMode           - [optional] an integer value (0-2). Default is Null. The mode the presentation is displayed in. See Constants, $LOI_SLIDESHOW_VIEW_MODE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iRepeatPause        - [optional] an integer value (0-86399). Default is Null. If $iPresMode is set to $LOI_SLIDESHOW_VIEW_MODE_LOOP, the amount of seconds before the presentation is played again.
-;                  $bShowLogo           - [optional] a boolean value. Default is Null. If True, the LibreOffice logo is displayed during the pause.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $iPresMode           - [optional] (0-2) Default is Null. The mode the presentation is displayed in. See Constants, $LOI_SLIDESHOW_VIEW_MODE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iRepeatPause        - [optional] (0-86399) Default is Null. If $iPresMode is set to $LOI_SLIDESHOW_VIEW_MODE_LOOP, the amount of seconds before the presentation is played again.
+;                  $bShowLogo           - [optional] Default is Null. If True, the LibreOffice logo is displayed during the pause.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2145,13 +2145,13 @@ EndFunc   ;==>_LOImpress_SlideshowSettingsMode
 ; Name ..........: _LOImpress_SlideshowSettingsOptions
 ; Description ...: Set or Retrieve the Slideshow's play options settings.
 ; Syntax ........: _LOImpress_SlideshowSettingsOptions(ByRef $oDoc[, $bDisableAutoSlides = Null[, $bChangeSlideByClick = Null[, $bMouseVisible = Null[, $bMouseAsPen = Null[, $bPlayAnimatedFiles = Null[, $bKeepOnTop = Null]]]]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $bDisableAutoSlides  - [optional] a boolean value. Default is Null. If True, slides will not transition to the next slide automatically (overriding individual slide settings).
-;                  $bChangeSlideByClick - [optional] a boolean value. Default is Null. If True, slides will transition when the mouse is clicked.
-;                  $bMouseVisible       - [optional] a boolean value. Default is Null. If True, the mouse is visible in the presentation.
-;                  $bMouseAsPen         - [optional] a boolean value. Default is Null. If True, the mouse can be used as a pen to draw on slides.
-;                  $bPlayAnimatedFiles  - [optional] a boolean value. Default is Null. If True, animated files (such as GIFs) will be played.
-;                  $bKeepOnTop          - [optional] a boolean value. Default is Null. If True, the presentation will be always kept on top of other programs.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $bDisableAutoSlides  - [optional] Default is Null. If True, slides will not transition to the next slide automatically (overriding individual slide settings).
+;                  $bChangeSlideByClick - [optional] Default is Null. If True, slides will transition when the mouse is clicked.
+;                  $bMouseVisible       - [optional] Default is Null. If True, the mouse is visible in the presentation.
+;                  $bMouseAsPen         - [optional] Default is Null. If True, the mouse can be used as a pen to draw on slides.
+;                  $bPlayAnimatedFiles  - [optional] Default is Null. If True, animated files (such as GIFs) will be played.
+;                  $bKeepOnTop          - [optional] Default is Null. If True, the presentation will be always kept on top of other programs.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2252,9 +2252,9 @@ EndFunc   ;==>_LOImpress_SlideshowSettingsOptions
 ; Name ..........: _LOImpress_SlideshowSettingsRange
 ; Description ...: Set or Retrieve the Slideshow's play Range settings.
 ; Syntax ........: _LOImpress_SlideshowSettingsRange(ByRef $oDoc[, $iRange = Null[, $sValue = Null]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $iRange              - [optional] an integer value (0-2). Default is Null. The Range of slides that will be shown when the Presentation is started. See Constants, $LOI_SLIDESHOW_RANGE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $sValue              - [optional] a string value. Default is Null. The "From" slide or Custom Slide Show name. See remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $iRange              - [optional] (0-2) Default is Null. The Range of slides that will be shown when the Presentation is started. See Constants, $LOI_SLIDESHOW_RANGE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $sValue              - [optional] Default is Null. The "From" slide or Custom Slide Show name. See remarks.
 ; Return values .: Success: 1 or Array.
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2394,10 +2394,10 @@ EndFunc   ;==>_LOImpress_SlideshowSettingsRange
 ; Name ..........: _LOImpress_SlideshowStart
 ; Description ...: Begins a presentation.
 ; Syntax ........: _LOImpress_SlideshowStart(ByRef $oDoc[, $bRehearse = False[, $sStartSlide = ""[, $sCustomShow = ""]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $bRehearse           - [optional] a boolean value. Default is False. If True, starts the presentation from the beginning and shows a rehearsal timer to the user.
-;                  $sStartSlide         - [optional] a string value. Default is "". The Slide's name to begin this presentation from.
-;                  $sCustomShow         - [optional] a string value. Default is "". The Custom Slideshow's name to play for this presentation.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $bRehearse           - [optional] Default is False. If True, starts the presentation from the beginning and shows a rehearsal timer to the user.
+;                  $sStartSlide         - [optional] Default is "". The Slide's name to begin this presentation from.
+;                  $sCustomShow         - [optional] Default is "". The Custom Slideshow's name to play for this presentation.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2490,7 +2490,7 @@ EndFunc   ;==>_LOImpress_SlideshowStart
 ; Name ..........: _LOImpress_SlideshowStop
 ; Description ...: Stop the presently playing presentation.
 ; Syntax ........: _LOImpress_SlideshowStop(ByRef $oDoc)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: 1
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
@@ -2591,12 +2591,12 @@ EndFunc   ;==>_LOImpress_SlideSoundsGetNames
 ; Name ..........: _LOImpress_SlideTransition
 ; Description ...: Set or Retrieve a Slide's Transition properties.
 ; Syntax ........: _LOImpress_SlideTransition(ByRef $oSlide[, $iTransition = Null[, $nDuration = Null[, $sSound = Null[, $bLoopSound = Null[, $nSlideAdvance = Null]]]]])
-; Parameters ....: $oSlide              - [in/out] an object. A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
-;                  $iTransition         - [optional] an integer value (0-78). Default is Null. The Transition effect. See Constants, $LOI_SLIDE_TRANSITION_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $nDuration           - [optional] a general number value (0-1000). Default is Null. The duration of the slide's transition effect, in seconds. L.O. 6.1+. See remarks.
-;                  $sSound              - [optional] a string value. Default is Null. The path to the sound to play during slide transition. See remarks.
-;                  $bLoopSound          - [optional] a boolean value. Default is Null. If True, the sound is repeated.
-;                  $nSlideAdvance       - [optional] a general number value (-1-1000). Default is Null. The number of seconds before automatically advance the slide. Call with -1 to set to On Mouse Click.
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+;                  $iTransition         - [optional] (0-78) Default is Null. The Transition effect. See Constants, $LOI_SLIDE_TRANSITION_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $nDuration           - [optional] (0-1000) Default is Null. The duration of the slide's transition effect, in seconds. L.O. 6.1+. See remarks.
+;                  $sSound              - [optional] Default is Null. The path to the sound to play during slide transition. See remarks.
+;                  $bLoopSound          - [optional] Default is Null. If True, the sound is repeated.
+;                  $nSlideAdvance       - [optional] (-1-1000) Default is Null. The number of seconds before automatically advance the slide. Call with -1 to set to On Mouse Click.
 ; Return values .: Success: 1 or Array
 ;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
 ;                  --Input Errors--
