@@ -2336,7 +2336,7 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaFillStyle
 ;                  $iFromColor          - [optional] (0-16777215) Default is Null. A color for the beginning point of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iToColor            - [optional] (0-16777215) Default is Null. A color for the endpoint of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iFromIntense        - [optional] Default is Null. Enter the intensity for the color in the "From Color", where 0% corresponds to black, and 100 % to the selected color. Min. 0%, Max 100%
-;                  $iToIntense          - [optional] Default is Null . Enter the intensity for the color in the "To Color", where 0% corresponds to black, and 100 % to the selected color. Min. 0%, Max 100%
+;                  $iToIntense          - [optional] Default is Null. Enter the intensity for the color in the "To Color", where 0% corresponds to black, and 100 % to the selected color. Min. 0%, Max 100%
 ; Return values .: Success: Integer or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
 ;                  @Error: 0, @Extended: 0, Return: 2 = Success. Gradient has been successfully turned off.

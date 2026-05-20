@@ -1984,11 +1984,11 @@ EndFunc   ;==>_LOWriter_DocMinimize
 ; Description ...: Open an existing Writer Document, returning its object identifier.
 ; Syntax ........: _LOWriter_DocOpen($sFilePath[, $bConnectIfOpen = True[, $bHidden = Null[, $bReadOnly = Null[, $sPassword = Null[, $bLoadAsTemplate = Null[, $sFilterName = Null]]]]]])
 ; Parameters ....: $sFilePath           - Full path and filename of the file to be opened.
-;                  $bConnectIfOpen      - [optional] Default is True(Connect). Whether to connect to the requested document if it is already open. See remarks.
-;                  $bHidden             - [optional] Default is Null. If True, opens the document invisibly.
-;                  $bReadOnly           - [optional] Default is Null. If True, opens the document as read-only.
+;                  $bConnectIfOpen      - [optional] Default is True. If True, Connect to the requested document if it is already open. See remarks.
+;                  $bHidden             - [optional] Default is Null. If True, Opens the document invisibly.
+;                  $bReadOnly           - [optional] Default is Null. If True, Opens the document as read-only.
 ;                  $sPassword           - [optional] Default is Null. The password that was used to read-protect the document, if any.
-;                  $bLoadAsTemplate     - [optional] Default is Null. If True, opens the document as a Template, i.e. an untitled copy of the specified document is made instead of modifying the original document.
+;                  $bLoadAsTemplate     - [optional] Default is Null. If True, Opens the document as a Template, i.e. an untitled copy of the specified document is made instead of modifying the original document.
 ;                  $sFilterName         - [optional] Default is Null. Name of a LibreOffice filter to use to load the specified document. LibreOffice automatically selects which to use by default.
 ; Return values .: Success: Object.
 ;                  @Error: 0, @Extended: 1, Return: Object = Successfully connected to requested Document without requested parameters. Returning Document's Object.
@@ -2199,7 +2199,7 @@ EndFunc   ;==>_LOWriter_DocPosAndSize
 ;                  $bCollate            - [optional] Default is True. Advises the printer to collate the pages of the copies.
 ;                  $vPages              - [optional] Default is "ALL". Specifies which pages to print. See remarks.
 ;                  $bWait               - [optional] Default is True. If True, the corresponding print request will be executed synchronous. Default is to use synchronous print mode.
-;                  $iDuplexMode         - [optional] (0-3) Default is $__g_iDuplexOFF. Determines the duplex mode for the print job. See Constants, $LOW_PRINT_DUPLEX_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iDuplexMode         - [optional] (0-3) Default is $LOW_PRINT_DUPLEX_OFF. Determines the duplex mode for the print job. See Constants, $LOW_PRINT_DUPLEX_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $sPrinter            - [optional] Default is "". Printer name. If left blank, or if printer name is not found, default printer is used.
 ;                  $sFilePathName       - [optional] Default is "". Specifies the name of a file to print to. Creates a .prn file at the given Path. Must include the desired path destination with file name.
 ; Return values .: Success: 1

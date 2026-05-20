@@ -9013,7 +9013,7 @@ EndFunc   ;==>_LOWriter_FormConTableConCurrencyFieldData
 ;                  $sLabel              - [optional] Default is Null. The control's label to display.
 ;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bStrict             - [optional] Default is Null. If True, strict formatting is enabled.
-;                  $bEnabled            - [optional] Default is Null.If True, the control is enabled.
+;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.
 ;                  $bReadOnly           - [optional] Default is Null. If True, the control is Read-Only.
 ;                  $iMouseScroll        - [optional] (0-2) Default is Null. The behavior of the mouse scroll wheel on the Control. See Constants $LOW_FORM_CON_MOUSE_SCROLL_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $nMin                - [optional] Default is Null. The minimum value the control can be set to.
@@ -12023,7 +12023,7 @@ EndFunc   ;==>_LOWriter_FormConTableConTimeFieldData
 ; Syntax ........: _LOWriter_FormConTableConTimeFieldGeneral(ByRef $oTimeField[, $sName = Null[, $sLabel = Null[, $iTxtDir = Null[, $bStrict = Null[, $bEnabled = Null[, $bReadOnly = Null[, $iMouseScroll = Null[, $tTimeMin = Null[, $tTimeMax = Null[, $iFormat = Null[, $tTimeDefault = Null[, $bSpin = Null[, $bRepeat = Null[, $iDelay = Null[, $iWidth = Null[, $iAlign = Null[, $bHideSel = Null[, $sAddInfo = Null[, $sHelpText = Null[, $sHelpURL = Null]]]]]]]]]]]]]]]]]]]])
 ; Parameters ....: $oTimeField          - A Table Control Time Field Control object returned by a previous _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConTableConColumnsGetList function.
 ;                  $sName               - [optional] Default is Null. The control name.
-;                  $sLabel              - [optional] Default is Null.The control's label to display.
+;                  $sLabel              - [optional] Default is Null. The control's label to display.
 ;                  $iTxtDir             - [optional] (0-5) Default is Null. The Text direction. See Constants $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bStrict             - [optional] Default is Null. If True, strict formatting is enabled.
 ;                  $bEnabled            - [optional] Default is Null. If True, the control is enabled.

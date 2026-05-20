@@ -1898,7 +1898,7 @@ EndFunc   ;==>_LOWriter_FontDescCreate
 ;                  $nSize               - [optional] Default is Null. The Font size.
 ;                  $iColor              - [optional] (-1-16777215) Default is Null. The Font Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
 ;                  $iUnderlineStyle     - [optional] (0-18) Default is Null. The Font underline Style. See Constants $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iUnderlineColor     - [optional] (-1-16777215) Default is Null.
+;                  $iUnderlineColor     - [optional] (-1-16777215) Default is Null. The Font Underline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
 ;                  $iStrikelineStyle    - [optional] (0-6) Default is Null. The Strikeout line style. See Constants $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $bIndividualWords    - [optional] Default is Null. If True, only individual words are underlined.
 ;                  $iRelief             - [optional] (0-2) Default is Null. The Font relief style. See Constants $LOW_CHAR_RELIEF_* as defined in LibreOfficeWriter_Constants.au3.
@@ -2546,12 +2546,12 @@ EndFunc   ;==>_LOWriter_SearchDescriptorCreate
 ; Description ...: Modify Search Descriptor settings of an existing Search Descriptor Object.
 ; Syntax ........: _LOWriter_SearchDescriptorModify(ByRef $oSrchDescript[, $bBackwards = Null[, $bMatchCase = Null[, $bWholeWord = Null[, $bRegExp = Null[, $bStyles = Null[, $bSearchPropValues = Null]]]]]])
 ; Parameters ....: $oSrchDescript       - A Search Descriptor Object returned from _LOWriter_SearchDescriptorCreate function.
-;                  $bBackwards          - [optional] Default is False. If True, the document is searched backwards.
-;                  $bMatchCase          - [optional] Default is False. If True, the case of the letters is important for the Search.
-;                  $bWholeWord          - [optional] Default is False. If True, only complete words will be found.
-;                  $bRegExp             - [optional] Default is False. If True, the search string is evaluated as a regular expression. Cannot be called with True if Similarity Search is set to True.
-;                  $bStyles             - [optional] Default is False. If True, the string is considered a Paragraph Style name, and the search will return any paragraph utilizing the specified name, EXCEPT if you input Format properties to search for, then setting this to True causes the search to search both for direct formatting matching those properties and also Paragraph/Character styles that contain matching properties.
-;                  $bSearchPropValues   - [optional] Default is False. If True, any formatting properties searched for are matched based on their value, else if False, the search only looks for their existence. See Remarks.
+;                  $bBackwards          - [optional] Default is Null. If True, the document is searched backwards.
+;                  $bMatchCase          - [optional] Default is Null. If True, the case of the letters is important for the Search.
+;                  $bWholeWord          - [optional] Default is Null. If True, only complete words will be found.
+;                  $bRegExp             - [optional] Default is Null. If True, the search string is evaluated as a regular expression. Cannot be called with True if Similarity Search is set to True.
+;                  $bStyles             - [optional] Default is Null. If True, the string is considered a Paragraph Style name, and the search will return any paragraph utilizing the specified name, EXCEPT if you input Format properties to search for, then setting this to True causes the search to search both for direct formatting matching those properties and also Paragraph/Character styles that contain matching properties.
+;                  $bSearchPropValues   - [optional] Default is Null. If True, any formatting properties searched for are matched based on their value, else if False, the search only looks for their existence. See Remarks.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Returning 1 after directly modifying Search Descriptor Object.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.

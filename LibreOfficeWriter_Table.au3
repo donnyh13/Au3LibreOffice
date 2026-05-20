@@ -1901,10 +1901,10 @@ EndFunc   ;==>_LOWriter_TableGetCellObjByPosition
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_TableGetData
 ; Description ...: Retrieve current text of a Text Table.
-; Syntax ........: _LOWriter_TableGetData(ByRef $oTable[, $iColumn = -1[, $iRow = -1]])
+; Syntax ........: _LOWriter_TableGetData(ByRef $oTable[, $iColumn = Null[, $iRow = Null]])
 ; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $iColumn             - [optional] Default is -1. The desired Column, See Remarks.
-;                  $iRow                - [optional] Default is -1. The desired Row, See Remarks.
+;                  $iColumn             - [optional] Default is Null. The desired Column, See Remarks.
+;                  $iRow                - [optional] Default is Null. The desired Row, See Remarks.
 ; Return values .: Success: Array or String.
 ;                  @Error 0 @Extended 1 Return Array of Arrays = Array of Table data.
 ;                  @Error: 0, @Extended: 2, Return: Array = Returning a specific row of data.
@@ -1913,16 +1913,16 @@ EndFunc   ;==>_LOWriter_TableGetCellObjByPosition
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
-;                  @Error: 1, @Extended: 2 = $iColumn not an Integer, less than -1 or greater than number of Columns containted in the Table.
-;                  @Error: 1, @Extended: 3 = $iRow not an Integer, less than -1 or greater than number of Rows containted in the Table.
+;                  @Error: 1, @Extended: 2 = $iColumn not an Integer, less than 0 or greater than number of Columns containted in the Table.
+;                  @Error: 1, @Extended: 3 = $iRow not an Integer, less than 0 or greater than number of Rows containted in the Table.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Array of Table data.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If only a Table object is called, an Array of Arrays is returned, The main array will have the same number of elements as there are rows. Each internal array will have the same number of elements as there are columns.
-;                  If You input a specific Row, a Array will be returned with the data from that specific row, one element per column.
-;                  If You input a Row and a column, a String will be returned with the specified Cell's data.
-;                  If you want only a certain column, set $iRow to -1 and $iColumn to the desired column.
+;                  If You call a specific Row, a Array will be returned with the data from that specific row, one element per column.
+;                  If You call a Row and a column, a String will be returned with the specified Cell's data.
+;                  If you want only a certain column, set $iRow to Null and $iColumn to the desired column.
 ;                  LibreOffice Tables start at 0, so to get the first Row/Column, you would set $iRow or $iColumn to 0.
 ;                  This function can fail if the Table is "complex", meaning it has joined or split cells.
 ;                  Strings returned will have CRLF for hard newlines, and LF for soft newlines.
