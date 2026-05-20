@@ -815,7 +815,7 @@ EndFunc   ;==>_LOImpress_CursorParSpacing
 ;                  $iFillChar           - [optional] Default is Null. The Asc (see AutoIt function) value of any character (except 0/Null) you want to act as a Tab Fill character. See remarks.
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Settings were successfully set. New TabStop position is returned.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
 ;                  @Error: 1, @Extended: 2 = $iPosition not an Integer.

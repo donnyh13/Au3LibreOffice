@@ -450,7 +450,7 @@ EndFunc   ;==>_LOImpress_ShapeAreaGradient
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  @Error: 1, @Extended: 2 = $avColorStops not an Array, or does not contain two columns.
@@ -789,7 +789,7 @@ EndFunc   ;==>_LOImpress_ShapeAreaTransparencyGradient
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  @Error: 1, @Extended: 2 = $avColorStops not an Array, or does not contain two columns.
@@ -2256,7 +2256,7 @@ EndFunc   ;==>_LOImpress_ShapeParSpacing
 ;                  $iFillChar           - [optional] Default is Null. The Asc (see AutoIt function) value of any character (except 0/Null) you want to act as a Tab Fill character. See remarks.
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Settings were successfully set. New TabStop position is returned.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  @Error: 1, @Extended: 2 = $iPosition not an Integer.
@@ -2664,7 +2664,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleAreaGradient
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPresStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $avColorStops not an Array, or does not contain two columns.
@@ -2875,7 +2875,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleAreaTransparencyGradient
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPresStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $avColorStops not an Array, or does not contain two columns.
@@ -3694,7 +3694,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleParSpacing
 ;                  $iFillChar           - [optional] Default is Null. The Asc (see AutoIt function) value of any character (except 0/Null) you want to act as a Tab Fill character. See remarks.
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Settings were successfully set. New TabStop position is returned.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPresStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $iPosition not an Integer.
@@ -4402,7 +4402,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleAreaGradient
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShapeStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $avColorStops not an Array, or does not contain two columns.
@@ -4613,7 +4613,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleAreaTransparencyGradient
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShapeStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $avColorStops not an Array, or does not contain two columns.
@@ -5704,7 +5704,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleParSpacing
 ;                  $iFillChar           - [optional] Default is Null. The Asc (see AutoIt function) value of any character (except 0/Null) you want to act as a Tab Fill character. See remarks.
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Settings were successfully set. New TabStop position is returned.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShapeStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $iPosition not an Integer.

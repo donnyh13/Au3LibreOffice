@@ -1529,7 +1529,7 @@ EndFunc   ;==>_LOImpress_SlideshowActiveSettings
 ;                  $asSlides            - A single column Array of Slide names. See remarks.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully created new Custom Slideshow.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sName not a String.
@@ -1633,7 +1633,7 @@ EndFunc   ;==>_LOImpress_SlideshowCustomDelete
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Custom Slideshow successfully modified.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning Array of Slide names contained in the Custom Slideshow. See remarks.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sName not a String.
