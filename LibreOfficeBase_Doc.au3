@@ -380,9 +380,9 @@ EndFunc   ;==>_LOBase_DocCreate
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOBase_DocDatabaseType
 ; Description ...: Set or Retrieve a Base Document's Database Type.
-; Syntax ........: _LOBase_DocDatabaseType(ByRef $oDoc[, $sType = "sdbc:embedded:hsqldb"[, $bOverwrite = False]])
+; Syntax ........: _LOBase_DocDatabaseType(ByRef $oDoc[, $sType = Default[, $bOverwrite = False]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOBase_DocOpen, _LOBase_DocConnect, or _LOBase_DocCreate function.
-;                  $sType               - [optional] Default is Default. Default is "sdbc:embedded:hsqldb". The Database Type string to set the document to. See remarks.
+;                  $sType               - [optional] Default is Default. The Database Type string to set the document to. See remarks.
 ;                  $bOverwrite          - [optional] Default is False. If True, an existing Database type will be overwritten. See remarks.
 ; Return values .: Success: 1 or String.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.

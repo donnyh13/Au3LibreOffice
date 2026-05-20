@@ -498,6 +498,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Moved Success values in the header above error values.
 - Reformatted Error and Extended value descriptions in headers.
 - Reword failure description.
+- Corrected mismatches between header Syntax, header Parameter Defaults, and Function parameter assignments.
 
 #### Fixed
 

@@ -467,7 +467,7 @@ EndFunc   ;==>_LOBase_FontDescCreate
 ;                  $nSize               - [optional] Default is Null. The Font size.
 ;                  $iColor              - [optional] (-1-16777215) Default is Null. The Font Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
 ;                  $iUnderlineStyle     - [optional] (0-18) Default is Null. The Font underline Style. See Constants $LOB_CHAR_UNDERLINE_* as defined in LibreOfficeBase_Constants.au3.
-;                  $iUnderlineColor     - [optional] (-1-16777215) Default is Null.
+;                  $iUnderlineColor     - [optional] (-1-16777215) Default is Null. The Font Underline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
 ;                  $iStrikelineStyle    - [optional] (0-6) Default is Null. The Strikeout line style. See Constants $LOB_CHAR_STRIKEOUT_* as defined in LibreOfficeBase_Constants.au3.
 ;                  $bIndividualWords    - [optional] Default is Null. If True, only individual words are underlined.
 ;                  $iRelief             - [optional] (0-2) Default is Null. The Font relief style. See Constants $LOB_CHAR_RELIEF_* as defined in LibreOfficeBase_Constants.au3.
