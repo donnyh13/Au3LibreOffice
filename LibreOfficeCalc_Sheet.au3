@@ -919,7 +919,7 @@ EndFunc   ;==>_LOCalc_SheetLinkModify
 ; Syntax ........: _LOCalc_SheetMove(ByRef $oDoc, ByRef $oSheet[, $iPosition = Null])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ;                  $oSheet              - A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
-;                  $iPosition           - [optional] Default is Null.The Position the move the Sheet to, 0 being the beginning.
+;                  $iPosition           - [optional] Default is Null. The Position the move the Sheet to, 0 being the beginning.
 ; Return values .: Success: 1 or Integer
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Sheet was successfully moved.
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. $iPosition called with Null, returning Sheet's current position.
