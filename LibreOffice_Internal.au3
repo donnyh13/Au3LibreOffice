@@ -369,6 +369,8 @@ EndFunc   ;==>__LO_IsObjInvalid
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = If the input is between Min and Max or is an allowed number, and not one of the disallowed numbers, True is returned. Else False.
 ;                  Failure: False and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $nTest not a Number.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If Minimum is a negative, and there is no max defined, it is treated as such that if a value is more negative, it is outside the range. e.g., min = -2, -3 is outside of the range, but -1 is inside.
@@ -379,7 +381,7 @@ EndFunc   ;==>__LO_IsObjInvalid
 Func __LO_NumIsBetween($nTest, $nMin, $nMax = 0, $vNot = "", $vIncl = "")
 	Local $nRealMin, $nRealMax
 
-	If Not IsNumber($nTest) Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+	If Not IsNumber($nTest) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, False)
 
 	If ($vNot <> "") Then
 		If IsString($vNot) Then
@@ -899,7 +901,6 @@ EndFunc   ;==>__LO_TestObjCOM
 ;                  $vVar32              - [optional] Default is Null. A variable to test.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = If All parameters are Equal to Null, True is returned. Else False.
-;                  Failure: False and sets @Error and @Extended to non-zero.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
