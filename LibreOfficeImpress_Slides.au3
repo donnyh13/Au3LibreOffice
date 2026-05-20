@@ -1434,8 +1434,6 @@ EndFunc   ;==>_LOImpress_SlidesGetNames
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = There is no presentation currently running.
 ;                  @Error: 3, @Extended: 2 = Failed to retrieve Object for currently running presentation.
-;                  --Version Related Errors--
-;                  @Error: 6, @Extended: 1 = Current LibreOffice version less than 4.2, $iPenWidth not available.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bKeepOnTop
@@ -1443,6 +1441,8 @@ EndFunc   ;==>_LOImpress_SlidesGetNames
 ;                  |                               4 = Error setting $bMouseAsPen
 ;                  |                               8 = Error setting $iPenColor
 ;                  |                               16 = Error setting $iPenWidth
+;                  --Version Related Errors--
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version less than 4.2, $iPenWidth not available.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
