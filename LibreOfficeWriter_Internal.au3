@@ -135,7 +135,6 @@
 ;                  $vVar8               - [optional] Default is Null. The variable to test if it is set to Default keyword.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = If Any parameters are equal to Default, True is returned. Else False.
-;                  Failure: False and sets @Error and @Extended to non-zero.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
