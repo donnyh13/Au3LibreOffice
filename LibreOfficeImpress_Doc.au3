@@ -871,11 +871,11 @@ EndFunc   ;==>_LOImpress_DocMinimize
 ; Description ...: Open an existing Impress Document, returning its object identifier.
 ; Syntax ........: _LOImpress_DocOpen($sFilePath[, $bConnectIfOpen = True[, $bHidden = Null[, $bReadOnly = Null[, $sPassword = Null[, $bLoadAsTemplate = Null[, $sFilterName = Null]]]]]])
 ; Parameters ....: $sFilePath           - Full path and filename of the file to be opened.
-;                  $bConnectIfOpen      - [optional] Default is True(Connect). Whether to connect to the requested document if it is already open. See remarks.
-;                  $bHidden             - [optional] Default is Null. If True, opens the document invisibly.
-;                  $bReadOnly           - [optional] Default is Null. If True, opens the document as read-only.
+;                  $bConnectIfOpen      - [optional] Default is True. If True, Connect to the requested document if it is already open. See remarks.
+;                  $bHidden             - [optional] Default is Null. If True, Opens the document invisibly.
+;                  $bReadOnly           - [optional] Default is Null. If True, Opens the document as read-only.
 ;                  $sPassword           - [optional] Default is Null. The password that was used to read-protect the document, if any.
-;                  $bLoadAsTemplate     - [optional] Default is Null. If True, opens the document as a Template, i.e. an untitled copy of the specified document is made instead of modifying the original document.
+;                  $bLoadAsTemplate     - [optional] Default is Null. If True, Opens the document as a Template, i.e. an untitled copy of the specified document is made instead of modifying the original document.
 ;                  $sFilterName         - [optional] Default is Null. Name of a LibreOffice filter to use to load the specified document. LibreOffice automatically selects which to use by default.
 ; Return values .: Success: Object.
 ;                  @Error: 0, @Extended: 1, Return: Object = Successfully connected to requested Document without requested parameters. Returning Document's Object.
