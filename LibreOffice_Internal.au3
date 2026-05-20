@@ -865,38 +865,38 @@ EndFunc   ;==>__LO_TestObjCOM
 ; Name ..........: __LO_VarsAreNull
 ; Description ...: Tests whether all input parameters are equal to Null keyword.
 ; Syntax ........: __LO_VarsAreNull($vVar1[, $vVar2 = Null[, $vVar3 = Null[, $vVar4 = Null[, $vVar5 = Null[, $vVar6 = Null[, $vVar7 = Null[, $vVar8 = Null[, $vVar9 = Null[, $vVar10 = Null[, $vVar11 = Null[, $vVar12 = Null[, $vVar13 = Null[, $vVar14 = Null[, $vVar15 = Null[, $vVar16 = Null[, $vVar17 = Null[, $vVar18 = Null[, $vVar19 = Null[, $vVar20 = Null[, $vVar21 = Null[, $vVar22 = Null[, $vVar23 = Null[, $vVar24 = Null[, $vVar25 = Null[, $vVar26 = Null[, $vVar27 = Null[, $vVar28 = Null[, $vVar29 = Null[, $vVar30 = Null[, $vVar31 = Null[, $vVar32 = Null]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]])
-; Parameters ....: $vVar1               - 
-;                  $vVar2               - [optional] Default is Null.
-;                  $vVar3               - [optional] Default is Null.
-;                  $vVar4               - [optional] Default is Null.
-;                  $vVar5               - [optional] Default is Null.
-;                  $vVar6               - [optional] Default is Null.
-;                  $vVar7               - [optional] Default is Null.
-;                  $vVar8               - [optional] Default is Null.
-;                  $vVar9               - [optional] Default is Null.
-;                  $vVar10              - [optional] Default is Null.
-;                  $vVar11              - [optional] Default is Null.
-;                  $vVar12              - [optional] Default is Null.
-;                  $vVar13              - [optional] Default is Null.
-;                  $vVar14              - [optional] Default is Null.
-;                  $vVar15              - [optional] Default is Null.
-;                  $vVar16              - [optional] Default is Null.
-;                  $vVar17              - [optional] Default is Null.
-;                  $vVar18              - [optional] Default is Null.
-;                  $vVar19              - [optional] Default is Null.
-;                  $vVar20              - [optional] Default is Null.
-;                  $vVar21              - [optional] Default is Null.
-;                  $vVar22              - [optional] Default is Null.
-;                  $vVar23              - [optional] Default is Null.
-;                  $vVar24              - [optional] Default is Null.
-;                  $vVar25              - [optional] Default is Null.
-;                  $vVar26              - [optional] Default is Null.
-;                  $vVar27              - [optional] Default is Null.
-;                  $vVar28              - [optional] Default is Null.
-;                  $vVar29              - [optional] Default is Null.
-;                  $vVar30              - [optional] Default is Null.
-;                  $vVar31              - [optional] Default is Null.
-;                  $vVar32              - [optional] Default is Null.
+; Parameters ....: $vVar1               - A variable to test.
+;                  $vVar2               - [optional] Default is Null. A variable to test.
+;                  $vVar3               - [optional] Default is Null. A variable to test.
+;                  $vVar4               - [optional] Default is Null. A variable to test.
+;                  $vVar5               - [optional] Default is Null. A variable to test.
+;                  $vVar6               - [optional] Default is Null. A variable to test.
+;                  $vVar7               - [optional] Default is Null. A variable to test.
+;                  $vVar8               - [optional] Default is Null. A variable to test.
+;                  $vVar9               - [optional] Default is Null. A variable to test.
+;                  $vVar10              - [optional] Default is Null. A variable to test.
+;                  $vVar11              - [optional] Default is Null. A variable to test.
+;                  $vVar12              - [optional] Default is Null. A variable to test.
+;                  $vVar13              - [optional] Default is Null. A variable to test.
+;                  $vVar14              - [optional] Default is Null. A variable to test.
+;                  $vVar15              - [optional] Default is Null. A variable to test.
+;                  $vVar16              - [optional] Default is Null. A variable to test.
+;                  $vVar17              - [optional] Default is Null. A variable to test.
+;                  $vVar18              - [optional] Default is Null. A variable to test.
+;                  $vVar19              - [optional] Default is Null. A variable to test.
+;                  $vVar20              - [optional] Default is Null. A variable to test.
+;                  $vVar21              - [optional] Default is Null. A variable to test.
+;                  $vVar22              - [optional] Default is Null. A variable to test.
+;                  $vVar23              - [optional] Default is Null. A variable to test.
+;                  $vVar24              - [optional] Default is Null. A variable to test.
+;                  $vVar25              - [optional] Default is Null. A variable to test.
+;                  $vVar26              - [optional] Default is Null. A variable to test.
+;                  $vVar27              - [optional] Default is Null. A variable to test.
+;                  $vVar28              - [optional] Default is Null. A variable to test.
+;                  $vVar29              - [optional] Default is Null. A variable to test.
+;                  $vVar30              - [optional] Default is Null. A variable to test.
+;                  $vVar31              - [optional] Default is Null. A variable to test.
+;                  $vVar32              - [optional] Default is Null. A variable to test.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = If All parameters are Equal to Null, True is returned. Else False.
 ;                  Failure: False and sets @Error and @Extended to non-zero.
