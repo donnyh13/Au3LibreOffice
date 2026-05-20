@@ -791,7 +791,7 @@ EndFunc   ;==>_LOCalc_CellOverline
 ; Name ..........: _LOCalc_CellProtection
 ; Description ...: Set or Retrieve Cell or Cell Range protection settings.
 ; Syntax ........: _LOCalc_CellProtection(ByRef $oCell[, $bHideAll = Null[, $bProtected = Null[, $bHideFormula = Null[, $bHideWhenPrint = Null]]]])
-; Parameters ....: $oCell               - 
+; Parameters ....: $oCell               - A Cell object returned by a previous _LOCalc_RangeGetCellByName, or _LOCalc_RangeGetCellByPosition function.
 ;                  $bHideAll            - [optional] Default is Null. If True, Hides formulas and contents of the cells in the range.
 ;                  $bProtected          - [optional] Default is Null. If True, Prevents the cells selected from being modified.
 ;                  $bHideFormula        - [optional] Default is Null. If True, Hides formulas in the cells in the selection.
