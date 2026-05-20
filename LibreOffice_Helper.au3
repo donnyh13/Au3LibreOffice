@@ -298,11 +298,12 @@ EndFunc   ;==>_LO_ConvertColorFromLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LO_ConvertColorToLong($vVal1 = Null, $vVal2 = Null, $vVal3 = Null, $vVal4 = Null) ; RGB = Int, CMYK = Int, HSB = String, Hex = String.
+Func _LO_ConvertColorToLong($vVal1 = Null, $vVal2 = Null, $vVal3 = Null, $vVal4 = Null)
 	Local Const $__STR_STRIPALL = 8
 	Local $iRed, $iGreen, $iBlue, $iLong, $iHue, $iSaturation, $iBrightness
 	Local $dHex
 	Local $nMaxRGB, $nMinRGB, $nChroma, $nHuePre, $nCyan, $nMagenta, $nYellow, $nBlack
+	; RGB = Int, CMYK = Int, HSB = String, Hex = String.
 
 	If (@NumParams = 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
@@ -977,7 +978,7 @@ EndFunc   ;==>_LO_InitializePortable
 ; Description ...: Converts the input path to or from a LibreOffice URL notation path.
 ; Syntax ........: _LO_PathConvert($sFilePath[, $iReturnMode = $LO_PATHCONV_AUTO_RETURN])
 ; Parameters ....: $sFilePath           - Full path to convert in String format.
-;                  $iReturnMode         - [optional] (0-2) Default is $__g_iAutoReturn. The type of path format to return. See Constants, $LO_PATHCONV_* as defined in LibreOffice_Constants.au3.
+;                  $iReturnMode         - [optional] (0-2) Default is $LO_PATHCONV_AUTO_RETURN. The type of path format to return. See Constants, $LO_PATHCONV_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: String.
 ;                  @Error: 0, @Extended: 1, Return: String = Returning converted File Path from LibreOffice URL.
 ;                  @Error: 0, @Extended: 2, Return: String = Returning converted path from File Path to LibreOffice URL.
@@ -1496,7 +1497,7 @@ EndFunc   ;==>_LO_UnitConvert
 ; Description ...: Retrieve the current Office version.
 ; Syntax ........: _LO_VersionGet([$bSimpleVersion = False[, $bReturnName = False]])
 ; Parameters ....: $bSimpleVersion      - [optional] Default is False. If True, returns a two digit version number, such as "7.3", else returns the complex version number, such as "7.3.2.4".
-;                  $bReturnName         - [optional] Default is True. If True returns the Program Name, such as "LibreOffice", appended by the version, i.e. "LibreOffice 7.3".
+;                  $bReturnName         - [optional] Default is False. If True returns the Program Name, such as "LibreOffice", appended by the version, i.e. "LibreOffice 7.3".
 ; Return values .: Success: String
 ;                  @Error: 0, @Extended: 0, Return: String = Success. Returning the Office version in String format.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.

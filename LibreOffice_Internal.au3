@@ -272,7 +272,7 @@ EndFunc   ;==>__LO_InternalComErrorHandler
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LO_IntIsBetween
 ; Description ...: Test whether an input is an Integer and is between two Integers.
-; Syntax ........: __LO_IntIsBetween($iTest, $iMin, $iMax[, $vNot = ""[, $vIncl = ""]])
+; Syntax ........: __LO_IntIsBetween($iTest, $iMin[, $iMax = 0[, $vNot = ""[, $vIncl = ""]]])
 ; Parameters ....: $iTest               - The Value to test.
 ;                  $iMin                - The minimum $iTest can be.
 ;                  $iMax                - [optional] Default is 0. The maximum $iTest can be.
