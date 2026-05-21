@@ -1339,7 +1339,7 @@ EndFunc   ;==>_LOBase_TableGetObjByName
 ;                  $bIsUnique           - [optional] Default is False. If True the Indexed Column(s) can contain only unique entries.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. New Index was successfully added to the Table.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $sName not a String.
