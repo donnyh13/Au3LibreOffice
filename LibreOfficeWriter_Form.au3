@@ -782,7 +782,7 @@ EndFunc   ;==>_LOWriter_FormConComboBoxData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 25 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oComboBox not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oComboBox not a Combo Box Control.
@@ -4916,7 +4916,7 @@ EndFunc   ;==>_LOWriter_FormConListBoxData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 23 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oListBox not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oListBox not a List Box Control.
@@ -5300,7 +5300,7 @@ EndFunc   ;==>_LOWriter_FormConListBoxGetCount
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current selection(s) of the List Box. See remarks.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oListBox not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oListBox not a List Box Control.
@@ -8697,7 +8697,7 @@ EndFunc   ;==>_LOWriter_FormConTableConComboBoxData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 16 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oComboBox not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oComboBox not a Combo Box Control.
@@ -10624,7 +10624,7 @@ EndFunc   ;==>_LOWriter_FormConTableConListBoxData
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 14 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oListBox not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oListBox not a List Box Control.

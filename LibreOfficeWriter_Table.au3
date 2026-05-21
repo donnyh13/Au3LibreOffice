@@ -2519,7 +2519,7 @@ EndFunc   ;==>_LOWriter_TableRowProperty
 ;                  $avData              - Array of Data to fill the Table with. See Remarks.
 ; Return values .: Success: 1.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Table data was successfully set.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $avData not an Array.
