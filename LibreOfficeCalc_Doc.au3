@@ -1679,7 +1679,7 @@ EndFunc   ;==>_LOCalc_DocSelectionSet
 ;                  $aoRange             - An array of Cell or Cell Range objects returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Objects were successfully selected.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an object.
 ;                  @Error: 1, @Extended: 2 = $aoRange not an Array.

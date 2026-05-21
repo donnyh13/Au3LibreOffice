@@ -139,7 +139,7 @@ EndFunc   ;==>_LOCalc_ComError_UserFunction
 ;                  $bSaveCriteria       - [optional] Default is True. If True, the output range remains linked to the source range, allowing for future re-application of the same filter to the range. Source Range must be previously defined as a Database range.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully created a Filter descriptor Object, returning its Object.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $atFilterField not an Array, or Array contains more than 8 elements.
@@ -240,7 +240,7 @@ EndFunc   ;==>_LOCalc_FilterDescriptorCreate
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Filter Descriptor was successfully modified.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFilterDesc not an Object.

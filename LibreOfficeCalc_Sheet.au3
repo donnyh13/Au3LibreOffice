@@ -1137,7 +1137,7 @@ EndFunc   ;==>_LOCalc_SheetPrintColumnsRepeat
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Print Range was successfully set.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning Array of Range Objects set to be printed. @Extended set to number of Ranges. See remarks.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSheet not an Object.
 ;                  @Error: 1, @Extended: 2 = $aoRange not an Array.

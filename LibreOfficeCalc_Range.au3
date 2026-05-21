@@ -743,7 +743,7 @@ EndFunc   ;==>_LOCalc_RangeCreateCursor
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Data was successfully set for the cell range.
 ;                  @Error: 0, @Extended: 1, Return: Array of Arrays = Success. $aavData called with Null, returning an array containing arrays, which contain any data content contained in the cell range.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $aavData not an Array.
@@ -1452,7 +1452,7 @@ EndFunc   ;==>_LOCalc_RangeFillSeries
 ;                  $oFilterDesc         - A Filter Descriptor created by a previous _LOCalc_FilterDescriptorCreate function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully processed Filter operation.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $oFilterDesc not an Object.
@@ -1686,7 +1686,7 @@ EndFunc   ;==>_LOCalc_RangeFindNext
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Formulas were successfully set for the cell range.
 ;                  @Error: 0, @Extended: 1, Return: Array of Arrays = Success. $aasFormulas called with Null, returning an array containing arrays, which contain any Formula content contained in the cell range.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $aasFormulas not an Array.
@@ -2681,7 +2681,7 @@ EndFunc   ;==>_LOCalc_RangeNamedModify
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Values were successfully set for the cell range.
 ;                  @Error: 0, @Extended: 1, Return: Array of Arrays = Success. $aanNumbers called with Null, returning an array containing arrays, which contain any numerical content contained in the cell range.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $aanNumbers not an Array.
@@ -3584,7 +3584,7 @@ EndFunc   ;==>_LOCalc_RangePivotFieldsUnusedGetNames
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPivotTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $atFilterField not an array or has more than 3 elements.
