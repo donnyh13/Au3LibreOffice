@@ -1407,6 +1407,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_RangePivotFilterClear
   - _LOCalc_RangeRowGetObjByPosition
   - _LOCalc_SheetDetectiveDependent
+- `_LOCalc_PageStyleOrganizer` was modifying the organizer settings for a built-in style.
 
 #### Refactored
 
