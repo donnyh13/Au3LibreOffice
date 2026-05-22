@@ -1578,7 +1578,7 @@ EndFunc   ;==>_LOImpress_ShapeImageCrop
 ; Remarks .......: Image is Auto-Sized and centered thanks to method by A. Pitonyak, OOME 4.1, PDF pg 320.
 ; Related .......:
 ; Link ..........:
-; Example .......: No
+; Example .......: Yes
 ; ===============================================================================================================================
 Func _LOImpress_ShapeImageInsert(ByRef $oSlide, $sURL)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
@@ -6121,7 +6121,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleTextAttrSettings
 ; Remarks .......:
 ; Related .......:
 ; Link ..........:
-; Example .......: No
+; Example .......: Yes
 ; ===============================================================================================================================
 Func _LOImpress_ShapeTableInsert(ByRef $oSlide, $iWidth, $iHeight, $iRows = 2, $iColumns = 2, $iX = 0, $iY = 0)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
@@ -6464,7 +6464,7 @@ EndFunc   ;==>_LOImpress_ShapeTextAttrSettings
 ; Remarks .......:
 ; Related .......:
 ; Link ..........:
-; Example .......: No
+; Example .......: Yes
 ; ===============================================================================================================================
 Func _LOImpress_ShapeTextBoxInsert(ByRef $oSlide, $iTextBoxType, $iWidth, $iHeight, $iX = 0, $iY = 0)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
