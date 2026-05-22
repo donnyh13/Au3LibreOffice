@@ -942,7 +942,7 @@ EndFunc   ;==>_LO_GradientMulticolorModify
 ;                  If running this with an installed version of LibreOffice present the flag SingleAppInstance may need to be set to False in the "LibreOfficePortablePrevious.ini" [or similar name], found at: C:\LibreOfficePortablePrevious\App\AppInfo\Launcher\LibreOfficePortablePrevious.ini.
 ; Related .......:
 ; Link ..........:
-; Example .......: No
+; Example .......: Yes
 ; ===============================================================================================================================
 Func _LO_InitializePortable($sOfficePortablePath)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
@@ -1404,7 +1404,7 @@ EndFunc   ;==>_LO_TransparencyGradientMultiModify
 ; Remarks .......: Hundredths of a Millimeter (HMM), is used in almost all LibreOffice functions that contain a measurement parameter.
 ; Related .......:
 ; Link ..........:
-; Example .......: No
+; Example .......: Yes
 ; ===============================================================================================================================
 Func _LO_UnitConvert($nValue, $iReturnType)
 	Local $iHMM, $iMM, $iCM, $iInch
