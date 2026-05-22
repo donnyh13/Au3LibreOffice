@@ -2584,7 +2584,7 @@ Func _LOCalc_DocZoom(ByRef $oDoc, $iZoomType = Null, $iZoom = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $aiZoom[0]
+	Local $aiZoom[2]
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
