@@ -1512,6 +1512,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOI_PAR_TEXT_ANCHOR_*
   - $LOI_PAR_TXT_DIR_*
   - $LOI_RELATIVE_*
+  - $LOI_SHAPE_COLOR_USE_SLIDE_BACKGROUND
   - $LOI_SHAPE_LINE_ARROW_TYPE_*
   - $LOI_SHAPE_LINE_CAP_*
   - $LOI_SHAPE_LINE_JOINT_*
@@ -1637,7 +1638,6 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - __LOImpress_ParTabStopDelete
   - __LOImpress_ParTabStopMod
   - __LOImpress_ParTabStopsGetList
-  - __LOImpress_ShapeAreaGradient
   - __LOImpress_ShapeAreaGradientMulticolor
   - __LOImpress_ShapeAreaShadow
   - __LOImpress_ShapeAreaShadowModify
@@ -1653,6 +1653,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - __LOImpress_ShapePresStyleNumInitiateDocument
   - __LOImpress_ShapePresStyleNumModify
   - __LOImpress_ShapeStyleAreaColor
+  - __LOImpress_ShapeStyleAreaGradient
   - __LOImpress_ShapeStyleAreaTransparencyGradient
   - __LOImpress_ShapeStyleCompare
   - __LOImpress_ShapeStyleLineArrowStyles

@@ -576,6 +576,9 @@ Global Const _                                                       ; com.sun.s
 		$LOI_RELATIVE_PAGE_PRINT_BOTTOM = 10, _                      ; The Object is placed considering the space available in the page footer(?)
 		$LOI_RELATIVE_PAGE_PRINT_TOP = 11                            ; The Object is placed considering the space available in the page header(?)
 
+Global Const _
+		$LOI_SHAPE_COLOR_USE_SLIDE_BACKGROUND = -2                   ; Use the Slide's background color as the Shape's background color.
+
 ; Arrowhead Type Constants
 Global Enum _
 		$LOI_SHAPE_LINE_ARROW_TYPE_NONE, _                           ; 0 -- No Arrow head.

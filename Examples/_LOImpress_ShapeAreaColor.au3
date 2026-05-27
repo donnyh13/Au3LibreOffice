@@ -35,6 +35,8 @@ Func Example()
 
 	; Modify the Shape Background Color settings. Background color = $LO_COLOR_TEAL.
 	_LOImpress_ShapeAreaColor($oShape, $LO_COLOR_TEAL)
+	; Modify the Shape Background Color settings. Background color = $LOI_SHAPE_COLOR_USE_SLIDE_BACKGROUND.
+	_LOImpress_ShapeAreaColor($oShape, $LOI_SHAPE_COLOR_USE_SLIDE_BACKGROUND)
 	If @error Then _ERROR($oDoc, "Failed to set Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current rectangle Shape settings. Return will be an Integer.

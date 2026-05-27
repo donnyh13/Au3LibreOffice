@@ -140,24 +140,27 @@
 ; Description ...: Set or Retrieve the Fill color settings for a Shape.
 ; Syntax ........: _LOImpress_ShapeAreaColor(ByRef $oShape[, $iColor = Null])
 ; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
-;                  $iColor              - [optional] (-1-16777215) Default is Null. The Fill color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for "None".
+;                  $iColor              - [optional] (-2-16777215) Default is Null. The Fill color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for "None", or $LOI_SHAPE_COLOR_USE_SLIDE_BACKGROUND (-2) to use the Slide's background color (L.O. 7.5 +).
 ; Return values .: Success: 1 or Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current Fill color as an Integer.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
-;                  @Error: 1, @Extended: 2 = $iColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error: 1, @Extended: 2 = $iColor not an Integer, less than -2 or greater than 16777215.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve current color value.
 ;                  @Error: 3, @Extended: 2 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iColor
+;                  --Version Related Errors--
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version less than 7.5.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
+;                  So far, I have found that Textboxes and all drawing shapes support the $LOI_SHAPE_COLOR_USE_SLIDE_BACKGROUND flag. Images and Tables do not, and will throw a property setting error.
 ; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
@@ -166,13 +169,56 @@ Func _LOImpress_ShapeAreaColor(ByRef $oShape, $iColor = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $vReturn
+	Local $iError = 0, $iOldTransparency, $iCurColor
 
 	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$vReturn = __LOImpress_ShapeAreaColor($oShape, $iColor)
+	; If $iColor is Null, and Fill Style is set to solid, then return current color value, else return LO_COLOR_OFF.
+	If __LO_VarsAreNull($iColor) Then
+		If ($oShape.FillStyle() = $LOI_AREA_FILL_STYLE_SOLID) Then ; If FillStyle is set to solid, then return current color value, else return $LO_COLOR_OFF (Probably a Gradient is used or otherwise).
+			$iCurColor = __LOImpress_ColorRemoveAlpha($oShape.FillColor())
+			If Not IsInt($iCurColor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	Return SetError(@error, @extended, $vReturn)
+		ElseIf ($oShape.FillStyle() = $LOI_AREA_FILL_STYLE_OFF) And $oShape.PropertySetInfo.hasPropertyByName("FillUseSlideBackground") And $oShape.FillUseSlideBackground() Then
+			$iCurColor = $LOI_SHAPE_COLOR_USE_SLIDE_BACKGROUND
+
+		Else
+			$iCurColor = $LO_COLOR_OFF
+		EndIf
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurColor)
+	EndIf
+
+	If Not __LO_IntIsBetween($iColor, $LO_COLOR_OFF, $LO_COLOR_WHITE, "", $LOI_SHAPE_COLOR_USE_SLIDE_BACKGROUND) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	If ($iColor = $LO_COLOR_OFF) Then
+		$oShape.FillStyle = $LOI_AREA_FILL_STYLE_OFF
+		$oShape.FillUseSlideBackground = False
+
+	ElseIf ($iColor = $LOI_SHAPE_COLOR_USE_SLIDE_BACKGROUND) Then
+		If Not __LO_VersionCheck(7.5) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
+
+		If ($oShape.PropertySetInfo.hasPropertyByName("FillUseSlideBackground")) Then
+			$oShape.FillStyle = $LOI_AREA_FILL_STYLE_OFF
+			$oShape.FillUseSlideBackground = True
+			$iError = ($oShape.FillUseSlideBackground() = True) ? ($iError) : (BitOR($iError, 1))
+		Else
+			$iError = BitOR($iError, 1)
+		EndIf
+
+	Else
+		$iOldTransparency = $oShape.FillTransparence()
+		If Not IsInt($iOldTransparency) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		$oShape.FillStyle = $LOI_AREA_FILL_STYLE_SOLID
+		$oShape.FillUseSlideBackground = False
+		$oShape.FillColor = $iColor
+		$iError = ($oShape.FillColor() = $iColor) ? ($iError) : (BitOR($iError, 1))
+
+		$oShape.FillTransparence = $iOldTransparency
+	EndIf
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOImpress_ShapeAreaColor
 
 ; #FUNCTION# ====================================================================================================================
@@ -2562,7 +2608,7 @@ Func _LOImpress_ShapePresStyleAreaColor(ByRef $oPresStyle, $iColor = Null)
 
 	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$vReturn = __LOImpress_ShapeAreaColor($oPresStyle, $iColor)
+	$vReturn = __LOImpress_ShapeStyleAreaColor($oPresStyle, $iColor)
 
 	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOImpress_ShapePresStyleAreaColor
@@ -4300,7 +4346,7 @@ Func _LOImpress_ShapeStyleAreaColor(ByRef $oShapeStyle, $iColor = Null)
 
 	If Not IsObj($oShapeStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$vReturn = __LOImpress_ShapeAreaColor($oShapeStyle, $iColor)
+	$vReturn = __LOImpress_ShapeStyleAreaColor($oShapeStyle, $iColor)
 
 	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOImpress_ShapeStyleAreaColor
