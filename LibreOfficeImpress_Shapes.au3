@@ -1553,9 +1553,13 @@ EndFunc   ;==>_LOImpress_ShapeImageCrop
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapeImageInsert
 ; Description ...: Insert an image into a slide.
-; Syntax ........: _LOImpress_ShapeImageInsert(ByRef $oSlide, $sURL)
+; Syntax ........: _LOImpress_ShapeImageInsert(ByRef $oSlide, $sURL[, $iWidth = -1[, $iHeight = -1[, $iX = -1[, $iY = -1]]]])
 ; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
 ;                  $sURL                - The file path to the image to insert.
+;                  $iWidth              - [optional] Default is -1. The Images's Width in Hundredths of a Millimeter (HMM). Call with -1 for automatic width.
+;                  $iHeight             - [optional] Default is -1. The Images's Height in Hundredths of a Millimeter (HMM). Call with -1 for automatic height.
+;                  $iX                  - [optional] Default is -1. The X position from the top-left of the page, in Hundredths of a Millimeter (HMM). Call with -1 to center the image horizontally.
+;                  $iY                  - [optional] Default is -1. The Y position from the top-left of the page, in Hundredths of a Millimeter (HMM). Call with -1 to center the image vertically.
 ; Return values .: Success: Object.
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Image was successfully inserted, returning image Object.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -1563,13 +1567,17 @@ EndFunc   ;==>_LOImpress_ShapeImageCrop
 ;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
 ;                  @Error: 1, @Extended: 2 = $sImage not a String.
 ;                  @Error: 1, @Extended: 3 = Image called in $sImage doesn't exist at given path.
+;                  @Error: 1, @Extended: 4 = $iWidth not an Integer.
+;                  @Error: 1, @Extended: 5 = $iHeight not an Integer.
+;                  @Error: 1, @Extended: 6 = $iX not an Integer.
+;                  @Error: 1, @Extended: 7 = $iY not an Integer.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failure creating "com.sun.star.drawing.GraphicObjectShape" Object.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Error converting Image Path to LibreOffice URL.
 ;                  @Error: 3, @Extended: 2 = Error retrieving Document Object.
-;                  @Error: 3, @Extended: 3 = Error retrieving Bitmap size.
-;                  @Error: 3, @Extended: 4 = Error retrieving image's size structure.
+;                  @Error: 3, @Extended: 3 = Error retrieving image's size structure.
+;                  @Error: 3, @Extended: 4 = Error retrieving Bitmap size.
 ;                  @Error: 3, @Extended: 5 = Error calculating image's ratio.
 ;                  @Error: 3, @Extended: 6 = Error calculating Slide's ratio.
 ;                  @Error: 3, @Extended: 7 = Error retrieving image's Position structure.
@@ -1580,7 +1588,7 @@ EndFunc   ;==>_LOImpress_ShapeImageCrop
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_ShapeImageInsert(ByRef $oSlide, $sURL)
+Func _LOImpress_ShapeImageInsert(ByRef $oSlide, $sURL, $iWidth = -1, $iHeight = -1, $iX = -1, $iY = -1)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1591,6 +1599,10 @@ Func _LOImpress_ShapeImageInsert(ByRef $oSlide, $sURL)
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsString($sURL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not FileExists($sURL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsInt($iWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not IsInt($iHeight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If Not IsInt($iX) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+	If Not IsInt($iY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
 	$sURL = _LO_PathConvert($sURL, $LO_PATHCONV_OFFICE_RETURN)
 	If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
@@ -1605,12 +1617,12 @@ Func _LOImpress_ShapeImageInsert(ByRef $oSlide, $sURL)
 
 	$oSlide.add($oImage)
 
+	$tNewSize = $oImage.Size()
+	If Not IsObj($tNewSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
 	; Auto-Size and center image. Thanks to method by A. Pitonyak, OOME 4.1, PDF pg 320.
 	$tBitmapSize = $oImage.GraphicObjectFillBitmap.GetSize()
-	If Not IsObj($tBitmapSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
-	$tNewSize = $oImage.Size()
-	If Not IsObj($tNewSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+	If Not IsObj($tBitmapSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
 	$nImageRatio = (Number($tBitmapSize.Height()) / Number($tBitmapSize.Width()))
 	If Not IsNumber($nImageRatio) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
@@ -1619,19 +1631,19 @@ Func _LOImpress_ShapeImageInsert(ByRef $oSlide, $sURL)
 	If Not IsNumber($nPageRatio) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
 
 	If ($nPageRatio > $nImageRatio) Then ; Compare the ratios to see which is wider.
-		$tNewSize.Width = $oSlide.Width()
-		$tNewSize.Height = Int($oSlide.Width() * $nImageRatio)
+		$tNewSize.Width = ($iWidth = -1) ? ($oSlide.Width()) : ($iWidth)
+		$tNewSize.Height = ($iHeight = -1) ? (($iWidth = -1) ? (Int($oSlide.Width() * $nImageRatio)) : ($iWidth * $nImageRatio)) : ($iHeight) ;
 
 	Else
-		$tNewSize.Width = Int($oSlide.Width() / $nImageRatio)
-		$tNewSize.Height = $oSlide.Height()
+		$tNewSize.Width = ($iWidth = -1) ? (Int($oSlide.Width() / $nImageRatio)) : ($iWidth)
+		$tNewSize.Height = ($iHeight = -1) ? ($oSlide.Height()) : ($iHeight)
 	EndIf
 
 	$tPos = $oImage.Position()
 	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 7, 0)
 
-	$tPos.X = Int(($oSlide.Width() - $tNewSize.Width()) / 2)
-	$tPos.Y = Int(($oSlide.Height() - $tNewSize.Height()) / 2)
+	$tPos.X = ($iX = -1) ? (Int(($oSlide.Width() - $tNewSize.Width()) / 2)) : ($iX)
+	$tPos.Y = ($iY = -1) ? (Int(($oSlide.Height() - $tNewSize.Height()) / 2)) : ($iY)
 
 	$oImage.Size = $tNewSize
 	$oImage.Position = $tPos
@@ -6090,14 +6102,14 @@ EndFunc   ;==>_LOImpress_ShapeStyleTextAttrSettings
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapeTableInsert
 ; Description ...: Create and Insert a Table into a Slide.
-; Syntax ........: _LOImpress_ShapeTableInsert(ByRef $oSlide, $iWidth, $iHeight[, $iRows = 2[, $iColumns = 2[, $iX = 0[, $iY = 0]]]])
+; Syntax ........: _LOImpress_ShapeTableInsert(ByRef $oSlide, $iWidth, $iHeight[, $iRows = 2[, $iColumns = 2[, $iX = -1[, $iY = -1]]]])
 ; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
 ;                  $iWidth              - The Table's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Table's Height in Hundredths of a Millimeter (HMM).
 ;                  $iRows               - [optional] (1-75) Default is 2. The number of Rows.
 ;                  $iColumns            - [optional] (1-75) Default is 2. The number of Columns.
-;                  $iX                  - [optional] Default is 0. The X position from the top-left of the page, in Hundredths of a Millimeter (HMM).
-;                  $iY                  - [optional] Default is 0. The Y position from the top-left of the page, in Hundredths of a Millimeter (HMM).
+;                  $iX                  - [optional] Default is -1. The X position from the top-left of the page, in Hundredths of a Millimeter (HMM). Call with -1 to center the table horizontally.
+;                  $iY                  - [optional] Default is -1. The Y position from the top-left of the page, in Hundredths of a Millimeter (HMM). Call with -1 to center the table vertically.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Inserted a new Table. Returning its Object.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -6123,7 +6135,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleTextAttrSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_ShapeTableInsert(ByRef $oSlide, $iWidth, $iHeight, $iRows = 2, $iColumns = 2, $iX = 0, $iY = 0)
+Func _LOImpress_ShapeTableInsert(ByRef $oSlide, $iWidth, $iHeight, $iRows = 2, $iColumns = 2, $iX = -1, $iY = -1)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -6158,8 +6170,8 @@ Func _LOImpress_ShapeTableInsert(ByRef $oSlide, $iWidth, $iHeight, $iRows = 2, $
 	$tPos = $oShape.Position()
 	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	$tPos.X = $iX
-	$tPos.Y = $iY
+	$tPos.X = ($iX = -1) ? (Int(($oSlide.Width() - $iWidth) / 2)) : ($iX)
+	$tPos.Y = ($iY = -1) ? (Int(($oSlide.Height() - $iHeight) / 2)) : ($iY)
 
 	$oShape.Position = $tPos
 
@@ -6436,13 +6448,13 @@ EndFunc   ;==>_LOImpress_ShapeTextAttrSettings
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapeTextBoxInsert
 ; Description ...: Create and Insert a Text box into a Slide.
-; Syntax ........: _LOImpress_ShapeTextBoxInsert(ByRef $oSlide, $iTextBoxType, $iWidth, $iHeight[, $iX = 0[, $iY = 0]])
+; Syntax ........: _LOImpress_ShapeTextBoxInsert(ByRef $oSlide, $iTextBoxType, $iWidth, $iHeight[, $iX = -1[, $iY = -1]])
 ; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
 ;                  $iTextBoxType        - (0-3) The type of Text Box to create. See Constants, $LOI_SHAPE_TEXTBOX_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iWidth              - The Text Box's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Text Box's Height in Hundredths of a Millimeter (HMM).
-;                  $iX                  - [optional] Default is 0. The X position from the top-left of the page, in Hundredths of a Millimeter (HMM).
-;                  $iY                  - [optional] Default is 0. The Y position from the top-left of the page, in Hundredths of a Millimeter (HMM).
+;                  $iX                  - [optional] Default is -1. The X position from the top-left of the page, in Hundredths of a Millimeter (HMM). Call with -1 to center the Text Box horizontally.
+;                  $iY                  - [optional] Default is -1. The Y position from the top-left of the page, in Hundredths of a Millimeter (HMM). Call with -1 to center the Text Box vertically.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Inserted a new Text Box. Returning its Object.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -6466,7 +6478,7 @@ EndFunc   ;==>_LOImpress_ShapeTextAttrSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_ShapeTextBoxInsert(ByRef $oSlide, $iTextBoxType, $iWidth, $iHeight, $iX = 0, $iY = 0)
+Func _LOImpress_ShapeTextBoxInsert(ByRef $oSlide, $iTextBoxType, $iWidth, $iHeight, $iX = -1, $iY = -1)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -6506,8 +6518,8 @@ Func _LOImpress_ShapeTextBoxInsert(ByRef $oSlide, $iTextBoxType, $iWidth, $iHeig
 	$tPos = $oShape.Position()
 	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	$tPos.X = $iX
-	$tPos.Y = $iY
+	$tPos.X = ($iX = -1) ? (Int(($oSlide.Width() - $iWidth) / 2)) : ($iX)
+	$tPos.Y = ($iY = -1) ? (Int(($oSlide.Height() - $iHeight) / 2)) : ($iY)
 
 	$oShape.Position = $tPos
 

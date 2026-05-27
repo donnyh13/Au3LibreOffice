@@ -20,7 +20,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to modify Slide layout. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a new Table.
-	_LOImpress_ShapeTableInsert($oSlide, 5000, 4000, 4, 3, 3000, 1000)
+	_LOImpress_ShapeTableInsert($oSlide, 5000, 4000, 4, 3)
 	If @error Then _ERROR($oDoc, "Failed to insert a Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

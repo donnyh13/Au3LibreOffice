@@ -742,13 +742,13 @@ EndFunc   ;==>_LOImpress_DrawShapeGetType
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_DrawShapeInsert
 ; Description ...: Insert a shape into a slide.
-; Syntax ........: _LOImpress_DrawShapeInsert(ByRef $oSlide, $iShapeType, $iWidth, $iHeight[, $iX = 0[, $iY = 0]])
+; Syntax ........: _LOImpress_DrawShapeInsert(ByRef $oSlide, $iShapeType, $iWidth, $iHeight[, $iX = -1[, $iY = -1]])
 ; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
 ;                  $iShapeType          - (0-187) The Type of shape to create. See remarks. See $LOI_DRAWSHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM). Note, for Lines, Width is the length of the line.
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM). Note, for Lines, Height is the amount the line goes below the point of insertion.
-;                  $iX                  - [optional] Default is 0. The X position from the top-left of the page, in Hundredths of a Millimeter (HMM).
-;                  $iY                  - [optional] Default is 0. The Y position from the top-left of the page, in Hundredths of a Millimeter (HMM).
+;                  $iX                  - [optional] Default is -1. The X position from the top-left of the page, in Hundredths of a Millimeter (HMM). Call with -1 to center the shape horizontally.
+;                  $iY                  - [optional] Default is -1. The Y position from the top-left of the page, in Hundredths of a Millimeter (HMM). Call with -1 to center the shape vertically.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. The Shape was successfully inserted. Returning the Shape's Object.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -781,7 +781,7 @@ EndFunc   ;==>_LOImpress_DrawShapeGetType
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_DrawShapeInsert(ByRef $oSlide, $iShapeType, $iWidth, $iHeight, $iX = 0, $iY = 0)
+Func _LOImpress_DrawShapeInsert(ByRef $oSlide, $iShapeType, $iWidth, $iHeight, $iX = -1, $iY = -1)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 

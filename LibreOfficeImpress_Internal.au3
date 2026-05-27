@@ -1193,8 +1193,8 @@ Func __LOImpress_DrawShape_CreateArrow(ByRef $oSlide, $iWidth, $iHeight, $iX, $i
 	$tPos = $oShape.Position()
 	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	$tPos.X = $iX
-	$tPos.Y = $iY
+	$tPos.X = ($iX = -1) ? (Int(($oSlide.Width() - $iWidth) / 2)) : ($iX)
+	$tPos.Y = ($iY = -1) ? (Int(($oSlide.Height() - $iHeight) / 2)) : ($iY)
 
 	$oShape.Position = $tPos
 
@@ -1387,8 +1387,8 @@ Func __LOImpress_DrawShape_CreateBasic(ByRef $oSlide, $iWidth, $iHeight, $iX, $i
 	$tPos = $oShape.Position()
 	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	$tPos.X = $iX
-	$tPos.Y = $iY
+	$tPos.X = ($iX = -1) ? (Int(($oSlide.Width() - $iWidth) / 2)) : ($iX)
+	$tPos.Y = ($iY = -1) ? (Int(($oSlide.Height() - $iHeight) / 2)) : ($iY)
 
 	$oShape.Position = $tPos
 
@@ -1496,8 +1496,8 @@ Func __LOImpress_DrawShape_CreateCallout(ByRef $oSlide, $iWidth, $iHeight, $iX, 
 	$tPos = $oShape.Position()
 	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	$tPos.X = $iX
-	$tPos.Y = $iY
+	$tPos.X = ($iX = -1) ? (Int(($oSlide.Width() - $iWidth) / 2)) : ($iX)
+	$tPos.Y = ($iY = -1) ? (Int(($oSlide.Height() - $iHeight) / 2)) : ($iY)
 
 	$oShape.Position = $tPos
 
@@ -1675,8 +1675,8 @@ Func __LOImpress_DrawShape_CreateFlowchart(ByRef $oSlide, $iWidth, $iHeight, $iX
 	$tPos = $oShape.Position()
 	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	$tPos.X = $iX
-	$tPos.Y = $iY
+	$tPos.X = ($iX = -1) ? (Int(($oSlide.Width() - $iWidth) / 2)) : ($iX)
+	$tPos.Y = ($iY = -1) ? (Int(($oSlide.Height() - $iHeight) / 2)) : ($iY)
 
 	$oShape.Position = $tPos
 
@@ -2147,8 +2147,8 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY
 	$tPos = $oShape.Position()
 	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
-	$tPos.X = $iX
-	$tPos.Y = $iY
+	$tPos.X = ($iX = -1) ? (Int(($oSlide.Width() - $iWidth) / 2)) : ($iX)
+	$tPos.Y = ($iY = -1) ? (Int(($oSlide.Height() - $iHeight) / 2)) : ($iY)
 
 	$oShape.Position = $tPos
 
@@ -2264,8 +2264,8 @@ Func __LOImpress_DrawShape_CreateStars(ByRef $oSlide, $iWidth, $iHeight, $iX, $i
 	$tPos = $oShape.Position()
 	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	$tPos.X = $iX
-	$tPos.Y = $iY
+	$tPos.X = ($iX = -1) ? (Int(($oSlide.Width() - $iWidth) / 2)) : ($iX)
+	$tPos.Y = ($iY = -1) ? (Int(($oSlide.Height() - $iHeight) / 2)) : ($iY)
 
 	$oShape.Position = $tPos
 
@@ -2425,8 +2425,8 @@ Func __LOImpress_DrawShape_CreateSymbol(ByRef $oSlide, $iWidth, $iHeight, $iX, $
 	$tPos = $oShape.Position()
 	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	$tPos.X = $iX
-	$tPos.Y = $iY
+	$tPos.X = ($iX = -1) ? (Int(($oSlide.Width() - $iWidth) / 2)) : ($iX)
+	$tPos.Y = ($iY = -1) ? (Int(($oSlide.Height() - $iHeight) / 2)) : ($iY)
 
 	$oShape.Position = $tPos
 
