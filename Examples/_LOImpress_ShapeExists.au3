@@ -24,21 +24,21 @@ Func Example()
 	_LOImpress_ShapeName($oShape, "AutoIt-Shape")
 	If @error Then _ERROR($oDoc, "Failed to rename a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Check if the Slide has a Shape by the name of "AutoIt-Shape"
-	$bReturn = _LOImpress_ShapeExists($oSlide, "AutoIt-Shape")
+	; Check if the Document has a Shape by the name of "AutoIt-Shape"
+	$bReturn = _LOImpress_ShapeExists($oDoc, "AutoIt-Shape")
 	If @error Then _ERROR($oDoc, "Failed to look for Shape name. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Does this Slide contain a Shape named ""AutoIt-Shape""? True/ False. " & $bReturn)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Does this Slideshow contain a Shape named ""AutoIt-Shape""? True/ False. " & $bReturn)
 
 	; Delete the Shape.
 	_LOImpress_ShapeDelete($oShape)
 	If @error Then _ERROR($oDoc, "Failed to delete Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Check again, if the Slide has a Shape by the name of "AutoIt-Shape"
-	$bReturn = _LOImpress_ShapeExists($oSlide, "AutoIt-Shape")
+	; Check again, if the Doc has a Shape by the name of "AutoIt-Shape"
+	$bReturn = _LOImpress_ShapeExists($oDoc, "AutoIt-Shape")
 	If @error Then _ERROR($oDoc, "Failed to look for Shape name. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Now does this Slide contain a Shape named ""AutoIt-Shape""? True/ False. " & $bReturn)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Now does this Slideshow document contain a Shape named ""AutoIt-Shape""? True/ False. " & $bReturn)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

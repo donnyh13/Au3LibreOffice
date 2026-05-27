@@ -1313,48 +1313,54 @@ EndFunc   ;==>_LOImpress_ShapeDelete
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapeExists
-; Description ...: Check if a Slide contains a DrawShape with the specified name.
-; Syntax ........: _LOImpress_ShapeExists(ByRef $oSlide, $sShapeName)
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+; Description ...: Check if a Document contains a DrawShape with the specified name.
+; Syntax ........: _LOImpress_ShapeExists(ByRef $oDoc, $sShapeName)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $sShapeName          - The Shape name to search for.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If a Shape was found matching $sShapeName, True is returned, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sShapeName not a String.
 ;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Error retrieving Shape name.
+;                  @Error: 3, @Extended: 1 = Error retrieving Slide Object.
+;                  @Error: 3, @Extended: 2 = Error retrieving Shape Object.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: On newly created shapes, the name value is blank for some reason, even though the shape in the UI has a name.
-;                  The Shape name must be unique, however due to the above issue, it is possible to have two shapes with the same name in the UI (But not internally).
-;                  I have modified the check for a Shape name already existing by assuming a Shape's name when encountering one without a name, e.g. assuming the name would be "Shape 1" etc. This could cause issues with non-English versions of LibreOffice.
+; Remarks .......: For all shapes that have not been renamed by the user, the name value is blank, even though the shape in the UI has a name. Therefore this function will only work for user-renamed shapes.
+;                  This function searches all slides, because a Shape name must be unique for an entire slideshow document.
 ;                  This function will work for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_ShapeExists(ByRef $oSlide, $sShapeName)
+Func _LOImpress_ShapeExists(ByRef $oDoc, $sShapeName)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $sName
+	Local $oSlide, $oShape
 
-	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsString($sShapeName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If $oSlide.hasElements() Then
-		For $i = 0 To $oSlide.getCount() - 1
-			$sName = $oSlide.getByIndex($i).Name()
-			If Not IsString($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	For $i = 0 To $oDoc.DrawPages.getCount() - 1
+		$oSlide = $oDoc.DrawPages.getByIndex($i)
+		If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-			; Impress doesn't set the Shape name on new shapes. It has names in the UI that would correspond to the order of the shapes inserted, i.e. Shape 1, Shape 2. Etc.
-			If (($sName = "") And (("Shape " & ($i + 1)) = $sShapeName)) Or ($sName = $sShapeName) Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
+		If $oSlide.hasElements() Then
+			For $j = 0 To $oSlide.getCount() - 1
+				$oShape = $oSlide.getByIndex($j)
+				If Not IsObj($oShape) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
-		Next
-	EndIf
+				If ($oShape.Name() <> "") And ($oShape.Name() = $sShapeName) Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
+
+				Sleep((IsInt($j / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+			Next
+		EndIf
+
+		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+	Next
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, False) ; No matches
 EndFunc   ;==>_LOImpress_ShapeExists
@@ -2069,15 +2075,15 @@ EndFunc   ;==>_LOImpress_ShapeLineProperties
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Shape's name.
 ;                  @Error: 3, @Extended: 2 = Failed to retrieve Parent Slide Object.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve Parent Document Object.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  On newly created shapes, the name value is blank for some reason, even though the shape in the UI has a name.
-;                  The Shape name must be unique, however due to the above issue, it is possible to have two shapes with the same name in the UI (But not internally).
-;                  I have modified the check for a Shape name already existing by assuming a Shape's name when encountering one without a name, e.g. assuming the name would be "Shape 1" etc. This could cause issues with non-English versions of LibreOffice.
+;                  For all shapes that have not been renamed by the user, the name value is blank, even though the shape in the UI has a name.
+;                  When renaming a shape, the Shape name must be unique to the entire slideshow (at least in the LibreOffice UI), however due to the above issue, it is possible to have two shapes with the same name in the UI (and also internally if I don't make a safety check).
 ;                  This function will work for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
 ; Related .......:
 ; Link ..........:
@@ -2088,7 +2094,7 @@ Func _LOImpress_ShapeName(ByRef $oShape, $sName = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $oSlide
+	Local $oSlide, $oDoc
 	Local $sCurrName
 
 	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -2104,7 +2110,11 @@ Func _LOImpress_ShapeName(ByRef $oShape, $sName = Null)
 
 	$oSlide = $oShape.Parent()
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-	If _LOImpress_ShapeExists($oSlide, $sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	$oDoc = $oSlide.MasterPage.Forms.Parent()
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	If _LOImpress_ShapeExists($oDoc, $sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$oShape.Name = $sName
 	$iError = ($oShape.Name() = $sName) ? ($iError) : (BitOR($iError, 1))
