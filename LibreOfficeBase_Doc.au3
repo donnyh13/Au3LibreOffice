@@ -624,7 +624,7 @@ Func _LOBase_DocIsModified(ByRef $oDoc, $bModified = Null)
 
 	If __LO_VarsAreNull($bModified) Then
 		$bIsMod = $oDoc.isModified()
-	If Not IsBool($bIsMod) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+		If Not IsBool($bIsMod) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $bIsMod)
 	EndIf
