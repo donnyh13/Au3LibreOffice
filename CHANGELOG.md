@@ -2363,6 +2363,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   > Previous order:($oDoc, $oPageStyle, $sNewPageStyleName, ***$bHidden***, $sFollowStyle)
   >
   > New order:($oDoc, $oPageStyle, $sNewPageStyleName, $sFollowStyle, ***$bHidden***)
+- Added ability to modify Document's modified status:
+  - _LOWriter_DocIsModified
 
 #### Documented
 
