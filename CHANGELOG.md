@@ -1327,6 +1327,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_PageStyleHeader
   - _LOCalc_PageStyleOrganizer
   - _LOCalc_PageStyleSheetScale
+- Added ability to modify Document's modified status:
+  - _LOCalc_DocIsModified
 
 #### Documented
 
