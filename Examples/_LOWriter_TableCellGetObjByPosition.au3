@@ -5,8 +5,8 @@
 Example()
 
 Func Example()
-	Local $oDoc, $oViewCursor, $oTable, $oCell
-	Local $iRows, $iColumns, $iColor
+	Local $oDoc, $oViewCursor, $oTable, $oCell, $oCellRange
+	Local $iRows, $iColumns
 
 	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -16,9 +16,27 @@ Func Example()
 	$oViewCursor = _LOWriter_CursorViewCursorGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Create a Table, 5 rows, 3 columns.
-	$oTable = _LOWriter_TableCreate($oDoc, $oViewCursor, 3, 5)
+	; Create a Table, 5 columns, 6 rows.
+	$oTable = _LOWriter_TableCreate($oDoc, $oViewCursor, 5, 6)
 	If @error Then _ERROR($oDoc, "Failed to create Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Retrieve middle left Table Cell Object, Table Rows and columns are 0 based, so left hand column is 0, 2nd row down is 1.
+	$oCell = _LOWriter_TableCellGetObjByPosition($oTable, 0, 1)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Set the Cell background color to show which cells I have retrieved the Cell Range Object for.
+	_LOWriter_TableCellBackColor($oCell, $LO_COLOR_BLUE)
+	If @error Then _ERROR($oDoc, "Failed to set Text Table cell background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; When retrieving multiple cells, a cell range will be returned, a cell range is largely the same as a single cell Object,
+	; but some functions don't accept a cell range.
+
+	; Retrieve the First Column, fourth row to third column, fifth row.
+	$oCellRange = _LOWriter_TableCellGetObjByPosition($oTable, 0, 3, 2, 4)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Set the Cell background color to show which cells I have retrieved the Cell Range Object for.
+	_LOWriter_TableCellBackColor($oCellRange, $LO_COLOR_TEAL)
 
 	; Retrieve how many Rows the Table currently contains.
 	$iRows = _LOWriter_TableRowGetCount($oTable)
@@ -39,17 +57,6 @@ Func Example()
 			If @error Then _ERROR($oDoc, "Failed to set Text Table Cell String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 		Next
 	Next
-
-	; Change the 3rd row down (Row 2) background color to: $LO_COLOR_ORANGE
-	_LOWriter_TableRowBackColor($oTable, 2, $LO_COLOR_ORANGE)
-	If @error Then _ERROR($oDoc, "Failed to set the row background color settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Retrieve row's current background color settings.
-	$iColor = _LOWriter_TableRowBackColor($oTable, 2)
-	If @error Then _ERROR($oDoc, "Failed to retrieve the row background color settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Array elements will be in order of function's parameters.
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The background color for the Third row down, (Row 2), is (as a RGB Color Integer): " & $iColor)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

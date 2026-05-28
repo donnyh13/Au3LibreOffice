@@ -31,7 +31,7 @@ Func Example()
 	; but some functions don't accept a cell range.
 
 	; Retrieve bottom left, and Bottom second over Table Cell Objects.
-	$oCell = _LOWriter_TableGetCellObjByCursor($oDoc, $oTable, $oViewCursor)
+	$oCell = _LOWriter_TableCellGetObjByCursor($oDoc, $oTable, $oViewCursor)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Cell background color to show which cells I have retrieved the Cell Range Object for.

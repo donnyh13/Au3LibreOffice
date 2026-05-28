@@ -42,6 +42,9 @@
 ; _LOWriter_TableCellGetDataType
 ; _LOWriter_TableCellGetError
 ; _LOWriter_TableCellGetName
+; _LOWriter_TableCellGetObjByCursor
+; _LOWriter_TableCellGetObjByName
+; _LOWriter_TableCellGetObjByPosition
 ; _LOWriter_TableCellProtect
 ; _LOWriter_TableCellsGetNames
 ; _LOWriter_TableCellString
@@ -55,9 +58,6 @@
 ; _LOWriter_TableCursor
 ; _LOWriter_TableDelete
 ; _LOWriter_TableExists
-; _LOWriter_TableGetCellObjByCursor
-; _LOWriter_TableGetCellObjByName
-; _LOWriter_TableGetCellObjByPosition
 ; _LOWriter_TableGetData
 ; _LOWriter_TableGetObjByCursor
 ; _LOWriter_TableGetObjByName
@@ -500,7 +500,7 @@ EndFunc   ;==>_LOWriter_TableBreak
 ; Name ..........: _LOWriter_TableCellBackColor
 ; Description ...: Set and Retrieve the Background color of a Cell or Cell Range.
 ; Syntax ........: _LOWriter_TableCellBackColor(ByRef $oCell[, $iBackColor = Null])
-; Parameters ....: $oCell               - A Table Cell or Cell Range Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+; Parameters ....: $oCell               - A Table Cell or Cell Range Object returned by a previous _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, or _LOWriter_TableCellGetObjByPosition function.
 ;                  $iBackColor          - [optional] (-1-16777215) Default is Null. Specify the Cell background color as a RGB Color Integer. Call with $LO_COLOR_OFF(-1) to disable Background color. Can also be one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -517,7 +517,7 @@ EndFunc   ;==>_LOWriter_TableBreak
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-; Related .......: _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -549,7 +549,7 @@ EndFunc   ;==>_LOWriter_TableCellBackColor
 ; Name ..........: _LOWriter_TableCellBorderColor
 ; Description ...: Set the Cell or Cell Range Border Line Color. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_TableCellBorderColor(ByRef $oCell[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oCell               - A Table Cell or Cell Range Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+; Parameters ....: $oCell               - A Table Cell or Cell Range Object returned by a previous _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, or _LOWriter_TableCellGetObjByPosition function.
 ;                  $iTop                - [optional] (0-16777215) Default is Null. The Top Border Line Color of the Cell, as a RGB Color Integer. A custom value or one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iBottom             - [optional] (0-16777215) Default is Null. The Bottom Border Line Color of the Cell, as a RGB Color Integer. A custom value or one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iLeft               - [optional] (0-16777215) Default is Null. The Left Border Line Color of the Cell, as a RGB Color Integer. A custom value or one of the constants $LO_COLOR_* as defined in LibreOffice_Constants.au3.
@@ -586,7 +586,7 @@ EndFunc   ;==>_LOWriter_TableCellBackColor
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Error values for Initialization and Processing are passed from the internal border setting function.
-; Related .......: _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_TableCellBorderWidth, _LOWriter_TableCellBorderStyle, _LOWriter_TableCellBorderPadding
+; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_TableCellBorderWidth, _LOWriter_TableCellBorderStyle, _LOWriter_TableCellBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -608,7 +608,7 @@ EndFunc   ;==>_LOWriter_TableCellBorderColor
 ; Name ..........: _LOWriter_TableCellBorderPadding
 ; Description ...: Set or retrieve the Border Padding (spacing between the Cell text and border) settings.
 ; Syntax ........: _LOWriter_TableCellBorderPadding(ByRef $oCell[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oCell               - A Table Cell or Cell Range Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+; Parameters ....: $oCell               - A Table Cell or Cell Range Object returned by a previous _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, or _LOWriter_TableCellGetObjByPosition function.
 ;                  $iTop                - [optional] Default is Null. The Top Distance between the Border and Cell text in Hundredths of a Millimeter (HMM).
 ;                  $iBottom             - [optional] Default is Null. The Bottom Distance between the Border and Cell text in Hundredths of a Millimeter (HMM).
 ;                  $iLeft               - [optional] Default is Null. The Left Distance between the Border and Cell text in Hundredths of a Millimeter (HMM).
@@ -633,7 +633,7 @@ EndFunc   ;==>_LOWriter_TableCellBorderColor
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition, _LO_UnitConvert, _LOWriter_TableCellBorderColor, _LOWriter_TableCellBorderStyle, _LOWriter_TableCellBorderWidth
+; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition, _LO_UnitConvert, _LOWriter_TableCellBorderColor, _LOWriter_TableCellBorderStyle, _LOWriter_TableCellBorderWidth
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -687,7 +687,7 @@ EndFunc   ;==>_LOWriter_TableCellBorderPadding
 ; Name ..........: _LOWriter_TableCellBorderStyle
 ; Description ...: Set or Retrieve the Cell or Cell Range Border Line style. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_TableCellBorderStyle(ByRef $oCell[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oCell               - A Table Cell or Cell Range Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+; Parameters ....: $oCell               - A Table Cell or Cell Range Object returned by a previous _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, or _LOWriter_TableCellGetObjByPosition function.
 ;                  $iTop                - [optional] (0x7FFF,0-17) Default is Null. The Top Border Line Style of the Cell. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iBottom             - [optional] (0x7FFF,0-17) Default is Null. The Bottom Border Line Style of the Cell. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iLeft               - [optional] (0x7FFF,0-17) Default is Null. The Left Border Line Style of the Cell. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
@@ -724,7 +724,7 @@ EndFunc   ;==>_LOWriter_TableCellBorderPadding
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Error values for Initialization and Processing are passed from the internal border setting function.
-; Related .......: _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition, _LOWriter_TableCellBorderWidth, _LOWriter_TableCellBorderColor, _LOWriter_TableCellBorderPadding
+; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition, _LOWriter_TableCellBorderWidth, _LOWriter_TableCellBorderColor, _LOWriter_TableCellBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -746,7 +746,7 @@ EndFunc   ;==>_LOWriter_TableCellBorderStyle
 ; Name ..........: _LOWriter_TableCellBorderWidth
 ; Description ...: Set or Retrieve the Cell or Cell Range Border Line Width. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_TableCellBorderWidth(ByRef $oCell[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oCell               - A Table Cell or Cell Range Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+; Parameters ....: $oCell               - A Table Cell or Cell Range Object returned by a previous _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, or _LOWriter_TableCellGetObjByPosition function.
 ;                  $iTop                - [optional] Default is Null. The Top Border Line width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iBottom             - [optional] Default is Null. The Bottom Border Line Width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iLeft               - [optional] Default is Null. The Left Border Line width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
@@ -779,7 +779,7 @@ EndFunc   ;==>_LOWriter_TableCellBorderStyle
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Error values for Initialization and Processing are passed from the internal border setting function.
-; Related .......: _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition, _LO_UnitConvert, _LOWriter_TableCellBorderStyle, _LOWriter_TableCellBorderColor, _LOWriter_TableCellBorderPadding
+; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition, _LO_UnitConvert, _LOWriter_TableCellBorderStyle, _LOWriter_TableCellBorderColor, _LOWriter_TableCellBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -801,7 +801,7 @@ EndFunc   ;==>_LOWriter_TableCellBorderWidth
 ; Name ..........: _LOWriter_TableCellCreateTextCursor
 ; Description ...: Create a Text Cursor in a particular cell for inserting text etc.
 ; Syntax ........: _LOWriter_TableCellCreateTextCursor(ByRef $oCell)
-; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, or _LOWriter_TableCellGetObjByPosition function.
 ; Return values .: Success: An Object.
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning a Text Cursor Object located in the specified Cell.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -813,7 +813,7 @@ EndFunc   ;==>_LOWriter_TableCellBorderWidth
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition, _LOWriter_CursorInsertString
+; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition, _LOWriter_CursorInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -836,7 +836,7 @@ EndFunc   ;==>_LOWriter_TableCellCreateTextCursor
 ; Name ..........: _LOWriter_TableCellFormula
 ; Description ...: Set or retrieve a formula for a cell.
 ; Syntax ........: _LOWriter_TableCellFormula(ByRef $oCell[, $sFormula = Null])
-; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, or _LOWriter_TableCellGetObjByPosition function.
 ;                  $sFormula            - [optional] Default is Null. The Formula to set the Cell to.
 ; Return values .: Success: 1 or String.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Formula was successfully set.
@@ -857,7 +857,7 @@ EndFunc   ;==>_LOWriter_TableCellCreateTextCursor
 ;                  Setting the formula will overwrite any existing data in the cell.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  To retrieve the total of a formula, use _LOWriter_TableCellValue.
-; Related .......: _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition,
+; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition,
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -890,7 +890,7 @@ EndFunc   ;==>_LOWriter_TableCellFormula
 ; Name ..........: _LOWriter_TableCellGetDataType
 ; Description ...: Get the Data type of a specific cell.
 ; Syntax ........: _LOWriter_TableCellGetDataType(ByRef $oCell)
-; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, or _LOWriter_TableCellGetObjByPosition function.
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. The Data Type as an Integer, See Constants, $LOW_CELL_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -903,7 +903,7 @@ EndFunc   ;==>_LOWriter_TableCellFormula
 ; Modified ......:
 ; Remarks .......: Returns the data type as one of the constants, $LOW_CELL_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  If the data was entered by the keyboard, it is generally recognized as a string regardless of the data content.
-; Related .......: _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition,
+; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition,
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -926,7 +926,7 @@ EndFunc   ;==>_LOWriter_TableCellGetDataType
 ; Name ..........: _LOWriter_TableCellGetError
 ; Description ...: Get the formula error Value.
 ; Syntax ........: _LOWriter_TableCellGetError(ByRef $oCell)
-; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, or _LOWriter_TableCellGetObjByPosition function.
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. The Cell formula error code as an Integer.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -938,7 +938,7 @@ EndFunc   ;==>_LOWriter_TableCellGetDataType
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If the cell is not a formula, the error value is zero.
-; Related .......: _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition,
+; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition,
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -961,7 +961,7 @@ EndFunc   ;==>_LOWriter_TableCellGetError
 ; Name ..........: _LOWriter_TableCellGetName
 ; Description ...: Retrieve the current Cell's name.
 ; Syntax ........: _LOWriter_TableCellGetName(ByRef $oCell)
-; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, or _LOWriter_TableCellGetObjByPosition function.
 ; Return values .: Success: A String.
 ;                  @Error: 0, @Extended: 0, Return: String = Success. The Cell name in String format.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -973,7 +973,7 @@ EndFunc   ;==>_LOWriter_TableCellGetError
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition,
+; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition,
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -993,10 +993,190 @@ Func _LOWriter_TableCellGetName(ByRef $oCell)
 EndFunc   ;==>_LOWriter_TableCellGetName
 
 ; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_TableCellGetObjByCursor
+; Description ...: Retrieve a single Cell Object or a Cell Range by Cursor.
+; Syntax ........: _LOWriter_TableCellGetObjByCursor(ByRef $oDoc, ByRef $oTable, ByRef $oCursor)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+;                  $oCursor             - A Cursor Object returned from any Cursor Object creation or retrieval functions.
+; Return values .: Success: Object.
+;                  @Error: 0, @Extended: 0, Return: Object = A Cell object or a Cell Range.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oTable not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 4 = $oCursor is not currently located inside of a Table Cell.
+;                  @Error: 1, @Extended: 5 = $oCursor unknown cursor type.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failure Retrieving Cell Object
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: This function will accept a Table Cursor, a ViewCursor, or a Text Cursor.
+;                  A TableCursor and ViewCursor can retrieve the single cell they are located in, or a range of cells that have been selected by them.
+;                  A TextCursor can only retrieve the single cell it is located in.
+; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_TableCellGetObjByCursor(ByRef $oDoc, ByRef $oTable, ByRef $oCursor)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iCursorType
+	Local $oCell, $oSelection
+	Local $sCellRange
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	$iCursorType = __LOWriter_Internal_CursorGetType($oCursor)
+
+	Switch $iCursorType
+		Case $LOW_CURTYPE_TABLE_CURSOR
+			$sCellRange = $oCursor.getRangeName()
+			$oCell = (StringInStr($sCellRange, ":")) ? ($oTable.getCellRangeByName($sCellRange)) : ($oTable.getCellByName($sCellRange))
+
+		Case $LOW_CURTYPE_TEXT_CURSOR
+			If Not $oCursor.Text.supportsService("com.sun.star.text.CellProperties") Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0) ; Cursor not in a Table cell.
+
+			$oCell = $oTable.getCellByName($oCursor.Cell.CellName())
+
+		Case $LOW_CURTYPE_VIEW_CURSOR
+			$oSelection = $oDoc.CurrentSelection()
+			If $oSelection.supportsService("com.sun.star.text.TextTableCursor") Then
+				$oCell = $oTable.getCellRangeByName($oSelection.getRangeName())
+
+			Else
+				If Not $oCursor.Text.supportsService("com.sun.star.text.CellProperties") Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0) ; Cursor not in a Table cell.
+
+				$oCell = $oTable.getCellByName($oCursor.Cell.CellName())
+			EndIf
+
+		Case Else
+
+			Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0) ; Unknown cursor type.
+	EndSwitch
+
+	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oCell)
+EndFunc   ;==>_LOWriter_TableCellGetObjByCursor
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_TableCellGetObjByName
+; Description ...: Retrieve a Cell Object or a Cell range by name.
+; Syntax ........: _LOWriter_TableCellGetObjByName(ByRef $oTable, $sCellName[, $sToCellName = $sCellName])
+; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+;                  $sCellName           - A Cell Name. Note: Case Sensitive. See remarks.
+;                  $sToCellName         - [optional] Default is $sCellName. The Cell name to end the Cell Range. Note: Case Sensitive.
+; Return values .: Success: Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. A Cell object or a Cell Range Object.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oTable is not an Object.
+;                  @Error: 1, @Extended: 2 = $sCellName not a String.
+;                  @Error: 1, @Extended: 3 = $sToCellName not a String.
+;                  @Error: 1, @Extended: 4 = Table does not contain the Requested Cell name as called in $sCellName.
+;                  @Error: 1, @Extended: 5 = Table does not contain the Requested Cell name as called in $sToCellName.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Cell Object.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Cell names are Case Sensitive. LibreOffice first goes from A to Z, and then a to z and then AA to ZZ etc.
+;                  $sCellName can contain a Cell name that is located after $sToCellName in the Table.
+;                  If $sToCellName is left blank, a cell object is returned instead of a Cell Range.
+; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_TableCellsGetNames
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_TableCellGetObjByName(ByRef $oTable, $sCellName, $sToCellName = $sCellName)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local Const $__STR_STRIPALL = 8
+	Local $oCell
+
+	If Not IsObj($oTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsString($sCellName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsString($sToCellName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	$sCellName = StringStripWS($sCellName, $__STR_STRIPALL)
+	$sToCellName = StringStripWS($sToCellName, $__STR_STRIPALL)
+	If Not __LOWriter_TableHasCellName($oTable, $sCellName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0) ; CellName not contained in Table
+	If Not __LOWriter_TableHasCellName($oTable, $sToCellName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0) ; ToCellName not contained in Table
+
+	$oCell = ($sCellName = $sToCellName) ? ($oTable.getCellByName($sCellName)) : ($oTable.getCellRangeByName($sCellName & ":" & $sToCellName))
+	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oCell)
+EndFunc   ;==>_LOWriter_TableCellGetObjByName
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_TableCellGetObjByPosition
+; Description ...: Retrieve a Cell object or Cell Range by position.
+; Syntax ........: _LOWriter_TableCellGetObjByPosition(ByRef $oTable, $iColumn, $iRow[, $iToColumn = Null[, $iToRow = Null]])
+; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
+;                  $iColumn             - The column the desired cell is located in, or where to start the the cell range from.
+;                  $iRow                - The row the desired cell is located in, or where to start the the cell range from.
+;                  $iToColumn           - [optional] Default is Null. The column containing the cell where to end the the cell range. Can be the same as $iRow or higher. If left blank $iToColumn will be the same as $iColumn.
+;                  $iToRow              - [optional] Default is Null. The row containing the cell where to end the the cell range. Can be the same as $iRow or higher. If left blank $iToRow will be the same as $iRow.
+; Return values .: Success: Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. A Cell object or a Cell Range.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oTable not an Object.
+;                  @Error: 1, @Extended: 2 = $iColumn not an Integer, or less than 0 or greater than number of Columns contained in the table.
+;                  @Error: 1, @Extended: 3 = $iRow not an Integer, or less than 0 or greater than number of Rows contained in the table.
+;                  @Error: 1, @Extended: 4 = $iToColumn not an Integer, or less than $iColumn or greater than number of Columns contained in the table.
+;                  @Error: 1, @Extended: 5 = $iToRow not an Integer, or less than $iRow or greater than number of Rows contained in the table.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Cell Object.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: This function can fail with complex Tables. Complex tables are tables that contain cells that have been split or joined.
+;                  Rows and Columns in a Table are 0 based, meaning they start their count at 0. The first cell is column 0 row 0.
+;                  To retrieve a single cell, only call the $iColumn and $iRow parameters.
+;                  To retrieve a cell range, call $iColumn with the lowest Integer value column and then $iToColumn with the highest Integer value column. As also for $iRow and $iToRow.
+;                  You may request the same row in both $iRow and $iToRow, but neither $iToRow or $iToColumn may be a lower Integer value than $iRow and $iColumn respectively.
+; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_TableColumnGetCount, _LOWriter_TableRowGetCount
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_TableCellGetObjByPosition(ByRef $oTable, $iColumn, $iRow, $iToColumn = Null, $iToRow = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oCell
+
+	If Not IsObj($oTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not __LO_IntIsBetween($iColumn, 0, ($oTable.getColumns.getCount() - 1)) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iRow, 0, ($oTable.getRows.getCount() - 1)) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	If __LO_VarsAreNull($iToColumn, $iToRow) Then
+		$oCell = $oTable.getCellByPosition($iColumn, $iRow)
+
+	Else
+		If Not __LO_IntIsBetween($iToColumn, $iColumn, ($oTable.getColumns.getCount() - 1)) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not __LO_IntIsBetween($iToRow, $iRow, ($oTable.getRows.getCount() - 1)) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+		$iToColumn = ($iToColumn = Null) ? ($iColumn) : ($iToColumn)
+		$iToRow = ($iToRow = Null) ? ($iRow) : ($iToRow)
+
+		$oCell = $oTable.getCellRangeByPosition($iColumn, $iRow, $iToColumn, $iToRow)
+	EndIf
+
+	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oCell)
+EndFunc   ;==>_LOWriter_TableCellGetObjByPosition
+
+; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_TableCellProtect
 ; Description ...: Write-Protect a Cell
 ; Syntax ........: _LOWriter_TableCellProtect(ByRef $oCell[, $bProtect = Null])
-; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, or _LOWriter_TableCellGetObjByPosition function.
 ;                  $bProtect            - [optional] Default is Null. If True, cell is protected from being written to. See remarks.
 ; Return values .: Success: 1 Or Boolean.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Successfully set Cell Protect setting.
@@ -1014,7 +1194,7 @@ EndFunc   ;==>_LOWriter_TableCellGetName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-; Related .......: _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition,
+; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition,
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1080,7 +1260,7 @@ EndFunc   ;==>_LOWriter_TableCellsGetNames
 ; Name ..........: _LOWriter_TableCellString
 ; Description ...: Set or retrieve the current string for a cell.
 ; Syntax ........: _LOWriter_TableCellString(ByRef $oCell[, $sString = Null])
-; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, or _LOWriter_TableCellGetObjByPosition function.
 ;                  $sString             - [optional] Default is Null. The String of text to set the cell to.
 ; Return values .: Success: 1 or String.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Successfully set the cell String.
@@ -1098,7 +1278,7 @@ EndFunc   ;==>_LOWriter_TableCellsGetNames
 ;                  Setting the String will overwrite any existing data in the cell.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  To prevent accidental and unwanted newlines, @CRLF is automatically replaced with @CR to match LibreOffice's newline style.
-; Related .......: _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition,
+; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition,
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1132,7 +1312,7 @@ EndFunc   ;==>_LOWriter_TableCellString
 ; Name ..........: _LOWriter_TableCellValue
 ; Description ...: Set or retrieve a Numerical value to a Cell
 ; Syntax ........: _LOWriter_TableCellValue(ByRef $oCell[, $nValue = Null])
-; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+; Parameters ....: $oCell               - A Table Cell Object returned by a previous _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, or _LOWriter_TableCellGetObjByPosition function.
 ;                  $nValue              - [optional] Default is Null. The value to set the cell to.
 ; Return values .: Success: 1 or Number.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Successfully set cell value.
@@ -1153,7 +1333,7 @@ EndFunc   ;==>_LOWriter_TableCellString
 ;                  Setting the Value will overwrite any existing data in the cell.
 ;                  For a value cell the value is returned, for a string cell zero is returned and for a formula cell the result value of a formula is returned.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-; Related .......: _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition,
+; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition,
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1186,7 +1366,7 @@ EndFunc   ;==>_LOWriter_TableCellValue
 ; Name ..........: _LOWriter_TableCellVertOrient
 ; Description ...: Set the Vertical Orientation of the Cell or Cell Range contents.
 ; Syntax ........: _LOWriter_TableCellVertOrient(ByRef $oCell[, $iVertOrient = Null])
-; Parameters ....: $oCell               - A Table Cell or Cell Range Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+; Parameters ....: $oCell               - A Table Cell or Cell Range Object returned by a previous _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, or _LOWriter_TableCellGetObjByPosition function.
 ;                  $iVertOrient         - [optional] (0-3) Default is Null. A Vertical Orientation constant. $LOW_ORIENT_VERT_* as defined in LibreOfficeWriter_Constants.au3
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Successfully set Vertical Orientation.
@@ -1203,7 +1383,7 @@ EndFunc   ;==>_LOWriter_TableCellValue
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-; Related .......: _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, _LOWriter_TableGetCellObjByPosition,
+; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition,
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1717,186 +1897,6 @@ Func _LOWriter_TableExists(ByRef $oDoc, $sTableName)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, False) ; No matches
 EndFunc   ;==>_LOWriter_TableExists
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_TableGetCellObjByCursor
-; Description ...: Retrieve a single Cell Object or a Cell Range by Cursor.
-; Syntax ........: _LOWriter_TableGetCellObjByCursor(ByRef $oDoc, ByRef $oTable, ByRef $oCursor)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $oCursor             - A Cursor Object returned from any Cursor Object creation or retrieval functions.
-; Return values .: Success: Object.
-;                  @Error: 0, @Extended: 0, Return: Object = A Cell object or a Cell Range.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
-;                  @Error: 1, @Extended: 2 = $oTable not an Object.
-;                  @Error: 1, @Extended: 3 = $oCursor not an Object.
-;                  @Error: 1, @Extended: 4 = $oCursor is not currently located inside of a Table Cell.
-;                  @Error: 1, @Extended: 5 = $oCursor unknown cursor type.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failure Retrieving Cell Object
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: This function will accept a Table Cursor, a ViewCursor, or a Text Cursor.
-;                  A TableCursor and ViewCursor can retrieve the single cell they are located in, or a range of cells that have been selected by them.
-;                  A TextCursor can only retrieve the single cell it is located in.
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOWriter_TableGetCellObjByCursor(ByRef $oDoc, ByRef $oTable, ByRef $oCursor)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $iCursorType
-	Local $oCell, $oSelection
-	Local $sCellRange
-
-	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsObj($oTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-	$iCursorType = __LOWriter_Internal_CursorGetType($oCursor)
-
-	Switch $iCursorType
-		Case $LOW_CURTYPE_TABLE_CURSOR
-			$sCellRange = $oCursor.getRangeName()
-			$oCell = (StringInStr($sCellRange, ":")) ? ($oTable.getCellRangeByName($sCellRange)) : ($oTable.getCellByName($sCellRange))
-
-		Case $LOW_CURTYPE_TEXT_CURSOR
-			If Not $oCursor.Text.supportsService("com.sun.star.text.CellProperties") Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0) ; Cursor not in a Table cell.
-
-			$oCell = $oTable.getCellByName($oCursor.Cell.CellName())
-
-		Case $LOW_CURTYPE_VIEW_CURSOR
-			$oSelection = $oDoc.CurrentSelection()
-			If $oSelection.supportsService("com.sun.star.text.TextTableCursor") Then
-				$oCell = $oTable.getCellRangeByName($oSelection.getRangeName())
-
-			Else
-				If Not $oCursor.Text.supportsService("com.sun.star.text.CellProperties") Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0) ; Cursor not in a Table cell.
-
-				$oCell = $oTable.getCellByName($oCursor.Cell.CellName())
-			EndIf
-
-		Case Else
-
-			Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0) ; Unknown cursor type.
-	EndSwitch
-
-	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oCell)
-EndFunc   ;==>_LOWriter_TableGetCellObjByCursor
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_TableGetCellObjByName
-; Description ...: Retrieve a Cell Object or a Cell range by name.
-; Syntax ........: _LOWriter_TableGetCellObjByName(ByRef $oTable, $sCellName[, $sToCellName = $sCellName])
-; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $sCellName           - A Cell Name. Note: Case Sensitive. See remarks.
-;                  $sToCellName         - [optional] Default is $sCellName. The Cell name to end the Cell Range. Note: Case Sensitive.
-; Return values .: Success: Object.
-;                  @Error: 0, @Extended: 0, Return: Object = Success. A Cell object or a Cell Range Object.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oTable is not an Object.
-;                  @Error: 1, @Extended: 2 = $sCellName not a String.
-;                  @Error: 1, @Extended: 3 = $sToCellName not a String.
-;                  @Error: 1, @Extended: 4 = Table does not contain the Requested Cell name as called in $sCellName.
-;                  @Error: 1, @Extended: 5 = Table does not contain the Requested Cell name as called in $sToCellName.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to retrieve Cell Object.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: Cell names are Case Sensitive. LibreOffice first goes from A to Z, and then a to z and then AA to ZZ etc.
-;                  $sCellName can contain a Cell name that is located after $sToCellName in the Table.
-;                  If $sToCellName is left blank, a cell object is returned instead of a Cell Range.
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_TableCellsGetNames
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOWriter_TableGetCellObjByName(ByRef $oTable, $sCellName, $sToCellName = $sCellName)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local Const $__STR_STRIPALL = 8
-	Local $oCell
-
-	If Not IsObj($oTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsString($sCellName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not IsString($sToCellName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-	$sCellName = StringStripWS($sCellName, $__STR_STRIPALL)
-	$sToCellName = StringStripWS($sToCellName, $__STR_STRIPALL)
-	If Not __LOWriter_TableHasCellName($oTable, $sCellName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0) ; CellName not contained in Table
-	If Not __LOWriter_TableHasCellName($oTable, $sToCellName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0) ; ToCellName not contained in Table
-
-	$oCell = ($sCellName = $sToCellName) ? ($oTable.getCellByName($sCellName)) : ($oTable.getCellRangeByName($sCellName & ":" & $sToCellName))
-	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oCell)
-EndFunc   ;==>_LOWriter_TableGetCellObjByName
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_TableGetCellObjByPosition
-; Description ...: Retrieve a Cell object or Cell Range by position.
-; Syntax ........: _LOWriter_TableGetCellObjByPosition(ByRef $oTable, $iColumn, $iRow[, $iToColumn = Null[, $iToRow = Null]])
-; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $iColumn             - The column the desired cell is located in, or where to start the the cell range from.
-;                  $iRow                - The row the desired cell is located in, or where to start the the cell range from.
-;                  $iToColumn           - [optional] Default is Null. The column containing the cell where to end the the cell range. Can be the same as $iRow or higher. If left blank $iToColumn will be the same as $iColumn.
-;                  $iToRow              - [optional] Default is Null. The row containing the cell where to end the the cell range. Can be the same as $iRow or higher. If left blank $iToRow will be the same as $iRow.
-; Return values .: Success: Object.
-;                  @Error: 0, @Extended: 0, Return: Object = Success. A Cell object or a Cell Range.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oTable not an Object.
-;                  @Error: 1, @Extended: 2 = $iColumn not an Integer, or less than 0 or greater than number of Columns contained in the table.
-;                  @Error: 1, @Extended: 3 = $iRow not an Integer, or less than 0 or greater than number of Rows contained in the table.
-;                  @Error: 1, @Extended: 4 = $iToColumn not an Integer, or less than $iColumn or greater than number of Columns contained in the table.
-;                  @Error: 1, @Extended: 5 = $iToRow not an Integer, or less than $iRow or greater than number of Rows contained in the table.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to retrieve Cell Object.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: This function can fail with complex Tables. Complex tables are tables that contain cells that have been split or joined.
-;                  Rows and Columns in a Table are 0 based, meaning they start their count at 0. The first cell is column 0 row 0.
-;                  To retrieve a single cell, only call the $iColumn and $iRow parameters.
-;                  To retrieve a cell range, call $iColumn with the lowest Integer value column and then $iToColumn with the highest Integer value column. As also for $iRow and $iToRow.
-;                  You may request the same row in both $iRow and $iToRow, but neither $iToRow or $iToColumn may be a lower Integer value than $iRow and $iColumn respectively.
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_TableColumnGetCount, _LOWriter_TableRowGetCount
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOWriter_TableGetCellObjByPosition(ByRef $oTable, $iColumn, $iRow, $iToColumn = Null, $iToRow = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $oCell
-
-	If Not IsObj($oTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LO_IntIsBetween($iColumn, 0, ($oTable.getColumns.getCount() - 1)) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not __LO_IntIsBetween($iRow, 0, ($oTable.getRows.getCount() - 1)) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-	If __LO_VarsAreNull($iToColumn, $iToRow) Then
-		$oCell = $oTable.getCellByPosition($iColumn, $iRow)
-
-	Else
-		If Not __LO_IntIsBetween($iToColumn, $iColumn, ($oTable.getColumns.getCount() - 1)) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-		If Not __LO_IntIsBetween($iToRow, $iRow, ($oTable.getRows.getCount() - 1)) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-
-		$iToColumn = ($iToColumn = Null) ? ($iColumn) : ($iToColumn)
-		$iToRow = ($iToRow = Null) ? ($iRow) : ($iToRow)
-
-		$oCell = $oTable.getCellRangeByPosition($iColumn, $iRow, $iToColumn, $iToRow)
-	EndIf
-
-	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oCell)
-EndFunc   ;==>_LOWriter_TableGetCellObjByPosition
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_TableGetData

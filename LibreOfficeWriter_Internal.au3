@@ -4388,7 +4388,7 @@ EndFunc   ;==>__LOWriter_InternalComErrorHandler
 ; Name ..........: __LOWriter_IsCellRange
 ; Description ...: Check whether a Cell Object is a single cell or a Cell Range.
 ; Syntax ........: __LOWriter_IsCellRange(ByRef $oCell)
-; Parameters ....: $oCell               - A Table Cell or Cell Range Object returned by a previous _LOWriter_TableGetCellObjByCursor, _LOWriter_TableGetCellObjByName, or _LOWriter_TableGetCellObjByPosition function.
+; Parameters ....: $oCell               - A Table Cell or Cell Range Object returned by a previous _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, or _LOWriter_TableCellGetObjByPosition function.
 ; Return values .: Success: Boolean.
 ;                  @Error: 0, @Extended: 0, Return: Boolean = If the cell object is a Cell Range, True is returned. Else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.

@@ -6,7 +6,6 @@ Example()
 
 Func Example()
 	Local $oDoc, $oViewCursor, $oTable, $oCell
-	Local $sString
 	Local $asCellNames
 
 	; Create a New, visible, Blank LibreOffice Document.
@@ -17,15 +16,25 @@ Func Example()
 	$oViewCursor = _LOWriter_CursorViewCursorGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Create a Table, 3 columns, 5 rows.
-	$oTable = _LOWriter_TableCreate($oDoc, $oViewCursor, 3, 5)
+	; Create a Table, 2 columns, 2 rows.
+	$oTable = _LOWriter_TableCreate($oDoc, $oViewCursor, 2, 2)
 	If @error Then _ERROR($oDoc, "Failed to create Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; When retrieving multiple cells, a cell range will be returned, a cell range is largely the same as a single cell Object,
+	; but some functions don't accept a cell range.
+
+	; Retrieve top left ("A1") and bottom left ("A2") Table Cell range Object
+	$oCell = _LOWriter_TableCellGetObjByName($oTable, "A1", "A2")
+	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Set the Cell background color to show which cells I have retrieved the Cell Range Object for.
+	_LOWriter_TableCellBackColor($oCell, $LO_COLOR_BLUE)
+	If @error Then _ERROR($oDoc, "Failed to set Text Table cell background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve Array of Cell names.
 	$asCellNames = _LOWriter_TableCellsGetNames($oTable)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Cell names. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Insert Cell names
 	For $i = 0 To UBound($asCellNames) - 1
 		; Retrieve each cell by name as returned in the array of cell names
 		$oCell = _LOWriter_TableCellGetObjByName($oTable, $asCellNames[$i])
@@ -35,16 +44,6 @@ Func Example()
 		_LOWriter_TableCellString($oCell, $asCellNames[$i])
 		If @error Then _ERROR($oDoc, "Failed to set Text Table Cell String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 	Next
-
-	; Retrieve top left ("A1") Table Cell Object
-	$oCell = _LOWriter_TableCellGetObjByName($oTable, "A1")
-	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Retrieve the Cell String.
-	$sString = _LOWriter_TableCellString($oCell)
-	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Cell String is: " & $sString)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

@@ -2371,6 +2371,10 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   > New order:($oDoc, $oPageStyle, $sNewPageStyleName, $sFollowStyle, ***$bHidden***)
 - Added ability to modify Document's modified status:
   - _LOWriter_DocIsModified
+- Renamed Table Cell Object retrieval functions:
+  - `_LOWriter_TableGetCellObjByCursor` --> `_LOWriter_TableCellGetObjByCursor`
+  - `_LOWriter_TableGetCellObjByName` --> `_LOWriter_TableCellGetObjByName`
+  - `_LOWriter_TableGetCellObjByPosition` --> `_LOWriter_TableCellGetObjByPosition`
 
 #### Documented
 

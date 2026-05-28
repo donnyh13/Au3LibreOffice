@@ -6,7 +6,7 @@ Example()
 
 Func Example()
 	Local $oDoc, $oViewCursor, $oTable, $oCell
-	Local $aCellBorder
+	Local $asCellNames
 
 	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -16,7 +16,7 @@ Func Example()
 	$oViewCursor = _LOWriter_CursorViewCursorGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Create the Table, 2 columns, 2 rows.
+	; Create a Table, 2 columns, 2 rows.
 	$oTable = _LOWriter_TableCreate($oDoc, $oViewCursor, 2, 2)
 	If @error Then _ERROR($oDoc, "Failed to create Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -24,24 +24,23 @@ Func Example()
 	$oCell = _LOWriter_TableCellGetObjByName($oTable, "A1")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Border width so I can set the Border Style.
-	_LOWriter_TableCellBorderWidth($oCell, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK)
-	If @error Then _ERROR($oDoc, "Failed to set Text Table cell Border width settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Set the Cell background color to show which cells I have retrieved the Cell Range Object for.
+	_LOWriter_TableCellBackColor($oCell, $LO_COLOR_BLUE)
+	If @error Then _ERROR($oDoc, "Failed to set Text Table cell background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set the Border Style, a different style on each side.
-	_LOWriter_TableCellBorderStyle($oCell, $LOW_BORDER_STYLE_DOTTED, $LOW_BORDER_STYLE_DASHED, $LOW_BORDER_STYLE_DASH_DOT_DOT, $LOW_BORDER_STYLE_THICKTHIN_SMALLGAP)
-	If @error Then _ERROR($oDoc, "Failed to set Text Table cell Border Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Retrieve Array of Cell names.
+	$asCellNames = _LOWriter_TableCellsGetNames($oTable)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Cell names. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Table Cell's Text.
-	_LOWriter_TableCellString($oCell, "Text inside the Cell's styled borders.")
-	If @error Then _ERROR($oDoc, "Failed to set Text Table cell text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	For $i = 0 To UBound($asCellNames) - 1
+		; Retrieve each cell by name as returned in the array of cell names
+		$oCell = _LOWriter_TableCellGetObjByName($oTable, $asCellNames[$i])
+		If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Cell by name. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve current Border Style settings. Return will be an Array, with elements in order of function parameters.
-	$aCellBorder = _LOWriter_TableCellBorderStyle($oCell)
-	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell Border Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The current Border Style settings are: " & @CRLF & "Top = " & $aCellBorder[0] & @CRLF & "Bottom = " & $aCellBorder[1] & @CRLF & _
-			"Left = " & $aCellBorder[2] & @CRLF & "Right = " & $aCellBorder[3] & @CRLF & @CRLF & "see Constants in UDF for value meanings.")
+		; Set Cell text String to each Cell's name.
+		_LOWriter_TableCellString($oCell, $asCellNames[$i])
+		If @error Then _ERROR($oDoc, "Failed to set Text Table Cell String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	Next
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 
