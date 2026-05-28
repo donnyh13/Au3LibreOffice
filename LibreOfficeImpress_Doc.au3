@@ -704,35 +704,51 @@ EndFunc   ;==>_LOImpress_DocIsActive
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_DocIsModified
-; Description ...: Test whether the document has been modified since being created or since the last save.
-; Syntax ........: _LOImpress_DocIsModified(ByRef $oDoc)
+; Description ...: Set or Retrieve the document's modified status.
+; Syntax ........: _LOImpress_DocIsModified(ByRef $oDoc[, $bModified = Null])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $bModified           - [optional] Default is Null. If True, sets the Document's modified status to True.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the document has been modified since last being saved.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Document modified status was successfully set.
+;                  @Error: 0, @Extended: 1, Return: Boolean = Success. Returning True if the document has been modified since last being saved, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $bModified not a Boolean.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to query Document whether it has been modified.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  |                               1 = Error setting $bModified
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_DocIsModified(ByRef $oDoc)
+Func _LOImpress_DocIsModified(ByRef $oDoc, $bModified = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $bIsMod
+	Local $iError = 0
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$bIsMod = $oDoc.isModified()
-	If Not IsBool($bIsMod) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	If __LO_VarsAreNull($bModified) Then
+		$bIsMod = $oDoc.isModified()
+		If Not IsBool($bIsMod) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $bIsMod)
+		Return SetError($__LO_STATUS_SUCCESS, 1, $bIsMod)
+	EndIf
+
+	If Not IsBool($bModified) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$oDoc.Modified = $bModified
+	$iError = ($oDoc.isModified() = $bModified) ? ($iError) : (BitOR($iError, 1))
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOImpress_DocIsModified
 
 ; #FUNCTION# ====================================================================================================================
