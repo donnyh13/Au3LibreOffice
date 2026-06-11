@@ -124,6 +124,7 @@ Func _LOImpress_TableBackColor(ByRef $oTable, $iBackColor = Null)
 					If ($oCell.FillStyle() = $LOI_AREA_FILL_STYLE_SOLID) Then     ; If FillStyle is set to solid, then retrieve current color value, else return $LO_COLOR_OFF (Probably a Gradient is used or otherwise).
 						$iCurColor = $oCell.FillColor()
 						If Not IsInt($iCurColor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
 					Else
 						$iCurColor = $LO_COLOR_OFF
 					EndIf
@@ -132,6 +133,7 @@ Func _LOImpress_TableBackColor(ByRef $oTable, $iBackColor = Null)
 					If ($oCell.FillStyle() = $LOI_AREA_FILL_STYLE_SOLID) Then     ; If FillStyle is set to solid, then retrieve current color value, else return $LO_COLOR_OFF (Probably a Gradient is used or otherwise).
 						$iTempColor = $oCell.FillColor()
 						If Not IsInt($iTempColor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
 					Else
 						$iTempColor = $LO_COLOR_OFF
 					EndIf
@@ -212,13 +214,11 @@ Func _LOImpress_TableBackFillStyle(ByRef $oTable)
 				If Not IsInt($iFillStyle) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 			Else
-
 				If ($oCell.FillStyle() <> $iFillStyle) Then      ; Cycle through the Table and retrieve the current value for each cell, if it isn't the same, change the return to Null.
 					$iFillStyle = Null
 					ExitLoop 2
 				EndIf
 			EndIf
-
 		Next
 	Next
 
@@ -335,13 +335,11 @@ Func _LOImpress_TableBackGradient(ByRef $oTable, $sGradientName = Null, $iType =
 							; Cycle through the Table and retrieve the current value for each cell, if it isn't the same, change the return to Null.
 							; If one is different, all should be Null since they're all related, exit the loops.
 							ExitLoop 3
-
 						EndIf
 
 						Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
 					Next
 				EndIf
-
 			Next
 		Next
 
@@ -373,7 +371,6 @@ Func _LOImpress_TableBackGradient(ByRef $oTable, $sGradientName = Null, $iType =
 				EndIf
 
 			Else
-
 				If ($oCell.FillStyle() <> $LOI_AREA_FILL_STYLE_GRADIENT) Then $oCell.FillStyle = $LOI_AREA_FILL_STYLE_GRADIENT
 
 				If ($sGradientName <> Null) Then
@@ -503,7 +500,6 @@ Func _LOImpress_TableBackGradient(ByRef $oTable, $sGradientName = Null, $iType =
 				; If Gradient is not turned off, then set rest of the Table cells to same Gradient name.
 				$sGradName = $oCell.FillGradientName()
 				If Not IsString($sGradName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 7, 0)
-
 			EndIf
 
 			; Error checking
@@ -516,7 +512,6 @@ Func _LOImpress_TableBackGradient(ByRef $oTable, $sGradientName = Null, $iType =
 			$iError = (__LO_VarsAreNull($iToColor)) ? ($iError) : (($oCell.FillGradient.EndColor() = $iToColor) ? ($iError) : (BitOR($iError, 256)))
 			$iError = (__LO_VarsAreNull($iFromIntense)) ? ($iError) : (($oCell.FillGradient.StartIntensity() = $iFromIntense) ? ($iError) : (BitOR($iError, 512)))
 			$iError = (__LO_VarsAreNull($iToIntense)) ? ($iError) : (($oCell.FillGradient.EndIntensity() = $iToIntense) ? ($iError) : (BitOR($iError, 1024)))
-
 		Next
 	Next
 
@@ -582,7 +577,6 @@ Func _LOImpress_TableBackGradientMulticolor(ByRef $oTable, $avColorStops = Null)
 	If Not __LO_VersionCheck(7.6) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($avColorStops) Then
-
 		For $iCol = 0 To $oTable.Model.ColumnCount() - 1
 			For $iRow = 0 To $oTable.Model.RowCount() - 1
 				$oCell = $oTable.Model.getCellByPosition($iCol, $iRow)
@@ -595,7 +589,6 @@ Func _LOImpress_TableBackGradientMulticolor(ByRef $oTable, $avColorStops = Null)
 				If Not IsArray($atColorStops) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 				If ($iRow = 0) And ($iCol = 0) Then
-
 					ReDim $avNewColorStops[UBound($atColorStops)][2]
 
 					For $i = 0 To UBound($atColorStops) - 1
@@ -633,7 +626,6 @@ Func _LOImpress_TableBackGradientMulticolor(ByRef $oTable, $avColorStops = Null)
 							$avNewColorStops[0][1] = Null
 							ExitLoop 3
 						EndIf
-
 					Next
 				EndIf
 			Next
@@ -676,7 +668,6 @@ Func _LOImpress_TableBackGradientMulticolor(ByRef $oTable, $avColorStops = Null)
 			If Not IsObj($oCell) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 			If IsString($sGradName) And ($sGradName <> "") Then
-
 				If ($oCell.FillStyle() <> $LOI_AREA_FILL_STYLE_GRADIENT) Then $oCell.FillStyle = $LOI_AREA_FILL_STYLE_GRADIENT
 
 				$oCell.FillGradientName = $sGradName
@@ -697,7 +688,6 @@ Func _LOImpress_TableBackGradientMulticolor(ByRef $oTable, $avColorStops = Null)
 
 				$sGradName = $oCell.FillGradientName()
 				If Not IsString($sGradName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
-
 			EndIf
 		Next
 	Next
@@ -780,7 +770,6 @@ Func _LOImpress_TableBorderColor(ByRef $oTable, $iTop = Null, $iBottom = Null, $
 	$vReturn = __LOImpress_TableBorder($oTable, False, False, True, $iTop, $iBottom, $iLeft, $iRight, $iVert, $iHori)
 
 	Return SetError(@error, @extended, $vReturn)
-
 EndFunc   ;==>_LOImpress_TableBorderColor
 
 ; #FUNCTION# ====================================================================================================================
@@ -860,7 +849,6 @@ Func _LOImpress_TableBorderPadding(ByRef $oTable, $iTop = Null, $iBottom = Null,
 						Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
 					Next
 				EndIf
-
 			Next
 		Next
 
@@ -899,7 +887,6 @@ Func _LOImpress_TableBorderPadding(ByRef $oTable, $iTop = Null, $iBottom = Null,
 				$oCell.TextRightDistance = $iRight
 				$iError = (__LO_IntIsBetween($oCell.TextRightDistance(), $iRight - 1, $iRight + 1)) ? ($iError) : (BitOR($iError, 8))
 			EndIf
-
 		Next
 	Next
 
@@ -1092,6 +1079,7 @@ Func _LOImpress_TableCellBackColor(ByRef $oCell, $iBackColor = Null)
 		If ($oCell.FillStyle() = $LOI_AREA_FILL_STYLE_SOLID) Then ; If FillStyle is set to solid, then retrieve current color value, else return $LO_COLOR_OFF (Probably a Gradient is used or otherwise).
 			$iCurColor = __LOImpress_ColorRemoveAlpha($oCell.FillColor())
 			If Not IsInt($iCurColor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
 		Else
 			$iCurColor = $LO_COLOR_OFF
 		EndIf
@@ -3342,7 +3330,6 @@ Func _LOImpress_TableColumnDelete(ByRef $oTable, $iColumn, $iCount = 1)
 
 	$iColumnCount = $oTable.Model.ColumnCount()
 	If Not IsInt($iColumnCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
 	If Not __LO_IntIsBetween($iColumn, 0, $iColumnCount - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not __LO_IntIsBetween($iCount, 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
@@ -3423,7 +3410,6 @@ Func _LOImpress_TableColumnInsert(ByRef $oTable, $iCount = 1, $iColumn = Null)
 
 	$iColumnCount = $oTable.Model.ColumnCount()
 	If Not IsInt($iColumnCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; Requested column out of bounds.
-
 	If ($iColumn <> Null) And Not __LO_IntIsBetween($iColumn, 0, $iColumnCount) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$iColumn = ($iColumn = Null) ? ($iColumnCount) : ($iColumn) ; Insert the new Columns at the end of the Table if $iColumn isn't defined.
@@ -3557,7 +3543,6 @@ Func _LOImpress_TableRowDelete(ByRef $oTable, $iRow, $iCount = 1)
 
 	$iRowCount = $oTable.Model.RowCount()
 	If Not IsInt($iRowCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
 	If Not __LO_IntIsBetween($iRow, 0, $iRowCount - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not __LO_IntIsBetween($iCount, 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 

@@ -9256,7 +9256,6 @@ Func __LOImpress_TableBorder(ByRef $oTable, $bWid, $bSty, $bCol, $iTop = Null, $
 
 								ElseIf $bCol Then
 									$iCurrVert = $oCell.RightBorder.Color()
-
 								EndIf
 
 								If Not IsInt($iCurrVert) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 7, 0)
@@ -9271,12 +9270,10 @@ Func __LOImpress_TableBorder(ByRef $oTable, $bWid, $bSty, $bCol, $iTop = Null, $
 
 								ElseIf $bCol Then
 									$iCurrHori = $oCell.BottomBorder.Color()
-
 								EndIf
 
 								If Not IsInt($iCurrHori) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 8, 0)
 							EndIf
-
 						EndIf
 
 						If ($iCol = ($oTable.Model.ColumnCount() - 1)) Then ; Processing the top-right-most column.
@@ -9289,7 +9286,6 @@ Func __LOImpress_TableBorder(ByRef $oTable, $bWid, $bSty, $bCol, $iTop = Null, $
 
 							ElseIf $bCol Then
 								$iCurrRight = $oCell.RightBorder.Color()
-
 							EndIf
 
 							If Not IsInt($iCurrRight) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
@@ -9329,7 +9325,6 @@ Func __LOImpress_TableBorder(ByRef $oTable, $bWid, $bSty, $bCol, $iTop = Null, $
 									$iCurrHori = ($iCurrHori = $oCell.BottomBorder.Color()) ? ($iCurrHori) : (Null)
 								EndIf
 							EndIf
-
 						EndIf
 
 						If ($iCol <> 0) And ($iCol <> ($oTable.Model.ColumnCount() - 1)) Then ; Processing top-central columns.
@@ -9736,6 +9731,7 @@ Func __LOImpress_TableBorder(ByRef $oTable, $bWid, $bSty, $bCol, $iTop = Null, $
 			If ($iVert <> Null) And ($oTable.Model.ColumnCount() > 1) Then ; Vertical border only applies to inside cell borders, so make sure there's more than 1 column.
 				If ($iCol = 0) Then ; Left-hand Cell, only set the inside Border.
 					If Not $bWid And ($oCell.RightBorder.LineWidth() = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 13, 0) ; If Width not set, cant set color or style.
+
 					$tBL2.LineWidth = ($bWid) ? ($iVert) : ($oCell.RightBorder.LineWidth()) ; copy Line Width over to new size structure
 					$tBL2.LineStyle = ($bSty) ? ($iVert) : ($oCell.RightBorder.LineStyle()) ; copy Line style over to new size structure
 					$tBL2.Color = ($bCol) ? ($iVert) : ($oCell.RightBorder.Color()) ; copy Color over to new size structure
@@ -9753,6 +9749,7 @@ Func __LOImpress_TableBorder(ByRef $oTable, $bWid, $bSty, $bCol, $iTop = Null, $
 
 				ElseIf ($iCol = ($oTable.Model.ColumnCount() - 1)) Then ; Right-hand cell, only set the inside border.
 					If Not $bWid And ($oCell.LeftBorder.LineWidth() = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 13, 0) ; If Width not set, cant set color or style.
+
 					$tBL2.LineWidth = ($bWid) ? ($iVert) : ($oCell.LeftBorder.LineWidth()) ; copy Line Width over to new size structure
 					$tBL2.LineStyle = ($bSty) ? ($iVert) : ($oCell.LeftBorder.LineStyle()) ; copy Line style over to new size structure
 					$tBL2.Color = ($bCol) ? ($iVert) : ($oCell.LeftBorder.Color()) ; copy Color over to new size structure
@@ -9770,6 +9767,7 @@ Func __LOImpress_TableBorder(ByRef $oTable, $bWid, $bSty, $bCol, $iTop = Null, $
 
 				Else ; Middle cell, set both borders.
 					If Not $bWid And (($oCell.LeftBorder.LineWidth() = 0) Or ($oCell.RightBorder.LineWidth() = 0)) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 13, 0) ; If Width not set, cant set color or style.
+
 					$tBL2.LineWidth = ($bWid) ? ($iVert) : ($oCell.LeftBorder.LineWidth()) ; copy Line Width over to new size structure
 					$tBL2.LineStyle = ($bSty) ? ($iVert) : ($oCell.LeftBorder.LineStyle()) ; copy Line style over to new size structure
 					$tBL2.Color = ($bCol) ? ($iVert) : ($oCell.LeftBorder.Color()) ; copy Color over to new size structure
@@ -9789,7 +9787,6 @@ Func __LOImpress_TableBorder(ByRef $oTable, $bWid, $bSty, $bCol, $iTop = Null, $
 					Else
 						$iError = (($oCell.LeftBorder.Color() = $iVert) And ($oCell.RightBorder.Color() = $iVert)) ? ($iError) : (BitOR($iError, 16))
 					EndIf
-
 				EndIf
 
 			ElseIf ($iVert <> Null) Then
@@ -9799,6 +9796,7 @@ Func __LOImpress_TableBorder(ByRef $oTable, $bWid, $bSty, $bCol, $iTop = Null, $
 			If ($iHori <> Null) And ($oTable.Model.RowCount() > 1) Then ; Horizontal border only applies to inside cell borders, so make sure there's more than 1 Row.
 				If ($iRow = 0) Then ; Setting a top cell, only set the bottom border.
 					If Not $bWid And ($oCell.BottomBorder.LineWidth() = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 14, 0) ; If Width not set, cant set color or style.
+
 					$tBL2.LineWidth = ($bWid) ? ($iHori) : ($oCell.BottomBorder.LineWidth()) ; copy Line Width over to new size structure
 					$tBL2.LineStyle = ($bSty) ? ($iHori) : ($oCell.BottomBorder.LineStyle()) ; copy Line style over to new size structure
 					$tBL2.Color = ($bCol) ? ($iHori) : ($oCell.BottomBorder.Color()) ; copy Color over to new size structure
@@ -9816,6 +9814,7 @@ Func __LOImpress_TableBorder(ByRef $oTable, $bWid, $bSty, $bCol, $iTop = Null, $
 
 				ElseIf ($iRow = ($oTable.Model.RowCount() - 1)) Then ; Setting a Bottom cell, only set the top border.
 					If Not $bWid And ($oCell.TopBorder.LineWidth() = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 14, 0) ; If Width not set, cant set color or style.
+
 					$tBL2.LineWidth = ($bWid) ? ($iHori) : ($oCell.TopBorder.LineWidth()) ; copy Line Width over to new size structure
 					$tBL2.LineStyle = ($bSty) ? ($iHori) : ($oCell.TopBorder.LineStyle()) ; copy Line style over to new size structure
 					$tBL2.Color = ($bCol) ? ($iHori) : ($oCell.TopBorder.Color()) ; copy Color over to new size structure
@@ -9833,6 +9832,7 @@ Func __LOImpress_TableBorder(ByRef $oTable, $bWid, $bSty, $bCol, $iTop = Null, $
 
 				Else ; Setting a middle cell, set the top and bottom border.
 					If Not $bWid And (($oCell.TopBorder.LineWidth() = 0) Or ($oCell.BottomBorder.LineWidth() = 0)) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 14, 0) ; If Width not set, cant set color or style.
+
 					$tBL2.LineWidth = ($bWid) ? ($iHori) : ($oCell.TopBorder.LineWidth()) ; copy Line Width over to new size structure
 					$tBL2.LineStyle = ($bSty) ? ($iHori) : ($oCell.TopBorder.LineStyle()) ; copy Line style over to new size structure
 					$tBL2.Color = ($bCol) ? ($iHori) : ($oCell.TopBorder.Color()) ; copy Color over to new size structure
