@@ -50,6 +50,7 @@
 ; _LOImpress_ShapeImageInsert
 ; _LOImpress_ShapeImageModify
 ; _LOImpress_ShapeImageReplace
+; _LOImpress_ShapeInteraction
 ; _LOImpress_ShapeLineArrowStyles
 ; _LOImpress_ShapeLineProperties
 ; _LOImpress_ShapeName
@@ -127,7 +128,6 @@
 ; _LOImpress_ShapeStyleTextAttrAnimation
 ; _LOImpress_ShapeStyleTextAttrFit
 ; _LOImpress_ShapeStyleTextAttrSettings
-; _LOImpress_ShapeTableInsert
 ; _LOImpress_ShapeTextAttrAnimation
 ; _LOImpress_ShapeTextAttrColumns
 ; _LOImpress_ShapeTextAttrFit
@@ -202,6 +202,7 @@ Func _LOImpress_ShapeAreaColor(ByRef $oShape, $iColor = Null)
 			$oShape.FillStyle = $LOI_AREA_FILL_STYLE_OFF
 			$oShape.FillUseSlideBackground = True
 			$iError = ($oShape.FillUseSlideBackground() = True) ? ($iError) : (BitOR($iError, 1))
+
 		Else
 			$iError = BitOR($iError, 1)
 		EndIf
@@ -1811,6 +1812,123 @@ Func _LOImpress_ShapeImageReplace(ByRef $oImage, $sNewImage)
 EndFunc   ;==>_LOImpress_ShapeImageReplace
 
 ; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_ShapeInteraction
+; Description ...: Set or Retrieve a Shape's current Interaction settings.
+; Syntax ........: _LOImpress_ShapeInteraction(ByRef $oShape[, $iAction = Null[, $sTarget = Null[, $iVerb = Null]]])
+; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+;                  $iAction             - [optional] (0-13) Default is Null. The action to perform when the shape is clicked. See Constants, $LOI_SHAPE_INTERACTION_ACTION_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $sTarget             - [optional] Default is Null. The target for the action. See remarks.
+;                  $iVerb               - [optional] Default is Null. If $iAction is set to $LOI_SHAPE_INTERACTION_ACTION_OBJ_ACTION, this is the action to perform on the OLE Object. See remarks.
+; Return values .: Success: 1 or Array.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oShape not an Object.
+;                  @Error: 1, @Extended: 2 = $iAction not an Integer, less than 0 or greater than 13. See Constants, $LOI_SHAPE_INTERACTION_ACTION_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $sTarget not a String.
+;                  @Error: 1, @Extended: 4 = Slide or shape does not exist with name called in $sTarget.
+;                  @Error: 1, @Extended: 5 = File called in $sTarget does not exist.
+;                  @Error: 1, @Extended: 6 = $iVerb not an Integer.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Target value.
+;                  @Error: 3, @Extended: 2 = Failed to convert current Target path.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve parent Slide Object.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve parent Document Object.
+;                  @Error: 3, @Extended: 5 = Failed to convert target path.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $iAction
+;                  |                               2 = Error setting $sTarget
+;                  |                               4 = Error setting $iVerb
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  Call any optional parameter with Null keyword to skip it.
+;                  When $iAction is set to $LOI_SHAPE_INTERACTION_ACTION_OBJ_ACTION, call $sTarget with the appropriate flag as a string for the action to perform on the OLE Object, and call $iVerb with the appropriate flag as an integer.
+;                  As an example for values to use with $LOI_SHAPE_INTERACTION_ACTION_OBJ_ACTION, I have observed the following values:
+;                  - When setting the action to "edit", $sTarget has a value of "-1" (as a string), and $iVerb has a value of 65535.
+;                  - When setting the action to "Save a Copy As", $sTarget has a value of "-8" (as a string), and $iVerb has a value of 65528.
+;                  $iVerb determines the action performed, and $sTarget determines the action showing selected in the UI.
+;                  User is responsible for ensuring values are correctly called (i.e. that a shape, or slide etc exists by that name) for $LOI_SHAPE_INTERACTION_ACTION_GOTO_PAGE_OBJ, $LOI_SHAPE_INTERACTION_ACTION_OBJ_ACTION, and $LOI_SHAPE_INTERACTION_ACTION_MACRO.
+;                  See comments for each $LOI_SHAPE_INTERACTION_ACTION_* Constant for what values are expected in $sTarget otherwise.
+;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_ShapeInteraction(ByRef $oShape, $iAction = Null, $sTarget = Null, $iVerb = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iError = 0
+	Local $sCurVal
+	Local $oSlide, $oDoc
+	Local $avInteraction[3]
+
+	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	If __LO_VarsAreNull($iAction, $sTarget) Then
+		$sCurVal = $oShape.Bookmark()
+		If Not IsString($sCurVal) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Switch $oShape.OnClick()
+			Case $LOI_SHAPE_INTERACTION_ACTION_DOCUMENT, $LOI_SHAPE_INTERACTION_ACTION_SOUND, $LOI_SHAPE_INTERACTION_ACTION_PROGRAM
+				$sCurVal = _LO_PathConvert($oShape.Bookmark(), $LO_PATHCONV_PCPATH_RETURN)
+				If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+		EndSwitch
+
+		__LO_ArrayFill($avInteraction, $oShape.OnClick(), $sCurVal, $oShape.Verb())
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $avInteraction)
+	EndIf
+
+	If ($iAction <> Null) Then
+		If Not __LO_IntIsBetween($iAction, $LOI_SHAPE_INTERACTION_ACTION_NONE, $LOI_SHAPE_INTERACTION_ACTION_EXIT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+		$oShape.OnClick = $iAction
+		$iError = ($oShape.OnClick() = $iAction) ? ($iError) : (BitOR($iError, 1))
+	EndIf
+
+	If ($sTarget <> Null) Then
+		If Not IsString($sTarget) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+		Switch $oShape.OnClick()
+			Case $LOI_SHAPE_INTERACTION_ACTION_GOTO_PAGE_OBJ
+				$oSlide = $oShape.Parent()
+				If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+				$oDoc = $oSlide.MasterPage.Forms.Parent()
+				If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+				If Not _LOImpress_ShapeExists($oDoc, $sTarget) And Not _
+						$oDoc.Links.getByName("Slide").Links.hasByName($sTarget) And Not _
+						$oDoc.Links.getByName("Notes").Links.hasByName($sTarget) And Not _
+						$oDoc.Links.getByName("Master Page").Links.hasByName($sTarget) And Not _
+						$oDoc.Links.getByName("Handouts").Links.hasByName($sTarget) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0) ; Not sure if I need to check Handouts?
+
+			Case $LOI_SHAPE_INTERACTION_ACTION_DOCUMENT, $LOI_SHAPE_INTERACTION_ACTION_SOUND, $LOI_SHAPE_INTERACTION_ACTION_PROGRAM
+				If Not FileExists($sTarget) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+				$sTarget = _LO_PathConvert($sTarget, $LO_PATHCONV_OFFICE_RETURN)
+				If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+		EndSwitch
+
+		$oShape.Bookmark = $sTarget
+		$iError = ($oShape.Bookmark() = $sTarget) ? ($iError) : (BitOR($iError, 2))
+	EndIf
+
+	If ($iVerb <> Null) Then
+		If Not IsInt($iVerb) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+
+		$oShape.Verb = $iVerb
+		$iError = ($oShape.Verb() = $iVerb) ? ($iError) : (BitOR($iError, 4))
+	EndIf
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LOImpress_ShapeInteraction
+
+; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapeLineArrowStyles
 ; Description ...: Set or Retrieve Shape Line Start and End Arrow Style settings.
 ; Syntax ........: _LOImpress_ShapeLineArrowStyles(ByRef $oShape[, $vStartStyle = Null[, $iStartWidth = Null[, $bStartCenter = Null[, $bSync = Null[, $vEndStyle = Null[, $iEndWidth = Null[, $bEndCenter = Null]]]]]]])
@@ -2159,7 +2277,6 @@ Func _LOImpress_ShapeName(ByRef $oShape, $sName = Null)
 
 	$oDoc = $oSlide.MasterPage.Forms.Parent()
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
 	If _LOImpress_ShapeExists($oDoc, $sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$oShape.Name = $sName
@@ -6154,93 +6271,6 @@ Func _LOImpress_ShapeStyleTextAttrSettings(ByRef $oShapeStyle, $iLeft = Null, $i
 
 	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOImpress_ShapeStyleTextAttrSettings
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_ShapeTableInsert
-; Description ...: Create and Insert a Table into a Slide.
-; Syntax ........: _LOImpress_ShapeTableInsert(ByRef $oSlide, $iWidth, $iHeight[, $iRows = 2[, $iColumns = 2[, $iX = -1[, $iY = -1]]]])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
-;                  $iWidth              - The Table's Width in Hundredths of a Millimeter (HMM).
-;                  $iHeight             - The Table's Height in Hundredths of a Millimeter (HMM).
-;                  $iRows               - [optional] (1-75) Default is 2. The number of Rows.
-;                  $iColumns            - [optional] (1-75) Default is 2. The number of Columns.
-;                  $iX                  - [optional] Default is -1. The X position from the top-left of the page, in Hundredths of a Millimeter (HMM). Call with -1 to center the table horizontally.
-;                  $iY                  - [optional] Default is -1. The Y position from the top-left of the page, in Hundredths of a Millimeter (HMM). Call with -1 to center the table vertically.
-; Return values .: Success: Object
-;                  @Error: 0, @Extended: 0, Return: Object = Success. Inserted a new Table. Returning its Object.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
-;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
-;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
-;                  @Error: 1, @Extended: 4 = $iRows not an Integer, less than 1 or greater than 75.
-;                  @Error: 1, @Extended: 5 = $iColumns not an Integer, less than 1 or greater than 75.
-;                  @Error: 1, @Extended: 6 = $iX not an Integer.
-;                  @Error: 1, @Extended: 7 = $iY not an Integer.
-;                  --Initialization Errors--
-;                  @Error: 2, @Extended: 1 = Failed to create a "com.sun.star.drawing.TableShape" Object.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to retrieve parent Document Object.
-;                  @Error: 3, @Extended: 2 = Failed to retrieve Default Table Style.
-;                  @Error: 3, @Extended: 3 = Failed to retrieve Position Structure.
-;                  @Error: 3, @Extended: 4 = Failed to retrieve Size Structure.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOImpress_ShapeTableInsert(ByRef $oSlide, $iWidth, $iHeight, $iRows = 2, $iColumns = 2, $iX = -1, $iY = -1)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $oShape, $oDoc, $oStyle
-	Local $tSize, $tPos
-
-	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsInt($iWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not IsInt($iHeight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If Not __LO_IntIsBetween($iRows, 1, 75) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If Not __LO_IntIsBetween($iColumns, 1, 75) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-	If Not IsInt($iX) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-	If Not IsInt($iY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
-
-	$oDoc = $oSlide.MasterPage.Forms.Parent()
-	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-	$oShape = $oDoc.createInstance("com.sun.star.drawing.TableShape")
-	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-
-	$oStyle = $oDoc.StyleFamilies.getByName("table").getByName("default")
-	If Not IsObj($oStyle) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-	; Apply Default Table Style, to match L.O.
-	$oShape.TableTemplate = $oStyle
-
-	$oSlide.add($oShape)
-
-	$oShape.Model.Rows.insertByIndex(0, ($iRows - 1)) ; Minus one to account for 1 Column/Row being present upon creation.
-	$oShape.Model.Columns.insertByIndex(0, ($iColumns - 1)) ; Minus one to account for 1 Column/Row being present upon creation.
-
-	$tPos = $oShape.Position()
-	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
-	$tPos.X = ($iX = -1) ? (Int(($oSlide.Width() - $iWidth) / 2)) : ($iX)
-	$tPos.Y = ($iY = -1) ? (Int(($oSlide.Height() - $iHeight) / 2)) : ($iY)
-
-	$oShape.Position = $tPos
-
-	$tSize = $oShape.Size()
-	If Not IsObj($tSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
-
-	$tSize.Width = $iWidth
-	$tSize.Height = $iHeight
-
-	$oShape.Size = $tSize
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oShape)
-EndFunc   ;==>_LOImpress_ShapeTableInsert
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapeTextAttrAnimation

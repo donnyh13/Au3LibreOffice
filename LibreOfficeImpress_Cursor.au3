@@ -528,9 +528,12 @@ EndFunc   ;==>_LOImpress_CursorGoToRange
 ;                  @Error: 1, @Extended: 1 = $oCursor not an Object.
 ;                  @Error: 1, @Extended: 2 = $sString not a string..
 ;                  @Error: 1, @Extended: 3 = $bOverwrite not a Boolean.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Parent Slide Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Parent Document Object.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Warning! For some reason this function doesn't seem to set the modified status to True. Changes could be inadvertently lost due to this, if the user closes without saving.
+; Remarks .......: For some reason the string insert method doesn't set the document modified status to True, therefore I have attempted to do it manually. This still may fail however, and changes could be inadvertently lost if the user closes without saving, as the Document will not ask if the user wishes to save changes.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -539,11 +542,23 @@ Func _LOImpress_CursorInsertString(ByRef $oCursor, $sString, $bOverwrite = False
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $oDoc, $oSlide
+
 	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsString($sString) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsBool($bOverwrite) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$oCursor.Text.insertString($oCursor, $sString, $bOverwrite)
+
+	If ($sString <> "") And Not $oCursor.Text.getPropertySetInfo.hasPropertyByName("TableBorder") Then ; If the Object containing the cursor has the TableBorder Property, it's most likely a cell, I can't get the parent slide from a cell, so skip setting the modified state.
+		$oSlide = $oCursor.Text.Parent()
+		If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		$oDoc = $oSlide.MasterPage.Forms.Parent()
+		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		If ($oDoc.IsModified() = False) Then $oDoc.Modified = True
+	EndIf
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOImpress_CursorInsertString

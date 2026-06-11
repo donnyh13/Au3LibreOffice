@@ -1512,12 +1512,16 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOI_PAR_TEXT_ANCHOR_*
   - $LOI_PAR_TXT_DIR_*
   - $LOI_RELATIVE_*
+  - $LOI_SHAPE_BORDER_STYLE_*
+  - $LOI_SHAPE_BORDER_WIDTH_*
   - $LOI_SHAPE_COLOR_USE_SLIDE_BACKGROUND
+  - $LOI_SHAPE_INTERACTION_ACTION_*
   - $LOI_SHAPE_LINE_ARROW_TYPE_*
   - $LOI_SHAPE_LINE_CAP_*
   - $LOI_SHAPE_LINE_JOINT_*
   - $LOI_SHAPE_LINE_STYLE_*
   - $LOI_SHAPE_SHADOW_LOCATION_*
+  - $LOI_SHAPE_TABLE_CELL_TYPE_*
   - $LOI_SHAPE_TEXTBOX_TYPE_*
   - $LOI_SHAPE_TYPE_*
   - $LOI_SLIDE_LAYOUT_*
@@ -1662,6 +1666,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - __LOImpress_ShapeTextAttrFit
   - __LOImpress_ShapeTextAttrSettings
   - __LOImpress_StyleCharFontColor
+  - __LOImpress_TableBorder
+  - __LOImpress_TableCellBorder
   - __LOImpress_Transition
   - __LOImpress_TransparencyGradientConvert
   - __LOImpress_TransparencyGradientNameInsert
@@ -1768,7 +1774,6 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOImpress_ShapeStyleTextAttrAnimation
   - _LOImpress_ShapeStyleTextAttrFit
   - _LOImpress_ShapeStyleTextAttrSettings
-  - _LOImpress_ShapeTableInsert
   - _LOImpress_ShapeTextAttrAnimation
   - _LOImpress_ShapeTextAttrColumns
   - _LOImpress_ShapeTextAttrFit
@@ -1808,6 +1813,56 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOImpress_SlideshowStop
   - _LOImpress_SlideSoundsGetNames
   - _LOImpress_SlideTransition
+- Table functions
+  - _LOImpress_TableBackColor
+  - _LOImpress_TableBackFillStyle
+  - _LOImpress_TableBackGradient
+  - _LOImpress_TableBackGradientMulticolor
+  - _LOImpress_TableBorderColor
+  - _LOImpress_TableBorderPadding
+  - _LOImpress_TableBorderStyle
+  - _LOImpress_TableBorderWidth
+  - _LOImpress_TableCellBackColor
+  - _LOImpress_TableCellBackFillStyle
+  - _LOImpress_TableCellBackGradient
+  - _LOImpress_TableCellBackGradientMulticolor
+  - _LOImpress_TableCellBorderColor
+  - _LOImpress_TableCellBorderPadding
+  - _LOImpress_TableCellBorderStyle
+  - _LOImpress_TableCellBorderWidth
+  - _LOImpress_TableCellCharEffect
+  - _LOImpress_TableCellCharFont
+  - _LOImpress_TableCellCharFontColor
+  - _LOImpress_TableCellCharOverLine
+  - _LOImpress_TableCellCharPosition
+  - _LOImpress_TableCellCharScaling
+  - _LOImpress_TableCellCharSpacing
+  - _LOImpress_TableCellCharStrikeOut
+  - _LOImpress_TableCellCharUnderLine
+  - _LOImpress_TableCellCreateTextCursor
+  - _LOImpress_TableCellGetObjByPosition
+  - _LOImpress_TableCellParAlignment
+  - _LOImpress_TableCellParIndent
+  - _LOImpress_TableCellParSpacing
+  - _LOImpress_TableCellParTabStopCreate
+  - _LOImpress_TableCellParTabStopDelete
+  - _LOImpress_TableCellParTabStopMod
+  - _LOImpress_TableCellParTabStopsGetList
+  - _LOImpress_TableCellString
+  - _LOImpress_TableCharEffect
+  - _LOImpress_TableCharFont
+  - _LOImpress_TableCharFontColor
+  - _LOImpress_TableCharOverLine
+  - _LOImpress_TableCharStrikeOut
+  - _LOImpress_TableCharUnderLine
+  - _LOImpress_TableColumnDelete
+  - _LOImpress_TableColumnGetCount
+  - _LOImpress_TableColumnInsert
+  - _LOImpress_TableInsert
+  - _LOImpress_TableRowDelete
+  - _LOImpress_TableRowGetCount
+  - _LOImpress_TableRowInsert
+  - _LOImpress_TableShadow
 
 #### Changed
 

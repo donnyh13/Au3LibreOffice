@@ -10,9 +10,10 @@
 ; Other includes for Impress
 #include "LibreOfficeImpress_Cursor.au3"
 #include "LibreOfficeImpress_Doc.au3"
-#include "LibreOfficeImpress_DrawShapes.au3"
-#include "LibreOfficeImpress_Shapes.au3"
-#include "LibreOfficeImpress_Slides.au3"
+#include "LibreOfficeImpress_DrawShape.au3"
+#include "LibreOfficeImpress_Shape.au3"
+#include "LibreOfficeImpress_Slide.au3"
+#include "LibreOfficeImpress_Table.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice UDF

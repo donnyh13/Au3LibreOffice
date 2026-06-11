@@ -576,8 +576,57 @@ Global Const _                                                       ; com.sun.s
 		$LOI_RELATIVE_PAGE_PRINT_BOTTOM = 10, _                      ; The Object is placed considering the space available in the page footer(?)
 		$LOI_RELATIVE_PAGE_PRINT_TOP = 11                            ; The Object is placed considering the space available in the page header(?)
 
+; Table Border Style
+Global Const _                                                       ; com.sun.star.table.BorderLineStyle
+		$LOI_SHAPE_BORDER_STYLE_NONE = 0x7FFF, _                     ; No border line.
+		$LOI_SHAPE_BORDER_STYLE_SOLID = 0, _                         ; Solid border line.
+		$LOI_SHAPE_BORDER_STYLE_DOTTED = 1, _                        ; Dotted border line.
+		$LOI_SHAPE_BORDER_STYLE_DASHED = 2, _                        ; Dashed border line.
+		$LOI_SHAPE_BORDER_STYLE_DOUBLE = 3, _                        ; Double border line.
+		$LOI_SHAPE_BORDER_STYLE_THINTHICK_SMALLGAP = 4, _            ; Double border line with a thin line outside and a thick line inside separated by a small gap.
+		$LOI_SHAPE_BORDER_STYLE_THINTHICK_MEDIUMGAP = 5, _           ; Double border line with a thin line outside and a thick line inside separated by a medium gap.
+		$LOI_SHAPE_BORDER_STYLE_THINTHICK_LARGEGAP = 6, _            ; Double border line with a thin line outside and a thick line inside separated by a large gap.
+		$LOI_SHAPE_BORDER_STYLE_THICKTHIN_SMALLGAP = 7, _            ; Double border line with a thick line outside and a thin line inside separated by a small gap.
+		$LOI_SHAPE_BORDER_STYLE_THICKTHIN_MEDIUMGAP = 8, _           ; Double border line with a thick line outside and a thin line inside separated by a medium gap.
+		$LOI_SHAPE_BORDER_STYLE_THICKTHIN_LARGEGAP = 9, _            ; Double border line with a thick line outside and a thin line inside separated by a large gap.
+		$LOI_SHAPE_BORDER_STYLE_EMBOSSED = 10, _                     ; 3D embossed border line.
+		$LOI_SHAPE_BORDER_STYLE_ENGRAVED = 11, _                     ; 3D engraved border line.
+		$LOI_SHAPE_BORDER_STYLE_OUTSET = 12, _                       ; Outset border line.
+		$LOI_SHAPE_BORDER_STYLE_INSET = 13, _                        ; Inset border line.
+		$LOI_SHAPE_BORDER_STYLE_FINE_DASHED = 14, _                  ; Finely dashed border line.
+		$LOI_SHAPE_BORDER_STYLE_DOUBLE_THIN = 15, _                  ; Double border line consisting of two fixed thin lines separated by a variable gap.
+		$LOI_SHAPE_BORDER_STYLE_DASH_DOT = 16, _                     ; Line consisting of a repetition of one dash and one dot.
+		$LOI_SHAPE_BORDER_STYLE_DASH_DOT_DOT = 17                    ; Line consisting of a repetition of one dash and 2 dots.
+
+; Border Width
+Global Const _
+		$LOI_SHAPE_BORDER_WIDTH_HAIRLINE = 2, _                      ; Hairline Border line width.
+		$LOI_SHAPE_BORDER_WIDTH_VERY_THIN = 18, _                    ; Very Thin Border line width.
+		$LOI_SHAPE_BORDER_WIDTH_THIN = 26, _                         ; Thin Border line width.
+		$LOI_SHAPE_BORDER_WIDTH_MEDIUM = 53, _                       ; Medium Border line width.
+		$LOI_SHAPE_BORDER_WIDTH_THICK = 79, _                        ; Thick Border line width.
+		$LOI_SHAPE_BORDER_WIDTH_EXTRA_THICK = 159                    ; Extra Thick Border line width.
+
+; Shape Use Slide Background color.
 Global Const _
 		$LOI_SHAPE_COLOR_USE_SLIDE_BACKGROUND = -2                   ; Use the Slide's background color as the Shape's background color.
+
+; Shape Interaction Action on Click
+Global Const _                                                       ; com.sun.star.presentation.ClickAction
+		$LOI_SHAPE_INTERACTION_ACTION_NONE = 0, _                    ; No action is performed on click.
+		$LOI_SHAPE_INTERACTION_ACTION_PREV_PAGE = 1, _               ; The presentation jumps to the previous page.
+		$LOI_SHAPE_INTERACTION_ACTION_NEXT_PAGE = 2, _               ; The presentation jumps to the next page.
+		$LOI_SHAPE_INTERACTION_ACTION_FIRST_PAGE = 3, _              ; The presentation continues with the first page.
+		$LOI_SHAPE_INTERACTION_ACTION_LAST_PAGE = 4, _               ; The presentation continues with the last page.
+		$LOI_SHAPE_INTERACTION_ACTION_GOTO_PAGE_OBJ = 5, _           ; The presentation jumps to a Slide or Object. Call $sTarget with the Slide name, or shape name to jump to.
+		$LOI_SHAPE_INTERACTION_ACTION_DOCUMENT = 6, _                ; The presentation jumps to another document. Call $sTarget with the path to the Document to open.
+		$LOI_SHAPE_INTERACTION_ACTION_INVISIBLE = 7, _               ; [Not used?] The object renders itself invisible after a click.
+		$LOI_SHAPE_INTERACTION_ACTION_SOUND = 8, _                   ; A sound is played after a click. Call $sTarget with the path to the sound file to play.
+		$LOI_SHAPE_INTERACTION_ACTION_OBJ_ACTION = 9, _              ; An OLE verb is performed on this object. Call $sTarget and $iVerb with the appropriate flags for the action to perform on the OLE Object.
+		$LOI_SHAPE_INTERACTION_ACTION_VANISH = 10, _                 ; [Not used?] The object vanishes with its effect.
+		$LOI_SHAPE_INTERACTION_ACTION_PROGRAM = 11, _                ; Another program is executed after a click. Call $sTarget with the path to the program to run.
+		$LOI_SHAPE_INTERACTION_ACTION_MACRO = 12, _                  ; A macro is executed after the click. Call $sTarget with the appropriate Macro URL to call.
+		$LOI_SHAPE_INTERACTION_ACTION_EXIT = 13                      ; The presentation is stopped after the click.
 
 ; Arrowhead Type Constants
 Global Enum _
@@ -676,6 +725,13 @@ Global Enum _
 		$LOI_SHAPE_SHADOW_LOCATION_BOTTOM_CENTER, _                  ; 7 The Shadow is positioned in the Lower-Center of the shape.
 		$LOI_SHAPE_SHADOW_LOCATION_BOTTOM_RIGHT                      ; 8 The Shadow is positioned in the Lower-Right corner of the shape.
 
+; Table Cell Type
+Global Const _                                                       ; com.sun.star.table.CellContentType
+		$LOI_SHAPE_TABLE_CELL_TYPE_EMPTY = 0, _                      ; Cell is empty.
+		$LOI_SHAPE_TABLE_CELL_TYPE_VALUE = 1, _                      ; Cell contains a value.
+		$LOI_SHAPE_TABLE_CELL_TYPE_TEXT = 2, _                       ; Cell contains text.
+		$LOI_SHAPE_TABLE_CELL_TYPE_FORMULA = 3                       ; Cell contains a formula.
+
 ; Text Box type Constants.
 Global Enum _
 		$LOI_SHAPE_TEXTBOX_TYPE_TEXTBOX, _                           ; 0 - A Text Box, including Hyperlinks, and most Fields.
@@ -684,7 +740,7 @@ Global Enum _
 		$LOI_SHAPE_TEXTBOX_TYPE_TITLE                                ; 3 - A Slide Title Text Box.
 
 ; Shape Type Constants.
-Global Enum Step * 2 _
+Global Enum Step *2 _
 		$LOI_SHAPE_TYPE_DRAWING_SHAPE = 1, _                         ; 1 - All shapes, 3D Shapes, Basic Shapes, Block Arrows, Flowcharts, Callouts, Lines, Connectors, Fontwork etc.
 		$LOI_SHAPE_TYPE_FORM_CONTROL, _                              ; 2 - Form Controls.
 		$LOI_SHAPE_TYPE_IMAGE, _                                     ; 4 - An Image, Barcode or QR code.

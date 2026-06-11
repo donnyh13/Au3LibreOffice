@@ -83,6 +83,8 @@
 ; __LOImpress_ShapeTextAttrFit
 ; __LOImpress_ShapeTextAttrSettings
 ; __LOImpress_StyleCharFontColor
+; __LOImpress_TableBorder
+; __LOImpress_TableCellBorder
 ; __LOImpress_Transition
 ; __LOImpress_TransparencyGradientConvert
 ; __LOImpress_TransparencyGradientNameInsert
@@ -9122,6 +9124,881 @@ Func __LOImpress_StyleCharFontColor(ByRef $oObj, $iFontColor = Null, $iHighlight
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>__LOImpress_StyleCharFontColor
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_TableBorder
+; Description ...: Set or Retrieve Table Border settings -- internal function. LibreOffice 3.6 and Up.
+; Syntax ........: __LOImpress_TableBorder(ByRef $oTable, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $iVert = Null[, $iHori = Null]]]]]])
+; Parameters ....: $oTable              - A Table Shape object returned by a previous _LOImpress_TableInsert, or _LOImpress_ShapesGetList function.
+;                  $bWid                - If True the calling function is for setting Border Line Width.
+;                  $bSty                - If True the calling function is for setting Border Line Style.
+;                  $bCol                - If True the calling function is for setting Border Line Color.
+;                  $iTop                - [optional] Default is Null. See TableBorder Style, Width, and Color functions for possible values.
+;                  $iBottom             - [optional] Default is Null. See TableBorder Style, Width, and Color functions for possible values.
+;                  $iLeft               - [optional] Default is Null. See TableBorder Style, Width, and Color functions for possible values.
+;                  $iRight              - [optional] Default is Null. See TableBorder Style, Width, and Color functions for possible values.
+;                  $iVert               - [optional] Default is Null. See TableBorder Style, Width, and Color functions for possible values.
+;                  $iHori               - [optional] Default is Null. See TableBorder Style, Width, and Color functions for possible values.
+; Return values .: Success: 1 or Array.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oTable not an Object.
+;                  --Initialization Errors--
+;                  @Error: 2, @Extended: 1 = Error Creating "com.sun.star.table.BorderLine2" Object.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Cell Object.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve current Top border value.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve current Bottom border value.
+;                  @Error: 3, @Extended: 5 = Failed to retrieve current Left border value.
+;                  @Error: 3, @Extended: 6 = Failed to retrieve current Right border value.
+;                  @Error: 3, @Extended: 7 = Failed to retrieve current Vertical border value.
+;                  @Error: 3, @Extended: 8 = Failed to retrieve current Horizontal border value.
+;                  @Error: 3, @Extended: 9 = Cannot set Top Border Style/Color when Top Border width not set.
+;                  @Error: 3, @Extended: 10 = Cannot set Bottom Border Style/Color when Bottom Border width not set.
+;                  @Error: 3, @Extended: 11 = Cannot set Left Border Style/Color when Left Border width not set.
+;                  @Error: 3, @Extended: 12 = Cannot set Right Border Style/Color when Right Border width not set.
+;                  @Error: 3, @Extended: 13 = Cannot set Vertical Border Style/Color when Vertical Border width not set.
+;                  @Error: 3, @Extended: 14 = Cannot set Horizontal Border Style/Color when Horizontal Border width not set.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $iTop
+;                  |                               2 = Error setting $iBottom
+;                  |                               4 = Error setting $iLeft
+;                  |                               8 = Error setting $iRight
+;                  |                               16 = Error setting $iVert
+;                  |                               32 = Error setting $iHori
+;                  --Version Related Errors--
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 3.6.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  Call any optional parameter with Null keyword to skip it.
+;                  Tables require that the properties be set individually for each Cell, therefore this function cycles through each cell and sets the value, and may be slower for large tables.
+;                  When retrieving the current property values for a table, if all of the cells in the Table do not have the same value, Null is returned for that property value.
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_TableBorder(ByRef $oTable, $bWid, $bSty, $bCol, $iTop = Null, $iBottom = Null, $iLeft = Null, $iRight = Null, $iVert = Null, $iHori = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $avBorder[6]
+	Local $oCell
+	Local $tBL2
+	Local $iError = 0, $iCurrTop, $iCurrBottom, $iCurrLeft, $iCurrRight, $iCurrVert, $iCurrHori
+
+	If Not __LO_VersionCheck(3.6) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
+	If Not IsObj($oTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If (($bWid + $bSty + $bCol) <> 1) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	If __LO_VarsAreNull($iTop, $iBottom, $iLeft, $iRight, $iVert, $iHori) Then
+		If ($oTable.Model.ColumnCount() = 1) And ($oTable.Model.RowCount() = 1) Then ; Dealing with a 1 cell table. No Horizontal/Vertical.
+			$oCell = $oTable.Model.getCellByPosition(0, 0)
+			If Not IsObj($oCell) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+			$iCurrHori = Null
+			$iCurrVert = Null
+
+			If $bWid Then
+				$iCurrTop = $oCell.TopBorder.LineWidth()
+				$iCurrBottom = $oCell.BottomBorder.LineWidth()
+				$iCurrLeft = $oCell.LeftBorder.LineWidth()
+				$iCurrRight = $oCell.RightBorder.LineWidth()
+
+			ElseIf $bSty Then
+				$iCurrTop = $oCell.TopBorder.LineStyle()
+				$iCurrBottom = $oCell.BottomBorder.LineStyle()
+				$iCurrLeft = $oCell.LeftBorder.LineStyle()
+				$iCurrRight = $oCell.RightBorder.LineStyle()
+
+			ElseIf $bCol Then
+				$iCurrTop = $oCell.TopBorder.Color()
+				$iCurrBottom = $oCell.BottomBorder.Color()
+				$iCurrLeft = $oCell.LeftBorder.Color()
+				$iCurrRight = $oCell.RightBorder.Color()
+			EndIf
+
+		Else
+			For $iRow = 0 To $oTable.Model.RowCount() - 1
+				For $iCol = 0 To $oTable.Model.ColumnCount() - 1
+					$oCell = $oTable.Model.getCellByPosition($iCol, $iRow)
+					If Not IsObj($oCell) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+					If ($iRow = 0) Then ; Processing the top row.
+						If ($iCol = 0) Then ; Processing the top-left-most column. This is the first cell, so I don't need to check if a value was already set.
+
+							If $bWid Then    ; Top Border, Left border
+								$iCurrTop = $oCell.TopBorder.LineWidth()
+								$iCurrLeft = $oCell.LeftBorder.LineWidth()
+
+							ElseIf $bSty Then
+								$iCurrTop = $oCell.TopBorder.LineStyle()
+								$iCurrLeft = $oCell.LeftBorder.LineStyle()
+
+							ElseIf $bCol Then
+								$iCurrTop = $oCell.TopBorder.Color()
+								$iCurrLeft = $oCell.LeftBorder.Color()
+							EndIf
+
+							If Not IsInt($iCurrTop) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+							If Not IsInt($iCurrLeft) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+
+							If Not IsInt($iCurrVert) And ($oTable.Model.ColumnCount() <> 1) Then ; Vertical Border, only retrieve if there is more than one Column.
+								If $bWid Then
+									$iCurrVert = $oCell.RightBorder.LineWidth()
+
+								ElseIf $bSty Then
+									$iCurrVert = $oCell.RightBorder.LineStyle()
+
+								ElseIf $bCol Then
+									$iCurrVert = $oCell.RightBorder.Color()
+
+								EndIf
+
+								If Not IsInt($iCurrVert) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 7, 0)
+							EndIf
+
+							If Not IsInt($iCurrHori) And ($oTable.Model.RowCount() <> 1) Then ; Horizontal Border, only retrieve if there is more than one Row.
+								If $bWid Then
+									$iCurrHori = $oCell.BottomBorder.LineWidth()
+
+								ElseIf $bSty Then
+									$iCurrHori = $oCell.BottomBorder.LineStyle()
+
+								ElseIf $bCol Then
+									$iCurrHori = $oCell.BottomBorder.Color()
+
+								EndIf
+
+								If Not IsInt($iCurrHori) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 8, 0)
+							EndIf
+
+						EndIf
+
+						If ($iCol = ($oTable.Model.ColumnCount() - 1)) Then ; Processing the top-right-most column.
+							; Right Border, at top, it won't have been already set.
+							If $bWid Then
+								$iCurrRight = $oCell.RightBorder.LineWidth()
+
+							ElseIf $bSty Then
+								$iCurrRight = $oCell.RightBorder.LineStyle()
+
+							ElseIf $bCol Then
+								$iCurrRight = $oCell.RightBorder.Color()
+
+							EndIf
+
+							If Not IsInt($iCurrRight) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
+
+							If ($iCurrTop <> Null) Then ; Top Border, make sure it wasn't already nulled, if the value doesn't match the first value, null it.
+								If $bWid Then
+									$iCurrTop = ($iCurrTop = $oCell.TopBorder.LineWidth()) ? ($iCurrTop) : (Null)
+
+								ElseIf $bSty Then
+									$iCurrTop = ($iCurrTop = $oCell.TopBorder.LineStyle()) ? ($iCurrTop) : (Null)
+
+								ElseIf $bCol Then
+									$iCurrTop = ($iCurrTop = $oCell.TopBorder.Color()) ? ($iCurrTop) : (Null)
+								EndIf
+							EndIf
+
+							If ($iCurrVert <> Null) And ($oTable.Model.ColumnCount() > 1) Then ; Vertical Border. Make sure it wasn't already nulled, and that there is more than one column, and if the value doesn't match the first value, null it.
+								If $bWid Then
+									$iCurrVert = ($iCurrVert = $oCell.LeftBorder.LineWidth()) ? ($iCurrVert) : (Null)
+
+								ElseIf $bSty Then
+									$iCurrVert = ($iCurrVert = $oCell.LeftBorder.LineStyle()) ? ($iCurrVert) : (Null)
+
+								ElseIf $bCol Then
+									$iCurrVert = ($iCurrVert = $oCell.LeftBorder.Color()) ? ($iCurrVert) : (Null)
+								EndIf
+							EndIf
+
+							If ($iCurrHori <> Null) And ($oTable.Model.RowCount() > 1) Then ; Horizontal Border. Make sure it wasn't already nulled, and that there is more than one row, and if the value doesn't match the first value, null it.
+								If $bWid Then
+									$iCurrHori = ($iCurrHori = $oCell.BottomBorder.LineWidth()) ? ($iCurrHori) : (Null)
+
+								ElseIf $bSty Then
+									$iCurrHori = ($iCurrHori = $oCell.BottomBorder.LineStyle()) ? ($iCurrHori) : (Null)
+
+								ElseIf $bCol Then
+									$iCurrHori = ($iCurrHori = $oCell.BottomBorder.Color()) ? ($iCurrHori) : (Null)
+								EndIf
+							EndIf
+
+						EndIf
+
+						If ($iCol <> 0) And ($iCol <> ($oTable.Model.ColumnCount() - 1)) Then ; Processing top-central columns.
+							If ($iCurrTop <> Null) Then ; Top Border, make sure it wasn't already nulled, if the value doesn't match the first value, null it.
+								If $bWid Then
+									$iCurrTop = ($iCurrTop = $oCell.TopBorder.LineWidth()) ? ($iCurrTop) : (Null)
+
+								ElseIf $bSty Then
+									$iCurrTop = ($iCurrTop = $oCell.TopBorder.LineStyle()) ? ($iCurrTop) : (Null)
+
+								ElseIf $bCol Then
+									$iCurrTop = ($iCurrTop = $oCell.TopBorder.Color()) ? ($iCurrTop) : (Null)
+								EndIf
+							EndIf
+
+							If ($iCurrVert <> Null) Then ; Vertical Border. Make sure it wasn't already nulled, and if both left and right values don't match the first value, null it.
+								If $bWid Then
+									$iCurrVert = ($iCurrVert = $oCell.LeftBorder.LineWidth()) ? ($iCurrVert) : (Null)
+									$iCurrVert = ($iCurrVert = $oCell.RightBorder.LineWidth()) ? ($iCurrVert) : (Null)
+
+								ElseIf $bSty Then
+									$iCurrVert = ($iCurrVert = $oCell.LeftBorder.LineStyle()) ? ($iCurrVert) : (Null)
+									$iCurrVert = ($iCurrVert = $oCell.RightBorder.LineStyle()) ? ($iCurrVert) : (Null)
+
+								ElseIf $bCol Then
+									$iCurrVert = ($iCurrVert = $oCell.LeftBorder.Color()) ? ($iCurrVert) : (Null)
+									$iCurrVert = ($iCurrVert = $oCell.RightBorder.Color()) ? ($iCurrVert) : (Null)
+								EndIf
+							EndIf
+
+							If ($iCurrHori <> Null) And ($oTable.Model.RowCount() > 1) Then ; Horizontal Border. Make sure it wasn't already nulled, and that there is more than one row, and if the value doesn't match the first value, null it.
+								If $bWid Then
+									$iCurrHori = ($iCurrHori = $oCell.BottomBorder.LineWidth()) ? ($iCurrHori) : (Null)
+
+								ElseIf $bSty Then
+									$iCurrHori = ($iCurrHori = $oCell.BottomBorder.LineStyle()) ? ($iCurrHori) : (Null)
+
+								ElseIf $bCol Then
+									$iCurrHori = ($iCurrHori = $oCell.BottomBorder.Color()) ? ($iCurrHori) : (Null)
+								EndIf
+							EndIf
+						EndIf
+					EndIf
+
+					If ($iRow = ($oTable.Model.RowCount() - 1)) Then ; Processing the bottom row.
+						If ($iCol = 0) Then ; Processing the bottom-left-most column.
+							If $bWid Then ; Bottom Border, won't have been set yet.
+								$iCurrBottom = $oCell.BottomBorder.LineWidth()
+
+							ElseIf $bSty Then
+								$iCurrBottom = $oCell.BottomBorder.LineStyle()
+
+							ElseIf $bCol Then
+								$iCurrBottom = $oCell.BottomBorder.Color()
+							EndIf
+
+							If Not IsInt($iCurrBottom) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+							If ($iCurrLeft <> Null) Then ; Left Border. Make sure it wasn't already nulled, and if the value doesn't match the first value, null it.
+								If $bWid Then
+									$iCurrLeft = ($iCurrLeft = $oCell.LeftBorder.LineWidth()) ? ($iCurrLeft) : (Null)
+
+								ElseIf $bSty Then
+									$iCurrLeft = ($iCurrLeft = $oCell.LeftBorder.LineStyle()) ? ($iCurrLeft) : (Null)
+
+								ElseIf $bCol Then
+									$iCurrLeft = ($iCurrLeft = $oCell.LeftBorder.Color()) ? ($iCurrLeft) : (Null)
+								EndIf
+							EndIf
+
+							If ($iCurrVert <> Null) And ($oTable.Model.ColumnCount() > 1) Then ; Vertical Border. Make sure it wasn't already nulled, and that there is more than one Column, and if the value doesn't match the first value, null it.
+								If $bWid Then
+									$iCurrVert = ($iCurrVert = $oCell.RightBorder.LineWidth()) ? ($iCurrVert) : (Null)
+
+								ElseIf $bSty Then
+									$iCurrVert = ($iCurrVert = $oCell.RightBorder.LineStyle()) ? ($iCurrVert) : (Null)
+
+								ElseIf $bCol Then
+									$iCurrVert = ($iCurrVert = $oCell.RightBorder.Color()) ? ($iCurrVert) : (Null)
+								EndIf
+							EndIf
+
+							If ($iCurrHori <> Null) And ($oTable.Model.RowCount() > 1) Then ; Horizontal Border. Make sure it wasn't already nulled, and that there is more than one row, and if the value doesn't match the first value, null it.
+								If $bWid Then
+									$iCurrHori = ($iCurrHori = $oCell.TopBorder.LineWidth()) ? ($iCurrHori) : (Null)
+
+								ElseIf $bSty Then
+									$iCurrHori = ($iCurrHori = $oCell.TopBorder.LineStyle()) ? ($iCurrHori) : (Null)
+
+								ElseIf $bCol Then
+									$iCurrHori = ($iCurrHori = $oCell.TopBorder.Color()) ? ($iCurrHori) : (Null)
+								EndIf
+							EndIf
+						EndIf
+
+						If ($iCol = ($oTable.Model.ColumnCount() - 1)) Then ; Processing the bottom-right-most column.
+							If ($iCurrRight <> Null) Then ; Right Border. Make sure it wasn't already nulled, and if the value doesn't match the first value, null it.
+								If $bWid Then
+									$iCurrRight = ($iCurrRight = $oCell.RightBorder.LineWidth()) ? ($iCurrRight) : (Null)
+
+								ElseIf $bSty Then
+									$iCurrRight = ($iCurrRight = $oCell.RightBorder.LineStyle()) ? ($iCurrRight) : (Null)
+
+								ElseIf $bCol Then
+									$iCurrRight = ($iCurrRight = $oCell.RightBorder.Color()) ? ($iCurrRight) : (Null)
+								EndIf
+							EndIf
+
+							If ($iCurrBottom <> Null) Then ; Bottom Border. Make sure it wasn't already nulled, and if the value doesn't match the first value, null it.
+								If $bWid Then
+									$iCurrBottom = ($iCurrBottom = $oCell.BottomBorder.LineWidth()) ? ($iCurrBottom) : (Null)
+
+								ElseIf $bSty Then
+									$iCurrBottom = ($iCurrBottom = $oCell.BottomBorder.LineStyle()) ? ($iCurrBottom) : (Null)
+
+								ElseIf $bCol Then
+									$iCurrBottom = ($iCurrBottom = $oCell.BottomBorder.Color()) ? ($iCurrBottom) : (Null)
+								EndIf
+							EndIf
+
+							If ($iCurrVert <> Null) And ($oTable.Model.ColumnCount() > 1) Then ; Vertical Border. Make sure it wasn't already nulled, and that there is more than one Column, and if the value doesn't match the first value, null it.
+								If $bWid Then
+									$iCurrVert = ($iCurrVert = $oCell.LeftBorder.LineWidth()) ? ($iCurrVert) : (Null)
+
+								ElseIf $bSty Then
+									$iCurrVert = ($iCurrVert = $oCell.LeftBorder.LineStyle()) ? ($iCurrVert) : (Null)
+
+								ElseIf $bCol Then
+									$iCurrVert = ($iCurrVert = $oCell.LeftBorder.Color()) ? ($iCurrVert) : (Null)
+								EndIf
+							EndIf
+
+							If ($iCurrHori <> Null) And ($oTable.Model.RowCount() > 1) Then ; Horizontal Border. Make sure it wasn't already nulled, and that there is more than one row, and if the value doesn't match the first value, null it.
+								If $bWid Then
+									$iCurrHori = ($iCurrHori = $oCell.TopBorder.LineWidth()) ? ($iCurrHori) : (Null)
+
+								ElseIf $bSty Then
+									$iCurrHori = ($iCurrHori = $oCell.TopBorder.LineStyle()) ? ($iCurrHori) : (Null)
+
+								ElseIf $bCol Then
+									$iCurrHori = ($iCurrHori = $oCell.TopBorder.Color()) ? ($iCurrHori) : (Null)
+								EndIf
+							EndIf
+						EndIf
+
+						If ($iCol <> 0) And ($iCol <> ($oTable.Model.ColumnCount() - 1)) Then ; Processing bottom-central columns.
+							If ($iCurrBottom <> Null) Then ; Bottom Border. Make sure it wasn't already nulled, and if the value doesn't match the first value, null it.
+								If $bWid Then
+									$iCurrBottom = ($iCurrBottom = $oCell.BottomBorder.LineWidth()) ? ($iCurrBottom) : (Null)
+
+								ElseIf $bSty Then
+									$iCurrBottom = ($iCurrBottom = $oCell.BottomBorder.LineStyle()) ? ($iCurrBottom) : (Null)
+
+								ElseIf $bCol Then
+									$iCurrBottom = ($iCurrBottom = $oCell.BottomBorder.Color()) ? ($iCurrBottom) : (Null)
+								EndIf
+							EndIf
+
+							If ($iCurrVert <> Null) Then ; Vertical Border. Make sure it wasn't already nulled, and if the value doesn't match the first value, null it.
+								If $bWid Then
+									$iCurrVert = ($iCurrVert = $oCell.LeftBorder.LineWidth()) ? ($iCurrVert) : (Null)
+									$iCurrVert = ($iCurrVert = $oCell.RightBorder.LineWidth()) ? ($iCurrVert) : (Null)
+
+								ElseIf $bSty Then
+									$iCurrVert = ($iCurrVert = $oCell.LeftBorder.LineStyle()) ? ($iCurrVert) : (Null)
+									$iCurrVert = ($iCurrVert = $oCell.RightBorder.LineStyle()) ? ($iCurrVert) : (Null)
+
+								ElseIf $bCol Then
+									$iCurrVert = ($iCurrVert = $oCell.LeftBorder.Color()) ? ($iCurrVert) : (Null)
+									$iCurrVert = ($iCurrVert = $oCell.RightBorder.Color()) ? ($iCurrVert) : (Null)
+								EndIf
+							EndIf
+
+							If ($iCurrHori <> Null) And ($oTable.Model.RowCount() > 1) Then ; Horizontal Border. Make sure it wasn't already nulled, and that there is more than one row, and if the value doesn't match the first value, null it.
+								If $bWid Then
+									$iCurrHori = ($iCurrHori = $oCell.TopBorder.LineWidth()) ? ($iCurrHori) : (Null)
+
+								ElseIf $bSty Then
+									$iCurrHori = ($iCurrHori = $oCell.TopBorder.LineStyle()) ? ($iCurrHori) : (Null)
+
+								ElseIf $bCol Then
+									$iCurrHori = ($iCurrHori = $oCell.TopBorder.Color()) ? ($iCurrHori) : (Null)
+								EndIf
+							EndIf
+						EndIf
+					EndIf
+
+					If ($iRow <> 0) And ($iRow <> ($oTable.Model.RowCount() - 1)) Then ; Processing the middle rows
+						If ($iCol = 0) Then ; Processing the middle-left-most column.
+							If ($iCurrLeft <> Null) Then ; Left Border. Make sure it wasn't already nulled, and if the value doesn't match the first value, null it.
+								If $bWid Then
+									$iCurrLeft = ($iCurrLeft = $oCell.LeftBorder.LineWidth()) ? ($iCurrLeft) : (Null)
+
+								ElseIf $bSty Then
+									$iCurrLeft = ($iCurrLeft = $oCell.LeftBorder.LineStyle()) ? ($iCurrLeft) : (Null)
+
+								ElseIf $bCol Then
+									$iCurrLeft = ($iCurrLeft = $oCell.LeftBorder.Color()) ? ($iCurrLeft) : (Null)
+								EndIf
+							EndIf
+
+							If ($iCurrVert <> Null) Then ; Vertical Border. Make sure it wasn't already nulled, and that there is more than one Column, and if the value doesn't match the first value, null it.
+								If $bWid Then
+									$iCurrVert = ($iCurrVert = $oCell.RightBorder.LineWidth()) ? ($iCurrVert) : (Null)
+
+								ElseIf $bSty Then
+									$iCurrVert = ($iCurrVert = $oCell.RightBorder.LineStyle()) ? ($iCurrVert) : (Null)
+
+								ElseIf $bCol Then
+									$iCurrVert = ($iCurrVert = $oCell.RightBorder.Color()) ? ($iCurrVert) : (Null)
+								EndIf
+							EndIf
+
+							If ($iCurrHori <> Null) Then ; Horizontal Border. Make sure it wasn't already nulled, and if the top and bottom value doesn't match the first value, null it.
+								If $bWid Then
+									$iCurrHori = ($iCurrHori = $oCell.TopBorder.LineWidth()) ? ($iCurrHori) : (Null)
+									$iCurrHori = ($iCurrHori = $oCell.BottomBorder.LineWidth()) ? ($iCurrHori) : (Null)
+
+								ElseIf $bSty Then
+									$iCurrHori = ($iCurrHori = $oCell.TopBorder.LineStyle()) ? ($iCurrHori) : (Null)
+									$iCurrHori = ($iCurrHori = $oCell.BottomBorder.LineStyle()) ? ($iCurrHori) : (Null)
+
+								ElseIf $bCol Then
+									$iCurrHori = ($iCurrHori = $oCell.TopBorder.Color()) ? ($iCurrHori) : (Null)
+									$iCurrHori = ($iCurrHori = $oCell.BottomBorder.Color()) ? ($iCurrHori) : (Null)
+								EndIf
+							EndIf
+						EndIf
+
+						If ($iCol = ($oTable.Model.ColumnCount() - 1)) Then ; Processing the middle-right-most column.
+							If ($iCurrRight <> Null) Then ; Right Border. Make sure it wasn't already nulled, and if the value doesn't match the first value, null it.
+								If $bWid Then
+									$iCurrRight = ($iCurrRight = $oCell.RightBorder.LineWidth()) ? ($iCurrRight) : (Null)
+
+								ElseIf $bSty Then
+									$iCurrRight = ($iCurrRight = $oCell.RightBorder.LineStyle()) ? ($iCurrRight) : (Null)
+
+								ElseIf $bCol Then
+									$iCurrRight = ($iCurrRight = $oCell.RightBorder.Color()) ? ($iCurrRight) : (Null)
+								EndIf
+							EndIf
+
+							If ($iCurrVert <> Null) And ($oTable.Model.ColumnCount() > 1) Then ; Vertical Border. Make sure it wasn't already nulled, and that there is more than one Column, and if the value doesn't match the first value, null it.
+								If $bWid Then
+									$iCurrVert = ($iCurrVert = $oCell.LeftBorder.LineWidth()) ? ($iCurrVert) : (Null)
+
+								ElseIf $bSty Then
+									$iCurrVert = ($iCurrVert = $oCell.LeftBorder.LineStyle()) ? ($iCurrVert) : (Null)
+
+								ElseIf $bCol Then
+									$iCurrVert = ($iCurrVert = $oCell.LeftBorder.Color()) ? ($iCurrVert) : (Null)
+								EndIf
+							EndIf
+
+							If ($iCurrHori <> Null) Then ; Horizontal Border. Make sure it wasn't already nulled, and if the value doesn't match the first value, null it.
+								If $bWid Then
+									$iCurrHori = ($iCurrHori = $oCell.TopBorder.LineWidth()) ? ($iCurrHori) : (Null)
+									$iCurrHori = ($iCurrHori = $oCell.BottomBorder.LineWidth()) ? ($iCurrHori) : (Null)
+
+								ElseIf $bSty Then
+									$iCurrHori = ($iCurrHori = $oCell.TopBorder.LineStyle()) ? ($iCurrHori) : (Null)
+									$iCurrHori = ($iCurrHori = $oCell.BottomBorder.LineStyle()) ? ($iCurrHori) : (Null)
+
+								ElseIf $bCol Then
+									$iCurrHori = ($iCurrHori = $oCell.TopBorder.Color()) ? ($iCurrHori) : (Null)
+									$iCurrHori = ($iCurrHori = $oCell.BottomBorder.Color()) ? ($iCurrHori) : (Null)
+								EndIf
+							EndIf
+						EndIf
+
+						If ($iCol <> 0) And ($iCol <> ($oTable.Model.ColumnCount() - 1)) Then ; Processing middle-central columns.
+							If ($iCurrVert <> Null) Then ; Vertical Border. Make sure it wasn't already nulled, and if the value doesn't match the first value, null it.
+								If $bWid Then
+									$iCurrVert = ($iCurrVert = $oCell.LeftBorder.LineWidth()) ? ($iCurrVert) : (Null)
+									$iCurrVert = ($iCurrVert = $oCell.RightBorder.LineWidth()) ? ($iCurrVert) : (Null)
+
+								ElseIf $bSty Then
+									$iCurrVert = ($iCurrVert = $oCell.LeftBorder.LineStyle()) ? ($iCurrVert) : (Null)
+									$iCurrVert = ($iCurrVert = $oCell.RightBorder.LineStyle()) ? ($iCurrVert) : (Null)
+
+								ElseIf $bCol Then
+									$iCurrVert = ($iCurrVert = $oCell.LeftBorder.Color()) ? ($iCurrVert) : (Null)
+									$iCurrVert = ($iCurrVert = $oCell.RightBorder.Color()) ? ($iCurrVert) : (Null)
+								EndIf
+							EndIf
+
+							If ($iCurrHori <> Null) Then ; Horizontal Border. Make sure it wasn't already nulled, and if the value doesn't match the first value, null it.
+								If $bWid Then
+									$iCurrHori = ($iCurrHori = $oCell.TopBorder.LineWidth()) ? ($iCurrHori) : (Null)
+									$iCurrHori = ($iCurrHori = $oCell.BottomBorder.LineWidth()) ? ($iCurrHori) : (Null)
+
+								ElseIf $bSty Then
+									$iCurrHori = ($iCurrHori = $oCell.TopBorder.LineStyle()) ? ($iCurrHori) : (Null)
+									$iCurrHori = ($iCurrHori = $oCell.BottomBorder.LineStyle()) ? ($iCurrHori) : (Null)
+
+								ElseIf $bCol Then
+									$iCurrHori = ($iCurrHori = $oCell.TopBorder.Color()) ? ($iCurrHori) : (Null)
+									$iCurrHori = ($iCurrHori = $oCell.BottomBorder.Color()) ? ($iCurrHori) : (Null)
+								EndIf
+							EndIf
+						EndIf
+					EndIf
+				Next
+			Next
+		EndIf
+
+		; On Single Row/Column tables, Hori/Vert values could be skipped, so need to make sure to Null them if so.
+		If ($iCurrVert <> Null) And Not IsInt($iCurrVert) Then $iCurrVert = Null
+		If ($iCurrHori <> Null) And Not IsInt($iCurrHori) Then $iCurrHori = Null
+
+		__LO_ArrayFill($avBorder, $iCurrTop, $iCurrBottom, $iCurrLeft, $iCurrRight, $iCurrVert, $iCurrHori)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $avBorder)
+	EndIf
+
+	$tBL2 = __LO_CreateStruct("com.sun.star.table.BorderLine2")
+	If Not IsObj($tBL2) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	For $iRow = 0 To $oTable.Model.RowCount() - 1
+		For $iCol = 0 To $oTable.Model.ColumnCount() - 1
+			$oCell = $oTable.Model.getCellByPosition($iCol, $iRow)
+			If Not IsObj($oCell) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+			If ($iTop <> Null) And ($iRow = 0) Then ; Top border value only applies to first Row of cells.
+				If Not $bWid And ($oCell.TopBorder.LineWidth() = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 9, 0) ; If Width not set, cant set color or style.
+
+				; Top Line
+				$tBL2.LineWidth = ($bWid) ? ($iTop) : ($oCell.TopBorder.LineWidth()) ; copy Line Width over to new size structure
+				$tBL2.LineStyle = ($bSty) ? ($iTop) : ($oCell.TopBorder.LineStyle()) ; copy Line style over to new size structure
+				$tBL2.Color = ($bCol) ? ($iTop) : ($oCell.TopBorder.Color()) ; copy Color over to new size structure
+				$oCell.TopBorder = $tBL2
+
+				If $bWid Then
+					$iError = (__LO_IntIsBetween($oCell.TopBorder.LineWidth(), $iTop - 1, $iTop + 1)) ? ($iError) : (BitOR($iError, 1))
+
+				ElseIf $bSty Then
+					$iError = ($oCell.TopBorder.LineStyle() = $iTop) ? ($iError) : (BitOR($iError, 1))
+
+				Else
+					$iError = ($oCell.TopBorder.Color() = $iTop) ? ($iError) : (BitOR($iError, 1))
+				EndIf
+			EndIf
+
+			If ($iBottom <> Null) And ($iRow = ($oTable.Model.RowCount() - 1)) Then ; Bottom Border only applies to last row of cells.
+				If Not $bWid And ($oCell.BottomBorder.LineWidth() = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 10, 0) ; If Width not set, cant set color or style.
+
+				; Bottom Line
+				$tBL2.LineWidth = ($bWid) ? ($iBottom) : ($oCell.BottomBorder.LineWidth()) ; copy Line Width over to new size structure
+				$tBL2.LineStyle = ($bSty) ? ($iBottom) : ($oCell.BottomBorder.LineStyle()) ; copy Line style over to new size structure
+				$tBL2.Color = ($bCol) ? ($iBottom) : ($oCell.BottomBorder.Color()) ; copy Color over to new size structure
+				$oCell.BottomBorder = $tBL2
+
+				If $bWid Then
+					$iError = (__LO_IntIsBetween($oCell.BottomBorder.LineWidth(), $iBottom - 1, $iBottom + 1)) ? ($iError) : (BitOR($iError, 2))
+
+				ElseIf $bSty Then
+					$iError = ($oCell.BottomBorder.LineStyle() = $iBottom) ? ($iError) : (BitOR($iError, 2))
+
+				Else
+					$iError = ($oCell.BottomBorder.Color() = $iBottom) ? ($iError) : (BitOR($iError, 2))
+				EndIf
+			EndIf
+
+			If ($iLeft <> Null) And ($iCol = 0) Then ; Left border only applies to left-most cells.
+				If Not $bWid And ($oCell.LeftBorder.LineWidth() = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 11, 0) ; If Width not set, cant set color or style.
+
+				; Left Line
+				$tBL2.LineWidth = ($bWid) ? ($iLeft) : ($oCell.LeftBorder.LineWidth()) ; copy Line Width over to new size structure
+				$tBL2.LineStyle = ($bSty) ? ($iLeft) : ($oCell.LeftBorder.LineStyle()) ; copy Line style over to new size structure
+				$tBL2.Color = ($bCol) ? ($iLeft) : ($oCell.LeftBorder.Color()) ; copy Color over to new size structure
+				$oCell.LeftBorder = $tBL2
+
+				If $bWid Then
+					$iError = (__LO_IntIsBetween($oCell.LeftBorder.LineWidth(), $iLeft - 1, $iLeft + 1)) ? ($iError) : (BitOR($iError, 4))
+
+				ElseIf $bSty Then
+					$iError = ($oCell.LeftBorder.LineStyle() = $iLeft) ? ($iError) : (BitOR($iError, 4))
+
+				Else
+					$iError = ($oCell.LeftBorder.Color() = $iLeft) ? ($iError) : (BitOR($iError, 4))
+				EndIf
+			EndIf
+
+			If ($iRight <> Null) And ($iCol = ($oTable.Model.ColumnCount() - 1)) Then ; Right border only applies to right-most cells.
+				If Not $bWid And ($oCell.RightBorder.LineWidth() = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 12, 0) ; If Width not set, cant set color or style.
+
+				; Right Line
+				$tBL2.LineWidth = ($bWid) ? ($iRight) : ($oCell.RightBorder.LineWidth()) ; copy Line Width over to new size structure
+				$tBL2.LineStyle = ($bSty) ? ($iRight) : ($oCell.RightBorder.LineStyle()) ; copy Line style over to new size structure
+				$tBL2.Color = ($bCol) ? ($iRight) : ($oCell.RightBorder.Color()) ; copy Color over to new size structure
+				$oCell.RightBorder = $tBL2
+
+				If $bWid Then
+					$iError = (__LO_IntIsBetween($oCell.RightBorder.LineWidth(), $iRight - 1, $iRight + 1)) ? ($iError) : (BitOR($iError, 8))
+
+				ElseIf $bSty Then
+					$iError = ($oCell.RightBorder.LineStyle() = $iRight) ? ($iError) : (BitOR($iError, 8))
+
+				Else
+					$iError = ($oCell.RightBorder.Color() = $iRight) ? ($iError) : (BitOR($iError, 8))
+				EndIf
+			EndIf
+
+			If ($iVert <> Null) And ($oTable.Model.ColumnCount() > 1) Then ; Vertical border only applies to inside cell borders, so make sure there's more than 1 column.
+				If ($iCol = 0) Then ; Left-hand Cell, only set the inside Border.
+					If Not $bWid And ($oCell.RightBorder.LineWidth() = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 13, 0) ; If Width not set, cant set color or style.
+					$tBL2.LineWidth = ($bWid) ? ($iVert) : ($oCell.RightBorder.LineWidth()) ; copy Line Width over to new size structure
+					$tBL2.LineStyle = ($bSty) ? ($iVert) : ($oCell.RightBorder.LineStyle()) ; copy Line style over to new size structure
+					$tBL2.Color = ($bCol) ? ($iVert) : ($oCell.RightBorder.Color()) ; copy Color over to new size structure
+					$oCell.RightBorder = $tBL2
+
+					If $bWid Then
+						$iError = (__LO_IntIsBetween($oCell.RightBorder.LineWidth(), $iVert - 1, $iVert + 1)) ? ($iError) : (BitOR($iError, 16))
+
+					ElseIf $bSty Then
+						$iError = ($oCell.RightBorder.LineStyle() = $iVert) ? ($iError) : (BitOR($iError, 16))
+
+					Else
+						$iError = ($oCell.RightBorder.Color() = $iVert) ? ($iError) : (BitOR($iError, 16))
+					EndIf
+
+				ElseIf ($iCol = ($oTable.Model.ColumnCount() - 1)) Then ; Right-hand cell, only set the inside border.
+					If Not $bWid And ($oCell.LeftBorder.LineWidth() = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 13, 0) ; If Width not set, cant set color or style.
+					$tBL2.LineWidth = ($bWid) ? ($iVert) : ($oCell.LeftBorder.LineWidth()) ; copy Line Width over to new size structure
+					$tBL2.LineStyle = ($bSty) ? ($iVert) : ($oCell.LeftBorder.LineStyle()) ; copy Line style over to new size structure
+					$tBL2.Color = ($bCol) ? ($iVert) : ($oCell.LeftBorder.Color()) ; copy Color over to new size structure
+					$oCell.LeftBorder = $tBL2
+
+					If $bWid Then
+						$iError = (__LO_IntIsBetween($oCell.LeftBorder.LineWidth(), $iVert - 1, $iVert + 1)) ? ($iError) : (BitOR($iError, 16))
+
+					ElseIf $bSty Then
+						$iError = ($oCell.LeftBorder.LineStyle() = $iVert) ? ($iError) : (BitOR($iError, 16))
+
+					Else
+						$iError = ($oCell.LeftBorder.Color() = $iVert) ? ($iError) : (BitOR($iError, 16))
+					EndIf
+
+				Else ; Middle cell, set both borders.
+					If Not $bWid And (($oCell.LeftBorder.LineWidth() = 0) Or ($oCell.RightBorder.LineWidth() = 0)) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 13, 0) ; If Width not set, cant set color or style.
+					$tBL2.LineWidth = ($bWid) ? ($iVert) : ($oCell.LeftBorder.LineWidth()) ; copy Line Width over to new size structure
+					$tBL2.LineStyle = ($bSty) ? ($iVert) : ($oCell.LeftBorder.LineStyle()) ; copy Line style over to new size structure
+					$tBL2.Color = ($bCol) ? ($iVert) : ($oCell.LeftBorder.Color()) ; copy Color over to new size structure
+					$oCell.LeftBorder = $tBL2
+
+					$tBL2.LineWidth = ($bWid) ? ($iVert) : ($oCell.RightBorder.LineWidth()) ; copy Line Width over to new size structure
+					$tBL2.LineStyle = ($bSty) ? ($iVert) : ($oCell.RightBorder.LineStyle()) ; copy Line style over to new size structure
+					$tBL2.Color = ($bCol) ? ($iVert) : ($oCell.RightBorder.Color()) ; copy Color over to new size structure
+					$oCell.RightBorder = $tBL2
+
+					If $bWid Then
+						$iError = (__LO_IntIsBetween($oCell.LeftBorder.LineWidth(), $iVert - 1, $iVert + 1) And __LO_IntIsBetween($oCell.RightBorder.LineWidth(), $iVert - 1, $iVert + 1)) ? ($iError) : (BitOR($iError, 16))
+
+					ElseIf $bSty Then
+						$iError = (($oCell.LeftBorder.LineStyle() = $iVert) And ($oCell.RightBorder.LineStyle() = $iVert)) ? ($iError) : (BitOR($iError, 16))
+
+					Else
+						$iError = (($oCell.LeftBorder.Color() = $iVert) And ($oCell.RightBorder.Color() = $iVert)) ? ($iError) : (BitOR($iError, 16))
+					EndIf
+
+				EndIf
+
+			ElseIf ($iVert <> Null) Then
+				$iError = BitOR($iError, 16)
+			EndIf
+
+			If ($iHori <> Null) And ($oTable.Model.RowCount() > 1) Then ; Horizontal border only applies to inside cell borders, so make sure there's more than 1 Row.
+				If ($iRow = 0) Then ; Setting a top cell, only set the bottom border.
+					If Not $bWid And ($oCell.BottomBorder.LineWidth() = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 14, 0) ; If Width not set, cant set color or style.
+					$tBL2.LineWidth = ($bWid) ? ($iHori) : ($oCell.BottomBorder.LineWidth()) ; copy Line Width over to new size structure
+					$tBL2.LineStyle = ($bSty) ? ($iHori) : ($oCell.BottomBorder.LineStyle()) ; copy Line style over to new size structure
+					$tBL2.Color = ($bCol) ? ($iHori) : ($oCell.BottomBorder.Color()) ; copy Color over to new size structure
+					$oCell.BottomBorder = $tBL2
+
+					If $bWid Then
+						$iError = (__LO_IntIsBetween($oCell.BottomBorder.LineWidth(), $iHori - 1, $iHori + 1)) ? ($iError) : (BitOR($iError, 32))
+
+					ElseIf $bSty Then
+						$iError = ($oCell.BottomBorder.LineStyle() = $iHori) ? ($iError) : (BitOR($iError, 32))
+
+					Else
+						$iError = ($oCell.BottomBorder.Color() = $iHori) ? ($iError) : (BitOR($iError, 32))
+					EndIf
+
+				ElseIf ($iRow = ($oTable.Model.RowCount() - 1)) Then ; Setting a Bottom cell, only set the top border.
+					If Not $bWid And ($oCell.TopBorder.LineWidth() = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 14, 0) ; If Width not set, cant set color or style.
+					$tBL2.LineWidth = ($bWid) ? ($iHori) : ($oCell.TopBorder.LineWidth()) ; copy Line Width over to new size structure
+					$tBL2.LineStyle = ($bSty) ? ($iHori) : ($oCell.TopBorder.LineStyle()) ; copy Line style over to new size structure
+					$tBL2.Color = ($bCol) ? ($iHori) : ($oCell.TopBorder.Color()) ; copy Color over to new size structure
+					$oCell.TopBorder = $tBL2
+
+					If $bWid Then
+						$iError = (__LO_IntIsBetween($oCell.TopBorder.LineWidth(), $iHori - 1, $iHori + 1)) ? ($iError) : (BitOR($iError, 32))
+
+					ElseIf $bSty Then
+						$iError = ($oCell.TopBorder.LineStyle() = $iHori) ? ($iError) : (BitOR($iError, 32))
+
+					Else
+						$iError = ($oCell.TopBorder.Color() = $iHori) ? ($iError) : (BitOR($iError, 32))
+					EndIf
+
+				Else ; Setting a middle cell, set the top and bottom border.
+					If Not $bWid And (($oCell.TopBorder.LineWidth() = 0) Or ($oCell.BottomBorder.LineWidth() = 0)) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 14, 0) ; If Width not set, cant set color or style.
+					$tBL2.LineWidth = ($bWid) ? ($iHori) : ($oCell.TopBorder.LineWidth()) ; copy Line Width over to new size structure
+					$tBL2.LineStyle = ($bSty) ? ($iHori) : ($oCell.TopBorder.LineStyle()) ; copy Line style over to new size structure
+					$tBL2.Color = ($bCol) ? ($iHori) : ($oCell.TopBorder.Color()) ; copy Color over to new size structure
+					$oCell.TopBorder = $tBL2
+
+					$tBL2.LineWidth = ($bWid) ? ($iHori) : ($oCell.BottomBorder.LineWidth()) ; copy Line Width over to new size structure
+					$tBL2.LineStyle = ($bSty) ? ($iHori) : ($oCell.BottomBorder.LineStyle()) ; copy Line style over to new size structure
+					$tBL2.Color = ($bCol) ? ($iHori) : ($oCell.BottomBorder.Color()) ; copy Color over to new size structure
+					$oCell.BottomBorder = $tBL2
+
+					If $bWid Then
+						$iError = (__LO_IntIsBetween($oCell.TopBorder.LineWidth(), $iHori - 1, $iHori + 1) And __LO_IntIsBetween($oCell.BottomBorder.LineWidth(), $iHori - 1, $iHori + 1)) ? ($iError) : (BitOR($iError, 32))
+
+					ElseIf $bSty Then
+						$iError = (($oCell.TopBorder.LineStyle() = $iHori) And ($oCell.BottomBorder.LineStyle() = $iHori)) ? ($iError) : (BitOR($iError, 32))
+
+					Else
+						$iError = (($oCell.TopBorder.Color() = $iHori) And ($oCell.BottomBorder.Color() = $iHori)) ? ($iError) : (BitOR($iError, 32))
+					EndIf
+				EndIf
+
+			ElseIf ($iHori <> Null) Then
+				$iError = BitOR($iError, 32)
+			EndIf
+		Next
+	Next
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>__LOImpress_TableBorder
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_TableCellBorder
+; Description ...: Set or Retrieve Cell Border settings. Internal function.
+; Syntax ........: __LOImpress_TableCellBorder(ByRef $oCell, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
+; Parameters ....: $oCell               - A Table Cell object returned by a previous _LOImpress_TableCellGetObjByPosition function.
+;                  $bWid                - If True, the calling function is for setting Border Line Width.
+;                  $bSty                - If True, the calling function is for setting Border Line Style.
+;                  $bCol                - If True, the calling function is for setting Border Line Color.
+;                  $iTop                - [optional] Default is Null. See Border Style, Width, and Color functions for possible values.
+;                  $iBottom             - [optional] Default is Null. See Border Style, Width, and Color functions for possible values.
+;                  $iLeft               - [optional] Default is Null. See Border Style, Width, and Color functions for possible values.
+;                  $iRight              - [optional] Default is Null. See Border Style, Width, and Color functions for possible values.
+; Return values .: Success: 1 or Array.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oCell not an Object.
+;                  --Initialization Errors--
+;                  @Error: 2, @Extended: 1 = Error Creating "com.sun.star.table.BorderLine2" Object.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error: 3, @Extended: 2 = Cannot set Top Border Style/Color when Top Border width not set.
+;                  @Error: 3, @Extended: 3 = Cannot set Bottom Border style/Color when Bottom Border width not set.
+;                  @Error: 3, @Extended: 4 = Cannot set Left Border style/Color when Left Border width not set.
+;                  @Error: 3, @Extended: 5 = Cannot set Right Border style/Color when Right Border width not set.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $iTop
+;                  |                               2 = Error setting $iBottom
+;                  |                               4 = Error setting $iLeft
+;                  |                               8 = Error setting $iRight
+;                  --Version Related Errors--
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 3.4.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  Call any optional parameter with Null keyword to skip it.
+;                  All distance values are set in Hundredths of a Millimeter (HMM).
+; Related .......: _LO_UnitConvert
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_TableCellBorder(ByRef $oCell, $bWid, $bSty, $bCol, $iTop = Null, $iBottom = Null, $iLeft = Null, $iRight = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $avBorder[4]
+	Local $tBL2
+	Local $iError = 0
+
+	If Not IsObj($oCell) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If (($bWid + $bSty + $bCol) <> 1) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; If more than one Boolean is true = error
+	If Not __LO_VersionCheck(3.4) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
+
+	If __LO_VarsAreNull($iTop, $iBottom, $iLeft, $iRight) Then
+		If $bWid Then
+			__LO_ArrayFill($avBorder, $oCell.TopBorder.LineWidth(), $oCell.BottomBorder.LineWidth(), $oCell.LeftBorder.LineWidth(), _
+					$oCell.RightBorder.LineWidth())
+
+		ElseIf $bSty Then
+			__LO_ArrayFill($avBorder, $oCell.TopBorder.LineStyle(), $oCell.BottomBorder.LineStyle(), $oCell.LeftBorder.LineStyle(), _
+					$oCell.RightBorder.LineStyle())
+
+		ElseIf $bCol Then
+			__LO_ArrayFill($avBorder, $oCell.TopBorder.Color(), $oCell.BottomBorder.Color(), $oCell.LeftBorder.Color(), _
+					$oCell.RightBorder.Color())
+		EndIf
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $avBorder)
+	EndIf
+
+	$tBL2 = __LO_CreateStruct("com.sun.star.table.BorderLine2")
+	If Not IsObj($tBL2) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	If $iTop <> Null Then
+		If Not $bWid And ($oCell.TopBorder.LineWidth() = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0) ; If Width not set, cant set color or style.
+
+		; Top Line
+		$tBL2.LineWidth = ($bWid) ? ($iTop) : ($oCell.TopBorder.LineWidth()) ; copy Line Width over to new size structure
+		$tBL2.LineStyle = ($bSty) ? ($iTop) : ($oCell.TopBorder.LineStyle()) ; copy Line style over to new size structure
+		$tBL2.Color = ($bCol) ? ($iTop) : ($oCell.TopBorder.Color()) ; copy Color over to new size structure
+		$oCell.TopBorder = $tBL2
+	EndIf
+
+	If $iBottom <> Null Then
+		If Not $bWid And ($oCell.BottomBorder.LineWidth() = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; If Width not set, cant set color or style.
+
+		; Bottom Line
+		$tBL2.LineWidth = ($bWid) ? ($iBottom) : ($oCell.BottomBorder.LineWidth()) ; copy Line Width over to new size structure
+		$tBL2.LineStyle = ($bSty) ? ($iBottom) : ($oCell.BottomBorder.LineStyle()) ; copy Line style over to new size structure
+		$tBL2.Color = ($bCol) ? ($iBottom) : ($oCell.BottomBorder.Color()) ; copy Color over to new size structure
+		$oCell.BottomBorder = $tBL2
+	EndIf
+
+	If $iLeft <> Null Then
+		If Not $bWid And ($oCell.LeftBorder.LineWidth() = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0) ; If Width not set, cant set color or style.
+
+		; Left Line
+		$tBL2.LineWidth = ($bWid) ? ($iLeft) : ($oCell.LeftBorder.LineWidth()) ; copy Line Width over to new size structure
+		$tBL2.LineStyle = ($bSty) ? ($iLeft) : ($oCell.LeftBorder.LineStyle()) ; copy Line style over to new size structure
+		$tBL2.Color = ($bCol) ? ($iLeft) : ($oCell.LeftBorder.Color()) ; copy Color over to new size structure
+		$oCell.LeftBorder = $tBL2
+	EndIf
+
+	If $iRight <> Null Then
+		If Not $bWid And ($oCell.RightBorder.LineWidth() = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0) ; If Width not set, cant set color or style.
+
+		; Right Line
+		$tBL2.LineWidth = ($bWid) ? ($iRight) : ($oCell.RightBorder.LineWidth()) ; copy Line Width over to new size structure
+		$tBL2.LineStyle = ($bSty) ? ($iRight) : ($oCell.RightBorder.LineStyle()) ; copy Line style over to new size structure
+		$tBL2.Color = ($bCol) ? ($iRight) : ($oCell.RightBorder.Color()) ; copy Color over to new size structure
+		$oCell.RightBorder = $tBL2
+	EndIf
+
+	If $bWid Then
+		$iError = ($iTop = Null) ? ($iError) : ((__LO_IntIsBetween($oCell.TopBorder.LineWidth(), $iTop - 1, $iTop + 1)) ? ($iError) : (BitOR($iError, 1)))
+		$iError = ($iBottom = Null) ? ($iError) : ((__LO_IntIsBetween($oCell.BottomBorder.LineWidth(), $iBottom - 1, $iBottom + 1)) ? ($iError) : (BitOR($iError, 2)))
+		$iError = ($iLeft = Null) ? ($iError) : ((__LO_IntIsBetween($oCell.LeftBorder.LineWidth(), $iLeft - 1, $iLeft + 1)) ? ($iError) : (BitOR($iError, 4)))
+		$iError = ($iRight = Null) ? ($iError) : ((__LO_IntIsBetween($oCell.RightBorder.LineWidth(), $iRight - 1, $iRight + 1)) ? ($iError) : (BitOR($iError, 8)))
+
+	ElseIf $bSty Then
+		$iError = ($iTop = Null) ? ($iError) : (($oCell.TopBorder.LineStyle() = $iTop) ? ($iError) : (BitOR($iError, 1)))
+		$iError = ($iBottom = Null) ? ($iError) : (($oCell.BottomBorder.LineStyle() = $iBottom) ? ($iError) : (BitOR($iError, 2)))
+		$iError = ($iLeft = Null) ? ($iError) : (($oCell.LeftBorder.LineStyle() = $iLeft) ? ($iError) : (BitOR($iError, 4)))
+		$iError = ($iRight = Null) ? ($iError) : (($oCell.RightBorder.LineStyle() = $iRight) ? ($iError) : (BitOR($iError, 8)))
+
+	Else
+		$iError = ($iTop = Null) ? ($iError) : (($oCell.TopBorder.Color() = $iTop) ? ($iError) : (BitOR($iError, 1)))
+		$iError = ($iBottom = Null) ? ($iError) : (($oCell.BottomBorder.Color() = $iBottom) ? ($iError) : (BitOR($iError, 2)))
+		$iError = ($iLeft = Null) ? ($iError) : (($oCell.LeftBorder.Color() = $iLeft) ? ($iError) : (BitOR($iError, 4)))
+		$iError = ($iRight = Null) ? ($iError) : (($oCell.RightBorder.Color() = $iRight) ? ($iError) : (BitOR($iError, 8)))
+	EndIf
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>__LOImpress_TableCellBorder
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_Transition
