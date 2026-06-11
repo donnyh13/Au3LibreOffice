@@ -1474,11 +1474,12 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - LibreOfficeImpress_Constants.au3
   - LibreOfficeImpress_Cursor.au3
   - LibreOfficeImpress_Doc.au3
-  - LibreOfficeImpress_DrawShapes.au3
+  - LibreOfficeImpress_DrawShape.au3
   - LibreOfficeImpress_Helper.au3
   - LibreOfficeImpress_Internal.au3
-  - LibreOfficeImpress_Shapes.au3
-  - LibreOfficeImpress_Slides.au3
+  - LibreOfficeImpress_Shape.au3
+  - LibreOfficeImpress_Slide.au3
+  - LibreOfficeImpress_Table.au3
 - Constants
   - $LOI_ALIGN_VERT_*
   - $LOI_ANCHOR_*
@@ -1697,6 +1698,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOImpress_ShapeImageInsert
   - _LOImpress_ShapeImageModify
   - _LOImpress_ShapeImageReplace
+  - _LOImpress_ShapeInteraction
   - _LOImpress_ShapeLineArrowStyles
   - _LOImpress_ShapeLineProperties
   - _LOImpress_ShapeName
