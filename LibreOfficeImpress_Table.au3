@@ -100,7 +100,7 @@
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Tables require that the properties be set individually for each Cell, therefore this function cycles through each cell and sets the value, and may be slower for large tables.
 ;                  When retrieving the current property values for a table, if all of the cells in the Table do not have the same value, Null is returned for that property value.
-; Related .......: _LOImpress_TableCreate, _LOImpress_TableGetObjByCursor, _LOImpress_TableGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LOImpress_TableInsert, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -762,7 +762,7 @@ EndFunc   ;==>_LOImpress_TableBackGradientMulticolor
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Tables require that the properties be set individually for each Cell, therefore this function cycles through each cell and sets the value, and may be slower for large tables.
 ;                  When retrieving the current property values for a table, if all of the cells in the Table do not have the same value, Null is returned for that property value.
-; Related .......: _LOImpress_TableCreate, _LOImpress_TableGetObjByCursor, _LOImpress_TableGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_TableBorderWidth, _LOImpress_TableBorderStyle, _LOImpress_TableBorderPadding
+; Related .......: _LOImpress_TableInsert, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_TableBorderWidth, _LOImpress_TableBorderStyle, _LOImpress_TableBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -816,7 +816,7 @@ EndFunc   ;==>_LOImpress_TableBorderColor
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Tables require that the properties be set individually for each Cell, therefore this function cycles through each cell and sets the value, and may be slower for large tables.
 ;                  When retrieving the current property values for a table, if all of the cells in the Table do not have the same value, Null is returned for that property value.
-; Related .......: _LOImpress_TableCreate, _LOImpress_TableGetObjByCursor, _LOImpress_TableGetObjByName, _LO_UnitConvert, _LOImpress_TableBorderWidth, _LOImpress_TableBorderStyle, _LOImpress_TableBorderColor
+; Related .......: _LOImpress_TableInsert, _LO_UnitConvert, _LOImpress_TableBorderWidth, _LOImpress_TableBorderStyle, _LOImpress_TableBorderColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -911,24 +911,24 @@ EndFunc   ;==>_LOImpress_TableBorderPadding
 ; Description ...: Set or Retrieve the Table Border Line style. L.O. 3.6+.
 ; Syntax ........: _LOImpress_TableBorderStyle(ByRef $oTable[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $iVert = Null[, $iHori = Null]]]]]])
 ; Parameters ....: $oTable              - A Table Shape object returned by a previous _LOImpress_TableInsert, or _LOImpress_ShapesGetList function.
-;                  $iTop                - [optional] (0x7FFF,0-17) Default is Null. The Top Border Line Style of the Table. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBottom             - [optional] (0x7FFF,0-17) Default is Null. The Bottom Border Line Style of the Table. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iLeft               - [optional] (0x7FFF,0-17) Default is Null. The Left Border Line Style of the Table. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iRight              - [optional] (0x7FFF,0-17) Default is Null. The Right Border Line Style of the Table. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iVert               - [optional] (0x7FFF,0-17) Default is Null. The internal Vertical Border Line Styles of the Table. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iHori               - [optional] (0x7FFF,0-17) Default is Null. The internal Horizontal Border Line Styles of the Table. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTop                - [optional] (0x7FFF,0-17) Default is Null. The Top Border Line Style of the Table. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iBottom             - [optional] (0x7FFF,0-17) Default is Null. The Bottom Border Line Style of the Table. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iLeft               - [optional] (0x7FFF,0-17) Default is Null. The Left Border Line Style of the Table. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iRight              - [optional] (0x7FFF,0-17) Default is Null. The Right Border Line Style of the Table. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iVert               - [optional] (0x7FFF,0-17) Default is Null. The internal Vertical Border Line Styles of the Table. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iHori               - [optional] (0x7FFF,0-17) Default is Null. The internal Horizontal Border Line Styles of the Table. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
-;                  @Error: 1, @Extended: 2 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error: 1, @Extended: 3 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error: 1, @Extended: 4 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error: 1, @Extended: 5 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error: 1, @Extended: 6 = $iVert not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error: 1, @Extended: 7 = $iHori not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iVert not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 7 = $iHori not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Error Creating "com.sun.star.table.BorderLine2" Object.
 ;                  --Processing Errors--
@@ -963,7 +963,7 @@ EndFunc   ;==>_LOImpress_TableBorderPadding
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Tables require that the properties be set individually for each Cell, therefore this function cycles through each cell and sets the value, and may be slower for large tables.
 ;                  When retrieving the current property values for a table, if all of the cells in the Table do not have the same value, Null is returned for that property value.
-; Related .......: _LOImpress_TableCreate, _LOImpress_TableGetObjByCursor, _LOImpress_TableGetObjByName, _LOImpress_TableBorderWidth, _LOImpress_TableBorderColor, _LOImpress_TableBorderPadding
+; Related .......: _LOImpress_TableInsert, _LOImpress_TableBorderWidth, _LOImpress_TableBorderColor, _LOImpress_TableBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -988,12 +988,12 @@ EndFunc   ;==>_LOImpress_TableBorderStyle
 ; Description ...: Set or Retrieve the Table Border Line Width. L.O. 3.6+.
 ; Syntax ........: _LOImpress_TableBorderWidth(ByRef $oTable[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $iVert = Null[, $iHori = Null]]]]]])
 ; Parameters ....: $oTable              - A Table Shape object returned by a previous _LOImpress_TableInsert, or _LOImpress_ShapesGetList function.
-;                  $iTop                - [optional] Default is Null. The Top Border Line width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOI_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBottom             - [optional] Default is Null. The Bottom Border Line Width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOI_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iLeft               - [optional] Default is Null. The Left Border Line width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOI_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iRight              - [optional] Default is Null. The Right Border Line Width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOI_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iVert               - [optional] Default is Null. The Internal Vertical Border Line width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOI_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iHori               - [optional] Default is Null. The Internal Horizontal Border Line width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOI_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTop                - [optional] Default is Null. The Top Border Line width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOI_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iBottom             - [optional] Default is Null. The Bottom Border Line Width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOI_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iLeft               - [optional] Default is Null. The Left Border Line width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOI_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iRight              - [optional] Default is Null. The Right Border Line Width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOI_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iVert               - [optional] Default is Null. The Internal Vertical Border Line width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOI_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iHori               - [optional] Default is Null. The Internal Horizontal Border Line width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOI_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
@@ -1034,7 +1034,7 @@ EndFunc   ;==>_LOImpress_TableBorderStyle
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Tables require that the properties be set individually for each Cell, therefore this function cycles through each cell and sets the value, and may be slower for large tables.
 ;                  When retrieving the current property values for a table, if all of the cells in the Table do not have the same value, Null is returned for that property value.
-; Related .......: _LOImpress_TableCreate, _LOImpress_TableGetObjByCursor, _LOImpress_TableGetObjByName, _LO_UnitConvert, _LOImpress_TableBorderStyle, _LOImpress_TableBorderColor, _LOImpress_TableBorderPadding
+; Related .......: _LOImpress_TableInsert, _LO_UnitConvert, _LOImpress_TableBorderStyle, _LOImpress_TableBorderColor, _LOImpress_TableBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1075,7 +1075,7 @@ EndFunc   ;==>_LOImpress_TableBorderWidth
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-; Related .......: _LOImpress_TableCellGetObjByCursor, _LOImpress_TableCellGetObjByName, _LOImpress_TableCellGetObjByPosition, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LOImpress_TableCellGetObjByPosition, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1187,10 +1187,9 @@ EndFunc   ;==>_LOImpress_TableCellBackFillStyle
 ;                  @Error: 1, @Extended: 13 = $iToIntense not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Error retrieving "FillGradient" Object.
-;                  @Error: 3, @Extended: 2 = Error retrieving Parent Document Object.
-;                  @Error: 3, @Extended: 3 = Failed to retrieve ColorStops Array.
-;                  @Error: 3, @Extended: 4 = Error creating Gradient Name.
-;                  @Error: 3, @Extended: 5 = Error setting Gradient Name.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 3 = Error creating Gradient Name.
+;                  @Error: 3, @Extended: 4 = Error setting Gradient Name.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sGradientName
@@ -1526,7 +1525,7 @@ EndFunc   ;==>_LOImpress_TableCellBackGradientMulticolor
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOImpress_TableCellGetObjByCursor, _LOImpress_TableCellGetObjByName, _LOImpress_TableCellGetObjByPosition, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_TableCellBorderWidth, _LOImpress_TableCellBorderStyle, _LOImpress_TableCellBorderPadding
+; Related .......: _LOImpress_TableCellGetObjByPosition, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_TableCellBorderWidth, _LOImpress_TableCellBorderStyle, _LOImpress_TableCellBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1573,7 +1572,7 @@ EndFunc   ;==>_LOImpress_TableCellBorderColor
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOImpress_TableCellGetObjByCursor, _LOImpress_TableCellGetObjByName, _LOImpress_TableCellGetObjByPosition, _LO_UnitConvert, _LOImpress_TableCellBorderColor, _LOImpress_TableCellBorderStyle, _LOImpress_TableCellBorderWidth
+; Related .......: _LOImpress_TableCellGetObjByPosition, _LO_UnitConvert, _LOImpress_TableCellBorderColor, _LOImpress_TableCellBorderStyle, _LOImpress_TableCellBorderWidth
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1628,20 +1627,20 @@ EndFunc   ;==>_LOImpress_TableCellBorderPadding
 ; Description ...: Set or Retrieve the Cell Border Line style. L.O. 3.4+.
 ; Syntax ........: _LOImpress_TableCellBorderStyle(ByRef $oCell[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oCell               - A Table Cell object returned by a previous _LOImpress_TableCellGetObjByPosition function.
-;                  $iTop                - [optional] (0x7FFF,0-17) Default is Null. The Top Border Line Style of the Cell. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBottom             - [optional] (0x7FFF,0-17) Default is Null. The Bottom Border Line Style of the Cell. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iLeft               - [optional] (0x7FFF,0-17) Default is Null. The Left Border Line Style of the Cell. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iRight              - [optional] (0x7FFF,0-17) Default is Null. The Right Border Line Style of the Cell. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTop                - [optional] (0x7FFF,0-17) Default is Null. The Top Border Line Style of the Cell. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iBottom             - [optional] (0x7FFF,0-17) Default is Null. The Bottom Border Line Style of the Cell. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iLeft               - [optional] (0x7FFF,0-17) Default is Null. The Left Border Line Style of the Cell. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iRight              - [optional] (0x7FFF,0-17) Default is Null. The Right Border Line Style of the Cell. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCell not an Object.
-;                  @Error: 1, @Extended: 2 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error: 1, @Extended: 3 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error: 1, @Extended: 4 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error: 1, @Extended: 5 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOI_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Error Creating "com.sun.star.table.BorderLine2" Object.
 ;                  --Processing Errors--
@@ -1663,7 +1662,7 @@ EndFunc   ;==>_LOImpress_TableCellBorderPadding
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOImpress_TableCellGetObjByCursor, _LOImpress_TableCellGetObjByName, _LOImpress_TableCellGetObjByPosition, _LOImpress_TableCellBorderWidth, _LOImpress_TableCellBorderColor, _LOImpress_TableCellBorderPadding
+; Related .......: _LOImpress_TableCellGetObjByPosition, _LOImpress_TableCellBorderWidth, _LOImpress_TableCellBorderColor, _LOImpress_TableCellBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1686,10 +1685,10 @@ EndFunc   ;==>_LOImpress_TableCellBorderStyle
 ; Description ...: Set or Retrieve the Cell Border Line Width. L.O. 3.4+.
 ; Syntax ........: _LOImpress_TableCellBorderWidth(ByRef $oCell[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oCell               - A Table Cell object returned by a previous _LOImpress_TableCellGetObjByPosition function.
-;                  $iTop                - [optional] Default is Null. The Top Border Line width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOI_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBottom             - [optional] Default is Null. The Bottom Border Line Width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOI_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iLeft               - [optional] Default is Null. The Left Border Line width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOI_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iRight              - [optional] Default is Null. The Right Border Line Width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOI_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iTop                - [optional] Default is Null. The Top Border Line width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOI_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iBottom             - [optional] Default is Null. The Bottom Border Line Width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOI_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iLeft               - [optional] Default is Null. The Left Border Line width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOI_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iRight              - [optional] Default is Null. The Right Border Line Width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOI_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -1717,7 +1716,7 @@ EndFunc   ;==>_LOImpress_TableCellBorderStyle
 ; Remarks .......: To "Turn Off" Borders, set them to 0
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOImpress_TableCellGetObjByCursor, _LOImpress_TableCellGetObjByName, _LOImpress_TableCellGetObjByPosition, _LO_UnitConvert, _LOImpress_TableCellBorderStyle, _LOImpress_TableCellBorderColor, _LOImpress_TableCellBorderPadding
+; Related .......: _LOImpress_TableCellGetObjByPosition, _LO_UnitConvert, _LOImpress_TableCellBorderStyle, _LOImpress_TableCellBorderColor, _LOImpress_TableCellBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2150,7 +2149,7 @@ EndFunc   ;==>_LOImpress_TableCellCharUnderLine
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_TableCellGetObjByCursor, _LOImpress_TableCellGetObjByName, _LOImpress_TableCellGetObjByPosition, _LOImpress_CursorInsertString
+; Related .......: _LOImpress_TableCellGetObjByPosition, _LOImpress_CursorInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2188,7 +2187,7 @@ EndFunc   ;==>_LOImpress_TableCellCreateTextCursor
 ; Modified ......:
 ; Remarks .......: This function can fail with complex Tables. Complex tables are tables that contain cells that have been split or joined.
 ;                  Rows and Columns in a Table are 0 based, meaning they start their count at 0. The first cell is column 0 row 0.
-; Related .......: _LOImpress_TableCreate, _LOImpress_TableGetObjByCursor, _LOImpress_TableGetObjByName, _LOImpress_TableColumnGetCount, _LOImpress_TableRowGetCount
+; Related .......: _LOImpress_TableInsert, _LOImpress_TableColumnGetCount, _LOImpress_TableRowGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2557,7 +2556,7 @@ EndFunc   ;==>_LOImpress_TableCellParTabStopsGetList
 ; Remarks .......: Setting the String will overwrite any existing data in the cell.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  To prevent accidental and unwanted newlines, @CRLF is automatically replaced with @CR to match LibreOffice's newline style.
-; Related .......: _LOImpress_TableCellGetObjByCursor, _LOImpress_TableCellGetObjByName, _LOImpress_TableCellGetObjByPosition,
+; Related .......: _LOImpress_TableCellGetObjByPosition,
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3329,7 +3328,7 @@ EndFunc   ;==>_LOImpress_TableCharUnderLine
 ; Remarks .......: LibreOffice counts columns and Rows starting at 0. So to delete the first column in a Table you would call $iColumn with 0.
 ;                  If you attempt to delete more columns than are present all columns from $iColumn over will be deleted.
 ;                  If you delete all columns starting from column 0, the entire Table is deleted.
-; Related .......: _LOImpress_TableCreate, _LOImpress_TableGetObjByCursor, _LOImpress_TableGetObjByName, _LOImpress_TableColumnGetCount
+; Related .......: _LOImpress_TableInsert, _LOImpress_TableColumnGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3369,7 +3368,7 @@ EndFunc   ;==>_LOImpress_TableColumnDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_TableCreate, _LOImpress_TableGetObjByCursor, _LOImpress_TableGetObjByName
+; Related .......: _LOImpress_TableInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3409,7 +3408,7 @@ EndFunc   ;==>_LOImpress_TableColumnGetCount
 ; Remarks .......: Call $iColumn with Null to insert the column(s) at the end (right-hand side) of the Table.
 ;                  LibreOffice counts the Table columns/Rows starting at 0. The columns are placed behind the desired column when inserted.
 ;                  To insert a column at the left most of the Table you would call $iColumn to 0. To insert columns at the Right of a table you would call $iColumn to one higher than the last column. e.g. a Table containing 3 columns, would be numbered as follows: 0(first-Column), 1(second-Column), 2(third-Column), to insert columns at the very Right of the columns, you would call $iColumn to 3.
-; Related .......: _LOImpress_TableCreate, _LOImpress_TableGetObjByCursor, _LOImpress_TableGetObjByName, _LOImpress_TableColumnGetCount
+; Related .......: _LOImpress_TableInsert, _LOImpress_TableColumnGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3544,7 +3543,7 @@ EndFunc   ;==>_LOImpress_TableInsert
 ; Remarks .......: LibreOffice counts Rows starting at 0. So to delete the first Row in a Table you would set $iRow to 0.
 ;                  If you attempt to delete more rows than are present, all rows from $iRow over will be deleted.
 ;                  If you delete all Rows starting from Row 0, the entire Table is deleted.
-; Related .......: _LOImpress_TableCreate, _LOImpress_TableGetObjByCursor, _LOImpress_TableGetObjByName, _LOImpress_TableRowGetCount
+; Related .......: _LOImpress_TableInsert, _LOImpress_TableRowGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3584,7 +3583,7 @@ EndFunc   ;==>_LOImpress_TableRowDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_TableCreate, _LOImpress_TableGetObjByCursor, _LOImpress_TableGetObjByName
+; Related .......: _LOImpress_TableInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3625,7 +3624,7 @@ EndFunc   ;==>_LOImpress_TableRowGetCount
 ;                  LibreOffice counts the Table Rows starting at 0. The Rows are placed above the desired Row when inserted.
 ;                  To insert a Row at the top most of the Table call $iRow with 0.
 ;                  To insert rows at the bottom of a table you would call $iRow with one higher than the last row. e.g. a Table containing 3 rows, would be numbered as follows: 0(first-row), 1(second-row), 2(third-row), to insert rows at the very bottom of the rows, call $iRow with 3.
-; Related .......: _LOImpress_TableCreate, _LOImpress_TableGetObjByCursor, _LOImpress_TableGetObjByName, _LOImpress_TableRowGetCount
+; Related .......: _LOImpress_TableInsert, _LOImpress_TableRowGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
