@@ -33,8 +33,6 @@ Func Example()
 	$oShape = _LOImpress_DrawShapeInsert($oSlide, $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE, 3000, 6000, 2000, 3500)
 	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Modify the Shape Background Color settings. Background color = $LO_COLOR_TEAL.
-	_LOImpress_ShapeAreaColor($oShape, $LO_COLOR_TEAL)
 	; Modify the Shape Background Color settings. Background color = $LOI_SHAPE_COLOR_USE_SLIDE_BACKGROUND.
 	_LOImpress_ShapeAreaColor($oShape, $LOI_SHAPE_COLOR_USE_SLIDE_BACKGROUND)
 	If @error Then _ERROR($oDoc, "Failed to set Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)

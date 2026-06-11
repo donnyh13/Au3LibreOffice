@@ -704,7 +704,7 @@ EndFunc   ;==>_LOImpress_DocIsActive
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_DocIsModified
-; Description ...: Set or Retrieve the document's modified status.
+; Description ...: Set or Retrieve the document's modified state.
 ; Syntax ........: _LOImpress_DocIsModified(ByRef $oDoc[, $bModified = Null])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $bModified           - [optional] Default is Null. If True, sets the Document's modified status to True.
