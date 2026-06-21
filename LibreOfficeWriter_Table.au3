@@ -1480,14 +1480,14 @@ Func _LOWriter_TableColumnGetCount(ByRef $oTable)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iColumnSize = 0
+	Local $iColumnCount
 
 	If Not IsObj($oTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0) ; Not an Object.
 
-	$iColumnSize = $oTable.getColumns.getCount()
-	If ($iColumnSize = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; Failed to retrieve column count.
+	$iColumnCount = $oTable.getColumns.getCount()
+	If Not IsInt($iColumnCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $iColumnSize)
+	Return SetError($__LO_STATUS_SUCCESS, 0, $iColumnCount)
 EndFunc   ;==>_LOWriter_TableColumnGetCount
 
 ; #FUNCTION# ====================================================================================================================
@@ -2372,14 +2372,14 @@ Func _LOWriter_TableRowGetCount(ByRef $oTable)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iRowSize = 0
+	Local $iRowCount
 
 	If Not IsObj($oTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0) ; Not an Object.
 
-	$iRowSize = $oTable.getRows.getCount()
-	If ($iRowSize = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; Failed to retrieve Row count.
+	$iRowCount = $oTable.getRows.getCount()
+	If Not IsInt($iRowCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; Failed to retrieve Row count.
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $iRowSize)
+	Return SetError($__LO_STATUS_SUCCESS, 0, $iRowCount)
 EndFunc   ;==>_LOWriter_TableRowGetCount
 
 ; #FUNCTION# ====================================================================================================================
