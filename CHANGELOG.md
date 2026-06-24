@@ -2378,6 +2378,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Renamed Table Data Get/Set functions to group them together.
   - `_LOWriter_TableGetData` --> `_LOWriter_TableDataGet`
   - `_LOWriter_TableSetData` --> `_LOWriter_TableDataSet`
+- Added default Column count of 1 to `_LOWriter_TableColumnInsert`
+- Added default Row count of 1 to `_LOWriter_TableRowInsert`
 
 #### Documented
 

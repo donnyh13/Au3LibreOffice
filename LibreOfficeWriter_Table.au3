@@ -1493,9 +1493,9 @@ EndFunc   ;==>_LOWriter_TableColumnGetCount
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_TableColumnInsert
 ; Description ...: Insert columns into a Text Table
-; Syntax ........: _LOWriter_TableColumnInsert(ByRef $oTable, $iCount[, $iColumn = Null])
+; Syntax ........: _LOWriter_TableColumnInsert(ByRef $oTable[, $iCount = 1[, $iColumn = Null]])
 ; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $iCount              - Number of columns to insert.
+;                  $iCount              - [optional] Default is 1. Number of columns to insert.
 ;                  $iColumn             - [optional] Default is Null. The column to insert columns after. See Remarks.
 ; Return values .: Success: 1.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Successfully inserted the number of desired columns.
@@ -1503,10 +1503,10 @@ EndFunc   ;==>_LOWriter_TableColumnGetCount
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $iCount not an Integer, or less than 1.
-;                  @Error: 1, @Extended: 3 = $iColumn not an Integer, or less than 0.
-;                  @Error: 1, @Extended: 4 = Column called in $iColumn greater than number of columns contained in table.
+;                  @Error: 1, @Extended: 3 = $iColumn not an Integer, less than 0 or greater than number of columns contained in table.
 ;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to insert columns.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve count of columns.
+;                  @Error: 3, @Extended: 2 = Failed to insert columns.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call $iColumn with Null to insert the column(s) at the end (right-hand side) of the Table.
@@ -1516,7 +1516,7 @@ EndFunc   ;==>_LOWriter_TableColumnGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_TableColumnInsert(ByRef $oTable, $iCount, $iColumn = Null)
+Func _LOWriter_TableColumnInsert(ByRef $oTable, $iCount = 1, $iColumn = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1524,14 +1524,15 @@ Func _LOWriter_TableColumnInsert(ByRef $oTable, $iCount, $iColumn = Null)
 
 	If Not IsObj($oTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not __LO_IntIsBetween($iCount, 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If ($iColumn <> Null) And Not __LO_IntIsBetween($iColumn, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If ($iColumn <> Null) And Not __LO_IntIsBetween($iColumn, 0, $oTable.getColumns.getCount()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$iColumnCount = $oTable.getColumns.getCount()
-	If ($iColumnCount < $iColumn) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0) ; Requested column out of bounds.
+	If Not IsInt($iColumnCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$iColumn = ($iColumn = Null) ? ($iColumnCount) : ($iColumn)
+
 	$oTable.getColumns.insertByIndex($iColumn, $iCount)
-	If ($oTable.getColumns.getCount() <> ($iColumnCount + $iCount)) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	If ($oTable.getColumns.getCount() <> ($iColumnCount + $iCount)) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_TableColumnInsert
@@ -2438,9 +2439,9 @@ EndFunc   ;==>_LOWriter_TableRowGetCount
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_TableRowInsert
 ; Description ...: Insert a row into a Text Table
-; Syntax ........: _LOWriter_TableRowInsert(ByRef $oTable, $iCount[, $iRow = Null])
+; Syntax ........: _LOWriter_TableRowInsert(ByRef $oTable[, $iCount = 1[, $iRow = Null]])
 ; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
-;                  $iCount              - Number of rows to insert.
+;                  $iCount              - [optional] Default is 1. Number of rows to insert.
 ;                  $iRow                - [optional] Default is Null. The row to insert rows after. See Remarks.
 ; Return values .: Success: 1.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Successfully inserted requested number of rows.
@@ -2448,9 +2449,9 @@ EndFunc   ;==>_LOWriter_TableRowGetCount
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $iCount not an Integer, or less than 1.
-;                  @Error: 1, @Extended: 3 = $iRow not an Integer, or less than 0.
-;                  @Error: 1, @Extended: 4 = Requested Row greater than number of Rows contained in table.
+;                  @Error: 1, @Extended: 3 = $iRow not an Integer, less than 0 or greater than number of Rows contained in table.
 ;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve count of Rows.
 ;                  @Error: 3, @Extended: 1 = Failed to insert Rows.
 ; Author ........: donnyh13
 ; Modified ......:
@@ -2462,7 +2463,7 @@ EndFunc   ;==>_LOWriter_TableRowGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_TableRowInsert(ByRef $oTable, $iCount, $iRow = Null)
+Func _LOWriter_TableRowInsert(ByRef $oTable, $iCount = 1, $iRow = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -2470,14 +2471,15 @@ Func _LOWriter_TableRowInsert(ByRef $oTable, $iCount, $iRow = Null)
 
 	If Not IsObj($oTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not __LO_IntIsBetween($iCount, 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If ($iRow <> Null) And Not __LO_IntIsBetween($iRow, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If ($iRow <> Null) And Not __LO_IntIsBetween($iRow, 0, $oTable.getRows.getCount()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$iRowCount = $oTable.getRows.getCount()
-	If ($iRowCount < $iRow) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0) ; Requested Row out of bounds.
+	If Not IsInt($iRowCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$iRow = ($iRow = Null) ? ($iRowCount) : ($iRow)
+
 	$oTable.getRows.insertByIndex($iRow, $iCount)
-	If ($oTable.getRows.getCount() <> ($iRowCount + $iCount)) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	If ($oTable.getRows.getCount() <> ($iRowCount + $iCount)) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_TableRowInsert
