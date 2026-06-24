@@ -1,4 +1,3 @@
-#include <Array.au3>
 #include <MsgBoxConstants.au3>
 
 #include "..\LibreOfficeWriter.au3"
@@ -8,7 +7,7 @@ Example()
 Func Example()
 	Local $oDoc, $oViewCursor, $oTable, $oCell
 	Local $iRows, $iColumns
-	Local $avData
+	Local $sData
 
 	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -42,19 +41,11 @@ Func Example()
 		Next
 	Next
 
-	; Retrieve Table data, second over column (Column 1).
-	$avData = _LOWriter_TableGetData($oTable, 1)
+	; Retrieve Table data, second column over (Column 1), second row down (row 1). This will return a string.
+	$sData = _LOWriter_TableDataGet($oTable, 1, 1)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Display Column 1
-	_ArrayDisplay($avData)
-
-	; Retrieve Table data, second down Row (row 1).
-	$avData = _LOWriter_TableGetData($oTable, Null, 1)
-	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Display Row 1
-	_ArrayDisplay($avData)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The returned data was: " & @CRLF & $sData)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

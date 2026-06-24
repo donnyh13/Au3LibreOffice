@@ -2375,6 +2375,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `_LOWriter_TableGetCellObjByCursor` --> `_LOWriter_TableCellGetObjByCursor`
   - `_LOWriter_TableGetCellObjByName` --> `_LOWriter_TableCellGetObjByName`
   - `_LOWriter_TableGetCellObjByPosition` --> `_LOWriter_TableCellGetObjByPosition`
+- Renamed Table Data Get/Set functions to group them together.
+  - `_LOWriter_TableGetData` --> `_LOWriter_TableDataGet`
+  - `_LOWriter_TableSetData` --> `_LOWriter_TableDataSet`
 
 #### Documented
 

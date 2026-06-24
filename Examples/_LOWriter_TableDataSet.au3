@@ -7,7 +7,7 @@ Example()
 Func Example()
 	Local $oDoc, $oViewCursor, $oTable, $oCell
 	Local $iRows, $iColumns
-	Local $sData
+	Local $avRows[0], $avColumns[0]
 
 	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -41,11 +41,26 @@ Func Example()
 		Next
 	Next
 
-	; Retrieve Table data, second column over (Column 1), second row down (row 1). This will return a string.
-	$sData = _LOWriter_TableGetData($oTable, 1, 1)
-	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; There  are two ways to set the Table data, I can retrieve an array of data in the table and modify that array, or I can create all new
+	; arrays to fill it with. I will demonstrate creating all new arrays this time.
+	ReDim $avRows[$iRows]
+	ReDim $avColumns[$iColumns]
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The returned data was: " & @CRLF & $sData)
+	; This "For" will loop through the Rows array adding a Columns Array to each element once I fill the Columns array. When I add an array to
+	; another array it puts a copy into the array, so I can keep re-using  the same columns array.
+	For $k = 0 To $iRows - 1
+		For $i = 0 To $iColumns - 1
+			$avColumns[$i] = "Array Column " & $i & @CR & "Array Row " & $k
+		Next
+		$avRows[$k] = $avColumns
+		Sleep(10)
+	Next
+
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now replace the existing data in the Table")
+
+	; Now set the data
+	_LOWriter_TableDataSet($oTable, $avRows)
+	If @error Then _ERROR($oDoc, "Failed to set Text Table Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

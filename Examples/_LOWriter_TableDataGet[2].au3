@@ -1,3 +1,4 @@
+#include <Array.au3>
 #include <MsgBoxConstants.au3>
 
 #include "..\LibreOfficeWriter.au3"
@@ -7,7 +8,7 @@ Example()
 Func Example()
 	Local $oDoc, $oViewCursor, $oTable, $oCell
 	Local $iRows, $iColumns
-	Local $avData, $avColumn
+	Local $avData
 
 	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -41,36 +42,19 @@ Func Example()
 		Next
 	Next
 
-	; There  are two ways to set the Table data, I can retrieve an array of data in the table and modify that array, or I can create all new
-	; arrays to fill it with. I will demonstrate retrieving the existing data array and modifying that.
-
-	; Retrieve Table data,
-	$avData = _LOWriter_TableGetData($oTable)
+	; Retrieve Table data, second over column (Column 1).
+	$avData = _LOWriter_TableDataGet($oTable, 1)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve the second down row, "Row 1"
-	$avColumn = $avData[1]
+	; Display Column 1
+	_ArrayDisplay($avData)
 
-	; Modify the third over column, "Column 2"
-	$avColumn[2] = "I set new data here."
+	; Retrieve Table data, second down Row (row 1).
+	$avData = _LOWriter_TableDataGet($oTable, Null, 1)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; set the modified data back into the array
-	$avData[1] = $avColumn
-
-	; Modify the third row down, "Row 2"
-	$avColumn = $avData[2]
-
-	; Modify the first column, "column 0", but keep the existing data.
-	$avColumn[0] = $avColumn[0] & " Some extra text I added."
-
-	; set the modified data back into the array
-	$avData[2] = $avColumn
-
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "I am about to modify the Table data.")
-
-	; Set the Table Data
-	_LOWriter_TableSetData($oTable, $avData)
-	If @error Then _ERROR($oDoc, "Failed to set Text Table Data. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Display Row 1
+	_ArrayDisplay($avData)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 
