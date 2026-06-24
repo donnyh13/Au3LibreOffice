@@ -216,7 +216,6 @@ EndFunc   ;==>_LOWriter_TableBorderColor
 ;                  @Error: 1, @Extended: 5 = $iRight not an Integer.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Error retrieving TableBorderDistances Object.
-;                  @Error: 3, @Extended: 2 = Error retrieving TableBorderDistances Object for Error checking.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTop border distance
@@ -241,15 +240,14 @@ Func _LOWriter_TableBorderPadding(ByRef $oTable, $iTop = Null, $iBottom = Null, 
 
 	If Not IsObj($oTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
+	$tBD = $oTable.TableBorderDistances()
+	If Not IsObj($tBD) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
 	If __LO_VarsAreNull($iTop, $iBottom, $iLeft, $iRight) Then
-		__LO_ArrayFill($aiBPadding, $oTable.TableBorderDistances.TopDistance(), $oTable.TableBorderDistances.BottomDistance(), _
-				$oTable.TableBorderDistances.LeftDistance(), $oTable.TableBorderDistances.RightDistance())
+		__LO_ArrayFill($aiBPadding, $tBD.TopDistance(), $tBD.BottomDistance(), $tBD.LeftDistance(), $tBD.RightDistance())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $aiBPadding)
 	EndIf
-
-	$tBD = $oTable.TableBorderDistances()
-	If Not IsObj($tBD) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	If ($iTop <> Null) Then
 		If Not __LO_IntIsBetween($iTop, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -276,14 +274,11 @@ Func _LOWriter_TableBorderPadding(ByRef $oTable, $iTop = Null, $iBottom = Null, 
 	EndIf
 
 	$oTable.TableBorderDistances = $tBD
-	; Error Checking.
-	$tBD = $oTable.TableBorderDistances()
-	If Not IsObj($tBD) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	$iError = (__LO_VarsAreNull($iTop)) ? ($iError) : ((__LO_IntIsBetween($tBD.TopDistance(), $iTop - 1, $iTop + 1)) ? ($iError) : (BitOR($iError, 1)))
-	$iError = (__LO_VarsAreNull($iBottom)) ? ($iError) : ((__LO_IntIsBetween($tBD.BottomDistance(), $iBottom - 1, $iBottom + 1)) ? ($iError) : (BitOR($iError, 2)))
-	$iError = (__LO_VarsAreNull($iLeft)) ? ($iError) : ((__LO_IntIsBetween($tBD.LeftDistance(), $iLeft - 1, $iLeft + 1)) ? ($iError) : (BitOR($iError, 4)))
-	$iError = (__LO_VarsAreNull($iRight)) ? ($iError) : ((__LO_IntIsBetween($tBD.RightDistance(), $iRight - 1, $iRight + 1)) ? ($iError) : (BitOR($iError, 8)))
+	$iError = (__LO_VarsAreNull($iTop)) ? ($iError) : ((__LO_IntIsBetween($oTable.TableBorderDistances.TopDistance(), $iTop - 1, $iTop + 1)) ? ($iError) : (BitOR($iError, 1)))
+	$iError = (__LO_VarsAreNull($iBottom)) ? ($iError) : ((__LO_IntIsBetween($oTable.TableBorderDistances.BottomDistance(), $iBottom - 1, $iBottom + 1)) ? ($iError) : (BitOR($iError, 2)))
+	$iError = (__LO_VarsAreNull($iLeft)) ? ($iError) : ((__LO_IntIsBetween($oTable.TableBorderDistances.LeftDistance(), $iLeft - 1, $iLeft + 1)) ? ($iError) : (BitOR($iError, 4)))
+	$iError = (__LO_VarsAreNull($iRight)) ? ($iError) : ((__LO_IntIsBetween($oTable.TableBorderDistances.RightDistance(), $iRight - 1, $iRight + 1)) ? ($iError) : (BitOR($iError, 8)))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_TableBorderPadding
@@ -2861,7 +2856,7 @@ Func _LOWriter_TableWidth(ByRef $oTable, $iWidth = Null, $iRelativeWidth = Null)
 	EndIf
 
 	If ($iWidth <> Null) Then
-		If Not IsInt($iWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0) ; not an integer
+		If Not IsInt($iWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 		If ($oTable.HoriOrient() = $LOW_ORIENT_HORI_FULL) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; Can't set Width/ Relative width with orientation set to Auto(6/Full)
 
 		$oTable.Width = $iWidth
@@ -2869,7 +2864,7 @@ Func _LOWriter_TableWidth(ByRef $oTable, $iWidth = Null, $iRelativeWidth = Null)
 	EndIf
 
 	If ($iRelativeWidth <> Null) Then
-		If Not IsInt($iRelativeWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0) ; not an integer
+		If Not IsInt($iRelativeWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 		If ($oTable.HoriOrient() = $LOW_ORIENT_HORI_FULL) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0) ; Can't set Width/ Relative width with orientation set to Auto(6/Full)
 
 		$oTable.RelativeWidth = $iRelativeWidth

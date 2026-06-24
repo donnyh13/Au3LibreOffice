@@ -2638,6 +2638,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Removed ImplementationName usages generally, as it is unreliable long term.
 - Simplified some internal workings of some cursor functions.
 - Change StringLen for StringRegExp in `_LOWriter_DateStructModify`.
+- Rename variables in:
+  - _LOWriter_TableColumnGetCount
+  - _LOWriter_TableRowGetCount
 
 #### Removed
 
