@@ -2447,7 +2447,7 @@ EndFunc   ;==>_LOWriter_TableRowGetCount
 ;                  @Error: 1, @Extended: 3 = $iRow not an Integer, less than 0 or greater than number of Rows contained in table.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve count of Rows.
-;                  @Error: 3, @Extended: 1 = Failed to insert Rows.
+;                  @Error: 3, @Extended: 2 = Failed to insert Rows.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call $iRow with Null to insert the row(s) at the bottom of the Table.
