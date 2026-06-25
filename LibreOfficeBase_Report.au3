@@ -1437,7 +1437,7 @@ EndFunc   ;==>_LOBase_ReportDocConnect
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
 ;                  Call any optional parameter with Null keyword to skip it.
-;                  Modifying $iContentType and $sContent  will open the "Add a Field" dialog unless it is suppressed.
+;                  Modifying $iContentType and $sContent will open the "Add a Field" dialog unless it is suppressed.
 ;                  When $bSuppress is True, changing $iContentType and $sContent, either in the UI or via AutoIt, will not activate the "Add a Field" dialog, until the report is re-opened again, or $bSuppress is called with False again.
 ;                  Setting $bSuppress to False will activate the "Add a Field" dialog, regardless if any settings are changed.
 ;                  $bSuppress is not needed when a Report Document has been opened "Hidden".
