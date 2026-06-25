@@ -12,14 +12,14 @@
 #include "LibreOfficeWriter_DirectFormatting.au3"
 #include "LibreOfficeWriter_Doc.au3"
 #include "LibreOfficeWriter_Field.au3"
-#include "LibreOfficeWriter_FootEndNotes.au3"
+#include "LibreOfficeWriter_FootEndNote.au3"
 #include "LibreOfficeWriter_Form.au3"
 #include "LibreOfficeWriter_Frame.au3"
-#include "LibreOfficeWriter_Images.au3"
+#include "LibreOfficeWriter_Image.au3"
 #include "LibreOfficeWriter_Num.au3"
 #include "LibreOfficeWriter_Page.au3"
 #include "LibreOfficeWriter_Par.au3"
-#include "LibreOfficeWriter_Shapes.au3"
+#include "LibreOfficeWriter_Shape.au3"
 #include "LibreOfficeWriter_Table.au3"
 
 ; #INDEX# =======================================================================================================================

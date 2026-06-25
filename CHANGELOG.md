@@ -2380,6 +2380,10 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `_LOWriter_TableSetData` --> `_LOWriter_TableDataSet`
 - Added default Column count of 1 to `_LOWriter_TableColumnInsert`
 - Added default Row count of 1 to `_LOWriter_TableRowInsert`
+- Renamed Component names to be singular, not plural for consistency.
+  - `LibreOfficeWriter_FootEndNotes.au3` --> `LibreOfficeWriter_FootEndNote.au3`
+  - `LibreOfficeWriter_Images.au3` --> `LibreOfficeWriter_Image.au3`
+  - `LibreOfficeWriter_Shapes.au3` --> `LibreOfficeWriter_Shape.au3`
 
 #### Documented
 
