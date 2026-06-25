@@ -233,7 +233,7 @@ Func _LOWriter_NumStyleCustomize(ByRef $oDoc, $oNumStyle, $iLevel, $iNumFormat =
 	If Not $oNumStyle.supportsService("com.sun.star.style.Style") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not __LO_IntIsBetween($iLevel, 0, 10) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-	$iLevel = ($iLevel - 1) ; Numbering Levels are  0 based, minus 1 to compensate.
+	$iLevel = ($iLevel - 1) ; Numbering Levels are 0 based, minus 1 to compensate.
 
 	$oNumRules = $oNumStyle.NumberingRules()
 	If Not IsObj($oNumRules) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
@@ -311,7 +311,7 @@ Func _LOWriter_NumStyleCustomize(ByRef $oDoc, $oNumStyle, $iLevel, $iNumFormat =
 
 			$atNumLevel[$mNumLevel["ParentNumbering"]].Value = $iSubLevels
 
-			; If Document has "ListFormat" setting (LibreOffice 7.2 +), Sub Levels ("ParentNumbering") wont accept a setting without also setting "List format", which means combining the corresponding "ListFormat"  number values + Prefix & Suffix.
+			; If Document has "ListFormat" setting (LibreOffice 7.2 +), Sub Levels ("ParentNumbering") wont accept a setting without also setting "List format", which means combining the corresponding "ListFormat" number values + Prefix & Suffix.
 			If MapExists($mNumLevel, "ListFormat") Then ; Test if "ListFormat" exists in the Numbering Rules.
 				$atNumLevel[$mNumLevel["ListFormat"]].Value = __LOWriter_NumStyleListFormat($atNumLevel, $i, $iSubLevels)
 			EndIf
@@ -642,7 +642,7 @@ Func _LOWriter_NumStylePosition(ByRef $oDoc, $oNumStyle, $iLevel, $iAlignedAt = 
 	If Not $oNumStyle.supportsService("com.sun.star.style.Style") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not __LO_IntIsBetween($iLevel, 0, 10) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-	$iLevel = ($iLevel - 1) ; Numbering Levels are  0 based, minus 1 to compensate.
+	$iLevel = ($iLevel - 1) ; Numbering Levels are 0 based, minus 1 to compensate.
 
 	$oNumRules = $oNumStyle.NumberingRules()
 	If Not IsObj($oNumRules) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)

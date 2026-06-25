@@ -2010,7 +2010,7 @@ Func _LOWriter_ShapePointsAdd(ByRef $oShape, $iPoint, $iX, $iY, $iPointType = $L
 	$avArray[0] = $aiFlags
 	$tPolyCoords.Flags = $avArray
 
-	; Set the  new Position Points for the Shape.
+	; Set the new Position Points for the Shape.
 	$oShape.PolyPolygonBezier = $tPolyCoords
 
 	; Apply it twice, as after inserting new points, the Point types get lost.
@@ -2510,7 +2510,7 @@ Func _LOWriter_ShapePointsRemove(ByRef $oShape, $iPoint)
 	$avArray[0] = $aiFlags
 	$tPolyCoords.Flags = $avArray
 
-	; Set the  new Position Points for the Shape.
+	; Set the new Position Points for the Shape.
 	$oShape.PolyPolygonBezier = $tPolyCoords
 
 	; Apply it twice, as after modifying points, the Point types get lost.
@@ -2953,7 +2953,7 @@ Func _LOWriter_ShapeTypePosition(ByRef $oShape, $iHorAlign = Null, $iHorPos = Nu
 		; LibreOffice is a bit complex in this anchor setting; When set to "As Character", there aren't specific setting
 		;		values for "Baseline, "Character" and "Row", But For Baseline the VertOrientRelation value is 0, or
 		; "$LOW_RELATIVE_PARAGRAPH", For "Character", The VertOrientRelation value is still 0, and the "VertOrient" value (In the
-		; L.O. UI the furthest left drop down box)  is modified, which can be either $LOW_ORIENT_VERT_CHAR_TOP(1),
+		; L.O. UI the furthest left drop down box) is modified, which can be either $LOW_ORIENT_VERT_CHAR_TOP(1),
 		; $LOW_ORIENT_VERT_CHAR_CENTER(2), $LOW_ORIENT_VERT_CHAR_BOTTOM(3), depending on the current value of Top, Bottom and
 		; Center, or "From Bottom"/ "From Top", of "VertOrient". The same is true For "Row", which means when the anchor is set
 		; to "As Character", I need to first determine the the desired user setting, $LOW_RELATIVE_ROW(-1),
