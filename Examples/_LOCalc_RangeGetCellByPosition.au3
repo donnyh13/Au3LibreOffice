@@ -23,7 +23,7 @@ Func Example()
 	_LOCalc_CellValue($oCell, 20)
 	If @error Then _ERROR($oDoc, "Failed to Set A1 Cell content. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve the cell located at 1, 1,  or B2 Cell.
+	; Retrieve the cell located at 1, 1, or B2 Cell.
 	$oCell = _LOCalc_RangeGetCellByPosition($oSheet, 1, 1)
 	If @error Then _ERROR($oDoc, "Failed to retrieve B2 Cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
