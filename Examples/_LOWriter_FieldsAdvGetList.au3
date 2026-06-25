@@ -88,13 +88,6 @@ Func Example()
 	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Insert some text.
-	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Please insert a DDE Field here.--> ")
-	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Next go to: " & @CRLF & _
-			"Insert, Field, More Fields, Variables, Click on ""DDE Field"" and enter ""Test"" as ""name"", and 1234 as value, then click insert. Press Ok on this MsgBox.")
-
 	; Insert 2 newlines.
 	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
@@ -112,8 +105,8 @@ Func Example()
 
 	_ArrayDisplay($avFields)
 
-	; Retrieve an array of Advanced Fields again, this time only list $LOW_FIELD_TYPE_ADV_USER and $LOW_FIELD_TYPE_ADV_DATABASE_NAME type fields.
-	$avFields = _LOWriter_FieldsAdvGetList($oDoc, BitOR($LOW_FIELD_TYPE_ADV_DATABASE_NAME, $LOW_FIELD_TYPE_ADV_USER))
+	; Retrieve an array of Advanced Fields again, this time only list $LOW_FIELD_TYPE_ADV_USER type fields.
+	$avFields = _LOWriter_FieldsAdvGetList($oDoc, $LOW_FIELD_TYPE_ADV_USER)
 	If @error Then _ERROR($oDoc, "Failed to search for Fields. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	_ArrayDisplay($avFields)
