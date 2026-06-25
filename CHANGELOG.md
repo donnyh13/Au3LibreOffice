@@ -2386,6 +2386,13 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `LibreOfficeWriter_FootEndNotes.au3` --> `LibreOfficeWriter_FootEndNote.au3`
   - `LibreOfficeWriter_Images.au3` --> `LibreOfficeWriter_Image.au3`
   - `LibreOfficeWriter_Shapes.au3` --> `LibreOfficeWriter_Shape.au3`
+- Renamed Field type constants for better grouping.
+  - `$LOW_FIELD_ADV_TYPE_*` --> `$LOW_FIELD_TYPE_ADV_*`
+  - `$LOW_FIELD_DOCINFO_TYPE_*` --> `$LOW_FIELD_TYPE_DOCINFO_*`
+- Changed the value of Field Type "ALL" constant from 1 to value of all constants BitOR'd together.
+  - $LOW_FIELD_TYPE_*
+  - $LOW_FIELD_TYPE_ADV_*
+  - $LOW_FIELD_TYPE_DOCINFO_*
 
 #### Documented
 

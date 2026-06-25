@@ -98,13 +98,13 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a Field. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve an array of Doc Info Fields. The Doc Info Field wont be listed in this array.
-	$avFields = _LOWriter_FieldsDocInfoGetList($oDoc, $LOW_FIELD_DOCINFO_TYPE_ALL)
+	$avFields = _LOWriter_FieldsDocInfoGetList($oDoc, $LOW_FIELD_TYPE_DOCINFO_ALL)
 	If @error Then _ERROR($oDoc, "Failed to search for Fields. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	_ArrayDisplay($avFields)
 
-	; Retrieve an array of Doc info Fields again, this time only list $LOW_FIELD_DOCINFO_TYPE_CREATE_AUTH and $LOW_FIELD_DOCINFO_TYPE_TITLE type fields.
-	$avFields = _LOWriter_FieldsDocInfoGetList($oDoc, BitOR($LOW_FIELD_DOCINFO_TYPE_CREATE_AUTH, $LOW_FIELD_DOCINFO_TYPE_TITLE))
+	; Retrieve an array of Doc info Fields again, this time only list $LOW_FIELD_TYPE_DOCINFO_CREATE_AUTH and $LOW_FIELD_TYPE_DOCINFO_TITLE type fields.
+	$avFields = _LOWriter_FieldsDocInfoGetList($oDoc, BitOR($LOW_FIELD_TYPE_DOCINFO_CREATE_AUTH, $LOW_FIELD_TYPE_DOCINFO_TITLE))
 	If @error Then _ERROR($oDoc, "Failed to search for Fields. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	_ArrayDisplay($avFields)
