@@ -3731,7 +3731,7 @@ EndFunc   ;==>_LOWriter_DocVisible
 ;                  $iZoom               - [optional] (20-600) Default is Null. The zoom percentage.
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = $iZoom set successfully.
-;                  @Error: 0, @Extended: 1, Return: Integer =  All optional parameters were called with Null, returning current zoom value.
+;                  @Error: 0, @Extended: 1, Return: Integer = All optional parameters were called with Null, returning current zoom value.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.

@@ -555,7 +555,7 @@ EndFunc   ;==>_LOWriter_DateStructCreate
 ;                  $bIsUTC              - [optional] Default is Null. If True: time zone is UTC Else False: unknown time zone. LibreOffice version 4.1 and up.
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters. If current LibreOffice version is less than 4.1, the $bIsUTC  parameter will return a Null value.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 8 Element Array with values in order of function parameters. If current LibreOffice version is less than 4.1, the $bIsUTC parameter will return a Null value.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $tDateStruct not an Object.
