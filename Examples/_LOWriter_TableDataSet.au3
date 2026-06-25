@@ -41,13 +41,13 @@ Func Example()
 		Next
 	Next
 
-	; There  are two ways to set the Table data, I can retrieve an array of data in the table and modify that array, or I can create all new
+	; There are two ways to set the Table data, I can retrieve an array of data in the table and modify that array, or I can create all new
 	; arrays to fill it with. I will demonstrate creating all new arrays this time.
 	ReDim $avRows[$iRows]
 	ReDim $avColumns[$iColumns]
 
 	; This "For" will loop through the Rows array adding a Columns Array to each element once I fill the Columns array. When I add an array to
-	; another array it puts a copy into the array, so I can keep re-using  the same columns array.
+	; another array it puts a copy into the array, so I can keep re-using the same columns array.
 	For $k = 0 To $iRows - 1
 		For $i = 0 To $iColumns - 1
 			$avColumns[$i] = "Array Column " & $i & @CR & "Array Row " & $k

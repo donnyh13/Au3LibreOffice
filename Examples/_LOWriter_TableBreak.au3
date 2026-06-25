@@ -51,7 +51,7 @@ Func Example()
 			"Page Style to use after the break: " & $avTableBreak[1] & @CRLF & _
 			"The page number offset for after the break: " & $avTableBreak[2])
 
-	; Change the Table Break settings to: Page break before the Table, $LOW_BREAK_PAGE_BEFORE,  Use the page style "Landscape" for after the break,
+	; Change the Table Break settings to: Page break before the Table, $LOW_BREAK_PAGE_BEFORE, Use the page style "Landscape" for after the break,
 	; And start page numbering at 2.
 	_LOWriter_TableBreak($oDoc, $oTable, $LOW_BREAK_PAGE_BEFORE, "Landscape", 2)
 	If @error Then _ERROR($oDoc, "Failed to set TableBreak settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)

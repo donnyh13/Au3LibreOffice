@@ -40,7 +40,7 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press Ok to modify the Doc Info Field settings.")
 
-	; Create or retrieve a  different DateFormat Key, two-digit year, Day, Month, Hour Minute, Second.
+	; Create or retrieve a different DateFormat Key, two-digit year, Day, Month, Hour Minute, Second.
 	$iDateFormatKey = _LOWriter_DateFormatKeyCreate($oDoc, "YY/DDD/MMM HH:MM:SS")
 	If @error Then _ERROR($oDoc, "Failed to create a Date Format Key. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

@@ -31,7 +31,7 @@ Func Example()
 	$iDateFormatKey = _LOWriter_DateFormatKeyCreate($oDoc, "HH:MM:SS AM/PM MM/DD/YYYY")
 	If @error Then _ERROR($oDoc, "Failed to create a Date Format Key. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Insert a Date and Time text Field at the View Cursor. Fixed = True, Set the Date to my previously created DateStruct, and set DateTime Format Key to the  first
+	; Insert a Date and Time text Field at the View Cursor. Fixed = True, Set the Date to my previously created DateStruct, and set DateTime Format Key to the first
 	; Key I created.
 	_LOWriter_FieldDateTimeInsert($oDoc, $oViewCursor, False, True, $tDateStruct, Null, Null, $iDateFormatKey)
 	If @error Then _ERROR($oDoc, "Failed to insert a field. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)

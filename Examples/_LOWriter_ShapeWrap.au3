@@ -29,7 +29,7 @@ Func Example()
 	$iHMM2 = _LO_UnitConvert(1, $LO_CONVERT_UNIT_INCH_HMM)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Modify the Shape wrap type settings. Set wrap type to $LOW_WRAP_MODE_LEFT, Left and Right  Spacing to 1/2", and Top and Bottom spacing to 1"
+	; Modify the Shape wrap type settings. Set wrap type to $LOW_WRAP_MODE_LEFT, Left and Right Spacing to 1/2", and Top and Bottom spacing to 1"
 	_LOWriter_ShapeWrap($oShape, $LOW_WRAP_MODE_LEFT, $iHMM, $iHMM, $iHMM2, $iHMM2)
 	If @error Then _ERROR($oDoc, "Failed to set Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

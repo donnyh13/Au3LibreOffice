@@ -62,7 +62,7 @@ Func Example()
 
 	; Create a new search descriptor for searching with. Set Backward, Match Case, Whole word, Regular Expression, and Search Styles to false, and
 	; Search property values to True.
-	; I could  have just modified my first search descriptor using the modify function, but since I am demonstrating the Search Descriptor Creation
+	; I could have just modified my first search descriptor using the modify function, but since I am demonstrating the Search Descriptor Creation
 	; function, I will just make a new one.
 	$oSrchDesc2 = _LOWriter_SearchDescriptorCreate($oDoc, False, False, False, False, False, True)
 	If @error Then _ERROR($oDoc, "Failed to create a search descriptor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
