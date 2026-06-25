@@ -1305,7 +1305,7 @@ EndFunc   ;==>_LOCalc_CellStyleBorderWidth
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Error Creating "com.sun.star.style.CellStyle" Object.
 ;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 =  Error Retrieving "CellStyles" Object.
+;                  @Error: 3, @Extended: 1 = Error Retrieving "CellStyles" Object.
 ;                  @Error: 3, @Extended: 2 = Error creating new Cell Style.
 ;                  @Error: 3, @Extended: 3 = Error Retrieving created Cell Style Object.
 ; Author ........: donnyh13
