@@ -1724,15 +1724,15 @@ Func __LOWriter_FieldTypeServices($iFieldType, $bAdvancedServices = False, $bDoc
 	If Not IsBool($bDocInfoServices) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	If ($bAdvancedServices = False) And ($bDocInfoServices = False) Then
-		If (BitAND($iFieldType, $LOW_FIELD_TYPE_ALL)) Then Return SetError($__LO_STATUS_SUCCESS, 0, $avFieldTypes)
+		If (BitAND($iFieldType, $LOW_FIELD_TYPE_ALL) = $LOW_FIELD_TYPE_ALL) Then Return SetError($__LO_STATUS_SUCCESS, 0, $avFieldTypes)
 		$avSearch = $avFieldTypes
 
 	ElseIf ($bAdvancedServices = True) And ($bDocInfoServices = False) Then
-		If (BitAND($iFieldType, $LOW_FIELD_TYPE_ADV_ALL)) Then Return SetError($__LO_STATUS_SUCCESS, 1, $avFieldAdvTypes)
+		If (BitAND($iFieldType, $LOW_FIELD_TYPE_ADV_ALL) = $LOW_FIELD_TYPE_ADV_ALL) Then Return SetError($__LO_STATUS_SUCCESS, 1, $avFieldAdvTypes)
 		$avSearch = $avFieldAdvTypes
 
 	ElseIf ($bDocInfoServices = True) And ($bAdvancedServices = False) Then
-		If (BitAND($iFieldType, $LOW_FIELD_TYPE_DOCINFO_ALL)) Then Return SetError($__LO_STATUS_SUCCESS, 2, $avFieldDocInfoTypes)
+		If (BitAND($iFieldType, $LOW_FIELD_TYPE_DOCINFO_ALL) = $LOW_FIELD_TYPE_DOCINFO_ALL) Then Return SetError($__LO_STATUS_SUCCESS, 2, $avFieldDocInfoTypes)
 		$avSearch = $avFieldDocInfoTypes
 
 	Else
