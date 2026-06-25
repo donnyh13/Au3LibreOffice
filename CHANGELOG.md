@@ -1333,6 +1333,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_PageStyleSheetScale
 - Added ability to modify Document's modified status:
   - _LOCalc_DocIsModified
+- Renamed Component names to be singular, not plural for consistency.
+  - `LibreOfficeCalc_Comments.au3` --> `LibreOfficeCalc_Comment.au3`
 
 #### Documented
 

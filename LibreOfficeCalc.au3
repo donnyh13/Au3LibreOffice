@@ -9,7 +9,7 @@
 
 ; Other includes for Calc
 #include "LibreOfficeCalc_Cell.au3"
-#include "LibreOfficeCalc_Comments.au3"
+#include "LibreOfficeCalc_Comment.au3"
 #include "LibreOfficeCalc_Cursor.au3"
 #include "LibreOfficeCalc_Doc.au3"
 #include "LibreOfficeCalc_Field.au3"
