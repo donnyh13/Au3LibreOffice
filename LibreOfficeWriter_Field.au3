@@ -4774,11 +4774,9 @@ EndFunc   ;==>_LOWriter_FieldRefModify
 ;                  @Error: 1, @Extended: 3 = $bSupportedServices not a Boolean.
 ;                  @Error: 1, @Extended: 4 = $bFieldType not a Boolean.
 ;                  @Error: 1, @Extended: 5 = $bFieldTypeNum not a Boolean.
-;                  @Error: 1, @Extended: 6 = $avFieldTypes passed to internal function not an Array. UDF needs fixed.
-;                  --Initialization Errors--
-;                  @Error: 2, @Extended: 1 = Failed to create enumeration of fields in document.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Error converting Field type Constants.
+;                  @Error: 3, @Extended: 2 = Failed to enumerate Fields in Document.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Array can vary in the number of columns, if $bSupportedServices, $bFieldType, and $bFieldTypeNum are called with False, the Array will be a single column. With each of the above listed options being set to True, a column will be added in the order they are listed in the UDF parameters. The First column will always be the Field Object.
@@ -4792,8 +4790,7 @@ EndFunc   ;==>_LOWriter_FieldRefModify
 ; Example .......: Yes
 ; ===============================================================================================================================
 Func _LOWriter_FieldsAdvGetList(ByRef $oDoc, $iType = $LOW_FIELD_TYPE_ADV_ALL, $bSupportedServices = True, $bFieldType = True, $bFieldTypeNum = True)
-	Local $avFieldTypes[0][0]
-	Local $vReturn
+	Local $avFieldTypes, $avReturn
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not __LO_IntIsBetween($iType, $LOW_FIELD_TYPE_ADV_BIBLIOGRAPHY, $LOW_FIELD_TYPE_ADV_ALL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -4802,11 +4799,12 @@ Func _LOWriter_FieldsAdvGetList(ByRef $oDoc, $iType = $LOW_FIELD_TYPE_ADV_ALL, $
 	If Not IsBool($bFieldTypeNum) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 	$avFieldTypes = __LOWriter_FieldTypeServices($iType, True, False)
-	If @error > 0 Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	If Not IsArray($avFieldTypes) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	$vReturn = __LOWriter_FieldsGetList($oDoc, $bSupportedServices, $bFieldType, $bFieldTypeNum, $avFieldTypes)
+	$avReturn = __LOWriter_FieldsGetList($oDoc, $bSupportedServices, $bFieldType, $bFieldTypeNum, $avFieldTypes)
+	If Not IsArray($avReturn) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	Return SetError(@error, @extended, $vReturn)
+	Return SetError($__LO_STATUS_SUCCESS, UBound($avReturn), $avReturn)
 EndFunc   ;==>_LOWriter_FieldsAdvGetList
 
 ; #FUNCTION# ====================================================================================================================
@@ -4827,11 +4825,9 @@ EndFunc   ;==>_LOWriter_FieldsAdvGetList
 ;                  @Error: 1, @Extended: 3 = $bSupportedServices not a Boolean.
 ;                  @Error: 1, @Extended: 4 = $bFieldType not a Boolean.
 ;                  @Error: 1, @Extended: 5 = $bFieldTypeNum not a Boolean.
-;                  @Error: 1, @Extended: 6 = $avFieldTypes passed to internal function not an Array. UDF needs fixed.
-;                  --Initialization Errors--
-;                  @Error: 2, @Extended: 1 = Failed to create enumeration of fields in document.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Error converting Field type Constants.
+;                  @Error: 3, @Extended: 2 = Failed to enumerate Fields in Document.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Array can vary in the number of columns, if $bSupportedServices, $bFieldType, and $bFieldTypeNum are called with False, the Array will be a single column. With each of the above listed options being set to True, a column will be added in the order they are listed in the UDF parameters. The First column will always be the Field Object.
@@ -4845,8 +4841,7 @@ EndFunc   ;==>_LOWriter_FieldsAdvGetList
 ; Example .......: Yes
 ; ===============================================================================================================================
 Func _LOWriter_FieldsDocInfoGetList(ByRef $oDoc, $iType = $LOW_FIELD_TYPE_DOCINFO_ALL, $bSupportedServices = True, $bFieldType = True, $bFieldTypeNum = True)
-	Local $avFieldTypes[0][0]
-	Local $vReturn
+	Local $avFieldTypes, $avReturn
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not __LO_IntIsBetween($iType, $LOW_FIELD_TYPE_DOCINFO_MOD_AUTH, $LOW_FIELD_TYPE_ADV_ALL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -4855,11 +4850,12 @@ Func _LOWriter_FieldsDocInfoGetList(ByRef $oDoc, $iType = $LOW_FIELD_TYPE_DOCINF
 	If Not IsBool($bFieldTypeNum) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 	$avFieldTypes = __LOWriter_FieldTypeServices($iType, False, True)
-	If @error > 0 Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	If Not IsArray($avFieldTypes) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	$vReturn = __LOWriter_FieldsGetList($oDoc, $bSupportedServices, $bFieldType, $bFieldTypeNum, $avFieldTypes)
+	$avReturn = __LOWriter_FieldsGetList($oDoc, $bSupportedServices, $bFieldType, $bFieldTypeNum, $avFieldTypes)
+	If Not IsArray($avReturn) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	Return SetError(@error, @extended, $vReturn)
+	Return SetError($__LO_STATUS_SUCCESS, UBound($avReturn), $avReturn)
 EndFunc   ;==>_LOWriter_FieldsDocInfoGetList
 
 ; #FUNCTION# ====================================================================================================================
@@ -5512,11 +5508,9 @@ EndFunc   ;==>_LOWriter_FieldSetVarModify
 ;                  @Error: 1, @Extended: 3 = $bSupportedServices not a Boolean.
 ;                  @Error: 1, @Extended: 4 = $bFieldType not a Boolean.
 ;                  @Error: 1, @Extended: 5 = $bFieldTypeNum not a Boolean.
-;                  @Error: 1, @Extended: 6 = $avFieldTypes passed to internal function not an Array. UDF needs fixed.
-;                  --Initialization Errors--
-;                  @Error: 2, @Extended: 1 = Failed to create enumeration of fields in document.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Error converting Field type Constants.
+;                  @Error: 3, @Extended: 2 = Failed to enumerate Fields in Document.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Array can vary in the number of columns, if $bSupportedServices, $bFieldType, and $bFieldTypeNum are called with False, the Array will be a single column. With each of the above listed options being set to True, a column will be added in the order they are listed in the UDF parameters. The First column will always be the Field Object.
@@ -5530,8 +5524,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarModify
 ; Example .......: Yes
 ; ===============================================================================================================================
 Func _LOWriter_FieldsGetList(ByRef $oDoc, $iType = $LOW_FIELD_TYPE_ALL, $bSupportedServices = True, $bFieldType = True, $bFieldTypeNum = True)
-	Local $avFieldTypes[0][0]
-	Local $vReturn
+	Local $avFieldTypes, $avReturn
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not __LO_IntIsBetween($iType, $LOW_FIELD_TYPE_COMMENT, $LOW_FIELD_TYPE_ALL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -5540,11 +5533,12 @@ Func _LOWriter_FieldsGetList(ByRef $oDoc, $iType = $LOW_FIELD_TYPE_ALL, $bSuppor
 	If Not IsBool($bFieldTypeNum) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 	$avFieldTypes = __LOWriter_FieldTypeServices($iType)
-	If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	If Not IsArray($avFieldTypes) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	$vReturn = __LOWriter_FieldsGetList($oDoc, $bSupportedServices, $bFieldType, $bFieldTypeNum, $avFieldTypes)
+	$avReturn = __LOWriter_FieldsGetList($oDoc, $bSupportedServices, $bFieldType, $bFieldTypeNum, $avFieldTypes)
+	If Not IsArray($avReturn) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	Return SetError(@error, @extended, $vReturn)
+	Return SetError($__LO_STATUS_SUCCESS, UBound($avReturn), $avReturn)
 EndFunc   ;==>_LOWriter_FieldsGetList
 
 ; #FUNCTION# ====================================================================================================================

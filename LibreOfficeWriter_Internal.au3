@@ -1574,10 +1574,10 @@ EndFunc   ;==>__LOWriter_FieldCountType
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
-;                  @Error: 1, @Extended: 3 = $bSupportedServices not a Boolean.
-;                  @Error: 1, @Extended: 4 = $bFieldType not a Boolean.
-;                  @Error: 1, @Extended: 5 = $bFieldTypeNum not a Boolean.
-;                  @Error: 1, @Extended: 6 = $avFieldTypes not an Array.
+;                  @Error: 1, @Extended: 2 = $bSupportedServices not a Boolean.
+;                  @Error: 1, @Extended: 3 = $bFieldType not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bFieldTypeNum not a Boolean.
+;                  @Error: 1, @Extended: 5 = $avFieldTypes not an Array.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create enumeration of fields in document.
 ; Author ........: donnyh13
@@ -1600,12 +1600,10 @@ Func __LOWriter_FieldsGetList(ByRef $oDoc, $bSupportedServices, $bFieldType, $bF
 	Local $avTextFields[50][4]
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	; Skip 2 to match other Funcs.
-	If Not IsBool($bSupportedServices) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If Not IsBool($bFieldType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If Not IsBool($bFieldTypeNum) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-	If Not IsArray($avFieldTypes) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+	If Not IsBool($bSupportedServices) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsBool($bFieldType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsBool($bFieldTypeNum) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not IsArray($avFieldTypes) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 	$iColumns = ($bSupportedServices = False) ? ($iColumns - 1) : ($iColumns)
 	$iColumns = ($bFieldType = False) ? ($iColumns - 1) : ($iColumns)

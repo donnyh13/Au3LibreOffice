@@ -2393,6 +2393,10 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOW_FIELD_TYPE_*
   - $LOW_FIELD_TYPE_ADV_*
   - $LOW_FIELD_TYPE_DOCINFO_*
+- Modified error values for Field list functions:
+  - _LOWriter_FieldsAdvGetList
+  - _LOWriter_FieldsDocInfoGetList
+  - _LOWriter_FieldsGetList
 
 #### Documented
 
