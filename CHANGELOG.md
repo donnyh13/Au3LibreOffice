@@ -2397,6 +2397,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_FieldsAdvGetList
   - _LOWriter_FieldsDocInfoGetList
   - _LOWriter_FieldsGetList
+- Renamed `_LOWriter_CursorHyperlinkInsert` to `_LOWriter_CursorHyperlink`
+- Modified `_LOWriter_CursorHyperlink` to Set and Retrieve hyperlink settings now, rather than inserting them.
 
 #### Documented
 

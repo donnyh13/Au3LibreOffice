@@ -28,7 +28,7 @@
 ; _LOWriter_CursorGetString
 ; _LOWriter_CursorGetType
 ; _LOWriter_CursorGoToRange
-; _LOWriter_CursorHyperlinkInsert
+; _LOWriter_CursorHyperlink
 ; _LOWriter_CursorInsertControlChar
 ; _LOWriter_CursorInsertString
 ; _LOWriter_CursorMove
@@ -298,51 +298,69 @@ Func _LOWriter_CursorGoToRange(ByRef $oCursor, ByRef $oRange, $bSelect = False)
 EndFunc   ;==>_LOWriter_CursorGoToRange
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_CursorHyperlinkInsert
-; Description ...: Insert a hyperlink into the document at the cursor location.
-; Syntax ........: _LOWriter_CursorHyperlinkInsert(ByRef $oCursor, $sLinkText, $sLinkAddress[, $bOverwrite = False]])
+; Name ..........: _LOWriter_CursorHyperlink
+; Description ...: Set or Retrieve hyperlink settings at the cursor location.
+; Syntax ........: _LOWriter_CursorHyperlink(ByRef $oCursor[, $sLinkAddress = Null[, $sLinkName = Null]])
 ; Parameters ....: $oCursor             - A Cursor Object returned from any Cursor Object creation or retrieval functions.
-;                  $sLinkText           - Link text you want displayed (Insert the URL here too if you want the link inserted raw.)
-;                  $sLinkAddress        - A URL.
-;                  $bOverwrite          - [optional] Default is False. If True, overwrites any data selected by the Cursor called in $oCursor.
-; Return values .: Success: 1.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success, hyperlink was successfully inserted.
+;                  $sLinkAddress        - [optional] Default is Null. The hyperlink address. See remarks.
+;                  $sLinkName           - [optional] Default is Null. The hyperlink name.
+; Return values .: Success: 1 or Array.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCursor not an Object, and is not called with Default keyword.
-;                  @Error: 1, @Extended: 2 = $sLinkText not a String.
+;                  @Error: 1, @Extended: 2 = $oCursor is a TableCursor, and is not supported.
 ;                  @Error: 1, @Extended: 3 = $sLinkAddress not a String.
-;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
-;                  @Error: 1, @Extended: 5 = $oCursor is a TableCursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $sLinkName not a String.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $sLinkAddress
+;                  |                               2 = Error setting $sLinkName
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  Call any optional parameter with Null keyword to skip it.
+;                  If no text is selected when setting or retrieving hyperlink settings, the whole word where the cursor is located is used.
+;                  $sLinkAddress can be a website URL (www.abc.com), or a mail to link ("mailto:abc@email.ca?subject=Testing123". It can also be a path to a file ("C:\Users\xyz.docx").
+;                  When setting $sLinkAddress to a computer path, it is recommended to convert it to URL notation using _LO_PathConvert. If you do not, a property setting error may be triggered because LibreOffice converts the path itself.
+;                  When retrieving the current value for $sLinkAddress, the value will be directly returned from LibreOffice, if the current value is a path, it will be in URL format and will need to be converted using _LO_PathConvert.
 ; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_CursorHyperlinkInsert(ByRef $oCursor, $sLinkText, $sLinkAddress, $bOverwrite = False)
+Func _LOWriter_CursorHyperlink(ByRef $oCursor, $sLinkAddress = Null, $sLinkName = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
+	Local $asLink[2]
+	Local $iError = 0
+
 	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsString($sLinkText) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not IsString($sLinkAddress) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If Not IsBool($bOverwrite) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If $oCursor.supportsService("com.sun.star.text.TextTableCursor") Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0) ; Can't get data type from Table Cursor.
+	If $oCursor.supportsService("com.sun.star.text.TextTableCursor") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0) ; Can't set hyperlink settings for a Table Cursor.
 
-	$oCursor.Text.insertString($oCursor, $sLinkText, $bOverwrite)
+	If __LO_VarsAreNull($sLinkAddress, $sLinkName) Then
+		__LO_ArrayFill($asLink, $oCursor.HyperLinkURL(), $oCursor.HyperLinkName())
 
-	With $oCursor
-		.goLeft(StringLen($sLinkText), False)
-		.goRight(StringLen($sLinkText), True)
-		.HyperLinkURL = $sLinkAddress
-		.collapseToEnd()
-		.goRight(1, False)
-	EndWith
+		Return SetError($__LO_STATUS_SUCCESS, 1, $asLink)
+	EndIf
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LOWriter_CursorHyperlinkInsert
+	If ($sLinkAddress <> Null) Then
+		If Not IsString($sLinkAddress) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+		$oCursor.HyperLinkURL = $sLinkAddress
+		$iError = ($oCursor.HyperLinkURL() = $sLinkAddress) ? ($iError) : (BitOR($iError, 1))
+	EndIf
+
+	If ($sLinkName <> Null) Then
+		If Not IsString($sLinkName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+		$oCursor.HyperLinkName = $sLinkName
+		$iError = ($oCursor.HyperLinkName() = $sLinkName) ? ($iError) : (BitOR($iError, 2))
+	EndIf
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LOWriter_CursorHyperlink
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_CursorInsertControlChar
