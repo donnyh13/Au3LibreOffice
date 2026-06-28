@@ -1567,8 +1567,14 @@ Func _LOWriter_FindFormatModifySpacing(ByRef $atFormat, $iAbovePar = Null, $iBel
 			__LOWriter_FindFormatDeleteSetting($atFormat, "ParaLineSpacing")
 
 		Else
-			$tLine = __LOWriter_FindFormatRetrieveSetting($atFormat, "ParaLineSpacing") ; Retrieve the ParaLineSpacing Property to modify if it exists.
-			If (@error = 0) And (@extended = 1) Then $tLine = $tLine.Value() ; If retrieval was successful, obtain the Line Space Structure.
+			For $i = 0 To UBound($atFormat) - 1
+				If ($atFormat[$i].Name() = "ParaLineSpacing") Then
+					$tLine = $atFormat[$i].Value()
+				EndIf
+
+				Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+			Next
+
 			If Not IsObj($tLine) Then $tLine = __LO_CreateStruct("com.sun.star.style.LineSpacing") ; If retrieval was not successful, then create a new one.
 			If Not IsObj($tLine) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 

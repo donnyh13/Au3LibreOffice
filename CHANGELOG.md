@@ -2664,6 +2664,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Removed internal cursor movement functions, combining them into one function.
 - Combined internal Numbering Style Script insertion, deletion and document creation functions.
 - Combined suggested image size function in Image insert.
+- Combined `__LOWriter_FindFormatRetrieveSetting` into `_LOWriter_FindFormatModifySpacing`.
 
 #### Removed
 
@@ -2727,6 +2728,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - __LOWriter_NumStyleDeleteScript
 - __LOWriter_NumStyleInitiateDocument
 - __LOWriter_ImageGetSuggestedSize
+- __LOWriter_FindFormatRetrieveSetting
 
 [To Top](#releases)
 

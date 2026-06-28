@@ -47,7 +47,6 @@
 ; __LOWriter_FilterNameGet
 ; __LOWriter_FindFormatAddSetting
 ; __LOWriter_FindFormatDeleteSetting
-; __LOWriter_FindFormatRetrieveSetting
 ; __LOWriter_FooterBorder
 ; __LOWriter_FormConGetObj
 ; __LOWriter_FormConIdentify
@@ -1932,41 +1931,6 @@ Func __LOWriter_FindFormatDeleteSetting(ByRef $atArray, $sSettingName)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>__LOWriter_FindFormatDeleteSetting
-
-; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOWriter_FindFormatRetrieveSetting
-; Description ...: Retrieve a specific setting from a Find Format Array of Settings.
-; Syntax ........: __LOWriter_FindFormatRetrieveSetting(ByRef $atArray, $sSettingName)
-; Parameters ....: $atArray             - A Find Format Array of Settings to Search. Array will not be modified.
-;                  $sSettingName        - The Setting name to search for.
-; Return values .: Success: Object or 1
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Search was successful, but setting was not found.
-;                  @Error: 0, @Extended: 1, Return: Object = Success. Setting found, returning requested setting Object.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $aArray not an Array.
-;                  @Error: 1, @Extended: 2 = $sSettingName not a String.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......: No
-; ===============================================================================================================================
-Func __LOWriter_FindFormatRetrieveSetting(ByRef $atArray, $sSettingName)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	If Not IsArray($atArray) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsString($sSettingName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-	For $i = 0 To UBound($atArray) - 1
-		If $atArray[$i].Name() = $sSettingName Then Return SetError($__LO_STATUS_SUCCESS, 1, $atArray[$i])
-		Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
-	Next
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>__LOWriter_FindFormatRetrieveSetting
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOWriter_FooterBorder
