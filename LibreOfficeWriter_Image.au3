@@ -17,6 +17,9 @@
 #include "LibreOfficeWriter_Doc.au3"
 #include "LibreOfficeWriter_Page.au3"
 
+; Required AutoIt Include
+#include <WinAPIGdiDC.au3>
+
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice UDF
 ; AutoIt Version : v3.3.16.1
@@ -1592,7 +1595,8 @@ EndFunc   ;==>_LOWriter_ImageHyperlink
 ;                  @Error: 3, @Extended: 2 = Error converting Image Path to LibreOffice URL.
 ;                  @Error: 3, @Extended: 3 = Error retrieving current Page Style name at insertion point.
 ;                  @Error: 3, @Extended: 4 = Error retrieving Page Style Object.
-;                  @Error: 3, @Extended: 5 = Error calculating suggested image size.
+;                  @Error: 3, @Extended: 5 = Failed to retrieve graphic descriptor.
+;                  @Error: 3, @Extended: 6 = Failed to retrieve size Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Unfortunately, I am unable to find a way to insert an image "linked", images can only be inserted as embedded.
@@ -1605,8 +1609,8 @@ Func _LOWriter_ImageInsert(ByRef $oDoc, $sImage, ByRef $oCursor, $iAnchorType = 
 	#forceref $oCOM_ErrorHandler
 
 	Local $iCursorType
-	Local $oImage
-	Local $oServiceManager, $oProvider, $oSize, $oPageStyle
+	Local $oImage, $oGraphic, $oServiceManager, $oProvider, $oSize, $oPageStyle
+	Local $iMaxW, $iMaxH
 	Local $sPageStyle
 	Local $atProp[1]
 
@@ -1642,8 +1646,38 @@ Func _LOWriter_ImageInsert(ByRef $oDoc, $sImage, ByRef $oCursor, $iAnchorType = 
 	$oPageStyle = _LOWriter_PageStyleGetObjByName($oDoc, $sPageStyle)
 	If Not IsObj($oPageStyle) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
-	$oSize = __LOWriter_ImageGetSuggestedSize(($oProvider.queryGraphicDescriptor($atProp)), $oPageStyle)
-	If Not IsObj($oSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+	; Get the suggested size.
+	$oGraphic = $oProvider.queryGraphicDescriptor($atProp)
+	If Not IsObj($oGraphic) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+
+	; Retrieve the Current Page Style's height minus top/bottom margins
+	$iMaxH = Int($oPageStyle.Height() - $oPageStyle.LeftMargin() - $oPageStyle.RightMargin())
+	If ($iMaxH = 0) Then $iMaxH = 24130 ; If error or is equal to 0, then set to 9.5 Inches in Hundredths of a Millimeter (HMM)
+
+	; Retrieve the Current Page Style's width minus left/right margins
+	$iMaxW = Int($oPageStyle.Width() - $oPageStyle.TopMargin() - $oPageStyle.BottomMargin())
+	If ($iMaxW = 0) Then $iMaxW = 17145 ; If error or is equal to 0, then set to 6.75 Inches in Hundredths of a Millimeter (HMM).
+
+	$oSize = $oGraphic.Size100thMM()
+	If Not IsObj($oSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
+
+	If ($oSize.Height = 0) Or ($oSize.Width = 0) Then
+		; 2540 Hundredths of a Millimeter (HMM) per Inch, 1440 TWIPS per inch
+		$oSize.Height = Int($oGraphic.SizePixel.Height * 2540 * _WinAPI_TwipsPerPixelY() / 1440)
+		$oSize.Width = Int($oGraphic.SizePixel.Width * 2540 * _WinAPI_TwipsPerPixelX() / 1440)
+	EndIf
+
+	If ($oSize.Height = 0) Or ($oSize.Width = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	If ($oSize.Width() > $iMaxW) Then
+		$oSize.Height = Int($oSize.Height * $iMaxW / $oSize.Width())
+		$oSize.Width = $iMaxW
+	EndIf
+
+	If ($oSize.Height() > $iMaxH) Then
+		$oSize.Width = Int($oSize.Width() * $iMaxH / $oSize.Height)
+		$oSize.Height = $iMaxH
+	EndIf
 
 	With $oImage
 		.GraphicURL = $sImage

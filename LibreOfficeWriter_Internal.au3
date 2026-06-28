@@ -12,9 +12,6 @@
 #include "LibreOfficeWriter_Constants.au3"
 #include "LibreOfficeWriter_Helper.au3"
 
-; Required AutoIt Include
-#include <WinAPIGdiDC.au3>
-
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice UDF
 ; AutoIt Version : v3.3.16.1
@@ -61,7 +58,6 @@
 ; __LOWriter_GradientNameInsert
 ; __LOWriter_GradientPresets
 ; __LOWriter_HeaderBorder
-; __LOWriter_ImageGetSuggestedSize
 ; __LOWriter_Internal_CursorGetDataType
 ; __LOWriter_Internal_CursorGetType
 ; __LOWriter_InternalComErrorHandler
@@ -4142,68 +4138,6 @@ Func __LOWriter_HeaderBorder(ByRef $oObj, $bWid, $bSty, $bCol, $iTop = Null, $iB
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>__LOWriter_HeaderBorder
-
-; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOWriter_ImageGetSuggestedSize
-; Description ...: Return a suggested image width/height based on an image's original size.
-; Syntax ........: __LOWriter_ImageGetSuggestedSize(ByRef $oGraphic, $oPageStyle)
-; Parameters ....: $oGraphic            - A graphic Object returned from a queryGraphicDescriptor call.
-;                  $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleGetObjByName function.
-; Return values .: Success: Structure.
-;                  @Error: 0, @Extended: 0, Return: Structure = Successfully calculated suggested Width and Height, returning size Structure.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oGraphic not an Object.
-;                  @Error: 1, @Extended: 2 = $oPageStyle not an Object.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Error calculating Width and Height.
-; Author ........: Andrew Pitonyak ("Useful Macro Information For OpenOffice.org", Page 62, listing 5.28)
-; Modified ......: donnyh13, converted code from L.O. Basic to AutoIt. Added a max W/H based on current page size.
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......: No
-; ===============================================================================================================================
-Func __LOWriter_ImageGetSuggestedSize($oGraphic, $oPageStyle)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $oSize
-	Local $iMaxH, $iMaxW
-
-	If Not IsObj($oGraphic) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsObj($oPageStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-	; Retrieve the Current Page Style's height minus top/bottom margins
-	$iMaxH = Int($oPageStyle.Height() - $oPageStyle.LeftMargin() - $oPageStyle.RightMargin())
-	If ($iMaxH = 0) Then $iMaxH = 24130 ; If error or is equal to 0, then set to 9.5 Inches in Hundredths of a Millimeter (HMM)
-
-	; Retrieve the Current Page Style's width minus left/right margins
-	$iMaxW = Int($oPageStyle.Width() - $oPageStyle.TopMargin() - $oPageStyle.BottomMargin())
-	If ($iMaxW = 0) Then $iMaxW = 17145 ; If error or is equal to 0, then set to 6.75 Inches in Hundredths of a Millimeter (HMM).
-
-	$oSize = $oGraphic.Size100thMM()
-
-	If ($oSize.Height = 0) Or ($oSize.Width = 0) Then
-		; 2540 Hundredths of a Millimeter (HMM) per Inch, 1440 TWIPS per inch
-		$oSize.Height = Int($oGraphic.SizePixel.Height * 2540 * _WinAPI_TwipsPerPixelY() / 1440)
-		$oSize.Width = Int($oGraphic.SizePixel.Width * 2540 * _WinAPI_TwipsPerPixelX() / 1440)
-	EndIf
-
-	If ($oSize.Height = 0) Or ($oSize.Width = 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-	If ($oSize.Width() > $iMaxW) Then
-		$oSize.Height = Int($oSize.Height * $iMaxW / $oSize.Width())
-		$oSize.Width = $iMaxW
-	EndIf
-
-	If ($oSize.Height() > $iMaxH) Then
-		$oSize.Width = Int($oSize.Width() * $iMaxH / $oSize.Height)
-		$oSize.Height = $iMaxH
-	EndIf
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oSize)
-EndFunc   ;==>__LOWriter_ImageGetSuggestedSize
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOWriter_Internal_CursorGetDataType
