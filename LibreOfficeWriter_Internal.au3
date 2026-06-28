@@ -68,9 +68,6 @@
 ; __LOWriter_IsCellRange
 ; __LOWriter_NumberingStyleCompare
 ; __LOWriter_NumRuleCreateMap
-; __LOWriter_NumStyleCreateScript
-; __LOWriter_NumStyleDeleteScript
-; __LOWriter_NumStyleInitiateDocument
 ; __LOWriter_NumStyleListFormat
 ; __LOWriter_NumStyleModify
 ; __LOWriter_ObjRelativeSize
@@ -4491,161 +4488,6 @@ Func __LOWriter_NumRuleCreateMap(ByRef $atNumLevel)
 EndFunc   ;==>__LOWriter_NumRuleCreateMap
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOWriter_NumStyleCreateScript
-; Description ...: Part of the Numbering Style Modification workaround, creates a Macro in a document.
-; Syntax ........: __LOWriter_NumStyleCreateScript(ByRef $oDoc)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-; Return values .: Success: Object
-;                  @Error: 0, @Extended: 0, Return: Object = Success. Function successfully created the Macro in Document. Returning Script Object.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Error retrieving Standard Macro Library.
-;                  @Error: 3, @Extended: 2 = Error creating Macro in Document.
-;                  @Error: 3, @Extended: 3 = Error retrieving Script Object.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......: No
-; ===============================================================================================================================
-Func __LOWriter_NumStyleCreateScript(ByRef $oDoc)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $sNumStyleScript = "Function ReplaceByIndex(oNumRules As Object, iIndex%, vSettings As Variant)" & @CRLF & _
-			"oNumRules.replaceByIndex(iIndex,vSettings)" & @CRLF & _
-			"ReplaceByIndex = oNumRules" & @CRLF & _
-			"End Function"
-	Local $oStandardLibrary, $oScript
-
-	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	; Retrieving the BasicLibrary.Standard Object fails when using a newly opened document, I found a workaround by updating the
-	; following setting.
-	$oDoc.BasicLibraries.VBACompatibilityMode = $oDoc.BasicLibraries.VBACompatibilityMode()
-
-	$oStandardLibrary = $oDoc.BasicLibraries.Standard()
-	If Not IsObj($oStandardLibrary) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-	If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then $oStandardLibrary.removeByName("AU3LibreOffice_UDF_Macros")
-
-	$oStandardLibrary.insertByName("AU3LibreOffice_UDF_Macros", $sNumStyleScript)
-	If Not $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-	$oScript = $oDoc.getScriptProvider().getScript("vnd.sun.star.script:Standard.AU3LibreOffice_UDF_Macros.ReplaceByIndex?language=Basic&location=document")
-	If Not IsObj($oScript) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oScript)
-EndFunc   ;==>__LOWriter_NumStyleCreateScript
-
-; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOWriter_NumStyleDeleteScript
-; Description ...: Part of the Numbering Style Modification workaround, deletes a Macro in a document.
-; Syntax ........: __LOWriter_NumStyleDeleteScript(ByRef $oDoc)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-; Return values .: Success: 1.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Function successfully deleted the Macro in Document.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Error retrieving Standard Macro Library.
-;                  @Error: 3, @Extended: 2 = Error deleting Macro.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......: No
-; ===============================================================================================================================
-Func __LOWriter_NumStyleDeleteScript(ByRef $oDoc)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $oStandardLibrary
-
-	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	; Retrieving the BasicLibrary.Standard Object fails when using a newly opened document, I found a workaround by updating the
-	; following setting.
-	$oDoc.BasicLibraries.VBACompatibilityMode = $oDoc.BasicLibraries.VBACompatibilityMode()
-
-	$oStandardLibrary = $oDoc.BasicLibraries.Standard()
-	If Not IsObj($oStandardLibrary) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-	If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then $oStandardLibrary.removeByName("AU3LibreOffice_UDF_Macros")
-
-	If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>__LOWriter_NumStyleDeleteScript
-
-; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOWriter_NumStyleInitiateDocument
-; Description ...: Part of the work around method for modifying Numbering Style settings.
-; Syntax ........: __LOWriter_NumStyleInitiateDocument()
-; Parameters ....: None
-; Return values .: Success: Object
-;                  @Error: 0, @Extended: 0, Return: Object = Success. The Numbering Style Modification Document was successfully created.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Initialization Errors--
-;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.ServiceManager" Object.
-;                  @Error: 2, @Extended: 2 = Error creating "com.sun.star.frame.Desktop" Object.
-;                  @Error: 2, @Extended: 3 = Error Creating document.
-;                  @Error: 2, @Extended: 4 = Error creating AU3LibreOffice_UDF_Macros Module in document.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting Hidden
-;                  |                               2 = Error setting MacroExecutionMode
-;                  |                               4 = Error setting ReadOnly
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......:
-; Link ..........:
-; Example .......: No
-; ===============================================================================================================================
-Func __LOWriter_NumStyleInitiateDocument()
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local Const $iMacroExecMode_ALWAYS_EXECUTE_NO_WARN = 4, $iURLFrameCreate = 8 ; Frame will be created if not found
-	Local $iError = 0
-	Local $oNumStyleDoc, $oServiceManager, $oDesktop
-	Local $atProperties[3]
-	Local $vProperty
-
-	$oServiceManager = __LO_ServiceManager()
-	If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-
-	$oDesktop = $oServiceManager.createInstance("com.sun.star.frame.Desktop")
-	If Not IsObj($oDesktop) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
-
-	$vProperty = __LO_SetPropertyValue("Hidden", True)
-	If @error Then $iError = BitOR($iError, 1)
-	If Not BitAND($iError, 1) Then $atProperties[0] = $vProperty
-
-	$vProperty = __LO_SetPropertyValue("MacroExecutionMode", $iMacroExecMode_ALWAYS_EXECUTE_NO_WARN)
-	If @error Then $iError = BitOR($iError, 2)
-	If Not BitAND($iError, 2) Then $atProperties[1] = $vProperty
-
-	$vProperty = __LO_SetPropertyValue("ReadOnly", True)
-	If @error Then $iError = BitOR($iError, 4)
-	If Not BitAND($iError, 4) Then $atProperties[2] = $vProperty
-
-	$oNumStyleDoc = $oDesktop.loadComponentFromURL("private:factory/swriter", "_blank", $iURLFrameCreate, $atProperties)
-	If Not IsObj($oNumStyleDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
-
-	__LOWriter_NumStyleCreateScript($oNumStyleDoc)
-	If (@error > 0) Then Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
-
-	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, $oNumStyleDoc)) : (SetError($__LO_STATUS_SUCCESS, 1, $oNumStyleDoc))
-EndFunc   ;==>__LOWriter_NumStyleInitiateDocument
-
-; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOWriter_NumStyleListFormat
 ; Description ...: Creates a string for modifying List Format Number Style setting.
 ; Syntax ........: __LOWriter_NumStyleListFormat(ByRef $atNumLevel, $iLevel, $iSubLevels[, $sPrefix = Null[, $sSuffix = Null]])
@@ -4717,10 +4559,15 @@ EndFunc   ;==>__LOWriter_NumStyleListFormat
 ;                  @Error: 1, @Extended: 2 = $oNumRules not an Object.
 ;                  @Error: 1, @Extended: 3 = $iLevel not between -1 and 9 to indicate correct level.
 ;                  @Error: 1, @Extended: 4 = $atNumLevel not an array.
+;                  --Initialization Errors--
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.ServiceManager" Object.
+;                  @Error: 2, @Extended: 2 = Error creating "com.sun.star.frame.Desktop" Object.
+;                  @Error: 2, @Extended: 3 = Error Creating document.
 ;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Error opening new document, and inserting ReplaceByIndex Script.
-;                  @Error: 3, @Extended: 2 = Error retrieving "Standard.AU3LibreOffice_UDF_Macros.ReplaceByIndex" Macro in new document.
-;                  @Error: 3, @Extended: 3 = Error deleting ReplaceByIndex Macro from Document.
+;                  @Error: 3, @Extended: 1 = Error retrieving Standard Macro Library.
+;                  @Error: 3, @Extended: 2 = Error creating Macro in Document.
+;                  @Error: 3, @Extended: 3 = Error retrieving Script Object.
+;                  @Error: 3, @Extended: 4 = Error deleting ReplaceByIndex Macro from Document.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This works, but only with a work-around method, see inside this function for a description of why a work-around method is necessary.
@@ -4733,25 +4580,69 @@ Func __LOWriter_NumStyleModify(ByRef $oDoc, ByRef $oNumRules, $iLevel, $atNumLev
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oNumStyleDoc, $oScript
+	Local $sNumStyleScript = "Function ReplaceByIndex(oNumRules As Object, iIndex%, vSettings As Variant)" & @CRLF & _
+			"oNumRules.replaceByIndex(iIndex,vSettings)" & @CRLF & _
+			"ReplaceByIndex = oNumRules" & @CRLF & _
+			"End Function"
+	Local $oServiceManager, $oDesktop, $oStandardLibrary, $oScript, $oNumStyleDoc
 	Local $aDummyArray[0], $avParamArray[3]
+	Local $atProperties[3]
 	Local $bNumDocOpen = False
+	Local Const $iMacroExecMode_ALWAYS_EXECUTE_NO_WARN = 4, $iURLFrameCreate = 8 ; Frame will be created if not found
+	Local $vProperty
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oNumRules) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not __LO_IntIsBetween($iLevel, -1, 9) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not IsArray($atNumLevel) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-	$oScript = __LOWriter_NumStyleCreateScript($oDoc) ; Create my modification Script.
+	; Retrieving the BasicLibrary.Standard Object fails when using a newly opened document, I found a workaround by updating the following setting.
+	$oDoc.BasicLibraries.VBACompatibilityMode = $oDoc.BasicLibraries.VBACompatibilityMode()
 
-	If Not IsObj($oScript) Then ; If creating my Mod. Script fails, open a new document and create a script in there.
-		$oNumStyleDoc = __LOWriter_NumStyleInitiateDocument()
-		If Not IsObj($oNumStyleDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	$oStandardLibrary = $oDoc.BasicLibraries.Standard()
+	If Not IsObj($oStandardLibrary) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then $oStandardLibrary.removeByName("AU3LibreOffice_UDF_Macros")
+
+	$oStandardLibrary.insertByName("AU3LibreOffice_UDF_Macros", $sNumStyleScript)
+
+	If Not $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then ; If creating my Mod. Script fails, open a new document and create a script in there.
+		$oServiceManager = __LO_ServiceManager()
+		If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+		$oDesktop = $oServiceManager.createInstance("com.sun.star.frame.Desktop")
+		If Not IsObj($oDesktop) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+		$vProperty = __LO_SetPropertyValue("Hidden", True)
+		If Not @error Then $atProperties[0] = $vProperty
+
+		$vProperty = __LO_SetPropertyValue("MacroExecutionMode", $iMacroExecMode_ALWAYS_EXECUTE_NO_WARN)
+		If Not @error Then $atProperties[1] = $vProperty
+
+		$vProperty = __LO_SetPropertyValue("ReadOnly", True)
+		If Not @error Then $atProperties[2] = $vProperty
+
+		$oNumStyleDoc = $oDesktop.loadComponentFromURL("private:factory/swriter", "_blank", $iURLFrameCreate, $atProperties)
+		If Not IsObj($oNumStyleDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
+
+		; Retrieving the BasicLibrary.Standard Object fails when using a newly opened document, I found a workaround by updating the following setting.
+		$oNumStyleDoc.BasicLibraries.VBACompatibilityMode = $oNumStyleDoc.BasicLibraries.VBACompatibilityMode()
+
+		$oStandardLibrary = $oNumStyleDoc.BasicLibraries.Standard()
+		If Not IsObj($oStandardLibrary) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		$oStandardLibrary.insertByName("AU3LibreOffice_UDF_Macros", $sNumStyleScript)
+		If Not $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		$oScript = $oNumStyleDoc.getScriptProvider().getScript("vnd.sun.star.script:Standard.AU3LibreOffice_UDF_Macros.ReplaceByIndex?language=Basic&location=document")
-		If Not IsObj($oScript) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+		If Not IsObj($oScript) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 		$bNumDocOpen = True
+
+	Else
+		$oScript = $oDoc.getScriptProvider().getScript("vnd.sun.star.script:Standard.AU3LibreOffice_UDF_Macros.ReplaceByIndex?language=Basic&location=document")
+		If Not IsObj($oScript) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
 	EndIf
 
 	; $oNumRules.replaceByIndex($iLevel, $atNumLevel); This should work but doesn't -- It would seem that the Array passed by
@@ -4768,8 +4659,8 @@ Func __LOWriter_NumStyleModify(ByRef $oDoc, ByRef $oNumRules, $iLevel, $atNumLev
 		$oNumStyleDoc.Close(True)
 
 	Else
-		__LOWriter_NumStyleDeleteScript($oDoc)
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+		If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then $oStandardLibrary.removeByName("AU3LibreOffice_UDF_Macros")
+		If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 	EndIf
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)

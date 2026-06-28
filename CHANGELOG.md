@@ -2662,6 +2662,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_TableColumnGetCount
   - _LOWriter_TableRowGetCount
 - Removed internal cursor movement functions, combining them into one function.
+- Combined internal Numbering Style Script insertion, deletion and document creation functions.
 
 #### Removed
 
@@ -2721,6 +2722,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - __LOWriter_TableCursorMove
 - __LOWriter_TextCursorMove
 - __LOWriter_ViewCursorMove
+- __LOWriter_NumStyleCreateScript
+- __LOWriter_NumStyleDeleteScript
+- __LOWriter_NumStyleInitiateDocument
 
 [To Top](#releases)
 
