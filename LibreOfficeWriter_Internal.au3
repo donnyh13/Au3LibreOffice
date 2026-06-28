@@ -4540,7 +4540,6 @@ Func __LOWriter_NumStyleModify(ByRef $oDoc, ByRef $oNumRules, $iLevel, $atNumLev
 	Else
 		$oScript = $oDoc.getScriptProvider().getScript("vnd.sun.star.script:Standard.AU3LibreOffice_UDF_Macros.ReplaceByIndex?language=Basic&location=document")
 		If Not IsObj($oScript) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
 	EndIf
 
 	; $oNumRules.replaceByIndex($iLevel, $atNumLevel); This should work but doesn't -- It would seem that the Array passed by
