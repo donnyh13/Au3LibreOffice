@@ -474,18 +474,18 @@ EndFunc   ;==>_LOWriter_CursorInsertString
 ; Description ...: Move a Cursor object in a document. Also for creating/Expanding selections.
 ; Syntax ........: _LOWriter_CursorMove(ByRef $oCursor, $iMove[, $iCount = 1[, $bSelect = False]])
 ; Parameters ....: $oCursor             - A Cursor Object returned from any Cursor Object creation Or retrieval functions.
-;                  $iMove               - The movement command. See remarks and Constants, $LOW_VIEWCUR_, $LOW_TEXTCUR_, $LOW_TABLECUR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iMove               - The movement command. See remarks and Constants, $LOW_VIEWCUR_*, $LOW_TEXTCUR_*, $LOW_TABLECUR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iCount              - [optional] Default is 1. Number of movements to make. See remarks.
 ;                  $bSelect             - [optional] Default is False. Whether to select data during this cursor movement. See remarks.
 ; Return values .: Success: Boolean.
-;                  @Error: 0, @Extended: ?, Return: Boolean = Success, Cursor object movement was processed successfully. Returning True if the full count of movements were successful, else False if none or only partially successful. @Extended set to number of successful movements. Or Page Number for "gotoPage" command. See Remarks
+;                  @Error: 0, @Extended: ?, Return: Boolean = Success, Cursor movement was processed successfully. Returning True if the full count of movements were successful, else False if none or only partially successful. @Extended set to an Integer. See description for particular constant used.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCursor not an Object.
 ;                  @Error: 1, @Extended: 2 = $iMove not an Integer.
-;                  @Error: 1, @Extended: 3 = $iMove mismatch with Cursor type. See Cursor Type/Move Type Constants, $LOW_VIEWCUR_, $LOW_TEXTCUR_, $LOW_TABLECUR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error: 1, @Extended: 4 = $iCount not an Integer or is a negative.
-;                  @Error: 1, @Extended: 5 = $bSelect not a Boolean.
+;                  @Error: 1, @Extended: 3 = $iCount not an Integer or is a negative.
+;                  @Error: 1, @Extended: 4 = $bSelect not a Boolean.
+;                  @Error: 1, @Extended: 5 = $iMove less than 0 or greater than last cursor movement for cursor type. See Cursor Type/Move Type Constants, $LOW_VIEWCUR_*, $LOW_TEXTCUR_*, $LOW_TABLECUR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Error determining cursor type.
 ;                  @Error: 3, @Extended: 2 = Error processing cursor move.
@@ -493,98 +493,172 @@ EndFunc   ;==>_LOWriter_CursorInsertString
 ;                  @Error: 3, @Extended: 4 = $oCursor Object unknown cursor type.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: $iMove may be called with any of the following constants depending on the Cursor type you are intending to move.
-;                  Only some movements accept movement amounts (such as "goRight" 2) etc. Also only some accept creating/ extending a selection of text/ data. They will be specified below.
-;                  To Clear /Unselect a current selection, you can input a move such as "goRight", 0, False.
-;                  #Cursor Movement Constants which accept Number of Moves and Selecting:
-;                  + ViewCursor
-;                  - $LOW_VIEWCUR_GO_DOWN,
-;                  - $LOW_VIEWCUR_GO_UP,
-;                  - $LOW_VIEWCUR_GO_LEFT,
-;                  - $LOW_VIEWCUR_GO_RIGHT,
-;                  + TextCursor
-;                  - $LOW_TEXTCUR_GO_LEFT,
-;                  - $LOW_TEXTCUR_GO_RIGHT,
-;                  - $LOW_TEXTCUR_GOTO_NEXT_WORD,
-;                  - $LOW_TEXTCUR_GOTO_PREV_WORD,
-;                  - $LOW_TEXTCUR_GOTO_NEXT_SENTENCE,
-;                  - $LOW_TEXTCUR_GOTO_PREV_SENTENCE,
-;                  - $LOW_TEXTCUR_GOTO_NEXT_PARAGRAPH,
-;                  - $LOW_TEXTCUR_GOTO_PREV_PARAGRAPH,
-;                  + TableCursor
-;                  - $LOW_TABLECUR_GO_LEFT,
-;                  - $LOW_TABLECUR_GO_RIGHT,
-;                  - $LOW_TABLECUR_GO_UP,
-;                  - $LOW_TABLECUR_GO_DOWN,
-;                  # Cursor Movements which accept Number of Moves Only:
-;                  + ViewCursor
-;                  - $LOW_VIEWCUR_JUMP_TO_NEXT_PAGE,
-;                  - $LOW_VIEWCUR_JUMP_TO_PREV_PAGE,
-;                  - $LOW_VIEWCUR_SCREEN_DOWN,
-;                  - $LOW_VIEWCUR_SCREEN_UP,
-;                  # Cursor Movements which accept Selecting Only:
-;                  + ViewCursor
-;                  - $LOW_VIEWCUR_GOTO_END_OF_LINE,
-;                  - $LOW_VIEWCUR_GOTO_START_OF_LINE,
-;                  - $LOW_VIEWCUR_GOTO_START,
-;                  - $LOW_VIEWCUR_GOTO_END,
-;                  + TextCursor
-;                  - $LOW_TEXTCUR_GOTO_START,
-;                  - $LOW_TEXTCUR_GOTO_END,
-;                  - $LOW_TEXTCUR_GOTO_END_OF_WORD,
-;                  - $LOW_TEXTCUR_GOTO_START_OF_WORD,
-;                  - $LOW_TEXTCUR_GOTO_END_OF_SENTENCE,
-;                  - $LOW_TEXTCUR_GOTO_START_OF_SENTENCE,
-;                  - $LOW_TEXTCUR_GOTO_END_OF_PARAGRAPH,
-;                  - $LOW_TEXTCUR_GOTO_START_OF_PARAGRAPH,
-;                  + TableCursor
-;                  - $LOW_TABLECUR_GOTO_START,
-;                  - $LOW_TABLECUR_GOTO_END,
-;                  # Cursor Movements which accept nothing and are done once per call:
-;                  + ViewCursor
-;                  - $LOW_VIEWCUR_JUMP_TO_FIRST_PAGE,
-;                  - $LOW_VIEWCUR_JUMP_TO_LAST_PAGE,
-;                  - $LOW_VIEWCUR_JUMP_TO_END_OF_PAGE,
-;                  - $LOW_VIEWCUR_JUMP_TO_START_OF_PAGE,
-;                  + TextCursor
-;                  - $LOW_TEXTCUR_COLLAPSE_TO_START,
-;                  - $LOW_TEXTCUR_COLLAPSE_TO_END,
-;                  # Misc. Cursor Movements:
-;                  + ViewCursor
-;                  - $LOW_VIEWCUR_JUMP_TO_PAGE
+; Remarks .......: $iMove may be called with any of the constants $LOW_VIEWCUR_*, $LOW_TEXTCUR_*, $LOW_TABLECUR_* as defined in LibreOfficeWriter_Constants.au3, depending on the Cursor type called in $oCursor.
+;                  Only some movements accept movement amounts (such as "goRight" 2) etc. Also only some accept creating/ extending a selection, these are specified in the description for each constant.
+;                  If a Constant says only [Count], then that action can only be repeated several times per call, but a Selection can not be created or expanded during the move.
+;                  If a Constant says only [Selecting], then that action can only be repeated a maximum of 1 time per call, and a Selection can be created or expanded during the move.
+;                  If a Constant says [Count, Selecting], then that action can be repeated several times per call, and a Selection can be created or expanded during the move.
+;                  If a Constant says [None], then that action can not be done once per call, and a Selection can not be created or expanded during the move.
+;                  To Clear/Unselect a current selection, you can call a move such as "goRight", 0, False.
 ; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_TableCreateCursor, _LOWriter_CursorGoToRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
 Func _LOWriter_CursorMove(ByRef $oCursor, $iMove, $iCount = 1, $bSelect = False)
-	Local $iCursorType
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iCursorType, $iExtended = 0
 	Local $bMoved = False
+	Local $asTableMoves[6], $asTextMoves[18], $asViewMoves[18]
 
 	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsInt($iMove) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iCount, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsBool($bSelect) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 	$iCursorType = __LOWriter_Internal_CursorGetType($oCursor)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Switch $iCursorType
 		Case $LOW_CURTYPE_TEXT_CURSOR
-			$bMoved = __LOWriter_TextCursorMove($oCursor, $iMove, $iCount, $bSelect)
+			If Not __LO_IntIsBetween($iMove, 0, UBound($asTextMoves) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
-			Return SetError(@error, @extended, $bMoved)
+			$asTextMoves[$LOW_TEXTCUR_COLLAPSE_TO_START] = "collapseToStart"
+			$asTextMoves[$LOW_TEXTCUR_COLLAPSE_TO_END] = "collapseToEnd"
+			$asTextMoves[$LOW_TEXTCUR_GO_LEFT] = "goLeft"
+			$asTextMoves[$LOW_TEXTCUR_GO_RIGHT] = "goRight"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_START] = "gotoStart"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_END] = "gotoEnd"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_NEXT_WORD] = "gotoNextWord"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_PREV_WORD] = "gotoPreviousWord"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_END_OF_WORD] = "gotoEndOfWord"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_START_OF_WORD] = "gotoStartOfWord"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_NEXT_SENTENCE] = "gotoNextSentence"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_PREV_SENTENCE] = "gotoPreviousSentence"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_END_OF_SENTENCE] = "gotoEndOfSentence"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_START_OF_SENTENCE] = "gotoStartOfSentence"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_NEXT_PARAGRAPH] = "gotoNextParagraph"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_PREV_PARAGRAPH] = "gotoPreviousParagraph"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_END_OF_PARAGRAPH] = "gotoEndOfParagraph"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_START_OF_PARAGRAPH] = "gotoStartOfParagraph"
+
+			Switch $iMove
+				Case $LOW_TEXTCUR_GO_LEFT, $LOW_TEXTCUR_GO_RIGHT
+					$bMoved = Execute("$oCursor." & $asTextMoves[$iMove] & "(" & $iCount & "," & $bSelect & ")")
+					$iExtended = ($bMoved) ? ($iCount) : (0)
+
+				Case $LOW_TEXTCUR_GOTO_NEXT_WORD, $LOW_TEXTCUR_GOTO_PREV_WORD, $LOW_TEXTCUR_GOTO_NEXT_SENTENCE, $LOW_TEXTCUR_GOTO_PREV_SENTENCE, $LOW_TEXTCUR_GOTO_NEXT_PARAGRAPH, _
+						$LOW_TEXTCUR_GOTO_PREV_PARAGRAPH
+
+					Do
+						$bMoved = Execute("$oCursor." & $asTextMoves[$iMove] & "(" & $bSelect & ")")
+						$iExtended += ($bMoved) ? (1) : (0)
+						Sleep((IsInt($iExtended / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+					Until ($iExtended >= $iCount) Or ($bMoved = False)
+
+				Case $LOW_TEXTCUR_GOTO_START, $LOW_TEXTCUR_GOTO_END, $LOW_TEXTCUR_GOTO_END_OF_WORD, $LOW_TEXTCUR_GOTO_START_OF_WORD, $LOW_TEXTCUR_GOTO_END_OF_SENTENCE, _
+						$LOW_TEXTCUR_GOTO_START_OF_SENTENCE, $LOW_TEXTCUR_GOTO_END_OF_PARAGRAPH, $LOW_TEXTCUR_GOTO_START_OF_PARAGRAPH
+					$bMoved = Execute("$oCursor." & $asTextMoves[$iMove] & "(" & $bSelect & ")")
+					$iExtended = ($bMoved) ? (1) : (0)
+
+				Case $LOW_TEXTCUR_COLLAPSE_TO_START, $LOW_TEXTCUR_COLLAPSE_TO_END
+					$bMoved = Execute("$oCursor." & $asTextMoves[$iMove] & "()")
+					$iExtended = ($bMoved) ? (1) : (0)
+
+				Case Else
+
+					Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+			EndSwitch
 
 		Case $LOW_CURTYPE_TABLE_CURSOR
-			$bMoved = __LOWriter_TableCursorMove($oCursor, $iMove, $iCount, $bSelect)
+			If Not __LO_IntIsBetween($iMove, 0, UBound($asTableMoves) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
-			Return SetError(@error, @extended, $bMoved)
+			$asTableMoves[$LOW_TABLECUR_GO_LEFT] = "goLeft"
+			$asTableMoves[$LOW_TABLECUR_GO_RIGHT] = "goRight"
+			$asTableMoves[$LOW_TABLECUR_GO_UP] = "goUp"
+			$asTableMoves[$LOW_TABLECUR_GO_DOWN] = "goDown"
+			$asTableMoves[$LOW_TABLECUR_GOTO_START] = "gotoStart"
+			$asTableMoves[$LOW_TABLECUR_GOTO_END] = "gotoEnd"
+
+			Switch $iMove
+				Case $LOW_TABLECUR_GO_LEFT, $LOW_TABLECUR_GO_RIGHT, $LOW_TABLECUR_GO_UP, $LOW_TABLECUR_GO_DOWN
+					$bMoved = Execute("$oCursor." & $asTableMoves[$iMove] & "(" & $iCount & "," & $bSelect & ")")
+					$iExtended = ($bMoved) ? ($iCount) : (0)
+
+				Case $LOW_TABLECUR_GOTO_START, $LOW_TABLECUR_GOTO_END
+					$bMoved = Execute("$oCursor." & $asTableMoves[$iMove] & "(" & $bSelect & ")")
+					$iExtended = ($bMoved) ? (1) : (0)
+
+				Case Else
+
+					Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+			EndSwitch
 
 		Case $LOW_CURTYPE_VIEW_CURSOR
-			$bMoved = __LOWriter_ViewCursorMove($oCursor, $iMove, $iCount, $bSelect)
+			If Not __LO_IntIsBetween($iMove, 0, UBound($asViewMoves) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
-			Return SetError(@error, @extended, $bMoved)
+			$asViewMoves[$LOW_VIEWCUR_GO_DOWN] = "goDown"
+			$asViewMoves[$LOW_VIEWCUR_GO_UP] = "goUp"
+			$asViewMoves[$LOW_VIEWCUR_GO_LEFT] = "goLeft"
+			$asViewMoves[$LOW_VIEWCUR_GO_RIGHT] = "goRight"
+			$asViewMoves[$LOW_VIEWCUR_GOTO_END_OF_LINE] = "gotoEndOfLine"
+			$asViewMoves[$LOW_VIEWCUR_GOTO_START_OF_LINE] = "gotoStartOfLine"
+			$asViewMoves[$LOW_VIEWCUR_JUMP_TO_FIRST_PAGE] = "jumpToFirstPage"
+			$asViewMoves[$LOW_VIEWCUR_JUMP_TO_LAST_PAGE] = "jumpToLastPage"
+			$asViewMoves[$LOW_VIEWCUR_JUMP_TO_PAGE] = "jumpToPage"
+			$asViewMoves[$LOW_VIEWCUR_JUMP_TO_NEXT_PAGE] = "jumpToNextPage"
+			$asViewMoves[$LOW_VIEWCUR_JUMP_TO_PREV_PAGE] = "jumpToPreviousPage"
+			$asViewMoves[$LOW_VIEWCUR_JUMP_TO_END_OF_PAGE] = "jumpToEndOfPage"
+			$asViewMoves[$LOW_VIEWCUR_JUMP_TO_START_OF_PAGE] = "jumpToStartOfPage"
+			$asViewMoves[$LOW_VIEWCUR_SCREEN_DOWN] = "screenDown"
+			$asViewMoves[$LOW_VIEWCUR_SCREEN_UP] = "screenUp"
+			$asViewMoves[$LOW_VIEWCUR_GOTO_START] = "gotoStart"
+			$asViewMoves[$LOW_VIEWCUR_GOTO_END] = "gotoEnd"
+			$asViewMoves[$LOW_VIEWCUR_GET_PAGE_NUM] = "PLACEHOLDER"
+
+			Switch $iMove
+				Case $LOW_VIEWCUR_GO_DOWN, $LOW_VIEWCUR_GO_UP, $LOW_VIEWCUR_GO_LEFT, $LOW_VIEWCUR_GO_RIGHT
+					$bMoved = Execute("$oCursor." & $asViewMoves[$iMove] & "(" & $iCount & "," & $bSelect & ")")
+					$iExtended = ($bMoved) ? ($iCount) : (0)
+
+				Case $LOW_VIEWCUR_GOTO_END_OF_LINE, $LOW_VIEWCUR_GOTO_START_OF_LINE, $LOW_VIEWCUR_GOTO_START, $LOW_VIEWCUR_GOTO_END
+					$bMoved = Execute("$oCursor." & $asViewMoves[$iMove] & "(" & $bSelect & ")")
+					$iExtended = ($bMoved) ? (1) : (0)
+
+				Case $LOW_VIEWCUR_JUMP_TO_PAGE
+					$bMoved = Execute("$oCursor." & $asViewMoves[$iMove] & "(" & $iCount & ")")
+					$iExtended = $oCursor.getPage()
+					If Not IsInt($iExtended) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+				Case $LOW_VIEWCUR_JUMP_TO_NEXT_PAGE, $LOW_VIEWCUR_JUMP_TO_PREV_PAGE, $LOW_VIEWCUR_SCREEN_DOWN, $LOW_VIEWCUR_SCREEN_UP
+					Do
+						$bMoved = Execute("$oCursor." & $asViewMoves[$iMove] & "()")
+						$iExtended += ($bMoved) ? (1) : (0)
+						Sleep((IsInt($iExtended / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+					Until ($iExtended >= $iCount) Or ($bMoved = False)
+
+				Case $LOW_VIEWCUR_JUMP_TO_FIRST_PAGE, $LOW_VIEWCUR_JUMP_TO_LAST_PAGE, $LOW_VIEWCUR_JUMP_TO_END_OF_PAGE, $LOW_VIEWCUR_JUMP_TO_START_OF_PAGE
+					$bMoved = Execute("$oCursor." & $asViewMoves[$iMove] & "()")
+					$iExtended = ($bMoved) ? (1) : (0)
+
+				Case $LOW_VIEWCUR_GET_PAGE_NUM
+					$iExtended = $oCursor.getPage()
+					If Not IsInt($iExtended) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+					$bMoved = True
+
+				Case Else
+
+					Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+			EndSwitch
 
 		Case Else
 
 			Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0) ; unknown cursor type.
 	EndSwitch
+
+	Return SetError($__LO_STATUS_SUCCESS, $iExtended, $bMoved)
 EndFunc   ;==>_LOWriter_CursorMove
 
 ; #FUNCTION# ====================================================================================================================

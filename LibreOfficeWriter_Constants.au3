@@ -1100,53 +1100,52 @@ Global Enum _
 
 ; LO TableCursor Movement Constants.
 Global Enum _
-		$LOW_TABLECUR_GO_LEFT, _                                ; 0 Move the cursor left n cells.
-		$LOW_TABLECUR_GO_RIGHT, _                               ; 1 Move the cursor right n cells.
-		$LOW_TABLECUR_GO_UP, _                                  ; 2 Move the cursor up n cells.
-		$LOW_TABLECUR_GO_DOWN, _                                ; 3 Move the cursor down n cells.
-		$LOW_TABLECUR_GOTO_START, _                             ; 4 Move the cursor to the first cell.
-		$LOW_TABLECUR_GOTO_END                                  ; 5 Move the cursor to the last cell.
+		$LOW_TABLECUR_GO_LEFT, _                                ; 0 [Count, Selecting] Move the cursor left n cells. @Extended set to count of moves performed.
+		$LOW_TABLECUR_GO_RIGHT, _                               ; 1 [Count, Selecting] Move the cursor right n cells. @Extended set to count of moves performed.
+		$LOW_TABLECUR_GO_UP, _                                  ; 2 [Count, Selecting] Move the cursor up n cells. @Extended set to count of moves performed.
+		$LOW_TABLECUR_GO_DOWN, _                                ; 3 [Count, Selecting] Move the cursor down n cells. @Extended set to count of moves performed.
+		$LOW_TABLECUR_GOTO_START, _                             ; 4 [Selecting] Move the cursor to the first cell. @Extended set to count of moves performed.
+		$LOW_TABLECUR_GOTO_END                                  ; 5 [Selecting] Move the cursor to the last cell. @Extended set to count of moves performed.
 
 ; LO TextCursor Movement Constants.
 Global Enum _
-		$LOW_TEXTCUR_COLLAPSE_TO_START, _                       ; 0 Collapses the current selection to the start of the selection.
-		$LOW_TEXTCUR_COLLAPSE_TO_END, _                         ; 1 Collapses the current selection the to end of the selection.
-		$LOW_TEXTCUR_GO_LEFT, _                                 ; 2 Move the cursor left by n characters.
-		$LOW_TEXTCUR_GO_RIGHT, _                                ; 3 Move the cursor right by n characters.
-		$LOW_TEXTCUR_GOTO_START, _                              ; 4 Move the cursor to the start of the text.
-		$LOW_TEXTCUR_GOTO_END, _                                ; 5 Move the cursor to the end of the text.
-		$LOW_TEXTCUR_GOTO_NEXT_WORD, _                          ; 6 Move to the start of the next word.
-		$LOW_TEXTCUR_GOTO_PREV_WORD, _                          ; 7 Move to the end of the previous word.
-		$LOW_TEXTCUR_GOTO_END_OF_WORD, _                        ; 8 Move to the end of the current word.
-		$LOW_TEXTCUR_GOTO_START_OF_WORD, _                      ; 9 Move to the start of the current word.
-		$LOW_TEXTCUR_GOTO_NEXT_SENTENCE, _                      ; 10 Move to the start of the next sentence.
-		$LOW_TEXTCUR_GOTO_PREV_SENTENCE, _                      ; 11 Move to the end of the previous sentence.
-		$LOW_TEXTCUR_GOTO_END_OF_SENTENCE, _                    ; 12 Move to the end of the current sentence.
-		$LOW_TEXTCUR_GOTO_START_OF_SENTENCE, _                  ; 13 Move to the start of the current sentence.
-		$LOW_TEXTCUR_GOTO_NEXT_PARAGRAPH, _                     ; 14 Move to the start of the next paragraph.
-		$LOW_TEXTCUR_GOTO_PREV_PARAGRAPH, _                     ; 15 Move to the End of the previous paragraph.
-		$LOW_TEXTCUR_GOTO_END_OF_PARAGRAPH, _                   ; 16 Move to the end of the current paragraph.
-		$LOW_TEXTCUR_GOTO_START_OF_PARAGRAPH                    ; 17 Move to the start of the current paragraph.
+		$LOW_TEXTCUR_COLLAPSE_TO_START, _                       ; 0 [None] Collapses the current selection to the start of the selection. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_COLLAPSE_TO_END, _                         ; 1 [None] Collapses the current selection the to end of the selection. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GO_LEFT, _                                 ; 2 [Count, Selecting] Move the cursor left by n characters. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GO_RIGHT, _                                ; 3 [Count, Selecting] Move the cursor right by n characters. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_START, _                              ; 4 [Selecting] Move the cursor to the start of the text. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_END, _                                ; 5 [Selecting] Move the cursor to the end of the text. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_NEXT_WORD, _                          ; 6 [Count, Selecting] Move to the start of the next word. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_PREV_WORD, _                          ; 7 [Count, Selecting] Move to the end of the previous word. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_END_OF_WORD, _                        ; 8 [Selecting] Move to the end of the current word. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_START_OF_WORD, _                      ; 9 [Selecting] Move to the start of the current word. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_NEXT_SENTENCE, _                      ; 10 [Count, Selecting] Move to the start of the next sentence. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_PREV_SENTENCE, _                      ; 11 [Count, Selecting] Move to the end of the previous sentence. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_END_OF_SENTENCE, _                    ; 12 [Selecting] Move to the end of the current sentence. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_START_OF_SENTENCE, _                  ; 13 [Selecting] Move to the start of the current sentence. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_NEXT_PARAGRAPH, _                     ; 14 [Count, Selecting] Move to the start of the next paragraph. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_PREV_PARAGRAPH, _                     ; 15 [Count, Selecting] Move to the End of the previous paragraph. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_END_OF_PARAGRAPH, _                   ; 16 [Selecting] Move to the end of the current paragraph. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_START_OF_PARAGRAPH                    ; 17 [Selecting] Move to the start of the current paragraph. @Extended set to count of moves performed.
 
 ; LO ViewCursor Movement Constants.
 Global Enum _
-		$LOW_VIEWCUR_GO_DOWN, _                                 ; 0 Move the cursor Down by n lines.
-		$LOW_VIEWCUR_GO_UP, _                                   ; 1 Move the cursor Up by n lines.
-		$LOW_VIEWCUR_GO_LEFT, _                                 ; 2 Move the cursor left by n characters.
-		$LOW_VIEWCUR_GO_RIGHT, _                                ; 3 Move the cursor right by n characters.
-		$LOW_VIEWCUR_GOTO_END_OF_LINE, _                        ; 4 Move the cursor to the end of the current line.
-		$LOW_VIEWCUR_GOTO_START_OF_LINE, _                      ; 5 Move the cursor to the start of the current line.
-		$LOW_VIEWCUR_JUMP_TO_FIRST_PAGE, _                      ; 6 Move the cursor to the first page.
-		$LOW_VIEWCUR_JUMP_TO_LAST_PAGE, _                       ; 7 Move the cursor to the Last page.
-		$LOW_VIEWCUR_JUMP_TO_PAGE, _                            ; 8 Jump to a specified page.
-		$LOW_VIEWCUR_JUMP_TO_NEXT_PAGE, _                       ; 9 Move the cursor to the Next page.
-		$LOW_VIEWCUR_JUMP_TO_PREV_PAGE, _                       ; 10 Move the cursor to the previous page.
-		$LOW_VIEWCUR_JUMP_TO_END_OF_PAGE, _                     ; 11 Move the cursor to the end of the current page.
-		$LOW_VIEWCUR_JUMP_TO_START_OF_PAGE, _                   ; 12 Move the cursor to the start of the current page.
-		$LOW_VIEWCUR_SCREEN_DOWN, _                             ; 13 Scroll the view forward by one visible page.
-		$LOW_VIEWCUR_SCREEN_UP, _                               ; 14 Scroll the view back by one visible page.
-		$LOW_VIEWCUR_GOTO_START, _                              ; 15 Move the cursor to the start of the document or Table.
-		$LOW_VIEWCUR_GOTO_END                                   ; 16 Move the cursor to the end of the document or Table.
+		$LOW_VIEWCUR_GO_DOWN, _                                 ; 0 [Count, Selecting] Move the cursor Down by n lines. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_GO_UP, _                                   ; 1 [Count, Selecting] Move the cursor Up by n lines. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_GO_LEFT, _                                 ; 2 [Count, Selecting] Move the cursor left by n characters. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_GO_RIGHT, _                                ; 3 [Count, Selecting] Move the cursor right by n characters. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_GOTO_END_OF_LINE, _                        ; 4 [Selecting] Move the cursor to the end of the current line. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_GOTO_START_OF_LINE, _                      ; 5 [Selecting] Move the cursor to the start of the current line. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_JUMP_TO_FIRST_PAGE, _                      ; 6 [None] Move the cursor to the first page. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_JUMP_TO_LAST_PAGE, _                       ; 7 [None] Move the cursor to the Last page. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_JUMP_TO_PAGE, _                            ; 8 [None] Jump to a specified page. @Extended set to current page number.
+		$LOW_VIEWCUR_JUMP_TO_NEXT_PAGE, _                       ; 9 [Count] Move the cursor to the Next page. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_JUMP_TO_PREV_PAGE, _                       ; 10 [Count] Move the cursor to the previous page. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_JUMP_TO_END_OF_PAGE, _                     ; 11 [None] Move the cursor to the end of the current page. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_JUMP_TO_START_OF_PAGE, _                   ; 12 [None] Move the cursor to the start of the current page. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_SCREEN_DOWN, _                             ; 13 [Count] Scroll the view forward by one visible page. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_SCREEN_UP, _                               ; 14 [Count] Scroll the view back by one visible page. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_GOTO_START, _                              ; 15 [Selecting] Move the cursor to the start of the document or Table. @Extended set to count of moves performed.
 		$LOW_VIEWCUR_GOTO_END, _                                ; 16 [Selecting] Move the cursor to the end of the document or Table. @Extended set to count of moves performed.
 		$LOW_VIEWCUR_GET_PAGE_NUM                               ; 17 [None] Retrieve the current page number where the ViewCursor is located. @Extended set to current page number.
 

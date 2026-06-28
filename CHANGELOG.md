@@ -2661,6 +2661,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Rename variables in:
   - _LOWriter_TableColumnGetCount
   - _LOWriter_TableRowGetCount
+- Removed internal cursor movement functions, combining them into one function.
 
 #### Removed
 
@@ -2717,6 +2718,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Second _LOWriter_DocConnect example.
 - LibreOfficeWriter_Cell.au3.
 - __LOWriter_CursorGetText
+- __LOWriter_TableCursorMove
+- __LOWriter_TextCursorMove
+- __LOWriter_ViewCursorMove
 
 [To Top](#releases)
 
