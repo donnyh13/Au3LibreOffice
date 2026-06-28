@@ -6,6 +6,7 @@ Example()
 
 Func Example()
 	Local $oDoc, $oViewCursor
+	Local $iPage
 
 	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
@@ -57,6 +58,14 @@ Func Example()
 	; Move the View Cursor to a specific page, page 3.
 	_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_JUMP_TO_PAGE, 3, False)
 	If @error Then _ERROR($oDoc, "Error performing cursor Move. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Retrieve the current page number.
+	_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_GET_PAGE_NUM)
+	If @error Then _ERROR($oDoc, "Error performing cursor Move. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	$iPage = @extended
+
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The View Cursor is currently on page " & $iPage & ".")
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

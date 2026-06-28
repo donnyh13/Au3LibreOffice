@@ -1147,6 +1147,8 @@ Global Enum _
 		$LOW_VIEWCUR_SCREEN_UP, _                               ; 14 Scroll the view back by one visible page.
 		$LOW_VIEWCUR_GOTO_START, _                              ; 15 Move the cursor to the start of the document or Table.
 		$LOW_VIEWCUR_GOTO_END                                   ; 16 Move the cursor to the end of the document or Table.
+		$LOW_VIEWCUR_GOTO_END, _                                ; 16 [Selecting] Move the cursor to the end of the document or Table. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_GET_PAGE_NUM                               ; 17 [None] Retrieve the current page number where the ViewCursor is located. @Extended set to current page number.
 
 ; Wrap Type
 Global Const _                                                  ; com.sun.star.text.WrapTextMode
