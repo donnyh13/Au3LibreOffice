@@ -639,7 +639,7 @@ EndFunc   ;==>_LOWriter_DocCreate
 ; Modified ......:
 ; Remarks .......: "Title" is the Title as found in File>Properties, not the Document's Title as set when saving it.
 ;                  Any array error checking only checks to make sure the input array, and the set Array of values is the same size, it does not check that each element is the same.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:
@@ -1272,7 +1272,7 @@ EndFunc   ;==>_LOWriter_DocFindNext
 ;                  |                               8 = Error setting $bApplyUserData
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Setting $bResetUserData to True resets several attributes at once, as follows:
 ;                  - Author is set to $sNewAuthor parameter, ($sNewAuthor MUST be set to a string).
@@ -1368,7 +1368,7 @@ EndFunc   ;==>_LOWriter_DocGenProp
 ;                  |                               2 = Error setting $tDateStruct
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_DateStructCreate
 ; Link ..........:
@@ -1433,7 +1433,7 @@ EndFunc   ;==>_LOWriter_DocGenPropCreation
 ;                  |                               2 = Error setting $tDateStruct
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_DateStructCreate, _LOWriter_DateStructModify
 ; Link ..........:
@@ -1498,7 +1498,7 @@ EndFunc   ;==>_LOWriter_DocGenPropModification
 ;                  |                               2 = Error setting $tDateStruct
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_DateStructCreate, _LOWriter_DateStructModify
 ; Link ..........:
@@ -1567,7 +1567,7 @@ EndFunc   ;==>_LOWriter_DocGenPropPrint
 ;                  |                               4 = Error setting $tDateStruct
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_DateStructCreate, _LOWriter_DateStructModify
 ; Link ..........:
@@ -1917,7 +1917,7 @@ EndFunc   ;==>_LOWriter_DocIsReadOnly
 ;                  |                               1 = Error setting $bMaximize
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -1966,7 +1966,7 @@ EndFunc   ;==>_LOWriter_DocMaximize
 ;                  |                               1 = Error setting $bMinimize
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -2143,7 +2143,7 @@ EndFunc   ;==>_LOWriter_DocOpen
 ; Modified ......:
 ; Remarks .......: X & Y, on my computer at least, seem to go no lower than 8(X) and 30(Y), if you enter lower than this, it will cause a "property setting Error".
 ;                  If you want more accurate functionality, use the "WinMove" AutoIt function.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:
@@ -2343,7 +2343,7 @@ EndFunc   ;==>_LOWriter_DocPrint
 ;                  |                               16 = Error setting $bHiddenText
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_DocPrintSizeSettings, _LOWriter_DocPrintPageSettings, _LOWriter_DocPrintMiscSettings
 ; Link ..........:
@@ -2446,7 +2446,7 @@ EndFunc   ;==>_LOWriter_DocPrintIncludedSettings
 ;                  @Error: 5, @Extended: 1 = Printer does not allow changing paper orientation.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_DocPrintSizeSettings, _LOWriter_DocPrintPageSettings, _LOWriter_DocPrintIncludedSettings
 ; Link ..........:
@@ -2567,7 +2567,7 @@ EndFunc   ;==>_LOWriter_DocPrintMiscSettings
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If both $bLeftOnly and $bRightOnly are True, both Left and Right pages are printed.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_DocPrintSizeSettings, _LOWriter_DocPrintMiscSettings, _LOWriter_DocPrintIncludedSettings
 ; Link ..........:
@@ -2665,7 +2665,7 @@ EndFunc   ;==>_LOWriter_DocPrintPageSettings
 ; Modified ......:
 ; Remarks .......: Due to slight inaccuracies in unit conversion, there may be False errors thrown while attempting to set paper size.
 ;                  For some reason, setting $iPaperWidth and $iPaperHeight modifies the document page size also.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LO_UnitConvert, _LOWriter_DocPrintPageSettings, _LOWriter_DocPrintMiscSettings, _LOWriter_DocPrintIncludedSettings
 ; Link ..........:
@@ -3694,7 +3694,7 @@ EndFunc   ;==>_LOWriter_DocUndoReset
 ;                  |                               1 = Error setting $bVisible
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current visibility setting.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes

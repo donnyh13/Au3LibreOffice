@@ -73,7 +73,7 @@
 ;                  |                               1 = Error setting $iColor
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
@@ -207,7 +207,7 @@ EndFunc   ;==>_LOWriter_ShapeAreaFillStyle
 ;                  |                               1024 = Error setting $iToIntense
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
 ; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
@@ -412,7 +412,7 @@ EndFunc   ;==>_LOWriter_ShapeAreaGradient
 ;                  The returned array will contain two columns, the first column will contain the ColorStop offset values, a number between 0 and 1.0. The second column will contain an Integer, the color value, as a RGB Color Integer.
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOWriter_ShapeAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: Yes
@@ -507,7 +507,7 @@ EndFunc   ;==>_LOWriter_ShapeAreaGradientMulticolor
 ;                  |                               1 = Error setting $iTransparency
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName
 ; Link ..........:
@@ -581,7 +581,7 @@ EndFunc   ;==>_LOWriter_ShapeAreaTransparency
 ;                  |                               64 = Error setting $iEnd
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName
 ; Link ..........:
@@ -756,7 +756,7 @@ EndFunc   ;==>_LOWriter_ShapeAreaTransparencyGradient
 ;                  The returned array will contain two columns, the first column will contain the ColorStop offset values, a number between 0 and 1.0. The second column will contain an Integer, the Transparency percentage value between 0 and 100%.
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOWriter_ShapeAreaGradientMulticolor
 ; Link ..........:
 ; Example .......: Yes
@@ -1273,7 +1273,7 @@ EndFunc   ;==>_LOWriter_ShapeInsert
 ;                  When retrieving the current settings, $bSync will be a Boolean value of whether the Start Arrowhead settings are currently equal to the End Arrowhead setting values.
 ;                  Both $vStartStyle and $vEndStyle accept a String or an Integer because there is the possibility of a custom Arrowhead being available the user may want to use.
 ;                  When retrieving the current settings, both $vStartStyle and $vEndStyle could be either an Integer or a String. It will be a String if the current Arrowhead is a custom Arrowhead, else an Integer, corresponding to one of the constants, $LOW_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:
@@ -1413,7 +1413,7 @@ EndFunc   ;==>_LOWriter_ShapeLineArrowStyles
 ; Modified ......:
 ; Remarks .......: $vStyle accepts a String or an Integer because there is the possibility of a custom Line Style being available that the user may want to use.
 ;                  When retrieving the current settings, $vStyle could be either an Integer or a String. It will be a String if the current Line Style is a custom Line Style, else an Integer, corresponding to one of the constants, $LOW_SHAPE_LINE_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
@@ -1541,7 +1541,7 @@ EndFunc   ;==>_LOWriter_ShapeLineProperties
 ;                  |                               1 = Error setting $sName
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName
 ; Link ..........:
 ; Example .......: Yes
@@ -2095,7 +2095,7 @@ EndFunc   ;==>_LOWriter_ShapePointsGetCount
 ;                  @Error: 3, @Extended: 6 = Failed to Retrieve PolyPolygonBezier Structure.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings for the Array Element called in $iArrayElement.
+; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to retrieve the current value(s) for the Array Element called in $iArrayElement.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Only $LOW_SHAPE_TYPE_LINE_* type shapes have Points that can be added to, removed, or modified.
 ;                  This is a homemade function as LibreOffice doesn't offer an easy way for modifying points in a shape. Consequently this will not produce similar results as when working with LibreOffice manually, and may wreck your shape's shape. Use with caution.
@@ -2545,7 +2545,7 @@ EndFunc   ;==>_LOWriter_ShapePointsRemove
 ;                  |                               4 = Error setting $bProtectPos
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
@@ -2623,7 +2623,7 @@ EndFunc   ;==>_LOWriter_ShapePosition
 ;                  This function uses the deprecated LibreOffice methods RotateAngle, and ShearAngle, and may stop working in future LibreOffice versions, after 7.3.4.2.
 ;                  At the present time Control Point settings are not included as they are too complex to manipulate.
 ;                  At the present time Corner Radius setting is not included, as I was unable to identify a shape that utilized this setting.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName
 ; Link ..........:
@@ -2739,7 +2739,7 @@ EndFunc   ;==>_LOWriter_ShapesGetNames
 ;                  - $LOW_SHAPE_TYPE_LINE_LINE, $LOW_SHAPE_TYPE_LINE_FREEFORM_LINE, $LOW_SHAPE_TYPE_LINE_FREEFORM_LINE_FILLED, $LOW_SHAPE_TYPE_LINE_CURVE, $LOW_SHAPE_TYPE_LINE_CURVE_FILLED, $LOW_SHAPE_TYPE_LINE_POLYGON, $LOW_SHAPE_TYPE_LINE_POLYGON_45, $LOW_SHAPE_TYPE_LINE_POLYGON_45_FILLED.
 ;                  - $LOW_SHAPE_TYPE_BASIC_CIRCLE_SEGMENT, $LOW_SHAPE_TYPE_BASIC_ARC.
 ;                  To prevent accidental and unwanted newlines, @CRLF is automatically replaced with @CR to match LibreOffice's newline style.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName
 ; Link ..........:
 ; Example .......: Yes
@@ -2824,7 +2824,7 @@ EndFunc   ;==>_LOWriter_ShapeTextBox
 ;                  |                               256 = Error setting $iAnchorPos
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $iHorRelation has varying acceptable values, depending on the current Anchor position and also the current $iHorAlign setting.
 ;                  The Following is a list of acceptable values per anchor position.
@@ -3057,7 +3057,7 @@ EndFunc   ;==>_LOWriter_ShapeTypePosition
 ;                  |                               4 = Error setting $bProtectSize
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  I have skipped "Keep Ratio", as currently it seems unable to be set for shapes.
 ; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName, _LO_UnitConvert
@@ -3144,7 +3144,7 @@ EndFunc   ;==>_LOWriter_ShapeTypeSize
 ;                  |                               16 = Error setting $iBottom
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName, _LO_UnitConvert
 ; Link ..........:
@@ -3245,7 +3245,7 @@ EndFunc   ;==>_LOWriter_ShapeWrap
 ;                  |                               4 = Error setting $bAllowOverlap
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  This function may indicate the settings were set successfully when they haven't been if the appropriate wrap type, anchor type etc. hasn't been set before hand.
 ; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName

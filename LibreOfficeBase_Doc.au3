@@ -657,7 +657,7 @@ EndFunc   ;==>_LOBase_DocIsModified
 ;                  |                               1 = Error setting $bMaximize
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -706,7 +706,7 @@ EndFunc   ;==>_LOBase_DocMaximize
 ;                  |                               1 = Error setting $bMinimize
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes

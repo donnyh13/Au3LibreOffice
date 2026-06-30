@@ -107,7 +107,7 @@
 ; Modified ......:
 ; Remarks .......: $iHorAlign must be set to $LOW_PAR_ALIGN_HOR_JUSTIFIED(2) before you can set $iLastLineAlign, and $iLastLineAlign must be set to $LOW_PAR_LAST_LINE_JUSTIFIED(2) before $bExpandSingleWord can be set.
 ;                  $iTxtDirection constants 2,3, and 5 may not be available depending on your language settings.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName
 ; Link ..........:
@@ -148,7 +148,7 @@ EndFunc   ;==>_LOWriter_ParStyleAlignment
 ;                  |                               1 = Error setting $iBackColor
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
@@ -258,7 +258,7 @@ EndFunc   ;==>_LOWriter_ParStyleAreaFillStyle
 ;                  |                               1024 = Error setting $iToIntense
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
 ; Related .......: _LOWriter_ParStyleAreaGradientMulticolor, _LOWriter_ParStyleAreaColor
@@ -313,7 +313,7 @@ EndFunc   ;==>_LOWriter_ParStyleAreaGradient
 ;                  The returned array will contain two columns, the first column will contain the ColorStop offset values, a number between 0 and 1.0. The second column will contain an Integer, the color value, as a RGB Color Integer.
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOWriter_ParStyleAreaGradient
 ; Link ..........:
 ; Example .......: Yes
@@ -352,7 +352,7 @@ EndFunc   ;==>_LOWriter_ParStyleAreaGradientMulticolor
 ;                  |                               1 = Error setting $iTransparency
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ParStyleAreaTransparencyGradient
 ; Link ..........:
@@ -416,7 +416,7 @@ EndFunc   ;==>_LOWriter_ParStyleAreaTransparency
 ;                  |                               64 = Error setting $iEnd
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ParStyleAreaTransparency, _LOWriter_ParStyleAreaTransparencyGradientMulti
 ; Link ..........:
@@ -470,7 +470,7 @@ EndFunc   ;==>_LOWriter_ParStyleAreaTransparencyGradient
 ;                  The returned array will contain two columns, the first column will contain the ColorStop offset values, a number between 0 and 1.0. The second column will contain an Integer, the Transparency percentage value between 0 and 100%.
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOWriter_ParStyleAreaTransparencyGradient
 ; Link ..........:
 ; Example .......: Yes
@@ -528,7 +528,7 @@ EndFunc   ;==>_LOWriter_ParStyleAreaTransparencyGradientMulti
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Certain Error values are passed from the internal border setting function.
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_ParStyleBorderWidth, _LOWriter_ParStyleBorderStyle, _LOWriter_ParStyleBorderPadding
@@ -584,7 +584,7 @@ EndFunc   ;==>_LOWriter_ParStyleBorderColor
 ;                  |                               16 = Error setting $iRight border distance
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName, _LO_UnitConvert, _LOWriter_ParStyleBorderWidth, _LOWriter_ParStyleBorderStyle, _LOWriter_ParStyleBorderColor
 ; Link ..........:
@@ -643,7 +643,7 @@ EndFunc   ;==>_LOWriter_ParStyleBorderPadding
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Certain Error values are passed from the internal border setting function.
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName, _LOWriter_ParStyleBorderWidth, _LOWriter_ParStyleBorderColor, _LOWriter_ParStyleBorderPadding
@@ -706,7 +706,7 @@ EndFunc   ;==>_LOWriter_ParStyleBorderStyle
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To "Turn Off" Borders, set them to 0
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Certain Error values are passed from the internal border setting function.
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName, _LO_UnitConvert, _LOWriter_ParStyleBorderStyle, _LOWriter_ParStyleBorderColor, _LOWriter_ParStyleBorderPadding
@@ -831,7 +831,7 @@ EndFunc   ;==>_LOWriter_ParStyleCreate
 ;                  |                               1 = Error setting $sParStyle
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_ParStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
@@ -965,7 +965,7 @@ EndFunc   ;==>_LOWriter_ParStyleDelete
 ; Modified ......:
 ; Remarks .......: Set $iNumChars, $iLines, $iSpcTxt to 0 to disable DropCaps.
 ;                  I am unable to find a way to set Drop Caps character style to "None" as is available in the User Interface. When it is set to "None" LibreOffice returns a blank string ("") but setting it to a blank string throws a COM error/Exception. Consequently, you cannot set Character Style to "None", but you can still disable Drop Caps as noted above.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName, _LO_UnitConvert
 ; Link ..........:
@@ -1017,7 +1017,7 @@ EndFunc   ;==>_LOWriter_ParStyleDropCaps
 ;                  |                               16 = Error setting $bShadow
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName
 ; Link ..........:
@@ -1097,7 +1097,7 @@ EndFunc   ;==>_LOWriter_ParStyleExists
 ;                  |                               8 = Error setting $iWeight
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
 ;                  LibreOffice Writer accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
@@ -1148,7 +1148,7 @@ EndFunc   ;==>_LOWriter_ParStyleFont
 ;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 7.0.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
@@ -1240,7 +1240,7 @@ EndFunc   ;==>_LOWriter_ParStyleGetObjByName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $bAutoHyphen needs to be set to True for the rest of the settings to be activated, but they will be still successfully be set regardless.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName
 ; Link ..........:
@@ -1289,7 +1289,7 @@ EndFunc   ;==>_LOWriter_ParStyleHyphenation
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $iFirstLine Indent cannot be set if $bAutoFirstLine is set to True.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName, _LO_UnitConvert
 ; Link ..........:
@@ -1348,7 +1348,7 @@ EndFunc   ;==>_LOWriter_ParStyleIndent
 ;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 4.0.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName, _LOWriter_ParStylesGetNames
 ; Link ..........:
@@ -1450,7 +1450,7 @@ EndFunc   ;==>_LOWriter_ParStyleOrganizer
 ;                  |                               8 = Error setting $iLineCountVal
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName, _LOWriter_NumStylesGetNames
 ; Link ..........:
@@ -1497,7 +1497,7 @@ EndFunc   ;==>_LOWriter_ParStyleOutLineAndList
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: OverLine line style uses the same constants as underline style.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
@@ -1547,7 +1547,7 @@ EndFunc   ;==>_LOWriter_ParStyleOverLine
 ; Modified ......:
 ; Remarks .......: Break Type must be set before Page Style will be able to be set, and page style needs set before $iPgNumOffSet can be set.
 ;                  LibreOffice doesn't directly show in its User interface options for Break type constants #3 and #6 (Column both) and (Page both), but doesn't throw an error when being set to either one, so they are included here, though I'm not sure if they will work correctly.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  If you set the $sPageStyle parameter, to remove the page break setting you must set this to "".
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName
@@ -1594,7 +1594,7 @@ EndFunc   ;==>_LOWriter_ParStylePageBreak
 ;                  |                               4 = Error setting $iRelativeSize.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Set either $iSubScript or $iSuperScript to 0 to return it to Normal setting.
 ;                  The way LibreOffice is set up Super/Subscript are set in the same setting, Superscript is a positive number from 1 to 100 (percentage), Subscript is a negative number set to -1 to -100 percentage. For the user's convenience this function automatically converts the positive numbers to negative, and back when setting or retrieving subscript values.
@@ -1640,7 +1640,7 @@ EndFunc   ;==>_LOWriter_ParStylePosition
 ;                  |                               2 = Error setting $iScaleWidth
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName
 ; Link ..........:
@@ -1739,7 +1739,7 @@ EndFunc   ;==>_LOWriter_ParStylesGetNames
 ;                  |                               4 = Error setting $iWidth
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  LibreOffice may change the shadow width +/- a Hundredth of a Millimeter (HMM).
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
@@ -1806,7 +1806,7 @@ EndFunc   ;==>_LOWriter_ParStyleShadow
 ;                  The settings in LibreOffice, (Single,1.15, 1.5, Double,) Use the Proportional mode, and are just varying percentages. e.g Single = 100, 1.15 = 115%, 1.5 = 150%, Double = 200%.
 ;                  $iLineSpcHeight depends on the $iLineSpcMode used, see constants for accepted Input values.
 ;                  $iAbovePar, $iBelowPar, $iLineSpcHeight may change +/- a Hundredth of a Millimeter (HMM) once set.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName, _LO_UnitConvert
 ; Link ..........:
@@ -1848,7 +1848,7 @@ EndFunc   ;==>_LOWriter_ParStyleSpace
 ;                  |                               2 = Error setting $nKerning.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  When setting Kerning values in LibreOffice, the measurement is listed in Pt (Printer's Points) in the User Display, however the internal setting is measured in Hundredths of a Millimeter (HMM). They will be automatically converted from Points to Hundredths of a Millimeter and back for retrieval of settings.
 ;                  The acceptable values are from -2 Pt to 928.8 Pt. the figures can be directly converted easily, however, for an unknown reason to myself, LibreOffice begins counting backwards and in negative Hundredths of a Millimeter internally from 928.9 up to 1000 Pt (Max setting).
@@ -1894,7 +1894,7 @@ EndFunc   ;==>_LOWriter_ParStyleSpacing
 ;                  |                               2 = Error setting $bWordOnly
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Strikeout line style is converted to a single line in Ms word document format.
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName
@@ -2056,7 +2056,7 @@ EndFunc   ;==>_LOWriter_ParStyleTabStopDelete
 ;                  $iPosition once set can vary +/- a Hundredth of a Millimeter (HMM). To ensure you can identify the tabstop to modify it again, This function returns the new TabStop position in @Extended when $iPosition is set, return value will be set to 2. See Return Values.
 ;                  Since $iPosition can fluctuate +/- a Hundredth of a Millimeter (HMM) when it is inserted into LibreOffice, it is possible to accidentally overwrite an already existing TabStop.
 ;                  $iFillChar, LibreOffice's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by LibreOffice are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName, _LOWriter_ParStyleTabStopCreate, _LOWriter_ParStyleTabStopsGetList, _LO_UnitConvert
 ; Link ..........:
@@ -2139,7 +2139,7 @@ EndFunc   ;==>_LOWriter_ParStyleTabStopsGetList
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If you do not set ParSplit to True, the rest of the settings will still show to have been set but will not become active until $bParSplit is set to True.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName
 ; Link ..........:
@@ -2184,7 +2184,7 @@ EndFunc   ;==>_LOWriter_ParStyleTxtFlowOpt
 ;                  |                               4 = Error setting $bWordOnly
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ParStyleCreate, _LOWriter_ParStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:

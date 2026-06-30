@@ -227,7 +227,7 @@ EndFunc   ;==>_LOWriter_EndnoteInsert
 ;                  |                               1 = Error setting $sLabel
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Calling $sLabel with Null will either return the current Label, or the current auto-numbering number, depending on if auto-numbering is active.
 ; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert
@@ -293,7 +293,7 @@ EndFunc   ;==>_LOWriter_EndnoteModifyAnchor
 ;                  |                               8 = Error setting $sAfter
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert
 ; Link ..........:
 ; Example .......: Yes
@@ -377,7 +377,7 @@ EndFunc   ;==>_LOWriter_EndnoteSettingsAutoNumber
 ;                  |                               8 = Error setting $sEndnoteArea
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ParStylesGetNames, _LOWriter_CharStylesGetNames, _LOWriter_PageStylesGetNames
 ; Link ..........:
@@ -665,7 +665,7 @@ EndFunc   ;==>_LOWriter_FootnoteInsert
 ;                  |                               1 = Error setting $sLabel
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Calling $sLabel with Null will either return the current Label, or the current auto-numbering number, depending on if auto-numbering is active.
 ; Related .......: _LOWriter_FootnoteInsert, _LOWriter_FootnotesGetList
@@ -737,7 +737,7 @@ EndFunc   ;==>_LOWriter_FootnoteModifyAnchor
 ;                  |                               32 = Error setting $bEndOfDoc
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:
@@ -827,7 +827,7 @@ EndFunc   ;==>_LOWriter_FootnoteSettingsAutoNumber
 ;                  |                               2 = Error setting $sBegin
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:
@@ -896,7 +896,7 @@ EndFunc   ;==>_LOWriter_FootnoteSettingsContinuation
 ;                  |                               8 = Error setting $sFootnoteArea
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_ParStylesGetNames, _LOWriter_PageStylesGetNames, _LOWriter_CharStylesGetNames
 ; Link ..........:

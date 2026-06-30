@@ -92,7 +92,7 @@
 ;                  |                               1 = Error setting $iBackColor
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellStyleBackColor
 ; Link ..........:
 ; Example .......: Yes
@@ -168,7 +168,7 @@ EndFunc   ;==>_LOCalc_CellBackColor
 ;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 3.6.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_CellBorderWidth, _LOCalc_CellBorderStyle, _LOCalc_CellBorderColor, _LO_ConvertColorToLong, _LO_ConvertColorFromLong
 ; Link ..........:
@@ -229,7 +229,7 @@ EndFunc   ;==>_LOCalc_CellBorderColor
 ;                  |                               8 = Error setting $iRight
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $iAll returns an integer value if all (Top, Bottom, Left, Right) padding values are equal, else Null is returned.
 ; Related .......: _LOCalc_CellStyleBorderPadding
@@ -307,7 +307,7 @@ EndFunc   ;==>_LOCalc_CellBorderPadding
 ;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 3.6.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_CellBorderWidth, _LOCalc_CellBorderColor, _LOCalc_CellStyleBorderStyle
 ; Link ..........:
@@ -386,7 +386,7 @@ EndFunc   ;==>_LOCalc_CellBorderStyle
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: For some reason, Horizontal line width may change depending on either top/bottom line widths or vertical line width.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_CellBorderStyle, _LOCalc_CellBorderColor, _LOCalc_CellStyleBorderWidth
 ; Link ..........:
@@ -487,7 +487,7 @@ EndFunc   ;==>_LOCalc_CellCreateTextCursor
 ;                  |                               4 = Error setting $bShadow
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_CellStyleEffect
 ; Link ..........:
@@ -538,7 +538,7 @@ EndFunc   ;==>_LOCalc_CellEffect
 ;                  |                               8 = Error setting $iWeight
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
 ;                  LibreOffice Calc accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
@@ -584,7 +584,7 @@ EndFunc   ;==>_LOCalc_CellFont
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Though Transparency is present on the Font Effects page in the UI, there is (as best as I can find) no setting for it available to read and modify. And further, it seems even in L.O. the setting does not affect the font's transparency, though it may change the color value.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellStyleFontColor
 ; Link ..........:
 ; Example .......: Yes
@@ -627,7 +627,7 @@ EndFunc   ;==>_LOCalc_CellFontColor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Only individual cells are supported, not cell ranges.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current Cell content.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOCalc_CellGetType, _LOCalc_CellString, _LOCalc_CellValue
 ; Link ..........:
 ; Example .......: Yes
@@ -716,7 +716,7 @@ EndFunc   ;==>_LOCalc_CellGetType
 ;                  |                               1 = Error setting $iFormatKey
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_CellStyleNumberFormat, _LOCalc_FormatKeyCreate, _LOCalc_FormatKeysGetList
 ; Link ..........:
@@ -765,7 +765,7 @@ EndFunc   ;==>_LOCalc_CellNumberFormat
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Overline line style uses the same constants as underline style.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_CellUnderline, _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellStyleOverline
 ; Link ..........:
@@ -817,7 +817,7 @@ EndFunc   ;==>_LOCalc_CellOverline
 ;                  |                               8 = Error setting $bHideWhenPrint
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Cell protection only takes effect if you also protect the sheet. (Tools - Protect Sheet)
 ; Related .......: _LOCalc_CellStyleProtection
@@ -867,7 +867,7 @@ EndFunc   ;==>_LOCalc_CellProtection
 ;                  |                               4 = Error setting $iWidth
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  LibreOffice may change the shadow width +/- a Hundredth of a Millimeter (HMM).
 ; Related .......: _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellStyleShadow
@@ -912,7 +912,7 @@ EndFunc   ;==>_LOCalc_CellShadow
 ;                  |                               2 = Error setting $bWordOnly
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_CellStyleStrikeOut
 ; Link ..........:
@@ -956,7 +956,7 @@ EndFunc   ;==>_LOCalc_CellStrikeOut
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Only individual cells are supported, not cell ranges.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current Cell content.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOCalc_CellGetType, _LOCalc_CellFormula, _LOCalc_CellValue
 ; Link ..........:
 ; Example .......: Yes
@@ -1009,7 +1009,7 @@ EndFunc   ;==>_LOCalc_CellString
 ;                  |                               1 = Error setting $iBackColor
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOCalc_CellBackColor, _LO_ConvertColorToLong, _LO_ConvertColorFromLong
 ; Link ..........:
 ; Example .......: Yes
@@ -1074,7 +1074,7 @@ EndFunc   ;==>_LOCalc_CellStyleBackColor
 ;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 3.6.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_CellStyleBorderWidth, _LOCalc_CellStyleBorderStyle, _LOCalc_CellBorderColor _LO_ConvertColorToLong, _LO_ConvertColorFromLong
 ; Link ..........:
@@ -1130,7 +1130,7 @@ EndFunc   ;==>_LOCalc_CellStyleBorderColor
 ;                  |                               8 = Error setting $iRight
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $iAll returns an Integer value if all (Top, Bottom, Left, Right) padding values are equal, else Null is returned.
 ; Related .......: _LOCalc_CellBorderPadding
@@ -1197,7 +1197,7 @@ EndFunc   ;==>_LOCalc_CellStyleBorderPadding
 ;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 3.6.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_CellStyleBorderWidth, _LOCalc_CellStyleBorderColor, _LOCalc_CellBorderStyle
 ; Link ..........:
@@ -1263,7 +1263,7 @@ EndFunc   ;==>_LOCalc_CellStyleBorderStyle
 ;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 3.6.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_CellStyleBorderStyle, _LOCalc_CellStyleBorderColor, _LOCalc_CellBorderWidth
 ; Link ..........:
@@ -1365,7 +1365,7 @@ EndFunc   ;==>_LOCalc_CellStyleCreate
 ;                  |                               1 = Error setting $sCellStyle
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOCalc_CellStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
@@ -1486,7 +1486,7 @@ EndFunc   ;==>_LOCalc_CellStyleDelete
 ;                  |                               4 = Error setting $bShadow
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_CellEffect
 ; Link ..........:
@@ -1566,7 +1566,7 @@ EndFunc   ;==>_LOCalc_CellStyleExists
 ;                  |                               8 = Error setting $iWeight
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
 ;                  LibreOffice Calc accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
@@ -1610,7 +1610,7 @@ EndFunc   ;==>_LOCalc_CellStyleFont
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Though Transparency is present on the Font Effects page in the UI, there is (as best as I can find) no setting for it available to read and modify. And further, it seems even in L.O. the setting does not affect the font's transparency, though it may change the color value.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellFontColor
 ; Link ..........:
 ; Example .......: Yes
@@ -1691,7 +1691,7 @@ EndFunc   ;==>_LOCalc_CellStyleGetObjByName
 ;                  |                               1 = Error setting $iFormatKey
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_CellNumberFormat, _LOCalc_FormatKeyCreate, _LOCalc_FormatKeysGetList
 ; Link ..........:
@@ -1744,7 +1744,7 @@ EndFunc   ;==>_LOCalc_CellStyleNumberFormat
 ;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 4.0.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOCalc_CellStyleExists, _LOCalc_CellStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
@@ -1825,7 +1825,7 @@ EndFunc   ;==>_LOCalc_CellStyleOrganizer
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Overline line style uses the same constants as underline style.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_CellStyleUnderline, _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellOverline
 ; Link ..........:
@@ -1875,7 +1875,7 @@ EndFunc   ;==>_LOCalc_CellStyleOverline
 ;                  |                               8 = Error setting $bHideWhenPrint
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Cell protection only takes effect if you also protect the sheet. (Tools - Protect Sheet)
 ; Related .......: _LOCalc_CellProtection
@@ -1967,7 +1967,7 @@ EndFunc   ;==>_LOCalc_CellStylesGetNames
 ;                  |                               4 = Error setting $iWidth
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  LibreOffice may change the shadow width +/- a Hundredth of a Millimeter (HMM).
 ; Related .......: _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellShadow
@@ -2010,7 +2010,7 @@ EndFunc   ;==>_LOCalc_CellStyleShadow
 ;                  |                               2 = Error setting $bWordOnly
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_CellStrikeOut
 ; Link ..........:
@@ -2055,7 +2055,7 @@ EndFunc   ;==>_LOCalc_CellStyleStrikeOut
 ;                  |                               4 = Error setting $iIndent
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_CellStyleTextOrient, _LOCalc_CellStyleTextProperties, _LOCalc_CellTextAlign
 ; Link ..........:
@@ -2103,7 +2103,7 @@ EndFunc   ;==>_LOCalc_CellStyleTextAlign
 ;                  |                               8 = Error setting $bAsianLayout
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_CellStyleTextAlign, _LOCalc_CellStyleTextProperties, _LOCalc_CellTextOrient
 ; Link ..........:
@@ -2151,7 +2151,7 @@ EndFunc   ;==>_LOCalc_CellStyleTextOrient
 ;                  |                               8 = Error setting $iTextDirection
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_CellStyleTextAlign, _LOCalc_CellStyleTextOrient, _LOCalc_CellTextProperties
 ; Link ..........:
@@ -2196,7 +2196,7 @@ EndFunc   ;==>_LOCalc_CellStyleTextProperties
 ;                  |                               4 = Error setting $bWordOnly
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_CellStyleOverline, _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellUnderline
 ; Link ..........:
@@ -2241,7 +2241,7 @@ EndFunc   ;==>_LOCalc_CellStyleUnderline
 ;                  |                               4 = Error setting $iIndent
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_CellTextOrient, _LOCalc_CellTextProperties, _LOCalc_CellStyleTextAlign
 ; Link ..........:
@@ -2291,7 +2291,7 @@ EndFunc   ;==>_LOCalc_CellTextAlign
 ;                  |                               8 = Error setting $bAsianLayout
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_CellTextAlign, _LOCalc_CellTextProperties, _LOCalc_CellStyleTextOrient
 ; Link ..........:
@@ -2341,7 +2341,7 @@ EndFunc   ;==>_LOCalc_CellTextOrient
 ;                  |                               8 = Error setting $iTextDirection
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_CellTextAlign, _LOCalc_CellTextOrient, _LOCalc_CellStyleTextProperties
 ; Link ..........:
@@ -2388,7 +2388,7 @@ EndFunc   ;==>_LOCalc_CellTextProperties
 ;                  |                               4 = Error setting $bWordOnly
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_CellOverline, _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellStyleUnderline
 ; Link ..........:
@@ -2432,7 +2432,7 @@ EndFunc   ;==>_LOCalc_CellUnderline
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Only individual cells are supported, not cell ranges.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current Cell content.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOCalc_CellGetType, _LOCalc_CellString, _LOCalc_CellFormula
 ; Link ..........:
 ; Example .......: Yes

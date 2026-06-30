@@ -97,7 +97,7 @@
 ;                  |                               1 = Error setting $iBackColor
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
@@ -173,7 +173,7 @@ EndFunc   ;==>_LOWriter_TableBackColor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_TableBorderWidth, _LOWriter_TableBorderStyle, _LOWriter_TableBorderPadding
 ; Link ..........:
@@ -224,7 +224,7 @@ EndFunc   ;==>_LOWriter_TableBorderColor
 ;                  |                               8 = Error setting $iRight border distance
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LO_UnitConvert, _LOWriter_TableBorderWidth, _LOWriter_TableBorderStyle, _LOWriter_TableBorderColor
 ; Link ..........:
@@ -330,7 +330,7 @@ EndFunc   ;==>_LOWriter_TableBorderPadding
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_TableBorderWidth, _LOWriter_TableBorderColor, _LOWriter_TableBorderPadding
 ; Link ..........:
@@ -393,7 +393,7 @@ EndFunc   ;==>_LOWriter_TableBorderStyle
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To "Turn Off" Borders, set them to 0
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LO_UnitConvert, _LOWriter_TableBorderStyle, _LOWriter_TableBorderColor, _LOWriter_TableBorderPadding
 ; Link ..........:
@@ -444,7 +444,7 @@ EndFunc   ;==>_LOWriter_TableBorderWidth
 ; Modified ......:
 ; Remarks .......: Break Type must be set before Page Style will be able to be set, and page style needs set before $iPgNumOffSet can be set.
 ;                  LibreOffice doesn't directly show in its User interface options for Break type constants #3 and #6 (Column both) and (Page both), but doesn't throw an error when being set to either one, so they are included here, though I'm not sure if they will work correctly.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_PageStylesGetNames
 ; Link ..........:
@@ -511,7 +511,7 @@ EndFunc   ;==>_LOWriter_TableBreak
 ;                  |                               1 = Error setting $iBackColor
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
@@ -578,7 +578,7 @@ EndFunc   ;==>_LOWriter_TableCellBackColor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Error values for Initialization and Processing are passed from the internal border setting function.
 ; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_TableCellBorderWidth, _LOWriter_TableCellBorderStyle, _LOWriter_TableCellBorderPadding
@@ -626,7 +626,7 @@ EndFunc   ;==>_LOWriter_TableCellBorderColor
 ;                  |                               8 = Error setting $iRight.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition, _LO_UnitConvert, _LOWriter_TableCellBorderColor, _LOWriter_TableCellBorderStyle, _LOWriter_TableCellBorderWidth
 ; Link ..........:
@@ -716,7 +716,7 @@ EndFunc   ;==>_LOWriter_TableCellBorderPadding
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Error values for Initialization and Processing are passed from the internal border setting function.
 ; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition, _LOWriter_TableCellBorderWidth, _LOWriter_TableCellBorderColor, _LOWriter_TableCellBorderPadding
@@ -771,7 +771,7 @@ EndFunc   ;==>_LOWriter_TableCellBorderStyle
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To "Turn Off" Borders, set them to 0
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Error values for Initialization and Processing are passed from the internal border setting function.
 ; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition, _LO_UnitConvert, _LOWriter_TableCellBorderStyle, _LOWriter_TableCellBorderColor, _LOWriter_TableCellBorderPadding
@@ -850,7 +850,7 @@ EndFunc   ;==>_LOWriter_TableCellCreateTextCursor
 ; Modified ......:
 ; Remarks .......: Formula can only be set for an individual cell, not a range.
 ;                  Setting the formula will overwrite any existing data in the cell.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To retrieve the total of a formula, use _LOWriter_TableCellValue.
 ; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition,
 ; Link ..........:
@@ -1188,7 +1188,7 @@ EndFunc   ;==>_LOWriter_TableCellGetObjByPosition
 ;                  |                               1 = Error setting $bProtect
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition,
 ; Link ..........:
 ; Example .......: Yes
@@ -1271,7 +1271,7 @@ EndFunc   ;==>_LOWriter_TableCellsGetNames
 ; Modified ......:
 ; Remarks .......: String can only be set for an individual cell, not a range.
 ;                  Setting the String will overwrite any existing data in the cell.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To prevent accidental and unwanted newlines, @CRLF is automatically replaced with @CR to match LibreOffice's newline style.
 ; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition,
 ; Link ..........:
@@ -1327,7 +1327,7 @@ EndFunc   ;==>_LOWriter_TableCellString
 ; Remarks .......: Value can only be set for an individual cell, not a range.
 ;                  Setting the Value will overwrite any existing data in the cell.
 ;                  For a value cell the value is returned, for a string cell zero is returned and for a formula cell the result value of a formula is returned.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition,
 ; Link ..........:
 ; Example .......: Yes
@@ -1377,7 +1377,7 @@ EndFunc   ;==>_LOWriter_TableCellValue
 ;                  |                               1 = Error setting $iVertOrient
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition,
 ; Link ..........:
 ; Example .......: Yes
@@ -2124,7 +2124,7 @@ EndFunc   ;==>_LOWriter_TableGetObjByName
 ; Modified ......:
 ; Remarks .......: Left Margin cannot be set unless Table Orientation is set to other than $LOW_ORIENT_HORI_FULL(6), or $LOW_ORIENT_HORI_LEFT(3).
 ;                  Right Margin cannot be set unless the table orientation is set to $LOW_ORIENT_HORI_NONE(0), or $LOW_ORIENT_HORI_LEFT(3).
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LO_UnitConvert
 ; Link ..........:
@@ -2217,7 +2217,7 @@ EndFunc   ;==>_LOWriter_TableMargin
 ;                  |                               64 = Error setting $bRepeatHeading
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $bSplitRows will return 0 instead of a boolean if the Table's rows have different settings for $bSplitRows.
 ; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName
@@ -2318,7 +2318,7 @@ EndFunc   ;==>_LOWriter_TableProperties
 ;                  |                               1 = Error setting $iBackColor
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_TableRowGetCount
 ; Link ..........:
 ; Example .......: Yes
@@ -2510,7 +2510,7 @@ EndFunc   ;==>_LOWriter_TableRowInsert
 ; Modified ......:
 ; Remarks .......: The First row number contained in a table is 0.
 ;                  None of these properties can be set if the Table is not inserted yet.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_TableRowGetCount
 ; Link ..........:
@@ -2623,7 +2623,7 @@ EndFunc   ;==>_LOWriter_TablesGetNames
 ;                  |                               4 = Error setting $iWidth
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  LibreOffice may change the shadow width +/- a Hundredth of a Millimeter (HMM).
 ; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
@@ -2699,7 +2699,7 @@ EndFunc   ;==>_LOWriter_TableShadow
 ;                  |                               1 = Error setting $sTableStyle
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOWriter_TableStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
@@ -2834,7 +2834,7 @@ EndFunc   ;==>_LOWriter_TableStylesGetNames
 ; Modified ......:
 ; Remarks .......: Relative Width and Width cannot be set until the Table Horizontal orientation is set to other than $LOW_ORIENT_HORI_FULL(6), which is LibeOffice's default setting.
 ;                  Width may change +/- a Hundredth of a Millimeter (HMM) once set due to LibreOffice.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LO_UnitConvert
 ; Link ..........:

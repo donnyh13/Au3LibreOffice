@@ -64,7 +64,7 @@
 ; Modified ......:
 ; Remarks .......: By default, new connections have auto-commit active.
 ;                  You can only modify the AutoCommit setting on private connections, however you can retrieve the current setting of AutoCommit for non-private or private connections.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes

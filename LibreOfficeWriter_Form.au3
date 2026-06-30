@@ -213,7 +213,7 @@ EndFunc   ;==>_LOWriter_FormAdd
 ;                  |                               2 = Error setting $bInputRequired
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ;                  Reference Values are not included here as they are applicable to Calc only, as far as I can ascertain.
@@ -341,7 +341,7 @@ EndFunc   ;==>_LOWriter_FormConCheckBoxData
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $sGraphics is called with an invalid Graphic URL, graphic is set to Null. The Return for $sGraphics is an Image Object.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $iDefaultState, $mFont, $sAddInfo.
@@ -686,7 +686,7 @@ EndFunc   ;==>_LOWriter_FormConCheckBoxState
 ;                  |                               16 = Error setting $sListContent
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConComboBoxValue, _LOWriter_FormConComboBoxGeneral
@@ -844,7 +844,7 @@ EndFunc   ;==>_LOWriter_FormConComboBoxData
 ;                  |                               16777216 = Error setting $sHelpURL
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $asList, $sDefaultTxt, $mFont, $sAddInfo.
@@ -1156,7 +1156,7 @@ EndFunc   ;==>_LOWriter_FormConComboBoxGeneral
 ;                  |                               1 = Error setting $sValue
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the currently selected value.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call $sValue with Default keyword to reset the value to default.
 ; Related .......: _LOWriter_FormConComboBoxGeneral, _LOWriter_FormConComboBoxData
 ; Link ..........:
@@ -1217,7 +1217,7 @@ EndFunc   ;==>_LOWriter_FormConComboBoxValue
 ;                  |                               2 = Error setting $bInputRequired
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConCurrencyFieldValue, _LOWriter_FormConCurrencyFieldGeneral
@@ -1373,7 +1373,7 @@ EndFunc   ;==>_LOWriter_FormConCurrencyFieldData
 ;                  |                               -1 = Error setting $sHelpURL (See remarks.)
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  If there is an error setting $sHelpURL, the @Extended value for Property setting error will be either -1, or if there are other errors present, a negative value of the error value.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
@@ -1753,7 +1753,7 @@ EndFunc   ;==>_LOWriter_FormConCurrencyFieldGeneral
 ;                  |                               1 = Error setting $nValue
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current value. Return will be Null if a value hasn't been set.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter. Return will be Null if a value hasn't been set.
 ;                  Call $nValue with Default keyword to reset the value to default.
 ; Related .......: _LOWriter_FormConCurrencyFieldGeneral, _LOWriter_FormConCurrencyFieldData
 ; Link ..........:
@@ -1813,7 +1813,7 @@ EndFunc   ;==>_LOWriter_FormConCurrencyFieldValue
 ;                  |                               2 = Error setting $bInputRequired
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConDateFieldValue, _LOWriter_FormConDateFieldGeneral
@@ -1965,7 +1965,7 @@ EndFunc   ;==>_LOWriter_FormConDateFieldData
 ;                  |                               268435456 = Error setting $sHelpURL
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $mFont, $sAddInfo.
@@ -2369,7 +2369,7 @@ EndFunc   ;==>_LOWriter_FormConDateFieldGeneral
 ;                  |                               1 = Error setting $tDateValue
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current Date value. Return will be Null if the Date hasn't been set.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter. Return will be Null if the Date hasn't been set.
 ;                  Call $tDateValue with Default keyword to reset the value to default.
 ; Related .......: _LOWriter_FormConDateFieldGeneral, _LOWriter_FormConDateFieldData
 ; Link ..........:
@@ -2540,7 +2540,7 @@ EndFunc   ;==>_LOWriter_FormConDelete
 ;                  |                               262144 = Error setting $sHelpURL
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $sDefaultTxt, $mFont, $sAddInfo.
@@ -2784,7 +2784,7 @@ EndFunc   ;==>_LOWriter_FormConFileSelFieldGeneral
 ;                  |                               1 = Error setting $sValue
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current value.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call $sValue with Default keyword to reset the value to default.
 ; Related .......: _LOWriter_FormConFileSelFieldGeneral
 ; Link ..........:
@@ -2851,7 +2851,7 @@ EndFunc   ;==>_LOWriter_FormConFileSelFieldValue
 ;                  |                               8 = Error setting $bFilter
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConFormattedFieldValue, _LOWriter_FormConFormattedFieldGeneral
@@ -3012,7 +3012,7 @@ EndFunc   ;==>_LOWriter_FormConFormattedFieldData
 ;                  |                               134217728 = Error setting $sHelpURL
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $mFont, $sAddInfo.
@@ -3360,7 +3360,7 @@ EndFunc   ;==>_LOWriter_FormConFormattedFieldGeneral
 ;                  |                               1 = Error setting $nValue
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current value.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call $nValue with Default keyword to reset the value to default.
 ; Related .......: _LOWriter_FormConFormattedFieldGeneral, _LOWriter_FormConFormattedFieldData
 ; Link ..........:
@@ -3493,7 +3493,7 @@ EndFunc   ;==>_LOWriter_FormConGetParent
 ;                  |                               512 = Error setting $sHelpURL
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $mFont, $sAddInfo.
@@ -3697,7 +3697,7 @@ EndFunc   ;==>_LOWriter_FormConGroupBoxGeneral
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $sGraphics is called with an invalid Graphic URL, graphic is set to Null. The Return for $sGraphics is an Image Object.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Setting $iBorder to $LOW_FORM_CON_BORDER_WITHOUT, will not trigger an error, but does not currently work. This is a known bug, https://bugs.documentfoundation.org/show_bug.cgi?id=131196
@@ -4036,7 +4036,7 @@ EndFunc   ;==>_LOWriter_FormConImageButtonGeneral
 ;                  |                               2 = Error setting $bInputRequired
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConImageControlGeneral
@@ -4148,7 +4148,7 @@ EndFunc   ;==>_LOWriter_FormConImageControlData
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $sGraphics is called with an invalid Graphic URL, graphic is set to Null. The Return for $sGraphics is an Image Object.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $sAddInfo.
@@ -4593,7 +4593,7 @@ EndFunc   ;==>_LOWriter_FormConInsert
 ;                  |                               32768 = Error setting $sHelpURL
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $mFont, $sAddInfo.
@@ -4818,7 +4818,7 @@ EndFunc   ;==>_LOWriter_FormConLabelGeneral
 ;                  |                               16 = Error setting $iBoundField
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ;                  $asListContent is not error checked for the same content, but only that the set array size is the same.
@@ -4978,7 +4978,7 @@ EndFunc   ;==>_LOWriter_FormConListBoxData
 ; Modified ......:
 ; Remarks .......: The array called for $asList should be a single dimension array, with one List entry as a String, per array element.
 ;                  The array called for $aiDefaultSel should be a single dimension array, with one Integer value, corresponding to the position in the $asList array, per array element, to indicate which value(s) is/are default.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $asList, $mFont, $sAddInfo.
@@ -5442,7 +5442,7 @@ EndFunc   ;==>_LOWriter_FormConListBoxSelection
 ;                  |                               131072 = Error setting $sHelpURL
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $mFont, $sAddInfo.
@@ -5680,7 +5680,7 @@ EndFunc   ;==>_LOWriter_FormConNavBarGeneral
 ;                  |                               2 = Error setting $bInputRequired
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConNumericFieldValue, _LOWriter_FormConNumericFieldGeneral
@@ -5830,7 +5830,7 @@ EndFunc   ;==>_LOWriter_FormConNumericFieldData
 ;                  |                               536870912 = Error setting $sHelpURL
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $mFont, $sAddInfo.
@@ -6188,7 +6188,7 @@ EndFunc   ;==>_LOWriter_FormConNumericFieldGeneral
 ;                  |                               1 = Error setting $nValue
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current value. Return will be Null if a value hasn't been set.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter. Return will be Null if a value hasn't been set.
 ;                  Call $nValue with Default keyword to reset the value to default.
 ; Related .......: _LOWriter_FormConNumericFieldGeneral, _LOWriter_FormConNumericFieldData
 ; Link ..........:
@@ -6248,7 +6248,7 @@ EndFunc   ;==>_LOWriter_FormConNumericFieldValue
 ;                  |                               2 = Error setting $bInputRequired
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ;                  Reference Values are not included here as they are applicable to Calc only, as far as I can ascertain.
@@ -6376,7 +6376,7 @@ EndFunc   ;==>_LOWriter_FormConOptionButtonData
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $sGraphics is called with an invalid Graphic URL, graphic is set to Null. The Return for $sGraphics is an Image Object.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $iDefaultState, $mFont, $sAddInfo.
@@ -6719,7 +6719,7 @@ EndFunc   ;==>_LOWriter_FormConOptionButtonState
 ;                  |                               8 = Error setting $bFilter
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConPatternFieldValue, _LOWriter_FormConPatternFieldGeneral
@@ -6869,7 +6869,7 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldData
 ;                  |                               16777216 = Error setting $sHelpURL
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $sDefaultTxt, $mFont, $sAddInfo.
@@ -7177,7 +7177,7 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldGeneral
 ;                  |                               1 = Error setting $sValue
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current value.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call $sValue with Default keyword to reset the value to default.
 ; Related .......: _LOWriter_FormConPatternFieldGeneral, _LOWriter_FormConPatternFieldData
 ; Link ..........:
@@ -7243,7 +7243,7 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldValue
 ;                  |                               8 = Error setting $bProtectPos
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LO_UnitConvert, _LOWriter_FormConSize
 ; Link ..........:
 ; Example .......: Yes
@@ -7404,7 +7404,7 @@ EndFunc   ;==>_LOWriter_FormConPosition
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $sGraphics is called with an invalid Graphic URL, graphic is set to Null. The Return for $sGraphics is an Image Object.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $iDefaultState, $mFont, $sAddInfo.
@@ -8032,7 +8032,7 @@ EndFunc   ;==>_LOWriter_FormConsGetList
 ;                  |                               4 = Error setting $bProtectSize
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  I have skipped Keep Ratio, as currently it seems unable to be set for controls.
 ; Related .......: _LO_UnitConvert, _LOWriter_FormConPosition
@@ -8111,7 +8111,7 @@ EndFunc   ;==>_LOWriter_FormConSize
 ;                  |                               2 = Error setting $bInputRequired
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ;                  Reference Values are not included here as they are applicable to Calc only, as far as I can ascertain.
@@ -8210,7 +8210,7 @@ EndFunc   ;==>_LOWriter_FormConTableConCheckBoxData
 ;                  |                               4096 = Error setting $sHelpURL
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iDefaultState, $sAddInfo.
@@ -8610,7 +8610,7 @@ EndFunc   ;==>_LOWriter_FormConTableConColumnsGetList
 ;                  |                               16 = Error setting $sListContent
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConComboBoxGeneral
@@ -8740,7 +8740,7 @@ EndFunc   ;==>_LOWriter_FormConTableConComboBoxData
 ;                  |                               32768 = Error setting $sHelpURL
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $asList, $sDefaultTxt, $sAddInfo.
@@ -8963,7 +8963,7 @@ EndFunc   ;==>_LOWriter_FormConTableConComboBoxGeneral
 ;                  |                               2 = Error setting $bInputRequired
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConCurrencyFieldGeneral
@@ -9094,7 +9094,7 @@ EndFunc   ;==>_LOWriter_FormConTableConCurrencyFieldData
 ;                  |                               8388608 = Error setting $sHelpURL
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $sAddInfo.
@@ -9394,7 +9394,7 @@ EndFunc   ;==>_LOWriter_FormConTableConCurrencyFieldGeneral
 ;                  |                               2 = Error setting $bInputRequired
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConDateFieldGeneral
@@ -9521,7 +9521,7 @@ EndFunc   ;==>_LOWriter_FormConTableConDateFieldData
 ;                  |                               1048576 = Error setting $sHelpURL
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $sAddInfo.
@@ -9850,7 +9850,7 @@ EndFunc   ;==>_LOWriter_FormConTableConDateFieldGeneral
 ;                  |                               8 = Error setting $bFilter
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConFormattedFieldGeneral
@@ -9986,7 +9986,7 @@ EndFunc   ;==>_LOWriter_FormConTableConFormattedFieldData
 ;                  |                               524288 = Error setting $sHelpURL
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $sAddInfo.
@@ -10299,7 +10299,7 @@ EndFunc   ;==>_LOWriter_FormConTableConFormattedFieldGeneral
 ;                  |                               65536 = Error setting $sHelpURL
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $mFont, $sAddInfo.
@@ -10535,7 +10535,7 @@ EndFunc   ;==>_LOWriter_FormConTableConGeneral
 ;                  |                               16 = Error setting $iBoundField
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ;                  $asListContent is not error checked for the same content, but only that the set array size is the same.
@@ -10667,7 +10667,7 @@ EndFunc   ;==>_LOWriter_FormConTableConListBoxData
 ; Modified ......:
 ; Remarks .......: The array called for $asList should be a single dimension array, with one List entry as a String, per array element.
 ;                  The array called for $aiDefaultSel should be a single dimension array, with one Integer value, corresponding to the position in the $asList array, per array element, to indicate which value(s) is/are default.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $asList, $sAddInfo.
@@ -10873,7 +10873,7 @@ EndFunc   ;==>_LOWriter_FormConTableConListBoxGeneral
 ;                  |                               2 = Error setting $bInputRequired
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConNumericFieldGeneral
@@ -10998,7 +10998,7 @@ EndFunc   ;==>_LOWriter_FormConTableConNumericFieldData
 ;                  |                               2097152 = Error setting $sHelpURL
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $sAddInfo.
@@ -11283,7 +11283,7 @@ EndFunc   ;==>_LOWriter_FormConTableConNumericFieldGeneral
 ;                  |                               8 = Error setting $bFilter
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConPatternFieldGeneral
@@ -11408,7 +11408,7 @@ EndFunc   ;==>_LOWriter_FormConTableConPatternFieldData
 ;                  |                               65536 = Error setting $sHelpURL
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $sDefaultTxt, $sAddInfo.
@@ -11642,7 +11642,7 @@ EndFunc   ;==>_LOWriter_FormConTableConPatternFieldGeneral
 ;                  |                               8 = Error setting $bFilter
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConTextBoxGeneral
@@ -11761,7 +11761,7 @@ EndFunc   ;==>_LOWriter_FormConTableConTextBoxData
 ;                  |                               16384 = Error setting $sHelpURL
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $sDefaultTxt, $sAddInfo.
@@ -11976,7 +11976,7 @@ EndFunc   ;==>_LOWriter_FormConTableConTextBoxGeneral
 ;                  |                               2 = Error setting $bInputRequired
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConTimeFieldGeneral
@@ -12100,7 +12100,7 @@ EndFunc   ;==>_LOWriter_FormConTableConTimeFieldData
 ;                  |                               524288 = Error setting $sHelpURL
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $mFont, $sAddInfo.
@@ -12467,7 +12467,7 @@ EndFunc   ;==>_LOWriter_FormConTextBoxCreateTextCursor
 ;                  |                               8 = Error setting $bFilter
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConTextBoxGeneral
@@ -12617,7 +12617,7 @@ EndFunc   ;==>_LOWriter_FormConTextBoxData
 ;                  |                               16777216 = Error setting $sHelpURL
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $sDefaultTxt, $mFont, $sAddInfo.
@@ -12976,7 +12976,7 @@ EndFunc   ;==>_LOWriter_FormConTextBoxGeneral
 ;                  |                               2 = Error setting $bInputRequired
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ; Related .......: _LOWriter_FormConTimeFieldValue, _LOWriter_FormConTimeFieldGeneral
@@ -13125,7 +13125,7 @@ EndFunc   ;==>_LOWriter_FormConTimeFieldData
 ;                  |                               134217728 = Error setting $sHelpURL
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $mFont, $sAddInfo.
@@ -13531,7 +13531,7 @@ EndFunc   ;==>_LOWriter_FormConTimeFieldGeneral
 ;                  |                               1 = Error setting $tTimeValue
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current Time value. Return will be Null if the Time hasn't been set.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter. Return will be Null if the Time hasn't been set.
 ;                  Call $tTimeValue with Default keyword to reset the value to default.
 ; Related .......: _LOWriter_FormConTimeFieldGeneral, _LOWriter_FormConTimeFieldData
 ; Link ..........:
@@ -13693,7 +13693,7 @@ EndFunc   ;==>_LOWriter_FormDelete
 ;                  |                               8 = Error setting $bUseControlWizards
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  In order to determine current values for $bFormDesignMode and $bUseControlWizards, a Macro is temporarily injected into the document, and subsequently deleted.
 ; Related .......:
@@ -14087,7 +14087,7 @@ EndFunc   ;==>_LOWriter_FormParent
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The array called for either $aLinkMaster or $aLinkSlave, should be a single dimension array, with one Field name per array element.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Error checking for $aLinkMaster or $aLinkSlave does not check content, only array size.
 ;                  There currently is no ability to set $iCycle to Default, but when it is already set to Default, the return value will be an empty string.
@@ -14262,7 +14262,7 @@ EndFunc   ;==>_LOWriter_FormPropertiesData
 ;                  |                               16 = Error setting $iSubType
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOWriter_FormPropertiesData
 ; Link ..........:

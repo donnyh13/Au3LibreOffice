@@ -577,7 +577,7 @@ EndFunc   ;==>_LOCalc_DocExport
 ;                  @Error: 6, @Extended: 1 = Current LibreOffice version less than 7.4.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -859,7 +859,7 @@ EndFunc   ;==>_LOCalc_DocIsReadOnly
 ;                  |                               1 = Error setting $bMaximize
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -908,7 +908,7 @@ EndFunc   ;==>_LOCalc_DocMaximize
 ;                  |                               1 = Error setting $bMinimize
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -1085,7 +1085,7 @@ EndFunc   ;==>_LOCalc_DocOpen
 ; Modified ......:
 ; Remarks .......: X & Y, on my computer at least, seem to go no lower than 8(X) and 30(Y), if you enter lower than this, it will cause a "property setting Error".
 ;                  If you want more accurate functionality, use the "WinMove" AutoIt function.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:
@@ -2068,7 +2068,7 @@ EndFunc   ;==>_LOCalc_DocUndoReset
 ;                  |                               256 = Error setting $iGridColor
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_DocViewWindowSettings, _LO_ConvertColorToLong, _LO_ConvertColorFromLong
 ; Link ..........:
@@ -2201,7 +2201,7 @@ EndFunc   ;==>_LOCalc_DocViewDisplaySettings
 ;                  |                               128 = Error setting $bObjects
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:
@@ -2308,7 +2308,7 @@ EndFunc   ;==>_LOCalc_DocViewWindowSettings
 ;                  |                               1 = Error setting $bVisible
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current visibility setting.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -2357,7 +2357,7 @@ EndFunc   ;==>_LOCalc_DocVisible
 ;                  |                               1 = Error setting $iColumn
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  This will fail if there are currently any frozen Columns.
 ; Related .......:
 ; Link ..........:
@@ -2406,7 +2406,7 @@ EndFunc   ;==>_LOCalc_DocWindowFirstColumn
 ;                  |                               1 = Error setting $iRow
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  This will fail if there are currently any frozen Rows.
 ; Related .......:
 ; Link ..........:
@@ -2490,7 +2490,7 @@ EndFunc   ;==>_LOCalc_DocWindowIsSplit
 ; Modified ......:
 ; Remarks .......: To remove the split view, set both $iX and $iY to 0.
 ;                  $bReturnPixels changes only the return value type, it doesn't change the type of input values to use for $iX and $iY.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:
@@ -2589,7 +2589,7 @@ EndFunc   ;==>_LOCalc_DocWindowVisibleRange
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Zoom type always has the value of $LOC_ZOOMTYPE_BY_VALUE(3), when using the other zoom types, the value stays the same, but the zoom level is modified. Consequently, I have not added an error check for the Zoom Type property being correctly set.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:

@@ -832,7 +832,7 @@ EndFunc   ;==>_LOCalc_SheetLink
 ;                  |                               4 = Error setting $iLinkMode
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  The Return for $oNewDoc is the File path of the linked Document.
 ;                  If you set $oNewDoc, you must set $sSheetName and $iLinkMode also.
@@ -993,7 +993,7 @@ EndFunc   ;==>_LOCalc_SheetMove
 ;                  |                               1 = Error setting $sName
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOCalc_SheetExists
 ; Link ..........:
 ; Example .......: Yes
@@ -1056,7 +1056,7 @@ EndFunc   ;==>_LOCalc_SheetName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call $oRange with the Default keyword to reset the Column Range to none.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  The Return for $oRange will be a Cell Range or Cell Object, if no Column is set, the return will always be the first cell (A1) of the Sheet.
 ; Related .......: _LOCalc_SheetPrintRowsRepeat
@@ -1152,7 +1152,7 @@ EndFunc   ;==>_LOCalc_SheetPrintColumnsRepeat
 ; Modified ......:
 ; Remarks .......: Call $aoRange with an empty Array (local $aArray[0]) to set the whole sheet to be printed (default), instead of a specific range.
 ;                  Likewise, when retrieving the current print range, if the returned array is empty, that means the entire sheet (all of the used cells) is set to be printed.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  If you set a Print Range for one sheet, any other Sheet without a Print Range set will NOT be printed.
 ; Related .......:
 ; Link ..........:
@@ -1220,7 +1220,7 @@ EndFunc   ;==>_LOCalc_SheetPrintRangeModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call $oRange with the Default keyword to reset the Row Range to none.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  The Return for $oRange will be a Cell Range or Cell Object, if no Row is set, the return will always be the first cell (A1) of the Sheet.
 ; Related .......: _LOCalc_SheetPrintColumnsRepeat
@@ -1515,7 +1515,7 @@ EndFunc   ;==>_LOCalc_SheetsGetNames
 ;                  |                               1 = Error setting $iColor
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
@@ -1602,7 +1602,7 @@ EndFunc   ;==>_LOCalc_SheetUnprotect
 ;                  |                               1 = Error setting $bVisiblee
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes

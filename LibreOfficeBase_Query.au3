@@ -674,7 +674,7 @@ EndFunc   ;==>_LOBase_QueryDocOpenByObject
 ;                  |                               1 = Error setting $bVisible
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -852,7 +852,7 @@ EndFunc   ;==>_LOBase_QueryFieldGetObjByName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $sRealName modifies nothing, but is an indicator of where the Query Field's Real name (The name without an Alias) will be returned when returning the current settings.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:
@@ -1068,7 +1068,7 @@ EndFunc   ;==>_LOBase_QueryGetObjByName
 ; Modified ......:
 ; Remarks .......: This function does not check if the new name already exists in Tables or Queries.
 ;                  According to LibreOffice SDK API IDL XRename Interface, It would seem some Database types don't support the renaming of Queries.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -1117,7 +1117,7 @@ EndFunc   ;==>_LOBase_QueryName
 ;                  |                               1 = Error setting $sSQL_Command
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes

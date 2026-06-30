@@ -343,7 +343,7 @@ EndFunc   ;==>_LOCalc_FieldHyperlinkInsert
 ;                  |                               4 = Error setting $sTargetFrame
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:

@@ -649,7 +649,7 @@ EndFunc   ;==>_LOBase_FormDocSave
 ;                  |                               1 = Error setting $bVisible
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current visibility setting.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  If a Form Document has been opened "Hidden", visibility cannot be set or retrieved.
 ; Related .......:
 ; Link ..........:

@@ -127,7 +127,7 @@ EndFunc   ;==>_LOCalc_CommentAdd
 ;                  |                               1 = Error setting $iColor
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current setting.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
@@ -248,7 +248,7 @@ EndFunc   ;==>_LOCalc_CommentAreaFillStyle
 ;                  |                               1024 = Error setting $iToIntense
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
 ; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
@@ -460,7 +460,7 @@ EndFunc   ;==>_LOCalc_CommentAreaGradient
 ;                  The returned array will contain two columns, the first column will contain the ColorStop offset values, a number between 0 and 1.0. The second column will contain an Integer, the color value, as a RGB Color Integer.
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOCalc_CommentAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: Yes
@@ -577,7 +577,7 @@ EndFunc   ;==>_LOCalc_CommentAreaGradientMulticolor
 ;                  |                               32 = Error setting $iTransparency
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  LibreOffice may change the shadow distance +/- a Hundredth of a Millimeter (HMM).
 ;                  Presently only the location settings applying the Shadow to the bottom, right, or bottom-right corners of the Comment visually work, both in LibreOffice and using this function. Though it still can be set to the other locations.
@@ -688,7 +688,7 @@ EndFunc   ;==>_LOCalc_CommentAreaShadow
 ;                  |                               1 = Error setting $iTransparency
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -767,7 +767,7 @@ EndFunc   ;==>_LOCalc_CommentAreaTransparency
 ;                  |                               64 = Error setting $iEnd
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:
@@ -947,7 +947,7 @@ EndFunc   ;==>_LOCalc_CommentAreaTransparencyGradient
 ;                  The returned array will contain two columns, the first column will contain the ColorStop offset values, a number between 0 and 1.0. The second column will contain an Integer, the Transparency percentage value between 0 and 100%.
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOCalc_CommentAreaGradientMulticolor
 ; Link ..........:
 ; Example .......: Yes
@@ -1066,7 +1066,7 @@ EndFunc   ;==>_LOCalc_CommentAreaTransparencyGradientMulti
 ; Remarks .......: If $iExtension is set to $LOC_COMMENT_CALLOUT_EXT_HORI, or $LOC_COMMENT_CALLOUT_EXT_VERT, $iExtendBy will be set to the alignment value of either constants $LOC_COMMENT_CALLOUT_EXT_ALIGN_HORI_*, or $LOC_COMMENT_CALLOUT_EXT_ALIGN_VERT_*.
 ;                  If $iExtension is set to $LOC_COMMENT_CALLOUT_EXT_OPTIMAL, $LOC_COMMENT_CALLOUT_EXT_FROM_LEFT, or $LOC_COMMENT_CALLOUT_EXT_FROM_TOP, $iExtendBy will be set to the length to extend the Callout line from the Comment box, in Hundredths of a Millimeter (HMM).
 ;                  If $iCalloutStyle is not set to $LOC_COMMENT_CALLOUT_STYLE_ANGLED_CONNECTOR, both $bOptimal and $iLength, are not used/unavailable for setting.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LO_UnitConvert
 ; Link ..........:
@@ -1469,7 +1469,7 @@ EndFunc   ;==>_LOCalc_CommentGetObjByIndex
 ;                  When retrieving the current settings, $bSync will be a Boolean value of whether the Start Arrowhead settings are currently equal to the End Arrowhead setting values.
 ;                  Both $vStartStyle and $vEndStyle accept a String or an Integer because there is the possibility of a custom Arrowhead being available the user may want to use.
 ;                  When retrieving the current settings, both $vStartStyle and $vEndStyle could be either an Integer or a String. It will be a String if the current Arrowhead is a custom Arrowhead, else an Integer, corresponding to one of the constants, $LOC_COMMENT_LINE_ARROW_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_CommentLineProperties
 ; Link ..........:
@@ -1614,7 +1614,7 @@ EndFunc   ;==>_LOCalc_CommentLineArrowStyles
 ; Modified ......:
 ; Remarks .......: $vStyle accepts a String or an Integer because there is the possibility of a custom Line Style being available that the user may want to use.
 ;                  When retrieving the current settings, $vStyle could be either an Integer or a String. It will be a String if the current Line Style is a custom Line Style, else an Integer, corresponding to one of the constants, $LOC_COMMENT_LINE_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOCalc_CommentLineArrowStyles
 ; Link ..........:
@@ -1751,7 +1751,7 @@ EndFunc   ;==>_LOCalc_CommentLineProperties
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The X Coordinate seems to be measured from the right hand edge of the Comment Box, and the Y Coordinate seems to be measured from the top of the comment box.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LO_UnitConvert, _LOCalc_CommentRotate, _LOCalc_CommentSize
 ; Link ..........:
 ; Example .......: Yes
@@ -1830,7 +1830,7 @@ EndFunc   ;==>_LOCalc_CommentPosition
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function uses the deprecated LibreOffice method RotateAngle and may stop working in future LibreOffice versions, after 7.3.4.2.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOCalc_CommentPosition, _LOCalc_CommentSize
 ; Link ..........:
 ; Example .......: Yes
@@ -1974,7 +1974,7 @@ EndFunc   ;==>_LOCalc_CommentsGetList
 ;                  |                               4 = Error setting $bProtectSize
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  I have skipped "Keep Ratio, as there is no built in setting for it for Comments, so I would have to formulate a custom function for this purpose.
 ; Related .......: _LO_UnitConvert, _LOCalc_CommentPosition
@@ -2053,7 +2053,7 @@ EndFunc   ;==>_LOCalc_CommentSize
 ;                  |                               1 = Error setting $sText
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current text content of the comment.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -2107,7 +2107,7 @@ EndFunc   ;==>_LOCalc_CommentText
 ;                  |                               2 = Error setting $bFullWidth
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:
@@ -2295,7 +2295,7 @@ EndFunc   ;==>_LOCalc_CommentTextAnchor
 ; Remarks .......: The Increment value can be set in either Pixels or Hundredths of a Millimeter (HMM), but internally it uses the same property. To make setting this easier, I have made two separate parameters to set, depending on if you wish to set increment using pixels ($iPixelIncrement) or Hundredths of a Millimeter ($iIncrement). Only one should be used, otherwise $iIncrement will overwrite $iPixelIncrement.
 ;                  When either $iPixelIncrement or $iIncrement is not set, meaning if you are setting the Increment value in pixels, or not, one or the other value will return 0 when retrieving the current settings.
 ;                  $iIncrement in the L.O. UI allows for 10" max, however this produces an erroneous value internally, and switches back to using pixels, even in the UI, if you set $iIncrement to the max value, it will most likely cause a property setting error.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LO_UnitConvert
 ; Link ..........:
@@ -2411,7 +2411,7 @@ EndFunc   ;==>_LOCalc_CommentTextAnimation
 ;                  |                               2 = Error setting $iSpacing
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LO_UnitConvert
 ; Link ..........:
@@ -2513,7 +2513,7 @@ EndFunc   ;==>_LOCalc_CommentTextColumns
 ; Modified ......:
 ; Remarks .......: If either $bFitWidth or $bFitHeight is set to True, $bFitToFrame cannot be set to True, and vice versa.
 ;                  If spacing values on all sides do not match, $iSpacingAll will return 0.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LO_UnitConvert
 ; Link ..........:
@@ -2635,7 +2635,7 @@ EndFunc   ;==>_LOCalc_CommentTextSettings
 ;                  |                               1 = Error setting $bVisible
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current setting.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes

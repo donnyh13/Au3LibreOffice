@@ -83,7 +83,7 @@
 ;                  |                               1 = Error setting $iBackColor
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
@@ -152,7 +152,7 @@ EndFunc   ;==>_LOCalc_PageStyleBackColor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOCalc_PageStyleBorderWidth, _LOCalc_PageStyleBorderStyle, _LOCalc_PageStyleBorderPadding
 ; Link ..........:
@@ -207,7 +207,7 @@ EndFunc   ;==>_LOCalc_PageStyleBorderColor
 ;                  |                               16 = Error setting $iRight border distance
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_UnitConvert, _LOCalc_PageStyleBorderWidth, _LOCalc_PageStyleBorderStyle, _LOCalc_PageStyleBorderColor
 ; Link ..........:
@@ -307,7 +307,7 @@ EndFunc   ;==>_LOCalc_PageStyleBorderPadding
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LOCalc_PageStyleBorderWidth, _LOCalc_PageStyleBorderColor, _LOCalc_PageStyleBorderPadding
 ; Link ..........:
@@ -366,7 +366,7 @@ EndFunc   ;==>_LOCalc_PageStyleBorderStyle
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To "Turn Off" Borders, set Width to 0
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_UnitConvert, _LOCalc_PageStyleBorderStyle, _LOCalc_PageStyleBorderColor, _LOCalc_PageStyleBorderPadding
 ; Link ..........:
@@ -466,7 +466,7 @@ EndFunc   ;==>_LOCalc_PageStyleCreate
 ;                  |                               1 = Error setting $sPageStyle
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOCalc_PageStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
@@ -624,7 +624,7 @@ EndFunc   ;==>_LOCalc_PageStyleExists
 ;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 4.0.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_UnitConvert
 ; Link ..........:
@@ -735,7 +735,7 @@ EndFunc   ;==>_LOCalc_PageStyleFooter
 ;                  |                               1 = Error setting $iBackColor
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
@@ -806,7 +806,7 @@ EndFunc   ;==>_LOCalc_PageStyleFooterBackColor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOCalc_PageStyleFooterBorderWidth, _LOCalc_PageStyleFooterBorderStyle, _LOCalc_PageStyleFooterBorderPadding
 ; Link ..........:
@@ -863,7 +863,7 @@ EndFunc   ;==>_LOCalc_PageStyleFooterBorderColor
 ;                  |                               16 = Error setting $iRight border distance
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_UnitConvert, _LOCalc_PageStyleFooterBorderWidth, _LOCalc_PageStyleFooterBorderStyle, _LOCalc_PageStyleFooterBorderColor
 ; Link ..........:
@@ -965,7 +965,7 @@ EndFunc   ;==>_LOCalc_PageStyleFooterBorderPadding
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LOCalc_PageStyleFooterBorderWidth, _LOCalc_PageStyleFooterBorderColor, _LOCalc_PageStyleFooterBorderPadding
 ; Link ..........:
@@ -1025,7 +1025,7 @@ EndFunc   ;==>_LOCalc_PageStyleFooterBorderStyle
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To "Turn Off" Borders, set Width to 0.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_UnitConvert, _LOCalc_PageStyleFooterBorderStyle, _LOCalc_PageStyleFooterBorderColor, _LOCalc_PageStyleFooterBorderPadding
 ; Link ..........:
@@ -1229,7 +1229,7 @@ EndFunc   ;==>_LOCalc_PageStyleFooterObj
 ;                  |                               4 = Error setting $iWidth
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  LibreOffice may change the shadow width +/- a Hundredth of a Millimeter (HMM).
 ; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
@@ -1367,7 +1367,7 @@ EndFunc   ;==>_LOCalc_PageStyleGetObjByName
 ;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 4.0.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_UnitConvert
 ; Link ..........:
@@ -1478,7 +1478,7 @@ EndFunc   ;==>_LOCalc_PageStyleHeader
 ;                  |                               1 = Error setting $iBackColor
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
@@ -1549,7 +1549,7 @@ EndFunc   ;==>_LOCalc_PageStyleHeaderBackColor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOCalc_PageStyleHeaderBorderWidth, _LOCalc_PageStyleHeaderBorderStyle, _LOCalc_PageStyleHeaderBorderPadding
 ; Link ..........:
@@ -1606,7 +1606,7 @@ EndFunc   ;==>_LOCalc_PageStyleHeaderBorderColor
 ;                  |                               16 = Error setting $iRight border distance
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_UnitConvert, _LOCalc_PageStyleHeaderBorderWidth, _LOCalc_PageStyleHeaderBorderStyle, _LOCalc_PageStyleHeaderBorderColor
 ; Link ..........:
@@ -1708,7 +1708,7 @@ EndFunc   ;==>_LOCalc_PageStyleHeaderBorderPadding
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LOCalc_PageStyleHeaderBorderWidth, _LOCalc_PageStyleHeaderBorderColor, _LOCalc_PageStyleHeaderBorderPadding
 ; Link ..........:
@@ -1768,7 +1768,7 @@ EndFunc   ;==>_LOCalc_PageStyleHeaderBorderStyle
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To "Turn Off" Borders, set Width to 0.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_UnitConvert, _LOCalc_PageStyleHeaderBorderStyle, _LOCalc_PageStyleHeaderBorderColor, _LOCalc_PageStyleHeaderBorderPadding
 ; Link ..........:
@@ -1972,7 +1972,7 @@ EndFunc   ;==>_LOCalc_PageStyleHeaderObj
 ;                  |                               4 = Error setting $iWidth
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  LibreOffice may change the shadow width +/- a Hundredth of a Millimeter (HMM).
 ; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
@@ -2061,7 +2061,7 @@ EndFunc   ;==>_LOCalc_PageStyleHeaderShadow
 ;                  |                               16 = Error setting $sPaperTray
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  I have no way to retrieve possible values for the Paper Tray parameter, at least that I can find. You may still use it if you know the appropriate value.
 ; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName
@@ -2151,7 +2151,7 @@ EndFunc   ;==>_LOCalc_PageStyleLayout
 ;                  |                               8 = Error setting $iBottom
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_UnitConvert
 ; Link ..........:
@@ -2232,7 +2232,7 @@ EndFunc   ;==>_LOCalc_PageStyleMargins
 ;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 4.0.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LOCalc_PageStylesGetNames
 ; Link ..........:
@@ -2305,7 +2305,7 @@ EndFunc   ;==>_LOCalc_PageStyleOrganizer
 ;                  |                               4 = Error setting $bLandscape
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_UnitConvert
 ; Link ..........:
@@ -2460,7 +2460,7 @@ EndFunc   ;==>_LOCalc_PageStylesGetNames
 ;                  |                               4 = Error setting $iWidth
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  LibreOffice may change the shadow width +/- a Hundredth of a Millimeter (HMM).
 ; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
@@ -2542,7 +2542,7 @@ EndFunc   ;==>_LOCalc_PageStyleShadow
 ;                  |                               4 = Error setting $iFirstPage
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_PageStyleSheetScale, _LOCalc_PageStyleSheetPrint
 ; Link ..........:
@@ -2628,7 +2628,7 @@ EndFunc   ;==>_LOCalc_PageStyleSheetPageOrder
 ;                  |                               128 = Error setting $bZeroValues
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOCalc_PageStyleSheetPageOrder, _LOCalc_PageStyleSheetScale
 ; Link ..........:
@@ -2741,7 +2741,7 @@ EndFunc   ;==>_LOCalc_PageStyleSheetPrint
 ;                  |                               16 = Error setting $iVariable1 for mode $LOC_SCALE_FIT_PAGES
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  When retrieving the current settings, if the current mode is equal to $LOC_SCALE_FIT_WIDTH_HEIGHT, all three elements of the returned array will contain data, Element 1(0) will be the current mode, element 2(1) will be the Width value, and Element 3(2) will be the height value. Otherwise the third element will be Null.
 ;                  $iVariable1 and $iVariable2 setting values depend on what the current or new mode is. For Modes Reduce/Enlarge and Fit Pages, $iVariable1 ALONE is used for setting Scale Percentage or Number of Pages Respectively.

@@ -134,7 +134,7 @@ EndFunc   ;==>_LOBase_ReportConDelete
 ;                  |                               1 = Error setting $sDataField
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ;                  DataField is a String that determines the content to be shown. The entry format is either of the following:
 ;                  - To display the value of a column, you would call $sDataField with field:[??] where "??" represents the column's name. e.g. field:[Unique_ID].
@@ -217,7 +217,7 @@ EndFunc   ;==>_LOBase_ReportConFormattedFieldData
 ;                  |                               256 = Error setting $iFormat
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  I could not find a property to set the TextDirection or Visible settings.
 ;                  Background Transparent is set automatically based on the value set for Background color. Set Background color to $LO_COLOR_OFF to set Background Transparent to True.
@@ -343,7 +343,7 @@ EndFunc   ;==>_LOBase_ReportConFormattedFieldGeneral
 ;                  |                               1 = Error setting $sDataField
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  $sDataField is not checked to make sure it exists in the referenced Database, it is the user's responsibility to do this.
 ;                  DataField is a String that determines the content to be shown. The entry format is either of the following:
 ;                  - To display the value of a column, you would call $sDataField with field:[??] where "??" represents the column's name. e.g. field:[Unique_ID].
@@ -424,7 +424,7 @@ EndFunc   ;==>_LOBase_ReportConImageConData
 ;                  |                               256 = Error setting $iScale
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  I could not find a property to set the TextDirection or Visible settings.
 ;                  Background Transparent is set automatically based on the value set for Background color. Set Background color to $LO_COLOR_OFF to set Background Transparent to True.
@@ -669,7 +669,7 @@ EndFunc   ;==>_LOBase_ReportConInsert
 ;                  |                               256 = Error setting $iVertAlign
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  I could not find a property to set the TextDirection or Visible settings.
 ;                  Background Transparent is set automatically based on the value set for Background color. Set Background color to $LO_COLOR_OFF to set Background Transparent to True.
@@ -789,7 +789,7 @@ EndFunc   ;==>_LOBase_ReportConLabelGeneral
 ;                  |                               4 = Error setting $iOrient
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  I could not find a property to set "Visible" setting.
 ; Related .......:
@@ -860,7 +860,7 @@ EndFunc   ;==>_LOBase_ReportConLineGeneral
 ;                  |                               2 = Error setting $iY
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LO_UnitConvert, _LOBase_ReportConSize
 ; Link ..........:
 ; Example .......: Yes
@@ -988,7 +988,7 @@ EndFunc   ;==>_LOBase_ReportConsGetList
 ;                  |                               4 = Error setting $bAutoGrow
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LO_UnitConvert, _LOBase_ReportConPosition
 ; Link ..........:
@@ -1435,7 +1435,7 @@ EndFunc   ;==>_LOBase_ReportDocConnect
 ;                  |                               32 = Error setting $bSuppress
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  Modifying $iContentType and $sContent will open the "Add a Field" dialog unless it is suppressed.
 ;                  When $bSuppress is True, changing $iContentType and $sContent, either in the UI or via AutoIt, will not activate the "Add a Field" dialog, until the report is re-opened again, or $bSuppress is called with False again.
@@ -1553,7 +1553,7 @@ EndFunc   ;==>_LOBase_ReportDocData
 ; Modified ......:
 ; Remarks .......: The minimum height of a Section is 1753 Hundredths of a Millimeter (HMM), the maximum is unknown, but I found that setting a large value tends to cause a freeze up/crash of the Report.
 ;                  Background Transparent is set automatically based on the value set for Background color. Set Background color to $LO_COLOR_OFF to set Background Transparent to True.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOBase_ReportDocPageFooter, _LOBase_ReportDocPageHeader, _LOBase_ReportDocFooter, _LOBase_ReportDocHeader, _LOBase_ReportGroupFooter, _LOBase_ReportGroupHeader, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
 ; Link ..........:
@@ -1671,7 +1671,7 @@ EndFunc   ;==>_LOBase_ReportDocDetail
 ; Remarks .......: The Report Footer must be enabled (turned on), before you can set or retrieve any other properties. When retrieving the current properties when the Footer is disabled, the return values will be Null, except for the Boolean value of $bEnabled.
 ;                  The minimum height of a Section is 1753 Hundredths of a Millimeter (HMM), the maximum is unknown, but I found that setting a large value tends to cause a freeze up/crash of the Report.
 ;                  Background Transparent is set automatically based on the value set for Background color. Set Background color to $LO_COLOR_OFF to set Background Transparent to True.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOBase_ReportDocPageFooter, _LOBase_ReportDocPageHeader, _LOBase_ReportDocHeader, _LOBase_ReportDocDetail, _LOBase_ReportGroupFooter, _LOBase_ReportGroupHeader, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
 ; Link ..........:
@@ -1825,7 +1825,7 @@ EndFunc   ;==>_LOBase_ReportDocFooter
 ;                  |                               16 = Error setting $bPrintRep
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOBase_ReportDocData
 ; Link ..........:
@@ -2197,7 +2197,7 @@ EndFunc   ;==>_LOBase_ReportDocGroupsGetCount
 ; Remarks .......: The Report Header must be enabled (turned on), before you can set or retrieve any other properties. When retrieving the current properties when the Header is disabled, the return values will be Null, except for the Boolean value of $bEnabled.
 ;                  The minimum height of a Section is 1753 Hundredths of a Millimeter (HMM), the maximum is unknown, but I found that setting a large value tends to cause a freeze up/crash of the Report.
 ;                  Background Transparent is set automatically based on the value set for Background color. Set Background color to $LO_COLOR_OFF to set Background Transparent to True.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOBase_ReportDocPageFooter, _LOBase_ReportDocPageHeader, _LOBase_ReportDocFooter, _LOBase_ReportDocDetail, _LOBase_ReportGroupFooter, _LOBase_ReportGroupHeader, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
 ; Link ..........:
@@ -2465,7 +2465,7 @@ EndFunc   ;==>_LOBase_ReportDocOpen
 ; Remarks .......: The Page Header must be enabled (turned on), before you can set or retrieve any other properties. When retrieving the current properties when the Footer is disabled, the return values will be Null, except for the Boolean value of $bEnabled.
 ;                  The minimum height of a Section is 1753 Hundredths of a Millimeter (HMM), the maximum is unknown, but I found that setting a large value tends to cause a freeze up/crash of the Report.
 ;                  Background Transparent is set automatically based on the value set for Background color. Set Background color to $LO_COLOR_OFF to set Background Transparent to True.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOBase_ReportDocPageHeader, _LOBase_ReportDocFooter, _LOBase_ReportDocHeader, _LOBase_ReportDocDetail, _LOBase_ReportGroupFooter, _LOBase_ReportGroupHeader, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
 ; Link ..........:
@@ -2600,7 +2600,7 @@ EndFunc   ;==>_LOBase_ReportDocPageFooter
 ; Remarks .......: The Page Header must be enabled (turned on), before you can set or retrieve any other properties. When retrieving the current properties when the Header is disabled, the return values will be Null, except for the Boolean value of $bEnabled.
 ;                  The minimum height of a Section is 1753 Hundredths of a Millimeter (HMM), the maximum is unknown, but I found that setting a large value tends to cause a freeze up/crash of the Report.
 ;                  Background Transparent is set automatically based on the value set for Background color. Set Background color to $LO_COLOR_OFF to set Background Transparent to True.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOBase_ReportDocPageFooter, _LOBase_ReportDocFooter, _LOBase_ReportDocHeader, _LOBase_ReportDocDetail, _LOBase_ReportGroupFooter, _LOBase_ReportGroupHeader, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
 ; Link ..........:
@@ -2827,7 +2827,7 @@ EndFunc   ;==>_LOBase_ReportDocSectionGetObj
 ;                  |                               1 = Error setting $bVisible
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current visibility setting.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  If a Report Document has been opened "Hidden", visibility cannot be set or retrieved.
 ; Related .......:
 ; Link ..........:
@@ -3582,7 +3582,7 @@ EndFunc   ;==>_LOBase_ReportFoldersGetNames
 ; Remarks .......: The Group Footer must be enabled (turned on), before you can set or retrieve any other properties. When retrieving the current properties when the Footer is disabled, the return values will be Null, except for the Boolean value of $bFooterOn.
 ;                  The minimum height of a Section is 1753 Hundredths of a Millimeter (HMM), the maximum is unknown, but I found that setting a large value tends to cause a freeze up/crash of the Report.
 ;                  Background Transparent is set automatically based on the value set for Background color. Set Background color to $LO_COLOR_OFF to set Background Transparent to True.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOBase_ReportDocPageFooter, _LOBase_ReportDocPageHeader, _LOBase_ReportDocFooter, _LOBase_ReportDocHeader, _LOBase_ReportDocDetail, _LOBase_ReportGroupHeader, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
 ; Link ..........:
@@ -3763,7 +3763,7 @@ EndFunc   ;==>_LOBase_ReportGroupFooter
 ; Remarks .......: The Group Header must be enabled (turned on), before you can set or retrieve any other properties. When retrieving the current properties when the Header is disabled, the return values will be Null, except for the Boolean value of $bHeaderOn.
 ;                  The minimum height of a Section is 1753 Hundredths of a Millimeter (HMM), the maximum is unknown, but I found that setting a large value tends to cause a freeze up/crash of the Report.
 ;                  Background Transparent is set automatically based on the value set for Background color. Set Background color to $LO_COLOR_OFF to set Background Transparent to True.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOBase_ReportDocPageFooter, _LOBase_ReportDocPageHeader, _LOBase_ReportDocFooter, _LOBase_ReportDocHeader, _LOBase_ReportDocDetail, _LOBase_ReportGroupFooter, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
 ; Link ..........:
@@ -3921,7 +3921,7 @@ EndFunc   ;==>_LOBase_ReportGroupHeader
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Group will be moved to the position before that called in $iPos. Thus to move a Group to the end of the list call $iPos with the total count of Groups, i.e., index of the last Group + 1.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current Position.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -4003,7 +4003,7 @@ EndFunc   ;==>_LOBase_ReportGroupPosition
 ;                  |                               16 = Error setting $iKeepTogether
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  It is the User's responsibility for the accuracy of names etc called in $sField, i.e. Column name, etc.
 ;                  It is the User's responsibility to use appropriate values for $iGroupOn based upon the type of field.

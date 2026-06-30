@@ -320,7 +320,7 @@ EndFunc   ;==>_LOWriter_CursorGoToRange
 ;                  |                               2 = Error setting $sLinkName
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ;                  If no text is selected when setting or retrieving hyperlink settings, the whole word where the cursor is located is used.
 ;                  $sLinkAddress can be a website URL (www.abc.com), or a mail to link ("mailto:abc@email.ca?subject=Testing123". It can also be a path to a file ("C:\Users\xyz.docx").

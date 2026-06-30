@@ -283,7 +283,7 @@ EndFunc   ;==>_LOBase_DateStructCreate
 ;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 4.1.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......: _LOBase_DateStructCreate
 ; Link ..........:
@@ -498,7 +498,7 @@ EndFunc   ;==>_LOBase_FontDescCreate
 ;                  @Error: 1, @Extended: 16 = $bShadow not a Boolean.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Call any optional parameter with Null keyword to skip it.
 ; Related .......:
 ; Link ..........:
