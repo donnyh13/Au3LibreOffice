@@ -97,7 +97,7 @@
 ;                  |                               1 = Error setting $iBackColor
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Tables require that the properties be set individually for each Cell, therefore this function cycles through each cell and sets the value, and may be slower for large tables.
 ;                  When retrieving the current property values for a table, if all of the cells in the Table do not have the same value, Null is returned for that property value.
 ; Related .......: _LOImpress_TableInsert, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
@@ -281,7 +281,7 @@ EndFunc   ;==>_LOImpress_TableBackFillStyle
 ;                  |                               1024 = Error setting $iToIntense
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
 ;                  Tables require that the properties be set individually for each Cell, therefore this function cycles through each cell and sets the value, and may be slower for large tables.
@@ -554,7 +554,7 @@ EndFunc   ;==>_LOImpress_TableBackGradient
 ;                  The returned array will contain two columns, the first column will contain the ColorStop offset values, a number between 0 and 1.0. The second column will contain an Integer, the color value, as a RGB Color Integer.
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Tables require that the properties be set individually for each Cell, therefore this function cycles through each cell and sets the value, and may be slower for large tables.
 ;                  When retrieving the current property values for a table, if all of the cells in the Table do not have the same value, a single row 2 columned array with Null values is returned.
 ; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOImpress_ShapeAreaTransparencyGradientMulti
@@ -748,7 +748,7 @@ EndFunc   ;==>_LOImpress_TableBackGradientMulticolor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Tables require that the properties be set individually for each Cell, therefore this function cycles through each cell and sets the value, and may be slower for large tables.
 ;                  When retrieving the current property values for a table, if all of the cells in the Table do not have the same value, Null is returned for that property value.
@@ -801,7 +801,7 @@ EndFunc   ;==>_LOImpress_TableBorderColor
 ;                  |                               8 = Error setting $iRight
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Tables require that the properties be set individually for each Cell, therefore this function cycles through each cell and sets the value, and may be slower for large tables.
 ;                  When retrieving the current property values for a table, if all of the cells in the Table do not have the same value, Null is returned for that property value.
@@ -946,7 +946,7 @@ EndFunc   ;==>_LOImpress_TableBorderPadding
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Tables require that the properties be set individually for each Cell, therefore this function cycles through each cell and sets the value, and may be slower for large tables.
 ;                  When retrieving the current property values for a table, if all of the cells in the Table do not have the same value, Null is returned for that property value.
@@ -1017,7 +1017,7 @@ EndFunc   ;==>_LOImpress_TableBorderStyle
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To "Turn Off" Borders, set them to 0
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Tables require that the properties be set individually for each Cell, therefore this function cycles through each cell and sets the value, and may be slower for large tables.
 ;                  When retrieving the current property values for a table, if all of the cells in the Table do not have the same value, Null is returned for that property value.
@@ -1061,7 +1061,7 @@ EndFunc   ;==>_LOImpress_TableBorderWidth
 ;                  |                               1 = Error setting $iBackColor
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOImpress_TableCellGetObjByPosition, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
@@ -1193,7 +1193,7 @@ EndFunc   ;==>_LOImpress_TableCellBackFillStyle
 ;                  |                               1024 = Error setting $iToIntense
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
 ; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
@@ -1398,7 +1398,7 @@ EndFunc   ;==>_LOImpress_TableCellBackGradient
 ;                  The returned array will contain two columns, the first column will contain the ColorStop offset values, a number between 0 and 1.0. The second column will contain an Integer, the color value, as a RGB Color Integer.
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOImpress_ShapeAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: Yes
@@ -1511,7 +1511,7 @@ EndFunc   ;==>_LOImpress_TableCellBackGradientMulticolor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LOImpress_TableCellGetObjByPosition, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_TableCellBorderWidth, _LOImpress_TableCellBorderStyle, _LOImpress_TableCellBorderPadding
 ; Link ..........:
@@ -1558,7 +1558,7 @@ EndFunc   ;==>_LOImpress_TableCellBorderColor
 ;                  |                               8 = Error setting $iRight.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LOImpress_TableCellGetObjByPosition, _LO_UnitConvert, _LOImpress_TableCellBorderColor, _LOImpress_TableCellBorderStyle, _LOImpress_TableCellBorderWidth
 ; Link ..........:
@@ -1648,7 +1648,7 @@ EndFunc   ;==>_LOImpress_TableCellBorderPadding
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LOImpress_TableCellGetObjByPosition, _LOImpress_TableCellBorderWidth, _LOImpress_TableCellBorderColor, _LOImpress_TableCellBorderPadding
 ; Link ..........:
@@ -1702,7 +1702,7 @@ EndFunc   ;==>_LOImpress_TableCellBorderStyle
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To "Turn Off" Borders, set them to 0
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LOImpress_TableCellGetObjByPosition, _LO_UnitConvert, _LOImpress_TableCellBorderStyle, _LOImpress_TableCellBorderColor, _LOImpress_TableCellBorderPadding
 ; Link ..........:
@@ -1749,7 +1749,7 @@ EndFunc   ;==>_LOImpress_TableCellBorderWidth
 ;                  |                               8 = Error setting $bShadow
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......:
 ; Link ..........:
@@ -1796,7 +1796,7 @@ EndFunc   ;==>_LOImpress_TableCellCharEffect
 ;                  |                               8 = Error setting $iWeight
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
 ;                  LibreOffice accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
@@ -1845,7 +1845,7 @@ EndFunc   ;==>_LOImpress_TableCellCharFont
 ;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 7.0.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
@@ -1889,7 +1889,7 @@ EndFunc   ;==>_LOImpress_TableCellCharFontColor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Overline line style uses the same constants as underline style.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......:
 ; Link ..........:
@@ -1933,7 +1933,7 @@ EndFunc   ;==>_LOImpress_TableCellCharOverLine
 ;                  |                               4 = Error setting $iRelativeSize.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Set either $iSubScript or $iSuperScript to 0 to return it to Normal setting.
 ;                  The way LibreOffice is set up Super/Subscript are set in the same setting, Superscript is a positive number from 1 to 100 (percentage), Subscript is a negative number set to -1 to -100 percentage. For the user's convenience this function automatically converts the positive numbers to negative, and back when setting or retrieving subscript values.
@@ -1976,7 +1976,7 @@ EndFunc   ;==>_LOImpress_TableCellCharPosition
 ;                  |                               1 = Error setting $iScaleWidth
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Fit to line seems to be unavailable in the API, and does not seem to work in LibreOffice anyway.
 ; Related .......:
@@ -2017,7 +2017,7 @@ EndFunc   ;==>_LOImpress_TableCellCharScaling
 ;                  |                               2 = Error setting $nKerning.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  When setting Kerning values in LibreOffice, the measurement is listed in Pt (Printer's Points) in the User Display, however the internal setting is measured in Hundredths of a Millimeter (HMM). They will be automatically converted from Points to Hundredths of a Millimeter and back for retrieval of settings.
 ;                  The acceptable values are from -2 Pt to 928.8 Pt. The values can be directly converted easily, however, for an unknown reason to myself, LibreOffice begins counting backwards and in negative Hundredths of a Millimeter internally from 928.9 up to 1000 Pt (Max setting).
@@ -2060,7 +2060,7 @@ EndFunc   ;==>_LOImpress_TableCellCharSpacing
 ;                  |                               2 = Error setting $bWordOnly
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......:
 ; Link ..........:
@@ -2103,7 +2103,7 @@ EndFunc   ;==>_LOImpress_TableCellCharStrikeOut
 ;                  |                               4 = Error setting $bWordOnly
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......:
 ; Link ..........:
@@ -2221,7 +2221,7 @@ EndFunc   ;==>_LOImpress_TableCellGetObjByPosition
 ; Modified ......:
 ; Remarks .......: $iHorAlign must be set to $LOI_PAR_ALIGN_HOR_JUSTIFIED(2) before you can set $iLastLineAlign.
 ;                  $iTxtDirection constants 2,3, and 5 may not be available depending on your language settings.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Expand single word, Snap to grid, and Vertical align (Text-To-Text), seem to be unavailable in the API, and do not seem to work in LibreOffice.
 ; Related .......:
@@ -2265,7 +2265,7 @@ EndFunc   ;==>_LOImpress_TableCellParAlignment
 ;                  |                               4 = Error setting $iFirstLine
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Auto indent first line does not seem to work in LibreOffice, and seems to be not available in the API.
 ; Related .......: _LO_UnitConvert
@@ -2320,7 +2320,7 @@ EndFunc   ;==>_LOImpress_TableCellParIndent
 ; Remarks .......: The settings in LibreOffice, (Single, 1.15, 1.5, Double), Use the Proportional mode, and are just varying percentages. e.g Single = 100, 1.15 = 115%, 1.5 = 150%, Double = 200%.
 ;                  $iLineSpcHeight depends on the $iLineSpcMode used, see constants for accepted Input values.
 ;                  $iAbovePar, $iBelowPar, $iLineSpcHeight may change +/- a Hundredth of a Millimeter (HMM) once set.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  The "Do not add space between paragraphs as the same style" setting seems to be not available to set or retrieve in the API, and seems to do nothing in LibreOffice anyway.
 ; Related .......: _LO_UnitConvert
@@ -2470,7 +2470,7 @@ EndFunc   ;==>_LOImpress_TableCellParTabStopDelete
 ;                  $iPosition once set can vary +/- a Hundredth of a Millimeter (HMM). To ensure you can identify the tabstop to modify it again, This function returns the new TabStop position in @Extended when $iPosition is set, return value will be set to 2. See Return Values.
 ;                  Since $iPosition can fluctuate +/- a Hundredth of a Millimeter (HMM) when it is inserted into LibreOffice, it is possible to accidentally overwrite an already existing TabStop.
 ;                  $iFillChar, Libre's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by Libre are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LO_UnitConvert
 ; Link ..........:
@@ -2542,7 +2542,7 @@ EndFunc   ;==>_LOImpress_TableCellParTabStopsGetList
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Setting the String will overwrite any existing data in the cell.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To prevent accidental and unwanted newlines, @CRLF is automatically replaced with @CR to match LibreOffice's newline style.
 ; Related .......: _LOImpress_TableCellGetObjByPosition,
 ; Link ..........:
@@ -2604,7 +2604,7 @@ EndFunc   ;==>_LOImpress_TableCellString
 ;                  |                               8 = Error setting $bShadow
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Tables require that the properties be set individually for each Cell, therefore this function cycles through each cell and sets the value, and may be slower for large tables.
 ;                  When retrieving the current property values for a table, if all of the cells in the Table do not have the same value, Null is returned for that property value.
@@ -2725,7 +2725,7 @@ EndFunc   ;==>_LOImpress_TableCharEffect
 ;                  |                               8 = Error setting $iWeight
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
 ;                  LibreOffice accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
@@ -2850,7 +2850,7 @@ EndFunc   ;==>_LOImpress_TableCharFont
 ;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 7.0.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Tables require that the properties be set individually for each Cell, therefore this function cycles through each cell and sets the value, and may be slower for large tables.
 ;                  When retrieving the current property values for a table, if all of the cells in the Table do not have the same value, Null is returned for that property value.
@@ -2983,7 +2983,7 @@ EndFunc   ;==>_LOImpress_TableCharFontColor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Overline line style uses the same constants as underline style.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Tables require that the properties be set individually for each Cell, therefore this function cycles through each cell and sets the value, and may be slower for large tables.
 ;                  When retrieving the current property values for a table, if all of the cells in the Table do not have the same value, Null is returned for that property value.
@@ -3099,7 +3099,7 @@ EndFunc   ;==>_LOImpress_TableCharOverLine
 ;                  |                               2 = Error setting $bWordOnly
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Tables require that the properties be set individually for each Cell, therefore this function cycles through each cell and sets the value, and may be slower for large tables.
 ;                  When retrieving the current property values for a table, if all of the cells in the Table do not have the same value, Null is returned for that property value.
@@ -3202,7 +3202,7 @@ EndFunc   ;==>_LOImpress_TableCharStrikeOut
 ;                  |                               4 = Error setting $bWordOnly
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Tables require that the properties be set individually for each Cell, therefore this function cycles through each cell and sets the value, and may be slower for large tables.
 ;                  When retrieving the current property values for a table, if all of the cells in the Table do not have the same value, Null is returned for that property value.
@@ -3670,7 +3670,7 @@ EndFunc   ;==>_LOImpress_TableRowInsert
 ;                  |                               32 = Error setting $iTransparency
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  LibreOffice may change the shadow distance +/- a Hundredth of a Millimeter (HMM).
 ; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert

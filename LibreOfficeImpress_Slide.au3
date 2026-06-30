@@ -152,7 +152,7 @@ EndFunc   ;==>_LOImpress_SlideAdd
 ;                  |                               1 = Error setting $iColor
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current setting.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the slide, the Constant $LO_COLOR_OFF is returned.
 ; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
@@ -313,7 +313,7 @@ EndFunc   ;==>_LOImpress_SlideBackFillStyle
 ;                  |                               1024 = Error setting $iToIntense
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
 ; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
@@ -543,7 +543,7 @@ EndFunc   ;==>_LOImpress_SlideBackGradient
 ;                  |                               1 = Error setting $iTransparency
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the slide, -1 is returned.
 ; Related .......:
 ; Link ..........:
@@ -636,7 +636,7 @@ EndFunc   ;==>_LOImpress_SlideBackTransparency
 ;                  |                               64 = Error setting $iEnd
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......:
 ; Link ..........:
@@ -1164,7 +1164,7 @@ EndFunc   ;==>_LOImpress_SlideGetObjByName
 ;                  |                               1 = Error setting $iLayout
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -1310,7 +1310,7 @@ EndFunc   ;==>_LOImpress_SlideMove
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If setting the slide name to a name and a number, there is a good chance the name won't stay applied, as LibreOffice will assume it is an auto-numbered slide.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -1445,7 +1445,7 @@ EndFunc   ;==>_LOImpress_SlidesGetNames
 ;                  @Error: 6, @Extended: 1 = Current LibreOffice version less than 4.2, $iPenWidth not available.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......:
 ; Link ..........:
@@ -1656,7 +1656,7 @@ EndFunc   ;==>_LOImpress_SlideshowCustomDelete
 ; Modified ......:
 ; Remarks .......: The expected input for $asSlides is a single column array having the Slide names in the order the user wishes the Slides to appear in the presentation, slide names can be placed in the Array multiple times.
 ;                  When retrieving the current order and content of the Slideshow, an array is returned with all the Slides contained in the Custom Slideshow, in the order they are set to be played. Slides may be present multiple times.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -2036,7 +2036,7 @@ EndFunc   ;==>_LOImpress_SlideshowsCustomGetNames
 ;                  |                               4 = Error setting $bShowLogo
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......:
 ; Link ..........:
@@ -2149,7 +2149,7 @@ EndFunc   ;==>_LOImpress_SlideshowSettingsMode
 ;                  |                               32 = Error setting $bKeepOnTop
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......:
 ; Link ..........:
@@ -2250,7 +2250,7 @@ EndFunc   ;==>_LOImpress_SlideshowSettingsOptions
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If you call $iRange with any other value than $LOI_SLIDESHOW_RANGE_ALL, $sValue must be called with an appropriate name, either a Slide name to start from, or a Custom Slideshow name.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  If there are two slides with the same name, and one is set to the "From Slide" property, there is no guarantee which slide will be the one used.
 ; Related .......:
@@ -2600,7 +2600,7 @@ EndFunc   ;==>_LOImpress_SlideSoundsGetNames
 ;                  $sSound can be called with an empty string to indicate that no sound should be played.
 ;                  If $sSound is called with the string "stop", this equals "Stop Previous Sound" in the UI.
 ;                  Otherwise call $sSound with a valid path to a sound file. See _LOImpress_SlideSoundsGetNames, to obtain a list of sound files included with Impress.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......:
 ; Link ..........:

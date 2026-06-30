@@ -64,7 +64,7 @@
 ;                  @Error: 6, @Extended: 1 = Current LibreOffice version less than 7.6.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  These properties are only available for shapes other than lines (e.g. squares, stars, etc.).
 ; Related .......:
@@ -166,7 +166,7 @@ EndFunc   ;==>_LOImpress_DrawShapeAltText
 ;                  Currently, it seems to be not possible to disconnect a shape from the Start or End programatically.
 ;                  Both $iStartGluePoint and $iEndGluePoint do not check if the value called too high, i.e., a higher GluePoint index than present. They also accept -1, but I see nothing noticeable that it does.
 ;                  The index of the default GluePoints are 0 (top), 1 (right), 2 (bottom), and 3 (left). You also can add new glue points to a shape’s default GluePoints.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......:
 ; Link ..........:
@@ -306,7 +306,7 @@ EndFunc   ;==>_LOImpress_DrawShapeConnectorModify
 ;                  |                               128 = Error setting $iVertEnd
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......:
 ; Link ..........:
@@ -435,7 +435,7 @@ EndFunc   ;==>_LOImpress_DrawShapeConnectorSettings
 ;                  |                               1024 = Error setting $iUnitType
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......:
 ; Link ..........:
@@ -1362,7 +1362,7 @@ EndFunc   ;==>_LOImpress_DrawShapePointsGetCount
 ;                  @Error: 3, @Extended: 6 = Failed to Retrieve PolyPolygonBezier Structure.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings for the Array Element called in $iArrayElement.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Only $LOI_DRAWSHAPE_TYPE_LINE_* type shapes have Points that can be added to, removed, or modified.
 ;                  This is a homemade function as LibreOffice doesn't offer an easy way for modifying points in a shape. Consequently this will not produce similar results as when working with LibreOffice manually, and may wreck your shape's shape. Use with caution.
@@ -1807,7 +1807,7 @@ EndFunc   ;==>_LOImpress_DrawShapePointsRemove
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: When setting the text of a Shape, any previous text will be overwritten.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
