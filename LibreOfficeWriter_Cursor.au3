@@ -38,6 +38,7 @@
 ; _LOWriter_CursorParObjPaste
 ; _LOWriter_CursorParObjSectionsGet
 ; _LOWriter_CursorTextCursorCreate
+; _LOWriter_CursorViewCursorCurrPage
 ; _LOWriter_CursorViewCursorGetObj
 ; _LOWriter_CursorViewCursorGetPosition
 ; ===============================================================================================================================
@@ -489,8 +490,7 @@ EndFunc   ;==>_LOWriter_CursorInsertString
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Error determining cursor type.
 ;                  @Error: 3, @Extended: 2 = Error processing cursor move.
-;                  @Error: 3, @Extended: 3 = Failed to retrieve Current Page number.
-;                  @Error: 3, @Extended: 4 = $oCursor Object unknown cursor type.
+;                  @Error: 3, @Extended: 3 = $oCursor Object unknown cursor type.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $iMove may be called with any of the constants $LOW_VIEWCUR_*, $LOW_TEXTCUR_*, $LOW_TABLECUR_* as defined in LibreOfficeWriter_Constants.au3, depending on the Cursor type called in $oCursor.
@@ -510,7 +510,7 @@ Func _LOWriter_CursorMove(ByRef $oCursor, $iMove, $iCount = 1, $bSelect = False)
 
 	Local $iCursorType, $iExtended = 0
 	Local $bMoved = False
-	Local $asTableMoves[6], $asTextMoves[18], $asViewMoves[18]
+	Local $asTableMoves[6], $asTextMoves[18], $asViewMoves[16]
 
 	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsInt($iMove) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -606,7 +606,6 @@ Func _LOWriter_CursorMove(ByRef $oCursor, $iMove, $iCount = 1, $bSelect = False)
 			$asViewMoves[$LOW_VIEWCUR_GOTO_START_OF_LINE] = "gotoStartOfLine"
 			$asViewMoves[$LOW_VIEWCUR_JUMP_TO_FIRST_PAGE] = "jumpToFirstPage"
 			$asViewMoves[$LOW_VIEWCUR_JUMP_TO_LAST_PAGE] = "jumpToLastPage"
-			$asViewMoves[$LOW_VIEWCUR_JUMP_TO_PAGE] = "jumpToPage"
 			$asViewMoves[$LOW_VIEWCUR_JUMP_TO_NEXT_PAGE] = "jumpToNextPage"
 			$asViewMoves[$LOW_VIEWCUR_JUMP_TO_PREV_PAGE] = "jumpToPreviousPage"
 			$asViewMoves[$LOW_VIEWCUR_JUMP_TO_END_OF_PAGE] = "jumpToEndOfPage"
@@ -615,7 +614,6 @@ Func _LOWriter_CursorMove(ByRef $oCursor, $iMove, $iCount = 1, $bSelect = False)
 			$asViewMoves[$LOW_VIEWCUR_SCREEN_UP] = "screenUp"
 			$asViewMoves[$LOW_VIEWCUR_GOTO_START] = "gotoStart"
 			$asViewMoves[$LOW_VIEWCUR_GOTO_END] = "gotoEnd"
-			$asViewMoves[$LOW_VIEWCUR_GET_PAGE_NUM] = "PLACEHOLDER"
 
 			Switch $iMove
 				Case $LOW_VIEWCUR_GO_DOWN, $LOW_VIEWCUR_GO_UP, $LOW_VIEWCUR_GO_LEFT, $LOW_VIEWCUR_GO_RIGHT
@@ -625,11 +623,6 @@ Func _LOWriter_CursorMove(ByRef $oCursor, $iMove, $iCount = 1, $bSelect = False)
 				Case $LOW_VIEWCUR_GOTO_END_OF_LINE, $LOW_VIEWCUR_GOTO_START_OF_LINE, $LOW_VIEWCUR_GOTO_START, $LOW_VIEWCUR_GOTO_END
 					$bMoved = Execute("$oCursor." & $asViewMoves[$iMove] & "(" & $bSelect & ")")
 					$iExtended = ($bMoved) ? (1) : (0)
-
-				Case $LOW_VIEWCUR_JUMP_TO_PAGE
-					$bMoved = Execute("$oCursor." & $asViewMoves[$iMove] & "(" & $iCount & ")")
-					$iExtended = $oCursor.getPage()
-					If Not IsInt($iExtended) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 				Case $LOW_VIEWCUR_JUMP_TO_NEXT_PAGE, $LOW_VIEWCUR_JUMP_TO_PREV_PAGE, $LOW_VIEWCUR_SCREEN_DOWN, $LOW_VIEWCUR_SCREEN_UP
 					Do
@@ -642,12 +635,6 @@ Func _LOWriter_CursorMove(ByRef $oCursor, $iMove, $iCount = 1, $bSelect = False)
 					$bMoved = Execute("$oCursor." & $asViewMoves[$iMove] & "()")
 					$iExtended = ($bMoved) ? (1) : (0)
 
-				Case $LOW_VIEWCUR_GET_PAGE_NUM
-					$iExtended = $oCursor.getPage()
-					If Not IsInt($iExtended) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
-					$bMoved = True
-
 				Case Else
 
 					Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
@@ -655,7 +642,7 @@ Func _LOWriter_CursorMove(ByRef $oCursor, $iMove, $iCount = 1, $bSelect = False)
 
 		Case Else
 
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0) ; unknown cursor type.
+			Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; unknown cursor type.
 	EndSwitch
 
 	Return SetError($__LO_STATUS_SUCCESS, $iExtended, $bMoved)
@@ -964,6 +951,55 @@ Func _LOWriter_CursorTextCursorCreate(ByRef $oDoc, $bCreateAtEnd = True, $bCreat
 
 	Return SetError($__LO_STATUS_SUCCESS, $iCursorType, $oCursor)
 EndFunc   ;==>_LOWriter_CursorTextCursorCreate
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_CursorViewCursorCurrPage
+; Description ...: Move the Cursor to, or Retrieve the current page containing the View Cursor.
+; Syntax ........: _LOWriter_CursorViewCursorCurrPage(ByRef $oCursor[, $iPageNum = Null])
+; Parameters ....: $oCursor             - A View Cursor Object returned by _LOWriter_CursorViewCursorGetObj function.
+;                  $iPageNum            - [optional] Default is Null. The page number of the document to move the cursor to.
+; Return values .: Success: 1.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Cursor was successfully moved to the requested page.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oCursor not a View Cursor.
+;                  @Error: 1, @Extended: 3 = $iPageNum not an Integer or less than 0.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Error determining cursor type.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Current Page number.
+;                  @Error: 3, @Extended: 3 = Failed to move cursor to requested page.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_CursorViewCursorCurrPage(ByRef $oCursor, $iPageNum = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iCurrPage
+
+	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If (__LOWriter_Internal_CursorGetType($oCursor) <> $LOW_CURTYPE_VIEW_CURSOR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	If __LO_VarsAreNull($iPageNum) Then
+		$iCurrPage = $oCursor.getPage()
+		If Not IsInt($iCurrPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurrPage)
+	EndIf
+
+	If Not __LO_IntIsBetween($iPageNum, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	$oCursor.jumpToPage($iPageNum)
+	If ($oCursor.getPage() <> $iPageNum) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOWriter_CursorViewCursorCurrPage
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_CursorViewCursorGetObj

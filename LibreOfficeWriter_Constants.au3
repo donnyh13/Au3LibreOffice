@@ -1138,16 +1138,14 @@ Global Enum _
 		$LOW_VIEWCUR_GOTO_START_OF_LINE, _                      ; 5 [Selecting] Move the cursor to the start of the current line. @Extended set to count of moves performed.
 		$LOW_VIEWCUR_JUMP_TO_FIRST_PAGE, _                      ; 6 [None] Move the cursor to the first page. @Extended set to count of moves performed.
 		$LOW_VIEWCUR_JUMP_TO_LAST_PAGE, _                       ; 7 [None] Move the cursor to the Last page. @Extended set to count of moves performed.
-		$LOW_VIEWCUR_JUMP_TO_PAGE, _                            ; 8 [None] Jump to a specified page. @Extended set to current page number.
-		$LOW_VIEWCUR_JUMP_TO_NEXT_PAGE, _                       ; 9 [Count] Move the cursor to the Next page. @Extended set to count of moves performed.
-		$LOW_VIEWCUR_JUMP_TO_PREV_PAGE, _                       ; 10 [Count] Move the cursor to the previous page. @Extended set to count of moves performed.
-		$LOW_VIEWCUR_JUMP_TO_END_OF_PAGE, _                     ; 11 [None] Move the cursor to the end of the current page. @Extended set to count of moves performed.
-		$LOW_VIEWCUR_JUMP_TO_START_OF_PAGE, _                   ; 12 [None] Move the cursor to the start of the current page. @Extended set to count of moves performed.
-		$LOW_VIEWCUR_SCREEN_DOWN, _                             ; 13 [Count] Scroll the view forward by one visible page. @Extended set to count of moves performed.
-		$LOW_VIEWCUR_SCREEN_UP, _                               ; 14 [Count] Scroll the view back by one visible page. @Extended set to count of moves performed.
-		$LOW_VIEWCUR_GOTO_START, _                              ; 15 [Selecting] Move the cursor to the start of the document or Table. @Extended set to count of moves performed.
-		$LOW_VIEWCUR_GOTO_END, _                                ; 16 [Selecting] Move the cursor to the end of the document or Table. @Extended set to count of moves performed.
-		$LOW_VIEWCUR_GET_PAGE_NUM                               ; 17 [None] Retrieve the current page number where the ViewCursor is located. @Extended set to current page number.
+		$LOW_VIEWCUR_JUMP_TO_NEXT_PAGE, _                       ; 8 [Count] Move the cursor to the Next page. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_JUMP_TO_PREV_PAGE, _                       ; 9 [Count] Move the cursor to the previous page. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_JUMP_TO_END_OF_PAGE, _                     ; 10 [None] Move the cursor to the end of the current page. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_JUMP_TO_START_OF_PAGE, _                   ; 11 [None] Move the cursor to the start of the current page. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_SCREEN_DOWN, _                             ; 12 [Count] Scroll the view forward by one visible page. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_SCREEN_UP, _                               ; 13 [Count] Scroll the view back by one visible page. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_GOTO_START, _                              ; 14 [Selecting] Move the cursor to the start of the document or Table. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_GOTO_END                                   ; 15 [Selecting] Move the cursor to the end of the document or Table. @Extended set to count of moves performed.
 
 ; Wrap Type
 Global Const _                                                  ; com.sun.star.text.WrapTextMode

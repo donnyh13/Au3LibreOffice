@@ -1728,6 +1728,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Added Enumeration values to comments after enumerated Constants.
 - Added default value for user inputs in examples.
 - Added new View Cursor move constant for retrieving current page number: `$LOW_VIEWCUR_GET_PAGE_NUM`.
+- _LOWriter_CursorViewCursorCurrPage
 
 #### Changed
 
@@ -2400,6 +2401,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_FieldsGetList
 - Renamed `_LOWriter_CursorHyperlinkInsert` to `_LOWriter_CursorHyperlink`
 - Modified `_LOWriter_CursorHyperlink` to Set and Retrieve hyperlink settings now, rather than inserting them.
+- Removed `$LOW_VIEWCUR_JUMP_TO_PAGE` and `$LOW_VIEWCUR_GET_PAGE_NUM` View Cursor constants and split the functionality off into a separate function.
 
 #### Documented
 
@@ -2729,6 +2731,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - __LOWriter_NumStyleInitiateDocument
 - __LOWriter_ImageGetSuggestedSize
 - __LOWriter_FindFormatRetrieveSetting
+- $LOW_VIEWCUR_JUMP_TO_PAGE
+- $LOW_VIEWCUR_GET_PAGE_NUM
 
 [To Top](#releases)
 
