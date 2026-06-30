@@ -174,7 +174,7 @@ EndFunc   ;==>_LOWriter_TableBackColor
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_TableBorderWidth, _LOWriter_TableBorderStyle, _LOWriter_TableBorderPadding
 ; Link ..........:
 ; Example .......: Yes
@@ -225,7 +225,7 @@ EndFunc   ;==>_LOWriter_TableBorderColor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LO_UnitConvert, _LOWriter_TableBorderWidth, _LOWriter_TableBorderStyle, _LOWriter_TableBorderColor
 ; Link ..........:
 ; Example .......: Yes
@@ -331,7 +331,7 @@ EndFunc   ;==>_LOWriter_TableBorderPadding
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_TableBorderWidth, _LOWriter_TableBorderColor, _LOWriter_TableBorderPadding
 ; Link ..........:
 ; Example .......: Yes
@@ -394,7 +394,7 @@ EndFunc   ;==>_LOWriter_TableBorderStyle
 ; Modified ......:
 ; Remarks .......: To "Turn Off" Borders, set them to 0
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LO_UnitConvert, _LOWriter_TableBorderStyle, _LOWriter_TableBorderColor, _LOWriter_TableBorderPadding
 ; Link ..........:
 ; Example .......: Yes
@@ -445,7 +445,7 @@ EndFunc   ;==>_LOWriter_TableBorderWidth
 ; Remarks .......: Break Type must be set before Page Style will be able to be set, and page style needs set before $iPgNumOffSet can be set.
 ;                  LibreOffice doesn't directly show in its User interface options for Break type constants #3 and #6 (Column both) and (Page both), but doesn't throw an error when being set to either one, so they are included here, though I'm not sure if they will work correctly.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_PageStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
@@ -579,7 +579,7 @@ EndFunc   ;==>_LOWriter_TableCellBackColor
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Error values for Initialization and Processing are passed from the internal border setting function.
 ; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_TableCellBorderWidth, _LOWriter_TableCellBorderStyle, _LOWriter_TableCellBorderPadding
 ; Link ..........:
@@ -627,7 +627,7 @@ EndFunc   ;==>_LOWriter_TableCellBorderColor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition, _LO_UnitConvert, _LOWriter_TableCellBorderColor, _LOWriter_TableCellBorderStyle, _LOWriter_TableCellBorderWidth
 ; Link ..........:
 ; Example .......: Yes
@@ -717,7 +717,7 @@ EndFunc   ;==>_LOWriter_TableCellBorderPadding
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Error values for Initialization and Processing are passed from the internal border setting function.
 ; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition, _LOWriter_TableCellBorderWidth, _LOWriter_TableCellBorderColor, _LOWriter_TableCellBorderPadding
 ; Link ..........:
@@ -772,7 +772,7 @@ EndFunc   ;==>_LOWriter_TableCellBorderStyle
 ; Modified ......:
 ; Remarks .......: To "Turn Off" Borders, set them to 0
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Error values for Initialization and Processing are passed from the internal border setting function.
 ; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition, _LO_UnitConvert, _LOWriter_TableCellBorderStyle, _LOWriter_TableCellBorderColor, _LOWriter_TableCellBorderPadding
 ; Link ..........:
@@ -1577,7 +1577,7 @@ EndFunc   ;==>_LOWriter_TableColumnInsert
 ;                  |                               64 = Error setting $iHeadingRows
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call any optional parameter with Null keyword to skip it.
+; Remarks .......: To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Text Tables cannot be inserted into Foot/Endnotes. And it is not best to place them into other tables, though it is possible.
 ;                  You can set the $oCursor parameter to either a ViewCursor or a Text cursor in an acceptable data type, the table will be inserted at the cursor position.
 ;                  $iHeadingRows accepts values from 1 to 1 less then the number of rows.
@@ -2125,7 +2125,7 @@ EndFunc   ;==>_LOWriter_TableGetObjByName
 ; Remarks .......: Left Margin cannot be set unless Table Orientation is set to other than $LOW_ORIENT_HORI_FULL(6), or $LOW_ORIENT_HORI_LEFT(3).
 ;                  Right Margin cannot be set unless the table orientation is set to $LOW_ORIENT_HORI_NONE(0), or $LOW_ORIENT_HORI_LEFT(3).
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
@@ -2218,7 +2218,7 @@ EndFunc   ;==>_LOWriter_TableMargin
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  $bSplitRows will return 0 instead of a boolean if the Table's rows have different settings for $bSplitRows.
 ; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName
 ; Link ..........:
@@ -2511,7 +2511,7 @@ EndFunc   ;==>_LOWriter_TableRowInsert
 ; Remarks .......: The First row number contained in a table is 0.
 ;                  None of these properties can be set if the Table is not inserted yet.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_TableRowGetCount
 ; Link ..........:
 ; Example .......: Yes
@@ -2624,7 +2624,7 @@ EndFunc   ;==>_LOWriter_TablesGetNames
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  LibreOffice may change the shadow width +/- a Hundredth of a Millimeter (HMM).
 ; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
 ; Link ..........:
@@ -2835,7 +2835,7 @@ EndFunc   ;==>_LOWriter_TableStylesGetNames
 ; Remarks .......: Relative Width and Width cannot be set until the Table Horizontal orientation is set to other than $LOW_ORIENT_HORI_FULL(6), which is LibeOffice's default setting.
 ;                  Width may change +/- a Hundredth of a Millimeter (HMM) once set due to LibreOffice.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes

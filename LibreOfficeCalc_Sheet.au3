@@ -833,7 +833,7 @@ EndFunc   ;==>_LOCalc_SheetLink
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  The Return for $oNewDoc is the File path of the linked Document.
 ;                  If you set $oNewDoc, you must set $sSheetName and $iLinkMode also.
 ;                  To unlink a Sheet, call $iLinkMode with $LOC_SHEET_LINK_MODE_NONE.
@@ -1057,7 +1057,7 @@ EndFunc   ;==>_LOCalc_SheetName
 ; Modified ......:
 ; Remarks .......: Call $oRange with the Default keyword to reset the Column Range to none.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  The Return for $oRange will be a Cell Range or Cell Object, if no Column is set, the return will always be the first cell (A1) of the Sheet.
 ; Related .......: _LOCalc_SheetPrintRowsRepeat
 ; Link ..........:
@@ -1221,7 +1221,7 @@ EndFunc   ;==>_LOCalc_SheetPrintRangeModify
 ; Modified ......:
 ; Remarks .......: Call $oRange with the Default keyword to reset the Row Range to none.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  The Return for $oRange will be a Cell Range or Cell Object, if no Row is set, the return will always be the first cell (A1) of the Sheet.
 ; Related .......: _LOCalc_SheetPrintColumnsRepeat
 ; Link ..........:

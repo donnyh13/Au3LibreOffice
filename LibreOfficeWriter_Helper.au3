@@ -583,7 +583,7 @@ EndFunc   ;==>_LOWriter_DateStructCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LOWriter_DateStructCreate
 ; Link ..........:
 ; Example .......: Yes
@@ -695,7 +695,7 @@ EndFunc   ;==>_LOWriter_DateStructModify
 ;                  @Error: 1, @Extended: 7 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call any optional parameter with Null keyword to skip it.
+; Remarks .......: To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call any parameter you wish to delete from an already existing Find Format Array with the Default Keyword.
 ;                  If you do not have a pre-existing FindFormat Array, create and pass an Array with 0 elements. (Local $aArray[0])
 ;                  $iTxtDirection constants 2,3, and 5 may not be available depending on your language settings.
@@ -797,7 +797,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyAlignment
 ;                  @Error: 1, @Extended: 5 = $bShadow not a Boolean.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call any optional parameter with Null keyword to skip it.
+; Remarks .......: To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call any parameter you wish to delete from an already existing Find Format Array with the Default Keyword.
 ;                  If you do not have a pre-existing FindFormat Array, create and pass an Array with 0 elements. (Local $aArray[0])
 ; Related .......: _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll _LOWriter_DocReplaceAllInRange
@@ -885,7 +885,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyEffects
 ;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 7.0.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call any optional parameter with Null keyword to skip it.
+; Remarks .......: To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call any parameter you wish to delete from an already existing Find Format Array with the Default Keyword.
 ;                  If you do not have a pre-existing FindFormat Array, create and pass an Array with 0 elements. (Local $aArray[0])
 ; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong,_LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll _LOWriter_DocReplaceAllInRange, _LOWriter_FontsGetNames
@@ -1010,7 +1010,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyFont
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: In my personal testing, searching for any of these hyphenation formatting settings causes any results matching the searched for string to be replaced, whether they contain these formatting settings or not. This is a bug in LibreOffice.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call any parameter you wish to delete from an already existing Find Format Array with the Default Keyword.
 ;                  If you do not have a pre-existing FindFormat Array, create and pass an Array with 0 elements. (Local $aArray[0])
 ; Related .......: _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange
@@ -1101,7 +1101,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyHyphenation
 ;                  @Error: 1, @Extended: 5 = $bAutoFirstLine not a Boolean.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call any optional parameter with Null keyword to skip it.
+; Remarks .......: To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call any parameter you wish to delete from an already existing Find Format Array with the Default Keyword.
 ;                  If you do not have a pre-existing FindFormat Array, create and pass an Array with 0 elements. (Local $aArray[0])
 ;                  $iFirstLine Indent cannot be set if $bAutoFirstLine is set to True.
@@ -1181,7 +1181,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyIndent
 ;                  @Error: 1, @Extended: 4 = $bWordOnly not a Boolean.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call any optional parameter with Null keyword to skip it.
+; Remarks .......: To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call any parameter you wish to delete from an already existing Find Format Array with the Default Keyword.
 ;                  If you do not have a pre-existing FindFormat Array, create and pass an Array with 0 elements. (Local $aArray[0])
 ;                  $bWordOnly applies to Underline, Overline and Strikeout, regardless of which is set to True, one setting applies to all.
@@ -1260,7 +1260,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyOverline
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: In my personal testing, searching for a page break was very hit and miss, especially when searching with the "PageStyle" Name parameter, and it never worked for searching for PageNumberOffset.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call any parameter you wish to delete from an already existing Find Format Array with the Default Keyword.
 ;                  If you do not have a pre-existing FindFormat Array, create and pass an Array with 0 elements. (Local $aArray[0])
 ; Related .......: _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll _LOWriter_DocReplaceAllInRange
@@ -1330,7 +1330,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyPageBreak
 ;                  @Error: 1, @Extended: 4 = $iRelativeSize not an Integer, less than 1 or greater than 100.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call any optional parameter with Null keyword to skip it.
+; Remarks .......: To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call any parameter you wish to delete from an already existing Find Format Array with the Default Keyword.
 ;                  If you do not have a pre-existing FindFormat Array, create and pass an Array with 0 elements. (Local $aArray[0])
 ;                  0 is the normal $iSubScript or $iSuperScript setting.
@@ -1413,7 +1413,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyPosition
 ;                  @Error: 1, @Extended: 5 = $nKerning not a number, less than -2 or greater than 928.8 Points.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call any optional parameter with Null keyword to skip it.
+; Remarks .......: To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call any parameter you wish to delete from an already existing Find Format Array with the Default Keyword.
 ;                  If you do not have a pre-existing FindFormat Array, create and pass an Array with 0 elements. (Local $aArray[0])
 ;                  There is a bug in LibreOffice, where searching for the Rotate setting using the $iRotation parameter causes any results matching the searched for string to be replaced, whether they contain the Rotate format or not, this is supposed to be fixed in L.O. 7.6.
@@ -1509,7 +1509,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyRotateScaleSpace
 ;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 3.6.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call any optional parameter with Null keyword to skip it.
+; Remarks .......: To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call any parameter you wish to delete from an already existing Find Format Array with the Default Keyword.
 ;                  If you do not have a pre-existing FindFormat Array, create and pass an Array with 0 elements. (Local $aArray[0])
 ;                  The settings in LibreOffice, (Single,1.15, 1.5, Double,) Use the Proportional mode, and are just varying percentages. e.g Single = 100, 1.15 = 115%, 1.5 = 150%, Double = 200%.
@@ -1623,7 +1623,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifySpacing
 ;                  @Error: 1, @Extended: 3 = $bWordOnly not a Boolean.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call any optional parameter with Null keyword to skip it.
+; Remarks .......: To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call any parameter you wish to delete from an already existing Find Format Array with the Default Keyword.
 ;                  If you do not have a pre-existing FindFormat Array, create and pass an Array with 0 elements. (Local $aArray[0])
 ;                  $bWordOnly applies to Underline, Overline and Strikeout, regardless of which is set to True, one setting applies to all.
@@ -1689,7 +1689,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyStrikeout
 ;                  @Error: 1, @Extended: 5 = $iParWidows not an Integer, less than 0, equal to 1, or greater than 9.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call any optional parameter with Null keyword to skip it.
+; Remarks .......: To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call any parameter you wish to delete from an already existing Find Format Array with the Default Keyword.
 ;                  If you do not have a pre-existing FindFormat Array, create and pass an Array with 0 elements. (Local $aArray[0])
 ;                  In my personal testing, searching for the Orphan setting using the $iParOrphans parameter causes any results matching the searched for string to be replaced, whether they contain the Orphan format or not. This is a LibreOffice bug.
@@ -1768,7 +1768,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyTxtFlowOpt
 ;                  @Error: 1, @Extended: 4 = $bWordOnly not a Boolean.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call any optional parameter with Null keyword to skip it.
+; Remarks .......: To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call any parameter you wish to delete from an already existing Find Format Array with the Default Keyword.
 ;                  If you do not have a pre-existing FindFormat Array, create and pass an Array with 0 elements. (Local $aArray[0])
 ;                  $bWordOnly applies to Underline, Overline and Strikeout, regardless of which is set to True, one setting applies to all.
@@ -1928,7 +1928,7 @@ EndFunc   ;==>_LOWriter_FontDescCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -2578,7 +2578,7 @@ EndFunc   ;==>_LOWriter_SearchDescriptorCreate
 ; Remarks .......: $bSearchPropValues is equivalent to the difference in selecting "Format" options in LibreOffice's search box and "Attributes".
 ;                  Calling $bSearchPropValues with True, means that the search will look for matches using the specified property AND having the specified value, such as Character Weight, Bold, only matches that have Character weight of Bold will be returned, whereas if $bSearchPropValues is called with False, the search only looks for matches that have the specified property, regardless of its value. Such as Character weight, would match Bold, Semi-Bold, etc. From my understanding, the search is based on anything directly formatted unless $bStyles is also True.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LOWriter_SearchDescriptorCreate, _LOWriter_SearchDescriptorSimilarityModify
 ; Link ..........:
 ; Example .......: Yes
@@ -2667,7 +2667,7 @@ EndFunc   ;==>_LOWriter_SearchDescriptorModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LOWriter_SearchDescriptorCreate
 ; Link ..........:
 ; Example .......: Yes

@@ -211,7 +211,7 @@ EndFunc   ;==>_LOWriter_NumStyleCurrent
 ;                  If the current numbering type is other than bullet style, a 9 element array will be returned, the last two parameters ($sBulletFont and $iCharDecimal) will return a Null value.
 ;                  You can request setting values for one numbering level at a time, or all at once (see below).
 ;                  If you retrieve the current settings for all levels (by calling $iLevel with 0), the return will be a 10 element array containing an array of settings for each Numbering Level.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  When a lot of settings are set, especially for all levels, this function can be a bit slow.
 ;                  For $iSubLevels, if you enter "2" and the previous level uses the "A, B, C..." numbering scheme, the numbering scheme for the current level becomes: "A.1". The Maximum value, if $iLevel is set to 0, is 1.
 ; Related .......: _LOWriter_NumStyleCreate, _LOWriter_NumStyleGetObjByName
@@ -531,7 +531,7 @@ EndFunc   ;==>_LOWriter_NumStyleGetObjByName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LOWriter_NumStyleCreate, _LOWriter_NumStyleGetObjByName
 ; Link ..........:
 ; Example .......: Yes
@@ -622,7 +622,7 @@ EndFunc   ;==>_LOWriter_NumStyleOrganizer
 ; Remarks .......: This function should work just fine as the others do for modifying styles, but for setting Numbering Style settings, it would seem that the Array of Setting Objects passed by AutoIt is not recognized as an appropriate array/Sequence by LibreOffice, and consequently causes a com.sun.star.lang.IllegalArgumentException COM error. See __LOWriter_NumStyleModify function for a more detailed explanation. This function can still be used to set and retrieve, setting values, however now, this function either inserts a temporary macro into $oDoc for performing the needed procedure, or if that fails, it invisibly opens an .odt LibreOffice document and inserts a macro, (see __LOWriter_NumStyleInitiateDocument), which is then called with the necessary parameters to set.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter. You can request setting values for one numbering level at a time, or all at once (see below).
 ;                  If you retrieve the current settings for all levels (by calling $iLevel with 0), the return will be a 10 element array containing an array of settings for each Numbering Level.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LOWriter_NumStyleCreate, _LOWriter_NumStyleGetObjByName, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
@@ -746,7 +746,7 @@ EndFunc   ;==>_LOWriter_NumStylePosition
 ;                  |                               1 = Error setting $iLevel
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call any optional parameter with Null keyword to skip it.
+; Remarks .......: To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOWriter_CursorParObjCreateList, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:

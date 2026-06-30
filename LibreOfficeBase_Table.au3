@@ -325,7 +325,7 @@ EndFunc   ;==>_LOBase_TableColAdd
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Column Objects retrieved for primary keys do not support a Description text, thus if a Primary Key Column is called in $oColumn, that parameter will return a Null value when retrieving the settings.
 ; Related .......: _LOBase_TableColProperties
 ; Link ..........:
@@ -589,7 +589,7 @@ EndFunc   ;==>_LOBase_TableColGetObjByName
 ;                  Not all column types support all of these settings. It is the user's responsibility to know which are valid or not.
 ;                  There seems to be Constant value for Default, Justified and Filled settings for $iAlign.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LOBase_TableColDefinition
 ; Link ..........:
 ; Example .......: Yes
@@ -1544,7 +1544,7 @@ EndFunc   ;==>_LOBase_TableIndexesGetNames
 ;                  An example of creating an Array for $avColumns would be: Local $avColumns[1][2] = [["ColumnName", [True]]. This would sort the Column named "ColumnName" in Ascending order.
 ;                  When retrieving the current settings, the returned array will be as described above for the $avColumns value.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  The error checking for newly set Columns or Ascending/Descending values doesn't check the content of the Index's columns vs those called in $avColumns, only the number of Columns.
 ;                  According to LibreOffice SDK API, some databases ignore the Ascending/Descending settings. In my limited testing, embedded HSQLDB seems to always be set to Ascending.
 ; Related .......:

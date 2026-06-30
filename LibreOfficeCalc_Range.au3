@@ -411,7 +411,7 @@ EndFunc   ;==>_LOCalc_RangeColumnInsert
 ; Remarks .......: Setting $bStartOfPageBreak to True will insert a Manual Page Break, the same as setting $bManualPageBreak to True would.
 ;                  $bStartOfPageBreak setting is available more for indicating where Calc is inserting Page Breaks rather than for applying a setting. You can retrieve the settings for each Column, and check if this value is True or not. If the Page break is an automatically inserted one, the value for $bManualPageBreak would be False.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -1134,7 +1134,7 @@ EndFunc   ;==>_LOCalc_RangeDatabaseGetObjByName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  When retrieving the settings, $oRange will be a Range Object.
 ; Related .......: _LOCalc_RangeDatabaseGetObjByName, _LOCalc_RangeDatabaseAdd
 ; Link ..........:
@@ -2584,7 +2584,7 @@ EndFunc   ;==>_LOCalc_RangeNamedGetObjByName
 ;                  Or in the case of a formula, an example would if we created a "named range 'AddLeft', which refers to the equation A3+B3 with C3 as the reference cell. The cells A3 and B3 are the two cells directly to the left of C3, so, the equation =AddLeft calculates the sum of the two cells directly to the left of the cell that contains the equation. Changing the reference cell to C4, which is below A3 and B3, causes the AddLeft equation to calculate the sum of the two cells that are to the left on the previous row."
 ;                  [Both quotations above are adapted from Andrew Pitonyak's book OOME 4.1, pdf Page 523, book page 519.]
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  When retrieving the settings, $vRange will be in a String format, either being a formula or Range Address String, i.e. $Sheet1.$A$1:$C$14.
 ;                  When retrieving the settings, $oRefCell will be a Cell Object.
 ; Related .......: _LOCalc_RangeNamedGetObjByName, _LOCalc_RangeNamedAdd
@@ -2926,7 +2926,7 @@ EndFunc   ;==>_LOCalc_RangePivotDelete
 ; Modified ......:
 ; Remarks .......: I was unable to find a setting for "Show Expand/Collapse buttons", therefore the current setting will be lost, because to change the output range, the entire Pivot Table needs to be copied over and re-inserted.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Any existing data within the Destination range will be overwritten.
 ; Related .......:
 ; Link ..........:
@@ -3301,7 +3301,7 @@ EndFunc   ;==>_LOCalc_RangePivotFieldsDataGetNames
 ; Remarks .......: It is the user's responsibility to ensure the a Base Item's name is correct, and exists, also field names etc.
 ;                  If $iBaseItem is set to $LOC_PIVOT_TBL_FIELD_BASE_ITEM_NAMED, you must fill in $sBaseItem also.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -3601,7 +3601,7 @@ EndFunc   ;==>_LOCalc_RangePivotFieldsUnusedGetNames
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LOCalc_RangePivotFilterClear, _LOCalc_FilterFieldCreate
 ; Link ..........:
 ; Example .......: Yes
@@ -4004,7 +4004,7 @@ EndFunc   ;==>_LOCalc_RangePivotRefresh
 ; Modified ......:
 ; Remarks .......: I was unable to find a setting for "Show Expand/Collapse buttons", therefore it is not settable currently.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -4978,7 +4978,7 @@ EndFunc   ;==>_LOCalc_RangeRowInsert
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Setting $bStartOfPageBreak to True will insert a Manual Page Break, the same as setting $bManualPageBreak to True would.
 ;                  $bStartOfPageBreak setting is available more for indicating where Calc is inserting Page Breaks rather than for applying a setting. You can retrieve the settings for each row, and check if this value is True or not. If the Page break is an automatically inserted one, the value for $bManualPageBreak would be False.
 ; Related .......:
@@ -5515,7 +5515,7 @@ EndFunc   ;==>_LOCalc_RangeSortAlt
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  When $iType is set to $LOC_VALIDATION_TYPE_LIST, $sValue1 is set to a single string of words that constitute the list, each word needs to be surrounded by quotations, and separated by semicolons, such as: '"abc";"def";"ghi"'
 ;                  When $iType is set to $LOC_VALIDATION_TYPE_LIST, call $iCondition with $LOC_VALIDATION_COND_EQUAL.
 ;                  The return for $oBaseCell will always be a cell object, whether or not it is currently set or not. If it has never been set before, it will generally be cell A1.
@@ -5648,7 +5648,7 @@ EndFunc   ;==>_LOCalc_RangeValidation
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  When $iErrorStyle is set to $LOC_VALIDATION_ERROR_ALERT_MACRO, $sErrorTitle is called with the macro address to execute, the macro address will look similar to the following, filling in the data between the"<>", including the last parameter for location, which will be either application, or document: "vnd.sun.star.script:<LibraryName>.<ModuleName>.<MacroName>?language=Basic&location=<application|document>"
 ;                  At this time I have no functions for locating or creating macros. They may be added later.
 ; Related .......: _LOCalc_RangeValidation

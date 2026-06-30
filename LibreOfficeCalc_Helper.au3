@@ -263,7 +263,7 @@ EndFunc   ;==>_LOCalc_FilterDescriptorCreate
 ; Modified ......:
 ; Remarks .......: When retrieving the current settings for a filter descriptor, the Return value for $oCopyOutput is a single Cell Object.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LOCalc_FilterDescriptorCreate, _LOCalc_FilterFieldCreate
 ; Link ..........:
 ; Example .......: Yes
@@ -439,7 +439,7 @@ EndFunc   ;==>_LOCalc_FilterFieldCreate
 ; Modified ......:
 ; Remarks .......: A Filter Descriptor can contain up to 8 of these Filter Fields. Once you create the Filter Field Structure, place it in an array before using it to create a Filter descriptor. Place each Filter Field Structure in a separate element of the Array.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LOCalc_FilterFieldCreate
 ; Link ..........:
 ; Example .......: Yes
@@ -1071,7 +1071,7 @@ EndFunc   ;==>_LOCalc_SearchDescriptorCreate
 ; Modified ......:
 ; Remarks .......: When calling $bRegExp or $bWildcards with True, if any of following three are set to True, they will be set to False: $bSimilarity(From the Similarity function), $bRegExp or $bWildcards.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LOCalc_SearchDescriptorCreate, _LOCalc_SearchDescriptorSimilarityModify
 ; Link ..........:
 ; Example .......: Yes
@@ -1174,7 +1174,7 @@ EndFunc   ;==>_LOCalc_SearchDescriptorModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  If $bSimilarity is called with True while Regular Expression, or Wildcards setting is set to True, those settings will be set to False.
 ; Related .......: _LOCalc_SearchDescriptorCreate
 ; Link ..........:
@@ -1306,7 +1306,7 @@ EndFunc   ;==>_LOCalc_SortFieldCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
