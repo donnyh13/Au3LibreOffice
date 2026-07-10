@@ -5256,7 +5256,7 @@ Func _LOCalc_RangeSort(ByRef $oDoc, ByRef $oRange, ByRef $tSortField, $bSortColu
 ;~ $oRange.Sort($avSortDesc); This doesn't sort properly, thus a work around method is required.
 
 	$sMacro = "REM Macro for Performing a Sort Function. Created By an AutoIt Script." & @CR & _ ; Just a description of the Macro
-			"Sub AU3LibreOffice_Sort(oRange, avSortDesc, atField)" & @CR & _ ; Macro header, Parameters, oRange = Range to Sort, avSortDesc = The array of Sort Descriptor settings,  atField = Sort Descriptor Column/Row settings.
+			"Sub AU3LibreOffice_Sort(oRange, avSortDesc, atField)" & @CR & _ ; Macro header, Parameters, oRange = Range to Sort, avSortDesc = The array of Sort Descriptor settings, atField = Sort Descriptor Column/Row settings.
 			@CR & _
 			"For i = LBound(avSortDesc) To UBound(avSortDesc) " & @CR & _ ; Loop through passed array, re-applying Array of Sort Fields, seems necessary to make sort work.
 			"If (avSortDesc(i).Name() = ""SortFields"") Then avSortDesc(i).Value = atField" & @CR & _

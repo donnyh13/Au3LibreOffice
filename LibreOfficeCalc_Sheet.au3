@@ -195,7 +195,7 @@ EndFunc   ;==>_LOCalc_SheetAdd
 ; Remarks .......: If $sNewName is left as Null, the original Sheet's name is used, with "_" and a digit appended.
 ;                  If $iPosition is left as Null, the copied sheet will be placed at the end of the list.
 ;                  Calling $iPosition with the number of Sheets in the Document will place the copied sheet at the end of the sheet list.
-; Related .......: _LOCalc_SheetExists, _LOCalc_SheetAdd,  _LOCalc_SheetMove, _LOCalc_SheetRemove
+; Related .......: _LOCalc_SheetExists, _LOCalc_SheetAdd, _LOCalc_SheetMove, _LOCalc_SheetRemove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

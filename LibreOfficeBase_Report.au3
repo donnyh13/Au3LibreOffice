@@ -349,7 +349,7 @@ EndFunc   ;==>_LOBase_ReportConFormattedFieldGeneral
 ;                  - To display the value of a column, you would call $sDataField with field:[??] where "??" represents the column's name. e.g. field:[Unique_ID].
 ;                  - To display the result of a function, you would call $sDataField with rpt:[??] where "??" represents the function name. e.g. rpt:[MaximumUnique_IDReport].
 ;                  - According to the "XReportControlModel" documentation, the following expression is also acceptable: rpt:24+24-47.
-; Related .......: _LOBase_ReportConImageConGeneral, _LOBase_ReportConsGetList, _LOBase_ReportConPosition 
+; Related .......: _LOBase_ReportConImageConGeneral, _LOBase_ReportConsGetList, _LOBase_ReportConPosition
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

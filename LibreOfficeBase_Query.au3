@@ -675,7 +675,7 @@ EndFunc   ;==>_LOBase_QueryDocOpenByObject
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:  _LOBase_QueryDocOpenByName, _LOBase_QueryDocOpenByObject
+; Related .......: _LOBase_QueryDocOpenByName, _LOBase_QueryDocOpenByObject
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

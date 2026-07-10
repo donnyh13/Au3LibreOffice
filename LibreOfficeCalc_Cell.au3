@@ -718,7 +718,7 @@ EndFunc   ;==>_LOCalc_CellGetType
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:  _LOCalc_FormatKeyCreate, _LOCalc_FormatKeysGetList, _LOCalc_CellStyleNumberFormat
+; Related .......: _LOCalc_FormatKeyCreate, _LOCalc_FormatKeysGetList, _LOCalc_CellStyleNumberFormat
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

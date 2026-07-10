@@ -709,7 +709,7 @@ EndFunc   ;==>_LOBase_TableColProperties
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOBase_TableColGetObjByIndex,  _LOBase_TableColsGetNames
+; Related .......: _LOBase_TableColGetObjByIndex, _LOBase_TableColsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

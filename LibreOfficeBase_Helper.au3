@@ -841,7 +841,7 @@ EndFunc   ;==>_LOBase_FormatKeyCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOBase_FormatKeysGetList, _LOBase_FormatKeyCreate, _LOBase_FormatKeyExists, 
+; Related .......: _LOBase_FormatKeysGetList, _LOBase_FormatKeyCreate, _LOBase_FormatKeyExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
