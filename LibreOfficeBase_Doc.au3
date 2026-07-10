@@ -403,7 +403,7 @@ EndFunc   ;==>_LOBase_DocCreate
 ; Remarks .......: I have not investigated the various settings for each Database type therefore I have no checks for right or wrong values, if you know the appropriate string to use you can set $sType to the desired setting, but make sure you know what you are doing. "sdbc:embedded:hsqldb" is the default setting for LibreOffice, which creates an embedded HSQLDB Base Document. The Type format is as follows jdbc:subprotocol:subname or sdbc:subprotocol:subname.
 ;                  I am not knowledgeable enough to know if changing Database types works, or if it is advisable, therefore I made the setting $bOverwrite. If $bOverwrite is False it prevents the user from setting the Database type if one is already set for the document.
 ;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword) to get the current Database type.
-; Related .......:
+; Related .......: _LOBase_DocSaveAs
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -455,7 +455,7 @@ EndFunc   ;==>_LOBase_DocDatabaseType
 ; Modified ......:
 ; Remarks .......: If $bReturnFull is True, the return value will be like: "<Database Doc name>.<extension> — LibreOffice Base" e.g. "Testing.odb — LibreOffice Base".
 ;                  Else the return value will be like: "<Database Doc name>.<extension>", e.g. "Testing.odb"
-; Related .......:
+; Related .......: _LOBase_DocGetPath
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -498,7 +498,7 @@ EndFunc   ;==>_LOBase_DocGetName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LO_PathConvert
+; Related .......: _LO_PathConvert, _LOBase_DocHasPath, _LOBase_DocGetName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -537,7 +537,7 @@ EndFunc   ;==>_LOBase_DocGetPath
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_DocGetPath
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -570,7 +570,7 @@ EndFunc   ;==>_LOBase_DocHasPath
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This does NOT test if the document is the current active window in Windows, it only tests if the document is the current active document among other LibreOffice documents.
-; Related .......:
+; Related .......: _LOBase_DocVisible
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -609,7 +609,7 @@ EndFunc   ;==>_LOBase_DocIsActive
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_DocSave, _LOBase_DocSaveAs, _LOBase_DocClose
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -658,7 +658,7 @@ EndFunc   ;==>_LOBase_DocIsModified
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOBase_DocMinimize, _LOBase_DocVisible
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -707,7 +707,7 @@ EndFunc   ;==>_LOBase_DocMaximize
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOBase_DocMaximize, _LOBase_DocVisible
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -855,7 +855,7 @@ EndFunc   ;==>_LOBase_DocOpen
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: You must set the DataBase type using _LOBase_DocDatabaseType, before you can save the document.
-; Related .......: _LOBase_DocSaveAs
+; Related .......: _LOBase_DocSaveAs, _LOBase_DocSaveCopy, _LOBase_DocIsModified, _LOBase_DocHasPath, _LOBase_DocClose
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -899,7 +899,7 @@ EndFunc   ;==>_LOBase_DocSave
 ; Remarks .......: Alters original save path (if there was one) to the new path.
 ;                  If ".odb" extension is not present, it is appended to the save path.
 ;                  You must set the Database type using _LOBase_DocDatabaseType, before you can save the document.
-; Related .......: _LOBase_DocSave, _LOBase_DocSaveCopy, _LOBase_DocDatabaseType
+; Related .......: _LOBase_DocSave, _LOBase_DocSaveCopy, _LOBase_DocDatabaseType, _LOBase_DocHasPath
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -974,7 +974,7 @@ EndFunc   ;==>_LOBase_DocSaveAs
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Does not alter the original save path (if there was one), saves a copy of the document to the new path.
-; Related .......: _LOBase_DocSave, _LOBase_DocSaveAs, _LOBase_DocDatabaseType
+; Related .......: _LOBase_DocSave, _LOBase_DocSaveAs, _LOBase_DocDatabaseType, _LOBase_DocHasPath, _LOBase_DocOpen
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1035,7 +1035,7 @@ EndFunc   ;==>_LOBase_DocSaveCopy
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This functions attempts to close all open Sub components (Tables, Queries, Forms or Reports [Except Reports in Viewing mode]). This will fail if any of the following is True for any open components: there are unsaved changes, if a dialog is open or if the user is printing from one of the documents.
-; Related .......:
+; Related .......: _LOBase_DocSubComponentsGetList, _LOBase_DocClose, _LOBase_FormDocClose, _LOBase_QueryDocClose, _LOBase_ReportDocClose, _LOBase_TableDocClose
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1075,7 +1075,7 @@ EndFunc   ;==>_LOBase_DocSubComponentsClose
 ;                  The Second Column is a Constant identifying the type of the component. See Constants, $LOB_SUB_COMP_TYPE_* as defined in LibreOfficeBase_Constants.au3.
 ;                  The Third Column is the Component's name, including the path for Forms and Reports, e.g. "frmForm1" or "Folder1/frmForm1".
 ;                  The Fourth Column is a Boolean indicating whether the Component is in Design mode (True) or Viewing mode (False).
-; Related .......:
+; Related .......: _LOBase_DocSubComponentsClose
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1142,7 +1142,7 @@ EndFunc   ;==>_LOBase_DocSubComponentsGetList
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call $bVisible with Null to return the current visibility setting.
-; Related .......:
+; Related .......: _LOBase_DocMinimize, _LOBase_DocMaximize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

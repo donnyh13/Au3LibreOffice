@@ -61,7 +61,7 @@
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_SQLStatementExecuteQuery, _LOBase_QueryDocGetRowSet, _LOBase_TableDocGetRowSet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -137,7 +137,7 @@ EndFunc   ;==>_LOBase_SQLResultColumnMetaDataQuery
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_SQLResultColumnsGetNames, _LOBase_SQLStatementExecuteQuery, _LOBase_QueryDocGetRowSet, _LOBase_TableDocGetRowSet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -172,7 +172,7 @@ EndFunc   ;==>_LOBase_SQLResultColumnsGetCount
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_SQLResultColumnsGetCount, _LOBase_SQLStatementExecuteQuery, _LOBase_QueryDocGetRowSet, _LOBase_TableDocGetRowSet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -212,7 +212,7 @@ EndFunc   ;==>_LOBase_SQLResultColumnsGetNames
 ; Modified ......:
 ; Remarks .......: $iNumber is only used when calling $LOB_RESULT_CURSOR_MOVE_ABSOLUTE or $LOB_RESULT_CURSOR_MOVE_RELATIVE commands.
 ;                  When $LOB_RESULT_CURSOR_MOVE_RELATIVE is called, both positive and negative numbers may be used. Forwards is a positive value, and backwards is a negative value.
-; Related .......:
+; Related .......: _LOBase_SQLResultCursorQuery, _LOBase_SQLStatementExecuteQuery, _LOBase_QueryDocGetRowSet, _LOBase_TableDocGetRowSet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -273,7 +273,7 @@ EndFunc   ;==>_LOBase_SQLResultCursorMove
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_SQLResultCursorMove, _LOBase_SQLStatementExecuteQuery, _LOBase_QueryDocGetRowSet, _LOBase_TableDocGetRowSet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -339,7 +339,7 @@ EndFunc   ;==>_LOBase_SQLResultCursorQuery
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $vValue is ignored when calling the $LOB_RESULT_ROW_MOD_NULL command.
-; Related .......:
+; Related .......: _LOBase_SQLResultRowQuery, _LOBase_SQLResultRowRead, _LOBase_SQLResultRowRefresh, _LOBase_SQLResultRowUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -460,7 +460,7 @@ EndFunc   ;==>_LOBase_SQLResultRowModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_SQLResultRowModify, _LOBase_SQLResultRowRead, _LOBase_SQLResultRowRefresh, _LOBase_SQLResultRowUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -509,7 +509,7 @@ EndFunc   ;==>_LOBase_SQLResultRowQuery
 ; Remarks .......: You can read most, or all values using $LOB_RESULT_ROW_READ_STRING if the returned Data type does not matter.
 ;                  Before you can call $LOB_RESULT_ROW_READ_WAS_NULL, a previous query has to have been already performed.
 ;                  When querying a Date or Time value, a Date Structure is returned, which you can then use the function _LOBase_DateStructModify to retrieve the values for.
-; Related .......:
+; Related .......: _LOBase_SQLResultRowModify, _LOBase_SQLResultRowQuery, _LOBase_SQLResultRowRefresh, _LOBase_SQLResultRowUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -592,7 +592,7 @@ EndFunc   ;==>_LOBase_SQLResultRowRead
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_SQLResultRowModify, _LOBase_SQLResultRowQuery, _LOBase_SQLResultRowRead, _LOBase_SQLResultRowUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -626,7 +626,7 @@ EndFunc   ;==>_LOBase_SQLResultRowRefresh
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_SQLResultRowModify, _LOBase_SQLResultRowQuery, _LOBase_SQLResultRowRead, _LOBase_SQLResultRowRefresh
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -674,7 +674,7 @@ EndFunc   ;==>_LOBase_SQLResultRowUpdate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $sSQL is called with NULL, a Statement will be created. If you call $sSQL with a SQL string, a Prepared Statement will be created.
-; Related .......:
+; Related .......: _LOBase_SQLStatementPreparedSetData, _LOBase_SQLStatementExecuteQuery, _LOBase_SQLStatementExecuteUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -726,7 +726,7 @@ EndFunc   ;==>_LOBase_SQLStatementCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_SQLStatementCreate, _LOBase_SQLStatementExecuteUpdate, _LOBase_SQLStatementPreparedSetData
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -786,7 +786,7 @@ EndFunc   ;==>_LOBase_SQLStatementExecuteQuery
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_SQLStatementCreate, _LOBase_SQLStatementExecuteQuery, _LOBase_SQLStatementPreparedSetData
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -843,7 +843,7 @@ EndFunc   ;==>_LOBase_SQLStatementExecuteUpdate
 ; Remarks .......: Call this function with Null in all optional parameters to clear the Prepared Statement placeholders or Data.
 ;                  When setting a Date, Time, or Timestamp, use a Date Structure returned from the function _LOBase_DateStructCreate, depending on the command, the appropriate values will be copied over to an appropriate structure (Date, or Time) inside the function.
 ;                  Not all SetTypes have error checking. It is the user's duty to know the values being input are correct.
-; Related .......:
+; Related .......: _LOBase_SQLStatementCreate, _LOBase_SQLStatementExecuteQuery, _LOBase_SQLStatementExecuteUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

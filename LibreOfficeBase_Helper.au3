@@ -412,7 +412,7 @@ EndFunc   ;==>_LOBase_DateStructModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_FontDescEdit, _LOBase_FontExists, _LOBase_FontsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -500,7 +500,7 @@ EndFunc   ;==>_LOBase_FontDescCreate
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOBase_FontDescCreate, _LOBase_FontExists, _LOBase_FontsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -630,7 +630,7 @@ EndFunc   ;==>_LOBase_FontDescEdit
 ; Modified ......:
 ; Remarks .......: This function may cause a processor usage spike for a moment or two. If you wish to eliminate this, comment out the current sleep function and place a sleep(10) in its place.
 ;                  $oDoc is optional, if not called, a Writer Document is created invisibly to perform the check.
-; Related .......:
+; Related .......: _LOBase_FontsGetNames, _LOBase_FontDescCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -709,7 +709,7 @@ EndFunc   ;==>_LOBase_FontExists
 ;                  The Second column (Array [1][1] contains the style name (Such as Bold Italic etc.)
 ;                  The third column (Array[1][2]) contains the Font weight (Bold) See Constants, $LOB_CHAR_WEIGHT_* as defined in LibreOfficeBase_Constants.au3;
 ;                  The fourth column (Array[1][3]) contains the font slant (Italic) See constants, $LOB_CHAR_POSTURE_* as defined in LibreOfficeBase_Constants.au3.
-; Related .......:
+; Related .......: _LOBase_FontExists, _LOBase_FontDescCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -783,7 +783,7 @@ EndFunc   ;==>_LOBase_FontsGetNames
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOBase_FormatKeyDelete, _LOBase_FormatKeyGetStandard
+; Related .......: _LOBase_FormatKeyExists, _LOBase_FormatKeyDelete, _LOBase_FormatKeyGetStandard
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -841,7 +841,7 @@ EndFunc   ;==>_LOBase_FormatKeyCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOBase_FormatKeysGetList, _LOBase_FormatKeyCreate
+; Related .......: _LOBase_FormatKeysGetList, _LOBase_FormatKeyCreate, _LOBase_FormatKeyExists, 
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -895,7 +895,7 @@ EndFunc   ;==>_LOBase_FormatKeyDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_FormatKeyDelete, _LOBase_FormatKeyGetString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -956,7 +956,7 @@ EndFunc   ;==>_LOBase_FormatKeyExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_FormatKeyGetString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1011,7 +1011,7 @@ EndFunc   ;==>_LOBase_FormatKeyGetStandard
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOBase_FormatKeysGetList
+; Related .......: _LOBase_FormatKeysGetList, _LOBase_FormatKeyExists, _LOBase_FormatKeyCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1072,7 +1072,7 @@ EndFunc   ;==>_LOBase_FormatKeyGetString
 ; Remarks .......: Column One (Array[0][0]) will contain the Format Key Integer,
 ;                  Column two (Array[0][1]) will contain the Format Key String,
 ;                  If $bIsUser is called with True, Column Three (Array[0][2]) will contain a Boolean, True if the Format Key is User created, else False.
-; Related .......: _LOBase_FormatKeyDelete, _LOBase_FormatKeyGetString, _LOBase_FormatKeyGetStandard
+; Related .......: _LOBase_FormatKeyDelete, _LOBase_FormatKeyGetString, _LOBase_FormatKeyGetStandard, _LOBase_FormatKeyCreate, _LOBase_FormatKeyExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

@@ -92,7 +92,7 @@
 ; Modified ......:
 ; Remarks .......: The first column created is set as the primary key.
 ;                  It is the user's responsibility to determine which Data types are valid to be used.
-; Related .......: _LOBase_TableDelete
+; Related .......: _LOBase_TableDelete, _LOBase_TableExists, _LOBase_TableDocOpenByObject
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -218,7 +218,7 @@ EndFunc   ;==>_LOBase_TableAdd
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOBase_TableColDelete
+; Related .......: _LOBase_TableColDelete, _LOBase_TableColDefinition, _LOBase_TableColProperties
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -427,7 +427,7 @@ EndFunc   ;==>_LOBase_TableColDefinition
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOBase_TableColAdd
+; Related .......: _LOBase_TableColAdd, _LOBase_TableColGetObjByIndex, _LOBase_TableColGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -473,7 +473,7 @@ EndFunc   ;==>_LOBase_TableColDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOBase_TableColsGetCount
+; Related .......: _LOBase_TableColsGetCount, _LOBase_TableColGetObjByName, _LOBase_TableColDefinition, _LOBase_TableColProperties
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -514,7 +514,7 @@ EndFunc   ;==>_LOBase_TableColGetObjByIndex
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: I found one place online stating more than one column can have the same name, and thus, this could be an unreliable method of obtaining the Column's object, in the case that there are two columns identically named. However I have not been able to reproduce this behavior.
-; Related .......: _LOBase_TableColsGetNames
+; Related .......: _LOBase_TableColsGetNames, _LOBase_TableColGetObjByIndex, _LOBase_TableColDefinition, _LOBase_TableColProperties
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -590,7 +590,7 @@ EndFunc   ;==>_LOBase_TableColGetObjByName
 ;                  There seems to be Constant value for Default, Justified and Filled settings for $iAlign.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOBase_TableColDefinition
+; Related .......: _LOBase_TableColDefinition, _LOBase_TableColGetObjByIndex, _LOBase_TableColGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -709,7 +709,7 @@ EndFunc   ;==>_LOBase_TableColProperties
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOBase_TableColGetObjByIndex
+; Related .......: _LOBase_TableColGetObjByIndex,  _LOBase_TableColsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -747,7 +747,7 @@ EndFunc   ;==>_LOBase_TableColsGetCount
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOBase_TableColGetObjByName
+; Related .......: _LOBase_TableColGetObjByName, _LOBase_TableColsGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -790,7 +790,7 @@ EndFunc   ;==>_LOBase_TableColsGetNames
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOBase_TableAdd
+; Related .......: _LOBase_TableAdd, _LOBase_TableGetObjByIndex, _LOBase_TableGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -886,7 +886,7 @@ EndFunc   ;==>_LOBase_TableDocClose
 ;                  -Row 1 Column 0 contains the Object for that document. e.g. $aArray[0][0] = $oDoc
 ;                  -Row 1 Column 1 contains the Document's type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3. e.g.: $aArray[0][1] = $LO_DOC_TYPE_BASE_FORM_VIEW.
 ;                  -Row 2 contains the Object for the next document. e.g. $aArray[1][0] = $oDoc2. And so on.
-; Related .......: _LOBase_TableDocOpenByObject, _LOBase_TableDocOpenByName,
+; Related .......: _LOBase_TableDocOpenByObject, _LOBase_TableDocOpenByName, _LOBase_TableDocClose
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -966,7 +966,7 @@ EndFunc   ;==>_LOBase_TableDocConnect
 ;                  Else if $bReturnFull is False, the return value will be one of the following:
 ;                  If the Table Document is in Design mode: "<Database Doc name>.<extension> : <Table name>", e.g. "Testing.odb : tblTable1"
 ;                  If the Table Document is in Viewing mode: "<Table name> - <Database Doc name>", e.g. "tblTable1 - Testing"
-; Related .......:
+; Related .......: _LOBase_TableName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1007,7 +1007,7 @@ EndFunc   ;==>_LOBase_TableDocGetName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Retrieving the RowSet for the table allows you to manipulate data contained in the Table using _LOBase_SQLResultRowUpdate, etc. functions.
-; Related .......:
+; Related .......: _LOBase_SQLResultCursorMove, _LOBase_SQLResultCursorQuery, _LOBase_SQLResultRowModify, _LOBase_SQLResultRowQuery, _LOBase_SQLResultRowRead, _LOBase_SQLResultRowRefresh, _LOBase_SQLResultRowUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1167,7 +1167,7 @@ EndFunc   ;==>_LOBase_TableDocOpenByObject
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOBase_TableDocOpenByName, _LOBase_TableDocOpenByObject
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1214,7 +1214,7 @@ EndFunc   ;==>_LOBase_TableDocVisible
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_TablesGetNames, _LOBase_TableDocOpenByName, _LOBase_TableGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1259,7 +1259,7 @@ EndFunc   ;==>_LOBase_TableExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOBase_TablesGetCount
+; Related .......: _LOBase_TablesGetCount, _LOBase_TableGetObjByName, _LOBase_TableDocOpenByObject
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1304,7 +1304,7 @@ EndFunc   ;==>_LOBase_TableGetObjByIndex
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOBase_TablesGetNames, _LOBase_TableExists
+; Related .......: _LOBase_TablesGetNames, _LOBase_TableExists, _LOBase_TableGetObjByIndex
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1358,7 +1358,7 @@ EndFunc   ;==>_LOBase_TableGetObjByName
 ; Modified ......:
 ; Remarks .......: The Array called in $avColumns needs to be a 2 Column array, the Column name must be placed in the first (0th) column, and a Boolean value indicating whether the Column should should be sorted Ascending (True) or Descending (False) be found in the second (1st) column.
 ;                  An example of creating an Array for $avColumns would be: Local $avColumns[1][2] = [["ColumnName", [True]]. This would sort the Column named "ColumnName" in Ascending order.
-; Related .......:
+; Related .......: _LOBase_TableIndexDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1419,7 +1419,7 @@ EndFunc   ;==>_LOBase_TableIndexAdd
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_TableIndexAdd, _LOBase_TableIndexesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1452,7 +1452,7 @@ EndFunc   ;==>_LOBase_TableIndexDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_TableIndexesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1485,7 +1485,7 @@ EndFunc   ;==>_LOBase_TableIndexesGetCount
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_TableIndexesGetCount, _LOBase_TableIndexDelete, _LOBase_TableIndexModify
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1547,7 +1547,7 @@ EndFunc   ;==>_LOBase_TableIndexesGetNames
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  The error checking for newly set Columns or Ascending/Descending values doesn't check the content of the Index's columns vs those called in $avColumns, only the number of Columns.
 ;                  According to LibreOffice SDK API, some databases ignore the Ascending/Descending settings. In my limited testing, embedded HSQLDB seems to always be set to Ascending.
-; Related .......:
+; Related .......: _LOBase_TableIndexesGetNames, _LOBase_TableIndexAdd
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1694,7 +1694,7 @@ EndFunc   ;==>_LOBase_TableIndexModify
 ; Remarks .......: This function does not check if the new name already exists in Tables or Queries.
 ;                  According to LibreOffice SDK API IDL XRename Interface, It would seem some Database types don't support the renaming of Tables.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOBase_TableExists
+; Related .......: _LOBase_TableExists, _LOBase_TablesGetNames, _LOBase_TableDocGetName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1836,7 +1836,7 @@ EndFunc   ;==>_LOBase_TablePrimaryKey
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOBase_TableGetObjByIndex
+; Related .......: _LOBase_TableGetObjByIndex, _LOBase_TablesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1877,7 +1877,7 @@ EndFunc   ;==>_LOBase_TablesGetCount
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOBase_TableGetObjByName
+; Related .......: _LOBase_TableGetObjByName, _LOBase_TablesGetCount, _LOBase_TableDocOpenByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

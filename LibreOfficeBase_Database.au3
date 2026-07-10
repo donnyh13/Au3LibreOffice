@@ -65,7 +65,7 @@
 ; Remarks .......: By default, new connections have auto-commit active.
 ;                  You can only modify the AutoCommit setting on private connections, however you can retrieve the current setting of AutoCommit for non-private or private connections.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOBase_DatabaseCommit
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -108,7 +108,7 @@ EndFunc   ;==>_LOBase_DatabaseAutoCommit
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function is unnecessary if AutoCommit is active (default).
-; Related .......:
+; Related .......: _LOBase_DatabaseAutoCommit, _LOBase_DatabaseRollback
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -254,7 +254,7 @@ EndFunc   ;==>_LOBase_DatabaseConnectionGet
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This returns a space " " if identifier quoting is not supported.
-; Related .......:
+; Related .......: _LOBase_DatabaseMetaDataQuery
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -474,7 +474,7 @@ EndFunc   ;==>_LOBase_DatabaseIsReadOnly
 ;                  $LOB_DBASE_META_SUPPORTS_RESULT_SET_TYPE Call $vParam1 with one of the Result Set Type constants, $LOB_RESULT_TYPE_*. Integer.
 ;                  $LOB_DBASE_META_SUPPORTS_TRANSACTION_ISOLATION_LEVEL Call $vParam1 with one of the Transaction Isolation Level constants, $LOB_DBASE_TRANSACTION_ISOLATION_*. Integer.
 ;                  $LOB_DBASE_META_UPDATES_ARE_DETECTED Call $vParam1 with one of the Result Set Type constants, $LOB_RESULT_TYPE_*. Integer.
-; Related .......:
+; Related .......: _LOBase_DatabaseGetDefaultQuote
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -667,7 +667,7 @@ EndFunc   ;==>_LOBase_DatabaseMetaDataQuery
 ; Modified ......:
 ; Remarks .......: If the database data source is registered, then the Name property denotes the registration name. Otherwise, the name property contains the URL of the file.
 ;                  If the same database data source is registered under different names, the value of the Name property is not defined.
-; Related .......:
+; Related .......: _LOBase_DatabaseGetObjByURL, _LOBase_DatabaseRegisteredAdd, _LOBase_DatabaseRegisteredRemoveByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -709,7 +709,7 @@ EndFunc   ;==>_LOBase_DatabaseName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOBase_DatabaseRegisteredExists
+; Related .......: _LOBase_DatabaseRegisteredExists, _LOBase_DatabaseRegisteredRemoveByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -753,7 +753,7 @@ EndFunc   ;==>_LOBase_DatabaseRegisteredAdd
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_DatabaseRegisteredAdd, _LOBase_DatabaseRegisteredRemoveByName, _LOBase_DatabaseGetObjByURL
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -794,7 +794,7 @@ EndFunc   ;==>_LOBase_DatabaseRegisteredExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOBase_DatabaseGetObjByURL
+; Related .......: _LOBase_DatabaseGetObjByURL, _LOBase_DatabaseRegisteredRemoveByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -836,7 +836,7 @@ EndFunc   ;==>_LOBase_DatabaseRegisteredGetNames
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOBase_DatabaseRegisteredAdd, _LOBase_DatabaseRegisteredExists
+; Related .......: _LOBase_DatabaseRegisteredAdd, _LOBase_DatabaseRegisteredExists, _LOBase_DatabaseRegisteredGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -876,7 +876,7 @@ EndFunc   ;==>_LOBase_DatabaseRegisteredRemoveByName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_DatabaseIsReadOnly
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -908,7 +908,7 @@ EndFunc   ;==>_LOBase_DatabaseRequiresPassword
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function is unnecessary if AutoCommit is active (default).
-; Related .......:
+; Related .......: _LOBase_DatabaseAutoCommit, _LOBase_DatabaseCommit
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

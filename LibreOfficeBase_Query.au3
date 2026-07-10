@@ -64,7 +64,7 @@
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_QueriesGetNames, _LOBase_QueryGetObjByIndex
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -101,7 +101,7 @@ EndFunc   ;==>_LOBase_QueriesGetCount
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_QueriesGetCount, _LOBase_QueryDocOpenByName, _LOBase_QueryDelete, _LOBase_QueryExists, _LOBase_QueryGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -154,7 +154,7 @@ EndFunc   ;==>_LOBase_QueriesGetNames
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $sQueryName must be unique from both Query and Table names.
-; Related .......:
+; Related .......: _LOBase_QueryAddBySQL, _LOBase_QueryExists, _LOBase_QueryDocOpenByObject, _LOBase_QuerySQLCommand
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -240,7 +240,7 @@ EndFunc   ;==>_LOBase_QueryAddByName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: It is the user's responsibility to ensure Table, Query, and Field names called in the SQL command are correct.
-; Related .......:
+; Related .......: _LOBase_QueryAddByName, _LOBase_QueryExists, _LOBase_QueryDocOpenByObject, _LOBase_QuerySQLCommand
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -300,7 +300,7 @@ EndFunc   ;==>_LOBase_QueryAddBySQL
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_QueriesGetNames, _LOBase_QueryAddByName, _LOBase_QueryAddBySQL, _LOBase_QueryExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -397,7 +397,7 @@ EndFunc   ;==>_LOBase_QueryDocClose
 ;                  -Row 1 Column 0 contains the Object for that document. e.g. $aArray[0][0] = $oDoc
 ;                  -Row 1 Column 1 contains the Document's type Constant as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3. e.g.: $aArray[0][1] = $LO_DOC_TYPE_BASE_FORM_VIEW.
 ;                  -Row 2 contains the Object for the next document. e.g. $aArray[1][0] = $oDoc2. And so on.
-; Related .......: _LOBase_QueryDocOpenByName, _LOBase_QueryDocOpenByObject
+; Related .......: _LOBase_QueryDocOpenByName, _LOBase_QueryDocOpenByObject, _LOBase_QueryDocClose
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -477,7 +477,7 @@ EndFunc   ;==>_LOBase_QueryDocConnect
 ;                  Else if $bReturnFull is False, the return value will be one of the following:
 ;                  If the Query Document is in Design mode: "<Database Doc name>.<extension> : <Query name>", e.g. "Testing.odb : QryAutoIt"
 ;                  If the Query Document is in Viewing mode: "<Query name> - <Database Doc name>", e.g. "QryAutoIt - Testing"
-; Related .......:
+; Related .......: _LOBase_QueryDocClose, _LOBase_QueryName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -518,7 +518,7 @@ EndFunc   ;==>_LOBase_QueryDocGetName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Retrieving the RowSet for the Query allows you to manipulate data contained in the Query using _LOBase_SQLResultRowUpdate, etc. functions.
-; Related .......:
+; Related .......: _LOBase_SQLResultCursorMove, _LOBase_SQLResultCursorQuery, _LOBase_SQLResultRowModify, _LOBase_SQLResultRowQuery, _LOBase_SQLResultRowRead, _LOBase_SQLResultRowRefresh, _LOBase_SQLResultRowUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -675,7 +675,7 @@ EndFunc   ;==>_LOBase_QueryDocOpenByObject
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......:  _LOBase_QueryDocOpenByName, _LOBase_QueryDocOpenByObject
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -722,7 +722,7 @@ EndFunc   ;==>_LOBase_QueryDocVisible
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_QueryDelete, _LOBase_QueryDocOpenByName, _LOBase_QueriesGetNames, _LOBase_QueryGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -765,7 +765,7 @@ EndFunc   ;==>_LOBase_QueryExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_QueryFieldGetObjByName, _LOBase_QueryFieldsGetCount, _LOBase_QueryFieldModify, _LOBase_QueryGetObjByIndex, _LOBase_QueryGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -806,7 +806,7 @@ EndFunc   ;==>_LOBase_QueryFieldGetObjByIndex
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Field name called in $sName must be the Alias name, if present, otherwise the real name will work.
-; Related .......:
+; Related .......: _LOBase_QueryFieldsGetNames, _LOBase_QueryFieldGetObjByIndex, _LOBase_QueryFieldModify, _LOBase_QueryGetObjByIndex, _LOBase_QueryGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -854,7 +854,7 @@ EndFunc   ;==>_LOBase_QueryFieldGetObjByName
 ; Remarks .......: $sRealName modifies nothing, but is an indicator of where the Query Field's Real name (The name without an Alias) will be returned when returning the current settings.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOBase_QueryFieldGetObjByIndex, _LOBase_QueryFieldGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -905,7 +905,7 @@ EndFunc   ;==>_LOBase_QueryFieldModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_QueryFieldGetObjByIndex, _LOBase_QueryFieldsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -938,7 +938,7 @@ EndFunc   ;==>_LOBase_QueryFieldsGetCount
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The name returned will be the Alias of the field, if there is one.
-; Related .......:
+; Related .......: _LOBase_QueryFieldGetObjByName, _LOBase_QueryFieldsGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -976,7 +976,7 @@ EndFunc   ;==>_LOBase_QueryFieldsGetNames
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_QueriesGetCount, _LOBase_QueryGetObjByName, _LOBase_QueryDocOpenByObject
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1021,7 +1021,7 @@ EndFunc   ;==>_LOBase_QueryGetObjByIndex
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOBase_QueryGetObjByIndex, _LOBase_QueriesGetNames, _LOBase_QueryDocOpenByObject
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1069,7 +1069,7 @@ EndFunc   ;==>_LOBase_QueryGetObjByName
 ; Remarks .......: This function does not check if the new name already exists in Tables or Queries.
 ;                  According to LibreOffice SDK API IDL XRename Interface, It would seem some Database types don't support the renaming of Queries.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOBase_QueryExists, _LOBase_QueriesGetNames, _LOBase_QueryGetObjByIndex, _LOBase_QueryGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

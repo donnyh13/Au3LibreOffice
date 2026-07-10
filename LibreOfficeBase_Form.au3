@@ -78,7 +78,7 @@
 ; Remarks .......: To copy a Form located inside a folder, the Form name MUST be prefixed by the folder path, separated by forward slashes (/). e.g. to create FormXYZ contained in folder 3, which is located in Folder 2, which is located inside folder 1, you would call $sInputForm with the following path: Folder1/Folder2/Folder3/FormXYZ.
 ;                  To create a Form inside a folder, the Form name MUST be prefixed by the folder path, separated by forward slashes (/). e.g. to create FormXYZ contained in folder 3, which is located in Folder 2, which is located inside folder 1, you would call $sOutputForm with the following path: Folder1/Folder2/Folder3/FormXYZ.
 ;                  If only a name is called in $sOutputForm, the Form will be created in the main directory, i.e. not inside of any folders.
-; Related .......: _LOBase_FormDelete, _LOBase_FormCreate
+; Related .......: _LOBase_FormDelete, _LOBase_FormCreate, _LOBase_FormExists, _LOBase_FormsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -156,7 +156,7 @@ EndFunc   ;==>_LOBase_FormCopy
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To create a form inside a folder, the form name MUST be prefixed by the folder path, separated by forward slashes (/). e.g. to create FormXYZ contained in folder 3, which is located in Folder 2, which is located inside folder 1, you would call $sForm with the following path: Folder1/Folder2/Folder3/FormXYZ.
-; Related .......: _LOBase_FormDelete, _LOBase_FormCopy
+; Related .......: _LOBase_FormDelete, _LOBase_FormCopy, _LOBase_FormDocOpen, _LOBase_FormFolderCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -262,7 +262,7 @@ EndFunc   ;==>_LOBase_FormCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To delete a form contained in a folder, you MUST prefix the Form name called in $sName by the folder path it is located in, separated by forward slashes (/). e.g. to delete FormXYZ located in folder3, which is located in Folder 2, which is located inside folder 1, you would call $sName with the following path: Folder1/Folder2/Folder3/FormXYZ
-; Related .......: _LOBase_FormCreate, _LOBase_FormCopy
+; Related .......: _LOBase_FormCreate, _LOBase_FormCopy, _LOBase_FormsGetNames, _LOBase_FormFolderDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -308,7 +308,7 @@ EndFunc   ;==>_LOBase_FormDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If there are unsaved changes in the document when close is called, and $bForceClose is True, they will be lost.
-; Related .......: _LOBase_FormDocOpen, _LOBase_FormDocConnect
+; Related .......: _LOBase_FormDocOpen, _LOBase_FormDocConnect, _LOBase_FormDocIsModified
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -448,7 +448,7 @@ EndFunc   ;==>_LOBase_FormDocConnect
 ; Modified ......:
 ; Remarks .......: If $bReturnFull is True, the return value will be like: "<Database Doc name>.<extension> : <Form name> — LibreOffice Base: Database Form" e.g. "Testing.odb : frmForm2 — LibreOffice Base: Database Form".
 ;                  Else the return value will be like: "<Database Doc name>.<extension> : <Form name>", e.g. "Testing.odb : frmForm2"
-; Related .......:
+; Related .......: _LOBase_FormRename, _LOBase_FormDocOpen, _LOBase_FormDocClose
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -549,7 +549,7 @@ EndFunc   ;==>_LOBase_FormDocIsModified
 ; Modified ......:
 ; Remarks .......: To open a form located inside a folder, the form name MUST be prefixed by the folder path, separated by forward slashes (/). e.g. to open FormXYZ contained in folder 3, which is located in Folder 2, which is located inside folder 1, you would call $sName with the following path: Folder1/Folder2/Folder3/FormXYZ.
 ;                  Once a Form Document has been opened "Hidden", it cannot be made visible without re-opening the Form Document.
-; Related .......:
+; Related .......: _LOBase_FormDocClose, _LOBase_FormDocConnect, _LOBase_FormExists, _LOBase_FormsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -600,7 +600,7 @@ EndFunc   ;==>_LOBase_FormDocOpen
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOBase_FormDocIsModified
+; Related .......: _LOBase_FormDocIsModified, _LOBase_FormDocClose, _LOBase_FormDocOpen, _LOBase_FormDocConnect
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -651,7 +651,7 @@ EndFunc   ;==>_LOBase_FormDocSave
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  If a Form Document has been opened "Hidden", visibility cannot be set or retrieved.
-; Related .......:
+; Related .......: _LOBase_FormDocClose, _LOBase_FormDocOpen
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -821,7 +821,7 @@ EndFunc   ;==>_LOBase_FormExists
 ;                  To copy a Folder contained in a folder, you MUST prefix the Folder name called in $sOutputFolder by the folder path you want it to be located in, separated by forward slashes (/). e.g. to create FolderXYZ located in folder3, which is located in Folder 2, which is located inside folder 1, you would call $sOutputFolder with the following path: Folder1/Folder2/Folder3/FolderXYZ
 ;                  Copying a Folder will copy all contents also.
 ;                  If only a name is called in $sOutputFolder, the Folder will be created in the main directory, i.e. not inside of any folders.
-; Related .......: _LOBase_FormFolderCreate, _LOBase_FormFolderDelete
+; Related .......: _LOBase_FormFolderCreate, _LOBase_FormFolderDelete, _LOBase_FormFoldersGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -885,7 +885,7 @@ EndFunc   ;==>_LOBase_FormFolderCopy
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To create a Folder inside a folder, the Folder name MUST be prefixed by the folder path, separated by forward slashes (/). e.g. to create FolderXYZ contained in folder 3, which is located in Folder 2, which is located inside folder 1, you would call $sFolder with the following path: Folder1/Folder2/Folder3/FolderXYZ.
-; Related .......: _LOBase_FormFolderCopy, _LOBase_FormFolderDelete
+; Related .......: _LOBase_FormFolderCopy, _LOBase_FormFolderDelete, _LOBase_FormFolderExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1008,7 +1008,7 @@ EndFunc   ;==>_LOBase_FormFolderDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To narrow the search for a Folder down to a specific folder, you MUST prefix the Folder name called in $sName by the folder path to look in, separated by forward slashes (/). e.g. to search for FolderXYZ located in folder3, which is located in Folder 2, which is located inside folder 1, you would call $sName with the following path: Folder1/Folder2/Folder3/FolderXYZ
-; Related .......:
+; Related .......: _LOBase_FormFolderCreate, _LOBase_FormFolderDelete, _LOBase_FormFoldersGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1116,7 +1116,7 @@ EndFunc   ;==>_LOBase_FormFolderExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To rename a Folder inside a folder, the original Folder name MUST be prefixed by the folder path, separated by forward slashes (/). e.g. to rename FolderXYZ contained in folder 3, which is located in Folder 2, which is located inside folder 1, you would call $sFolder with the following path: Folder1/Folder2/Folder3/FolderXYZ.
-; Related .......:
+; Related .......: _LOBase_FormFolderExists, _LOBase_FormFoldersGetNames, _LOBase_FormRename
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1274,7 +1274,7 @@ EndFunc   ;==>_LOBase_FormFoldersGetCount
 ;                  All Folders located in sub-folders will have the folder path prefixed to the Folder name, separated by forward slashes (/). e.g. Folder1/Folder2/Folder3.
 ;                  Calling $bExhaustive with True when searching inside a Folder, will get all Folder names from inside that folder, and all sub-folders.
 ;                  The order of the Folder names inside the folders may not necessarily be in proper order, i.e. if there are two sub folders, and folders inside the first sub-folder, the two folders will be listed first, then the folders inside the first sub-folder.
-; Related .......: _LOBase_FormFolderDelete, _LOBase_FormFolderExists, _LOBase_FormFoldersGetCount
+; Related .......: _LOBase_FormFolderDelete, _LOBase_FormFolderExists, _LOBase_FormFoldersGetCount, _LOBase_FormsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1380,7 +1380,7 @@ EndFunc   ;==>_LOBase_FormFoldersGetNames
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To rename a Form inside a folder, the original Form name MUST be prefixed by the folder path, separated by forward slashes (/). e.g. to rename FormXYZ contained in folder 3, which is located in Folder 2, which is located inside folder 1, you would call $sForm with the following path: Folder1/Folder2/Folder3/FormXYZ.
-; Related .......:
+; Related .......: _LOBase_FormCopy, _LOBase_FormCreate, _LOBase_FormExists, _LOBase_FormsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1542,7 +1542,7 @@ EndFunc   ;==>_LOBase_FormsGetCount
 ;                  All forms located in folders will have the folder path prefixed to the Form name, separated by forward slashes (/). e.g. Folder1/Folder2/Folder3/FormXYZ.
 ;                  Calling $bExhaustive with True when searching inside a Folder, will get all Form names from inside that folder, and all sub-folders.
 ;                  The order of the form names inside the folders may not necessarily be in proper order, i.e. if there are two sub folders, and folders inside the first sub-folder, the Forms inside of the two folders will be listed first, then the forms inside the folders inside the first sub-folder.
-; Related .......: _LOBase_FormsGetCount, _LOBase_FormDelete, _LOBase_FormDocOpen
+; Related .......: _LOBase_FormsGetCount, _LOBase_FormDelete, _LOBase_FormDocOpen, _LOBase_FormRename, _LOBase_FormExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
