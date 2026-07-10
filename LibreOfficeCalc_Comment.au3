@@ -74,7 +74,7 @@
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_CommentDelete
+; Related .......: _LOCalc_CommentDelete, _LOCalc_CommentsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -128,7 +128,7 @@ EndFunc   ;==>_LOCalc_CommentAdd
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LOCalc_CommentAreaFillStyle, _LOCalc_CommentAreaGradient, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -176,7 +176,7 @@ EndFunc   ;==>_LOCalc_CommentAreaColor
 ; Modified ......:
 ; Remarks .......: This function is to help determine if a Gradient background, or a solid color background is currently active.
 ;                  This is useful because, if a Gradient is active, the solid color value is still present, and thus it would not be possible to determine which function should be used to retrieve the current values for, whether the Color function, or the Gradient function.
-; Related .......:
+; Related .......: _LOCalc_CommentAreaColor, _LOCalc_CommentAreaGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -251,7 +251,7 @@ EndFunc   ;==>_LOCalc_CommentAreaFillStyle
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LOCalc_CommentAreaColor, _LOCalc_CommentAreaFillStyle, _LOCalc_CommentAreaGradientMulticolor, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -461,7 +461,7 @@ EndFunc   ;==>_LOCalc_CommentAreaGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOCalc_CommentAreaTransparencyGradientMulti
+; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOCalc_CommentAreaGradient, _LOCalc_CommentAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -689,7 +689,7 @@ EndFunc   ;==>_LOCalc_CommentAreaShadow
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOCalc_CommentAreaTransparencyGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -769,7 +769,7 @@ EndFunc   ;==>_LOCalc_CommentAreaTransparency
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOCalc_CommentAreaTransparency, _LOCalc_CommentAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -948,7 +948,7 @@ EndFunc   ;==>_LOCalc_CommentAreaTransparencyGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOCalc_CommentAreaGradientMulticolor
+; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOCalc_CommentAreaTransparencyGradient, _LOCalc_CommentAreaGradientMulticolor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1068,7 +1068,7 @@ EndFunc   ;==>_LOCalc_CommentAreaTransparencyGradientMulti
 ;                  If $iCalloutStyle is not set to $LOC_COMMENT_CALLOUT_STYLE_ANGLED_CONNECTOR, both $bOptimal and $iLength, are not used/unavailable for setting.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOCalc_CommentLineArrowStyles, _LOCalc_CommentLineProperties
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1193,7 +1193,7 @@ EndFunc   ;==>_LOCalc_CommentCallout
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_CommentText, _LOCalc_TextCursorInsertString, _LOCalc_TextCursorMove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1284,7 +1284,7 @@ EndFunc   ;==>_LOCalc_CommentDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_CommentGetObjByCell
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1358,7 +1358,7 @@ EndFunc   ;==>_LOCalc_CommentGetLastEdit
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_CommentDelete
+; Related .......: _LOCalc_CommentDelete, _LOCalc_CommentGetObjByIndex, _LOCalc_CommentsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1397,7 +1397,7 @@ EndFunc   ;==>_LOCalc_CommentGetObjByCell
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_CommentDelete
+; Related .......: _LOCalc_CommentDelete, _LOCalc_CommentGetObjByCell, _LOCalc_CommentsGetCount, _LOCalc_CommentsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1471,7 +1471,7 @@ EndFunc   ;==>_LOCalc_CommentGetObjByIndex
 ;                  When retrieving the current settings, both $vStartStyle and $vEndStyle could be either an Integer or a String. It will be a String if the current Arrowhead is a custom Arrowhead, else an Integer, corresponding to one of the constants, $LOC_COMMENT_LINE_ARROW_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_CommentLineProperties
+; Related .......: _LOCalc_CommentLineProperties, _LOCalc_CommentCallout
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1616,7 +1616,7 @@ EndFunc   ;==>_LOCalc_CommentLineArrowStyles
 ;                  When retrieving the current settings, $vStyle could be either an Integer or a String. It will be a String if the current Line Style is a custom Line Style, else an Integer, corresponding to one of the constants, $LOC_COMMENT_LINE_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOCalc_CommentLineArrowStyles
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOCalc_CommentLineArrowStyles, _LOCalc_CommentCallout
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1879,7 +1879,7 @@ EndFunc   ;==>_LOCalc_CommentRotate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_CommentGetObjByIndex
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1917,7 +1917,7 @@ EndFunc   ;==>_LOCalc_CommentsGetCount
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_CommentGetObjByCell, _LOCalc_CommentGetObjByIndex
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1977,7 +1977,7 @@ EndFunc   ;==>_LOCalc_CommentsGetList
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  I have skipped "Keep Ratio, as there is no built in setting for it for Comments, so I would have to formulate a custom function for this purpose.
-; Related .......: _LO_UnitConvert, _LOCalc_CommentPosition
+; Related .......: _LO_UnitConvert, _LOCalc_CommentPosition, _LOCalc_CommentRotate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2054,7 +2054,7 @@ EndFunc   ;==>_LOCalc_CommentSize
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOCalc_CommentCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2109,7 +2109,7 @@ EndFunc   ;==>_LOCalc_CommentText
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOCalc_CommentGetCell, _LOCalc_CommentTextSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2297,7 +2297,7 @@ EndFunc   ;==>_LOCalc_CommentTextAnchor
 ;                  $iIncrement in the L.O. UI allows for 10" max, however this produces an erroneous value internally, and switches back to using pixels, even in the UI, if you set $iIncrement to the max value, it will most likely cause a property setting error.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOCalc_CommentTextColumns, _LOCalc_CommentTextSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2413,7 +2413,7 @@ EndFunc   ;==>_LOCalc_CommentTextAnimation
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOCalc_CommentTextSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2515,7 +2515,7 @@ EndFunc   ;==>_LOCalc_CommentTextColumns
 ;                  If spacing values on all sides do not match, $iSpacingAll will return 0.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOCalc_CommentTextColumns
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2636,7 +2636,7 @@ EndFunc   ;==>_LOCalc_CommentTextSettings
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOCalc_CommentDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

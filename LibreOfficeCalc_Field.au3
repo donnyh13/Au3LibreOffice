@@ -99,7 +99,7 @@ EndFunc   ;==>_LOCalc_FieldCurrentDisplayGet
 ; Remarks .......: If you are inserting the field into a header or footer of the document, make sure you use a newly created Text Cursor, using a cursor that has previously inserted text, will cause this function to fail to identify the new Field's object. The Field will still be successfully inserted however.
 ;                  Inserting Fields into the Headers/Footers is a bit glitchy.
 ;                  The reason I use a Map to contain the Field's object is that Calc Fields are a little buggy currently, therefore I need two Objects in order to do certain functions with the Field, such as deleteing, or retrieving the Field's display. It is easier and more accurate to identify and retrieve the Objects now, rather than later.
-; Related .......:
+; Related .......: _LOCalc_FieldDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -196,7 +196,7 @@ EndFunc   ;==>_LOCalc_FieldDelete
 ; Remarks .......: If you are inserting the field into a header or footer of the document, make sure you use a newly created Text Cursor, using a cursor that has previously inserted text, will cause this function to fail to identify the new Field's object. The Field will still be successfully inserted however.
 ;                  Inserting Fields into the Headers/Footers is a bit glitchy.
 ;                  The reason I use a Map to contain the Field's object is that Calc Fields are a little buggy currently, therefore I need two Objects in order to do certain functions with the Field, such as deleteing, or retrieving the Field's display. It is easier and more accurate to identify and retrieve the Objects now, rather than later.
-; Related .......:
+; Related .......: _LOCalc_FieldSheetNameInsert, _LOCalc_FieldTitleInsert, _LOCalc_FieldDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -240,7 +240,7 @@ EndFunc   ;==>_LOCalc_FieldFileNameInsert
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_FieldsGetList
+; Related .......: _LOCalc_FieldsGetList, _LOCalc_TextCursorInsertString, _LOCalc_TextCursorMove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -285,7 +285,7 @@ EndFunc   ;==>_LOCalc_FieldGetAnchor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The reason I use a Map to contain the Field's object is that Calc Fields are a little buggy currently, therefore I need two Objects in order to do certain functions with the Field, such as deleteing, or retrieving the Field's display. It is easier and more accurate to identify and retrieve the Objects now, rather than later.
-; Related .......:
+; Related .......: _LOCalc_FieldHyperlinkModify, _LOCalc_FieldDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -345,7 +345,7 @@ EndFunc   ;==>_LOCalc_FieldHyperlinkInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOCalc_FieldHyperlinkInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -411,7 +411,7 @@ EndFunc   ;==>_LOCalc_FieldHyperlinkModify
 ; Remarks .......: If you are inserting the field into a header or footer of the document, make sure you use a newly created Text Cursor, using a cursor that has previously inserted text, will cause this function to fail to identify the new Field's object. The Field will still be successfully inserted however.
 ;                  Inserting Fields into the Headers/Footers is a bit glitchy.
 ;                  The reason I use a Map to contain the Field's object is that Calc Fields are a little buggy currently, therefore I need two Objects in order to do certain functions with the Field, such as deleteing, or retrieving the Field's display. It is easier and more accurate to identify and retrieve the Objects now, rather than later.
-; Related .......:
+; Related .......: _LOCalc_FieldPageNumberInsert, _LOCalc_FieldDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -459,7 +459,7 @@ EndFunc   ;==>_LOCalc_FieldPageCountInsert
 ; Remarks .......: If you are inserting the field into a header or footer of the document, make sure you use a newly created Text Cursor, using a cursor that has previously inserted text, will cause this function to fail to identify the new Field's object. The Field will still be successfully inserted however.
 ;                  Inserting Fields into the Headers/Footers is a bit glitchy.
 ;                  The reason I use a Map to contain the Field's object is that Calc Fields are a little buggy currently, therefore I need two Objects in order to do certain functions with the Field, such as deleteing, or retrieving the Field's display. It is easier and more accurate to identify and retrieve the Objects now, rather than later.
-; Related .......:
+; Related .......: _LOCalc_FieldPageCountInsert, _LOCalc_FieldDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -515,7 +515,7 @@ EndFunc   ;==>_LOCalc_FieldPageNumberInsert
 ;                  Setting $bFieldTypeNum to True will add a Field type Number column, matching the constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3 for the found Field.
 ;                  This function may fail to identify Fields if text has been inserted recently using the same Cursor.
 ;                  The reason I use a Map to contain the Field's object is that Calc Fields are a little buggy currently, therefore I need two Objects in order to do certain functions with the Field, such as deleteing, or retrieving the Field's display. It is easier and more accurate to identify and retrieve the Objects now, rather than later.
-; Related .......:
+; Related .......: _LOCalc_FieldDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -635,7 +635,7 @@ EndFunc   ;==>_LOCalc_FieldsGetList
 ; Remarks .......: If you are inserting the field into a header or footer of the document, make sure you use a newly created Text Cursor, using a cursor that has previously inserted text, will cause this function to fail to identify the new Field's object. The Field will still be successfully inserted however.
 ;                  Inserting Fields into the Headers/Footers is a bit glitchy.
 ;                  The reason I use a Map to contain the Field's object is that Calc Fields are a little buggy currently, therefore I need two Objects in order to do certain functions with the Field, such as deleteing, or retrieving the Field's display. It is easier and more accurate to identify and retrieve the Objects now, rather than later.
-; Related .......:
+; Related .......: _LOCalc_FieldFileNameInsert, _LOCalc_FieldTitleInsert, _LOCalc_FieldDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -683,7 +683,7 @@ EndFunc   ;==>_LOCalc_FieldSheetNameInsert
 ; Remarks .......: If you are inserting the field into a header or footer of the document, make sure you use a newly created Text Cursor, using a cursor that has previously inserted text, will cause this function to fail to identify the new Field's object. The Field will still be successfully inserted however.
 ;                  Inserting Fields into the Headers/Footers is a bit glitchy.
 ;                  The reason I use a Map to contain the Field's object is that Calc Fields are a little buggy currently, therefore I need two Objects in order to do certain functions with the Field, such as deleteing, or retrieving the Field's display. It is easier and more accurate to identify and retrieve the Objects now, rather than later.
-; Related .......:
+; Related .......: _LOCalc_FieldSheetNameInsert, _LOCalc_FieldFileNameInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

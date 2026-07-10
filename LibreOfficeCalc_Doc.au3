@@ -184,7 +184,7 @@ EndFunc   ;==>_LOCalc_DocClose
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_DocColumnsRowsFreeze
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -220,7 +220,7 @@ EndFunc   ;==>_LOCalc_DocColumnsRowsAreFrozen
 ; Modified ......:
 ; Remarks .......: To set no Columns or rows to be frozen in view, set both $iColumns and $iRows to 0.
 ;                  Setting either $iColumns or $iRows will lose previous values for both.
-; Related .......:
+; Related .......: _LOCalc_DocColumnsRowsAreFrozen
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -578,7 +578,7 @@ EndFunc   ;==>_LOCalc_DocExport
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOCalc_DocColumnsRowsFreeze, _LOCalc_DocWindowVisibleRange, _LOCalc_DocWindowSplit, _LOCalc_DocWindowFirstColumn, _LOCalc_DocWindowFirstRow, _LOCalc_DocViewWindowSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -667,7 +667,7 @@ EndFunc   ;==>_LOCalc_DocGetName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LO_PathConvert
+; Related .......: _LO_PathConvert, _LOCalc_DocHasPath
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -706,7 +706,7 @@ EndFunc   ;==>_LOCalc_DocGetPath
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_DocClose, _LOCalc_DocGetPath, _LOCalc_DocSaveAs
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -739,7 +739,7 @@ EndFunc   ;==>_LOCalc_DocHasPath
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This does NOT test if the document is the current active window in Windows, it only tests if the document is the current active document among other LibreOffice documents.
-; Related .......:
+; Related .......: _LOCalc_DocToFront
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -778,7 +778,7 @@ EndFunc   ;==>_LOCalc_DocIsActive
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_DocIsReadOnly, _LOCalc_DocSave
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -821,7 +821,7 @@ EndFunc   ;==>_LOCalc_DocIsModified
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Only documents that have been saved to a location, will ever be "ReadOnly".
-; Related .......:
+; Related .......: _LOCalc_DocIsModified, _LOCalc_DocClose, _LOCalc_DocOpen
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -860,7 +860,7 @@ EndFunc   ;==>_LOCalc_DocIsReadOnly
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOCalc_DocMinimize, _LOCalc_DocPosAndSize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -909,7 +909,7 @@ EndFunc   ;==>_LOCalc_DocMaximize
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOCalc_DocMaximize, _LOCalc_DocToFront, _LOCalc_DocPosAndSize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1087,7 +1087,7 @@ EndFunc   ;==>_LOCalc_DocOpen
 ;                  If you want more accurate functionality, use the "WinMove" AutoIt function.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOCalc_DocMaximize, _LOCalc_DocMinimize, _LOCalc_DocToFront, _LOCalc_DocZoom
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1269,7 +1269,7 @@ EndFunc   ;==>_LOCalc_DocPrint
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_DocUndo, _LOCalc_DocRedoIsPossible, _LOCalc_DocRedoGetAllActionTitles, _LOCalc_DocRedoCurActionTitle
+; Related .......: _LOCalc_DocRedoIsPossible, _LOCalc_DocRedoGetAllActionTitles, _LOCalc_DocRedoCurActionTitle, _LOCalc_DocUndo
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1303,7 +1303,7 @@ EndFunc   ;==>_LOCalc_DocRedo
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This will silently fail if there are any _LOCalc_DocUndoActionBegin still active.
-; Related .......: _LOCalc_DocUndoClear, _LOCalc_DocUndoReset
+; Related .......: _LOCalc_DocUndoReset, _LOCalc_DocUndoClear
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1333,7 +1333,7 @@ EndFunc   ;==>_LOCalc_DocRedoClear
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_DocRedo, _LOCalc_DocRedoGetAllActionTitles
+; Related .......: _LOCalc_DocRedo, _LOCalc_DocRedoGetAllActionTitles, _LOCalc_DocRedoIsPossible, _LOCalc_DocUndoCurActionTitle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1367,7 +1367,7 @@ EndFunc   ;==>_LOCalc_DocRedoCurActionTitle
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_DocRedo, _LOCalc_DocRedoCurActionTitle
+; Related .......: _LOCalc_DocRedo, _LOCalc_DocRedoCurActionTitle, _LOCalc_DocUndoGetAllActionTitles
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1400,7 +1400,7 @@ EndFunc   ;==>_LOCalc_DocRedoGetAllActionTitles
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_DocRedo
+; Related .......: _LOCalc_DocRedo, _LOCalc_DocRedoCurActionTitle, _LOCalc_DocRedoGetAllActionTitles, _LOCalc_DocUndoIsPossible
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1433,7 +1433,7 @@ EndFunc   ;==>_LOCalc_DocRedoIsPossible
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_DocExport, _LOCalc_DocSaveAs
+; Related .......: _LOCalc_DocExport, _LOCalc_DocSaveAs, _LOCalc_DocIsModified, _LOCalc_DocIsReadOnly, _LOCalc_DocHasPath
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1527,7 +1527,7 @@ EndFunc   ;==>_LOCalc_DocSaveAs
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_DocSelectionCopy
-; Description ...: "Copies" data selected by the ViewCursor, returning an Object for use in inserting later.
+; Description ...: "Copies" data selected by the Cursor, returning an Object for use in inserting later.
 ; Syntax ........: _LOCalc_DocSelectionCopy(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ; Return values .: Success: Object
@@ -1580,7 +1580,7 @@ EndFunc   ;==>_LOCalc_DocSelectionCopy
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If the user has nothing selected, or is typing in a cell, the return will still be the single cell Object.
-; Related .......:
+; Related .......: _LOCalc_DocSelectionCopy, _LOCalc_DocSelectionSet, _LOCalc_DocSelectionSetMulti
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1669,7 +1669,7 @@ EndFunc   ;==>_LOCalc_DocSelectionPaste
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_DocSelectionCopy, _LOCalc_DocSelectionGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1708,7 +1708,7 @@ EndFunc   ;==>_LOCalc_DocSelectionSet
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_DocSelectionCopy,_LOCalc_DocSelectionSet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1757,7 +1757,7 @@ EndFunc   ;==>_LOCalc_DocSelectionSetMulti
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If minimized, the document is restored and brought to the front of the visible pages. Generally only brings the document to the front of other LibreOffice windows.
-; Related .......:
+; Related .......: _LOCalc_DocIsActive, _LOCalc_DocMinimize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1825,7 +1825,7 @@ EndFunc   ;==>_LOCalc_DocUndo
 ; Remarks .......: This begins an Undo Action Group, any functions and actions done after this function is called will be grouped together, and if undone, all actions will be undone together at once.
 ;                  _LOCalc_DocUndoActionEnd must be called after this function before this undo group will become available in the Undo Action list.
 ;                  _LOCalc_DocUndoActionBegin can be nested, e.g. call this function multiple times without ending the first undo action, but only the last group that is ended with _LOCalc_DocUndoActionEnd will appear.
-; Related .......:
+; Related .......: _LOCalc_DocUndoActionEnd, _LOCalc_DocUndoReset
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1854,7 +1854,7 @@ EndFunc   ;==>_LOCalc_DocUndoActionBegin
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This stops the grouping of actions into the last created Undo Action Group.
-; Related .......: _LOCalc_DocUndoActionBegin
+; Related .......: _LOCalc_DocUndoActionBegin, _LOCalc_DocUndoReset
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1882,7 +1882,7 @@ EndFunc   ;==>_LOCalc_DocUndoActionEnd
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This will silently fail if there are any _LOCalc_DocUndoActionBegin still active.
-; Related .......: _LOCalc_DocRedoClear, _LOCalc_DocUndoReset
+; Related .......: _LOCalc_DocUndoReset, _LOCalc_DocRedoClear
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1912,7 +1912,7 @@ EndFunc   ;==>_LOCalc_DocUndoClear
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_DocUndo, _LOCalc_DocUndoGetAllActionTitles
+; Related .......: _LOCalc_DocUndo, _LOCalc_DocUndoGetAllActionTitles, _LOCalc_DocUndoIsPossible, _LOCalc_DocRedoCurActionTitle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1945,7 +1945,7 @@ EndFunc   ;==>_LOCalc_DocUndoCurActionTitle
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_DocUndo, _LOCalc_DocUndoCurActionTitle
+; Related .......: _LOCalc_DocUndo, _LOCalc_DocUndoCurActionTitle, _LOCalc_DocRedoGetAllActionTitles
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1978,7 +1978,7 @@ EndFunc   ;==>_LOCalc_DocUndoGetAllActionTitles
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_DocUndo
+; Related .......: _LOCalc_DocUndo, _LOCalc_DocRedoIsPossible
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2009,7 +2009,7 @@ EndFunc   ;==>_LOCalc_DocUndoIsPossible
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Calling this function does the following: remove all locks from the undo manager; closes all open undo group actions, clears all undo actions, clears all redo actions.
-; Related .......: _LOCalc_DocRedoClear, _LOCalc_DocUndoClear
+; Related .......: _LOCalc_DocUndoClear, _LOCalc_DocRedoClear
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2203,7 +2203,7 @@ EndFunc   ;==>_LOCalc_DocViewDisplaySettings
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOCalc_DocFormulaBarHeight
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2309,7 +2309,7 @@ EndFunc   ;==>_LOCalc_DocViewWindowSettings
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOCalc_DocCreate, _LOCalc_DocOpen
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2359,7 +2359,7 @@ EndFunc   ;==>_LOCalc_DocVisible
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  This will fail if there are currently any frozen Columns.
-; Related .......:
+; Related .......: _LOCalc_DocWindowFirstRow, _LOCalc_DocColumnsRowsFreeze, _LOCalc_DocWindowVisibleRange, _LOCalc_DocWindowSplit
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2408,7 +2408,7 @@ EndFunc   ;==>_LOCalc_DocWindowFirstColumn
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  This will fail if there are currently any frozen Rows.
-; Related .......:
+; Related .......: _LOCalc_DocWindowFirstColumn, _LOCalc_DocColumnsRowsFreeze, _LOCalc_DocWindowVisibleRange, _LOCalc_DocWindowSplit
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2450,7 +2450,7 @@ EndFunc   ;==>_LOCalc_DocWindowFirstRow
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_DocWindowSplit, _LOCalc_DocColumnsRowsAreFrozen
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2492,7 +2492,7 @@ EndFunc   ;==>_LOCalc_DocWindowIsSplit
 ;                  $bReturnPixels changes only the return value type, it doesn't change the type of input values to use for $iX and $iY.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOCalc_DocWindowIsSplit, _LOCalc_DocWindowFirstColumn, _LOCalc_DocWindowFirstRow, _LOCalc_DocColumnsRowsFreeze
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2543,7 +2543,7 @@ EndFunc   ;==>_LOCalc_DocWindowSplit
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_DocWindowFirstColumn, _LOCalc_DocWindowFirstRow, _LOCalc_DocWindowSplit, _LOCalc_DocColumnsRowsFreeze
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2591,7 +2591,7 @@ EndFunc   ;==>_LOCalc_DocWindowVisibleRange
 ; Remarks .......: Zoom type always has the value of $LOC_ZOOMTYPE_BY_VALUE(3), when using the other zoom types, the value stays the same, but the zoom level is modified. Consequently, I have not added an error check for the Zoom Type property being correctly set.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOCalc_DocViewWindowSettings, _LOCalc_DocMaximize, _LOCalc_DocMinimize, _LOCalc_DocWindowVisibleRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

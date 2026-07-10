@@ -195,7 +195,7 @@ EndFunc   ;==>_LOCalc_SheetAdd
 ; Remarks .......: If $sNewName is left as Null, the original Sheet's name is used, with "_" and a digit appended.
 ;                  If $iPosition is left as Null, the copied sheet will be placed at the end of the list.
 ;                  Calling $iPosition with the number of Sheets in the Document will place the copied sheet at the end of the sheet list.
-; Related .......: _LOCalc_SheetExists, _LOCalc_SheetMove
+; Related .......: _LOCalc_SheetExists, _LOCalc_SheetAdd,  _LOCalc_SheetMove, _LOCalc_SheetRemove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -257,7 +257,7 @@ EndFunc   ;==>_LOCalc_SheetCopy
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: A Sheet Cursor can be used in functions accepting a range. When created, the Cursor will have the entire Sheet selected.
-; Related .......:
+; Related .......: _LOCalc_SheetCursorMove, _LOCalc_RangeCreateCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -322,7 +322,7 @@ EndFunc   ;==>_LOCalc_SheetDetectiveClear
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Each time that $bShow is called with True, another level of Dependents is marked with arrows.
-; Related .......: _LOCalc_SheetDetectivePrecedent, _LOCalc_SheetDetectiveTraceError, _LOCalc_SheetDetectiveClear, _LOCalc_SheetDetectiveInvalidData
+; Related .......: _LOCalc_SheetDetectivePrecedent, _LOCalc_SheetDetectiveTraceError, _LOCalc_SheetDetectiveClear, _LOCalc_SheetDetectiveInvalidData, _LOCalc_RangeQueryDependents
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -404,7 +404,7 @@ EndFunc   ;==>_LOCalc_SheetDetectiveInvalidData
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Each time that $bShow is called with True, another level of precedents is marked with arrows.
-; Related .......: _LOCalc_SheetDetectiveDependent, _LOCalc_SheetDetectiveTraceError, _LOCalc_SheetDetectiveClear, _LOCalc_SheetDetectiveInvalidData
+; Related .......: _LOCalc_SheetDetectiveDependent, _LOCalc_SheetDetectiveTraceError, _LOCalc_SheetDetectiveClear, _LOCalc_SheetDetectiveInvalidData, _LOCalc_RangeQueryPrecedents
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -491,7 +491,7 @@ EndFunc   ;==>_LOCalc_SheetDetectiveTraceError
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_SheetAdd, _LOCalc_SheetGetObjByName, _LOCalc_SheetsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -531,7 +531,7 @@ EndFunc   ;==>_LOCalc_SheetExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_SheetsGetNames
+; Related .......: _LOCalc_SheetsGetNames, _LOCalc_SheetExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -620,7 +620,7 @@ EndFunc   ;==>_LOCalc_SheetGetObjByPosition
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_SheetLink
+; Related .......: _LOCalc_SheetLink, _LOCalc_SheetRemove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -750,7 +750,7 @@ EndFunc   ;==>_LOCalc_SheetIsProtected
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_SheetImport
+; Related .......: _LOCalc_SheetImport, _LOCalc_SheetLinkModify, _LOCalc_SheetRemove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -935,7 +935,7 @@ EndFunc   ;==>_LOCalc_SheetLinkModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Calling $iPosition with the number of Sheets in the Document will place the moved sheet at the end of the sheet list.
-; Related .......: _LOCalc_SheetCopy
+; Related .......: _LOCalc_SheetCopy, _LOCalc_SheetAdd
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1059,7 +1059,7 @@ EndFunc   ;==>_LOCalc_SheetName
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  The Return for $oRange will be a Cell Range or Cell Object, if no Column is set, the return will always be the first cell (A1) of the Sheet.
-; Related .......: _LOCalc_SheetPrintRowsRepeat
+; Related .......: _LOCalc_SheetPrintRowsRepeat, _LOCalc_DocPrint
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1154,7 +1154,7 @@ EndFunc   ;==>_LOCalc_SheetPrintColumnsRepeat
 ;                  Likewise, when retrieving the current print range, if the returned array is empty, that means the entire sheet (all of the used cells) is set to be printed.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  If you set a Print Range for one sheet, any other Sheet without a Print Range set will NOT be printed.
-; Related .......:
+; Related .......: _LOCalc_DocPrint
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1223,7 +1223,7 @@ EndFunc   ;==>_LOCalc_SheetPrintRangeModify
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  The Return for $oRange will be a Cell Range or Cell Object, if no Row is set, the return will always be the first cell (A1) of the Sheet.
-; Related .......: _LOCalc_SheetPrintColumnsRepeat
+; Related .......: _LOCalc_SheetPrintColumnsRepeat, _LOCalc_DocPrint
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1347,7 +1347,7 @@ EndFunc   ;==>_LOCalc_SheetProtect
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_SheetAdd, _LOCalc_SheetGetObjByName
+; Related .......: _LOCalc_SheetAdd, _LOCalc_SheetGetObjByName, _LOCalc_SheetCopy
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1392,7 +1392,7 @@ EndFunc   ;==>_LOCalc_SheetRemove
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_SheetGetObjByPosition
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1603,7 +1603,7 @@ EndFunc   ;==>_LOCalc_SheetUnprotect
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOCalc_SheetActive
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

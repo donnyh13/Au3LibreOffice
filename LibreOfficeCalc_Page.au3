@@ -84,7 +84,7 @@
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOCalc_PageStyleFooterBackColor, _LOCalc_PageStyleHeaderBackColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -154,7 +154,7 @@ EndFunc   ;==>_LOCalc_PageStyleBackColor
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOCalc_PageStyleBorderWidth, _LOCalc_PageStyleBorderStyle, _LOCalc_PageStyleBorderPadding
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOCalc_PageStyleBorderWidth, _LOCalc_PageStyleBorderStyle, _LOCalc_PageStyleBorderPadding, _LOCalc_PageStyleFooterBorderColor, _LOCalc_PageStyleHeaderBackColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -209,7 +209,7 @@ EndFunc   ;==>_LOCalc_PageStyleBorderColor
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_UnitConvert, _LOCalc_PageStyleBorderWidth, _LOCalc_PageStyleBorderStyle, _LOCalc_PageStyleBorderColor
+; Related .......: _LO_UnitConvert, _LOCalc_PageStyleBorderWidth, _LOCalc_PageStyleBorderStyle, _LOCalc_PageStyleBorderColor, _LOCalc_PageStyleFooterBorderPadding, _LOCalc_PageStyleHeaderBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -309,7 +309,7 @@ EndFunc   ;==>_LOCalc_PageStyleBorderPadding
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LOCalc_PageStyleBorderWidth, _LOCalc_PageStyleBorderColor, _LOCalc_PageStyleBorderPadding
+; Related .......: _LOCalc_PageStyleBorderWidth, _LOCalc_PageStyleBorderColor, _LOCalc_PageStyleBorderPadding, _LOCalc_PageStyleFooterBorderStyle, _LOCalc_PageStyleHeaderBorderStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -368,7 +368,7 @@ EndFunc   ;==>_LOCalc_PageStyleBorderStyle
 ; Remarks .......: To "Turn Off" Borders, set Width to 0
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_UnitConvert, _LOCalc_PageStyleBorderStyle, _LOCalc_PageStyleBorderColor, _LOCalc_PageStyleBorderPadding
+; Related .......: _LO_UnitConvert, _LOCalc_PageStyleBorderStyle, _LOCalc_PageStyleBorderColor, _LOCalc_PageStyleBorderPadding, _LOCalc_PageStyleFooterBorderWidth, _LOCalc_PageStyleHeaderBorderWidth
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -412,7 +412,7 @@ EndFunc   ;==>_LOCalc_PageStyleBorderWidth
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_PageStyleDelete
+; Related .......: _LOCalc_PageStyleDelete, _LOCalc_PageStyleExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -467,7 +467,7 @@ EndFunc   ;==>_LOCalc_PageStyleCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOCalc_PageStylesGetNames
+; Related .......: _LOCalc_PageStylesGetNames, _LOCalc_PageStyleExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -566,7 +566,7 @@ EndFunc   ;==>_LOCalc_PageStyleDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_PageStylesGetNames, _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -626,7 +626,7 @@ EndFunc   ;==>_LOCalc_PageStyleExists
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOCalc_PageStyleHeader
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -736,7 +736,7 @@ EndFunc   ;==>_LOCalc_PageStyleFooter
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOCalc_PageStyleBackColor, _LOCalc_PageStyleHeaderBackColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -808,7 +808,7 @@ EndFunc   ;==>_LOCalc_PageStyleFooterBackColor
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOCalc_PageStyleFooterBorderWidth, _LOCalc_PageStyleFooterBorderStyle, _LOCalc_PageStyleFooterBorderPadding
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOCalc_PageStyleFooterBorderWidth, _LOCalc_PageStyleFooterBorderStyle, _LOCalc_PageStyleFooterBorderPadding, _LOCalc_PageStyleBorderColor, _LOCalc_PageStyleHeaderBorderColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -865,7 +865,7 @@ EndFunc   ;==>_LOCalc_PageStyleFooterBorderColor
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_UnitConvert, _LOCalc_PageStyleFooterBorderWidth, _LOCalc_PageStyleFooterBorderStyle, _LOCalc_PageStyleFooterBorderColor
+; Related .......: _LO_UnitConvert, _LOCalc_PageStyleFooterBorderWidth, _LOCalc_PageStyleFooterBorderStyle, _LOCalc_PageStyleFooterBorderColor, _LOCalc_PageStyleBorderPadding, _LOCalc_PageStyleHeaderBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -967,7 +967,7 @@ EndFunc   ;==>_LOCalc_PageStyleFooterBorderPadding
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LOCalc_PageStyleFooterBorderWidth, _LOCalc_PageStyleFooterBorderColor, _LOCalc_PageStyleFooterBorderPadding
+; Related .......: _LOCalc_PageStyleFooterBorderWidth, _LOCalc_PageStyleFooterBorderColor, _LOCalc_PageStyleFooterBorderPadding, _LOCalc_PageStyleBorderStyle, _LOCalc_PageStyleHeaderBorderStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1027,7 +1027,7 @@ EndFunc   ;==>_LOCalc_PageStyleFooterBorderStyle
 ; Remarks .......: To "Turn Off" Borders, set Width to 0.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_UnitConvert, _LOCalc_PageStyleFooterBorderStyle, _LOCalc_PageStyleFooterBorderColor, _LOCalc_PageStyleFooterBorderPadding
+; Related .......: _LO_UnitConvert, _LOCalc_PageStyleFooterBorderStyle, _LOCalc_PageStyleFooterBorderColor, _LOCalc_PageStyleFooterBorderPadding, _LOCalc_PageStyleBorderWidth, _LOCalc_PageStyleHeaderBorderWidth
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1074,7 +1074,7 @@ EndFunc   ;==>_LOCalc_PageStyleFooterBorderWidth
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: You can only create a Text Cursor in one area at a time per function call.
-; Related .......: _LOCalc_TextCursorMove, _LOCalc_PageStyleFooterObj
+; Related .......: _LOCalc_TextCursorMove, _LOCalc_PageStyleFooterObj, _LOCalc_PageStyleHeaderCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1147,7 +1147,7 @@ EndFunc   ;==>_LOCalc_PageStyleFooterCreateTextCursor
 ;                  The Object returned is interchangeable among the others. i.e. if you want identical content on all pages, you can set all three using the same Object. You can also use this method to copy header/footer content from one page Style to another, even in other documents.
 ;                  Only one Object can be retrieved at once. But you could set and retrieve another object at one time, such as set First page and retrieve Left Page. If more than one parameter is called with Default, the first parameter called with Default is retrieved.
 ;                  If Same Content on Left and Right is True, enter Content using RightPage Object.
-; Related .......: _LOCalc_PageStyleHeaderObj, _LOCalc_PageStyleFooterCreateTextCursor
+; Related .......: _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1232,7 +1232,7 @@ EndFunc   ;==>_LOCalc_PageStyleFooterObj
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  LibreOffice may change the shadow width +/- a Hundredth of a Millimeter (HMM).
-; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LOCalc_PageStyleHeaderShadow, _LOCalc_PageStyleShadow
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1369,7 +1369,7 @@ EndFunc   ;==>_LOCalc_PageStyleGetObjByName
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOCalc_PageStyleFooter
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1479,7 +1479,7 @@ EndFunc   ;==>_LOCalc_PageStyleHeader
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOCalc_PageStyleBackColor, _LOCalc_PageStyleFooterBackColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1551,7 +1551,7 @@ EndFunc   ;==>_LOCalc_PageStyleHeaderBackColor
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOCalc_PageStyleHeaderBorderWidth, _LOCalc_PageStyleHeaderBorderStyle, _LOCalc_PageStyleHeaderBorderPadding
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOCalc_PageStyleHeaderBorderWidth, _LOCalc_PageStyleHeaderBorderStyle, _LOCalc_PageStyleHeaderBorderPadding, _LOCalc_PageStyleBorderColor, _LOCalc_PageStyleFooterBackColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1608,7 +1608,7 @@ EndFunc   ;==>_LOCalc_PageStyleHeaderBorderColor
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_UnitConvert, _LOCalc_PageStyleHeaderBorderWidth, _LOCalc_PageStyleHeaderBorderStyle, _LOCalc_PageStyleHeaderBorderColor
+; Related .......: _LO_UnitConvert, _LOCalc_PageStyleHeaderBorderWidth, _LOCalc_PageStyleHeaderBorderStyle, _LOCalc_PageStyleHeaderBorderColor, _LOCalc_PageStyleBorderPadding, _LOCalc_PageStyleFooterBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1710,7 +1710,7 @@ EndFunc   ;==>_LOCalc_PageStyleHeaderBorderPadding
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LOCalc_PageStyleHeaderBorderWidth, _LOCalc_PageStyleHeaderBorderColor, _LOCalc_PageStyleHeaderBorderPadding
+; Related .......: _LOCalc_PageStyleHeaderBorderWidth, _LOCalc_PageStyleHeaderBorderColor, _LOCalc_PageStyleHeaderBorderPadding, _LOCalc_PageStyleBorderStyle, _LOCalc_PageStyleFooterBorderStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1770,7 +1770,7 @@ EndFunc   ;==>_LOCalc_PageStyleHeaderBorderStyle
 ; Remarks .......: To "Turn Off" Borders, set Width to 0.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_UnitConvert, _LOCalc_PageStyleHeaderBorderStyle, _LOCalc_PageStyleHeaderBorderColor, _LOCalc_PageStyleHeaderBorderPadding
+; Related .......: _LO_UnitConvert, _LOCalc_PageStyleHeaderBorderStyle, _LOCalc_PageStyleHeaderBorderColor, _LOCalc_PageStyleHeaderBorderPadding, _LOCalc_PageStyleBorderWidth, _LOCalc_PageStyleFooterBorderWidth
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1817,7 +1817,7 @@ EndFunc   ;==>_LOCalc_PageStyleHeaderBorderWidth
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: You can only create a Text Cursor in one area at a time per function call. i.e. only one of the Area parameters can be called with True.
-; Related .......: _LOCalc_PageStyleHeaderObj, _LOCalc_TextCursorMove
+; Related .......: _LOCalc_PageStyleHeaderObj, _LOCalc_TextCursorMove, _LOCalc_PageStyleFooterCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1975,7 +1975,7 @@ EndFunc   ;==>_LOCalc_PageStyleHeaderObj
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  LibreOffice may change the shadow width +/- a Hundredth of a Millimeter (HMM).
-; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LOCalc_PageStyleFooterShadow, _LOCalc_PageStyleShadow
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2064,7 +2064,7 @@ EndFunc   ;==>_LOCalc_PageStyleHeaderShadow
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  I have no way to retrieve possible values for the Paper Tray parameter, at least that I can find. You may still use it if you know the appropriate value.
-; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName
+; Related .......: _LOCalc_PageStyleMargins, _LOCalc_PageStylePaperFormat, _LOCalc_PageStyleSheetPrint
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2153,7 +2153,7 @@ EndFunc   ;==>_LOCalc_PageStyleLayout
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOCalc_PageStyleLayout, _LOCalc_PageStylePaperFormat
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2234,7 +2234,7 @@ EndFunc   ;==>_LOCalc_PageStyleMargins
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LOCalc_PageStylesGetNames
+; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LOCalc_PageStylesGetNames, _LOCalc_PageStyleExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2307,7 +2307,7 @@ EndFunc   ;==>_LOCalc_PageStyleOrganizer
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOCalc_PageStyleLayout, _LOCalc_PageStyleMargins, _LOCalc_PageStyleSheetPrint
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2386,7 +2386,7 @@ EndFunc   ;==>_LOCalc_PageStylePaperFormat
 ;                  Else if $bUserOnly is called with True, only User-Created Page Styles are returned.
 ;                  Else if $bAppliedOnly is called with True, only Applied Page Styles are returned.
 ;                  If Both are True then only User-Created Page styles that are applied are returned.
-; Related .......: _LOCalc_PageStyleGetObjByName
+; Related .......: _LOCalc_PageStyleGetObjByName, _LOCalc_PageStyleExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2463,7 +2463,7 @@ EndFunc   ;==>_LOCalc_PageStylesGetNames
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  LibreOffice may change the shadow width +/- a Hundredth of a Millimeter (HMM).
-; Related .......: _LOCalc_PageStyleCreate, _LOCalc_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LOCalc_PageStyleFooterShadow, _LOCalc_PageStyleHeaderShadow
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2630,7 +2630,7 @@ EndFunc   ;==>_LOCalc_PageStyleSheetPageOrder
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_PageStyleSheetPageOrder, _LOCalc_PageStyleSheetScale
+; Related .......: _LOCalc_PageStyleSheetPageOrder, _LOCalc_PageStyleSheetScale, _LOCalc_PageStyleLayout
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2750,7 +2750,7 @@ EndFunc   ;==>_LOCalc_PageStyleSheetPrint
 ;                  When Scale Mode is set to $LOC_SCALE_REDUCE_ENLARGE, the Minimum scaling value for $iVariable1 is 10%, and the Maximum is 400%.
 ;                  When Scale Mode is set to $LOC_SCALE_FIT_WIDTH_HEIGHT, the Minimum scaling value for both Vairable1 and Variable2 is 1, and the Maximum is 1000.
 ;                  When Scale Mode is set to $LOC_SCALE_FIT_PAGES, the Minimum scaling value for $iVariable1 is 1, and the Maximum is 1000.
-; Related .......: _LOCalc_PageStyleSheetPageOrder, _LOCalc_PageStyleSheetPrint
+; Related .......: _LOCalc_PageStyleSheetPageOrder, _LOCalc_PageStyleSheetPrint, _LOCalc_PageStyleLayout, _LOCalc_PageStyleMargins
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

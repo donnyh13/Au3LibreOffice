@@ -85,7 +85,7 @@
 ;                  #Cursor Movements which accept only number of moves ($iCount):
 ;                  $LOC_SHEETCUR_GOTO_NEXT, Call $iCount with the number of moves to perform.
 ;                  $LOC_SHEETCUR_GOTO_PREV Call $iCount with the number of moves to perform.
-; Related .......:
+; Related .......: _LOCalc_TextCursorMove, _LOCalc_SheetCreateCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -209,7 +209,7 @@ EndFunc   ;==>_LOCalc_SheetCursorMove
 ;                  The way LibreOffice is set up Super/Subscript are set in the same setting, Superscript is a positive number from 1 to 100 (percentage), Subscript is a negative number set to -1 to -100 percentage. For the user's convenience this function automatically converts the positive numbers to negative, and back when setting or retrieving subscript values.
 ;                  Automatic Superscript has an Integer value of 14000, Auto Subscript has a Integer value of -14000. Being that there is no settable setting of Automatic Super/Sub Script, it has been chosen to use -1 to indicate an automatic Sub/SuperScript value.
 ;                  If you set both $iSuperScript and $iSubScript to -1 (Automatic), or both $iSuperScript and $iSubScript to any value, Subscript will be the result, as it is the last in the function to be set, and thus will overwrite any Superscript values.
-; Related .......:
+; Related .......: _LOCalc_TextCursorCharSpacing
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -312,7 +312,7 @@ EndFunc   ;==>_LOCalc_TextCursorCharPosition
 ;                  When setting Kerning values in LibreOffice, the measurement is listed in Pt (Printer's Points) in the User Display, however the internal setting is measured in Hundredths of a Millimeter (HMM). They will be automatically converted from Points to Hundredths of a Millimeter and back for retrieval of settings.
 ;                  The acceptable values are from -2 Pt to 928.8 Pt. The values can be directly converted easily, however, for an unknown reason to myself, LibreOffice begins counting backwards and in negative Hundredths of a Millimeter internally from 928.9 up to 1000 Pt (Max setting).
 ;                  For example, 928.8Pt is the last correct value, which equals 32766 Hundredths of a Millimeter (HMM), after this LibreOffice reports the following: 928.9 Pt = -32766 HMM; 929 Pt = -32763 HMM; 929.1 = -32759; 1000 pt = -30258. Attempting to set LibreOffice's kerning value to anything over 32768 HMM causes a COM exception, and attempting to set the kerning to any of these negative numbers sets the User viewable kerning value to -2.0 Pt. For these reasons the max settable kerning is -2.0 Pt to 928.8 Pt.
-; Related .......:
+; Related .......: _LOCalc_TextCursorCharPosition
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -393,7 +393,7 @@ EndFunc   ;==>_LOCalc_TextCursorCharSpacing
 ; Remarks .......: Retrieving current settings in any Text Cursor formatting functions may be inaccurate as multiple different settings could be selected at once, which would result in a return of inaccurate values.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOCalc_TextCursorOverline, _LOCalc_TextCursorStrikeOut, _LOCalc_TextCursorUnderline
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -458,7 +458,7 @@ EndFunc   ;==>_LOCalc_TextCursorEffect
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
 ;                  LibreOffice Calc accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
-; Related .......: _LOCalc_FontsGetNames
+; Related .......: _LOCalc_FontsGetNames, _LOCalc_TextCursorFontColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -514,7 +514,7 @@ EndFunc   ;==>_LOCalc_TextCursorFont
 ; Remarks .......: Retrieving current settings in any Text Cursor formatting functions may be inaccurate as multiple different settings could be selected at once, which would result in a return of inaccurate values.
 ;                  Though Transparency is present on the Font Effects page in the UI, there is (as best as I can find) no setting for it available to read and modify. And further, it seems even in L.O. the setting does not affect the font's transparency, though it may change the color value.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_ConvertColorToLong, _LO_ConvertColorFromLong
+; Related .......: _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_TextCursorFont
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -560,7 +560,7 @@ EndFunc   ;==>_LOCalc_TextCursorFontColor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: LibreOffice documentation states that when used in LibreOffice Basic, GetString is limited to 64kb's in size. I do not know if the same limitation applies to any outside use of GetString (such as through Autoit).
-; Related .......:
+; Related .......: _LOCalc_TextCursorInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -601,7 +601,7 @@ EndFunc   ;==>_LOCalc_TextCursorGetString
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If the Cursor being used as a range has anything selected, the selection will be selected in the Cursor called in $oCursor also.
-; Related .......:
+; Related .......: _LOCalc_TextCursorMove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -648,7 +648,7 @@ EndFunc   ;==>_LOCalc_TextCursorGoToRange
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_PageStyleHeaderCreateTextCursor, _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_CellCreateTextCursor
+; Related .......: _LOCalc_TextCursorGetString, _LOCalc_CellCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -687,7 +687,7 @@ EndFunc   ;==>_LOCalc_TextCursorInsertString
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_TextCursorMove
+; Related .......: _LOCalc_TextCursorMove, _LOCalc_TextCursorGetString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -748,7 +748,7 @@ EndFunc   ;==>_LOCalc_TextCursorIsCollapsed
 ;                  #Cursor Movements which accept nothing and are done once per call:
 ;                  $LOC_TEXTCUR_COLLAPSE_TO_START,
 ;                  $LOC_TEXTCUR_COLLAPSE_TO_END
-; Related .......: _LOCalc_TextCursorIsCollapsed
+; Related .......: _LOCalc_TextCursorIsCollapsed, _LOCalc_SheetCursorMove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -836,7 +836,7 @@ EndFunc   ;==>_LOCalc_TextCursorMove
 ;                  Overline line style uses the same constants as underline style.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_ConvertColorToLong, _LO_ConvertColorFromLong
+; Related .......: _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_TextCursorEffect, _LOCalc_TextCursorStrikeOut, _LOCalc_TextCursorUnderline
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -882,7 +882,7 @@ EndFunc   ;==>_LOCalc_TextCursorOverline
 ; Modified ......:
 ; Remarks .......: The paragraphs are enumerated for the area the cursor is currently within, for example, the Text Cursor is currently in a Cell, the enumeration of paragraphs would be for the Cell the cursor was presently in.
 ;                  Returns an Array of objects for Directly Formatting paragraphs in a document, or for deleting or inserting in other areas, etc.
-; Related .......: _LOCalc_TextCursorParObjSectionsGet
+; Related .......: _LOCalc_TextCursorParObjSectionsGet, _LOCalc_TextCursorGetString, _LOCalc_TextCursorMove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -946,7 +946,7 @@ EndFunc   ;==>_LOCalc_TextCursorParObjCreateList
 ;                  |- SoftPageBreak — a soft page break.
 ;                  |- InContentMetadata — a text range with attached metadata.
 ;                  For Reference marks, document index marks, etc., 2 text portions will be generated, one for the start position and one for the end position.
-; Related .......: _LOCalc_TextCursorParObjCreateList
+; Related .......: _LOCalc_TextCursorParObjCreateList, _LOCalc_TextCursorGetString, _LOCalc_TextCursorMove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1005,7 +1005,7 @@ EndFunc   ;==>_LOCalc_TextCursorParObjSectionsGet
 ; Remarks .......: Retrieving current settings in any Text Cursor formatting functions may be inaccurate as multiple different settings could be selected at once, which would result in a return of inaccurate values.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOCalc_TextCursorEffect, _LOCalc_TextCursorOverline, _LOCalc_TextCursorUnderline
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1065,7 +1065,7 @@ EndFunc   ;==>_LOCalc_TextCursorStrikeOut
 ; Remarks .......: Retrieving current settings in any Text Cursor formatting functions may be inaccurate as multiple different settings could be selected at once, which would result in a return of inaccurate values.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_ConvertColorToLong, _LO_ConvertColorFromLong
+; Related .......: _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_TextCursorEffect, _LOCalc_TextCursorOverline, _LOCalc_TextCursorStrikeOut
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

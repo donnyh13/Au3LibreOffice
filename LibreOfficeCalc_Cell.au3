@@ -170,7 +170,7 @@ EndFunc   ;==>_LOCalc_CellBackColor
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_CellBorderWidth, _LOCalc_CellBorderStyle, _LOCalc_CellBorderColor, _LO_ConvertColorToLong, _LO_ConvertColorFromLong
+; Related .......: _LOCalc_CellBorderWidth, _LOCalc_CellBorderStyle, _LOCalc_CellBorderPadding, _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellStyleBorderColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -232,7 +232,7 @@ EndFunc   ;==>_LOCalc_CellBorderColor
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  $iAll returns an integer value if all (Top, Bottom, Left, Right) padding values are equal, else Null is returned.
-; Related .......: _LOCalc_CellStyleBorderPadding
+; Related .......: _LOCalc_CellBorderColor, _LOCalc_CellBorderStyle, _LOCalc_CellBorderWidth, _LO_UnitConvert, _LOCalc_CellStyleBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -309,7 +309,7 @@ EndFunc   ;==>_LOCalc_CellBorderPadding
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_CellBorderWidth, _LOCalc_CellBorderColor, _LOCalc_CellStyleBorderStyle
+; Related .......: _LOCalc_CellBorderWidth, _LOCalc_CellBorderColor, _LOCalc_CellBorderPadding, _LOCalc_CellStyleBorderStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -388,7 +388,7 @@ EndFunc   ;==>_LOCalc_CellBorderStyle
 ; Remarks .......: For some reason, Horizontal line width may change depending on either top/bottom line widths or vertical line width.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_CellBorderStyle, _LOCalc_CellBorderColor, _LOCalc_CellStyleBorderWidth
+; Related .......: _LOCalc_CellBorderStyle, _LOCalc_CellBorderColor, _LOCalc_CellBorderPadding, _LOCalc_CellStyleBorderWidth, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -435,7 +435,7 @@ EndFunc   ;==>_LOCalc_CellBorderWidth
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Cells that are considered Values instead of Strings may be considered Strings if you modify them using a text cursor.
-; Related .......:
+; Related .......: _LOCalc_TextCursorInsertString, _LOCalc_TextCursorMove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -489,7 +489,7 @@ EndFunc   ;==>_LOCalc_CellCreateTextCursor
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_CellStyleEffect
+; Related .......: _LOCalc_CellOverline, _LOCalc_CellStrikeOut, _LOCalc_CellUnderline, _LOCalc_CellStyleEffect
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -542,7 +542,7 @@ EndFunc   ;==>_LOCalc_CellEffect
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
 ;                  LibreOffice Calc accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
-; Related .......: _LOCalc_FontsGetNames, _LOCalc_CellStyleFont
+; Related .......: _LOCalc_FontsGetNames, _LOCalc_CellFontColor, _LOCalc_CellStyleFont
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -585,7 +585,7 @@ EndFunc   ;==>_LOCalc_CellFont
 ; Modified ......:
 ; Remarks .......: Though Transparency is present on the Font Effects page in the UI, there is (as best as I can find) no setting for it available to read and modify. And further, it seems even in L.O. the setting does not affect the font's transparency, though it may change the color value.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellStyleFontColor
+; Related .......: _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellFont, _LOCalc_CellStyleFontColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -718,7 +718,7 @@ EndFunc   ;==>_LOCalc_CellGetType
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_CellStyleNumberFormat, _LOCalc_FormatKeyCreate, _LOCalc_FormatKeysGetList
+; Related .......:  _LOCalc_FormatKeyCreate, _LOCalc_FormatKeysGetList, _LOCalc_CellStyleNumberFormat
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -767,7 +767,7 @@ EndFunc   ;==>_LOCalc_CellNumberFormat
 ; Remarks .......: Overline line style uses the same constants as underline style.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_CellUnderline, _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellStyleOverline
+; Related .......: _LOCalc_CellEffect, _LOCalc_CellStrikeOut, _LOCalc_CellUnderline, _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellStyleOverline
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -870,7 +870,7 @@ EndFunc   ;==>_LOCalc_CellProtection
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  LibreOffice may change the shadow width +/- a Hundredth of a Millimeter (HMM).
-; Related .......: _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellStyleShadow
+; Related .......: _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LO_UnitConvert, _LOCalc_CellStyleShadow
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -914,7 +914,7 @@ EndFunc   ;==>_LOCalc_CellShadow
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_CellStyleStrikeOut
+; Related .......: _LOCalc_CellEffect, _LOCalc_CellOverline, _LOCalc_CellUnderline, _LOCalc_CellStyleStrikeOut
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1076,7 +1076,7 @@ EndFunc   ;==>_LOCalc_CellStyleBackColor
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_CellStyleBorderWidth, _LOCalc_CellStyleBorderStyle, _LOCalc_CellBorderColor _LO_ConvertColorToLong, _LO_ConvertColorFromLong
+; Related .......: _LOCalc_CellStyleBorderWidth, _LOCalc_CellStyleBorderStyle, _LOCalc_CellStyleBorderPadding, _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellBorderColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1133,7 +1133,7 @@ EndFunc   ;==>_LOCalc_CellStyleBorderColor
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  $iAll returns an Integer value if all (Top, Bottom, Left, Right) padding values are equal, else Null is returned.
-; Related .......: _LOCalc_CellBorderPadding
+; Related .......: _LOCalc_CellStyleBorderColor, _LOCalc_CellStyleBorderStyle, _LOCalc_CellStyleBorderWidth, _LOCalc_CellBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1199,7 +1199,7 @@ EndFunc   ;==>_LOCalc_CellStyleBorderPadding
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_CellStyleBorderWidth, _LOCalc_CellStyleBorderColor, _LOCalc_CellBorderStyle
+; Related .......: _LOCalc_CellStyleBorderWidth, _LOCalc_CellStyleBorderColor, _LOCalc_CellStyleBorderPadding, _LOCalc_CellBorderStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1265,7 +1265,7 @@ EndFunc   ;==>_LOCalc_CellStyleBorderStyle
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_CellStyleBorderStyle, _LOCalc_CellStyleBorderColor, _LOCalc_CellBorderWidth
+; Related .......: _LOCalc_CellStyleBorderStyle, _LOCalc_CellStyleBorderColor, _LOCalc_CellStyleBorderPadding, _LO_UnitConvert, _LOCalc_CellBorderWidth
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1311,7 +1311,7 @@ EndFunc   ;==>_LOCalc_CellStyleBorderWidth
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_CellStyleDelete
+; Related .......: _LOCalc_CellStyleDelete, _LOCalc_CellStyleExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1424,7 +1424,7 @@ EndFunc   ;==>_LOCalc_CellStyleCurrent
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_CellStyleGetObjByName
+; Related .......: _LOCalc_CellStyleCreate, _LOCalc_CellStyleGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1488,7 +1488,7 @@ EndFunc   ;==>_LOCalc_CellStyleDelete
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_CellEffect
+; Related .......: _LOCalc_CellStyleOverline, _LOCalc_CellStyleStrikeOut, _LOCalc_CellStyleUnderline, _LOCalc_CellEffect
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1521,7 +1521,7 @@ EndFunc   ;==>_LOCalc_CellStyleEffect
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_CellStyleCreate, _LOCalc_CellStyleGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1570,7 +1570,7 @@ EndFunc   ;==>_LOCalc_CellStyleExists
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
 ;                  LibreOffice Calc accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
-; Related .......: _LOCalc_FontsGetNames, _LOCalc_CellFont
+; Related .......: _LOCalc_FontsGetNames, _LOCalc_CellStyleFontColor, _LOCalc_CellFont
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1611,7 +1611,7 @@ EndFunc   ;==>_LOCalc_CellStyleFont
 ; Modified ......:
 ; Remarks .......: Though Transparency is present on the Font Effects page in the UI, there is (as best as I can find) no setting for it available to read and modify. And further, it seems even in L.O. the setting does not affect the font's transparency, though it may change the color value.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellFontColor
+; Related .......: _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellStyleFont, _LOCalc_CellFontColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1647,7 +1647,7 @@ EndFunc   ;==>_LOCalc_CellStyleFontColor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_CellStylesGetNames, _LOCalc_CellStyleDelete
+; Related .......: _LOCalc_CellStylesGetNames, _LOCalc_CellStyleExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1693,7 +1693,7 @@ EndFunc   ;==>_LOCalc_CellStyleGetObjByName
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_CellNumberFormat, _LOCalc_FormatKeyCreate, _LOCalc_FormatKeysGetList
+; Related .......: _LOCalc_FormatKeyCreate, _LOCalc_FormatKeysGetList, _LOCalc_CellNumberFormat
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1745,7 +1745,7 @@ EndFunc   ;==>_LOCalc_CellStyleNumberFormat
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOCalc_CellStyleExists, _LOCalc_CellStylesGetNames
+; Related .......: _LOCalc_CellStyleExists, _LOCalc_CellStylesGetNames, _LOCalc_CellStyleCurrent, _LOCalc_CellStyleGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1827,7 +1827,7 @@ EndFunc   ;==>_LOCalc_CellStyleOrganizer
 ; Remarks .......: Overline line style uses the same constants as underline style.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_CellStyleUnderline, _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellOverline
+; Related .......: _LOCalc_CellStyleEffect, _LOCalc_CellStyleStrikeOut, _LOCalc_CellStyleUnderline, _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellOverline
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1919,7 +1919,7 @@ EndFunc   ;==>_LOCalc_CellStyleProtection
 ; Remarks .......: If Only a Document object is input, all available Cell styles will be returned.
 ;                  If Both $bUserOnly and $bAppliedOnly are called with True, only User-Created styles that are applied are returned.
 ;                  Calling $bDisplayName with True will return a list of Style names, as the user sees them in the UI, in the same order as they are returned if $bDisplayName is False. It is best not to use these when setting Paragraph Styling.
-; Related .......: _LOCalc_CellStyleGetObjByName
+; Related .......: _LOCalc_CellStyleGetObjByName, _LOCalc_CellStyleExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1970,7 +1970,7 @@ EndFunc   ;==>_LOCalc_CellStylesGetNames
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  LibreOffice may change the shadow width +/- a Hundredth of a Millimeter (HMM).
-; Related .......: _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellShadow
+; Related .......: _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LO_UnitConvert, _LOCalc_CellShadow
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2012,7 +2012,7 @@ EndFunc   ;==>_LOCalc_CellStyleShadow
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_CellStrikeOut
+; Related .......: _LOCalc_CellStyleEffect, _LOCalc_CellStyleOverline, _LOCalc_CellStyleUnderline, _LOCalc_CellStrikeOut
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2198,7 +2198,7 @@ EndFunc   ;==>_LOCalc_CellStyleTextProperties
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_CellStyleOverline, _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellUnderline
+; Related .......: _LOCalc_CellStyleEffect, _LOCalc_CellStyleOverline, _LOCalc_CellStyleUnderline, _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellUnderline
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2390,7 +2390,7 @@ EndFunc   ;==>_LOCalc_CellTextProperties
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_CellOverline, _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellStyleUnderline
+; Related .......: _LOCalc_CellEffect, _LOCalc_CellOverline, _LOCalc_CellStrikeOut, _LO_ConvertColorToLong, _LO_ConvertColorFromLong, _LOCalc_CellStyleUnderline
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

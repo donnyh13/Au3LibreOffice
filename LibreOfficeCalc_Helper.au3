@@ -380,7 +380,7 @@ EndFunc   ;==>_LOCalc_FilterDescriptorModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: A Filter Descriptor can contain up to 8 of these Filter Fields. Once you create the Filter Field Structure, place it in an array before using it to create a Filter descriptor. Place each Filter Field Structure in a separate element of the Array.
-; Related .......: _LOCalc_FilterFieldModify
+; Related .......: _LOCalc_FilterFieldModify, _LOCalc_FilterDescriptorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -440,7 +440,7 @@ EndFunc   ;==>_LOCalc_FilterFieldCreate
 ; Remarks .......: A Filter Descriptor can contain up to 8 of these Filter Fields. Once you create the Filter Field Structure, place it in an array before using it to create a Filter descriptor. Place each Filter Field Structure in a separate element of the Array.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_FilterFieldCreate
+; Related .......: _LOCalc_FilterFieldCreate, _LOCalc_FilterDescriptorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -668,7 +668,7 @@ EndFunc   ;==>_LOCalc_FontsGetNames
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_FormatKeyDelete, _LOCalc_FormatKeyGetStandard
+; Related .......: _LOCalc_FormatKeyDelete, _LOCalc_FormatKeyGetStandard, _LOCalc_FormatKeyExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -763,7 +763,7 @@ EndFunc   ;==>_LOCalc_FormatKeyDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_FormatKeyCreate, _LOCalc_FormatKeyDelete, _LOCalc_FormatKeysGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -816,7 +816,7 @@ EndFunc   ;==>_LOCalc_FormatKeyExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_FormatKeyGetString, _LOCalc_FormatKeysGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -862,7 +862,7 @@ EndFunc   ;==>_LOCalc_FormatKeyGetStandard
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_FormatKeysGetList
+; Related .......: _LOCalc_FormatKeysGetList, _LOCalc_FormatKeyGetStandard
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -912,7 +912,7 @@ EndFunc   ;==>_LOCalc_FormatKeyGetString
 ; Remarks .......: Column One (Array[0][0]) will contain the Format Key Integer,
 ;                  Column two (Array[0][1]) will contain the Format Key String,
 ;                  If $bIsUser is called with True, Column Three (Array[0][2]) will contain a Boolean, True if the Format Key is User-created, else False.
-; Related .......: _LOCalc_FormatKeyDelete, _LOCalc_FormatKeyGetString, _LOCalc_FormatKeyGetStandard
+; Related .......: _LOCalc_FormatKeyDelete, _LOCalc_FormatKeyGetString, _LOCalc_FormatKeyGetStandard, _LOCalc_FormatKeyExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1176,7 +1176,7 @@ EndFunc   ;==>_LOCalc_SearchDescriptorModify
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  If $bSimilarity is called with True while Regular Expression, or Wildcards setting is set to True, those settings will be set to False.
-; Related .......: _LOCalc_SearchDescriptorCreate
+; Related .......: _LOCalc_SearchDescriptorCreate, _LOCalc_SearchDescriptorModify
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1256,7 +1256,7 @@ EndFunc   ;==>_LOCalc_SearchDescriptorSimilarityModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_SortFieldModify
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1307,7 +1307,7 @@ EndFunc   ;==>_LOCalc_SortFieldCreate
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOCalc_SortFieldCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

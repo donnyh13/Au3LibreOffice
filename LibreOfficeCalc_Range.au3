@@ -137,7 +137,7 @@
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_RangeOutlineClearAll, _LOCalc_RangeOutlineShow, _LOCalc_RangeDetail, _LOCalc_RangeGroup
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -172,7 +172,7 @@ EndFunc   ;==>_LOCalc_RangeAutoOutline
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_RangeDelete, _LOCalc_RangeFill, _LOCalc_RangeFillRandom, _LOCalc_RangeFillSeries, _LOCalc_RangeData
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -208,7 +208,7 @@ EndFunc   ;==>_LOCalc_RangeClearContents
 ; Modified ......:
 ; Remarks .......: Columns in L.O. Calc are 0 based, to Delete Column "A" in the LibreOffice UI, you would call $iColumn with 0.
 ;                  Deleting Columns does not decrease the Column count, it simply erases the Column's contents in a specific area and shifts all after content left.
-; Related .......: _LOCalc_RangeColumnInsert
+; Related .......: _LOCalc_RangeColumnInsert, _LOCalc_RangeRowDelete, _LOCalc_RangeColumnsGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -245,7 +245,7 @@ EndFunc   ;==>_LOCalc_RangeColumnDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_RangeColumnsGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -323,7 +323,7 @@ EndFunc   ;==>_LOCalc_RangeColumnGetObjByName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Columns in L.O. Calc are 0 based, to retrieve Column "A" in the LibreOffice UI, you would call $iColumn with 0.
-; Related .......: _LOCalc_RangeColumnGetObjByName
+; Related .......: _LOCalc_RangeColumnGetObjByName, _LOCalc_RangeColumnsGetCount, _LOCalc_RangeRowGetObjByPosition
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -365,7 +365,7 @@ EndFunc   ;==>_LOCalc_RangeColumnGetObjByPosition
 ; Modified ......:
 ; Remarks .......: Columns in L.O. Calc are 0 based, to add columns in Column "A" in the LibreOffice UI, you would call $iColumn with 0.
 ;                  Inserting Columns does not increase the Column count, it simply adds blanks in a specific area and shifts all after content further right.
-; Related .......: _LOCalc_RangeColumnDelete
+; Related .......: _LOCalc_RangeColumnDelete, _LOCalc_RangeInsert, _LOCalc_RangeRowInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -412,7 +412,7 @@ EndFunc   ;==>_LOCalc_RangeColumnInsert
 ;                  $bStartOfPageBreak setting is available more for indicating where Calc is inserting Page Breaks rather than for applying a setting. You can retrieve the settings for each Column, and check if this value is True or not. If the Page break is an automatically inserted one, the value for $bManualPageBreak would be False.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOCalc_RangeRowPageBreak
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -507,7 +507,7 @@ EndFunc   ;==>_LOCalc_RangeColumnsGetCount
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOCalc_RangeRowVisible
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -559,7 +559,7 @@ EndFunc   ;==>_LOCalc_RangeColumnVisible
 ; Remarks .......: $bOptimal only accepts True. False will return an error. Calling True again returns the cell to optimal width, setting a custom width essentially disables it.
 ;                  I am presently unable to find a setting for Optimal Width "Add" Value.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOCalc_RangeRowHeight
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -714,7 +714,7 @@ EndFunc   ;==>_LOCalc_RangeCopyMove
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: A Sheet Cursor can be used in functions accepting a range. When created, the Cursor will have the called range selected.
-; Related .......:
+; Related .......: _LOCalc_SheetCursorMove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -769,7 +769,7 @@ EndFunc   ;==>_LOCalc_RangeCreateCursor
 ;                  Any data previously contained in the Cell Range will be overwritten.
 ;                  All array elements must contain appropriate data, strings or numbers.
 ;                  Formulas will be inserted as strings only, and will not be valid.
-; Related .......:
+; Related .......: _LOCalc_RangeFill, _LOCalc_RangeFormula, _LOCalc_RangeNumbers
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -875,7 +875,7 @@ EndFunc   ;==>_LOCalc_RangeData
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_RangeDatabaseExists, _LOCalc_RangeDatabaseDelete
+; Related .......: _LOCalc_RangeDatabaseExists, _LOCalc_RangeDatabaseDelete, _LOCalc_RangeDatabaseModify
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -935,7 +935,7 @@ EndFunc   ;==>_LOCalc_RangeDatabaseAdd
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_RangeDatabaseAdd
+; Related .......: _LOCalc_RangeDatabaseAdd, _LOCalc_RangeDatabaseGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -982,7 +982,7 @@ EndFunc   ;==>_LOCalc_RangeDatabaseDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_RangeDatabaseGetObjByName, _LOCalc_RangeDatabaseAdd
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1020,7 +1020,7 @@ EndFunc   ;==>_LOCalc_RangeDatabaseExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_RangeDatabaseGetObjByName
+; Related .......: _LOCalc_RangeDatabaseGetObjByName, _LOCalc_RangeDatabaseExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1241,7 +1241,7 @@ EndFunc   ;==>_LOCalc_RangeDatabaseModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function will silently fail if the deletion will cause an array formula to be split -- OOME. 4.1., Page 509.
-; Related .......:
+; Related .......: _LOCalc_RangeClearContents, _LOCalc_RangeData, _LOCalc_RangeFill, _LOCalc_RangeFillRandom, _LOCalc_RangeFillSeries
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1280,7 +1280,7 @@ EndFunc   ;==>_LOCalc_RangeDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_RangeAutoOutline, _LOCalc_RangeOutlineClearAll, _LOCalc_RangeOutlineShow, _LOCalc_RangeGroup
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1323,7 +1323,7 @@ EndFunc   ;==>_LOCalc_RangeDetail
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Fill value is calculated based on the first value(s) in the Range, the first value location depends on the Fill direction. If Fill direction is set to Right, the initial value must be in the first cell(s) on the left, and vice versa.
-; Related .......: _LOCalc_RangeFillSeries
+; Related .......: _LOCalc_RangeFillSeries, _LOCalc_RangeFillRandom, _LOCalc_RangeData, _LOCalc_RangeClearContents, _LOCalc_RangeDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1364,7 +1364,7 @@ EndFunc   ;==>_LOCalc_RangeFill
 ; Modified ......:
 ; Remarks .......: This function is a homemade version of Calc's Fill Random, as there is no built in method for calling LibreOffice's built-in one. The results of this function may not be similar to the results of LibreOffice's random number generator.
 ;                  Any values in the range will be overwritten.
-; Related .......:
+; Related .......: _LOCalc_RangeFill, _LOCalc_RangeFillSeries, _LOCalc_RangeData, _LOCalc_RangeClearContents, _LOCalc_RangeDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1424,7 +1424,7 @@ EndFunc   ;==>_LOCalc_RangeFillRandom
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_RangeFill
+; Related .......: _LOCalc_RangeFill, _LOCalc_RangeFillRandom, _LOCalc_RangeData, _LOCalc_RangeClearContents, _LOCalc_RangeDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1464,7 +1464,7 @@ EndFunc   ;==>_LOCalc_RangeFillSeries
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_RangeFilterClear, _LOCalc_FilterDescriptorCreate
+; Related .......: _LOCalc_RangeFilterClear, _LOCalc_FilterDescriptorCreate, _LOCalc_RangeFilterAdvanced
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1511,7 +1511,7 @@ EndFunc   ;==>_LOCalc_RangeFilter
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $oFilterDescRange will be a range containing the filter criteria as described in the L.O. help file for Advanced Filters. It can be from anywhere in the same Calc Document, the same Sheet, or a completely different sheet. Named Ranges can also be used.
-; Related .......:
+; Related .......: _LOCalc_RangeFilter, _LOCalc_RangeFilterClear
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1547,7 +1547,7 @@ EndFunc   ;==>_LOCalc_RangeFilterAdvanced
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_RangeFilter
+; Related .......: _LOCalc_RangeFilter, _LOCalc_RangeFilterAdvanced
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1711,7 +1711,7 @@ EndFunc   ;==>_LOCalc_RangeFindNext
 ;                  $aasFormulas must be an array containing arrays. If $bStrictSize is called with True, the main Array's element count must match the row count contained in the Cell Range, and each internal Array's element count must match the column count of the Cell Range it is to fill. All internal arrays must be the same size.
 ;                  Any data previously contained in the Cell Range will be overwritten.
 ;                  All array elements must contain strings, blank or otherwise.
-; Related .......:
+; Related .......: _LOCalc_CellFormula, _LOCalc_RangeData, _LOCalc_RangeNumbers
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1799,7 +1799,7 @@ EndFunc   ;==>_LOCalc_RangeFormula
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Return will be like the following, including the dollar signs. "$Sheet1.$A$1:$F$18"
-; Related .......: _LOCalc_RangeGetAddressAsPosition
+; Related .......: _LOCalc_RangeGetAddressAsPosition, _LOCalc_RangeGetCellByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1832,7 +1832,7 @@ EndFunc   ;==>_LOCalc_RangeGetAddressAsName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The return will be a 5 element array giving the Range's address in the following order: Sheet index number, Range's first Cell Column, First Cell Row, Last Cell Column, Last Cell Row.
-; Related .......: _LOCalc_RangeGetAddressAsName
+; Related .......: _LOCalc_RangeGetAddressAsName, _LOCalc_RangeGetCellByPosition
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1876,7 +1876,7 @@ EndFunc   ;==>_LOCalc_RangeGetAddressAsPosition
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $sFromCellName can be a Cell Name or a defined Cell Range name.
-; Related .......: _LOCalc_RangeGetCellByPosition
+; Related .......: _LOCalc_RangeGetCellByPosition, _LOCalc_RangeGetAddressAsName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1927,7 +1927,7 @@ EndFunc   ;==>_LOCalc_RangeGetCellByName
 ; Modified ......:
 ; Remarks .......: According to the wiki (https://wiki.documentfoundation.org/Faq/Calc/022), the maximum Columns contained in a sheet is 1024 until version 7.3, or 16384 from 7.3. and up..
 ;                  According to Andrew Pitonyak, (OOME. 4.1 Page 492), the maximum number of rows contained in a sheet is 65,536 as of OOo Calc 3.0, but according to the wiki (https://wiki.documentfoundation.org/Faq/Calc/022), the maximum or Rows for LibreOffice Calc is 1,048,576.
-; Related .......: _LOCalc_RangeGetCellByName
+; Related .......: _LOCalc_RangeGetCellByName, _LOCalc_RangeGetAddressAsPosition, _LOCalc_RangeColumnsGetCount, _LOCalc_RangeRowsGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1977,7 +1977,7 @@ EndFunc   ;==>_LOCalc_RangeGetCellByPosition
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_RangeGetAddressAsName, _LOCalc_RangeGetAddressAsPosition
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2014,7 +2014,7 @@ EndFunc   ;==>_LOCalc_RangeGetSheet
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_RangeAutoOutline, _LOCalc_RangeOutlineClearAll, _LOCalc_RangeOutlineShow, _LOCalc_RangeDetail
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2062,7 +2062,7 @@ EndFunc   ;==>_LOCalc_RangeGroup
 ; Remarks .......: The new range of cells inserted will be the same size as the range called in $oRange.
 ;                  Non-Empty cells cannot be moved off of the sheet.
 ;                  This function will silently fail if the insertion will cause an array formula to be split -- OOME. 4.1., Page 509.
-; Related .......:
+; Related .......: _LOCalc_RangeColumnInsert, _LOCalc_RangeRowInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2271,7 +2271,7 @@ EndFunc   ;==>_LOCalc_RangeNamedAdd
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_RangeNamedModify, _LOCalc_RangeNamedExists
+; Related .......: _LOCalc_RangeNamedGetObjByName, _LOCalc_RangeNamedModify, _LOCalc_RangeNamedExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2345,7 +2345,7 @@ EndFunc   ;==>_LOCalc_RangeNamedChangeScope
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Object called in $oObj must be the scope the Named Range is present in, either Globally (Document Object), or locally (Sheet Object).
-; Related .......: _LOCalc_RangeNamedAdd, _LOCalc_RangeNamedExists
+; Related .......: _LOCalc_RangeNamedAdd, _LOCalc_RangeNamedExists, _LOCalc_RangeNamedDeleteByObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2389,7 +2389,7 @@ EndFunc   ;==>_LOCalc_RangeNamedDeleteByName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Object called in $oObj must be the scope the Named Range is present in, either Globally (Document Object), or locally (Sheet Object).
-; Related .......: _LOCalc_RangeNamedAdd, _LOCalc_RangeNamedExists
+; Related .......: _LOCalc_RangeNamedAdd, _LOCalc_RangeNamedDeleteByName, _LOCalc_RangeNamedGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2437,7 +2437,7 @@ EndFunc   ;==>_LOCalc_RangeNamedDeleteByObj
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Object called in $oObj determines the scope you are searching in for the Named Range specified, either Globally (Document Object), or locally (Sheet Object).
-; Related .......:
+; Related .......: _LOCalc_RangeNamedAdd, _LOCalc_RangeNamedGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2475,7 +2475,7 @@ EndFunc   ;==>_LOCalc_RangeNamedExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Object called in $oObj determines the scope you are retrieving the array of names for, either Globally (Document Object), or locally (Sheet Object).
-; Related .......: _LOCalc_RangeNamedGetObjByName
+; Related .......: _LOCalc_RangeNamedGetObjByName, _LOCalc_RangeNamedExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2587,7 +2587,7 @@ EndFunc   ;==>_LOCalc_RangeNamedGetObjByName
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  When retrieving the settings, $vRange will be in a String format, either being a formula or Range Address String, i.e. $Sheet1.$A$1:$C$14.
 ;                  When retrieving the settings, $oRefCell will be a Cell Object.
-; Related .......: _LOCalc_RangeNamedGetObjByName, _LOCalc_RangeNamedAdd
+; Related .......: _LOCalc_RangeNamedGetObjByName, _LOCalc_RangeNamedAdd, _LOCalc_RangeNamedChangeScope
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2706,7 +2706,7 @@ EndFunc   ;==>_LOCalc_RangeNamedModify
 ;                  $aanNumbers must be an array containing arrays. If $bStrictSize is called with True, the main Array's element count must match the row count contained in the Cell Range, and each internal Array's element count must match the column count of the Cell Range it is to fill. All internal arrays must be the same size.
 ;                  Any data previously contained in the Cell Range will be overwritten.
 ;                  All array elements must contain numbers.
-; Related .......:
+; Related .......: _LOCalc_RangeFormula, _LOCalc_RangeData, _LOCalc_CellValue
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2792,7 +2792,7 @@ EndFunc   ;==>_LOCalc_RangeNumbers
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_RangeAutoOutline, _LOCalc_RangeOutlineShow, _LOCalc_RangeDetail, _LOCalc_RangeGroup
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2824,7 +2824,7 @@ EndFunc   ;==>_LOCalc_RangeOutlineClearAll
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_RangeAutoOutline, _LOCalc_RangeOutlineClearAll, _LOCalc_RangeDetail, _LOCalc_RangeGroup
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2861,7 +2861,7 @@ EndFunc   ;==>_LOCalc_RangeOutlineShow
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_RangePivotGetObjByIndex, _LOCalc_RangePivotGetObjByName, _LOCalc_RangePivotInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2928,7 +2928,7 @@ EndFunc   ;==>_LOCalc_RangePivotDelete
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Any existing data within the Destination range will be overwritten.
-; Related .......:
+; Related .......: _LOCalc_RangePivotSource
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3079,7 +3079,7 @@ EndFunc   ;==>_LOCalc_RangePivotDest
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_RangePivotGetObjByName, _LOCalc_RangePivotInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3116,7 +3116,7 @@ EndFunc   ;==>_LOCalc_RangePivotExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_RangePivotFieldItemsGetNames, _LOCalc_RangePivotFieldsColumnsGetNames, _LOCalc_RangePivotFieldsDataGetNames, _LOCalc_RangePivotFieldsFiltersGetNames, _LOCalc_RangePivotFieldsGetNames, _LOCalc_RangePivotFieldsRowsGetNames, _LOCalc_RangePivotFieldsUnusedGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3151,7 +3151,7 @@ EndFunc   ;==>_LOCalc_RangePivotFieldGetObjByName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The element names are the items contained in each row for a specific column/field.
-; Related .......:
+; Related .......: _LOCalc_RangePivotFieldGetObjByName, _LOCalc_RangePivotFieldsColumnsGetNames, _LOCalc_RangePivotFieldsDataGetNames, _LOCalc_RangePivotFieldsFiltersGetNames, _LOCalc_RangePivotFieldsRowsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3185,7 +3185,7 @@ EndFunc   ;==>_LOCalc_RangePivotFieldItemsGetNames
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_RangePivotFieldGetObjByName, _LOCalc_RangePivotFieldsRowsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3229,7 +3229,7 @@ EndFunc   ;==>_LOCalc_RangePivotFieldsColumnsGetNames
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_RangePivotFieldGetObjByName, _LOCalc_RangePivotFieldItemsGetNames, _LOCalc_RangePivotFieldsColumnsGetNames, _LOCalc_RangePivotFieldsFiltersGetNames, _LOCalc_RangePivotFieldsRowsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3302,7 +3302,7 @@ EndFunc   ;==>_LOCalc_RangePivotFieldsDataGetNames
 ;                  If $iBaseItem is set to $LOC_PIVOT_TBL_FIELD_BASE_ITEM_NAMED, you must fill in $sBaseItem also.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOCalc_RangePivotFieldGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3412,7 +3412,7 @@ EndFunc   ;==>_LOCalc_RangePivotFieldSettings
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_RangePivotFieldGetObjByName, _LOCalc_RangePivotFilter, _LOCalc_RangePivotFilterClear
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3456,7 +3456,7 @@ EndFunc   ;==>_LOCalc_RangePivotFieldsFiltersGetNames
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: There is always a "Data" field present.
-; Related .......:
+; Related .......: _LOCalc_RangePivotFieldGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3500,7 +3500,7 @@ EndFunc   ;==>_LOCalc_RangePivotFieldsGetNames
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_RangePivotFieldGetObjByName, _LOCalc_RangePivotFieldsColumnsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3544,7 +3544,7 @@ EndFunc   ;==>_LOCalc_RangePivotFieldsRowsGetNames
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: There is always a "Data" field present.
-; Related .......:
+; Related .......: _LOCalc_RangePivotFieldGetObjByName, _LOCalc_RangePivotFieldItemsGetNames, _LOCalc_RangePivotFieldsDataGetNames, _LOCalc_RangePivotFieldsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3602,7 +3602,7 @@ EndFunc   ;==>_LOCalc_RangePivotFieldsUnusedGetNames
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_RangePivotFilterClear, _LOCalc_FilterFieldCreate
+; Related .......: _LOCalc_RangePivotFilterClear, _LOCalc_FilterFieldCreate, _LOCalc_RangePivotFieldsFiltersGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3712,7 +3712,7 @@ EndFunc   ;==>_LOCalc_RangePivotFilterClear
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_RangePivotGetObjByName, _LOCalc_RangePivotsGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3749,7 +3749,7 @@ EndFunc   ;==>_LOCalc_RangePivotGetObjByIndex
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_RangePivotGetObjByIndex, _LOCalc_RangePivotsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3803,7 +3803,7 @@ EndFunc   ;==>_LOCalc_RangePivotGetObjByName
 ; Modified ......:
 ; Remarks .......: If you do not call a field in $sField, the resulting Pivot Table will display "Empty", and will need a field set either manually or using one of the other functions before it will appear normal.
 ;                  Any existing data within the Destination range will be overwritten.
-; Related .......:
+; Related .......: _LOCalc_RangePivotDelete, _LOCalc_RangePivotGetObjByIndex, _LOCalc_RangePivotGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3906,7 +3906,7 @@ EndFunc   ;==>_LOCalc_RangePivotInsert
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOCalc_RangePivotExists, _LOCalc_RangePivotsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3954,7 +3954,7 @@ EndFunc   ;==>_LOCalc_RangePivotName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Refreshing a table re-creates it from the present source data.
-; Related .......:
+; Related .......: _LOCalc_RangePivotDest, _LOCalc_RangePivotSettings, _LOCalc_RangePivotSource
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4005,7 +4005,7 @@ EndFunc   ;==>_LOCalc_RangePivotRefresh
 ; Remarks .......: I was unable to find a setting for "Show Expand/Collapse buttons", therefore it is not settable currently.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOCalc_RangePivotDest, _LOCalc_RangePivotRefresh, _LOCalc_RangePivotSource
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4085,7 +4085,7 @@ EndFunc   ;==>_LOCalc_RangePivotSettings
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_RangePivotGetObjByIndex, _LOCalc_RangePivotsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4119,7 +4119,7 @@ EndFunc   ;==>_LOCalc_RangePivotsGetCount
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_RangePivotGetObjByName, _LOCalc_RangePivotsGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4171,7 +4171,7 @@ EndFunc   ;==>_LOCalc_RangePivotsGetNames
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOCalc_RangePivotDest, _LOCalc_RangePivotRefresh
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4226,7 +4226,7 @@ EndFunc   ;==>_LOCalc_RangePivotSource
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Looks for differences per column in the range, comparing the column to the value in the row $oCellToCompare is located. OOME 4.1. pg 488/489
-; Related .......:
+; Related .......: _LOCalc_RangeQueryRowDiff
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4280,7 +4280,7 @@ EndFunc   ;==>_LOCalc_RangeQueryColumnDiff
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Empty cells in the range may be skipped depending on the flag used. For instance, when querying for styles, the returned ranges may not include empty cells even if styles are applied to those cells.
-; Related .......:
+; Related .......: _LOCalc_RangeQueryDependents, _LOCalc_RangeQueryEmpty, _LOCalc_RangeQueryPrecedents
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4329,7 +4329,7 @@ EndFunc   ;==>_LOCalc_RangeQueryContents
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Dependent cells are cells which reference cells in this range. If $bRecursive is True, repeats query with all found cells (finds dependents of dependents, and so on).
-; Related .......:
+; Related .......: _LOCalc_RangeQueryPrecedents
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4376,7 +4376,7 @@ EndFunc   ;==>_LOCalc_RangeQueryDependents
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_RangeQueryContents
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4424,7 +4424,7 @@ EndFunc   ;==>_LOCalc_RangeQueryEmpty
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_RangeQueryContents, _LOCalc_RangeQueryDependents, _LOCalc_RangeQueryPrecedents
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4474,7 +4474,7 @@ EndFunc   ;==>_LOCalc_RangeQueryFormula
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_RangeQueryDependents, _LOCalc_RangeQueryPrecedents
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4527,7 +4527,7 @@ EndFunc   ;==>_LOCalc_RangeQueryIntersection
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Precedent cells are cells which are referenced by cells in this range. If $bRecursive is True, repeats query with all found cells (finds precedents of precedents, and so on).
-; Related .......:
+; Related .......: _LOCalc_RangeQueryDependents
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4578,7 +4578,7 @@ EndFunc   ;==>_LOCalc_RangeQueryPrecedents
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Looks for differences per row in the range, comparing the row to the value in the column $oCellToCompare is located. OOME 4.1. pg 488/489
-; Related .......:
+; Related .......: _LOCalc_RangeQueryColumnDiff
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4630,7 +4630,7 @@ EndFunc   ;==>_LOCalc_RangeQueryRowDiff
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOCalc_RangeColumnVisible, _LOCalc_RangeRowVisible
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4682,7 +4682,7 @@ EndFunc   ;==>_LOCalc_RangeQueryVisible
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: LibreOffice does not offer a Function to call to replace only one result within a Range, consequently I have had to create my own, which means this may not work exactly as expected.
-; Related .......: _LOCalc_SearchDescriptorCreate, _LOCalc_RangeFindAll, _LOCalc_RangeFindNext, _LOCalc_RangeReplaceAll,
+; Related .......: _LOCalc_SearchDescriptorCreate, _LOCalc_RangeFindAll, _LOCalc_RangeFindNext, _LOCalc_RangeReplaceAll
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4793,7 +4793,7 @@ EndFunc   ;==>_LOCalc_RangeReplaceAll
 ; Modified ......:
 ; Remarks .......: Rows in L.O. Calc are 0 based, to Delete Row 1 in the LibreOffice UI, you would call $iRow with 0.
 ;                  Deleting Rows does not decrease the Row count, it simply erases the row's contents in a specific area and shifts all after content higher.
-; Related .......: _LOCalc_RangeRowInsert
+; Related .......: _LOCalc_RangeRowInsert, _LOCalc_RangeColumnDelete, _LOCalc_RangeRowsGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4833,7 +4833,7 @@ EndFunc   ;==>_LOCalc_RangeRowDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Rows in L.O. Calc are 0 based, to retrieve Row 1 in the LibreOffice UI, you would call $iRow with 0.
-; Related .......:
+; Related .......: _LOCalc_RangeRowsGetCount, _LOCalc_RangeColumnGetObjByPosition
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4878,7 +4878,7 @@ EndFunc   ;==>_LOCalc_RangeRowGetObjByPosition
 ; Modified ......:
 ; Remarks .......: I am presently unable to find a setting for Optimal Height "Add" Value.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOCalc_RangeColumnWidth
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4934,7 +4934,7 @@ EndFunc   ;==>_LOCalc_RangeRowHeight
 ; Modified ......:
 ; Remarks .......: Rows in L.O. Calc are 0 based, to add Rows in Row 1 in the LibreOffice UI, you would call $iRow with 0.
 ;                  Inserting Rows does not increase the Row count, it simply adds blanks in a specific area and shifts all after content lower.
-; Related .......: _LOCalc_RangeRowDelete
+; Related .......: _LOCalc_RangeRowDelete, _LOCalc_RangeInsert, _LOCalc_RangeColumnInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4981,7 +4981,7 @@ EndFunc   ;==>_LOCalc_RangeRowInsert
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Setting $bStartOfPageBreak to True will insert a Manual Page Break, the same as setting $bManualPageBreak to True would.
 ;                  $bStartOfPageBreak setting is available more for indicating where Calc is inserting Page Breaks rather than for applying a setting. You can retrieve the settings for each row, and check if this value is True or not. If the Page break is an automatically inserted one, the value for $bManualPageBreak would be False.
-; Related .......:
+; Related .......: _LOCalc_RangeColumnPageBreak
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5033,7 +5033,7 @@ EndFunc   ;==>_LOCalc_RangeRowPageBreak
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: There is a fixed number of Rows per sheet, but different L.O. versions contain different amounts of Rows. This can also help determine how many rows are in a Cell Range.
-; Related .......:
+; Related .......: _LOCalc_RangeRowGetObjByPosition, _LOCalc_RangeColumnsGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5076,7 +5076,7 @@ EndFunc   ;==>_LOCalc_RangeRowsGetCount
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOCalc_RangeColumnVisible
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5153,7 +5153,7 @@ EndFunc   ;==>_LOCalc_RangeRowVisible
 ;                  Only one Sort Field per Column/Row per sort, may be used, otherwise only the first Sort Field for that Column/Row is used.
 ;                  $oCellOutput indicates the cell to begin the output data, and does not need to be the same size as $oRange. Any data will be overwritten in order to output the copied Sort Data that is within range.
 ;                  Due to some form of bug in LibreOffice, the sort function does not work appropriately when using the normal method, so a slight workaround has been implemented, this workaround involves inserting a temporary Macro into the Document, calling that Macro, and then deleting the Macro once finished.
-; Related .......:
+; Related .......: _LOCalc_RangeSortAlt, _LOCalc_SortFieldCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5355,7 +5355,7 @@ EndFunc   ;==>_LOCalc_RangeSort
 ;                  You can sort up to 3 Columns/Rows per Sort call by using $tSortField2 and $tSortField3.
 ;                  Only one Sort Field per Column/Row per sort, may be used, otherwise only the first Sort Field for that Column/Row is used.
 ;                  Natural sort is a sort algorithm that sorts string-prefixed numbers based on the value of the numerical element in each sorted number, instead of the traditional way of sorting them as ordinary strings.
-; Related .......:
+; Related .......: _LOCalc_RangeSort, _LOCalc_SortFieldCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
