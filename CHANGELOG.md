@@ -105,6 +105,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Reformatted Error and Extended value descriptions in headers.
 - Reword failure description.
 - Corrected mismatches between header Syntax, header Parameter Defaults, and Function parameter assignments.
+- Revised related section for better accuracy.
 
 #### Fixed
 

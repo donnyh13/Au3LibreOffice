@@ -52,7 +52,7 @@
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: __LO_ArrayFill
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -118,7 +118,7 @@ EndFunc   ;==>__LO_AddTo1DArray
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call only how many you parameters you need to add to the Array. Automatically resizes the Array if it is the incorrect size.
-; Related .......:
+; Related .......: __LO_AddTo1DArray
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -147,7 +147,7 @@ EndFunc   ;==>__LO_ArrayFill
 ; Author ........: mLipok
 ; Modified ......: donnyh13 - Added error checking.
 ; Remarks .......: From WriterDemo.au3 as modified by mLipok from WriterDemo.vbs found in the LibreOffice SDK examples.
-; Related .......:
+; Related .......: __LO_SetPropertyValue
 ; Link ..........: https://www.autoitscript.com/forum/topic/204665-libreopenoffice-writer/?do=findComment&comment=1471711
 ; Example .......: No
 ; ===============================================================================================================================
@@ -286,7 +286,7 @@ EndFunc   ;==>__LO_InternalComErrorHandler
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If Minimum is a negative, and there is no max defined, it is treated as such that if a value is more negative, it is outside the range. e.g., min = -2, -3 is outside of the range, but -1 is inside.
-; Related .......:
+; Related .......: __LO_NumIsBetween
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -374,7 +374,7 @@ EndFunc   ;==>__LO_IsObjInvalid
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If Minimum is a negative, and there is no max defined, it is treated as such that if a value is more negative, it is outside the range. e.g., min = -2, -3 is outside of the range, but -1 is inside.
-; Related .......:
+; Related .......: __LO_IntIsBetween
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -434,7 +434,7 @@ EndFunc   ;==>__LO_NumIsBetween
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: __LO_SetPortableServiceManager
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -510,7 +510,7 @@ EndFunc   ;==>__LO_ServiceManager
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If the COM Error "Binary URP bridge already disposed" is encountered, any running soffice.exe/soffice.bin processes need to be closed via TaskManager.
-; Related .......:
+; Related .......: __LO_ServiceManager
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -694,7 +694,7 @@ EndFunc   ;==>__LO_SetPortableServiceManager
 ; Author ........: Leagnus, GMK
 ; Modified ......: donnyh13 - added CreateStruct function. Modified variable names.
 ; Remarks .......:
-; Related .......:
+; Related .......: __LO_CreateStruct
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================

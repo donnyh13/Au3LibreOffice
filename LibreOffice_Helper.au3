@@ -139,7 +139,7 @@ EndFunc   ;==>_LO_ComError_UserFunction
 ; Remarks .......: To retrieve a Hexadecimal color value, call the RGB Color Integer in $iHex, To retrieve a R(ed)G(reen)B(lue) color value, call Null in $iHex, and call the RGB Color Integer into $iRGB, etc. for the other color types.
 ;                  Hex returns as a string variable, all others (RGB, HSB, CMYK) return an array.
 ;                  The Hexadecimal figure returned doesn't contain the usual "0x", as LibreOffice does not implement it in its numbering system.
-; Related .......: _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorToLong, _LO_UnitConvert, _LO_PathConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -294,7 +294,7 @@ EndFunc   ;==>_LO_ConvertColorFromLong
 ;                  To convert a H(ue) S(aturation) B(rightness) color, call H in $vVal1 as a String, S in $vVal2 as a String, and B in $vVal3 as a string.
 ;                  To convert C(yan) M(agenta) Y(ellow) Blac(k) call C in $vVal1 as an Integer, M in $vVal2 as an Integer, Y in $vVal3 as an Integer, and K in $vVal4 as an Integer.
 ;                  The Hexadecimal figure entered cannot contain the usual "0x", as LibreOffice does not implement it in its numbering system.
-; Related .......: _LO_ConvertColorFromLong
+; Related .......: _LO_ConvertColorFromLong, _LO_UnitConvert, _LO_PathConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -470,7 +470,7 @@ EndFunc   ;==>_LO_ConvertColorToLong
 ;                  -Row 1, Column 0 contains the Object for that document. e.g. $aArray[0][0] = $oDoc
 ;                  -Row 1, Column 1 contains the Document's Type as an Integer. See Constants, $LO_DOC_TYPE_* as defined in LibreOffice_Constants.au3. e.g. $aArray[0][1] = $LO_DOC_TYPE_CALC
 ;                  -Row 2, Column 0 contains the Object for the next document. e.g. $aArray[1][0] = $oDoc2. And so on.
-; Related .......:
+; Related .......: _LO_DocGetType, _LO_PathConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -598,7 +598,7 @@ EndFunc   ;==>_LO_DocConnect
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LO_DocConnect
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -781,7 +781,7 @@ EndFunc   ;==>_LO_DocGetType
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LO_TransparencyGradientMultiAdd, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiModify
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -831,7 +831,7 @@ EndFunc   ;==>_LO_GradientMulticolorAdd
 ;                  @Error: 1, @Extended: 3 = $iIndex not an Integer, less than 0 or greater than last element plus 1.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
+; Remarks .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorModify, _LO_TransparencyGradientMultiAdd, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiModify
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -881,7 +881,7 @@ EndFunc   ;==>_LO_GradientMulticolorDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_TransparencyGradientMultiAdd, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiModify
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -991,7 +991,7 @@ EndFunc   ;==>_LO_InitializePortable
 ; Remarks .......: LibreOffice URL notation is based on the Internet Standard RFC 1738, which means only [0-9],[a-zA-Z] are allowed in paths, most other characters need to be converted into ISO 8859-1 (ISO Latin) such as is found in internet URL's (spaces become %20).
 ;                  See: StarOfficeTM 6.0 Office SuiteA SunTM ONE Software Offering, Basic Programmer's Guide; Page 74
 ;                  The user generally should not even need this function, as I have endeavored to convert any URLs to the appropriate computer path format and any input computer paths to a LibreOffice URL.
-; Related .......:
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1247,7 +1247,7 @@ EndFunc   ;==>_LO_Terminate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiModify
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1298,7 +1298,7 @@ EndFunc   ;==>_LO_TransparencyGradientMultiAdd
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LO_TransparencyGradientMultiAdd, _LO_TransparencyGradientMultiModify
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1347,7 +1347,7 @@ EndFunc   ;==>_LO_TransparencyGradientMultiDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LO_TransparencyGradientMultiAdd, _LO_TransparencyGradientMultiDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1402,7 +1402,7 @@ EndFunc   ;==>_LO_TransparencyGradientMultiModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Hundredths of a Millimeter (HMM), is used in almost all LibreOffice functions that contain a measurement parameter.
-; Related .......:
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_PathConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
