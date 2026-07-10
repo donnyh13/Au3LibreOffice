@@ -112,7 +112,7 @@
 ;                  Border Width must be set first to be able to set Border Style and Color.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_DirFrmtClear, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet, _LOWriter_DirFrmtCharBorderWidth, _LOWriter_DirFrmtCharBorderStyle, _LOWriter_DirFrmtCharBorderPadding
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_DirFrmtCharBorderWidth, _LOWriter_DirFrmtCharBorderStyle, _LOWriter_DirFrmtCharBorderPadding, _LOWriter_DirFrmtParBorderColor, _LOWriter_CharStyleBorderColor, _LOWriter_ParStyleBorderColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -183,7 +183,7 @@ EndFunc   ;==>_LOWriter_DirFrmtCharBorderColor
 ;                  Retrieving current settings in any Direct formatting functions may be inaccurate as multiple different settings could be selected at once, which would result in a return of 0, False, Null, etc.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LOWriter_DirFrmtClear, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet, _LOWriter_DirFrmtCharBorderWidth, _LOWriter_DirFrmtCharBorderStyle, _LOWriter_DirFrmtCharBorderColor
+; Related .......: _LO_UnitConvert, _LOWriter_DirFrmtCharBorderWidth, _LOWriter_DirFrmtCharBorderStyle, _LOWriter_DirFrmtCharBorderColor, _LOWriter_DirFrmtParBorderPadding, _LOWriter_CharStyleBorderPadding, _LOWriter_ParStyleBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -253,7 +253,7 @@ EndFunc   ;==>_LOWriter_DirFrmtCharBorderPadding
 ;                  Border Width must be set first to be able to set Border Style and Color.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_DirFrmtClear, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet, _LOWriter_DirFrmtCharBorderWidth, _LOWriter_DirFrmtCharBorderColor, _LOWriter_DirFrmtCharBorderPadding
+; Related .......: _LOWriter_DirFrmtCharBorderWidth, _LOWriter_DirFrmtCharBorderColor, _LOWriter_DirFrmtCharBorderPadding, _LOWriter_DirFrmtParBorderStyle, _LOWriter_CharStyleBorderStyle, _LOWriter_ParStyleBorderStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -326,7 +326,7 @@ EndFunc   ;==>_LOWriter_DirFrmtCharBorderStyle
 ;                  To "Turn Off" Borders, set them to 0
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LOWriter_DirFrmtClear, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet, _LOWriter_DirFrmtCharBorderStyle, _LOWriter_DirFrmtCharBorderColor, _LOWriter_DirFrmtCharBorderPadding
+; Related .......: _LO_UnitConvert, _LOWriter_DirFrmtCharBorderStyle, _LOWriter_DirFrmtCharBorderColor, _LOWriter_DirFrmtCharBorderPadding, _LOWriter_DirFrmtParBorderWidth, _LOWriter_CharStyleBorderWidth, _LOWriter_ParStyleBorderWidth
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -395,7 +395,7 @@ EndFunc   ;==>_LOWriter_DirFrmtCharBorderWidth
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call a Parameter with Default keyword to clear direct formatting for that setting.
-; Related .......: _LOWriter_DirFrmtClear, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LOWriter_DirFrmtOverLine, _LOWriter_DirFrmtStrikeOut, _LOWriter_DirFrmtUnderLine, _LOWriter_CharStyleEffect, _LOWriter_ParStyleEffect
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -477,7 +477,7 @@ EndFunc   ;==>_LOWriter_DirFrmtCharEffect
 ;                  The way LibreOffice is set up Super/Subscript are set in the same setting, Superscript is a positive number from 1 to 100 (percentage), Subscript is a negative number set to -1 to -100 percentage. For the user's convenience this function automatically converts the positive numbers to negative, and back when setting or retrieving subscript values.
 ;                  Automatic Superscript has an Integer value of 14000, Auto Subscript has a Integer value of -14000. Being that there is no settable setting of Automatic Super/Sub Script, it has been chosen to use -1 to indicate an automatic Sub/SuperScript value.
 ;                  If you set both $iSuperScript and $iSubScript to -1 (Automatic), or both $iSuperScript and $iSubScript to any value, Subscript will be the result, as it is the last in the function to be set, and thus will overwrite any Superscript values.
-; Related .......: _LOWriter_DirFrmtClear, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LOWriter_DirFrmtCharRotateScale, _LOWriter_DirFrmtCharSpacing, _LOWriter_CharStylePosition, _LOWriter_ParStylePosition
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -531,7 +531,7 @@ EndFunc   ;==>_LOWriter_DirFrmtCharPosition
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call a Parameter with Default keyword to clear direct formatting for that setting.
-; Related .......: _LOWriter_DirFrmtClear,_LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor,_LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LOWriter_DirFrmtCharPosition, _LOWriter_DirFrmtCharSpacing, _LOWriter_CharStyleRotateScale, _LOWriter_ParStyleRotateScale
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -612,7 +612,7 @@ EndFunc   ;==>_LOWriter_DirFrmtCharRotateScale
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  LibreOffice may adjust the set width +/- 1 Hundredth of a Millimeter (HMM) after setting.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LOWriter_DirFrmtClear, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LOWriter_DirFrmtCharEffect, _LOWriter_DirFrmtFontColor, _LOWriter_DirFrmtParShadow, _LOWriter_CharStyleShadow, _LOWriter_ParStyleShadow
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -668,7 +668,7 @@ EndFunc   ;==>_LOWriter_DirFrmtCharShadow
 ;                  The acceptable values are from -2 Pt to 928.8 Pt. the figures can be directly converted easily, however, for an unknown reason to myself, LibreOffice begins counting backwards and in negative Hundredths of a Millimeter internally from 928.9 up to 1000 Pt (Max setting).
 ;                  For example, 928.8Pt is the last correct value, which equals 32766 Hundredths of a Millimeter (HMM), after this LibreOffice reports the following: ;928.9 Pt = -32766 (HMM); 929 Pt = -32763 (HMM); 929.1 = -32759; 1000 pt = -30258.
 ;                  Attempting to set LibreOffice's kerning value to anything over 32768 (HMM) causes a COM exception, and attempting to set the kerning to any of these negative numbers sets the User viewable kerning value to -2.0 Pt. For these reasons the max settable kerning is -2.0 Pt to 928.8 Pt.
-; Related .......: _LO_UnitConvert, _LOWriter_DirFrmtClear, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LO_UnitConvert, _LOWriter_DirFrmtCharRotateScale, _LOWriter_DirFrmtParSpace, _LOWriter_CharStyleSpacing, _LOWriter_ParStyleSpacing
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -722,7 +722,7 @@ EndFunc   ;==>_LOWriter_DirFrmtCharSpacing
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function causes the ViewCursor to select the data input in $oSelection, unless $oSelection is a ViewCursor object. After the formatting has been cleared the ViewCursor is returned to its previous position.
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: 
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -805,7 +805,7 @@ EndFunc   ;==>_LOWriter_DirFrmtClear
 ;                  Call a Parameter with Default keyword to clear direct formatting for that setting.
 ;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
 ;                  LibreOffice Writer accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
-; Related .......: _LOWriter_FontsGetNames, _LOWriter_DirFrmtClear, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LOWriter_FontsGetNames, _LOWriter_DirFrmtFontColor, _LOWriter_CharStyleFont, _LOWriter_ParStyleFont
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -882,7 +882,7 @@ EndFunc   ;==>_LOWriter_DirFrmtFont
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call a Parameter with Default keyword to clear direct formatting for that setting. Font Color and Transparency reset at the same time as the other, e.g., if you reset Font Color, it will reset Transparency.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_DirFrmtClear, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_DirFrmtFont, _LOWriter_CharStyleFontColor, _LOWriter_ParStyleFontColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -937,7 +937,7 @@ EndFunc   ;==>_LOWriter_DirFrmtFontColor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Some of the returned style values may be blank if they are not set, particularly Numbering style.
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LOWriter_ParStyleCurrent, _LOWriter_CharStyleCurrent, _LOWriter_PageStyleCurrent, _LOWriter_NumStyleCurrent
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -987,7 +987,7 @@ EndFunc   ;==>_LOWriter_DirFrmtGetCurStyles
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call a Parameter with Default keyword to clear direct formatting for that setting. Overline style, and Color all reset together.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_DirFrmtClear, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_DirFrmtCharEffect, _LOWriter_DirFrmtStrikeOut, _LOWriter_DirFrmtUnderLine, _LOWriter_CharStyleOverLine, _LOWriter_ParStyleOverLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1067,7 +1067,7 @@ EndFunc   ;==>_LOWriter_DirFrmtOverLine
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call a Parameter with Default keyword to clear direct formatting for that setting. $iHorAlign, $iLastLineAlign, and $bExpandSingleWord are all reset together.
 ;                  $iHorAlign must be set to $LOW_PAR_ALIGN_HOR_JUSTIFIED(2) before you can set $iLastLineAlign, and $iLastLineAlign must be set to $LOW_PAR_LAST_LINE_JUSTIFIED(2) before $bExpandSingleWord can be set.
-; Related .......: _LOWriter_DirFrmtClear, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LOWriter_DirFrmtParIndent, _LOWriter_DirFrmtParSpace, _LOWriter_DirFrmtParTxtFlowOpt, _LOWriter_ParStyleAlignment
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1146,7 +1146,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParAlignment
 ; Remarks .......: Direct formatting is, just as the name indicates, directly applying settings to a selection of text, it is messy to deal with both by proxy (such as by AutoIt automation) and directly in the document, and is generally not recommended to use. Character and Paragraph styles are generally recommended instead.
 ;                  Retrieving current settings in any Direct formatting functions may be inaccurate as multiple different settings could be selected at once, which would result in a return of 0, False, Null, etc.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_DirFrmtClear, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_DirFrmtFontColor, _LOWriter_DirFrmtParAreaFillStyle, _LOWriter_DirFrmtParAreaGradient, _LOWriter_ParStyleAreaColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1194,7 +1194,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParAreaColor
 ;                  Direct formatting is, just as the name indicates, directly applying settings to a selection of text, it is messy to deal with both by proxy (such as by AutoIt automation) and directly in the document, and is generally not recommended to use. Character and Paragraph styles are generally recommended instead.
 ;                  Retrieving current settings in any Direct formatting functions may be inaccurate as multiple different settings could be selected at once, which would result in a return of 0, False, Null, etc.
 ;                  If an entire Paragraph is not selected in the selection, a wrong value may also result, and setting may not apply correctly.
-; Related .......: _LOWriter_DirFrmtParAreaGradient, _LOWriter_DirFrmtParAreaColor
+; Related .......: _LOWriter_DirFrmtParAreaGradient, _LOWriter_DirFrmtParAreaColor, _LOWriter_ParStyleAreaFillStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1282,7 +1282,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParAreaFillStyle
 ;                  Direct formatting is, just as the name indicates, directly applying settings to a selection of text, it is messy to deal with both by proxy (such as by AutoIt automation) and directly in the document, and is generally not recommended to use. Character and Paragraph styles are generally recommended instead.
 ;                  Retrieving current settings in any Direct formatting functions may be inaccurate as multiple different settings could be selected at once, which would result in a return of 0, False, Null, etc.
 ;                  If an entire Paragraph is not selected in the selection, a wrong value may also result, and setting may not apply correctly.
-; Related .......: _LOWriter_DirFrmtParAreaColor, _LOWriter_DirFrmtParAreaGradientMulticolor
+; Related .......: _LOWriter_DirFrmtParAreaColor, _LOWriter_DirFrmtParAreaGradientMulticolor, _LOWriter_DirFrmtParAreaFillStyle, _LOWriter_ParStyleAreaGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1351,7 +1351,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParAreaGradient
 ;                  Direct formatting is, just as the name indicates, directly applying settings to a selection of text, it is messy to deal with both by proxy (such as by AutoIt automation) and directly in the document, and is generally not recommended to use. Character and Paragraph styles are generally recommended instead.
 ;                  Retrieving current settings in any Direct formatting functions may be inaccurate as multiple different settings could be selected at once, which would result in a return of 0, False, Null, etc.
 ;                  If an entire Paragraph is not selected in the selection, a wrong value may also result, and setting may not apply correctly.
-; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOWriter_DirFrmtParAreaGradient
+; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOWriter_DirFrmtParAreaGradient, _LOWriter_ParStyleAreaGradientMulticolor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1402,7 +1402,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParAreaGradientMulticolor
 ;                  Direct formatting is, just as the name indicates, directly applying settings to a selection of text, it is messy to deal with both by proxy (such as by AutoIt automation) and directly in the document, and is generally not recommended to use. Character and Paragraph styles are generally recommended instead.
 ;                  Retrieving current settings in any Direct formatting functions may be inaccurate as multiple different settings could be selected at once, which would result in a return of 0, False, Null, etc.
 ;                  If an entire Paragraph is not selected in the selection, a wrong value may also result, and setting may not apply correctly.
-; Related .......:
+; Related .......: _LOWriter_DirFrmtParAreaColor, _LOWriter_ParStyleAreaTransparency
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1474,7 +1474,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParAreaTransparency
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Border Width must be set first to be able to set Border Style and Color.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_DirFrmtClear, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet, _LOWriter_DirFrmtParBorderWidth, _LOWriter_DirFrmtParBorderStyle, _LOWriter_DirFrmtParBorderPadding
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_DirFrmtParBorderWidth, _LOWriter_DirFrmtParBorderStyle, _LOWriter_DirFrmtParBorderPadding, _LOWriter_DirFrmtCharBorderColor, _LOWriter_ParStyleBorderColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1543,7 +1543,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParBorderColor
 ;                  Retrieving current settings in any Direct formatting functions may be inaccurate as multiple different settings could be selected at once, which would result in a return of 0, False, Null, etc.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LOWriter_DirFrmtClear, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet, _LOWriter_DirFrmtParBorderWidth, _LOWriter_DirFrmtParBorderStyle, _LOWriter_DirFrmtParBorderColor
+; Related .......: _LO_UnitConvert, _LOWriter_DirFrmtParBorderWidth, _LOWriter_DirFrmtParBorderStyle, _LOWriter_DirFrmtParBorderColor, _LOWriter_DirFrmtCharBorderPadding, _LOWriter_ParStyleBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1611,7 +1611,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParBorderPadding
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Border Width must be set first to be able to set Border Style and Color.
-; Related .......: _LOWriter_DirFrmtClear, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet, _LOWriter_DirFrmtParBorderWidth, _LOWriter_DirFrmtParBorderColor, _LOWriter_DirFrmtParBorderPadding
+; Related .......: _LOWriter_DirFrmtParBorderWidth, _LOWriter_DirFrmtParBorderColor, _LOWriter_DirFrmtParBorderPadding, _LOWriter_DirFrmtCharBorderStyle, _LOWriter_ParStyleBorderStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1689,7 +1689,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParBorderStyle
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call $bConnectBorder Parameter with Default keyword to clear direct formatting for that setting.
 ;                  To "Turn Off" Borders, set them to 0
-; Related .......: _LO_UnitConvert, _LOWriter_DirFrmtClear, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet, _LOWriter_DirFrmtParBorderStyle, _LOWriter_DirFrmtParBorderColor, _LOWriter_DirFrmtParBorderPadding
+; Related .......: _LO_UnitConvert, _LOWriter_DirFrmtParBorderStyle, _LOWriter_DirFrmtParBorderColor, _LOWriter_DirFrmtParBorderPadding, _LOWriter_DirFrmtCharBorderWidth, _LOWriter_ParStyleBorderWidth
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1794,7 +1794,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParBorderWidth
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Set $iNumChars, $iLines, $iSpcTxt to 0 to disable DropCaps.
 ;                  I am unable to find a way to set Drop Caps character style to "None" as is available in the User Interface. When it is set to "None" LibreOffice returns a blank string ("") but setting it to a blank string throws a COM error/Exception. Consequently, you cannot set Character Style to "None", but you can still disable Drop Caps as noted above.
-; Related .......: _LO_UnitConvert, _LOWriter_DirFrmtClear, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LO_UnitConvert, _LOWriter_DirFrmtParOutLineAndList, _LOWriter_ParStyleDropCaps
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1858,7 +1858,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParDropCaps
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  $bAutoHyphen needs to be set to True for the rest of the settings to be activated, but they will be still successfully be set regardless.
-; Related .......: _LOWriter_DirFrmtClear, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LOWriter_DirFrmtParPageBreak, _LOWriter_DirFrmtParTxtFlowOpt, _LOWriter_ParStyleHyphenation
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1916,7 +1916,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParHyphenation
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  $iFirstLine Indent cannot be set if $bAutoFirstLine is set to True.
-; Related .......: _LO_UnitConvert, _LOWriter_DirFrmtClear, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LO_UnitConvert, _LOWriter_DirFrmtParAlignment, _LOWriter_DirFrmtParSpace, _LOWriter_ParStyleIndent
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1980,7 +1980,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParIndent
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call a Parameter with Default keyword to clear direct formatting for that setting. $iOutline, $bParLineCount, and $iLineCountVal all are reset together.
 ;                  In LibreOffice User Interface (UI), there are two options available when applying direct formatting, "Restart numbering at this paragraph", and "start value", these are too glitchy to make available, I am able to set "Restart numbering at this paragraph" to True, but I cannot set it to False, and I am unable to clear either setting once applied, so for those reasons I am not including it in this UDF.
-; Related .......: _LOWriter_DirFrmtClear, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LOWriter_ParStyleOutLineAndList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2061,7 +2061,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParOutLineAndList
 ;                  Clearing directly formatted page breaks may fail, If the cursor selection contains more than one paragraph that has more than one type of page break, it may fail to literally reset it to the paragraph style's original settings even though it returns a success, you will need to reset each paragraph one at a time if this is the case.
 ;                  Break Type must be set before Page Style will be able to be set, and page style needs set before $iPgNumOffSet can be set.
 ;                  LibreOffice doesn't directly show in its User interface options for Break type constants #3 and #6 (Column both) and (Page both), but doesn't throw an error when being set to either one, so they are included here, though I'm not sure if they will work correctly.
-; Related .......: _LOWriter_DirFrmtClear, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LOWriter_DirFrmtParTxtFlowOpt, _LOWriter_DirFrmtParHyphenation, _LOWriter_ParStylePageBreak
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2125,7 +2125,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParPageBreak
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  LibreOffice may change the shadow width +/- a Hundredth of a Millimeter (HMM).
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LOWriter_DirFrmtClear, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LOWriter_DirFrmtCharShadow, _LOWriter_ParStyleShadow
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2199,7 +2199,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParShadow
 ;                  The settings in LibreOffice, (Single,1.15, 1.5, Double,) Use the Proportional mode, and are just varying percentages. e.g Single = 100, 1.15 = 115%, 1.5 = 150%, Double = 200%.
 ;                  $iLineSpcHeight depends on the $iLineSpcMode used, see constants for accepted Input values.
 ;                  $iAbovePar, $iBelowPar, $iLineSpcHeight may change +/- a Hundredth of a Millimeter (HMM) once set.
-; Related .......: _LO_UnitConvert, _LOWriter_DirFrmtClear, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LO_UnitConvert, _LOWriter_DirFrmtParIndent, _LOWriter_DirFrmtParAlignment, _LOWriter_ParStyleSpace
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2293,7 +2293,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParSpace
 ;                  $iFillChar, LibreOffice's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by LibreOffice are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Function and "ASCII Character Codes" in the AutoIt help file.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  $iNewTabStop position is still returned even though some settings weren't successfully set, the new TabStop was still created.
-; Related .......: _LO_UnitConvert, _LOWriter_DirFrmtParTabStopDelete, _LOWriter_DirFrmtParTabStopMod, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LO_UnitConvert, _LOWriter_DirFrmtParTabStopDelete, _LOWriter_DirFrmtParTabStopMod, _LOWriter_DirFrmtParTabStopsGetList, _LOWriter_ParStyleTabStopCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2329,7 +2329,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParTabStopCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $iTabStop refers to the position, or essentially the "length" of a TabStop from the edge of a page margin. This is the only reliable way to identify a Tabstop to be able to interact with it, as there can only be one of a certain length per paragraph.
-; Related .......: _LOWriter_DirFrmtParTabStopCreate, _LOWriter_DirFrmtParTabStopsGetList, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LOWriter_DirFrmtParTabStopCreate, _LOWriter_DirFrmtParTabStopsGetList, _LOWriter_ParStyleTabStopDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2393,7 +2393,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParTabStopDelete
 ;                  $iPosition once set can vary +/- a Hundredth of a Millimeter (HMM). To ensure you can identify the tabstop to modify it again, This function returns the new TabStop position in @Extended when $iPosition is set, return value will be set to 2. See Return Values.
 ;                  Since $iPosition can fluctuate +/- a Hundredth of a Millimeter (HMM) when it is inserted into LibreOffice, it is possible to accidentally overwrite an already existing TabStop.
 ;                  $iFillChar, LibreOffice's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by LibreOffice are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
-; Related .......: _LO_UnitConvert, _LOWriter_DirFrmtParTabStopCreate, _LOWriter_DirFrmtParTabStopDelete, _LOWriter_DirFrmtParTabStopsGetList, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LO_UnitConvert, _LOWriter_DirFrmtParTabStopCreate, _LOWriter_DirFrmtParTabStopDelete, _LOWriter_DirFrmtParTabStopsGetList, _LOWriter_ParStyleTabStopMod
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2433,7 +2433,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParTabStopMod
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Retrieving current settings in any Direct formatting functions may be inaccurate as multiple different settings could be selected at once, which would result in a return of 0, False, Null, etc.
-; Related .......: _LOWriter_DirFrmtParTabStopCreate, _LOWriter_DirFrmtParTabStopDelete, _LOWriter_DirFrmtParTabStopMod, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LOWriter_DirFrmtParTabStopCreate, _LOWriter_DirFrmtParTabStopDelete, _LOWriter_DirFrmtParTabStopMod, _LOWriter_ParStyleTabStopsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2483,7 +2483,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParTabStopsGetList
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call a Parameter with Default keyword to clear direct formatting for that setting. Resetting Orphan or Widow will reset $bParSplit to False if it was set to True.
 ;                  If you do not set ParSplit to True, the rest of the settings will still show to have been set, but will not become active until $bParSplit is set to True.
-; Related .......: _LOWriter_DirFrmtClear, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LOWriter_ParStyleHyphenation, _LOWriter_ParStylePageBreak, _LOWriter_ParStyleTxtFlowOpt
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2554,7 +2554,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParTxtFlowOpt
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call a Parameter with Default keyword to clear direct formatting for that setting.
 ;                  Strikeout line style is converted to a single line in Ms word document format.
-; Related .......: _LOWriter_DirFrmtClear, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LOWriter_DirFrmtCharEffect, _LOWriter_DirFrmtOverLine, _LOWriter_DirFrmtUnderLine, _LOWriter_CharStyleStrikeOut
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2618,7 +2618,7 @@ EndFunc   ;==>_LOWriter_DirFrmtStrikeOut
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call a Parameter with Default keyword to clear direct formatting for that setting. Underline style, and Color all reset together.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_DirFrmtClear, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_DirFrmtCharEffect, _LOWriter_DirFrmtOverLine, _LOWriter_DirFrmtStrikeOut, _LOWriter_CharStyleUnderLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

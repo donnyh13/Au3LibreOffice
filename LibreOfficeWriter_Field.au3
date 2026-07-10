@@ -151,7 +151,7 @@
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldAuthorModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldAuthorModify, _LOWriter_FieldDelete, _LOWriter_FieldDocInfoCreateAuthInsert, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -224,7 +224,7 @@ EndFunc   ;==>_LOWriter_FieldAuthorInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldAuthorInsert, _LOWriter_FieldsGetList
+; Related .......: _LOWriter_FieldAuthorInsert, _LOWriter_FieldsGetList, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -286,7 +286,7 @@ EndFunc   ;==>_LOWriter_FieldAuthorModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldBookmarkInsert, _LOWriter_FieldBookmarkGetObjByName, _LOWriter_FieldBookmarksGetNames
+; Related .......: _LOWriter_FieldBookmarkInsert, _LOWriter_FieldBookmarkGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -327,7 +327,7 @@ EndFunc   ;==>_LOWriter_FieldBookmarkDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldBookmarkGetObjByName, _LOWriter_FieldBookmarkInsert, _LOWriter_FieldBookmarksGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -401,7 +401,7 @@ EndFunc   ;==>_LOWriter_FieldBookmarkGetAnchor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldBookmarksGetNames, _LOWriter_FieldBookmarkModify, _LOWriter_FieldBookmarkDelete
+; Related .......: _LOWriter_FieldBookmarksGetNames, _LOWriter_FieldBookmarkModify, _LOWriter_FieldBookmarkDelete, _LOWriter_FieldBookmarkExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -446,7 +446,7 @@ EndFunc   ;==>_LOWriter_FieldBookmarkGetObjByName
 ; Remarks .......: If the cursor used to insert a Bookmark has text selected, the Bookmark will envelope the text, else the Bookmark will be inserted at a single point.
 ;                  A Bookmark name cannot contain the following characters: / \ @ : * ? " ; , . #
 ;                  If the document already contains a Bookmark by the same name, LibreOffice adds a digit after the name, such as Bookmark 1, Bookmark 2 etc.
-; Related .......: _LOWriter_FieldBookmarkModify, _LOWriter_FieldBookmarkDelete
+; Related .......: _LOWriter_FieldBookmarkModify, _LOWriter_FieldBookmarkDelete, _LOWriter_FieldBookmarkExists, _LOWriter_FieldBookmarksGetNames, _LOWriter_FieldRefBookmarkInsert, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -504,7 +504,7 @@ EndFunc   ;==>_LOWriter_FieldBookmarkInsert
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  A Bookmark name cannot contain the following characters: / \ @ : * ? " ; , . #
 ;                  If the document already contains a Bookmark by the same name, LibreOffice adds a digit after the name, such as Bookmark 1, Bookmark 2 etc.
-; Related .......: _LOWriter_FieldBookmarkGetObjByName, _LOWriter_FieldBookmarkInsert, _LOWriter_FieldBookmarkDelete
+; Related .......: _LOWriter_FieldBookmarkGetObjByName, _LOWriter_FieldBookmarkInsert, _LOWriter_FieldBookmarkDelete, _LOWriter_FieldRefBookmarkModify, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -548,7 +548,7 @@ EndFunc   ;==>_LOWriter_FieldBookmarkModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldBookmarkGetObjByName
+; Related .......: _LOWriter_FieldBookmarkGetObjByName, _LOWriter_FieldBookmarkExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -590,7 +590,7 @@ EndFunc   ;==>_LOWriter_FieldBookmarksGetNames
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldChapterModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldChapterModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -650,7 +650,7 @@ EndFunc   ;==>_LOWriter_FieldChapterInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldChapterInsert, _LOWriter_FieldsGetList
+; Related .......: _LOWriter_FieldChapterInsert, _LOWriter_FieldsGetList, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -711,7 +711,7 @@ EndFunc   ;==>_LOWriter_FieldChapterModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldCombCharModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldCombCharModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -766,7 +766,7 @@ EndFunc   ;==>_LOWriter_FieldCombCharInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldCombCharInsert, _LOWriter_FieldsGetList
+; Related .......: _LOWriter_FieldCombCharInsert, _LOWriter_FieldsGetList, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -831,7 +831,7 @@ EndFunc   ;==>_LOWriter_FieldCombCharModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldCommentModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DateStructCreate _LOWriter_DateStructModify
+; Related .......: _LOWriter_FieldCommentModify, _LOWriter_DateStructCreate _LOWriter_DateStructModify, _LOWriter_FieldDocInfoCommentsInsert, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -939,7 +939,7 @@ EndFunc   ;==>_LOWriter_FieldCommentInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldCommentInsert, _LOWriter_FieldsGetList, _LOWriter_DateStructCreate _LOWriter_DateStructModify
+; Related .......: _LOWriter_FieldCommentInsert, _LOWriter_FieldsGetList, _LOWriter_DateStructCreate, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1046,7 +1046,7 @@ EndFunc   ;==>_LOWriter_FieldCommentModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldCondTextModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldCondTextModify, _LOWriter_FieldFuncHiddenParInsert, _LOWriter_FieldFuncHiddenTextInsert, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1115,7 +1115,7 @@ EndFunc   ;==>_LOWriter_FieldCondTextInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldCondTextInsert, _LOWriter_FieldsGetList
+; Related .......: _LOWriter_FieldCondTextInsert, _LOWriter_FieldsGetList, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1175,7 +1175,7 @@ EndFunc   ;==>_LOWriter_FieldCondTextModify
 ; Modified ......:
 ; Remarks .......: A Comment Field will return an empty string, use the Comment Field function to retrieve the current comment content. A DocInfoComments field will work with this function however.
 ;                  This will work for most Fields, but not all. Check and see which will work and which wont.
-; Related .......: _LOWriter_FieldsGetList, _LOWriter_FieldsAdvGetList, _LOWriter_FieldsDocInfoGetList
+; Related .......: _LOWriter_FieldsGetList, _LOWriter_FieldsAdvGetList, _LOWriter_FieldsDocInfoGetList, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1229,7 +1229,7 @@ EndFunc   ;==>_LOWriter_FieldCurrentDisplayGet
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDateTimeModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DateStructCreate, _LOWriter_DateStructModify
+; Related .......: _LOWriter_FieldDateTimeModify, _LOWriter_DateStructCreate, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1326,7 +1326,7 @@ EndFunc   ;==>_LOWriter_FieldDateTimeInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldDateTimeInsert, _LOWriter_FieldsGetList, _LOWriter_DateStructCreate, _LOWriter_DateStructModify
+; Related .......: _LOWriter_FieldDateTimeInsert, _LOWriter_FieldsGetList, _LOWriter_DateStructCreate, _LOWriter_DateStructModify, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1489,7 +1489,7 @@ EndFunc   ;==>_LOWriter_FieldDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoCommentsModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocDescription
+; Related .......: _LOWriter_FieldDocInfoCommentsModify, _LOWriter_DocDescription, _LOWriter_FieldCommentInsert, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1553,7 +1553,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoCommentsInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldDocInfoCommentsInsert, _LOWriter_FieldsGetList, _LOWriter_DocDescription
+; Related .......: _LOWriter_FieldDocInfoCommentsInsert, _LOWriter_FieldsGetList, _LOWriter_DocDescription, _LOWriter_FieldCommentModify, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1615,7 +1615,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoCommentsModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoCreateAuthModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocGenPropCreation
+; Related .......: _LOWriter_FieldDocInfoCreateAuthModify, _LOWriter_DocGenPropCreation, _LOWriter_FieldAuthorInsert, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1679,7 +1679,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoCreateAuthInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldDocInfoCreateAuthInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DocGenPropCreation
+; Related .......: _LOWriter_FieldDocInfoCreateAuthInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DocGenPropCreation, _LOWriter_FieldAuthorModify, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1742,7 +1742,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoCreateAuthModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoCreateDateTimeModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenPropCreation
+; Related .......: _LOWriter_FieldDocInfoCreateDateTimeModify, _LOWriter_FieldDelete, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenPropCreation, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1806,7 +1806,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoCreateDateTimeInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldDocInfoCreateDateTimeInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenPropCreation
+; Related .......: _LOWriter_FieldDocInfoCreateDateTimeInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenPropCreation, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1876,7 +1876,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoCreateDateTimeModify
 ;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.textfield.docinfo.EditTime" Object.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: _LOWriter_FieldDocInfoEditTimeModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenProp
+; Remarks .......: _LOWriter_FieldDocInfoEditTimeModify, _LOWriter_FieldDelete, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenProp, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -1939,7 +1939,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoEditTimeInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldDocInfoEditTimeInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenProp
+; Related .......: _LOWriter_FieldDocInfoEditTimeInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenProp, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2008,7 +2008,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoEditTimeModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoKeywordsModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocDescription
+; Related .......: _LOWriter_FieldDocInfoKeywordsModify, _LOWriter_FieldDelete, _LOWriter_DocDescription, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2072,7 +2072,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoKeywordsInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldDocInfoKeywordsInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DocDescription
+; Related .......: _LOWriter_FieldDocInfoKeywordsInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DocDescription, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2134,7 +2134,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoKeywordsModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoModAuthModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocGenPropModification
+; Related .......: _LOWriter_FieldDocInfoModAuthModify, _LOWriter_FieldDelete, _LOWriter_DocGenPropModification, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2198,7 +2198,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoModAuthInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldDocInfoModAuthInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DocGenPropModification
+; Related .......: _LOWriter_FieldDocInfoModAuthInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DocGenPropModification, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2261,7 +2261,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoModAuthModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoModDateTimeModify, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocGenPropModification
+; Related .......: _LOWriter_FieldDocInfoModDateTimeModify, _LOWriter_FieldDelete, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenPropModification, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2325,7 +2325,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoModDateTimeInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldDocInfoModDateTimeInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenPropModification
+; Related .......: _LOWriter_FieldDocInfoModDateTimeInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenPropModification, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2395,7 +2395,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoModDateTimeModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoPrintAuthModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocGenPropPrint
+; Related .......: _LOWriter_FieldDocInfoPrintAuthModify, _LOWriter_FieldDelete, _LOWriter_DocGenPropPrint, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2459,7 +2459,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoPrintAuthInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldDocInfoPrintAuthInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DocGenPropPrint
+; Related .......: _LOWriter_FieldDocInfoPrintAuthInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DocGenPropPrint, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2522,7 +2522,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoPrintAuthModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoPrintDateTimeModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenPropPrint
+; Related .......: _LOWriter_FieldDocInfoPrintDateTimeModify, _LOWriter_FieldDelete, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenPropPrint, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2586,7 +2586,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoPrintDateTimeInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldDocInfoPrintDateTimeInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenPropPrint
+; Related .......: _LOWriter_FieldDocInfoPrintDateTimeInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenPropPrint, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2656,7 +2656,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoPrintDateTimeModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoRevNumModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocGenProp
+; Related .......: _LOWriter_FieldDocInfoRevNumModify, _LOWriter_FieldDelete, _LOWriter_DocGenProp, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2720,7 +2720,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoRevNumInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldDocInfoRevNumInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DocGenProp
+; Related .......: _LOWriter_FieldDocInfoRevNumInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DocGenProp, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2782,7 +2782,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoRevNumModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoSubjectModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocDescription
+; Related .......: _LOWriter_FieldDocInfoSubjectModify, _LOWriter_FieldDelete, _LOWriter_DocDescription, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2846,7 +2846,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoSubjectInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldDocInfoSubjectInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DocDescription
+; Related .......: _LOWriter_FieldDocInfoSubjectInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DocDescription, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2908,7 +2908,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoSubjectModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoTitleModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_DocDescription
+; Related .......: _LOWriter_FieldDocInfoTitleModify, _LOWriter_FieldDelete, _LOWriter_DocDescription, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2972,7 +2972,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoTitleInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldDocInfoTitleInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DocDescription
+; Related .......: _LOWriter_FieldDocInfoTitleInsert, _LOWriter_FieldsDocInfoGetList, _LOWriter_DocDescription, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3034,7 +3034,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoTitleModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Until L.O. Version 26.8, there is a bug where the wrong Path Format type is displayed when the content is set to Fixed = True. For example, $LOW_FIELD_FILENAME_NAME_AND_EXT, displays in the format of $LOW_FIELD_FILENAME_NAME. See (https://bugs.documentfoundation.org/show_bug.cgi?id=155780).
-; Related .......: _LOWriter_FieldFileNameModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldFileNameModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3095,7 +3095,7 @@ EndFunc   ;==>_LOWriter_FieldFileNameInsert
 ; Remarks .......: Until L.O. Version 26.8, there is a bug where the wrong Path Format type is displayed when the content is set to Fixed = True. For example, $LOW_FIELD_FILENAME_NAME_AND_EXT, displays in the format of $LOW_FIELD_FILENAME_NAME. See (https://bugs.documentfoundation.org/show_bug.cgi?id=155780).
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldFileNameInsert, _LOWriter_FieldsGetList
+; Related .......: _LOWriter_FieldFileNameInsert, _LOWriter_FieldsGetList, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3155,7 +3155,7 @@ EndFunc   ;==>_LOWriter_FieldFileNameModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldFuncHiddenParModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldFuncHiddenParModify, _LOWriter_FieldDelete, _LOWriter_FieldCondTextInsert, _LOWriter_FieldFuncHiddenTextInsert, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3206,7 +3206,7 @@ EndFunc   ;==>_LOWriter_FieldFuncHiddenParInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldFuncHiddenParInsert, _LOWriter_FieldsGetList
+; Related .......: _LOWriter_FieldFuncHiddenParInsert, _LOWriter_FieldsGetList, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3261,7 +3261,7 @@ EndFunc   ;==>_LOWriter_FieldFuncHiddenParModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldFuncHiddenTextModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldFuncHiddenTextModify, _LOWriter_FieldDelete, _LOWriter_FieldCondTextInsert, _LOWriter_FieldFuncHiddenParInsert, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3321,7 +3321,7 @@ EndFunc   ;==>_LOWriter_FieldFuncHiddenTextInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldFuncHiddenTextInsert, _LOWriter_FieldsGetList
+; Related .......: _LOWriter_FieldFuncHiddenTextInsert, _LOWriter_FieldsGetList, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3383,7 +3383,7 @@ EndFunc   ;==>_LOWriter_FieldFuncHiddenTextModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldFuncInputModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldFuncInputModify, _LOWriter_FieldDelete, _LOWriter_FieldInputListInsert, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3443,7 +3443,7 @@ EndFunc   ;==>_LOWriter_FieldFuncInputInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldFuncInputInsert, _LOWriter_FieldsGetList
+; Related .......: _LOWriter_FieldFuncInputInsert, _LOWriter_FieldsGetList, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3507,7 +3507,7 @@ EndFunc   ;==>_LOWriter_FieldFuncInputModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldFuncPlaceholderModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldFuncPlaceholderModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3576,7 +3576,7 @@ EndFunc   ;==>_LOWriter_FieldFuncPlaceholderInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldFuncPlaceholderInsert, _LOWriter_FieldsGetList
+; Related .......: _LOWriter_FieldFuncPlaceholderInsert, _LOWriter_FieldsGetList, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3680,7 +3680,7 @@ EndFunc   ;==>_LOWriter_FieldGetAnchor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldInputListModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldInputListModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3749,7 +3749,7 @@ EndFunc   ;==>_LOWriter_FieldInputListInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldInputListInsert, _LOWriter_FieldsGetList
+; Related .......: _LOWriter_FieldInputListInsert, _LOWriter_FieldsGetList, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3822,7 +3822,7 @@ EndFunc   ;==>_LOWriter_FieldInputListModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldPageNumberModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldPageNumberModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3917,7 +3917,7 @@ EndFunc   ;==>_LOWriter_FieldPageNumberInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldPageNumberInsert, _LOWriter_FieldsGetList
+; Related .......: _LOWriter_FieldPageNumberInsert, _LOWriter_FieldsGetList, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4012,7 +4012,7 @@ EndFunc   ;==>_LOWriter_FieldPageNumberModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldRefBookmarkModify, _LOWriter_FieldBookmarkInsert, _LOWriter_FieldBookmarksGetNames, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldRefBookmarkModify, _LOWriter_FieldBookmarkInsert, _LOWriter_FieldBookmarksGetNames, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4074,7 +4074,7 @@ EndFunc   ;==>_LOWriter_FieldRefBookmarkInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldRefBookmarkInsert, _LOWriter_FieldBookmarkInsert, _LOWriter_FieldBookmarksGetNames, _LOWriter_FieldsGetList
+; Related .......: _LOWriter_FieldRefBookmarkInsert, _LOWriter_FieldBookmarkInsert, _LOWriter_FieldBookmarksGetNames, _LOWriter_FieldsGetList, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4139,7 +4139,7 @@ EndFunc   ;==>_LOWriter_FieldRefBookmarkModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldRefEndnoteModify, _LOWriter_EndnoteInsert, _LOWriter_EndnotesGetList, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldRefEndnoteModify, _LOWriter_EndnoteInsert, _LOWriter_EndnotesGetList, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4203,7 +4203,7 @@ EndFunc   ;==>_LOWriter_FieldRefEndnoteInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldRefEndnoteInsert, _LOWriter_EndnoteInsert, _LOWriter_EndnotesGetList, _LOWriter_FieldsGetList
+; Related .......: _LOWriter_FieldRefEndnoteInsert, _LOWriter_EndnoteInsert, _LOWriter_EndnotesGetList, _LOWriter_FieldsGetList, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4280,7 +4280,7 @@ EndFunc   ;==>_LOWriter_FieldRefEndnoteModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldRefFootnoteModify, _LOWriter_FootnoteInsert, _LOWriter_FootnotesGetList, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldRefFootnoteModify, _LOWriter_FootnoteInsert, _LOWriter_FootnotesGetList, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4344,7 +4344,7 @@ EndFunc   ;==>_LOWriter_FieldRefFootnoteInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldRefFootnoteInsert, _LOWriter_FootnoteInsert, _LOWriter_FootnotesGetList, _LOWriter_FieldsGetList
+; Related .......: _LOWriter_FieldRefFootnoteInsert, _LOWriter_FootnoteInsert, _LOWriter_FootnotesGetList, _LOWriter_FieldsGetList, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4412,7 +4412,7 @@ EndFunc   ;==>_LOWriter_FieldRefFootnoteModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: A Reference Field can be referencing multiple different types of Data, such as a Reference Mark, or Bookmark, etc.
-; Related .......: _LOWriter_FieldsGetList
+; Related .......: _LOWriter_FieldsGetList, _LOWriter_FieldRefModify, _LOWriter_FieldRefInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4457,7 +4457,7 @@ EndFunc   ;==>_LOWriter_FieldRefGetType
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldRefModify, _LOWriter_FieldRefMarkSet, _LOWriter_FieldRefMarksGetNames, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldRefModify, _LOWriter_FieldRefMarkSet, _LOWriter_FieldRefMarksGetNames, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4615,7 +4615,7 @@ EndFunc   ;==>_LOWriter_FieldRefMarkGetAnchor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldRefMarkDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldRefMarkDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4711,7 +4711,7 @@ EndFunc   ;==>_LOWriter_FieldRefMarksGetNames
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldRefInsert, _LOWriter_FieldsGetList, _LOWriter_FieldRefMarkSet, _LOWriter_FieldRefMarksGetNames
+; Related .......: _LOWriter_FieldRefInsert, _LOWriter_FieldsGetList, _LOWriter_FieldRefMarkSet, _LOWriter_FieldRefMarksGetNames, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4785,7 +4785,7 @@ EndFunc   ;==>_LOWriter_FieldRefModify
 ;                  Setting $bFieldTypeNum to True will add a Field type Number column, matching the constants, $LOW_FIELD_TYPE_ADV_* as defined in LibreOfficeWriter_Constants.au3 for the found Field.
 ;                  For simplicity, and also due to certain Bit limitations I have broken the different Field types into three different categories, Regular Fields, ($LWFieldType), Advanced(Complex) Fields, ($LWFieldAdvType), and Document Information fields (Found in the Document Information Tab in L.O. Fields dialog), ($LWFieldDocInfoType).
 ;                  Just because a field is listed in the constants, does not necessarily mean that I have made a function to create/modify it, you may still be able to update or delete it using the _LOWriter_FieldUpdate, or _LOWriter_FieldDelete function, though. Some Fields are too complex to create a function for, and others are not possible.
-; Related .......: _LOWriter_FieldsDocInfoGetList, _LOWriter_FieldsGetList, _LOWriter_FieldDelete, _LOWriter_FieldGetAnchor, _LOWriter_FieldUpdate
+; Related .......: _LOWriter_FieldsDocInfoGetList, _LOWriter_FieldsGetList, _LOWriter_FieldDelete, _LOWriter_FieldGetAnchor, _LOWriter_FieldUpdate, _LOWriter_FieldCurrentDisplayGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4836,7 +4836,7 @@ EndFunc   ;==>_LOWriter_FieldsAdvGetList
 ;                  Setting $bFieldTypeNum to True will add a Field type Number column, matching the constants, $LOW_FIELD_TYPE_DOCINFO_* as defined in LibreOfficeWriter_Constants.au3 for the found Field.
 ;                  For simplicity, and also due to certain Bit limitations I have broken the different Field types into three different categories, Regular Fields, ($LWFieldType), Advanced(Complex) Fields, ($LWFieldAdvType), and Document Information fields (Found in the Document Information Tab in L.O. Fields dialog), ($LWFieldDocInfoType).
 ;                  Just because a field is listed in the constants below, does not necessarily mean that I have made a function to create/modify it, you may still be able to update or delete it using the Field Update, or Field Delete function, though. Some Fields are too complex to create a function for, and others are literally impossible.
-; Related .......: _LOWriter_FieldsAdvGetList, _LOWriter_FieldsGetList, _LOWriter_FieldDelete, _LOWriter_FieldGetAnchor, _LOWriter_FieldUpdate
+; Related .......: _LOWriter_FieldsAdvGetList, _LOWriter_FieldsGetList, _LOWriter_FieldDelete, _LOWriter_FieldGetAnchor, _LOWriter_FieldUpdate, _LOWriter_FieldCurrentDisplayGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4884,7 +4884,7 @@ EndFunc   ;==>_LOWriter_FieldsDocInfoGetList
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldSenderModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldSenderModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4957,7 +4957,7 @@ EndFunc   ;==>_LOWriter_FieldSenderInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldSenderInsert, _LOWriter_FieldsGetList
+; Related .......: _LOWriter_FieldSenderInsert, _LOWriter_FieldsGetList, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5034,7 +5034,7 @@ EndFunc   ;==>_LOWriter_FieldSenderModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldSetVarModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_FormatKeyCreate _LOWriter_FormatKeysGetList, _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMastersGetNames
+; Related .......: _LOWriter_FieldSetVarModify, _LOWriter_FieldDelete, _LOWriter_FormatKeyCreate _LOWriter_FormatKeysGetList, _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMastersGetNames, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5160,7 +5160,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMasterGetObjByName, _LOWriter_FieldSetVarMastersGetNames
+; Related .......: _LOWriter_FieldSetVarMasterDeleteByObj, _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMasterGetObjByName, _LOWriter_FieldSetVarMastersGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5208,7 +5208,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterDeleteByName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMasterGetObjByName, _LOWriter_FieldSetVarMastersGetNames
+; Related .......: _LOWriter_FieldSetVarMasterDeleteByName, _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMasterGetObjByName, _LOWriter_FieldSetVarMastersGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5253,7 +5253,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterDeleteByObj
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMastersGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5292,7 +5292,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Dependent Fields are SetVariable Fields that are referencing the Master field.
-; Related .......: _LOWriter_FieldSetVarMasterGetObjByName
+; Related .......: _LOWriter_FieldSetVarMasterGetObjByName, _LOWriter_FieldSetVarMasterExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5437,7 +5437,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarMastersGetNames
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldSetVarInsert, _LOWriter_FieldsGetList, _LOWriter_FormatKeyCreate _LOWriter_FormatKeysGetList
+; Related .......: _LOWriter_FieldSetVarInsert, _LOWriter_FieldsGetList, _LOWriter_FormatKeyCreate _LOWriter_FormatKeysGetList, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5519,7 +5519,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarModify
 ;                  Setting $bFieldTypeNum to True will add a Field type Number column, matching the constants, $LOW_FIELD_TYPE_* as defined in LibreOfficeWriter_Constants.au3 for the found Field.
 ;                  For simplicity, and also due to certain Bit limitations I have broken the different Field types into three different categories, Regular Fields, ($LWFieldType), Advanced(Complex) Fields, ($LWFieldAdvType), and Document Information fields (Found in the Document Information Tab in L.O. Fields dialog), ($LWFieldDocInfoType).
 ;                  Just because a field is listed in the constants below, does not necessarily mean that I have made a function to create/modify it, you may still be able to update or delete it using the Field Update, or Field Delete function, though. Some Fields are too complex to create a function for, and others are literally impossible.
-; Related .......: _LOWriter_FieldsAdvGetList, _LOWriter_FieldsDocInfoGetList, _LOWriter_FieldDelete, _LOWriter_FieldGetAnchor, _LOWriter_FieldUpdate
+; Related .......: _LOWriter_FieldsAdvGetList, _LOWriter_FieldsDocInfoGetList, _LOWriter_FieldDelete, _LOWriter_FieldGetAnchor, _LOWriter_FieldUpdate, _LOWriter_FieldCurrentDisplayGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5569,7 +5569,7 @@ EndFunc   ;==>_LOWriter_FieldsGetList
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function checks if there is a Set Variable matching the name called in $sSetVarName.
-; Related .......: _LOWriter_FieldShowVarModify, _LOWriter_FieldSetVarInsert, _LOWriter_FieldsGetList, _LOWriter_FormatKeyCreate _LOWriter_FormatKeysGetList, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldShowVarModify, _LOWriter_FieldSetVarInsert, _LOWriter_FormatKeyCreate _LOWriter_FormatKeysGetList, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5643,7 +5643,7 @@ EndFunc   ;==>_LOWriter_FieldShowVarInsert
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function checks if there is a Set Variable matching the name called in $sSetVarName.
-; Related .......: _LOWriter_FieldShowVarInsert, _LOWriter_FieldsGetList, _LOWriter_FormatKeyCreate, _LOWriter_FormatKeysGetList
+; Related .......: _LOWriter_FieldShowVarInsert, _LOWriter_FieldsGetList, _LOWriter_FormatKeyCreate, _LOWriter_FormatKeysGetList, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5723,7 +5723,7 @@ EndFunc   ;==>_LOWriter_FieldShowVarModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: After insertion there seems to be a necessary delay before the value to display is available, thus when a new count field is inserted, the value will be "0". If you call a _LOWriter_FieldUpdate for this field after a few seconds, the value should appear.
-; Related .......: _LOWriter_FieldStatCountModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldStatCountModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5792,7 +5792,7 @@ EndFunc   ;==>_LOWriter_FieldStatCountInsert
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  After changing the Count type there may be a delay before the value to display is available, thus when the count field is inserted, the value will be "0". If you call a _LOWriter_FieldUpdate for this field after a few seconds, the value should appear.
-; Related .......: _LOWriter_FieldStatCountInsert, _LOWriter_FieldsGetList
+; Related .......: _LOWriter_FieldStatCountInsert, _LOWriter_FieldsGetList, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5875,7 +5875,7 @@ EndFunc   ;==>_LOWriter_FieldStatCountModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldStatTemplateModify, _LOWriter_DocGenPropTemplate, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldStatTemplateModify, _LOWriter_DocGenPropTemplate, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5928,7 +5928,7 @@ EndFunc   ;==>_LOWriter_FieldStatTemplateInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldStatTemplateInsert, _LOWriter_DocGenPropTemplate, _LOWriter_FieldsGetList
+; Related .......: _LOWriter_FieldStatTemplateInsert, _LOWriter_DocGenPropTemplate, _LOWriter_FieldsGetList, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5979,7 +5979,7 @@ EndFunc   ;==>_LOWriter_FieldStatTemplateModify
 ; Modified ......:
 ; Remarks .......: Updating a fixed field will usually erase any user-provided content, such as an author name, creation date etc.
 ;                  If a Field is fixed, the field wont be updated unless $bForceUpdate is called with True.
-; Related .......: _LOWriter_FieldsGetList, _LOWriter_FieldsAdvGetList, _LOWriter_FieldsDocInfoGetList
+; Related .......: _LOWriter_FieldsGetList, _LOWriter_FieldsAdvGetList, _LOWriter_FieldsDocInfoGetList, _LOWriter_FieldCurrentDisplayGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6058,7 +6058,7 @@ EndFunc   ;==>_LOWriter_FieldUpdate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldVarSetPageModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldVarSetPageModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6118,7 +6118,7 @@ EndFunc   ;==>_LOWriter_FieldVarSetPageInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldVarSetPageInsert, _LOWriter_FieldsGetList
+; Related .......: _LOWriter_FieldVarSetPageInsert, _LOWriter_FieldsGetList, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6178,7 +6178,7 @@ EndFunc   ;==>_LOWriter_FieldVarSetPageModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldVarShowPageModify, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_FieldVarShowPageModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6234,7 +6234,7 @@ EndFunc   ;==>_LOWriter_FieldVarShowPageInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldVarShowPageInsert, _LOWriter_FieldsGetList
+; Related .......: _LOWriter_FieldVarShowPageInsert, _LOWriter_FieldsGetList, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

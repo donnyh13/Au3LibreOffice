@@ -60,7 +60,7 @@
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_NumStyleDelete
+; Related .......: _LOWriter_NumStyleDelete, _LOWriter_NumStyleExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -115,7 +115,7 @@ EndFunc   ;==>_LOWriter_NumStyleCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOWriter_CursorParObjCreateList, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_NumStylesGetNames
+; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_NumStylesGetNames, _LOWriter_NumStyleExists, _LOWriter_NumStyleSetLevel
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -214,7 +214,7 @@ EndFunc   ;==>_LOWriter_NumStyleCurrent
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  When a lot of settings are set, especially for all levels, this function can be a bit slow.
 ;                  For $iSubLevels, if you enter "2" and the previous level uses the "A, B, C..." numbering scheme, the numbering scheme for the current level becomes: "A.1". The Maximum value, if $iLevel is set to 0, is 1.
-; Related .......: _LOWriter_NumStyleCreate, _LOWriter_NumStyleGetObjByName
+; Related .......: _LOWriter_NumStylePosition, _LOWriter_CharStylesGetNames, _LOWriter_CharStyleExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -448,7 +448,7 @@ EndFunc   ;==>_LOWriter_NumStyleDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_NumStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -482,7 +482,7 @@ EndFunc   ;==>_LOWriter_NumStyleExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_NumStylesGetNames
+; Related .......: _LOWriter_NumStylesGetNames, _LOWriter_NumStyleExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -532,7 +532,7 @@ EndFunc   ;==>_LOWriter_NumStyleGetObjByName
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_NumStyleCreate, _LOWriter_NumStyleGetObjByName
+; Related .......: _LOWriter_NumStyleCustomize, _LOWriter_NumStyleExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -623,7 +623,7 @@ EndFunc   ;==>_LOWriter_NumStyleOrganizer
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter. You can request setting values for one numbering level at a time, or all at once (see below).
 ;                  If you retrieve the current settings for all levels (by calling $iLevel with 0), the return will be a 10 element array containing an array of settings for each Numbering Level.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_NumStyleCreate, _LOWriter_NumStyleGetObjByName, _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOWriter_NumStyleCustomize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -748,7 +748,7 @@ EndFunc   ;==>_LOWriter_NumStylePosition
 ; Modified ......:
 ; Remarks .......: To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOWriter_CursorParObjCreateList, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_NumStyleCurrent
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -808,7 +808,7 @@ EndFunc   ;==>_LOWriter_NumStyleSetLevel
 ;                  Previous to LibreOffice 25.2 either name would work when setting a Style, however after 25.2 only the internal, or programmatic style names, will work.
 ;                  Calling $bDisplayName with True will return a list of Style names, as the user sees them in the UI, in the same order as they are returned if $bDisplayName is False. It is best not to use these when setting Styling.
 ;                  Numbering Styles with special characters may return a name like "Bullet ?" when $bDisplayName is True.
-; Related .......: _LOWriter_NumStyleGetObjByName
+; Related .......: _LOWriter_NumStyleGetObjByName, _LOWriter_NumStyleExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

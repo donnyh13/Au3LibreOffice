@@ -98,7 +98,7 @@
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_TableCellBackColor, _LOWriter_TableRowBackColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -175,7 +175,7 @@ EndFunc   ;==>_LOWriter_TableBackColor
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_TableBorderWidth, _LOWriter_TableBorderStyle, _LOWriter_TableBorderPadding
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_TableBorderWidth, _LOWriter_TableBorderStyle, _LOWriter_TableBorderPadding, _LOWriter_TableCellBorderColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -226,7 +226,7 @@ EndFunc   ;==>_LOWriter_TableBorderColor
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LO_UnitConvert, _LOWriter_TableBorderWidth, _LOWriter_TableBorderStyle, _LOWriter_TableBorderColor
+; Related .......: _LO_UnitConvert, _LOWriter_TableBorderWidth, _LOWriter_TableBorderStyle, _LOWriter_TableBorderColor, _LOWriter_TableCellBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -332,7 +332,7 @@ EndFunc   ;==>_LOWriter_TableBorderPadding
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_TableBorderWidth, _LOWriter_TableBorderColor, _LOWriter_TableBorderPadding
+; Related .......: _LOWriter_TableBorderWidth, _LOWriter_TableBorderColor, _LOWriter_TableBorderPadding, _LOWriter_TableCellBorderStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -395,7 +395,7 @@ EndFunc   ;==>_LOWriter_TableBorderStyle
 ; Remarks .......: To "Turn Off" Borders, set them to 0
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LO_UnitConvert, _LOWriter_TableBorderStyle, _LOWriter_TableBorderColor, _LOWriter_TableBorderPadding
+; Related .......: _LO_UnitConvert, _LOWriter_TableBorderStyle, _LOWriter_TableBorderColor, _LOWriter_TableBorderPadding, _LOWriter_TableCellBorderWidth
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -446,7 +446,7 @@ EndFunc   ;==>_LOWriter_TableBorderWidth
 ;                  LibreOffice doesn't directly show in its User interface options for Break type constants #3 and #6 (Column both) and (Page both), but doesn't throw an error when being set to either one, so they are included here, though I'm not sure if they will work correctly.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_PageStylesGetNames
+; Related .......: _LOWriter_PageStylesGetNames, _LOWriter_TableRowProperty, _LOWriter_TableProperties
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -512,7 +512,7 @@ EndFunc   ;==>_LOWriter_TableBreak
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_TableBackColor, _LOWriter_TableRowBackColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -581,7 +581,7 @@ EndFunc   ;==>_LOWriter_TableCellBackColor
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Error values for Initialization and Processing are passed from the internal border setting function.
-; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_TableCellBorderWidth, _LOWriter_TableCellBorderStyle, _LOWriter_TableCellBorderPadding
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_TableCellBorderWidth, _LOWriter_TableCellBorderStyle, _LOWriter_TableCellBorderPadding, _LOWriter_TableBorderColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -628,7 +628,7 @@ EndFunc   ;==>_LOWriter_TableCellBorderColor
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition, _LO_UnitConvert, _LOWriter_TableCellBorderColor, _LOWriter_TableCellBorderStyle, _LOWriter_TableCellBorderWidth
+; Related .......: _LO_UnitConvert, _LOWriter_TableCellBorderColor, _LOWriter_TableCellBorderStyle, _LOWriter_TableCellBorderWidth, _LOWriter_TableBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -719,7 +719,7 @@ EndFunc   ;==>_LOWriter_TableCellBorderPadding
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Error values for Initialization and Processing are passed from the internal border setting function.
-; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition, _LOWriter_TableCellBorderWidth, _LOWriter_TableCellBorderColor, _LOWriter_TableCellBorderPadding
+; Related .......: _LOWriter_TableCellBorderWidth, _LOWriter_TableCellBorderColor, _LOWriter_TableCellBorderPadding, _LOWriter_TableCellBorderStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -774,7 +774,7 @@ EndFunc   ;==>_LOWriter_TableCellBorderStyle
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Error values for Initialization and Processing are passed from the internal border setting function.
-; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition, _LO_UnitConvert, _LOWriter_TableCellBorderStyle, _LOWriter_TableCellBorderColor, _LOWriter_TableCellBorderPadding
+; Related .......: _LO_UnitConvert, _LOWriter_TableCellBorderStyle, _LOWriter_TableCellBorderColor, _LOWriter_TableCellBorderPadding, _LOWriter_TableCellBorderWidth
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -808,7 +808,7 @@ EndFunc   ;==>_LOWriter_TableCellBorderWidth
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition, _LOWriter_CursorInsertString
+; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_CursorInsertString, _LOWriter_TableDataGet, _LOWriter_TableDataSet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -852,7 +852,7 @@ EndFunc   ;==>_LOWriter_TableCellCreateTextCursor
 ;                  Setting the formula will overwrite any existing data in the cell.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To retrieve the total of a formula, use _LOWriter_TableCellValue.
-; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition,
+; Related .......: _LOWriter_TableCellGetDataType, _LOWriter_TableCellGetError, _LOWriter_TableCellString, _LOWriter_TableCellValue, _LOWriter_TableDataGet, _LOWriter_TableDataSet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -898,7 +898,7 @@ EndFunc   ;==>_LOWriter_TableCellFormula
 ; Modified ......:
 ; Remarks .......: Returns the data type as one of the constants, $LOW_CELL_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  If the data was entered by the keyboard, it is generally recognized as a string regardless of the data content.
-; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition,
+; Related .......: _LOWriter_TableCellFormula, _LOWriter_TableCellGetError, _LOWriter_TableCellString, _LOWriter_TableCellValue
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -933,7 +933,7 @@ EndFunc   ;==>_LOWriter_TableCellGetDataType
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If the cell is not a formula, the error value is zero.
-; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition,
+; Related .......: _LOWriter_TableCellFormula, _LOWriter_TableCellGetDataType
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -968,7 +968,7 @@ EndFunc   ;==>_LOWriter_TableCellGetError
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition,
+; Related .......: _LOWriter_TableCellsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1010,7 +1010,7 @@ EndFunc   ;==>_LOWriter_TableCellGetName
 ; Remarks .......: This function will accept a Table Cursor, a ViewCursor, or a Text Cursor.
 ;                  A TableCursor and ViewCursor can retrieve the single cell they are located in, or a range of cells that have been selected by them.
 ;                  A TextCursor can only retrieve the single cell it is located in.
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1082,7 +1082,7 @@ EndFunc   ;==>_LOWriter_TableCellGetObjByCursor
 ; Remarks .......: Cell names are Case Sensitive. LibreOffice first goes from A to Z, and then a to z and then AA to ZZ etc.
 ;                  $sCellName can contain a Cell name that is located after $sToCellName in the Table.
 ;                  If $sToCellName is left blank, a cell object is returned instead of a Cell Range.
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_TableCellsGetNames
+; Related .......: _LOWriter_TableCellsGetNames, _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByPosition
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1135,7 +1135,7 @@ EndFunc   ;==>_LOWriter_TableCellGetObjByName
 ;                  To retrieve a single cell, only call the $iColumn and $iRow parameters.
 ;                  To retrieve a cell range, call $iColumn with the lowest Integer value column and then $iToColumn with the highest Integer value column. As also for $iRow and $iToRow.
 ;                  You may request the same row in both $iRow and $iToRow, but neither $iToRow or $iToColumn may be a lower Integer value than $iRow and $iColumn respectively.
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_TableColumnGetCount, _LOWriter_TableRowGetCount
+; Related .......: _LOWriter_TableColumnGetCount, _LOWriter_TableRowGetCount, _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1189,7 +1189,7 @@ EndFunc   ;==>_LOWriter_TableCellGetObjByPosition
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition,
+; Related .......:
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1233,7 +1233,7 @@ EndFunc   ;==>_LOWriter_TableCellProtect
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName
+; Related .......: _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1273,7 +1273,7 @@ EndFunc   ;==>_LOWriter_TableCellsGetNames
 ;                  Setting the String will overwrite any existing data in the cell.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To prevent accidental and unwanted newlines, @CRLF is automatically replaced with @CR to match LibreOffice's newline style.
-; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition,
+; Related .......: _LOWriter_TableCellFormula, _LOWriter_TableCellGetDataType, _LOWriter_TableCellValue, _LOWriter_TableDataGet, _LOWriter_TableDataSet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1328,7 +1328,7 @@ EndFunc   ;==>_LOWriter_TableCellString
 ;                  Setting the Value will overwrite any existing data in the cell.
 ;                  For a value cell the value is returned, for a string cell zero is returned and for a formula cell the result value of a formula is returned.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition,
+; Related .......: _LOWriter_TableCellFormula, _LOWriter_TableCellGetDataType, _LOWriter_TableCellString, _LOWriter_TableDataGet, _LOWriter_TableDataSet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1378,7 +1378,7 @@ EndFunc   ;==>_LOWriter_TableCellValue
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition,
+; Related .......:
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1428,7 +1428,7 @@ EndFunc   ;==>_LOWriter_TableCellVertOrient
 ; Remarks .......: LibreOffice counts columns and Rows starting at 0. So to delete the first column in a Table you would set $iColumn to 0.
 ;                  If you attempt to delete more columns than are present all columns from $iColumn over will be deleted.
 ;                  If you delete all columns starting from column 0, the entire Table is deleted.
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_TableColumnGetCount
+; Related .......: _LOWriter_TableColumnGetCount, _LOWriter_TableColumnInsert, _LOWriter_TableRowDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1467,7 +1467,7 @@ EndFunc   ;==>_LOWriter_TableColumnDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName
+; Related .......: _LOWriter_TableColumnDelete, _LOWriter_TableColumnInsert, _LOWriter_TableRowGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1507,7 +1507,7 @@ EndFunc   ;==>_LOWriter_TableColumnGetCount
 ; Remarks .......: Call $iColumn with Null to insert the column(s) at the end (right-hand side) of the Table.
 ;                  LibreOffice counts the Table columns/Rows starting at 0. The columns are placed behind the desired column when inserted.
 ;                  To insert a column at the left most of the Table you would set $iColumn to 0. To insert columns at the Right of a table you would set $iColumn to one higher than the last column. e.g. a Table containing 3 columns, would be numbered as follows: 0(first-Column), 1(second-Column), 2(third-Column), to insert columns at the very Right of the columns, you would set $iColumn to 3.
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_TableColumnGetCount
+; Related .......: _LOWriter_TableColumnGetCount, _LOWriter_TableColumnDelete, _LOWriter_TableRowInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1582,7 +1582,7 @@ EndFunc   ;==>_LOWriter_TableColumnInsert
 ;                  You can set the $oCursor parameter to either a ViewCursor or a Text cursor in an acceptable data type, the table will be inserted at the cursor position.
 ;                  $iHeadingRows accepts values from 1 to 1 less then the number of rows.
 ;                  If a property setting error occurs, the table will have still been successfully inserted, and the Table's object will still be returned.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableDelete, _LOWriter_TableExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1706,7 +1706,7 @@ EndFunc   ;==>_LOWriter_TableCreate
 ; Modified ......:
 ; Remarks .......: $oTable can be either called with a Table object, or Null Keyword with $oCursor called with a Cursor object, $oCursor can be either called with a cursor object currently located in a Table (such as a ViewCursor) or a TextCursor located in a table.
 ;                  $sCellName can be left blank, which will place the TextTableCursor at the first cell (Typically "A1") if $oTable is called with an Object, else if $oCursor is used, the cell the cursor is currently located in is used.
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_TableCellsGetNames, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_TableCellsGetNames, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1842,7 +1842,7 @@ EndFunc   ;==>_LOWriter_TableCursor
 ;                  LibreOffice Tables start at 0, so to get the first Row/Column, you would set $iRow or $iColumn to 0.
 ;                  This function can fail if the Table is "complex", meaning it has joined or split cells.
 ;                  Strings returned will have CRLF for hard newlines, and LF for soft newlines.
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_TableColumnGetCount, _LOWriter_TableRowGetCount
+; Related .......: _LOWriter_TableDataSet, _LOWriter_TableColumnGetCount, _LOWriter_TableRowGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1904,7 +1904,7 @@ EndFunc   ;==>_LOWriter_TableDataGet
 ;                  To skip a Cell, just leave the sub array element blank you want to skip.
 ;                  This will replace all previous data in the Table.
 ;                  The array is cycled through, and all @CRLF's are replaced with @CR so that additional new lines are not added when inserting the data into LibreOffice.
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName
+; Related .......: _LOWriter_TableDataGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1995,7 +1995,7 @@ EndFunc   ;==>_LOWriter_TableDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_TableGetObjByName
+; Related .......: _LOWriter_TableGetObjByName, _LOWriter_TablesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2072,7 +2072,7 @@ EndFunc   ;==>_LOWriter_TableGetObjByCursor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_TableGetObjByCursor, _LOWriter_TablesGetNames
+; Related .......: _LOWriter_TableGetObjByCursor, _LOWriter_TablesGetNames, _LOWriter_TableExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2126,7 +2126,7 @@ EndFunc   ;==>_LOWriter_TableGetObjByName
 ;                  Right Margin cannot be set unless the table orientation is set to $LOW_ORIENT_HORI_NONE(0), or $LOW_ORIENT_HORI_LEFT(3).
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOWriter_TableWidth
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2220,7 +2220,7 @@ EndFunc   ;==>_LOWriter_TableMargin
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  $bSplitRows will return 0 instead of a boolean if the Table's rows have different settings for $bSplitRows.
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName
+; Related .......: _LOWriter_TableBreak
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2319,7 +2319,7 @@ EndFunc   ;==>_LOWriter_TableProperties
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_TableRowGetCount
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_TableRowGetCount, _LOWriter_TableBackColor, _LOWriter_TableCellBackColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2374,7 +2374,7 @@ EndFunc   ;==>_LOWriter_TableRowBackColor
 ; Remarks .......: LibreOffice counts Rows starting at 0. So to delete the first Row in a Table you would set $iRow to 0.
 ;                  If you attempt to delete more rows than are present, all rows from $iRow over will be deleted.
 ;                  If you delete all Rows starting from Row 0, the entire Table is deleted.
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_TableRowGetCount
+; Related .......: _LOWriter_TableRowGetCount, _LOWriter_TableRowInsert, _LOWriter_TableColumnDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2413,7 +2413,7 @@ EndFunc   ;==>_LOWriter_TableRowDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName
+; Related .......: _LOWriter_TableRowDelete, _LOWriter_TableRowInsert, _LOWriter_TableColumnGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2454,7 +2454,7 @@ EndFunc   ;==>_LOWriter_TableRowGetCount
 ;                  LibreOffice counts the Table Rows starting at 0. The Rows are placed above the desired Row when inserted.
 ;                  To insert a Row at the top most of the Table you would set $iRow to 0.
 ;                  To insert rows at the bottom of a table you would set $iRow to one higher than the last row. e.g. a Table containing 3 rows, would be numbered as follows: 0(first-row), 1(second-row), 2(third-row), to insert rows at the very bottom of the rows, I would set $iRow to 3.
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_TableRowGetCount
+; Related .......: _LOWriter_TableRowGetCount, _LOWriter_TableRowDelete, _LOWriter_TableColumnInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2512,7 +2512,7 @@ EndFunc   ;==>_LOWriter_TableRowInsert
 ;                  None of these properties can be set if the Table is not inserted yet.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LOWriter_TableRowGetCount
+; Related .......: _LOWriter_TableRowGetCount, _LOWriter_TableProperties
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2576,7 +2576,7 @@ EndFunc   ;==>_LOWriter_TableRowProperty
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_TableGetObjByName
+; Related .......: _LOWriter_TableGetObjByName, _LOWriter_TableExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2626,7 +2626,7 @@ EndFunc   ;==>_LOWriter_TablesGetNames
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  LibreOffice may change the shadow width +/- a Hundredth of a Millimeter (HMM).
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2700,7 +2700,7 @@ EndFunc   ;==>_LOWriter_TableShadow
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOWriter_TableStylesGetNames
+; Related .......: _LOWriter_TableStylesGetNames, _LOWriter_TableStyleExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2745,7 +2745,7 @@ EndFunc   ;==>_LOWriter_TableStyleCurrent
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_TableStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2836,7 +2836,7 @@ EndFunc   ;==>_LOWriter_TableStylesGetNames
 ;                  Width may change +/- a Hundredth of a Millimeter (HMM) once set due to LibreOffice.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_TableCreate, _LOWriter_TableGetObjByCursor, _LOWriter_TableGetObjByName, _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOWriter_TableMargin
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

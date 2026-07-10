@@ -107,7 +107,7 @@
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LOWriter_FrameAreaFillStyle, _LOWriter_FrameAreaGradient, _LOWriter_FrameStyleAreaColor, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -156,7 +156,7 @@ EndFunc   ;==>_LOWriter_FrameAreaColor
 ; Modified ......:
 ; Remarks .......: This function is to help determine if a Gradient background, or a solid color background is currently active.
 ;                  This is useful because, if a Gradient is active, the solid color value is still present, and thus it would not be possible to determine which function should be used to retrieve the current values for, whether the Color function, or the Gradient function.
-; Related .......:
+; Related .......: _LOWriter_FrameStyleAreaFillStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -233,7 +233,7 @@ EndFunc   ;==>_LOWriter_FrameAreaFillStyle
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LOWriter_FrameAreaColor, _LOWriter_FrameAreaFillStyle, _LOWriter_FrameStyleAreaGradient, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -436,7 +436,7 @@ EndFunc   ;==>_LOWriter_FrameAreaGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOWriter_FrameAreaTransparencyGradientMulti
+; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOWriter_FrameAreaTransparencyGradientMulti, _LOWriter_FrameStyleAreaGradientMulticolor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -532,7 +532,7 @@ EndFunc   ;==>_LOWriter_FrameAreaGradientMulticolor
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByCursor, _LOWriter_FrameGetObjByName
+; Related .......: _LOWriter_FrameAreaTransparencyGradient, _LOWriter_FrameAreaColor, _LOWriter_FrameStyleAreaTransparency
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -606,7 +606,7 @@ EndFunc   ;==>_LOWriter_FrameAreaTransparency
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByCursor, _LOWriter_FrameGetObjByName
+; Related .......: _LOWriter_FrameAreaTransparency, _LOWriter_FrameAreaTransparencyGradientMulti, _LOWriter_FrameStyleAreaTransparencyGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -780,7 +780,7 @@ EndFunc   ;==>_LOWriter_FrameAreaTransparencyGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOWriter_FrameAreaGradientMulticolor
+; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOWriter_FrameAreaTransparencyGradient, _LOWriter_FrameAreaGradientMulticolor, _LOWriter_FrameStyleAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -894,7 +894,7 @@ EndFunc   ;==>_LOWriter_FrameAreaTransparencyGradientMulti
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_FrameBorderWidth, _LOWriter_FrameBorderStyle, _LOWriter_FrameBorderPadding
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_FrameBorderWidth, _LOWriter_FrameBorderStyle, _LOWriter_FrameBorderPadding, _LOWriter_FrameStyleBorderColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -947,7 +947,7 @@ EndFunc   ;==>_LOWriter_FrameBorderColor
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LO_UnitConvert, _LOWriter_FrameBorderWidth, _LOWriter_FrameBorderStyle, _LOWriter_FrameBorderColor
+; Related .......: _LO_UnitConvert, _LOWriter_FrameBorderWidth, _LOWriter_FrameBorderStyle, _LOWriter_FrameBorderColor, _LOWriter_FrameStyleBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1045,7 +1045,7 @@ EndFunc   ;==>_LOWriter_FrameBorderPadding
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LOWriter_FrameBorderWidth, _LOWriter_FrameBorderColor, _LOWriter_FrameBorderPadding
+; Related .......: _LOWriter_FrameBorderWidth, _LOWriter_FrameBorderColor, _LOWriter_FrameBorderPadding, _LOWriter_FrameStyleBorderStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1102,7 +1102,7 @@ EndFunc   ;==>_LOWriter_FrameBorderStyle
 ; Remarks .......: To "Turn Off" Borders, set Width to 0
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LO_UnitConvert, _LOWriter_FrameBorderStyle, _LOWriter_FrameBorderColor, _LOWriter_FrameBorderPadding
+; Related .......: _LO_UnitConvert, _LOWriter_FrameBorderStyle, _LOWriter_FrameBorderColor, _LOWriter_FrameBorderPadding, _LOWriter_FrameStyleBorderWidth
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1160,7 +1160,7 @@ EndFunc   ;==>_LOWriter_FrameBorderWidth
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LOWriter_FrameColumnSettings, _LOWriter_FrameColumnSize, _LOWriter_FrameStyleColumnSeparator
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1254,7 +1254,7 @@ EndFunc   ;==>_LOWriter_FrameColumnSeparator
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor
+; Related .......: _LOWriter_FrameColumnSeparator, _LOWriter_FrameColumnSize, _LOWriter_FrameStyleColumnSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1326,7 +1326,7 @@ EndFunc   ;==>_LOWriter_FrameColumnSettings
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  To set $bAutoWidth or $iGlobalSpacing you may enter any number in $iColumn as long as you are not setting width or spacing, as AutoWidth is not column specific. If you set a value for $iGlobalSpacing with $bAutoWidth set to False, the value is applied to all the columns still.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOWriter_FrameColumnSeparator, _LOWriter_FrameColumnSettings, _LOWriter_FrameStyleColumnSize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1476,7 +1476,7 @@ EndFunc   ;==>_LOWriter_FrameColumnSize
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LO_UnitConvert, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LO_UnitConvert, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_FrameDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1612,7 +1612,7 @@ EndFunc   ;==>_LOWriter_FrameDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Some document types, such as docx, list frames as Shapes instead of TextFrames, so this function searches both.
-; Related .......: _LOWriter_FrameDelete
+; Related .......: _LOWriter_FrameDelete, _LOWriter_FramesGetNames, _LOWriter_FrameGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1664,7 +1664,7 @@ EndFunc   ;==>_LOWriter_FrameExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LOWriter_CursorMove _LOWriter_CursorInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1700,7 +1700,7 @@ EndFunc   ;==>_LOWriter_FrameGetAnchor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_FrameCreateTextCursor, _LOWriter_FrameDelete
+; Related .......: _LOWriter_FrameGetObjByName, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1741,7 +1741,7 @@ EndFunc   ;==>_LOWriter_FrameGetObjByCursor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FramesGetNames, _LOWriter_FrameDelete
+; Related .......: _LOWriter_FrameGetObjByCursor, _LOWriter_FramesGetNames, _LOWriter_FrameExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1816,7 +1816,7 @@ EndFunc   ;==>_LOWriter_FrameGetObjByName
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LOWriter_CursorHyperlink
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1911,7 +1911,7 @@ EndFunc   ;==>_LOWriter_FrameHyperlink
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor
+; Related .......: _LOWriter_FrameOptionsName, _LOWriter_FrameWrapOptions, _LOWriter_FrameStyleOptions
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2017,7 +2017,7 @@ EndFunc   ;==>_LOWriter_FrameOptions
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor
+; Related .......: _LOWriter_FrameOptions
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2089,7 +2089,7 @@ EndFunc   ;==>_LOWriter_FrameOptionsName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: In Docx (and possibly other formats) Frames seem to be saved as "Shapes" instead of "Frames", if this function returns no results, or not the ones you expect, try setting $bSearchShapes to True.
-; Related .......: _LOWriter_FrameGetObjByName
+; Related .......: _LOWriter_FrameGetObjByName, _LOWriter_FrameExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2176,7 +2176,7 @@ EndFunc   ;==>_LOWriter_FramesGetNames
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  LibreOffice may change the shadow width +/- a Hundredth of a Millimeter.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LOWriter_FrameStyleShadow
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2252,7 +2252,7 @@ EndFunc   ;==>_LOWriter_FrameShadow
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_FrameStyleAreaFillStyle, _LOWriter_FrameStyleAreaGradient, _LOWriter_FrameAreaColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2302,7 +2302,7 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaColor
 ; Modified ......:
 ; Remarks .......: This function is to help determine if a Gradient background, or a solid color background is currently active.
 ;                  This is useful because, if a Gradient is active, the solid color value is still present, and thus it would not be possible to determine which function should be used to retrieve the current values for, whether the Color function, or the Gradient function.
-; Related .......:
+; Related .......: _LOWriter_FrameStyleAreaColor, _LOWriter_FrameStyleAreaGradient, _LOWriter_FrameAreaFillStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2380,7 +2380,7 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaFillStyle
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_FrameStyleAreaColor, _LOWriter_FrameStyleAreaGradientMulticolor, _LOWriter_FrameAreaGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2585,7 +2585,7 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOWriter_FrameStyleAreaTransparencyGradientMulti
+; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOWriter_FrameStyleAreaTransparencyGradientMulti, _LOWriter_FrameStyleAreaGradient, _LOWriter_FrameAreaGradientMulticolor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2683,7 +2683,7 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaGradientMulticolor
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName
+; Related .......: _LOWriter_FrameStyleAreaTransparencyGradient, _LOWriter_FrameAreaTransparency
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2759,7 +2759,7 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaTransparency
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName
+; Related .......: _LOWriter_FrameStyleAreaTransparency, _LOWriter_FrameStyleAreaTransparencyGradientMulti, _LOWriter_FrameAreaTransparencyGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2935,7 +2935,7 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaTransparencyGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOWriter_FrameStyleAreaGradientMulticolor
+; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOWriter_FrameStyleAreaTransparencyGradient, _LOWriter_FrameStyleAreaGradientMulticolor, _LOWriter_FrameAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3051,7 +3051,7 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaTransparencyGradientMulti
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_FrameStyleBorderWidth, _LOWriter_FrameStyleBorderStyle, _LOWriter_FrameStyleBorderPadding
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_FrameStyleBorderWidth, _LOWriter_FrameStyleBorderStyle, _LOWriter_FrameStyleBorderPadding, _LOWriter_FrameBorderColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3106,7 +3106,7 @@ EndFunc   ;==>_LOWriter_FrameStyleBorderColor
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName, _LO_UnitConvert, _LOWriter_FrameStyleBorderWidth, _LOWriter_FrameStyleBorderStyle, _LOWriter_FrameStyleBorderColor
+; Related .......: _LO_UnitConvert, _LOWriter_FrameStyleBorderWidth, _LOWriter_FrameStyleBorderStyle, _LOWriter_FrameStyleBorderColor, _LOWriter_FrameBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3206,7 +3206,7 @@ EndFunc   ;==>_LOWriter_FrameStyleBorderPadding
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName, _LOWriter_FrameStyleBorderWidth, _LOWriter_FrameStyleBorderColor, _LOWriter_FrameStyleBorderPadding
+; Related .......: _LOWriter_FrameStyleBorderWidth, _LOWriter_FrameStyleBorderColor, _LOWriter_FrameStyleBorderPadding, _LOWriter_FrameBorderStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3265,7 +3265,7 @@ EndFunc   ;==>_LOWriter_FrameStyleBorderStyle
 ; Remarks .......: To "Turn Off" Borders, set Width to 0
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName, _LO_UnitConvert, _LOWriter_FrameStyleBorderStyle, _LOWriter_FrameStyleBorderColor, _LOWriter_FrameStyleBorderPadding
+; Related .......: _LO_UnitConvert, _LOWriter_FrameStyleBorderStyle, _LOWriter_FrameStyleBorderColor, _LOWriter_FrameStyleBorderPadding, _LOWriter_FrameBorderWidth
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3325,7 +3325,7 @@ EndFunc   ;==>_LOWriter_FrameStyleBorderWidth
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LOWriter_FrameStyleColumnSettings, _LOWriter_FrameStyleColumnSize, _LOWriter_FrameColumnSeparator
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3421,7 +3421,7 @@ EndFunc   ;==>_LOWriter_FrameStyleColumnSeparator
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName
+; Related .......: _LOWriter_FrameStyleColumnSeparator, _LOWriter_FrameStyleColumnSize, _LOWriter_FrameColumnSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3495,7 +3495,7 @@ EndFunc   ;==>_LOWriter_FrameStyleColumnSettings
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  To set $bAutoWidth or $iGlobalSpacing you may enter any number in $iColumn as long as you are not setting width or spacing, as AutoWidth is not column specific. If you set a value for $iGlobalSpacing with $bAutoWidth set to False, the value is applied to all the columns still.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName, _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOWriter_FrameStyleColumnSeparator, _LOWriter_FrameStyleColumnSettings, _LOWriter_FrameColumnSize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3641,7 +3641,7 @@ EndFunc   ;==>_LOWriter_FrameStyleColumnSize
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FrameStyleDelete
+; Related .......: _LOWriter_FrameStyleDelete, _LOWriter_FrameStyleExists, _LOWriter_FrameStyleGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3806,7 +3806,7 @@ EndFunc   ;==>_LOWriter_FrameStyleDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FrameStylesGetNames, _LOWriter_FrameStyleCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3840,7 +3840,7 @@ EndFunc   ;==>_LOWriter_FrameStyleExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FrameStylesGetNames
+; Related .......: _LOWriter_FrameStylesGetNames, _LOWriter_FrameStyleExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3899,7 +3899,7 @@ EndFunc   ;==>_LOWriter_FrameStyleGetObjByName
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName
+; Related .......: _LOWriter_FrameStyleOrganizer, _LOWriter_FrameStyleTypePosition, _LOWriter_FrameStyleTypeSize, _LOWriter_FrameStyleWrapOptions, _LOWriter_FrameOptions
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4009,7 +4009,7 @@ EndFunc   ;==>_LOWriter_FrameStyleOptions
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName, _LOWriter_FrameStylesGetNames
+; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName, _LOWriter_FrameStylesGetNames, _LOWriter_FrameStyleExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4095,7 +4095,7 @@ EndFunc   ;==>_LOWriter_FrameStyleOrganizer
 ; Remarks .......: If only a Document object is called, all available Frame styles will be returned.
 ;                  If Both $bUserOnly and $bAppliedOnly are called with True, only User-Created styles that are applied are returned.
 ;                  Calling $bDisplayName with True will return a list of Style names, as the user sees them in the UI, in the same order as they are returned if $bDisplayName is False. It is best not to use these when setting Styling.
-; Related .......: _LOWriter_FrameStyleGetObjByName
+; Related .......: _LOWriter_FrameStyleGetObjByName, _LOWriter_FrameStyleExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4147,7 +4147,7 @@ EndFunc   ;==>_LOWriter_FrameStylesGetNames
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  LibreOffice may change the shadow width +/- a Hundredth of a Millimeter.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LOWriter_FrameShadow
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4309,7 +4309,7 @@ EndFunc   ;==>_LOWriter_FrameStyleShadow
 ;                  - $LOW_RELATIVE_PAGE_PRINT (8),[For Horizontal Relation:], [Same as Page Text Area in L.O. UI] the frame is positioned considering the whole width available for text in the page, from the left to the right page margins.
 ;                  - $LOW_RELATIVE_PAGE_PRINT [For Vertical relation:], the frame is positioned considering the full height available for text, from top to bottom margins.
 ;                  - $LOW_RELATIVE_TEXT_LINE (9),[For Vertical relation:], the frame is positioned considering the height of the line of text where the anchor is placed.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName
+; Related .......: _LOWriter_FrameStyleTypeSize, _LOWriter_FrameStyleOptions, _LOWriter_FrameStyleWrapOptions, _LOWriter_FrameTypePosition
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4511,7 +4511,7 @@ EndFunc   ;==>_LOWriter_FrameStyleTypePosition
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function can successfully set "Keep Ratio" however when the user changes this setting in the UI, for some reason the applicable setting values are not updated, so this function may return incorrect values for "Keep Ratio".
 ;                  When Keep Ratio is set to True, setting Width/Height values via this function will not be kept in ratio.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName, _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOWriter_FrameStyleTypePosition, _LOWriter_FrameTypeSize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4656,7 +4656,7 @@ EndFunc   ;==>_LOWriter_FrameStyleTypeSize
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName, _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOWriter_FrameStyleWrapOptions, _LOWriter_FrameStyleTypePosition, _LOWriter_FrameWrap
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4759,7 +4759,7 @@ EndFunc   ;==>_LOWriter_FrameStyleWrap
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function may indicate the settings were set successfully when they haven't been if the appropriate wrap type, anchor type etc. hasn't been set before hand.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName
+; Related .......: _LOWriter_FrameStyleWrap, _LOWriter_FrameStyleOptions, _LOWriter_FrameWrapOptions
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4911,7 +4911,7 @@ EndFunc   ;==>_LOWriter_FrameStyleWrapOptions
 ;                  - $LOW_RELATIVE_PAGE_PRINT (8),[For Horizontal Relation:], [Same as Page Text Area in L.O. UI] the frame is positioned considering the whole width available for text in the page, from the left to the right page margins.
 ;                  - $LOW_RELATIVE_PAGE_PRINT [For Vertical relation:], the frame is positioned considering the full height available for text, from top to bottom margins.
 ;                  - $LOW_RELATIVE_TEXT_LINE (9),[For Vertical relation:], the frame is positioned considering the height of the line of text where the anchor is placed.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByCursor, _LOWriter_FrameGetObjByName
+; Related .......: _LOWriter_FrameTypeSize, _LOWriter_FrameStyleTypePosition
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5110,7 +5110,7 @@ EndFunc   ;==>_LOWriter_FrameTypePosition
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function can successfully set "Keep Ratio" however when the user changes this setting in the UI, for some reason the applicable setting values are not updated, so this function may return incorrect values for "Keep Ratio".
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByCursor, _LOWriter_FrameGetObjByName, _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOWriter_FrameTypePosition, _LOWriter_FrameStyleTypeSize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5253,7 +5253,7 @@ EndFunc   ;==>_LOWriter_FrameTypeSize
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByCursor, _LOWriter_FrameGetObjByName, _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOWriter_FrameWrapOptions, _LOWriter_FrameTypePosition, _LOWriter_FrameStyleWrapOptions
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5356,7 +5356,7 @@ EndFunc   ;==>_LOWriter_FrameWrap
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function may indicate the settings were set successfully when they haven't been if the appropriate wrap type, anchor type etc. hasn't been set before hand.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByCursor, _LOWriter_FrameGetObjByName
+; Related .......: _LOWriter_FrameWrap, _LOWriter_FrameStyleWrapOptions
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

@@ -109,7 +109,7 @@
 ; Remarks .......: If $bSaveChanges is True and the document hasn't been saved yet, the document is saved to the desktop.
 ;                  If $sSaveName is undefined, it is saved as an .odt document to the desktop, named Year-Month-Day_Hour-Minute-Second.odt.
 ;                  $sSaveName may be a name only without an extension, in which case the file will be saved in .odt format. Or you may define your own format by including an extension, such as "Test.docx"
-; Related .......: _LOWriter_DocOpen, _LOWriter_DocConnect, _LOWriter_DocCreate, _LOWriter_DocSaveAs, _LOWriter_DocSave
+; Related .......: _LOWriter_DocOpen, _LOWriter_DocConnect, _LOWriter_DocCreate, _LOWriter_DocSaveAs, _LOWriter_DocSave, _LOWriter_DocHasPath, _LOWriter_DocIsReadOnly
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -215,7 +215,7 @@ EndFunc   ;==>_LOWriter_DocClose
 ;                  The Connect All option returns a single columned array. ($aArray[0]), each result is stored in a separate row.
 ;                  -Row 1 contains the Object for that document. e.g. $aArray[0] = $oDoc
 ;                  -Row 2 contains the Object for the next document. e.g. $aArray[1] = $oDoc2. And so on.
-; Related .......: _LOWriter_DocOpen, _LOWriter_DocClose, _LOWriter_DocCreate
+; Related .......: _LOWriter_DocOpen, _LOWriter_DocCreate, _LOWriter_DocClose
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -429,7 +429,7 @@ EndFunc   ;==>_LOWriter_DocConvertTableToText
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function temporarily moves the ViewCursor to and selects the Text, and then attempts to restore the ViewCursor to its former position.
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_DocConvertTableToText
+; Related .......: _LOWriter_DocConvertTableToText, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -536,7 +536,7 @@ EndFunc   ;==>_LOWriter_DocConvertTextToTable
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_DocOpen, _LOWriter_DocClose, _LOWriter_DocConnect
+; Related .......: _LOWriter_DocOpen, _LOWriter_DocClose, _LOWriter_DocConnect, _LOWriter_DocSaveAs, _LOWriter_DocVisible
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -641,7 +641,7 @@ EndFunc   ;==>_LOWriter_DocCreate
 ;                  Any array error checking only checks to make sure the input array, and the set Array of values is the same size, it does not check that each element is the same.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOWriter_DocGenProp
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -816,7 +816,7 @@ EndFunc   ;==>_LOWriter_DocDescription
 ;                  - uno:ZoomPlus -- Increases the zoom value to the next increment up.
 ;                  - uno:ZoomPageWidth -- Set zoom to fit page width.
 ;                  - uno:ZoomPage -- Set zoom to fit page.
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorMove
+; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorMove, _LOWriter_DocSelection
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -873,7 +873,7 @@ EndFunc   ;==>_LOWriter_DocExecuteDispatch
 ; Modified ......:
 ; Remarks .......: Does not alter the original save path (if there was one), saves a copy of the document to the new path, in the new file format if one is chosen.
 ;                  If $bSamePath is called with True, the same save path as the current document is used. You must still fill in "sFilePath" with the desired File Name and new extension, but you do not need to enter the file path.
-; Related .......: _LOWriter_DocSave, _LOWriter_DocSaveAs
+; Related .......: _LOWriter_DocSave, _LOWriter_DocSaveAs, _LOWriter_DocHasPath
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -960,7 +960,7 @@ EndFunc   ;==>_LOWriter_DocExport
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Objects returned can be used in any of the functions accepting a Paragraph or Cursor Object etc., to modify their properties or even the text itself.
-; Related .......: _LOWriter_SearchDescriptorCreate, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyAlignment, _LOWriter_FindFormatModifyEffects, _LOWriter_FindFormatModifyFont, _LOWriter_FindFormatModifyHyphenation, _LOWriter_FindFormatModifyIndent, _LOWriter_FindFormatModifyOverline, _LOWriter_FindFormatModifyPageBreak, _LOWriter_FindFormatModifyPosition, _LOWriter_FindFormatModifyRotateScaleSpace, _LOWriter_FindFormatModifySpacing, _LOWriter_FindFormatModifyStrikeout, _LOWriter_FindFormatModifyTxtFlowOpt, _LOWriter_FindFormatModifyUnderline.
+; Related .......: _LOWriter_SearchDescriptorCreate, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyFont.
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1021,7 +1021,7 @@ EndFunc   ;==>_LOWriter_DocFindAll
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_SearchDescriptorCreate, _LOWriter_DocFindAll, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyAlignment, _LOWriter_FindFormatModifyEffects, _LOWriter_FindFormatModifyFont, _LOWriter_FindFormatModifyHyphenation, _LOWriter_FindFormatModifyIndent, _LOWriter_FindFormatModifyOverline, _LOWriter_FindFormatModifyPageBreak, _LOWriter_FindFormatModifyPosition, _LOWriter_FindFormatModifyRotateScaleSpace, _LOWriter_FindFormatModifySpacing, _LOWriter_FindFormatModifyStrikeout, _LOWriter_FindFormatModifyTxtFlowOpt, _LOWriter_FindFormatModifyUnderline.
+; Related .......: _LOWriter_DocFindAll, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyFont.
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1135,7 +1135,7 @@ EndFunc   ;==>_LOWriter_DocFindAllInRange
 ; Modified ......:
 ; Remarks .......: When a search is performed inside of a selection, the search may miss any footnotes/ Endnotes/ Frames contained in that selection as the text of these are counted as being located at the very end/beginning of a Document, thus if you are searching in the center of a document, the search will begin in the center, reach the end of the selection, and stop, never reaching the foot/Endnotes etc.
 ;                  If $bExhaustive is called with True, the search continues until the whole document has been searched, but, if the search has many hits, this could slow the search considerably. There is no use setting this to True in a full document search.
-; Related .......: _LOWriter_SearchDescriptorCreate, _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyAlignment, _LOWriter_FindFormatModifyEffects, _LOWriter_FindFormatModifyFont, _LOWriter_FindFormatModifyHyphenation, _LOWriter_FindFormatModifyIndent, _LOWriter_FindFormatModifyOverline, _LOWriter_FindFormatModifyPageBreak, _LOWriter_FindFormatModifyPosition, _LOWriter_FindFormatModifyRotateScaleSpace, _LOWriter_FindFormatModifySpacing, _LOWriter_FindFormatModifyStrikeout, _LOWriter_FindFormatModifyTxtFlowOpt, _LOWriter_FindFormatModifyUnderline.
+; Related .......: _LOWriter_SearchDescriptorCreate, _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyFont.
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1280,7 +1280,7 @@ EndFunc   ;==>_LOWriter_DocFindNext
 ;                  - ModifiedBy is cleared, ModificationDate is cleared;
 ;                  - PrintedBy is cleared; PrintDate is cleared;
 ;                  - EditingDuration is cleared; EditingCycles is set to 1.
-; Related .......:
+; Related .......: _LOWriter_DocGenPropCreation, _LOWriter_DocGenPropModification, _LOWriter_DocGenPropPrint, _LOWriter_DocGenPropTemplate, _LOWriter_DocDescription
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1370,7 +1370,7 @@ EndFunc   ;==>_LOWriter_DocGenProp
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_DateStructCreate
+; Related .......: _LOWriter_DateStructCreate, _LOWriter_DocGenProp, _LOWriter_DocGenPropModification, _LOWriter_DocGenPropPrint, _LOWriter_DocGenPropTemplate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1435,7 +1435,7 @@ EndFunc   ;==>_LOWriter_DocGenPropCreation
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_DateStructCreate, _LOWriter_DateStructModify
+; Related .......: _LOWriter_DateStructCreate, _LOWriter_DocGenProp, _LOWriter_DocGenPropCreation, _LOWriter_DocGenPropPrint, _LOWriter_DocGenPropTemplate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1500,7 +1500,7 @@ EndFunc   ;==>_LOWriter_DocGenPropModification
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_DateStructCreate, _LOWriter_DateStructModify
+; Related .......: _LOWriter_DateStructCreate, _LOWriter_DocGenProp, _LOWriter_DocGenPropCreation, _LOWriter_DocGenPropModification, _LOWriter_DocGenPropTemplate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1569,7 +1569,7 @@ EndFunc   ;==>_LOWriter_DocGenPropPrint
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_DateStructCreate, _LOWriter_DateStructModify
+; Related .......: _LOWriter_DateStructCreate, _LOWriter_DocGenProp, _LOWriter_DocGenPropCreation, _LOWriter_DocGenPropModification, _LOWriter_DocGenPropPrint
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1682,7 +1682,7 @@ EndFunc   ;==>_LOWriter_DocGetCounts
 ; Modified ......:
 ; Remarks .......: If $bReturnFull is True, the return value will be like: "<Writer Doc name>.<extension> — LibreOffice Writer" e.g. "Testing.odt — LibreOffice Writer".
 ;                  Else the return value will be like: "<Writer Doc name>.<extension>", e.g. "Testing.odt"
-; Related .......:
+; Related .......: _LOWriter_DocDescription, _LOWriter_DocExport, _LOWriter_DocSaveAs
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1725,7 +1725,7 @@ EndFunc   ;==>_LOWriter_DocGetName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LO_PathConvert
+; Related .......: _LO_PathConvert, _LOWriter_DocHasPath
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1764,7 +1764,7 @@ EndFunc   ;==>_LOWriter_DocGetPath
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_DocGetPath, _LOWriter_DocExport, _LOWriter_DocSaveAs
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1797,7 +1797,7 @@ EndFunc   ;==>_LOWriter_DocHasPath
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This does NOT test if the document is the current active window in Windows, it only tests if the document is the current active document among other LibreOffice documents.
-; Related .......:
+; Related .......: _LOWriter_DocIsModified, _LOWriter_DocIsReadOnly, _LOWriter_DocToFront
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1836,7 +1836,7 @@ EndFunc   ;==>_LOWriter_DocIsActive
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_DocSave, _LOWriter_DocIsReadOnly
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1879,7 +1879,7 @@ EndFunc   ;==>_LOWriter_DocIsModified
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Only documents that have been saved to a location, will ever be "ReadOnly".
-; Related .......:
+; Related .......: _LOWriter_DocClose
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1918,7 +1918,7 @@ EndFunc   ;==>_LOWriter_DocIsReadOnly
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOWriter_DocMinimize, _LOWriter_DocIsActive, _LOWriter_DocToFront, _LOWriter_DocVisible, _LOWriter_DocPosAndSize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1967,7 +1967,7 @@ EndFunc   ;==>_LOWriter_DocMaximize
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOWriter_DocMaximize, , _LOWriter_DocIsActive, _LOWriter_DocToFront, _LOWriter_DocVisible, _LOWriter_DocPosAndSize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2033,7 +2033,7 @@ EndFunc   ;==>_LOWriter_DocMinimize
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Any parameters (Hidden, template etc.,) will not be applied when connecting to a document.
-; Related .......: _LOWriter_DocCreate, _LOWriter_DocClose, _LOWriter_DocConnect
+; Related .......: _LOWriter_DocCreate, _LOWriter_DocClose, _LOWriter_DocConnect, _LOWriter_DocVisible
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2145,7 +2145,7 @@ EndFunc   ;==>_LOWriter_DocOpen
 ;                  If you want more accurate functionality, use the "WinMove" AutoIt function.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOWriter_DocMaximize, _LOWriter_DocMinimize, _LOWriter_DocVisible, _LOWriter_DocZoom
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2345,7 +2345,7 @@ EndFunc   ;==>_LOWriter_DocPrint
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_DocPrintSizeSettings, _LOWriter_DocPrintPageSettings, _LOWriter_DocPrintMiscSettings
+; Related .......: _LOWriter_DocPrintSizeSettings, _LOWriter_DocPrintPageSettings, _LOWriter_DocPrintMiscSettings, _LOWriter_DocPrint
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2448,7 +2448,7 @@ EndFunc   ;==>_LOWriter_DocPrintIncludedSettings
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_DocPrintSizeSettings, _LOWriter_DocPrintPageSettings, _LOWriter_DocPrintIncludedSettings
+; Related .......: _LOWriter_DocPrintSizeSettings, _LOWriter_DocPrintPageSettings, _LOWriter_DocPrintIncludedSettings, _LOWriter_DocPrint
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2569,7 +2569,7 @@ EndFunc   ;==>_LOWriter_DocPrintMiscSettings
 ; Remarks .......: If both $bLeftOnly and $bRightOnly are True, both Left and Right pages are printed.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_DocPrintSizeSettings, _LOWriter_DocPrintMiscSettings, _LOWriter_DocPrintIncludedSettings
+; Related .......: _LOWriter_DocPrintSizeSettings, _LOWriter_DocPrintMiscSettings, _LOWriter_DocPrintIncludedSettings, _LOWriter_DocPrint
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2667,7 +2667,7 @@ EndFunc   ;==>_LOWriter_DocPrintPageSettings
 ;                  For some reason, setting $iPaperWidth and $iPaperHeight modifies the document page size also.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LOWriter_DocPrintPageSettings, _LOWriter_DocPrintMiscSettings, _LOWriter_DocPrintIncludedSettings
+; Related .......: _LO_UnitConvert, _LOWriter_DocPrintPageSettings, _LOWriter_DocPrintMiscSettings, _LOWriter_DocPrintIncludedSettings, _LOWriter_DocPrint
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2786,7 +2786,7 @@ EndFunc   ;==>_LOWriter_DocRedo
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This will silently fail if there are any _LOWriter_DocUndoActionBegin still active.
-; Related .......: _LOWriter_DocUndoClear, _LOWriter_DocUndoReset
+; Related .......: _LOWriter_DocUndoClear, _LOWriter_DocUndoReset, _LOWriter_DocRedoIsPossible
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2816,7 +2816,7 @@ EndFunc   ;==>_LOWriter_DocRedoClear
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_DocRedo, _LOWriter_DocRedoGetAllActionTitles
+; Related .......: _LOWriter_DocRedo, _LOWriter_DocRedoGetAllActionTitles, _LOWriter_DocUndoCurActionTitle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2850,7 +2850,7 @@ EndFunc   ;==>_LOWriter_DocRedoCurActionTitle
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_DocRedo, _LOWriter_DocRedoCurActionTitle
+; Related .......: _LOWriter_DocRedo, _LOWriter_DocRedoCurActionTitle, _LOWriter_DocUndoGetAllActionTitles
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2883,7 +2883,7 @@ EndFunc   ;==>_LOWriter_DocRedoGetAllActionTitles
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_DocRedo
+; Related .......: _LOWriter_DocRedo, _LOWriter_DocRedoClear, _LOWriter_DocUndoIsPossible, _LOWriter_DocRedoCurActionTitle, _LOWriter_DocRedoGetAllActionTitles
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2928,7 +2928,7 @@ EndFunc   ;==>_LOWriter_DocRedoIsPossible
 ; Modified ......:
 ; Remarks .......: In order for $atReplaceFormat to be applied to replacements, $bSearchPropValues must be True in the Search descriptor. I'm not sure why.
 ;                  Calling $bBackwards with True can cause issues with Find and Replace using formats, perhaps other things as well.
-; Related .......: _LOWriter_SearchDescriptorCreate, _LOWriter_DocFindAll, _LOWriter_DocFindNext, _LOWriter_DocFindAllInRange, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyAlignment, _LOWriter_FindFormatModifyEffects, _LOWriter_FindFormatModifyFont, _LOWriter_FindFormatModifyHyphenation, _LOWriter_FindFormatModifyIndent, _LOWriter_FindFormatModifyOverline, _LOWriter_FindFormatModifyPageBreak, _LOWriter_FindFormatModifyPosition, _LOWriter_FindFormatModifyRotateScaleSpace, _LOWriter_FindFormatModifySpacing, _LOWriter_FindFormatModifyStrikeout, _LOWriter_FindFormatModifyTxtFlowOpt, _LOWriter_FindFormatModifyUnderline.
+; Related .......: _LOWriter_SearchDescriptorCreate, _LOWriter_DocFindAll, _LOWriter_DocFindNext, _LOWriter_DocFindAllInRange, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyFont.
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3002,7 +3002,7 @@ EndFunc   ;==>_LOWriter_DocReplaceAll
 ;                  Replacing Paragraph Styles doesn't work with a dispatch command, so I use the "FindAllInRange" function, and then manually apply the new Paragraph Style.
 ;                  In order for $atReplaceFormat to be applied to replacements, $bSearchPropValues must be True in the Search descriptor. I'm not sure why.
 ;                  Calling $bBackwards with True can cause issues with Find and Replace using formats, perhaps other things as well.
-; Related .......: _LOWriter_SearchDescriptorCreate, _LOWriter_DocFindAll, _LOWriter_DocFindNext, _LOWriter_DocFindAllInRange, _LOWriter_DocReplaceAll, _LOWriter_FindFormatModifyAlignment, _LOWriter_FindFormatModifyEffects, _LOWriter_FindFormatModifyFont, _LOWriter_FindFormatModifyHyphenation, _LOWriter_FindFormatModifyIndent, _LOWriter_FindFormatModifyOverline, _LOWriter_FindFormatModifyPageBreak, _LOWriter_FindFormatModifyPosition, _LOWriter_FindFormatModifyRotateScaleSpace, _LOWriter_FindFormatModifySpacing, _LOWriter_FindFormatModifyStrikeout, _LOWriter_FindFormatModifyTxtFlowOpt, _LOWriter_FindFormatModifyUnderline.
+; Related .......: _LOWriter_SearchDescriptorCreate, _LOWriter_DocFindAll, _LOWriter_DocFindNext, _LOWriter_DocFindAllInRange, _LOWriter_DocReplaceAll, _LOWriter_FindFormatModifyFont.
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3171,7 +3171,7 @@ EndFunc   ;==>_LOWriter_DocReplaceAllInRange
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_DocExport, _LOWriter_DocSaveAs
+; Related .......: _LOWriter_DocExport, _LOWriter_DocSaveAs, _LOWriter_DocIsModified, _LOWriter_DocIsReadOnly, _LOWriter_DocHasPath
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3299,7 +3299,7 @@ EndFunc   ;==>_LOWriter_DocSaveAs
 ;                  If there are multiple selections present, the default behaviour of this function is to create a TextCursor for each selection and return them in an Array. When $bReturnMultiAsObj is True, the single multi-selection Object (com.sun.star.text.TextRanges) is returned, this is useless to the user (unless they use the API commands themselves to retrieve the individual selections), but can be used to restore the previous selections by calling the returned Object in this function.
 ;                  Presently, I have no way to set multiple selections at a time other than the above mentioned method.
 ;                  When multiple selections are present, one returned cursor will usually be the present position of the ViewCursor in the current selection.
-; Related .......:
+; Related .......: _LOWriter_CursorMove, _LOWriter_CursorViewCursorGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3406,7 +3406,7 @@ EndFunc   ;==>_LOWriter_DocSelection
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If minimized, the document is restored and brought to the front of the visible pages. Generally only brings the document to the front of other LibreOffice windows.
-; Related .......:
+; Related .......: _LOWriter_DocIsActive, _LOWriter_DocMaximize, _LOWriter_DocMinimize, _LOWriter_DocVisible
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3474,7 +3474,7 @@ EndFunc   ;==>_LOWriter_DocUndo
 ; Remarks .......: This begins an Undo Action Group, any functions and actions done after this function is called will be grouped together, and if undone, all actions will be undone together at once.
 ;                  _LOWriter_DocUndoActionEnd must be called after this function before this undo group will become available in the Undo Action list.
 ;                  _LOWriter_DocUndoActionBegin can be nested, e.g. call this function multiple times without ending the first undo action, but only the last group that is ended with _LOWriter_DocUndoActionEnd will appear.
-; Related .......: _LOWriter_DocUndoActionEnd
+; Related .......: _LOWriter_DocUndoActionEnd, _LOWriter_DocUndo, _LOWriter_DocUndoReset
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3503,7 +3503,7 @@ EndFunc   ;==>_LOWriter_DocUndoActionBegin
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This stops the grouping of actions into the last created Undo Action Group.
-; Related .......: _LOWriter_DocUndoActionBegin
+; Related .......: _LOWriter_DocUndoActionBegin, _LOWriter_DocUndo, _LOWriter_DocUndoReset
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3531,7 +3531,7 @@ EndFunc   ;==>_LOWriter_DocUndoActionEnd
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This will silently fail if there are any _LOWriter_DocUndoActionBegin still active.
-; Related .......: _LOWriter_DocRedoClear
+; Related .......: _LOWriter_DocRedoClear, _LOWriter_DocUndoIsPossible, _LOWriter_DocUndoCurActionTitle, _LOWriter_DocUndoGetAllActionTitles, _LOWriter_DocUndoReset
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3561,7 +3561,7 @@ EndFunc   ;==>_LOWriter_DocUndoClear
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_DocUndo, _LOWriter_DocUndoGetAllActionTitles
+; Related .......: _LOWriter_DocUndo, _LOWriter_DocUndoGetAllActionTitles, _LOWriter_DocRedoCurActionTitle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3595,7 +3595,7 @@ EndFunc   ;==>_LOWriter_DocUndoCurActionTitle
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_DocUndo, _LOWriter_DocUndoCurActionTitle
+; Related .......: _LOWriter_DocUndo, _LOWriter_DocUndoCurActionTitle, _LOWriter_DocRedoGetAllActionTitles, _LOWriter_DocUndoClear, _LOWriter_DocUndoReset
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3628,7 +3628,7 @@ EndFunc   ;==>_LOWriter_DocUndoGetAllActionTitles
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_DocUndo
+; Related .......: _LOWriter_DocUndo, _LOWriter_DocRedoIsPossible, _LOWriter_DocUndoClear, _LOWriter_DocUndoReset
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3695,7 +3695,7 @@ EndFunc   ;==>_LOWriter_DocUndoReset
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOWriter_DocCreate, _LOWriter_DocOpen, _LOWriter_DocMinimize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3747,7 +3747,7 @@ EndFunc   ;==>_LOWriter_DocVisible
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_DocPosAndSize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

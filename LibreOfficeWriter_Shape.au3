@@ -74,7 +74,7 @@
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_ShapeAreaFillStyle, _LOWriter_ShapeAreaGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -133,7 +133,7 @@ EndFunc   ;==>_LOWriter_ShapeAreaColor
 ; Modified ......:
 ; Remarks .......: This function is to help determine if a Gradient background, or a solid color background is currently active.
 ;                  This is useful because, if a Gradient is active, the solid color value is still present, and thus it would not be possible to determine which function should be used to retrieve the current values for, whether the Color function, or the Gradient function.
-; Related .......:
+; Related .......: _LOWriter_ShapeAreaColor, _LOWriter_ShapeAreaGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -210,7 +210,7 @@ EndFunc   ;==>_LOWriter_ShapeAreaFillStyle
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
-; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_ShapeAreaGradientMulticolor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -413,7 +413,7 @@ EndFunc   ;==>_LOWriter_ShapeAreaGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOWriter_ShapeAreaTransparencyGradientMulti
+; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOWriter_ShapeAreaGradient, _LOWriter_ShapeAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -509,7 +509,7 @@ EndFunc   ;==>_LOWriter_ShapeAreaGradientMulticolor
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName
+; Related .......: _LOWriter_ShapeAreaTransparencyGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -583,7 +583,7 @@ EndFunc   ;==>_LOWriter_ShapeAreaTransparency
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName
+; Related .......: _LOWriter_ShapeAreaTransparency, _LOWriter_ShapeAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -757,7 +757,7 @@ EndFunc   ;==>_LOWriter_ShapeAreaTransparencyGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOWriter_ShapeAreaGradientMulticolor
+; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOWriter_ShapeAreaTransparencyGradient, _LOWriter_ShapeAreaGradientMulticolor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -890,7 +890,7 @@ EndFunc   ;==>_LOWriter_ShapeDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_ShapeGetObjByName
+; Related .......: _LOWriter_ShapesGetNames, _LOWriter_ShapeGetObjByName, _LOWriter_ShapeInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -932,7 +932,7 @@ EndFunc   ;==>_LOWriter_ShapeExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName
+; Related .......: _LOWriter_CursorInsertString, _LOWriter_CursorMove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -969,7 +969,7 @@ EndFunc   ;==>_LOWriter_ShapeGetAnchor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_ShapesGetNames
+; Related .......: _LOWriter_ShapeExists, _LOWriter_ShapesGetNames, _LOWriter_ShapeInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1053,7 +1053,7 @@ EndFunc   ;==>_LOWriter_ShapeGetObjByName
 ;                  - $LOW_SHAPE_TYPE_STARS_DOORPLATE, known as, "mso-spt21", should be "doorplate"
 ;                  - $LOW_SHAPE_TYPE_SYMBOL_BEVEL_DIAMOND, known as, "col-502ad400", should be ??
 ;                  - $LOW_SHAPE_TYPE_SYMBOL_BEVEL_OCTAGON, known as, "col-60da8460", should be ??
-; Related .......:
+; Related .......: _LOWriter_ShapesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1173,7 +1173,7 @@ EndFunc   ;==>_LOWriter_ShapeGetType
 ;                  Inserting any of the above shapes will still show successful, but the shape will be invisible, and could cause the document to crash.
 ;                  The following shape is visually different from the manually inserted one in L.O. 7.3.4.2:
 ;                  - $LOW_SHAPE_TYPE_SYMBOL_LIGHTNING
-; Related .......: _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_ShapeDelete, _LOWriter_ShapeGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1275,7 +1275,7 @@ EndFunc   ;==>_LOWriter_ShapeInsert
 ;                  When retrieving the current settings, both $vStartStyle and $vEndStyle could be either an Integer or a String. It will be a String if the current Arrowhead is a custom Arrowhead, else an Integer, corresponding to one of the constants, $LOW_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOWriter_ShapeLineProperties
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1415,7 +1415,7 @@ EndFunc   ;==>_LOWriter_ShapeLineArrowStyles
 ;                  When retrieving the current settings, $vStyle could be either an Integer or a String. It will be a String if the current Line Style is a custom Line Style, else an Integer, corresponding to one of the constants, $LOW_SHAPE_LINE_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LOWriter_ShapeLineArrowStyles, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1542,7 +1542,7 @@ EndFunc   ;==>_LOWriter_ShapeLineProperties
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName
+; Related .......: _LOWriter_ShapeExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2546,7 +2546,7 @@ EndFunc   ;==>_LOWriter_ShapePointsRemove
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName, _LO_UnitConvert
+; Related .......: _LOWriter_ShapeTypePosition, _LOWriter_ShapeTypeSize, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2625,7 +2625,7 @@ EndFunc   ;==>_LOWriter_ShapePosition
 ;                  At the present time Corner Radius setting is not included, as I was unable to identify a shape that utilized this setting.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName
+; Related .......: _LOWriter_ShapePosition
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2683,7 +2683,7 @@ EndFunc   ;==>_LOWriter_ShapeRotateSlant
 ;                  - Form Controls: com.sun.star.drawing.ControlShape.
 ;                  There may be other return types I haven't found yet.
 ;                  Images inserted into the document are also listed as TextFrames in the shapes category. There isn't an easy way to differentiate between them yet, see _LOWriter_FramesGetNames, to search for Frames in the shapes category.
-; Related .......:
+; Related .......: _LOWriter_ShapeGetObjByName, _LOWriter_ShapeExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2740,7 +2740,7 @@ EndFunc   ;==>_LOWriter_ShapesGetNames
 ;                  - $LOW_SHAPE_TYPE_BASIC_CIRCLE_SEGMENT, $LOW_SHAPE_TYPE_BASIC_ARC.
 ;                  To prevent accidental and unwanted newlines, @CRLF is automatically replaced with @CR to match LibreOffice's newline style.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName
+; Related .......:
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2881,7 +2881,7 @@ EndFunc   ;==>_LOWriter_ShapeTextBox
 ;                  - $LOW_RELATIVE_PAGE_PRINT (8),[For Horizontal Relation:], [Same as Page Text Area in L.O. UI] the Shape is positioned considering the whole width available for text in the page, from the left to the right page margins.
 ;                  - $LOW_RELATIVE_PAGE_PRINT [For Vertical relation:], the Shape is positioned considering the full height available for text, from top to bottom margins.
 ;                  - $LOW_RELATIVE_TEXT_LINE (9),[For Vertical relation:], the Shape is positioned considering the height of the line of text where the anchor is placed.
-; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName
+; Related .......: _LOWriter_ShapePosition, _LOWriter_ShapeTypeSize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3060,7 +3060,7 @@ EndFunc   ;==>_LOWriter_ShapeTypePosition
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  I have skipped "Keep Ratio", as currently it seems unable to be set for shapes.
-; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName, _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOWriter_ShapeTypePosition, _LOWriter_ShapePosition
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3146,7 +3146,7 @@ EndFunc   ;==>_LOWriter_ShapeTypeSize
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName, _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOWriter_ShapeWrapOptions
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3248,7 +3248,7 @@ EndFunc   ;==>_LOWriter_ShapeWrap
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function may indicate the settings were set successfully when they haven't been if the appropriate wrap type, anchor type etc. hasn't been set before hand.
-; Related .......: _LOWriter_ShapeInsert, _LOWriter_ShapeGetObjByName
+; Related .......: _LOWriter_ShapeWrap
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

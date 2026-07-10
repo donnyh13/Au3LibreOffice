@@ -60,7 +60,7 @@
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Returns what type of data a cursor is currently located in, such as a TextTable, Footnote etc.
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_CursorGetStatus, _LOWriter_CursorGetType, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -115,7 +115,7 @@ EndFunc   ;==>_LOWriter_CursorGetDataType
 ;                  - $LOW_CURSOR_STAT_GET_PAGE,
 ;                  # Table Cursor Status Flag Constants:
 ;                  - $LOW_CURSOR_STAT_GET_RANGE_NAME
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorGetType
+; Related .......: _LOWriter_CursorGetType, _LOWriter_CursorGetDataType, _LOWriter_CursorMove, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -194,7 +194,7 @@ EndFunc   ;==>_LOWriter_CursorGetStatus
 ; Modified ......:
 ; Remarks .......: LibreOffice documentation states that when used in LibreOffice Basic, GetString is limited to 64kb's in size. I do not know if the same limitation applies to any outside use of GetString (such as through Autoit).
 ;                  If there are multiple selections, the returned value will be an empty string ("").
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_CursorInsertString, _LOWriter_CursorMove, _LOWriter_CursorGetStatus, _LOWriter_CursorHyperlink, _LOWriter_CursorParObjCreateList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -234,7 +234,7 @@ EndFunc   ;==>_LOWriter_CursorGetString
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Will also work for Paragraph object and paragraph section objects.
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LOWriter_CursorGetDataType, _LOWriter_CursorMove, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -271,7 +271,7 @@ EndFunc   ;==>_LOWriter_CursorGetType
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If the Cursor being used as a range has anything selected, the selection will be selected in the Cursor called in $oCursor also.
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet, _LOWriter_CursorMove
+; Related .......: _LOWriter_CursorMove, _LOWriter_CursorViewCursorCurrPage, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -326,7 +326,7 @@ EndFunc   ;==>_LOWriter_CursorGoToRange
 ;                  $sLinkAddress can be a website URL (www.abc.com), or a mail to link ("mailto:abc@email.ca?subject=Testing123". It can also be a path to a file ("C:\Users\xyz.docx").
 ;                  When setting $sLinkAddress to a computer path, it is recommended to convert it to URL notation using _LO_PathConvert. If you do not, a property setting error may be triggered because LibreOffice converts the path itself.
 ;                  When retrieving the current value for $sLinkAddress, the value will be directly returned from LibreOffice, if the current value is a path, it will be in URL format and will need to be converted using _LO_PathConvert.
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorInsertString
+; Related .......: _LOWriter_CursorInsertString, _LOWriter_CursorInsertControlChar, _LOWriter_CursorGetString, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -386,7 +386,7 @@ EndFunc   ;==>_LOWriter_CursorHyperlink
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorInsertString
+; Related .......: _LOWriter_CursorInsertString, _LOWriter_CursorGetString, _LOWriter_CursorHyperlink, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -438,7 +438,7 @@ EndFunc   ;==>_LOWriter_CursorInsertControlChar
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To prevent accidental and unwanted newlines, @CRLF is automatically replaced with @CR to match LibreOffice's newline style.
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_CursorGetString, _LOWriter_CursorHyperlink, _LOWriter_CursorInsertControlChar, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -500,7 +500,7 @@ EndFunc   ;==>_LOWriter_CursorInsertString
 ;                  If a Constant says [Count, Selecting], then that action can be repeated several times per call, and a Selection can be created or expanded during the move.
 ;                  If a Constant says [None], then that action can not be done once per call, and a Selection can not be created or expanded during the move.
 ;                  To Clear/Unselect a current selection, you can call a move such as "goRight", 0, False.
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_TableCreateCursor, _LOWriter_CursorGoToRange
+; Related .......: _LOWriter_CursorGoToRange, _LOWriter_CursorGetDataType, _LOWriter_CursorGetStatus, _LOWriter_CursorGetType, _LOWriter_CursorGoToRange, _LOWriter_CursorViewCursorGetPosition, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -706,7 +706,7 @@ EndFunc   ;==>_LOWriter_CursorParObjCopy
 ;                  The different possible areas are: Text Body, Table Cell, Header, Footer, Footnote, Endnote, Frame.
 ;                  Returns an Array of objects for Direct Formatting paragraphs in a document, or for copying and inserting etc.
 ;                  Table Objects returned from this function can be used as a regular Table Object to modify the Table with.
-; Related .......: _LOWriter_CursorParObjSectionsGet, _LOWriter_DocSelection, _LOWriter_CursorParObjDelete
+; Related .......: _LOWriter_CursorParObjSectionsGet, _LOWriter_DocSelection, _LOWriter_CursorParObjDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -767,7 +767,7 @@ EndFunc   ;==>_LOWriter_CursorParObjCreateList
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: You cannot delete the last paragraph contained in a Text area, it will cause a COM error.
-; Related .......: _LOWriter_CursorParObjCreateList
+; Related .......: _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjCopy
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -909,7 +909,7 @@ EndFunc   ;==>_LOWriter_CursorParObjSectionsGet
 ;                  Calling $bCreateAtViewCursor with True will create a Textcursor at the current ViewCursor position.
 ;                  There are two types of cursors in Word documents. The one you see, called the "ViewCursor", and one you do not see, called a "TextCursor". A "ViewCursor" is the blinking cursor you see when you are editing a Word document, there is only one per document. A "TextCursor" on the other hand, is an invisible cursor used for inserting text etc., into a Writer document. You can have multiple "TextCursors" per document.
 ;                  The ViewCursor knows how the data is displayed, but doesn’t know about the data itself. TextCursors however, know a lot about the data but very little about how it is displayed. For example, ViewCursors do not know about words or paragraphs, and TextCursors do not know about lines, screens, or pages.
-; Related .......: _LOWriter_CursorMove
+; Related .......: _LOWriter_CursorMove, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorGoToRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -972,7 +972,7 @@ EndFunc   ;==>_LOWriter_CursorTextCursorCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_CursorMove, _LOWriter_CursorViewCursorGetPosition, _LOWriter_CursorViewCursorGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1016,7 +1016,7 @@ EndFunc   ;==>_LOWriter_CursorViewCursorCurrPage
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The ViewCursor deals with the visible cursor of the Document. You can have only one ViewCursor at a time. ViewCursors support movement commands that are directly related to viewing, but can also be used like a TextCursor in most instances.
-; Related .......: _LOWriter_CursorMove
+; Related .......: _LOWriter_CursorMove, _LOWriter_CursorTextCursorCreate, _LOWriter_CursorGoToRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1052,7 +1052,7 @@ EndFunc   ;==>_LOWriter_CursorViewCursorGetObj
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Cursor Coordinate position is relative to the top-left of the first page of the document. In Hundredths of a Millimeter (HMM).
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorMove, _LO_UnitConvert
+; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorViewCursorCurrPage, _LOWriter_CursorMove, _LOWriter_CursorGoToRange, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

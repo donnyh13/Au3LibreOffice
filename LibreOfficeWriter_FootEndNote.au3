@@ -57,7 +57,7 @@
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert
+; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert, _LOWriter_FootnoteDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -91,7 +91,7 @@ EndFunc   ;==>_LOWriter_EndnoteDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Anchor cursor returned is just a Text Cursor placed at the anchor's position.
-; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert, _LOWriter_CursorMove, _LOWriter_CursorGetString, _LOWriter_CursorInsertString
+; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert, _LOWriter_CursorMove, _LOWriter_CursorGetString, _LOWriter_CursorInsertString, _LOWriter_FootnoteGetAnchor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -124,7 +124,7 @@ EndFunc   ;==>_LOWriter_EndnoteGetAnchor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert, _LOWriter_CursorInsertString
+; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert, _LOWriter_CursorInsertString, _LOWriter_FootnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -166,7 +166,7 @@ EndFunc   ;==>_LOWriter_EndnoteGetTextCursor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: A Endnote cannot be inserted into a Frame, a Footnote, a Endnote, or the Header/Footer.
-; Related .......: _LOWriter_EndnoteDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor,
+; Related .......: _LOWriter_EndnoteDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_FootnoteInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -230,7 +230,7 @@ EndFunc   ;==>_LOWriter_EndnoteInsert
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Calling $sLabel with Null will either return the current Label, or the current auto-numbering number, depending on if auto-numbering is active.
-; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert
+; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert, _LOWriter_EndnoteSettingsAutoNumber, _LOWriter_FootnoteModifyAnchor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -294,7 +294,7 @@ EndFunc   ;==>_LOWriter_EndnoteModifyAnchor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert
+; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert, _LOWriter_EndnoteModifyAnchor, _LOWriter_FootnoteSettingsAutoNumber
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -379,7 +379,7 @@ EndFunc   ;==>_LOWriter_EndnoteSettingsAutoNumber
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_ParStylesGetNames, _LOWriter_CharStylesGetNames, _LOWriter_PageStylesGetNames
+; Related .......: _LOWriter_ParStylesGetNames, _LOWriter_CharStylesGetNames, _LOWriter_PageStylesGetNames, _LOWriter_EndnoteSettingsAutoNumber, _LOWriter_FootnoteSettingsStyles
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -448,7 +448,7 @@ EndFunc   ;==>_LOWriter_EndnoteSettingsStyles
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_EndnoteDelete
+; Related .......: _LOWriter_EndnoteDelete, _LOWriter_FootnotesGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -495,7 +495,7 @@ EndFunc   ;==>_LOWriter_EndnotesGetList
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FootnoteInsert, _LOWriter_FootnotesGetList
+; Related .......: _LOWriter_FootnoteInsert, _LOWriter_FootnotesGetList, _LOWriter_EndnoteDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -529,7 +529,7 @@ EndFunc   ;==>_LOWriter_FootnoteDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FootnotesGetList
+; Related .......: _LOWriter_FootnotesGetList, _LOWriter_CursorMove, _LOWriter_CursorGetString, _LOWriter_CursorInsertString, _LOWriter_EndnoteGetAnchor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -562,7 +562,7 @@ EndFunc   ;==>_LOWriter_FootnoteGetAnchor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_CursorMove, _LOWriter_CursorInsertString
+; Related .......: _LOWriter_CursorMove, _LOWriter_CursorInsertString, _LOWriter_EndnoteGetTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -604,7 +604,7 @@ EndFunc   ;==>_LOWriter_FootnoteGetTextCursor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: A Footnote cannot be inserted into a Frame, a Footnote, an Endnote, or a Header/Footer.
-; Related .......: _LOWriter_FootnoteDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor
+; Related .......: _LOWriter_FootnoteDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_EndnoteInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -668,7 +668,7 @@ EndFunc   ;==>_LOWriter_FootnoteInsert
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Calling $sLabel with Null will either return the current Label, or the current auto-numbering number, depending on if auto-numbering is active.
-; Related .......: _LOWriter_FootnoteInsert, _LOWriter_FootnotesGetList
+; Related .......: _LOWriter_FootnoteInsert, _LOWriter_FootnotesGetList, _LOWriter_FootnoteSettingsAutoNumber, _LOWriter_EndnoteModifyAnchor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -739,7 +739,7 @@ EndFunc   ;==>_LOWriter_FootnoteModifyAnchor
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOWriter_FootnoteModifyAnchor, _LOWriter_EndnoteSettingsAutoNumber
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -829,7 +829,7 @@ EndFunc   ;==>_LOWriter_FootnoteSettingsAutoNumber
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOWriter_FootnoteSettingsStyles
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -898,7 +898,7 @@ EndFunc   ;==>_LOWriter_FootnoteSettingsContinuation
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_ParStylesGetNames, _LOWriter_PageStylesGetNames, _LOWriter_CharStylesGetNames
+; Related .......: _LOWriter_ParStylesGetNames, _LOWriter_CharStylesGetNames, _LOWriter_PageStylesGetNames, _LOWriter_FootnoteSettingsAutoNumber, _LOWriter_FootnoteSettingsContinuation, _LOWriter_EndnoteSettingsStyles
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -967,7 +967,7 @@ EndFunc   ;==>_LOWriter_FootnoteSettingsStyles
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FootnoteDelete
+; Related .......: _LOWriter_FootnoteDelete, _LOWriter_FootnoteInsert, _LOWriter_EndnotesGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

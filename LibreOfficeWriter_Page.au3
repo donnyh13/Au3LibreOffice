@@ -106,7 +106,7 @@
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_PageStyleAreaFillStyle, _LOWriter_PageStyleAreaGradient, _LOWriter_PageStyleFooterAreaColor, _LOWriter_PageStyleHeaderAreaColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -156,7 +156,7 @@ EndFunc   ;==>_LOWriter_PageStyleAreaColor
 ; Modified ......:
 ; Remarks .......: This function is to help determine if a Gradient background, or a solid color background is currently active.
 ;                  This is useful because, if a Gradient is active, the solid color value is still present, and thus it would not be possible to determine which function should be used to retrieve the current values for, whether the Color function, or the Gradient function.
-; Related .......:
+; Related .......: _LOWriter_PageStyleAreaColor, _LOWriter_PageStyleAreaGradient, _LOWriter_PageStyleFooterAreaFillStyle, _LOWriter_PageStyleHeaderAreaFillStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -234,7 +234,7 @@ EndFunc   ;==>_LOWriter_PageStyleAreaFillStyle
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_PageStyleAreaGradientMulticolor, _LOWriter_PageStyleFooterAreaGradient, _LOWriter_PageStyleHeaderAreaGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -438,7 +438,7 @@ EndFunc   ;==>_LOWriter_PageStyleAreaGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOWriter_PageStyleAreaTransparencyGradientMulti
+; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOWriter_PageStyleAreaGradient, _LOWriter_PageStyleFooterAreaGradientMulticolor, _LOWriter_PageStyleHeaderAreaTransparencyGradientMulti, _LOWriter_PageStyleAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -536,7 +536,7 @@ EndFunc   ;==>_LOWriter_PageStyleAreaGradientMulticolor
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName
+; Related .......: _LOWriter_PageStyleAreaTransparencyGradient, _LOWriter_PageStyleFooterAreaTransparency, _LOWriter_PageStyleHeaderAreaTransparency
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -612,7 +612,7 @@ EndFunc   ;==>_LOWriter_PageStyleAreaTransparency
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName
+; Related .......: _LOWriter_PageStyleAreaTransparency, _LOWriter_PageStyleAreaTransparencyGradientMulti, _LOWriter_PageStyleFooterAreaTransparencyGradient, _LOWriter_PageStyleHeaderAreaTransparencyGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -788,7 +788,7 @@ EndFunc   ;==>_LOWriter_PageStyleAreaTransparencyGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOWriter_PageStyleAreaGradientMulticolor
+; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOWriter_PageStyleAreaTransparencyGradient, _LOWriter_PageStyleFooterAreaTransparencyGradientMulti, _LOWriter_PageStyleHeaderAreaTransparencyGradientMulti, _LOWriter_PageStyleAreaGradientMulticolor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -904,7 +904,7 @@ EndFunc   ;==>_LOWriter_PageStyleAreaTransparencyGradientMulti
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_PageStyleBorderWidth, _LOWriter_PageStyleBorderStyle, _LOWriter_PageStyleBorderPadding
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_PageStyleBorderWidth, _LOWriter_PageStyleBorderStyle, _LOWriter_PageStyleBorderPadding, _LOWriter_PageStyleFooterBorderColor, _LOWriter_PageStyleHeaderBorderColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -959,7 +959,7 @@ EndFunc   ;==>_LOWriter_PageStyleBorderColor
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LO_UnitConvert, _LOWriter_PageStyleBorderWidth, _LOWriter_PageStyleBorderStyle, _LOWriter_PageStyleBorderColor
+; Related .......: _LO_UnitConvert, _LOWriter_PageStyleBorderWidth, _LOWriter_PageStyleBorderStyle, _LOWriter_PageStyleBorderColor, _LOWriter_PageStyleFooterBorderPadding, _LOWriter_PageStyleHeaderBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1059,7 +1059,7 @@ EndFunc   ;==>_LOWriter_PageStyleBorderPadding
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LOWriter_PageStyleBorderWidth, _LOWriter_PageStyleBorderColor, _LOWriter_PageStyleBorderPadding
+; Related .......: _LOWriter_PageStyleBorderWidth, _LOWriter_PageStyleBorderColor, _LOWriter_PageStyleBorderPadding, _LOWriter_PageStyleFooterBorderStyle, _LOWriter_PageStyleHeaderBorderStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1118,7 +1118,7 @@ EndFunc   ;==>_LOWriter_PageStyleBorderStyle
 ; Remarks .......: To "Turn Off" Borders, set Width to 0
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LO_UnitConvert, _LOWriter_PageStyleBorderStyle, _LOWriter_PageStyleBorderColor, _LOWriter_PageStyleBorderPadding
+; Related .......: _LO_UnitConvert, _LOWriter_PageStyleBorderStyle, _LOWriter_PageStyleBorderColor, _LOWriter_PageStyleBorderPadding, _LOWriter_PageStyleFooterBorderWidth, _LOWriter_PageStyleHeaderBorderWidth
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1178,7 +1178,7 @@ EndFunc   ;==>_LOWriter_PageStyleBorderWidth
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LOWriter_PageStyleColumnSettings, _LOWriter_PageStyleColumnSize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1274,7 +1274,7 @@ EndFunc   ;==>_LOWriter_PageStyleColumnSeparator
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName
+; Related .......: _LOWriter_PageStyleColumnSeparator, _LOWriter_PageStyleColumnSize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1347,7 +1347,7 @@ EndFunc   ;==>_LOWriter_PageStyleColumnSettings
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  To set $bAutoWidth or $iGlobalSpacing you may enter any number in $iColumn as long as you are not setting width or spacing, as AutoWidth is not column specific. If you set a value for $iGlobalSpacing with $bAutoWidth set to False, the value is applied to all the columns still.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOWriter_PageStyleColumnSeparator, _LOWriter_PageStyleColumnSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1495,7 +1495,7 @@ EndFunc   ;==>_LOWriter_PageStyleColumnSize
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_PageStyleDelete
+; Related .......: _LOWriter_PageStyleDelete, _LOWriter_PageStyleExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1550,7 +1550,7 @@ EndFunc   ;==>_LOWriter_PageStyleCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOWriter_CursorParObjCreateList, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_PageStylesGetNames
+; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_PageStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1649,7 +1649,7 @@ EndFunc   ;==>_LOWriter_PageStyleDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_PageStylesGetNames, _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1712,7 +1712,7 @@ EndFunc   ;==>_LOWriter_PageStyleExists
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOWriter_PageStyleHeader
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1832,7 +1832,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooter
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_PageStyleFooterAreaFillStyle, _LOWriter_PageStyleFooterAreaGradient, _LOWriter_PageStyleAreaColor, _LOWriter_PageStyleHeaderAreaColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1883,7 +1883,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaColor
 ; Modified ......:
 ; Remarks .......: This function is to help determine if a Gradient background, or a solid color background is currently active.
 ;                  This is useful because, if a Gradient is active, the solid color value is still present, and thus it would not be possible to determine which function should be used to retrieve the current values for, whether the Color function, or the Gradient function.
-; Related .......:
+; Related .......: _LOWriter_PageStyleFooterAreaColor, _LOWriter_PageStyleFooterAreaGradient, _LOWriter_PageStyleHeaderAreaFillStyle, _LOWriter_PageStyleAreaFillStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1962,7 +1962,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaFillStyle
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_PageStyleFooterAreaGradientMulticolor, _LOWriter_PageStyleHeaderAreaGradient, _LOWriter_PageStyleAreaGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2167,7 +2167,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOWriter_PageStyleFooterAreaTransparencyGradientMulti
+; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOWriter_PageStyleFooterAreaGradient, _LOWriter_PageStyleHeaderAreaGradientMulticolor, _LOWriter_PageStyleAreaGradientMulticolor, _LOWriter_PageStyleFooterAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2266,7 +2266,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaGradientMulticolor
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName
+; Related .......: _LOWriter_PageStyleFooterAreaTransparencyGradient, _LOWriter_PageStyleHeaderAreaTransparency, _LOWriter_PageStyleAreaTransparency
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2344,7 +2344,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaTransparency
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName
+; Related .......: _LOWriter_PageStyleFooterAreaTransparencyGradientMulti, _LOWriter_PageStyleHeaderAreaTransparencyGradient, _LOWriter_PageStyleAreaTransparencyGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2521,7 +2521,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaTransparencyGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOWriter_PageStyleFooterAreaGradientMulticolor
+; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOWriter_PageStyleFooterAreaTransparencyGradientMulti, _LOWriter_PageStyleHeaderAreaTransparencyGradient, _LOWriter_PageStyleFooterAreaGradientMulticolor, _LOWriter_PageStyleAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2636,7 +2636,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaTransparencyGradientMulti
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_PageStyleFooterBorderWidth, _LOWriter_PageStyleFooterBorderStyle, _LOWriter_PageStyleFooterBorderPadding
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_PageStyleFooterBorderWidth, _LOWriter_PageStyleFooterBorderStyle, _LOWriter_PageStyleFooterBorderPadding, _LOWriter_PageStyleHeaderBorderColor, _LOWriter_PageStyleBorderColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2693,7 +2693,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterBorderColor
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LO_UnitConvert, _LOWriter_PageStyleFooterBorderWidth, _LOWriter_PageStyleFooterBorderStyle, _LOWriter_PageStyleFooterBorderColor
+; Related .......: _LO_UnitConvert, _LOWriter_PageStyleFooterBorderWidth, _LOWriter_PageStyleFooterBorderStyle, _LOWriter_PageStyleFooterBorderColor, _LOWriter_PageStyleHeaderBorderPadding, _LOWriter_PageStyleBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2793,7 +2793,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterBorderPadding
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LOWriter_PageStyleFooterBorderWidth, _LOWriter_PageStyleFooterBorderColor, _LOWriter_PageStyleFooterBorderPadding
+; Related .......: _LOWriter_PageStyleFooterBorderWidth, _LOWriter_PageStyleFooterBorderColor, _LOWriter_PageStyleFooterBorderPadding, _LOWriter_PageStyleHeaderBorderStyle, _LOWriter_PageStyleBorderStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2851,7 +2851,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterBorderStyle
 ; Remarks .......: To "Turn Off" Borders, set Width to 0.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LO_UnitConvert, _LOWriter_PageStyleFooterBorderStyle, _LOWriter_PageStyleFooterBorderColor, _LOWriter_PageStyleFooterBorderPadding
+; Related .......: _LO_UnitConvert, _LOWriter_PageStyleFooterBorderStyle, _LOWriter_PageStyleFooterBorderColor, _LOWriter_PageStyleFooterBorderPadding, _LOWriter_PageStyleHeaderBorderWidth, _LOWriter_PageStyleBorderWidth
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2897,7 +2897,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterBorderWidth
 ; Modified ......:
 ; Remarks .......: If more than one parameter is called with True, an array is returned with the requested objects in the order that the True parameters are listed. Else the requested object is returned.
 ;                  If same content on left and right and first pages is active for the requested page style, you only need to use the $bFooter parameter, the others are only for when same content on first page or same content on left and right pages is deactivated.
-; Related .......: _LOWriter_PageStyleGetObjByName, _LOWriter_PageStyleCreate, _LOWriter_CursorInsertString
+; Related .......: _LOWriter_PageStyleGetObjByName, _LOWriter_PageStyleCreate, _LOWriter_CursorInsertString, _LOWriter_PageStyleHeaderCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2969,7 +2969,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterCreateTextCursor
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  LibreOffice may change the shadow width +/- a Hundredth of a Millimeter (HMM).
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LOWriter_PageStyleHeaderShadow, _LOWriter_PageStyleShadow
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3048,7 +3048,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterShadow
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LO_UnitConvert
+; Related .......: _LOWriter_PageStyleFootnoteLine, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3123,7 +3123,7 @@ EndFunc   ;==>_LOWriter_PageStyleFootnoteArea
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
+; Related .......: _LOWriter_PageStyleFootnoteArea, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3211,7 +3211,7 @@ EndFunc   ;==>_LOWriter_PageStyleFootnoteLine
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_PageStylesGetNames
+; Related .......: _LOWriter_PageStylesGetNames, _LOWriter_PageStyleExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3278,7 +3278,7 @@ EndFunc   ;==>_LOWriter_PageStyleGetObjByName
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LO_UnitConvert
+; Related .......: _LOWriter_PageStyleFooter, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3398,7 +3398,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeader
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_PageStyleHeaderAreaFillStyle, _LOWriter_PageStyleHeaderAreaGradient, _LOWriter_PageStyleFooterAreaColor, _LOWriter_PageStyleAreaColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3449,7 +3449,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaColor
 ; Modified ......:
 ; Remarks .......: This function is to help determine if a Gradient background, or a solid color background is currently active.
 ;                  This is useful because, if a Gradient is active, the solid color value is still present, and thus it would not be possible to determine which function should be used to retrieve the current values for, whether the Color function, or the Gradient function.
-; Related .......:
+; Related .......: _LOWriter_PageStyleHeaderAreaColor, _LOWriter_PageStyleHeaderAreaGradient, _LOWriter_PageStyleFooterAreaFillStyle, _LOWriter_PageStyleAreaFillStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3528,7 +3528,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaFillStyle
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_PageStyleHeaderAreaGradientMulticolor, _LOWriter_PageStyleFooterAreaGradient, _LOWriter_PageStyleAreaGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3733,7 +3733,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOWriter_PageStyleHeaderAreaTransparencyGradientMulti
+; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOWriter_PageStyleHeaderAreaGradient, _LOWriter_PageStyleHeaderAreaTransparencyGradientMulti, _LOWriter_PageStyleFooterAreaGradientMulticolor, _LOWriter_PageStyleAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3832,7 +3832,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaGradientMulticolor
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName
+; Related .......: _LOWriter_PageStyleHeaderAreaTransparencyGradient, _LOWriter_PageStyleFooterAreaTransparency, _LOWriter_PageStyleAreaTransparency
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3910,7 +3910,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaTransparency
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName
+; Related .......: _LOWriter_PageStyleHeaderAreaTransparencyGradient, _LOWriter_PageStyleFooterAreaTransparencyGradient, _LOWriter_PageStyleAreaTransparencyGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4087,7 +4087,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaTransparencyGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOWriter_PageStyleHeaderAreaGradientMulticolor
+; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOWriter_PageStyleHeaderAreaTransparencyGradient, _LOWriter_PageStyleHeaderAreaGradientMulticolor, _LOWriter_PageStyleFooterAreaTransparencyGradientMulti, _LOWriter_PageStyleAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4202,7 +4202,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaTransparencyGradientMulti
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_PageStyleHeaderBorderWidth, _LOWriter_PageStyleHeaderBorderStyle, _LOWriter_PageStyleHeaderBorderPadding
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_PageStyleHeaderBorderWidth, _LOWriter_PageStyleHeaderBorderStyle, _LOWriter_PageStyleHeaderBorderPadding, _LOWriter_PageStyleFooterBorderColor, _LOWriter_PageStyleBorderColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4259,7 +4259,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderBorderColor
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LO_UnitConvert, _LOWriter_PageStyleHeaderBorderWidth, _LOWriter_PageStyleHeaderBorderStyle, _LOWriter_PageStyleHeaderBorderColor
+; Related .......: _LO_UnitConvert, _LOWriter_PageStyleHeaderBorderWidth, _LOWriter_PageStyleHeaderBorderStyle, _LOWriter_PageStyleHeaderBorderColor, _LOWriter_PageStyleFooterBorderPadding, _LOWriter_PageStyleBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4359,7 +4359,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderBorderPadding
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LOWriter_PageStyleHeaderBorderWidth, _LOWriter_PageStyleHeaderBorderColor, _LOWriter_PageStyleHeaderBorderPadding
+; Related .......: _LOWriter_PageStyleHeaderBorderWidth, _LOWriter_PageStyleHeaderBorderColor, _LOWriter_PageStyleHeaderBorderPadding, _LOWriter_PageStyleFooterBorderStyle, _LOWriter_PageStyleBorderStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4417,7 +4417,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderBorderStyle
 ; Remarks .......: To "Turn Off" Borders, set Width to 0.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LO_UnitConvert, _LOWriter_PageStyleHeaderBorderStyle, _LOWriter_PageStyleHeaderBorderColor, _LOWriter_PageStyleHeaderBorderPadding
+; Related .......: _LO_UnitConvert, _LOWriter_PageStyleHeaderBorderStyle, _LOWriter_PageStyleHeaderBorderColor, _LOWriter_PageStyleHeaderBorderPadding, _LOWriter_PageStyleFooterBorderWidth, _LOWriter_PageStyleBorderWidth
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4463,7 +4463,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderBorderWidth
 ; Modified ......:
 ; Remarks .......: If more than one parameter is called with True, an array is returned with the requested objects in the order that the True parameters are listed. Else the requested object is returned.
 ;                  If same content on left and right and first pages is active for the requested page style, you only need to use the $bHeader parameter, the others are only for when same content on first page or same content on left and right pages is deactivated.
-; Related .......: _LOWriter_PageStyleGetObjByName, _LOWriter_PageStyleCreate, _LOWriter_CursorInsertString
+; Related .......: _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_CursorMove, _LOWriter_CursorInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4535,7 +4535,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderCreateTextCursor
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  LibreOffice may change the shadow width +/- a Hundredth of a Millimeter (HMM).
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LOWriter_PageStyleFooterShadow, _LOWriter_PageStyleShadow
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4637,7 +4637,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderShadow
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  I have no way to retrieve possible values for the Paper Tray parameter, at least that I can find. You may still use it if you know the appropriate value.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName
+; Related .......: _LOWriter_PageStyleMargins, _LOWriter_PageStylePaperFormat
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4760,7 +4760,7 @@ EndFunc   ;==>_LOWriter_PageStyleLayout
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOWriter_PageStyleLayout, _LOWriter_PageStylePaperFormat
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4940,7 +4940,7 @@ EndFunc   ;==>_LOWriter_PageStyleOrganizer
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOWriter_PageStyleLayout, _LOWriter_PageStyleMargins
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5023,7 +5023,7 @@ EndFunc   ;==>_LOWriter_PageStylePaperFormat
 ;                  - "Default Page Style" is internally called "Standard".
 ;                  Previous to LibreOffice 25.2 either name would work when setting a Style, however after 25.2 only the internal, or programmatic style names, will work.
 ;                  Calling $bDisplayName with True will return a list of Style names, as the user sees them in the UI, in the same order as they are returned if $bDisplayName is False. It is best not to use these when setting Styling.
-; Related .......: _LOWriter_PageStyleGetObjByName
+; Related .......: _LOWriter_PageStyleGetObjByName, _LOWriter_PageStyleExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5075,7 +5075,7 @@ EndFunc   ;==>_LOWriter_PageStylesGetNames
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  LibreOffice may change the shadow width +/- a Hundredth of a Millimeter (HMM).
-; Related .......: _LOWriter_PageStyleCreate, _LOWriter_PageStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LOWriter_PageStyleFooterShadow, _LOWriter_PageStyleHeaderShadow
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

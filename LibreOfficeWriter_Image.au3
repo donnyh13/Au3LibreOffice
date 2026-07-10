@@ -85,7 +85,7 @@
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOWriter_ImageInsert, _LOWriter_ImageGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LOWriter_ImageAreaFillStyle, _LOWriter_ImageAreaGradient, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -134,7 +134,7 @@ EndFunc   ;==>_LOWriter_ImageAreaColor
 ; Modified ......:
 ; Remarks .......: This function is to help determine if a Gradient background, or a solid color background is currently active.
 ;                  This is useful because, if a Gradient is active, the solid color value is still present, and thus it would not be possible to determine which function should be used to retrieve the current values for, whether the Color function, or the Gradient function.
-; Related .......:
+; Related .......: _LOWriter_ImageAreaColor, _LOWriter_ImageAreaGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -211,7 +211,7 @@ EndFunc   ;==>_LOWriter_ImageAreaFillStyle
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
-; Related .......: _LOWriter_ImageInsert, _LOWriter_ImageGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LOWriter_ImageAreaColor, _LOWriter_ImageAreaFillStyle, _LOWriter_ImageAreaGradientMulticolor, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -414,7 +414,7 @@ EndFunc   ;==>_LOWriter_ImageAreaGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOWriter_ImageAreaTransparencyGradientMulti
+; Related .......: _LOWriter_ImageAreaGradient, _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOWriter_ImageAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -510,7 +510,7 @@ EndFunc   ;==>_LOWriter_ImageAreaGradientMulticolor
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_ImageInsert, _LOWriter_ImageGetObjByName
+; Related .......: _LOWriter_ImageAreaTransparencyGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -584,7 +584,7 @@ EndFunc   ;==>_LOWriter_ImageAreaTransparency
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_ImageInsert, _LOWriter_ImageGetObjByName
+; Related .......: _LOWriter_ImageAreaTransparency, _LOWriter_ImageAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -758,7 +758,7 @@ EndFunc   ;==>_LOWriter_ImageAreaTransparencyGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOWriter_ImageAreaGradientMulticolor
+; Related .......: _LOWriter_ImageAreaTransparencyGradient, _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOWriter_ImageAreaGradientMulticolor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -872,7 +872,7 @@ EndFunc   ;==>_LOWriter_ImageAreaTransparencyGradientMulti
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_ImageInsert, _LOWriter_ImageGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_ImageBorderWidth, _LOWriter_ImageBorderStyle, _LOWriter_ImageBorderPadding
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_ImageBorderWidth, _LOWriter_ImageBorderStyle, _LOWriter_ImageBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -925,7 +925,7 @@ EndFunc   ;==>_LOWriter_ImageBorderColor
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_ImageInsert, _LOWriter_ImageGetObjByName, _LO_UnitConvert, _LOWriter_ImageBorderWidth, _LOWriter_ImageBorderStyle, _LOWriter_ImageBorderColor
+; Related .......: _LO_UnitConvert, _LOWriter_ImageBorderWidth, _LOWriter_ImageBorderStyle, _LOWriter_ImageBorderColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1023,7 +1023,7 @@ EndFunc   ;==>_LOWriter_ImageBorderPadding
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_ImageInsert, _LOWriter_ImageGetObjByName, _LOWriter_ImageBorderWidth, _LOWriter_ImageBorderColor, _LOWriter_ImageBorderPadding
+; Related .......: _LOWriter_ImageBorderWidth, _LOWriter_ImageBorderColor, _LOWriter_ImageBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1080,7 +1080,7 @@ EndFunc   ;==>_LOWriter_ImageBorderStyle
 ; Remarks .......: To "Turn Off" Borders, set Width to 0
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_ImageInsert, _LOWriter_ImageGetObjByName, _LO_UnitConvert, _LOWriter_ImageBorderStyle, _LOWriter_ImageBorderColor, _LOWriter_ImageBorderPadding
+; Related .......: _LO_UnitConvert, _LOWriter_ImageBorderStyle, _LOWriter_ImageBorderColor, _LOWriter_ImageBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1143,7 +1143,7 @@ EndFunc   ;==>_LOWriter_ImageBorderWidth
 ; Remarks .......: $bInvert is glitchy to set. The current setting will always be returned as False if set by the user. Setting inverted using this function can be difficult to remove by the user.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_ImageInsert, _LOWriter_ImageGetObjByName
+; Related .......: _LOWriter_ImageTransparency, _LOWriter_ImageModify
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1262,7 +1262,7 @@ EndFunc   ;==>_LOWriter_ImageColorAdjust
 ;                  Maximum crop values are based on page width. You cannot exceed the size of the page, nor crop too much of the image away.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_ImageInsert, _LOWriter_ImageGetObjByName, _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOWriter_ImageSize, _LOWriter_ImageModify
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1387,7 +1387,7 @@ EndFunc   ;==>_LOWriter_ImageDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_ImageDelete
+; Related .......: _LOWriter_ImageDelete, _LOWriter_ImageGetObjByName, _LOWriter_ImagesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1418,7 +1418,7 @@ EndFunc   ;==>_LOWriter_ImageExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_ImageInsert, _LOWriter_ImageGetObjByName, _LOWriter_CursorMove
+; Related .......: _LOWriter_CursorMove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1455,7 +1455,7 @@ EndFunc   ;==>_LOWriter_ImageGetAnchor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_ImagesGetNames
+; Related .......: _LOWriter_ImagesGetNames, _LOWriter_ImageExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1508,7 +1508,7 @@ EndFunc   ;==>_LOWriter_ImageGetObjByName
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_ImageInsert, _LOWriter_ImageGetObjByName
+; Related .......:
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1600,7 +1600,7 @@ EndFunc   ;==>_LOWriter_ImageHyperlink
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Unfortunately, I am unable to find a way to insert an image "linked", images can only be inserted as embedded.
-; Related .......: _LOWriter_ImageDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate,_LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_FrameCreateTextCursor
+; Related .......: _LOWriter_ImageDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1721,7 +1721,7 @@ EndFunc   ;==>_LOWriter_ImageInsert
 ; Remarks .......: Unfortunately I cannot find a way to replace an image as a linked image. Thus I have skipped "Link" setting.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_ImageInsert, _LOWriter_ImageGetObjByName
+; Related .......: _LOWriter_ImageColorAdjust, _LOWriter_ImageCrop
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1801,7 +1801,7 @@ EndFunc   ;==>_LOWriter_ImageModify
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_ImageInsert, _LOWriter_ImageGetObjByName, _LOWriter_ImageOptionsName
+; Related .......: _LOWriter_ImageOptionsName, _LOWriter_ImageSize, _LOWriter_ImageTypePosition, _LOWriter_ImageTypeSize, _LOWriter_ImageWrapOptions
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1886,7 +1886,7 @@ EndFunc   ;==>_LOWriter_ImageOptions
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Previous and Next link are omitted as they seem to have no use for images.
-; Related .......: _LOWriter_ImageInsert, _LOWriter_ImageGetObjByName, _LOWriter_ImageOptions
+; Related .......: _LOWriter_ImageOptions
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1962,7 +1962,7 @@ EndFunc   ;==>_LOWriter_ImageOptionsName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Unfortunately I am unable to find a way to convert or insert an image as a linked image instead of an embedded image. All linked images will remain as such, all embedded images will stay as embedded.
-; Related .......: _LOWriter_ImageInsert, _LOWriter_ImageGetObjByName
+; Related .......: _LOWriter_ImageDelete, _LOWriter_ImageInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1997,7 +1997,7 @@ EndFunc   ;==>_LOWriter_ImageReplace
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_ImageGetObjByName
+; Related .......: _LOWriter_ImageGetObjByName, _LOWriter_ImageExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2052,7 +2052,7 @@ EndFunc   ;==>_LOWriter_ImagesGetNames
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  LibreOffice may change the shadow width +/- a Hundredth of a Millimeter (HMM).
-; Related .......: _LOWriter_ImageInsert, _LOWriter_ImageGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2142,7 +2142,7 @@ EndFunc   ;==>_LOWriter_ImageShadow
 ; Remarks .......: The return for $bOriginalSize is a Boolean whether the image is currently set to its original size (True) or not.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_ImageInsert, _LOWriter_ImageGetObjByName, _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOWriter_ImageTypeSize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2251,7 +2251,7 @@ EndFunc   ;==>_LOWriter_ImageSize
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_ImageInsert, _LOWriter_ImageGetObjByName, _LOWriter_ImageAreaTransparency
+; Related .......: _LOWriter_ImageColorAdjust, _LOWriter_ImageAreaTransparency
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2367,7 +2367,7 @@ EndFunc   ;==>_LOWriter_ImageTransparency
 ;                  - $LOW_RELATIVE_PAGE (7),
 ;                  - $LOW_RELATIVE_PAGE_PRINT (8)[Same as Page Text Area in L.O. UI].
 ;                  - $LOW_RELATIVE_TEXT_LINE (9)[The same as "Line of Text" in L.O. UI]
-; Related .......: _LOWriter_ImageInsert, _LOWriter_ImageGetObjByName, _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOWriter_ImageTypeSize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2561,7 +2561,7 @@ EndFunc   ;==>_LOWriter_ImageTypePosition
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function can successfully set "Keep Ratio" however when the user changes this setting in the UI, for some reason the applicable setting values are not updated, so this function may return incorrect values for "Keep Ratio".
 ;                  When Keep Ratio is set to True, setting Width/Height values via this function will not be kept in ratio.
-; Related .......: _LOWriter_ImageInsert, _LOWriter_ImageGetObjByName, _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOWriter_ImageOptions, _LOWriter_ImageSize, _LOWriter_ImageTypePosition
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2681,7 +2681,7 @@ EndFunc   ;==>_LOWriter_ImageTypeSize
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_ImageInsert, _LOWriter_ImageGetObjByName, _LO_UnitConvert, _LOWriter_ImageWrapOptions
+; Related .......: _LO_UnitConvert, _LOWriter_ImageWrapOptions
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2788,7 +2788,7 @@ EndFunc   ;==>_LOWriter_ImageWrap
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function may indicate the settings were set successfully when they haven't been if the appropriate wrap type, anchor type etc. hasn't been set before hand.
-; Related .......: _LOWriter_ImageInsert, _LOWriter_ImageGetObjByName, _LOWriter_ImageWrap
+; Related .......: _LOWriter_ImageWrap
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

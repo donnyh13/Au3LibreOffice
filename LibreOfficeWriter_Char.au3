@@ -90,7 +90,7 @@
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Certain Error values are passed from the internal border setting function.
-; Related .......: _LOWriter_CharStyleGetObjByName, _LOWriter_CharStyleCreate, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_CharStyleBorderWidth, _LOWriter_CharStyleBorderStyle, _LOWriter_CharStyleBorderPadding
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_CharStyleBorderWidth, _LOWriter_CharStyleBorderStyle, _LOWriter_CharStyleBorderPadding, _LOWriter_ParStyleBorderColor, _LOWriter_DirFrmtCharBorderColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -148,7 +148,7 @@ EndFunc   ;==>_LOWriter_CharStyleBorderColor
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  All distance values are set in Hundredths of a Millimeter (HMM). To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_CharStyleGetObjByName, _LOWriter_CharStyleCreate, _LO_UnitConvert, _LOWriter_CharStyleBorderWidth, _LOWriter_CharStyleBorderStyle, _LOWriter_CharStyleBorderColor
+; Related .......: _LO_UnitConvert, _LOWriter_CharStyleBorderWidth, _LOWriter_CharStyleBorderStyle, _LOWriter_CharStyleBorderColor, _LOWriter_ParStyleBorderPadding, _LOWriter_DirFrmtCharBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -208,7 +208,7 @@ EndFunc   ;==>_LOWriter_CharStyleBorderPadding
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_CharStyleGetObjByName, _LOWriter_CharStyleCreate, _LOWriter_CharStyleBorderWidth, _LOWriter_CharStyleBorderColor, _LOWriter_CharStyleBorderPadding
+; Related .......: _LOWriter_CharStyleBorderWidth, _LOWriter_CharStyleBorderColor, _LOWriter_CharStyleBorderPadding, _LOWriter_ParStyleBorderStyle, _LOWriter_DirFrmtCharBorderStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -269,7 +269,7 @@ EndFunc   ;==>_LOWriter_CharStyleBorderStyle
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Certain Error values are passed from the internal border setting function.
-; Related .......: _LOWriter_CharStyleGetObjByName, _LOWriter_CharStyleCreate, _LO_UnitConvert, _LOWriter_CharStyleBorderColor, _LOWriter_CharStyleBorderStyle, _LOWriter_CharStyleBorderPadding
+; Related .......: _LO_UnitConvert, _LOWriter_CharStyleBorderColor, _LOWriter_CharStyleBorderStyle, _LOWriter_CharStyleBorderPadding, _LOWriter_ParStyleBorderWidth, _LOWriter_DirFrmtCharBorderWidth
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -314,7 +314,7 @@ EndFunc   ;==>_LOWriter_CharStyleBorderWidth
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_CharStyleDelete
+; Related .......: _LOWriter_CharStyleDelete, _LOWriter_CharStyleExists, _LOWriter_CharStyleGetObjByName, _LOWriter_CharStyleOrganizer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -369,7 +369,7 @@ EndFunc   ;==>_LOWriter_CharStyleCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_CursorParObjCreateList, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CharStylesGetNames
+; Related .......: _LOWriter_CharStylesGetNames, _LOWriter_ParStyleCurrent, _LOWriter_DirFrmtGetCurStyles
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -497,7 +497,7 @@ EndFunc   ;==>_LOWriter_CharStyleDelete
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_CharStyleGetObjByName, _LOWriter_CharStyleCreate
+; Related .......: _LOWriter_ParStyleEffect, _LOWriter_DirFrmtCharEffect, _LOWriter_CharStyleOverLine, _LOWriter_CharStyleStrikeOut, _LOWriter_CharStyleUnderLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -530,7 +530,7 @@ EndFunc   ;==>_LOWriter_CharStyleEffect
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_CharStyleCreate, _LOWriter_CharStyleGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -579,7 +579,7 @@ EndFunc   ;==>_LOWriter_CharStyleExists
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
 ;                  LibreOffice Writer accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
-; Related .......: _LOWriter_CharStyleGetObjByName, _LOWriter_CharStyleCreate, _LOWriter_FontsGetNames
+; Related .......: _LOWriter_FontsGetNames, _LOWriter_CharStyleFontColor, _LOWriter_ParStyleFont, _LOWriter_DirFrmtFont
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -628,7 +628,7 @@ EndFunc   ;==>_LOWriter_CharStyleFont
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_CharStyleGetObjByName, _LOWriter_CharStyleCreate, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LOWriter_CharStyleFont, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_ParStyleFontColor, _LOWriter_DirFrmtFontColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -664,7 +664,7 @@ EndFunc   ;==>_LOWriter_CharStyleFontColor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_CharStylesGetNames
+; Related .......: _LOWriter_CharStylesGetNames, _LOWriter_CharStyleExists, _LOWriter_CharStyleOrganizer
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -718,7 +718,7 @@ EndFunc   ;==>_LOWriter_CharStyleGetObjByName
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_CharStyleGetObjByName, _LOWriter_CharStylesGetNames
+; Related .......: _LOWriter_CharStyleGetObjByName, _LOWriter_CharStyleCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -800,7 +800,7 @@ EndFunc   ;==>_LOWriter_CharStyleOrganizer
 ; Remarks .......: OverLine line style uses the same constants as underline style.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_CharStyleGetObjByName, _LOWriter_CharStyleCreate, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_CharStyleEffect, _LOWriter_CharStyleStrikeOut, _LOWriter_CharStyleUnderLine, _LOWriter_ParStyleOverLine, _LOWriter_DirFrmtOverLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -849,7 +849,7 @@ EndFunc   ;==>_LOWriter_CharStyleOverLine
 ;                  The way LibreOffice is set up Super/Subscript are set in the same setting, Superscript is a positive number from 1 to 100 (percentage), Subscript is a negative number set to -1 to -100 percentage. For the user's convenience this function automatically converts the positive numbers to negative, and back when setting or retrieving subscript values.
 ;                  Automatic Superscript has an Integer value of 14000, Auto Subscript has a Integer value of -14000. Being that there is no settable setting of Automatic Super/Sub Script, it has been chosen to use -1 to indicate an automatic Sub/SuperScript value.
 ;                  If you set both $iSuperScript and $iSubScript to -1 (Automatic), or both $iSuperScript and $iSubScript to any value, Subscript will be the result, as it is the last in the function to be set, and thus will overwrite any Superscript values.
-; Related .......: _LOWriter_CharStyleGetObjByName, _LOWriter_CharStyleCreate
+; Related .......: _LOWriter_CharStyleSpacing, _LOWriter_CharStyleFont, _LOWriter_ParStylePosition, _LOWriter_DirFrmtCharPosition
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -892,7 +892,7 @@ EndFunc   ;==>_LOWriter_CharStylePosition
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_CharStyleGetObjByName, _LOWriter_CharStyleCreate
+; Related .......: _LOWriter_CharStylePosition, _LOWriter_CharStyleSpacing, _LOWriter_ParStyleRotateScale, _LOWriter_DirFrmtCharRotateScale
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -940,7 +940,7 @@ EndFunc   ;==>_LOWriter_CharStyleRotateScale
 ;                  - "No Character Style" is internally called "Standard".
 ;                  Previous to LibreOffice 25.2 either name would work when setting a Style, however after 25.2 only the internal, or programmatic style names, will work.
 ;                  Calling $bDisplayName with True will return a list of Style names, as the user sees them in the UI, in the same order as they are returned if $bDisplayName is False. It is best not to use these when setting Paragraph Styling.
-; Related .......:
+; Related .......: _LOWriter_CharStyleExists, _LOWriter_CharStyleGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -994,7 +994,7 @@ EndFunc   ;==>_LOWriter_CharStylesGetNames
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  LibreOffice may adjust the set width +/- a Hundredth of a Millimeter (HMM) after setting.
-; Related .......: _LOWriter_CharStyleGetObjByName, _LOWriter_CharStyleCreate, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
+; Related .......: _LOWriter_CharStyleEffect, _LOWriter_CharStyleFontColor, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LOWriter_ParStyleShadow, _LOWriter_DirFrmtCharShadow
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1041,7 +1041,7 @@ EndFunc   ;==>_LOWriter_CharStyleShadow
 ;                  The acceptable values are from -2 Pt to 928.8 Pt. The figures can be directly converted easily, however, for an unknown reason to myself, LibreOffice begins counting backwards and in negative Hundredths of a Millimeter (HMM) internally from 928.9 up to 1000 Pt (Max setting).
 ;                  For example, 928.8Pt is the last correct value, which equals 32766 Hundredths of a Millimeter (HMM), after this LibreOffice reports the following: ;928.9 Pt = -32766 (HMM); 929 Pt = -32763 (HMM); 929.1 = -32759; 1000 pt = -30258.
 ;                  Attempting to set LibreOffice's kerning value to anything over 32768 (HMM) causes a COM exception, and attempting to set the kerning to any of these negative numbers sets the User viewable kerning value to -2.0 Pt. For these reasons the max settable kerning is -2.0 Pt to 928.8 Pt.
-; Related .......: _LOWriter_CharStyleGetObjByName, _LOWriter_CharStyleCreate, _LO_UnitConvert
+; Related .......: _LOWriter_CharStylePosition, _LOWriter_CharStyleRotateScale, _LO_UnitConvert, _LOWriter_ParStyleSpacing, _LOWriter_DirFrmtCharSpacing
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1084,7 +1084,7 @@ EndFunc   ;==>_LOWriter_CharStyleSpacing
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Strikeout line style is converted to a single line in Ms word document format.
-; Related .......: _LOWriter_CharStyleGetObjByName
+; Related .......: _LOWriter_CharStyleEffect, _LOWriter_CharStyleOverLine, _LOWriter_CharStyleUnderLine, _LOWriter_ParStyleStrikeOut, _LOWriter_DirFrmtStrikeOut
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1129,7 +1129,7 @@ EndFunc   ;==>_LOWriter_CharStyleStrikeOut
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_CharStyleGetObjByName, _LOWriter_CharStyleCreate, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LOWriter_CharStyleEffect, _LOWriter_CharStyleOverLine, _LOWriter_CharStyleStrikeOut, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_ParStyleUnderLine, _LOWriter_DirFrmtUnderLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
