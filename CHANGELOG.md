@@ -1039,6 +1039,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Added Module name to COM Error outputs for MsgBox and ConsoleWrite.
 - Added Enumeration values to comments after enumerated Constants.
 - Added default value for user inputs in examples.
+- _LOCalc_RangeColumnsGetNames
 
 #### Changed
 

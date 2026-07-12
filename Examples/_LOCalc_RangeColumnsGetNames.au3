@@ -6,7 +6,8 @@ Example()
 
 Func Example()
 	Local $oDoc, $oSheet, $oCellRange
-	Local $iCount = 0
+	Local $asNames
+	Local $sNames = ""
 
 	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOCalc_DocCreate(True, False)
@@ -16,21 +17,19 @@ Func Example()
 	$oSheet = _LOCalc_SheetActive($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the currently active Sheet Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve the count of Columns contained in the Sheet.
-	$iCount = _LOCalc_RangeColumnsGetCount($oSheet)
-	If @error Then _ERROR($oDoc, "Failed to retrieve Count of columns contained in Sheet. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Number of columns contained in this sheet is: " & $iCount)
-
 	; Retrieve Cell range B1 to G1
 	$oCellRange = _LOCalc_RangeGetCellByName($oSheet, "B1", "G1")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Range Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve the count of Columns contained in the Range.
-	$iCount = _LOCalc_RangeColumnsGetCount($oCellRange)
-	If @error Then _ERROR($oDoc, "Failed to retrieve Count of columns contained in Range. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Retrieve an Array of Column namess contained in the Range.
+	$asNames = _LOCalc_RangeColumnsGetNames($oCellRange)
+	If @error Then _ERROR($oDoc, "Failed to retrieve array of column names contained in Range. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Number of columns contained in the Range B1 to G1 is: " & $iCount)
+	For $i = 0 To @extended - 1
+		$sNames &= $asNames[$i] & @CRLF
+	Next
+
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The names of the columns contained in the range B1 to G1 are: " & @CRLF & @CRLF & $sNames)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

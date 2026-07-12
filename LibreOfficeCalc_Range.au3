@@ -32,6 +32,7 @@
 ; _LOCalc_RangeColumnInsert
 ; _LOCalc_RangeColumnPageBreak
 ; _LOCalc_RangeColumnsGetCount
+; _LOCalc_RangeColumnsGetNames
 ; _LOCalc_RangeColumnVisible
 ; _LOCalc_RangeColumnWidth
 ; _LOCalc_RangeCompute
@@ -485,6 +486,44 @@ Func _LOCalc_RangeColumnsGetCount(ByRef $oRange)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $iCount)
 EndFunc   ;==>_LOCalc_RangeColumnsGetCount
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOCalc_RangeColumnsGetNames
+; Description ...: Retrieve an array of Column namess contained in a Range.
+; Syntax ........: _LOCalc_RangeColumnsGetNames(ByRef $oRange)
+; Parameters ....: $oRange              - A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
+; Return values .: Success: Integer
+;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning an array of Column Names contained in the Range. @Extended is set to number of results.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oRange not an Object.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Columns Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve array of Column names.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: There is a fixed number of Columns per sheet, but different L.O. versions contain different amounts of Columns. But this also helps to determine the column namess contained in a Cell Range.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOCalc_RangeColumnsGetNames(ByRef $oRange)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOCalc_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oColumns
+	Local $asNames
+
+	If Not IsObj($oRange) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$oColumns = $oRange.getColumns()
+	If Not IsObj($oColumns) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$asNames = $oColumns.getElementNames()
+	If Not IsArray($asNames) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, UBound($asNames), $asNames)
+EndFunc   ;==>_LOCalc_RangeColumnsGetNames
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_RangeColumnVisible
