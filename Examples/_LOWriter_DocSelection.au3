@@ -23,7 +23,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert text into the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a TextCursor, I called false for $bCreateAtEnd, the cursor will be created at the beginning of the document.
-	$oTextCursor = _LOWriter_CursorTextCursorCreate($oDoc, False)
+	$oTextCursor = _LOWriter_CursorCreateTextCursor($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to create Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the Text Cursor right 6 spaces, not selecting the text.

@@ -23,17 +23,17 @@
 ; ===============================================================================================================================
 
 ; #CURRENT# =====================================================================================================================
+; _LOWriter_EndnoteCreateTextCursor
 ; _LOWriter_EndnoteDelete
 ; _LOWriter_EndnoteGetAnchor
-; _LOWriter_EndnoteGetTextCursor
 ; _LOWriter_EndnoteInsert
 ; _LOWriter_EndnoteModifyAnchor
 ; _LOWriter_EndnoteSettingsAutoNumber
 ; _LOWriter_EndnoteSettingsStyles
 ; _LOWriter_EndnotesGetList
+; _LOWriter_FootnoteCreateTextCursor
 ; _LOWriter_FootnoteDelete
 ; _LOWriter_FootnoteGetAnchor
-; _LOWriter_FootnoteGetTextCursor
 ; _LOWriter_FootnoteInsert
 ; _LOWriter_FootnoteModifyAnchor
 ; _LOWriter_FootnoteSettingsAutoNumber
@@ -41,6 +41,39 @@
 ; _LOWriter_FootnoteSettingsStyles
 ; _LOWriter_FootnotesGetList
 ; ===============================================================================================================================
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_EndnoteCreateTextCursor
+; Description ...: Create a Text Cursor in a Endnote to modify the text therein.
+; Syntax ........: _LOWriter_EndnoteCreateTextCursor(ByRef $oEndNote)
+; Parameters ....: $oEndNote            - A Endnote Object from a previous _LOWriter_EndnoteInsert, or _LOWriter_EndnotesGetList function.
+; Return values .: Success: Object
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully retrieved the Endnote Cursor Object.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oEndNote not an Object.
+;                  --Initialization Errors--
+;                  @Error: 2, @Extended: 1 = Error retrieving Cursor Object.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert, _LOWriter_CursorInsertString, _LOWriter_FootnoteCreateTextCursor
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_EndnoteCreateTextCursor(ByRef $oEndNote)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oTextCursor
+
+	If Not IsObj($oEndNote) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$oTextCursor = $oEndNote.Text.createTextCursor()
+	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oTextCursor)
+EndFunc   ;==>_LOWriter_EndnoteCreateTextCursor
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_EndnoteDelete
@@ -110,39 +143,6 @@ Func _LOWriter_EndnoteGetAnchor(ByRef $oEndNote)
 EndFunc   ;==>_LOWriter_EndnoteGetAnchor
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_EndnoteGetTextCursor
-; Description ...: Create a Text Cursor in a Endnote to modify the text therein.
-; Syntax ........: _LOWriter_EndnoteGetTextCursor(ByRef $oEndNote)
-; Parameters ....: $oEndNote            - A Endnote Object from a previous _LOWriter_EndnoteInsert, or _LOWriter_EndnotesGetList function.
-; Return values .: Success: Object
-;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully retrieved the Endnote Cursor Object.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oEndNote not an Object.
-;                  --Initialization Errors--
-;                  @Error: 2, @Extended: 1 = Error retrieving Cursor Object.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......: _LOWriter_EndnotesGetList, _LOWriter_EndnoteInsert, _LOWriter_CursorInsertString, _LOWriter_FootnoteGetTextCursor
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOWriter_EndnoteGetTextCursor(ByRef $oEndNote)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $oTextCursor
-
-	If Not IsObj($oEndNote) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$oTextCursor = $oEndNote.Text.createTextCursor()
-	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oTextCursor)
-EndFunc   ;==>_LOWriter_EndnoteGetTextCursor
-
-; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_EndnoteInsert
 ; Description ...: Insert a Endnote into a Document.
 ; Syntax ........: _LOWriter_EndnoteInsert(ByRef $oDoc, ByRef $oCursor[, $bOverwrite = False[, $sLabel = Null]])
@@ -166,7 +166,7 @@ EndFunc   ;==>_LOWriter_EndnoteGetTextCursor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: A Endnote cannot be inserted into a Frame, a Footnote, a Endnote, or the Header/Footer.
-; Related .......: _LOWriter_EndnoteDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_FootnoteInsert
+; Related .......: _LOWriter_EndnoteDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor, _LOWriter_FootnoteInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -481,6 +481,39 @@ Func _LOWriter_EndnotesGetList(ByRef $oDoc)
 EndFunc   ;==>_LOWriter_EndnotesGetList
 
 ; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_FootnoteCreateTextCursor
+; Description ...: Create a Text Cursor in a Footnote to modify the text therein.
+; Syntax ........: _LOWriter_FootnoteCreateTextCursor(ByRef $oFootNote)
+; Parameters ....: $oFootNote           - A Footnote Object from a previous _LOWriter_FootnoteInsert, Or _LOWriter_FootnotesGetList function.
+; Return values .: Success: Object
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully retrieved the footnote Cursor Object.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oFootNote not an Object.
+;                  --Initialization Errors--
+;                  @Error: 2, @Extended: 1 = Error retrieving Cursor Object.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: _LOWriter_CursorMove, _LOWriter_CursorInsertString, _LOWriter_EndnoteCreateTextCursor
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_FootnoteCreateTextCursor(ByRef $oFootNote)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oTextCursor
+
+	If Not IsObj($oFootNote) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$oTextCursor = $oFootNote.Text.createTextCursor()
+	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oTextCursor)
+EndFunc   ;==>_LOWriter_FootnoteCreateTextCursor
+
+; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FootnoteDelete
 ; Description ...: Delete a Footnote.
 ; Syntax ........: _LOWriter_FootnoteDelete(ByRef $oFootNote)
@@ -548,39 +581,6 @@ Func _LOWriter_FootnoteGetAnchor(ByRef $oFootNote)
 EndFunc   ;==>_LOWriter_FootnoteGetAnchor
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_FootnoteGetTextCursor
-; Description ...: Create a Text Cursor in a Footnote to modify the text therein.
-; Syntax ........: _LOWriter_FootnoteGetTextCursor(ByRef $oFootNote)
-; Parameters ....: $oFootNote           - A Footnote Object from a previous _LOWriter_FootnoteInsert, Or _LOWriter_FootnotesGetList function.
-; Return values .: Success: Object
-;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully retrieved the footnote Cursor Object.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oFootNote not an Object.
-;                  --Initialization Errors--
-;                  @Error: 2, @Extended: 1 = Error retrieving Cursor Object.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......: _LOWriter_CursorMove, _LOWriter_CursorInsertString, _LOWriter_EndnoteGetTextCursor
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOWriter_FootnoteGetTextCursor(ByRef $oFootNote)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $oTextCursor
-
-	If Not IsObj($oFootNote) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$oTextCursor = $oFootNote.Text.createTextCursor()
-	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oTextCursor)
-EndFunc   ;==>_LOWriter_FootnoteGetTextCursor
-
-; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FootnoteInsert
 ; Description ...: Insert a Footnote into a Document.
 ; Syntax ........: _LOWriter_FootnoteInsert(ByRef $oDoc, ByRef $oCursor[, $bOverwrite = False[, $sLabel = Null]])
@@ -604,7 +604,7 @@ EndFunc   ;==>_LOWriter_FootnoteGetTextCursor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: A Footnote cannot be inserted into a Frame, a Footnote, an Endnote, or a Header/Footer.
-; Related .......: _LOWriter_FootnoteDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_EndnoteInsert
+; Related .......: _LOWriter_FootnoteDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor, _LOWriter_EndnoteInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

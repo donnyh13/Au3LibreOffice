@@ -151,7 +151,7 @@
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldAuthorModify, _LOWriter_FieldDelete, _LOWriter_FieldDocInfoCreateAuthInsert, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldAuthorModify, _LOWriter_FieldDelete, _LOWriter_FieldDocInfoCreateAuthInsert, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -446,7 +446,7 @@ EndFunc   ;==>_LOWriter_FieldBookmarkGetObjByName
 ; Remarks .......: If the cursor used to insert a Bookmark has text selected, the Bookmark will envelope the text, else the Bookmark will be inserted at a single point.
 ;                  A Bookmark name cannot contain the following characters: / \ @ : * ? " ; , . #
 ;                  If the document already contains a Bookmark by the same name, LibreOffice adds a digit after the name, such as Bookmark 1, Bookmark 2 etc.
-; Related .......: _LOWriter_FieldBookmarkModify, _LOWriter_FieldBookmarkDelete, _LOWriter_FieldBookmarkExists, _LOWriter_FieldBookmarksGetNames, _LOWriter_FieldRefBookmarkInsert, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldBookmarkModify, _LOWriter_FieldBookmarkDelete, _LOWriter_FieldBookmarkExists, _LOWriter_FieldBookmarksGetNames, _LOWriter_FieldRefBookmarkInsert, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -590,7 +590,7 @@ EndFunc   ;==>_LOWriter_FieldBookmarksGetNames
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldChapterModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldChapterModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -711,7 +711,7 @@ EndFunc   ;==>_LOWriter_FieldChapterModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldCombCharModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldCombCharModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -831,7 +831,7 @@ EndFunc   ;==>_LOWriter_FieldCombCharModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldCommentModify, _LOWriter_DateStructCreate _LOWriter_DateStructModify, _LOWriter_FieldDocInfoCommentsInsert, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldCommentModify, _LOWriter_DateStructCreate _LOWriter_DateStructModify, _LOWriter_FieldDocInfoCommentsInsert, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1046,7 +1046,7 @@ EndFunc   ;==>_LOWriter_FieldCommentModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldCondTextModify, _LOWriter_FieldFuncHiddenParInsert, _LOWriter_FieldFuncHiddenTextInsert, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldCondTextModify, _LOWriter_FieldFuncHiddenParInsert, _LOWriter_FieldFuncHiddenTextInsert, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1229,7 +1229,7 @@ EndFunc   ;==>_LOWriter_FieldCurrentDisplayGet
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDateTimeModify, _LOWriter_DateStructCreate, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldDateTimeModify, _LOWriter_DateStructCreate, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1489,7 +1489,7 @@ EndFunc   ;==>_LOWriter_FieldDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoCommentsModify, _LOWriter_DocDescription, _LOWriter_FieldCommentInsert, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldDocInfoCommentsModify, _LOWriter_DocDescription, _LOWriter_FieldCommentInsert, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1615,7 +1615,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoCommentsModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoCreateAuthModify, _LOWriter_DocGenPropCreation, _LOWriter_FieldAuthorInsert, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldDocInfoCreateAuthModify, _LOWriter_DocGenPropCreation, _LOWriter_FieldAuthorInsert, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1742,7 +1742,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoCreateAuthModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoCreateDateTimeModify, _LOWriter_FieldDelete, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenPropCreation, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldDocInfoCreateDateTimeModify, _LOWriter_FieldDelete, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenPropCreation, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1876,7 +1876,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoCreateDateTimeModify
 ;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.textfield.docinfo.EditTime" Object.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: _LOWriter_FieldDocInfoEditTimeModify, _LOWriter_FieldDelete, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenProp, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Remarks .......: _LOWriter_FieldDocInfoEditTimeModify, _LOWriter_FieldDelete, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenProp, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -2008,7 +2008,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoEditTimeModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoKeywordsModify, _LOWriter_FieldDelete, _LOWriter_DocDescription, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldDocInfoKeywordsModify, _LOWriter_FieldDelete, _LOWriter_DocDescription, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2134,7 +2134,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoKeywordsModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoModAuthModify, _LOWriter_FieldDelete, _LOWriter_DocGenPropModification, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldDocInfoModAuthModify, _LOWriter_FieldDelete, _LOWriter_DocGenPropModification, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2261,7 +2261,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoModAuthModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoModDateTimeModify, _LOWriter_FieldDelete, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenPropModification, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldDocInfoModDateTimeModify, _LOWriter_FieldDelete, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenPropModification, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2395,7 +2395,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoModDateTimeModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoPrintAuthModify, _LOWriter_FieldDelete, _LOWriter_DocGenPropPrint, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldDocInfoPrintAuthModify, _LOWriter_FieldDelete, _LOWriter_DocGenPropPrint, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2522,7 +2522,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoPrintAuthModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoPrintDateTimeModify, _LOWriter_FieldDelete, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenPropPrint, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldDocInfoPrintDateTimeModify, _LOWriter_FieldDelete, _LOWriter_DateFormatKeyCreate, _LOWriter_DateFormatKeysGetList, _LOWriter_DocGenPropPrint, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2656,7 +2656,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoPrintDateTimeModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoRevNumModify, _LOWriter_FieldDelete, _LOWriter_DocGenProp, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldDocInfoRevNumModify, _LOWriter_FieldDelete, _LOWriter_DocGenProp, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2782,7 +2782,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoRevNumModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoSubjectModify, _LOWriter_FieldDelete, _LOWriter_DocDescription, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldDocInfoSubjectModify, _LOWriter_FieldDelete, _LOWriter_DocDescription, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2908,7 +2908,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoSubjectModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldDocInfoTitleModify, _LOWriter_FieldDelete, _LOWriter_DocDescription, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldDocInfoTitleModify, _LOWriter_FieldDelete, _LOWriter_DocDescription, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3034,7 +3034,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoTitleModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Until L.O. Version 26.8, there is a bug where the wrong Path Format type is displayed when the content is set to Fixed = True. For example, $LOW_FIELD_FILENAME_NAME_AND_EXT, displays in the format of $LOW_FIELD_FILENAME_NAME. See (https://bugs.documentfoundation.org/show_bug.cgi?id=155780).
-; Related .......: _LOWriter_FieldFileNameModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldFileNameModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3155,7 +3155,7 @@ EndFunc   ;==>_LOWriter_FieldFileNameModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldFuncHiddenParModify, _LOWriter_FieldDelete, _LOWriter_FieldCondTextInsert, _LOWriter_FieldFuncHiddenTextInsert, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldFuncHiddenParModify, _LOWriter_FieldDelete, _LOWriter_FieldCondTextInsert, _LOWriter_FieldFuncHiddenTextInsert, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3261,7 +3261,7 @@ EndFunc   ;==>_LOWriter_FieldFuncHiddenParModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldFuncHiddenTextModify, _LOWriter_FieldDelete, _LOWriter_FieldCondTextInsert, _LOWriter_FieldFuncHiddenParInsert, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldFuncHiddenTextModify, _LOWriter_FieldDelete, _LOWriter_FieldCondTextInsert, _LOWriter_FieldFuncHiddenParInsert, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3383,7 +3383,7 @@ EndFunc   ;==>_LOWriter_FieldFuncHiddenTextModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldFuncInputModify, _LOWriter_FieldDelete, _LOWriter_FieldInputListInsert, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldFuncInputModify, _LOWriter_FieldDelete, _LOWriter_FieldInputListInsert, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3507,7 +3507,7 @@ EndFunc   ;==>_LOWriter_FieldFuncInputModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldFuncPlaceholderModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldFuncPlaceholderModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3680,7 +3680,7 @@ EndFunc   ;==>_LOWriter_FieldGetAnchor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldInputListModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldInputListModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3822,7 +3822,7 @@ EndFunc   ;==>_LOWriter_FieldInputListModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldPageNumberModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldPageNumberModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4012,7 +4012,7 @@ EndFunc   ;==>_LOWriter_FieldPageNumberModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldRefBookmarkModify, _LOWriter_FieldBookmarkInsert, _LOWriter_FieldBookmarksGetNames, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldRefBookmarkModify, _LOWriter_FieldBookmarkInsert, _LOWriter_FieldBookmarksGetNames, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4139,7 +4139,7 @@ EndFunc   ;==>_LOWriter_FieldRefBookmarkModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldRefEndnoteModify, _LOWriter_EndnoteInsert, _LOWriter_EndnotesGetList, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldRefEndnoteModify, _LOWriter_EndnoteInsert, _LOWriter_EndnotesGetList, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4280,7 +4280,7 @@ EndFunc   ;==>_LOWriter_FieldRefEndnoteModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldRefFootnoteModify, _LOWriter_FootnoteInsert, _LOWriter_FootnotesGetList, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldRefFootnoteModify, _LOWriter_FootnoteInsert, _LOWriter_FootnotesGetList, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4457,7 +4457,7 @@ EndFunc   ;==>_LOWriter_FieldRefGetType
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldRefModify, _LOWriter_FieldRefMarkSet, _LOWriter_FieldRefMarksGetNames, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldRefModify, _LOWriter_FieldRefMarkSet, _LOWriter_FieldRefMarksGetNames, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4615,7 +4615,7 @@ EndFunc   ;==>_LOWriter_FieldRefMarkGetAnchor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldRefMarkDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldRefMarkDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4884,7 +4884,7 @@ EndFunc   ;==>_LOWriter_FieldsDocInfoGetList
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldSenderModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldSenderModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5034,7 +5034,7 @@ EndFunc   ;==>_LOWriter_FieldSenderModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldSetVarModify, _LOWriter_FieldDelete, _LOWriter_FormatKeyCreate _LOWriter_FormatKeysGetList, _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMastersGetNames, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldSetVarModify, _LOWriter_FieldDelete, _LOWriter_FormatKeyCreate _LOWriter_FormatKeysGetList, _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMastersGetNames, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5569,7 +5569,7 @@ EndFunc   ;==>_LOWriter_FieldsGetList
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function checks if there is a Set Variable matching the name called in $sSetVarName.
-; Related .......: _LOWriter_FieldShowVarModify, _LOWriter_FieldSetVarInsert, _LOWriter_FormatKeyCreate _LOWriter_FormatKeysGetList, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldShowVarModify, _LOWriter_FieldSetVarInsert, _LOWriter_FormatKeyCreate _LOWriter_FormatKeysGetList, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5723,7 +5723,7 @@ EndFunc   ;==>_LOWriter_FieldShowVarModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: After insertion there seems to be a necessary delay before the value to display is available, thus when a new count field is inserted, the value will be "0". If you call a _LOWriter_FieldUpdate for this field after a few seconds, the value should appear.
-; Related .......: _LOWriter_FieldStatCountModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldStatCountModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5875,7 +5875,7 @@ EndFunc   ;==>_LOWriter_FieldStatCountModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldStatTemplateModify, _LOWriter_DocGenPropTemplate, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldStatTemplateModify, _LOWriter_DocGenPropTemplate, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6058,7 +6058,7 @@ EndFunc   ;==>_LOWriter_FieldUpdate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldVarSetPageModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldVarSetPageModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6178,7 +6178,7 @@ EndFunc   ;==>_LOWriter_FieldVarSetPageModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldVarShowPageModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FieldVarShowPageModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

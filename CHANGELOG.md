@@ -2405,6 +2405,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Renamed `_LOWriter_CursorHyperlinkInsert` to `_LOWriter_CursorHyperlink`
 - Modified `_LOWriter_CursorHyperlink` to Set and Retrieve hyperlink settings now, rather than inserting them.
 - Removed `$LOW_VIEWCUR_JUMP_TO_PAGE` and `$LOW_VIEWCUR_GET_PAGE_NUM` View Cursor constants and split the functionality off into a separate function.
+- Renamed `_LOWriter_EndnoteGetTextCursor` to `_LOWriter_EndnoteCreateTextCursor` for consistency.
+- Renamed `_LOWriter_FootnoteGetTextCursor` to `_LOWriter_FootnoteCreateTextCursor` for consistency.
+- Renamed `_LOWriter_CursorTextCursorCreate` to `_LOWriter_CursorCreateTextCursor` for consistency.
 
 #### Documented
 

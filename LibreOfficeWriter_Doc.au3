@@ -429,7 +429,7 @@ EndFunc   ;==>_LOWriter_DocConvertTableToText
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function temporarily moves the ViewCursor to and selects the Text, and then attempts to restore the ViewCursor to its former position.
-; Related .......: _LOWriter_DocConvertTableToText, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_DocConvertTableToText, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

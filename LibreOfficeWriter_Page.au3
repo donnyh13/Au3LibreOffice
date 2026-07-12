@@ -1550,7 +1550,7 @@ EndFunc   ;==>_LOWriter_PageStyleCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_PageStylesGetNames
+; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor, _LOWriter_PageStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

@@ -25,7 +25,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will create a text cursor now.")
 
 	; Create a TextCursor, I called false for $bCreateAtEnd, the cursor will be created at the beginning of the document.
-	$oTextCursor = _LOWriter_CursorTextCursorCreate($oDoc, False)
+	$oTextCursor = _LOWriter_CursorCreateTextCursor($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to create Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now move the TextCursor right 6 spaces, not selecting any text, and then right 4 spaces selecting the word ""Line"".")

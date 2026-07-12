@@ -115,7 +115,7 @@ EndFunc   ;==>_LOWriter_NumStyleCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_NumStylesGetNames, _LOWriter_NumStyleExists, _LOWriter_NumStyleSetLevel
+; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor, _LOWriter_NumStylesGetNames, _LOWriter_NumStyleExists, _LOWriter_NumStyleSetLevel
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -748,7 +748,7 @@ EndFunc   ;==>_LOWriter_NumStylePosition
 ; Modified ......:
 ; Remarks .......: To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_NumStyleCurrent
+; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor, _LOWriter_NumStyleCurrent
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

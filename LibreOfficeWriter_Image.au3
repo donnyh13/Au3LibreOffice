@@ -1600,7 +1600,7 @@ EndFunc   ;==>_LOWriter_ImageHyperlink
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Unfortunately, I am unable to find a way to insert an image "linked", images can only be inserted as embedded.
-; Related .......: _LOWriter_ImageDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_ImageDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

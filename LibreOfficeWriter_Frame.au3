@@ -1476,7 +1476,7 @@ EndFunc   ;==>_LOWriter_FrameColumnSize
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LO_UnitConvert, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_FrameDelete
+; Related .......: _LO_UnitConvert, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor, _LOWriter_FrameDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1700,7 +1700,7 @@ EndFunc   ;==>_LOWriter_FrameGetAnchor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FrameGetObjByName, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_FrameGetObjByName, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

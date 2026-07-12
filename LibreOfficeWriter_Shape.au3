@@ -1173,7 +1173,7 @@ EndFunc   ;==>_LOWriter_ShapeGetType
 ;                  Inserting any of the above shapes will still show successful, but the shape will be invisible, and could cause the document to crash.
 ;                  The following shape is visually different from the manually inserted one in L.O. 7.3.4.2:
 ;                  - $LOW_SHAPE_TYPE_SYMBOL_LIGHTNING
-; Related .......: _LO_UnitConvert, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_ShapeDelete, _LOWriter_ShapeGetObjByName
+; Related .......: _LO_UnitConvert, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor, _LOWriter_ShapeDelete, _LOWriter_ShapeGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

@@ -1010,7 +1010,7 @@ EndFunc   ;==>_LOWriter_TableCellGetName
 ; Remarks .......: This function will accept a Table Cursor, a ViewCursor, or a Text Cursor.
 ;                  A TableCursor and ViewCursor can retrieve the single cell they are located in, or a range of cells that have been selected by them.
 ;                  A TextCursor can only retrieve the single cell it is located in.
-; Related .......: _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_TableCellGetObjByName, _LOWriter_TableCellGetObjByPosition, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1582,7 +1582,7 @@ EndFunc   ;==>_LOWriter_TableColumnInsert
 ;                  You can set the $oCursor parameter to either a ViewCursor or a Text cursor in an acceptable data type, the table will be inserted at the cursor position.
 ;                  $iHeadingRows accepts values from 1 to 1 less then the number of rows.
 ;                  If a property setting error occurs, the table will have still been successfully inserted, and the Table's object will still be returned.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableDelete, _LOWriter_TableExists
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor, _LOWriter_TableDelete, _LOWriter_TableExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1706,7 +1706,7 @@ EndFunc   ;==>_LOWriter_TableCreate
 ; Modified ......:
 ; Remarks .......: $oTable can be either called with a Table object, or Null Keyword with $oCursor called with a Cursor object, $oCursor can be either called with a cursor object currently located in a Table (such as a ViewCursor) or a TextCursor located in a table.
 ;                  $sCellName can be left blank, which will place the TextTableCursor at the first cell (Typically "A1") if $oTable is called with an Object, else if $oCursor is used, the cell the cursor is currently located in is used.
-; Related .......: _LOWriter_TableCellsGetNames, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCursor
+; Related .......: _LOWriter_TableCellsGetNames, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor, _LOWriter_TableCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2034,7 +2034,7 @@ EndFunc   ;==>_LOWriter_TableExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_TableGetObjByName, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate
+; Related .......: _LOWriter_TableGetObjByName, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
