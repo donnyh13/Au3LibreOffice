@@ -699,7 +699,7 @@ EndFunc   ;==>_LOWriter_DateStructModify
 ;                  Call any parameter you wish to delete from an already existing Find Format Array with the Default Keyword.
 ;                  If you do not have a pre-existing FindFormat Array, create and pass an Array with 0 elements. (Local $aArray[0])
 ;                  $iTxtDirection constants 2,3, and 5 may not be available depending on your language settings.
-; Related .......: _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyIndent, _LOWriter_FindFormatModifyPosition, _LOWriter_FindFormatModifySpacing
+; Related .......: _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyIndent, _LOWriter_FindFormatModifyPosition, _LOWriter_FindFormatModifySpacing
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -800,7 +800,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyAlignment
 ; Remarks .......: To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call any parameter you wish to delete from an already existing Find Format Array with the Default Keyword.
 ;                  If you do not have a pre-existing FindFormat Array, create and pass an Array with 0 elements. (Local $aArray[0])
-; Related .......: _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyOverline, _LOWriter_FindFormatModifyStrikeout, _LOWriter_FindFormatModifyUnderline
+; Related .......: _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyOverline, _LOWriter_FindFormatModifyStrikeout, _LOWriter_FindFormatModifyUnderline
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -888,7 +888,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyEffects
 ; Remarks .......: To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call any parameter you wish to delete from an already existing Find Format Array with the Default Keyword.
 ;                  If you do not have a pre-existing FindFormat Array, create and pass an Array with 0 elements. (Local $aArray[0])
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll _LOWriter_DocReplaceAllInRange, _LOWriter_FontsGetNames
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange, _LOWriter_FontsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1263,7 +1263,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyOverline
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call any parameter you wish to delete from an already existing Find Format Array with the Default Keyword.
 ;                  If you do not have a pre-existing FindFormat Array, create and pass an Array with 0 elements. (Local $aArray[0])
-; Related .......: _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyTxtFlowOpt
+; Related .......: _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyTxtFlowOpt
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1337,7 +1337,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyPageBreak
 ;                  The way LibreOffice is set up Super/Subscript are set in the same setting, Superscript is a positive number from 1 to 100 (percentage), Subscript is a negative number set to -1 to -100 percentage. For the user's convenience this function automatically converts the positive numbers to negative, and back when setting or retrieving subscript values.
 ;                  Automatic Superscript has an Integer value of 14000, Auto Subscript has a Integer value of -14000. Being that there is no settable setting of Automatic Super/Sub Script, it has been chosen to use -1 to indicate an automatic Sub/SuperScript value.
 ;                  If you set both $iSuperScript and $iSubScript to -1 (Automatic), or both $iSuperScript and $iSubScript to any value, Subscript will be the result, as it is the last in the function to be set, and thus will overwrite any Superscript values.
-; Related .......: _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyAlignment, _LOWriter_FindFormatModifyIndent, _LOWriter_FindFormatModifySpacing
+; Related .......: _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyAlignment, _LOWriter_FindFormatModifyIndent, _LOWriter_FindFormatModifySpacing
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1515,7 +1515,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyRotateScaleSpace
 ;                  The settings in LibreOffice, (Single,1.15, 1.5, Double,) Use the Proportional mode, and are just varying percentages. e.g Single = 100, 1.15 = 115%, 1.5 = 150%, Double = 200%.
 ;                  The values accepted by $iLineSpcHeight depends on the $iLineSpcMode used, see constants for accepted Input values.
 ;                  $iAbovePar, $iBelowPar, $iLineSpcHeight may change +/- a Hundredth of a Millimeter (HMM) once set.
-; Related .......: _LO_UnitConvert, _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyAlignment, _LOWriter_FindFormatModifyIndent, _LOWriter_FindFormatModifyPosition
+; Related .......: _LO_UnitConvert, _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyAlignment, _LOWriter_FindFormatModifyIndent, _LOWriter_FindFormatModifyPosition
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1627,7 +1627,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifySpacing
 ;                  Call any parameter you wish to delete from an already existing Find Format Array with the Default Keyword.
 ;                  If you do not have a pre-existing FindFormat Array, create and pass an Array with 0 elements. (Local $aArray[0])
 ;                  $bWordOnly applies to Underline, Overline and Strikeout, regardless of which is set to True, one setting applies to all.
-; Related .......: _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyEffects, _LOWriter_FindFormatModifyOverline, _LOWriter_FindFormatModifyUnderline
+; Related .......: _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyEffects, _LOWriter_FindFormatModifyOverline, _LOWriter_FindFormatModifyUnderline
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2514,7 +2514,7 @@ EndFunc   ;==>_LOWriter_FormatKeysGetList
 ; Remarks .......: $bSearchPropValues is equivalent to the difference in selecting "Format" options in LibreOffice's search box and "Attributes".
 ;                  Calling $bSearchPropValues with True, means that the search will look for matches using the specified property AND having the specified value, such as Character Weight, Bold, only matches that have Character weight of Bold will be returned, whereas if $bSearchPropValues is called with False, the search only looks for matches that have the specified property, regardless of its value. Such as Character weight, would match Bold, Semi-Bold, etc. From my understanding, the search is based on anything directly formatted unless $bStyles is also True.
 ;                  The returned Search Descriptor is only good for the Document it was created by, it WILL NOT work for other documents.
-; Related .......: _LOWriter_SearchDescriptorModify, _LOWriter_SearchDescriptorSimilarityModify, _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll _LOWriter_DocReplaceAllInRange
+; Related .......: _LOWriter_SearchDescriptorModify, _LOWriter_SearchDescriptorSimilarityModify, _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2579,7 +2579,7 @@ EndFunc   ;==>_LOWriter_SearchDescriptorCreate
 ;                  Calling $bSearchPropValues with True, means that the search will look for matches using the specified property AND having the specified value, such as Character Weight, Bold, only matches that have Character weight of Bold will be returned, whereas if $bSearchPropValues is called with False, the search only looks for matches that have the specified property, regardless of its value. Such as Character weight, would match Bold, Semi-Bold, etc. From my understanding, the search is based on anything directly formatted unless $bStyles is also True.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_SearchDescriptorCreate, _LOWriter_SearchDescriptorSimilarityModify, _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll _LOWriter_DocReplaceAllInRange
+; Related .......: _LOWriter_SearchDescriptorCreate, _LOWriter_SearchDescriptorSimilarityModify, _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2668,7 +2668,7 @@ EndFunc   ;==>_LOWriter_SearchDescriptorModify
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_SearchDescriptorCreate, _LOWriter_SearchDescriptorModify, _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll _LOWriter_DocReplaceAllInRange
+; Related .......: _LOWriter_SearchDescriptorCreate, _LOWriter_SearchDescriptorModify, _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

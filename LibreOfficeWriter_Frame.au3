@@ -1536,7 +1536,7 @@ EndFunc   ;==>_LOWriter_FrameCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LOWriter_CursorMove _LOWriter_CursorInsertString
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LOWriter_CursorMove, _LOWriter_CursorInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1664,7 +1664,7 @@ EndFunc   ;==>_LOWriter_FrameExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LOWriter_CursorMove _LOWriter_CursorInsertString
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LOWriter_CursorMove, _LOWriter_CursorInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

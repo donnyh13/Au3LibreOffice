@@ -831,7 +831,7 @@ EndFunc   ;==>_LOWriter_FieldCombCharModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldCommentModify, _LOWriter_DateStructCreate _LOWriter_DateStructModify, _LOWriter_FieldDocInfoCommentsInsert, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
+; Related .......: _LOWriter_FieldCommentModify, _LOWriter_DateStructCreate, _LOWriter_DateStructModify, _LOWriter_FieldDocInfoCommentsInsert, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5034,7 +5034,7 @@ EndFunc   ;==>_LOWriter_FieldSenderModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FieldSetVarModify, _LOWriter_FieldDelete, _LOWriter_FormatKeyCreate _LOWriter_FormatKeysGetList, _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMastersGetNames, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
+; Related .......: _LOWriter_FieldSetVarModify, _LOWriter_FieldDelete, _LOWriter_FormatKeyCreate, _LOWriter_FormatKeysGetList, _LOWriter_FieldSetVarMasterCreate, _LOWriter_FieldSetVarMastersGetNames, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5437,7 +5437,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarMastersGetNames
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FieldSetVarInsert, _LOWriter_FieldsGetList, _LOWriter_FormatKeyCreate _LOWriter_FormatKeysGetList, _LOWriter_FieldUpdate
+; Related .......: _LOWriter_FieldSetVarInsert, _LOWriter_FieldsGetList, _LOWriter_FormatKeyCreate, _LOWriter_FormatKeysGetList, _LOWriter_FieldUpdate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5569,7 +5569,7 @@ EndFunc   ;==>_LOWriter_FieldsGetList
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function checks if there is a Set Variable matching the name called in $sSetVarName.
-; Related .......: _LOWriter_FieldShowVarModify, _LOWriter_FieldSetVarInsert, _LOWriter_FormatKeyCreate _LOWriter_FormatKeysGetList, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
+; Related .......: _LOWriter_FieldShowVarModify, _LOWriter_FieldSetVarInsert, _LOWriter_FormatKeyCreate, _LOWriter_FormatKeysGetList, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
