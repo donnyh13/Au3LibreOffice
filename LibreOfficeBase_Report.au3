@@ -3136,7 +3136,7 @@ EndFunc   ;==>_LOBase_ReportFolderCreate
 ; Modified ......:
 ; Remarks .......: To delete a Folder contained in a folder, you MUST prefix the Folder name called in $sName by the folder path it is located in, separated by forward slashes (/). e.g. to delete FolderXYZ located in folder3, which is located in Folder 2, which is located inside folder 1, you would call $sName with the following path: Folder1/Folder2/Folder3/FolderXYZ
 ;                  Deleting a Folder will delete all contents also.
-; Related .......: _LOBase_ReportFolderCreate _LOBase_ReportFolderCopy, _LOBase_ReportFoldersGetNames, _LOBase_ReportFolderExists
+; Related .......: _LOBase_ReportFolderCreate, _LOBase_ReportFolderCopy, _LOBase_ReportFoldersGetNames, _LOBase_ReportFolderExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
