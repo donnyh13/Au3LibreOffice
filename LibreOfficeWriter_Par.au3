@@ -261,7 +261,7 @@ EndFunc   ;==>_LOWriter_ParStyleAreaFillStyle
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
-; Related .......: _LOWriter_ParStyleAreaGradientMulticolor, _LOWriter_ParStyleAreaColor, _LOWriter_ParStyleAreaFillStyle, _LOWriter_DirFrmtParAreaGradient
+; Related .......: _LOWriter_ParStyleAreaGradientMulticolor, _LOWriter_ParStyleAreaColor, _LOWriter_ParStyleAreaFillStyle, _LOWriter_DirFrmtParAreaGradient, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

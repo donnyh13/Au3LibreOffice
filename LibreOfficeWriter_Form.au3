@@ -345,7 +345,7 @@ EndFunc   ;==>_LOWriter_FormConCheckBoxData
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $iDefaultState, $mFont, $sAddInfo.
-; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormConCheckBoxState, _LOWriter_FormConCheckBoxData, _LOWriter_FormConTableConCheckBoxGeneral
+; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormConCheckBoxState, _LOWriter_FormConCheckBoxData, _LOWriter_FormConTableConCheckBoxGeneral, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -849,7 +849,7 @@ EndFunc   ;==>_LOWriter_FormConComboBoxData
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $asList, $sDefaultTxt, $mFont, $sAddInfo.
 ;                  Setting $iBorder to $LOW_FORM_CON_BORDER_WITHOUT, will not trigger an error, but does not currently work. This is a known bug, https://bugs.documentfoundation.org/show_bug.cgi?id=131196
-; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormConComboBoxValue, _LOWriter_FormConComboBoxData, _LOWriter_FormConTableConComboBoxGeneral
+; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormConComboBoxValue, _LOWriter_FormConComboBoxData, _LOWriter_FormConTableConComboBoxGeneral, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1379,7 +1379,7 @@ EndFunc   ;==>_LOWriter_FormConCurrencyFieldData
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $mFont, $sAddInfo.
 ;                  Setting $iBorder to $LOW_FORM_CON_BORDER_WITHOUT, will not trigger an error, but does not currently work. This is a known bug, https://bugs.documentfoundation.org/show_bug.cgi?id=131196
-; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormConCurrencyFieldValue, _LOWriter_FormConCurrencyFieldData, _LOWriter_FormConTableConCurrencyFieldGeneral
+; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormConCurrencyFieldValue, _LOWriter_FormConCurrencyFieldData, _LOWriter_FormConTableConCurrencyFieldGeneral, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1970,7 +1970,7 @@ EndFunc   ;==>_LOWriter_FormConDateFieldData
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $mFont, $sAddInfo.
 ;                  Setting $iBorder to $LOW_FORM_CON_BORDER_WITHOUT, will not trigger an error, but does not currently work. This is a known bug, https://bugs.documentfoundation.org/show_bug.cgi?id=131196
-; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormConDateFieldValue, _LOWriter_FormConDateFieldData, _LOWriter_FormConTableConDateFieldGeneral
+; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormConDateFieldValue, _LOWriter_FormConDateFieldData, _LOWriter_FormConTableConDateFieldGeneral, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2545,7 +2545,7 @@ EndFunc   ;==>_LOWriter_FormConDelete
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $sDefaultTxt, $mFont, $sAddInfo.
 ;                  Setting $iBorder to $LOW_FORM_CON_BORDER_WITHOUT, will not trigger an error, but does not currently work. This is a known bug, https://bugs.documentfoundation.org/show_bug.cgi?id=131196
-; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormConFileSelFieldValue
+; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormConFileSelFieldValue, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3017,7 +3017,7 @@ EndFunc   ;==>_LOWriter_FormConFormattedFieldData
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $mFont, $sAddInfo.
 ;                  Setting $iBorder to $LOW_FORM_CON_BORDER_WITHOUT, will not trigger an error, but does not currently work. This is a known bug, https://bugs.documentfoundation.org/show_bug.cgi?id=131196
-; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormatKeyCreate, _LOWriter_FormatKeysGetList, _LOWriter_FormConFormattedFieldValue, _LOWriter_FormConFormattedFieldData, _LOWriter_FormConTableConFormattedFieldGeneral
+; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormatKeyCreate, _LOWriter_FormatKeysGetList, _LOWriter_FormConFormattedFieldValue, _LOWriter_FormConFormattedFieldData, _LOWriter_FormConTableConFormattedFieldGeneral, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3702,7 +3702,7 @@ EndFunc   ;==>_LOWriter_FormConGroupBoxGeneral
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Setting $iBorder to $LOW_FORM_CON_BORDER_WITHOUT, will not trigger an error, but does not currently work. This is a known bug, https://bugs.documentfoundation.org/show_bug.cgi?id=131196
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $sAddInfo.
-; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormConImageControlGeneral
+; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormConImageControlGeneral, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4153,7 +4153,7 @@ EndFunc   ;==>_LOWriter_FormConImageControlData
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $sAddInfo.
 ;                  Setting $iBorder to $LOW_FORM_CON_BORDER_WITHOUT, will not trigger an error, but does not currently work. This is a known bug, https://bugs.documentfoundation.org/show_bug.cgi?id=131196
-; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormConImageControlData, _LOWriter_FormConImageButtonGeneral
+; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormConImageControlData, _LOWriter_FormConImageButtonGeneral, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4598,7 +4598,7 @@ EndFunc   ;==>_LOWriter_FormConInsert
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $mFont, $sAddInfo.
 ;                  Setting $iBorder to $LOW_FORM_CON_BORDER_WITHOUT, will not trigger an error, but does not currently work. This is a known bug, https://bugs.documentfoundation.org/show_bug.cgi?id=131196
-; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList
+; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4983,7 +4983,7 @@ EndFunc   ;==>_LOWriter_FormConListBoxData
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $asList, $mFont, $sAddInfo.
 ;                  Setting $iBorder to $LOW_FORM_CON_BORDER_WITHOUT, will not trigger an error, but does not currently work. This is a known bug, https://bugs.documentfoundation.org/show_bug.cgi?id=131196
-; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormConListBoxSelection, _LOWriter_FormConListBoxGetCount, _LOWriter_FormConListBoxData, _LOWriter_FormConTableConListBoxGeneral
+; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormConListBoxSelection, _LOWriter_FormConListBoxGetCount, _LOWriter_FormConListBoxData, _LOWriter_FormConTableConListBoxGeneral, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5447,7 +5447,7 @@ EndFunc   ;==>_LOWriter_FormConListBoxSelection
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $mFont, $sAddInfo.
 ;                  Setting $iBorder to $LOW_FORM_CON_BORDER_WITHOUT, will not trigger an error, but does not currently work. This is a known bug, https://bugs.documentfoundation.org/show_bug.cgi?id=131196
-; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList
+; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5835,7 +5835,7 @@ EndFunc   ;==>_LOWriter_FormConNumericFieldData
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $mFont, $sAddInfo.
 ;                  Setting $iBorder to $LOW_FORM_CON_BORDER_WITHOUT, will not trigger an error, but does not currently work. This is a known bug, https://bugs.documentfoundation.org/show_bug.cgi?id=131196
-; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormConNumericFieldValue, _LOWriter_FormConNumericFieldData, _LOWriter_FormConTableConNumericFieldGeneral
+; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormConNumericFieldValue, _LOWriter_FormConNumericFieldData, _LOWriter_FormConTableConNumericFieldGeneral, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6380,7 +6380,7 @@ EndFunc   ;==>_LOWriter_FormConOptionButtonData
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $iDefaultState, $mFont, $sAddInfo.
-; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormConOptionButtonState, _LOWriter_FormConOptionButtonData
+; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormConOptionButtonState, _LOWriter_FormConOptionButtonData, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6874,7 +6874,7 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldData
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $sDefaultTxt, $mFont, $sAddInfo.
 ;                  Setting $iBorder to $LOW_FORM_CON_BORDER_WITHOUT, will not trigger an error, but does not currently work. This is a known bug, https://bugs.documentfoundation.org/show_bug.cgi?id=131196
-; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormConPatternFieldValue, _LOWriter_FormConPatternFieldData, _LOWriter_FormConTableConPatternFieldGeneral
+; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormConPatternFieldValue, _LOWriter_FormConPatternFieldData, _LOWriter_FormConTableConPatternFieldGeneral, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -7408,7 +7408,7 @@ EndFunc   ;==>_LOWriter_FormConPosition
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $iDefaultState, $mFont, $sAddInfo.
-; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormConPushButtonState
+; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormConPushButtonState, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -10304,7 +10304,7 @@ EndFunc   ;==>_LOWriter_FormConTableConFormattedFieldGeneral
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $mFont, $sAddInfo.
 ;                  Setting $iBorder to $LOW_FORM_CON_BORDER_WITHOUT, will not trigger an error, but does not currently work. This is a known bug, https://bugs.documentfoundation.org/show_bug.cgi?id=131196
-; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList
+; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LO_UnitConvert, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -12622,7 +12622,7 @@ EndFunc   ;==>_LOWriter_FormConTextBoxData
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $sDefaultTxt, $mFont, $sAddInfo.
 ;                  Setting $iBorder to $LOW_FORM_CON_BORDER_WITHOUT, will not trigger an error, but does not currently work. This is a known bug, https://bugs.documentfoundation.org/show_bug.cgi?id=131196
-; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormConTextBoxData, _LOWriter_FormConTableConTextBoxGeneral
+; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormConTextBoxData, _LOWriter_FormConTableConTextBoxGeneral, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -13130,7 +13130,7 @@ EndFunc   ;==>_LOWriter_FormConTimeFieldData
 ;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
 ;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $iTabOrder, $mFont, $sAddInfo.
 ;                  Setting $iBorder to $LOW_FORM_CON_BORDER_WITHOUT, will not trigger an error, but does not currently work. This is a known bug, https://bugs.documentfoundation.org/show_bug.cgi?id=131196
-; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormatKeyCreate, _LOWriter_FormatKeysGetList, _LOWriter_FormConTimeFieldValue, _LOWriter_FormConTimeFieldData, _LOWriter_FormConTableConTimeFieldGeneral
+; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LOWriter_FormatKeyCreate, _LOWriter_FormatKeysGetList, _LOWriter_FormConTimeFieldValue, _LOWriter_FormConTimeFieldData, _LOWriter_FormConTableConTimeFieldGeneral, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

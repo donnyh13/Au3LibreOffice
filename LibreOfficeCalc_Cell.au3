@@ -1133,7 +1133,7 @@ EndFunc   ;==>_LOCalc_CellStyleBorderColor
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  $iAll returns an Integer value if all (Top, Bottom, Left, Right) padding values are equal, else Null is returned.
-; Related .......: _LOCalc_CellStyleBorderColor, _LOCalc_CellStyleBorderStyle, _LOCalc_CellStyleBorderWidth, _LOCalc_CellBorderPadding
+; Related .......: _LOCalc_CellStyleBorderColor, _LOCalc_CellStyleBorderStyle, _LOCalc_CellStyleBorderWidth, _LOCalc_CellBorderPadding, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2057,7 +2057,7 @@ EndFunc   ;==>_LOCalc_CellStyleStrikeOut
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_CellStyleTextOrient, _LOCalc_CellStyleTextProperties, _LOCalc_CellTextAlign
+; Related .......: _LOCalc_CellStyleTextOrient, _LOCalc_CellStyleTextProperties, _LOCalc_CellTextAlign, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2243,7 +2243,7 @@ EndFunc   ;==>_LOCalc_CellStyleUnderline
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_CellTextOrient, _LOCalc_CellTextProperties, _LOCalc_CellStyleTextAlign
+; Related .......: _LOCalc_CellTextOrient, _LOCalc_CellTextProperties, _LOCalc_CellStyleTextAlign, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

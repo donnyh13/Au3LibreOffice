@@ -1378,7 +1378,7 @@ EndFunc   ;==>__LOWriter_ColorRemoveAlpha
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Modified from A. Pitonyak, Listing 493. in OOME 3.0
-; Related .......:
+; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -5677,7 +5677,7 @@ EndFunc   ;==>__LOWriter_ParBorderPadding
 ;                  I am unable to find a way to set Drop Caps character style to "None" as is available in the User Interface. When it is set to "None" LibreOffice returns a blank string ("") but setting it to a blank string throws a COM error/Exception. Consequently, you cannot set Character Style to "None", but you can still disable Drop Caps as noted above.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -6882,7 +6882,7 @@ EndFunc   ;==>__LOWriter_ParTxtFlowOpt
 ; Remarks .......: The following shapes are not implemented into LibreOffice as of L.O. Version 7.3.4.2 for automation, and thus will not work:
 ;                  $LOW_SHAPE_TYPE_ARROWS_ARROW_S_SHAPED, $LOW_SHAPE_TYPE_ARROWS_ARROW_SPLIT, $LOW_SHAPE_TYPE_ARROWS_ARROW_RIGHT_OR_LEFT,
 ;                  $LOW_SHAPE_TYPE_ARROWS_ARROW_CORNER_RIGHT, $LOW_SHAPE_TYPE_ARROWS_ARROW_UP_RIGHT_DOWN, $LOW_SHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_RIGHT
-; Related .......:
+; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -7064,7 +7064,7 @@ EndFunc   ;==>__LOWriter_Shape_CreateArrow
 ; Modified ......:
 ; Remarks .......: The following shapes are not implemented into LibreOffice as of L.O. Version 7.3.4.2 for automation, and thus will not work:
 ;                  $LOW_SHAPE_TYPE_BASIC_CIRCLE_PIE, $LOW_SHAPE_TYPE_BASIC_FRAME
-; Related .......:
+; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -7247,7 +7247,7 @@ EndFunc   ;==>__LOWriter_Shape_CreateBasic
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -7365,7 +7365,7 @@ EndFunc   ;==>__LOWriter_Shape_CreateCallout
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -7547,7 +7547,7 @@ EndFunc   ;==>__LOWriter_Shape_CreateFlowchart
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -7844,7 +7844,7 @@ EndFunc   ;==>__LOWriter_Shape_CreateLine
 ; Modified ......:
 ; Remarks .......: The following shapes are not implemented into LibreOffice as of L.O. Version 7.3.4.2 for automation, and thus will not work:
 ;                  $LOW_SHAPE_TYPE_STARS_6_POINT, $LOW_SHAPE_TYPE_STARS_12_POINT, $LOW_SHAPE_TYPE_STARS_SIGNET, $LOW_SHAPE_TYPE_STARS_6_POINT_CONCAVE.
-; Related .......:
+; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -7980,7 +7980,7 @@ EndFunc   ;==>__LOWriter_Shape_CreateStars
 ;                  $LOW_SHAPE_TYPE_SYMBOL_CLOUD, $LOW_SHAPE_TYPE_SYMBOL_FLOWER, $LOW_SHAPE_TYPE_SYMBOL_PUZZLE, $LOW_SHAPE_TYPE_SYMBOL_BEVEL_OCTAGON, $LOW_SHAPE_TYPE_SYMBOL_BEVEL_DIAMOND
 ;                  The following shape is visually different from the manually inserted one in L.O. 7.3.4.2:
 ;                  $LOW_SHAPE_TYPE_SYMBOL_LIGHTNING
-; Related .......:
+; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -8885,7 +8885,7 @@ EndFunc   ;==>__LOWriter_ShapePointGetSettings
 ;                  For an unknown reason, I am unable to insert "SMOOTH" Points, and consequently, any smooth Points are reverted back to "Normal" points, but still having their Smooth control points upon insertion that were already present in the shape. If you modify a point to "SMOOTH" type, it will be, for now, replaced with "Symmetrical".
 ;                  The first and last points in a shape can only be a "Normal" Point Type. The last point cannot be Curved, but the first can be.
 ;                  Calling and Smooth or Symmetrical point types with $bIsCurve = True, will be ignored, as they are already a curve.
-; Related .......:
+; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================

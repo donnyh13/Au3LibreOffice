@@ -221,7 +221,7 @@ EndFunc   ;==>_LOBase_ReportConFormattedFieldData
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  I could not find a property to set the TextDirection or Visible settings.
 ;                  Background Transparent is set automatically based on the value set for Background color. Set Background color to $LO_COLOR_OFF to set Background Transparent to True.
-; Related .......: _LOBase_FormatKeyCreate, _LOBase_FormatKeysGetList, _LOBase_ReportConFormattedFieldData, _LOBase_ReportConsGetList, _LOBase_ReportConPosition
+; Related .......: _LOBase_FormatKeyCreate, _LOBase_FormatKeysGetList, _LOBase_ReportConFormattedFieldData, _LOBase_ReportConsGetList, _LOBase_ReportConPosition, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -673,7 +673,7 @@ EndFunc   ;==>_LOBase_ReportConInsert
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  I could not find a property to set the TextDirection or Visible settings.
 ;                  Background Transparent is set automatically based on the value set for Background color. Set Background color to $LO_COLOR_OFF to set Background Transparent to True.
-; Related .......: _LOBase_ReportConsGetList, _LOBase_ReportConPosition
+; Related .......: _LOBase_ReportConsGetList, _LOBase_ReportConPosition, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

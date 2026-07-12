@@ -412,7 +412,7 @@ EndFunc   ;==>_LOBase_DateStructModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOBase_FontDescEdit, _LOBase_FontExists, _LOBase_FontsGetNames
+; Related .......: _LOBase_FontDescEdit, _LOBase_FontExists, _LOBase_FontsGetNames, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -500,7 +500,7 @@ EndFunc   ;==>_LOBase_FontDescCreate
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOBase_FontDescCreate, _LOBase_FontExists, _LOBase_FontsGetNames
+; Related .......: _LOBase_FontDescCreate, _LOBase_FontExists, _LOBase_FontsGetNames, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

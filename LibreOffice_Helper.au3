@@ -781,7 +781,7 @@ EndFunc   ;==>_LO_DocGetType
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LO_TransparencyGradientMultiAdd, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiModify
+; Related .......: _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LO_TransparencyGradientMultiAdd, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -831,7 +831,7 @@ EndFunc   ;==>_LO_GradientMulticolorAdd
 ;                  @Error: 1, @Extended: 3 = $iIndex not an Integer, less than 0 or greater than last element plus 1.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorModify, _LO_TransparencyGradientMultiAdd, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiModify
+; Remarks .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorModify, _LO_TransparencyGradientMultiDelete
 ; Related .......:
 ; Link ..........:
 ; Example .......: Yes
@@ -881,7 +881,7 @@ EndFunc   ;==>_LO_GradientMulticolorDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_TransparencyGradientMultiAdd, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiModify
+; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_TransparencyGradientMultiModify, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

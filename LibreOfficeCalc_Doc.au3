@@ -1708,7 +1708,7 @@ EndFunc   ;==>_LOCalc_DocSelectionSet
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_DocSelectionCopy,_LOCalc_DocSelectionSet
+; Related .......: _LOCalc_DocSelectionCopy, _LOCalc_DocSelectionSet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

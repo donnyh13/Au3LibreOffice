@@ -111,7 +111,7 @@ EndFunc   ;==>__LOCalc_CellAddressIsSame
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -383,7 +383,7 @@ EndFunc   ;==>__LOCalc_CellBorder
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  $iAll returns an Integer value if all (Top, Bottom, Left, Right) padding values are equal, else Null is returned.
-; Related .......:
+; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -621,7 +621,7 @@ EndFunc   ;==>__LOCalc_CellFont
 ; Modified ......:
 ; Remarks .......: Though Transparency is present on the Font Effects page in the UI, there is (as best as I can find) no setting for it available to read and modify. And further, it seems even in L.O. the setting does not affect the font's transparency, though it may change the color value.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -731,7 +731,7 @@ EndFunc   ;==>__LOCalc_CellNumberFormat
 ; Remarks .......: Overline line style uses the same constants as underline style.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -899,7 +899,7 @@ EndFunc   ;==>__LOCalc_CellProtection
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -1202,7 +1202,7 @@ EndFunc   ;==>__LOCalc_CellStyleBorder
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -1461,7 +1461,7 @@ EndFunc   ;==>__LOCalc_CellTextProperties
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -1532,7 +1532,7 @@ EndFunc   ;==>__LOCalc_CellUnderLine
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================

@@ -2512,7 +2512,7 @@ EndFunc   ;==>_LOWriter_TableRowInsert
 ;                  None of these properties can be set if the Table is not inserted yet.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_TableRowGetCount, _LOWriter_TableProperties
+; Related .......: _LOWriter_TableRowGetCount, _LOWriter_TableProperties, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

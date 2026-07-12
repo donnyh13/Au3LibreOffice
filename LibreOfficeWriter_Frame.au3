@@ -4309,7 +4309,7 @@ EndFunc   ;==>_LOWriter_FrameStyleShadow
 ;                  - $LOW_RELATIVE_PAGE_PRINT (8),[For Horizontal Relation:], [Same as Page Text Area in L.O. UI] the frame is positioned considering the whole width available for text in the page, from the left to the right page margins.
 ;                  - $LOW_RELATIVE_PAGE_PRINT [For Vertical relation:], the frame is positioned considering the full height available for text, from top to bottom margins.
 ;                  - $LOW_RELATIVE_TEXT_LINE (9),[For Vertical relation:], the frame is positioned considering the height of the line of text where the anchor is placed.
-; Related .......: _LOWriter_FrameStyleTypeSize, _LOWriter_FrameStyleOptions, _LOWriter_FrameStyleWrapOptions, _LOWriter_FrameTypePosition
+; Related .......: _LOWriter_FrameStyleTypeSize, _LOWriter_FrameStyleOptions, _LOWriter_FrameStyleWrapOptions, _LOWriter_FrameTypePosition, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4911,7 +4911,7 @@ EndFunc   ;==>_LOWriter_FrameStyleWrapOptions
 ;                  - $LOW_RELATIVE_PAGE_PRINT (8),[For Horizontal Relation:], [Same as Page Text Area in L.O. UI] the frame is positioned considering the whole width available for text in the page, from the left to the right page margins.
 ;                  - $LOW_RELATIVE_PAGE_PRINT [For Vertical relation:], the frame is positioned considering the full height available for text, from top to bottom margins.
 ;                  - $LOW_RELATIVE_TEXT_LINE (9),[For Vertical relation:], the frame is positioned considering the height of the line of text where the anchor is placed.
-; Related .......: _LOWriter_FrameTypeSize, _LOWriter_FrameStyleTypePosition
+; Related .......: _LOWriter_FrameTypeSize, _LOWriter_FrameStyleTypePosition, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

@@ -960,7 +960,7 @@ EndFunc   ;==>_LOWriter_DocExport
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Objects returned can be used in any of the functions accepting a Paragraph or Cursor Object etc., to modify their properties or even the text itself.
-; Related .......: _LOWriter_SearchDescriptorCreate, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyFont.
+; Related .......: _LOWriter_SearchDescriptorCreate, _LOWriter_DocFindAllInRange, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyFont
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1021,7 +1021,7 @@ EndFunc   ;==>_LOWriter_DocFindAll
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_DocFindAll, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyFont.
+; Related .......: _LOWriter_DocFindAll, _LOWriter_DocFindNext, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyFont
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1135,7 +1135,7 @@ EndFunc   ;==>_LOWriter_DocFindAllInRange
 ; Modified ......:
 ; Remarks .......: When a search is performed inside of a selection, the search may miss any footnotes/ Endnotes/ Frames contained in that selection as the text of these are counted as being located at the very end/beginning of a Document, thus if you are searching in the center of a document, the search will begin in the center, reach the end of the selection, and stop, never reaching the foot/Endnotes etc.
 ;                  If $bExhaustive is called with True, the search continues until the whole document has been searched, but, if the search has many hits, this could slow the search considerably. There is no use setting this to True in a full document search.
-; Related .......: _LOWriter_SearchDescriptorCreate, _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyFont.
+; Related .......: _LOWriter_SearchDescriptorCreate, _LOWriter_DocFindAll, _LOWriter_DocFindAllInRange, _LOWriter_DocReplaceAll, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyFont
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1967,7 +1967,7 @@ EndFunc   ;==>_LOWriter_DocMaximize
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOWriter_DocMaximize, , _LOWriter_DocIsActive, _LOWriter_DocToFront, _LOWriter_DocVisible, _LOWriter_DocPosAndSize
+; Related .......: _LOWriter_DocMaximize, _LOWriter_DocIsActive, _LOWriter_DocToFront, _LOWriter_DocVisible, _LOWriter_DocPosAndSize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2928,7 +2928,7 @@ EndFunc   ;==>_LOWriter_DocRedoIsPossible
 ; Modified ......:
 ; Remarks .......: In order for $atReplaceFormat to be applied to replacements, $bSearchPropValues must be True in the Search descriptor. I'm not sure why.
 ;                  Calling $bBackwards with True can cause issues with Find and Replace using formats, perhaps other things as well.
-; Related .......: _LOWriter_SearchDescriptorCreate, _LOWriter_DocFindAll, _LOWriter_DocFindNext, _LOWriter_DocFindAllInRange, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyFont.
+; Related .......: _LOWriter_SearchDescriptorCreate, _LOWriter_DocFindAll, _LOWriter_DocFindNext, _LOWriter_DocFindAllInRange, _LOWriter_DocReplaceAllInRange, _LOWriter_FindFormatModifyFont
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3002,7 +3002,7 @@ EndFunc   ;==>_LOWriter_DocReplaceAll
 ;                  Replacing Paragraph Styles doesn't work with a dispatch command, so I use the "FindAllInRange" function, and then manually apply the new Paragraph Style.
 ;                  In order for $atReplaceFormat to be applied to replacements, $bSearchPropValues must be True in the Search descriptor. I'm not sure why.
 ;                  Calling $bBackwards with True can cause issues with Find and Replace using formats, perhaps other things as well.
-; Related .......: _LOWriter_SearchDescriptorCreate, _LOWriter_DocFindAll, _LOWriter_DocFindNext, _LOWriter_DocFindAllInRange, _LOWriter_DocReplaceAll, _LOWriter_FindFormatModifyFont.
+; Related .......: _LOWriter_SearchDescriptorCreate, _LOWriter_DocFindAll, _LOWriter_DocFindNext, _LOWriter_DocFindAllInRange, _LOWriter_DocReplaceAll, _LOWriter_FindFormatModifyFont
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

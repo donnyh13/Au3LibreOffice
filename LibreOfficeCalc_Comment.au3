@@ -1471,7 +1471,7 @@ EndFunc   ;==>_LOCalc_CommentGetObjByIndex
 ;                  When retrieving the current settings, both $vStartStyle and $vEndStyle could be either an Integer or a String. It will be a String if the current Arrowhead is a custom Arrowhead, else an Integer, corresponding to one of the constants, $LOC_COMMENT_LINE_ARROW_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOCalc_CommentLineProperties, _LOCalc_CommentCallout
+; Related .......: _LOCalc_CommentLineProperties, _LOCalc_CommentCallout, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1616,7 +1616,7 @@ EndFunc   ;==>_LOCalc_CommentLineArrowStyles
 ;                  When retrieving the current settings, $vStyle could be either an Integer or a String. It will be a String if the current Line Style is a custom Line Style, else an Integer, corresponding to one of the constants, $LOC_COMMENT_LINE_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOCalc_CommentLineArrowStyles, _LOCalc_CommentCallout
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LOCalc_CommentLineArrowStyles, _LOCalc_CommentCallout
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

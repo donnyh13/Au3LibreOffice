@@ -1857,7 +1857,7 @@ EndFunc   ;==>_LOWriter_FindFormatModifyUnderline
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FontDescEdit, _LOWriter_FontExists, _LOWriter_FontsGetNames
+; Related .......: _LOWriter_FontDescEdit, _LOWriter_FontExists, _LOWriter_FontsGetNames, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1929,7 +1929,7 @@ EndFunc   ;==>_LOWriter_FontDescCreate
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOWriter_FontDescCreate, _LOWriter_FontExists, _LOWriter_FontsGetNames
+; Related .......: _LOWriter_FontDescCreate, _LOWriter_FontExists, _LOWriter_FontsGetNames, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
