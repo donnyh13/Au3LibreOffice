@@ -25,7 +25,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Change the Connector line style to be a Line type, 300 horizontal spacing at the beginning,
-	; 550  horizontal spacing at the end, 700 vertical spacing at the beginning, and 1500 vertical spacing at the end.
+	; 550 horizontal spacing at the end, 700 vertical spacing at the beginning, and 1500 vertical spacing at the end.
 	_LOImpress_ShapeStyleConnectorSettings($oStyle, $LOI_DRAWSHAPE_CONNECTOR_TYPE_LINE, 300, 550, 700, 1500)
 	If @error Then _ERROR($oDoc, "Failed to modify Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

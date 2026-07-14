@@ -168,7 +168,7 @@ EndFunc   ;==>_LOImpress_DrawShapeAltText
 ;                  The index of the default GluePoints are 0 (top), 1 (right), 2 (bottom), and 3 (left). You also can add new glue points to a shape’s default GluePoints.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_DrawShapeConnectorSettings
+; Related .......: _LOImpress_DrawShapeConnectorSettings, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -308,7 +308,7 @@ EndFunc   ;==>_LOImpress_DrawShapeConnectorModify
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_DrawShapeConnectorModify
+; Related .......: _LOImpress_DrawShapeConnectorModify, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -437,7 +437,7 @@ EndFunc   ;==>_LOImpress_DrawShapeConnectorSettings
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_DrawShapeConnectorSettings
+; Related .......: _LOImpress_DrawShapeConnectorSettings, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1369,7 +1369,7 @@ EndFunc   ;==>_LOImpress_DrawShapePointsGetCount
 ;                  For an unknown reason, I am unable to insert "SMOOTH" Points, and consequently, any smooth Points are reverted back to "Normal" points, but still having their Smooth control points upon insertion that were already present in the shape. If you modify a point to "SMOOTH" type, it will be, for now, replaced with "Symmetrical".
 ;                  The first and last points in a shape can only be a "Normal" Point Type. The last point cannot be Curved, but the first can be.
 ;                  Calling and Smooth or Symmetrical point types with $bIsCurve = True, will be ignored, as they are already a curve.
-; Related .......: _LOImpress_DrawShapePointsAdd, _LOImpress_DrawShapePointsRemove, _LOImpress_DrawShapePointsGetCount
+; Related .......: _LOImpress_DrawShapePointsAdd, _LOImpress_DrawShapePointsRemove, _LOImpress_DrawShapePointsGetCount, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

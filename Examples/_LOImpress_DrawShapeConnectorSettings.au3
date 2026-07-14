@@ -21,7 +21,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Change the Connector line style to be a Line type, with 500 Line 1 Skew, 50 Line 2 Skew, 0 Line 3 Skew, 300 horizontal spacing at the beginning,
-	; 550  horizontal spacing at the end, 700 vertical spacing at the beginning, and 1500 vertical spacing at the end.
+	; 550 horizontal spacing at the end, 700 vertical spacing at the beginning, and 1500 vertical spacing at the end.
 	_LOImpress_DrawShapeConnectorSettings($oShape, $LOI_DRAWSHAPE_CONNECTOR_TYPE_LINE, 500, 50, 0, 300, 550, 700, 1500)
 	If @error Then _ERROR($oDoc, "Failed to modify Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

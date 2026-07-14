@@ -1447,7 +1447,7 @@ EndFunc   ;==>_LOImpress_SlidesGetNames
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_SlideshowIsRunning, _LOImpress_SlideshowSettingsMode, _LOImpress_SlideshowSettingsOptions, _LOImpress_SlideshowSettingsRange
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_SlideshowIsRunning, _LOImpress_SlideshowSettingsMode, _LOImpress_SlideshowSettingsOptions, _LOImpress_SlideshowSettingsRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

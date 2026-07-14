@@ -22,7 +22,7 @@ Func Example()
 	; Now set the User COM Error function
 	; The First Parameter is my User function I want called any time there is a COM Error.
 	; the second function parameter is my first optional Parameter, a String, my second optional Parameter is an integer, my third
-	; optional parameter is a boolean, the fourth optional parameter is a String, and the fifth optional parameter  is an integer.
+	; optional parameter is a boolean, the fourth optional parameter is a String, and the fifth optional parameter is an integer.
 	_LOImpress_ComError_UserFunction($MyFunc, "My First Parameter", 05, False, "Another String", 100)
 	If @error Then _ERROR("Error Assigning User COM Error Function.  Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

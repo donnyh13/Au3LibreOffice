@@ -1048,7 +1048,7 @@ EndFunc   ;==>_LOImpress_ShapeCharFontColor
 ; Remarks .......: Overline line style uses the same constants as underline style.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_ShapeCharEffect, _LOImpress_ShapeCharStrikeOut, _LOImpress_ShapeCharUnderLine, _LOImpress_ShapePresStyleCharOverLine, _LOImpress_ShapeStyleCharOverLine
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapeCharEffect, _LOImpress_ShapeCharStrikeOut, _LOImpress_ShapeCharUnderLine, _LOImpress_ShapePresStyleCharOverLine, _LOImpress_ShapeStyleCharOverLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1262,7 +1262,7 @@ EndFunc   ;==>_LOImpress_ShapeCharStrikeOut
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_ShapeCharEffect, _LOImpress_ShapeCharOverLine, _LOImpress_ShapeCharStrikeOut, _LOImpress_ShapePresStyleCharUnderLine, _LOImpress_ShapeStyleCharUnderLine
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapeCharEffect, _LOImpress_ShapeCharOverLine, _LOImpress_ShapeCharStrikeOut, _LOImpress_ShapePresStyleCharUnderLine, _LOImpress_ShapeStyleCharUnderLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1295,7 +1295,7 @@ EndFunc   ;==>_LOImpress_ShapeCharUnderLine
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......: _LOImpress_DrawShapeText,
+; Related .......: _LOImpress_DrawShapeText
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1637,7 +1637,7 @@ EndFunc   ;==>_LOImpress_ShapeImageCrop
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Image is Auto-Sized and centered thanks to method by A. Pitonyak, OOME 4.1, PDF pg 320.
-; Related .......: _LOImpress_ShapeDelete, _LOImpress_ShapeImageModify, _LOImpress_ShapeImageReplace, _LOImpress_ShapeTextBoxInsert, _LOImpress_TableInsert
+; Related .......: _LO_UnitConvert, _LOImpress_ShapeDelete, _LOImpress_ShapeImageModify, _LOImpress_ShapeImageReplace, _LOImpress_ShapeTextBoxInsert, _LOImpress_TableInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1978,7 +1978,7 @@ EndFunc   ;==>_LOImpress_ShapeInteraction
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......: _LOImpress_ShapeLineProperties, _LOImpress_ShapePresStyleLineArrowStyles, _LOImpress_ShapeStyleLineArrowStyles
+; Related .......: _LO_UnitConvert, _LOImpress_ShapeLineProperties, _LOImpress_ShapePresStyleLineArrowStyles, _LOImpress_ShapeStyleLineArrowStyles
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2119,7 +2119,7 @@ EndFunc   ;==>_LOImpress_ShapeLineArrowStyles
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapeLineArrowStyles, _LOImpress_ShapePresStyleLineProperties, _LOImpress_ShapeStyleLineProperties
+; Related .......: _LO_UnitConvert, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapeLineArrowStyles, _LOImpress_ShapePresStyleLineProperties, _LOImpress_ShapeStyleLineProperties
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2713,7 +2713,7 @@ EndFunc   ;==>_LOImpress_ShapePosition
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapePresStyleAreaFillStyle, _LOImpress_ShapePresStyleAreaGradient, _LOImpress_ShapeAreaColor. _LOImpress_ShapeStyleAreaColor
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapePresStyleAreaFillStyle, _LOImpress_ShapePresStyleAreaGradient, _LOImpress_ShapeAreaColor, _LOImpress_ShapeStyleAreaColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3264,7 +3264,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleCharFontColor
 ; Remarks .......: Overline line style uses the same constants as underline style.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_ShapeCharOverLine, _LOImpress_ShapePresStyleCharEffect, _LOImpress_ShapePresStyleCharStrikeOut, _LOImpress_ShapePresStyleCharUnderLine, _LOImpress_ShapeStyleCharOverLine
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapeCharOverLine, _LOImpress_ShapePresStyleCharEffect, _LOImpress_ShapePresStyleCharStrikeOut, _LOImpress_ShapePresStyleCharUnderLine, _LOImpress_ShapeStyleCharOverLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3347,7 +3347,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleCharStrikeOut
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_ShapePresStyleCharEffect, _LOImpress_ShapePresStyleCharStrikeOut, _LOImpress_ShapePresStyleCharUnderLine, _LOImpress_ShapeCharUnderLine, _LOImpress_ShapeStyleCharUnderLine
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapePresStyleCharEffect, _LOImpress_ShapePresStyleCharStrikeOut, _LOImpress_ShapePresStyleCharUnderLine, _LOImpress_ShapeCharUnderLine, _LOImpress_ShapeStyleCharUnderLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3453,7 +3453,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleGetObjByName
 ;                  When retrieving the current settings, both $vStartStyle and $vEndStyle could be either an Integer or a String. It will be a String if the current Arrowhead is a custom Arrowhead, else an Integer, corresponding to one of the constants, $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_ShapePresStyleLineProperties, _LOImpress_ShapeLineArrowStyles, _LOImpress_ShapeStyleLineArrowStyles
+; Related .......: _LO_UnitConvert, _LOImpress_ShapePresStyleLineProperties, _LOImpress_ShapeLineArrowStyles, _LOImpress_ShapeStyleLineArrowStyles
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3514,7 +3514,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleLineArrowStyles
 ;                  When retrieving the current settings, $vStyle could be either an Integer or a String. It will be a String if the current Line Style is a custom Line Style, else an Integer, corresponding to one of the constants, $LOI_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapePresStyleLineArrowStyles, _LOImpress_ShapeLineProperties, _LOImpress_ShapeStyleLineProperties
+; Related .......: _LO_UnitConvert, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapePresStyleLineArrowStyles, _LOImpress_ShapeLineProperties, _LOImpress_ShapeStyleLineProperties
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3588,7 +3588,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleLineProperties
 ;                  If you retrieve the current settings for all levels (by calling $iLevel with 0), the return will be a 10 element array containing an array of settings for each Numbering Level.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  When a lot of settings are set, especially for all levels, this function can be a bit slow.
-; Related .......: _LOImpress_ShapePresStyleParIndent, _LOImpress_ShapePresStyleParTabStopCreate
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapePresStyleParIndent, _LOImpress_ShapePresStyleParTabStopCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4209,7 +4209,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleTextAttrFit
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_ShapePresStyleTextAttrFit, _LOImpress_ShapeStyleTextAttrSettings, _LOImpress_ShapeTextAttrSettings
+; Related .......: _LO_UnitConvert, _LOImpress_ShapePresStyleTextAttrFit, _LOImpress_ShapeStyleTextAttrSettings, _LOImpress_ShapeTextAttrSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5002,7 +5002,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleCharFontColor
 ; Remarks .......: Overline line style uses the same constants as underline style.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_ShapeStyleCharEffect, _LOImpress_ShapeStyleCharStrikeOut, _LOImpress_ShapeStyleCharUnderLine, _LOImpress_ShapeCharOverLine, _LOImpress_ShapePresStyleCharOverLine
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapeStyleCharEffect, _LOImpress_ShapeStyleCharStrikeOut, _LOImpress_ShapeStyleCharUnderLine, _LOImpress_ShapeCharOverLine, _LOImpress_ShapePresStyleCharOverLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5085,7 +5085,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleCharStrikeOut
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_ShapeStyleCharEffect, _LOImpress_ShapeStyleCharOverLine, _LOImpress_ShapeStyleCharStrikeOut, _LOImpress_ShapeCharUnderLine, _LOImpress_ShapePresStyleCharUnderLine
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapeStyleCharEffect, _LOImpress_ShapeStyleCharOverLine, _LOImpress_ShapeStyleCharStrikeOut, _LOImpress_ShapeCharUnderLine, _LOImpress_ShapePresStyleCharUnderLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5135,7 +5135,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleCharUnderLine
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Line 1, 2, and 3 Skew setting is not available for Shape Styles.
-; Related .......: _LOImpress_DrawShapeConnectorSettings
+; Related .......: _LO_UnitConvert, _LOImpress_DrawShapeConnectorSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5429,7 +5429,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleDelete
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_DrawShapeDimensionSettings
+; Related .......: _LO_UnitConvert, _LOImpress_DrawShapeDimensionSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5566,7 +5566,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleGetObjByName
 ;                  When retrieving the current settings, both $vStartStyle and $vEndStyle could be either an Integer or a String. It will be a String if the current Arrowhead is a custom Arrowhead, else an Integer, corresponding to one of the constants, $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_ShapeStyleLineProperties, _LOImpress_ShapeLineArrowStyles, _LOImpress_ShapePresStyleLineArrowStyles
+; Related .......: _LO_UnitConvert, _LOImpress_ShapeStyleLineProperties, _LOImpress_ShapeLineArrowStyles, _LOImpress_ShapePresStyleLineArrowStyles
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5627,7 +5627,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleLineArrowStyles
 ;                  When retrieving the current settings, $vStyle could be either an Integer or a String. It will be a String if the current Line Style is a custom Line Style, else an Integer, corresponding to one of the constants, $LOI_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapeStyleLineArrowStyles, _LOImpress_ShapeLineProperties, _LOImpress_ShapePresStyleLineProperties
+; Related .......: _LO_UnitConvert, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapeStyleLineArrowStyles, _LOImpress_ShapeLineProperties, _LOImpress_ShapePresStyleLineProperties
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6150,7 +6150,7 @@ EndFunc   ;==>_LOImpress_ShapeStylesGetNames
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_ShapeStyleTextAttrFit, _LOImpress_ShapeStyleTextAttrSettings, _LOImpress_ShapeTextAttrAnimation
+; Related .......: _LO_UnitConvert, _LOImpress_ShapeStyleTextAttrFit, _LOImpress_ShapeStyleTextAttrSettings, _LOImpress_ShapeTextAttrAnimation
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6255,7 +6255,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleTextAttrFit
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_ShapeStyleTextAttrAnimation, _LOImpress_ShapeStyleTextAttrFit, _LOImpress_ShapeTextAttrSettings
+; Related .......: _LO_UnitConvert, _LOImpress_ShapeStyleTextAttrAnimation, _LOImpress_ShapeStyleTextAttrFit, _LOImpress_ShapeTextAttrSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6316,7 +6316,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleTextAttrSettings
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......: _LOImpress_ShapeTextAttrSettings, _LOImpress_ShapeStyleTextAttrAnimation
+; Related .......: _LO_UnitConvert, _LOImpress_ShapeTextAttrSettings, _LOImpress_ShapeStyleTextAttrAnimation
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6363,7 +6363,7 @@ EndFunc   ;==>_LOImpress_ShapeTextAttrAnimation
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......: _LOImpress_ShapeTextAttrFit, _LOImpress_ShapeTextAttrSettings
+; Related .......: _LO_UnitConvert, _LOImpress_ShapeTextAttrFit, _LOImpress_ShapeTextAttrSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6514,7 +6514,7 @@ EndFunc   ;==>_LOImpress_ShapeTextAttrFit
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......: _LOImpress_ShapeTextAttrAnimation, _LOImpress_ShapeTextAttrColumns, _LOImpress_ShapeTextAttrFit, _LOImpress_ShapeStyleTextAttrSettings
+; Related .......: _LO_UnitConvert, _LOImpress_ShapeTextAttrAnimation, _LOImpress_ShapeTextAttrColumns, _LOImpress_ShapeTextAttrFit, _LOImpress_ShapeStyleTextAttrSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6560,7 +6560,7 @@ EndFunc   ;==>_LOImpress_ShapeTextAttrSettings
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_ShapeDelete, _LOImpress_ShapeImageInsert, _LOImpress_DrawShapeInsert, _LOImpress_TableInsert
+; Related .......: _LO_UnitConvert, _LOImpress_ShapeDelete, _LOImpress_ShapeImageInsert, _LOImpress_DrawShapeInsert, _LOImpress_TableInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

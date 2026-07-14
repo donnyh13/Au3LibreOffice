@@ -216,7 +216,7 @@ EndFunc   ;==>_LOImpress_CursorCharFontColor
 ; Remarks .......: Overline line style uses the same constants as underline style.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_CursorCharEffect, _LOImpress_CursorCharStrikeOut, _LOImpress_CursorCharUnderLine
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_CursorCharEffect, _LOImpress_CursorCharStrikeOut, _LOImpress_CursorCharUnderLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -430,7 +430,7 @@ EndFunc   ;==>_LOImpress_CursorCharStrikeOut
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_CursorCharEffect, _LOImpress_CursorCharOverLine, _LOImpress_CursorCharStrikeOut
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_CursorCharEffect, _LOImpress_CursorCharOverLine, _LOImpress_CursorCharStrikeOut
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

@@ -56,7 +56,7 @@ Func Example()
 	$iHMM = _LO_UnitConvert(0.5, $LO_CONVERT_UNIT_INCH_HMM)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Modify the TabStop from 1/4" to 1/2" Tab Stop position, Set alignment To  $LOI_PAR_TAB_ALIGN_DECIMAL,
+	; Modify the TabStop from 1/4" to 1/2" Tab Stop position, Set alignment To $LOI_PAR_TAB_ALIGN_DECIMAL,
 	; and the decimal character to ASC(.) a period, ASCII value 46, Set the fill character to Asc(~) the Tilde key ASCII Value 126..
 	; Since I am modifying the TabStop position, @Extended will be my new Tab Stop position.
 	_LOImpress_ShapePresStyleParTabStopMod($oStyle, $iTabStop, $iHMM, $LOI_PAR_TAB_ALIGN_DECIMAL, Asc("."), Asc("~"))

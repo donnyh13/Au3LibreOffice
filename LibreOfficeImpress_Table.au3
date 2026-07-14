@@ -1891,7 +1891,7 @@ EndFunc   ;==>_LOImpress_TableCellCharFontColor
 ; Remarks .......: Overline line style uses the same constants as underline style.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_TableCellCharEffect, _LOImpress_TableCellCharStrikeOut, _LOImpress_TableCellCharUnderLine, _LOImpress_TableCharOverLine
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_TableCellCharEffect, _LOImpress_TableCellCharStrikeOut, _LOImpress_TableCellCharUnderLine, _LOImpress_TableCharOverLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2105,7 +2105,7 @@ EndFunc   ;==>_LOImpress_TableCellCharStrikeOut
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_TableCellCharEffect, _LOImpress_TableCellCharOverLine, _LOImpress_TableCellCharStrikeOut, _LOImpress_TableCharUnderLine
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_TableCellCharEffect, _LOImpress_TableCellCharOverLine, _LOImpress_TableCellCharStrikeOut, _LOImpress_TableCharUnderLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2987,7 +2987,7 @@ EndFunc   ;==>_LOImpress_TableCharFontColor
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Tables require that the properties be set individually for each Cell, therefore this function cycles through each cell and sets the value, and may be slower for large tables.
 ;                  When retrieving the current property values for a table, if all of the cells in the Table do not have the same value, Null is returned for that property value.
-; Related .......: _LOImpress_TableCellCharOverLine, _LOImpress_TableCharEffect, _LOImpress_TableCharStrikeOut, _LOImpress_TableCharUnderLine
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_TableCellCharOverLine, _LOImpress_TableCharEffect, _LOImpress_TableCharStrikeOut, _LOImpress_TableCharUnderLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3206,7 +3206,7 @@ EndFunc   ;==>_LOImpress_TableCharStrikeOut
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Tables require that the properties be set individually for each Cell, therefore this function cycles through each cell and sets the value, and may be slower for large tables.
 ;                  When retrieving the current property values for a table, if all of the cells in the Table do not have the same value, Null is returned for that property value.
-; Related .......: _LOImpress_TableCharEffect, _LOImpress_TableCharOverLine, _LOImpress_TableCharStrikeOut, _LOImpress_TableCellCharUnderLine
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_TableCharEffect, _LOImpress_TableCharOverLine, _LOImpress_TableCharStrikeOut, _LOImpress_TableCellCharUnderLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3452,7 +3452,7 @@ EndFunc   ;==>_LOImpress_TableColumnInsert
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_ShapeDelete, _LOImpress_ShapeImageInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_DrawShapeInsert
+; Related .......: _LO_UnitConvert, _LOImpress_ShapeDelete, _LOImpress_ShapeImageInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_DrawShapeInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

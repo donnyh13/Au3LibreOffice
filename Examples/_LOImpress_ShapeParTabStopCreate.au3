@@ -44,7 +44,7 @@ Func Example()
 	$iHMM = _LO_UnitConvert(0.25, $LO_CONVERT_UNIT_INCH_HMM)
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Create a TabStop at 1/4" Tab Stop position, Set alignment To  $LOI_PAR_TAB_ALIGN_DECIMAL,
+	; Create a TabStop at 1/4" Tab Stop position, Set alignment To $LOI_PAR_TAB_ALIGN_DECIMAL,
 	; Set decimal character to ASC(.) a period, ASCII value 46 and set the fill character to Asc(~) the Tilde key ASCII Value 126.
 	$iTabStop = _LOImpress_ShapeParTabStopCreate($oTextBox, $iHMM, $LOI_PAR_TAB_ALIGN_DECIMAL, Asc("."), Asc("~"))
 	If @error Then _ERROR($oDoc, "Failed to Create a Paragraph Tab stop. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
