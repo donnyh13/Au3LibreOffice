@@ -1277,7 +1277,7 @@ Func _LOImpress_DrawShapePointsAdd(ByRef $oShape, $iPoint, $iX, $iY, $iPointType
 	$avArray[0] = $aiFlags
 	$tPolyCoords.Flags = $avArray
 
-	; Set the  new Position Points for the Shape.
+	; Set the new Position Points for the Shape.
 	$oShape.PolyPolygonBezier = $tPolyCoords
 
 	; Apply it twice, as after inserting new points, the Point types get lost.
@@ -1777,7 +1777,7 @@ Func _LOImpress_DrawShapePointsRemove(ByRef $oShape, $iPoint)
 	$avArray[0] = $aiFlags
 	$tPolyCoords.Flags = $avArray
 
-	; Set the  new Position Points for the Shape.
+	; Set the new Position Points for the Shape.
 	$oShape.PolyPolygonBezier = $tPolyCoords
 
 	; Apply it twice, as after modifying points, the Point types get lost.

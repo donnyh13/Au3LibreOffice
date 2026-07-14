@@ -331,7 +331,7 @@ Global Enum _
 		$LOI_DRAWSHAPE_TYPE_LINE_POLYGON, _                          ; 154 -- A Polygon.
 		$LOI_DRAWSHAPE_TYPE_LINE_POLYGON_45, _                       ; 155 -- A 45 degree Polygon.
 		$LOI_DRAWSHAPE_TYPE_LINE_POLYGON_45_FILLED, _                ; 156 -- A Filled 45 degree Polygon.
-		$LOI_DRAWSHAPE_TYPE_LINE_POLYGON_FILLED, _                   ; 157 --  A Filled Polygon.
+		$LOI_DRAWSHAPE_TYPE_LINE_POLYGON_FILLED, _                   ; 157 -- A Filled Polygon.
 		$LOI_DRAWSHAPE_TYPE_STARS_4_POINT, _                         ; 158 -- A 4 Pointed Star.
 		$LOI_DRAWSHAPE_TYPE_STARS_5_POINT, _                         ; 159 -- A 5 Pointed Star.
 		$LOI_DRAWSHAPE_TYPE_STARS_6_POINT, _                         ; 160 -- A 6 Pointed Star. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.

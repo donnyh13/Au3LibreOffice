@@ -256,7 +256,7 @@ EndFunc   ;==>__LOImpress_CharFont
 ; Name ..........: __LOImpress_CharFontColor
 ; Description ...: Set or retrieve the font color, transparency and highlighting values.
 ; Syntax ........: __LOImpress_CharFontColor(ByRef $oObj[, $iFontColor = Null[, $iTransparency = Null[, $iHighlight = Null]]])
-; Parameters ....: $oObj                - A Text Cursor or Shape object returned by a previous  _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert or _LOImpress_ShapesGetList function.
+; Parameters ....: $oObj                - A Text Cursor or Shape object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert or _LOImpress_ShapesGetList function.
 ;                  $iFontColor          - [optional] (-1-16777215) Default is Null. The font Color value, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. Transparency percentage. 0 is visible, 100 is invisible. Available for LibreOffice 7.0 and up.
 ;                  $iHighlight          - [optional] (-1-16777215) Default is Null. The highlight Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for No color.
@@ -425,7 +425,7 @@ EndFunc   ;==>__LOImpress_CharOverLine
 ; Name ..........: __LOImpress_CharPosition
 ; Description ...: Set and retrieve settings related to Sub/Super Script and relative size.
 ; Syntax ........: __LOImpress_CharPosition(ByRef $oObj[, $iSuperScript = Null[, $iSubScript = Null[, $iRelativeSize = Null]]])
-; Parameters ....: $oObj                - A Text Cursor or Shape object returned by a previous  _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert or _LOImpress_ShapesGetList function.
+; Parameters ....: $oObj                - A Text Cursor or Shape object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert or _LOImpress_ShapesGetList function.
 ;                  $iSuperScript        - [optional] (-1-100) Default is Null. The Superscript percentage value. Call with -1 for Automatic SuperScript. See Remarks.
 ;                  $iSubScript          - [optional] (-1-100) Default is Null. Subscript percentage value. Call with -1 for Automatic SubScript. See Remarks.
 ;                  $iRelativeSize       - [optional] (1-100) Default is Null. The size percentage relative to current font size.
@@ -515,7 +515,7 @@ EndFunc   ;==>__LOImpress_CharPosition
 ; Name ..........: __LOImpress_CharScaling
 ; Description ...: Set or retrieve the character Scale settings.
 ; Syntax ........: __LOImpress_CharScaling(ByRef $oObj[, $iScaleWidth = Null])
-; Parameters ....: $oObj                - A Text Cursor or Shape object returned by a previous  _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert or _LOImpress_ShapesGetList function.
+; Parameters ....: $oObj                - A Text Cursor or Shape object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert or _LOImpress_ShapesGetList function.
 ;                  $iScaleWidth         - [optional] (1-100) Default is Null. The percentage to horizontally stretch or compress the text. 100 is normal sizing.
 ; Return values .: Success: 1 or Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -566,7 +566,7 @@ EndFunc   ;==>__LOImpress_CharScaling
 ; Name ..........: __LOImpress_CharSpacing
 ; Description ...: Set and retrieve the spacing between characters (Kerning).
 ; Syntax ........: __LOImpress_CharSpacing(ByRef $oObj[, $bAutoKerning = Null[, $nKerning = Null]])
-; Parameters ....: $oObj                - A Text Cursor or Shape object returned by a previous  _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert or _LOImpress_ShapesGetList function.
+; Parameters ....: $oObj                - A Text Cursor or Shape object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert or _LOImpress_ShapesGetList function.
 ;                  $bAutoKerning        - [optional] Default is Null. If True, applies a spacing in between certain pairs of characters.
 ;                  $nKerning            - [optional] (-928.8-928.8) Default is Null. The kerning value of the characters. See Remarks. Values are in Printer's Points as set in the LibreOffice UI.
 ; Return values .: Success: Integer or Array.
@@ -630,7 +630,7 @@ EndFunc   ;==>__LOImpress_CharSpacing
 ; Name ..........: __LOImpress_CharStrikeOut
 ; Description ...: Set or Retrieve the Strikeout settings.
 ; Syntax ........: __LOImpress_CharStrikeOut(ByRef $oObj[, $iStrikeLineStyle = Null[, $bWordOnly = Null]])
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous  _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
 ;                  $iStrikeLineStyle    - [optional] (0-6) Default is Null. The Strikeout Line Style, see constants, $LOI_CHAR_STRIKEOUT_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $bWordOnly           - [optional] Default is Null. If True, strike out is applied to words only, skipping whitespaces.
 ; Return values .: Success: 1 or Array
@@ -689,7 +689,7 @@ EndFunc   ;==>__LOImpress_CharStrikeOut
 ; Name ..........: __LOImpress_CharUnderLine
 ; Description ...: Set and retrieve the Underline settings.
 ; Syntax ........: __LOImpress_CharUnderLine(ByRef $oObj[, $iUnderLineStyle = Null[, $iULColor = Null[, $bWordOnly = Null]]])
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous  _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
 ;                  $iUnderLineStyle     - [optional] (0-18) Default is Null. The Underline line style, see constants, $LOI_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iULColor            - [optional] (-1-16777215) Default is Null. The underline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
 ;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not underlined.
@@ -5275,7 +5275,7 @@ EndFunc   ;==>__LOImpress_ParAlignment
 ; Name ..........: __LOImpress_ParIndent
 ; Description ...: Set or Retrieve Paragraph Indent settings.
 ; Syntax ........: __LOImpress_ParIndent(ByRef $oObj[, $iBeforeTxt = Null[, $iAfterTxt = Null[, $iFirstLine = Null]]])
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous  _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
 ;                  $iBeforeTxt          - [optional] (0-1162202) Default is Null. The amount of space that you want to indent the paragraph from the page margin. Set in Hundredths of a Millimeter (HMM).
 ;                  $iAfterTxt           - [optional] (0-1162202) Default is Null. The amount of space that you want to indent the paragraph from the page margin. Set in Hundredths of a Millimeter (HMM)
 ;                  $iFirstLine          - [optional] (0-1162202) Default is Null. Indentation distance of the first line of a paragraph. Set in Hundredths of a Millimeter (HMM).
@@ -5345,7 +5345,7 @@ EndFunc   ;==>__LOImpress_ParIndent
 ; Name ..........: __LOImpress_ParSpacing
 ; Description ...: Set and Retrieve Line Spacing settings.
 ; Syntax ........: __LOImpress_ParSpacing(ByRef $oObj[, $iAbovePar = Null[, $iBelowPar = Null[, $iLineSpcMode = Null[, $iLineSpcHeight = Null]]]])
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous  _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
 ;                  $iAbovePar           - [optional] (0-100000) Default is Null. The Space above a paragraph, in Hundredths of a Millimeter (HMM).
 ;                  $iBelowPar           - [optional] (0-100000) Default is Null. The Space Below a paragraph, in Hundredths of a Millimeter (HMM).
 ;                  $iLineSpcMode        - [optional] (0-3) Default is Null. The line spacing type of the paragraph. See Constants, $LOI_PAR_LINE_SPC_MODE_* as defined in LibreOfficeImpress_Constants.au3, also notice min and max values for each.
@@ -5452,7 +5452,7 @@ EndFunc   ;==>__LOImpress_ParSpacing
 ; Name ..........: __LOImpress_ParTabStopCreate
 ; Description ...: Create a new TabStop for a Paragraph.
 ; Syntax ........: __LOImpress_ParTabStopCreate(ByRef $oObj, $iPosition[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]])
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous  _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
 ;                  $iPosition           - The TabStop position to set the new TabStop to. Set in Hundredths of a Millimeter (HMM). See Remarks.
 ;                  $iAlignment          - [optional] (0-4) Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOI_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iDecChar            - [optional] Default is Null. Enter a character(in Asc Value(See AutoIt Asc Function)) that you want the decimal tab to use as a decimal separator. Can only be set if $iAlignment is set to $LOI_PAR_TAB_ALIGN_DECIMAL.
@@ -5567,7 +5567,7 @@ EndFunc   ;==>__LOImpress_ParTabStopCreate
 ; Name ..........: __LOImpress_ParTabStopDelete
 ; Description ...: Delete a TabStop from a Paragraph
 ; Syntax ........: __LOImpress_ParTabStopDelete(ByRef $oObj, $iTabStop)
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous  _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
 ;                  $iTabStop            - The Tab position of the TabStop to modify. See Remarks.
 ; Return values .: Success: Boolean.
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Returning True if TabStop was successfully deleted, else False.
@@ -5622,7 +5622,7 @@ EndFunc   ;==>__LOImpress_ParTabStopDelete
 ; Name ..........: __LOImpress_ParTabStopMod
 ; Description ...: Modify or retrieve the properties of an existing TabStop.
 ; Syntax ........: __LOImpress_ParTabStopMod(ByRef $oObj, $iTabStop[, $iPosition = Null[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]]])
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous  _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
 ;                  $iTabStop            - The Tab position of the TabStop to modify. See Remarks.
 ;                  $iPosition           - [optional] Default is Null. The New position to set the input position to. Set in Hundredths of a Millimeter (HMM). See Remarks.
 ;                  $iAlignment          - [optional] (0-4) Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOI_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
@@ -5755,7 +5755,7 @@ EndFunc   ;==>__LOImpress_ParTabStopMod
 ; Name ..........: __LOImpress_ParTabStopsGetList
 ; Description ...: Retrieve an array of TabStops available in a Paragraph.
 ; Syntax ........: __LOImpress_ParTabStopsGetList(ByRef $oObj)
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous  _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
 ; Return values .: Success: Array.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. An Array of TabStops. @Extended set to number of results.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -8892,7 +8892,7 @@ EndFunc   ;==>__LOImpress_ShapeTextAttrFit
 ;                  @Error: 1, @Extended: 3 = $iRight not an Integer, less than -100000 or greater than 100000.
 ;                  @Error: 1, @Extended: 4 = $iTop not an Integer, less than -100000 or greater than 100000.
 ;                  @Error: 1, @Extended: 5 = $iBottom not an Integer, less than -100000 or greater than 100000.
-;                  @Error: 1, @Extended: 6 = $iAnchor  not an Integer, less than 0 or greater than 8. See Constants, $LOI_PAR_TEXT_ANCHOR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iAnchor not an Integer, less than 0 or greater than 8. See Constants, $LOI_PAR_TEXT_ANCHOR_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 7 = $bFullWidth not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:

@@ -1295,7 +1295,7 @@ EndFunc   ;==>_LOImpress_ShapeCharUnderLine
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......: _LOImpress_DrawShapeText, 
+; Related .......: _LOImpress_DrawShapeText,
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3499,7 +3499,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleLineArrowStyles
 ;                  @Error: 1, @Extended: 9 = $iCapStyle is an Integer, but less than 0 or greater than 2. See constants $LOI_SHAPE_LINE_CAP_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to convert Constant to Line Style name.
-;                  @Error: 3, @Extended: 2 =  Failed to insert Line Style name.
+;                  @Error: 3, @Extended: 2 = Failed to insert Line Style name.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $vStyle
@@ -3607,7 +3607,7 @@ Func _LOImpress_ShapePresStyleNumCustomize(ByRef $oDoc, ByRef $oPresStyle, $iLev
 	If Not $oPresStyle.supportsService("com.sun.star.style.Style") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not __LO_IntIsBetween($iLevel, 0, 10) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-	$iLevel = ($iLevel - 1) ; Numbering Levels are  0 based, minus 1 to compensate.
+	$iLevel = ($iLevel - 1) ; Numbering Levels are 0 based, minus 1 to compensate.
 
 	$oNumRules = $oPresStyle.NumberingRules()
 	If Not IsObj($oNumRules) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
@@ -4195,7 +4195,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleTextAttrFit
 ;                  @Error: 1, @Extended: 3 = $iRight not an Integer, less than -100000 or greater than 100000.
 ;                  @Error: 1, @Extended: 4 = $iTop not an Integer, less than -100000 or greater than 100000.
 ;                  @Error: 1, @Extended: 5 = $iBottom not an Integer, less than -100000 or greater than 100000.
-;                  @Error: 1, @Extended: 6 = $iAnchor  not an Integer, less than 0 or greater than 8. See Constants, $LOI_PAR_TEXT_ANCHOR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iAnchor not an Integer, less than 0 or greater than 8. See Constants, $LOI_PAR_TEXT_ANCHOR_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 7 = $bFullWidth not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
@@ -6241,7 +6241,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleTextAttrFit
 ;                  @Error: 1, @Extended: 3 = $iRight not an Integer, less than -100000 or greater than 100000.
 ;                  @Error: 1, @Extended: 4 = $iTop not an Integer, less than -100000 or greater than 100000.
 ;                  @Error: 1, @Extended: 5 = $iBottom not an Integer, less than -100000 or greater than 100000.
-;                  @Error: 1, @Extended: 6 = $iAnchor  not an Integer, less than 0 or greater than 8. See Constants, $LOI_PAR_TEXT_ANCHOR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iAnchor not an Integer, less than 0 or greater than 8. See Constants, $LOI_PAR_TEXT_ANCHOR_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 7 = $bFullWidth not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
@@ -6499,7 +6499,7 @@ EndFunc   ;==>_LOImpress_ShapeTextAttrFit
 ;                  @Error: 1, @Extended: 3 = $iRight not an Integer, less than -100000 or greater than 100000.
 ;                  @Error: 1, @Extended: 4 = $iTop not an Integer, less than -100000 or greater than 100000.
 ;                  @Error: 1, @Extended: 5 = $iBottom not an Integer, less than -100000 or greater than 100000.
-;                  @Error: 1, @Extended: 6 = $iAnchor  not an Integer, less than 0 or greater than 8. See Constants, $LOI_PAR_TEXT_ANCHOR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iAnchor not an Integer, less than 0 or greater than 8. See Constants, $LOI_PAR_TEXT_ANCHOR_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 7 = $bFullWidth not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
