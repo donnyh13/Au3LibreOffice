@@ -161,7 +161,7 @@
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
 ;                  So far, I have found that Textboxes and all drawing shapes support the $LOI_SHAPE_COLOR_USE_SLIDE_BACKGROUND flag. Images and Tables do not, and will throw a property setting error.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LOImpress_ShapePresStyleAreaColor, _LOImpress_ShapeStyleAreaColor, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -239,7 +239,7 @@ EndFunc   ;==>_LOImpress_ShapeAreaColor
 ; Remarks .......: This function is to help determine if a Gradient background, or a solid color background is currently active.
 ;                  This is useful because, if a Gradient is active, the solid color value is still present, and thus it would not be possible to determine which function should be used to retrieve the current values for, whether the Color function, or the Gradient function.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......:
+; Related .......: _LOImpress_ShapeAreaColor, _LOImpress_ShapeAreaGradient, _LOImpress_ShapePresStyleAreaFillStyle, _LOImpress_ShapeStyleAreaFillStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -316,7 +316,7 @@ EndFunc   ;==>_LOImpress_ShapeAreaFillStyle
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapeAreaFillStyle, _LOImpress_ShapeAreaGradientMulticolor, _LOImpress_ShapePresStyleAreaGradient, _LOImpress_ShapeStyleAreaGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -523,7 +523,7 @@ EndFunc   ;==>_LOImpress_ShapeAreaGradient
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOImpress_ShapeAreaTransparencyGradientMulti
+; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOImpress_ShapeAreaGradient, _LOImpress_ShapePresStyleAreaGradientMulticolor, _LOImpress_ShapeStyleAreaTransparencyGradientMulti, _LOImpress_ShapeAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -581,7 +581,7 @@ EndFunc   ;==>_LOImpress_ShapeAreaGradientMulticolor
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  LibreOffice may change the shadow distance +/- a Hundredth of a Millimeter (HMM).
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LOImpress_ShapePresStyleAreaShadow, _LOImpress_ShapeStyleAreaShadow
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -621,7 +621,7 @@ EndFunc   ;==>_LOImpress_ShapeAreaShadow
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......:
+; Related .......: _LOImpress_ShapeAreaTransparencyGradient, _LOImpress_ShapePresStyleAreaTransparency, _LOImpress_ShapeStyleAreaTransparency
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -684,7 +684,7 @@ EndFunc   ;==>_LOImpress_ShapeAreaTransparency
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......:
+; Related .......: _LOImpress_ShapeAreaTransparency, _LOImpress_ShapePresStyleAreaTransparencyGradient, _LOImpress_ShapeStyleAreaTransparencyGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -862,7 +862,7 @@ EndFunc   ;==>_LOImpress_ShapeAreaTransparencyGradient
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOImpress_ShapeAreaGradientMulticolor
+; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOImpress_ShapeAreaTransparencyGradient, _LOImpress_ShapePresStyleAreaTransparencyGradientMulti, _LOImpress_ShapeStyleAreaTransparencyGradientMulti, _LOImpress_ShapeAreaGradientMulticolor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -908,7 +908,7 @@ EndFunc   ;==>_LOImpress_ShapeAreaTransparencyGradientMulti
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_ShapeCharOverLine, _LOImpress_ShapeCharStrikeOut, _LOImpress_ShapeCharUnderLine, _LOImpress_ShapePresStyleCharEffect, _LOImpress_ShapeStyleCharEffect
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -957,7 +957,7 @@ EndFunc   ;==>_LOImpress_ShapeCharEffect
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
 ;                  LibreOffice accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
-; Related .......:
+; Related .......: _LOImpress_ShapeCharFontColor, _LOImpress_ShapePresStyleCharFont, _LOImpress_ShapeStyleCharFont, _LOImpress_FontsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1004,7 +1004,7 @@ EndFunc   ;==>_LOImpress_ShapeCharFont
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapeCharFont, _LOImpress_ShapePresStyleCharFontColor, _LOImpress_ShapeStyleCharFontColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1048,7 +1048,7 @@ EndFunc   ;==>_LOImpress_ShapeCharFontColor
 ; Remarks .......: Overline line style uses the same constants as underline style.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_ShapeCharEffect, _LOImpress_ShapeCharStrikeOut, _LOImpress_ShapeCharUnderLine, _LOImpress_ShapePresStyleCharOverLine, _LOImpress_ShapeStyleCharOverLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1096,7 +1096,7 @@ EndFunc   ;==>_LOImpress_ShapeCharOverLine
 ;                  The way LibreOffice is set up Super/Subscript are set in the same setting, Superscript is a positive number from 1 to 100 (percentage), Subscript is a negative number set to -1 to -100 percentage. For the user's convenience this function automatically converts the positive numbers to negative, and back when setting or retrieving subscript values.
 ;                  Automatic Superscript has an Integer value of 14000, Auto Subscript has a Integer value of -14000. Being that there is no settable setting of Automatic Super/Sub Script, it has been chosen to use -1 to indicate an automatic Sub/SuperScript value.
 ;                  If you set both $iSuperScript and $iSubScript to -1 (Automatic), or both $iSuperScript and $iSubScript to any value, Subscript will be the result, as it is the last in the function to be set, and thus will overwrite any Superscript values.
-; Related .......:
+; Related .......: _LOImpress_ShapeParAlignment, _LOImpress_ShapeParIndent, _LOImpress_ShapeParSpacing
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1136,7 +1136,7 @@ EndFunc   ;==>_LOImpress_ShapeCharPosition
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Fit to line seems to be unavailable in the API, and does not seem to work in LibreOffice anyway.
-; Related .......:
+; Related .......: _LOImpress_ShapeCharSpacing
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1179,7 +1179,7 @@ EndFunc   ;==>_LOImpress_ShapeCharScaling
 ;                  When setting Kerning values in LibreOffice, the measurement is listed in Pt (Printer's Points) in the User Display, however the internal setting is measured in Hundredths of a Millimeter (HMM). They will be automatically converted from Points to Hundredths of a Millimeter and back for retrieval of settings.
 ;                  The acceptable values are from -2 Pt to 928.8 Pt. The values can be directly converted easily, however, for an unknown reason to myself, LibreOffice begins counting backwards and in negative Hundredths of a Millimeter internally from 928.9 up to 1000 Pt (Max setting).
 ;                  For example, 928.8Pt is the last correct value, which equals 32766 Hundredths of a Millimeter (HMM), after this LibreOffice reports the following: 928.9 Pt = -32766 HMM; 929 Pt = -32763 HMM; 929.1 = -32759; 1000 pt = -30258. Attempting to set Libre's kerning value to anything over 32768 HMM causes a COM exception, and attempting to set the kerning to any of these negative numbers sets the User viewable kerning value to -2.0 Pt. For these reasons the max settable kerning is -2.0 Pt to 928.8 Pt.
-; Related .......:
+; Related .......: _LOImpress_ShapeCharScaling, _LOImpress_ShapeParSpacing
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1219,7 +1219,7 @@ EndFunc   ;==>_LOImpress_ShapeCharSpacing
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_ShapeCharEffect, _LOImpress_ShapeCharOverLine, _LOImpress_ShapeCharUnderLine, _LOImpress_ShapePresStyleCharStrikeOut, _LOImpress_ShapeStyleCharStrikeOut
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1262,7 +1262,7 @@ EndFunc   ;==>_LOImpress_ShapeCharStrikeOut
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_ShapeCharEffect, _LOImpress_ShapeCharOverLine, _LOImpress_ShapeCharStrikeOut, _LOImpress_ShapePresStyleCharUnderLine, _LOImpress_ShapeStyleCharUnderLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1295,7 +1295,7 @@ EndFunc   ;==>_LOImpress_ShapeCharUnderLine
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......:
+; Related .......: _LOImpress_DrawShapeText, 
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1331,7 +1331,7 @@ EndFunc   ;==>_LOImpress_ShapeCreateTextCursor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function will work for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......:
+; Related .......: _LOImpress_ShapesGetList, _LOImpress_ShapeImageInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_DrawShapeInsert, _LOImpress_TableInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1378,7 +1378,7 @@ EndFunc   ;==>_LOImpress_ShapeDelete
 ; Remarks .......: For all shapes that have not been renamed by the user, the name value is blank, even though the shape in the UI has a name. Therefore this function will only work for user-renamed shapes.
 ;                  This function searches all slides, because a Shape name must be unique for an entire slideshow document.
 ;                  This function will work for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......:
+; Related .......: _LOImpress_ShapesGetList, _LOImpress_DrawShapeInsert, _LOImpress_ShapeImageInsert, _LOImpress_ShapeTextBoxInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1441,7 +1441,7 @@ EndFunc   ;==>_LOImpress_ShapeExists
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_DrawShapeAltText
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1531,7 +1531,7 @@ EndFunc   ;==>_LOImpress_ShapeImageAltText
 ;                  Maximum crop values are based on page width. You cannot exceed the size of the page, nor crop too much of the image away.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_ShapeImageInsert, _LO_UnitConvert
+; Related .......: _LOImpress_ShapeImageInsert, _LO_UnitConvert, _LOImpress_ShapeSize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1637,7 +1637,7 @@ EndFunc   ;==>_LOImpress_ShapeImageCrop
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Image is Auto-Sized and centered thanks to method by A. Pitonyak, OOME 4.1, PDF pg 320.
-; Related .......:
+; Related .......: _LOImpress_ShapeDelete, _LOImpress_ShapeImageModify, _LOImpress_ShapeImageReplace, _LOImpress_ShapeTextBoxInsert, _LOImpress_TableInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1728,7 +1728,7 @@ EndFunc   ;==>_LOImpress_ShapeImageInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_ShapeImageInsert
+; Related .......: _LOImpress_ShapeImageInsert, _LOImpress_ShapeImageReplace
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1790,7 +1790,7 @@ EndFunc   ;==>_LOImpress_ShapeImageModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_ShapeImageInsert
+; Related .......: _LOImpress_ShapeImageInsert, _LOImpress_ShapeImageModify
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1853,7 +1853,7 @@ EndFunc   ;==>_LOImpress_ShapeImageReplace
 ;                  User is responsible for ensuring values are correctly called (i.e. that a shape, or slide etc exists by that name) for $LOI_SHAPE_INTERACTION_ACTION_GOTO_PAGE_OBJ, $LOI_SHAPE_INTERACTION_ACTION_OBJ_ACTION, and $LOI_SHAPE_INTERACTION_ACTION_MACRO.
 ;                  See comments for each $LOI_SHAPE_INTERACTION_ACTION_* Constant for what values are expected in $sTarget otherwise.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......:
+; Related .......: _LOImpress_ShapeTextAttrAnimation
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1978,7 +1978,7 @@ EndFunc   ;==>_LOImpress_ShapeInteraction
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......:
+; Related .......: _LOImpress_ShapeLineProperties, _LOImpress_ShapePresStyleLineArrowStyles, _LOImpress_ShapeStyleLineArrowStyles
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2119,7 +2119,7 @@ EndFunc   ;==>_LOImpress_ShapeLineArrowStyles
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapeLineArrowStyles, _LOImpress_ShapePresStyleLineProperties, _LOImpress_ShapeStyleLineProperties
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2249,7 +2249,7 @@ EndFunc   ;==>_LOImpress_ShapeLineProperties
 ;                  For all shapes that have not been renamed by the user, the name value is blank, even though the shape in the UI has a name.
 ;                  When renaming a shape, the Shape name must be unique to the entire slideshow (at least in the LibreOffice UI), however due to the above issue, it is possible to have two shapes with the same name in the UI (and also internally if I don't make a safety check).
 ;                  This function will work for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......:
+; Related .......: _LOImpress_ShapeExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2314,7 +2314,7 @@ EndFunc   ;==>_LOImpress_ShapeName
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Expand single word, Snap to grid, and Vertical align (Text-To-Text), seem to be unavailable in the API, and do not seem to work in LibreOffice.
-; Related .......:
+; Related .......: _LOImpress_ShapeCharPosition, _LOImpress_ShapeParIndent, _LOImpress_ShapeParSpacing, _LOImpress_ShapePresStyleParAlignment, _LOImpress_ShapeStyleParAlignment
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2358,7 +2358,7 @@ EndFunc   ;==>_LOImpress_ShapeParAlignment
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Auto indent first line does not seem to work in LibreOffice, and seems to be not available in the API.
-; Related .......: _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOImpress_ShapeParAlignment, _LOImpress_ShapeParSpacing, _LOImpress_ShapePresStyleParIndent, _LOImpress_ShapeStyleParIndent
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2413,7 +2413,7 @@ EndFunc   ;==>_LOImpress_ShapeParIndent
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  The "Do not add space between paragraphs as the same style" setting seems to be not available to set or retrieve in the API, and seems to do nothing in LibreOffice anyway.
-; Related .......: _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOImpress_ShapeCharSpacing, _LOImpress_ShapeParAlignment, _LOImpress_ShapeParIndent, _LOImpress_ShapePresStyleParSpacing, _LOImpress_ShapeStyleParSpacing
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2468,7 +2468,7 @@ EndFunc   ;==>_LOImpress_ShapeParSpacing
 ;                  $iFillChar, Libre's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by Libre are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  $iNewTabStop position is still returned as even though some settings weren't successfully set, the new TabStop was still created.
-; Related .......: _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOImpress_ShapeParTabStopDelete, _LOImpress_ShapeParTabStopMod, _LOImpress_ShapeParTabStopsGetList, _LOImpress_ShapePresStyleParTabStopCreate, _LOImpress_ShapeStyleParTabStopCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2503,7 +2503,7 @@ EndFunc   ;==>_LOImpress_ShapeParTabStopCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $iTabStop refers to the position, or essential the "length" of a TabStop from the edge of a page margin. This is the only reliable way to identify a Tabstop to be able to interact with it, as there can only be one of a certain length per paragraph.
-; Related .......:
+; Related .......: _LOImpress_ShapeParTabStopCreate, _LOImpress_ShapeParTabStopsGetList, _LOImpress_ShapePresStyleParTabStopDelete, _LOImpress_ShapeStyleParTabStopDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2562,7 +2562,7 @@ EndFunc   ;==>_LOImpress_ShapeParTabStopDelete
 ;                  $iFillChar, Libre's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by Libre are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOImpress_ShapeParTabStopCreate, _LOImpress_ShapeParTabStopsGetList, _LOImpress_ShapePresStyleParTabStopMod, _LOImpress_ShapeStyleParTabStopMod
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2594,7 +2594,7 @@ EndFunc   ;==>_LOImpress_ShapeParTabStopMod
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOImpress_ShapeParTabStopCreate, _LOImpress_ShapeParTabStopDelete, _LOImpress_ShapePresStyleParTabStopsGetList, _LOImpress_ShapeStyleParTabStopsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2639,7 +2639,7 @@ EndFunc   ;==>_LOImpress_ShapeParTabStopsGetList
 ; Modified ......:
 ; Remarks .......: This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOImpress_ShapeSize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2713,7 +2713,7 @@ EndFunc   ;==>_LOImpress_ShapePosition
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapePresStyleAreaFillStyle, _LOImpress_ShapePresStyleAreaGradient, _LOImpress_ShapeAreaColor. _LOImpress_ShapeStyleAreaColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2746,7 +2746,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleAreaColor
 ; Modified ......:
 ; Remarks .......: This function is to help determine if a Gradient background, or a solid color background is currently active.
 ;                  This is useful because, if a Gradient is active, the solid color value is still present, and thus it would not be possible to determine which function should be used to retrieve the current values for, whether the Color function, or the Gradient function.
-; Related .......:
+; Related .......: _LOImpress_ShapeAreaFillStyle, _LOImpress_ShapePresStyleAreaColor, _LOImpress_ShapePresStyleAreaGradient, _LOImpress_ShapeStyleAreaFillStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2823,7 +2823,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleAreaFillStyle
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapePresStyleAreaFillStyle, _LOImpress_ShapePresStyleAreaGradientMulticolor, _LOImpress_ShapeAreaGradient, _LOImpress_ShapeStyleAreaGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2874,7 +2874,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleAreaGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOImpress_ShapeAreaTransparencyGradientMulti
+; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOImpress_ShapeAreaGradientMulticolor, _LOImpress_ShapePresStyleAreaGradient, _LOImpress_ShapeStyleAreaGradientMulticolor, _LOImpress_ShapeAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2931,7 +2931,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleAreaGradientMulticolor
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  LibreOffice may change the shadow distance +/- a Hundredth of a Millimeter (HMM).
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LOImpress_ShapeAreaShadow, _LOImpress_ShapeStyleAreaShadow
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2970,7 +2970,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleAreaShadow
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_ShapeAreaTransparency, _LOImpress_ShapePresStyleAreaTransparencyGradient, _LOImpress_ShapeStyleAreaTransparency
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3033,7 +3033,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleAreaTransparency
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_ShapeAreaTransparencyGradient, _LOImpress_ShapePresStyleAreaTransparency, _LOImpress_ShapePresStyleAreaTransparencyGradientMulti, _LOImpress_ShapeStyleAreaTransparencyGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3085,7 +3085,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleAreaTransparencyGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOImpress_ShapeAreaGradientMulticolor
+; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOImpress_ShapeAreaTransparencyGradientMulti, _LOImpress_ShapePresStyleAreaTransparencyGradient, _LOImpress_ShapeStyleAreaTransparencyGradientMulti, _LOImpress_ShapeAreaGradientMulticolor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3131,7 +3131,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleAreaTransparencyGradientMulti
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_ShapePresStyleCharOverLine, _LOImpress_ShapePresStyleCharStrikeOut, _LOImpress_ShapePresStyleCharUnderLine, _LOImpress_ShapeCharEffect, _LOImpress_ShapeStyleCharEffect
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3180,7 +3180,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleCharEffect
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
 ;                  LibreOffice accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
-; Related .......:
+; Related .......: _LOImpress_ShapePresStyleCharFontColor, _LOImpress_ShapeCharFont, _LOImpress_ShapeStyleCharFont, _LOImpress_FontsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3220,7 +3220,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleCharFont
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LOImpress_ShapePresStyleCharFont, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapeCharFontColor, _LOImpress_ShapeStyleCharFontColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3264,7 +3264,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleCharFontColor
 ; Remarks .......: Overline line style uses the same constants as underline style.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_ShapeCharOverLine, _LOImpress_ShapePresStyleCharEffect, _LOImpress_ShapePresStyleCharStrikeOut, _LOImpress_ShapePresStyleCharUnderLine, _LOImpress_ShapeStyleCharOverLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3304,7 +3304,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleCharOverLine
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_ShapePresStyleCharEffect, _LOImpress_ShapePresStyleCharOverLine, _LOImpress_ShapePresStyleCharUnderLine, _LOImpress_ShapeCharStrikeOut, _LOImpress_ShapeStyleCharStrikeOut
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3347,7 +3347,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleCharStrikeOut
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_ShapePresStyleCharEffect, _LOImpress_ShapePresStyleCharStrikeOut, _LOImpress_ShapePresStyleCharUnderLine, _LOImpress_ShapeCharUnderLine, _LOImpress_ShapeStyleCharUnderLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3453,7 +3453,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleGetObjByName
 ;                  When retrieving the current settings, both $vStartStyle and $vEndStyle could be either an Integer or a String. It will be a String if the current Arrowhead is a custom Arrowhead, else an Integer, corresponding to one of the constants, $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_ShapePresStyleLineProperties, _LOImpress_ShapeLineArrowStyles, _LOImpress_ShapeStyleLineArrowStyles
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3514,7 +3514,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleLineArrowStyles
 ;                  When retrieving the current settings, $vStyle could be either an Integer or a String. It will be a String if the current Line Style is a custom Line Style, else an Integer, corresponding to one of the constants, $LOI_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapePresStyleLineArrowStyles, _LOImpress_ShapeLineProperties, _LOImpress_ShapeStyleLineProperties
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3588,7 +3588,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleLineProperties
 ;                  If you retrieve the current settings for all levels (by calling $iLevel with 0), the return will be a 10 element array containing an array of settings for each Numbering Level.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  When a lot of settings are set, especially for all levels, this function can be a bit slow.
-; Related .......:
+; Related .......: _LOImpress_ShapePresStyleParIndent, _LOImpress_ShapePresStyleParTabStopCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3752,7 +3752,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleNumCustomize
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Expand single word, Snap to grid, and Vertical align (Text-To-Text), seem to be unavailable in the API, and do not seem to work in LibreOffice.
-; Related .......:
+; Related .......: _LOImpress_ShapeParAlignment, _LOImpress_ShapePresStyleParIndent, _LOImpress_ShapePresStyleParSpacing, _LOImpress_ShapeStyleParAlignment
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3796,7 +3796,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleParAlignment
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Auto indent first line does not seem to work in LibreOffice, and seems to be not available in the API.
-; Related .......: _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOImpress_ShapeParIndent, _LOImpress_ShapePresStyleParAlignment, _LOImpress_ShapePresStyleParSpacing, _LOImpress_ShapeStyleParIndent
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3851,7 +3851,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleParIndent
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  The "Do not add space between paragraphs as the same style" setting seems to be not available to set or retrieve in the API, and seems to do nothing in LibreOffice anyway.
-; Related .......: _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOImpress_ShapePresStyleParAlignment, _LOImpress_ShapePresStyleParIndent, _LOImpress_ShapeParSpacing, _LOImpress_ShapeStyleParSpacing
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3906,7 +3906,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleParSpacing
 ;                  $iFillChar, Libre's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by Libre are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  $iNewTabStop position is still returned as even though some settings weren't successfully set, the new TabStop was still created.
-; Related .......: _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOImpress_ShapePresStyleParTabStopDelete, _LOImpress_ShapePresStyleParTabStopMod, _LOImpress_ShapePresStyleParTabStopsGetList, _LOImpress_ShapeParTabStopCreate, _LOImpress_ShapeStyleParTabStopCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3941,7 +3941,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleParTabStopCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $iTabStop refers to the position, or essential the "length" of a TabStop from the edge of a page margin. This is the only reliable way to identify a Tabstop to be able to interact with it, as there can only be one of a certain length per paragraph.
-; Related .......:
+; Related .......: _LOImpress_ShapePresStyleParTabStopCreate, _LOImpress_ShapePresStyleParTabStopsGetList, _LOImpress_ShapeParTabStopDelete, _LOImpress_ShapeStyleParTabStopDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4000,7 +4000,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleParTabStopDelete
 ;                  $iFillChar, Libre's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by Libre are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOImpress_ShapePresStyleParTabStopCreate, _LOImpress_ShapePresStyleParTabStopsGetList, _LOImpress_ShapeParTabStopMod, _LOImpress_ShapeStyleParTabStopMod
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4032,7 +4032,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleParTabStopMod
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOImpress_ShapePresStyleParTabStopCreate, _LOImpress_ShapePresStyleParTabStopDelete, _LOImpress_ShapePresStyleParTabStopMod, _LOImpress_ShapeParTabStopsGetList, _LOImpress_ShapeStyleParTabStopsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4082,7 +4082,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleParTabStopsGetList
 ;                  - "Outline 9" is internally called "outline9".
 ;                  Previous to LibreOffice 25.2 either name would work when setting a Style, however after 25.2 only the internal, or programmatic style names, will work.
 ;                  Calling $bDisplayName with True will return a list of Style names, as the user sees them in the UI, in the same order as they are returned if $bDisplayName is False. It is best not to use these when setting Styling.
-; Related .......: _LOImpress_ShapePresStyleGetObjByName
+; Related .......: _LOImpress_ShapePresStyleGetObjByName, _LOImpress_ShapeStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4129,7 +4129,7 @@ EndFunc   ;==>_LOImpress_ShapePresStylesGetNames
 ; Remarks .......: Properties as found in the UI, and their equivalent: "Fit Width to Text" = $bFitWidth. "Fit Height to Text" = $bFitHeight. "Fit to Frame" = $bFitToFrame.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_ShapePresStyleTextAttrSettings, _LOImpress_ShapeStyleTextAttrFit, _LOImpress_ShapeTextAttrFit
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4209,7 +4209,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleTextAttrFit
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_ShapePresStyleTextAttrFit, _LOImpress_ShapeStyleTextAttrSettings, _LOImpress_ShapeTextAttrSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4254,7 +4254,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleTextAttrSettings
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......:
+; Related .......: _LOImpress_ShapePosition, _LOImpress_ShapeSize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4308,7 +4308,7 @@ EndFunc   ;==>_LOImpress_ShapeRotateSlant
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Array returned has two columns. The first column is the shape Object. The second column is the Shape Type, corresponding to one of the Constants $LOI_SHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
-; Related .......: _LOImpress_DrawShapeGetType
+; Related .......: _LOImpress_DrawShapeGetType, _LOImpress_DrawShapeInsert, _LOImpress_ShapeImageInsert, _LOImpress_ShapeTextBoxInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4377,7 +4377,7 @@ EndFunc   ;==>_LOImpress_ShapesGetList
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  I have skipped "Keep Ratio", as currently it seems unable to be set for shapes.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......: _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOImpress_ShapePosition, _LOImpress_ShapeRotateSlant
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4451,7 +4451,7 @@ EndFunc   ;==>_LOImpress_ShapeSize
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapeStyleAreaFillStyle, _LOImpress_ShapeStyleAreaGradient, _LOImpress_ShapeAreaColor, _LOImpress_ShapePresStyleAreaColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4484,7 +4484,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleAreaColor
 ; Modified ......:
 ; Remarks .......: This function is to help determine if a Gradient background, or a solid color background is currently active.
 ;                  This is useful because, if a Gradient is active, the solid color value is still present, and thus it would not be possible to determine which function should be used to retrieve the current values for, whether the Color function, or the Gradient function.
-; Related .......:
+; Related .......: _LOImpress_ShapeStyleAreaColor, _LOImpress_ShapeStyleAreaGradient, _LOImpress_ShapeAreaFillStyle, _LOImpress_ShapePresStyleAreaFillStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4561,7 +4561,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleAreaFillStyle
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapeStyleAreaFillStyle, _LOImpress_ShapeStyleAreaGradientMulticolor, _LOImpress_ShapeAreaGradient, _LOImpress_ShapePresStyleAreaGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4612,7 +4612,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleAreaGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOImpress_ShapeAreaTransparencyGradientMulti
+; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOImpress_ShapeStyleAreaTransparencyGradient, _LOImpress_ShapeAreaTransparencyGradientMulti, _LOImpress_ShapeAreaGradientMulticolor, _LOImpress_ShapePresStyleAreaGradientMulticolor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4669,7 +4669,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleAreaGradientMulticolor
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  LibreOffice may change the shadow distance +/- a Hundredth of a Millimeter (HMM).
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LOImpress_ShapeAreaShadow, _LOImpress_ShapePresStyleAreaShadow
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4708,7 +4708,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleAreaShadow
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_ShapeStyleAreaTransparencyGradient, _LOImpress_ShapeAreaTransparency, _LOImpress_ShapePresStyleAreaTransparency
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4771,7 +4771,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleAreaTransparency
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_ShapeStyleAreaTransparencyGradientMulti, _LOImpress_ShapeAreaTransparencyGradient, _LOImpress_ShapePresStyleAreaTransparencyGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4823,7 +4823,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleAreaTransparencyGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOImpress_ShapeAreaGradientMulticolor
+; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOImpress_ShapeStyleAreaTransparencyGradient, _LOImpress_ShapeAreaGradientMulticolor, _LOImpress_ShapeAreaTransparencyGradientMulti, _LOImpress_ShapePresStyleAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4869,7 +4869,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleAreaTransparencyGradientMulti
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_ShapeStyleCharOverLine, _LOImpress_ShapeStyleCharStrikeOut, _LOImpress_ShapeStyleCharUnderLine, _LOImpress_ShapeCharEffect, _LOImpress_ShapePresStyleCharEffect
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4918,7 +4918,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleCharEffect
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
 ;                  LibreOffice accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
-; Related .......:
+; Related .......: _LOImpress_ShapeStyleCharFontColor, _LOImpress_ShapeCharFont, _LOImpress_ShapePresStyleCharFont, _LOImpress_FontsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4958,7 +4958,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleCharFont
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapeStyleCharFont, _LOImpress_ShapeCharFontColor, _LOImpress_ShapePresStyleCharFontColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5002,7 +5002,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleCharFontColor
 ; Remarks .......: Overline line style uses the same constants as underline style.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_ShapeStyleCharEffect, _LOImpress_ShapeStyleCharStrikeOut, _LOImpress_ShapeStyleCharUnderLine, _LOImpress_ShapeCharOverLine, _LOImpress_ShapePresStyleCharOverLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5042,7 +5042,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleCharOverLine
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_ShapeStyleCharEffect, _LOImpress_ShapeStyleCharOverLine, _LOImpress_ShapeStyleCharUnderLine, _LOImpress_ShapeCharStrikeOut, _LOImpress_ShapePresStyleCharStrikeOut
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5085,7 +5085,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleCharStrikeOut
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_ShapeStyleCharEffect, _LOImpress_ShapeStyleCharOverLine, _LOImpress_ShapeStyleCharStrikeOut, _LOImpress_ShapeCharUnderLine, _LOImpress_ShapePresStyleCharUnderLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5135,7 +5135,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleCharUnderLine
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Line 1, 2, and 3 Skew setting is not available for Shape Styles.
-; Related .......:
+; Related .......: _LOImpress_DrawShapeConnectorSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5215,7 +5215,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleConnectorSettings
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_ShapeStyleDelete
+; Related .......: _LOImpress_ShapeStyleDelete, _LOImpress_ShapeStyleExists, _LOImpress_ShapeStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5274,7 +5274,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleCreate
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  Because a Shape can have either a Presentation Style or a Drawing/Shape style applied to them, this function has two different @Extended values depending on whether the current style applied is a Presentation style or a Drawing/Shape style.
 ;                  You cannot set the style for a Presentation shape, which is a shape that is not user-created. These include Title, Subtitle, Outline and Note TextBoxes, also background shapes.
-; Related .......:
+; Related .......: _LOImpress_ShapeStyleExists, _LOImpress_ShapeStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5429,7 +5429,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleDelete
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_DrawShapeDimensionSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5461,7 +5461,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleDimensionSettings
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5495,7 +5495,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_ShapeStylesGetNames
+; Related .......: _LOImpress_ShapeStylesGetNames, _LOImpress_ShapeStyleExists, _LOImpress_ShapePresStyleGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5566,7 +5566,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleGetObjByName
 ;                  When retrieving the current settings, both $vStartStyle and $vEndStyle could be either an Integer or a String. It will be a String if the current Arrowhead is a custom Arrowhead, else an Integer, corresponding to one of the constants, $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_ShapeStyleLineProperties, _LOImpress_ShapeLineArrowStyles, _LOImpress_ShapePresStyleLineArrowStyles
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5627,7 +5627,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleLineArrowStyles
 ;                  When retrieving the current settings, $vStyle could be either an Integer or a String. It will be a String if the current Line Style is a custom Line Style, else an Integer, corresponding to one of the constants, $LOI_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapeStyleLineArrowStyles, _LOImpress_ShapeLineProperties, _LOImpress_ShapePresStyleLineProperties
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5762,7 +5762,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleOrganizer
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Expand single word, Snap to grid, and Vertical align (Text-To-Text), seem to be unavailable in the API, and do not seem to work in LibreOffice.
-; Related .......:
+; Related .......: _LOImpress_ShapeStyleParIndent, _LOImpress_ShapeStyleParSpacing, _LOImpress_ShapeParAlignment, _LOImpress_ShapePresStyleParAlignment
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5806,7 +5806,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleParAlignment
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Auto indent first line does not seem to work in LibreOffice, and seems to be not available in the API.
-; Related .......: _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOImpress_ShapeStyleParAlignment, _LOImpress_ShapeStyleParSpacing, _LOImpress_ShapeParIndent, _LOImpress_ShapePresStyleParIndent
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5861,7 +5861,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleParIndent
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  The "Do not add space between paragraphs as the same style" setting seems to be not available to set or retrieve in the API, and seems to do nothing in LibreOffice anyway.
-; Related .......: _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOImpress_ShapeStyleParAlignment, _LOImpress_ShapeStyleParIndent, _LOImpress_ShapeParSpacing, _LOImpress_ShapePresStyleParSpacing
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5916,7 +5916,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleParSpacing
 ;                  $iFillChar, Libre's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by Libre are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  $iNewTabStop position is still returned as even though some settings weren't successfully set, the new TabStop was still created.
-; Related .......: _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOImpress_ShapeStyleParTabStopDelete, _LOImpress_ShapeStyleParTabStopMod, _LOImpress_ShapeStyleParTabStopsGetList, _LOImpress_ShapeParTabStopCreate, _LOImpress_ShapePresStyleParTabStopCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5951,7 +5951,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleParTabStopCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $iTabStop refers to the position, or essential the "length" of a TabStop from the edge of a page margin. This is the only reliable way to identify a Tabstop to be able to interact with it, as there can only be one of a certain length per paragraph.
-; Related .......:
+; Related .......: _LOImpress_ShapeStyleParTabStopCreate, _LOImpress_ShapeStyleParTabStopsGetList, _LOImpress_ShapeParTabStopDelete, _LOImpress_ShapePresStyleParTabStopDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6010,7 +6010,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleParTabStopDelete
 ;                  $iFillChar, Libre's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by Libre are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOImpress_ShapeStyleParTabStopCreate, _LOImpress_ShapeStyleParTabStopsGetList, _LOImpress_ShapeParTabStopMod, _LOImpress_ShapePresStyleParTabStopMod
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6042,7 +6042,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleParTabStopMod
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOImpress_ShapeStyleParTabStopCreate, _LOImpress_ShapeStyleParTabStopDelete, _LOImpress_ShapeStyleParTabStopMod, _LOImpress_ShapeParTabStopsGetList, _LOImpress_ShapePresStyleParTabStopsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6086,7 +6086,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleParTabStopsGetList
 ;                  - "Object without fill" is internally called "objectwithoutfill".
 ;                  Previous to LibreOffice 25.2 either name would work when setting a Style, however after 25.2 only the internal, or programmatic style names, will work.
 ;                  Calling $bDisplayName with True will return a list of Style names, as the user sees them in the UI, in the same order as they are returned if $bDisplayName is False. It is best not to use these when setting Styling.
-; Related .......: _LOImpress_ShapeStyleGetObjByName
+; Related .......: _LOImpress_ShapeStyleGetObjByName, _LOImpress_ShapeStyleExists, _LOImpress_ShapePresStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6150,7 +6150,7 @@ EndFunc   ;==>_LOImpress_ShapeStylesGetNames
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_ShapeStyleTextAttrFit, _LOImpress_ShapeStyleTextAttrSettings, _LOImpress_ShapeTextAttrAnimation
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6203,7 +6203,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleTextAttrAnimation
 ; Remarks .......: Properties as found in the UI, and their equivalent: "Word Wrap Text in Shape" = $bWordWrap. "Resize Shape to Fit Text" = $bResizeShape. "Fit Width to Text" = $bFitWidth. "Fit Height to Text" = $bFitHeight. "Fit to Frame" = $bFitToFrame. "Adjust to Contour" = $bAdjustContour.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_ShapeStyleTextAttrAnimation, _LOImpress_ShapeStyleTextAttrSettings, _LOImpress_ShapeTextAttrFit
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6255,7 +6255,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleTextAttrFit
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_ShapeStyleTextAttrAnimation, _LOImpress_ShapeStyleTextAttrFit, _LOImpress_ShapeTextAttrSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6316,7 +6316,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleTextAttrSettings
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......:
+; Related .......: _LOImpress_ShapeTextAttrSettings, _LOImpress_ShapeStyleTextAttrAnimation
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6363,7 +6363,7 @@ EndFunc   ;==>_LOImpress_ShapeTextAttrAnimation
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......:
+; Related .......: _LOImpress_ShapeTextAttrFit, _LOImpress_ShapeTextAttrSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6461,7 +6461,7 @@ EndFunc   ;==>_LOImpress_ShapeTextAttrColumns
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......:
+; Related .......: _LOImpress_ShapeTextAttrColumns, _LOImpress_ShapeTextAttrSettings, _LOImpress_ShapeStyleTextAttrFit
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6514,7 +6514,7 @@ EndFunc   ;==>_LOImpress_ShapeTextAttrFit
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......:
+; Related .......: _LOImpress_ShapeTextAttrAnimation, _LOImpress_ShapeTextAttrColumns, _LOImpress_ShapeTextAttrFit, _LOImpress_ShapeStyleTextAttrSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -6560,7 +6560,7 @@ EndFunc   ;==>_LOImpress_ShapeTextAttrSettings
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOImpress_ShapeDelete, _LOImpress_ShapeImageInsert, _LOImpress_DrawShapeInsert, _LOImpress_TableInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

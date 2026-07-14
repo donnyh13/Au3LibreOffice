@@ -76,7 +76,7 @@
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_CursorCharOverLine, _LOImpress_CursorCharStrikeOut, _LOImpress_CursorCharUnderLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -125,7 +125,7 @@ EndFunc   ;==>_LOImpress_CursorCharEffect
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
 ;                  LibreOffice accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
-; Related .......:
+; Related .......: _LOImpress_CursorCharFontColor, _LOImpress_FontsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -172,7 +172,7 @@ EndFunc   ;==>_LOImpress_CursorCharFont
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_CursorCharFont
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -216,7 +216,7 @@ EndFunc   ;==>_LOImpress_CursorCharFontColor
 ; Remarks .......: Overline line style uses the same constants as underline style.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_CursorCharEffect, _LOImpress_CursorCharStrikeOut, _LOImpress_CursorCharUnderLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -264,7 +264,7 @@ EndFunc   ;==>_LOImpress_CursorCharOverLine
 ;                  The way LibreOffice is set up Super/Subscript are set in the same setting, Superscript is a positive number from 1 to 100 (percentage), Subscript is a negative number set to -1 to -100 percentage. For the user's convenience this function automatically converts the positive numbers to negative, and back when setting or retrieving subscript values.
 ;                  Automatic Superscript has an Integer value of 14000, Auto Subscript has a Integer value of -14000. Being that there is no settable setting of Automatic Super/Sub Script, it has been chosen to use -1 to indicate an automatic Sub/SuperScript value.
 ;                  If you set both $iSuperScript and $iSubScript to -1 (Automatic), or both $iSuperScript and $iSubScript to any value, Subscript will be the result, as it is the last in the function to be set, and thus will overwrite any Superscript values.
-; Related .......:
+; Related .......: _LOImpress_CursorParAlignment, _LOImpress_CursorParIndent, _LOImpress_CursorParSpacing
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -304,7 +304,7 @@ EndFunc   ;==>_LOImpress_CursorCharPosition
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Fit to line seems to be unavailable in the API, and does not seem to work in LibreOffice anyway.
-; Related .......:
+; Related .......: _LOImpress_CursorCharSpacing
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -347,7 +347,7 @@ EndFunc   ;==>_LOImpress_CursorCharScaling
 ;                  When setting Kerning values in LibreOffice, the measurement is listed in Pt (Printer's Points) in the User Display, however the internal setting is measured in Hundredths of a Millimeter (HMM). They will be automatically converted from Points to Hundredths of a Millimeter and back for retrieval of settings.
 ;                  The acceptable values are from -2 Pt to 928.8 Pt. The values can be directly converted easily, however, for an unknown reason to myself, LibreOffice begins counting backwards and in negative Hundredths of a Millimeter internally from 928.9 up to 1000 Pt (Max setting).
 ;                  For example, 928.8Pt is the last correct value, which equals 32766 Hundredths of a Millimeter (HMM), after this LibreOffice reports the following: 928.9 Pt = -32766 HMM; 929 Pt = -32763 HMM; 929.1 = -32759; 1000 pt = -30258. Attempting to set Libre's kerning value to anything over 32768 HMM causes a COM exception, and attempting to set the kerning to any of these negative numbers sets the User viewable kerning value to -2.0 Pt. For these reasons the max settable kerning is -2.0 Pt to 928.8 Pt.
-; Related .......:
+; Related .......: _LOImpress_CursorCharScaling, _LOImpress_CursorParSpacing
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -387,7 +387,7 @@ EndFunc   ;==>_LOImpress_CursorCharSpacing
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_CursorCharEffect, _LOImpress_CursorCharOverLine, _LOImpress_CursorCharUnderLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -430,7 +430,7 @@ EndFunc   ;==>_LOImpress_CursorCharStrikeOut
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_CursorCharEffect, _LOImpress_CursorCharOverLine, _LOImpress_CursorCharStrikeOut
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -462,7 +462,7 @@ EndFunc   ;==>_LOImpress_CursorCharUnderLine
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: LibreOffice documentation states that when used in Libre Basic, GetString is limited to 64kb's in size. I do not know if the same limitation applies to any outside use of GetString (such as through Autoit).
-; Related .......:
+; Related .......: _LOImpress_CursorGoToRange, _LOImpress_CursorInsertString, _LOImpress_CursorMove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -497,7 +497,7 @@ EndFunc   ;==>_LOImpress_CursorGetString
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If the Cursor being used as a range has anything selected, the selection will be selected in the Cursor called in $oTextCursor also.
-; Related .......:
+; Related .......: _LOImpress_CursorIsCollapsed, _LOImpress_CursorMove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -534,7 +534,7 @@ EndFunc   ;==>_LOImpress_CursorGoToRange
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: For some reason the string insert method doesn't set the document modified status to True, therefore I have attempted to do it manually. This still may fail however, and changes could be inadvertently lost if the user closes without saving, as the Document will not ask if the user wishes to save changes.
-; Related .......:
+; Related .......: _LOImpress_CursorGetString, _LOImpress_CursorMove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -578,7 +578,7 @@ EndFunc   ;==>_LOImpress_CursorInsertString
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_CursorMove
+; Related .......: _LOImpress_CursorMove, _LOImpress_CursorGetString, _LOImpress_CursorInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -625,7 +625,7 @@ EndFunc   ;==>_LOImpress_CursorIsCollapsed
 ;                  #Cursor Movements which accept nothing and are done once per call:
 ;                  $LOI_TEXTCUR_COLLAPSE_TO_START,
 ;                  $LOI_TEXTCUR_COLLAPSE_TO_END
-; Related .......: _LOImpress_CursorIsCollapsed
+; Related .......: _LOImpress_CursorIsCollapsed, _LOImpress_CursorGoToRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -703,7 +703,7 @@ EndFunc   ;==>_LOImpress_CursorMove
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Expand single word, Snap to grid, and Vertical align (Text-To-Text), seem to be unavailable in the API, and do not seem to work in LibreOffice.
-; Related .......:
+; Related .......: _LOImpress_CursorCharPosition, _LOImpress_CursorParIndent, _LOImpress_CursorParSpacing
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -747,7 +747,7 @@ EndFunc   ;==>_LOImpress_CursorParAlignment
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Auto indent first line does not seem to work in LibreOffice, and seems to be not available in the API.
-; Related .......: _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOImpress_CursorCharPosition, _LOImpress_CursorParAlignment, _LOImpress_CursorParSpacing
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -802,7 +802,7 @@ EndFunc   ;==>_LOImpress_CursorParIndent
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  The "Do not add space between paragraphs as the same style" setting seems to be not available to set or retrieve in the API, and seems to do nothing in LibreOffice anyway.
-; Related .......: _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOImpress_CursorCharPosition, _LOImpress_CursorParAlignment, _LOImpress_CursorParIndent
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -857,7 +857,7 @@ EndFunc   ;==>_LOImpress_CursorParSpacing
 ;                  $iFillChar, Libre's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by Libre are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  $iNewTabStop position is still returned as even though some settings weren't successfully set, the new TabStop was still created.
-; Related .......: _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOImpress_CursorParTabStopDelete, _LOImpress_CursorParTabStopMod, _LOImpress_CursorParTabStopsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -892,7 +892,7 @@ EndFunc   ;==>_LOImpress_CursorParTabStopCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $iTabStop refers to the position, or essential the "length" of a TabStop from the edge of a page margin. This is the only reliable way to identify a Tabstop to be able to interact with it, as there can only be one of a certain length per paragraph.
-; Related .......:
+; Related .......: _LOImpress_CursorParTabStopCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -951,7 +951,7 @@ EndFunc   ;==>_LOImpress_CursorParTabStopDelete
 ;                  $iFillChar, Libre's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by Libre are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOImpress_CursorParTabStopCreate, _LOImpress_CursorParTabStopsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -983,7 +983,7 @@ EndFunc   ;==>_LOImpress_CursorParTabStopMod
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOImpress_CursorParTabStopCreate, _LOImpress_CursorParTabStopDelete, _LOImpress_CursorParTabStopMod
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

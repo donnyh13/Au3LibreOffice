@@ -67,7 +67,7 @@
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  These properties are only available for shapes other than lines (e.g. squares, stars, etc.).
-; Related .......:
+; Related .......: _LOImpress_DrawShapeText, _LOImpress_ShapeName, _LOImpress_ShapeImageAltText
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -168,7 +168,7 @@ EndFunc   ;==>_LOImpress_DrawShapeAltText
 ;                  The index of the default GluePoints are 0 (top), 1 (right), 2 (bottom), and 3 (left). You also can add new glue points to a shape’s default GluePoints.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_DrawShapeConnectorSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -308,7 +308,7 @@ EndFunc   ;==>_LOImpress_DrawShapeConnectorModify
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_DrawShapeConnectorModify
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -437,7 +437,7 @@ EndFunc   ;==>_LOImpress_DrawShapeConnectorSettings
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_DrawShapeConnectorSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -524,7 +524,7 @@ EndFunc   ;==>_LOImpress_DrawShapeDimensionSettings
 ;                  - If I fail to identify, or it is customized differently, $LOI_DRAWSHAPE_TYPE_CONNECTOR_CURVED_* Connector, $LOI_DRAWSHAPE_TYPE_CONNECTOR_CURVED will be returned.
 ;                  - If I fail to identify, or it is customized differently, $LOI_DRAWSHAPE_TYPE_CONNECTOR_* Connector, or if I fail to identify the sub-type of a connector, $LOI_DRAWSHAPE_TYPE_CONNECTOR will be returned.
 ;                  - If I fail to identify $LOI_DRAWSHAPE_TYPE_LINE_ARROW_*, the Value of $LOI_DRAWSHAPE_TYPE_LINE_LINE is returned for any of these.
-; Related .......:
+; Related .......: _LOImpress_ShapesGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -777,7 +777,7 @@ EndFunc   ;==>_LOImpress_DrawShapeGetType
 ;                  The following shape is visually different from the manually inserted one in L.O. 7.3.4.2:
 ;                  - $LOI_DRAWSHAPE_TYPE_SYMBOL_LIGHTNING
 ;                  I presently don't know how to insert 3D shapes or Fontwork, consequently all $LOI_DRAWSHAPE_TYPE_3D_* and $LOI_DRAWSHAPE_TYPE_FONTWORK_* will return a processing error.
-; Related .......: _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOImpress_ShapeDelete, _LOImpress_TableInsert, _LOImpress_ShapeImageInsert, _LOImpress_ShapeTextBoxInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -880,7 +880,7 @@ EndFunc   ;==>_LOImpress_DrawShapeInsert
 ;                  For an unknown reason, I am unable to insert "SMOOTH" Points, and consequently, any smooth Points are sometimes reverted back to "Normal" points, but still having their Smooth control points upon insertion that were already present in the shape. If you call a new point with "SMOOTH" type, it will be, for now, replaced with "Symmetrical".
 ;                  The first and last points in a shape can only be a "Normal" Point Type. The last point cannot be Curved, but the first can be.
 ;                  Calling any Smooth or Symmetrical point types with $bIsCurve = True, will be ignored, as with the last point in a shape, as they are already a curve, or not supported in the case of the last point.
-; Related .......: _LOImpress_DrawShapePointsModify, _LOImpress_DrawShapePointsRemove, _LOImpress_DrawShapePointsGetCount
+; Related .......: _LOImpress_DrawShapePointsModify, _LOImpress_DrawShapePointsRemove, _LOImpress_DrawShapePointsGetCount, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1808,7 +1808,7 @@ EndFunc   ;==>_LOImpress_DrawShapePointsRemove
 ; Modified ......:
 ; Remarks .......: When setting the text of a Shape, any previous text will be overwritten.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOImpress_DrawShapeAltText, _LOImpress_ShapeCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

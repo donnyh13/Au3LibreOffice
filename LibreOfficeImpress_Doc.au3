@@ -430,7 +430,7 @@ EndFunc   ;==>_LOImpress_DocCreate
 ;                  - uno:ZoomPlus -- Increases the zoom value to the next increment up.
 ;                  - uno:ZoomPageWidth -- Set zoom to fit page width.
 ;                  - uno:ZoomPage -- Set zoom to fit page.
-; Related .......:
+; Related .......: _LOImpress_DocZoom
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -487,7 +487,7 @@ EndFunc   ;==>_LOImpress_DocExecuteDispatch
 ; Modified ......:
 ; Remarks .......: Does not alter the original save path (if there was one), saves a copy of the document to the new path, in the new file format if one is chosen.
 ;                  If $bSamePath is called with True, the same save path as the current document is used. You must still fill in "$sFilePath" with the desired File Name and new extension, but you do not need to enter the file path.
-; Related .......: _LOImpress_DocSave, _LOImpress_DocSaveAs
+; Related .......: _LOImpress_DocSave, _LOImpress_DocSaveAs, _LOImpress_DocHasPath
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -569,7 +569,7 @@ EndFunc   ;==>_LOImpress_DocExport
 ; Modified ......:
 ; Remarks .......: If $bReturnFull is True, the return value will be like: "<Impress Doc name>.<extension> — LibreOffice Impress" e.g. "Testing.odp — LibreOffice Impress".
 ;                  Else the return value will be like: "<Impress Doc name>.<extension>", e.g. "Testing.odp"
-; Related .......:
+; Related .......: _LOImpress_DocSaveAs
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -612,7 +612,7 @@ EndFunc   ;==>_LOImpress_DocGetName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LO_PathConvert
+; Related .......: _LO_PathConvert, _LOImpress_DocHasPath
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -651,7 +651,7 @@ EndFunc   ;==>_LOImpress_DocGetPath
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOImpress_DocGetPath
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -684,7 +684,7 @@ EndFunc   ;==>_LOImpress_DocHasPath
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This does NOT test if the document is the current active window in Windows, it only tests if the document is the current active document among other LibreOffice documents.
-; Related .......:
+; Related .......: _LOImpress_DocToFront
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -723,7 +723,7 @@ EndFunc   ;==>_LOImpress_DocIsActive
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOImpress_DocSave, _LOImpress_DocIsReadOnly
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -766,7 +766,7 @@ EndFunc   ;==>_LOImpress_DocIsModified
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Only documents that have been saved to a location, will ever be "ReadOnly".
-; Related .......:
+; Related .......: _LOImpress_DocIsModified, _LOImpress_DocClose
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -805,7 +805,7 @@ EndFunc   ;==>_LOImpress_DocIsReadOnly
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOImpress_DocMinimize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -854,7 +854,7 @@ EndFunc   ;==>_LOImpress_DocMaximize
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOImpress_DocMaximize, _LOImpress_DocToFront
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1032,7 +1032,7 @@ EndFunc   ;==>_LOImpress_DocOpen
 ;                  If you want more accurate functionality, use the "WinMove" AutoIt function.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_DocMaximize, _LOImpress_DocMinimize, _LOImpress_DocZoom
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1108,7 +1108,7 @@ EndFunc   ;==>_LOImpress_DocPosAndSize
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_DocUndo, _LOImpress_DocRedoIsPossible, _LOImpress_DocRedoGetAllActionTitles, _LOImpress_DocRedoCurActionTitle
+; Related .......: _LOImpress_DocRedoIsPossible, _LOImpress_DocRedoGetAllActionTitles, _LOImpress_DocRedoCurActionTitle, _LOImpress_DocUndo
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1172,7 +1172,7 @@ EndFunc   ;==>_LOImpress_DocRedoClear
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_DocRedo, _LOImpress_DocRedoGetAllActionTitles
+; Related .......: _LOImpress_DocRedo, _LOImpress_DocRedoGetAllActionTitles, _LOImpress_DocUndoCurActionTitle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1206,7 +1206,7 @@ EndFunc   ;==>_LOImpress_DocRedoCurActionTitle
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_DocRedo, _LOImpress_DocRedoCurActionTitle
+; Related .......: _LOImpress_DocRedo, _LOImpress_DocRedoCurActionTitle, _LOImpress_DocUndoGetAllActionTitles
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1239,7 +1239,7 @@ EndFunc   ;==>_LOImpress_DocRedoGetAllActionTitles
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_DocRedo
+; Related .......: _LOImpress_DocRedo, _LOImpress_DocRedoCurActionTitle, _LOImpress_DocUndoIsPossible
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1272,7 +1272,7 @@ EndFunc   ;==>_LOImpress_DocRedoIsPossible
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_DocExport, _LOImpress_DocSaveAs
+; Related .......: _LOImpress_DocExport, _LOImpress_DocSaveAs, _LOImpress_DocHasPath, _LOImpress_DocIsReadOnly
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1377,7 +1377,7 @@ EndFunc   ;==>_LOImpress_DocSaveAs
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If minimized, the document is restored and brought to the front of the visible pages. Generally only brings the document to the front of other LibreOffice windows.
-; Related .......:
+; Related .......: _LOImpress_DocIsActive, _LOImpress_DocMinimize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1445,7 +1445,7 @@ EndFunc   ;==>_LOImpress_DocUndo
 ; Remarks .......: This begins an Undo Action Group, any functions and actions done after this function is called will be grouped together, and if undone, all actions will be undone together at once.
 ;                  _LOImpress_DocUndoActionEnd must be called after this function before this undo group will become available in the Undo Action list.
 ;                  _LOImpress_DocUndoActionBegin can be nested, e.g. call this function multiple times without ending the first undo action, but only the last group that is ended with _LOImpress_DocUndoActionEnd will appear.
-; Related .......:
+; Related .......: _LOImpress_DocUndoActionEnd, _LOImpress_DocUndoReset
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1474,7 +1474,7 @@ EndFunc   ;==>_LOImpress_DocUndoActionBegin
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This stops the grouping of actions into the last created Undo Action Group.
-; Related .......: _LOImpress_DocUndoActionBegin
+; Related .......: _LOImpress_DocUndoActionBegin, _LOImpress_DocUndoReset
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1502,7 +1502,7 @@ EndFunc   ;==>_LOImpress_DocUndoActionEnd
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This will silently fail if there are any _LOImpress_DocUndoActionBegin still active.
-; Related .......: _LOImpress_DocRedoClear, _LOImpress_DocUndoReset
+; Related .......: _LOImpress_DocUndoReset, _LOImpress_DocRedoClear
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1532,7 +1532,7 @@ EndFunc   ;==>_LOImpress_DocUndoClear
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_DocUndo, _LOImpress_DocUndoGetAllActionTitles
+; Related .......: _LOImpress_DocUndo, _LOImpress_DocUndoGetAllActionTitles, _LOImpress_DocRedoCurActionTitle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1566,7 +1566,7 @@ EndFunc   ;==>_LOImpress_DocUndoCurActionTitle
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_DocUndo, _LOImpress_DocUndoCurActionTitle
+; Related .......: _LOImpress_DocUndo, _LOImpress_DocUndoCurActionTitle, _LOImpress_DocRedoGetAllActionTitles
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1599,7 +1599,7 @@ EndFunc   ;==>_LOImpress_DocUndoGetAllActionTitles
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_DocUndo
+; Related .......: _LOImpress_DocUndo, _LOImpress_DocRedoIsPossible
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1630,7 +1630,7 @@ EndFunc   ;==>_LOImpress_DocUndoIsPossible
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Calling this function does the following: remove all locks from the undo manager; closes all open undo group actions, clears all undo actions, clears all redo actions.
-; Related .......: _LOImpress_DocRedoClear, _LOImpress_DocUndoClear
+; Related .......: _LOImpress_DocUndoClear, _LOImpress_DocUndoActionEnd
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1666,7 +1666,7 @@ EndFunc   ;==>_LOImpress_DocUndoReset
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOImpress_DocOpen
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1717,7 +1717,7 @@ EndFunc   ;==>_LOImpress_DocVisible
 ; Remarks .......: Zoom type always has the value of $LOI_ZOOMTYPE_BY_VALUE(3), when using the other zoom types, the value stays the same, but the zoom level is modified. Consequently, I have not added an error check for the Zoom Type property being correctly set.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_DocExecuteDispatch, _LOImpress_DocPosAndSize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

@@ -82,7 +82,7 @@
 ; Remarks .......: If $iPos is called with Null, the new slide is inserted at the end.
 ;                  Call $iPos with the last slide index to insert the slide at the end.
 ;                  Due to limitations in the API, I have made a small workaround for inserting a slide at the beginning. A dispatch is executed to move the slide to the beginning. The current slide will temporarily be set to the new slide in order to move it.
-; Related .......:
+; Related .......: _LOImpress_SlideDeleteByIndex, _LOImpress_SlideDeleteByObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -154,7 +154,7 @@ EndFunc   ;==>_LOImpress_SlideAdd
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the slide, the Constant $LO_COLOR_OFF is returned.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_SlideBackFillStyle, _LOImpress_SlideBackGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -218,7 +218,7 @@ EndFunc   ;==>_LOImpress_SlideBackColor
 ;                  This is useful because, if a Gradient is active, the solid color value is still present, and thus it would not be possible to determine which function should be used to retrieve the current values for, whether the Color function, or the Gradient function.
 ;                  When the Fill style is disabled for a Slide, the Fill properties are completely removed. This is how Impress works normally.
 ;                  $bFillOff will do nothing if it is called with False, and is not, of course, returned when retrieving the FillStyle value.
-; Related .......:
+; Related .......: _LOImpress_SlideBackColor, _LOImpress_SlideBackGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -316,7 +316,7 @@ EndFunc   ;==>_LOImpress_SlideBackFillStyle
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_SlideBackColor, _LOImpress_SlideBackFillStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -545,7 +545,7 @@ EndFunc   ;==>_LOImpress_SlideBackGradient
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the slide, -1 is returned.
-; Related .......:
+; Related .......: _LOImpress_SlideBackTransparencyGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -638,7 +638,7 @@ EndFunc   ;==>_LOImpress_SlideBackTransparency
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_SlideBackTransparency
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -820,7 +820,7 @@ EndFunc   ;==>_LOImpress_SlideBackTransparencyGradient
 ; Modified ......:
 ; Remarks .......: The copied slide is inserted after the slide to be copied.
 ;                  If $iPos is called with Null, the slide is left in the position described above. Otherwise, due to limitations in the API, some dispatches are executed to move the slide. The current slide will temporarily be set to the new slide in order to move it.
-; Related .......:
+; Related .......: _LOImpress_SlideAdd, _LOImpress_SlideDeleteByIndex, _LOImpress_SlideDeleteByObj, _LOImpress_SlideMove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -917,7 +917,7 @@ EndFunc   ;==>_LOImpress_SlideCopy
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current slide.
-; Related .......:
+; Related .......: _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -964,7 +964,7 @@ EndFunc   ;==>_LOImpress_SlideCurrent
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOImpress_SlideDeleteByObj, _LOImpress_SlidesGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1007,7 +1007,7 @@ EndFunc   ;==>_LOImpress_SlideDeleteByIndex
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOImpress_SlideDeleteByIndex, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1051,7 +1051,7 @@ EndFunc   ;==>_LOImpress_SlideDeleteByObj
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOImpress_SlideAdd, _LOImpress_SlideName, _LOImpress_SlidesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1087,7 +1087,7 @@ EndFunc   ;==>_LOImpress_SlideExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOImpress_SlideGetObjByName, _LOImpress_SlidesGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1124,7 +1124,7 @@ EndFunc   ;==>_LOImpress_SlideGetObjByIndex
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOImpress_SlideGetObjByIndex, _LOImpress_SlidesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1165,7 +1165,7 @@ EndFunc   ;==>_LOImpress_SlideGetObjByName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOImpress_SlideName, _LOImpress_SlideTransition
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1216,7 +1216,7 @@ EndFunc   ;==>_LOImpress_SlideLayout
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Due to limitations in the API, some dispatches are executed to move the slide. The current slide will temporarily be set to the new slide in order to move it.
-; Related .......:
+; Related .......: _LOImpress_SlideCopy
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1311,7 +1311,7 @@ EndFunc   ;==>_LOImpress_SlideMove
 ; Modified ......:
 ; Remarks .......: If setting the slide name to a name and a number, there is a good chance the name won't stay applied, as LibreOffice will assume it is an auto-numbered slide.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOImpress_SlideExists, _LOImpress_SlidesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1359,7 +1359,7 @@ EndFunc   ;==>_LOImpress_SlideName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOImpress_SlideDeleteByIndex, _LOImpress_SlideGetObjByIndex
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1392,7 +1392,7 @@ EndFunc   ;==>_LOImpress_SlidesGetCount
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOImpress_SlideExists, _LOImpress_SlideGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1447,7 +1447,7 @@ EndFunc   ;==>_LOImpress_SlidesGetNames
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_SlideshowIsRunning, _LOImpress_SlideshowSettingsMode, _LOImpress_SlideshowSettingsOptions, _LOImpress_SlideshowSettingsRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1547,7 +1547,7 @@ EndFunc   ;==>_LOImpress_SlideshowActiveSettings
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The expected input for $asSlides is a single column array having the Slide names in the order the user wishes the Slides to appear in the presentation, slide names can be placed in the Array multiple times.
-; Related .......:
+; Related .......: _LOImpress_SlideshowCustomDelete, _LOImpress_SlideshowsCustomGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1605,7 +1605,7 @@ EndFunc   ;==>_LOImpress_SlideshowCustomCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOImpress_SlideshowCustomCreate, _LOImpress_SlideshowsCustomGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1657,7 +1657,7 @@ EndFunc   ;==>_LOImpress_SlideshowCustomDelete
 ; Remarks .......: The expected input for $asSlides is a single column array having the Slide names in the order the user wishes the Slides to appear in the presentation, slide names can be placed in the Array multiple times.
 ;                  When retrieving the current order and content of the Slideshow, an array is returned with all the Slides contained in the Custom Slideshow, in the order they are set to be played. Slides may be present multiple times.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LOImpress_SlideshowCustomCreate, _LOImpress_SlideshowsCustomGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1739,7 +1739,7 @@ EndFunc   ;==>_LOImpress_SlideshowCustomModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOImpress_SlideshowCustomModify, _LOImpress_SlideshowsCustomGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1780,7 +1780,7 @@ EndFunc   ;==>_LOImpress_SlideshowCustomSetName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOImpress_SlideshowStart, _LOImpress_SlideshowStop
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1846,7 +1846,7 @@ EndFunc   ;==>_LOImpress_SlideshowIsRunning
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Any queries or commands that require an input parameter will have the type of input required indicated in the description for the Constant.
-; Related .......:
+; Related .......: _LOImpress_SlideshowActiveSettings, _LOImpress_SlideshowIsRunning
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1991,7 +1991,7 @@ EndFunc   ;==>_LOImpress_SlideshowPresentationControl
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOImpress_SlideshowCustomCreate, _LOImpress_SlideshowCustomDelete, _LOImpress_SlideshowCustomModify, _LOImpress_SlideshowCustomSetName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2038,7 +2038,7 @@ EndFunc   ;==>_LOImpress_SlideshowsCustomGetNames
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_SlideshowActiveSettings, _LOImpress_SlideshowPresentationControl, _LOImpress_SlideshowSettingsOptions, _LOImpress_SlideshowSettingsRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2151,7 +2151,7 @@ EndFunc   ;==>_LOImpress_SlideshowSettingsMode
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_SlideshowActiveSettings, _LOImpress_SlideshowPresentationControl, _LOImpress_SlideshowSettingsMode, _LOImpress_SlideshowSettingsRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2253,7 +2253,7 @@ EndFunc   ;==>_LOImpress_SlideshowSettingsOptions
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  If there are two slides with the same name, and one is set to the "From Slide" property, there is no guarantee which slide will be the one used.
-; Related .......:
+; Related .......: _LOImpress_SlideshowActiveSettings, _LOImpress_SlideshowPresentationControl, _LOImpress_SlideshowSettingsMode, _LOImpress_SlideshowSettingsOptions
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2389,7 +2389,7 @@ EndFunc   ;==>_LOImpress_SlideshowSettingsRange
 ; Modified ......:
 ; Remarks .......: If $bRehearse is called with True, both $sStartSlide and $sCustomShow will be ignored.
 ;                  If both $sStartSlide and $sCustomShow are called with a parameter, $sCustomShow will be ignored.
-; Related .......:
+; Related .......: _LOImpress_SlideshowIsRunning, _LOImpress_SlideshowStop
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2471,7 +2471,7 @@ EndFunc   ;==>_LOImpress_SlideshowStart
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOImpress_SlideshowIsRunning, _LOImpress_SlideshowStart
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2506,7 +2506,7 @@ EndFunc   ;==>_LOImpress_SlideshowStop
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: An example path that may be returned is: "C:\Program Files\LibreOffice\program\..\share\gallery\curve.wav"
-; Related .......:
+; Related .......: _LOImpress_SlideTransition
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2602,7 +2602,7 @@ EndFunc   ;==>_LOImpress_SlideSoundsGetNames
 ;                  Otherwise call $sSound with a valid path to a sound file. See _LOImpress_SlideSoundsGetNames, to obtain a list of sound files included with Impress.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......:
+; Related .......: _LOImpress_SlideSoundsGetNames, _LOImpress_SlideLayout
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
