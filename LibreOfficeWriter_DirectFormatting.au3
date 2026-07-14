@@ -32,15 +32,17 @@
 ; _LOWriter_DirFrmtCharBorderStyle
 ; _LOWriter_DirFrmtCharBorderWidth
 ; _LOWriter_DirFrmtCharEffect
+; _LOWriter_DirFrmtCharFont
+; _LOWriter_DirFrmtCharFontColor
+; _LOWriter_DirFrmtCharOverLine
 ; _LOWriter_DirFrmtCharPosition
 ; _LOWriter_DirFrmtCharRotateScale
 ; _LOWriter_DirFrmtCharShadow
 ; _LOWriter_DirFrmtCharSpacing
+; _LOWriter_DirFrmtCharStrikeOut
+; _LOWriter_DirFrmtCharUnderLine
 ; _LOWriter_DirFrmtClear
-; _LOWriter_DirFrmtFont
-; _LOWriter_DirFrmtFontColor
 ; _LOWriter_DirFrmtGetCurStyles
-; _LOWriter_DirFrmtOverLine
 ; _LOWriter_DirFrmtParAlignment
 ; _LOWriter_DirFrmtParAreaColor
 ; _LOWriter_DirFrmtParAreaFillStyle
@@ -63,8 +65,6 @@
 ; _LOWriter_DirFrmtParTabStopMod
 ; _LOWriter_DirFrmtParTabStopsGetList
 ; _LOWriter_DirFrmtParTxtFlowOpt
-; _LOWriter_DirFrmtStrikeOut
-; _LOWriter_DirFrmtUnderLine
 ; ===============================================================================================================================
 
 ; #FUNCTION# ====================================================================================================================
@@ -395,7 +395,7 @@ EndFunc   ;==>_LOWriter_DirFrmtCharBorderWidth
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Call a Parameter with Default keyword to clear direct formatting for that setting.
-; Related .......: _LOWriter_DirFrmtOverLine, _LOWriter_DirFrmtStrikeOut, _LOWriter_DirFrmtUnderLine, _LOWriter_CharStyleEffect, _LOWriter_ParStyleEffect
+; Related .......: _LOWriter_DirFrmtCharOverLine, _LOWriter_DirFrmtCharStrikeOut, _LOWriter_DirFrmtCharUnderLine, _LOWriter_CharStyleEffect, _LOWriter_ParStyleEffect
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -441,6 +441,229 @@ Func _LOWriter_DirFrmtCharEffect(ByRef $oSelection, $iCase = Null, $bHidden = Nu
 
 	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOWriter_DirFrmtCharEffect
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_DirFrmtCharFont
+; Description ...: Set and Retrieve the Font Settings by Direct Formatting.
+; Syntax ........: _LOWriter_DirFrmtCharFont(ByRef $oSelection[, $sFontName = Null[, $nFontSize = Null[, $iPosture = Null[, $iWeight = Null]]]])
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
+;                  $sFontName           - [optional] Default is Null. The Font Name to use.
+;                  $nFontSize           - [optional] Default is Null. The new Font size.
+;                  $iPosture            - [optional] (0-5) Default is Null. Font Italic setting. See Constants, $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3. Also see remarks.
+;                  $iWeight             - [optional] (0, 50-200) Default is Null. Font Bold settings, see Constants, $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3. Also see remarks.
+; Return values .: Success: Integer or Array.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 2 = Success. One or more parameter(s) were called with Default, and rest of parameters were called with Null. Direct formatting has been successfully cleared.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oSelection not an Object.
+;                  @Error: 1, @Extended: 2 = $sFontName not a String.
+;                  @Error: 1, @Extended: 3 = $sFontName not available in current document.
+;                  @Error: 1, @Extended: 4 = $nFontSize not a Number.
+;                  @Error: 1, @Extended: 5 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iWeight less than 50 and not 0, or more than 200. See Constants, $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 7 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  |                               1 = Error setting $sFontName
+;                  |                               2 = Error setting $nFontSize
+;                  |                               4 = Error setting $iPosture
+;                  |                               8 = Error setting $iWeight
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Direct formatting is, just as the name indicates, directly applying settings to a selection of text, it is messy to deal with both by proxy (such as by AutoIt automation) and directly in the document, and is generally not recommended to use. Character and Paragraph styles are generally recommended instead.
+;                  Retrieving current settings in any Direct formatting functions may be inaccurate as multiple different settings could be selected at once, which would result in a return of 0, False, Null, etc.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+;                  Call a Parameter with Default keyword to clear direct formatting for that setting.
+;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
+;                  LibreOffice Writer accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
+; Related .......: _LOWriter_FontsGetNames, _LOWriter_DirFrmtCharFontColor, _LOWriter_CharStyleFont, _LOWriter_ParStyleFont
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_DirFrmtCharFont(ByRef $oSelection, $sFontName = Null, $nFontSize = Null, $iPosture = Null, $iWeight = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $vReturn
+
+	If Not IsObj($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not __LOWriter_DirFrmtCheck($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+
+	If __LOWriter_AnyAreDefault($sFontName, $nFontSize, $iPosture, $iWeight) Then
+		If ($sFontName = Default) Then
+			$oSelection.setPropertyToDefault("CharFontName")
+			$sFontName = Null
+		EndIf
+
+		If ($nFontSize = Default) Then
+			$oSelection.setPropertyToDefault("CharHeight")
+			$nFontSize = Null
+		EndIf
+
+		If ($iPosture = Default) Then
+			$oSelection.setPropertyToDefault("CharPosture")
+			$iPosture = Null
+		EndIf
+
+		If ($iWeight = Default) Then
+			$oSelection.setPropertyToDefault("CharWeight")
+			$iWeight = Null
+		EndIf
+
+		If __LO_VarsAreNull($sFontName, $nFontSize, $iPosture, $iWeight) Then Return SetError($__LO_STATUS_SUCCESS, 0, 2)
+	EndIf
+
+	$vReturn = __LOWriter_CharFont($oSelection, $sFontName, $nFontSize, $iPosture, $iWeight)
+
+	Return SetError(@error, @extended, $vReturn)
+EndFunc   ;==>_LOWriter_DirFrmtCharFont
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_DirFrmtCharFontColor
+; Description ...: Set or retrieve the font color, transparency and highlighting by Direct Formatting.
+; Syntax ........: _LOWriter_DirFrmtCharFontColor(ByRef $oSelection[, $iFontColor = Null[, $iTransparency = Null[, $iHighlight = Null]]])
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
+;                  $iFontColor          - [optional] (-1-16777215) Default is Null. The Font color, as a RGB Color Integer, Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
+;                  $iTransparency       - [optional] (0-100) Default is Null. Transparency percentage. 0 is visible, 100 is invisible. Available for LibreOffice 7.0 and up.
+;                  $iHighlight          - [optional] (-1-16777215) Default is Null. The highlight color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for No color.
+; Return values .: Success: Integer or Array.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters. If The current LibreOffice version is below 7.0 the $iTransparency parameter will return a Null value.
+;                  @Error: 0, @Extended: 0, Return: 2 = Success. One or more parameter(s) were called with Default, and rest of parameters were called with Null. Direct formatting has been successfully cleared.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oSelection not an Object.
+;                  @Error: 1, @Extended: 2 = $iFontColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error: 1, @Extended: 3 = $iTransparency not an Integer, less than 0 or greater than 100%.
+;                  @Error: 1, @Extended: 4 = $iHighlight not an Integer, less than -1 or greater than 16777215.
+;                  @Error: 1, @Extended: 5 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve old Transparency value.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  |                               1 = Error setting $FontColor
+;                  |                               2 = Error setting $iTransparency.
+;                  |                               4 = Error setting $iHighlight
+;                  --Version Related Errors--
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 7.0.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Direct formatting is, just as the name indicates, directly applying settings to a selection of text, it is messy to deal with both by proxy (such as by AutoIt automation) and directly in the document, and is generally not recommended to use. Character and Paragraph styles are generally recommended instead.
+;                  Retrieving current settings in any Direct formatting functions may be inaccurate as multiple different settings could be selected at once, which would result in a return of 0, False, Null, etc.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+;                  Call a Parameter with Default keyword to clear direct formatting for that setting. Font Color and Transparency reset at the same time as the other, e.g., if you reset Font Color, it will reset Transparency.
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_DirFrmtCharFont, _LOWriter_CharStyleFontColor, _LOWriter_ParStyleFontColor
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_DirFrmtCharFontColor(ByRef $oSelection, $iFontColor = Null, $iTransparency = Null, $iHighlight = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $vReturn
+
+	If Not IsObj($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not __LOWriter_DirFrmtCheck($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+	If __LOWriter_AnyAreDefault($iFontColor, $iTransparency, $iHighlight) Then
+		If ($iFontColor = Default) Then
+			$oSelection.setPropertyToDefault("CharColor")
+			$iFontColor = Null
+		EndIf
+
+		If ($iTransparency = Default) Then
+			If Not __LO_VersionCheck(7.0) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
+
+			$oSelection.setPropertyToDefault("CharTransparence")
+			$iTransparency = Null
+		EndIf
+
+		If ($iHighlight = Default) Then
+			If __LO_VersionCheck(4.2) Then $oSelection.setPropertyToDefault("CharHighlight")
+			$oSelection.setPropertyToDefault("CharBackColor") ; Both may be used? not sure. Both do the same thing, so reset both to make sure.
+			$iHighlight = Null
+		EndIf
+
+		If __LO_VarsAreNull($iFontColor, $iTransparency, $iHighlight) Then Return SetError($__LO_STATUS_SUCCESS, 0, 2)
+	EndIf
+
+	$vReturn = __LOWriter_CharFontColor($oSelection, $iFontColor, $iTransparency, $iHighlight)
+
+	Return SetError(@error, @extended, $vReturn)
+EndFunc   ;==>_LOWriter_DirFrmtCharFontColor
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_DirFrmtCharOverLine
+; Description ...: Set and retrieve the OverLine settings by Direct Formatting.
+; Syntax ........: _LOWriter_DirFrmtCharOverLine(ByRef $oSelection[, $iOverLineStyle = Null[, $iOLColor = Null[, $bWordOnly = Null]]])
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
+;                  $iOverLineStyle      - [optional] (0-18) Default is Null. The style of the Overline line, see constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
+;                  $iOLColor            - [optional] (-1-16777215) Default is Null. The color of the Overline, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
+;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not Overlined.
+; Return values .: Success: Integer or Array.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 2 = Success. One or more parameter(s) were called with Default, and rest of parameters were called with Null. Direct formatting has been successfully cleared.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oSelection not an Object.
+;                  @Error: 1, @Extended: 2 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iOLColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error: 1, @Extended: 4 = $bWordOnly not a Boolean.
+;                  @Error: 1, @Extended: 5 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  |                               1 = Error setting $iOverLineStyle
+;                  |                               2 = Error setting $iOLColor
+;                  |                               4 = Error setting $bWordOnly
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Direct formatting is, just as the name indicates, directly applying settings to a selection of text, it is messy to deal with both by proxy (such as by AutoIt automation) and directly in the document, and is generally not recommended to use. Character and Paragraph styles are generally recommended instead.
+;                  Retrieving current settings in any Direct formatting functions may be inaccurate as multiple different settings could be selected at once, which would result in a return of 0, False, Null, etc.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+;                  Call a Parameter with Default keyword to clear direct formatting for that setting. Overline style, and Color all reset together.
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_DirFrmtCharEffect, _LOWriter_DirFrmtCharStrikeOut, _LOWriter_DirFrmtCharUnderLine, _LOWriter_CharStyleOverLine, _LOWriter_ParStyleOverLine
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_DirFrmtCharOverLine(ByRef $oSelection, $iOverLineStyle = Null, $iOLColor = Null, $bWordOnly = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $vReturn
+
+	If Not IsObj($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not __LOWriter_DirFrmtCheck($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+	If __LOWriter_AnyAreDefault($iOverLineStyle, $iOLColor, $bWordOnly) Then
+		If ($iOverLineStyle = Default) Then
+			$oSelection.setPropertyToDefault("CharOverline")
+			$iOverLineStyle = Null
+		EndIf
+
+		If ($iOLColor = Default) Then
+			$oSelection.setPropertyToDefault("CharOverlineHasColor")
+			$oSelection.setPropertyToDefault("CharOverlineColor")
+			$iOLColor = Null
+		EndIf
+
+		If ($bWordOnly = Default) Then
+			$oSelection.setPropertyToDefault("CharWordMode")
+			$bWordOnly = Null
+		EndIf
+
+		If __LO_VarsAreNull($iOverLineStyle, $iOLColor, $bWordOnly) Then Return SetError($__LO_STATUS_SUCCESS, 0, 2)
+	EndIf
+
+	$vReturn = __LOWriter_CharOverLine($oSelection, $iOverLineStyle, $iOLColor, $bWordOnly)
+
+	Return SetError(@error, @extended, $vReturn)
+EndFunc   ;==>_LOWriter_DirFrmtCharOverLine
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DirFrmtCharPosition
@@ -612,7 +835,7 @@ EndFunc   ;==>_LOWriter_DirFrmtCharRotateScale
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  LibreOffice may adjust the set width +/- 1 Hundredth of a Millimeter (HMM) after setting.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LOWriter_DirFrmtCharEffect, _LOWriter_DirFrmtFontColor, _LOWriter_DirFrmtParShadow, _LOWriter_CharStyleShadow, _LOWriter_ParStyleShadow
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LOWriter_DirFrmtCharEffect, _LOWriter_DirFrmtCharFontColor, _LOWriter_DirFrmtParShadow, _LOWriter_CharStyleShadow, _LOWriter_ParStyleShadow
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -700,6 +923,137 @@ Func _LOWriter_DirFrmtCharSpacing(ByRef $oSelection, $bAutoKerning = Null, $nKer
 EndFunc   ;==>_LOWriter_DirFrmtCharSpacing
 
 ; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_DirFrmtCharStrikeOut
+; Description ...: Set or Retrieve the StrikeOut settings by Direct Formatting.
+; Syntax ........: _LOWriter_DirFrmtCharStrikeOut(ByRef $oSelection[, $iStrikeLineStyle = Null[, $bWordOnly = Null]])
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
+;                  $iStrikeLineStyle    - [optional] (0-6) Default is Null. The Strikeout Line Style, see constants, $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bWordOnly           - [optional] Default is Null. If True, strikes out words only and skip whitespaces.
+; Return values .: Success: Integer or Array.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 2 = Success. One or more parameter(s) were called with Default, and rest of parameters were called with Null. Direct formatting has been successfully cleared.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oSelection not an Object.
+;                  @Error: 1, @Extended: 2 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $bWordOnly not a Boolean.
+;                  @Error: 1, @Extended: 4 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  |                               1 = Error setting $iStrikeLineStyle
+;                  |                               2 = Error setting $bWordOnly
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Direct formatting is, just as the name indicates, directly applying settings to a selection of text, it is messy to deal with both by proxy (such as by AutoIt automation) and directly in the document, and is generally not recommended to use. Character and Paragraph styles are generally recommended instead.
+;                  Retrieving current settings in any Direct formatting functions may be inaccurate as multiple different settings could be selected at once, which would result in a return of 0, False, Null, etc.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+;                  Call a Parameter with Default keyword to clear direct formatting for that setting.
+;                  Strikeout line style is converted to a single line in Ms word document format.
+; Related .......: _LOWriter_DirFrmtCharEffect, _LOWriter_DirFrmtCharOverLine, _LOWriter_DirFrmtCharUnderLine, _LOWriter_CharStyleStrikeOut
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_DirFrmtCharStrikeOut(ByRef $oSelection, $iStrikeLineStyle = Null, $bWordOnly = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $vReturn
+
+	If Not IsObj($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not __LOWriter_DirFrmtCheck($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+	If __LOWriter_AnyAreDefault($iStrikeLineStyle, $bWordOnly) Then
+		If ($iStrikeLineStyle = Default) Then
+			$oSelection.setPropertyToDefault("CharCrossedOut")
+			$oSelection.setPropertyToDefault("CharStrikeout")
+			$iStrikeLineStyle = Null
+		EndIf
+
+		If ($bWordOnly = Default) Then
+			$oSelection.setPropertyToDefault("CharWordMode")
+			$bWordOnly = Null
+		EndIf
+
+		If __LO_VarsAreNull($bWordOnly, $iStrikeLineStyle) Then Return SetError($__LO_STATUS_SUCCESS, 0, 2)
+	EndIf
+
+	$vReturn = __LOWriter_CharStrikeOut($oSelection, $iStrikeLineStyle, $bWordOnly)
+
+	Return SetError(@error, @extended, $vReturn)
+EndFunc   ;==>_LOWriter_DirFrmtCharStrikeOut
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_DirFrmtCharUnderLine
+; Description ...: Set and retrieve the Underline settings by Direct Formatting.
+; Syntax ........: _LOWriter_DirFrmtCharUnderLine(ByRef $oSelection[, $iUnderLineStyle = Null[, $iULColor = Null[, $bWordOnly = Null]]])
+; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
+;                  $iUnderLineStyle     - [optional] (0-18) Default is Null. The style of the Underline line, see constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iULColor            - [optional] (-1-16777215) Default is Null. The color of the underline, as a RGB Color Integer. Can be a custom value or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
+;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not underlined.
+; Return values .: Success: Integer or Array.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  @Error: 0, @Extended: 0, Return: 2 = Success. One or more parameter(s) were called with Default, and rest of parameters were called with Null. Direct formatting has been successfully cleared.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oSelection not an Object.
+;                  @Error: 1, @Extended: 2 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iULColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error: 1, @Extended: 4 = $bWordOnly not a Boolean.
+;                  @Error: 1, @Extended: 5 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  |                               1 = Error setting $iUnderLineStyle
+;                  |                               2 = Error setting $iULColor
+;                  |                               4 = Error setting $bWordOnly
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: Direct formatting is, just as the name indicates, directly applying settings to a selection of text, it is messy to deal with both by proxy (such as by AutoIt automation) and directly in the document, and is generally not recommended to use. Character and Paragraph styles are generally recommended instead.
+;                  Retrieving current settings in any Direct formatting functions may be inaccurate as multiple different settings could be selected at once, which would result in a return of 0, False, Null, etc.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+;                  Call a Parameter with Default keyword to clear direct formatting for that setting. Underline style, and Color all reset together.
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_DirFrmtCharEffect, _LOWriter_DirFrmtCharOverLine, _LOWriter_DirFrmtCharStrikeOut, _LOWriter_CharStyleUnderLine
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_DirFrmtCharUnderLine(ByRef $oSelection, $iUnderLineStyle = Null, $iULColor = Null, $bWordOnly = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $vReturn
+
+	If Not IsObj($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not __LOWriter_DirFrmtCheck($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+
+	If __LOWriter_AnyAreDefault($iUnderLineStyle, $iULColor, $bWordOnly) Then
+		If ($iUnderLineStyle = Default) Then
+			$oSelection.setPropertyToDefault("CharUnderline")
+			$iUnderLineStyle = Null
+		EndIf
+
+		If ($iULColor = Default) Then
+			$oSelection.setPropertyToDefault("CharUnderlineHasColor")
+			$oSelection.setPropertyToDefault("CharUnderlineColor")
+			$iULColor = Null
+		EndIf
+
+		If ($bWordOnly = Default) Then
+			$oSelection.setPropertyToDefault("CharWordMode")
+			$bWordOnly = Null
+		EndIf
+
+		If __LO_VarsAreNull($iUnderLineStyle, $iULColor, $bWordOnly) Then Return SetError($__LO_STATUS_SUCCESS, 0, 2)
+	EndIf
+
+	$vReturn = __LOWriter_CharUnderLine($oSelection, $iUnderLineStyle, $iULColor, $bWordOnly)
+
+	Return SetError(@error, @extended, $vReturn)
+EndFunc   ;==>_LOWriter_DirFrmtCharUnderLine
+
+; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DirFrmtClear
 ; Description ...: Clear any Direct formatting in a Cursor or Text Object.
 ; Syntax ........: _LOWriter_DirFrmtClear(ByRef $oDoc, ByRef $oSelection)
@@ -769,160 +1123,6 @@ Func _LOWriter_DirFrmtClear(ByRef $oDoc, ByRef $oSelection)
 EndFunc   ;==>_LOWriter_DirFrmtClear
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_DirFrmtFont
-; Description ...: Set and Retrieve the Font Settings by Direct Formatting.
-; Syntax ........: _LOWriter_DirFrmtFont(ByRef $oSelection[, $sFontName = Null[, $nFontSize = Null[, $iPosture = Null[, $iWeight = Null]]]])
-; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
-;                  $sFontName           - [optional] Default is Null. The Font Name to use.
-;                  $nFontSize           - [optional] Default is Null. The new Font size.
-;                  $iPosture            - [optional] (0-5) Default is Null. Font Italic setting. See Constants, $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3. Also see remarks.
-;                  $iWeight             - [optional] (0, 50-200) Default is Null. Font Bold settings, see Constants, $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3. Also see remarks.
-; Return values .: Success: Integer or Array.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  @Error: 0, @Extended: 0, Return: 2 = Success. One or more parameter(s) were called with Default, and rest of parameters were called with Null. Direct formatting has been successfully cleared.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oSelection not an Object.
-;                  @Error: 1, @Extended: 2 = $sFontName not a String.
-;                  @Error: 1, @Extended: 3 = $sFontName not available in current document.
-;                  @Error: 1, @Extended: 4 = $nFontSize not a Number.
-;                  @Error: 1, @Extended: 5 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOW_CHAR_POSTURE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error: 1, @Extended: 6 = $iWeight less than 50 and not 0, or more than 200. See Constants, $LOW_CHAR_WEIGHT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error: 1, @Extended: 7 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $sFontName
-;                  |                               2 = Error setting $nFontSize
-;                  |                               4 = Error setting $iPosture
-;                  |                               8 = Error setting $iWeight
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: Direct formatting is, just as the name indicates, directly applying settings to a selection of text, it is messy to deal with both by proxy (such as by AutoIt automation) and directly in the document, and is generally not recommended to use. Character and Paragraph styles are generally recommended instead.
-;                  Retrieving current settings in any Direct formatting functions may be inaccurate as multiple different settings could be selected at once, which would result in a return of 0, False, Null, etc.
-;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-;                  Call a Parameter with Default keyword to clear direct formatting for that setting.
-;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
-;                  LibreOffice Writer accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
-; Related .......: _LOWriter_FontsGetNames, _LOWriter_DirFrmtFontColor, _LOWriter_CharStyleFont, _LOWriter_ParStyleFont
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOWriter_DirFrmtFont(ByRef $oSelection, $sFontName = Null, $nFontSize = Null, $iPosture = Null, $iWeight = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LOWriter_DirFrmtCheck($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
-
-	If __LOWriter_AnyAreDefault($sFontName, $nFontSize, $iPosture, $iWeight) Then
-		If ($sFontName = Default) Then
-			$oSelection.setPropertyToDefault("CharFontName")
-			$sFontName = Null
-		EndIf
-
-		If ($nFontSize = Default) Then
-			$oSelection.setPropertyToDefault("CharHeight")
-			$nFontSize = Null
-		EndIf
-
-		If ($iPosture = Default) Then
-			$oSelection.setPropertyToDefault("CharPosture")
-			$iPosture = Null
-		EndIf
-
-		If ($iWeight = Default) Then
-			$oSelection.setPropertyToDefault("CharWeight")
-			$iWeight = Null
-		EndIf
-
-		If __LO_VarsAreNull($sFontName, $nFontSize, $iPosture, $iWeight) Then Return SetError($__LO_STATUS_SUCCESS, 0, 2)
-	EndIf
-
-	$vReturn = __LOWriter_CharFont($oSelection, $sFontName, $nFontSize, $iPosture, $iWeight)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LOWriter_DirFrmtFont
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_DirFrmtFontColor
-; Description ...: Set or retrieve the font color, transparency and highlighting by Direct Formatting.
-; Syntax ........: _LOWriter_DirFrmtFontColor(ByRef $oSelection[, $iFontColor = Null[, $iTransparency = Null[, $iHighlight = Null]]])
-; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
-;                  $iFontColor          - [optional] (-1-16777215) Default is Null. The Font color, as a RGB Color Integer, Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
-;                  $iTransparency       - [optional] (0-100) Default is Null. Transparency percentage. 0 is visible, 100 is invisible. Available for LibreOffice 7.0 and up.
-;                  $iHighlight          - [optional] (-1-16777215) Default is Null. The highlight color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for No color.
-; Return values .: Success: Integer or Array.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters. If The current LibreOffice version is below 7.0 the $iTransparency parameter will return a Null value.
-;                  @Error: 0, @Extended: 0, Return: 2 = Success. One or more parameter(s) were called with Default, and rest of parameters were called with Null. Direct formatting has been successfully cleared.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oSelection not an Object.
-;                  @Error: 1, @Extended: 2 = $iFontColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error: 1, @Extended: 3 = $iTransparency not an Integer, less than 0 or greater than 100%.
-;                  @Error: 1, @Extended: 4 = $iHighlight not an Integer, less than -1 or greater than 16777215.
-;                  @Error: 1, @Extended: 5 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to retrieve old Transparency value.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $FontColor
-;                  |                               2 = Error setting $iTransparency.
-;                  |                               4 = Error setting $iHighlight
-;                  --Version Related Errors--
-;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 7.0.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: Direct formatting is, just as the name indicates, directly applying settings to a selection of text, it is messy to deal with both by proxy (such as by AutoIt automation) and directly in the document, and is generally not recommended to use. Character and Paragraph styles are generally recommended instead.
-;                  Retrieving current settings in any Direct formatting functions may be inaccurate as multiple different settings could be selected at once, which would result in a return of 0, False, Null, etc.
-;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-;                  Call a Parameter with Default keyword to clear direct formatting for that setting. Font Color and Transparency reset at the same time as the other, e.g., if you reset Font Color, it will reset Transparency.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_DirFrmtFont, _LOWriter_CharStyleFontColor, _LOWriter_ParStyleFontColor
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOWriter_DirFrmtFontColor(ByRef $oSelection, $iFontColor = Null, $iTransparency = Null, $iHighlight = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LOWriter_DirFrmtCheck($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-
-	If __LOWriter_AnyAreDefault($iFontColor, $iTransparency, $iHighlight) Then
-		If ($iFontColor = Default) Then
-			$oSelection.setPropertyToDefault("CharColor")
-			$iFontColor = Null
-		EndIf
-
-		If ($iTransparency = Default) Then
-			If Not __LO_VersionCheck(7.0) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
-
-			$oSelection.setPropertyToDefault("CharTransparence")
-			$iTransparency = Null
-		EndIf
-
-		If ($iHighlight = Default) Then
-			If __LO_VersionCheck(4.2) Then $oSelection.setPropertyToDefault("CharHighlight")
-			$oSelection.setPropertyToDefault("CharBackColor") ; Both may be used? not sure. Both do the same thing, so reset both to make sure.
-			$iHighlight = Null
-		EndIf
-
-		If __LO_VarsAreNull($iFontColor, $iTransparency, $iHighlight) Then Return SetError($__LO_STATUS_SUCCESS, 0, 2)
-	EndIf
-
-	$vReturn = __LOWriter_CharFontColor($oSelection, $iFontColor, $iTransparency, $iHighlight)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LOWriter_DirFrmtFontColor
-
-; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DirFrmtGetCurStyles
 ; Description ...: Retrieve the current Styles set for a selection of text.
 ; Syntax ........: _LOWriter_DirFrmtGetCurStyles(ByRef $oSelection)
@@ -955,75 +1155,6 @@ Func _LOWriter_DirFrmtGetCurStyles(ByRef $oSelection)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $asStyles)
 EndFunc   ;==>_LOWriter_DirFrmtGetCurStyles
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_DirFrmtOverLine
-; Description ...: Set and retrieve the OverLine settings by Direct Formatting.
-; Syntax ........: _LOWriter_DirFrmtOverLine(ByRef $oSelection[, $iOverLineStyle = Null[, $iOLColor = Null[, $bWordOnly = Null]]])
-; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
-;                  $iOverLineStyle      - [optional] (0-18) Default is Null. The style of the Overline line, see constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3. See Remarks.
-;                  $iOLColor            - [optional] (-1-16777215) Default is Null. The color of the Overline, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
-;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not Overlined.
-; Return values .: Success: Integer or Array.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  @Error: 0, @Extended: 0, Return: 2 = Success. One or more parameter(s) were called with Default, and rest of parameters were called with Null. Direct formatting has been successfully cleared.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oSelection not an Object.
-;                  @Error: 1, @Extended: 2 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error: 1, @Extended: 3 = $iOLColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error: 1, @Extended: 4 = $bWordOnly not a Boolean.
-;                  @Error: 1, @Extended: 5 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $iOverLineStyle
-;                  |                               2 = Error setting $iOLColor
-;                  |                               4 = Error setting $bWordOnly
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: Direct formatting is, just as the name indicates, directly applying settings to a selection of text, it is messy to deal with both by proxy (such as by AutoIt automation) and directly in the document, and is generally not recommended to use. Character and Paragraph styles are generally recommended instead.
-;                  Retrieving current settings in any Direct formatting functions may be inaccurate as multiple different settings could be selected at once, which would result in a return of 0, False, Null, etc.
-;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-;                  Call a Parameter with Default keyword to clear direct formatting for that setting. Overline style, and Color all reset together.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_DirFrmtCharEffect, _LOWriter_DirFrmtStrikeOut, _LOWriter_DirFrmtUnderLine, _LOWriter_CharStyleOverLine, _LOWriter_ParStyleOverLine
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOWriter_DirFrmtOverLine(ByRef $oSelection, $iOverLineStyle = Null, $iOLColor = Null, $bWordOnly = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LOWriter_DirFrmtCheck($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-
-	If __LOWriter_AnyAreDefault($iOverLineStyle, $iOLColor, $bWordOnly) Then
-		If ($iOverLineStyle = Default) Then
-			$oSelection.setPropertyToDefault("CharOverline")
-			$iOverLineStyle = Null
-		EndIf
-
-		If ($iOLColor = Default) Then
-			$oSelection.setPropertyToDefault("CharOverlineHasColor")
-			$oSelection.setPropertyToDefault("CharOverlineColor")
-			$iOLColor = Null
-		EndIf
-
-		If ($bWordOnly = Default) Then
-			$oSelection.setPropertyToDefault("CharWordMode")
-			$bWordOnly = Null
-		EndIf
-
-		If __LO_VarsAreNull($iOverLineStyle, $iOLColor, $bWordOnly) Then Return SetError($__LO_STATUS_SUCCESS, 0, 2)
-	EndIf
-
-	$vReturn = __LOWriter_CharOverLine($oSelection, $iOverLineStyle, $iOLColor, $bWordOnly)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LOWriter_DirFrmtOverLine
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DirFrmtParAlignment
@@ -1146,7 +1277,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParAlignment
 ; Remarks .......: Direct formatting is, just as the name indicates, directly applying settings to a selection of text, it is messy to deal with both by proxy (such as by AutoIt automation) and directly in the document, and is generally not recommended to use. Character and Paragraph styles are generally recommended instead.
 ;                  Retrieving current settings in any Direct formatting functions may be inaccurate as multiple different settings could be selected at once, which would result in a return of 0, False, Null, etc.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_DirFrmtFontColor, _LOWriter_DirFrmtParAreaFillStyle, _LOWriter_DirFrmtParAreaGradient, _LOWriter_ParStyleAreaColor
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_DirFrmtCharFontColor, _LOWriter_DirFrmtParAreaFillStyle, _LOWriter_DirFrmtParAreaGradient, _LOWriter_ParStyleAreaColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2524,134 +2655,3 @@ Func _LOWriter_DirFrmtParTxtFlowOpt(ByRef $oSelection, $bParSplit = Null, $bKeep
 
 	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOWriter_DirFrmtParTxtFlowOpt
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_DirFrmtStrikeOut
-; Description ...: Set or Retrieve the StrikeOut settings by Direct Formatting.
-; Syntax ........: _LOWriter_DirFrmtStrikeOut(ByRef $oSelection[, $iStrikeLineStyle = Null[, $bWordOnly = Null]])
-; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
-;                  $iStrikeLineStyle    - [optional] (0-6) Default is Null. The Strikeout Line Style, see constants, $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bWordOnly           - [optional] Default is Null. If True, strikes out words only and skip whitespaces.
-; Return values .: Success: Integer or Array.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
-;                  @Error: 0, @Extended: 0, Return: 2 = Success. One or more parameter(s) were called with Default, and rest of parameters were called with Null. Direct formatting has been successfully cleared.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oSelection not an Object.
-;                  @Error: 1, @Extended: 2 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOW_CHAR_STRIKEOUT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error: 1, @Extended: 3 = $bWordOnly not a Boolean.
-;                  @Error: 1, @Extended: 4 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $iStrikeLineStyle
-;                  |                               2 = Error setting $bWordOnly
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: Direct formatting is, just as the name indicates, directly applying settings to a selection of text, it is messy to deal with both by proxy (such as by AutoIt automation) and directly in the document, and is generally not recommended to use. Character and Paragraph styles are generally recommended instead.
-;                  Retrieving current settings in any Direct formatting functions may be inaccurate as multiple different settings could be selected at once, which would result in a return of 0, False, Null, etc.
-;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-;                  Call a Parameter with Default keyword to clear direct formatting for that setting.
-;                  Strikeout line style is converted to a single line in Ms word document format.
-; Related .......: _LOWriter_DirFrmtCharEffect, _LOWriter_DirFrmtOverLine, _LOWriter_DirFrmtUnderLine, _LOWriter_CharStyleStrikeOut
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOWriter_DirFrmtStrikeOut(ByRef $oSelection, $iStrikeLineStyle = Null, $bWordOnly = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LOWriter_DirFrmtCheck($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-
-	If __LOWriter_AnyAreDefault($iStrikeLineStyle, $bWordOnly) Then
-		If ($iStrikeLineStyle = Default) Then
-			$oSelection.setPropertyToDefault("CharCrossedOut")
-			$oSelection.setPropertyToDefault("CharStrikeout")
-			$iStrikeLineStyle = Null
-		EndIf
-
-		If ($bWordOnly = Default) Then
-			$oSelection.setPropertyToDefault("CharWordMode")
-			$bWordOnly = Null
-		EndIf
-
-		If __LO_VarsAreNull($bWordOnly, $iStrikeLineStyle) Then Return SetError($__LO_STATUS_SUCCESS, 0, 2)
-	EndIf
-
-	$vReturn = __LOWriter_CharStrikeOut($oSelection, $iStrikeLineStyle, $bWordOnly)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LOWriter_DirFrmtStrikeOut
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_DirFrmtUnderLine
-; Description ...: Set and retrieve the Underline settings by Direct Formatting.
-; Syntax ........: _LOWriter_DirFrmtUnderLine(ByRef $oSelection[, $iUnderLineStyle = Null[, $iULColor = Null[, $bWordOnly = Null]]])
-; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval function, Or A Paragraph Object, or other Object containing a selection of text.
-;                  $iUnderLineStyle     - [optional] (0-18) Default is Null. The style of the Underline line, see constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iULColor            - [optional] (-1-16777215) Default is Null. The color of the underline, as a RGB Color Integer. Can be a custom value or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
-;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not underlined.
-; Return values .: Success: Integer or Array.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  @Error: 0, @Extended: 0, Return: 2 = Success. One or more parameter(s) were called with Default, and rest of parameters were called with Null. Direct formatting has been successfully cleared.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oSelection not an Object.
-;                  @Error: 1, @Extended: 2 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOW_CHAR_UNDERLINE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error: 1, @Extended: 3 = $iULColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error: 1, @Extended: 4 = $bWordOnly not a Boolean.
-;                  @Error: 1, @Extended: 5 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $iUnderLineStyle
-;                  |                               2 = Error setting $iULColor
-;                  |                               4 = Error setting $bWordOnly
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: Direct formatting is, just as the name indicates, directly applying settings to a selection of text, it is messy to deal with both by proxy (such as by AutoIt automation) and directly in the document, and is generally not recommended to use. Character and Paragraph styles are generally recommended instead.
-;                  Retrieving current settings in any Direct formatting functions may be inaccurate as multiple different settings could be selected at once, which would result in a return of 0, False, Null, etc.
-;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-;                  Call a Parameter with Default keyword to clear direct formatting for that setting. Underline style, and Color all reset together.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_DirFrmtCharEffect, _LOWriter_DirFrmtOverLine, _LOWriter_DirFrmtStrikeOut, _LOWriter_CharStyleUnderLine
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOWriter_DirFrmtUnderLine(ByRef $oSelection, $iUnderLineStyle = Null, $iULColor = Null, $bWordOnly = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LOWriter_DirFrmtCheck($oSelection) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-
-	If __LOWriter_AnyAreDefault($iUnderLineStyle, $iULColor, $bWordOnly) Then
-		If ($iUnderLineStyle = Default) Then
-			$oSelection.setPropertyToDefault("CharUnderline")
-			$iUnderLineStyle = Null
-		EndIf
-
-		If ($iULColor = Default) Then
-			$oSelection.setPropertyToDefault("CharUnderlineHasColor")
-			$oSelection.setPropertyToDefault("CharUnderlineColor")
-			$iULColor = Null
-		EndIf
-
-		If ($bWordOnly = Default) Then
-			$oSelection.setPropertyToDefault("CharWordMode")
-			$bWordOnly = Null
-		EndIf
-
-		If __LO_VarsAreNull($iUnderLineStyle, $iULColor, $bWordOnly) Then Return SetError($__LO_STATUS_SUCCESS, 0, 2)
-	EndIf
-
-	$vReturn = __LOWriter_CharUnderLine($oSelection, $iUnderLineStyle, $iULColor, $bWordOnly)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LOWriter_DirFrmtUnderLine

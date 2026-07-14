@@ -2409,6 +2409,12 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Renamed `_LOWriter_EndnoteGetTextCursor` to `_LOWriter_EndnoteCreateTextCursor` for consistency.
 - Renamed `_LOWriter_FootnoteGetTextCursor` to `_LOWriter_FootnoteCreateTextCursor` for consistency.
 - Renamed `_LOWriter_CursorTextCursorCreate` to `_LOWriter_CursorCreateTextCursor` for consistency.
+- Renamed some Direct Formatting functions for better grouping:
+  - `_LOWriter_DirFrmtFont` --> `_LOWriter_DirFrmtCharFont`
+  - `_LOWriter_DirFrmtFontColor` --> `_LOWriter_DirFrmtCharFontColor`
+  - `_LOWriter_DirFrmtOverLine` --> `_LOWriter_DirFrmtCharOverLine`
+  - `_LOWriter_DirFrmtStrikeOut` --> `_LOWriter_DirFrmtCharStrikeOut`
+  - `_LOWriter_DirFrmtUnderLine` --> `_LOWriter_DirFrmtCharUnderLine`
 
 #### Documented
 

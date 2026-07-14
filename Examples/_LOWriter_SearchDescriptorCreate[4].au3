@@ -55,7 +55,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the selected text's Font to and weight (Bold) to $LOW_CHAR_WEIGHT_BOLD
-	_LOWriter_DirFrmtFont($oViewCursor, Null, Null, Null, $LOW_CHAR_WEIGHT_BOLD)
+	_LOWriter_DirFrmtCharFont($oViewCursor, Null, Null, Null, $LOW_CHAR_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the cursor right 10 spaces, without selecting
@@ -67,7 +67,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the selected text's Font weight to $LOW_CHAR_WEIGHT_SEMI_BOLD
-	_LOWriter_DirFrmtFont($oViewCursor, Null, Null, Null, $LOW_CHAR_WEIGHT_SEMI_BOLD)
+	_LOWriter_DirFrmtCharFont($oViewCursor, Null, Null, Null, $LOW_CHAR_WEIGHT_SEMI_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Find Format Search Array for Bold font.

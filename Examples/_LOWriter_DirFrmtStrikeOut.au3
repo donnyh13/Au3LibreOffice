@@ -33,11 +33,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the selected text's Strikeout settings to, Words only = True, Strikeout = True, Line style = $LOW_CHAR_STRIKEOUT_X
-	_LOWriter_DirFrmtStrikeOut($oViewCursor, $LOW_CHAR_STRIKEOUT_X, True)
+	_LOWriter_DirFrmtCharStrikeOut($oViewCursor, $LOW_CHAR_STRIKEOUT_X, True)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
-	$avSettings = _LOWriter_DirFrmtStrikeOut($oViewCursor)
+	$avSettings = _LOWriter_DirFrmtCharStrikeOut($oViewCursor)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The selected text's current Strikeout settings are as follows: " & @CRLF & _
@@ -46,7 +46,7 @@ Func Example()
 			"Press ok to remove direct formatting.")
 
 	; Remove direct formatting
-	_LOWriter_DirFrmtStrikeOut($oViewCursor, Default, Default)
+	_LOWriter_DirFrmtCharStrikeOut($oViewCursor, Default, Default)
 	If @error Then _ERROR($oDoc, "Failed to clear the selected text's direct formatting settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

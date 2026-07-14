@@ -49,7 +49,7 @@ Func Example()
 
 	; An example of what I can do with a paragraph section Object. Set the first paragraph section's font size to 22 point. The Object
 	; is stored in the first column [0] of the array.
-	_LOWriter_DirFrmtFont($aoSections[0][0], Null, 22)
+	_LOWriter_DirFrmtCharFont($aoSections[0][0], Null, 22)
 	If @error Then _ERROR($oDoc, "Failed to direct format Paragraph Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Display the paragraph sections.

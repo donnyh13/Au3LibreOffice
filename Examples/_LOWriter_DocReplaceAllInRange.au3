@@ -30,7 +30,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the selected text's Font weight to (Bold) $LOW_CHAR_WEIGHT_BOLD
-	_LOWriter_DirFrmtFont($oViewCursor, Null, Null, Null, $LOW_CHAR_WEIGHT_BOLD)
+	_LOWriter_DirFrmtCharFont($oViewCursor, Null, Null, Null, $LOW_CHAR_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the cursor left 14 spaces, unselecting as I go.

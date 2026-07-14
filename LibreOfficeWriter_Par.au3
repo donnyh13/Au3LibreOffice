@@ -1101,7 +1101,7 @@ EndFunc   ;==>_LOWriter_ParStyleExists
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
 ;                  LibreOffice Writer accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
-; Related .......: _LOWriter_FontsGetNames, _LOWriter_ParStyleFontColor, _LOWriter_CharStyleFont, _LOWriter_DirFrmtFont
+; Related .......: _LOWriter_FontsGetNames, _LOWriter_ParStyleFontColor, _LOWriter_CharStyleFont, _LOWriter_DirFrmtCharFont
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1150,7 +1150,7 @@ EndFunc   ;==>_LOWriter_ParStyleFont
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_ParStyleFont, _LOWriter_ParStyleAreaColor, _LOWriter_CharStyleFontColor, _LOWriter_DirFrmtFontColor
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_ParStyleFont, _LOWriter_ParStyleAreaColor, _LOWriter_CharStyleFontColor, _LOWriter_DirFrmtCharFontColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1499,7 +1499,7 @@ EndFunc   ;==>_LOWriter_ParStyleOutLineAndList
 ; Remarks .......: OverLine line style uses the same constants as underline style.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_ParStyleEffect, _LOWriter_ParStyleStrikeOut, _LOWriter_ParStyleUnderLine, _LOWriter_CharStyleOverLine, _LOWriter_DirFrmtOverLine
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_ParStyleEffect, _LOWriter_ParStyleStrikeOut, _LOWriter_ParStyleUnderLine, _LOWriter_CharStyleOverLine, _LOWriter_DirFrmtCharOverLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1897,7 +1897,7 @@ EndFunc   ;==>_LOWriter_ParStyleSpacing
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Strikeout line style is converted to a single line in Ms word document format.
-; Related .......: _LOWriter_ParStyleEffect, _LOWriter_ParStyleOverLine, _LOWriter_ParStyleUnderLine, _LOWriter_CharStyleStrikeOut, _LOWriter_DirFrmtStrikeOut
+; Related .......: _LOWriter_ParStyleEffect, _LOWriter_ParStyleOverLine, _LOWriter_ParStyleUnderLine, _LOWriter_CharStyleStrikeOut, _LOWriter_DirFrmtCharStrikeOut
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2186,7 +2186,7 @@ EndFunc   ;==>_LOWriter_ParStyleTxtFlowOpt
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_ParStyleEffect, _LOWriter_ParStyleOverLine, _LOWriter_ParStyleStrikeOut, _LOWriter_CharStyleUnderLine, _LOWriter_DirFrmtUnderLine
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_ParStyleEffect, _LOWriter_ParStyleOverLine, _LOWriter_ParStyleStrikeOut, _LOWriter_CharStyleUnderLine, _LOWriter_DirFrmtCharUnderLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

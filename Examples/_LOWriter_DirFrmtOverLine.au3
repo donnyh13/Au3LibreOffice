@@ -33,11 +33,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the selected text's Overline settings to Overline style $LOW_CHAR_UNDERLINE_BOLD_DASH_DOT, Color to $LO_COLOR_BROWN, and Words only = True
-	_LOWriter_DirFrmtOverLine($oViewCursor, $LOW_CHAR_UNDERLINE_BOLD_DASH_DOT, $LO_COLOR_BROWN, True)
+	_LOWriter_DirFrmtCharOverLine($oViewCursor, $LOW_CHAR_UNDERLINE_BOLD_DASH_DOT, $LO_COLOR_BROWN, True)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
-	$avSettings = _LOWriter_DirFrmtOverLine($oViewCursor)
+	$avSettings = _LOWriter_DirFrmtCharOverLine($oViewCursor)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The selected text's current Overline settings are as follows: " & @CRLF & _
@@ -47,7 +47,7 @@ Func Example()
 			"Press ok to remove direct formatting.")
 
 	; Remove Direct formatting.
-	_LOWriter_DirFrmtOverLine($oViewCursor, Default, Default, Default)
+	_LOWriter_DirFrmtCharOverLine($oViewCursor, Default, Default, Default)
 	If @error Then _ERROR($oDoc, "Failed to clear the selected text's direct formatting settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

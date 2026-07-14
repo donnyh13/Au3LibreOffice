@@ -32,7 +32,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the selected text's Underline settings to Underline style $LOW_CHAR_UNDERLINE_BOLD_DASH_DOT, Color to $LO_COLOR_BROWN, and Words only = True
-	_LOWriter_DirFrmtUnderLine($oViewCursor, $LOW_CHAR_UNDERLINE_BOLD_DASH_DOT, $LO_COLOR_BROWN, True)
+	_LOWriter_DirFrmtCharUnderLine($oViewCursor, $LOW_CHAR_UNDERLINE_BOLD_DASH_DOT, $LO_COLOR_BROWN, True)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the cursor right 4 spaces
@@ -44,7 +44,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the selected text's font color to $LO_COLOR_RED, Transparency to 50%, and Highlight to $LO_COLOR_GOLD
-	_LOWriter_DirFrmtFontColor($oViewCursor, $LO_COLOR_RED, 50, $LO_COLOR_GOLD)
+	_LOWriter_DirFrmtCharFontColor($oViewCursor, $LO_COLOR_RED, 50, $LO_COLOR_GOLD)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the cursor right 11 spaces
@@ -69,7 +69,7 @@ Func Example()
 
 	; Set the selected text's Font to "Arial", Font size to 18, Posture (Italic) to $LOW_CHAR_POSTURE_ITALIC, and weight (Bold)
 	; to $LOW_CHAR_WEIGHT_BOLD
-	_LOWriter_DirFrmtFont($oViewCursor, "Arial", 18, $LOW_CHAR_POSTURE_ITALIC, $LOW_CHAR_WEIGHT_BOLD)
+	_LOWriter_DirFrmtCharFont($oViewCursor, "Arial", 18, $LOW_CHAR_POSTURE_ITALIC, $LOW_CHAR_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the cursor to the start again
