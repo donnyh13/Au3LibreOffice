@@ -2574,6 +2574,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_ParStyleStrikeOut
   - _LOWriter_TableCellBorderColor
 - `_LOWriter_TableCellFormula` Wrong Bit value for property setting error.
+- Inccorect save filter for .dot changed from "MS Word 97" to "MS Word 97 Vorlage".
 
 #### Refactored
 
