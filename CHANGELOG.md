@@ -80,7 +80,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - CHM help file maker tool:
   - Modified from user water's tool, ["Simple Library Docs Generator"](https://www.autoitscript.com/forum/topic/207211-ghs-thread-for-the-modified-simple-library-docs-generator/).
   - Originally created by user G.Sandler (a.k.a (Mr)CreatoR), <www.creator-lab.ucoz.ru>, <www.autoit-script.ru>.
-  - With methods, functions and techniques borrowed from Au3Wrapper and AutoIt Herlp file generator by Jos and the AutoIt Team..
+  - With methods, functions and techniques borrowed from Au3Wrapper and AutoIt Herlp file generator by Jos and the AutoIt Team.
+- Added CHM help file for the UDF.
 
 #### Changed
 
