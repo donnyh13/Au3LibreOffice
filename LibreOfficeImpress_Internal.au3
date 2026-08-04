@@ -3629,10 +3629,10 @@ Func __LOImpress_FilterNameGet(ByRef $sDocSavePath, $bExportFilters = False)
 	$iLength = StringLen($sDocSavePath)
 
 	$msSaveAsFilters[".fodp"] = "OpenDocument Presentation Flat XML"
-	$msSaveAsFilters[".pot"] = "PowerPoint 3"
+	$msSaveAsFilters[".pot"] = "MS PowerPoint 97 Vorlage"
 	$msSaveAsFilters[".potx"] = "Impress MS PowerPoint 2007 XML Template" ; Note these have a XML version too.
 	$msSaveAsFilters[".pps"] = "MS PowerPoint 97 AutoPlay"
-	$msSaveAsFilters[".ppt"] = "PowerPoint 3"
+	$msSaveAsFilters[".ppt"] = "MS PowerPoint 97"
 	$msSaveAsFilters[".ppsx"] = "Impress MS PowerPoint 2007 XML AutoPlay" ; Note these have a XML version too.
 	$msSaveAsFilters[".pptm"] = "Impress MS PowerPoint 2007 XML VBA"
 	$msSaveAsFilters[".pptx"] = "Impress MS PowerPoint 2007 XML" ; Note these have a XML version too.
@@ -3658,7 +3658,7 @@ Func __LOImpress_FilterNameGet(ByRef $sDocSavePath, $bExportFilters = False)
 		$msExportFilters[".png"] = "impress_png_Export"
 		$msExportFilters[".tif"] = "impress_tif_Export"
 		$msExportFilters[".tiff"] = "impress_tif_Export"
-		$msExportFilters[".webp"] = "writer_webp_Export"
+		$msExportFilters[".webp"] = "impress_webp_Export"
 		$msExportFilters[".wmf"] = "impress_wmf_Export"
 		$msExportFilters[".xhtml"] = "XHTML Impress File"
 	EndIf
