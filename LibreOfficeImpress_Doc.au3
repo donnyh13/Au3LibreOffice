@@ -106,7 +106,7 @@ Func _LOImpress_DocClose(ByRef $oDoc, $bSaveChanges = True, $sSaveName = "", $bD
 	If Not $oDoc.hasLocation() And ($bSaveChanges = True) Then
 		$sSavePath = @DesktopDir & "\"
 		If ($sSaveName = "") Or ($sSaveName = " ") Then
-			$sSaveName = @YEAR & "-" & @MON & "-" & @MDAY & "_" & @HOUR & "-" & @MIN & "-" & @SEC & ".ods"
+			$sSaveName = @YEAR & "-" & @MON & "-" & @MDAY & "_" & @HOUR & "-" & @MIN & "-" & @SEC & ".odp"
 			$sFilterName = "impress8"
 		EndIf
 

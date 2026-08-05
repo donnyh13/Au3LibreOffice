@@ -3678,7 +3678,7 @@ Func __LOImpress_FilterNameGet(ByRef $sDocSavePath, $bExportFilters = False)
 		Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	EndIf
 
-	If $sFileExtension = $sDocSavePath Then ;  If no file extension identified, append .ods extension and return.
+	If $sFileExtension = $sDocSavePath Then ;  If no file extension identified, append .odp extension and return.
 		$sDocSavePath = $sDocSavePath & ".odp"
 
 		Return SetError($__LO_STATUS_SUCCESS, 3, "impress8")
