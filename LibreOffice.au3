@@ -9,7 +9,7 @@
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice UDF
 ; AutoIt Version : v3.3.16.1
-; UDF Version    : 0.9.1
+; UDF Version ...: 0.9.1
 ; Description ...: Provides basic functionality through AutoIt for interacting with LibreOffice.
 ; Author(s) .....: donnyh13, mLipok
 ; Dll ...........:

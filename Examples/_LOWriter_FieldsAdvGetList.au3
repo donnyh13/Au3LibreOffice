@@ -31,7 +31,7 @@ Func Example()
 	$iDateFormatKey = _LOWriter_DateFormatKeyCreate($oDoc, "HH:MM:SS AM/PM MM/DD/YYYY")
 	If @error Then _ERROR($oDoc, "Failed to create a Date Format Key. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Insert a Date and Time text Field at the View Cursor. Fixed = True, Set the Date to my previously created DateStruct,and set DateTime Format Key to the  first
+	; Insert a Date and Time text Field at the View Cursor. Fixed = True, Set the Date to my previously created DateStruct,and set DateTime Format Key to the first
 	; Key I created.
 	_LOWriter_FieldDateTimeInsert($oDoc, $oViewCursor, False, True, $tDateStruct, Null, Null, $iDateFormatKey)
 	If @error Then _ERROR($oDoc, "Failed to insert a field. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
@@ -88,13 +88,6 @@ Func Example()
 	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Insert some text.
-	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Please insert a DDE Field here.--> ")
-	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Next go to: " & @CRLF & _
-			"Insert, Field, More Fields, Variables, Click on ""DDE Field"" and enter ""Test"" as ""name"", and 1234 as value, then click insert. Press Ok on this MsgBox.")
-
 	; Insert 2 newlines.
 	_LOWriter_CursorInsertString($oDoc, $oViewCursor, @CR & @CR)
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
@@ -107,13 +100,13 @@ Func Example()
 			"Insert, Field, More Fields, Database, Click on ""Database Name"" and drop down ""Bibliography"", select ""Biblio"", then click insert. Press Ok on this MsgBox.")
 
 	; Retrieve an array of Advanced Fields. The Doc Info Field, and regular fields, wont be listed in this array.
-	$avFields = _LOWriter_FieldsAdvGetList($oDoc, $LOW_FIELD_ADV_TYPE_ALL)
+	$avFields = _LOWriter_FieldsAdvGetList($oDoc, $LOW_FIELD_TYPE_ADV_ALL)
 	If @error Then _ERROR($oDoc, "Failed to search for Fields. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	_ArrayDisplay($avFields)
 
-	; Retrieve an array of Advanced Fields again, this time only list $LOW_FIELD_ADV_TYPE_USER and $LOW_FIELD_ADV_TYPE_DATABASE_NAME type fields.
-	$avFields = _LOWriter_FieldsAdvGetList($oDoc, BitOR($LOW_FIELD_ADV_TYPE_DATABASE_NAME, $LOW_FIELD_ADV_TYPE_USER))
+	; Retrieve an array of Advanced Fields again, this time only list $LOW_FIELD_TYPE_ADV_USER type fields.
+	$avFields = _LOWriter_FieldsAdvGetList($oDoc, $LOW_FIELD_TYPE_ADV_USER)
 	If @error Then _ERROR($oDoc, "Failed to search for Fields. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	_ArrayDisplay($avFields)

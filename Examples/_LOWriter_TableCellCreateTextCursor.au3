@@ -27,7 +27,7 @@ Func Example()
 	; Insert Cell names
 	For $i = 0 To UBound($asCellNames) - 1
 		; Retrieve each cell by name as returned in the array or Cell names.
-		$oCell = _LOWriter_TableGetCellObjByName($oTable, $asCellNames[$i])
+		$oCell = _LOWriter_TableCellGetObjByName($oTable, $asCellNames[$i])
 		If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Cell by name. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 		; Set Cell text String to each Cell's name.
@@ -36,7 +36,7 @@ Func Example()
 	Next
 
 	; Retrieve 2nd down. 2nd over ("B2") Table Cell Object
-	$oCell = _LOWriter_TableGetCellObjByName($oTable, "B2")
+	$oCell = _LOWriter_TableCellGetObjByName($oTable, "B2")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Text cursor in the cell.

@@ -29,7 +29,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set comment visibility. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Comment Transparency Gradient settings to: Gradient shape type = $LOC_GRAD_TYPE_SQUARE, Horizontal offset = 87%, Vertical offset = 55%, Angle = 56 degrees,
-	; Set Transition start to 25%, Set beginning Transparency percentage to 75%, and the ending  percentage to 15%
+	; Set Transition start to 25%, Set beginning Transparency percentage to 75%, and the ending percentage to 15%
 	_LOCalc_CommentAreaTransparencyGradient($oDoc, $oComment, $LOC_GRAD_TYPE_SQUARE, 87, 55, 56, 25, 75, 15)
 	If @error Then _ERROR($oDoc, "Failed to set Comment settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

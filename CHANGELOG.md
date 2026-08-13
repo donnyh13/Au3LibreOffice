@@ -77,6 +77,11 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LO_TransparencyGradientMultiModify
 - _LO_DocConnect for connecting to any opened LibreOffice document.
 - _LO_DocGetType
+- CHM help file maker tool:
+  - Modified from user water's tool, ["Simple Library Docs Generator"](https://www.autoitscript.com/forum/topic/207211-ghs-thread-for-the-modified-simple-library-docs-generator/).
+  - Originally created by user G.Sandler (a.k.a (Mr)CreatoR), <www.creator-lab.ucoz.ru>, <www.autoit-script.ru>.
+  - With methods, functions and techniques borrowed from Au3Wrapper and AutoIt Herlp file generator by Jos and the AutoIt Team.
+- Added CHM help file for the UDF.
 
 #### Changed
 
@@ -88,6 +93,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Added _LO_Terminate to all examples for clean-up.
 - Removed returns with Object calls directly in them. Also adding applicable error checking:
   - _LO_PrintersGetNamesAlt
+- Added Boolean return to `_LO_Terminate`.
+- Lowered sleep time from 500 ms to 250 ms in `_LO_Terminate`.
 
 #### Documented
 
@@ -98,6 +105,12 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Added missing error values and corrected wrong error values listed in the headers.
 - Reworded Color terminology.
 - Reworded measurement terminology.
+- Removed "[in/out]", Return (integer, String, 0) and parameter descriptions, such as "a string value", from Header parameter descriptions for chm compatibility.
+- Moved Success values in the header above error values.
+- Reformatted Error and Extended value descriptions in headers.
+- Reword failure description.
+- Corrected mismatches between header Syntax, header Parameter Defaults, and Function parameter assignments.
+- Revised related section for better accuracy.
 
 #### Fixed
 
@@ -478,12 +491,25 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Added Property error checking to some functions:
   - _LOBase_DocMaximize
   - _LOBase_DocMinimize
+- All functions that returned variable sized arrays depending on current LibreOffice version now return the same sized array, with Null values for invalid properties:
+  - _LOBase_DateStructModify
+  - _LOBase_TableColDefinition
+- Added ability to modify Document's modified status:
+  - _LOBase_DocIsModified
+  - _LOBase_FormDocIsModified
+  - _LOBase_ReportDocIsModified
 
 #### Documented
 
 - `_LOBase_DocOpen` Header Syntax contained one incorrect parameter.
 - Fix incorrect Constant name in `_LOBase_ReportConImageConData` header.
 - Added missing "See Constants" to applicable variables in headers.
+- Removed "[in/out]", Return (integer, String, 0) and parameter descriptions, such as "a string value", from Header parameter descriptions for chm compatibility.
+- Moved Success values in the header above error values.
+- Reformatted Error and Extended value descriptions in headers.
+- Reword failure description.
+- Corrected mismatches between header Syntax, header Parameter Defaults, and Function parameter assignments.
+- Revised related section for better accuracy.
 
 #### Fixed
 
@@ -1017,6 +1043,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOC_ZOOMTYPE_*
 - Added Module name to COM Error outputs for MsgBox and ConsoleWrite.
 - Added Enumeration values to comments after enumerated Constants.
+- Added default value for user inputs in examples.
+- _LOCalc_RangeColumnsGetNames
 
 #### Changed
 
@@ -1304,6 +1332,17 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Added Property error checking to some functions:
   - _LOCalc_DocMaximize
   - _LOCalc_DocMinimize
+- Add an error return to Style Organizer functions for trying to rename built-in styles.
+- All functions that returned variable sized arrays depending on current LibreOffice version now return the same sized array, with Null values for invalid properties:
+  - _LOCalc_CellStyleOrganizer
+  - _LOCalc_PageStyleFooter
+  - _LOCalc_PageStyleHeader
+  - _LOCalc_PageStyleOrganizer
+  - _LOCalc_PageStyleSheetScale
+- Added ability to modify Document's modified status:
+  - _LOCalc_DocIsModified
+- Renamed Component names to be singular, not plural for consistency.
+  - `LibreOfficeCalc_Comments.au3` --> `LibreOfficeCalc_Comment.au3`
 
 #### Documented
 
@@ -1313,6 +1352,12 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - __LOCalc_CellOverLine
   - __LOCalc_CellUnderLine
 - Added missing "See Constants" to applicable variables in headers.
+- Removed "[in/out]", Return (integer, String, 0) and parameter descriptions, such as "a string value", from Header parameter descriptions for chm compatibility.
+- Moved Success values in the header above error values.
+- Reformatted Error and Extended value descriptions in headers.
+- Reword failure description.
+- Corrected mismatches between header Syntax, header Parameter Defaults, and Function parameter assignments.
+- Revised related section for better accuracy.
 
 #### Fixed
 
@@ -1379,6 +1424,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_RangePivotFilterClear
   - _LOCalc_RangeRowGetObjByPosition
   - _LOCalc_SheetDetectiveDependent
+- `_LOCalc_PageStyleOrganizer` was modifying the organizer settings for a built-in style.
 
 #### Refactored
 
@@ -1418,6 +1464,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_SheetAdd
   - _LOCalc_SheetProtect
   - _LOCalc_SheetUnprotect
+- Removed ImplementationName usage, as it is unreliable long term.
 
 #### Removed
 
@@ -1688,6 +1735,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - __LOWriter_GradientIsModified
 - Added Module name to COM Error outputs for MsgBox and ConsoleWrite.
 - Added Enumeration values to comments after enumerated Constants.
+- Added default value for user inputs in examples.
+- Added new View Cursor move constant for retrieving current page number: `$LOW_VIEWCUR_GET_PAGE_NUM`.
+- _LOWriter_CursorViewCursorCurrPage
 
 #### Changed
 
@@ -2295,6 +2345,81 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_DocMinimize
   - _LOWriter_TableCellFormula
   - _LOWriter_TableCellValue
+- Rearranged Effect parameters to match LO UI order.
+  > Previous order:(***$iRelief***, $iCase, $bHidden, $bOutline, $bShadow)
+  >
+  > New order:($iCase, $bHidden, ***$iRelief***, $bOutline, $bShadow)
+  - __LOWriter_CharEffect
+  - _LOWriter_CharStyleEffect
+  - _LOWriter_DirFrmtCharEffect
+  - _LOWriter_FindFormatModifyEffects
+  - _LOWriter_ParStyleEffect
+- Added Decorative parameter to `_LOWriter_ImageOptionsName`, which was added in L.O. 7.6.
+- Simplified `_LOWriter_CursorHyperlinkInsert` to have only a Cursor parameter, and less unnecessary options.
+- Add an error return to Style Organizer functions for trying to rename built-in styles.
+- Removed static $bKeepScale from `_LOWriter_ImageCrop`. Return is now always Null, and default state is True.
+- All functions that returned variable sized arrays depending on current LibreOffice version now return the same sized array, with Null values for invalid properties:
+  - __LOWriter_CharFontColor
+  - __LOWriter_ParHyphenation
+  - __LOWriter_ParSpace
+  - _LOWriter_CharStyleOrganizer
+  - _LOWriter_DocDescription
+  - _LOWriter_FieldCommentModify
+  - _LOWriter_FrameStyleOrganizer
+  - _LOWriter_FrameStyleTypeSize
+  - _LOWriter_DateStructModify
+  - _LOWriter_ImageOptionsName
+  - _LOWriter_ImageTypeSize
+  - _LOWriter_NumStyleCustomize
+  - _LOWriter_NumStyleOrganizer
+  - _LOWriter_PageStyleFooter
+  - _LOWriter_PageStyleHeader
+  - _LOWriter_PageStyleLayout
+  - _LOWriter_PageStyleMargins
+  - _LOWriter_PageStyleOrganizer
+  - _LOWriter_ParStyleOrganizer
+- Rearranged `_LOWriter_PageStyleOrganizer` parameters to match LO UI order, and also similar functions.
+  > Previous order:($oDoc, $oPageStyle, $sNewPageStyleName, ***$bHidden***, $sFollowStyle)
+  >
+  > New order:($oDoc, $oPageStyle, $sNewPageStyleName, $sFollowStyle, ***$bHidden***)
+- Added ability to modify Document's modified status:
+  - _LOWriter_DocIsModified
+- Renamed Table Cell Object retrieval functions:
+  - `_LOWriter_TableGetCellObjByCursor` --> `_LOWriter_TableCellGetObjByCursor`
+  - `_LOWriter_TableGetCellObjByName` --> `_LOWriter_TableCellGetObjByName`
+  - `_LOWriter_TableGetCellObjByPosition` --> `_LOWriter_TableCellGetObjByPosition`
+- Renamed Table Data Get/Set functions to group them together.
+  - `_LOWriter_TableGetData` --> `_LOWriter_TableDataGet`
+  - `_LOWriter_TableSetData` --> `_LOWriter_TableDataSet`
+- Added default Column count of 1 to `_LOWriter_TableColumnInsert`
+- Added default Row count of 1 to `_LOWriter_TableRowInsert`
+- Renamed Component names to be singular, not plural for consistency.
+  - `LibreOfficeWriter_FootEndNotes.au3` --> `LibreOfficeWriter_FootEndNote.au3`
+  - `LibreOfficeWriter_Images.au3` --> `LibreOfficeWriter_Image.au3`
+  - `LibreOfficeWriter_Shapes.au3` --> `LibreOfficeWriter_Shape.au3`
+- Renamed Field type constants for better grouping.
+  - `$LOW_FIELD_ADV_TYPE_*` --> `$LOW_FIELD_TYPE_ADV_*`
+  - `$LOW_FIELD_DOCINFO_TYPE_*` --> `$LOW_FIELD_TYPE_DOCINFO_*`
+- Changed the value of Field Type "ALL" constant from 1 to value of all constants BitOR'd together.
+  - $LOW_FIELD_TYPE_*
+  - $LOW_FIELD_TYPE_ADV_*
+  - $LOW_FIELD_TYPE_DOCINFO_*
+- Modified error values for Field list functions:
+  - _LOWriter_FieldsAdvGetList
+  - _LOWriter_FieldsDocInfoGetList
+  - _LOWriter_FieldsGetList
+- Renamed `_LOWriter_CursorHyperlinkInsert` to `_LOWriter_CursorHyperlink`
+- Modified `_LOWriter_CursorHyperlink` to Set and Retrieve hyperlink settings now, rather than inserting them.
+- Removed `$LOW_VIEWCUR_JUMP_TO_PAGE` and `$LOW_VIEWCUR_GET_PAGE_NUM` View Cursor constants and split the functionality off into a separate function.
+- Renamed `_LOWriter_EndnoteGetTextCursor` to `_LOWriter_EndnoteCreateTextCursor` for consistency.
+- Renamed `_LOWriter_FootnoteGetTextCursor` to `_LOWriter_FootnoteCreateTextCursor` for consistency.
+- Renamed `_LOWriter_CursorTextCursorCreate` to `_LOWriter_CursorCreateTextCursor` for consistency.
+- Renamed some Direct Formatting functions for better grouping:
+  - `_LOWriter_DirFrmtFont` --> `_LOWriter_DirFrmtCharFont`
+  - `_LOWriter_DirFrmtFontColor` --> `_LOWriter_DirFrmtCharFontColor`
+  - `_LOWriter_DirFrmtOverLine` --> `_LOWriter_DirFrmtCharOverLine`
+  - `_LOWriter_DirFrmtStrikeOut` --> `_LOWriter_DirFrmtCharStrikeOut`
+  - `_LOWriter_DirFrmtUnderLine` --> `_LOWriter_DirFrmtCharUnderLine`
 
 #### Documented
 
@@ -2315,6 +2440,12 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - `_LOWriter_FormConPushButtonGeneral` Removed duplicated parameter in Header Parameter description.
 - Added LibreOffice SDK/API Constant names to constants.
 - Added missing "See Constants" to applicable variables in headers.
+- Removed "[in/out]", Return (integer, String, 0) and parameter descriptions, such as "a string value", from Header parameter descriptions for chm compatibility.
+- Moved Success values in the header above error values.
+- Reformatted Error and Extended value descriptions in headers.
+- Reword failure description.
+- Corrected mismatches between header Syntax, header Parameter Defaults, and Function parameter assignments.
+- Revised related section for better accuracy.
 
 #### Fixed
 
@@ -2447,6 +2578,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_ParStyleOverLine
   - _LOWriter_ParStyleStrikeOut
   - _LOWriter_TableCellBorderColor
+- `_LOWriter_TableCellFormula` Wrong Bit value for property setting error.
+- Inccorect save filter for .dot changed from "MS Word 97" to "MS Word 97 Vorlage".
 
 #### Refactored
 
@@ -2544,6 +2677,16 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOWriter_FormatKeyDelete
   - _LOWriter_TableColumnInsert
   - _LOWriter_TableRowInsert
+- Removed ImplementationName usages generally, as it is unreliable long term.
+- Simplified some internal workings of some cursor functions.
+- Change StringLen for StringRegExp in `_LOWriter_DateStructModify`.
+- Rename variables in:
+  - _LOWriter_TableColumnGetCount
+  - _LOWriter_TableRowGetCount
+- Removed internal cursor movement functions, combining them into one function.
+- Combined internal Numbering Style Script insertion, deletion and document creation functions.
+- Combined suggested image size function in Image insert.
+- Combined `__LOWriter_FindFormatRetrieveSetting` into `_LOWriter_FindFormatModifySpacing`.
 
 #### Removed
 
@@ -2599,6 +2742,17 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - `_LOWriter_FieldSetVarMasterDelete`, split into separate files.
 - Second _LOWriter_DocConnect example.
 - LibreOfficeWriter_Cell.au3.
+- __LOWriter_CursorGetText
+- __LOWriter_TableCursorMove
+- __LOWriter_TextCursorMove
+- __LOWriter_ViewCursorMove
+- __LOWriter_NumStyleCreateScript
+- __LOWriter_NumStyleDeleteScript
+- __LOWriter_NumStyleInitiateDocument
+- __LOWriter_ImageGetSuggestedSize
+- __LOWriter_FindFormatRetrieveSetting
+- $LOW_VIEWCUR_JUMP_TO_PAGE
+- $LOW_VIEWCUR_GET_PAGE_NUM
 
 [To Top](#releases)
 

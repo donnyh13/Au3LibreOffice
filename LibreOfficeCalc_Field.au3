@@ -41,17 +41,16 @@
 ; Name ..........: _LOCalc_FieldCurrentDisplayGet
 ; Description ...: Retrieve the current data displayed by a field.
 ; Syntax ........: _LOCalc_FieldCurrentDisplayGet(ByRef $mField[, $bFieldName = False])
-; Parameters ....: $mField              - [in/out] a map. A Map containing a Field Object as returned from a previous insert, or _LOCalc_FieldsGetList function.
-;                  $bFieldName          - [optional] a boolean value. Default is False. If True, the Field command name is returned, else the current Field display is returned.
+; Parameters ....: $mField              - A Map containing a Field Object as returned from a previous insert, or _LOCalc_FieldsGetList function.
+;                  $bFieldName          - [optional] Default is False. If True, the Field command name is returned, else the current Field display is returned.
 ; Return values .: Success: String
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: String = Success. Returning current Field display content in String format.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oField not a map.
-;                  @Error 1 @Extended 2 Return 0 = $bFieldName not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oField not a map.
+;                  @Error: 1, @Extended: 2 = $bFieldName not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Field's current display.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. Returning current Field display content in String format.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Field's current display.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Retrieving the current display of Fields in the Header/Footer, generally returns three question marks, this is due to the way Headers/Footers are implemented for Calc.
@@ -79,29 +78,28 @@ EndFunc   ;==>_LOCalc_FieldCurrentDisplayGet
 ; Name ..........: _LOCalc_FieldDateTimeInsert
 ; Description ...: Insert a Date or Time Field.
 ; Syntax ........: _LOCalc_FieldDateTimeInsert(ByRef $oDoc, ByRef $oTextCursor[, $bIsDate = True[, $bOverwrite = False]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $bIsDate             - [optional] a boolean value. Default is True. If True, the inserted Field will be a Date Field, if False, the Field will be a Time Field.
-;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, any content selected by the Cursor is overwritten.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $bIsDate             - [optional] Default is True. If True, the inserted Field will be a Date Field, if False, the Field will be a Time Field.
+;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Map
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: Map = Success. Successfully inserted the field, returning a Map containing the Field's Object.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $bIsDate not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $bIsDate not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to Create a "com.sun.star.text.TextField.DateTime" Object.
+;                  @Error: 2, @Extended: 1 = Failed to Create a "com.sun.star.text.TextField.DateTime" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify and retrieve Field object after insertion.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Map = Success. Successfully inserted the field, returning a Map containing the Field's Object.
+;                  @Error: 3, @Extended: 1 = Failed to identify and retrieve Field object after insertion.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If you are inserting the field into a header or footer of the document, make sure you use a newly created Text Cursor, using a cursor that has previously inserted text, will cause this function to fail to identify the new Field's object. The Field will still be successfully inserted however.
 ;                  Inserting Fields into the Headers/Footers is a bit glitchy.
 ;                  The reason I use a Map to contain the Field's object is that Calc Fields are a little buggy currently, therefore I need two Objects in order to do certain functions with the Field, such as deleteing, or retrieving the Field's display. It is easier and more accurate to identify and retrieve the Objects now, rather than later.
-; Related .......:
+; Related .......: _LOCalc_FieldDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -137,15 +135,14 @@ EndFunc   ;==>_LOCalc_FieldDateTimeInsert
 ; Name ..........: _LOCalc_FieldDelete
 ; Description ...: Delete a Field from a Document.
 ; Syntax ........: _LOCalc_FieldDelete(ByRef $mField)
-; Parameters ....: $mField              - [in/out] a map. A Map containing a Field Object as returned from a previous insert, or _LOCalc_FieldsGetList function.
+; Parameters ....: $mField              - A Map containing a Field Object as returned from a previous insert, or _LOCalc_FieldsGetList function.
 ; Return values .: Success: 1
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully deleted the field.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $mField not a map.
+;                  @Error: 1, @Extended: 1 = $mField not a map.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to Create a new Text Cursor.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Successfully deleted the field.
+;                  @Error: 2, @Extended: 1 = Failed to Create a new Text Cursor.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To Delete a field in a Header/Footer, retrieve a new Object for the Header/Footer, retrieve an array of fields from the Header/Footer Object, delete the Field using this function, then re-insert the Header/Footer object into the Page Style.
@@ -178,29 +175,28 @@ EndFunc   ;==>_LOCalc_FieldDelete
 ; Name ..........: _LOCalc_FieldFileNameInsert
 ; Description ...: Insert a File Name field.
 ; Syntax ........: _LOCalc_FieldFileNameInsert(ByRef $oDoc, ByRef $oTextCursor[, $bPath = False[, $bOverwrite = False]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $bPath               - [optional] a boolean value. Default is False. If True, the File name will be prefixed by the File Path. If False, the File name and extension will be displayed.
-;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, any content selected by the Cursor is overwritten.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $bPath               - [optional] Default is False. If True, the File name will be prefixed by the File Path. If False, the File name and extension will be displayed.
+;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Map
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: Map = Success. Successfully inserted the field, returning a map containing the Field's Object.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $bPath not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $bPath not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to Create a "com.sun.star.text.TextField.FileName" Object.
+;                  @Error: 2, @Extended: 1 = Failed to Create a "com.sun.star.text.TextField.FileName" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify and retrieve Field object after insertion.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Map = Success. Successfully inserted the field, returning a map containing the Field's Object.
+;                  @Error: 3, @Extended: 1 = Failed to identify and retrieve Field object after insertion.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If you are inserting the field into a header or footer of the document, make sure you use a newly created Text Cursor, using a cursor that has previously inserted text, will cause this function to fail to identify the new Field's object. The Field will still be successfully inserted however.
 ;                  Inserting Fields into the Headers/Footers is a bit glitchy.
 ;                  The reason I use a Map to contain the Field's object is that Calc Fields are a little buggy currently, therefore I need two Objects in order to do certain functions with the Field, such as deleteing, or retrieving the Field's display. It is easier and more accurate to identify and retrieve the Objects now, rather than later.
-; Related .......:
+; Related .......: _LOCalc_FieldSheetNameInsert, _LOCalc_FieldTitleInsert, _LOCalc_FieldDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -233,19 +229,18 @@ EndFunc   ;==>_LOCalc_FieldFileNameInsert
 ; Name ..........: _LOCalc_FieldGetAnchor
 ; Description ...: Retrieve the Anchor Cursor Object for a Field.
 ; Syntax ........: _LOCalc_FieldGetAnchor(ByRef $mField)
-; Parameters ....: $mField              - [in/out] a map. A Map containing a Field Object as returned from a previous insert, or _LOCalc_FieldsGetList function.
+; Parameters ....: $mField              - A Map containing a Field Object as returned from a previous insert, or _LOCalc_FieldsGetList function.
 ; Return values .: Success: Object
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested Field Anchor Cursor Object.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $mField not a map.
+;                  @Error: 1, @Extended: 1 = $mField not a map.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to retrieve Field anchor Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning requested Field Anchor Cursor Object.
+;                  @Error: 2, @Extended: 1 = Failed to retrieve Field anchor Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOCalc_FieldsGetList
+; Related .......: _LOCalc_FieldsGetList, _LOCalc_TextCursorInsertString, _LOCalc_TextCursorMove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -267,31 +262,30 @@ EndFunc   ;==>_LOCalc_FieldGetAnchor
 ; Name ..........: _LOCalc_FieldHyperlinkInsert
 ; Description ...: Insert a Hyperlink into a Calc Cell.
 ; Syntax ........: _LOCalc_FieldHyperlinkInsert(ByRef $oDoc, ByRef $oTextCursor, $sURL[, $sText = ""[, $sTargetFrame = ""[, $bOverwrite = False]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $sURL                - a string value. The URL/Hyperlink Address.
-;                  $sText               - [optional] a string value. Default is "". The Text to display instead of the URL. "" means the URL itself is displayed.
-;                  $sTargetFrame        - [optional] a string value. Default is "". Enter the name of the frame that you want the linked file to open in. Leave blank to skip.
-;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, any content selected by the Cursor is overwritten.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $sURL                - The URL/Hyperlink Address.
+;                  $sText               - [optional] Default is "". The Text to display instead of the URL. "" means the URL itself is displayed.
+;                  $sTargetFrame        - [optional] Default is "". Enter the name of the frame that you want the linked file to open in. Leave blank to skip.
+;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Map
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: Map = Success. Successfully inserted the field, returning a map containing the Field's Object.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $sURL not a String.
-;                  @Error 1 @Extended 4 Return 0 = $sText not a String.
-;                  @Error 1 @Extended 5 Return 0 = $sTargetFrame not a String.
-;                  @Error 1 @Extended 6 Return 0 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $sURL not a String.
+;                  @Error: 1, @Extended: 4 = $sText not a String.
+;                  @Error: 1, @Extended: 5 = $sTargetFrame not a String.
+;                  @Error: 1, @Extended: 6 = $bOverwrite not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to Create a "com.sun.star.text.TextField.URL" Object.
+;                  @Error: 2, @Extended: 1 = Failed to Create a "com.sun.star.text.TextField.URL" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify and retrieve Field object after insertion.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Map = Success. Successfully inserted the field, returning a map containing the Field's Object.
+;                  @Error: 3, @Extended: 1 = Failed to identify and retrieve Field object after insertion.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The reason I use a Map to contain the Field's object is that Calc Fields are a little buggy currently, therefore I need two Objects in order to do certain functions with the Field, such as deleteing, or retrieving the Field's display. It is easier and more accurate to identify and retrieve the Objects now, rather than later.
-; Related .......:
+; Related .......: _LOCalc_FieldHyperlinkModify, _LOCalc_FieldDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -329,30 +323,29 @@ EndFunc   ;==>_LOCalc_FieldHyperlinkInsert
 ; Name ..........: _LOCalc_FieldHyperlinkModify
 ; Description ...: Set or Retrieve the settings of a Hyperlink/URL field.
 ; Syntax ........: _LOCalc_FieldHyperlinkModify(ByRef $mHyperlinkField[, $sURL = Null[, $sText = Null[, $sTargetFrame = Null]]])
-; Parameters ....: $mHyperlinkField     - [in/out] a map. A Hyperlink/URL Map containing the Field Field Object returned by a previous _LOCalc_FieldHyperlinkInsert or _LOCalc_FieldsGetList function.
-;                  $sURL                - [optional] a string value. Default is Null. The URL/Hyperlink Address.
-;                  $sText               - [optional] a string value. Default is Null. The Text to display instead of the URL. "" means the URL itself is displayed.
-;                  $sTargetFrame        - [optional] a string value. Default is Null. If True, any content selected by the Cursor is overwritten.
+; Parameters ....: $mHyperlinkField     - A Hyperlink/URL Map containing the Field Field Object returned by a previous _LOCalc_FieldHyperlinkInsert or _LOCalc_FieldsGetList function.
+;                  $sURL                - [optional] Default is Null. The URL/Hyperlink Address.
+;                  $sText               - [optional] Default is Null. The Text to display instead of the URL. "" means the URL itself is displayed.
+;                  $sTargetFrame        - [optional] Default is Null. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: 1 or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $mHyperlinkField not a map.
-;                  @Error 1 @Extended 2 Return 0 = $sURL not a String.
-;                  @Error 1 @Extended 3 Return 0 = $sText not a String.
-;                  @Error 1 @Extended 4 Return 0 = $sTargetFrame not a String.
+;                  @Error: 1, @Extended: 1 = $mHyperlinkField not a map.
+;                  @Error: 1, @Extended: 2 = $sURL not a String.
+;                  @Error: 1, @Extended: 3 = $sText not a String.
+;                  @Error: 1, @Extended: 4 = $sTargetFrame not a String.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sURL
 ;                  |                               2 = Error setting $sText
 ;                  |                               4 = Error setting $sTargetFrame
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
-; Related .......:
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LOCalc_FieldHyperlinkInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -399,27 +392,26 @@ EndFunc   ;==>_LOCalc_FieldHyperlinkModify
 ; Name ..........: _LOCalc_FieldPageCountInsert
 ; Description ...: Insert a total Page Count Field.
 ; Syntax ........: _LOCalc_FieldPageCountInsert(ByRef $oDoc, ByRef $oTextCursor[, $bOverwrite = False])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, any content selected by the Cursor is overwritten.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Map
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: Map = Success. Successfully inserted the field, returning a map containing the Field's Object.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $bOverwrite not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to Create a "com.sun.star.text.TextField.PageCount" Object.
+;                  @Error: 2, @Extended: 1 = Failed to Create a "com.sun.star.text.TextField.PageCount" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify and retrieve Field object after insertion.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Map = Success. Successfully inserted the field, returning a map containing the Field's Object.
+;                  @Error: 3, @Extended: 1 = Failed to identify and retrieve Field object after insertion.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If you are inserting the field into a header or footer of the document, make sure you use a newly created Text Cursor, using a cursor that has previously inserted text, will cause this function to fail to identify the new Field's object. The Field will still be successfully inserted however.
 ;                  Inserting Fields into the Headers/Footers is a bit glitchy.
 ;                  The reason I use a Map to contain the Field's object is that Calc Fields are a little buggy currently, therefore I need two Objects in order to do certain functions with the Field, such as deleteing, or retrieving the Field's display. It is easier and more accurate to identify and retrieve the Objects now, rather than later.
-; Related .......:
+; Related .......: _LOCalc_FieldPageNumberInsert, _LOCalc_FieldDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -448,27 +440,26 @@ EndFunc   ;==>_LOCalc_FieldPageCountInsert
 ; Name ..........: _LOCalc_FieldPageNumberInsert
 ; Description ...: Insert a Page Number Field.
 ; Syntax ........: _LOCalc_FieldPageNumberInsert(ByRef $oDoc, ByRef $oTextCursor[, $bOverwrite = False])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, any content selected by the Cursor is overwritten.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Map
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: Map = Success. Successfully inserted the field, returning a map containing the Field's Object.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $bOverwrite not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to Create a "com.sun.star.text.TextField.PageNumber" Object.
+;                  @Error: 2, @Extended: 1 = Failed to Create a "com.sun.star.text.TextField.PageNumber" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify and retrieve Field object after insertion.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Map = Success. Successfully inserted the field, returning a map containing the Field's Object.
+;                  @Error: 3, @Extended: 1 = Failed to identify and retrieve Field object after insertion.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If you are inserting the field into a header or footer of the document, make sure you use a newly created Text Cursor, using a cursor that has previously inserted text, will cause this function to fail to identify the new Field's object. The Field will still be successfully inserted however.
 ;                  Inserting Fields into the Headers/Footers is a bit glitchy.
 ;                  The reason I use a Map to contain the Field's object is that Calc Fields are a little buggy currently, therefore I need two Objects in order to do certain functions with the Field, such as deleteing, or retrieving the Field's display. It is easier and more accurate to identify and retrieve the Objects now, rather than later.
-; Related .......:
+; Related .......: _LOCalc_FieldPageCountInsert, _LOCalc_FieldDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -497,35 +488,34 @@ EndFunc   ;==>_LOCalc_FieldPageNumberInsert
 ; Name ..........: _LOCalc_FieldsGetList
 ; Description ...: Retrieve an Array of maps containing Field Objects present in a Cell or Header/Footer.
 ; Syntax ........: _LOCalc_FieldsGetList(ByRef $oTextCursor[, $iType = $LOC_FIELD_TYPE_ALL[, $bFieldTypeNum = True]])
-; Parameters ....: $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $iType               - [optional] an integer value (1-255). Default is $LOC_FIELD_TYPE_ALL. The type of Field to search for. See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3. Can be BitOr'd together.
-;                  $bFieldTypeNum       - [optional] a boolean value. Default is True. If True, adds a column to the array that has the Field Type Constant Integer for that particular Field, to assist in identifying the Field type. See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
+; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $iType               - [optional] (1-255) Default is $LOC_FIELD_TYPE_ALL. The type of Field to search for. See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3. Can be BitOr'd together.
+;                  $bFieldTypeNum       - [optional] Default is True. If True, adds a column to the array that has the Field Type Constant Integer for that particular Field, to assist in identifying the Field type. See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: Array
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning Array of maps containing Text Field Objects with @Extended set to number of results. See Remarks for Array sizing.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iType not an Integer, less than 1 or greater than 255. (The total of all Constants added together.) See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $bFieldTypeNum not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 1 or greater than 255. (The total of all Constants added together.) See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $bFieldTypeNum not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create enumeration of paragraphs in Cell.
-;                  @Error 2 @Extended 2 Return 0 = Failed to create enumeration of Text Portions in Paragraph.
+;                  @Error: 2, @Extended: 1 = Failed to create enumeration of paragraphs in Cell.
+;                  @Error: 2, @Extended: 2 = Failed to create enumeration of Text Portions in Paragraph.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify requested Field Types.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve Text Fields Object/
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve total count of Fields.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Text Field Object.
-;                  @Error 3 @Extended 5 Return 0 = More fields found than total count of Fields. Try creating a new cursor, and trying again.
-;                  @Error 3 @Extended 6 Return 0 = Failed to retrieve secondary Text Field Object.
-;                  @Error 3 @Extended 7 Return 0 = Number of Fields found not equal to number of expected Fields. Try creating a new cursor, and trying again.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. Returning Array of maps containing Text Field Objects with @Extended set to number of results. See Remarks for Array sizing.
+;                  @Error: 3, @Extended: 1 = Failed to identify requested Field Types.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Text Fields Object/
+;                  @Error: 3, @Extended: 3 = Failed to retrieve total count of Fields.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve Text Field Object.
+;                  @Error: 3, @Extended: 5 = More fields found than total count of Fields. Try creating a new cursor, and trying again.
+;                  @Error: 3, @Extended: 6 = Failed to retrieve secondary Text Field Object.
+;                  @Error: 3, @Extended: 7 = Number of Fields found not equal to number of expected Fields. Try creating a new cursor, and trying again.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Array can vary in the number of columns, if $bFieldTypeNum is called with False, the Array will be a single column. If $bFieldTypeNum is called with True, a column will be added to the array. First column will always be the map containing the Field's Object.
 ;                  Setting $bFieldTypeNum to True will add a Field type Number column, matching the constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3 for the found Field.
 ;                  This function may fail to identify Fields if text has been inserted recently using the same Cursor.
 ;                  The reason I use a Map to contain the Field's object is that Calc Fields are a little buggy currently, therefore I need two Objects in order to do certain functions with the Field, such as deleteing, or retrieving the Field's display. It is easier and more accurate to identify and retrieve the Objects now, rather than later.
-; Related .......:
+; Related .......: _LOCalc_FieldDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -626,27 +616,26 @@ EndFunc   ;==>_LOCalc_FieldsGetList
 ; Name ..........: _LOCalc_FieldSheetNameInsert
 ; Description ...: Insert a Sheet Name Field at a Text Cursor location.
 ; Syntax ........: _LOCalc_FieldSheetNameInsert(ByRef $oDoc, ByRef $oTextCursor[, $bOverwrite = False])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, any content selected by the Cursor is overwritten.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Map
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: Map = Success. Successfully inserted the field, returning a map containing the Field's Object.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $bOverwrite not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to Create a "com.sun.star.text.TextField.SheetName" Object.
+;                  @Error: 2, @Extended: 1 = Failed to Create a "com.sun.star.text.TextField.SheetName" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify and retrieve Field object after insertion.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Map = Success. Successfully inserted the field, returning a map containing the Field's Object.
+;                  @Error: 3, @Extended: 1 = Failed to identify and retrieve Field object after insertion.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If you are inserting the field into a header or footer of the document, make sure you use a newly created Text Cursor, using a cursor that has previously inserted text, will cause this function to fail to identify the new Field's object. The Field will still be successfully inserted however.
 ;                  Inserting Fields into the Headers/Footers is a bit glitchy.
 ;                  The reason I use a Map to contain the Field's object is that Calc Fields are a little buggy currently, therefore I need two Objects in order to do certain functions with the Field, such as deleteing, or retrieving the Field's display. It is easier and more accurate to identify and retrieve the Objects now, rather than later.
-; Related .......:
+; Related .......: _LOCalc_FieldFileNameInsert, _LOCalc_FieldTitleInsert, _LOCalc_FieldDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -675,27 +664,26 @@ EndFunc   ;==>_LOCalc_FieldSheetNameInsert
 ; Name ..........: _LOCalc_FieldTitleInsert
 ; Description ...: Insert a Document Title field.
 ; Syntax ........: _LOCalc_FieldTitleInsert(ByRef $oDoc, ByRef $oTextCursor[, $bOverwrite = False])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
-;                  $oTextCursor         - [in/out] an object. A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, any content selected by the Cursor is overwritten.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
+;                  $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
+;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Map
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: Map = Success. Successfully inserted the field, returning a map containing the Field's Object.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oTextCursor not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $bOverwrite not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to Create a "com.sun.star.text.TextField.docinfo.Title" Object.
+;                  @Error: 2, @Extended: 1 = Failed to Create a "com.sun.star.text.TextField.docinfo.Title" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to identify and retrieve Field object after insertion.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Map = Success. Successfully inserted the field, returning a map containing the Field's Object.
+;                  @Error: 3, @Extended: 1 = Failed to identify and retrieve Field object after insertion.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If you are inserting the field into a header or footer of the document, make sure you use a newly created Text Cursor, using a cursor that has previously inserted text, will cause this function to fail to identify the new Field's object. The Field will still be successfully inserted however.
 ;                  Inserting Fields into the Headers/Footers is a bit glitchy.
 ;                  The reason I use a Map to contain the Field's object is that Calc Fields are a little buggy currently, therefore I need two Objects in order to do certain functions with the Field, such as deleteing, or retrieving the Field's display. It is easier and more accurate to identify and retrieve the Objects now, rather than later.
-; Related .......:
+; Related .......: _LOCalc_FieldSheetNameInsert, _LOCalc_FieldFileNameInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

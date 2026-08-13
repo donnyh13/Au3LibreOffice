@@ -12,14 +12,14 @@
 #include "LibreOfficeWriter_DirectFormatting.au3"
 #include "LibreOfficeWriter_Doc.au3"
 #include "LibreOfficeWriter_Field.au3"
-#include "LibreOfficeWriter_FootEndNotes.au3"
+#include "LibreOfficeWriter_FootEndNote.au3"
 #include "LibreOfficeWriter_Form.au3"
 #include "LibreOfficeWriter_Frame.au3"
-#include "LibreOfficeWriter_Images.au3"
+#include "LibreOfficeWriter_Image.au3"
 #include "LibreOfficeWriter_Num.au3"
 #include "LibreOfficeWriter_Page.au3"
 #include "LibreOfficeWriter_Par.au3"
-#include "LibreOfficeWriter_Shapes.au3"
+#include "LibreOfficeWriter_Shape.au3"
 #include "LibreOfficeWriter_Table.au3"
 
 ; #INDEX# =======================================================================================================================
@@ -28,15 +28,15 @@
 ; Description ...: Provides basic functionality through AutoIt for interacting with LibreOffice Writer.
 ; Author(s) .....: donnyh13, mLipok
 ; Sources .......: Andrew Pitonyak & Laurent Godard. Useful Macro Information, section 5.7.1. OOo version. Used for VersionGet;
-;				   jguinch -- Printmgr.au3. Function used: _PrintMgr_EnumPrinter.
-;				   Leagnus & GMK -- OOoCalc.au3. Function used: SetPropertyValue.
-;				   mLipok  -- OOoCalc.au3. Function used: __OOoCalc_ComErrorHandler_UserFunction,_InternalComErrorHandler.
-;						   -- WriterDemo.au3. Function used: _CreateStruct;
+;                  jguinch -- Printmgr.au3. Function used: _PrintMgr_EnumPrinter.
+;                  Leagnus & GMK -- OOoCalc.au3. Function used: SetPropertyValue.
+;                  mLipok -- OOoCalc.au3. Function used: __OOoCalc_ComErrorHandler_UserFunction,_InternalComErrorHandler.
+;                         -- WriterDemo.au3. Function used: _CreateStruct;
 ; Dll ...........:
 ; Note...........: Tips/templates taken from OOoCalc UDF written by user GMK; also from Word UDF by user water.
-;				   I found the book by Andrew Pitonyak very helpful also, titled, "OpenOffice.org Macros Explained; OOME Third Edition".
-;				   Of course, this UDF is written using the English version of LibreOffice, and may only work for the English version of LibreOffice installations.
-;				   Many functions in this UDF may or may not work with OpenOffice Writer, however some settings are definitely for LibreOffice only.
+;                  I found the book by Andrew Pitonyak very helpful also, titled, "OpenOffice.org Macros Explained; OOME Third Edition".
+;                  Of course, this UDF is written using the English version of LibreOffice, and may only work for the English version of LibreOffice installations.
+;                  Many functions in this UDF may or may not work with OpenOffice Writer, however some settings are definitely for LibreOffice only.
 ; ===============================================================================================================================
 
 ; #CURRENT# =====================================================================================================================

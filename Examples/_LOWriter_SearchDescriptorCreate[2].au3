@@ -58,13 +58,13 @@ Func Example()
 	WEnd
 
 	; Create a new search descriptor for searching with. Set Backward, Match Case, and Whole word to false, and Regular Expression to True.
-	; I could  have just modified my first search descriptor using the modify function, but since I am demonstrating the Search Descriptor Creation
+	; I could have just modified my first search descriptor using the modify function, but since I am demonstrating the Search Descriptor Creation
 	; function, I will just make a new one.
 	$oSrchDesc2 = _LOWriter_SearchDescriptorCreate($oDoc, False, False, False, True)
 	If @error Then _ERROR($oDoc, "Failed to create a search descriptor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Search for the regular expression \b[a-z]{8}\b, which means find a word 8 letters long, \b means word boundary, meaning the result will start at
-	; the beginning of  a whole word, and end at the end of a whole word.
+	; the beginning of a whole word, and end at the end of a whole word.
 	$oResult = _LOWriter_DocFindNext($oDoc, $oSrchDesc2, "\b[a-z]{8}\b")
 	If @error Then _ERROR($oDoc, "Failed to perform search in the document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

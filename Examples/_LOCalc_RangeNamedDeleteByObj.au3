@@ -45,7 +45,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Global Named Range names currently set for this document are: " & @CRLF & $sRanges & @CRLF & @CRLF & _
 			"I will now delete this Named Range using its Object.")
 
-	; Delete the named  Range "My_Global_Named_Range" using its Object.
+	; Delete the named Range "My_Global_Named_Range" using its Object.
 	_LOCalc_RangeNamedDeleteByObj($oDoc, $oGlobalNamedRange)
 	If @error Then _ERROR($oDoc, "Failed to delete named Range. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -76,7 +76,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Local Named Range names currently set for this Sheet are: " & @CRLF & $sRanges & @CRLF & @CRLF & _
 			"I will now delete this Named Range using its Object.")
 
-	; Delete the named  Range "A_Local_Named_Range" using its Object.
+	; Delete the named Range "A_Local_Named_Range" using its Object.
 	_LOCalc_RangeNamedDeleteByObj($oSheet, $oLocalNamedRange)
 	If @error Then _ERROR($oDoc, "Failed to delete named Range. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

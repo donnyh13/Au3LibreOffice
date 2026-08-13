@@ -37,7 +37,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a footnote. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Get a TextCursor for the footnote
-	$oFootTextCursor = _LOWriter_FootnoteGetTextCursor($oFootNote)
+	$oFootTextCursor = _LOWriter_FootnoteCreateTextCursor($oFootNote)
 	If @error Then _ERROR($oDoc, "Failed to create a footnote Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text in the footnote.
