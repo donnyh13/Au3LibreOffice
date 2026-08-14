@@ -128,14 +128,14 @@ EndFunc   ;==>_LOCalc_ComError_UserFunction
 ; Name ..........: _LOCalc_FilterDescriptorCreate
 ; Description ...: Create a Filter Descriptor to use in the Filter function.
 ; Syntax ........: _LOCalc_FilterDescriptorCreate(ByRef $oRange, $atFilterField[, $bCaseSensitive = False[, $bSkipDupl = False[, $bUseRegExp = False[, $bHeaders = False[, $bCopyOutput = False[, $oCopyOutput = Null[, $bSaveCriteria = True]]]]]]])
-; Parameters ....: $oRange              - The Range you intend to apply the Filter to. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
+; Parameters ....: $oRange              - The Range you intend to apply the Filter to. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOCalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $atFilterField       - A single column Array of Filter Fields previously created by _LOCalc_FilterFieldCreate. Maximum of 8 Fields allowed.
 ;                  $bCaseSensitive      - [optional] Default is False. If True, the Filtering operation will be case sensitive.
 ;                  $bSkipDupl           - [optional] Default is False. If True, Duplicate values will be skipped in the list of filtered data.
 ;                  $bUseRegExp          - [optional] Default is False. If True, the String Value set will be considered as using Regular expressions.
 ;                  $bHeaders            - [optional] Default is False. If True, the Range contains column headers.
 ;                  $bCopyOutput         - [optional] Default is False. If True, the filtering results are copied to another location in the Sheet.
-;                  $oCopyOutput         - [optional] Default is Null. The location to copy filter data to. If a range is input, the first cell is used. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
+;                  $oCopyOutput         - [optional] Default is Null. The location to copy filter data to. If a range is input, the first cell is used. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOCalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $bSaveCriteria       - [optional] Default is True. If True, the output range remains linked to the source range, allowing for future re-application of the same filter to the range. Source Range must be previously defined as a Database range.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully created a Filter descriptor Object, returning its Object.
@@ -227,7 +227,7 @@ EndFunc   ;==>_LOCalc_FilterDescriptorCreate
 ; Name ..........: _LOCalc_FilterDescriptorModify
 ; Description ...: Set or Retrieve Filter Descriptor settings.
 ; Syntax ........: _LOCalc_FilterDescriptorModify(ByRef $oRange, ByRef $oFilterDesc[, $atFilterField = Null[, $bCaseSensitive = Null[, $bSkipDupl = Null[, $bUseRegExp = Null[, $bHeaders = Null[, $bCopyOutput = Null[, $oCopyOutput = Null[, $bSaveCriteria = Null]]]]]]]])
-; Parameters ....: $oRange              - The Sheet the Filter Descriptor was Created with, or the Range you intend to apply the Filter to. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
+; Parameters ....: $oRange              - The Sheet the Filter Descriptor was Created with, or the Range you intend to apply the Filter to. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOCalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $oFilterDesc         - A Filter Descriptor created by a previous _LOCalc_FilterDescriptorCreate function.
 ;                  $atFilterField       - [optional] Default is Null. A single column Array of Filter Fields previously created by _LOCalc_FilterFieldCreate. Maximum of 8 Fields allowed.
 ;                  $bCaseSensitive      - [optional] Default is Null. If True, the Filtering operation will be case sensitive.
@@ -235,7 +235,7 @@ EndFunc   ;==>_LOCalc_FilterDescriptorCreate
 ;                  $bUseRegExp          - [optional] Default is Null. If True, the String Value set will be considered as using Regular expressions.
 ;                  $bHeaders            - [optional] Default is Null. If True, the Range contains column headers.
 ;                  $bCopyOutput         - [optional] Default is Null. If True, the filtering results are copied to another location in the Sheet.
-;                  $oCopyOutput         - [optional] Default is Null. The location to copy filter data to. If a range is input, the first cell is used. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
+;                  $oCopyOutput         - [optional] Default is Null. The location to copy filter data to. If a range is input, the first cell is used. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOCalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $bSaveCriteria       - [optional] Default is Null. If True, the output range remains linked to the source range, allowing for future re-application of the same filter to the range. Source Range must be previously defined as a Database range.
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Filter Descriptor was successfully modified.
@@ -971,7 +971,7 @@ EndFunc   ;==>_LOCalc_FormatKeysGetList
 ; Name ..........: _LOCalc_SearchDescriptorCreate
 ; Description ...: Create a Search Descriptor for searching a document.
 ; Syntax ........: _LOCalc_SearchDescriptorCreate(ByRef $oRange[, $bBackwards = False[, $bSearchRows = True[, $bMatchCase = False[, $iSearchIn = $LOC_SEARCH_IN_FORMULAS[, $bEntireCell = False[, $bRegExp = False[, $bWildcards = False[, $bStyles = False]]]]]]]])
-; Parameters ....: $oRange              - A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
+; Parameters ....: $oRange              - A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOCalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $bBackwards          - [optional] Default is False. If True, the document is searched backwards.
 ;                  $bSearchRows         - [optional] Default is True. If True, Search is performed left to right along the rows, else if False, the search is performed top to bottom along the columns.
 ;                  $bMatchCase          - [optional] Default is False. If True, the case of the letters is important for the Search.

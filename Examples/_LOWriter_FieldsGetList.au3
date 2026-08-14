@@ -74,13 +74,13 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a Field. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve an array of Regular Fields. The Doc Info Field wont be listed in this array.
-	$avFields = _LOWriter_FieldsGetList($oDoc, $LOW_FIELD_TYPE_ALL)
+	$avFields = _LOWriter_FieldsGetList($oDoc, $LOW_FIELD_TYPE_REG_ALL)
 	If @error Then _ERROR($oDoc, "Failed to search for Fields. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	_ArrayDisplay($avFields)
 
-	; Retrieve an array of Regular Fields again, this time only list $LOW_FIELD_TYPE_DATE_TIME and $LOW_FIELD_TYPE_COMBINED_CHAR type fields.
-	$avFields = _LOWriter_FieldsGetList($oDoc, BitOR($LOW_FIELD_TYPE_DATE_TIME, $LOW_FIELD_TYPE_COMBINED_CHAR))
+	; Retrieve an array of Regular Fields again, this time only list $LOW_FIELD_TYPE_REG_DATE_TIME and $LOW_FIELD_TYPE_REG_COMBINED_CHAR type fields.
+	$avFields = _LOWriter_FieldsGetList($oDoc, BitOR($LOW_FIELD_TYPE_REG_DATE_TIME, $LOW_FIELD_TYPE_REG_COMBINED_CHAR))
 	If @error Then _ERROR($oDoc, "Failed to search for Fields. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	_ArrayDisplay($avFields)

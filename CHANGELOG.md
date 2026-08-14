@@ -999,7 +999,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOC_COMMENT_ANIMATION_KIND_*
   - $LOC_COMMENT_CALLOUT_EXT_ALIGN_HORI_*
   - $LOC_COMMENT_CALLOUT_EXT_ALIGN_VERT_*
-  - $LOC_COMMENT_CALLOUT_EXT_*
+  - ~~$LOC_COMMENT_CALLOUT_EXT_*~~
+  - $LOC_COMMENT_CALLOUT_EXT_POS_*
   - $LOC_COMMENT_CALLOUT_STYLE_*
   - $LOC_COMMENT_LINE_ARROW_TYPE_*
   - $LOC_COMMENT_LINE_CAP_*
@@ -1343,6 +1344,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_DocIsModified
 - Renamed Component names to be singular, not plural for consistency.
   - `LibreOfficeCalc_Comments.au3` --> `LibreOfficeCalc_Comment.au3`
+- Renamed Comment Extension Constant $LOC_COMMENT_CALLOUT_EXT_* to $LOC_COMMENT_CALLOUT_EXT_POS_*
 
 #### Documented
 
@@ -2420,6 +2422,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - `_LOWriter_DirFrmtOverLine` --> `_LOWriter_DirFrmtCharOverLine`
   - `_LOWriter_DirFrmtStrikeOut` --> `_LOWriter_DirFrmtCharStrikeOut`
   - `_LOWriter_DirFrmtUnderLine` --> `_LOWriter_DirFrmtCharUnderLine`
+- Renamed Regular Fields Constants from $LOW_FIELD_TYPE_* to $LOW_FIELD_TYPE_REG_*
 
 #### Documented
 

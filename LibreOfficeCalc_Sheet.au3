@@ -1034,7 +1034,7 @@ EndFunc   ;==>_LOCalc_SheetName
 ; Description ...: Set or Retrieve settings for Column Header print settings.
 ; Syntax ........: _LOCalc_SheetPrintColumnsRepeat(ByRef $oSheet[, $oRange = Null[, $bRepeatColumns = Null]])
 ; Parameters ....: $oSheet              - A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
-;                  $oRange              - [optional] Default is Null. The Range containing the Column Headers. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
+;                  $oRange              - [optional] Default is Null. The Range containing the Column Headers. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOCalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $bRepeatColumns      - [optional] Default is Null. If True, the Column Titles are repeated on each printed page to the right.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -1133,7 +1133,7 @@ EndFunc   ;==>_LOCalc_SheetPrintColumnsRepeat
 ; Description ...: Set or Retrieve an array of Print Ranges for a Sheet.
 ; Syntax ........: _LOCalc_SheetPrintRangeModify(ByRef $oSheet[, $aoRange = Null])
 ; Parameters ....: $oSheet              - A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
-;                  $aoRange             - [optional] Default is Null. An Array of Ranges that are marked for printing. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
+;                  $aoRange             - [optional] Default is Null. An Array of Ranges that are marked for printing. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOCalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Print Range was successfully set.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning Array of Range Objects set to be printed. @Extended set to number of Ranges. See remarks.
@@ -1198,7 +1198,7 @@ EndFunc   ;==>_LOCalc_SheetPrintRangeModify
 ; Description ...: Set or Retrieve settings for Row Header print settings.
 ; Syntax ........: _LOCalc_SheetPrintRowsRepeat(ByRef $oSheet[, $oRange = Null[, $bRepeatRows = Null]])
 ; Parameters ....: $oSheet              - A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
-;                  $oRange              - [optional] Default is Null. The Range containing the Row Headers. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOcalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
+;                  $oRange              - [optional] Default is Null. The Range containing the Row Headers. A Cell Range or Cell object returned by a previous _LOCalc_RangeGetCellByName, _LOCalc_RangeGetCellByPosition, _LOCalc_RangeColumnGetObjByPosition, _LOCalc_RangeColumnGetObjByName, _LOCalc_RangeRowGetObjByPosition, _LOCalc_SheetGetObjByName, or _LOCalc_SheetActive function.
 ;                  $bRepeatRows         - [optional] Default is Null. If True, the Row Titles are repeated on each printed page to the bottom.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
