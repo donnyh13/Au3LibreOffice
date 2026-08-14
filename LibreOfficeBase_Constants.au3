@@ -15,7 +15,7 @@
 ; #CURRENT# =====================================================================================================================
 ; ===============================================================================================================================
 
-; Sleep Divisor $__LOCCONST_SLEEP_DIV
+; Sleep Divisor $__LOBCONST_SLEEP_DIV
 ; In applicable functions this is used for adjusting how frequent a sleep occurs in loops.
 ; For any number above 0 the number of times a loop has completed is divided by $__LOBCONST_SLEEP_DIV. If you find some functions cause momentary freeze ups, a recommended value is 15.
 ; Set to 0 for no pause in a loop.
