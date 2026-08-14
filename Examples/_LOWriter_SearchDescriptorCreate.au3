@@ -40,7 +40,7 @@ Func Example()
 		MsgBox($MB_OK + $MB_TOPMOST, Default, "The search was successful, but returned no results.")
 	EndIf
 
-	; Create a new search descriptor for searching with. Set Backward to False, and Match Case to True. I could  have just modified
+	; Create a new search descriptor for searching with. Set Backward to False, and Match Case to True. I could have just modified
 	; my first search descriptor using the modify function, but since I am demonstrating the Search Descriptor Creation function, I will just make a new one.
 	$oSrchDesc2 = _LOWriter_SearchDescriptorCreate($oDoc, False, True)
 	If @error Then _ERROR($oDoc, "Failed to create a search descriptor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)

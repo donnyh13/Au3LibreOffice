@@ -52,12 +52,6 @@ Func Example()
 	_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_JUMP_TO_END_OF_PAGE, 1, False)
 	If @error Then _ERROR($oDoc, "Error performing cursor Move. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "And finally I will go to a specific page.")
-
-	; Move the View Cursor to a specific page, page 3.
-	_LOWriter_CursorMove($oViewCursor, $LOW_VIEWCUR_JUMP_TO_PAGE, 3, False)
-	If @error Then _ERROR($oDoc, "Error performing cursor Move. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 
 	; Close the document.

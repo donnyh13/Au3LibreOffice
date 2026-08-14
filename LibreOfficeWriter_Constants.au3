@@ -6,7 +6,7 @@
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice Writer Constants for the LibreOffice UDF.
 ; AutoIt Version : v3.3.16.1
-; Description ...: Constants for various functions in the LibreOffice UDF.
+; Description ...: Constants for various Writer functions in the LibreOffice UDF.
 ; Author(s) .....: donnyh13, mLipok
 ; Dll ...........:
 ; Note ..........: Descriptions for some Constants are taken from the LibreOffice SDK API documentation.
@@ -214,19 +214,6 @@ Global Const _
 		$LOW_CURTYPE_PARAGRAPH = 4, _                           ; Object is a Paragraph Object.
 		$LOW_CURTYPE_TEXT_PORTION = 5                           ; Object is a Paragraph Text Portion Object.
 
-; Advanced Field Types
-Global Enum Step *2 _
-		$LOW_FIELD_ADV_TYPE_ALL = 1, _                          ; 1 All of the below listed Fields will be returned.
-		$LOW_FIELD_ADV_TYPE_BIBLIOGRAPHY, _                     ; 2 A Bibliography Field, found in Fields dialog, Database tab.
-		$LOW_FIELD_ADV_TYPE_DATABASE, _                         ; 4 A Database Field, found in Fields dialog, Database tab.
-		$LOW_FIELD_ADV_TYPE_DATABASE_SET_NUM, _                 ; 8 A Database Field, found in Fields dialog, Database tab.
-		$LOW_FIELD_ADV_TYPE_DATABASE_NAME, _                    ; 16 A Database Field, found in Fields dialog, Database tab.
-		$LOW_FIELD_ADV_TYPE_DATABASE_NEXT_SET, _                ; 32 A Database Field, found in Fields dialog, Database tab.
-		$LOW_FIELD_ADV_TYPE_DATABASE_NAME_OF_SET, _             ; 64 A Database Field, found in Fields dialog, Database tab.
-		$LOW_FIELD_ADV_TYPE_DDE, _                              ; 128 A DDE Field, found in Fields dialog, Variables tab.
-		$LOW_FIELD_ADV_TYPE_INPUT_USER, _                       ; 256 ?
-		$LOW_FIELD_ADV_TYPE_USER                                ; 512 A User Field, found in Fields dialog, Variables tab.
-
 ; Field Chapter Display Type
 Global Const _                                                  ; com.sun.star.text.ChapterFormat
 		$LOW_FIELD_CHAP_FRMT_NAME = 0, _                        ; The title of the chapter is displayed.
@@ -244,23 +231,6 @@ Global Enum _
 		$LOW_FIELD_COUNT_TYPE_PARAGRAPHS, _                     ; 4 Count field is a Paragraph Count type field.
 		$LOW_FIELD_COUNT_TYPE_TABLES, _                         ; 5 Count field is a Table Count type field.
 		$LOW_FIELD_COUNT_TYPE_WORDS                             ; 6 Count field is a Word Count type field.
-
-; Document Information Field Types
-Global Enum Step *2 _
-		$LOW_FIELD_DOCINFO_TYPE_ALL = 1, _                      ; 1 Returns an array of all field types listed below.
-		$LOW_FIELD_DOCINFO_TYPE_MOD_AUTH, _                     ; 2 A Modified By Author Field, found in Fields dialog, DocInformation Tab, Modified Type.
-		$LOW_FIELD_DOCINFO_TYPE_MOD_DATE_TIME, _                ; 4 A Modified Date/Time Field, found in Fields dialog, DocInformation Tab, Modified Type.
-		$LOW_FIELD_DOCINFO_TYPE_CREATE_AUTH, _                  ; 8 A Created By Author Field, found in Fields dialog, DocInformation Tab, Created Type.
-		$LOW_FIELD_DOCINFO_TYPE_CREATE_DATE_TIME, _             ; 16 A Created Date/Time Field, found in Fields dialog, DocInformation Tab, Created Type.
-		$LOW_FIELD_DOCINFO_TYPE_CUSTOM, _                       ; 32 A Custom Field, found in Fields dialog, DocInformation Tab.
-		$LOW_FIELD_DOCINFO_TYPE_COMMENTS, _                     ; 64 A Comments Field, found in Fields dialog, DocInformation Tab.
-		$LOW_FIELD_DOCINFO_TYPE_EDIT_TIME, _                    ; 128 A Total Editing Time Field, found in Fields dialog, DocInformation Tab.
-		$LOW_FIELD_DOCINFO_TYPE_KEYWORDS, _                     ; 256 A Keywords Field, found in Fields dialog, DocInformation Tab.
-		$LOW_FIELD_DOCINFO_TYPE_PRINT_AUTH, _                   ; 512 A Printed By Author Field, found in Fields dialog, DocInformation Tab, Last Printed Type.
-		$LOW_FIELD_DOCINFO_TYPE_PRINT_DATE_TIME, _              ; 1024 A Printed Date/Time Field, found in Fields dialog, DocInformation Tab, Last Printed Type.
-		$LOW_FIELD_DOCINFO_TYPE_REVISION, _                     ; 2048 A Revision Number Field, found in Fields dialog, DocInformation Tab.
-		$LOW_FIELD_DOCINFO_TYPE_SUBJECT, _                      ; 4096 A Subject Field, found in Fields dialog, DocInformation Tab.
-		$LOW_FIELD_DOCINFO_TYPE_TITLE                           ; 8192 A Title Field, found in Fields dialog, DocInformation Tab.
 
 ; File Name Field Type
 Global Const _                                                  ; com.sun.star.text.FilenameDisplayFormat
@@ -301,38 +271,68 @@ Global Const _                                                  ; com.sun.star.t
 		$LOW_FIELD_REF_USING_NUMBER_NO_CONT = 9, _              ; Inserts only the number of the heading or numbered paragraph.
 		$LOW_FIELD_REF_USING_NUMBER_CONT = 10                   ; Inserts the number of the heading or numbered paragraph, including all superior levels.
 
+; Advanced Field Types
+Global Enum Step *2 _
+		$LOW_FIELD_TYPE_ADV_BIBLIOGRAPHY = 1, _                 ; 1 A Bibliography Field, found in Fields dialog, Database tab.
+		$LOW_FIELD_TYPE_ADV_DATABASE, _                         ; 2 A Database Field, found in Fields dialog, Database tab.
+		$LOW_FIELD_TYPE_ADV_DATABASE_SET_NUM, _                 ; 4 A Database Field, found in Fields dialog, Database tab.
+		$LOW_FIELD_TYPE_ADV_DATABASE_NAME, _                    ; 8 A Database Field, found in Fields dialog, Database tab.
+		$LOW_FIELD_TYPE_ADV_DATABASE_NEXT_SET, _                ; 16 A Database Field, found in Fields dialog, Database tab.
+		$LOW_FIELD_TYPE_ADV_DATABASE_NAME_OF_SET, _             ; 32 A Database Field, found in Fields dialog, Database tab.
+		$LOW_FIELD_TYPE_ADV_DDE, _                              ; 64 A DDE Field, found in Fields dialog, Variables tab.
+		$LOW_FIELD_TYPE_ADV_INPUT_USER, _                       ; 128 ?
+		$LOW_FIELD_TYPE_ADV_USER, _                             ; 256 A User Field, found in Fields dialog, Variables tab.
+		$LOW_FIELD_TYPE_ADV_ALL = 511                           ; 511 All of the above listed Fields.
+
+; Document Information Field Types
+Global Enum Step *2 _
+		$LOW_FIELD_TYPE_DOCINFO_MOD_AUTH = 1, _                 ; 1 A Modified By Author Field, found in Fields dialog, DocInformation Tab, Modified Type.
+		$LOW_FIELD_TYPE_DOCINFO_MOD_DATE_TIME, _                ; 2 A Modified Date/Time Field, found in Fields dialog, DocInformation Tab, Modified Type.
+		$LOW_FIELD_TYPE_DOCINFO_CREATE_AUTH, _                  ; 4 A Created By Author Field, found in Fields dialog, DocInformation Tab, Created Type.
+		$LOW_FIELD_TYPE_DOCINFO_CREATE_DATE_TIME, _             ; 8 A Created Date/Time Field, found in Fields dialog, DocInformation Tab, Created Type.
+		$LOW_FIELD_TYPE_DOCINFO_CUSTOM, _                       ; 16 A Custom Field, found in Fields dialog, DocInformation Tab.
+		$LOW_FIELD_TYPE_DOCINFO_COMMENTS, _                     ; 32 A Comments Field, found in Fields dialog, DocInformation Tab.
+		$LOW_FIELD_TYPE_DOCINFO_EDIT_TIME, _                    ; 64 A Total Editing Time Field, found in Fields dialog, DocInformation Tab.
+		$LOW_FIELD_TYPE_DOCINFO_KEYWORDS, _                     ; 128 A Keywords Field, found in Fields dialog, DocInformation Tab.
+		$LOW_FIELD_TYPE_DOCINFO_PRINT_AUTH, _                   ; 256 A Printed By Author Field, found in Fields dialog, DocInformation Tab, Last Printed Type.
+		$LOW_FIELD_TYPE_DOCINFO_PRINT_DATE_TIME, _              ; 512 A Printed Date/Time Field, found in Fields dialog, DocInformation Tab, Last Printed Type.
+		$LOW_FIELD_TYPE_DOCINFO_REVISION, _                     ; 1024 A Revision Number Field, found in Fields dialog, DocInformation Tab.
+		$LOW_FIELD_TYPE_DOCINFO_SUBJECT, _                      ; 2048 A Subject Field, found in Fields dialog, DocInformation Tab.
+		$LOW_FIELD_TYPE_DOCINFO_TITLE, _                        ; 4096 A Title Field, found in Fields dialog, DocInformation Tab.
+		$LOW_FIELD_TYPE_DOCINFO_ALL = 8191                      ; 8191 All field types listed above.
+
 ; Regular Field Types
 Global Enum Step *2 _
-		$LOW_FIELD_TYPE_ALL = 1, _                              ; 1 Returns an array of all field types listed below.
-		$LOW_FIELD_TYPE_COMMENT, _                              ; 2 A Comment Field. As Found at Insert > Comment
-		$LOW_FIELD_TYPE_AUTHOR, _                               ; 4 A Author field, found in the Fields Dialog, Document tab.
-		$LOW_FIELD_TYPE_CHAPTER, _                              ; 8 A Chapter field, found in the Fields Dialog, Document tab.
-		$LOW_FIELD_TYPE_CHAR_COUNT, _                           ; 16 A Character Count field, found in the Fields Dialog, Document tab, Statistics Type.
-		$LOW_FIELD_TYPE_COMBINED_CHAR, _                        ; 32 A Combined Character field, found in the Fields Dialog, Functions tab.
-		$LOW_FIELD_TYPE_COND_TEXT, _                            ; 64 A Conditional Text field, found in the Fields Dialog, Functions tab.
-		$LOW_FIELD_TYPE_DATE_TIME, _                            ; 128 A Date/Time field, found in the Fields Dialog, Document tab, Date Type and Time Type..
-		$LOW_FIELD_TYPE_INPUT_LIST, _                           ; 256 A Input List field, found in the Fields Dialog, Functions tab.
-		$LOW_FIELD_TYPE_EMB_OBJ_COUNT, _                        ; 512 A Object Count field, found in the Fields Dialog, Document tab, Statistics Type.
-		$LOW_FIELD_TYPE_SENDER, _                               ; 1024 A Sender field, found in the Fields Dialog, Document tab.
-		$LOW_FIELD_TYPE_FILENAME, _                             ; 2048 A File Name field, found in the Fields Dialog, Document tab.
-		$LOW_FIELD_TYPE_SHOW_VAR, _                             ; 4096 A Show Variable field, found in the Fields Dialog, Variables tab.
-		$LOW_FIELD_TYPE_INSERT_REF, _                           ; 8192 A Insert Reference field, found in the Fields Dialog, Cross-References tab. [Includes: "Insert Reference", "Headings", "Numbered Paragraphs", "Drawing", "Bookmarks", "Footnotes", "Endnotes", etc.]
-		$LOW_FIELD_TYPE_IMAGE_COUNT, _                          ; 16384 A Image Count field, found in the Fields Dialog, Document tab, Statistics Type.
-		$LOW_FIELD_TYPE_HIDDEN_PAR, _                           ; 32768 A Hidden Paragraph field, found in the Fields Dialog, Functions tab.
-		$LOW_FIELD_TYPE_HIDDEN_TEXT, _                          ; 65536 A Hidden Text field, found in the Fields Dialog, Functions tab.
-		$LOW_FIELD_TYPE_INPUT, _                                ; 131072 A Input field, found in the Fields Dialog, Functions tab.
-		$LOW_FIELD_TYPE_PLACEHOLDER, _                          ; 262144 A Placeholder field, found in the Fields Dialog, Functions tab.
-		$LOW_FIELD_TYPE_MACRO, _                                ; 524288 A Execute Macro field, found in the Fields Dialog, Functions tab.
-		$LOW_FIELD_TYPE_PAGE_COUNT, _                           ; 1048576 A Page Count field, found in the Fields Dialog, Document tab, Statistics Type.
-		$LOW_FIELD_TYPE_PAGE_NUM, _                             ; 2097152 A Page Number (Unstyled) field, found in the Fields Dialog, Document tab.
-		$LOW_FIELD_TYPE_PAR_COUNT, _                            ; 4194304 A Paragraph Count field, found in the Fields Dialog, Document tab, Statistics Type..
-		$LOW_FIELD_TYPE_SHOW_PAGE_VAR, _                        ; 8388608 A Show Page Variable field, found in the Fields Dialog, Variables tab.
-		$LOW_FIELD_TYPE_SET_PAGE_VAR, _                         ; 16777216 A Set Page Variable field, found in the Fields Dialog, Variables tab.
-		$LOW_FIELD_TYPE_SCRIPT, _                               ; 33554432
-		$LOW_FIELD_TYPE_SET_VAR, _                              ; 67108864 A Set Variable field, found in the Fields Dialog, Variables tab..
-		$LOW_FIELD_TYPE_TABLE_COUNT, _                          ; 134217728 A Table Count field, found in the Fields Dialog, Document tab, Statistics Type.
-		$LOW_FIELD_TYPE_TEMPLATE_NAME, _                        ; 268435456 A Templates field, found in the Fields Dialog, Document tab.
-		$LOW_FIELD_TYPE_WORD_COUNT                              ; 536870912 A Word Count field, found in the Fields Dialog, Document tab, Statistics Type.
+		$LOW_FIELD_TYPE_REG_COMMENT = 1, _                      ; 1 A Comment Field. As Found at Insert > Comment
+		$LOW_FIELD_TYPE_REG_AUTHOR, _                           ; 2 A Author field, found in the Fields Dialog, Document tab.
+		$LOW_FIELD_TYPE_REG_CHAPTER, _                          ; 4 A Chapter field, found in the Fields Dialog, Document tab.
+		$LOW_FIELD_TYPE_REG_CHAR_COUNT, _                       ; 8 A Character Count field, found in the Fields Dialog, Document tab, Statistics Type.
+		$LOW_FIELD_TYPE_REG_COMBINED_CHAR, _                    ; 16 A Combined Character field, found in the Fields Dialog, Functions tab.
+		$LOW_FIELD_TYPE_REG_COND_TEXT, _                        ; 32 A Conditional Text field, found in the Fields Dialog, Functions tab.
+		$LOW_FIELD_TYPE_REG_DATE_TIME, _                        ; 64 A Date/Time field, found in the Fields Dialog, Document tab, Date Type and Time Type..
+		$LOW_FIELD_TYPE_REG_INPUT_LIST, _                       ; 128 A Input List field, found in the Fields Dialog, Functions tab.
+		$LOW_FIELD_TYPE_REG_EMB_OBJ_COUNT, _                    ; 256 A Object Count field, found in the Fields Dialog, Document tab, Statistics Type.
+		$LOW_FIELD_TYPE_REG_SENDER, _                           ; 512 A Sender field, found in the Fields Dialog, Document tab.
+		$LOW_FIELD_TYPE_REG_FILENAME, _                         ; 1024 A File Name field, found in the Fields Dialog, Document tab.
+		$LOW_FIELD_TYPE_REG_SHOW_VAR, _                         ; 2048 A Show Variable field, found in the Fields Dialog, Variables tab.
+		$LOW_FIELD_TYPE_REG_INSERT_REF, _                       ; 4096 A Insert Reference field, found in the Fields Dialog, Cross-References tab. [Includes: "Insert Reference", "Headings", "Numbered Paragraphs", "Drawing", "Bookmarks", "Footnotes", "Endnotes", etc.]
+		$LOW_FIELD_TYPE_REG_IMAGE_COUNT, _                      ; 8192 A Image Count field, found in the Fields Dialog, Document tab, Statistics Type.
+		$LOW_FIELD_TYPE_REG_HIDDEN_PAR, _                       ; 16384 A Hidden Paragraph field, found in the Fields Dialog, Functions tab.
+		$LOW_FIELD_TYPE_REG_HIDDEN_TEXT, _                      ; 32768 A Hidden Text field, found in the Fields Dialog, Functions tab.
+		$LOW_FIELD_TYPE_REG_INPUT, _                            ; 65536 A Input field, found in the Fields Dialog, Functions tab.
+		$LOW_FIELD_TYPE_REG_PLACEHOLDER, _                      ; 131072 A Placeholder field, found in the Fields Dialog, Functions tab.
+		$LOW_FIELD_TYPE_REG_MACRO, _                            ; 262144 A Execute Macro field, found in the Fields Dialog, Functions tab.
+		$LOW_FIELD_TYPE_REG_PAGE_COUNT, _                       ; 524288 A Page Count field, found in the Fields Dialog, Document tab, Statistics Type.
+		$LOW_FIELD_TYPE_REG_PAGE_NUM, _                         ; 1048576 A Page Number (Unstyled) field, found in the Fields Dialog, Document tab.
+		$LOW_FIELD_TYPE_REG_PAR_COUNT, _                        ; 2097152 A Paragraph Count field, found in the Fields Dialog, Document tab, Statistics Type..
+		$LOW_FIELD_TYPE_REG_SHOW_PAGE_VAR, _                    ; 4194304 A Show Page Variable field, found in the Fields Dialog, Variables tab.
+		$LOW_FIELD_TYPE_REG_SET_PAGE_VAR, _                     ; 8388608 A Set Page Variable field, found in the Fields Dialog, Variables tab.
+		$LOW_FIELD_TYPE_REG_SCRIPT, _                           ; 16777216
+		$LOW_FIELD_TYPE_REG_SET_VAR, _                          ; 33554432 A Set Variable field, found in the Fields Dialog, Variables tab..
+		$LOW_FIELD_TYPE_REG_TABLE_COUNT, _                      ; 67108864 A Table Count field, found in the Fields Dialog, Document tab, Statistics Type.
+		$LOW_FIELD_TYPE_REG_TEMPLATE_NAME, _                    ; 134217728 A Templates field, found in the Fields Dialog, Document tab.
+		$LOW_FIELD_TYPE_REG_WORD_COUNT, _                       ; 268435456 A Word Count field, found in the Fields Dialog, Document tab, Statistics Type.
+		$LOW_FIELD_TYPE_REG_ALL = 536870911                     ; 536870911 Returns an array of all field types listed below.
 
 ; User Data Field Type
 Global Const _                                                  ; com.sun.star.text.UserDataPart
@@ -1100,53 +1100,52 @@ Global Enum _
 
 ; LO TableCursor Movement Constants.
 Global Enum _
-		$LOW_TABLECUR_GO_LEFT, _                                ; 0 Move the cursor left n cells.
-		$LOW_TABLECUR_GO_RIGHT, _                               ; 1 Move the cursor right n cells.
-		$LOW_TABLECUR_GO_UP, _                                  ; 2 Move the cursor up n cells.
-		$LOW_TABLECUR_GO_DOWN, _                                ; 3 Move the cursor down n cells.
-		$LOW_TABLECUR_GOTO_START, _                             ; 4 Move the cursor to the first cell.
-		$LOW_TABLECUR_GOTO_END                                  ; 5 Move the cursor to the last cell.
+		$LOW_TABLECUR_GO_LEFT, _                                ; 0 [Count, Selecting] Move the cursor left n cells. @Extended set to count of moves performed.
+		$LOW_TABLECUR_GO_RIGHT, _                               ; 1 [Count, Selecting] Move the cursor right n cells. @Extended set to count of moves performed.
+		$LOW_TABLECUR_GO_UP, _                                  ; 2 [Count, Selecting] Move the cursor up n cells. @Extended set to count of moves performed.
+		$LOW_TABLECUR_GO_DOWN, _                                ; 3 [Count, Selecting] Move the cursor down n cells. @Extended set to count of moves performed.
+		$LOW_TABLECUR_GOTO_START, _                             ; 4 [Selecting] Move the cursor to the first cell. @Extended set to count of moves performed.
+		$LOW_TABLECUR_GOTO_END                                  ; 5 [Selecting] Move the cursor to the last cell. @Extended set to count of moves performed.
 
 ; LO TextCursor Movement Constants.
 Global Enum _
-		$LOW_TEXTCUR_COLLAPSE_TO_START, _                       ; 0 Collapses the current selection to the start of the selection.
-		$LOW_TEXTCUR_COLLAPSE_TO_END, _                         ; 1 Collapses the current selection the to end of the selection.
-		$LOW_TEXTCUR_GO_LEFT, _                                 ; 2 Move the cursor left by n characters.
-		$LOW_TEXTCUR_GO_RIGHT, _                                ; 3 Move the cursor right by n characters.
-		$LOW_TEXTCUR_GOTO_START, _                              ; 4 Move the cursor to the start of the text.
-		$LOW_TEXTCUR_GOTO_END, _                                ; 5 Move the cursor to the end of the text.
-		$LOW_TEXTCUR_GOTO_NEXT_WORD, _                          ; 6 Move to the start of the next word.
-		$LOW_TEXTCUR_GOTO_PREV_WORD, _                          ; 7 Move to the end of the previous word.
-		$LOW_TEXTCUR_GOTO_END_OF_WORD, _                        ; 8 Move to the end of the current word.
-		$LOW_TEXTCUR_GOTO_START_OF_WORD, _                      ; 9 Move to the start of the current word.
-		$LOW_TEXTCUR_GOTO_NEXT_SENTENCE, _                      ; 10 Move to the start of the next sentence.
-		$LOW_TEXTCUR_GOTO_PREV_SENTENCE, _                      ; 11 Move to the end of the previous sentence.
-		$LOW_TEXTCUR_GOTO_END_OF_SENTENCE, _                    ; 12 Move to the end of the current sentence.
-		$LOW_TEXTCUR_GOTO_START_OF_SENTENCE, _                  ; 13 Move to the start of the current sentence.
-		$LOW_TEXTCUR_GOTO_NEXT_PARAGRAPH, _                     ; 14 Move to the start of the next paragraph.
-		$LOW_TEXTCUR_GOTO_PREV_PARAGRAPH, _                     ; 15 Move to the End of the previous paragraph.
-		$LOW_TEXTCUR_GOTO_END_OF_PARAGRAPH, _                   ; 16 Move to the end of the current paragraph.
-		$LOW_TEXTCUR_GOTO_START_OF_PARAGRAPH                    ; 17 Move to the start of the current paragraph.
+		$LOW_TEXTCUR_COLLAPSE_TO_START, _                       ; 0 [None] Collapses the current selection to the start of the selection. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_COLLAPSE_TO_END, _                         ; 1 [None] Collapses the current selection the to end of the selection. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GO_LEFT, _                                 ; 2 [Count, Selecting] Move the cursor left by n characters. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GO_RIGHT, _                                ; 3 [Count, Selecting] Move the cursor right by n characters. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_START, _                              ; 4 [Selecting] Move the cursor to the start of the text. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_END, _                                ; 5 [Selecting] Move the cursor to the end of the text. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_NEXT_WORD, _                          ; 6 [Count, Selecting] Move to the start of the next word. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_PREV_WORD, _                          ; 7 [Count, Selecting] Move to the end of the previous word. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_END_OF_WORD, _                        ; 8 [Selecting] Move to the end of the current word. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_START_OF_WORD, _                      ; 9 [Selecting] Move to the start of the current word. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_NEXT_SENTENCE, _                      ; 10 [Count, Selecting] Move to the start of the next sentence. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_PREV_SENTENCE, _                      ; 11 [Count, Selecting] Move to the end of the previous sentence. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_END_OF_SENTENCE, _                    ; 12 [Selecting] Move to the end of the current sentence. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_START_OF_SENTENCE, _                  ; 13 [Selecting] Move to the start of the current sentence. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_NEXT_PARAGRAPH, _                     ; 14 [Count, Selecting] Move to the start of the next paragraph. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_PREV_PARAGRAPH, _                     ; 15 [Count, Selecting] Move to the End of the previous paragraph. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_END_OF_PARAGRAPH, _                   ; 16 [Selecting] Move to the end of the current paragraph. @Extended set to count of moves performed.
+		$LOW_TEXTCUR_GOTO_START_OF_PARAGRAPH                    ; 17 [Selecting] Move to the start of the current paragraph. @Extended set to count of moves performed.
 
 ; LO ViewCursor Movement Constants.
 Global Enum _
-		$LOW_VIEWCUR_GO_DOWN, _                                 ; 0 Move the cursor Down by n lines.
-		$LOW_VIEWCUR_GO_UP, _                                   ; 1 Move the cursor Up by n lines.
-		$LOW_VIEWCUR_GO_LEFT, _                                 ; 2 Move the cursor left by n characters.
-		$LOW_VIEWCUR_GO_RIGHT, _                                ; 3 Move the cursor right by n characters.
-		$LOW_VIEWCUR_GOTO_END_OF_LINE, _                        ; 4 Move the cursor to the end of the current line.
-		$LOW_VIEWCUR_GOTO_START_OF_LINE, _                      ; 5 Move the cursor to the start of the current line.
-		$LOW_VIEWCUR_JUMP_TO_FIRST_PAGE, _                      ; 6 Move the cursor to the first page.
-		$LOW_VIEWCUR_JUMP_TO_LAST_PAGE, _                       ; 7 Move the cursor to the Last page.
-		$LOW_VIEWCUR_JUMP_TO_PAGE, _                            ; 8 Jump to a specified page.
-		$LOW_VIEWCUR_JUMP_TO_NEXT_PAGE, _                       ; 9 Move the cursor to the Next page.
-		$LOW_VIEWCUR_JUMP_TO_PREV_PAGE, _                       ; 10 Move the cursor to the previous page.
-		$LOW_VIEWCUR_JUMP_TO_END_OF_PAGE, _                     ; 11 Move the cursor to the end of the current page.
-		$LOW_VIEWCUR_JUMP_TO_START_OF_PAGE, _                   ; 12 Move the cursor to the start of the current page.
-		$LOW_VIEWCUR_SCREEN_DOWN, _                             ; 13 Scroll the view forward by one visible page.
-		$LOW_VIEWCUR_SCREEN_UP, _                               ; 14 Scroll the view back by one visible page.
-		$LOW_VIEWCUR_GOTO_START, _                              ; 15 Move the cursor to the start of the document or Table.
-		$LOW_VIEWCUR_GOTO_END                                   ; 16 Move the cursor to the end of the document or Table.
+		$LOW_VIEWCUR_GO_DOWN, _                                 ; 0 [Count, Selecting] Move the cursor Down by n lines. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_GO_UP, _                                   ; 1 [Count, Selecting] Move the cursor Up by n lines. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_GO_LEFT, _                                 ; 2 [Count, Selecting] Move the cursor left by n characters. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_GO_RIGHT, _                                ; 3 [Count, Selecting] Move the cursor right by n characters. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_GOTO_END_OF_LINE, _                        ; 4 [Selecting] Move the cursor to the end of the current line. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_GOTO_START_OF_LINE, _                      ; 5 [Selecting] Move the cursor to the start of the current line. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_JUMP_TO_FIRST_PAGE, _                      ; 6 [None] Move the cursor to the first page. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_JUMP_TO_LAST_PAGE, _                       ; 7 [None] Move the cursor to the Last page. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_JUMP_TO_NEXT_PAGE, _                       ; 8 [Count] Move the cursor to the Next page. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_JUMP_TO_PREV_PAGE, _                       ; 9 [Count] Move the cursor to the previous page. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_JUMP_TO_END_OF_PAGE, _                     ; 10 [None] Move the cursor to the end of the current page. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_JUMP_TO_START_OF_PAGE, _                   ; 11 [None] Move the cursor to the start of the current page. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_SCREEN_DOWN, _                             ; 12 [Count] Scroll the view forward by one visible page. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_SCREEN_UP, _                               ; 13 [Count] Scroll the view back by one visible page. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_GOTO_START, _                              ; 14 [Selecting] Move the cursor to the start of the document or Table. @Extended set to count of moves performed.
+		$LOW_VIEWCUR_GOTO_END                                   ; 15 [Selecting] Move the cursor to the end of the document or Table. @Extended set to count of moves performed.
 
 ; Wrap Type
 Global Const _                                                  ; com.sun.star.text.WrapTextMode

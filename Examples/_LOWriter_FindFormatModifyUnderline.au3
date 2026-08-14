@@ -34,7 +34,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the selected text's underline style to $LOW_CHAR_UNDERLINE_WAVE
-	_LOWriter_DirFrmtUnderLine($oViewCursor, $LOW_CHAR_UNDERLINE_WAVE)
+	_LOWriter_DirFrmtCharUnderLine($oViewCursor, $LOW_CHAR_UNDERLINE_WAVE)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Move the cursor right 10 spaces, without selecting
@@ -46,7 +46,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the selected text's underline style to $LOW_CHAR_UNDERLINE_BOLD_DASH
-	_LOWriter_DirFrmtUnderLine($oViewCursor, $LOW_CHAR_UNDERLINE_BOLD_DASH)
+	_LOWriter_DirFrmtCharUnderLine($oViewCursor, $LOW_CHAR_UNDERLINE_BOLD_DASH)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a search descriptor for searching with. Set Backward, Match Case, Whole word, Regular Expression, and Search Styles to false, and

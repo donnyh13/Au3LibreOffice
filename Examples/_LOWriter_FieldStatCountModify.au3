@@ -27,7 +27,7 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press Ok to modify the Count Field settings.")
 
-	; Modify the Count Field settings. Set the Count type to $LOW_FIELD_COUNT_TYPE_PARAGRAPHS, set Numbering format to  $LOW_NUM_STYLE_ARABIC
+	; Modify the Count Field settings. Set the Count type to $LOW_FIELD_COUNT_TYPE_PARAGRAPHS, set Numbering format to $LOW_NUM_STYLE_ARABIC
 	_LOWriter_FieldStatCountModify($oDoc, $oField, $LOW_FIELD_COUNT_TYPE_PARAGRAPHS, $LOW_NUM_STYLE_ARABIC)
 	If @error Then _ERROR($oDoc, "Failed to modify field. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

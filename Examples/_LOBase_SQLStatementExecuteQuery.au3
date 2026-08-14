@@ -57,7 +57,7 @@ Func Example()
 		$sUsers &= _LOBase_SQLResultRowRead($oResult, $LOB_RESULT_ROW_READ_STRING, 1) & @CRLF
 		If @error Then Return _ERROR($oDoc, $oTableDoc, "Failed to read Result Row. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-		; See if  this is the last result.
+		; See if this is the last result.
 	Until _LOBase_SQLResultCursorQuery($oResult, $LOB_RESULT_CURSOR_QUERY_IS_LAST)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Following users have post counts less than 12,000" & @CRLF & $sUsers & @CRLF & _

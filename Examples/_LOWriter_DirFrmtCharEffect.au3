@@ -33,7 +33,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the selected text's Font effects to $LOW_CHAR_RELIEF_EMBOSSED relief type.
-	_LOWriter_DirFrmtCharEffect($oViewCursor, $LOW_CHAR_RELIEF_EMBOSSED)
+	_LOWriter_DirFrmtCharEffect($oViewCursor, Null, Null, $LOW_CHAR_RELIEF_EMBOSSED)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -41,15 +41,15 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The selected text's current Font Effects settings are as follows: " & @CRLF & _
-			"Relief style (See UDF Constants): " & $avSettings[0] & @CRLF & _
-			"Case style (See UDF Constants): " & $avSettings[1] & @CRLF & _
-			"Are the words hidden? True/False: " & $avSettings[2] & @CRLF & _
+			"Case style (See UDF Constants): " & $avSettings[0] & @CRLF & _
+			"Are the words hidden? True/False: " & $avSettings[1] & @CRLF & _
+			"Relief style (See UDF Constants): " & $avSettings[2] & @CRLF & _
 			"Are the words outlined? True/False: " & $avSettings[3] & @CRLF & _
 			"Do the words have a shadow? True/False: " & $avSettings[4] & @CRLF & @CRLF & _
 			"I will now set Case to $LOW_CHAR_CASEMAP_SM_CAPS, and Relief to $LOW_CHAR_RELIEF_NONE.")
 
-	; Set the selected text's Font effects to $LOW_CHAR_RELIEF_NONE relief type, Case to $LOW_CHAR_CASEMAP_SM_CAPS
-	_LOWriter_DirFrmtCharEffect($oViewCursor, $LOW_CHAR_RELIEF_NONE, $LOW_CHAR_CASEMAP_SM_CAPS)
+	; Set the selected text's Font effects to Case to $LOW_CHAR_CASEMAP_SM_CAPS, $LOW_CHAR_RELIEF_NONE relief type
+	_LOWriter_DirFrmtCharEffect($oViewCursor, $LOW_CHAR_CASEMAP_SM_CAPS, Null, $LOW_CHAR_RELIEF_NONE)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -57,9 +57,9 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The selected text's current Font Effects settings are as follows: " & @CRLF & _
-			"Relief style (See UDF Constants): " & $avSettings[0] & @CRLF & _
-			"Case style (See UDF Constants): " & $avSettings[1] & @CRLF & _
-			"Are the words hidden? True/False: " & $avSettings[2] & @CRLF & _
+			"Case style (See UDF Constants): " & $avSettings[0] & @CRLF & _
+			"Are the words hidden? True/False: " & $avSettings[1] & @CRLF & _
+			"Relief style (See UDF Constants): " & $avSettings[2] & @CRLF & _
 			"Are the words outlined? True/False: " & $avSettings[3] & @CRLF & _
 			"Do the words have a shadow? True/False: " & $avSettings[4] & @CRLF & @CRLF & _
 			"Press ok to remove direct formatting.")

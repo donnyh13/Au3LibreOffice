@@ -23,12 +23,13 @@
 ; ===============================================================================================================================
 
 ; #CURRENT# =====================================================================================================================
+; _LOWriter_CursorCreateTextCursor
 ; _LOWriter_CursorGetDataType
 ; _LOWriter_CursorGetStatus
 ; _LOWriter_CursorGetString
 ; _LOWriter_CursorGetType
 ; _LOWriter_CursorGoToRange
-; _LOWriter_CursorHyperlinkInsert
+; _LOWriter_CursorHyperlink
 ; _LOWriter_CursorInsertControlChar
 ; _LOWriter_CursorInsertString
 ; _LOWriter_CursorMove
@@ -37,30 +38,99 @@
 ; _LOWriter_CursorParObjDelete
 ; _LOWriter_CursorParObjPaste
 ; _LOWriter_CursorParObjSectionsGet
-; _LOWriter_CursorTextCursorCreate
+; _LOWriter_CursorViewCursorCurrPage
 ; _LOWriter_CursorViewCursorGetObj
 ; _LOWriter_CursorViewCursorGetPosition
 ; ===============================================================================================================================
 
 ; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_CursorCreateTextCursor
+; Description ...: Create a TextCursor Object for future Textcursor related functional use.
+; Syntax ........: _LOWriter_CursorCreateTextCursor(ByRef $oDoc[, $bCreateAtEnd = True[, $bCreateAtViewCursor = False]])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or_LOWriter_DocCreate function.
+;                  $bCreateAtEnd        - [optional] Default is True. If True, creates the new cursor at the end of the Document. Else cursor is created at the beginning.
+;                  $bCreateAtViewCursor - [optional] Default is False. If True, create the Text cursor at the document's View Cursor. See Remarks
+; Return values .: Success: Object.
+;                  @Error: 0, @Extended: ?, Return: Object = Success, Cursor object was returned. @Extended can be on of the constants, $LOW_CURDATA_* as defined in LibreOfficeWriter_Constants.au3 indicating the current created cursor is in that type of data.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $bCreateAtEnd not a Boolean.
+;                  @Error: 1, @Extended: 3 = $bCreateAtViewCursor not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bCreateAtEnd and $bCreateAtViewCursor both called with True, set either one to False.
+;                  --Initialization Errors--
+;                  @Error: 2, @Extended: 1 = Failed to create Text Cursor Object.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve ViewCursor Object.
+;                  @Error: 3, @Extended: 2 = Failed to Retrieve Cursor Data Type.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: The cursor Created by this function in a text document, is used for inserting text, reading text, etc.
+;                  If you call $bCreateAtEnd with False, the new cursor is created at the beginning of the document, True creates the cursor at the very end of the document.
+;                  Calling $bCreateAtViewCursor with True will create a Textcursor at the current ViewCursor position.
+;                  There are two types of cursors in Word documents. The one you see, called the "ViewCursor", and one you do not see, called a "TextCursor". A "ViewCursor" is the blinking cursor you see when you are editing a Word document, there is only one per document. A "TextCursor" on the other hand, is an invisible cursor used for inserting text etc., into a Writer document. You can have multiple "TextCursors" per document.
+;                  The ViewCursor knows how the data is displayed, but doesn’t know about the data itself. TextCursors however, know a lot about the data but very little about how it is displayed. For example, ViewCursors do not know about words or paragraphs, and TextCursors do not know about lines, screens, or pages.
+; Related .......: _LOWriter_CursorMove, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorGoToRange
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_CursorCreateTextCursor(ByRef $oDoc, $bCreateAtEnd = True, $bCreateAtViewCursor = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oCursor, $oViewCursor
+	Local $iCursorType = 0
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsBool($bCreateAtEnd) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsBool($bCreateAtViewCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If ($bCreateAtEnd = True) And ($bCreateAtViewCursor = True) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+	If $bCreateAtViewCursor Then
+		$oViewCursor = $oDoc.CurrentController.getViewCursor()
+		If Not IsObj($oViewCursor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		$iCursorType = __LOWriter_Internal_CursorGetDataType($oDoc, $oViewCursor)
+		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		$oCursor = $oViewCursor.Text.createTextCursorByRange($oViewCursor)
+		If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	Else
+		$oCursor = $oDoc.getText.createTextCursor()
+		If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+		$iCursorType = $LOW_CURDATA_BODY_TEXT
+
+		If ($bCreateAtEnd = True) Then
+			$oCursor.gotoEnd(False)
+
+		Else
+			$oCursor.gotoStart(False)
+		EndIf
+	EndIf
+
+	Return SetError($__LO_STATUS_SUCCESS, $iCursorType, $oCursor)
+EndFunc   ;==>_LOWriter_CursorCreateTextCursor
+
+; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_CursorGetDataType
 ; Description ...: Determines what type of Text data a Cursor is currently in.
 ; Syntax ........: _LOWriter_CursorGetType(ByRef $oDoc, ByRef $oCursor)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation Or retrieval functions.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oCursor             - A Cursor Object returned from any Cursor Object creation Or retrieval functions.
 ; Return values .: Success: Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Return value will be one of the constants, $LOW_CURDATA_* as defined in LibreOfficeWriter_Constants.au3.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Cursor Data Type.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success. Return value will be one of the constants, $LOW_CURDATA_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 3, @Extended: 1 = Error retrieving Cursor Data Type.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Returns what type of data a cursor is currently located in, such as a TextTable, Footnote etc.
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_CursorGetStatus, _LOWriter_CursorGetType, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -80,24 +150,23 @@ EndFunc   ;==>_LOWriter_CursorGetDataType
 ; Name ..........: _LOWriter_CursorGetStatus
 ; Description ...: Retrieve the current status of a cursor.
 ; Syntax ........: _LOWriter_CursorGetStatus(ByRef $oCursor, $iFlag)
-; Parameters ....: $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions.
-;                  $iFlag               - an integer value. The Requested status to return, see constants, $LOW_CURSOR_STAT_* as defined in LibreOfficeWriter_Constants.au3. See remarks.
+; Parameters ....: $oCursor             - A Cursor Object returned from any Cursor Object creation or retrieval functions.
+;                  $iFlag               - The Requested status to return, see constants, $LOW_CURSOR_STAT_* as defined in LibreOfficeWriter_Constants.au3. See remarks.
 ; Return values .: Success: Variable.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: Variable = Success. The requested status was successfully returned. See called flag for expected return type.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iFlag not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = Flag called in $iFlag not available for "Text" cursor.
-;                  @Error 1 @Extended 4 Return 0 = Flag called in $iFlag not available for "Table" cursor.
-;                  @Error 1 @Extended 5 Return 0 = Flag called in $iFlag not available for "View" cursor.
-;                  @Error 1 @Extended 6 Return 0 = $oCursor unknown cursor type.
+;                  @Error: 1, @Extended: 1 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 2 = $iFlag not an Integer.
+;                  @Error: 1, @Extended: 3 = Flag called in $iFlag not available for "Text" cursor.
+;                  @Error: 1, @Extended: 4 = Flag called in $iFlag not available for "Table" cursor.
+;                  @Error: 1, @Extended: 5 = Flag called in $iFlag not available for "View" cursor.
+;                  @Error: 1, @Extended: 6 = $oCursor unknown cursor type.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Cursor Type.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving Status for Text Cursor.
-;                  @Error 3 @Extended 3 Return 0 = Error retrieving Status for Table Cursor.
-;                  @Error 3 @Extended 4 Return 0 = Error retrieving Status for View Cursor.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Variable = Success. The requested status was successfully returned. See called flag for expected return type.
+;                  @Error: 3, @Extended: 1 = Error retrieving Cursor Type.
+;                  @Error: 3, @Extended: 2 = Error retrieving Status for Text Cursor.
+;                  @Error: 3, @Extended: 3 = Error retrieving Status for Table Cursor.
+;                  @Error: 3, @Extended: 4 = Error retrieving Status for View Cursor.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Only certain flags work for certain types of cursors:
@@ -116,7 +185,7 @@ EndFunc   ;==>_LOWriter_CursorGetDataType
 ;                  - $LOW_CURSOR_STAT_GET_PAGE,
 ;                  # Table Cursor Status Flag Constants:
 ;                  - $LOW_CURSOR_STAT_GET_RANGE_NAME
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorGetType
+; Related .......: _LOWriter_CursorGetType, _LOWriter_CursorGetDataType, _LOWriter_CursorMove, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -180,23 +249,22 @@ EndFunc   ;==>_LOWriter_CursorGetStatus
 ; Name ..........: _LOWriter_CursorGetString
 ; Description ...: Retrieve the string of text currently selected or contained in a paragraph object.
 ; Syntax ........: _LOWriter_CursorGetString(ByRef $oObj)
-; Parameters ....: $oObj                - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions with Data selected, or a Paragraph Object returned from _LOWriter_CursorParObjCreateList function.
+; Parameters ....: $oObj                - A Cursor Object returned from any Cursor Object creation or retrieval functions with Data selected, or a Paragraph Object returned from _LOWriter_CursorParObjCreateList function.
 ; Return values .: Success: String
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: String = Success. The selected text in String format.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oObj not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oObj doesn't support Paragraph Properties service.
-;                  @Error 1 @Extended 3 Return 0 = $oObj is a TableCursor. Can only use View Cursor or Text Cursor.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $oObj doesn't support Paragraph Properties service.
+;                  @Error: 1, @Extended: 3 = $oObj is a TableCursor. Can only use View Cursor or Text Cursor.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Cursor type.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve String.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return String = Success. The selected text in String format.
+;                  @Error: 3, @Extended: 1 = Error retrieving Cursor type.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve String.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: LibreOffice documentation states that when used in Libre Basic, GetString is limited to 64kb's in size. I do not know if the same limitation applies to any outside use of GetString (such as through Autoit).
+; Remarks .......: LibreOffice documentation states that when used in LibreOffice Basic, GetString is limited to 64kb's in size. I do not know if the same limitation applies to any outside use of GetString (such as through Autoit).
 ;                  If there are multiple selections, the returned value will be an empty string ("").
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_CursorInsertString, _LOWriter_CursorMove, _LOWriter_CursorGetStatus, _LOWriter_CursorHyperlink, _LOWriter_CursorParObjCreateList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -225,19 +293,18 @@ EndFunc   ;==>_LOWriter_CursorGetString
 ; Name ..........: _LOWriter_CursorGetType
 ; Description ...: Determine what type a Cursor Object is, such as a TableCursor, Text Cursor or a ViewCursor.
 ; Syntax ........: _LOWriter_CursorGetType(ByRef $oCursor)
-; Parameters ....: $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation Or retrieval functions.
+; Parameters ....: $oCursor             - A Cursor Object returned from any Cursor Object creation Or retrieval functions.
 ; Return values .: Success: Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Return value will be one of the Constants, $LOW_CURTYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 1 = $oCursor not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Cursor Type.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success. Return value will be one of the Constants, $LOW_CURTYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 3, @Extended: 1 = Error retrieving Cursor Type.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Will also work for Paragraph object and paragraph section objects.
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet
+; Related .......: _LOWriter_CursorGetDataType, _LOWriter_CursorMove, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -256,26 +323,25 @@ EndFunc   ;==>_LOWriter_CursorGetType
 ; Name ..........: _LOWriter_CursorGoToRange
 ; Description ...: Moves a Text or View cursor to another View or Text Cursor Position or Range.
 ; Syntax ........: _LOWriter_CursorGoToRange(ByRef $oCursor, ByRef $oRange[, $bSelect = False])
-; Parameters ....: $oCursor             - [in/out] an object. an object. A Text or View Cursor Object returned from any Cursor Object creation or retrieval functions.
-;                  $oRange              - [in/out] an object. an object. A Text or View Cursor Object returned from any Cursor Object creation or retrieval functions to move $oCursor to.
-;                  $bSelect             - [optional] a boolean value. Default is False. If True, the selection is expanded or created from original cursor location to Range location.
+; Parameters ....: $oCursor             - A Text or View Cursor Object returned from any Cursor Object creation or retrieval functions.
+;                  $oRange              - A Text or View Cursor Object returned from any Cursor Object creation or retrieval functions to move $oCursor to.
+;                  $bSelect             - [optional] Default is False. If True, the selection is expanded or created from original cursor location to Range location.
 ; Return values .: Success: 1
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Cursor successfully moved to $oRange position.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oRange not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $bSelect not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $oCursor not a Text or View Cursor.
-;                  @Error 1 @Extended 5 Return 0 = $oRange is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 1 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 2 = $oRange not an Object.
+;                  @Error: 1, @Extended: 3 = $bSelect not a Boolean.
+;                  @Error: 1, @Extended: 4 = $oCursor not a Text or View Cursor.
+;                  @Error: 1, @Extended: 5 = $oRange is a Table Cursor, and is not supported.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error determining $oCursor cursor type.
-;                  @Error 3 @Extended 2 Return 0 = Error determining $oRange cursor type.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Cursor successfully moved to $oRange position.
+;                  @Error: 3, @Extended: 1 = Error determining $oCursor cursor type.
+;                  @Error: 3, @Extended: 2 = Error determining $oRange cursor type.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If the Cursor being used as a range has anything selected, the selection will be selected in the Cursor called in $oCursor also.
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjSectionsGet, _LOWriter_CursorMove
+; Related .......: _LOWriter_CursorMove, _LOWriter_CursorViewCursorCurrPage, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -303,120 +369,94 @@ Func _LOWriter_CursorGoToRange(ByRef $oCursor, ByRef $oRange, $bSelect = False)
 EndFunc   ;==>_LOWriter_CursorGoToRange
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_CursorHyperlinkInsert
-; Description ...: Insert a hyperlink into the specified document and a cursor location or other.
-; Syntax ........: _LOWriter_CursorHyperlinkInsert(ByRef $oDoc, ByRef $oCursor, $sLinkText, $sLinkAddress[, $bInsertAtViewCursor = False[, $bOverwrite = False]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation or retrieval functions. See Remarks.
-;                  $sLinkText           - a string value. Link text you want displayed (Insert the URL here too if you want the link inserted raw.)
-;                  $sLinkAddress        - a string value. A URL.
-;                  $bInsertAtViewCursor - [optional] a boolean value. Default is False. If True, inserts the hyperlink at the ViewCursor's position. See Remarks.
-;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, overwrites any data selected by the $oCursor.
-; Return values .: Success: 1.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+; Name ..........: _LOWriter_CursorHyperlink
+; Description ...: Set or Retrieve hyperlink settings at the cursor location.
+; Syntax ........: _LOWriter_CursorHyperlink(ByRef $oCursor[, $sLinkAddress = Null[, $sLinkName = Null]])
+; Parameters ....: $oCursor             - A Cursor Object returned from any Cursor Object creation or retrieval functions.
+;                  $sLinkAddress        - [optional] Default is Null. The hyperlink address. See remarks.
+;                  $sLinkName           - [optional] Default is Null. The hyperlink name.
+; Return values .: Success: 1 or Array.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCursor not an Object, and is not called with Default keyword.
-;                  @Error 1 @Extended 3 Return 0 = $sLinkText not a String.
-;                  @Error 1 @Extended 4 Return 0 = $sLinkAddress not a String.
-;                  @Error 1 @Extended 5 Return 0 = $bInsertAtViewCursor not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $oCursor is called with an Object, and $bInsertAtViewCursor is called with True. Change $oCursor to Default or call $bInsertAtViewCursor with False.
-;                  @Error 1 @Extended 7 Return 0 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 8 Return 0 = $oCursor is a TableCursor, and is not supported.
-;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create Cursor Object.
-;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Cursor type.
-;                  @Error 3 @Extended 2 Return 0 = Current ViewCursor is in unknown data type or failed detecting what data type.
-;                  @Error 3 @Extended 3 Return 0 = Failed to Retrieve Text Object.
-;                  --Success--
-;                  @Error 0 @Extended 1 Return 1 = Success, hyperlink was successfully inserted.
+;                  @Error: 1, @Extended: 1 = $oCursor not an Object, and is not called with Default keyword.
+;                  @Error: 1, @Extended: 2 = $oCursor is a TableCursor, and is not supported.
+;                  @Error: 1, @Extended: 3 = $sLinkAddress not a String.
+;                  @Error: 1, @Extended: 4 = $sLinkName not a String.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $sLinkAddress
+;                  |                               2 = Error setting $sLinkName
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: You may call this function with an already existing cursor object, which will place the Link at the cursor's current position. You can also set $oCursor to Default keyword, and set $bInsertAtViewCursor to True. This will insert the link at the current ViewCursor position. Or you can set $oCursor to Default, and leave $bInsertAtViewCursor undeclared which will insert the Link at the very end of the document.
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorInsertString
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+;                  If no text is selected when setting or retrieving hyperlink settings, the whole word where the cursor is located is used.
+;                  $sLinkAddress can be a website URL (www.abc.com), or a mail to link ("mailto:abc@email.ca?subject=Testing123". It can also be a path to a file ("C:\Users\xyz.docx").
+;                  When setting $sLinkAddress to a computer path, it is recommended to convert it to URL notation using _LO_PathConvert. If you do not, a property setting error may be triggered because LibreOffice converts the path itself.
+;                  When retrieving the current value for $sLinkAddress, the value will be directly returned from LibreOffice, if the current value is a path, it will be in URL format and will need to be converted using _LO_PathConvert.
+; Related .......: _LOWriter_CursorInsertString, _LOWriter_CursorInsertControlChar, _LOWriter_CursorGetString, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_CursorHyperlinkInsert(ByRef $oDoc, ByRef $oCursor, $sLinkText, $sLinkAddress, $bInsertAtViewCursor = False, $bOverwrite = False)
+Func _LOWriter_CursorHyperlink(ByRef $oCursor, $sLinkAddress = Null, $sLinkName = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oText, $oTextCursor
-	Local $iCursorType = 0
+	Local $asLink[2]
+	Local $iError = 0
 
-	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsObj($oCursor) And ($oCursor <> Default) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not IsString($sLinkText) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If Not IsString($sLinkAddress) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If Not IsBool($bInsertAtViewCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-	If IsObj($oCursor) And $bInsertAtViewCursor Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-	If Not IsBool($bOverwrite) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If $oCursor.supportsService("com.sun.star.text.TextTableCursor") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0) ; Can't set hyperlink settings for a Table Cursor.
 
-	If IsObj($oCursor) Or $bInsertAtViewCursor Then
-		$iCursorType = (IsObj($oCursor)) ? (__LOWriter_Internal_CursorGetType($oCursor)) : (0)
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-		If ($iCursorType = $LOW_CURTYPE_TABLE_CURSOR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
+	If __LO_VarsAreNull($sLinkAddress, $sLinkName) Then
+		__LO_ArrayFill($asLink, $oCursor.HyperLinkURL(), $oCursor.HyperLinkName())
 
-		If $bInsertAtViewCursor Or ($iCursorType = $LOW_CURTYPE_VIEW_CURSOR) Then
-			$oTextCursor = _LOWriter_CursorTextCursorCreate($oDoc, False, True) ; create new Text cursor at ViewCursor
-			If Not IsObj($oTextCursor) Or @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-		EndIf
-
-		$oTextCursor = ($iCursorType = $LOW_CURTYPE_TEXT_CURSOR) ? ($oCursor) : ($oTextCursor) ; If already was a TextCursor transfer to $oTextCursor
-
-		$oText = __LOWriter_CursorGetText($oDoc, $oTextCursor)
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-		If Not IsObj($oText) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
-	Else
-		$oText = $oDoc.getText
-		If Not IsObj($oText) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
-		$oTextCursor = $oText.createTextCursor()
-		If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-
-		$oTextCursor.gotoEnd(False)
+		Return SetError($__LO_STATUS_SUCCESS, 1, $asLink)
 	EndIf
 
-	$oText.insertString($oTextCursor, $sLinkText, $bOverwrite)
+	If ($sLinkAddress <> Null) Then
+		If Not IsString($sLinkAddress) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-	With $oTextCursor
-		.goLeft(StringLen($sLinkText), False)
-		.goRight(StringLen($sLinkText), True)
-		.HyperLinkURL = $sLinkAddress
-		.collapseToEnd()
-		.goRight(1, False)
-	EndWith
+		$oCursor.HyperLinkURL = $sLinkAddress
+		$iError = ($oCursor.HyperLinkURL() = $sLinkAddress) ? ($iError) : (BitOR($iError, 1))
+	EndIf
 
-	Return SetError($__LO_STATUS_SUCCESS, 1, $oTextCursor)
-EndFunc   ;==>_LOWriter_CursorHyperlinkInsert
+	If ($sLinkName <> Null) Then
+		If Not IsString($sLinkName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+		$oCursor.HyperLinkName = $sLinkName
+		$iError = ($oCursor.HyperLinkName() = $sLinkName) ? ($iError) : (BitOR($iError, 2))
+	EndIf
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LOWriter_CursorHyperlink
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_CursorInsertControlChar
 ; Description ...: Insert a control character at the cursor position.
 ; Syntax ........: _LOWriter_CursorInsertControlChar(ByRef $oDoc, ByRef $oCursor, $iConChar[, $bOverwrite = False])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oCursor             - [in/out] an object. A Text or View Cursor Object returned from any Cursor Object creation or retrieval functions.
-;                  $iConChar            - an integer value (0-5). The control character to insert. See constants, $LOW_CON_CHAR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, and the cursor object has text selected, it is overwritten, else if False, the character is inserted to the left of the selection.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oCursor             - A Text or View Cursor Object returned from any Cursor Object creation or retrieval functions.
+;                  $iConChar            - (0-5) The control character to insert. See constants, $LOW_CON_CHAR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bOverwrite          - [optional] Default is False. If True, and the cursor object has text selected, it is overwritten, else if False, the character is inserted to the left of the selection.
 ; Return values .: Success: 1
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Control Character was successfully inserted.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $iConChar not an Integer, less than 0 or greater than 5. See Constants, $LOW_CON_CHAR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $oCursor is a TableCursor. Can only use View Cursor or Text Cursor.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $iConChar not an Integer, less than 0 or greater than 5. See Constants, $LOW_CON_CHAR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $oCursor is a TableCursor. Can only use View Cursor or Text Cursor.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Cursor type.
-;                  @Error 3 @Extended 2 Return 0 = Error creating Text Cursor.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Control Character was successfully inserted.
+;                  @Error: 3, @Extended: 1 = Error retrieving Cursor type.
+;                  @Error: 3, @Extended: 2 = Error creating Text Cursor.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_CursorInsertString
+; Related .......: _LOWriter_CursorInsertString, _LOWriter_CursorGetString, _LOWriter_CursorHyperlink, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -436,7 +476,7 @@ Func _LOWriter_CursorInsertControlChar(ByRef $oDoc, ByRef $oCursor, $iConChar, $
 	If @error > 0 Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 	If ($iCursorType = $LOW_CURTYPE_TABLE_CURSOR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
-	If ($iCursorType = $LOW_CURTYPE_VIEW_CURSOR) Then $oTextCursor = _LOWriter_CursorTextCursorCreate($oDoc, False, True)
+	If ($iCursorType = $LOW_CURTYPE_VIEW_CURSOR) Then $oTextCursor = _LOWriter_CursorCreateTextCursor($oDoc, False, True)
 
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
@@ -449,27 +489,26 @@ EndFunc   ;==>_LOWriter_CursorInsertControlChar
 ; Name ..........: _LOWriter_CursorInsertString
 ; Description ...: Insert a string at a cursor position.
 ; Syntax ........: _LOWriter_CursorInsertString(ByRef $oDoc, ByRef $oCursor, $sString[, $bOverwrite = False])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oCursor             - [in/out] an object. A Text or View Cursor Object returned from any Cursor Object creation or retrieval functions.
-;                  $sString             - a string value. A String to insert.
-;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, and the cursor object has text selected, the selection is overwritten, else if False, the string is inserted to the left of the selection. If there are multiple selections, the string is inserted to the left of the last selection, and none are overwritten.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oCursor             - A Text or View Cursor Object returned from any Cursor Object creation or retrieval functions.
+;                  $sString             - A String to insert.
+;                  $bOverwrite          - [optional] Default is False. If True, and the cursor object has text selected, the selection is overwritten, else if False, the string is inserted to the left of the selection. If there are multiple selections, the string is inserted to the left of the last selection, and none are overwritten.
 ; Return values .: Success: 1
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. String was successfully inserted.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $sString not a string..
-;                  @Error 1 @Extended 4 Return 0 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $oCursor is a TableCursor. Can only use View Cursor or Text Cursor.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $sString not a string..
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $oCursor is a TableCursor. Can only use View Cursor or Text Cursor.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Cursor type.
-;                  @Error 3 @Extended 2 Return 0 = Error creating Text Cursor.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. String was successfully inserted.
+;                  @Error: 3, @Extended: 1 = Error retrieving Cursor type.
+;                  @Error: 3, @Extended: 2 = Error creating Text Cursor.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To prevent accidental and unwanted newlines, @CRLF is automatically replaced with @CR to match LibreOffice's newline style.
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LOWriter_CursorGetString, _LOWriter_CursorHyperlink, _LOWriter_CursorInsertControlChar, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -489,7 +528,7 @@ Func _LOWriter_CursorInsertString(ByRef $oDoc, ByRef $oCursor, $sString, $bOverw
 	If @error > 0 Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 	If ($iCursorType = $LOW_CURTYPE_TABLE_CURSOR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
-	If ($iCursorType = $LOW_CURTYPE_VIEW_CURSOR) Then $oTextCursor = _LOWriter_CursorTextCursorCreate($oDoc, False, True)
+	If ($iCursorType = $LOW_CURTYPE_VIEW_CURSOR) Then $oTextCursor = _LOWriter_CursorCreateTextCursor($oDoc, False, True)
 
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
@@ -505,134 +544,192 @@ EndFunc   ;==>_LOWriter_CursorInsertString
 ; Name ..........: _LOWriter_CursorMove
 ; Description ...: Move a Cursor object in a document. Also for creating/Expanding selections.
 ; Syntax ........: _LOWriter_CursorMove(ByRef $oCursor, $iMove[, $iCount = 1[, $bSelect = False]])
-; Parameters ....: $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation Or retrieval functions.
-;                  $iMove               - an integer value. The movement command. See remarks and Constants, $LOW_VIEWCUR_, $LOW_TEXTCUR_, $LOW_TABLECUR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iCount              - [optional] an integer value. Default is 1. Number of movements to make. See remarks.
-;                  $bSelect             - [optional] a boolean value. Default is False. Whether to select data during this cursor movement. See remarks.
+; Parameters ....: $oCursor             - A Cursor Object returned from any Cursor Object creation Or retrieval functions.
+;                  $iMove               - The movement command. See remarks and Constants, $LOW_VIEWCUR_*, $LOW_TEXTCUR_*, $LOW_TABLECUR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iCount              - [optional] Default is 1. Number of movements to make. See remarks.
+;                  $bSelect             - [optional] Default is False. Whether to select data during this cursor movement. See remarks.
 ; Return values .: Success: Boolean.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: ?, Return: Boolean = Success, Cursor movement was processed successfully. Returning True if the full count of movements were successful, else False if none or only partially successful. @Extended set to an Integer. See description for particular constant used.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iMove not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = $iMove mismatch with Cursor type. See Cursor Type/Move Type Constants, $LOW_VIEWCUR_, $LOW_TEXTCUR_, $LOW_TABLECUR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iCount not an Integer or is a negative.
-;                  @Error 1 @Extended 5 Return 0 = $bSelect not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 2 = $iMove not an Integer.
+;                  @Error: 1, @Extended: 3 = $iCount not an Integer or is a negative.
+;                  @Error: 1, @Extended: 4 = $bSelect not a Boolean.
+;                  @Error: 1, @Extended: 5 = $iMove less than 0 or greater than last cursor movement for cursor type. See Cursor Type/Move Type Constants, $LOW_VIEWCUR_*, $LOW_TEXTCUR_*, $LOW_TABLECUR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error determining cursor type.
-;                  @Error 3 @Extended 2 Return 0 = Error processing cursor move.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Current Page number.
-;                  @Error 3 @Extended 4 Return 0 = $oCursor Object unknown cursor type.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Boolean = Success, Cursor object movement was processed successfully. Returning True if the full count of movements were successful, else False if none or only partially successful. @Extended set to number of successful movements. Or Page Number for "gotoPage" command. See Remarks
+;                  @Error: 3, @Extended: 1 = Error determining cursor type.
+;                  @Error: 3, @Extended: 2 = Error processing cursor move.
+;                  @Error: 3, @Extended: 3 = $oCursor Object unknown cursor type.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: $iMove may be called with any of the following constants depending on the Cursor type you are intending to move.
-;                  Only some movements accept movement amounts (such as "goRight" 2) etc. Also only some accept creating/ extending a selection of text/ data. They will be specified below.
-;                  To Clear /Unselect a current selection, you can input a move such as "goRight", 0, False.
-;                  #Cursor Movement Constants which accept Number of Moves and Selecting:
-;                  + ViewCursor
-;                  - $LOW_VIEWCUR_GO_DOWN,
-;                  - $LOW_VIEWCUR_GO_UP,
-;                  - $LOW_VIEWCUR_GO_LEFT,
-;                  - $LOW_VIEWCUR_GO_RIGHT,
-;                  + TextCursor
-;                  - $LOW_TEXTCUR_GO_LEFT,
-;                  - $LOW_TEXTCUR_GO_RIGHT,
-;                  - $LOW_TEXTCUR_GOTO_NEXT_WORD,
-;                  - $LOW_TEXTCUR_GOTO_PREV_WORD,
-;                  - $LOW_TEXTCUR_GOTO_NEXT_SENTENCE,
-;                  - $LOW_TEXTCUR_GOTO_PREV_SENTENCE,
-;                  - $LOW_TEXTCUR_GOTO_NEXT_PARAGRAPH,
-;                  - $LOW_TEXTCUR_GOTO_PREV_PARAGRAPH,
-;                  + TableCursor
-;                  - $LOW_TABLECUR_GO_LEFT,
-;                  - $LOW_TABLECUR_GO_RIGHT,
-;                  - $LOW_TABLECUR_GO_UP,
-;                  - $LOW_TABLECUR_GO_DOWN,
-;                  # Cursor Movements which accept Number of Moves Only:
-;                  + ViewCursor
-;                  - $LOW_VIEWCUR_JUMP_TO_NEXT_PAGE,
-;                  - $LOW_VIEWCUR_JUMP_TO_PREV_PAGE,
-;                  - $LOW_VIEWCUR_SCREEN_DOWN,
-;                  - $LOW_VIEWCUR_SCREEN_UP,
-;                  # Cursor Movements which accept Selecting Only:
-;                  + ViewCursor
-;                  - $LOW_VIEWCUR_GOTO_END_OF_LINE,
-;                  - $LOW_VIEWCUR_GOTO_START_OF_LINE,
-;                  - $LOW_VIEWCUR_GOTO_START,
-;                  - $LOW_VIEWCUR_GOTO_END,
-;                  + TextCursor
-;                  - $LOW_TEXTCUR_GOTO_START,
-;                  - $LOW_TEXTCUR_GOTO_END,
-;                  - $LOW_TEXTCUR_GOTO_END_OF_WORD,
-;                  - $LOW_TEXTCUR_GOTO_START_OF_WORD,
-;                  - $LOW_TEXTCUR_GOTO_END_OF_SENTENCE,
-;                  - $LOW_TEXTCUR_GOTO_START_OF_SENTENCE,
-;                  - $LOW_TEXTCUR_GOTO_END_OF_PARAGRAPH,
-;                  - $LOW_TEXTCUR_GOTO_START_OF_PARAGRAPH,
-;                  + TableCursor
-;                  - $LOW_TABLECUR_GOTO_START,
-;                  - $LOW_TABLECUR_GOTO_END,
-;                  # Cursor Movements which accept nothing and are done once per call:
-;                  + ViewCursor
-;                  - $LOW_VIEWCUR_JUMP_TO_FIRST_PAGE,
-;                  - $LOW_VIEWCUR_JUMP_TO_LAST_PAGE,
-;                  - $LOW_VIEWCUR_JUMP_TO_END_OF_PAGE,
-;                  - $LOW_VIEWCUR_JUMP_TO_START_OF_PAGE,
-;                  + TextCursor
-;                  - $LOW_TEXTCUR_COLLAPSE_TO_START,
-;                  - $LOW_TEXTCUR_COLLAPSE_TO_END,
-;                  # Misc. Cursor Movements:
-;                  + ViewCursor
-;                  - $LOW_VIEWCUR_JUMP_TO_PAGE
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor, _LOWriter_TableCreateCursor, _LOWriter_CursorGoToRange
+; Remarks .......: $iMove may be called with any of the constants $LOW_VIEWCUR_*, $LOW_TEXTCUR_*, $LOW_TABLECUR_* as defined in LibreOfficeWriter_Constants.au3, depending on the Cursor type called in $oCursor.
+;                  Only some movements accept movement amounts (such as "goRight" 2) etc. Also only some accept creating/ extending a selection, these are specified in the description for each constant.
+;                  If a Constant says only [Count], then that action can only be repeated several times per call, but a Selection can not be created or expanded during the move.
+;                  If a Constant says only [Selecting], then that action can only be repeated a maximum of 1 time per call, and a Selection can be created or expanded during the move.
+;                  If a Constant says [Count, Selecting], then that action can be repeated several times per call, and a Selection can be created or expanded during the move.
+;                  If a Constant says [None], then that action can not be done once per call, and a Selection can not be created or expanded during the move.
+;                  To Clear/Unselect a current selection, you can call a move such as "goRight", 0, False.
+; Related .......: _LOWriter_CursorGoToRange, _LOWriter_CursorGetDataType, _LOWriter_CursorGetStatus, _LOWriter_CursorGetType, _LOWriter_CursorGoToRange, _LOWriter_CursorViewCursorGetPosition, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
 Func _LOWriter_CursorMove(ByRef $oCursor, $iMove, $iCount = 1, $bSelect = False)
-	Local $iCursorType
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iCursorType, $iExtended = 0
 	Local $bMoved = False
+	Local $asTableMoves[6], $asTextMoves[18], $asViewMoves[16]
 
 	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsInt($iMove) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iCount, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsBool($bSelect) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 	$iCursorType = __LOWriter_Internal_CursorGetType($oCursor)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Switch $iCursorType
 		Case $LOW_CURTYPE_TEXT_CURSOR
-			$bMoved = __LOWriter_TextCursorMove($oCursor, $iMove, $iCount, $bSelect)
+			If Not __LO_IntIsBetween($iMove, 0, UBound($asTextMoves) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
-			Return SetError(@error, @extended, $bMoved)
+			$asTextMoves[$LOW_TEXTCUR_COLLAPSE_TO_START] = "collapseToStart"
+			$asTextMoves[$LOW_TEXTCUR_COLLAPSE_TO_END] = "collapseToEnd"
+			$asTextMoves[$LOW_TEXTCUR_GO_LEFT] = "goLeft"
+			$asTextMoves[$LOW_TEXTCUR_GO_RIGHT] = "goRight"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_START] = "gotoStart"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_END] = "gotoEnd"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_NEXT_WORD] = "gotoNextWord"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_PREV_WORD] = "gotoPreviousWord"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_END_OF_WORD] = "gotoEndOfWord"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_START_OF_WORD] = "gotoStartOfWord"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_NEXT_SENTENCE] = "gotoNextSentence"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_PREV_SENTENCE] = "gotoPreviousSentence"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_END_OF_SENTENCE] = "gotoEndOfSentence"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_START_OF_SENTENCE] = "gotoStartOfSentence"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_NEXT_PARAGRAPH] = "gotoNextParagraph"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_PREV_PARAGRAPH] = "gotoPreviousParagraph"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_END_OF_PARAGRAPH] = "gotoEndOfParagraph"
+			$asTextMoves[$LOW_TEXTCUR_GOTO_START_OF_PARAGRAPH] = "gotoStartOfParagraph"
+
+			Switch $iMove
+				Case $LOW_TEXTCUR_GO_LEFT, $LOW_TEXTCUR_GO_RIGHT
+					$bMoved = Execute("$oCursor." & $asTextMoves[$iMove] & "(" & $iCount & "," & $bSelect & ")")
+					$iExtended = ($bMoved) ? ($iCount) : (0)
+
+				Case $LOW_TEXTCUR_GOTO_NEXT_WORD, $LOW_TEXTCUR_GOTO_PREV_WORD, $LOW_TEXTCUR_GOTO_NEXT_SENTENCE, $LOW_TEXTCUR_GOTO_PREV_SENTENCE, $LOW_TEXTCUR_GOTO_NEXT_PARAGRAPH, _
+						$LOW_TEXTCUR_GOTO_PREV_PARAGRAPH
+
+					Do
+						$bMoved = Execute("$oCursor." & $asTextMoves[$iMove] & "(" & $bSelect & ")")
+						$iExtended += ($bMoved) ? (1) : (0)
+						Sleep((IsInt($iExtended / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+					Until ($iExtended >= $iCount) Or ($bMoved = False)
+
+				Case $LOW_TEXTCUR_GOTO_START, $LOW_TEXTCUR_GOTO_END, $LOW_TEXTCUR_GOTO_END_OF_WORD, $LOW_TEXTCUR_GOTO_START_OF_WORD, $LOW_TEXTCUR_GOTO_END_OF_SENTENCE, _
+						$LOW_TEXTCUR_GOTO_START_OF_SENTENCE, $LOW_TEXTCUR_GOTO_END_OF_PARAGRAPH, $LOW_TEXTCUR_GOTO_START_OF_PARAGRAPH
+					$bMoved = Execute("$oCursor." & $asTextMoves[$iMove] & "(" & $bSelect & ")")
+					$iExtended = ($bMoved) ? (1) : (0)
+
+				Case $LOW_TEXTCUR_COLLAPSE_TO_START, $LOW_TEXTCUR_COLLAPSE_TO_END
+					$bMoved = Execute("$oCursor." & $asTextMoves[$iMove] & "()")
+					$iExtended = ($bMoved) ? (1) : (0)
+
+				Case Else
+
+					Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+			EndSwitch
 
 		Case $LOW_CURTYPE_TABLE_CURSOR
-			$bMoved = __LOWriter_TableCursorMove($oCursor, $iMove, $iCount, $bSelect)
+			If Not __LO_IntIsBetween($iMove, 0, UBound($asTableMoves) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
-			Return SetError(@error, @extended, $bMoved)
+			$asTableMoves[$LOW_TABLECUR_GO_LEFT] = "goLeft"
+			$asTableMoves[$LOW_TABLECUR_GO_RIGHT] = "goRight"
+			$asTableMoves[$LOW_TABLECUR_GO_UP] = "goUp"
+			$asTableMoves[$LOW_TABLECUR_GO_DOWN] = "goDown"
+			$asTableMoves[$LOW_TABLECUR_GOTO_START] = "gotoStart"
+			$asTableMoves[$LOW_TABLECUR_GOTO_END] = "gotoEnd"
+
+			Switch $iMove
+				Case $LOW_TABLECUR_GO_LEFT, $LOW_TABLECUR_GO_RIGHT, $LOW_TABLECUR_GO_UP, $LOW_TABLECUR_GO_DOWN
+					$bMoved = Execute("$oCursor." & $asTableMoves[$iMove] & "(" & $iCount & "," & $bSelect & ")")
+					$iExtended = ($bMoved) ? ($iCount) : (0)
+
+				Case $LOW_TABLECUR_GOTO_START, $LOW_TABLECUR_GOTO_END
+					$bMoved = Execute("$oCursor." & $asTableMoves[$iMove] & "(" & $bSelect & ")")
+					$iExtended = ($bMoved) ? (1) : (0)
+
+				Case Else
+
+					Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+			EndSwitch
 
 		Case $LOW_CURTYPE_VIEW_CURSOR
-			$bMoved = __LOWriter_ViewCursorMove($oCursor, $iMove, $iCount, $bSelect)
+			If Not __LO_IntIsBetween($iMove, 0, UBound($asViewMoves) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
-			Return SetError(@error, @extended, $bMoved)
+			$asViewMoves[$LOW_VIEWCUR_GO_DOWN] = "goDown"
+			$asViewMoves[$LOW_VIEWCUR_GO_UP] = "goUp"
+			$asViewMoves[$LOW_VIEWCUR_GO_LEFT] = "goLeft"
+			$asViewMoves[$LOW_VIEWCUR_GO_RIGHT] = "goRight"
+			$asViewMoves[$LOW_VIEWCUR_GOTO_END_OF_LINE] = "gotoEndOfLine"
+			$asViewMoves[$LOW_VIEWCUR_GOTO_START_OF_LINE] = "gotoStartOfLine"
+			$asViewMoves[$LOW_VIEWCUR_JUMP_TO_FIRST_PAGE] = "jumpToFirstPage"
+			$asViewMoves[$LOW_VIEWCUR_JUMP_TO_LAST_PAGE] = "jumpToLastPage"
+			$asViewMoves[$LOW_VIEWCUR_JUMP_TO_NEXT_PAGE] = "jumpToNextPage"
+			$asViewMoves[$LOW_VIEWCUR_JUMP_TO_PREV_PAGE] = "jumpToPreviousPage"
+			$asViewMoves[$LOW_VIEWCUR_JUMP_TO_END_OF_PAGE] = "jumpToEndOfPage"
+			$asViewMoves[$LOW_VIEWCUR_JUMP_TO_START_OF_PAGE] = "jumpToStartOfPage"
+			$asViewMoves[$LOW_VIEWCUR_SCREEN_DOWN] = "screenDown"
+			$asViewMoves[$LOW_VIEWCUR_SCREEN_UP] = "screenUp"
+			$asViewMoves[$LOW_VIEWCUR_GOTO_START] = "gotoStart"
+			$asViewMoves[$LOW_VIEWCUR_GOTO_END] = "gotoEnd"
+
+			Switch $iMove
+				Case $LOW_VIEWCUR_GO_DOWN, $LOW_VIEWCUR_GO_UP, $LOW_VIEWCUR_GO_LEFT, $LOW_VIEWCUR_GO_RIGHT
+					$bMoved = Execute("$oCursor." & $asViewMoves[$iMove] & "(" & $iCount & "," & $bSelect & ")")
+					$iExtended = ($bMoved) ? ($iCount) : (0)
+
+				Case $LOW_VIEWCUR_GOTO_END_OF_LINE, $LOW_VIEWCUR_GOTO_START_OF_LINE, $LOW_VIEWCUR_GOTO_START, $LOW_VIEWCUR_GOTO_END
+					$bMoved = Execute("$oCursor." & $asViewMoves[$iMove] & "(" & $bSelect & ")")
+					$iExtended = ($bMoved) ? (1) : (0)
+
+				Case $LOW_VIEWCUR_JUMP_TO_NEXT_PAGE, $LOW_VIEWCUR_JUMP_TO_PREV_PAGE, $LOW_VIEWCUR_SCREEN_DOWN, $LOW_VIEWCUR_SCREEN_UP
+					Do
+						$bMoved = Execute("$oCursor." & $asViewMoves[$iMove] & "()")
+						$iExtended += ($bMoved) ? (1) : (0)
+						Sleep((IsInt($iExtended / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+					Until ($iExtended >= $iCount) Or ($bMoved = False)
+
+				Case $LOW_VIEWCUR_JUMP_TO_FIRST_PAGE, $LOW_VIEWCUR_JUMP_TO_LAST_PAGE, $LOW_VIEWCUR_JUMP_TO_END_OF_PAGE, $LOW_VIEWCUR_JUMP_TO_START_OF_PAGE
+					$bMoved = Execute("$oCursor." & $asViewMoves[$iMove] & "()")
+					$iExtended = ($bMoved) ? (1) : (0)
+
+				Case Else
+
+					Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+			EndSwitch
 
 		Case Else
 
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0) ; unknown cursor type.
+			Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; unknown cursor type.
 	EndSwitch
+
+	Return SetError($__LO_STATUS_SUCCESS, $iExtended, $bMoved)
 EndFunc   ;==>_LOWriter_CursorMove
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_CursorParObjCopy
 ; Description ...: "Copies" data selected by the ViewCursor, returning an Object for use in inserting later.
 ; Syntax ........: _LOWriter_CursorParObjCopy(ByRef $oDoc)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ; Return values .: Success: Object
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Data was successfully copied, returning an Object for use in _LOWriter_CursorParObjPaste.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to Copy Selected Data, make sure Data is selected using the ViewCursor.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Data was successfully copied, returning an Object for use in _LOWriter_CursorParObjPaste.
+;                  @Error: 3, @Extended: 1 = Failed to Copy Selected Data, make sure Data is selected using the ViewCursor.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Data you desire to be copied MUST be selected with the ViewCursor, see _LOWriter_DocSelection.
@@ -662,17 +759,16 @@ EndFunc   ;==>_LOWriter_CursorParObjCopy
 ; Name ..........: _LOWriter_CursorParObjCreateList
 ; Description ...: Return Objects for every paragraph contained in a specific section of a document.
 ; Syntax ........: _LOWriter_CursorParObjCreateList(ByRef $oCursor[, $bTableCheck = False])
-; Parameters ....: $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation Or retrieval functions. See Remarks
-;                  $bTableCheck         - [optional] a boolean value. Default is False. If True, returned array will be 2 dimensional, with the second column indicating if the paragraph object is a Table (True) or not (False).
+; Parameters ....: $oCursor             - A Cursor Object returned from any Cursor Object creation Or retrieval functions. See Remarks
+;                  $bTableCheck         - [optional] Default is False. If True, returned array will be 2 dimensional, with the second column indicating if the paragraph object is a Table (True) or not (False).
 ; Return values .: Success: 1D or 2D Array
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning an Array of Paragraph Objects, @Extended is set to the number of results.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bTableCheck not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 2 = $bTableCheck not a Boolean.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create Enumeration of Paragraphs.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. Returning an Array of Paragraph Objects, @Extended is set to the number of results.
+;                  @Error: 2, @Extended: 1 = Failed to create Enumeration of Paragraphs.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $oCursor can be either a ViewCursor or a TextCursor, the paragraphs are enumerated for the area the cursor is currently within, for example, the ViewCursor is currently in a Table, the enumeration of paragraphs would be for the Cell the cursor was presently in.
@@ -680,7 +776,7 @@ EndFunc   ;==>_LOWriter_CursorParObjCopy
 ;                  The different possible areas are: Text Body, Table Cell, Header, Footer, Footnote, Endnote, Frame.
 ;                  Returns an Array of objects for Direct Formatting paragraphs in a document, or for copying and inserting etc.
 ;                  Table Objects returned from this function can be used as a regular Table Object to modify the Table with.
-; Related .......: _LOWriter_CursorParObjSectionsGet, _LOWriter_DocSelection, _LOWriter_CursorParObjDelete
+; Related .......: _LOWriter_CursorParObjSectionsGet, _LOWriter_DocSelection, _LOWriter_CursorParObjDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -730,19 +826,18 @@ EndFunc   ;==>_LOWriter_CursorParObjCreateList
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_CursorParObjDelete
-; Description ...: Delete a Paragraph Object returned from _LOWriter_CursorParObjCreateList. See Remarks.
+; Description ...: Delete a Paragraph Object returned from _LOWriter_CursorParObjCreateList.
 ; Syntax ........: _LOWriter_CursorParObjDelete(ByRef $oParObj)
-; Parameters ....: $oParObj             - [in/out] an object. A Paragraph Object returned by _LOWriter_CursorParObjCreateList.
+; Parameters ....: $oParObj             - A Paragraph Object returned by _LOWriter_CursorParObjCreateList.
 ; Return values .: Success: Integer
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Paragraph was successfully deleted.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oParObj not an Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Paragraph was successfully deleted.
+;                  @Error: 1, @Extended: 1 = $oParObj not an Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: You cannot delete the last paragraph contained in a Text area, it will cause a COM error.
-; Related .......: _LOWriter_CursorParObjCreateList
+; Related .......: _LOWriter_CursorParObjCreateList, _LOWriter_CursorParObjCopy
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -766,15 +861,14 @@ EndFunc   ;==>_LOWriter_CursorParObjDelete
 ; Name ..........: _LOWriter_CursorParObjPaste
 ; Description ...: Inserts a ParObjCopy Object at the current ViewCursor location.
 ; Syntax ........: _LOWriter_CursorParObjPaste(ByRef $oDoc, ByRef $oParObj)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oParObj             - [in/out] an object. A Object returned from _LOWriter_CursorParObjCopy to insert.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oParObj             - A Object returned from _LOWriter_CursorParObjCopy to insert.
 ; Return values .: Success: Integer
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Data was successfully inserted at the ViewCursor location.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oParObj not an Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Data was successfully inserted at the ViewCursor location.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oParObj not an Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -796,18 +890,17 @@ EndFunc   ;==>_LOWriter_CursorParObjPaste
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_CursorParObjSectionsGet
-; Description ...: Break a Paragraph Object into individual Sections for Direct Formatting etc. See Remarks.
+; Description ...: Break a Paragraph Object into individual Sections for Direct Formatting etc.
 ; Syntax ........: _LOWriter_CursorParObjSectionsGet(ByRef $oParagraph)
-; Parameters ....: $oParagraph          - [in/out] an object. A Paragraph Object returned from _LOWriter_CursorParObjCreateList function. Make sure it's not a Table!
+; Parameters ....: $oParagraph          - A Paragraph Object returned from _LOWriter_CursorParObjCreateList function. Make sure it's not a Table!
 ; Return values .: Success: Array
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: Array = Success. A two column array. See remarks.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oParagraph is not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oParagraph does not support Paragraph service. Not a paragraph Object.
+;                  @Error: 1, @Extended: 1 = $oParagraph is not an Object.
+;                  @Error: 1, @Extended: 2 = $oParagraph does not support Paragraph service. Not a paragraph Object.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error enumerating Paragraph sections.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Array = Success. A two column array. See remarks.
+;                  @Error: 2, @Extended: 1 = Error enumerating Paragraph sections.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: A Paragraph in a Document may have more than one section if it contains direct formatting, foot/endnote anchors etc.
@@ -860,104 +953,70 @@ Func _LOWriter_CursorParObjSectionsGet(ByRef $oParagraph)
 EndFunc   ;==>_LOWriter_CursorParObjSectionsGet
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOWriter_CursorTextCursorCreate
-; Description ...: Create a TextCursor Object for future Textcursor related functional use.
-; Syntax ........: _LOWriter_CursorTextCursorCreate(ByRef $oDoc[, $bCreateAtEnd = True[, $bCreateAtViewCursor = False]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or_LOWriter_DocCreate function.
-;                  $bCreateAtEnd        - [optional] a boolean value. Default is True. If True, creates the new cursor at the end of the Document. Else cursor is created at the beginning.
-;                  $bCreateAtViewCursor - [optional] a boolean value. Default is False. If True, create the Text cursor at the document's View Cursor. See Remarks
-; Return values .: Success: Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+; Name ..........: _LOWriter_CursorViewCursorCurrPage
+; Description ...: Move the Cursor to, or Retrieve the current page containing the View Cursor.
+; Syntax ........: _LOWriter_CursorViewCursorCurrPage(ByRef $oCursor[, $iPageNum = Null])
+; Parameters ....: $oCursor             - A View Cursor Object returned by _LOWriter_CursorViewCursorGetObj function.
+;                  $iPageNum            - [optional] Default is Null. The page number of the document to move the cursor to.
+; Return values .: Success: 1.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Cursor was successfully moved to the requested page.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bCreateAtEnd not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $bCreateAtViewCursor not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bCreateAtEnd and $bCreateAtViewCursor both called with True, set either one to False.
-;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create Text Cursor Object.
+;                  @Error: 1, @Extended: 1 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oCursor not a View Cursor.
+;                  @Error: 1, @Extended: 3 = $iPageNum not an Integer or less than 0.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve ViewCursor Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to Retrieve Text Object.
-;                  @Error 3 @Extended 3 Return 0 = Current ViewCursor is in unknown data type or failed detecting what data type.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Object = Success, Cursor object was returned. @Extended can be on of the constants, $LOW_CURDATA_* as defined in LibreOfficeWriter_Constants.au3 indicating the current created cursor is in that type of data.
+;                  @Error: 3, @Extended: 1 = Error determining cursor type.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Current Page number.
+;                  @Error: 3, @Extended: 3 = Failed to move cursor to requested page.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: The cursor Created by this function in a text document, is used for inserting text, reading text, etc.
-;                  If you call $bCreateAtEnd with False, the new cursor is created at the beginning of the document, True creates the cursor at the very end of the document.
-;                  Calling $bCreateAtViewCursor with True will create a Textcursor at the current ViewCursor position.
-;                  There are two types of cursors in Word documents. The one you see, called the "ViewCursor", and one you do not see, called a "TextCursor". A "ViewCursor" is the blinking cursor you see when you are editing a Word document, there is only one per document. A "TextCursor" on the other hand, is an invisible cursor used for inserting text etc., into a Writer document. You can have multiple "TextCursors" per document.
-;                  The ViewCursor knows how the data is displayed, but doesn’t know about the data itself. TextCursors however, know a lot about the data but very little about how it is displayed. For example, ViewCursors do not know about words or paragraphs, and TextCursors do not know about lines, screens, or pages.
-; Related .......: _LOWriter_CursorMove
+; Remarks .......:
+; Related .......: _LOWriter_CursorMove, _LOWriter_CursorViewCursorGetPosition, _LOWriter_CursorViewCursorGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOWriter_CursorTextCursorCreate(ByRef $oDoc, $bCreateAtEnd = True, $bCreateAtViewCursor = False)
+Func _LOWriter_CursorViewCursorCurrPage(ByRef $oCursor, $iPageNum = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oCursor, $oText, $oViewCursor
-	Local $iCursorType = 0
+	Local $iCurrPage
 
-	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsBool($bCreateAtEnd) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not IsBool($bCreateAtViewCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If ($bCreateAtEnd = True) And ($bCreateAtViewCursor = True) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If (__LOWriter_Internal_CursorGetType($oCursor) <> $LOW_CURTYPE_VIEW_CURSOR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If $bCreateAtViewCursor Then
-		$oViewCursor = $oDoc.CurrentController.getViewCursor()
-		If Not IsObj($oViewCursor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	If __LO_VarsAreNull($iPageNum) Then
+		$iCurrPage = $oCursor.getPage()
+		If Not IsInt($iCurrPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-		$oText = __LOWriter_CursorGetText($oDoc, $oViewCursor)
-		$iCursorType = @extended
-		If @error Or Not IsObj($oText) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-		If __LO_IntIsBetween($iCursorType, $LOW_CURDATA_BODY_TEXT, $LOW_CURDATA_HEADER_FOOTER) Then
-			$oCursor = $oText.createTextCursorByRange($oViewCursor)
-			If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-
-		Else
-
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; ViewCursor in unknown data type.
-		EndIf
-
-	Else
-		$oText = $oDoc.getText
-		If Not IsObj($oText) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-		$oCursor = $oText.createTextCursor()
-		If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-
-		$iCursorType = $LOW_CURDATA_BODY_TEXT
-
-		If ($bCreateAtEnd = True) Then
-			$oCursor.gotoEnd(False)
-
-		Else
-			$oCursor.gotoStart(False)
-		EndIf
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurrPage)
 	EndIf
 
-	Return SetError($__LO_STATUS_SUCCESS, $iCursorType, $oCursor)
-EndFunc   ;==>_LOWriter_CursorTextCursorCreate
+	If Not __LO_IntIsBetween($iPageNum, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	$oCursor.jumpToPage($iPageNum)
+	If ($oCursor.getPage() <> $iPageNum) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOWriter_CursorViewCursorCurrPage
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_CursorViewCursorGetObj
 ; Description ...: Retrieve the ViewCursor Object for a Document.
 ; Syntax ........: _LOWriter_CursorViewCursorGetObj(ByRef $oDoc)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or_LOWriter_DocCreate function.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or_LOWriter_DocCreate function.
 ; Return values .: Success: Object
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. The Object for the Document's View Cursor is returned for use in other Cursor related functions.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve ViewCursor Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. The Object for the Document's View Cursor is returned for use in other Cursor related functions.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve ViewCursor Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The ViewCursor deals with the visible cursor of the Document. You can have only one ViewCursor at a time. ViewCursors support movement commands that are directly related to viewing, but can also be used like a TextCursor in most instances.
-; Related .......: _LOWriter_CursorMove
+; Related .......: _LOWriter_CursorMove, _LOWriter_CursorCreateTextCursor, _LOWriter_CursorGoToRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -979,22 +1038,21 @@ EndFunc   ;==>_LOWriter_CursorViewCursorGetObj
 ; Name ..........: _LOWriter_CursorViewCursorGetPosition
 ; Description ...: Retrieve View Cursor position in Hundredths of a Millimeter (HMM).
 ; Syntax ........: _LOWriter_CursorViewCursorGetPosition(ByRef $oCursor)
-; Parameters ....: $oCursor             - [in/out] an object. A View Cursor Object returned by _LOWriter_CursorViewCursorGetObj function.
+; Parameters ....: $oCursor             - A View Cursor Object returned by _LOWriter_CursorViewCursorGetObj function.
 ; Return values .: Success: Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: Array = Success. Returning a two element array containing "X" coordinate in the first element ($aArray[0]), and the "Y" Coordinate in the second element ($aArray[1]). In Hundredths of a Millimeter (HMM).
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCursor not a View Cursor.
+;                  @Error: 1, @Extended: 1 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not a View Cursor.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to determine Cursor type.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve "X" coordinate.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve "Y" coordinate.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Array = Success. Returning a two element array containing "X" coordinate in the first element ($aArray[0]), and the "Y" Coordinate in the second element ($aArray[1]). In Hundredths of a Millimeter (HMM).
+;                  @Error: 3, @Extended: 1 = Failed to determine Cursor type.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve "X" coordinate.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve "Y" coordinate.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Cursor Coordinate position is relative to the top-left of the first page of the document. In Hundredths of a Millimeter (HMM).
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorMove, _LO_UnitConvert
+; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorViewCursorCurrPage, _LOWriter_CursorMove, _LOWriter_CursorGoToRange, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

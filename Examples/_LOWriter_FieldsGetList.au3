@@ -31,7 +31,7 @@ Func Example()
 	$iDateFormatKey = _LOWriter_DateFormatKeyCreate($oDoc, "HH:MM:SS AM/PM MM/DD/YYYY")
 	If @error Then _ERROR($oDoc, "Failed to create a Date Format Key. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Insert a Date and Time text Field at the View Cursor. Fixed = True, Set the Date to my previously created DateStruct,and set DateTime Format Key to the  first
+	; Insert a Date and Time text Field at the View Cursor. Fixed = True, Set the Date to my previously created DateStruct,and set DateTime Format Key to the first
 	; Key I created.
 	_LOWriter_FieldDateTimeInsert($oDoc, $oViewCursor, False, True, $tDateStruct, Null, Null, $iDateFormatKey)
 	If @error Then _ERROR($oDoc, "Failed to insert a field. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
@@ -74,13 +74,13 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert a Field. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve an array of Regular Fields. The Doc Info Field wont be listed in this array.
-	$avFields = _LOWriter_FieldsGetList($oDoc, $LOW_FIELD_TYPE_ALL)
+	$avFields = _LOWriter_FieldsGetList($oDoc, $LOW_FIELD_TYPE_REG_ALL)
 	If @error Then _ERROR($oDoc, "Failed to search for Fields. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	_ArrayDisplay($avFields)
 
-	; Retrieve an array of Regular Fields again, this time only list $LOW_FIELD_TYPE_DATE_TIME and $LOW_FIELD_TYPE_COMBINED_CHAR type fields.
-	$avFields = _LOWriter_FieldsGetList($oDoc, BitOR($LOW_FIELD_TYPE_DATE_TIME, $LOW_FIELD_TYPE_COMBINED_CHAR))
+	; Retrieve an array of Regular Fields again, this time only list $LOW_FIELD_TYPE_REG_DATE_TIME and $LOW_FIELD_TYPE_REG_COMBINED_CHAR type fields.
+	$avFields = _LOWriter_FieldsGetList($oDoc, BitOR($LOW_FIELD_TYPE_REG_DATE_TIME, $LOW_FIELD_TYPE_REG_COMBINED_CHAR))
 	If @error Then _ERROR($oDoc, "Failed to search for Fields. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	_ArrayDisplay($avFields)

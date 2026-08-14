@@ -6,7 +6,7 @@
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice Calc Constants for the LibreOffice UDF.
 ; AutoIt Version : v3.3.16.1
-; Description ...: Constants for various functions in the LibreOffice UDF.
+; Description ...: Constants for various Calc functions in the LibreOffice UDF.
 ; Author(s) .....: donnyh13, mLipok
 ; Dll ...........:
 ; Note ..........: Descriptions for some Constants are taken from the LibreOffice SDK API documentation.
@@ -225,11 +225,11 @@ Global Const _
 
 ; Comment Connector Line Position
 Global Const _                                                  ; com.sun.star.drawing.CaptionEscapeDirection
-		$LOC_COMMENT_CALLOUT_EXT_HORI = 0, _                    ; The Connector line extends Horizontally from the Comment.
-		$LOC_COMMENT_CALLOUT_EXT_VERT = 1, _                    ; The Connector line extends Vertically from the Comment.
-		$LOC_COMMENT_CALLOUT_EXT_OPTIMAL = 2, _                 ; The Connector line extends from the optimal position of the Comment.
-		$LOC_COMMENT_CALLOUT_EXT_FROM_LEFT = 3, _               ; The Connector line extends from the left of the Comment.
-		$LOC_COMMENT_CALLOUT_EXT_FROM_TOP = 4                   ; The Connector line extends from the top of the Comment.
+		$LOC_COMMENT_CALLOUT_EXT_POS_HORI = 0, _                ; The Connector line extends Horizontally from the Comment.
+		$LOC_COMMENT_CALLOUT_EXT_POS_VERT = 1, _                ; The Connector line extends Vertically from the Comment.
+		$LOC_COMMENT_CALLOUT_EXT_POS_OPTIMAL = 2, _             ; The Connector line extends from the optimal position of the Comment.
+		$LOC_COMMENT_CALLOUT_EXT_POS_FROM_LEFT = 3, _           ; The Connector line extends from the left of the Comment.
+		$LOC_COMMENT_CALLOUT_EXT_POS_FROM_TOP = 4               ; The Connector line extends from the top of the Comment.
 
 ; Comment Connector Line Style
 Global Const _                                                  ; com.sun.star.drawing.CaptionType

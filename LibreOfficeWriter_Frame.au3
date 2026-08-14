@@ -89,26 +89,25 @@
 ; Name ..........: _LOWriter_FrameAreaColor
 ; Description ...: Set or Retrieve background color settings for a Frame.
 ; Syntax ........: _LOWriter_FrameAreaColor(ByRef $oFrame[, $iBackColor = Null])
-; Parameters ....: $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
-;                  $iBackColor          - [optional] an integer value (-1-16777215). Default is Null. The background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for "None".
+; Parameters ....: $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
+;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for "None".
 ; Return values .: Success: Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting as an Integer.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iBackColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
+;                  @Error: 1, @Extended: 2 = $iBackColor not an Integer, less than -1 or greater than 16777215.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Background color.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve old Transparency value.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Background color.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iBackColor
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting as an Integer.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+; Related .......: _LOWriter_FrameAreaFillStyle, _LOWriter_FrameAreaGradient, _LOWriter_FrameStyleAreaColor, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -145,20 +144,19 @@ EndFunc   ;==>_LOWriter_FrameAreaColor
 ; Name ..........: _LOWriter_FrameAreaFillStyle
 ; Description ...: Retrieve what kind of background fill is active, if any.
 ; Syntax ........: _LOWriter_FrameAreaFillStyle(ByRef $oFrame)
-; Parameters ....: $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
+; Parameters ....: $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
 ; Return values .: Success: Integer
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOW_AREA_FILL_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
+;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Fill Style.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning current background fill style. Return will be one of the constants $LOW_AREA_FILL_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Fill Style.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function is to help determine if a Gradient background, or a solid color background is currently active.
 ;                  This is useful because, if a Gradient is active, the solid color value is still present, and thus it would not be possible to determine which function should be used to retrieve the current values for, whether the Color function, or the Gradient function.
-; Related .......:
+; Related .......: _LOWriter_FrameStyleAreaFillStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -180,42 +178,45 @@ EndFunc   ;==>_LOWriter_FrameAreaFillStyle
 ; Name ..........: _LOWriter_FrameAreaGradient
 ; Description ...: Modify or retrieve the settings for Frame Background color Gradient.
 ; Syntax ........: _LOWriter_FrameAreaGradient(ByRef $oDoc, ByRef $oFrame[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
-;                  $sGradientName       - [optional] a string value. Default is Null. A Preset Gradient Name. See remarks. See constants, $LOW_GRAD_NAME_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iType               - [optional] an integer value (-1-5). Default is Null. The gradient that you want to apply. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iIncrement          - [optional] an integer value (0,3-256). Default is Null. Specifies the number of steps of change color. Allowed values are: 0, 3 to 256. 0 = Automatic.
-;                  $iXCenter            - [optional] an integer value (0-100). Default is Null. The horizontal offset for the gradient, where 0% corresponds to the current horizontal location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" setting. Set in percentage. $iType must be other than "Linear", or "Axial".
-;                  $iYCenter            - [optional] an integer value (0-100). Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage. $iType must be other than "Linear", or "Axial".
-;                  $iAngle              - [optional] an integer value (0-359). Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
-;                  $iTransitionStart    - [optional] an integer value (0-100). Default is Null. The amount by which you want to adjust the transparent area of the gradient. Set in percentage.
-;                  $iFromColor          - [optional] an integer value (0-16777215). Default is Null. A color for the beginning point of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iToColor            - [optional] an integer value (0-16777215). Default is Null. A color for the endpoint of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iFromIntense        - [optional] an integer value (0-100). Default is Null. Enter the intensity for the color in the "From Color", where 0% corresponds to black, and 100 % to the selected color.
-;                  $iToIntense          - [optional] an integer value (0-100). Default is Null. Enter the intensity for the color in the "To Color", where 0% corresponds to black, and 100 % to the selected color.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
+;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOW_GRAD_NAME_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iType               - [optional] (-1-5) Default is Null. The gradient that you want to apply. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iIncrement          - [optional] (0, 3-256) Default is Null. Specifies the number of steps of change color. Allowed values are: 0, 3 to 256. 0 = Automatic.
+;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient, where 0% corresponds to the current horizontal location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" setting. Set in percentage. $iType must be other than "Linear", or "Axial".
+;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage. $iType must be other than "Linear", or "Axial".
+;                  $iAngle              - [optional] (0-359) Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
+;                  $iTransitionStart    - [optional] (0-100) Default is Null. The amount by which you want to adjust the transparent area of the gradient. Set in percentage.
+;                  $iFromColor          - [optional] (0-16777215) Default is Null. A color for the beginning point of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iToColor            - [optional] (0-16777215) Default is Null. A color for the endpoint of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iFromIntense        - [optional] (0-100) Default is Null. Enter the intensity for the color in the "From Color", where 0% corresponds to black, and 100 % to the selected color.
+;                  $iToIntense          - [optional] (0-100) Default is Null. Enter the intensity for the color in the "To Color", where 0% corresponds to black, and 100 % to the selected color.
 ; Return values .: Success: Integer or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 0, Return: 2 = Success. Gradient has been successfully turned off.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $sGradientName not a String.
-;                  @Error 1 @Extended 4 Return 0 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $iIncrement not an Integer, less than 3 but not 0, or greater than 256.
-;                  @Error 1 @Extended 6 Return 0 = $iXCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 7 Return 0 = $iYCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 8 Return 0 = $iAngle not an Integer, less than 0 or greater than 359.
-;                  @Error 1 @Extended 9 Return 0 = $iTransitionStart not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 10 Return 0 = $iFromColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 11 Return 0 = $iToColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 12 Return 0 = $iFromIntense not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 13 Return 0 = $iToIntense not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oFrame not an Object.
+;                  @Error: 1, @Extended: 3 = $sGradientName not a String.
+;                  @Error: 1, @Extended: 4 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iIncrement not an Integer, less than 3 but not 0, or greater than 256.
+;                  @Error: 1, @Extended: 6 = $iXCenter not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 7 = $iYCenter not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 8 = $iAngle not an Integer, less than 0 or greater than 359.
+;                  @Error: 1, @Extended: 9 = $iTransitionStart not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 10 = $iFromColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 11 = $iToColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 12 = $iFromIntense not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 13 = $iToIntense not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving "FillGradient" Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 Return 0 = Error creating Gradient Name.
-;                  @Error 3 @Extended 4 Return 0 = Error setting Gradient Name.
+;                  @Error: 3, @Extended: 1 = Error retrieving "FillGradient" Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 3 = Error creating Gradient Name.
+;                  @Error: 3, @Extended: 4 = Error setting Gradient Name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sGradientName
 ;                  |                               2 = Error setting $iType
 ;                  |                               4 = Error setting $iIncrement
@@ -227,16 +228,12 @@ EndFunc   ;==>_LOWriter_FrameAreaFillStyle
 ;                  |                               256 = Error setting $iToColor
 ;                  |                               512 = Error setting $iFromIntense
 ;                  |                               1024 = Error setting $iToIntense
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 0 Return 2 = Success. Gradient has been successfully turned off.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LOWriter_FrameAreaColor, _LOWriter_FrameAreaFillStyle, _LOWriter_FrameStyleAreaGradient, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -407,40 +404,39 @@ EndFunc   ;==>_LOWriter_FrameAreaGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FrameAreaGradientMulticolor
-; Description ...: Set or Retrieve a Frame's Multicolor Gradient settings. See remarks.
+; Description ...: Set or Retrieve a Frame's Multicolor Gradient settings.
 ; Syntax ........: _LOWriter_FrameAreaGradientMulticolor(ByRef $oFrame[, $avColorStops = Null])
-; Parameters ....: $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
-;                  $avColorStops        - [optional] an array of variants. Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
+; Parameters ....: $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
+;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $avColorStops not an Array, or does not contain two columns.
-;                  @Error 1 @Extended 3 Return 0 = $avColorStops contains less than two rows.
-;                  @Error 1 @Extended 4 Return ? = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
-;                  @Error 1 @Extended 5 Return ? = ColorStop color not an Integer, less than 0 or greater than 16777215. Returning problem element index.
+;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
+;                  @Error: 1, @Extended: 2 = $avColorStops not an Array, or does not contain two columns.
+;                  @Error: 1, @Extended: 3 = $avColorStops contains less than two rows.
+;                  @Error: 1, @Extended: 4 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
+;                  @Error: 1, @Extended: 5 = ColorStop color not an Integer, less than 0 or greater than 16777215. Returning problem element index.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create com.sun.star.awt.ColorStop Struct.
+;                  @Error: 2, @Extended: 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve FillGradient Struct.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve StopColor Struct.
-;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current version less than 7.6.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve FillGradient Struct.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve StopColor Struct.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColorStops
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
+;                  --Version Related Errors--
+;                  @Error: 6, @Extended: 1 = Current version less than 7.6.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Starting with version 7.6 LibreOffice introduced an option to have multiple color stops in a Gradient rather than just a beginning and an ending color, but as of yet, the option is not available in the User Interface. However it has been made available in the API.
 ;                  The returned array will contain two columns, the first column will contain the ColorStop offset values, a number between 0 and 1.0. The second column will contain an Integer, the color value, as a RGB Color Integer.
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOWriter_FrameAreaTransparencyGradientMulti
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOWriter_FrameAreaTransparencyGradientMulti, _LOWriter_FrameStyleAreaGradientMulticolor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -518,26 +514,25 @@ EndFunc   ;==>_LOWriter_FrameAreaGradientMulticolor
 ; Name ..........: _LOWriter_FrameAreaTransparency
 ; Description ...: Set or retrieve Transparency settings for a Frame.
 ; Syntax ........: _LOWriter_FrameAreaTransparency(ByRef $oFrame[, $iTransparency = Null])
-; Parameters ....: $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
-;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
+; Parameters ....: $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
+;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
+;                  @Error: 1, @Extended: 2 = $iTransparency not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Transparency value.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Transparency value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTransparency
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByCursor, _LOWriter_FrameGetObjByName
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LOWriter_FrameAreaTransparencyGradient, _LOWriter_FrameAreaColor, _LOWriter_FrameStyleAreaTransparency
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -569,34 +564,37 @@ EndFunc   ;==>_LOWriter_FrameAreaTransparency
 ; Name ..........: _LOWriter_FrameAreaTransparencyGradient
 ; Description ...: Set or retrieve the Frame transparency gradient settings.
 ; Syntax ........: _LOWriter_FrameAreaTransparencyGradient(ByRef $oDoc, ByRef $oFrame[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
-;                  $iType               - [optional] an integer value (-1-5). Default is Null. The type of transparency gradient to apply. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3. Call with $LOW_GRAD_TYPE_OFF to turn Transparency Gradient off.
-;                  $iXCenter            - [optional] an integer value (0-100). Default is Null. The horizontal offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
-;                  $iYCenter            - [optional] an integer value (0-100). Default is Null. The vertical offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
-;                  $iAngle              - [optional] an integer value (0-359). Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
-;                  $iTransitionStart    - [optional] an integer value (0-100). Default is Null. The amount by which you want to adjust the transparent area of the gradient. Set in percentage.
-;                  $iStart              - [optional] an integer value (0-100). Default is Null. The transparency value for the beginning point of the gradient, where 0% is fully opaque and 100% is fully transparent.
-;                  $iEnd                - [optional] an integer value (0-100). Default is Null. The transparency value for the endpoint of the gradient, where 0% is fully opaque and 100% is fully transparent.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
+;                  $iType               - [optional] (-1-5) Default is Null. The type of transparency gradient to apply. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3. Call with $LOW_GRAD_TYPE_OFF to turn Transparency Gradient off.
+;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
+;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
+;                  $iAngle              - [optional] (0-359) Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
+;                  $iTransitionStart    - [optional] (0-100) Default is Null. The amount by which you want to adjust the transparent area of the gradient. Set in percentage.
+;                  $iStart              - [optional] (0-100) Default is Null. The transparency value for the beginning point of the gradient, where 0% is fully opaque and 100% is fully transparent.
+;                  $iEnd                - [optional] (0-100) Default is Null. The transparency value for the endpoint of the gradient, where 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 0, Return: 2 = Success. Transparency Gradient has been successfully turned off.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $iType Not an Integer, less than -1 or greater than 5. See constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iXCenter Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 5 Return 0 = $iYCenter Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 6 Return 0 = $iAngle Not an Integer, less than 0 or greater than 359.
-;                  @Error 1 @Extended 7 Return 0 = $iTransitionStart Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 8 Return 0 = $iStart Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 9 Return 0 = $iEnd Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oFrame not an Object.
+;                  @Error: 1, @Extended: 3 = $iType Not an Integer, less than -1 or greater than 5. See constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iXCenter Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 5 = $iYCenter Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 6 = $iAngle Not an Integer, less than 0 or greater than 359.
+;                  @Error: 1, @Extended: 7 = $iTransitionStart Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 8 = $iStart Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 9 = $iEnd Not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving "FillTransparenceGradient" Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 Return 0 = Error creating Transparency Gradient Name.
-;                  @Error 3 @Extended 4 Return 0 = Error setting Transparency Gradient Name.
+;                  @Error: 3, @Extended: 1 = Error retrieving "FillTransparenceGradient" Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 3 = Error creating Transparency Gradient Name.
+;                  @Error: 3, @Extended: 4 = Error setting Transparency Gradient Name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iType
 ;                  |                               2 = Error setting $iXCenter
 ;                  |                               4 = Error setting $iYCenter
@@ -604,15 +602,11 @@ EndFunc   ;==>_LOWriter_FrameAreaTransparency
 ;                  |                               16 = Error setting $iTransitionStart
 ;                  |                               32 = Error setting $iStart
 ;                  |                               64 = Error setting $iEnd
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 0 Return 2 = Success. Transparency Gradient has been successfully turned off.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByCursor, _LOWriter_FrameGetObjByName
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LOWriter_FrameAreaTransparency, _LOWriter_FrameAreaTransparencyGradientMulti, _LOWriter_FrameStyleAreaTransparencyGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -754,40 +748,39 @@ EndFunc   ;==>_LOWriter_FrameAreaTransparencyGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FrameAreaTransparencyGradientMulti
-; Description ...: Set or Retrieve a Frame's Multi Transparency Gradient settings. See remarks.
+; Description ...: Set or Retrieve a Frame's Multi Transparency Gradient settings.
 ; Syntax ........: _LOWriter_FrameAreaTransparencyGradientMulti(ByRef $oFrame[, $avColorStops = Null])
-; Parameters ....: $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
-;                  $avColorStops        - [optional] an array of variants. Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
+; Parameters ....: $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
+;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $avColorStops not an Array, or does not contain two columns.
-;                  @Error 1 @Extended 3 Return 0 = $avColorStops contains less than two rows.
-;                  @Error 1 @Extended 4 Return ? = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
-;                  @Error 1 @Extended 5 Return ? = ColorStop Transparency value not an Integer, less than 0 or greater than 100. Returning problem element index.
+;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
+;                  @Error: 1, @Extended: 2 = $avColorStops not an Array, or does not contain two columns.
+;                  @Error: 1, @Extended: 3 = $avColorStops contains less than two rows.
+;                  @Error: 1, @Extended: 4 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
+;                  @Error: 1, @Extended: 5 = ColorStop Transparency value not an Integer, less than 0 or greater than 100. Returning problem element index.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create com.sun.star.awt.ColorStop Struct.
+;                  @Error: 2, @Extended: 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve FillTransparenceGradient Struct.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve StopColor Struct.
-;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current version less than 7.6.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve FillTransparenceGradient Struct.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve StopColor Struct.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColorStops
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
+;                  --Version Related Errors--
+;                  @Error: 6, @Extended: 1 = Current version less than 7.6.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Starting with version 7.6 LibreOffice introduced an option to have multiple Transparency stops in a Gradient rather than just a beginning and an ending value, but as of yet, the option is not available in the User Interface. However it has been made available in the API.
 ;                  The returned array will contain two columns, the first column will contain the ColorStop offset values, a number between 0 and 1.0. The second column will contain an Integer, the Transparency percentage value between 0 and 100%.
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOWriter_FrameAreaGradientMulticolor
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOWriter_FrameAreaTransparencyGradient, _LOWriter_FrameAreaGradientMulticolor, _LOWriter_FrameStyleAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -865,44 +858,43 @@ EndFunc   ;==>_LOWriter_FrameAreaTransparencyGradientMulti
 ; Name ..........: _LOWriter_FrameBorderColor
 ; Description ...: Set or retrieve the Frame Border Line Color. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_FrameBorderColor(ByRef $oFrame[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
-;                  $iTop                - [optional] an integer value (0-16777215). Default is Null. The Top Border Line Color of the Frame, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iBottom             - [optional] an integer value (0-16777215). Default is Null. The Bottom Border Line Color of the Frame, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iLeft               - [optional] an integer value (0-16777215). Default is Null. The Left Border Line Color of the Frame, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iRight              - [optional] an integer value (0-16777215). Default is Null. The Right Border Line Color of the Frame, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+; Parameters ....: $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
+;                  $iTop                - [optional] (0-16777215) Default is Null. The Top Border Line Color of the Frame, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBottom             - [optional] (0-16777215) Default is Null. The Bottom Border Line Color of the Frame, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iLeft               - [optional] (0-16777215) Default is Null. The Left Border Line Color of the Frame, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iRight              - [optional] (0-16777215) Default is Null. The Right Border Line Color of the Frame, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iTop not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 3 Return 0 = $iBottom not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $iLeft not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 5 Return 0 = $iRight not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
+;                  @Error: 1, @Extended: 2 = $iTop not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 3 = $iBottom not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 4 = $iLeft not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 5 = $iRight not an Integer, less than 0 or greater than 16777215.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error: 2, @Extended: 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 Return 0 = Cannot set Top Border Color when Top Border width not set.
-;                  @Error 3 @Extended 3 Return 0 = Cannot set Bottom Border Color when Bottom Border width not set.
-;                  @Error 3 @Extended 4 Return 0 = Cannot set Left Border Color when Left Border width not set.
-;                  @Error 3 @Extended 5 Return 0 = Cannot set Right Border Color when Right Border width not set.
+;                  @Error: 3, @Extended: 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error: 3, @Extended: 2 = Cannot set Top Border Color when Top Border width not set.
+;                  @Error: 3, @Extended: 3 = Cannot set Bottom Border Color when Bottom Border width not set.
+;                  @Error: 3, @Extended: 4 = Cannot set Left Border Color when Left Border width not set.
+;                  @Error: 3, @Extended: 5 = Cannot set Right Border Color when Right Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 3.4.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_FrameBorderWidth, _LOWriter_FrameBorderStyle, _LOWriter_FrameBorderPadding
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_FrameBorderWidth, _LOWriter_FrameBorderStyle, _LOWriter_FrameBorderPadding, _LOWriter_FrameStyleBorderColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -927,36 +919,35 @@ EndFunc   ;==>_LOWriter_FrameBorderColor
 ; Name ..........: _LOWriter_FrameBorderPadding
 ; Description ...: Set or retrieve the Frame Border Padding settings.
 ; Syntax ........: _LOWriter_FrameBorderPadding(ByRef $oFrame[, $iAll = Null[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]]])
-; Parameters ....: $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
-;                  $iAll                - [optional] an integer value. Default is Null. Set all four padding distances to one distance in Hundredths of a Millimeter (HMM).
-;                  $iTop                - [optional] an integer value. Default is Null. The Top Distance between the Border and Frame contents in Hundredths of a Millimeter (HMM).
-;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom Distance between the Border and Frame contents in Hundredths of a Millimeter (HMM).
-;                  $iLeft               - [optional] an integer value. Default is Null. The Left Distance between the Border and Frame contents in Hundredths of a Millimeter (HMM).
-;                  $iRight              - [optional] an integer value. Default is Null. The Right Distance between the Border and Frame contents in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
+;                  $iAll                - [optional] Default is Null. Set all four padding distances to one distance in Hundredths of a Millimeter (HMM).
+;                  $iTop                - [optional] Default is Null. The Top Distance between the Border and Frame contents in Hundredths of a Millimeter (HMM).
+;                  $iBottom             - [optional] Default is Null. The Bottom Distance between the Border and Frame contents in Hundredths of a Millimeter (HMM).
+;                  $iLeft               - [optional] Default is Null. The Left Distance between the Border and Frame contents in Hundredths of a Millimeter (HMM).
+;                  $iRight              - [optional] Default is Null. The Right Distance between the Border and Frame contents in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iAll not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = $iTop not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = $iBottom not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $Left not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $iRight not an Integer.
+;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
+;                  @Error: 1, @Extended: 2 = $iAll not an Integer.
+;                  @Error: 1, @Extended: 3 = $iTop not an Integer.
+;                  @Error: 1, @Extended: 4 = $iBottom not an Integer.
+;                  @Error: 1, @Extended: 5 = $Left not an Integer.
+;                  @Error: 1, @Extended: 6 = $iRight not an Integer.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iAll border distance
 ;                  |                               2 = Error setting $iTop border distance
 ;                  |                               4 = Error setting $iBottom border distance
 ;                  |                               8 = Error setting $iLeft border distance
 ;                  |                               16 = Error setting $iRight border distance
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LO_UnitConvert, _LOWriter_FrameBorderWidth, _LOWriter_FrameBorderStyle, _LOWriter_FrameBorderColor
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LO_UnitConvert, _LOWriter_FrameBorderWidth, _LOWriter_FrameBorderStyle, _LOWriter_FrameBorderColor, _LOWriter_FrameStyleBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1018,44 +1009,43 @@ EndFunc   ;==>_LOWriter_FrameBorderPadding
 ; Name ..........: _LOWriter_FrameBorderStyle
 ; Description ...: Set or Retrieve the Frame Border Line style. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_FrameBorderStyle(ByRef $oFrame[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
-;                  $iTop                - [optional] an integer value (0x7FFF,0-17). Default is Null. The Top Border Line Style of the Frame. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBottom             - [optional] an integer value (0x7FFF,0-17). Default is Null. The Bottom Border Line Style of the Frame. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iLeft               - [optional] an integer value (0x7FFF,0-17). Default is Null. The Left Border Line Style of the Frame. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iRight              - [optional] an integer value (0x7FFF,0-17). Default is Null. The Right Border Line Style of the Frame. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+; Parameters ....: $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
+;                  $iTop                - [optional] (0x7FFF,0-17) Default is Null. The Top Border Line Style of the Frame. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iBottom             - [optional] (0x7FFF,0-17) Default is Null. The Bottom Border Line Style of the Frame. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iLeft               - [optional] (0x7FFF,0-17) Default is Null. The Left Border Line Style of the Frame. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRight              - [optional] (0x7FFF,0-17) Default is Null. The Right Border Line Style of the Frame. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
+;                  @Error: 1, @Extended: 2 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error: 2, @Extended: 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 Return 0 = Cannot set Top Border Style when Top Border width not set.
-;                  @Error 3 @Extended 3 Return 0 = Cannot set Bottom Border Style when Bottom Border width not set.
-;                  @Error 3 @Extended 4 Return 0 = Cannot set Left Border Style when Left Border width not set.
-;                  @Error 3 @Extended 5 Return 0 = Cannot set Right Border Style when Right Border width not set.
+;                  @Error: 3, @Extended: 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error: 3, @Extended: 2 = Cannot set Top Border Style when Top Border width not set.
+;                  @Error: 3, @Extended: 3 = Cannot set Bottom Border Style when Bottom Border width not set.
+;                  @Error: 3, @Extended: 4 = Cannot set Left Border Style when Left Border width not set.
+;                  @Error: 3, @Extended: 5 = Cannot set Right Border Style when Right Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 3.4.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LOWriter_FrameBorderWidth, _LOWriter_FrameBorderColor, _LOWriter_FrameBorderPadding
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LOWriter_FrameBorderWidth, _LOWriter_FrameBorderColor, _LOWriter_FrameBorderPadding, _LOWriter_FrameStyleBorderStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1080,40 +1070,39 @@ EndFunc   ;==>_LOWriter_FrameBorderStyle
 ; Name ..........: _LOWriter_FrameBorderWidth
 ; Description ...: Set or Retrieve the Frame Border Line Width. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_FrameBorderWidth(ByRef $oFrame[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
-;                  $iTop                - [optional] an integer value. Default is Null. The Top Border Line width of the Frame in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom Border Line Width of the Frame in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iLeft               - [optional] an integer value. Default is Null. The Left Border Line width of the Frame in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iRight              - [optional] an integer value. Default is Null. The Right Border Line Width of the Frame in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+; Parameters ....: $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
+;                  $iTop                - [optional] Default is Null. The Top Border Line width of the Frame in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iBottom             - [optional] Default is Null. The Bottom Border Line Width of the Frame in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iLeft               - [optional] Default is Null. The Left Border Line width of the Frame in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRight              - [optional] Default is Null. The Right Border Line Width of the Frame in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iTop not an Integer, or less than 0.
-;                  @Error 1 @Extended 3 Return 0 = $iBottom not an Integer, or less than 0.
-;                  @Error 1 @Extended 4 Return 0 = $iLeft not an Integer, or less than 0.
-;                  @Error 1 @Extended 5 Return 0 = $iRight not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
+;                  @Error: 1, @Extended: 2 = $iTop not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 3 = $iBottom not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 4 = $iLeft not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 5 = $iRight not an Integer, or less than 0.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error: 2, @Extended: 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error: 3, @Extended: 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 3.4.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To "Turn Off" Borders, set Width to 0
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LO_UnitConvert, _LOWriter_FrameBorderStyle, _LOWriter_FrameBorderColor, _LOWriter_FrameBorderPadding
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LO_UnitConvert, _LOWriter_FrameBorderStyle, _LOWriter_FrameBorderColor, _LOWriter_FrameBorderPadding, _LOWriter_FrameStyleBorderWidth
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1138,41 +1127,40 @@ EndFunc   ;==>_LOWriter_FrameBorderWidth
 ; Name ..........: _LOWriter_FrameColumnSeparator
 ; Description ...: Set or retrieve Frame Column Separator line settings.
 ; Syntax ........: _LOWriter_FrameColumnSeparator(ByRef $oFrame[, $bSeparatorOn = Null[, $iStyle = Null[, $iWidth = Null[, $iColor = Null[, $iHeight = Null[, $iPosition = Null]]]]]])
-; Parameters ....: $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
-;                  $bSeparatorOn        - [optional] a boolean value. Default is Null. If True, add a separator line between two or more columns.
-;                  $iStyle              - [optional] an integer value (0-3). Default is Null. The formatting style for the column separator line. See Constants, $LOW_LINE_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iWidth              - [optional] an integer value (5-180). Default is Null. The width of the separator line. Set in Hundredths of a Millimeter (HMM).
-;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The separator line color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iHeight             - [optional] an integer value (0-100). Default is Null. The length of the separator line as a percentage of the height of the column area.
-;                  $iPosition           - [optional] an integer value (0-2). Default is Null. Select the vertical alignment of the separator line. This option is only available if Height value of the line is less than 100%. See Constants, $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+; Parameters ....: $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
+;                  $bSeparatorOn        - [optional] Default is Null. If True, add a separator line between two or more columns.
+;                  $iStyle              - [optional] (0-3) Default is Null. The formatting style for the column separator line. See Constants, $LOW_LINE_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iWidth              - [optional] (5-180) Default is Null. The width of the separator line. Set in Hundredths of a Millimeter (HMM).
+;                  $iColor              - [optional] (0-16777215) Default is Null. The separator line color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iHeight             - [optional] (0-100) Default is Null. The length of the separator line as a percentage of the height of the column area.
+;                  $iPosition           - [optional] (0-2) Default is Null. Select the vertical alignment of the separator line. This option is only available if Height value of the line is less than 100%. See Constants, $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bSeparatorOn not a Boolean value.
-;                  @Error 1 @Extended 3 Return 0 = $iStyle not an Integer, less than 0 or greater than 3. See Constants, $LOW_LINE_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iWidth not an Integer, less than 5 or greater than 180.
-;                  @Error 1 @Extended 5 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 6 Return 0 = $iHeight not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 7 Return 0 = $iPosition not an Integer, less than 0 or greater than 2. See constants, $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
+;                  @Error: 1, @Extended: 2 = $bSeparatorOn not a Boolean value.
+;                  @Error: 1, @Extended: 3 = $iStyle not an Integer, less than 0 or greater than 3. See Constants, $LOW_LINE_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iWidth not an Integer, less than 5 or greater than 180.
+;                  @Error: 1, @Extended: 5 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 6 = $iHeight not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 7 = $iPosition not an Integer, less than 0 or greater than 2. See constants, $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Text Columns Object.
+;                  @Error: 3, @Extended: 1 = Error retrieving Text Columns Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bSeparatorOn
 ;                  |                               2 = Error setting $iStyle
 ;                  |                               4 = Error setting $iWidth
 ;                  |                               8 = Error setting $iColor
 ;                  |                               16 = Error setting $iHeight
 ;                  |                               32 = Error setting $iPosition
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LOWriter_FrameColumnSettings, _LOWriter_FrameColumnSize, _LOWriter_FrameStyleColumnSeparator
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1247,27 +1235,26 @@ EndFunc   ;==>_LOWriter_FrameColumnSeparator
 ; Name ..........: _LOWriter_FrameColumnSettings
 ; Description ...: Set or retrieve Frame Column count.
 ; Syntax ........: _LOWriter_FrameColumnSettings(ByRef $oFrame[, $iColumns = Null])
-; Parameters ....: $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
-;                  $iColumns            - [optional] an integer value. Default is Null. The number of columns that you want in the Frame. Min. 1.
+; Parameters ....: $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
+;                  $iColumns            - [optional] Default is Null. The number of columns that you want in the Frame. Min. 1.
 ; Return values .: Success: Integer
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current column count.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iColumns not an Integer, or less than 1.
+;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
+;                  @Error: 1, @Extended: 2 = $iColumns not an Integer, or less than 1.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Text Columns Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve count of Text Columns.
+;                  @Error: 3, @Extended: 1 = Error retrieving Text Columns Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve count of Text Columns.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iColumns
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current column count.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LOWriter_FrameColumnSeparator, _LOWriter_FrameColumnSize, _LOWriter_FrameStyleColumnSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1304,43 +1291,42 @@ EndFunc   ;==>_LOWriter_FrameColumnSettings
 ; Name ..........: _LOWriter_FrameColumnSize
 ; Description ...: Set or retrieve Frame Column sizing settings.
 ; Syntax ........: _LOWriter_FrameColumnSize(ByRef $oFrame, $iColumn[, $bAutoWidth = Null[, $iGlobalSpacing = Null[, $iSpacing = Null[, $iWidth = Null]]]])
-; Parameters ....: $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
-;                  $iColumn             - an integer value. The column to modify the settings on. See Remarks.
-;                  $bAutoWidth          - [optional] a boolean value. Default is Null. If True Column Width is automatically adjusted.
-;                  $iGlobalSpacing      - [optional] an integer value. Default is Null. Set a spacing value for between all columns. Set in Hundredths of a Millimeter (HMM). See remarks.
-;                  $iSpacing            - [optional] an integer value. Default is Null. The Space between two columns, in Hundredths of a Millimeter (HMM). Cannot be set for the last column.
-;                  $iWidth              - [optional] an integer value. Default is Null. If $iGlobalSpacing is set to other than 0, enter the width of the column. Set in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
+;                  $iColumn             - The column to modify the settings on. See Remarks.
+;                  $bAutoWidth          - [optional] Default is Null. If True Column Width is automatically adjusted.
+;                  $iGlobalSpacing      - [optional] Default is Null. Set a spacing value for between all columns. Set in Hundredths of a Millimeter (HMM). See remarks.
+;                  $iSpacing            - [optional] Default is Null. The Space between two columns, in Hundredths of a Millimeter (HMM). Cannot be set for the last column.
+;                  $iWidth              - [optional] Default is Null. If $iGlobalSpacing is set to other than 0, enter the width of the column. Set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iColumn not an Integer.
-;                  @Error 1 @Extended 3 Return 0 = $iColumn greater than number of columns in the document or less than 1.
-;                  @Error 1 @Extended 4 Return 0 = $bAutoWidth not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $iGlobalSpacing not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $iSpacing not an Integer.
-;                  @Error 1 @Extended 7 Return 0 = $iWidth not an Integer.
+;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
+;                  @Error: 1, @Extended: 2 = $iColumn not an Integer.
+;                  @Error: 1, @Extended: 3 = $iColumn greater than number of columns in the document or less than 1.
+;                  @Error: 1, @Extended: 4 = $bAutoWidth not a Boolean.
+;                  @Error: 1, @Extended: 5 = $iGlobalSpacing not an Integer.
+;                  @Error: 1, @Extended: 6 = $iSpacing not an Integer.
+;                  @Error: 1, @Extended: 7 = $iWidth not an Integer.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Text Columns Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving Frame Style Column Object Array.
-;                  @Error 3 @Extended 3 Return 0 = No columns present for requested Frame.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve Array of Columns.
+;                  @Error: 3, @Extended: 1 = Error retrieving Text Columns Object.
+;                  @Error: 3, @Extended: 2 = Error retrieving Frame Style Column Object Array.
+;                  @Error: 3, @Extended: 3 = No columns present for requested Frame.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve Array of Columns.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bAutoWidth
 ;                  |                               2 = Error setting $iGlobalSpacing
 ;                  |                               4 = Error setting $iSpacing
 ;                  |                               8 = Error setting $iWidth
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function will work fine for setting AutoWidth, and Spacing values, however Width will not work the best, Spacing etc is set in plain Hundredths of a Millimeter (HMM) values, however width is set in a relative value, and I am unable to find a way to be able to convert a specific value, such as 1" (2540 HMM) etc, to the appropriate relative value, especially when spacing is set.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  To set $bAutoWidth or $iGlobalSpacing you may enter any number in $iColumn as long as you are not setting width or spacing, as AutoWidth is not column specific. If you set a value for $iGlobalSpacing with $bAutoWidth set to False, the value is applied to all the columns still.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOWriter_FrameColumnSeparator, _LOWriter_FrameColumnSettings, _LOWriter_FrameStyleColumnSize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1364,7 +1350,7 @@ Func _LOWriter_FrameColumnSize(ByRef $oFrame, $iColumn, $bAutoWidth = Null, $iGl
 	If ($oTextColumns.ColumnCount() <= 1) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 	If ($iColumn > UBound($atColumns)) Or ($iColumn < 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-	$iColumn = $iColumn - 1 ; Libre Columns Array is 0 based -- Minus one to compensate
+	$iColumn = $iColumn - 1 ; LibreOffice Columns Array is 0 based -- Minus one to compensate
 
 	If __LO_VarsAreNull($bAutoWidth, $iGlobalSpacing, $iSpacing, $iWidth) Then
 		If ($iColumn = (UBound($atColumns) - 1)) Then ; If last column is called, there is no spacing value, so return the outer margin, which will be 0.
@@ -1373,7 +1359,7 @@ Func _LOWriter_FrameColumnSize(ByRef $oFrame, $iColumn, $bAutoWidth = Null, $iGl
 
 		Else
 			__LO_ArrayFill($avColumnSize, $oTextColumns.IsAutomatic, $oTextColumns.AutomaticDistance(), _
-					$atColumns[$iColumn].RightMargin() + $atColumns[$iColumn + 1].LeftMargin(), $atColumns[$iColumn].Width())
+					($atColumns[$iColumn].RightMargin() + $atColumns[$iColumn + 1].LeftMargin()), $atColumns[$iColumn].Width())
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avColumnSize)
@@ -1467,31 +1453,30 @@ EndFunc   ;==>_LOWriter_FrameColumnSize
 ; Name ..........: _LOWriter_FrameCreate
 ; Description ...: Create and insert a TextFrame.
 ; Syntax ........: _LOWriter_FrameCreate(ByRef $oDoc, ByRef $oCursor[, $sFrameName = Null[, $iWidth = Null[, $iHeight = Null[, $bOverwrite = False]]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation Or retrieval functions. Must not be a Table Cursor.
-;                  $sFrameName          - [optional] a string value. Default is Null. The Name of the Frame to Create.
-;                  $iWidth              - [optional] an integer value. Default is Null. The width of the Frame to create. Set in Hundredths of a Millimeter (HMM). Min. 51 (HMM).
-;                  $iHeight             - [optional] an integer value. Default is Null. The Height of the Frame to create. Set in Hundredths of a Millimeter (HMM). Min. 51 (HMM).
-;                  $bOverwrite          - [optional] a boolean value. Default is False. If True, content selected by Cursor is overwritten., Else Frame is inserted after the selection.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oCursor             - A Cursor Object returned from any Cursor Object creation Or retrieval functions. Must not be a Table Cursor.
+;                  $sFrameName          - [optional] Default is Null. The Name of the Frame to Create.
+;                  $iWidth              - [optional] Default is Null. The width of the Frame to create. Set in Hundredths of a Millimeter (HMM). Min. 51 (HMM).
+;                  $iHeight             - [optional] Default is Null. The Height of the Frame to create. Set in Hundredths of a Millimeter (HMM). Min. 51 (HMM).
+;                  $bOverwrite          - [optional] Default is False. If True, content selected by Cursor is overwritten., Else Frame is inserted after the selection.
 ; Return values .: Success: Object
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Frame was created successfully and inserted at cursor position. Returning Frame Object.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oCursor is a Table Cursor, cannot insert a Frame using a Table Cursor.
-;                  @Error 1 @Extended 4 Return 0 = $bOverwrite not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $sFrameName not a String.
-;                  @Error 1 @Extended 6 Return 0 = Document already contains a Frame with same name as $sFrameName.
-;                  @Error 1 @Extended 7 Return 0 = $iWidth not an Integer, or less than 51 Hundredths of a Millimeter (HMM).
-;                  @Error 1 @Extended 8 Return 0 = $iHeight not an Integer, or less than 51 Hundredths of a Millimeter (HMM).
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, cannot insert a Frame using a Table Cursor.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $sFrameName not a String.
+;                  @Error: 1, @Extended: 6 = Document already contains a Frame with same name as $sFrameName.
+;                  @Error: 1, @Extended: 7 = $iWidth not an Integer, or less than 51 Hundredths of a Millimeter (HMM).
+;                  @Error: 1, @Extended: 8 = $iHeight not an Integer, or less than 51 Hundredths of a Millimeter (HMM).
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create "com.sun.star.text.TextFrame" Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Frame was created successfully and inserted at cursor position. Returning Frame Object.
+;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.text.TextFrame" Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LO_UnitConvert, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_TableCellCreateTextCursor, _LOWriter_FrameCreateTextCursor, _LOWriter_PageStyleHeaderCreateTextCursor, _LOWriter_PageStyleFooterCreateTextCursor, _LOWriter_EndnoteGetTextCursor, _LOWriter_FootnoteGetTextCursor
+; Related .......: _LO_UnitConvert, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor, _LOWriter_FrameDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1540,19 +1525,18 @@ EndFunc   ;==>_LOWriter_FrameCreate
 ; Name ..........: _LOWriter_FrameCreateTextCursor
 ; Description ...: Create a Text Cursor in a Frame for inserting text etc.
 ; Syntax ........: _LOWriter_FrameCreateTextCursor(ByRef $oFrame)
-; Parameters ....: $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
+; Parameters ....: $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
 ; Return values .: Success: Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. A Text Cursor Object located in the Frame.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
+;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create a TextCursor.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. A Text Cursor Object located in the Frame.
+;                  @Error: 2, @Extended: 1 = Failed to create a TextCursor.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LOWriter_CursorMove _LOWriter_CursorInsertString
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LOWriter_CursorMove, _LOWriter_CursorInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1574,17 +1558,16 @@ EndFunc   ;==>_LOWriter_FrameCreateTextCursor
 ; Name ..........: _LOWriter_FrameDelete
 ; Description ...: Delete a Frame from the document.
 ; Syntax ........: _LOWriter_FrameDelete(ByRef $oDoc, ByRef $oFrame)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
 ; Return values .: Success: 1
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Frame was successfully deleted.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrame not an Object.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oFrame not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Frame was attempted to be deleted, but the document still contains a frame named the same.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Frame was successfully deleted.
+;                  @Error: 3, @Extended: 1 = Frame was attempted to be deleted, but the document still contains a frame named the same.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1614,23 +1597,22 @@ EndFunc   ;==>_LOWriter_FrameDelete
 ; Name ..........: _LOWriter_FrameExists
 ; Description ...: Check if a Document contains a Frame with the specified name.
 ; Syntax ........: _LOWriter_FrameExists(ByRef $oDoc, $sFrameName)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $sFrameName          - a string value. The Frame name to search for.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $sFrameName          - The Frame name to search for.
 ; Return values .: Success: Boolean
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Search was successful, If Frame was found matching $sFrameName True is Returned, else False
+;                  @Error: 0, @Extended: 1, Return: Boolean = Success. Search was successful, Frame found matching $sFrameName listed as a shape.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sFrameName not a String.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sFrameName not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Text Frames Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving Shapes Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Search was successful, If Frame was found matching $sFrameName True is Returned, else False
-;                  @Error 0 @Extended 1 Return Boolean = Success. Search was successful, Frame found matching $sFrameName listed as a shape.
+;                  @Error: 3, @Extended: 1 = Error retrieving Text Frames Object.
+;                  @Error: 3, @Extended: 2 = Error retrieving Shapes Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Some document types, such as docx, list frames as Shapes instead of TextFrames, so this function searches both.
-; Related .......: _LOWriter_FrameDelete
+; Related .......: _LOWriter_FrameDelete, _LOWriter_FramesGetNames, _LOWriter_FrameGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1656,7 +1638,7 @@ Func _LOWriter_FrameExists(ByRef $oDoc, $sFrameName)
 		For $i = 0 To $oShapes.getCount() - 1
 			If ($oShapes.getByIndex($i).Name() = $sFrameName) Then
 				If ($oShapes.getByIndex($i).supportsService("com.sun.star.drawing.Text")) And _
-						($oShapes.getByIndex($i).Text.ImplementationName() = "SwXTextFrame") And Not _
+						($oShapes.getByIndex($i).Text.supportsService("com.sun.star.text.TextFrame")) And Not _
 						$oShapes.getByIndex($i).getPropertySetInfo().hasPropertyByName("ActualSize") Then Return SetError($__LO_STATUS_SUCCESS, 2, True)
 			EndIf
 
@@ -1671,19 +1653,18 @@ EndFunc   ;==>_LOWriter_FrameExists
 ; Name ..........: _LOWriter_FrameGetAnchor
 ; Description ...: Create a Text Cursor at the Frame Anchor position.
 ; Syntax ........: _LOWriter_FrameGetAnchor(ByRef $oFrame)
-; Parameters ....: $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
+; Parameters ....: $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
 ; Return values .: Success: Object
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully returned the Frame Anchor.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
+;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to retrieve Frame anchor Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Successfully returned the Frame Anchor.
+;                  @Error: 2, @Extended: 1 = Failed to retrieve Frame anchor Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LOWriter_CursorMove, _LOWriter_CursorInsertString
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1705,22 +1686,21 @@ EndFunc   ;==>_LOWriter_FrameGetAnchor
 ; Name ..........: _LOWriter_FrameGetObjByCursor
 ; Description ...: Returns a Frame Object, for later Frame related functions.
 ; Syntax ........: _LOWriter_FrameGetObjByCursor(ByRef $oDoc, ByRef $oCursor)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oCursor             - [in/out] an object. A Cursor Object returned from any Cursor Object creation Or retrieval functions. Cursor object must be located in a Frame.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oCursor             - A Cursor Object returned from any Cursor Object creation Or retrieval functions. Cursor object must be located in a Frame.
 ; Return values .: Success: Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning an Object for the requested Frame.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oCursor not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oCursor not located in a Frame.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor not located in a Frame.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Frame Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Returning an Object for the requested Frame.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Frame Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorTextCursorCreate, _LOWriter_FrameCreateTextCursor, _LOWriter_FrameDelete
+; Related .......: _LOWriter_FrameGetObjByName, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1732,7 +1712,7 @@ Func _LOWriter_FrameGetObjByCursor(ByRef $oDoc, ByRef $oCursor)
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If (__LOWriter_Internal_CursorGetDataType($oDoc, $oCursor) <> $LOW_CURDATA_FRAME) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0) ; Cursor not in Frame
+	If Not $oCursor.Text.supportsService("com.sun.star.text.TextFrame") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0) ; Cursor not in Frame
 
 	$oFrame = $oDoc.TextFrames.getByName($oCursor.TextFrame.Name)
 	If Not IsObj($oFrame) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
@@ -1744,25 +1724,24 @@ EndFunc   ;==>_LOWriter_FrameGetObjByCursor
 ; Name ..........: _LOWriter_FrameGetObjByName
 ; Description ...: Retrieve a Frame Object by Name.
 ; Syntax ........: _LOWriter_FrameGetObjByName(ByRef $oDoc, $sFrameName)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $sFrameName          - a string value. The frame name to search for.
-; Return values .: Success: 0 or Object.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $sFrameName          - The frame name to search for.
+; Return values .: Success: 1 or Object.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. No matches found.
+;                  @Error: 0, @Extended: 1, Return: Object = Success. Successfully found requested Frame by name, returning Frame Object.
+;                  @Error: 0, @Extended: 2, Return: Object = Success. Successfully found requested Frame by name in Shapes list, returning Frame Object.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sFrameName not a String.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sFrameName not a String.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving TextFrame Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving Shapes Object.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve Frame Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. No matches found.
-;                  @Error 0 @Extended 1 Return Object = Success. Successfully found requested Frame by name, returning Frame Object.
-;                  @Error 0 @Extended 2 Return Object = Success. Successfully found requested Frame by name in Shapes list, returning Frame Object.
+;                  @Error: 3, @Extended: 1 = Error retrieving TextFrame Object.
+;                  @Error: 3, @Extended: 2 = Error retrieving Shapes Object.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve Frame Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FramesGetNames, _LOWriter_FrameDelete
+; Related .......: _LOWriter_FrameGetObjByCursor, _LOWriter_FramesGetNames, _LOWriter_FrameExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1792,7 +1771,7 @@ Func _LOWriter_FrameGetObjByName(ByRef $oDoc, $sFrameName)
 	If $oShapes.hasElements() Then
 		For $i = 0 To $oShapes.getCount() - 1
 			If ($oShapes.getByIndex($i).Name() = $sFrameName) Then
-				If ($oShapes.getByIndex($i).Text.ImplementationName() = "SwXTextFrame") Then
+				If ($oShapes.getByIndex($i).Text.supportsService("com.sun.star.text.TextFrame")) Then
 					$oFrame = $oShapes.getByIndex($i)
 					If Not IsObj($oFrame) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
@@ -1811,34 +1790,33 @@ EndFunc   ;==>_LOWriter_FrameGetObjByName
 ; Name ..........: _LOWriter_FrameHyperlink
 ; Description ...: Set or Retrieve Frame Hyperlink settings.
 ; Syntax ........: _LOWriter_FrameHyperlink(ByRef $oFrame[, $sURL = Null[, $sName = Null[, $sFrameTarget = Null[, $bServerSideMap = Null]]]])
-; Parameters ....: $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
-;                  $sURL                - [optional] a string value. Default is Null. The complete path to the file that you want to open.
-;                  $sName               - [optional] a string value. Default is Null. Name for the hyperlink.
-;                  $sFrameTarget        - [optional] a string value. Default is Null. Specify the name of the frame where you want to open the targeted file. See Constants, $LOW_FRAME_TARGET_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bServerSideMap      - [optional] a boolean value. Default is Null. If True, Uses a server-side image map.
+; Parameters ....: $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
+;                  $sURL                - [optional] Default is Null. The complete path to the file that you want to open.
+;                  $sName               - [optional] Default is Null. Name for the hyperlink.
+;                  $sFrameTarget        - [optional] Default is Null. Specify the name of the frame where you want to open the targeted file. See Constants, $LOW_FRAME_TARGET_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bServerSideMap      - [optional] Default is Null. If True, Uses a server-side image map.
 ; Return values .: Success: 1 or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sURL not a String
-;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 4 Return 0 = $sFrameTarget not a String.
-;                  @Error 1 @Extended 5 Return 0 = $sFrameTarget not equal to one of the Constants, $LOW_FRAME_TARGET_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $bServerSideMap not a boolean.
+;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
+;                  @Error: 1, @Extended: 2 = $sURL not a String
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $sFrameTarget not a String.
+;                  @Error: 1, @Extended: 5 = $sFrameTarget not equal to one of the Constants, $LOW_FRAME_TARGET_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $bServerSideMap not a boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sURL
 ;                  |                               2 = Error setting $sName
 ;                  |                               4 = Error setting $sFrameTarget
 ;                  |                               8 = Error setting $bServerSideMap
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LOWriter_CursorHyperlink
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1899,27 +1877,29 @@ EndFunc   ;==>_LOWriter_FrameHyperlink
 ; Name ..........: _LOWriter_FrameOptions
 ; Description ...: Set or Retrieve Frame Options.
 ; Syntax ........: _LOWriter_FrameOptions(ByRef $oFrame[, $bProtectContent = Null[, $bProtectPos = Null[, $bProtectSize = Null[, $iVertAlign = Null[, $bEditInRead = Null[, $bPrint = Null[, $iTxtDirection = Null]]]]]]])
-; Parameters ....: $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
-;                  $bProtectContent     - [optional] a boolean value. Default is Null. If True, Prevents changes to the contents of the frame.
-;                  $bProtectPos         - [optional] a boolean value. Default is Null. If True, Locks the position of the frame in the current document.
-;                  $bProtectSize        - [optional] a boolean value. Default is Null. If True, Locks the size of the frame.
-;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. Specifies the vertical alignment of the frame's content. See Constants, $LOW_PAR_TXT_ADJ_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bEditInRead         - [optional] a boolean value. Default is Null. If True, Allows you to edit the contents of a frame in a document that is read-only.
-;                  $bPrint              - [optional] a boolean value. Default is Null. If True, Includes the frame when you print the document.
-;                  $iTxtDirection       - [optional] an integer value (0-5). Default is Null. Specifies the preferred text flow direction in a frame. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+; Parameters ....: $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
+;                  $bProtectContent     - [optional] Default is Null. If True, Prevents changes to the contents of the frame.
+;                  $bProtectPos         - [optional] Default is Null. If True, Locks the position of the frame in the current document.
+;                  $bProtectSize        - [optional] Default is Null. If True, Locks the size of the frame.
+;                  $iVertAlign          - [optional] (0-2) Default is Null. Specifies the vertical alignment of the frame's content. See Constants, $LOW_PAR_TXT_ADJ_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bEditInRead         - [optional] Default is Null. If True, Allows you to edit the contents of a frame in a document that is read-only.
+;                  $bPrint              - [optional] Default is Null. If True, Includes the frame when you print the document.
+;                  $iTxtDirection       - [optional] (0-5) Default is Null. Specifies the preferred text flow direction in a frame. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bProtectContent not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $bProtectPos not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bProtectSize not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants, $LOW_PAR_TXT_ADJ_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $bEditInRead not a Boolean.
-;                  @Error 1 @Extended 7 Return 0 = $bPrint not a Boolean.
-;                  @Error 1 @Extended 8 Return 0 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
+;                  @Error: 1, @Extended: 2 = $bProtectContent not a Boolean.
+;                  @Error: 1, @Extended: 3 = $bProtectPos not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bProtectSize not a Boolean.
+;                  @Error: 1, @Extended: 5 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants, $LOW_PAR_TXT_ADJ_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $bEditInRead not a Boolean.
+;                  @Error: 1, @Extended: 7 = $bPrint not a Boolean.
+;                  @Error: 1, @Extended: 8 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bProtectContent
 ;                  |                               2 = Error setting $bProtectPos
 ;                  |                               4 = Error setting $bProtectSize
@@ -1927,14 +1907,11 @@ EndFunc   ;==>_LOWriter_FrameHyperlink
 ;                  |                               16 = Error setting $bEditInRead
 ;                  |                               32 = Error setting $bPrint
 ;                  |                               64 = Error setting $iTxtDirection
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LOWriter_FrameOptionsName, _LOWriter_FrameWrapOptions, _LOWriter_FrameStyleOptions
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2010,38 +1987,37 @@ EndFunc   ;==>_LOWriter_FrameOptions
 ; Name ..........: _LOWriter_FrameOptionsName
 ; Description ...: Set or Retrieve Frame Name settings.
 ; Syntax ........: _LOWriter_FrameOptionsName(ByRef $oDoc, ByRef $oFrame[, $sName = Null[, $sDesc = Null[, $sPrevLink = Null[, $sNextLink = Null]]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
-;                  $sName               - [optional] a string value. Default is Null. Name for the Frame.
-;                  $sDesc               - [optional] a string value. Default is Null. Description of the Frame.
-;                  $sPrevLink           - [optional] a string value. Default is Null. The Frame Name that comes before the current Frame in a linked sequence. The current frame and the target frame must be empty. Call with "" to remove a linked frame.
-;                  $sNextLink           - [optional] a string value. Default is Null. The Frame Name that comes after the current Frame in a linked sequence. The current frame and the target frame must be empty. Call with "" to remove a linked frame.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
+;                  $sName               - [optional] Default is Null. Name for the Frame.
+;                  $sDesc               - [optional] Default is Null. Description of the Frame.
+;                  $sPrevLink           - [optional] Default is Null. The Frame Name that comes before the current Frame in a linked sequence. The current frame and the target frame must be empty. Call with "" to remove a linked frame.
+;                  $sNextLink           - [optional] Default is Null. The Frame Name that comes after the current Frame in a linked sequence. The current frame and the target frame must be empty. Call with "" to remove a linked frame.
 ; Return values .: Success: 1 or Array
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $sName not a String.
-;                  @Error 1 @Extended 4 Return 0 = Document already contains Frame with same name as $sName.
-;                  @Error 1 @Extended 5 Return 0 = $sDesc not a string.
-;                  @Error 1 @Extended 6 Return 0 = $sPrevLink not a String.
-;                  @Error 1 @Extended 7 Return 0 = Document does not contain Frame matching $sPrevLink.
-;                  @Error 1 @Extended 8 Return 0 = $sNextLink not a String.
-;                  @Error 1 @Extended 9 Return 0 = Document does not contain Frame matching $sNextLink
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oFrame not an Object.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = Document already contains Frame with same name as $sName.
+;                  @Error: 1, @Extended: 5 = $sDesc not a string.
+;                  @Error: 1, @Extended: 6 = $sPrevLink not a String.
+;                  @Error: 1, @Extended: 7 = Document does not contain Frame matching $sPrevLink.
+;                  @Error: 1, @Extended: 8 = $sNextLink not a String.
+;                  @Error: 1, @Extended: 9 = Document does not contain Frame matching $sNextLink
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sName
 ;                  |                               2 = Error setting $sDesc
 ;                  |                               4 = Error setting $sPrevLink
 ;                  |                               8 = Error setting $sNextLink
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LOWriter_FrameOptions
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2099,22 +2075,21 @@ EndFunc   ;==>_LOWriter_FrameOptionsName
 ; Name ..........: _LOWriter_FramesGetNames
 ; Description ...: Retrieve an array of names of all frames contained in a document.
 ; Syntax ........: _LOWriter_FramesGetNames(ByRef $oDoc[, $bSearchShapes = False])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $bSearchShapes       - [optional] a boolean value. Default is False. If True, function searches and adds any Frames listed as "Shapes" in the document to the array of Frame names. See remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $bSearchShapes       - [optional] Default is False. If True, function searches and adds any Frames listed as "Shapes" in the document to the array of Frame names. See remarks.
 ; Return values .: Success: Array of Strings.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: ?, Return: Array = Returning Array of Frame names. @Extended set to number of Frame Names returned.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bSearchShapes not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $bSearchShapes not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failure retrieving Frame objects.
-;                  @Error 3 @Extended 2 Return 0 = Failure retrieving Shape objects.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Returning Array of Frame names. @Extended set to number of Frame Names returned.
+;                  @Error: 3, @Extended: 1 = Failure retrieving Frame objects.
+;                  @Error: 3, @Extended: 2 = Failure retrieving Shape objects.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: In Docx (and possibly other formats) Frames seem to be saved as "Shapes" instead of "Frames", if this function returns no results, or not the ones you expect, try setting $bSearchShapes to True.
-; Related .......: _LOWriter_FrameGetObjByName
+; Related .......: _LOWriter_FrameGetObjByName, _LOWriter_FrameExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2148,7 +2123,7 @@ Func _LOWriter_FramesGetNames(ByRef $oDoc, $bSearchShapes = False)
 			ReDim $asShapes[$oShapes.getCount()]
 			For $i = 0 To $oShapes.getCount() - 1
 				If $oShapes.getByIndex($i).supportsService("com.sun.star.drawing.Text") Then ; Determine if the Shape is an actual Frame or not.
-					If ($oShapes.getByIndex($i).Text.ImplementationName() = "SwXTextFrame") And Not _
+					If ($oShapes.getByIndex($i).Text.supportsService("com.sun.star.text.TextFrame")) And Not _
 							$oShapes.getByIndex($i).getPropertySetInfo().hasPropertyByName("ActualSize") Then
 						$asShapes[$iCount] = $oShapes.getByIndex($i).Name()
 						$iCount += 1
@@ -2175,34 +2150,33 @@ EndFunc   ;==>_LOWriter_FramesGetNames
 ; Name ..........: _LOWriter_FrameShadow
 ; Description ...: Set or Retrieve the shadow settings for a Frame.
 ; Syntax ........: _LOWriter_FrameShadow(ByRef $oFrame[, $iLocation = Null[, $iColor = Null[, $iWidth = Null]]])
-; Parameters ....: $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
-;                  $iLocation           - [optional] an integer value (0-4). Default is Null. The Location of the Frame Shadow, must be one of the Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3..
-;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The Color of the Frame shadow, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3..
-;                  $iWidth              - [optional] an integer value. Default is Null. The Width of the Frame Shadow set in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
+;                  $iLocation           - [optional] (0-4) Default is Null. The Location of the Frame Shadow, must be one of the Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3..
+;                  $iColor              - [optional] (0-16777215) Default is Null. The Color of the Frame shadow, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3..
+;                  $iWidth              - [optional] Default is Null. The Width of the Frame Shadow set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3..
-;                  @Error 1 @Extended 3 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $iWidth not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
+;                  @Error: 1, @Extended: 2 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3..
+;                  @Error: 1, @Extended: 3 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 4 = $iWidth not an Integer, or less than 0.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving ShadowFormat Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving ShadowFormat Object for Error checking.
+;                  @Error: 3, @Extended: 1 = Error retrieving ShadowFormat Object.
+;                  @Error: 3, @Extended: 2 = Error retrieving ShadowFormat Object for Error checking.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iLocation
 ;                  |                               2 = Error setting $iColor
 ;                  |                               4 = Error setting $iWidth
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  LibreOffice may change the shadow width +/- a Hundredth of a Millimeter.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, _LOWriter_FrameGetObjByCursor, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LOWriter_FrameStyleShadow
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2259,27 +2233,26 @@ EndFunc   ;==>_LOWriter_FrameShadow
 ; Name ..........: _LOWriter_FrameStyleAreaColor
 ; Description ...: Set or Retrieve background color settings for a Frame style.
 ; Syntax ........: _LOWriter_FrameStyleAreaColor(ByRef $oFrameStyle[, $iBackColor = Null])
-; Parameters ....: $oFrameStyle         - [in/out] an object. A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
-;                  $iBackColor          - [optional] an integer value (-1-16777215). Default is Null. The background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for "None".
+; Parameters ....: $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
+;                  $iBackColor          - [optional] (-1-16777215) Default is Null. The background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for "None".
 ; Return values .: Success: Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting as an Integer.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iBackColor not an Integer, less than -1 or greater than 16777215.
+;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error: 1, @Extended: 3 = $iBackColor not an Integer, less than -1 or greater than 16777215.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Background color.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve old Transparency value.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Background color.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iBackColor
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting as an Integer.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_FrameStyleAreaFillStyle, _LOWriter_FrameStyleAreaGradient, _LOWriter_FrameAreaColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2317,20 +2290,19 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaColor
 ; Name ..........: _LOWriter_FrameStyleAreaFillStyle
 ; Description ...: Retrieve what kind of background fill is active, if any.
 ; Syntax ........: _LOWriter_FrameStyleAreaFillStyle(ByRef $oFrameStyle)
-; Parameters ....: $oFrameStyle         - [in/out] an object. A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
+; Parameters ....: $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
 ; Return values .: Success: Integer
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOW_AREA_FILL_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
+;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Fill Style.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Integer = Success. Returning current background fill style. Return will be one of the constants $LOW_AREA_FILL_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Fill Style.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function is to help determine if a Gradient background, or a solid color background is currently active.
 ;                  This is useful because, if a Gradient is active, the solid color value is still present, and thus it would not be possible to determine which function should be used to retrieve the current values for, whether the Color function, or the Gradient function.
-; Related .......:
+; Related .......: _LOWriter_FrameStyleAreaColor, _LOWriter_FrameStyleAreaGradient, _LOWriter_FrameAreaFillStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2352,43 +2324,46 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaFillStyle
 ; Name ..........: _LOWriter_FrameStyleAreaGradient
 ; Description ...: Modify or retrieve the settings for Frame Style Background color Gradient.
 ; Syntax ........: _LOWriter_FrameStyleAreaGradient(ByRef $oDoc, ByRef $oFrameStyle[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oFrameStyle         - [in/out] an object. A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
-;                  $sGradientName       - [optional] a string value. Default is Null. A Preset Gradient Name. See remarks. See constants, $LOW_GRAD_NAME_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iType               - [optional] an integer value (-1-5). Default is Null. The gradient that you want to apply. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iIncrement          - [optional] an integer value. Default is Null. Specifies the number of steps of change color. Allowed values are: 0, 3 to 256. 0 = Automatic.
-;                  $iXCenter            - [optional] an integer value. Default is Null. The horizontal offset for the gradient, where 0% corresponds to the current horizontal location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" setting. Set in percentage, Min. 0%, Max 100%. $iType must be other than "Linear", or "Axial".
-;                  $iYCenter            - [optional] an integer value. Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage, Min. 0%, Max 100%. $iType must be other than "Linear", or "Axial".
-;                  $iAngle              - [optional] an integer value. Default is Null. The rotation angle for the gradient. Set in degrees, min 0, max 359 degrees. $iType must be other than "Radial".
-;                  $iTransitionStart    - [optional] an integer value. Default is Null. The amount by which you want to adjust the transparent area of the gradient. Set in percentage. Minimum is 0, Maximum is 100%.
-;                  $iFromColor          - [optional] an integer value (0-16777215). Default is Null. A color for the beginning point of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iToColor            - [optional] an integer value (0-16777215). Default is Null. A color for the endpoint of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iFromIntense        - [optional] an integer value. Default is Null. Enter the intensity for the color in the "From Color", where 0% corresponds to black, and 100 % to the selected color. Min. 0%, Max 100%
-;                  $iToIntense          - [optional] an integer value. Default is Null . Enter the intensity for the color in the "To Color", where 0% corresponds to black, and 100 % to the selected color. Min. 0%, Max 100%
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
+;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOW_GRAD_NAME_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iType               - [optional] (-1-5) Default is Null. The gradient that you want to apply. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iIncrement          - [optional] Default is Null. Specifies the number of steps of change color. Allowed values are: 0, 3 to 256. 0 = Automatic.
+;                  $iXCenter            - [optional] Default is Null. The horizontal offset for the gradient, where 0% corresponds to the current horizontal location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" setting. Set in percentage, Min. 0%, Max 100%. $iType must be other than "Linear", or "Axial".
+;                  $iYCenter            - [optional] Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage, Min. 0%, Max 100%. $iType must be other than "Linear", or "Axial".
+;                  $iAngle              - [optional] Default is Null. The rotation angle for the gradient. Set in degrees, min 0, max 359 degrees. $iType must be other than "Radial".
+;                  $iTransitionStart    - [optional] Default is Null. The amount by which you want to adjust the transparent area of the gradient. Set in percentage. Minimum is 0, Maximum is 100%.
+;                  $iFromColor          - [optional] (0-16777215) Default is Null. A color for the beginning point of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iToColor            - [optional] (0-16777215) Default is Null. A color for the endpoint of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iFromIntense        - [optional] Default is Null. Enter the intensity for the color in the "From Color", where 0% corresponds to black, and 100 % to the selected color. Min. 0%, Max 100%
+;                  $iToIntense          - [optional] Default is Null. Enter the intensity for the color in the "To Color", where 0% corresponds to black, and 100 % to the selected color. Min. 0%, Max 100%
 ; Return values .: Success: Integer or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 0, Return: 2 = Success. Gradient has been successfully turned off.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 4 Return 0 = $sGradientName Not a String.
-;                  @Error 1 @Extended 5 Return 0 = $iType Not an Integer, less than -1 or greater than 5. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3..
-;                  @Error 1 @Extended 6 Return 0 = $iIncrement Not an Integer, less than 3 but not 0, or greater than 256.
-;                  @Error 1 @Extended 7 Return 0 = $iXCenter Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 8 Return 0 = $iYCenter Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 9 Return 0 = $iAngle Not an Integer, less than 0 or greater than 359.
-;                  @Error 1 @Extended 10 Return 0 = $iTransitionStart Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 11 Return 0 = $iFromColor Not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 12 Return 0 = $iToColor Not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 13 Return 0 = $iFromIntense Not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 14 Return 0 = $iToIntense Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oFrameStyle not an Object.
+;                  @Error: 1, @Extended: 3 = $oFrameStyle not a Frame Style Object.
+;                  @Error: 1, @Extended: 4 = $sGradientName Not a String.
+;                  @Error: 1, @Extended: 5 = $iType Not an Integer, less than -1 or greater than 5. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3..
+;                  @Error: 1, @Extended: 6 = $iIncrement Not an Integer, less than 3 but not 0, or greater than 256.
+;                  @Error: 1, @Extended: 7 = $iXCenter Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 8 = $iYCenter Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 9 = $iAngle Not an Integer, less than 0 or greater than 359.
+;                  @Error: 1, @Extended: 10 = $iTransitionStart Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 11 = $iFromColor Not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 12 = $iToColor Not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 13 = $iFromIntense Not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 14 = $iToIntense Not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving "FillGradient" Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 Return 0 = Error creating Gradient Name.
-;                  @Error 3 @Extended 4 Return 0 = Error setting Gradient Name.
+;                  @Error: 3, @Extended: 1 = Error retrieving "FillGradient" Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 3 = Error creating Gradient Name.
+;                  @Error: 3, @Extended: 4 = Error setting Gradient Name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sGradientName
 ;                  |                               2 = Error setting $iType
 ;                  |                               4 = Error setting $iIncrement
@@ -2400,16 +2375,12 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaFillStyle
 ;                  |                               256 = Error setting $iToColor
 ;                  |                               512 = Error setting $iFromIntense
 ;                  |                               1024 = Error setting $iToIntense
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 0 Return 2 = Success. Gradient has been successfully turned off.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_FrameStyleAreaColor, _LOWriter_FrameStyleAreaGradientMulticolor, _LOWriter_FrameAreaGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2581,41 +2552,40 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FrameStyleAreaGradientMulticolor
-; Description ...: Set or Retrieve a Frame Style's Multicolor Gradient settings. See remarks.
+; Description ...: Set or Retrieve a Frame Style's Multicolor Gradient settings.
 ; Syntax ........: _LOWriter_FrameStyleAreaGradientMulticolor(ByRef $oFrameStyle[, $avColorStops = Null])
-; Parameters ....: $oFrameStyle         - [in/out] an object. A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
-;                  $avColorStops        - [optional] an array of variants. Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
+; Parameters ....: $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
+;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $avColorStops not an Array, or does not contain two columns.
-;                  @Error 1 @Extended 4 Return 0 = $avColorStops contains less than two rows.
-;                  @Error 1 @Extended 5 Return ? = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
-;                  @Error 1 @Extended 6 Return ? = ColorStop color not an Integer, less than 0 or greater than 16777215. Returning problem element index.
+;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error: 1, @Extended: 3 = $avColorStops not an Array, or does not contain two columns.
+;                  @Error: 1, @Extended: 4 = $avColorStops contains less than two rows.
+;                  @Error: 1, @Extended: 5 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
+;                  @Error: 1, @Extended: 6 = ColorStop color not an Integer, less than 0 or greater than 16777215. Returning problem element index.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create com.sun.star.awt.ColorStop Struct.
+;                  @Error: 2, @Extended: 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve FillGradient Struct.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve StopColor Struct.
-;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current version less than 7.6.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve FillGradient Struct.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve StopColor Struct.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColorStops
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
+;                  --Version Related Errors--
+;                  @Error: 6, @Extended: 1 = Current version less than 7.6.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Starting with version 7.6 LibreOffice introduced an option to have multiple color stops in a Gradient rather than just a beginning and an ending color, but as of yet, the option is not available in the User Interface. However it has been made available in the API.
 ;                  The returned array will contain two columns, the first column will contain the ColorStop offset values, a number between 0 and 1.0. The second column will contain an Integer, the color value, as a RGB Color Integer.
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOWriter_FrameStyleAreaTransparencyGradientMulti
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOWriter_FrameStyleAreaTransparencyGradientMulti, _LOWriter_FrameStyleAreaGradient, _LOWriter_FrameAreaGradientMulticolor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2694,27 +2664,26 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaGradientMulticolor
 ; Name ..........: _LOWriter_FrameStyleAreaTransparency
 ; Description ...: Modify or retrieve Transparency settings for a Frame style.
 ; Syntax ........: _LOWriter_FrameStyleAreaTransparency(ByRef $oFrameStyle[, $iTransparency = Null])
-; Parameters ....: $oFrameStyle         - [in/out] an object. A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
-;                  $iTransparency       - [optional] an integer value (0-100). Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
+; Parameters ....: $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
+;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iTransparency not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error: 1, @Extended: 3 = $iTransparency not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Transparency value.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Transparency value.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iTransparency
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LOWriter_FrameStyleAreaTransparencyGradient, _LOWriter_FrameAreaTransparency
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2747,35 +2716,38 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaTransparency
 ; Name ..........: _LOWriter_FrameStyleAreaTransparencyGradient
 ; Description ...: Modify or retrieve the Frame Style transparency gradient settings.
 ; Syntax ........: _LOWriter_FrameStyleAreaTransparencyGradient(ByRef $oDoc, ByRef $oFrameStyle[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oFrameStyle         - [in/out] an object. A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
-;                  $iType               - [optional] an integer value (-1-5). Default is Null. The type of transparency gradient to apply. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3. Call with $LOW_GRAD_TYPE_OFF to turn Transparency Gradient off.
-;                  $iXCenter            - [optional] an integer value (0-100). Default is Null. The horizontal offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
-;                  $iYCenter            - [optional] an integer value (0-100). Default is Null. The vertical offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
-;                  $iAngle              - [optional] an integer value (0-359). Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
-;                  $iTransitionStart    - [optional] an integer value (0-100). Default is Null. The amount by which you want to adjust the transparent area of the gradient. Set in percentage.
-;                  $iStart              - [optional] an integer value (0-100). Default is Null. The transparency value for the beginning point of the gradient, where 0% is fully opaque and 100% is fully transparent.
-;                  $iEnd                - [optional] an integer value (0-100). Default is Null. The transparency value for the endpoint of the gradient, where 0% is fully opaque and 100% is fully transparent.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
+;                  $iType               - [optional] (-1-5) Default is Null. The type of transparency gradient to apply. See Constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3. Call with $LOW_GRAD_TYPE_OFF to turn Transparency Gradient off.
+;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
+;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
+;                  $iAngle              - [optional] (0-359) Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
+;                  $iTransitionStart    - [optional] (0-100) Default is Null. The amount by which you want to adjust the transparent area of the gradient. Set in percentage.
+;                  $iStart              - [optional] (0-100) Default is Null. The transparency value for the beginning point of the gradient, where 0% is fully opaque and 100% is fully transparent.
+;                  $iEnd                - [optional] (0-100) Default is Null. The transparency value for the endpoint of the gradient, where 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
+;                  @Error: 0, @Extended: 0, Return: 2 = Success. Transparency Gradient has been successfully turned off.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 4 Return 0 = $iType not an Integer, less than -1 or greater than 5. See constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $iXCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 6 Return 0 = $iYCenter not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 7 Return 0 = $iAngle not an Integer, less than 0 or greater than 359.
-;                  @Error 1 @Extended 8 Return 0 = $iTransitionStart not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 9 Return 0 = $iStart not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 10 Return 0 = $iEnd not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oFrameStyle not an Object.
+;                  @Error: 1, @Extended: 3 = $oFrameStyle not a Frame Style Object.
+;                  @Error: 1, @Extended: 4 = $iType not an Integer, less than -1 or greater than 5. See constants, $LOW_GRAD_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iXCenter not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 6 = $iYCenter not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 7 = $iAngle not an Integer, less than 0 or greater than 359.
+;                  @Error: 1, @Extended: 8 = $iTransitionStart not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 9 = $iStart not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 10 = $iEnd not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving "FillTransparenceGradient" Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 Return 0 = Error creating Transparency Gradient Name.
-;                  @Error 3 @Extended 4 Return 0 = Error setting Transparency Gradient Name.
+;                  @Error: 3, @Extended: 1 = Error retrieving "FillTransparenceGradient" Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 3 = Error creating Transparency Gradient Name.
+;                  @Error: 3, @Extended: 4 = Error setting Transparency Gradient Name.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iType
 ;                  |                               2 = Error setting $iXCenter
 ;                  |                               4 = Error setting $iYCenter
@@ -2783,15 +2755,11 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaTransparency
 ;                  |                               16 = Error setting $iTransitionStart
 ;                  |                               32 = Error setting $iStart
 ;                  |                               64 = Error setting $iEnd
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings have been successfully set.
-;                  @Error 0 @Extended 0 Return 2 = Success. Transparency Gradient has been successfully turned off.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LOWriter_FrameStyleAreaTransparency, _LOWriter_FrameStyleAreaTransparencyGradientMulti, _LOWriter_FrameAreaTransparencyGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2934,41 +2902,40 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaTransparencyGradient
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FrameStyleAreaTransparencyGradientMulti
-; Description ...: Set or Retrieve a Frame Style's Multi Transparency Gradient settings. See remarks.
+; Description ...: Set or Retrieve a Frame Style's Multi Transparency Gradient settings.
 ; Syntax ........: _LOWriter_FrameStyleAreaTransparencyGradientMulti(ByRef $oFrameStyle[, $avColorStops = Null])
-; Parameters ....: $oFrameStyle         - [in/out] an object. A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
-;                  $avColorStops        - [optional] an array of variants. Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
+; Parameters ....: $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
+;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
+;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $avColorStops not an Array, or does not contain two columns.
-;                  @Error 1 @Extended 4 Return 0 = $avColorStops contains less than two rows.
-;                  @Error 1 @Extended 5 Return ? = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
-;                  @Error 1 @Extended 6 Return ? = ColorStop color not an Integer, less than 0 or greater than 100. Returning problem element index.
+;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error: 1, @Extended: 3 = $avColorStops not an Array, or does not contain two columns.
+;                  @Error: 1, @Extended: 4 = $avColorStops contains less than two rows.
+;                  @Error: 1, @Extended: 5 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
+;                  @Error: 1, @Extended: 6 = ColorStop color not an Integer, less than 0 or greater than 100. Returning problem element index.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Failed to create com.sun.star.awt.ColorStop Struct.
+;                  @Error: 2, @Extended: 1 = Failed to create com.sun.star.awt.ColorStop Struct.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve FillTransparenceGradient Struct.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve ColorStops Array.
-;                  @Error 3 @Extended 3 Return 0 = Failed to retrieve StopColor Struct.
-;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current version less than 7.6.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve FillTransparenceGradient Struct.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve StopColor Struct.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $avColorStops
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended ? Return Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
+;                  --Version Related Errors--
+;                  @Error: 6, @Extended: 1 = Current version less than 7.6.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Starting with version 7.6 LibreOffice introduced an option to have multiple Transparency stops in a Gradient rather than just a beginning and an ending value, but as of yet, the option is not available in the User Interface. However it has been made available in the API.
 ;                  The returned array will contain two columns, the first column will contain the ColorStop offset values, a number between 0 and 1.0. The second column will contain an Integer, the Transparency percentage value between 0 and 100%.
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOWriter_FrameStyleAreaGradientMulticolor
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOWriter_FrameStyleAreaTransparencyGradient, _LOWriter_FrameStyleAreaGradientMulticolor, _LOWriter_FrameAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3047,45 +3014,44 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaTransparencyGradientMulti
 ; Name ..........: _LOWriter_FrameStyleBorderColor
 ; Description ...: Set or retrieve the Frame Style Border Line Color. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_FrameStyleBorderColor(ByRef $oFrameStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oFrameStyle         - [in/out] an object. A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
-;                  $iTop                - [optional] an integer value (0-16777215). Default is Null. The Top Border Line Color of the Frame, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iBottom             - [optional] an integer value (0-16777215). Default is Null. The Bottom Border Line Color of the Frame, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iLeft               - [optional] an integer value (0-16777215). Default is Null. The Left Border Line Color of the Frame, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iRight              - [optional] an integer value (0-16777215). Default is Null. The Right Border Line Color of the Frame, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+; Parameters ....: $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
+;                  $iTop                - [optional] (0-16777215) Default is Null. The Top Border Line Color of the Frame, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iBottom             - [optional] (0-16777215) Default is Null. The Bottom Border Line Color of the Frame, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iLeft               - [optional] (0-16777215) Default is Null. The Left Border Line Color of the Frame, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iRight              - [optional] (0-16777215) Default is Null. The Right Border Line Color of the Frame, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iTop not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 4 Return 0 = $iBottom not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 5 Return 0 = $iLeft not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 6 Return 0 = $iRight not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error: 1, @Extended: 3 = $iTop not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 4 = $iBottom not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 5 = $iLeft not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 6 = $iRight not an Integer, less than 0 or greater than 16777215.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error: 2, @Extended: 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 Return 0 = Cannot set Top Border Color when Top Border width not set.
-;                  @Error 3 @Extended 3 Return 0 = Cannot set Bottom Border Color when Bottom Border width not set.
-;                  @Error 3 @Extended 4 Return 0 = Cannot set Left Border Color when Left Border width not set.
-;                  @Error 3 @Extended 5 Return 0 = Cannot set Right Border Color when Right Border width not set.
+;                  @Error: 3, @Extended: 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error: 3, @Extended: 2 = Cannot set Top Border Color when Top Border width not set.
+;                  @Error: 3, @Extended: 3 = Cannot set Bottom Border Color when Bottom Border width not set.
+;                  @Error: 3, @Extended: 4 = Cannot set Left Border Color when Left Border width not set.
+;                  @Error: 3, @Extended: 5 = Cannot set Right Border Color when Right Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 3.4.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_FrameStyleBorderWidth, _LOWriter_FrameStyleBorderStyle, _LOWriter_FrameStyleBorderPadding
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOWriter_FrameStyleBorderWidth, _LOWriter_FrameStyleBorderStyle, _LOWriter_FrameStyleBorderPadding, _LOWriter_FrameBorderColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3111,37 +3077,36 @@ EndFunc   ;==>_LOWriter_FrameStyleBorderColor
 ; Name ..........: _LOWriter_FrameStyleBorderPadding
 ; Description ...: Set or retrieve the Frame Style Border Padding settings.
 ; Syntax ........: _LOWriter_FrameStyleBorderPadding(ByRef $oFrameStyle[, $iAll = Null[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]]])
-; Parameters ....: $oFrameStyle         - [in/out] an object. A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
-;                  $iAll                - [optional] an integer value. Default is Null. Set all four padding distances to one distance in Hundredths of a Millimeter (HMM).
-;                  $iTop                - [optional] an integer value. Default is Null. The Top Distance between the Border and Frame contents in Hundredths of a Millimeter (HMM).
-;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom Distance between the Border and Frame contents in Hundredths of a Millimeter (HMM).
-;                  $iLeft               - [optional] an integer value. Default is Null. The Left Distance between the Border and Frame contents in Hundredths of a Millimeter (HMM).
-;                  $iRight              - [optional] an integer value. Default is Null. The Right Distance between the Border and Frame contents in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
+;                  $iAll                - [optional] Default is Null. Set all four padding distances to one distance in Hundredths of a Millimeter (HMM).
+;                  $iTop                - [optional] Default is Null. The Top Distance between the Border and Frame contents in Hundredths of a Millimeter (HMM).
+;                  $iBottom             - [optional] Default is Null. The Bottom Distance between the Border and Frame contents in Hundredths of a Millimeter (HMM).
+;                  $iLeft               - [optional] Default is Null. The Left Distance between the Border and Frame contents in Hundredths of a Millimeter (HMM).
+;                  $iRight              - [optional] Default is Null. The Right Distance between the Border and Frame contents in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iAll not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = $iTop not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $iBottom not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $Left not an Integer.
-;                  @Error 1 @Extended 7 Return 0 = $iRight not an Integer.
+;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error: 1, @Extended: 3 = $iAll not an Integer.
+;                  @Error: 1, @Extended: 4 = $iTop not an Integer.
+;                  @Error: 1, @Extended: 5 = $iBottom not an Integer.
+;                  @Error: 1, @Extended: 6 = $Left not an Integer.
+;                  @Error: 1, @Extended: 7 = $iRight not an Integer.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iAll border distance
 ;                  |                               2 = Error setting $iTop border distance
 ;                  |                               4 = Error setting $iBottom border distance
 ;                  |                               8 = Error setting $iLeft border distance
 ;                  |                               16 = Error setting $iRight border distance
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName, _LO_UnitConvert, _LOWriter_FrameStyleBorderWidth, _LOWriter_FrameStyleBorderStyle, _LOWriter_FrameStyleBorderColor
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LO_UnitConvert, _LOWriter_FrameStyleBorderWidth, _LOWriter_FrameStyleBorderStyle, _LOWriter_FrameStyleBorderColor, _LOWriter_FrameBorderPadding
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3204,45 +3169,44 @@ EndFunc   ;==>_LOWriter_FrameStyleBorderPadding
 ; Name ..........: _LOWriter_FrameStyleBorderStyle
 ; Description ...: Set or Retrieve the Frame Style Border Line style. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_FrameStyleBorderStyle(ByRef $oFrameStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oFrameStyle         - [in/out] an object. A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
-;                  $iTop                - [optional] an integer value (0x7FFF-17). Default is Null. The Top Border Line Style of the Frame. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBottom             - [optional] an integer value (0x7FFF-17). Default is Null. The Bottom Border Line Style of the Frame. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iLeft               - [optional] an integer value (0x7FFF-17). Default is Null. The Left Border Line Style of the Frame. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iRight              - [optional] an integer value (0x7FFF-17). Default is Null. The Right Border Line Style of the Frame. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+; Parameters ....: $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
+;                  $iTop                - [optional] (0x7FFF-17) Default is Null. The Top Border Line Style of the Frame. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iBottom             - [optional] (0x7FFF-17) Default is Null. The Bottom Border Line Style of the Frame. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iLeft               - [optional] (0x7FFF-17) Default is Null. The Left Border Line Style of the Frame. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRight              - [optional] (0x7FFF-17) Default is Null. The Right Border Line Style of the Frame. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error: 1, @Extended: 3 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOW_BORDER_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error: 2, @Extended: 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
-;                  @Error 3 @Extended 2 Return 0 = Cannot set Top Border Style when Top Border width not set.
-;                  @Error 3 @Extended 3 Return 0 = Cannot set Bottom Border Style when Bottom Border width not set.
-;                  @Error 3 @Extended 4 Return 0 = Cannot set Left Border Style when Left Border width not set.
-;                  @Error 3 @Extended 5 Return 0 = Cannot set Right Border Style when Right Border width not set.
+;                  @Error: 3, @Extended: 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error: 3, @Extended: 2 = Cannot set Top Border Style when Top Border width not set.
+;                  @Error: 3, @Extended: 3 = Cannot set Bottom Border Style when Bottom Border width not set.
+;                  @Error: 3, @Extended: 4 = Cannot set Left Border Style when Left Border width not set.
+;                  @Error: 3, @Extended: 5 = Cannot set Right Border Style when Right Border width not set.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 3.4.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Border Width must be set first to be able to set Border Style and Color.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName, _LOWriter_FrameStyleBorderWidth, _LOWriter_FrameStyleBorderColor, _LOWriter_FrameStyleBorderPadding
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LOWriter_FrameStyleBorderWidth, _LOWriter_FrameStyleBorderColor, _LOWriter_FrameStyleBorderPadding, _LOWriter_FrameBorderStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3268,41 +3232,40 @@ EndFunc   ;==>_LOWriter_FrameStyleBorderStyle
 ; Name ..........: _LOWriter_FrameStyleBorderWidth
 ; Description ...: Set or Retrieve the Frame Style Border Line Width. LibreOffice Version 3.4 and Up.
 ; Syntax ........: _LOWriter_FrameStyleBorderWidth(ByRef $oFrameStyle[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oFrameStyle         - [in/out] an object. A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
-;                  $iTop                - [optional] an integer value. Default is Null. The Top Border Line width of the Frame in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iBottom             - [optional] an integer value. Default is Null. The Bottom Border Line Width of the Frame in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iLeft               - [optional] an integer value. Default is Null. The Left Border Line width of the Frame in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iRight              - [optional] an integer value. Default is Null. The Right Border Line Width of the Frame in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+; Parameters ....: $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
+;                  $iTop                - [optional] Default is Null. The Top Border Line width of the Frame in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iBottom             - [optional] Default is Null. The Bottom Border Line Width of the Frame in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iLeft               - [optional] Default is Null. The Left Border Line width of the Frame in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iRight              - [optional] Default is Null. The Right Border Line Width of the Frame in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOW_BORDER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iTop not an Integer, or less than 0.
-;                  @Error 1 @Extended 4 Return 0 = $iBottom not an Integer, or less than 0.
-;                  @Error 1 @Extended 5 Return 0 = $iLeft not an Integer, or less than 0.
-;                  @Error 1 @Extended 6 Return 0 = $iRight not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error: 1, @Extended: 3 = $iTop not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 4 = $iBottom not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 5 = $iLeft not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 6 = $iRight not an Integer, or less than 0.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating Object "com.sun.star.table.BorderLine2"
+;                  @Error: 2, @Extended: 1 = Error Creating Object "com.sun.star.table.BorderLine2"
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Internal command error. More than one parameter called with True. UDF Must be fixed.
+;                  @Error: 3, @Extended: 1 = Internal command error. More than one parameter called with True. UDF Must be fixed.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iTop
 ;                  |                               2 = Error setting $iBottom
 ;                  |                               4 = Error setting $iLeft
 ;                  |                               8 = Error setting $iRight
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 3.4.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 3.4.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To "Turn Off" Borders, set Width to 0
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName, _LO_UnitConvert, _LOWriter_FrameStyleBorderStyle, _LOWriter_FrameStyleBorderColor, _LOWriter_FrameStyleBorderPadding
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LO_UnitConvert, _LOWriter_FrameStyleBorderStyle, _LOWriter_FrameStyleBorderColor, _LOWriter_FrameStyleBorderPadding, _LOWriter_FrameBorderWidth
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3328,42 +3291,41 @@ EndFunc   ;==>_LOWriter_FrameStyleBorderWidth
 ; Name ..........: _LOWriter_FrameStyleColumnSeparator
 ; Description ...: Modify or retrieve Frame Style Column Separator line settings.
 ; Syntax ........: _LOWriter_FrameStyleColumnSeparator(ByRef $oFrameStyle[, $bSeparatorOn = Null[, $iStyle = Null[, $iWidth = Null[, $iColor = Null[, $iHeight = Null[, $iPosition = Null]]]]]])
-; Parameters ....: $oFrameStyle         - [in/out] an object. A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
-;                  $bSeparatorOn        - [optional] a boolean value. Default is Null. If True, add a separator line between two or more columns.
-;                  $iStyle              - [optional] an integer value (0-3). Default is Null. The formatting style for the column separator line. See Constants, $LOW_LINE_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iWidth              - [optional] an integer value (5-180). Default is Null. The width of the separator line. Set in Hundredths of a Millimeter (HMM).
-;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The separator line color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iHeight             - [optional] an integer value (0-100). Default is Null. The length of the separator line as a percentage of the height of the column area.
-;                  $iPosition           - [optional] an integer value (0-2). Default is Null. Select the vertical alignment of the separator line. This option is only available if Height value of the line is less than 100%. See Constants, $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+; Parameters ....: $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
+;                  $bSeparatorOn        - [optional] Default is Null. If True, add a separator line between two or more columns.
+;                  $iStyle              - [optional] (0-3) Default is Null. The formatting style for the column separator line. See Constants, $LOW_LINE_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iWidth              - [optional] (5-180) Default is Null. The width of the separator line. Set in Hundredths of a Millimeter (HMM).
+;                  $iColor              - [optional] (0-16777215) Default is Null. The separator line color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iHeight             - [optional] (0-100) Default is Null. The length of the separator line as a percentage of the height of the column area.
+;                  $iPosition           - [optional] (0-2) Default is Null. Select the vertical alignment of the separator line. This option is only available if Height value of the line is less than 100%. See Constants, $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $bSeparatorOn not a Boolean value.
-;                  @Error 1 @Extended 4 Return 0 = $iStyle not an Integer, less than 0 or greater than 3. See constants, $LOW_LINE_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $iWidth not an Integer, less than 5 or greater than 180.
-;                  @Error 1 @Extended 6 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 7 Return 0 = $iHeight not an Integer, less than 0 or greater than 100.
-;                  @Error 1 @Extended 8 Return 0 = $iPosition not an Integer, less than 0 or greater than 2. See constants, $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error: 1, @Extended: 3 = $bSeparatorOn not a Boolean value.
+;                  @Error: 1, @Extended: 4 = $iStyle not an Integer, less than 0 or greater than 3. See constants, $LOW_LINE_STYLE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iWidth not an Integer, less than 5 or greater than 180.
+;                  @Error: 1, @Extended: 6 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 7 = $iHeight not an Integer, less than 0 or greater than 100.
+;                  @Error: 1, @Extended: 8 = $iPosition not an Integer, less than 0 or greater than 2. See constants, $LOW_ALIGN_VERT_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Text Columns Object.
+;                  @Error: 3, @Extended: 1 = Error retrieving Text Columns Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bSeparatorOn
 ;                  |                               2 = Error setting $iStyle
 ;                  |                               4 = Error setting $iWidth
 ;                  |                               8 = Error setting $iColor
 ;                  |                               16 = Error setting $iHeight
 ;                  |                               32 = Error setting $iPosition
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LOWriter_FrameStyleColumnSettings, _LOWriter_FrameStyleColumnSize, _LOWriter_FrameColumnSeparator
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3439,28 +3401,27 @@ EndFunc   ;==>_LOWriter_FrameStyleColumnSeparator
 ; Name ..........: _LOWriter_FrameStyleColumnSettings
 ; Description ...: Set or retrieve Frame style Column count.
 ; Syntax ........: _LOWriter_FrameStyleColumnSettings(ByRef $oFrameStyle[, $iColumns = Null])
-; Parameters ....: $oFrameStyle         - [in/out] an object. A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
-;                  $iColumns            - [optional] an integer value. Default is Null. The number of columns that you want in the Frame. Min. 1.
+; Parameters ....: $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
+;                  $iColumns            - [optional] Default is Null. The number of columns that you want in the Frame. Min. 1.
 ; Return values .: Success: Integer.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current column count.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iColumns not an Integer, or less than 1.
+;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error: 1, @Extended: 3 = $iColumns not an Integer, or less than 1.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Text Columns Object.
-;                  @Error 3 @Extended 2 Return 0 = Failed to retrieve count of Text Columns.
+;                  @Error: 3, @Extended: 1 = Error retrieving Text Columns Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve count of Text Columns.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iColumns
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Integer = Success. All optional parameters were called with Null, returning current column count.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LOWriter_FrameStyleColumnSeparator, _LOWriter_FrameStyleColumnSize, _LOWriter_FrameColumnSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3498,44 +3459,43 @@ EndFunc   ;==>_LOWriter_FrameStyleColumnSettings
 ; Name ..........: _LOWriter_FrameStyleColumnSize
 ; Description ...: Set or retrieve Column sizing settings.
 ; Syntax ........: _LOWriter_FrameStyleColumnSize(ByRef $oFrameStyle, $iColumn[, $bAutoWidth = Null[, $iGlobalSpacing = Null[, $iSpacing = Null[, $iWidth = Null]]]])
-; Parameters ....: $oFrameStyle         - [in/out] an object. A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
-;                  $iColumn             - an integer value. The column to modify the settings on. See Remarks.
-;                  $bAutoWidth          - [optional] a boolean value. Default is Null. If True, Column Width is automatically adjusted.
-;                  $iGlobalSpacing      - [optional] an integer value. Default is Null. Set a spacing value for between all columns. Set in Hundredths of a Millimeter (HMM). See remarks.
-;                  $iSpacing            - [optional] an integer value. Default is Null. The Space between two columns, in Hundredths of a Millimeter (HMM). Cannot be set for the last column.
-;                  $iWidth              - [optional] an integer value. Default is Null. If $iGlobalSpacing is set to other than 0, enter the width of the column. Set in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
+;                  $iColumn             - The column to modify the settings on. See Remarks.
+;                  $bAutoWidth          - [optional] Default is Null. If True, Column Width is automatically adjusted.
+;                  $iGlobalSpacing      - [optional] Default is Null. Set a spacing value for between all columns. Set in Hundredths of a Millimeter (HMM). See remarks.
+;                  $iSpacing            - [optional] Default is Null. The Space between two columns, in Hundredths of a Millimeter (HMM). Cannot be set for the last column.
+;                  $iWidth              - [optional] Default is Null. If $iGlobalSpacing is set to other than 0, enter the width of the column. Set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iColumn not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = $iColumn greater than number of columns in the document or less than 1.
-;                  @Error 1 @Extended 5 Return 0 = $bAutoWidth not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $iGlobalSpacing not an Integer.
-;                  @Error 1 @Extended 7 Return 0 = $iSpacing not an Integer.
-;                  @Error 1 @Extended 8 Return 0 = $iWidth not an Integer.
+;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error: 1, @Extended: 3 = $iColumn not an Integer.
+;                  @Error: 1, @Extended: 4 = $iColumn greater than number of columns in the document or less than 1.
+;                  @Error: 1, @Extended: 5 = $bAutoWidth not a Boolean.
+;                  @Error: 1, @Extended: 6 = $iGlobalSpacing not an Integer.
+;                  @Error: 1, @Extended: 7 = $iSpacing not an Integer.
+;                  @Error: 1, @Extended: 8 = $iWidth not an Integer.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Text Columns Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving Frame Style Column Object Array.
-;                  @Error 3 @Extended 3 Return 0 = No columns present for requested Frame Style.
-;                  @Error 3 @Extended 4 Return 0 = Failed to retrieve array of Columns.
+;                  @Error: 3, @Extended: 1 = Error retrieving Text Columns Object.
+;                  @Error: 3, @Extended: 2 = Error retrieving Frame Style Column Object Array.
+;                  @Error: 3, @Extended: 3 = No columns present for requested Frame Style.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve array of Columns.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bAutoWidth
 ;                  |                               2 = Error setting $iGlobalSpacing
 ;                  |                               4 = Error setting $iSpacing
 ;                  |                               8 = Error setting $iWidth
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function will work fine for setting AutoWidth, and Spacing values, however Width will not work the best, Spacing etc is set in plain Hundredths of a Millimeter (HMM) values, however width is set in a relative value, and I am unable to find a way to be able to convert a specific value, such as 1" (2540 HMM) etc, to the appropriate relative value, especially when spacing is set.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  To set $bAutoWidth or $iGlobalSpacing you may enter any number in $iColumn as long as you are not setting width or spacing, as AutoWidth is not column specific. If you set a value for $iGlobalSpacing with $bAutoWidth set to False, the value is applied to all the columns still.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName, _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOWriter_FrameStyleColumnSeparator, _LOWriter_FrameStyleColumnSettings, _LOWriter_FrameColumnSize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3560,7 +3520,7 @@ Func _LOWriter_FrameStyleColumnSize(ByRef $oFrameStyle, $iColumn, $bAutoWidth = 
 	If ($oTextColumns.ColumnCount() <= 1) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 	If ($iColumn > UBound($atColumns)) Or ($iColumn < 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-	$iColumn = $iColumn - 1 ; Libre Columns Array is 0 based -- Minus one to compensate
+	$iColumn = $iColumn - 1 ; LibreOffice Columns Array is 0 based -- Minus one to compensate
 
 	If __LO_VarsAreNull($bAutoWidth, $iGlobalSpacing, $iSpacing, $iWidth) Then
 		If ($iColumn = (UBound($atColumns) - 1)) Then ; If last column is called, there is no spacing value, so return the outer margin, which will be 0.
@@ -3569,7 +3529,7 @@ Func _LOWriter_FrameStyleColumnSize(ByRef $oFrameStyle, $iColumn, $bAutoWidth = 
 
 		Else
 			__LO_ArrayFill($avColumnSize, $oTextColumns.IsAutomatic, $oTextColumns.AutomaticDistance(), _
-					$atColumns[$iColumn].RightMargin() + $atColumns[$iColumn + 1].LeftMargin(), $atColumns[$iColumn].Width())
+					($atColumns[$iColumn].RightMargin() + $atColumns[$iColumn + 1].LeftMargin()), $atColumns[$iColumn].Width())
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avColumnSize)
@@ -3663,26 +3623,25 @@ EndFunc   ;==>_LOWriter_FrameStyleColumnSize
 ; Name ..........: _LOWriter_FrameStyleCreate
 ; Description ...: Create a new Frame Style in a Document.
 ; Syntax ........: _LOWriter_FrameStyleCreate(ByRef $oDoc, $sFrameStyle)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $sFrameStyle         - a string value. The Name of the New Frame Style to Create.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $sFrameStyle         - The Name of the New Frame Style to Create.
 ; Return values .: Success: Object
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. New Frame Style successfully created. Returning its Object.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sFrameStyle not a String.
-;                  @Error 1 @Extended 3 Return 0 = $sFrameStyle name already exists in document.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sFrameStyle not a String.
+;                  @Error: 1, @Extended: 3 = $sFrameStyle name already exists in document.
 ;                  --Initialization Errors--
-;                  @Error 2 @Extended 1 Return 0 = Error Creating "com.sun.star.style.FrameStyle" Object.
+;                  @Error: 2, @Extended: 1 = Error Creating "com.sun.star.style.FrameStyle" Object.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error Retrieving "FrameStyles" Object.
-;                  @Error 3 @Extended 2 Return 0 = Error creating new Frame Style by Name.
-;                  @Error 3 @Extended 3 Return 0 = Error Retrieving New Frame Style Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. New Frame Style successfully created. Returning its Object.
+;                  @Error: 3, @Extended: 1 = Error Retrieving "FrameStyles" Object.
+;                  @Error: 3, @Extended: 2 = Error creating new Frame Style by Name.
+;                  @Error: 3, @Extended: 3 = Error Retrieving New Frame Style Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FrameStyleDelete
+; Related .......: _LOWriter_FrameStyleDelete, _LOWriter_FrameStyleExists, _LOWriter_FrameStyleGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3716,28 +3675,27 @@ EndFunc   ;==>_LOWriter_FrameStyleCreate
 ; Name ..........: _LOWriter_FrameStyleCurrent
 ; Description ...: Set or Retrieve the current Frame Style used for a Frame.
 ; Syntax ........: _LOWriter_FrameStyleCurrent(ByRef $oDoc, ByRef $oFrameObj[, $sFrameStyle = Null])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oFrameObj           - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
-;                  $sFrameStyle         - [optional] a string value. Default is Null. The Frame Style name to set the frame to.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oFrameObj           - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
+;                  $sFrameStyle         - [optional] Default is Null. The Frame Style name to set the frame to.
 ; Return values .: Success: 1 or String.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Frame Style successfully set.
+;                  @Error: 0, @Extended: 1, Return: String = Success. All optional parameters were called with Null, returning current Frame Style set for the Frame.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameObj not an Object.
-;                  @Error 1 @Extended 3 Return 0 = Object called in $oFrameObj not a Frame Object.
-;                  @Error 1 @Extended 4 Return 0 = $sFrameStyle not a String.
-;                  @Error 1 @Extended 5 Return 0 = Frame Style called in $sFrameStyle doesn't exist in Document.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oFrameObj not an Object.
+;                  @Error: 1, @Extended: 3 = Object called in $oFrameObj not a Frame Object.
+;                  @Error: 1, @Extended: 4 = $sFrameStyle not a String.
+;                  @Error: 1, @Extended: 5 = Frame Style called in $sFrameStyle doesn't exist in Document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve current Frame Style.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Frame Style.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sFrameStyle
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Frame Style successfully set.
-;                  @Error 0 @Extended 1 Return String = Success. All optional parameters were called with Null, returning current Frame Style set for the Frame.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByCursor, _LOWriter_FrameGetObjByName, _LOWriter_FrameStylesGetNames
 ; Link ..........:
 ; Example .......: Yes
@@ -3773,27 +3731,26 @@ EndFunc   ;==>_LOWriter_FrameStyleCurrent
 ; Name ..........: _LOWriter_FrameStyleDelete
 ; Description ...: Delete a User-Created Frame Style from a Document.
 ; Syntax ........: _LOWriter_FrameStyleDelete(ByRef $oDoc, $oFrameStyle[, $bForceDelete = False[, $sReplacementStyle = "Frame"]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oFrameStyle         - [in/out] an object. A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
-;                  $bForceDelete        - [optional] a boolean value. Default is False. If True, Frame style will be deleted regardless of whether it is in use or not.
-;                  $sReplacementStyle   - [optional] a string value. Default is "Frame". The Frame style to use instead of the one being deleted if the Frame style being deleted was already applied to a Frame in the document.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
+;                  $bForceDelete        - [optional] Default is False. If True, Frame style will be deleted regardless of whether it is in use or not.
+;                  $sReplacementStyle   - [optional] Default is "Frame". The Frame style to use instead of the one being deleted if the Frame style being deleted was already applied to a Frame in the document.
 ; Return values .: Success: 1
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Frame Style called in $sFrameStyle was successfully deleted.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 4 Return 0 = $bForceDelete not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $sReplacementStyle not a String.
-;                  @Error 1 @Extended 6 Return 0 = Frame Style called in $sReplacementStyle doesn't exist in Document.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oFrameStyle not an Object.
+;                  @Error: 1, @Extended: 3 = $oFrameStyle not a Frame Style Object.
+;                  @Error: 1, @Extended: 4 = $bForceDelete not a Boolean.
+;                  @Error: 1, @Extended: 5 = $sReplacementStyle not a String.
+;                  @Error: 1, @Extended: 6 = Frame Style called in $sReplacementStyle doesn't exist in Document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving "FrameStyles" Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving Frame Style Name.
-;                  @Error 3 @Extended 3 Return 0 = $sFrameStyle is not a User-Created Frame Style and cannot be deleted.
-;                  @Error 3 @Extended 4 Return 0 = $sFrameStyle is in use and $bForceDelete is False.
-;                  @Error 3 @Extended 5 Return 0 = $sFrameStyle still exists after deletion attempt.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Frame Style called in $sFrameStyle was successfully deleted.
+;                  @Error: 3, @Extended: 1 = Error retrieving "FrameStyles" Object.
+;                  @Error: 3, @Extended: 2 = Error retrieving Frame Style Name.
+;                  @Error: 3, @Extended: 3 = $sFrameStyle is not a User-Created Frame Style and cannot be deleted.
+;                  @Error: 3, @Extended: 4 = $sFrameStyle is in use and $bForceDelete is False.
+;                  @Error: 3, @Extended: 5 = $sFrameStyle still exists after deletion attempt.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -3838,19 +3795,18 @@ EndFunc   ;==>_LOWriter_FrameStyleDelete
 ; Name ..........: _LOWriter_FrameStyleExists
 ; Description ...: Check whether a Document contains a specific Frame Style by name.
 ; Syntax ........: _LOWriter_FrameStyleExists(ByRef $oDoc, $sFrameStyle)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $sFrameStyle         - a string value. The Frame Style Name to search for.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $sFrameStyle         - The Frame Style Name to search for.
 ; Return values .: Success: Boolean
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Document contains a Frame style matching the input name, else False.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sFrameStyle not a String.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Boolean = Success. Returning True if the Document contains a Frame style matching the input name, else False.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sFrameStyle not a String.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOWriter_FrameStylesGetNames, _LOWriter_FrameStyleCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3870,22 +3826,21 @@ EndFunc   ;==>_LOWriter_FrameStyleExists
 ; Name ..........: _LOWriter_FrameStyleGetObjByName
 ; Description ...: Retrieve a Frame Style Object for use with other Frame Style functions.
 ; Syntax ........: _LOWriter_FrameStyleGetObjByName(ByRef $oDoc, $sFrameStyle)
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $sFrameStyle         - a string value. The Frame Style name to retrieve the Object for.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $sFrameStyle         - The Frame Style name to retrieve the Object for.
 ; Return values .: Success: Object
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Frame Style successfully retrieved, returning its Object.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $sFrameStyle not a String.
-;                  @Error 1 @Extended 3 Return 0 = Frame Style called in $sFrameStyle not found in Document.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sFrameStyle not a String.
+;                  @Error: 1, @Extended: 3 = Frame Style called in $sFrameStyle not found in Document.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Frame Style Object.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return Object = Success. Frame Style successfully retrieved, returning its Object.
+;                  @Error: 3, @Extended: 1 = Error retrieving Frame Style Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOWriter_FrameStylesGetNames
+; Related .......: _LOWriter_FrameStylesGetNames, _LOWriter_FrameStyleExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3909,28 +3864,30 @@ EndFunc   ;==>_LOWriter_FrameStyleGetObjByName
 ; Name ..........: _LOWriter_FrameStyleOptions
 ; Description ...: Set or Retrieve Frame Style Options.
 ; Syntax ........: _LOWriter_FrameStyleOptions(ByRef $oFrameStyle[, $bProtectContent = Null[, $bProtectPos = Null[, $bProtectSize = Null[, $iVertAlign = Null[, $bEditInRead = Null[, $bPrint = Null[, $iTxtDirection = Null]]]]]]])
-; Parameters ....: $oFrameStyle         - [in/out] an object. A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
-;                  $bProtectContent     - [optional] a boolean value. Default is Null. If True, Prevents changes to the contents of the frame.
-;                  $bProtectPos         - [optional] a boolean value. Default is Null. If True, Locks the position of the frame in the current document.
-;                  $bProtectSize        - [optional] a boolean value. Default is Null. If True, Locks the size of the frame.
-;                  $iVertAlign          - [optional] an integer value (0-2). Default is Null. Specifies the vertical alignment of the frame's content. See Constants, $LOW_PAR_TXT_ADJ_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $bEditInRead         - [optional] a boolean value. Default is Null. If True, Allows you to edit the contents of a frame in a document that is read-only.
-;                  $bPrint              - [optional] a boolean value. Default is Null. If True, Includes the Frame when you print the document.
-;                  $iTxtDirection       - [optional] an integer value (0-5). Default is Null. Specifies the preferred text flow direction in a frame. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+; Parameters ....: $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
+;                  $bProtectContent     - [optional] Default is Null. If True, Prevents changes to the contents of the frame.
+;                  $bProtectPos         - [optional] Default is Null. If True, Locks the position of the frame in the current document.
+;                  $bProtectSize        - [optional] Default is Null. If True, Locks the size of the frame.
+;                  $iVertAlign          - [optional] (0-2) Default is Null. Specifies the vertical alignment of the frame's content. See Constants, $LOW_PAR_TXT_ADJ_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $bEditInRead         - [optional] Default is Null. If True, Allows you to edit the contents of a frame in a document that is read-only.
+;                  $bPrint              - [optional] Default is Null. If True, Includes the Frame when you print the document.
+;                  $iTxtDirection       - [optional] (0-5) Default is Null. Specifies the preferred text flow direction in a frame. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $bProtectContent not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bProtectPos not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $bProtectSize not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants, $LOW_PAR_TXT_ADJ_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 7 Return 0 = $bEditInRead not a Boolean.
-;                  @Error 1 @Extended 8 Return 0 = $bPrint not a Boolean.
-;                  @Error 1 @Extended 9 Return 0 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error: 1, @Extended: 3 = $bProtectContent not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bProtectPos not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bProtectSize not a Boolean.
+;                  @Error: 1, @Extended: 6 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants, $LOW_PAR_TXT_ADJ_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 7 = $bEditInRead not a Boolean.
+;                  @Error: 1, @Extended: 8 = $bPrint not a Boolean.
+;                  @Error: 1, @Extended: 9 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOW_PAR_TXT_DIR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bProtectContent
 ;                  |                               2 = Error setting $bProtectPos
 ;                  |                               4 = Error setting $bProtectSize
@@ -3938,14 +3895,11 @@ EndFunc   ;==>_LOWriter_FrameStyleGetObjByName
 ;                  |                               16 = Error setting $bEditInRead
 ;                  |                               32 = Error setting $bPrint
 ;                  |                               64 = Error setting $iTxtDirection
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LOWriter_FrameStyleOrganizer, _LOWriter_FrameStyleTypePosition, _LOWriter_FrameStyleTypeSize, _LOWriter_FrameStyleWrapOptions, _LOWriter_FrameOptions
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4022,40 +3976,40 @@ EndFunc   ;==>_LOWriter_FrameStyleOptions
 ; Name ..........: _LOWriter_FrameStyleOrganizer
 ; Description ...: Set or retrieve the Organizer settings of a Frame Style.
 ; Syntax ........: _LOWriter_FrameStyleOrganizer(ByRef $oDoc, $oFrameStyle[, $sNewFrameStyleName = Null[, $sParentStyle = Null[, $bAutoUpdate = Null[, $bHidden = Null]]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oFrameStyle         - [in/out] an object. A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
-;                  $sNewFrameStyleName  - [optional] a string value. Default is Null. The new name to set $sFrameStyle Frame style to.
-;                  $sParentStyle        - [optional] a string value. Default is Null. Set an existing Frame style (or an Empty String ("") = - None -) to apply its settings to the current style. Use the other settings to modify the inherited style settings.
-;                  $bAutoUpdate         - [optional] a boolean value. Default is Null. If True, Updates the style when you apply direct formatting to a Frame using this style in your document. The formatting of all Frames using this style is automatically updated.
-;                  $bHidden             - [optional] a boolean value. Default is Null. If True, hide the style in the UI. (Libre 4.0 and up only.)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
+;                  $sNewFrameStyleName  - [optional] Default is Null. The new name to set $sFrameStyle Frame style to.
+;                  $sParentStyle        - [optional] Default is Null. Set an existing Frame style (or an Empty String ("") = - None -) to apply its settings to the current style. Use the other settings to modify the inherited style settings.
+;                  $bAutoUpdate         - [optional] Default is Null. If True, Updates the style when you apply direct formatting to a Frame using this style in your document. The formatting of all Frames using this style is automatically updated.
+;                  $bHidden             - [optional] Default is Null. If True, hide the style in the UI. (LibreOffice 4.0 and up only.)
 ; Return values .: Success: 1 or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the $bHidden parameter will return a Null value.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 4 Return 0 = $sNewFrameStyleName not a String.
-;                  @Error 1 @Extended 5 Return 0 = A Frame style already exists in document by the name called in $sNewFrameStyleName .
-;                  @Error 1 @Extended 6 Return 0 = $sParentStyle not a String.
-;                  @Error 1 @Extended 7 Return 0 = Frame Style called in $sParentStyle doesn't exist in this Document.
-;                  @Error 1 @Extended 8 Return 0 = $bAutoUpdate not a Boolean.
-;                  @Error 1 @Extended 9 Return 0 = $bHidden not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oFrameStyle not an Object.
+;                  @Error: 1, @Extended: 3 = $oFrameStyle not a Frame Style Object.
+;                  @Error: 1, @Extended: 4 = $sNewFrameStyleName not a String.
+;                  @Error: 1, @Extended: 5 = A Frame style already exists in document by the name called in $sNewFrameStyleName.
+;                  @Error: 1, @Extended: 6 = Cannot rename built-in Frame Styles.
+;                  @Error: 1, @Extended: 7 = $sParentStyle not a String.
+;                  @Error: 1, @Extended: 8 = Frame Style called in $sParentStyle doesn't exist in this Document.
+;                  @Error: 1, @Extended: 9 = $bAutoUpdate not a Boolean.
+;                  @Error: 1, @Extended: 10 = $bHidden not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sNewFrameStyleName
 ;                  |                               2 = Error setting $sParentStyle
 ;                  |                               4 = Error setting $bAutoUpdate
 ;                  |                               8 = Error setting $bHidden
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.0.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 or 4 Element Array with values in order of function parameters. If the LibreOffice version is below 4.0, the Array will contain 3 elements because $bHidden is not available.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 4.0.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName, _LOWriter_FrameStylesGetNames
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName, _LOWriter_FrameStylesGetNames, _LOWriter_FrameStyleExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4075,7 +4029,7 @@ Func _LOWriter_FrameStyleOrganizer(ByRef $oDoc, $oFrameStyle, $sNewFrameStyleNam
 			__LO_ArrayFill($avOrganizer, $oFrameStyle.Name(), $oFrameStyle.ParentStyle(), $oFrameStyle.IsAutoUpdate(), $oFrameStyle.Hidden())
 
 		Else
-			__LO_ArrayFill($avOrganizer, $oFrameStyle.Name(), $oFrameStyle.ParentStyle(), $oFrameStyle.IsAutoUpdate())
+			__LO_ArrayFill($avOrganizer, $oFrameStyle.Name(), $oFrameStyle.ParentStyle(), $oFrameStyle.IsAutoUpdate(), Null)
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avOrganizer)
@@ -4084,30 +4038,31 @@ Func _LOWriter_FrameStyleOrganizer(ByRef $oDoc, $oFrameStyle, $sNewFrameStyleNam
 	If ($sNewFrameStyleName <> Null) Then
 		If Not IsString($sNewFrameStyleName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 		If _LOWriter_FrameStyleExists($oDoc, $sNewFrameStyleName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not $oFrameStyle.isUserDefined() Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oFrameStyle.Name = $sNewFrameStyleName
 		$iError = ($oFrameStyle.Name() = $sNewFrameStyleName) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($sParentStyle <> Null) Then
-		If Not IsString($sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not IsString($sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
 		If ($sParentStyle <> "") Then
-			If Not _LOWriter_FrameStyleExists($oDoc, $sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+			If Not _LOWriter_FrameStyleExists($oDoc, $sParentStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 		EndIf
 		$oFrameStyle.ParentStyle = $sParentStyle
 		$iError = ($oFrameStyle.ParentStyle() = $sParentStyle) ? ($iError) : (BitOR($iError, 2))
 	EndIf
 
 	If ($bAutoUpdate <> Null) Then
-		If Not IsBool($bAutoUpdate) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
+		If Not IsBool($bAutoUpdate) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
 
 		$oFrameStyle.IsAutoUpdate = $bAutoUpdate
 		$iError = ($oFrameStyle.IsAutoUpdate() = $bAutoUpdate) ? ($iError) : (BitOR($iError, 4))
 	EndIf
 
 	If ($bHidden <> Null) Then
-		If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
+		If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0)
 		If Not __LO_VersionCheck(4.0) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
 		$oFrameStyle.Hidden = $bHidden
@@ -4121,27 +4076,26 @@ EndFunc   ;==>_LOWriter_FrameStyleOrganizer
 ; Name ..........: _LOWriter_FrameStylesGetNames
 ; Description ...: Retrieve an array of all Frame Style names available for a document.
 ; Syntax ........: _LOWriter_FrameStylesGetNames(ByRef $oDoc[, $bUserOnly = False[, $bAppliedOnly = False[, $bDisplayName = False]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $bUserOnly           - [optional] a boolean value. Default is False. If True only User-Created Frame Styles are returned.
-;                  $bAppliedOnly        - [optional] a boolean value. Default is False. If True only Applied Frame Styles are returned.
-;                  $bDisplayName        - [optional] a boolean value. Default is False. If True, the style name displayed in the UI (Display Name), instead of the programmatic style name, is returned. See remarks.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $bUserOnly           - [optional] Default is False. If True only User-Created Frame Styles are returned.
+;                  $bAppliedOnly        - [optional] Default is False. If True only Applied Frame Styles are returned.
+;                  $bDisplayName        - [optional] Default is False. If True, the style name displayed in the UI (Display Name), instead of the programmatic style name, is returned. See remarks.
 ; Return values .: Success: Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. An Array containing all Frame Styles matching the called parameters. @Extended contains the count of results returned.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bUserOnly not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $bAppliedOnly not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bDisplayName not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $bUserOnly not a Boolean.
+;                  @Error: 1, @Extended: 3 = $bAppliedOnly not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bDisplayName not a Boolean.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Failed to retrieve Array of Frame Style names.
-;                  --Success--
-;                  @Error 0 @Extended ? Return Array = Success. An Array containing all Frame Styles matching the called parameters. @Extended contains the count of results returned.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Array of Frame Style names.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If only a Document object is called, all available Frame styles will be returned.
 ;                  If Both $bUserOnly and $bAppliedOnly are called with True, only User-Created styles that are applied are returned.
 ;                  Calling $bDisplayName with True will return a list of Style names, as the user sees them in the UI, in the same order as they are returned if $bDisplayName is False. It is best not to use these when setting Styling.
-; Related .......: _LOWriter_FrameStyleGetObjByName
+; Related .......: _LOWriter_FrameStyleGetObjByName, _LOWriter_FrameStyleExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4166,35 +4120,34 @@ EndFunc   ;==>_LOWriter_FrameStylesGetNames
 ; Name ..........: _LOWriter_FrameStyleShadow
 ; Description ...: Set or Retrieve the shadow settings for a Frame Style.
 ; Syntax ........: _LOWriter_FrameStyleShadow(ByRef $oFrameStyle[, $iLocation = Null[, $iColor = Null[, $iWidth = Null]]])
-; Parameters ....: $oFrameStyle         - [in/out] an object. A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
-;                  $iLocation           - [optional] an integer value (0-4). Default is Null. The Location of the Frame Shadow, must be one of the Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iColor              - [optional] an integer value (0-16777215). Default is Null. The Color of the Frame shadow, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iWidth              - [optional] an integer value. Default is Null. The Width of the Frame Shadow set in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
+;                  $iLocation           - [optional] (0-4) Default is Null. The Location of the Frame Shadow, must be one of the Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iColor              - [optional] (0-16777215) Default is Null. The Color of the Frame shadow, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
+;                  $iWidth              - [optional] Default is Null. The Width of the Frame Shadow set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error 1 @Extended 5 Return 0 = $iWidth not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error: 1, @Extended: 3 = $iLocation not an Integer, less than 0 or greater than 4. See Constants, $LOW_SHADOW_LOCATION_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iColor not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 5 = $iWidth not an Integer, or less than 0.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving ShadowFormat Object.
-;                  @Error 3 @Extended 2 Return 0 = Error retrieving ShadowFormat Object for Error checking.
+;                  @Error: 3, @Extended: 1 = Error retrieving ShadowFormat Object.
+;                  @Error: 3, @Extended: 2 = Error retrieving ShadowFormat Object for Error checking.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iLocation
 ;                  |                               2 = Error setting $iColor
 ;                  |                               4 = Error setting $iWidth
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  LibreOffice may change the shadow width +/- a Hundredth of a Millimeter.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LOWriter_FrameShadow
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4252,32 +4205,34 @@ EndFunc   ;==>_LOWriter_FrameStyleShadow
 ; Name ..........: _LOWriter_FrameStyleTypePosition
 ; Description ...: Set or Retrieve Frame Style Position Settings.
 ; Syntax ........: _LOWriter_FrameStyleTypePosition(ByRef $oFrameStyle[, $iHorAlign = Null[, $iHorPos = Null[, $iHorRelation = Null[, $bMirror = Null[, $iVertAlign = Null[, $iVertPos = Null[, $iVertRelation = Null[, $bKeepInside = Null[, $iAnchorPos = Null]]]]]]]]])
-; Parameters ....: $oFrameStyle         - [in/out] an object. A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
-;                  $iHorAlign           - [optional] an integer value (0-3). Default is Null. The horizontal orientation of the Frame. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3. Can't be set if Anchor position is set to "As Character".
-;                  $iHorPos             - [optional] an integer value. Default is Null. The horizontal position of the Frame. set in Hundredths of a Millimeter (HMM). Only valid if $iHorAlign is set to $LOW_ORIENT_HORI_NONE().
-;                  $iHorRelation        - [optional] an integer value (0-8). Default is Null. The reference point for the selected horizontal alignment option. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3., and Remarks for acceptable values.
-;                  $bMirror             - [optional] a boolean value. Default is Null. If True, Reverses the current horizontal alignment settings on even pages.
-;                  $iVertAlign          - [optional] an integer value (0-9). Default is Null. The vertical orientation of the Frame. See Constants, $LOW_ORIENT_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iVertPos            - [optional] an integer value. Default is Null. The vertical position of the Frame. set in Hundredths of a Millimeter (HMM). Only valid if $iVertAlign is set to $LOW_ORIENT_VERT_NONE().
-;                  $iVertRelation       - [optional] an integer value (-1-9). Default is Null. The reference point for the selected vertical alignment option. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3., and Remarks for acceptable values.
-;                  $bKeepInside         - [optional] a boolean value. Default is Null. If True, Keeps the frame within the layout boundaries of the text that the frame is anchored to.
-;                  $iAnchorPos          - [optional] an integer value (0-2,4). Default is Null. Specify the anchoring options for the frame style. See Constants, $LOW_ANCHOR_AT_* as defined in LibreOfficeWriter_Constants.au3..
+; Parameters ....: $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
+;                  $iHorAlign           - [optional] (0-3) Default is Null. The horizontal orientation of the Frame. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3. Can't be set if Anchor position is set to "As Character".
+;                  $iHorPos             - [optional] Default is Null. The horizontal position of the Frame. set in Hundredths of a Millimeter (HMM). Only valid if $iHorAlign is set to $LOW_ORIENT_HORI_NONE().
+;                  $iHorRelation        - [optional] (0-8) Default is Null. The reference point for the selected horizontal alignment option. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3., and Remarks for acceptable values.
+;                  $bMirror             - [optional] Default is Null. If True, Reverses the current horizontal alignment settings on even pages.
+;                  $iVertAlign          - [optional] (0-9) Default is Null. The vertical orientation of the Frame. See Constants, $LOW_ORIENT_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iVertPos            - [optional] Default is Null. The vertical position of the Frame. set in Hundredths of a Millimeter (HMM). Only valid if $iVertAlign is set to $LOW_ORIENT_VERT_NONE().
+;                  $iVertRelation       - [optional] (-1-9) Default is Null. The reference point for the selected vertical alignment option. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3., and Remarks for acceptable values.
+;                  $bKeepInside         - [optional] Default is Null. If True, Keeps the frame within the layout boundaries of the text that the frame is anchored to.
+;                  $iAnchorPos          - [optional] (0-2, 4) Default is Null. Specify the anchoring options for the frame style. See Constants, $LOW_ANCHOR_AT_* as defined in LibreOfficeWriter_Constants.au3..
 ; Return values .: Success: 1 or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iHorAlign Not an Integer, less than 0 or greater than 3. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iHorPos not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $iHorRelation not an Integer, less than 0 or greater than 8. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3..
-;                  @Error 1 @Extended 6 Return 0 = $bMirror not a Boolean.
-;                  @Error 1 @Extended 7 Return 0 = $iVertAlign not an Integer, less than 0 or greater than 9. See Constants, $LOW_ORIENT_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 8 Return 0 = $iVertPos not an Integer.
-;                  @Error 1 @Extended 9 Return 0 = $iVertRelation Not an Integer, Less than -1 or greater than 9. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3..
-;                  @Error 1 @Extended 10 Return 0 = $bKeepInside not a Boolean.
-;                  @Error 1 @Extended 11 Return 0 = $iAnchorPos not an Integer, less than 0 or greater than 4, or equal to 3. See Constants, $LOW_ANCHOR_AT_* as defined in LibreOfficeWriter_Constants.au3..
+;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error: 1, @Extended: 3 = $iHorAlign Not an Integer, less than 0 or greater than 3. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iHorPos not an Integer.
+;                  @Error: 1, @Extended: 5 = $iHorRelation not an Integer, less than 0 or greater than 8. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3..
+;                  @Error: 1, @Extended: 6 = $bMirror not a Boolean.
+;                  @Error: 1, @Extended: 7 = $iVertAlign not an Integer, less than 0 or greater than 9. See Constants, $LOW_ORIENT_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 8 = $iVertPos not an Integer.
+;                  @Error: 1, @Extended: 9 = $iVertRelation Not an Integer, Less than -1 or greater than 9. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3..
+;                  @Error: 1, @Extended: 10 = $bKeepInside not a Boolean.
+;                  @Error: 1, @Extended: 11 = $iAnchorPos not an Integer, less than 0 or greater than 4, or equal to 3. See Constants, $LOW_ANCHOR_AT_* as defined in LibreOfficeWriter_Constants.au3..
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iHorAlign
 ;                  |                               2 = Error setting $iHorPos
 ;                  |                               4 = Error setting $iHorRelation
@@ -4287,13 +4242,10 @@ EndFunc   ;==>_LOWriter_FrameStyleShadow
 ;                  |                               64 = Error setting $iVertRelation
 ;                  |                               128 = Error setting $bKeepInside
 ;                  |                               256 = Error setting $iAnchorPos
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  $iHorRelation has varying acceptable values, depending on the current Anchor position and also the current $iHorAlign setting.
 ;                  The Following is a list of acceptable values per anchor position.
 ;                  # $LOW_ANCHOR_AT_PARAGRAPH(0) Accepts the following $iHorRelation Values:
@@ -4357,7 +4309,7 @@ EndFunc   ;==>_LOWriter_FrameStyleShadow
 ;                  - $LOW_RELATIVE_PAGE_PRINT (8),[For Horizontal Relation:], [Same as Page Text Area in L.O. UI] the frame is positioned considering the whole width available for text in the page, from the left to the right page margins.
 ;                  - $LOW_RELATIVE_PAGE_PRINT [For Vertical relation:], the frame is positioned considering the full height available for text, from top to bottom margins.
 ;                  - $LOW_RELATIVE_TEXT_LINE (9),[For Vertical relation:], the frame is positioned considering the height of the line of text where the anchor is placed.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName
+; Related .......: _LOWriter_FrameStyleTypeSize, _LOWriter_FrameStyleOptions, _LOWriter_FrameStyleWrapOptions, _LOWriter_FrameTypePosition, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4512,34 +4464,36 @@ EndFunc   ;==>_LOWriter_FrameStyleTypePosition
 ; Name ..........: _LOWriter_FrameStyleTypeSize
 ; Description ...: Set or Retrieve Frame Style Size related settings.
 ; Syntax ........: _LOWriter_FrameStyleTypeSize(ByRef $oDoc, ByRef $oFrameStyle[, $iWidth = Null[, $iRelativeWidth = Null[, $iWidthRelativeTo = Null[, $bAutoWidth = Null[, $iHeight = Null[, $iRelativeHeight = Null[, $iHeightRelativeTo = Null[, $bAutoHeight = Null[, $bKeepRatio = Null]]]]]]]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oFrameStyle         - [in/out] an object. A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
-;                  $iWidth              - [optional] an integer value. Default is Null. The width of the Frame, in Hundredths of a Millimeter (HMM). Min. 51.
-;                  $iRelativeWidth      - [optional] an integer value (0-254). Default is Null. Calculates the width of the frame as a percentage of the width of the page text area. 0 = (off).
-;                  $iWidthRelativeTo    - [optional] an integer value (0,7). Default is Null. Determines what 100% width means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
-;                  $bAutoWidth          - [optional] a boolean value. Default is Null. Automatically adjusts the width of a frame to match the contents of the frame. $iWidth becomes the minimum width the frame must be.
-;                  $iHeight             - [optional] an integer value. Default is Null. The height that you want for the Frame, in Hundredths of a Millimeter (HMM). Min. 51.
-;                  $iRelativeHeight     - [optional] an integer value (0-254). Default is Null. Calculates the Height of the frame as a percentage of the Height of the page text area. 0 = (off).
-;                  $iHeightRelativeTo   - [optional] an integer value (0,7). Default is Null. Determines what 100% Height means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
-;                  $bAutoHeight         - [optional] a boolean value. Default is Null. Automatically adjusts the height of a frame to match the contents of the frame. $iHeight becomes the minimum height the frame must be.
-;                  $bKeepRatio          - [optional] a boolean value. Default is Null. Maintains the height and width ratio when you change the width or the height setting.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
+;                  $iWidth              - [optional] Default is Null. The width of the Frame, in Hundredths of a Millimeter (HMM). Min. 51.
+;                  $iRelativeWidth      - [optional] (0-254) Default is Null. Calculates the width of the frame as a percentage of the width of the page text area. 0 = (off).
+;                  $iWidthRelativeTo    - [optional] (0, 7) Default is Null. Determines what 100% width means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
+;                  $bAutoWidth          - [optional] Default is Null. Automatically adjusts the width of a frame to match the contents of the frame. $iWidth becomes the minimum width the frame must be.
+;                  $iHeight             - [optional] Default is Null. The height that you want for the Frame, in Hundredths of a Millimeter (HMM). Min. 51.
+;                  $iRelativeHeight     - [optional] (0-254) Default is Null. Calculates the Height of the frame as a percentage of the Height of the page text area. 0 = (off).
+;                  $iHeightRelativeTo   - [optional] (0, 7) Default is Null. Determines what 100% Height means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
+;                  $bAutoHeight         - [optional] Default is Null. Automatically adjusts the height of a frame to match the contents of the frame. $iHeight becomes the minimum height the frame must be.
+;                  $bKeepRatio          - [optional] Default is Null. Maintains the height and width ratio when you change the width or the height setting.
 ; Return values .: Success: 1 or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters. If the current LibreOffice version is less than 4.3, then both $iWidthRelativeTo and $iHeightRelativeTo parameters will return a Null value.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 4 Return 0 = $iWidth Not an Integer, or less than 51.
-;                  @Error 1 @Extended 5 Return 0 = $iRelativeWidth not an Integer, less than 0 or greater than 254.
-;                  @Error 1 @Extended 6 Return 0 = $iWidthRelativeTo not an Integer, not equal to 0 and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 7 Return 0 = $bAutoWidth not a Boolean.
-;                  @Error 1 @Extended 8 Return 0 = $iHeight Not an Integer, or less than 51.
-;                  @Error 1 @Extended 9 Return 0 = $iRelativeHeight not an Integer, less than 0 or greater than 254.
-;                  @Error 1 @Extended 10 Return 0 = $iHeightRelativeTo not an Integer, not equal to 0 and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 11 Return 0 = $bAutoHeight not a Boolean.
-;                  @Error 1 @Extended 12 Return 0 = $bKeepRatio not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oFrameStyle not an Object.
+;                  @Error: 1, @Extended: 3 = $oFrameStyle not a Frame Style Object.
+;                  @Error: 1, @Extended: 4 = $iWidth Not an Integer, or less than 51.
+;                  @Error: 1, @Extended: 5 = $iRelativeWidth not an Integer, less than 0 or greater than 254.
+;                  @Error: 1, @Extended: 6 = $iWidthRelativeTo not an Integer, not equal to 0 and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 7 = $bAutoWidth not a Boolean.
+;                  @Error: 1, @Extended: 8 = $iHeight Not an Integer, or less than 51.
+;                  @Error: 1, @Extended: 9 = $iRelativeHeight not an Integer, less than 0 or greater than 254.
+;                  @Error: 1, @Extended: 10 = $iHeightRelativeTo not an Integer, not equal to 0 and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 11 = $bAutoHeight not a Boolean.
+;                  @Error: 1, @Extended: 12 = $bKeepRatio not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iWidth
 ;                  |                               2 = Error setting $iRelativeWidth
 ;                  |                               4 = Error setting $iWidthRelativeTo
@@ -4550,17 +4504,14 @@ EndFunc   ;==>_LOWriter_FrameStyleTypePosition
 ;                  |                               128 = Error setting $bAutoHeight
 ;                  |                               256 = Error setting $bKeepRatio
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.3.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 or 9 Element Array depending on current LibreOffice Version, If the current LibreOffice version is greater or equal to than 4.3, then a 9 element Array is returned, else 7 element array with both $iWidthRelativeTo and $iHeightRelativeTo skipped. Array Element values will be in order of function parameters.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 4.3.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function can successfully set "Keep Ratio" however when the user changes this setting in the UI, for some reason the applicable setting values are not updated, so this function may return incorrect values for "Keep Ratio".
 ;                  When Keep Ratio is set to True, setting Width/Height values via this function will not be kept in ratio.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName, _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOWriter_FrameStyleTypePosition, _LOWriter_FrameTypeSize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4569,7 +4520,7 @@ Func _LOWriter_FrameStyleTypeSize(ByRef $oDoc, ByRef $oFrameStyle, $iWidth = Nul
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $avSize[7]
+	Local $avSize[9]
 	Local Const $iCONST_AutoHW_OFF = 1, $iCONST_AutoHW_ON = 2
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -4584,9 +4535,9 @@ Func _LOWriter_FrameStyleTypeSize(ByRef $oDoc, ByRef $oFrameStyle, $iWidth = Nul
 					(($oFrameStyle.IsSyncHeightToWidth() And $oFrameStyle.IsSyncWidthToHeight()) ? (True) : (False)))
 
 		Else
-			__LO_ArrayFill($avSize, $oFrameStyle.Width(), $oFrameStyle.RelativeWidth(), _
-					($oFrameStyle.WidthType() = $iCONST_AutoHW_ON) ? (True) : (False), $oFrameStyle.Height(), _
-					$oFrameStyle.RelativeHeight(), ($oFrameStyle.SizeType() = $iCONST_AutoHW_ON) ? (True) : (False), _
+			__LO_ArrayFill($avSize, $oFrameStyle.Width(), $oFrameStyle.RelativeWidth(), Null, _
+					($oFrameStyle.WidthType() = $iCONST_AutoHW_ON) ? (True) : (False), $oFrameStyle.Height(), $oFrameStyle.RelativeHeight(), _
+					Null, ($oFrameStyle.SizeType() = $iCONST_AutoHW_ON) ? (True) : (False), _
 					(($oFrameStyle.IsSyncHeightToWidth() And $oFrameStyle.IsSyncWidthToHeight()) ? (True) : (False)))
 		EndIf
 
@@ -4674,39 +4625,38 @@ EndFunc   ;==>_LOWriter_FrameStyleTypeSize
 ; Name ..........: _LOWriter_FrameStyleWrap
 ; Description ...: Set or Retrieve Frame Style Wrap and Spacing settings.
 ; Syntax ........: _LOWriter_FrameStyleWrap(ByRef $oFrameStyle[, $iWrapType = Null[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]]])
-; Parameters ....: $oFrameStyle         - [in/out] an object. A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
-;                  $iWrapType           - [optional] an integer value (0-5). Default is Null. The way you want text to wrap around the frame. See Constants, $LOW_WRAP_MODE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iLeft               - [optional] an integer value. Default is Null. The amount of space that you want between the Left edge of the frame and the text. Set in Hundredths of a Millimeter (HMM).
-;                  $iRight              - [optional] an integer value. Default is Null. The amount of space that you want between the Right edge of the frame and the text. Set in Hundredths of a Millimeter (HMM).
-;                  $iTop                - [optional] an integer value. Default is Null. The amount of space that you want between the Top edge of the frame and the text. Set in Hundredths of a Millimeter (HMM).
-;                  $iBottom             - [optional] an integer value. Default is Null. The amount of space that you want between the Bottom edge of the frame and the text. Set in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
+;                  $iWrapType           - [optional] (0-5) Default is Null. The way you want text to wrap around the frame. See Constants, $LOW_WRAP_MODE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iLeft               - [optional] Default is Null. The amount of space that you want between the Left edge of the frame and the text. Set in Hundredths of a Millimeter (HMM).
+;                  $iRight              - [optional] Default is Null. The amount of space that you want between the Right edge of the frame and the text. Set in Hundredths of a Millimeter (HMM).
+;                  $iTop                - [optional] Default is Null. The amount of space that you want between the Top edge of the frame and the text. Set in Hundredths of a Millimeter (HMM).
+;                  $iBottom             - [optional] Default is Null. The amount of space that you want between the Bottom edge of the frame and the text. Set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $iWrapType not an Integer, less than 0 or greater than 5. See Constants, $LOW_WRAP_MODE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 4 Return 0 = $iLeft not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $iRight not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $iTop not an Integer.
-;                  @Error 1 @Extended 7 Return 0 = $iBottom not an Integer.
+;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error: 1, @Extended: 3 = $iWrapType not an Integer, less than 0 or greater than 5. See Constants, $LOW_WRAP_MODE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iLeft not an Integer.
+;                  @Error: 1, @Extended: 5 = $iRight not an Integer.
+;                  @Error: 1, @Extended: 6 = $iTop not an Integer.
+;                  @Error: 1, @Extended: 7 = $iBottom not an Integer.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Property Set Info Object.
+;                  @Error: 3, @Extended: 1 = Error retrieving Property Set Info Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iWrapType
 ;                  |                               2 = Error setting $iLeft
 ;                  |                               4 = Error setting $iRight
 ;                  |                               8 = Error setting $iTop
 ;                  |                               16 = Error setting $iBottom
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName, _LO_UnitConvert
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LO_UnitConvert, _LOWriter_FrameStyleWrapOptions, _LOWriter_FrameStyleTypePosition, _LOWriter_FrameWrap
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4785,32 +4735,31 @@ EndFunc   ;==>_LOWriter_FrameStyleWrap
 ; Name ..........: _LOWriter_FrameStyleWrapOptions
 ; Description ...: Set or Retrieve Frame Style Wrap Options.
 ; Syntax ........: _LOWriter_FrameStyleWrapOptions(ByRef $oFrameStyle[, $bFirstPar = Null[, $bInBackground = Null[, $bAllowOverlap = Null]]])
-; Parameters ....: $oFrameStyle         - [in/out] an object. A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
-;                  $bFirstPar           - [optional] a boolean value. Default is Null. If True, starts a new paragraph below the Frame.
-;                  $bInBackground       - [optional] a boolean value. Default is Null. If True, moves the selected Frame to the background. This option is only available with the "Through" wrap type.
-;                  $bAllowOverlap       - [optional] a boolean value. Default is Null. If True, the Frame is allowed to overlap another Frame. This option has no effect on wrap "Through" Frames, which can always overlap.
+; Parameters ....: $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
+;                  $bFirstPar           - [optional] Default is Null. If True, starts a new paragraph below the Frame.
+;                  $bInBackground       - [optional] Default is Null. If True, moves the selected Frame to the background. This option is only available with the "Through" wrap type.
+;                  $bAllowOverlap       - [optional] Default is Null. If True, the Frame is allowed to overlap another Frame. This option has no effect on wrap "Through" Frames, which can always overlap.
 ; Return values .: Success: 1 or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrameStyle not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrameStyle not a Frame Style Object.
-;                  @Error 1 @Extended 3 Return 0 = $bFirstPar not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bInBackground not a Boolean.
-;                  @Error 1 @Extended 5 Return 0 = $bAllowOverlap not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oFrameStyle not an Object.
+;                  @Error: 1, @Extended: 2 = $oFrameStyle not a Frame Style Object.
+;                  @Error: 1, @Extended: 3 = $bFirstPar not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bInBackground not a Boolean.
+;                  @Error: 1, @Extended: 5 = $bAllowOverlap not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bFirstPar
 ;                  |                               2 = Error setting $bInBackground
 ;                  |                               4 = Error setting $bAllowOverlap
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function may indicate the settings were set successfully when they haven't been if the appropriate wrap type, anchor type etc. hasn't been set before hand.
-; Related .......: _LOWriter_FrameStyleCreate, _LOWriter_FrameStyleGetObjByName
+; Related .......: _LOWriter_FrameStyleWrap, _LOWriter_FrameStyleOptions, _LOWriter_FrameWrapOptions
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4859,31 +4808,33 @@ EndFunc   ;==>_LOWriter_FrameStyleWrapOptions
 ; Name ..........: _LOWriter_FrameTypePosition
 ; Description ...: Set or Retrieve Frame Position Settings.
 ; Syntax ........: _LOWriter_FrameTypePosition(ByRef $oFrame[, $iHorAlign = Null[, $iHorPos = Null[, $iHorRelation = Null[, $bMirror = Null[, $iVertAlign = Null[, $iVertPos = Null[, $iVertRelation = Null[, $bKeepInside = Null[, $iAnchorPos = Null]]]]]]]]])
-; Parameters ....: $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
-;                  $iHorAlign           - [optional] an integer value (0-3). Default is Null. The horizontal orientation of the Frame. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3. Can't be set if Anchor position is set to "As Character".
-;                  $iHorPos             - [optional] an integer value. Default is Null. The horizontal position of the Frame. set in Hundredths of a Millimeter (HMM). Only valid if $iHorAlign is set to $LOW_ORIENT_HORI_NONE().
-;                  $iHorRelation        - [optional] an integer value (0-8). Default is Null. The reference point for the selected horizontal alignment option. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3, and Remarks for acceptable values.
-;                  $bMirror             - [optional] a boolean value. Default is Null. If True, Reverses the current horizontal alignment settings on even pages.
-;                  $iVertAlign          - [optional] an integer value (0-9). Default is Null. The vertical orientation of the Frame. See Constants, $LOW_ORIENT_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iVertPos            - [optional] an integer value. Default is Null. The vertical position of the Frame. set in Hundredths of a Millimeter (HMM). Only valid if $iVertAlign is set to $LOW_ORIENT_VERT_NONE().
-;                  $iVertRelation       - [optional] an integer value (-1-9). Default is Null. The reference point for the selected vertical alignment option. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3, and Remarks for acceptable values.
-;                  $bKeepInside         - [optional] a boolean value. Default is Null. If True, Keeps the frame within the layout boundaries of the text that the frame is anchored to.
-;                  $iAnchorPos          - [optional] an integer value(0-2,4). Default is Null. Specify the anchoring options for the frame. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3.
+; Parameters ....: $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
+;                  $iHorAlign           - [optional] (0-3) Default is Null. The horizontal orientation of the Frame. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3. Can't be set if Anchor position is set to "As Character".
+;                  $iHorPos             - [optional] Default is Null. The horizontal position of the Frame. set in Hundredths of a Millimeter (HMM). Only valid if $iHorAlign is set to $LOW_ORIENT_HORI_NONE().
+;                  $iHorRelation        - [optional] (0-8) Default is Null. The reference point for the selected horizontal alignment option. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3, and Remarks for acceptable values.
+;                  $bMirror             - [optional] Default is Null. If True, Reverses the current horizontal alignment settings on even pages.
+;                  $iVertAlign          - [optional] (0-9) Default is Null. The vertical orientation of the Frame. See Constants, $LOW_ORIENT_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iVertPos            - [optional] Default is Null. The vertical position of the Frame. set in Hundredths of a Millimeter (HMM). Only valid if $iVertAlign is set to $LOW_ORIENT_VERT_NONE().
+;                  $iVertRelation       - [optional] (-1-9) Default is Null. The reference point for the selected vertical alignment option. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3, and Remarks for acceptable values.
+;                  $bKeepInside         - [optional] Default is Null. If True, Keeps the frame within the layout boundaries of the text that the frame is anchored to.
+;                  $iAnchorPos          - [optional] (0-2, 4) Default is Null. Specify the anchoring options for the frame. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: 1 or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iHorAlign Not an Integer, less than 0 or greater than 3. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iHorPos not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = $iHorRelation not an Integer, less than 0 or greater than 8. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 5 Return 0 = $bMirror not a Boolean.
-;                  @Error 1 @Extended 6 Return 0 = $iVertAlign not an Integer, less than 0 or greater than 9. See Constants, $LOW_ORIENT_VERT_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 7 Return 0 = $iVertPos not an Integer.
-;                  @Error 1 @Extended 8 Return 0 = $iVertRelation Not an Integer, Less than -1 or greater than 9. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 9 Return 0 = $bKeepInside not a Boolean.
-;                  @Error 1 @Extended 10 Return 0 = $iAnchorPos not an Integer, less than 0 or greater than 4, or equal to 3. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
+;                  @Error: 1, @Extended: 2 = $iHorAlign Not an Integer, less than 0 or greater than 3. See Constants, $LOW_ORIENT_HORI_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iHorPos not an Integer.
+;                  @Error: 1, @Extended: 4 = $iHorRelation not an Integer, less than 0 or greater than 8. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $bMirror not a Boolean.
+;                  @Error: 1, @Extended: 6 = $iVertAlign not an Integer, less than 0 or greater than 9. See Constants, $LOW_ORIENT_VERT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 7 = $iVertPos not an Integer.
+;                  @Error: 1, @Extended: 8 = $iVertRelation Not an Integer, Less than -1 or greater than 9. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 9 = $bKeepInside not a Boolean.
+;                  @Error: 1, @Extended: 10 = $iAnchorPos not an Integer, less than 0 or greater than 4, or equal to 3. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iHorAlign
 ;                  |                               2 = Error setting $iHorPos
 ;                  |                               4 = Error setting $iHorRelation
@@ -4893,13 +4844,10 @@ EndFunc   ;==>_LOWriter_FrameStyleWrapOptions
 ;                  |                               64 = Error setting $iVertRelation
 ;                  |                               128 = Error setting $bKeepInside
 ;                  |                               256 = Error setting $iAnchorPos
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  $iHorRelation has varying acceptable values, depending on the current Anchor position and also the current $iHorAlign setting.
 ;                  The Following is a list of acceptable values per anchor position.
 ;                  # $LOW_ANCHOR_AT_PARAGRAPH(0) Accepts the following $iHorRelation Values:
@@ -4963,7 +4911,7 @@ EndFunc   ;==>_LOWriter_FrameStyleWrapOptions
 ;                  - $LOW_RELATIVE_PAGE_PRINT (8),[For Horizontal Relation:], [Same as Page Text Area in L.O. UI] the frame is positioned considering the whole width available for text in the page, from the left to the right page margins.
 ;                  - $LOW_RELATIVE_PAGE_PRINT [For Vertical relation:], the frame is positioned considering the full height available for text, from top to bottom margins.
 ;                  - $LOW_RELATIVE_TEXT_LINE (9),[For Vertical relation:], the frame is positioned considering the height of the line of text where the anchor is placed.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByCursor, _LOWriter_FrameGetObjByName
+; Related .......: _LOWriter_FrameTypeSize, _LOWriter_FrameStyleTypePosition, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5035,7 +4983,7 @@ Func _LOWriter_FrameTypePosition(ByRef $oFrame, $iHorAlign = Null, $iHorPos = Nu
 		; LibreOffice is a bit complex in this anchor setting; When set to "As Character", there aren't specific setting
 		;		values for "Baseline, "Character" and "Row", But For Baseline the VertOrientRelation value is 0, or
 		; "$LOW_RELATIVE_PARAGRAPH", For "Character", The VertOrientRelation value is still 0, and the "VertOrient" value (In the
-		; L.O. UI the furthest left drop down box)  is modified, which can be either $LOW_ORIENT_VERT_CHAR_TOP(1),
+		; L.O. UI the furthest left drop down box) is modified, which can be either $LOW_ORIENT_VERT_CHAR_TOP(1),
 		; $LOW_ORIENT_VERT_CHAR_CENTER(2), $LOW_ORIENT_VERT_CHAR_BOTTOM(3), depending on the current value of Top, Bottom and
 		; Center, or "From Bottom"/ "From Top", of "VertOrient". The same is true For "Row", which means when the anchor is set
 		; to "As Character", I need to first determine the the desired user setting, $LOW_RELATIVE_ROW(-1),
@@ -5117,33 +5065,35 @@ EndFunc   ;==>_LOWriter_FrameTypePosition
 ; Name ..........: _LOWriter_FrameTypeSize
 ; Description ...: Set or Retrieve Frame Size related settings.
 ; Syntax ........: _LOWriter_FrameTypeSize(ByRef $oDoc, ByRef $oFrame[, $iWidth = Null[, $iRelativeWidth = Null[, $iWidthRelativeTo = Null[, $bAutoWidth = Null[, $iHeight = Null[, $iRelativeHeight = Null[, $iHeightRelativeTo = Null[, $bAutoHeight = Null[, $bKeepRatio = Null]]]]]]]]])
-; Parameters ....: $oDoc                - [in/out] an object. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
-;                  $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
-;                  $iWidth              - [optional] an integer value. Default is Null. The width of the Frame, in Hundredths of a Millimeter (HMM). Min. 51.
-;                  $iRelativeWidth      - [optional] an integer value (0-254). Default is Null. Calculates the width of the frame as a percentage of the width of the page text area. Min. 0 (off). Max 254.
-;                  $iWidthRelativeTo    - [optional] an integer value (0,7). Default is Null. determines what 100% width means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
-;                  $bAutoWidth          - [optional] a boolean value. Default is Null. Automatically adjusts the width of a frame to match the contents of the frame. $iWidth becomes the minimum width the frame must be.
-;                  $iHeight             - [optional] an integer value. Default is Null. The height of the Frame, in Hundredths of a Millimeter (HMM). Min. 51.
-;                  $iRelativeHeight     - [optional] an integer value (0-254). Default is Null. Calculates the Height of the frame as a percentage of the Height of the page text area. Min. 0 (off). Max 254.
-;                  $iHeightRelativeTo   - [optional] an integer value (0,7). Default is Null. determines what 100% Height means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
-;                  $bAutoHeight         - [optional] a boolean value. Default is Null. Automatically adjusts the height of a frame to match the contents of the frame. $iHeight becomes the minimum height the frame must be.
-;                  $bKeepRatio          - [optional] a boolean value. Default is Null. Maintains the height and width ratio when you change the width or the height setting.
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
+;                  $iWidth              - [optional] Default is Null. The width of the Frame, in Hundredths of a Millimeter (HMM). Min. 51.
+;                  $iRelativeWidth      - [optional] (0-254) Default is Null. Calculates the width of the frame as a percentage of the width of the page text area. Min. 0 (off). Max 254.
+;                  $iWidthRelativeTo    - [optional] (0, 7) Default is Null. determines what 100% width means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
+;                  $bAutoWidth          - [optional] Default is Null. Automatically adjusts the width of a frame to match the contents of the frame. $iWidth becomes the minimum width the frame must be.
+;                  $iHeight             - [optional] Default is Null. The height of the Frame, in Hundredths of a Millimeter (HMM). Min. 51.
+;                  $iRelativeHeight     - [optional] (0-254) Default is Null. Calculates the Height of the frame as a percentage of the Height of the page text area. Min. 0 (off). Max 254.
+;                  $iHeightRelativeTo   - [optional] (0, 7) Default is Null. determines what 100% Height means: either text area (excluding margins) or the entire page (including margins). See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3. LibreOffice 4.3 and Up.
+;                  $bAutoHeight         - [optional] Default is Null. Automatically adjusts the height of a frame to match the contents of the frame. $iHeight becomes the minimum height the frame must be.
+;                  $bKeepRatio          - [optional] Default is Null. Maintains the height and width ratio when you change the width or the height setting.
 ; Return values .: Success: 1 or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 9 Element Array with values in order of function parameters. If the LibreOffice version is below 4.3, the $iWidthRelativeTo and $iHeightRelativeTo parameters will return a Null value.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oDoc not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 3 Return 0 = $iWidth Not an Integer, or less than 51.
-;                  @Error 1 @Extended 4 Return 0 = $iRelativeWidth not an Integer, less than 0 or greater than 254.
-;                  @Error 1 @Extended 5 Return 0 = $iWidthRelativeTo not an Integer, not equal to 0 and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 6 Return 0 = $bAutoWidth not a Boolean.
-;                  @Error 1 @Extended 7 Return 0 = $iHeight Not an Integer, or less than 51.
-;                  @Error 1 @Extended 8 Return 0 = $iRelativeHeight not an Integer, less than 0 or greater than 254.
-;                  @Error 1 @Extended 9 Return 0 = $iHeightRelativeTo not an Integer, not equal to 0 and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 10 Return 0 = $bAutoHeight not a Boolean.
-;                  @Error 1 @Extended 11 Return 0 = $bKeepRatio not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oFrame not an Object.
+;                  @Error: 1, @Extended: 3 = $iWidth Not an Integer, or less than 51.
+;                  @Error: 1, @Extended: 4 = $iRelativeWidth not an Integer, less than 0 or greater than 254.
+;                  @Error: 1, @Extended: 5 = $iWidthRelativeTo not an Integer, not equal to 0 and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $bAutoWidth not a Boolean.
+;                  @Error: 1, @Extended: 7 = $iHeight Not an Integer, or less than 51.
+;                  @Error: 1, @Extended: 8 = $iRelativeHeight not an Integer, less than 0 or greater than 254.
+;                  @Error: 1, @Extended: 9 = $iHeightRelativeTo not an Integer, not equal to 0 and not equal to 7. See Constants, $LOW_RELATIVE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 10 = $bAutoHeight not a Boolean.
+;                  @Error: 1, @Extended: 11 = $bKeepRatio not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iWidth
 ;                  |                               2 = Error setting $iRelativeWidth
 ;                  |                               4 = Error setting $iWidthRelativeTo
@@ -5154,16 +5104,13 @@ EndFunc   ;==>_LOWriter_FrameTypePosition
 ;                  |                               128 = Error setting $bAutoHeight
 ;                  |                               256 = Error setting $bKeepRatio
 ;                  --Version Related Errors--
-;                  @Error 6 @Extended 1 Return 0 = Current LibreOffice version lower than 4.3.
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 7 or 9 Element Array depending on current LibreOffice Version, If the current LibreOffice version is greater or equal to than 4.3, then a 9 element Array is returned, else 7 element array with both $iWidthRelativeTo and $iHeightRelativeTo skipped. Array Element values will be in order of function parameters.
+;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 4.3.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function can successfully set "Keep Ratio" however when the user changes this setting in the UI, for some reason the applicable setting values are not updated, so this function may return incorrect values for "Keep Ratio".
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByCursor, _LOWriter_FrameGetObjByName, _LO_UnitConvert
+; Related .......: _LO_UnitConvert, _LOWriter_FrameTypePosition, _LOWriter_FrameStyleTypeSize
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5172,7 +5119,7 @@ Func _LOWriter_FrameTypeSize(ByRef $oDoc, ByRef $oFrame, $iWidth = Null, $iRelat
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $avSize[7]
+	Local $avSize[9]
 	Local Const $iCONST_AutoHW_OFF = 1, $iCONST_AutoHW_ON = 2
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -5186,9 +5133,9 @@ Func _LOWriter_FrameTypeSize(ByRef $oDoc, ByRef $oFrame, $iWidth = Null, $iRelat
 					(($oFrame.IsSyncHeightToWidth() And $oFrame.IsSyncWidthToHeight()) ? (True) : (False)))
 
 		Else
-			__LO_ArrayFill($avSize, $oFrame.Width(), $oFrame.RelativeWidth(), _
-					($oFrame.WidthType() = $iCONST_AutoHW_ON) ? (True) : (False), $oFrame.Height(), _
-					$oFrame.RelativeHeight(), ($oFrame.SizeType() = $iCONST_AutoHW_ON) ? (True) : (False), _
+			__LO_ArrayFill($avSize, $oFrame.Width(), $oFrame.RelativeWidth(), Null, _
+					($oFrame.WidthType() = $iCONST_AutoHW_ON) ? (True) : (False), $oFrame.Height(), $oFrame.RelativeHeight(), _
+					Null, ($oFrame.SizeType() = $iCONST_AutoHW_ON) ? (True) : (False), _
 					(($oFrame.IsSyncHeightToWidth() And $oFrame.IsSyncWidthToHeight()) ? (True) : (False)))
 		EndIf
 
@@ -5276,38 +5223,37 @@ EndFunc   ;==>_LOWriter_FrameTypeSize
 ; Name ..........: _LOWriter_FrameWrap
 ; Description ...: Set or Retrieve Frame Wrap and Spacing settings.
 ; Syntax ........: _LOWriter_FrameWrap(ByRef $oFrame[, $iWrapType = Null[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]]])
-; Parameters ....: $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
-;                  $iWrapType           - [optional] an integer value (0-5). Default is Null. The way you want text to wrap around the frame. See Constants, $LOW_WRAP_MODE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  $iLeft               - [optional] an integer value. Default is Null. The amount of space that you want between the Left edge of the frame and the text. Set in Hundredths of a Millimeter (HMM).
-;                  $iRight              - [optional] an integer value. Default is Null. The amount of space that you want between the Right edge of the frame and the text. Set in Hundredths of a Millimeter (HMM).
-;                  $iTop                - [optional] an integer value. Default is Null. The amount of space that you want between the Top edge of the frame and the text. Set in Hundredths of a Millimeter (HMM).
-;                  $iBottom             - [optional] an integer value. Default is Null. The amount of space that you want between the Bottom edge of the frame and the text. Set in Hundredths of a Millimeter (HMM).
+; Parameters ....: $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
+;                  $iWrapType           - [optional] (0-5) Default is Null. The way you want text to wrap around the frame. See Constants, $LOW_WRAP_MODE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iLeft               - [optional] Default is Null. The amount of space that you want between the Left edge of the frame and the text. Set in Hundredths of a Millimeter (HMM).
+;                  $iRight              - [optional] Default is Null. The amount of space that you want between the Right edge of the frame and the text. Set in Hundredths of a Millimeter (HMM).
+;                  $iTop                - [optional] Default is Null. The amount of space that you want between the Top edge of the frame and the text. Set in Hundredths of a Millimeter (HMM).
+;                  $iBottom             - [optional] Default is Null. The amount of space that you want between the Bottom edge of the frame and the text. Set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $iWrapType not an Integer, less than 0 or greater than 5. See Constants, $LOW_WRAP_MODE_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error 1 @Extended 3 Return 0 = $iLeft not an Integer.
-;                  @Error 1 @Extended 4 Return 0 = $iRight not an Integer.
-;                  @Error 1 @Extended 5 Return 0 = $iTop not an Integer.
-;                  @Error 1 @Extended 6 Return 0 = $iBottom not an Integer.
+;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
+;                  @Error: 1, @Extended: 2 = $iWrapType not an Integer, less than 0 or greater than 5. See Constants, $LOW_WRAP_MODE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iLeft not an Integer.
+;                  @Error: 1, @Extended: 4 = $iRight not an Integer.
+;                  @Error: 1, @Extended: 5 = $iTop not an Integer.
+;                  @Error: 1, @Extended: 6 = $iBottom not an Integer.
 ;                  --Processing Errors--
-;                  @Error 3 @Extended 1 Return 0 = Error retrieving Property Set Info Object.
+;                  @Error: 3, @Extended: 1 = Error retrieving Property Set Info Object.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iWrapType
 ;                  |                               2 = Error setting $iLeft
 ;                  |                               4 = Error setting $iRight
 ;                  |                               8 = Error setting $iTop
 ;                  |                               16 = Error setting $iBottom
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByCursor, _LOWriter_FrameGetObjByName, _LO_UnitConvert
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LO_UnitConvert, _LOWriter_FrameWrapOptions, _LOWriter_FrameTypePosition, _LOWriter_FrameStyleWrapOptions
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -5386,32 +5332,31 @@ EndFunc   ;==>_LOWriter_FrameWrap
 ; Name ..........: _LOWriter_FrameWrapOptions
 ; Description ...: Set or Retrieve Frame Wrap Options.
 ; Syntax ........: _LOWriter_FrameWrapOptions(ByRef $oFrame[, $bFirstPar = Null[, $bInBackground = Null[, $bAllowOverlap = Null]]])
-; Parameters ....: $oFrame              - [in/out] an object. A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
-;                  $bFirstPar           - [optional] a boolean value. Default is Null. If True, starts a new paragraph below the object.
-;                  $bInBackground       - [optional] a boolean value. Default is Null. If True, moves the selected object to the background. This option is only available with the "Through" wrap type.
-;                  $bAllowOverlap       - [optional] a boolean value. Default is Null. If True, the object is allowed to overlap another object. This option has no effect on wrap "Through" objects, which can always overlap.
+; Parameters ....: $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
+;                  $bFirstPar           - [optional] Default is Null. If True, starts a new paragraph below the object.
+;                  $bInBackground       - [optional] Default is Null. If True, moves the selected object to the background. This option is only available with the "Through" wrap type.
+;                  $bAllowOverlap       - [optional] Default is Null. If True, the object is allowed to overlap another object. This option has no effect on wrap "Through" objects, which can always overlap.
 ; Return values .: Success: 1 or Array.
-;                  Failure: 0 and sets the @Error and @Extended flags to non-zero.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error 1 @Extended 1 Return 0 = $oFrame not an Object.
-;                  @Error 1 @Extended 2 Return 0 = $bFirstPar not a Boolean.
-;                  @Error 1 @Extended 3 Return 0 = $bInBackground not a Boolean.
-;                  @Error 1 @Extended 4 Return 0 = $bAllowOverlap not a Boolean.
+;                  @Error: 1, @Extended: 1 = $oFrame not an Object.
+;                  @Error: 1, @Extended: 2 = $bFirstPar not a Boolean.
+;                  @Error: 1, @Extended: 3 = $bInBackground not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bAllowOverlap not a Boolean.
 ;                  --Property Setting Errors--
-;                  @Error 4 @Extended ? Return 0 = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $bFirstPar
 ;                  |                               2 = Error setting $bInBackground
 ;                  |                               4 = Error setting $bAllowOverlap
-;                  --Success--
-;                  @Error 0 @Extended 0 Return 1 = Success. Settings were successfully set.
-;                  @Error 0 @Extended 1 Return Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Contour and Outside only, though shown on the L.O. UI, are not available for frames, as stated in the L.O. Offline help file.
-;                  Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current settings.
-;                  Call any optional parameter with Null keyword to skip it.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function may indicate the settings were set successfully when they haven't been if the appropriate wrap type, anchor type etc. hasn't been set before hand.
-; Related .......: _LOWriter_FrameCreate, _LOWriter_FrameGetObjByCursor, _LOWriter_FrameGetObjByName
+; Related .......: _LOWriter_FrameWrap, _LOWriter_FrameStyleWrapOptions
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
