@@ -205,6 +205,9 @@ While 1
 				$sCurrentFile = StringReplace($sCurrentFile, "filename:", "")
 			EndIf
 
+			; Initialize the Timer.
+			__Timer(True)
+
 			If $iCompile_DelOnDone Then ; Create a temporary folder to output files to.
 				$sTempFolder = "\Au3LibOut-" & @MDAY & "-" & @MIN & "-"
 				$iTempCount = 1
@@ -278,7 +281,7 @@ While 1
 				ShellExecute($sIndex_File)
 			EndIf
 
-			GUICtrlSetData($idStatus_Label, @CRLF & "Done!")
+			GUICtrlSetData($idStatus_Label, @CRLF & "Done! Time: (" & __Timer() & ")")
 			GUICtrlSetState($idGenerateDocs_Button, $GUI_ENABLE)
 			GUICtrlSetState($idExit_Button, $GUI_ENABLE)
 
@@ -1540,3 +1543,40 @@ Func _SendSciTE_GetInfo($My_Hwnd, $hSciTE_hwnd, $sCmd)
 	Return $sSciTECmd
 EndFunc   ;==>_SendSciTE_GetInfo
 #EndRegion ; The following Scite functions are copied and modified from AutoItWrapper. Credits to Jos.
+
+Func __Timer($bInitialize = False)
+	Local $iDiff, $iSeconds, $iMinutes, $iHours
+	Local $sTime = ""
+	Local Static $hTimer
+
+	If $bInitialize Then
+		$hTimer = TimerInit()
+		Return
+	EndIf
+
+	If Not IsInt($hTimer) Then $hTimer = TimerInit()
+
+	$iDiff = TimerDiff($hTimer)
+
+	If ($iDiff > 1000) Then
+		$iSeconds = Int($iDiff / 1000)
+	Else
+		$iSeconds = Number($iDiff * 0.001)
+	EndIf
+
+	If ($iSeconds > 60) Then
+		$iMinutes = Int($iSeconds / 60)
+		$iSeconds = ($iSeconds - Int($iMinutes * 60))
+	EndIf
+
+	If ($iMinutes > 60) Then
+		$iHours = Int($iMinutes / 60)
+		$iMinutes = ($iMinutes - Int($iHours * 60))
+	EndIf
+
+	$sTime = ((IsNumber($iHours)) ? ($iHours & ":") : ("")) & ((IsNumber($iMinutes)) ? ($iMinutes & ":") : ("")) & ((IsNumber($iSeconds)) ? ($iSeconds) : (""))
+
+	If Not IsNumber($iMinutes) Then $sTime &= " seconds" ; If no minutes, append seconds to the time for clarity.
+
+	Return $sTime
+EndFunc   ;==>__Timer
