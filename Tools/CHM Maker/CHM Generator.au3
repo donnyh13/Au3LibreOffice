@@ -67,6 +67,7 @@ Global $iTempCount = 1
 Global $sInitial_Dir, $sDir, $sLibraryFile_Name, $sFile, $sIndex_File, $sLibraryDir, $sTempFolder
 Global Enum $__g_Header_Name, $__g_Header_Description, $__g_Header_Syntax, $__g_Header_Parameters, $__g_Header_Return, $__g_Header_Author, $__g_Header_Modified, _
 		$__g_Header_Remarks, $__g_Header_Related, $__g_Header_Link, $__g_Header_Example
+Global Enum $__g_Const_Constant, $__g_Const_Value, $__g_Const_Desc
 
 #EndRegion Global Variables
 
@@ -299,11 +300,11 @@ Func _AU3Lib_GenerateDocs_Proc(ByRef $asFiles)
 	Local $sHtml_Content, $sParam_TD_Width, $sValue_TD_Width, $sExample_Content, $hFunc_File, $sFile
 	Local $sDocsFunc_Formatted_Title, $sDocsFuncHeader_Formatted_Title, $sDocsFunc_FormattedTmp_Title, $sDocsFuncHeader_FormattedTmp_Title ;, $sCurrWorkDir
 
-	Local $asRegExp[0], $asExamples[0]
+	Local $asRegExp[0], $asExamples[0], $asConstants
 	Local $aParams[0], $aValues[0]
 	Local $hCompIndex, $hSubCompIndex, $hSearch, $hTempFile
 	Local $avIndexFiles[0][3], $avSubIndex[0]
-	Local $iCompIndex = -1
+	Local $iCompIndex = -1, $iTotalFiles
 	Local $sComponent = "", $sSubComponent = "", $sCompHTML_Header = "", $sSubCompHTML_Header = "", $sDesc, $sTempExamplePath, $sTempExampleName, $sFileName
 	Local Enum $__eIndexName, $__eIndexHandle, $__eIndexSubIndex
 	Local $sTempFile = _TempFile(@TempDir, "1", ".au3"), $sTempOutputFile = _TempFile(@TempDir, "1", ".html")
@@ -321,8 +322,6 @@ Func _AU3Lib_GenerateDocs_Proc(ByRef $asFiles)
 	DirCreate($sDocsDir & "\funcs")
 	DirCreate($sDocsDir & "\indices")
 
-;~ 	$sCurrWorkDir = @WorkingDir ; Backup the working Directory.
-
 	; Change the working Directory to the ScriptDir so that the files can be found.
 	If (@WorkingDir <> @ScriptDir) Then FileChangeDir(@ScriptDir)
 
@@ -332,7 +331,6 @@ Func _AU3Lib_GenerateDocs_Proc(ByRef $asFiles)
 	FileInstall(".\Resources\h1_background.jpg", $sDocsDir & "\css\h1_background.jpg", $FC_OVERWRITE)
 
 	; Change the Working Directory back to the former value.
-;~ 	FileChangeDir($sCurrWorkDir)
 
 	;Определяем файл индекса
 	; Create the index file.
@@ -352,18 +350,17 @@ Func _AU3Lib_GenerateDocs_Proc(ByRef $asFiles)
 			'  <p>Below is a complete list of the LibreOffice Components available in this library. Click on a Component name for a list of available Sub-Components.</p>')
 
 	For $iFile = 0 To UBound($asFiles) - 1
-		; Skip and Null files that are not valid, Internal, Constants, and top level files.
-		; e.g.: LibreOffice.au3, LibreOffice_Constants.au3, LibreOffice_Internal.au3
-;~ 		If Not StringInStr($asFiles[$iFile], "_") Or StringRegExp($asFiles[$iFile], "(?i)_(?:Constants|Internal)") Then
-		If Not StringRegExp($asFiles[$iFile], "[^\\]+_[^\\]+$") Or StringRegExp($asFiles[$iFile], "(?i)[^\\]+_(?:Constants|Internal)[^\\]+$") Then
+		; Skip and Null files that are not valid, Internal, and top level files.
+		; e.g.: LibreOffice.au3, LibreOffice_Internal.au3
+		If Not StringRegExp($asFiles[$iFile], "[^\\]+_[^\\]+$") Or StringRegExp($asFiles[$iFile], "(?i)[^\\]+_Internal[^\\]+$") Then
 			$asFiles[$iFile] = "" ; Scrap the file name so that the array is only filled with valid data.
 		EndIf
 	Next
 
-	; Parse and store all function names to help validate links.
+	; Parse and store all function names and Constant files to help validate links.
 	__LinkIsValid(Default, $asFiles)
 
-	Local $iTotalFiles = UBound($asFiles)
+	$iTotalFiles = UBound($asFiles)
 	If ($iTotalFiles > 1) Then $iTotalFiles -= 1 ; Minus one from the count since the file path was part of the array.
 
 	For $iFile = 0 To UBound($asFiles) - 1
@@ -373,7 +370,6 @@ Func _AU3Lib_GenerateDocs_Proc(ByRef $asFiles)
 		$iCompIndex = -1
 
 		; Determine the Index file to use, or create it if it doesn't exist.
-;~ 		$asRegExp = StringRegExp($asFiles[$iFile], "(?i)(?|LibreOffice(\w+)_(\w+)|(LibreOffice)_(\w+))", $STR_REGEXPARRAYMATCH) ; Get Sub-Component name, else get LibreOffice name for global files.
 		$asRegExp = StringRegExp($asFiles[$iFile], "(?i)(?|LibreOffice(\w+)_(\w+)|(LibreOffice)_(\w+))[^\\]+$", $STR_REGEXPARRAYMATCH) ; Get Sub-Component name, else get LibreOffice name for global files.
 		If Not IsArray($asRegExp) Then
 			ConsoleWrite("! Failed to identify Component and Sub-Component, skipping: " & $asFiles[$iFile] & @CRLF)
@@ -433,15 +429,6 @@ Func _AU3Lib_GenerateDocs_Proc(ByRef $asFiles)
 		; Generate the HTML page header.
 		$sSubCompHTML_Header = _AU3Lib_GetHtmlHeaderStr($sComponent & " " & $sSubComponent, '../css')
 
-		; Write the beginning of the index page.
-		FileWriteLine($hSubCompIndex, $sSubCompHTML_Header & @CRLF & '<body>' & @CRLF & '  <h1>' & 'LibreOffice ' & $sComponent & ' ' & $sSubComponent & '</h1>' & @CRLF & _
-				'  <p>Below is a complete list of the functions available in the LibreOffice ' & $sComponent & ' ' & $sSubComponent & ' library. Click on a function name for a detailed description.</p>' & @CRLF & _
-				'  <table>' & @CRLF & _
-				'  <tr>' & @CRLF & _
-				'    <th style="width:25%">Function</th>' & @CRLF & _
-				'    <th style="width:75%">Description</th>' & @CRLF & _
-				'  </tr>')
-
 		; Grab the Description for the Sub-Component from the file.
 		$asRegExp = StringRegExp(FileRead($asFiles[$iFile]), "(?im)^;\s*Description\s*\.+:\s*(.+)$", $STR_REGEXPARRAYMATCH)
 
@@ -458,331 +445,415 @@ Func _AU3Lib_GenerateDocs_Proc(ByRef $asFiles)
 				'    <td>' & $sDesc & '</td>' & @CRLF & _ ; Add the description.
 				'  </tr>')
 
-		;Получаем заголовки библиотеки
-		; Retrieve the library headers.
-		$aHeaders = _AU3Lib_GetHeaders($asFiles[$iFile])
-
-		For $i = 1 To UBound($aHeaders) - 1
-			;Получаем имя функций (для имени файла и ссылки)
-			; Get the function name (used for the filename and hyperlink).
-			$sFuncName = $aHeaders[$i][$__g_Header_Name]
-
-			;Форматируем заголовки для Html-страниц (только для функций, т.к. она изменяется и считывается в цикле)
-			; Format the HTML titles for this function (updated for each function in the loop).
-			$sDocsFunc_FormattedTmp_Title = StringReplace($sDocsFunc_Formatted_Title, '%FuncName%', $sFuncName)
-			$sDocsFuncHeader_FormattedTmp_Title = StringReplace($sDocsFuncHeader_Formatted_Title, '%FuncName%', $sFuncName)
-
-			;Получаем имя файла функций
-			; Generate the function filename.
-			$sFile = _AU3Lib_GetValidFileName($sFuncName)
-
-			; Add the current function entry to the Sub-Component index.
-			FileWriteLine($hSubCompIndex, '  <tr>' & @CRLF & _
-					'    <td><a href="../funcs/' & $sFile & '.htm">' & $sFuncName & '</a></td>' & @CRLF & _
-					'    <td>' & $aHeaders[$i][$__g_Header_Description] & '</td>' & @CRLF & _
+		If StringRegExp($asFiles[$iFile], "(?i)_Constants\.\w+$") Then ; A Constants page.
+			; Write the beginning of the index page.
+			FileWriteLine($hSubCompIndex, $sSubCompHTML_Header & @CRLF & '<body>' & @CRLF & '  <h1>' & 'LibreOffice ' & $sComponent & ' ' & $sSubComponent & '</h1>' & @CRLF & _
+					'  <p>Below is a complete list of the Constants available for use in LibreOffice ' & $sComponent & '.</p>' & @CRLF & _
+					'  <table>' & @CRLF & _
+					'  <tr>' & @CRLF & _
+					'    <th style="width:25%">Constant</th>' & @CRLF & _
+					'    <th style="width:25%">Value</th>' & @CRLF & _
+					'    <th style="width:50%">Description</th>' & @CRLF & _
 					'  </tr>')
 
-			#Region Получаем и форматируем параметры функций ; Get and format function parameters
-			$aParams_Split = StringSplit(StringStripCR($aHeaders[$i][$__g_Header_Parameters]), @LF)
-;~ 			Local $aParams[$aParams_Split[0] + 1]
-			ReDim $aParams[$aParams_Split[0] + 1]
-			$aParams[0] = 0 ; Reset the value to 0 so the correct count is set.
-;~ 			Local $aValues[$aParams_Split[0] + 1]
-			ReDim $aValues[$aParams_Split[0] + 1]
-			$aValues[0] = 0 ; Reset the value to 0 so the correct count is set.
+			$asConstants = _AU3Lib_GetConstants($asFiles[$iFile])
 
-			For $j = 1 To $aParams_Split[0]
-				If StringIsSpace($aParams_Split[$j]) Then ContinueLoop
+			For $i = 0 To UBound($asConstants) - 1
+				If StringInStr($asConstants[$i][$__g_Const_Constant], "*") Then ; Adding a Short constant, don't make it visible.
+					; Add the Constant entry to the Table, but not visibly, so that linking will work. Also remove the asterisk to prevent breaking html stuff.
+					FileWriteLine($hSubCompIndex, '  <tr id= "' & StringReplace($asConstants[$i][$__g_Const_Constant], "*", "") & '">' & @CRLF & _
+							'    <td colspan="3"><br /></td>' & @CRLF & _
+							'  </tr>')
 
-				;Проверяем если текущая строка это строка с параметром в начале
-				; Check whether the current line starts with a parameter definition.
-				If StringRegExp($aParams_Split[$j], "(?:\s+)?(\$[\w\d_]+)\s+-.*") Then
-					$aParams[0] += 1
-					$aValues[0] += 1
+				Else
 
-					;Извлекаем параметр
-					; Extract the parameter name.
-					$aParams[$aParams[0]] = StringRegExpReplace($aParams_Split[$j], '(?:\s+)?(\$[\w\d_]+)\s+-.*', '\1')
+					; Add the Constant entry to the index.
+					FileWriteLine($hSubCompIndex, '  <tr id= "' & $asConstants[$i][$__g_Const_Constant] & '">' & @CRLF & _
+							'    <td>' & $asConstants[$i][$__g_Const_Constant] & '</td>' & @CRLF & _
+							'    <td>' & $asConstants[$i][$__g_Const_Value] & '</td>' & @CRLF & _
+							'    <td>' & $asConstants[$i][$__g_Const_Desc] & '</td>' & @CRLF & _
+							'  </tr>')
+				EndIf
+			Next
 
-					;Извлекаем описание параметра
-					; Extract the parameter description.
-					$aValues[$aValues[0]] = StringRegExpReplace($aParams_Split[$j], '(?:\s+)?\$[\w\d_]+\s+-\s+(.*)', '\1') & '<br>' & @CRLF
-				Else ;Иначе это продолжение описания параметра
-					; Otherwise this line continues the parameter description.
-					$aValues[$aValues[0]] &= $aParams_Split[$j] & '<br>' & @CRLF
+		Else ; A Normal Library file.
+
+			; Write the beginning of the index page.
+			FileWriteLine($hSubCompIndex, $sSubCompHTML_Header & @CRLF & '<body>' & @CRLF & '  <h1>' & 'LibreOffice ' & $sComponent & ' ' & $sSubComponent & '</h1>' & @CRLF & _
+					'  <p>Below is a complete list of the functions available in the LibreOffice ' & $sComponent & ' ' & $sSubComponent & ' library. Click on a function name for a detailed description.</p>' & @CRLF & _
+					'  <table>' & @CRLF & _
+					'  <tr>' & @CRLF & _
+					'    <th style="width:25%">Function</th>' & @CRLF & _
+					'    <th style="width:75%">Description</th>' & @CRLF & _
+					'  </tr>')
+
+			;Получаем заголовки библиотеки
+			; Retrieve the library headers.
+			$aHeaders = _AU3Lib_GetHeaders($asFiles[$iFile])
+
+			For $i = 1 To UBound($aHeaders) - 1
+				;Получаем имя функций (для имени файла и ссылки)
+				; Get the function name (used for the filename and hyperlink).
+				$sFuncName = $aHeaders[$i][$__g_Header_Name]
+
+				;Форматируем заголовки для Html-страниц (только для функций, т.к. она изменяется и считывается в цикле)
+				; Format the HTML titles for this function (updated for each function in the loop).
+				$sDocsFunc_FormattedTmp_Title = StringReplace($sDocsFunc_Formatted_Title, '%FuncName%', $sFuncName)
+				$sDocsFuncHeader_FormattedTmp_Title = StringReplace($sDocsFuncHeader_Formatted_Title, '%FuncName%', $sFuncName)
+
+				;Получаем имя файла функций
+				; Generate the function filename.
+				$sFile = _AU3Lib_GetValidFileName($sFuncName)
+
+				; Add the current function entry to the Sub-Component index.
+				FileWriteLine($hSubCompIndex, '  <tr>' & @CRLF & _
+						'    <td><a href="../funcs/' & $sFile & '.htm">' & $sFuncName & '</a></td>' & @CRLF & _
+						'    <td>' & $aHeaders[$i][$__g_Header_Description] & '</td>' & @CRLF & _
+						'  </tr>')
+
+				#Region Получаем и форматируем параметры функций ; Get and format function parameters
+				$aParams_Split = StringSplit(StringStripCR($aHeaders[$i][$__g_Header_Parameters]), @LF)
+				ReDim $aParams[$aParams_Split[0] + 1]
+				$aParams[0] = 0 ; Reset the value to 0 so the correct count is set.
+				ReDim $aValues[$aParams_Split[0] + 1]
+				$aValues[0] = 0 ; Reset the value to 0 so the correct count is set.
+
+				For $j = 1 To $aParams_Split[0]
+					If StringIsSpace($aParams_Split[$j]) Then ContinueLoop
+
+					;Проверяем если текущая строка это строка с параметром в начале
+					; Check whether the current line starts with a parameter definition.
+					If StringRegExp($aParams_Split[$j], "(?:\s+)?(\$[\w\d_]+)\s+-.*") Then
+						$aParams[0] += 1
+						$aValues[0] += 1
+
+						;Извлекаем параметр
+						; Extract the parameter name.
+						$aParams[$aParams[0]] = StringRegExpReplace($aParams_Split[$j], '(?:\s+)?(\$[\w\d_]+)\s+-.*', '\1')
+
+						;Извлекаем описание параметра
+						; Extract the parameter description.
+						$aValues[$aValues[0]] = StringRegExpReplace($aParams_Split[$j], '(?:\s+)?\$[\w\d_]+\s+-\s+(.*)', '\1') & '<br>' & @CRLF
+					Else ;Иначе это продолжение описания параметра
+						; Otherwise this line continues the parameter description.
+						$aValues[$aValues[0]] &= $aParams_Split[$j] & '<br>' & @CRLF
+					EndIf
+
+					;Заменяем в описании параметра |True/1/False/0 на 1 и 0
+					; Normalize markup in the parameter description.
+					$aValues[$aValues[0]] = StringRegExpReplace($aValues[$aValues[0]], '(?i)\|(?:(.+))', '\1')
+					$aValues[$aValues[0]] = StringRegExpReplace($aValues[$aValues[0]], '(?m)^\h*\+', '<br>')
+
+					;Обрамляем в описании параметра [Opt*] тегами <b></b>
+					; Highlight [Opt], [In], and [Out] markers using <b> tags.
+					$aValues[$aValues[0]] = StringRegExpReplace($aValues[$aValues[0]], '(?i)(\[(?:Opt|In|Out)[^\]]*\])', '<b>\1</b>')
+
+					; Assume any functions mentioned in parameters has an underscore either in the beginning or somewhere in the middle. Also avoid variables.
+					$asRegExp = StringRegExp($aValues[$aValues[0]], "(?<!\$)\b\w*_\w+\b", $STR_REGEXPARRAYGLOBALMATCH)
+
+					If IsArray($asRegExp) Then
+						For $k = 0 To UBound($asRegExp) - 1
+;~ 						ConsoleWrite($asRegExp[$k] & @CRLF)
+							If __LinkIsValid($asRegExp[$k]) Then $aValues[$aValues[0]] = StringRegExpReplace($aValues[$aValues[0]], "(?<!\$)\b(\Q" & $asRegExp[$k] & "\E)\b(?!\.htm|</a>)", '<a href="\1.htm">\1</a>')
+						Next
+					EndIf
+
+					; Grab all constants mentioned in parameter description.
+					$asRegExp = StringRegExp($aValues[$aValues[0]], "\$\w+\*?", $STR_REGEXPARRAYGLOBALMATCH)
+
+					If IsArray($asRegExp) Then
+						For $k = 0 To UBound($asRegExp) - 1
+							If __LinkIsValid($asRegExp[$k]) Then
+								$aValues[$aValues[0]] = StringRegExpReplace($aValues[$aValues[0]], "(?<!\#)(\Q" & $asRegExp[$k] & "\E)", '<a href="/indices/' & __LinkIsValid($asRegExp[$k], Null, True) & '.htm#\1">\1</a>')
+								$aValues[$aValues[0]] = StringRegExpReplace($aValues[$aValues[0]], "(?<=\#)(\$\w+)\*", "\1")
+							EndIf
+						Next
+					EndIf
+				Next
+
+				ReDim $aParams[$aParams[0] + 1]
+				ReDim $aValues[$aParams[0] + 1]
+				#EndRegion Получаем и форматируем параметры функций ; Get and format function parameters
+
+				#Region Получаем и форматируем возвращаемое значение функций ; Get and format function return values
+				$aReturn = StringRegExp($aHeaders[$i][$__g_Header_Return], '(?si).*?Success\h*[-:]\h*(.*?)\s+Failure\s*[-:]\s*(.*)', $STR_REGEXPARRAYGLOBALMATCH)
+
+				If @error Then
+					$sReturn_Success = $aHeaders[$i][$__g_Header_Return]
+					$sReturn_Failure = "None."
+				Else
+					$sReturn_Success = StringReplace($aReturn[0], @CRLF, '<br>' & @CRLF)
+					$sReturn_Failure = StringReplace($aReturn[1], @CRLF, '<br>' & @CRLF)
 				EndIf
 
-				;Заменяем в описании параметра |True/1/False/0 на 1 и 0
-				; Normalize markup in the parameter description.
-				$aValues[$aValues[0]] = StringRegExpReplace($aValues[$aValues[0]], '(?i)\|(?:(.+))', '\1')
-				$aValues[$aValues[0]] = StringRegExpReplace($aValues[$aValues[0]], '(?m)^\h*\+', '<br>')
+				;Заменяем в описании возвр. значения |True/1/False/0 на 1 и 0.
+				; Normalize markup in the return value description.
+				$sReturn_Success = StringRegExpReplace($sReturn_Success, '(?i)\|\-', '')
+				$sReturn_Success = StringRegExpReplace($sReturn_Success, '(?i)\|(?:(.+?))', '\1')
+				$sReturn_Success = StringRegExpReplace($sReturn_Success, '<br>\h*\+', '')
+				$sReturn_Failure = StringRegExpReplace($sReturn_Failure, '(?i)\|\-', '')
+				$sReturn_Failure = StringRegExpReplace($sReturn_Failure, '(?i)\|(?:(.+?))', '\1')
+				$sReturn_Failure = StringRegExpReplace($sReturn_Failure, '<br>\h*\+', '')
 
-				;Обрамляем в описании параметра [Opt*] тегами <b></b>
-				; Highlight [Opt], [In], and [Out] markers using <b> tags.
-				$aValues[$aValues[0]] = StringRegExpReplace($aValues[$aValues[0]], '(?i)(\[(?:Opt|In|Out)[^\]]*\])', '<b>\1</b>')
+				$sReturn_Success = StringRegExpReplace($sReturn_Success, "(?i)((?|\@Error|\@Extended|Return):)", "<b>\1</b>")
+				$sReturn_Failure = StringRegExpReplace($sReturn_Failure, "(?i)((?|\@Error|\@Extended):)", "<b>\1</b>")
 
-				; Assume any functions mentioned in parameters has an underscore either in the beginning or somewhere in the middle. Also avoid variables.
-				$asRegExp = StringRegExp($aValues[$aValues[0]], "(?<!\$)\b\w*_\w+\b", $STR_REGEXPARRAYGLOBALMATCH)
+				; Grab all constants mentioned in Success values.
+				$asRegExp = StringRegExp($sReturn_Success, "\$\w+\*?", $STR_REGEXPARRAYGLOBALMATCH)
 
 				If IsArray($asRegExp) Then
 					For $k = 0 To UBound($asRegExp) - 1
-;~ 						ConsoleWrite($asRegExp[$k] & @CRLF)
-						If __LinkIsValid($asRegExp[$k]) Then $aValues[$aValues[0]] = StringRegExpReplace($aValues[$aValues[0]], "(?<!\$)\b(\Q" & $asRegExp[$k] & "\E)\b(?!\.htm|</a>)", '<a href="\1.htm">\1</a>')
+						If __LinkIsValid($asRegExp[$k]) Then
+							$sReturn_Success = StringRegExpReplace($sReturn_Success, "(?<!\#)(\Q" & $asRegExp[$k] & "\E)", '<a href="/indices/' & __LinkIsValid($asRegExp[$k], Null, True) & '.htm#\1">\1</a>')
+							$sReturn_Success = StringRegExpReplace($sReturn_Success, "(?<=\#)(\$\w+)\*", "\1")
+						EndIf
 					Next
 				EndIf
 
-			Next
+				; Grab all constants mentioned in Failure values.
+				$asRegExp = StringRegExp($sReturn_Failure, "\$\w+\*?", $STR_REGEXPARRAYGLOBALMATCH)
 
-			ReDim $aParams[$aParams[0] + 1]
-			ReDim $aValues[$aParams[0] + 1]
-			#EndRegion Получаем и форматируем параметры функций ; Get and format function parameters
+				If IsArray($asRegExp) Then
+					For $k = 0 To UBound($asRegExp) - 1
+						If __LinkIsValid($asRegExp[$k]) Then
+							$sReturn_Failure = StringRegExpReplace($sReturn_Failure, "(?<!\#)(\Q" & $asRegExp[$k] & "\E)", '<a href="/indices/' & __LinkIsValid($asRegExp[$k], Null, True) & '.htm#\1">\1</a>')
+							$sReturn_Failure = StringRegExpReplace($sReturn_Failure, "(?<=\#)(\$\w+)\*", "\1")
+						EndIf
+					Next
+				EndIf
 
-			#Region Получаем и форматируем возвращаемое значение функций ; Get and format function return values
-			$aReturn = StringRegExp($aHeaders[$i][$__g_Header_Return], '(?si).*?Success\h*[-:]\h*(.*?)\s+Failure\s*[-:]\s*(.*)', $STR_REGEXPARRAYGLOBALMATCH)
+				If StringRegExp($sReturn_Success, "^.*?[\r\n]{2}") Then
+					$sReturn_Success &= '<br>&nbsp;'
+				EndIf
+				#EndRegion Получаем и форматируем возвращаемое значение функций ; Get and format function return values
 
-			If @error Then
-				$sReturn_Success = $aHeaders[$i][$__g_Header_Return]
-				$sReturn_Failure = "None."
-			Else
-				$sReturn_Success = StringReplace($aReturn[0], @CRLF, '<br>' & @CRLF)
-				$sReturn_Failure = StringReplace($aReturn[1], @CRLF, '<br>' & @CRLF)
-			EndIf
+				#Region  Формируем Html'ку функций' ; Build the function HTML page
+				$sHtml_Content = _AU3Lib_GetHtmlHeaderStr($sDocsFunc_FormattedTmp_Title, '../css') & _
+						'<body>' & @CRLF & '  <h1 class="small">' & $sDocsFuncHeader_FormattedTmp_Title & '</h1>' & @CRLF & _ ;~ modified
+						'  <hr style="height:0px">' & @CRLF & _ ;~ modified/inserted
+						'  <h1>' & $sFuncName & '</h1>' & @CRLF & _
+						'  <p class="funcdesc">' & $aHeaders[$i][$__g_Header_Description] & '<br /></p>' & @CRLF & _
+						'  <p class="codeheader">' & @CRLF & _
+						$aHeaders[$i][$__g_Header_Syntax] & '<br>' & @CRLF & _
+						'  </p>' & @CRLF & @CRLF & _
+						'  <h2>Parameters</h2>' & @CRLF
 
-			;Заменяем в описании возвр. значения |True/1/False/0 на 1 и 0.
-			; Normalize markup in the return value description.
-			$sReturn_Success = StringRegExpReplace($sReturn_Success, '(?i)\|\-', '')
-			$sReturn_Success = StringRegExpReplace($sReturn_Success, '(?i)\|(?:(.+?))', '\1')
-			$sReturn_Success = StringRegExpReplace($sReturn_Success, '<br>\h*\+', '')
-			$sReturn_Failure = StringRegExpReplace($sReturn_Failure, '(?i)\|\-', '')
-			$sReturn_Failure = StringRegExpReplace($sReturn_Failure, '(?i)\|(?:(.+?))', '\1')
-			$sReturn_Failure = StringRegExpReplace($sReturn_Failure, '<br>\h*\+', '')
+				If $aParams[0] > 0 Then
+					$sHtml_Content &= '  <table>' & @CRLF ;~ modified
 
-			$sReturn_Success = StringRegExpReplace($sReturn_Success, "(?i)((?|\@Error|\@Extended|Return):)", "<b>\1</b>")
-			$sReturn_Failure = StringRegExpReplace($sReturn_Failure, "(?i)((?|\@Error|\@Extended):)", "<b>\1</b>")
+					$sParam_TD_Width = ' style="width:15%"' ;~ modified
+					$sValue_TD_Width = ' style="width:85%"' ;~ modified
 
-			If StringRegExp($sReturn_Success, "^.*?[\r\n]{2}") Then
-				$sReturn_Success &= '<br>&nbsp;'
-			EndIf
-			#EndRegion Получаем и форматируем возвращаемое значение функций ; Get and format function return values
+					For $j = 1 To $aParams[0]
+						If $j > 1 Then
+							$sParam_TD_Width = ''
+							$sValue_TD_Width = ''
+						EndIf
 
-			#Region  Формируем Html'ку функций' ; Build the function HTML page
-			$sHtml_Content = _AU3Lib_GetHtmlHeaderStr($sDocsFunc_FormattedTmp_Title, '../css') & _
-					'<body>' & @CRLF & '  <h1 class="small">' & $sDocsFuncHeader_FormattedTmp_Title & '</h1>' & @CRLF & _ ;~ modified
-					'  <hr style="height:0px">' & @CRLF & _ ;~ modified/inserted
-					'  <h1>' & $sFuncName & '</h1>' & @CRLF & _
-					'  <p class="funcdesc">' & $aHeaders[$i][$__g_Header_Description] & '<br /></p>' & @CRLF & _
-					'  <p class="codeheader">' & @CRLF & _
-					$aHeaders[$i][$__g_Header_Syntax] & '<br>' & @CRLF & _
-					'  </p>' & @CRLF & @CRLF & _
-					'  <h2>Parameters</h2>' & @CRLF
+						$sHtml_Content &= _
+								'  <tr>' & @CRLF & _
+								'    <td' & $sParam_TD_Width & '>' & $aParams[$j] & '</td>' & @CRLF & _
+								'    <td' & $sValue_TD_Width & '>' & $aValues[$j] & '</td>' & @CRLF & _
+								'  </tr>' & @CRLF
+					Next
 
-			If $aParams[0] > 0 Then
-				$sHtml_Content &= '  <table>' & @CRLF ;~ modified
+					$sHtml_Content &= '  </table>' & @CRLF & @CRLF
+				Else
+					$sHtml_Content &= 'None.<br>' & @CRLF
+				EndIf
 
-				$sParam_TD_Width = ' style="width:15%"' ;~ modified
-				$sValue_TD_Width = ' style="width:85%"' ;~ modified
+				$sHtml_Content &= '  <h2>Return Value</h2>' & @CRLF ;~ modified
 
-				For $j = 1 To $aParams[0]
-					If $j > 1 Then
-						$sParam_TD_Width = ''
-						$sValue_TD_Width = ''
+				$sHtml_Content &= _
+						'  <table class="noborder">' & @CRLF & _ ;~ modified
+						'    <tr>' & @CRLF & _
+						'      <td style="width:10%" class="valign-top">Success:</td>' & @CRLF & _
+						'      <td style="width:90%">' & $sReturn_Success & '</td>' & @CRLF & _
+						'    </tr>' & @CRLF & _
+						'    <tr>' & @CRLF & _
+						'      <td class="valign-top">Failure:</td>' & @CRLF & _
+						'      <td>' & $sReturn_Failure & '</td>' & @CRLF & _
+						'    </tr>' & @CRLF & _
+						'  </table>' & @CRLF
+
+				If $aHeaders[$i][$__g_Header_Remarks] <> '' Then ;~ modified
+					$sRemarks = StringReplace($aHeaders[$i][$__g_Header_Remarks], @CRLF, '<br>' & @CRLF)
+					$sRemarks = StringRegExpReplace($sRemarks, '(?m)^\h*\+', '&nbsp;') ;~ modified
+
+					; Grab all constants mentioned in Remarks.
+					$asRegExp = StringRegExp($sRemarks, "\$\w+\*?", $STR_REGEXPARRAYGLOBALMATCH)
+
+					If IsArray($asRegExp) Then
+						For $k = 0 To UBound($asRegExp) - 1
+							If __LinkIsValid($asRegExp[$k]) Then
+								$sRemarks = StringRegExpReplace($sRemarks, "(?<!\#)(\Q" & $asRegExp[$k] & "\E)", '<a href="/indices/' & __LinkIsValid($asRegExp[$k], Null, True) & '.htm#\1">\1</a>')
+								$sRemarks = StringRegExpReplace($sRemarks, "(?<=\#)(\$\w+)\*", "\1")
+							EndIf
+						Next
 					EndIf
 
 					$sHtml_Content &= _
-							'  <tr>' & @CRLF & _
-							'    <td' & $sParam_TD_Width & '>' & $aParams[$j] & '</td>' & @CRLF & _
-							'    <td' & $sValue_TD_Width & '>' & $aValues[$j] & '</td>' & @CRLF & _
-							'  </tr>' & @CRLF
-				Next
+							@CRLF & '  <h2>Remarks</h2>' & @CRLF & _ ;~ modified
+							$sRemarks & '<br>' & @CRLF & @CRLF ;~ modified
+				EndIf ;~ modified
 
-				$sHtml_Content &= '  </table>' & @CRLF & @CRLF
-			Else
-				$sHtml_Content &= 'None.<br>' & @CRLF
-			EndIf
+				If $aHeaders[$i][$__g_Header_Related] <> '' Then
+					$aSplit = StringRegExp($aHeaders[$i][$__g_Header_Related], '(\w+)', $STR_REGEXPARRAYGLOBALMATCH)
 
-			$sHtml_Content &= '  <h2>Return Value</h2>' & @CRLF ;~ modified
+					$aHeaders[$i][$__g_Header_Related] = ''
 
-			$sHtml_Content &= _
-					'  <table class="noborder">' & @CRLF & _ ;~ modified
-					'    <tr>' & @CRLF & _
-					'      <td style="width:10%" class="valign-top">Success:</td>' & @CRLF & _
-					'      <td style="width:90%">' & $sReturn_Success & '</td>' & @CRLF & _
-					'    </tr>' & @CRLF & _
-					'    <tr>' & @CRLF & _
-					'      <td class="valign-top">Failure:</td>' & @CRLF & _
-					'      <td>' & $sReturn_Failure & '</td>' & @CRLF & _
-					'    </tr>' & @CRLF & _
-					'  </table>' & @CRLF
+					For $j = 0 To UBound($aSplit) - 1
+						If __LinkIsValid($aSplit[$j]) Then ; If function will be in the chm, add a link.
+							$aHeaders[$i][$__g_Header_Related] &= ($aHeaders[$i][$__g_Header_Related] ? ', ' : '') & '<a href="' & $aSplit[$j] & '.htm">' & $aSplit[$j] & '</a>'
 
-			If $aHeaders[$i][$__g_Header_Remarks] <> '' Then ;~ modified
-				$sRemarks = StringReplace($aHeaders[$i][$__g_Header_Remarks], @CRLF, '<br>' & @CRLF)
-				$sRemarks = StringRegExpReplace($sRemarks, '(?m)^\h*\+', '&nbsp;') ;~ modified
+						Else ; Otherwise just add it to the list.
+							$aHeaders[$i][$__g_Header_Related] &= ($aHeaders[$i][$__g_Header_Related] ? ', ' : '') & $aSplit[$j]
 
-				$sHtml_Content &= _
-						@CRLF & '  <h2>Remarks</h2>' & @CRLF & _ ;~ modified
-						$sRemarks & '<br>' & @CRLF & @CRLF ;~ modified
-			EndIf ;~ modified
+						EndIf
+					Next
 
-			If $aHeaders[$i][$__g_Header_Related] <> '' Then
-				$aSplit = StringRegExp($aHeaders[$i][$__g_Header_Related], '(\w+)', $STR_REGEXPARRAYGLOBALMATCH)
+					$sRelated = StringReplace($aHeaders[$i][$__g_Header_Related], @CRLF, '<br>' & @CRLF)
+					$sRelated = StringRegExpReplace($sRelated, '(?i)\|(?:(.+))', '\1')
 
-				$aHeaders[$i][$__g_Header_Related] = ''
+					$sHtml_Content &= _
+							'  <h2>Related</h2>' & @CRLF & _
+							$sRelated & '<br>' & @CRLF
+				EndIf
 
-				For $j = 0 To UBound($aSplit) - 1
-;~ 					$aHeaders[$i][$__g_Header_Related] &= ($aHeaders[$i][$__g_Header_Related] ? ', ' : '') & '<a href="' & $aSplit[$j] & '.htm">' & $aSplit[$j] & '</a>'
-					If __LinkIsValid($aSplit[$j]) Then ; If function will be in the chm, add a link.
-						$aHeaders[$i][$__g_Header_Related] &= ($aHeaders[$i][$__g_Header_Related] ? ', ' : '') & '<a href="' & $aSplit[$j] & '.htm">' & $aSplit[$j] & '</a>'
+				If ($aHeaders[$i][$__g_Header_Example] <> "No") Then
+					If (($aHeaders[$i][$__g_Header_Example] = "Yes") And FileExists($sLibExamplesDir & "\" & $sFile & ".au3")) Then ; Example named the same as the function.
+						$sTempExamplePath = $sLibExamplesDir & "\"
+						$sTempExampleName = $sFile
 
-					Else ; Otherwise just add it to the list.
-						$aHeaders[$i][$__g_Header_Related] &= ($aHeaders[$i][$__g_Header_Related] ? ', ' : '') & $aSplit[$j]
+						ReDim $asExamples[1]
+						$asExamples[0] = $sTempExamplePath & $sTempExampleName & ".au3"
 
-					EndIf
-				Next
+						$hSearch = FileFindFirstFile($sTempExamplePath & $sTempExampleName & "*" & ".au3")
 
-				$sRelated = StringReplace($aHeaders[$i][$__g_Header_Related], @CRLF, '<br>' & @CRLF)
-				$sRelated = StringRegExpReplace($sRelated, '(?i)\|(?:(.+))', '\1')
+						If ($hSearch <> -1) Then ; Find all additional examples
+							Do
+								$sFileName = FileFindNextFile($hSearch)
+								If @error Then ExitLoop
+								If StringRegExp($sFileName, "(?i)\Q" & $sTempExampleName & "\E\s*\[\d+\]\s*\.au3") Then ; Make sure this is an additional example, not just a similarly named one. Allow for spaces before/after the brackets ([]).
+									ReDim $asExamples[UBound($asExamples) + 1]
+									$asExamples[UBound($asExamples) - 1] = $sTempExamplePath & $sFileName
+								EndIf
+							Until @error
+							FileClose($hSearch)
+						EndIf
 
-				$sHtml_Content &= _
-						'  <h2>Related</h2>' & @CRLF & _
-						$sRelated & '<br>' & @CRLF
-			EndIf
+					ElseIf FileExists($aHeaders[$i][$__g_Header_Example]) Or FileExists($sLibraryDir & "\" & $aHeaders[$i][$__g_Header_Example]) Then ; Custom input path, or relative to Library directory (Matches original functionality of MrCreatoR).
+						If FileExists($sLibraryDir & "\" & $aHeaders[$i][$__g_Header_Example]) Then ; Example is in the working dir (The library source folder), or relative to it.
+							$sTempExamplePath = $sLibraryDir
+							$sTempExampleName = $aHeaders[$i][$__g_Header_Example]
 
-			If ($aHeaders[$i][$__g_Header_Example] <> "No") Then
-				If (($aHeaders[$i][$__g_Header_Example] = "Yes") And FileExists($sLibExamplesDir & "\" & $sFile & ".au3")) Then ; Example named the same as the function.
-					$sTempExamplePath = $sLibExamplesDir & "\"
-					$sTempExampleName = $sFile
+						Else ; This is a path to an example.
+							$sTempExamplePath = StringMid($aHeaders[$i][$__g_Header_Example], 1, StringInStr($aHeaders[$i][$__g_Header_Example], "\", 0, -1))
+							$sTempExampleName = StringMid($aHeaders[$i][$__g_Header_Example], StringInStr($aHeaders[$i][$__g_Header_Example], "\", 0, -1) + 1)
+						EndIf
 
-					ReDim $asExamples[1]
-					$asExamples[0] = $sTempExamplePath & $sTempExampleName & ".au3"
+						ReDim $asExamples[1]
+						$asExamples[0] = $sTempExamplePath & $sTempExampleName
 
-					$hSearch = FileFindFirstFile($sTempExamplePath & $sTempExampleName & "*" & ".au3")
-
-					If ($hSearch <> -1) Then  ; Find all additional examples
-						Do
-							$sFileName = FileFindNextFile($hSearch)
-							If @error Then ExitLoop
-							If StringRegExp($sFileName, "(?i)\Q" & $sTempExampleName & "\E\s*\[\d+\]\s*\.au3") Then ; Make sure this is an additional example, not just a similarly named one. Allow for spaces before/after the brackets ([]).
-								ReDim $asExamples[UBound($asExamples) + 1]
-								$asExamples[UBound($asExamples) - 1] = $sTempExamplePath & $sFileName
-							EndIf
-						Until @error
-						FileClose($hSearch)
-					EndIf
-
-;~ 				ElseIf FileExists($aHeaders[$i][$__g_Header_Example]) Then ; Custom input path, or relative to @WorkingDir (Matches original functionality of MrCreatoR).
-				ElseIf FileExists($aHeaders[$i][$__g_Header_Example]) Or FileExists($sLibraryDir & "\" & $aHeaders[$i][$__g_Header_Example]) Then ; Custom input path, or relative to Library directory (Matches original functionality of MrCreatoR).
-;~ 					If FileExists(@WorkingDir & "\" & $aHeaders[$i][$__g_Header_Example]) Then; Example is in the working dir (The library source folder), or relative to it.
-					If FileExists($sLibraryDir & "\" & $aHeaders[$i][$__g_Header_Example]) Then ; Example is in the working dir (The library source folder), or relative to it.
-;~ 						$sTempExamplePath = @WorkingDir
-						$sTempExamplePath = $sLibraryDir
+					ElseIf FileExists($sLibExamplesDir & "\" & $aHeaders[$i][$__g_Header_Example]) Then ; Alternatively named example in the Example Dir.
+						$sTempExamplePath = $sLibExamplesDir & "\"
 						$sTempExampleName = $aHeaders[$i][$__g_Header_Example]
 
-					Else ; This is a path to an example.
-						$sTempExamplePath = StringMid($aHeaders[$i][$__g_Header_Example], 1, StringInStr($aHeaders[$i][$__g_Header_Example], "\", 0, -1))
-						$sTempExampleName = StringMid($aHeaders[$i][$__g_Header_Example], StringInStr($aHeaders[$i][$__g_Header_Example], "\", 0, -1) + 1)
+						ReDim $asExamples[1]
+						$asExamples[0] = $sTempExamplePath & $sTempExampleName
+
+					ElseIf FileExists($sLibExamplesDir & "\" & $aHeaders[$i][$__g_Header_Example] & ".au3") Then ; Alternatively named example in the Example Dir.
+						$sTempExamplePath = $sLibExamplesDir & "\"
+						$sTempExampleName = $aHeaders[$i][$__g_Header_Example]
+
+						ReDim $asExamples[1]
+						$asExamples[0] = $sTempExamplePath & $sTempExampleName & ".au3"
 					EndIf
-
-					ReDim $asExamples[1]
-					$asExamples[0] = $sTempExamplePath & $sTempExampleName
-
-				ElseIf FileExists($sLibExamplesDir & "\" & $aHeaders[$i][$__g_Header_Example]) Then ; Alternatively named example in the Example Dir.
-					$sTempExamplePath = $sLibExamplesDir & "\"
-					$sTempExampleName = $aHeaders[$i][$__g_Header_Example]
-
-					ReDim $asExamples[1]
-					$asExamples[0] = $sTempExamplePath & $sTempExampleName
-
-				ElseIf FileExists($sLibExamplesDir & "\" & $aHeaders[$i][$__g_Header_Example] & ".au3") Then ; Alternatively named example in the Example Dir.
-					$sTempExamplePath = $sLibExamplesDir & "\"
-					$sTempExampleName = $aHeaders[$i][$__g_Header_Example]
-
-					ReDim $asExamples[1]
-					$asExamples[0] = $sTempExamplePath & $sTempExampleName & ".au3"
 				EndIf
-			EndIf
 
-			If (UBound($asExamples) > 0) Then
-				$sHtml_Content &= @CRLF & '  <h2>Example</h2>' & @CRLF & _ ;~ modified
-						'  <script type="text/javascript">' & @CRLF & _
-						'  if ((navigator.appName == "Microsoft Internet Explorer") && (parseInt(navigator.appVersion) >= 4)) // IE (4+) only' & @CRLF & _
-						'  function copyToClipboard(section) {' & @CRLF & _
-						'  if (window.clipboardData && clipboardData.setData) {' & @CRLF & _
-						'  clipboardData.setData("text", section + "\r\n");' & @CRLF & _
-						'  alert("Copied to clipboard");' & @CRLF & _
-						'  }' & @CRLF & _
-						'  }' & @CRLF & _
-						'  </script>' & @CRLF
+				If (UBound($asExamples) > 0) Then
+					$sHtml_Content &= @CRLF & '  <h2>Example</h2>' & @CRLF & _ ;~ modified
+							'  <script type="text/javascript">' & @CRLF & _
+							'  if ((navigator.appName == "Microsoft Internet Explorer") && (parseInt(navigator.appVersion) >= 4)) // IE (4+) only' & @CRLF & _
+							'  function copyToClipboard(section) {' & @CRLF & _
+							'  if (window.clipboardData && clipboardData.setData) {' & @CRLF & _
+							'  clipboardData.setData("text", section + "\r\n");' & @CRLF & _
+							'  alert("Copied to clipboard");' & @CRLF & _
+							'  }' & @CRLF & _
+							'  }' & @CRLF & _
+							'  </script>' & @CRLF
 
-				For $iExample = 0 To UBound($asExamples) - 1
-					If $iHighlightExampleSyntax Then
+					For $iExample = 0 To UBound($asExamples) - 1
+						If $iHighlightExampleSyntax Then
 
-						$hTempFile = FileOpen($sTempFile, BitOR($FO_OVERWRITE, $FO_UTF8))
-						FileWrite($hTempFile, FileRead($asExamples[$iExample]))
-						FileClose($hTempFile)
-						_SendSciTE_Command($hGUI, $hSciTE_hwnd, 'open:' & StringReplace($sTempFile, '\', '\\') & '') ; Open the temporary Au3 file.
-						_SendSciTE_Command($hGUI, $hSciTE_hwnd, 'exportashtml:' & StringReplace($sTempOutputFile, '\', '\\')) ; Export it to html which will allow it to be colored.
-						_SendSciTE_Command($hGUI, $hSciTE_hwnd, 'close:') ; Close the temporary Au3 file so I can write the new data to it.
-						$sExample_Content = FileRead($sTempOutputFile)
-						_SciTE_ParseHTML($sExample_Content) ; Content is ByRef modified.
+							$hTempFile = FileOpen($sTempFile, BitOR($FO_OVERWRITE, $FO_UTF8))
+							FileWrite($hTempFile, FileRead($asExamples[$iExample]))
+							FileClose($hTempFile)
+							_SendSciTE_Command($hGUI, $hSciTE_hwnd, 'open:' & StringReplace($sTempFile, '\', '\\') & '') ; Open the temporary Au3 file.
+							_SendSciTE_Command($hGUI, $hSciTE_hwnd, 'exportashtml:' & StringReplace($sTempOutputFile, '\', '\\')) ; Export it to html which will allow it to be colored.
+							_SendSciTE_Command($hGUI, $hSciTE_hwnd, 'close:') ; Close the temporary Au3 file so I can write the new data to it.
+							$sExample_Content = FileRead($sTempOutputFile)
+							_SciTE_ParseHTML($sExample_Content) ; Content is ByRef modified.
 
-						If $iHiglExmplSyntx_AddURLs Then $sExample_Content = __AddHelpLinks($sExample_Content)
-					Else
-						$sExample_Content = FileRead($asExamples[$iExample])
-					EndIf
+							If $iHiglExmplSyntx_AddURLs Then $sExample_Content = __AddHelpLinks($sExample_Content)
+						Else
+							$sExample_Content = FileRead($asExamples[$iExample])
+						EndIf
 
-					$sExample_Content = StringStripWS($sExample_Content, $STR_STRIPLEADING + $STR_STRIPTRAILING)
-					$sExample_Content = StringReplace($sExample_Content, '<>', '&lt;&gt;')
+						$sExample_Content = StringStripWS($sExample_Content, $STR_STRIPLEADING + $STR_STRIPTRAILING)
+						$sExample_Content = StringReplace($sExample_Content, '<>', '&lt;&gt;')
 
-					If Not $iHighlightExampleSyntax Then
-						$sExample_Content = StringReplace($sExample_Content, '<', '&lt;')
-						$sExample_Content = StringReplace($sExample_Content, '>', '&gt;')
-					EndIf
+						If Not $iHighlightExampleSyntax Then
+							$sExample_Content = StringReplace($sExample_Content, '<', '&lt;')
+							$sExample_Content = StringReplace($sExample_Content, '>', '&gt;')
+						EndIf
 
-					If $sExample_Content <> "" Then
-						If (UBound($asExamples) > 1) Then $sHtml_Content &= '  <h3>Example ' & ($iExample + 1) & '</h3>' & @CRLF
-						$sHtml_Content &= _
-								'  <div class="codeSnippetContainer">' & @CRLF & _
-								'    <div class="codeSnippetContainerTabs">' & @CRLF & _
-								'  <script type="text/javascript">' & @CRLF & _
-								'  if (document.URL.match(/^mk:@MSITStore:/i)) {' & @CRLF & _
-								'  document.write(''<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">'');' & @CRLF & _
-								'  document.write(''<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\' & StringMid($asExamples[$iExample], StringInStr($asExamples[$iExample], "\", 0, -1) + 1) & ',"></object>'');' & @CRLF & _ ; $sFuncName & '.au3,"></object>'');' & @CRLF & _
-								'  document.write(''<\/div>'');' & @CRLF & _
-								'  }' & @CRLF & _
-								'  </script>' & @CRLF & _
-								'  </div>' & @CRLF & _
-								' ' & @CRLF & _
-								'  <div class="codeSnippetContainerCodeContainer">' & @CRLF & _
-								'  <div class="codeSnippetToolBar">' & @CRLF & _
-								'  <div class="codeSnippetToolBarText">' & @CRLF & _
-								'  <script type="text/javascript">' & @CRLF & _
-								'  if ((navigator.appName == "Microsoft Internet Explorer") && (parseInt(navigator.appVersion) >= 4)) // IE (4+) only' & @CRLF & _
-								'  document.write(''<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\''copytext' & $iExample + 1 & '\'').innerText)">Copy to clipboard<\/a>'');' & @CRLF & _
-								'  </script>' & @CRLF & _
-								'  </div>' & @CRLF & _
-								'  </div>' & @CRLF & _
-								'  <div class="codeSnippetContainerCode" dir="ltr" id="copytext' & $iExample + 1 & '">' & @CRLF & _
-								'  <pre>' & @CRLF & _
-								$sExample_Content & @CRLF & _
-								'  </pre>' & @CRLF & _
-								'  </div>' & @CRLF & _
-								'  </div>' & @CRLF & _
-								'  </div>' & @CRLF
-					EndIf
-				Next
-			EndIf
+						If $sExample_Content <> "" Then
+							If (UBound($asExamples) > 1) Then $sHtml_Content &= '  <h3>Example ' & ($iExample + 1) & '</h3>' & @CRLF
+							$sHtml_Content &= _
+									'  <div class="codeSnippetContainer">' & @CRLF & _
+									'    <div class="codeSnippetContainerTabs">' & @CRLF & _
+									'  <script type="text/javascript">' & @CRLF & _
+									'  if (document.URL.match(/^mk:@MSITStore:/i)) {' & @CRLF & _
+									'  document.write(''<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">'');' & @CRLF & _
+									'  document.write(''<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\' & StringMid($asExamples[$iExample], StringInStr($asExamples[$iExample], "\", 0, -1) + 1) & ',"></object>'');' & @CRLF & _ ; $sFuncName & '.au3,"></object>'');' & @CRLF & _
+									'  document.write(''<\/div>'');' & @CRLF & _
+									'  }' & @CRLF & _
+									'  </script>' & @CRLF & _
+									'  </div>' & @CRLF & _
+									' ' & @CRLF & _
+									'  <div class="codeSnippetContainerCodeContainer">' & @CRLF & _
+									'  <div class="codeSnippetToolBar">' & @CRLF & _
+									'  <div class="codeSnippetToolBarText">' & @CRLF & _
+									'  <script type="text/javascript">' & @CRLF & _
+									'  if ((navigator.appName == "Microsoft Internet Explorer") && (parseInt(navigator.appVersion) >= 4)) // IE (4+) only' & @CRLF & _
+									'  document.write(''<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\''copytext' & $iExample + 1 & '\'').innerText)">Copy to clipboard<\/a>'');' & @CRLF & _
+									'  </script>' & @CRLF & _
+									'  </div>' & @CRLF & _
+									'  </div>' & @CRLF & _
+									'  <div class="codeSnippetContainerCode" dir="ltr" id="copytext' & $iExample + 1 & '">' & @CRLF & _
+									'  <pre>' & @CRLF & _
+									$sExample_Content & @CRLF & _
+									'  </pre>' & @CRLF & _
+									'  </div>' & @CRLF & _
+									'  </div>' & @CRLF & _
+									'  </div>' & @CRLF
+						EndIf
+					Next
+				EndIf
 
-			;Закрываем теги Html'ки функций: Body, Html
-			; Close the function HTML tags (Body, Html).
-			$sHtml_Content &= '</body>' & @CRLF & '</html>'
-			#EndRegion  Формируем Html'ку функций' ; Build the function HTML page
+				;Закрываем теги Html'ки функций: Body, Html
+				; Close the function HTML tags (Body, Html).
+				$sHtml_Content &= '</body>' & @CRLF & '</html>'
+				#EndRegion  Формируем Html'ку функций' ; Build the function HTML page
 
-			;Пишем файл функций
-			; Write the function HTML file.
-			$hFunc_File = FileOpen($sDocsDir & "\funcs\" & $sFile & ".htm", $FO_OVERWRITE + $FO_UTF8)
-			FileWrite($hFunc_File, $sHtml_Content)
-			FileClose($hFunc_File)
-		Next
+				;Пишем файл функций
+				; Write the function HTML file.
+				$hFunc_File = FileOpen($sDocsDir & "\funcs\" & $sFile & ".htm", $FO_OVERWRITE + $FO_UTF8)
+				FileWrite($hFunc_File, $sHtml_Content)
+				FileClose($hFunc_File)
+			Next
+		EndIf
 
 		; Close the Sub-Component Index table, body, and html tags.
 		FileWriteLine($hSubCompIndex, "  </table>" & @CRLF & "</body>" & @CRLF & "</html>")
@@ -856,6 +927,7 @@ Func _AU3Lib_GetHeaders($sLibraryFile)
 		If StringIsSpace($aLibHeaders[$i]) Then ContinueLoop
 
 		$iCount += 1
+		If ($iCount >= UBound($aHeaders)) Then ReDim $aHeaders[Int(($iCount * 1.5))]
 
 		For $j = 1 To $aHeader_Params[0]
 			$sParam = StringRegExpReplace($aLibHeaders[$i], '(?s).*; ' & $aHeader_Params[$j] & ': ?(.*?)[\r\n]; ([\w\s_]+\.+:|=+).*', '\1')
@@ -872,6 +944,94 @@ Func _AU3Lib_GetHeaders($sLibraryFile)
 	ReDim $aHeaders[$iCount + 1][11]
 	Return $aHeaders
 EndFunc   ;==>_AU3Lib_GetHeaders
+
+; $asConstants[0] = Constant
+; $asConstants[1] = Value
+; $asConstants[2] = Description
+Func _AU3Lib_GetConstants($sLibraryFile)
+	If Not FileExists($sLibraryFile) Then Return SetError(1, 0, -1)
+	Local $asLibConstants = StringRegExp(FileRead($sLibraryFile), "(?ism)^\s*Global.+?(\$.+?)$(?!\R+\s+\$)", $STR_REGEXPARRAYGLOBALMATCH) ; Grab all the constant groups from the file.
+	Local $asConstants[500][3], $iCount = 0, $asTempConsts, $asRegExp
+	Local $bMatch = False
+	Local $sShortConst = ""
+
+	For $i = 0 To UBound($asLibConstants) - 1
+		$asTempConsts = StringRegExp($asLibConstants[$i], "(?m)\$\w+[^;\$\n\r]*(?:;.*)*", $STR_REGEXPARRAYGLOBALMATCH) ; Grab each Constant, value and comment group.
+
+		If IsArray($asTempConsts) Then
+			$asRegExp = StringRegExp($asTempConsts[0], "\$\w+", $STR_REGEXPARRAYMATCH) ; Grab the first Constant.
+			If Not IsArray($asRegExp) Then
+				ConsoleWrite("! Failed to identify constant: " & $asTempConsts[0] & @CRLF)
+				ContinueLoop
+			EndIf
+
+			$sShortConst = $asRegExp[0]
+
+			Do ; Cycle through and determine the universal short-form of the constant. e.g. $LO_COLOR_BLACK, $LO_COLOR_WHITE = $LO_COLOR_*
+				$bMatch = True
+
+				For $j = 0 To UBound($asTempConsts) - 1
+					If Not StringRegExp($asTempConsts[$j], "^\s*\Q" & $sShortConst & "\E") Then
+						$bMatch = False
+						ExitLoop
+					EndIf
+				Next
+
+				If Not $bMatch Then $sShortConst = StringLeft($sShortConst, StringInStr(StringTrimRight($sShortConst, 1), "_", 0, -1))
+
+				Sleep(10)
+			Until $bMatch Or Not (StringInStr($sShortConst, "_", 0, 2)) ; Go until found or I've cut the constant too much.
+
+			$asConstants[$iCount][$__g_Const_Constant] = $sShortConst & "*" ; Add the short constant to the list for later linking.
+			$asConstants[$iCount][$__g_Const_Value] = ""
+			$asConstants[$iCount][$__g_Const_Desc] = ""
+
+			$iCount += 1
+			If ($iCount >= UBound($asConstants)) Then ReDim $asConstants[Int(($iCount * 1.5))][3]
+
+			For $k = 0 To UBound($asLibConstants) - 1
+				If $k = $i Then ContinueLoop ; Skip the current file.
+				If StringRegExp($asLibConstants[$k], "^\s*\Q" & $sShortConst & "\E") Then ConsoleWrite("! Non-unique short constant: " & $sShortConst & @TAB & $asLibConstants[$k] & @CRLF)
+			Next
+
+			For $j = 0 To UBound($asTempConsts) - 1
+				$asRegExp = StringRegExp($asTempConsts[$j], "\$\w+", $STR_REGEXPARRAYMATCH) ; Grab the Constant.
+				If Not IsArray($asRegExp) Then
+					ConsoleWrite("! Failed to identify constant: " & $asTempConsts[$j] & @CRLF)
+					ContinueLoop
+				EndIf
+
+				$asConstants[$iCount][$__g_Const_Constant] = $asRegExp[0]
+
+				$asRegExp = StringRegExp($asTempConsts[$j], '\$\w+(?|\s*=\s*([-\d]+)|\s*=\s*(".*?")|[\W_]+;\s*([-\d]+)\s*)', $STR_REGEXPARRAYMATCH) ; Grab the Value if present.
+				If IsArray($asRegExp) Then
+					$asConstants[$iCount][$__g_Const_Value] = $asRegExp[0]
+				Else
+					$asConstants[$iCount][$__g_Const_Value] = "" ; If no value, set to empty string.
+					ConsoleWrite("! No Value for: " & $asTempConsts[$j] & @CRLF)
+				EndIf
+
+				$asRegExp = StringRegExp($asTempConsts[$j], "(?m)\$\w+[^;\n\r]+;\s*\d*\s*(.+)$", $STR_REGEXPARRAYMATCH) ; Grab the Description if present.
+				If IsArray($asRegExp) Then
+					$asConstants[$iCount][$__g_Const_Desc] = $asRegExp[0]
+				Else
+					$asConstants[$iCount][$__g_Const_Desc] = "" ; If no description, set to empty string.
+					If StringInStr($asTempConsts[$j], ";") Then ConsoleWrite("! No Description for: " & $asTempConsts[$j] & @CRLF)
+				EndIf
+
+				$iCount += 1
+				If ($iCount >= UBound($asConstants)) Then ReDim $asConstants[Int(($iCount * 1.5))][3]
+			Next
+
+		Else
+			ConsoleWrite("! Skipping Constant group, failed to identify: " & $asLibConstants[$i] & @CRLF)
+		EndIf
+
+	Next
+
+	ReDim $asConstants[$iCount][3]
+	Return $asConstants
+EndFunc   ;==>_AU3Lib_GetConstants
 
 Func _AU3Lib_GetHtmlHeaderStr($sTitle, $sCss_Path = 'css')
 	Return _
@@ -997,48 +1157,69 @@ Func _AU3Lib_CompileHtmlToChm($sChm_File_Path, $sChm_File_Name)
 				ContinueLoop
 			EndIf
 
-			; Add the Sub-Component to the TOC
-			$sTOC_hhc_File_Content &= _
-					'      <LI> <OBJECT type="text/sitemap">' & @CRLF & _
-					'        <param name="Name" value="' & $asSubComponentIndex[$j] & '">' & @CRLF & _
-					'        <param name="Local" value="indices\' & $asComponentIndex[$i] & "_" & $asSubComponentIndex[$j] & '_Index.htm">' & @CRLF & _
-					'      </OBJECT>' & @CRLF & _
-					'      <UL>' & @CRLF
+			If StringRegExp($asSubComponentIndex[$j], "(?i)constants") Then ; Only add Constant Index, but don't add a sub-list like I do for functions.
+				; Add the Sub-Component to the TOC
+				$sTOC_hhc_File_Content &= _
+						'      <LI> <OBJECT type="text/sitemap">' & @CRLF & _
+						'        <param name="Name" value="' & $asSubComponentIndex[$j] & '">' & @CRLF & _
+						'        <param name="Local" value="indices\' & $asComponentIndex[$i] & "_" & $asSubComponentIndex[$j] & '_Index.htm">' & @CRLF & _
+						'      </OBJECT>' & @CRLF
 
-			; Get a list of all Functions
-			$asFuncs = StringRegExp(FileRead($sDocsDir & "\indices\" & $asComponentIndex[$i] & "_" & $asSubComponentIndex[$j] & "_Index.htm"), '<td><a href=.+?>(\w+)</a></td>', $STR_REGEXPARRAYGLOBALMATCH)
-			If Not IsArray($asFuncs) Then
-				ConsoleWrite("! No Functions found: " & $asSubComponentIndex[$j] & @CRLF)
-				ContinueLoop
-			EndIf
+				; Add Constant file Index to the Index
+				$sIndex_hhk_File_Content &= _
+						'  <LI> <OBJECT type="text/sitemap">' & @CRLF & _
+						'    <param name="Name" value="' & $asComponentIndex[$i] & "_" & $asSubComponentIndex[$j] & '">' & @CRLF & _
+						'    <param name="Local" value="indices\' & $asComponentIndex[$i] & "_" & $asSubComponentIndex[$j] & '_Index.htm">' & @CRLF & _
+						'  </OBJECT>' & @CRLF
 
-			For $k = 0 To UBound($asFuncs) - 1
-				If Not FileExists($sDocsDir & "\funcs\" & $asFuncs[$k] & ".htm") Then
-					ConsoleWrite("! Function file not found: " & $asFuncs[$k] & @CRLF)
+				; Add Constant file Index to the CHM file
+				$sChmProject_hhp_File_Content &= 'indices\' & $asComponentIndex[$i] & "_" & $asSubComponentIndex[$j] & '_Index.htm' & @CRLF
+
+			Else
+
+				; Add the Sub-Component to the TOC
+				$sTOC_hhc_File_Content &= _
+						'      <LI> <OBJECT type="text/sitemap">' & @CRLF & _
+						'        <param name="Name" value="' & $asSubComponentIndex[$j] & '">' & @CRLF & _
+						'        <param name="Local" value="indices\' & $asComponentIndex[$i] & "_" & $asSubComponentIndex[$j] & '_Index.htm">' & @CRLF & _
+						'      </OBJECT>' & @CRLF & _
+						'      <UL>' & @CRLF
+
+				; Get a list of all Functions
+				$asFuncs = StringRegExp(FileRead($sDocsDir & "\indices\" & $asComponentIndex[$i] & "_" & $asSubComponentIndex[$j] & "_Index.htm"), '<td><a href=.+?>(\w+)</a></td>', $STR_REGEXPARRAYGLOBALMATCH)
+				If Not IsArray($asFuncs) Then
+					ConsoleWrite("! No Functions found: " & $asSubComponentIndex[$j] & @CRLF)
 					ContinueLoop
 				EndIf
 
-				; Add the Function to the TOC
-				$sTOC_hhc_File_Content &= _
-						'        <LI> <OBJECT type="text/sitemap">' & @CRLF & _
-						'          <param name="Name" value="' & $asFuncs[$k] & '">' & @CRLF & _
-						'          <param name="Local" value="funcs\' & $asFuncs[$k] & '.htm">' & @CRLF & _
-						'        </OBJECT>' & @CRLF
+				For $k = 0 To UBound($asFuncs) - 1
+					If Not FileExists($sDocsDir & "\funcs\" & $asFuncs[$k] & ".htm") Then
+						ConsoleWrite("! Function file not found: " & $asFuncs[$k] & @CRLF)
+						ContinueLoop
+					EndIf
 
-				; Add function to the Index
-				$sIndex_hhk_File_Content &= _
-						'  <LI> <OBJECT type="text/sitemap">' & @CRLF & _
-						'    <param name="Name" value="' & $asFuncs[$k] & '">' & @CRLF & _
-						'    <param name="Local" value="funcs\' & $asFuncs[$k] & '.htm">' & @CRLF & _
-						'  </OBJECT>' & @CRLF
+					; Add the Function to the TOC
+					$sTOC_hhc_File_Content &= _
+							'        <LI> <OBJECT type="text/sitemap">' & @CRLF & _
+							'          <param name="Name" value="' & $asFuncs[$k] & '">' & @CRLF & _
+							'          <param name="Local" value="funcs\' & $asFuncs[$k] & '.htm">' & @CRLF & _
+							'        </OBJECT>' & @CRLF
 
-				; Add function to the CHM file
-				$sChmProject_hhp_File_Content &= 'funcs\' & $asFuncs[$k] & ".htm" & @CRLF
-			Next
+					; Add function to the Index
+					$sIndex_hhk_File_Content &= _
+							'  <LI> <OBJECT type="text/sitemap">' & @CRLF & _
+							'    <param name="Name" value="' & $asFuncs[$k] & '">' & @CRLF & _
+							'    <param name="Local" value="funcs\' & $asFuncs[$k] & '.htm">' & @CRLF & _
+							'  </OBJECT>' & @CRLF
 
-			; close off the Function UL.
-			$sTOC_hhc_File_Content &= '      </UL>' & @CRLF
+					; Add function to the CHM file
+					$sChmProject_hhp_File_Content &= 'funcs\' & $asFuncs[$k] & ".htm" & @CRLF
+				Next
 
+				; close off the Function UL.
+				$sTOC_hhc_File_Content &= '      </UL>' & @CRLF
+
+			EndIf
 		Next
 		; close off the sub-component UL etc.
 		$sTOC_hhc_File_Content &= '    </UL>' & @CRLF
@@ -1180,13 +1361,9 @@ Func __AddHelpLinks($sData)
 	If IsArray($asRegExp) Then
 		For $i = 0 To UBound($asRegExp) - 1
 			; Only add links to valid functions included in this help file.
-;~ 			For $j = 0 To UBound($asFuncNames) - 1
-;~ 				If StringRegExp($asFuncNames[$j], "\b" & $asRegExp[$i] & "\b") Then
 			If __LinkIsValid($asRegExp[$i]) Then
 				$sData = StringRegExpReplace($sData, '<span class="S17">(' & $asRegExp[$i] & ')</span>', '<a class="codeSnippetLink" href="\1.htm"><span class="S17">\1</span></a>')
-;~ 					ExitLoop
 			EndIf
-;~ 			Next
 		Next
 	EndIf
 
@@ -1207,36 +1384,118 @@ Func _SciTE_ParseHTML(ByRef $sData)
 	Return $bReturn
 EndFunc   ;==>_SciTE_ParseHTML
 
-Func __LinkIsValid($sFuncName, $asFiles = Null) ; Parses and stores a list of all functions that will be processed, so I can know which functions will be valid links.
-	Local $asRegExp
-	Local Static $asFuncNames[0]
-	Local $iCount = 0
+Func __LinkIsValid($sSearchItem, $asFiles = Null, $bReturnFileName = False) ; Parses and stores a list of all functions and Constants that will be processed, so I can know which functions/constants will be valid links.
+	Local $asRegExp, $asPrefix
+	Local Static $asFuncNames[0], $asConstants[0][3]
+	Local $iFuncCount = 0, $iConstCount = 0
+	Local $sComponent, $sSubComponent
 
-	If ($sFuncName = Default) And IsArray($asFiles) Then ; Parse and store all function names, overwriting the last ones stored, if any.
+	If ($sSearchItem = Default) And IsArray($asFiles) Then ; Parse and store all function names, overwriting the last ones stored, if any.
 		ReDim $asFuncNames[UBound($asFiles)]
+		ReDim $asConstants[UBound($asFiles)][3]
 
 		For $iSrcFile = 0 To UBound($asFiles) - 1
 			If ($asFiles[$iSrcFile] = "") Then ContinueLoop
 
-			$asRegExp = StringRegExp(FileRead($asFiles[$iSrcFile]), "(?i);\s*Name\s*\.+:\s*(?!__)(\w+)", $STR_REGEXPARRAYGLOBALMATCH)
+			If StringRegExp($asFiles[$iSrcFile], "(?i)_constants") Then ; Constants processing.
+				$asRegExp = StringRegExp($asFiles[$iSrcFile], "(?i)(?|LibreOffice(\w+)_(\w+)|(LibreOffice)_(\w+))[^\\]+$", $STR_REGEXPARRAYMATCH) ; Get Sub-Component name, else get LibreOffice name for global files.
+				If Not IsArray($asRegExp) Then
+					ConsoleWrite("! Failed to identify Component and Sub-Component for LinkIsValid, skipping: " & $asFiles[$iFile] & @CRLF)
+					ContinueLoop
+				EndIf
 
-			If IsArray($asRegExp) Then
-				$asFuncNames[$iCount] = " "
-				For $i = 0 To UBound($asRegExp) - 1
-					$asFuncNames[$iCount] &= $asRegExp[$i] & " "
-				Next
-				$iCount += 1
+				$sComponent = ($asRegExp[0] = "LibreOffice") ? ("Global") : ($asRegExp[0]) ; If dealing with the global helper funcs (LO_Helper) etc., just name it global.
+				$sSubComponent = $asRegExp[1]
+
+				$asRegExp = StringRegExp(FileRead($asFiles[$iSrcFile]), "(?i)\$\w+", $STR_REGEXPARRAYGLOBALMATCH) ; Grab all Constants in the file.
+
+				If IsArray($asRegExp) Then
+
+					$asConstants[$iConstCount][0] = " "
+					$asConstants[$iConstCount][1] = " "
+					$asConstants[$iConstCount][2] = $sComponent & "_" & $sSubComponent & "_Index"
+					For $i = 0 To UBound($asRegExp) - 1
+						$asPrefix = StringRegExp($asRegExp[$i], "\$_*+[^_]+_", $STR_REGEXPARRAYMATCH)
+						; If Constant prefix was identified, and not already listed, add it.
+						If IsArray($asPrefix) And Not StringRegExp($asConstants[$iConstCount][0], "\Q" & $asPrefix[0] & "\E\b") Then $asConstants[$iConstCount][0] &= $asPrefix[0] & " "
+
+						$asConstants[$iConstCount][1] &= $asRegExp[$i] & " "
+					Next
+					$iConstCount += 1
+				EndIf
+
+			Else ; Function processing.
+				$asRegExp = StringRegExp(FileRead($asFiles[$iSrcFile]), "(?i);\s*Name\s*\.+:\s*(?!__)(\w+)", $STR_REGEXPARRAYGLOBALMATCH) ; Grab all Function names in the file.
+
+				If IsArray($asRegExp) Then
+					$asFuncNames[$iFuncCount] = " "
+					For $i = 0 To UBound($asRegExp) - 1
+						$asFuncNames[$iFuncCount] &= $asRegExp[$i] & " "
+					Next
+					$iFuncCount += 1
+				EndIf
 			EndIf
 		Next
 
-		ReDim $asFuncNames[$iCount]
+		ReDim $asFuncNames[$iFuncCount]
+		ReDim $asConstants[$iConstCount][3]
 
 		Return True
 
-	ElseIf IsString($sFuncName) Then
-		For $i = 0 To UBound($asFuncNames) - 1
-			If StringRegExp($asFuncNames[$i], "\b" & $sFuncName & "\b") Then Return True
-		Next
+	ElseIf IsString($sSearchItem) Then
+		If StringRegExp($sSearchItem, "^\$") Then ; Searching for a Constant.
+			$asPrefix = StringRegExp($sSearchItem, "\$_*+[^_]+_", $STR_REGEXPARRAYMATCH)
+
+			; If Constant prefix was identified, then search for it first.
+			If IsArray($asPrefix) Then
+				For $i = 0 To UBound($asConstants) - 1
+					If StringRegExp($asConstants[$i][0], "\Q" & $asPrefix[0] & "\E\b") Then
+						; See if I am testing a short constant or full.
+						If StringInStr($sSearchItem, "*") Then     ; Checking for a short constant.
+;~ 								$asRegExp = StringRegExp($asConstants[$i][1], "\Q" & StringReplace($sSearchItem, "*", "") & "\E", $STR_REGEXPARRAYGLOBALMATCH) ; Remove the asterisk from the search item.
+							If StringRegExp($asConstants[$i][1], "\Q" & StringReplace($sSearchItem, "*", "") & "\E") Then Return ($bReturnFileName) ? ($asConstants[$i][2]) : (True)
+
+;~ 								If IsArray($asRegExp) Then
+;~ 									If (UBound($asRegExp) > 1) Then ConsoleWrite("! More than one match for Short Constant: " & $sSearchItem & @TAB & " In Prefixes: " & $asConstants[$i][0] & @CRLF)
+;~ 									Return True
+;~ 									Return ($bReturnFileName) ? ($asConstants[$i][2]) : (True)
+;~ 								EndIf
+
+						Else     ; Searching a full constant.
+;~ 								If StringRegExp($asConstants[$i][1], "\Q" & $sSearchItem & "\E\b") Then Return True
+							If StringRegExp($asConstants[$i][1], "\Q" & $sSearchItem & "\E\b") Then Return ($bReturnFileName) ? ($asConstants[$i][2]) : (True)
+							ExitLoop     ; If Not found stop searching.
+						EndIf
+					EndIf
+				Next
+
+			Else     ; Search all constants for the search term.
+				For $i = 0 To UBound($asConstants) - 1
+					; See if I am testing a short constant or full.
+					If StringInStr($sSearchItem, "*") Then         ; Checking for a short constant.
+;~ 								$asRegExp = StringRegExp($asConstants[$i][1], "\Q" & StringReplace($sSearchItem, "*", "") & "\E", $STR_REGEXPARRAYGLOBALMATCH) ; Remove the asterisk from the search item.
+						If StringRegExp($asConstants[$i][1], "\Q" & StringReplace($sSearchItem, "*", "") & "\E") Then Return ($bReturnFileName) ? ($asConstants[$i][2]) : (True)
+
+;~ 								If IsArray($asRegExp) Then
+;~ 									If (UBound($asRegExp) > 1) Then ConsoleWrite("! More than one match for Short Constant: " & $sSearchItem & @TAB & " In Prefixes: " & $asConstants[$i][0] & @CRLF)
+;~ 									Return True
+;~ 									Return ($bReturnFileName) ? ($asConstants[$i][2]) : (True)
+;~ 								EndIf
+
+					Else         ; Searching a full constant.
+;~ 								If StringRegExp($asConstants[$i][1], "\Q" & $sSearchItem & "\E\b") Then Return True
+						If StringRegExp($asConstants[$i][1], "\Q" & $sSearchItem & "\E\b") Then Return ($bReturnFileName) ? ($asConstants[$i][2]) : (True)
+						ExitLoop         ; If Not found stop searching.
+					EndIf
+				Next
+			EndIf
+
+		Else ; Searching for a function.
+			For $i = 0 To UBound($asFuncNames) - 1
+				If StringRegExp($asFuncNames[$i], "\b" & $sSearchItem & "\b") Then Return True
+			Next
+		EndIf
+
 	EndIf
 
 	Return False
