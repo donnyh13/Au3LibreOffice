@@ -271,39 +271,6 @@ Global Const _                                                  ; com.sun.star.t
 		$LOW_FIELD_REF_USING_NUMBER_NO_CONT = 9, _              ; Inserts only the number of the heading or numbered paragraph.
 		$LOW_FIELD_REF_USING_NUMBER_CONT = 10                   ; Inserts the number of the heading or numbered paragraph, including all superior levels.
 
-; Regular Field Types
-Global Enum Step *2 _
-		$LOW_FIELD_TYPE_COMMENT = 1, _                          ; 1 A Comment Field. As Found at Insert > Comment
-		$LOW_FIELD_TYPE_AUTHOR, _                               ; 2 A Author field, found in the Fields Dialog, Document tab.
-		$LOW_FIELD_TYPE_CHAPTER, _                              ; 4 A Chapter field, found in the Fields Dialog, Document tab.
-		$LOW_FIELD_TYPE_CHAR_COUNT, _                           ; 8 A Character Count field, found in the Fields Dialog, Document tab, Statistics Type.
-		$LOW_FIELD_TYPE_COMBINED_CHAR, _                        ; 16 A Combined Character field, found in the Fields Dialog, Functions tab.
-		$LOW_FIELD_TYPE_COND_TEXT, _                            ; 32 A Conditional Text field, found in the Fields Dialog, Functions tab.
-		$LOW_FIELD_TYPE_DATE_TIME, _                            ; 64 A Date/Time field, found in the Fields Dialog, Document tab, Date Type and Time Type..
-		$LOW_FIELD_TYPE_INPUT_LIST, _                           ; 128 A Input List field, found in the Fields Dialog, Functions tab.
-		$LOW_FIELD_TYPE_EMB_OBJ_COUNT, _                        ; 256 A Object Count field, found in the Fields Dialog, Document tab, Statistics Type.
-		$LOW_FIELD_TYPE_SENDER, _                               ; 512 A Sender field, found in the Fields Dialog, Document tab.
-		$LOW_FIELD_TYPE_FILENAME, _                             ; 1024 A File Name field, found in the Fields Dialog, Document tab.
-		$LOW_FIELD_TYPE_SHOW_VAR, _                             ; 2048 A Show Variable field, found in the Fields Dialog, Variables tab.
-		$LOW_FIELD_TYPE_INSERT_REF, _                           ; 4096 A Insert Reference field, found in the Fields Dialog, Cross-References tab. [Includes: "Insert Reference", "Headings", "Numbered Paragraphs", "Drawing", "Bookmarks", "Footnotes", "Endnotes", etc.]
-		$LOW_FIELD_TYPE_IMAGE_COUNT, _                          ; 8192 A Image Count field, found in the Fields Dialog, Document tab, Statistics Type.
-		$LOW_FIELD_TYPE_HIDDEN_PAR, _                           ; 16384 A Hidden Paragraph field, found in the Fields Dialog, Functions tab.
-		$LOW_FIELD_TYPE_HIDDEN_TEXT, _                          ; 32768 A Hidden Text field, found in the Fields Dialog, Functions tab.
-		$LOW_FIELD_TYPE_INPUT, _                                ; 65536 A Input field, found in the Fields Dialog, Functions tab.
-		$LOW_FIELD_TYPE_PLACEHOLDER, _                          ; 131072 A Placeholder field, found in the Fields Dialog, Functions tab.
-		$LOW_FIELD_TYPE_MACRO, _                                ; 262144 A Execute Macro field, found in the Fields Dialog, Functions tab.
-		$LOW_FIELD_TYPE_PAGE_COUNT, _                           ; 524288 A Page Count field, found in the Fields Dialog, Document tab, Statistics Type.
-		$LOW_FIELD_TYPE_PAGE_NUM, _                             ; 1048576 A Page Number (Unstyled) field, found in the Fields Dialog, Document tab.
-		$LOW_FIELD_TYPE_PAR_COUNT, _                            ; 2097152 A Paragraph Count field, found in the Fields Dialog, Document tab, Statistics Type..
-		$LOW_FIELD_TYPE_SHOW_PAGE_VAR, _                        ; 4194304 A Show Page Variable field, found in the Fields Dialog, Variables tab.
-		$LOW_FIELD_TYPE_SET_PAGE_VAR, _                         ; 8388608 A Set Page Variable field, found in the Fields Dialog, Variables tab.
-		$LOW_FIELD_TYPE_SCRIPT, _                               ; 16777216
-		$LOW_FIELD_TYPE_SET_VAR, _                              ; 33554432 A Set Variable field, found in the Fields Dialog, Variables tab..
-		$LOW_FIELD_TYPE_TABLE_COUNT, _                          ; 67108864 A Table Count field, found in the Fields Dialog, Document tab, Statistics Type.
-		$LOW_FIELD_TYPE_TEMPLATE_NAME, _                        ; 134217728 A Templates field, found in the Fields Dialog, Document tab.
-		$LOW_FIELD_TYPE_WORD_COUNT, _                           ; 268435456 A Word Count field, found in the Fields Dialog, Document tab, Statistics Type.
-		$LOW_FIELD_TYPE_ALL = 536870911                         ; 536870911 Returns an array of all field types listed below.
-
 ; Advanced Field Types
 Global Enum Step *2 _
 		$LOW_FIELD_TYPE_ADV_BIBLIOGRAPHY = 1, _                 ; 1 A Bibliography Field, found in Fields dialog, Database tab.
@@ -333,6 +300,39 @@ Global Enum Step *2 _
 		$LOW_FIELD_TYPE_DOCINFO_SUBJECT, _                      ; 2048 A Subject Field, found in Fields dialog, DocInformation Tab.
 		$LOW_FIELD_TYPE_DOCINFO_TITLE, _                        ; 4096 A Title Field, found in Fields dialog, DocInformation Tab.
 		$LOW_FIELD_TYPE_DOCINFO_ALL = 8191                      ; 8191 All field types listed above.
+
+; Regular Field Types
+Global Enum Step *2 _
+		$LOW_FIELD_TYPE_REG_COMMENT = 1, _                      ; 1 A Comment Field. As Found at Insert > Comment
+		$LOW_FIELD_TYPE_REG_AUTHOR, _                           ; 2 A Author field, found in the Fields Dialog, Document tab.
+		$LOW_FIELD_TYPE_REG_CHAPTER, _                          ; 4 A Chapter field, found in the Fields Dialog, Document tab.
+		$LOW_FIELD_TYPE_REG_CHAR_COUNT, _                       ; 8 A Character Count field, found in the Fields Dialog, Document tab, Statistics Type.
+		$LOW_FIELD_TYPE_REG_COMBINED_CHAR, _                    ; 16 A Combined Character field, found in the Fields Dialog, Functions tab.
+		$LOW_FIELD_TYPE_REG_COND_TEXT, _                        ; 32 A Conditional Text field, found in the Fields Dialog, Functions tab.
+		$LOW_FIELD_TYPE_REG_DATE_TIME, _                        ; 64 A Date/Time field, found in the Fields Dialog, Document tab, Date Type and Time Type..
+		$LOW_FIELD_TYPE_REG_INPUT_LIST, _                       ; 128 A Input List field, found in the Fields Dialog, Functions tab.
+		$LOW_FIELD_TYPE_REG_EMB_OBJ_COUNT, _                    ; 256 A Object Count field, found in the Fields Dialog, Document tab, Statistics Type.
+		$LOW_FIELD_TYPE_REG_SENDER, _                           ; 512 A Sender field, found in the Fields Dialog, Document tab.
+		$LOW_FIELD_TYPE_REG_FILENAME, _                         ; 1024 A File Name field, found in the Fields Dialog, Document tab.
+		$LOW_FIELD_TYPE_REG_SHOW_VAR, _                         ; 2048 A Show Variable field, found in the Fields Dialog, Variables tab.
+		$LOW_FIELD_TYPE_REG_INSERT_REF, _                       ; 4096 A Insert Reference field, found in the Fields Dialog, Cross-References tab. [Includes: "Insert Reference", "Headings", "Numbered Paragraphs", "Drawing", "Bookmarks", "Footnotes", "Endnotes", etc.]
+		$LOW_FIELD_TYPE_REG_IMAGE_COUNT, _                      ; 8192 A Image Count field, found in the Fields Dialog, Document tab, Statistics Type.
+		$LOW_FIELD_TYPE_REG_HIDDEN_PAR, _                       ; 16384 A Hidden Paragraph field, found in the Fields Dialog, Functions tab.
+		$LOW_FIELD_TYPE_REG_HIDDEN_TEXT, _                      ; 32768 A Hidden Text field, found in the Fields Dialog, Functions tab.
+		$LOW_FIELD_TYPE_REG_INPUT, _                            ; 65536 A Input field, found in the Fields Dialog, Functions tab.
+		$LOW_FIELD_TYPE_REG_PLACEHOLDER, _                      ; 131072 A Placeholder field, found in the Fields Dialog, Functions tab.
+		$LOW_FIELD_TYPE_REG_MACRO, _                            ; 262144 A Execute Macro field, found in the Fields Dialog, Functions tab.
+		$LOW_FIELD_TYPE_REG_PAGE_COUNT, _                       ; 524288 A Page Count field, found in the Fields Dialog, Document tab, Statistics Type.
+		$LOW_FIELD_TYPE_REG_PAGE_NUM, _                         ; 1048576 A Page Number (Unstyled) field, found in the Fields Dialog, Document tab.
+		$LOW_FIELD_TYPE_REG_PAR_COUNT, _                        ; 2097152 A Paragraph Count field, found in the Fields Dialog, Document tab, Statistics Type..
+		$LOW_FIELD_TYPE_REG_SHOW_PAGE_VAR, _                    ; 4194304 A Show Page Variable field, found in the Fields Dialog, Variables tab.
+		$LOW_FIELD_TYPE_REG_SET_PAGE_VAR, _                     ; 8388608 A Set Page Variable field, found in the Fields Dialog, Variables tab.
+		$LOW_FIELD_TYPE_REG_SCRIPT, _                           ; 16777216
+		$LOW_FIELD_TYPE_REG_SET_VAR, _                          ; 33554432 A Set Variable field, found in the Fields Dialog, Variables tab..
+		$LOW_FIELD_TYPE_REG_TABLE_COUNT, _                      ; 67108864 A Table Count field, found in the Fields Dialog, Document tab, Statistics Type.
+		$LOW_FIELD_TYPE_REG_TEMPLATE_NAME, _                    ; 134217728 A Templates field, found in the Fields Dialog, Document tab.
+		$LOW_FIELD_TYPE_REG_WORD_COUNT, _                       ; 268435456 A Word Count field, found in the Fields Dialog, Document tab, Statistics Type.
+		$LOW_FIELD_TYPE_REG_ALL = 536870911                     ; 536870911 Returns an array of all field types listed below.
 
 ; User Data Field Type
 Global Const _                                                  ; com.sun.star.text.UserDataPart

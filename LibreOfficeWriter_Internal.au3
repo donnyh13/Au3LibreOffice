@@ -1575,7 +1575,7 @@ EndFunc   ;==>__LOWriter_FieldCountType
 ;                  The First column will always be the Field Object.
 ;                  Setting $bSupportedServices to True will add a Supported Service String column for the found Field.
 ;                  Setting $bFieldType to True will add a Field type column for the found Field.
-;                  Setting $bFieldTypeNum to True will add a Field type Number column, matching one of the following constants for the found Field. $LOW_FIELD_TYPE_*,$LOW_FIELD_TYPE_ADV_*, and $LOW_FIELD_TYPE_DOCINFO_* as defined in LibreOfficeWriter_Constants.au3.
+;                  Setting $bFieldTypeNum to True will add a Field type Number column, matching one of the following constants for the found Field. $LOW_FIELD_TYPE_REG_*,$LOW_FIELD_TYPE_ADV_*, and $LOW_FIELD_TYPE_DOCINFO_* as defined in LibreOfficeWriter_Constants.au3.
 ; Related .......:
 ; Link ..........:
 ; Example .......: No
@@ -1674,21 +1674,21 @@ EndFunc   ;==>__LOWriter_FieldsGetList
 ; Example .......: No
 ; ===============================================================================================================================
 Func __LOWriter_FieldTypeServices($iFieldType, $bAdvancedServices = False, $bDocInfoServices = False)
-	Local $avFieldTypes[29][2] = [[$LOW_FIELD_TYPE_COMMENT, "com.sun.star.text.TextField.Annotation"], _
-			[$LOW_FIELD_TYPE_AUTHOR, "com.sun.star.text.TextField.Author"], [$LOW_FIELD_TYPE_CHAPTER, "com.sun.star.text.TextField.Chapter"], _
-			[$LOW_FIELD_TYPE_CHAR_COUNT, "com.sun.star.text.TextField.CharacterCount"], [$LOW_FIELD_TYPE_COMBINED_CHAR, "com.sun.star.text.TextField.CombinedCharacters"], _
-			[$LOW_FIELD_TYPE_COND_TEXT, "com.sun.star.text.TextField.ConditionalText"], [$LOW_FIELD_TYPE_DATE_TIME, "com.sun.star.text.TextField.DateTime"], _
-			[$LOW_FIELD_TYPE_INPUT_LIST, "com.sun.star.text.TextField.DropDown"], [$LOW_FIELD_TYPE_EMB_OBJ_COUNT, "com.sun.star.text.TextField.EmbeddedObjectCount"], _
-			[$LOW_FIELD_TYPE_SENDER, "com.sun.star.text.TextField.ExtendedUser"], [$LOW_FIELD_TYPE_FILENAME, "com.sun.star.text.TextField.FileName"], _
-			[$LOW_FIELD_TYPE_SHOW_VAR, "com.sun.star.text.TextField.GetExpression"], [$LOW_FIELD_TYPE_INSERT_REF, "com.sun.star.text.TextField.GetReference"], _
-			[$LOW_FIELD_TYPE_IMAGE_COUNT, "com.sun.star.text.TextField.GraphicObjectCount"], [$LOW_FIELD_TYPE_HIDDEN_PAR, "com.sun.star.text.TextField.HiddenParagraph"], _
-			[$LOW_FIELD_TYPE_HIDDEN_TEXT, "com.sun.star.text.TextField.HiddenText"], [$LOW_FIELD_TYPE_INPUT, "com.sun.star.text.TextField.Input"], _
-			[$LOW_FIELD_TYPE_PLACEHOLDER, "com.sun.star.text.TextField.JumpEdit"], [$LOW_FIELD_TYPE_MACRO, "com.sun.star.text.TextField.Macro"], _
-			[$LOW_FIELD_TYPE_PAGE_COUNT, "com.sun.star.text.TextField.PageCount"], [$LOW_FIELD_TYPE_PAGE_NUM, "com.sun.star.text.TextField.PageNumber"], _
-			[$LOW_FIELD_TYPE_PAR_COUNT, "com.sun.star.text.TextField.ParagraphCount"], [$LOW_FIELD_TYPE_SHOW_PAGE_VAR, "com.sun.star.text.TextField.ReferencePageGet"], _
-			[$LOW_FIELD_TYPE_SET_PAGE_VAR, "com.sun.star.text.TextField.ReferencePageSet"], [$LOW_FIELD_TYPE_SCRIPT, "com.sun.star.text.TextField.Script"], _
-			[$LOW_FIELD_TYPE_SET_VAR, "com.sun.star.text.TextField.SetExpression"], [$LOW_FIELD_TYPE_TABLE_COUNT, "com.sun.star.text.TextField.TableCount"], _
-			[$LOW_FIELD_TYPE_TEMPLATE_NAME, "com.sun.star.text.TextField.TemplateName"], [$LOW_FIELD_TYPE_WORD_COUNT, "com.sun.star.text.TextField.WordCount"]]
+	Local $avFieldTypes[29][2] = [[$LOW_FIELD_TYPE_REG_COMMENT, "com.sun.star.text.TextField.Annotation"], _
+			[$LOW_FIELD_TYPE_REG_AUTHOR, "com.sun.star.text.TextField.Author"], [$LOW_FIELD_TYPE_REG_CHAPTER, "com.sun.star.text.TextField.Chapter"], _
+			[$LOW_FIELD_TYPE_REG_CHAR_COUNT, "com.sun.star.text.TextField.CharacterCount"], [$LOW_FIELD_TYPE_REG_COMBINED_CHAR, "com.sun.star.text.TextField.CombinedCharacters"], _
+			[$LOW_FIELD_TYPE_REG_COND_TEXT, "com.sun.star.text.TextField.ConditionalText"], [$LOW_FIELD_TYPE_REG_DATE_TIME, "com.sun.star.text.TextField.DateTime"], _
+			[$LOW_FIELD_TYPE_REG_INPUT_LIST, "com.sun.star.text.TextField.DropDown"], [$LOW_FIELD_TYPE_REG_EMB_OBJ_COUNT, "com.sun.star.text.TextField.EmbeddedObjectCount"], _
+			[$LOW_FIELD_TYPE_REG_SENDER, "com.sun.star.text.TextField.ExtendedUser"], [$LOW_FIELD_TYPE_REG_FILENAME, "com.sun.star.text.TextField.FileName"], _
+			[$LOW_FIELD_TYPE_REG_SHOW_VAR, "com.sun.star.text.TextField.GetExpression"], [$LOW_FIELD_TYPE_REG_INSERT_REF, "com.sun.star.text.TextField.GetReference"], _
+			[$LOW_FIELD_TYPE_REG_IMAGE_COUNT, "com.sun.star.text.TextField.GraphicObjectCount"], [$LOW_FIELD_TYPE_REG_HIDDEN_PAR, "com.sun.star.text.TextField.HiddenParagraph"], _
+			[$LOW_FIELD_TYPE_REG_HIDDEN_TEXT, "com.sun.star.text.TextField.HiddenText"], [$LOW_FIELD_TYPE_REG_INPUT, "com.sun.star.text.TextField.Input"], _
+			[$LOW_FIELD_TYPE_REG_PLACEHOLDER, "com.sun.star.text.TextField.JumpEdit"], [$LOW_FIELD_TYPE_REG_MACRO, "com.sun.star.text.TextField.Macro"], _
+			[$LOW_FIELD_TYPE_REG_PAGE_COUNT, "com.sun.star.text.TextField.PageCount"], [$LOW_FIELD_TYPE_REG_PAGE_NUM, "com.sun.star.text.TextField.PageNumber"], _
+			[$LOW_FIELD_TYPE_REG_PAR_COUNT, "com.sun.star.text.TextField.ParagraphCount"], [$LOW_FIELD_TYPE_REG_SHOW_PAGE_VAR, "com.sun.star.text.TextField.ReferencePageGet"], _
+			[$LOW_FIELD_TYPE_REG_SET_PAGE_VAR, "com.sun.star.text.TextField.ReferencePageSet"], [$LOW_FIELD_TYPE_REG_SCRIPT, "com.sun.star.text.TextField.Script"], _
+			[$LOW_FIELD_TYPE_REG_SET_VAR, "com.sun.star.text.TextField.SetExpression"], [$LOW_FIELD_TYPE_REG_TABLE_COUNT, "com.sun.star.text.TextField.TableCount"], _
+			[$LOW_FIELD_TYPE_REG_TEMPLATE_NAME, "com.sun.star.text.TextField.TemplateName"], [$LOW_FIELD_TYPE_REG_WORD_COUNT, "com.sun.star.text.TextField.WordCount"]]
 
 	Local $avFieldAdvTypes[9][2] = [[$LOW_FIELD_TYPE_ADV_BIBLIOGRAPHY, "com.sun.star.text.TextField.Bibliography"], _
 			[$LOW_FIELD_TYPE_ADV_DATABASE, "com.sun.star.text.TextField.Database"], [$LOW_FIELD_TYPE_ADV_DATABASE_NAME, "com.sun.star.text.TextField.DatabaseName"], _
@@ -1713,7 +1713,7 @@ Func __LOWriter_FieldTypeServices($iFieldType, $bAdvancedServices = False, $bDoc
 	If Not IsBool($bDocInfoServices) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	If ($bAdvancedServices = False) And ($bDocInfoServices = False) Then
-		If (BitAND($iFieldType, $LOW_FIELD_TYPE_ALL) = $LOW_FIELD_TYPE_ALL) Then Return SetError($__LO_STATUS_SUCCESS, 0, $avFieldTypes)
+		If (BitAND($iFieldType, $LOW_FIELD_TYPE_REG_ALL) = $LOW_FIELD_TYPE_REG_ALL) Then Return SetError($__LO_STATUS_SUCCESS, 0, $avFieldTypes)
 		$avSearch = $avFieldTypes
 
 	ElseIf ($bAdvancedServices = True) And ($bDocInfoServices = False) Then
