@@ -1033,7 +1033,7 @@ EndFunc   ;==>_LOCalc_CommentAreaTransparencyGradientMulti
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ;                  $iCalloutStyle       - [optional] (0-2) Default is Null. The Style of Callout connector line. See Constants $LOC_COMMENT_CALLOUT_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $iSpacing            - [optional] (0-240005) Default is Null. The amount of space between the Callout connector line end and the comment box, in Hundredths of a Millimeter (HMM).
-;                  $iExtension          - [optional] (0-4) Default is Null. The position to extend the Callout line from. See Constants $LOC_COMMENT_CALLOUT_EXT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  $iExtension          - [optional] (0-4) Default is Null. The position to extend the Callout line from. See Constants $LOC_COMMENT_CALLOUT_EXT_POS_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $iExtendBy           - [optional] (0-240005; 0, 5000, 10000). Default is Null. The length to extend the Callout line, in Hundredths of a Millimeter (HMM), or the alignment of the line depending on the current setting of $iExtension. See remarks. See Constants $LOC_COMMENT_CALLOUT_EXT_ALIGN_HORI_*, or $LOC_COMMENT_CALLOUT_EXT_ALIGN_VERT_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  $bOptimal            - [optional] Default is Null. If True a angled line will be used optimally.
 ;                  $iLength             - [optional] (0-240005) Default is Null. The length of the callout line, in Hundredths of a Millimeter (HMM).
@@ -1045,7 +1045,7 @@ EndFunc   ;==>_LOCalc_CommentAreaTransparencyGradientMulti
 ;                  @Error: 1, @Extended: 1 = $oComment not an Object.
 ;                  @Error: 1, @Extended: 2 = $iCalloutStyle not an Integer, less than 0 or greater than 2. See Constants $LOC_COMMENT_CALLOUT_STYLE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $iSpacing not an Integer, less than 0 or greater than 240,005.
-;                  @Error: 1, @Extended: 4 = $iExtension not an Integer, less than 0 or greater than 4. See Constants $LOC_COMMENT_CALLOUT_EXT_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iExtension not an Integer, less than 0 or greater than 4. See Constants $LOC_COMMENT_CALLOUT_EXT_POS_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  @Error: 1, @Extended: 5 = $iExtendBy not an Integer, not equal to 0, 5,000, or 10,000. See Constants $LOC_COMMENT_CALLOUT_EXT_ALIGN_HORI_*, as defined in LibreOfficeCalc_Constants.au3.
 ;                  @Error: 1, @Extended: 6 = $iExtendBy not an Integer, not equal to 0, 5,000, or 10,000. See Constants $LOC_COMMENT_CALLOUT_EXT_ALIGN_VERT_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  @Error: 1, @Extended: 7 = $iExtendBy not an Integer, less than 0 or greater than 240,005.
@@ -1063,8 +1063,8 @@ EndFunc   ;==>_LOCalc_CommentAreaTransparencyGradientMulti
 ;                  |                               32 = Error setting $iLength
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: If $iExtension is set to $LOC_COMMENT_CALLOUT_EXT_HORI, or $LOC_COMMENT_CALLOUT_EXT_VERT, $iExtendBy will be set to the alignment value of either constants $LOC_COMMENT_CALLOUT_EXT_ALIGN_HORI_*, or $LOC_COMMENT_CALLOUT_EXT_ALIGN_VERT_*.
-;                  If $iExtension is set to $LOC_COMMENT_CALLOUT_EXT_OPTIMAL, $LOC_COMMENT_CALLOUT_EXT_FROM_LEFT, or $LOC_COMMENT_CALLOUT_EXT_FROM_TOP, $iExtendBy will be set to the length to extend the Callout line from the Comment box, in Hundredths of a Millimeter (HMM).
+; Remarks .......: If $iExtension is set to $LOC_COMMENT_CALLOUT_EXT_POS_HORI, or $LOC_COMMENT_CALLOUT_EXT_POS_VERT, $iExtendBy will be set to the alignment value of either constants $LOC_COMMENT_CALLOUT_EXT_ALIGN_HORI_*, or $LOC_COMMENT_CALLOUT_EXT_ALIGN_VERT_*.
+;                  If $iExtension is set to $LOC_COMMENT_CALLOUT_EXT_POS_OPTIMAL, $LOC_COMMENT_CALLOUT_EXT_POS_FROM_LEFT, or $LOC_COMMENT_CALLOUT_EXT_POS_FROM_TOP, $iExtendBy will be set to the length to extend the Callout line from the Comment box, in Hundredths of a Millimeter (HMM).
 ;                  If $iCalloutStyle is not set to $LOC_COMMENT_CALLOUT_STYLE_ANGLED_CONNECTOR, both $bOptimal and $iLength, are not used/unavailable for setting.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
@@ -1108,32 +1108,32 @@ Func _LOCalc_CommentCallout(ByRef $oComment, $iCalloutStyle = Null, $iSpacing = 
 	EndIf
 
 	If ($iExtension <> Null) Then
-		If Not __LO_IntIsBetween($iExtension, $LOC_COMMENT_CALLOUT_EXT_HORI, $LOC_COMMENT_CALLOUT_EXT_FROM_TOP) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not __LO_IntIsBetween($iExtension, $LOC_COMMENT_CALLOUT_EXT_POS_HORI, $LOC_COMMENT_CALLOUT_EXT_POS_FROM_TOP) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-		If __LO_IntIsBetween($iExtension, $LOC_COMMENT_CALLOUT_EXT_OPTIMAL, $LOC_COMMENT_CALLOUT_EXT_FROM_TOP) Then
+		If __LO_IntIsBetween($iExtension, $LOC_COMMENT_CALLOUT_EXT_POS_OPTIMAL, $LOC_COMMENT_CALLOUT_EXT_POS_FROM_TOP) Then
 			If ($oAnnotationShape.CaptionIsEscapeRelative() = True) Then
 				$oAnnotationShape.CaptionIsEscapeRelative = False
 				$oAnnotationShape.CaptionEscapeAbsolute = 0
 			EndIf
 
 			Switch $iExtension
-				Case $LOC_COMMENT_CALLOUT_EXT_OPTIMAL
+				Case $LOC_COMMENT_CALLOUT_EXT_POS_OPTIMAL
 					$oAnnotationShape.CaptionEscapeDirection = $iExtension
 					$iError = ($oAnnotationShape.CaptionEscapeDirection() = $iExtension) ? ($iError) : (BitOR($iError, 4))
 
-				Case $LOC_COMMENT_CALLOUT_EXT_FROM_LEFT ; From Left, is the same as Vertical setting with different CaptionIsEscapeRelative
-					$oAnnotationShape.CaptionEscapeDirection = $LOC_COMMENT_CALLOUT_EXT_VERT
-					$iError = ($oAnnotationShape.CaptionEscapeDirection() = $LOC_COMMENT_CALLOUT_EXT_VERT) ? ($iError) : (BitOR($iError, 4))
+				Case $LOC_COMMENT_CALLOUT_EXT_POS_FROM_LEFT ; From Left, is the same as Vertical setting with different CaptionIsEscapeRelative
+					$oAnnotationShape.CaptionEscapeDirection = $LOC_COMMENT_CALLOUT_EXT_POS_VERT
+					$iError = ($oAnnotationShape.CaptionEscapeDirection() = $LOC_COMMENT_CALLOUT_EXT_POS_VERT) ? ($iError) : (BitOR($iError, 4))
 
-				Case $LOC_COMMENT_CALLOUT_EXT_FROM_TOP ; From Top, is the same as Horizontal setting with different CaptionIsEscapeRelative
-					$oAnnotationShape.CaptionEscapeDirection = $LOC_COMMENT_CALLOUT_EXT_HORI
-					$iError = ($oAnnotationShape.CaptionEscapeDirection() = $LOC_COMMENT_CALLOUT_EXT_HORI) ? ($iError) : (BitOR($iError, 4))
+				Case $LOC_COMMENT_CALLOUT_EXT_POS_FROM_TOP ; From Top, is the same as Horizontal setting with different CaptionIsEscapeRelative
+					$oAnnotationShape.CaptionEscapeDirection = $LOC_COMMENT_CALLOUT_EXT_POS_HORI
+					$iError = ($oAnnotationShape.CaptionEscapeDirection() = $LOC_COMMENT_CALLOUT_EXT_POS_HORI) ? ($iError) : (BitOR($iError, 4))
 			EndSwitch
 
 		Else
 			If ($oAnnotationShape.CaptionIsEscapeRelative() = False) Then
 				$oAnnotationShape.CaptionIsEscapeRelative = True
-				$oAnnotationShape.CaptionEscapeRelative = (($iExtension = $LOC_COMMENT_CALLOUT_EXT_HORI) ? ($LOC_COMMENT_CALLOUT_EXT_ALIGN_HORI_TOP) : ($LOC_COMMENT_CALLOUT_EXT_ALIGN_VERT_LEFT))
+				$oAnnotationShape.CaptionEscapeRelative = (($iExtension = $LOC_COMMENT_CALLOUT_EXT_POS_HORI) ? ($LOC_COMMENT_CALLOUT_EXT_ALIGN_HORI_TOP) : ($LOC_COMMENT_CALLOUT_EXT_ALIGN_VERT_LEFT))
 			EndIf
 			$oAnnotationShape.CaptionEscapeDirection = $iExtension
 			$iError = ($oAnnotationShape.CaptionEscapeDirection() = $iExtension) ? ($iError) : (BitOR($iError, 4))
@@ -1142,7 +1142,7 @@ Func _LOCalc_CommentCallout(ByRef $oComment, $iCalloutStyle = Null, $iSpacing = 
 
 	If ($iExtendBy <> Null) Then
 		If ($oAnnotationShape.CaptionIsEscapeRelative() = True) Then
-			If ($oAnnotationShape.CaptionEscapeDirection() = $LOC_COMMENT_CALLOUT_EXT_HORI) Then
+			If ($oAnnotationShape.CaptionEscapeDirection() = $LOC_COMMENT_CALLOUT_EXT_POS_HORI) Then
 				If Not __LO_IntIsBetween($iExtendBy, $LOC_COMMENT_CALLOUT_EXT_ALIGN_HORI_TOP, $LOC_COMMENT_CALLOUT_EXT_ALIGN_HORI_TOP, "", String($LOC_COMMENT_CALLOUT_EXT_ALIGN_HORI_MIDDLE & ":" & $LOC_COMMENT_CALLOUT_EXT_ALIGN_HORI_BOTTOM)) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 			Else

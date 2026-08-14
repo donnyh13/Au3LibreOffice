@@ -1343,6 +1343,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOCalc_DocIsModified
 - Renamed Component names to be singular, not plural for consistency.
   - `LibreOfficeCalc_Comments.au3` --> `LibreOfficeCalc_Comment.au3`
+- Renamed Comment Extension Constant $LOC_COMMENT_CALLOUT_EXT_* to $LOC_COMMENT_CALLOUT_EXT_POS_*
 
 #### Documented
 
