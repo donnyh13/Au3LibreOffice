@@ -130,7 +130,7 @@ $idCompile_DelOnDone_CB = GUICtrlCreateCheckbox("Delete Build Files On Finish", 
 GUICtrlSetState($idCompile_DelOnDone_CB, $iCompile_DelOnDone)
 If (BitAND(GUICtrlRead($idCompileToChm_CB), $GUI_UNCHECKED) = $GUI_UNCHECKED) Then GUICtrlSetState($idCompile_DelOnDone_CB, $GUI_DISABLE)
 
-$idStatus_Label = GUICtrlCreateLabel("", 230, 480, 160, 27)
+$idStatus_Label = GUICtrlCreateLabel("", 200, 480, 190, 27)
 GUICtrlSetFont(-1, 8.5, 800, 0, "Georgia")
 GUICtrlSetColor(-1, $COLOR_RED)
 
