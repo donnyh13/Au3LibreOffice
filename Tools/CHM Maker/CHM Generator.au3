@@ -72,7 +72,7 @@ Global Enum $__g_Const_Constant, $__g_Const_Value, $__g_Const_Desc
 #EndRegion Global Variables
 
 #Region GUI Creation & Main Loop
-$hGUI = GUICreate($sAppName, 400, 510, -1, -1, -1, $WS_EX_TOPMOST)
+$hGUI = GUICreate($sAppName, 400, 535, -1, -1, -1, $WS_EX_TOPMOST)
 
 GUICtrlCreateLabel("Au3 Library File(s):", 20, 5, -1, 15)
 $idLibraryFile_Button = GUICtrlCreateButton("...", 360, 20, 20, 20)
@@ -136,6 +136,10 @@ GUICtrlSetColor(-1, $COLOR_RED)
 
 $idGenerateDocs_Button = GUICtrlCreateButton("Generate", 20, 480, 60, 20)
 $idExit_Button = GUICtrlCreateButton("Exit", 100, 480, 60, 20)
+
+GUICtrlCreateLabel("Credits and Thanks to: (Mr)CreatoR, water, Jos and the AutoIt team.", 5, 505, 390, 27)
+GUICtrlSetFont(-1, 8.5, 800, 0, "Georgia")
+GUICtrlSetColor(-1, $COLOR_TEAL)
 
 GUISetState(@SW_SHOW, $hGUI)
 
