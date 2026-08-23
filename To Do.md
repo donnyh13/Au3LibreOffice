@@ -23,7 +23,7 @@ Things pertaining to the **entire UDF**, or **equally to all sub-Components**.
 - Is it possible to add a global variable that tracks the current func name for use in debugging in COM Errors?
   - Would have to remove crumbs on exiting function?
 - Remove extensive "Related" entries
-- For Border functions, make a COnstant value rather than 3 Booleans?
+- For Border functions, make a Constant value rather than 3 Booleans?
   - Better way to make _LOWriter_DocHeaderGetTextCursor and _LOWriter_DocFooterGetTextCursor decide where to make the cursor?
 
 ## Base
@@ -54,7 +54,6 @@ Things pertaining to **Impress**.
 
 - Can't set animation event duration and delay, see StackOverflow "LibreOffice Impress macro to read a slide's animation event duration and delay times"
   - Maybe can, but it's tricky. Several layers deep in Slide's animation node.
-
 - Affine Matrix transformation DOES NOT seem to work using Transformation. Setting it to known values retrieved from LO doesn't return the shape to correct positioning.
 - This note is in ConnectorModify: Currently, it seems to be not possible to disconnect a shape from the Start or End programatically.
 - Add DrawShape glue point modify etc
@@ -85,7 +84,6 @@ Things pertaining to **Writer**.
 - This note is added to Form Controls : Setting $iBorder to $LOW_FORM_CON_BORDER_WITHOUT, will not trigger an error, but does not currently work. This is a known bug, https://bugs.documentfoundation.org/show_bug.cgi?id=131196
 - It's not possible to set DirFrmt Transparency Gradient (can't set TransparenceName)
 - Make _LOWriter_DirFrmtGetCurStyles also Set curr style? Or Delete it?
-- Rename _LOWriter_DirFrmtStrikeOut and _LOWriter_DirFrmtUnderLine to DirFrmtChar ?
 - Add predefined List Style settings (Numbering Styles).
 - Numbering Styles is missing Graphics option support, if it can be added/not too complex??
 - Method available for cursor.Text?? convertToTable -- can replace dispatch? -- See Apache OpenOffice Community Forum - [Solved] Writer convertToTable
