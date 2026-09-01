@@ -359,14 +359,14 @@ Global Const _
 
 ; Field Types
 Global Enum Step *2 _
-		$LOC_FIELD_TYPE_ALL = 1, _                              ; 1 Returns an array of all field types listed below.
-		$LOC_FIELD_TYPE_DATE_TIME, _                            ; 2 A Date or Time field. {Cell & Header.}
-		$LOC_FIELD_TYPE_DOC_TITLE, _                            ; 4 A Document Title field. {Cell & Header.}
-		$LOC_FIELD_TYPE_FILE_NAME, _                            ; 8 A File Name or Path and File Name field. {Header.}
-		$LOC_FIELD_TYPE_PAGE_NUM, _                             ; 16 A Page Number field. {Header.}
-		$LOC_FIELD_TYPE_PAGE_COUNT, _                           ; 32 A total Page Count field. {Header.}
-		$LOC_FIELD_TYPE_SHEET_NAME, _                           ; 64 A Sheet Name field. {Cell & Header.}
-		$LOC_FIELD_TYPE_URL                                     ; 128 A Hyperlink/URL field. {Cell.}
+		$LOC_FIELD_TYPE_DATE_TIME = 1, _                        ; 1 A Date or Time field. {Cell & Header.}
+		$LOC_FIELD_TYPE_DOC_TITLE, _                            ; 2 A Document Title field. {Cell & Header.}
+		$LOC_FIELD_TYPE_FILE_NAME, _                            ; 4 A File Name or Path and File Name field. {Header.}
+		$LOC_FIELD_TYPE_PAGE_NUM, _                             ; 8 A Page Number field. {Header.}
+		$LOC_FIELD_TYPE_PAGE_COUNT, _                           ; 16 A total Page Count field. {Header.}
+		$LOC_FIELD_TYPE_SHEET_NAME, _                           ; 32 A Sheet Name field. {Cell & Header.}
+		$LOC_FIELD_TYPE_URL, _                                  ; 64 A Hyperlink/URL field. {Cell.}
+		$LOC_FIELD_TYPE_ALL = 127                               ; 127 Returns an array of all field types listed above.
 
 ; Fill Date Mode
 Global Const _                                                  ; com.sun.star.sheet.FillDateMode

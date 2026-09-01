@@ -489,14 +489,14 @@ EndFunc   ;==>_LOCalc_FieldPageNumberInsert
 ; Description ...: Retrieve an Array of maps containing Field Objects present in a Cell or Header/Footer.
 ; Syntax ........: _LOCalc_FieldsGetList(ByRef $oTextCursor[, $iType = $LOC_FIELD_TYPE_ALL[, $bFieldTypeNum = True]])
 ; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $iType               - [optional] (1-255) Default is $LOC_FIELD_TYPE_ALL. The type of Field to search for. See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3. Can be BitOr'd together.
+;                  $iType               - [optional] (1-127) Default is $LOC_FIELD_TYPE_ALL. The type of Field to search for. See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3. Can be BitOr'd together.
 ;                  $bFieldTypeNum       - [optional] Default is True. If True, adds a column to the array that has the Field Type Constant Integer for that particular Field, to assist in identifying the Field type. See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning Array of maps containing Text Field Objects with @Extended set to number of results. See Remarks for Array sizing.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
-;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 1 or greater than 255. (The total of all Constants added together.) See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 1 or greater than 127. (The total of all Constants added together.) See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $bFieldTypeNum not a Boolean.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create enumeration of paragraphs in Cell.
@@ -530,9 +530,7 @@ Func _LOCalc_FieldsGetList(ByRef $oTextCursor, $iType = $LOC_FIELD_TYPE_ALL, $bF
 	Local $avTextFields[1]
 
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LO_IntIsBetween($iType, $LOC_FIELD_TYPE_ALL, 255) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-	; 255 is all possible Consts added together
+	If Not __LO_IntIsBetween($iType, $LOC_FIELD_TYPE_DATE_TIME, $LOC_FIELD_TYPE_ALL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsBool($bFieldTypeNum) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	; When a Text Cursor has been used to insert Strings previous to inserting or looking for a Field, the fields sometimes are not able to be identified.
