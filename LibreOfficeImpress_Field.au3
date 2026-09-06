@@ -72,7 +72,7 @@
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_FieldAuthorInsert(ByRef $oDoc, ByRef $oTextCursor, $bIsFixed = False, $sAuthor = Null, $iFormat = $LOI_FIELD_AUTH_NAME_FULL, $bOverwrite = False)
+Func _LOImpress_FieldAuthorInsert(ByRef $oDoc, ByRef $oTextCursor, $bIsFixed = False, $sAuthor = "", $iFormat = $LOI_FIELD_AUTH_NAME_FULL, $bOverwrite = False)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -181,9 +181,14 @@ EndFunc   ;==>_LOImpress_FieldAuthorModify
 ;                  @Error: 0, @Extended: 0, Return: String = Success. Returning current Field display content in String format.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oField not a map.
+;                  @Error: 1, @Extended: 1 = $oField not an Object.
+;                  --Initialization Errors--
+;                  @Error: 2, @Extended: 1 = Failed to create a TextCursor.
+;                  @Error: 2, @Extended: 2 = Failed to create enumeration of paragraphs.
+;                  @Error: 2, @Extended: 3 = Failed to create enumeration of Text Portions in Paragraph.
 ;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to retrieve Field's current display.
+;                  @Error: 3, @Extended: 1 = Failed to identify Field's Text portion object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Field's current display.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Both Slide Title and Slide Number fields may return "<slide-name>" or "<number>" respectively instead of their current display value. I don't know why.
@@ -201,7 +206,7 @@ Func _LOImpress_FieldCurrentDisplayGet(ByRef $oField)
 	If Not IsObj($oField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	; Generally the Field Object does not have a method to call to get the current displayed value.
-	; In order to obtain the currently displayed value, you have to enumerate the containing  shape's text Paragraphs and text portions,
+	; In order to obtain the currently displayed value, you have to enumerate the containing shape's text Paragraphs and text portions,
 	; until I find the text portion containing the field. Then I can just use the method getString to retrieve the currently displayed value of the field.
 	$oTextCursor = $oField.Anchor.Text.createTextCursor()
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
@@ -371,6 +376,7 @@ Func _LOImpress_FieldDateTimeModify(ByRef $oDateTimeField, $bIsFixed = Null, $tD
 	If ($iFormat <> Null) Then
 		If $oDateTimeField.IsDate() Then
 			If Not __LO_IntIsBetween($iFormat, $LOI_FIELD_DATE_FMT_STANDARD_SHORT, $LOI_FIELD_DATE_FMT_DOW_MMMM_DD_YYYY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
 		Else
 			If Not __LO_IntIsBetween($iFormat, $LOI_FIELD_TIME_FMT_STANDARD, $LOI_FIELD_TIME_FMT_12H_HMS_MS_AMPM) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 		EndIf
@@ -549,7 +555,7 @@ EndFunc   ;==>_LOImpress_FieldFileNameModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_FieldsGetList, _LOImpress_TextCursorInsertString, _LOImpress_TextCursorMove
+; Related .......: _LOImpress_FieldsGetList, _LOImpress_CursorInsertString, _LOImpress_CursorMove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -753,6 +759,7 @@ Func _LOImpress_FieldsGetList(ByRef $oTextCursor, $iType = $LOI_FIELD_TYPE_ALL, 
 	For $i = 0 To $oDrawPage.Count() - 1
 		$oShape = $oDrawPage.getByIndex($i)
 		If Not IsObj($oShape) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
 		If ($oShape.Text() = $oTextCursor.Text()) Then
 			$oInternalCursor = $oShape.Text.createTextCursorByRange($oTextCursor)
 			ExitLoop
@@ -786,7 +793,6 @@ Func _LOImpress_FieldsGetList(ByRef $oTextCursor, $iType = $LOI_FIELD_TYPE_ALL, 
 
 				For $i = 0 To UBound($avFieldTypes) - 1
 					If $oTextField.supportsService($avFieldTypes[$i][1]) Then
-
 						If $bFieldTypeNum Then
 							$avTextFields[$iCount][0] = $oTextField
 							$avTextFields[$iCount][1] = $avFieldTypes[$i][0]

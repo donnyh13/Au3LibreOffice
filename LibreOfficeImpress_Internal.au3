@@ -3707,6 +3707,7 @@ Func __LOImpress_FieldGetObj(ByRef $oTextCursor, $iType = $LOI_FIELD_TYPE_ALL)
 	For $i = 0 To $oDrawPage.Count() - 1
 		$oShape = $oDrawPage.getByIndex($i)
 		If Not IsObj($oShape) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
 		If ($oShape.Text() = $oTextCursor.Text()) Then
 			$oInternalCursor = $oShape.Text.createTextCursorByRange($oTextCursor)
 			ExitLoop
@@ -3743,7 +3744,6 @@ Func __LOImpress_FieldGetObj(ByRef $oTextCursor, $iType = $LOI_FIELD_TYPE_ALL)
 					EndIf
 					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
 				Next
-
 			EndIf
 		WEnd
 	WEnd

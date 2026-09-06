@@ -400,14 +400,14 @@ Global Const _
 
 ; Field Types
 Global Enum Step *2 _
-		$LOI_FIELD_TYPE_AUTHOR = 1, _                                ; 4 An Author field.
+		$LOI_FIELD_TYPE_AUTHOR = 1, _                                ; 1 An Author field.
 		$LOI_FIELD_TYPE_DATE_TIME, _                                 ; 2 A Date or Time field.
-		$LOI_FIELD_TYPE_FILE_NAME, _                                 ; 8 A File Name field.
-		$LOI_FIELD_TYPE_SLIDE_COUNT, _                               ; 32 A total Slide Count field.
+		$LOI_FIELD_TYPE_FILE_NAME, _                                 ; 4 A File Name field.
+		$LOI_FIELD_TYPE_SLIDE_COUNT, _                               ; 8 A total Slide Count field.
 		$LOI_FIELD_TYPE_SLIDE_NUM, _                                 ; 16 A Slide Number field.
-		$LOI_FIELD_TYPE_SLIDE_TITLE, _                               ; 64 A Slide Title field.
-		$LOI_FIELD_TYPE_URL, _                                       ; 128 A Hyperlink/URL field.
-		$LOI_FIELD_TYPE_ALL = 127                                    ; 1 Returns an array of all field types listed above.
+		$LOI_FIELD_TYPE_SLIDE_TITLE, _                               ; 32 A Slide Title field.
+		$LOI_FIELD_TYPE_URL, _                                       ; 64 A Hyperlink/URL field.
+		$LOI_FIELD_TYPE_ALL = 127                                    ; 127 Returns an array of all field types listed above.
 
 ; Gradient Names
 Global Const _
