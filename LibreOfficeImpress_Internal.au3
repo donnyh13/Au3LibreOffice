@@ -3907,7 +3907,7 @@ EndFunc   ;==>__LOImpress_FilterNameGet
 ; Name ..........: __LOImpress_GetShapeName
 ; Description ...: Create a Shape Name that hasn't been used yet in the slide.
 ; Syntax ........: __LOImpress_GetShapeName(ByRef $oSlide, $sShapeName)
-; Parameters ....: $oSlide              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oSlide              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $sShapeName          - The Shape name to begin with.
 ; Return values .: Success: String
 ;                  @Error: 0, @Extended: 0, Return: String = Success. Slide contained no shapes, returning the Shape name with a "1" appended.
@@ -6231,7 +6231,7 @@ EndFunc   ;==>__LOImpress_ShapeAreaShadow
 ; Name ..........: __LOImpress_ShapeAreaShadowModify
 ; Description ...: Internal function for setting or retrieving Shape Shadow Location and Distance settings.
 ; Syntax ........: __LOImpress_ShapeAreaShadowModify($oShape[, $iLocation = Null[, $iDistance = Null]])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $iLocation           - [optional] (0-8) Default is Null. The Location of the Shadow, must be one of the Constants, $LOI_SHAPE_SHADOW_LOCATION_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iDistance           - [optional] Default is Null. The distance of the Shadow from the Shape's edges, set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Integer
@@ -6537,7 +6537,7 @@ EndFunc   ;==>__LOImpress_ShapeAreaTransparencyGradientMulti
 ; Name ..........: __LOImpress_ShapeGetType
 ; Description ...: Identify a Shape's type.
 ; Syntax ........: __LOImpress_ShapeGetType(ByRef $oShape)
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning the Shape's Type, corresponding to one of the Constants $LOI_SHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
