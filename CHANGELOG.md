@@ -87,6 +87,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOI_SHAPE_TABLE_CELL_TYPE_*
   - $LOI_SHAPE_TEXTBOX_TYPE_*
   - $LOI_SHAPE_TYPE_*
+  - $LOI_SLIDE_DT_FMT_*
   - $LOI_SLIDE_LAYOUT_*
   - $LOI_SLIDE_TRANSITION_*
   - $LOI_SLIDESHOW_VIEW_MODE_*
@@ -375,6 +376,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOImpress_SlideCurrent
   - _LOImpress_SlideDeleteByIndex
   - _LOImpress_SlideExists
+  - _LOImpress_SlideFooter
   - _LOImpress_SlideDeleteByObj
   - _LOImpress_SlideGetObjByIndex
   - _LOImpress_SlideGetObjByName

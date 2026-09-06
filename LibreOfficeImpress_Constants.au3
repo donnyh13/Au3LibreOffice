@@ -799,6 +799,21 @@ Global Enum Step *2 _
 		$LOI_SHAPE_TYPE_TEXTBOX_OUTLINE, _                           ; 512 - A Slide Outline Text Box.
 		$LOI_SHAPE_TYPE_ALL = 1023                                   ; 1023 All types above.
 
+; Slide Header/Footer Date and Time Display Format
+Global Const _
+		$LOI_SLIDE_DT_FMT_MMDDYY = 4, _                              ; Numerical Month, Day, Two-digit year (03/28/92).
+		$LOI_SLIDE_DT_FMT_MMDDYYYY = 5, _                            ; Numerical Month, Day, Four-digit year (03/28/1992).
+		$LOI_SLIDE_DT_FMT_MMM_DD_YYYY = 6, _                         ; Abbreviated Month Name, Day, Year (Mar 28, 1992).
+		$LOI_SLIDE_DT_FMT_MMMM_DD_YYYY = 7, _                        ; Full Month Name, Day, Year (March 28, 1992).
+		$LOI_SLIDE_DT_FMT_DOW_MMM_DD_YYYY = 8, _                     ; Abbreviated Day of Week + Full Month (Sat, March 28, 1992).
+		$LOI_SLIDE_DT_FMT_DOW_MMMM_DD_YYYY = 9, _                    ; Full Day of Week + Full Month (Saturday, March 28, 1992).
+		$LOI_SLIDE_DT_FMT_24H_HM = 48, _                             ; 24-Hour: Hours and Minutes (15:24).
+		$LOI_SLIDE_DT_FMT_MMDDYY_24H_HM = 52, _                      ; Numerical Month, Day, Two-digit year (03/28/92), 24-Hour: Hours and Minutes (15:24).
+		$LOI_SLIDE_DT_FMT_24H_HMS = 64, _                            ; 24-Hour: Hours, Minutes, Seconds (15:24:55)
+		$LOI_SLIDE_DT_FMT_12H_HM_AMPM = 96, _                        ; 12-Hour: Hours and Minutes AM/PM (5:02 PM).
+		$LOI_SLIDE_DT_FMT_MMDDYY_12H_HM_AMPM = 100, _                ; Numerical Month, Day, Two-digit year (03/28/92), 12-Hour: Hours and Minutes AM/PM (5:02 PM).
+		$LOI_SLIDE_DT_FMT_12H_HMS_AMPM = 112                         ; 12-Hour: Hours, Minutes, Seconds AM/PM (5:02:43 PM).
+
 ; Slide layout arrangements.
 Global Const _
 		$LOI_SLIDE_LAYOUT_TITLE = 0, _                               ; The Slide will contain a Title textbox and a Subtitle textbox.

@@ -35,6 +35,7 @@
 ; _LOImpress_SlideDeleteByIndex
 ; _LOImpress_SlideDeleteByObj
 ; _LOImpress_SlideExists
+; _LOImpress_SlideFooter
 ; _LOImpress_SlideGetObjByIndex
 ; _LOImpress_SlideGetObjByName
 ; _LOImpress_SlideLayout
@@ -1069,6 +1070,126 @@ Func _LOImpress_SlideExists(ByRef $oDoc, $sName)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $bExists)
 EndFunc   ;==>_LOImpress_SlideExists
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlideFooter
+; Description ...: Set or Retrieve Slide Footer settings.
+; Syntax ........: _LOImpress_SlideFooter(ByRef $oSlide[, $bDateTime = Null[, $bDateTimeIsFixed = Null[, $sDateTimeValue = Null[, $iDateTimeFormat = Null[, $bFooter = Null[, $sFooterText = Null[, $bSlideNum = Null]]]]]]])
+; Parameters ....: $oSlide              -  A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+;                  $bDateTime           - [optional] Default is Null. If True, a Date or Time entry is added to the footer of the slide.
+;                  $bDateTimeIsFixed    - [optional] Default is Null. If True, the Date or Time entry is fixed.
+;                  $sDateTimeValue      - [optional] Default is Null. If $bDateTimeIsFixed is True, this is the custom date or time value to display.
+;                  $iDateTimeFormat     - [optional] (4-112) Default is Null. If $bDateTimeIsFixed is False, the format to display the Date or Time in. See Constants, $LOI_SLIDE_DT_FMT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $bFooter             - [optional] Default is Null. If True, a Footer entry is added to the footer of the slide.
+;                  $sFooterText         - [optional] Default is Null. If $bFooter is True, the text to display in the footer of the Slide.
+;                  $bSlideNum           - [optional] Default is Null. If True, a current Slide number is added to the footer of the slide.
+; Return values .: Success: 1 or Array.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
+;                  @Error: 1, @Extended: 2 = $bDateTime not a Boolean.
+;                  @Error: 1, @Extended: 3 = $bDateTimeIsFixed not a Boolean.
+;                  @Error: 1, @Extended: 4 = $sDateTimeValue not a String.
+;                  @Error: 1, @Extended: 5 = $iDateTimeFormat not an Integer, less than 4 or greater than 9 but not equal to one of the constant values. See Constants, $LOI_SLIDE_DT_FMT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $bFooter not a Boolean.
+;                  @Error: 1, @Extended: 7 = $sFooterText not a String.
+;                  @Error: 1, @Extended: 8 = $bSlideNum not a Boolean.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $bDateTime
+;                  |                               2 = Error setting $bDateTimeIsFixed
+;                  |                               4 = Error setting $sDateTimeValue
+;                  |                               8 = Error setting $iDateTimeFormat
+;                  |                               16 = Error setting $bFooter
+;                  |                               32 = Error setting $sFooterText
+;                  |                               64 = Error setting $bSlideNum
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: When retrieving current setting values, both $sDateTimeValue and $iDateTimeFormat may return a value. To determine which is currently valid, check $bDateTimeIsFixed. If $bDateTimeIsFixed is True, $sDateTimeValue is valid, else $iDateTimeFormat. If $bDateTime is false, neither will be used.
+;                  Skip first slide, and Apply to all are not added to this function as they are not actual settings. The user can simulate these easily by making a loop to apply it to all slides, and skip the first slide if required.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func _LOImpress_SlideFooter(ByRef $oSlide, $bDateTime = Null, $bDateTimeIsFixed = Null, $sDateTimeValue = Null, $iDateTimeFormat = Null, $bFooter = Null, $sFooterText = Null, $bSlideNum = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iError = 0
+	Local $avFooter[7]
+	Local $sAllowed = $LOI_SLIDE_DT_FMT_24H_HM & ":" & $LOI_SLIDE_DT_FMT_MMDDYY_24H_HM & ":" & $LOI_SLIDE_DT_FMT_24H_HMS & ":" & $LOI_SLIDE_DT_FMT_12H_HM_AMPM & ":" & $LOI_SLIDE_DT_FMT_MMDDYY_12H_HM_AMPM & ":" & $LOI_SLIDE_DT_FMT_12H_HMS_AMPM
+
+	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	If __LO_VarsAreNull($bDateTime, $bDateTimeIsFixed, $sDateTimeValue, $iDateTimeFormat, $bFooter, $sFooterText, $bSlideNum) Then
+		__LO_ArrayFill($avFooter, $oSlide.IsDateTimeVisible(), $oSlide.IsDateTimeFixed(), $oSlide.DateTimeText(), $oSlide.DateTimeFormat(), _
+				$oSlide.IsFooterVisible(), $oSlide.FooterText(), $oSlide.IsPageNumberVisible())
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $avFooter)
+	EndIf
+
+	If ($bDateTime <> Null) Then
+		If Not IsBool($bDateTime) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+		$oSlide.IsDateTimeVisible = $bDateTime
+
+		$iError = ($oSlide.IsDateTimeVisible() = $bDateTime) ? ($iError) : (BitOR($iError, 1))
+	EndIf
+
+	If ($bDateTimeIsFixed <> Null) Then
+		If Not IsBool($bDateTimeIsFixed) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+		$oSlide.IsDateTimeFixed = $bDateTimeIsFixed
+
+		$iError = ($oSlide.IsDateTimeFixed() = $bDateTimeIsFixed) ? ($iError) : (BitOR($iError, 2))
+	EndIf
+
+	If ($sDateTimeValue <> Null) Then
+		If Not IsString($sDateTimeValue) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+		$oSlide.DateTimeText = $sDateTimeValue
+
+		$iError = ($oSlide.DateTimeText() = $sDateTimeValue) ? ($iError) : (BitOR($iError, 4))
+	EndIf
+
+	If ($iDateTimeFormat <> Null) Then
+		If Not __LO_IntIsBetween($iDateTimeFormat, $LOI_SLIDE_DT_FMT_MMDDYY, $LOI_SLIDE_DT_FMT_DOW_MMMM_DD_YYYY, "", $sAllowed) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+		$oSlide.DateTimeFormat = $iDateTimeFormat
+
+		$iError = ($oSlide.DateTimeFormat() = $iDateTimeFormat) ? ($iError) : (BitOR($iError, 8))
+	EndIf
+
+	If ($bFooter <> Null) Then
+		If Not IsBool($bFooter) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+
+		$oSlide.IsFooterVisible = $bFooter
+
+		$iError = ($oSlide.IsFooterVisible() = $bFooter) ? ($iError) : (BitOR($iError, 16))
+	EndIf
+
+	If ($sFooterText <> Null) Then
+		If Not IsString($sFooterText) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+
+		$oSlide.FooterText = $sFooterText
+
+		$iError = ($oSlide.FooterText() = $sFooterText) ? ($iError) : (BitOR($iError, 32))
+	EndIf
+
+	If ($bSlideNum <> Null) Then
+		If Not IsBool($bSlideNum) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
+
+		$oSlide.IsPageNumberVisible = $bSlideNum
+
+		$iError = ($oSlide.IsPageNumberVisible() = $bSlideNum) ? ($iError) : (BitOR($iError, 64))
+	EndIf
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LOImpress_SlideFooter
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_SlideGetObjByIndex
