@@ -363,6 +363,52 @@ Global Enum _
 		$LOI_DRAWSHAPE_TYPE_SYMBOL_PROHIBITED, _                     ; 186 -- A Prohibited Shape.
 		$LOI_DRAWSHAPE_TYPE_SYMBOL_PUZZLE                            ; 187 -- A Puzzle Piece Shape. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 
+; Field Author Display Format
+Global Const _                                                       ; com.sun.star.text.AuthorDisplayFormat
+		$LOI_FIELD_AUTH_NAME_FULL = 0, _                             ; The full name of the author is displayed.
+		$LOI_FIELD_AUTH_NAME_LAST = 1, _                             ; Only the last name of the author is displayed.
+		$LOI_FIELD_AUTH_NAME_FIRST = 2, _                            ; Only the first name of the author is displayed.
+		$LOI_FIELD_AUTH_NAME_INITIALS = 3                            ; The initials of the author are displayed.
+
+; Field Date Display Format
+Global Const _
+		$LOI_FIELD_DATE_FMT_STANDARD_SHORT = 2, _                    ; Standard Short Date (e.g., 03/28/92)
+		$LOI_FIELD_DATE_FMT_STANDARD_LONG = 3, _                     ; Standard Long Date (e.g., Saturday, March 28, 1992)
+		$LOI_FIELD_DATE_FMT_MMDDYY = 4, _                            ; Numerical Month, Day, Two-digit year (03/28/92)
+		$LOI_FIELD_DATE_FMT_MMDDYYYY = 5, _                          ; Numerical Month, Day, Four-digit year (03/28/1992)
+		$LOI_FIELD_DATE_FMT_MMM_DD_YYYY = 6, _                       ; Abbreviated Month Name, Day, Year (Mar 28, 1992)
+		$LOI_FIELD_DATE_FMT_MMMM_DD_YYYY = 7, _                      ; Full Month Name, Day, Year (March 28, 1992)
+		$LOI_FIELD_DATE_FMT_DOW_MMM_DD_YYYY = 8, _                   ; Abbreviated Day of Week + Full Month (Sat, March 28, 1992)
+		$LOI_FIELD_DATE_FMT_DOW_MMMM_DD_YYYY = 9                     ; Full Day of Week + Full Month (Saturday, March 28, 1992)
+
+; File Name Field Display Format
+Global Const _                                                       ; com.sun.star.text.FilenameDisplayFormat
+		$LOI_FIELD_FILENAME_FULL_PATH = 0, _                         ; The Path and File name is displayed.
+		$LOI_FIELD_FILENAME_PATH = 1, _                              ; Only the path of the file is displayed.
+		$LOI_FIELD_FILENAME_NAME = 2, _                              ; Only the name of the file without the file extension is displayed.
+		$LOI_FIELD_FILENAME_NAME_AND_EXT = 3                         ; The file name including the file extension is displayed.
+
+; Field Time Display Format
+Global Const _
+		$LOI_FIELD_TIME_FMT_STANDARD = 2, _                          ; Standard Time format (HH:MM)
+		$LOI_FIELD_TIME_FMT_24H_HM = 3, _                            ; 24-Hour: Hours and Minutes (15:24)
+		$LOI_FIELD_TIME_FMT_24H_HMS = 4, _                           ; 24-Hour: Hours, Minutes, Seconds (15:24:55)
+		$LOI_FIELD_TIME_FMT_24H_HMS_MS = 5, _                        ; 24-Hour: With Milliseconds (15:24:55.32)
+		$LOI_FIELD_TIME_FMT_12H_HM_AMPM = 6, _                       ; 12-Hour: Hours and Minutes AM/PM (5:02 PM)
+		$LOI_FIELD_TIME_FMT_12H_HMS_AMPM = 7, _                      ; 12-Hour: Hours, Minutes, Seconds AM/PM (5:02:43 PM)
+		$LOI_FIELD_TIME_FMT_12H_HMS_MS_AMPM = 8                      ; 12-Hour: With Milliseconds AM/PM (5:02:43.23 PM)
+
+; Field Types
+Global Enum Step *2 _
+		$LOI_FIELD_TYPE_AUTHOR = 1, _                                ; 4 An Author field.
+		$LOI_FIELD_TYPE_DATE_TIME, _                                 ; 2 A Date or Time field.
+		$LOI_FIELD_TYPE_FILE_NAME, _                                 ; 8 A File Name field.
+		$LOI_FIELD_TYPE_SLIDE_COUNT, _                               ; 32 A total Slide Count field.
+		$LOI_FIELD_TYPE_SLIDE_NUM, _                                 ; 16 A Slide Number field.
+		$LOI_FIELD_TYPE_SLIDE_TITLE, _                               ; 64 A Slide Title field.
+		$LOI_FIELD_TYPE_URL, _                                       ; 128 A Hyperlink/URL field.
+		$LOI_FIELD_TYPE_ALL = 127                                    ; 1 Returns an array of all field types listed above.
+
 ; Gradient Names
 Global Const _
 		$LOI_GRAD_NAME_PASTEL_BOUQUET = "Pastel Bouquet", _          ; The "Pastel Bouquet" Gradient Preset.

@@ -55,6 +55,11 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_*
   - $LOI_DRAWSHAPE_POINT_TYPE_*
   - $LOI_DRAWSHAPE_TYPE_*
+  - $LOI_FIELD_AUTH_NAME_*
+  - $LOI_FIELD_DATE_FMT_*
+  - $LOI_FIELD_FILENAME_*
+  - $LOI_FIELD_TIME_FMT_*
+  - $LOI_FIELD_TYPE_*
   - $LOI_GRAD_NAME_*
   - $LOI_GRAD_TYPE_*
   - $LOI_NUM_FRMT_*
@@ -158,8 +163,26 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOImpress_DrawShapePointsModify
   - _LOImpress_DrawShapePointsRemove
   - _LOImpress_DrawShapeText
+- Field Functions
+  - _LOImpress_FieldAuthorInsert
+  - _LOImpress_FieldAuthorModify
+  - _LOImpress_FieldCurrentDisplayGet
+  - _LOImpress_FieldDateTimeInsert
+  - _LOImpress_FieldDateTimeModify
+  - _LOImpress_FieldDelete
+  - _LOImpress_FieldFileNameInsert
+  - _LOImpress_FieldFileNameModify
+  - _LOImpress_FieldGetAnchor
+  - _LOImpress_FieldHyperlinkInsert
+  - _LOImpress_FieldHyperlinkModify
+  - _LOImpress_FieldsGetList
+  - _LOImpress_FieldSlideCountInsert
+  - _LOImpress_FieldSlideNumberInsert
+  - _LOImpress_FieldSlideTitleInsert
 - Helper Functions
   - _LOImpress_ComError_UserFunction
+  - _LOImpress_DateStructCreate
+  - _LOImpress_DateStructModify
   - _LOImpress_FontExists
   - _LOImpress_FontsGetNames
 - Internal Functions
@@ -175,6 +198,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - __LOImpress_ColorRemoveAlpha
   - __LOImpress_CreatePoint
   - __LOImpress_CursorParHasTabStop
+  - __LOImpress_DateStructCompare
   - __LOImpress_DimensionSettings
   - __LOImpress_DrawShape_CreateArrow
   - __LOImpress_DrawShape_CreateBasic
@@ -186,6 +210,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - __LOImpress_DrawShape_GetCustomType
   - __LOImpress_DrawShapePointGetSettings
   - __LOImpress_DrawShapePointModify
+  - __LOImpress_FieldGetObj
+  - __LOImpress_FieldTypeServices
   - __LOImpress_FilterNameGet
   - __LOImpress_GetShapeName
   - __LOImpress_GradientIsModified

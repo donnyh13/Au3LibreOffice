@@ -34,6 +34,7 @@
 ; __LOImpress_ColorRemoveAlpha
 ; __LOImpress_CreatePoint
 ; __LOImpress_CursorParHasTabStop
+; __LOImpress_DateStructCompare
 ; __LOImpress_DimensionSettings
 ; __LOImpress_DrawShape_CreateArrow
 ; __LOImpress_DrawShape_CreateBasic
@@ -45,6 +46,8 @@
 ; __LOImpress_DrawShape_GetCustomType
 ; __LOImpress_DrawShapePointGetSettings
 ; __LOImpress_DrawShapePointModify
+; __LOImpress_FieldGetObj
+; __LOImpress_FieldTypeServices
 ; __LOImpress_FilterNameGet
 ; __LOImpress_GetShapeName
 ; __LOImpress_GradientIsModified
@@ -875,6 +878,68 @@ Func __LOImpress_CursorParHasTabStop(ByRef $oTextCursor, $iTabStop)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, False)
 EndFunc   ;==>__LOImpress_CursorParHasTabStop
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_DateStructCompare
+; Description ...: Compare two date Structures to see if they are the same Date, Time, etc.
+; Syntax ........: __LOImpress_DateStructCompare($tDateStruct1, $tDateStruct2[, $bIsDate = False[, $bIsTime = False]])
+; Parameters ....: $tDateStruct1        - The First Date Structure.
+;                  $tDateStruct2        - The Second Date Structure.
+;                  $bIsDate             - [optional] Default is False. If True, the comparison is two Date Structures.
+;                  $bIsTime             - [optional] Default is False. If True, the comparison is two Time Structures.
+; Return values .: Success: Boolean
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the Dates/Times in $tDateStruct1 and $tDateStruct2 are the same, True is returned. Else False.
+;                  Failure: False and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $tDateStruct1 not an Object.
+;                  @Error: 1, @Extended: 2 = $tDateStruct2 not an Object.
+;                  @Error: 1, @Extended: 3 = $bIsDate not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bIsTime not a Boolean.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: If both $bIsDate and $bIsTime are False, the comparison is two Date and Time Structures
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_DateStructCompare($tDateStruct1, $tDateStruct2, $bIsDate = False, $bIsTime = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	If Not IsObj($tDateStruct1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, False)
+	If Not IsObj($tDateStruct2) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, False)
+	If Not IsBool($bIsDate) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, False)
+	If Not IsBool($bIsTime) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, False)
+
+	If $bIsDate Then
+		If $tDateStruct1.Year() <> $tDateStruct2.Year() Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+		If $tDateStruct1.Month() <> $tDateStruct2.Month() Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+		If $tDateStruct1.Day() <> $tDateStruct2.Day() Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+
+	ElseIf $bIsTime Then
+		If $tDateStruct1.Hours() <> $tDateStruct2.Hours() Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+		If $tDateStruct1.Minutes() <> $tDateStruct2.Minutes() Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+		If $tDateStruct1.Seconds() <> $tDateStruct2.Seconds() Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+		If $tDateStruct1.NanoSeconds() <> $tDateStruct2.NanoSeconds() Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+		If __LO_VersionCheck(4.1) Then
+			If $tDateStruct1.IsUTC() <> $tDateStruct2.IsUTC() Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+		EndIf
+
+	Else
+		If $tDateStruct1.Year() <> $tDateStruct2.Year() Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+		If $tDateStruct1.Month() <> $tDateStruct2.Month() Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+		If $tDateStruct1.Day() <> $tDateStruct2.Day() Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+		If $tDateStruct1.Hours() <> $tDateStruct2.Hours() Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+		If $tDateStruct1.Minutes() <> $tDateStruct2.Minutes() Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+		If $tDateStruct1.Seconds() <> $tDateStruct2.Seconds() Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+		If $tDateStruct1.NanoSeconds() <> $tDateStruct2.NanoSeconds() Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+		If __LO_VersionCheck(4.1) Then
+			If $tDateStruct1.IsUTC() <> $tDateStruct2.IsUTC() Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+		EndIf
+	EndIf
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, True)
+EndFunc   ;==>__LOImpress_DateStructCompare
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_DimensionSettings
@@ -3592,6 +3657,144 @@ Func __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iA
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>__LOImpress_DrawShapePointModify
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_FieldGetObj
+; Description ...: Retrieve the Field's Object after insertion.
+; Syntax ........: __LOImpress_FieldGetObj(ByRef $oTextCursor[, $iType = $LOI_FIELD_TYPE_ALL])
+; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LOImpress_ShapeCreateTextCursor function.
+;                  $iType               - [optional] (1-127) Default is $LOI_FIELD_TYPE_ALL. The Type of field to search for. Can be BitOR'd together. See Constants, $LOI_FIELD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+; Return values .: Success: Object
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning newly inserted Field's Object.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 1 or greater than 127. (The total of all Constants added together.) See Constants, $LOI_FIELD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  --Initialization Errors--
+;                  @Error: 2, @Extended: 1 = Failed to create a TextCursor.
+;                  @Error: 2, @Extended: 2 = Failed to create enumeration of paragraphs.
+;                  @Error: 2, @Extended: 3 = Failed to create enumeration of Text Portions in Paragraph.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve parent slide Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve containing Shape Object.
+;                  @Error: 3, @Extended: 3 = Failed to identify requested Field Types.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve Text Field Object.
+;                  @Error: 3, @Extended: 5 = Failed to identify newly created Field.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: After inserting a Field, the Object is not usable for modifying the field later on, so I retrieve it again after insertion.
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_FieldGetObj(ByRef $oTextCursor, $iType = $LOI_FIELD_TYPE_ALL)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $avFieldTypes[0][0]
+	Local $oParEnum, $oPar, $oTextEnum, $oTextPortion, $oTextField, $oInternalCursor, $oDrawPage, $oShape
+
+	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not __LO_IntIsBetween($iType, $LOI_FIELD_TYPE_AUTHOR, $LOI_FIELD_TYPE_ALL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	; When a Text Cursor has been used to insert Strings previous to inserting or looking for a Field, the fields sometimes are not able to be identified.
+	; The workaround I figured out was to create the Text Cursor again before enumerating the fields.
+	; To do this I have to retrieve the shape Object again, then create a textcursor using the new Object. The parent of the shape is the drawpage (Slide), I
+	; then cycle through all shapes in the slide to identify which one the current textcursor is in. Once found, I create a new cursor.
+	$oDrawPage = $oTextCursor.Text.getParent()
+	If Not IsObj($oDrawPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	For $i = 0 To $oDrawPage.Count() - 1
+		$oShape = $oDrawPage.getByIndex($i)
+		If Not IsObj($oShape) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+		If ($oShape.Text() = $oTextCursor.Text()) Then
+			$oInternalCursor = $oShape.Text.createTextCursorByRange($oTextCursor)
+			ExitLoop
+		EndIf
+
+		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+	Next
+
+	If Not IsObj($oInternalCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	$avFieldTypes = __LOImpress_FieldTypeServices($iType)
+	If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	$oParEnum = $oInternalCursor.getText().createEnumeration()
+	If Not IsObj($oParEnum) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+	While $oParEnum.hasMoreElements()
+		$oPar = $oParEnum.nextElement()
+
+		$oTextEnum = $oPar.createEnumeration()
+		If Not IsObj($oTextEnum) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
+
+		While $oTextEnum.hasMoreElements()
+			$oTextPortion = $oTextEnum.nextElement()
+
+			If ($oTextPortion.TextPortionType = "TextField") Then
+				$oTextField = $oTextPortion.TextField()
+				If Not IsObj($oTextField) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+				For $i = 0 To UBound($avFieldTypes) - 1
+					If $oTextField.supportsService($avFieldTypes[$i][1]) And ($oInternalCursor.compareRegionEnds($oInternalCursor, $oTextField.Anchor.End()) = 0) Then
+
+						Return SetError($__LO_STATUS_SUCCESS, 0, $oTextField)
+					EndIf
+					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+				Next
+
+			EndIf
+		WEnd
+	WEnd
+
+	Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+EndFunc   ;==>__LOImpress_FieldGetObj
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_FieldTypeServices
+; Description ...: Retrieve an Array of Supported Service Names and Integer Constants to search for Fields.
+; Syntax ........: __LOImpress_FieldTypeServices($iFieldType)
+; Parameters ....: $iFieldType          - The Constant Field type. See Constants, $LOI_FIELD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+; Return values .: Success: Array
+;                  @Error: 0, @Extended: 0, Return: Array = Success. $iFieldType called with All, returning full regular Field Service list String Array.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. $iFieldType BitOr'd together, determining which flags are called from the Array. Returning Field Service String list Array.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $iFieldType not an Integer.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_FieldTypeServices($iFieldType)
+	Local $avFieldTypes[7][2] = [[$LOI_FIELD_TYPE_AUTHOR, "com.sun.star.text.TextField.Author"], [$LOI_FIELD_TYPE_DATE_TIME, "com.sun.star.text.TextField.DateTime"], _
+			[$LOI_FIELD_TYPE_FILE_NAME, "com.sun.star.text.TextField.FileName"], [$LOI_FIELD_TYPE_SLIDE_COUNT, "com.sun.star.text.TextField.PageCount"], _
+			[$LOI_FIELD_TYPE_SLIDE_NUM, "com.sun.star.text.TextField.PageNumber"], [$LOI_FIELD_TYPE_SLIDE_TITLE, "com.sun.star.text.TextField.PageName"], _
+			[$LOI_FIELD_TYPE_URL, "com.sun.star.text.TextField.URL"]]
+
+	Local $avFieldResults[UBound($avFieldTypes)][2]
+	Local $iCount = 0
+
+	If Not IsInt($iFieldType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	If (BitAND($iFieldType, $LOI_FIELD_TYPE_ALL)) Then Return SetError($__LO_STATUS_SUCCESS, 0, $avFieldTypes)
+
+	For $i = 0 To UBound($avFieldTypes) - 1
+		If BitAND($avFieldTypes[$i][0], $iFieldType) Then
+			$avFieldResults[$iCount][0] = $avFieldTypes[$i][0]
+			$avFieldResults[$iCount][1] = $avFieldTypes[$i][1]
+			$iCount += 1
+		EndIf
+		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV)) ? (10) : (0))
+	Next
+
+	ReDim $avFieldResults[$iCount][2]
+
+	Return SetError($__LO_STATUS_SUCCESS, 1, $avFieldResults)
+EndFunc   ;==>__LOImpress_FieldTypeServices
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_FilterNameGet
