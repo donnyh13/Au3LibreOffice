@@ -27,6 +27,10 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 - Renumbered $LOC_FIELD_TYPE_ALL from 1 to 127.
 
+#### Documented
+
+- Fixed minor Documentation typos and errors.
+
 ## [0.10.0] - 2026-08-23
 
 ### LibreOfficeUDF

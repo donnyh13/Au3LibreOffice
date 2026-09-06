@@ -266,7 +266,7 @@ EndFunc   ;==>_LOCalc_FieldGetAnchor
 ;                  $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
 ;                  $sURL                - The URL/Hyperlink Address.
 ;                  $sText               - [optional] Default is "". The Text to display instead of the URL. "" means the URL itself is displayed.
-;                  $sTargetFrame        - [optional] Default is "". Enter the name of the frame that you want the linked file to open in. Leave blank to skip.
+;                  $sTargetFrame        - [optional] Default is "". Enter the name of the frame that you want the linked file to open in. Pass an empty string to skip.
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Map
 ;                  @Error: 0, @Extended: 0, Return: Map = Success. Successfully inserted the field, returning a map containing the Field's Object.
@@ -323,10 +323,10 @@ EndFunc   ;==>_LOCalc_FieldHyperlinkInsert
 ; Name ..........: _LOCalc_FieldHyperlinkModify
 ; Description ...: Set or Retrieve the settings of a Hyperlink/URL field.
 ; Syntax ........: _LOCalc_FieldHyperlinkModify(ByRef $mHyperlinkField[, $sURL = Null[, $sText = Null[, $sTargetFrame = Null]]])
-; Parameters ....: $mHyperlinkField     - A Hyperlink/URL Map containing the Field Field Object returned by a previous _LOCalc_FieldHyperlinkInsert or _LOCalc_FieldsGetList function.
+; Parameters ....: $mHyperlinkField     - A Hyperlink/URL Map containing the Field Object returned by a previous _LOCalc_FieldHyperlinkInsert or _LOCalc_FieldsGetList function.
 ;                  $sURL                - [optional] Default is Null. The URL/Hyperlink Address.
 ;                  $sText               - [optional] Default is Null. The Text to display instead of the URL. "" means the URL itself is displayed.
-;                  $sTargetFrame        - [optional] Default is Null. If True, any content selected by the Cursor is overwritten.
+;                  $sTargetFrame        - [optional] Default is Null. Enter the name of the frame that you want the linked file to open in. Pass an empty string to skip.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -503,7 +503,7 @@ EndFunc   ;==>_LOCalc_FieldPageNumberInsert
 ;                  @Error: 2, @Extended: 2 = Failed to create enumeration of Text Portions in Paragraph.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to identify requested Field Types.
-;                  @Error: 3, @Extended: 2 = Failed to retrieve Text Fields Object/
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Text Fields Object.
 ;                  @Error: 3, @Extended: 3 = Failed to retrieve total count of Fields.
 ;                  @Error: 3, @Extended: 4 = Failed to retrieve Text Field Object.
 ;                  @Error: 3, @Extended: 5 = More fields found than total count of Fields. Try creating a new cursor, and trying again.
