@@ -49,11 +49,13 @@
 ; __LOImpress_FieldGetObj
 ; __LOImpress_FieldTypeServices
 ; __LOImpress_FilterNameGet
+; __LOImpress_Format
 ; __LOImpress_GetShapeName
 ; __LOImpress_GradientIsModified
 ; __LOImpress_GradientNameInsert
 ; __LOImpress_GradientPresets
 ; __LOImpress_InternalComErrorHandler
+; __LOImpress_Margins
 ; __LOImpress_NumRuleCreateMap
 ; __LOImpress_ParAlignment
 ; __LOImpress_ParIndent
@@ -3904,6 +3906,86 @@ Func __LOImpress_FilterNameGet(ByRef $sDocSavePath, $bExportFilters = False)
 EndFunc   ;==>__LOImpress_FilterNameGet
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_Format
+; Description ...: Set or Retrieve the page format settings.
+; Syntax ........: __LOImpress_Format(ByRef $oObj[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
+; Parameters ....: $oObj                - A Slide, Master Slide, Notes or Handout page object.
+;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOI_PAPER_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOI_PAPER_HEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOI_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
+; Return values .: Success: 1 or Array.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
+;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
+;                  @Error: 1, @Extended: 4 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants, $LOI_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current slide width.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  |                               1 = Error setting $iWidth
+;                  |                               2 = Error setting $iHeight
+;                  |                               4 = Error setting $iOrientation
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+;                  If a slide is square (equal width and height), setting orientation to landscape will result in a property setting error due to the way LibreOffice behaves.
+; Related .......: _LO_UnitConvert, _LOImpress_SlidePageLayout, _LOImpress_SlidePageMargins, _LOImpress_SlideSheetPrint
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_Format(ByRef $oObj, $iWidth = Null, $iHeight = Null, $iOrientation = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iError = 0, $iTempW
+	Local $avFormat[3]
+
+	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	If __LO_VarsAreNull($iWidth, $iHeight, $iOrientation) Then
+		__LO_ArrayFill($avFormat, $oObj.Width(), $oObj.Height(), $oObj.Orientation())
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $avFormat)
+	EndIf
+
+	If ($iWidth <> Null) Then
+		If Not IsInt($iWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+		$oObj.Width = $iWidth
+		$iError = (__LO_IntIsBetween($oObj.Width(), $iWidth - 1, $iWidth + 1)) ? ($iError) : (BitOR($iError, 1))
+	EndIf
+
+	If ($iHeight <> Null) Then
+		If Not IsInt($iHeight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+		$oObj.Height = $iHeight
+		$iError = (__LO_IntIsBetween($oObj.Height(), $iHeight - 1, $iHeight + 1)) ? ($iError) : (BitOR($iError, 2))
+	EndIf
+
+	If ($iOrientation <> Null) Then
+		If Not __LO_IntIsBetween($iOrientation, $LOI_PAGE_ORIENT_PORTRAIT, $LOI_PAGE_ORIENT_LANDSCAPE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+		$iTempW = $oObj.Width()
+		If Not IsInt($iTempW) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		; Orientation isn't a settable property, it only toggles based on whether width or height is smaller. Therefore to change it, I have to manually swap width/hight.
+		If ($oObj.Orientation() <> $iOrientation) Then
+			$oObj.Width = $oObj.Height()
+			$oObj.Height = $iTempW
+		EndIf
+
+		$iError = ($oObj.Orientation() = $iOrientation) ? ($iError) : (BitOR($iError, 4))
+	EndIf
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>__LOImpress_Format
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_GetShapeName
 ; Description ...: Create a Shape Name that hasn't been used yet in the slide.
 ; Syntax ........: __LOImpress_GetShapeName(ByRef $oSlide, $sShapeName)
@@ -5368,6 +5450,85 @@ Func __LOImpress_InternalComErrorHandler(ByRef $oComError)
 		EndSwitch
 	EndIf
 EndFunc   ;==>__LOImpress_InternalComErrorHandler
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_Margins
+; Description ...: Set or Retrieve the page margin settings.
+; Syntax ........: __LOImpress_Margins(ByRef $oObj[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
+; Parameters ....: $oObj                - A Slide, Master Slide, Notes or Handout page object.
+;                  $iLeft               - [optional] Default is Null. The amount of space to leave between the left edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
+;                  $iRight              - [optional] Default is Null. The amount of space to leave between the right edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
+;                  $iTop                - [optional] Default is Null. The amount of space to leave between the upper edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
+;                  $iBottom             - [optional] Default is Null. The amount of space to leave between the lower edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
+; Return values .: Success: 1 or Array.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $iLeft not an Integer.
+;                  @Error: 1, @Extended: 3 = $iRight not an Integer.
+;                  @Error: 1, @Extended: 4 = $iTop not an Integer.
+;                  @Error: 1, @Extended: 5 = $iBottom not an Integer.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  |                               1 = Error setting $iLeft
+;                  |                               2 = Error setting $iRight
+;                  |                               4 = Error setting $iTop
+;                  |                               8 = Error setting $iBottom
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LO_UnitConvert, _LOImpress_SlidePageLayout, _LOImpress_SlidePageFormat
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_Margins(ByRef $oObj, $iLeft = Null, $iRight = Null, $iTop = Null, $iBottom = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iError = 0
+	Local $aiMargins[4]
+
+	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	If __LO_VarsAreNull($iLeft, $iRight, $iTop, $iBottom) Then
+		__LO_ArrayFill($aiMargins, $oObj.BorderLeft(), $oObj.BorderRight(), $oObj.BorderTop(), $oObj.BorderBottom())
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $aiMargins)
+	EndIf
+
+	If ($iLeft <> Null) Then
+		If Not IsInt($iLeft) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+		$oObj.BorderLeft = $iLeft
+		$iError = (__LO_IntIsBetween($oObj.BorderLeft(), $iLeft - 1, $iLeft + 1)) ? ($iError) : (BitOR($iError, 1))
+	EndIf
+
+	If ($iRight <> Null) Then
+		If Not IsInt($iRight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+		$oObj.BorderRight = $iRight
+		$iError = (__LO_IntIsBetween($oObj.BorderRight(), $iRight - 1, $iRight + 1)) ? ($iError) : (BitOR($iError, 2))
+	EndIf
+
+	If ($iTop <> Null) Then
+		If Not IsInt($iTop) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+		$oObj.BorderTop = $iTop
+		$iError = (__LO_IntIsBetween($oObj.BorderTop(), $iTop - 1, $iTop + 1)) ? ($iError) : (BitOR($iError, 4))
+	EndIf
+
+	If ($iBottom <> Null) Then
+		If Not IsInt($iBottom) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+		$oObj.BorderBottom = $iBottom
+		$iError = (__LO_IntIsBetween($oObj.BorderBottom(), $iBottom - 1, $iBottom + 1)) ? ($iError) : (BitOR($iError, 8))
+	EndIf
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>__LOImpress_Margins
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_NumRuleCreateMap

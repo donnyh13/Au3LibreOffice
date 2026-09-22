@@ -534,6 +534,85 @@ Global Const _                                                       ; com.sun.s
 		$LOI_ORIENT_VERT_LINE_CENTER = 8, _                          ; Aligned at the center of the line. Available only when anchor is set to "As character". Equal to L.O. UI setting of "Vertical" = Center, and "To" = Row.
 		$LOI_ORIENT_VERT_LINE_BOTTOM = 9                             ; Aligned at the bottom of the line. Available only when anchor is set to "As character". Equal to L.O. UI setting of "Vertical" = Center, and "To" = Row.
 
+; Slide Page Height in Hundredths of a Millimeter
+Global Const _
+		$LOI_PAGE_HEIGHT_A6 = 14808, _                               ; A6 page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_A5 = 21000, _                               ; A5 page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_A4 = 29700, _                               ; A4 page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_A3 = 42012, _                               ; A3 page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_A2 = 59411, _                               ; A2 page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_A1 = 84099, _                               ; A1 page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_A0 = 11890, _                               ; A0 page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_B6ISO = 17600, _                            ; B6ISO page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_B5ISO = 25000, _                            ; B5ISO page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_B4ISO = 35300, _                            ; B4ISO page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_LETTER = 27940, _                           ; Letter page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_LEGAL = 35560, _                            ; Legal page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_LONG_BOND = 33020, _                        ; Long Bond page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_TABLOID = 43180, _                          ; Tabloid page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_B6JIS = 18212, _                            ; B6JIS page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_B5JIS = 25705, _                            ; B5JIS page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_B4JIS = 36400, _                            ; B4JIS page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_16KAI = 26010, _                            ; 16KAI page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_32KAI = 18390, _                            ; 32KAI page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_BIG_32KAI = 20300, _                        ; Big 32KAI page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_DLENVELOPE = 22000, _                       ; DL Envelope page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_C6ENVELOPE = 16200, _                       ; C6 Envelope page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_C6_5_ENVELOPE = 22911, _                    ; C6/5 Envelope page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_C5ENVELOPE = 22911, _                       ; C5 Envelope page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_C4ENVELOPE = 32410, _                       ; C4 Envelope page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_DIA_SLIDE = 27000, _                        ; Dia Slide page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_SCREEN_4_3 = 28000, _                       ; Screen 4:3 page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_SCREEN_16_9 = 28000, _                      ; Screen 16:9 page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_SCREEN_16_10 = 28000, _                     ; Screen 16:10 page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_WIDESCREEN = 33866, _                       ; Widescreen page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_ON_SCREEN_SHOW_4_3 = 25400, _               ; On Screen Show (4:3) page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_ON_SCREEN_SHOW_16_9 = 25400, _              ; On Screen Show (16:9) page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_ON_SCREEN_SHOW_16_10 = 25400, _             ; On Screen Show (16:10) page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_JAP_POSTCARD = 14800                        ; Japanese Postcard page height in Hundredths of a Millimeter (HMM).
+
+; Slide Page Orientation Constants.
+Global Const _                                                       ; com.sun.star.view.PaperOrientation
+		$LOI_PAGE_ORIENT_PORTRAIT = 0, _                             ; Portrait Page Orientation.
+		$LOI_PAGE_ORIENT_LANDSCAPE = 1                               ; Landscape Page Orientation.
+
+; Slide Page Width in Hundredths of a Millimeter
+Global Const _
+		$LOI_PAGE_WIDTH_A6 = 10490, _                                ; A6 page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_A5 = 14800, _                                ; A5 page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_A4 = 21000, _                                ; A4 page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_A3 = 29693, _                                ; A3 page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_A2 = 42012, _                                ; A2 page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_A1 = 59411, _                                ; A1 page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_A0 = 84100, _                                ; A0 page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_B6ISO = 12500, _                             ; B6ISO page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_B5ISO = 17600, _                             ; B5ISO page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_B4ISO = 25000, _                             ; B4ISO page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_LETTER = 21590, _                            ; Letter page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_LEGAL = 21590, _                             ; Legal page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_LONG_BOND = 21590, _                         ; Long Bond page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_TABLOID = 27940, _                           ; Tabloid page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_B6JIS = 12802, _                             ; B6JIS page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_B5JIS = 18212, _                             ; B5JIS page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_B4JIS = 25700, _                             ; B4JIS page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_16KAI = 18390, _                             ; 16KAI page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_32KAI = 13005, _                             ; 32KAI page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_BIG_32KAI = 14000, _                         ; Big 32KAI page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_DLENVELOPE = 11000, _                        ; DL Envelope page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_C6ENVELOPE = 11400, _                        ; C6 Envelope page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_C6_5_ENVELOPE = 11405, _                     ; C6/5 Envelope page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_C5ENVELOPE = 16205, _                        ; C5 Envelope page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_C4ENVELOPE = 22911, _                        ; C4 Envelope page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_DIA_SLIDE = 18009, _                         ; Dia Slide page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_SCREEN_4_3 = 21000, _                        ; Screen 4:3 page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_SCREEN_16_9 = 15750, _                       ; Screen 16:9 page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_SCREEN_16_10 = 17500, _                      ; Screen 16:10 page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_WIDESCREEN = 19050, _                        ; Widescreen page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_ON_SCREEN_SHOW_4_3 = 19050, _                ; On Screen Show (4:3) page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_ON_SCREEN_SHOW_16_9 = 14300, _               ; On Screen Show (16:9) page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_ON_SCREEN_SHOW_16_10 = 15875, _              ; On Screen Show (16:10) page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_JAP_POSTCARD = 10000                         ; Japanese Postcard page width in Hundredths of a Millimeter (HMM).
+
 ; Paragraph Horizontal Align
 Global Const _                                                       ; com.sun.star.style.ParagraphAdjust
 		$LOI_PAR_ALIGN_HOR_LEFT = 0, _                               ; The Paragraph is left-aligned between the borders.
@@ -808,6 +887,15 @@ Global Enum Step *2 _
 		$LOI_SHAPE_TYPE_TEXTBOX_TITLE, _                             ; 262144 - A Slide Title Text Box.
 		$LOI_SHAPE_TYPE_TEXTBOX_OUTLINE, _                           ; 524288 - A Slide Outline Text Box.
 		$LOI_SHAPE_TYPE_ALL = 1048575                                ; 1048575 All types above.
+
+; Current Slide Constants
+Global _
+		$LOI_SLIDE_CURRENT_UNKNOWN = -1, _                           ; The current slide page is unknown.
+		$LOI_SLIDE_CURRENT_SLIDE = 0, _                              ; The current slide page is a regular slide.
+		$LOI_SLIDE_CURRENT_SLIDE_NOTES, _                            ; The current slide page is a slide notes page.
+		$LOI_SLIDE_CURRENT_MASTER, _                                 ; The current slide page is a slide master page.
+		$LOI_SLIDE_CURRENT_MASTER_NOTES, _                           ; The current slide page is a slide master notes page.
+		$LOI_SLIDE_CURRENT_MASTER_HANDOUT                            ; The current slide page is a slide master handouts page.
 
 ; Slide Header/Footer Date and Time Display Format
 Global Const _

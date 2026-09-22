@@ -21,7 +21,7 @@ Func Example()
 	$asSounds = _LOImpress_SlideSoundsGetNames()
 	If @error Then _ERROR($oDoc, "Failed to retrieve Slide names. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	If (UBound($asSounds) = 0) Then ; If not sounds found, add an empty entry to the example doesn't fail.
+	If (UBound($asSounds) = 0) Then ; If no sounds found, add an empty entry so the example doesn't fail.
 		ReDim $asSounds[1]
 		$asSounds[0] = ""
 	EndIf

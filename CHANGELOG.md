@@ -65,6 +65,9 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOI_NUM_FRMT_*
   - $LOI_ORIENT_HORI_*
   - $LOI_ORIENT_VERT_*
+  - $LOI_PAGE_HEIGHT_*
+  - $LOI_PAGE_ORIENT_*
+  - $LOI_PAGE_WIDTH_*
   - $LOI_PAR_ALIGN_HOR_*
   - $LOI_PAR_ALIGN_VERT_*
   - $LOI_PAR_LAST_LINE_*
@@ -87,6 +90,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOI_SHAPE_TABLE_CELL_TYPE_*
   - $LOI_SHAPE_TEXTBOX_TYPE_*
   - $LOI_SHAPE_TYPE_*
+  - $LOI_SLIDE_CURRENT_*
   - $LOI_SLIDE_DT_FMT_*
   - $LOI_SLIDE_LAYOUT_*
   - $LOI_SLIDE_TRANSITION_*
@@ -214,11 +218,13 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - __LOImpress_FieldGetObj
   - __LOImpress_FieldTypeServices
   - __LOImpress_FilterNameGet
+  - __LOImpress_Format
   - __LOImpress_GetShapeName
   - __LOImpress_GradientIsModified
   - __LOImpress_GradientNameInsert
   - __LOImpress_GradientPresets
   - __LOImpress_InternalComErrorHandler
+  - __LOImpress_Margins
   - __LOImpress_NumRuleCreateMap
   - __LOImpress_ParAlignment
   - __LOImpress_ParIndent
@@ -380,9 +386,39 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOImpress_SlideDeleteByObj
   - _LOImpress_SlideGetObjByIndex
   - _LOImpress_SlideGetObjByName
+  - _LOImpress_SlideHandoutFooter
+  - _LOImpress_SlideHandoutFormat
+  - _LOImpress_SlideHandoutGetObj
+  - _LOImpress_SlideHandoutHeader
+  - _LOImpress_SlideHandoutMargins
   - _LOImpress_SlideLayout
+  - _LOImpress_SlideMasterAdd
+  - _LOImpress_SlideMasterBackColor
+  - _LOImpress_SlideMasterBackFillStyle
+  - _LOImpress_SlideMasterBackGradient
+  - _LOImpress_SlideMasterBackTransparency
+  - _LOImpress_SlideMasterBackTransparencyGradient
+  - _LOImpress_SlideMasterCurrent
+  - _LOImpress_SlideMasterDeleteByIndex
+  - _LOImpress_SlideMasterDeleteByObj
+  - _LOImpress_SlideMasterExists
+  - _LOImpress_SlideMasterGetObjByIndex
+  - _LOImpress_SlideMasterGetObjByName
+  - _LOImpress_SlideMasterName
+  - _LOImpress_SlideMasterNotesGetObj
+  - _LOImpress_SlideMasterPageFormat
+  - _LOImpress_SlideMasterPageMargins
+  - _LOImpress_SlideMastersGetCount
+  - _LOImpress_SlideMastersGetNames
   - _LOImpress_SlideMove
   - _LOImpress_SlideName
+  - _LOImpress_SlideNotesFooter
+  - _LOImpress_SlideNotesFormat
+  - _LOImpress_SlideNotesGetObj
+  - _LOImpress_SlideNotesHeader
+  - _LOImpress_SlideNotesMargins
+  - _LOImpress_SlidePageFormat
+  - _LOImpress_SlidePageMargins
   - _LOImpress_SlidesGetCount
   - _LOImpress_SlidesGetNames
   - _LOImpress_SlideshowActiveSettings
