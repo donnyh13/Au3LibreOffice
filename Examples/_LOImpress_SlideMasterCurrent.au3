@@ -13,11 +13,11 @@ Func Example()
 
 	; Add a new Master Slide
 	$oMaster = _LOImpress_SlideMasterAdd($oDoc, Null, "Au3 Master")
-		If @error Then _ERROR($oDoc, "Failed to Insert a new Master slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then _ERROR($oDoc, "Failed to Insert a new Master slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the background color of the new Master slide to purple.
 	_LOImpress_SlideMasterBackColor($oMaster, $LO_COLOR_PURPLE)
-		If @error Then _ERROR($oDoc, "Failed to set background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then _ERROR($oDoc, "Failed to set background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to set the current slide's Master page to the new Master slide I created.")
 

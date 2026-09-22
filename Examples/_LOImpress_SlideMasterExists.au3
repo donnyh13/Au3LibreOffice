@@ -14,7 +14,7 @@ Func Example()
 
 	; Add a new Master Slide
 	$oMaster = _LOImpress_SlideMasterAdd($oDoc, Null, "Au3 Master")
-		If @error Then _ERROR($oDoc, "Failed to Insert a new Master slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then _ERROR($oDoc, "Failed to Insert a new Master slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; See if the new Master Slide exists.
 	$bExists = _LOImpress_SlideMasterExists($oDoc, "Au3 Master")

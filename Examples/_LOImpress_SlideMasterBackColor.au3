@@ -14,7 +14,7 @@ Func Example()
 
 	; Retrieve the Default Master Slide Object.
 	$oMaster = _LOImpress_SlideMasterGetObjByIndex($oDoc, 0)
-		If @error Then _ERROR($oDoc, "Failed to retrieve Master slide Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Master slide Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Slide's Background Color settings. Background color = $LO_COLOR_GOLD.
 	_LOImpress_SlideMasterBackColor($oMaster, $LO_COLOR_GOLD)

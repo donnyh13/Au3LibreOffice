@@ -26,8 +26,8 @@ Func Example()
 			"Press ok to add a master slide.")
 
 	; Add a new Master Slide
-		_LOImpress_SlideMasterAdd($oDoc, Null, "Au3 Master")
-		If @error Then _ERROR($oDoc, "Failed to Insert a new Master slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	_LOImpress_SlideMasterAdd($oDoc, Null, "Au3 Master")
+	If @error Then _ERROR($oDoc, "Failed to Insert a new Master slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve an Array of all Master slides in the Document.
 	$asMasterSlides = _LOImpress_SlideMastersGetNames($oDoc)

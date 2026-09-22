@@ -14,7 +14,7 @@ Func Example()
 
 	; Retrieve the Default Master Slide Object.
 	$oMaster = _LOImpress_SlideMasterGetObjByIndex($oDoc, 0)
-		If @error Then _ERROR($oDoc, "Failed to retrieve Master slide Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Master slide Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to set the master slide's background to a Gradient.")
 
