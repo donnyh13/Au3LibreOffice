@@ -62,6 +62,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOI_FIELD_TYPE_*
   - $LOI_GRAD_NAME_*
   - $LOI_GRAD_TYPE_*
+  - $LOI_HANDOUT_LAYOUT_*
   - $LOI_NUM_FRMT_*
   - $LOI_ORIENT_HORI_*
   - $LOI_ORIENT_VERT_*
@@ -391,6 +392,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOImpress_SlideHandoutFormat
   - _LOImpress_SlideHandoutGetObj
   - _LOImpress_SlideHandoutHeader
+  - _LOImpress_SlideHandoutLayout
   - _LOImpress_SlideHandoutMargins
   - _LOImpress_SlideLayout
   - _LOImpress_SlideMargins

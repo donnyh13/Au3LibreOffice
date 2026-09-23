@@ -437,6 +437,15 @@ Global Const _                                                       ; com.sun.s
 		$LOI_GRAD_TYPE_SQUARE = 4, _                                 ; Square type Gradient
 		$LOI_GRAD_TYPE_RECT = 5                                      ; Rectangle type Gradient
 
+; Handout layout arrangements.
+Global Const _
+		$LOI_HANDOUT_LAYOUT_ONE_SLIDE = 22, _                        ; The Handout page will contain one slide placeholder.
+		$LOI_HANDOUT_LAYOUT_TWO_SLIDES = 23, _                       ; The Handout page will contain two slide placeholders.
+		$LOI_HANDOUT_LAYOUT_THREE_SLIDES = 24, _                     ; The Handout page will contain three slide placeholders.
+		$LOI_HANDOUT_LAYOUT_FOUR_SLIDES = 25, _                      ; The Handout page will contain four slide placeholders.
+		$LOI_HANDOUT_LAYOUT_SIX_SLIDES = 26, _                       ; The Handout page will contain six slide placeholders.
+		$LOI_HANDOUT_LAYOUT_NINE_SLIDES = 31                         ; The Handout page will contain nine slide placeholders.
+
 ; Numbering Style Type
 Global Const _                                                       ; com.sun.star.style.NumberingType
 		$LOI_NUM_FRMT_CHARS_UPPER_LETTER = 0, _                      ; Numbering is put in upper case letters. ("A, B, C, D)

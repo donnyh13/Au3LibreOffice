@@ -5,27 +5,27 @@
 Example()
 
 Func Example()
-	Local $oDoc, $oSlide
+	Local $oDoc, $oHandout
 	Local $iLayout
 
 	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOImpress_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Impress Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve the current Slide.
-	$oSlide = _LOImpress_SlideCurrent($oDoc)
-	If @error Then _ERROR($oDoc, "Failed to retrieve current slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Retrieve the handout Page's Object.
+	$oHandout = _LOImpress_SlideHandoutGetObj($oDoc)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Handout page's Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve the current slide layout.
-	$iLayout = _LOImpress_SlideLayout($oSlide)
-	If @error Then _ERROR($oDoc, "Failed to retrieve Slide Layout. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Retrieve the current handout page layout.
+	$iLayout = _LOImpress_SlideHandoutLayout($oHandout)
+	If @error Then _ERROR($oDoc, "Failed to retrieve page Layout. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Slide's current layout is (See UDF Constants): " & $iLayout & @CRLF & @CRLF & _
-			"Press ok to change the slide's layout to $LOI_SLIDE_LAYOUT_TITLE_4_CONTENT.")
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Page's current layout is (See UDF Constants): " & $iLayout & @CRLF & @CRLF & _
+			"Press ok to change the Page's layout to $LOI_HANDOUT_LAYOUT_THREE_SLIDES. You can switch to that view to see that it worked.")
 
-	; Change the Slide's layout to $LOI_SLIDE_LAYOUT_TITLE_4_CONTENT
-	_LOImpress_SlideLayout($oSlide, $LOI_SLIDE_LAYOUT_TITLE_4_CONTENT)
-	If @error Then _ERROR($oDoc, "Failed to modify Slide layout. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Change the Handout Page's layout to $LOI_HANDOUT_LAYOUT_THREE_SLIDES
+	_LOImpress_SlideLayout($oHandout, $LOI_HANDOUT_LAYOUT_THREE_SLIDES)
+	If @error Then _ERROR($oDoc, "Failed to modify Handout Page layout. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

@@ -43,6 +43,7 @@
 ; _LOImpress_SlideHandoutFormat
 ; _LOImpress_SlideHandoutGetObj
 ; _LOImpress_SlideHandoutHeader
+; _LOImpress_SlideHandoutLayout
 ; _LOImpress_SlideHandoutMargins
 ; _LOImpress_SlideLayout
 ; _LOImpress_SlideMargins
@@ -1646,6 +1647,55 @@ Func _LOImpress_SlideHandoutHeader(ByRef $oHandout, $bHeader = Null, $sHeaderTex
 EndFunc   ;==>_LOImpress_SlideHandoutHeader
 
 ; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlideHandoutLayout
+; Description ...: Set or Retrieve the current Handout page's layout.
+; Syntax ........: _LOImpress_SlideHandoutLayout(ByRef $oHandout[, $iLayout = Null])
+; Parameters ....: $oHandout            - A Handout page object returned by a previous _LOImpress_SlideHandoutGetObj function.
+;                  $iLayout             - [optional] (22-31) Default is Null. The layout format of the Handout page. See Constants, $LOI_HANDOUT_LAYOUT_* as defined in LibreOfficeImpress_Constants.au3.
+; Return values .: Success: 1 or Integer.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current layout setting as an Integer.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oHandout not an Object.
+;                  @Error: 1, @Extended: 2 = $iLayout not an Integer, less than 22 or greater than 31. See Constants, $LOI_HANDOUT_LAYOUT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Page's current layout.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $iLayout
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+; Related .......: _LOImpress_SlideHandoutFormat, _LOImpress_SlideHandoutMargins, _LOImpress_SlideLayout
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_SlideHandoutLayout(ByRef $oHandout, $iLayout = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iError = 0
+	Local $iCurrLayout
+
+	If Not IsObj($oHandout) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	If __LO_VarsAreNull($iLayout) Then
+		$iCurrLayout = $oHandout.Layout()
+		If Not IsInt($iCurrLayout) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurrLayout)
+	EndIf
+
+	If Not __LO_IntIsBetween($iLayout, $LOI_HANDOUT_LAYOUT_ONE_SLIDE, $LOI_HANDOUT_LAYOUT_NINE_SLIDES) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$oHandout.Layout = $iLayout
+	$iError = ($oHandout.Layout() = $iLayout) ? ($iError) : (BitOR($iError, 1))
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LOImpress_SlideHandoutLayout
+
+; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_SlideHandoutMargins
 ; Description ...: Set or Retrieve the handout page margin settings.
 ; Syntax ........: _LOImpress_SlideHandoutMargins(ByRef $oHandout[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
@@ -1712,7 +1762,7 @@ EndFunc   ;==>_LOImpress_SlideHandoutMargins
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOImpress_SlideName, _LOImpress_SlideTransition, _LOImpress_SlideFormat, _LOImpress_SlideMargins
+; Related .......: _LOImpress_SlideName, _LOImpress_SlideTransition, _LOImpress_SlideFormat, _LOImpress_SlideMargins, _LOImpress_SlideHandoutLayout
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
