@@ -93,15 +93,18 @@
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_SlideAdd
 ; Description ...: Add a slide to a presentation.
-; Syntax ........: _LOImpress_SlideAdd(ByRef $oDoc[, $iPos = Null])
+; Syntax ........: _LOImpress_SlideAdd(ByRef $oDoc[, $iPos = Null[, $sName = ""]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $iPos                - [optional] Default is Null. The position to insert the new slide in the collection of slides. 0 Based. See remarks.
+;                  $sName               - [optional] Default is "". The unique name of the Slide. If called with an empty string, LibreOffice automatically names it.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning new slide's Object.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $iPos not an Integer, less than 0 or greater than number of slides.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = Name called in $sName already exists.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.ServiceManager" Object.
 ;                  @Error: 2, @Extended: 2 = Error creating "com.sun.star.frame.DispatchHelper" Object.
@@ -113,11 +116,11 @@
 ; Remarks .......: If $iPos is called with Null, the new slide is inserted at the end.
 ;                  Call $iPos with the last slide index to insert the slide at the end. Call $iPos with 0 to insert the new slide in the first slide position.
 ;                  Due to limitations in the API, I have made a small workaround for inserting a slide at the beginning. A dispatch is executed to move the slide to the beginning. The current slide will temporarily be set to the new slide in order to move it.
-; Related .......: _LOImpress_SlideDeleteByIndex, _LOImpress_SlideDeleteByObj, _LOImpress_SlideMasterAdd
+; Related .......: _LOImpress_SlideDeleteByIndex, _LOImpress_SlideDeleteByObj, _LOImpress_SlideMasterAdd, _LOImpress_SlideExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideAdd(ByRef $oDoc, $iPos = Null)
+Func _LOImpress_SlideAdd(ByRef $oDoc, $iPos = Null, $sName = "")
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -129,6 +132,8 @@ Func _LOImpress_SlideAdd(ByRef $oDoc, $iPos = Null)
 
 	If ($iPos = Null) Then $iPos = $oDoc.DrawPages.getCount()
 	If Not __LO_IntIsBetween($iPos, 0, $oDoc.DrawPages.getCount()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If ($sName <> "") And _LOImpress_SlideExists($oDoc, $sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 	$iPos -= 1 ; -1 because when 0 is called in insertNewByIndex, it inserts it in position 1, etc. Also there is no way to insert a new slide at position 0, so I made a workaround.
 
@@ -155,6 +160,10 @@ Func _LOImpress_SlideAdd(ByRef $oDoc, $iPos = Null)
 		$oDispatcher.executeDispatch($oDoc.CurrentController(), ".uno:MovePageFirst", "", 0, $aArray)
 
 		$oDoc.getCurrentController.setCurrentPage($oCurrSlide) ; Restore current slide.
+	EndIf
+
+	If ($sName <> "") Then
+		$oSlide.Name = $sName
 	EndIf
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oSlide)
@@ -1799,7 +1808,7 @@ EndFunc   ;==>_LOImpress_SlideMargins
 ; Remarks .......: If $iPos is called with Null, the new master slide is inserted at the end.
 ;                  Call $iPos with the last master slide index to insert the master slide at the end. Call $iPos with 0 to insert the new master slide at the beginning.
 ;                  I have not found a way to import Master slide from the LibreOffice templates yet.
-; Related .......: _LOImpress_SlideMasterDeleteByIndex, _LOImpress_SlideMasterDeleteByObj, _LOImpress_SlideAdd
+; Related .......: _LOImpress_SlideMasterDeleteByIndex, _LOImpress_SlideMasterDeleteByObj, _LOImpress_SlideAdd, _LOImpress_SlideMasterExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
