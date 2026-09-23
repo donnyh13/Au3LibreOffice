@@ -5,7 +5,7 @@
 Example()
 
 Func Example()
-	Local $oDoc, $oSlide, $oMaster
+	Local $oDoc, $oSlide
 	Local $avSettings
 
 	; Create a New, visible, Blank LibreOffice Document.
@@ -16,19 +16,15 @@ Func Example()
 	$oSlide = _LOImpress_SlideCurrent($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve current slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve the Master slide for the current Slide.
-	$oMaster = _LOImpress_SlideMasterCurrent($oSlide)
-	If @error Then _ERROR($oDoc, "Failed to retrieve current master slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Set some of the Master Slide Page's margin settings
-	_LOImpress_SlideMasterPageMargins($oMaster, 1270, 2540, 2540, 1270)
+	; Set some of the Slide Page's margin settings
+	_LOImpress_SlideMargins($oSlide, 1270, 2540, 2540, 1270)
 	If @error Then _ERROR($oDoc, "Failed to set Page's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve the Master Slide Page's margin settings. Return will be an array in order of function parameters.
-	$avSettings = _LOImpress_SlideMasterPageMargins($oMaster)
+	; Retrieve the Slide Page's margin settings. Return will be an array in order of function parameters.
+	$avSettings = _LOImpress_SlideMargins($oSlide)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Page's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Master Slide Page's margin settings are as follows: " & @CRLF & _
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Slide Page's margin settings are as follows: " & @CRLF & _
 			"The the left page margin is, in Hundredths of a Millimeter (HMM): " & $avSettings[0] & @CRLF & _
 			"The the right page margin is, in Hundredths of a Millimeter (HMM): " & $avSettings[1] & @CRLF & _
 			"The the top page margin is, in Hundredths of a Millimeter (HMM): " & $avSettings[2] & @CRLF & _

@@ -5,7 +5,7 @@
 Example()
 
 Func Example()
-	Local $oDoc, $oSlide
+	Local $oDoc, $oSlide, $oMaster
 	Local $avSettings
 
 	; Create a New, visible, Blank LibreOffice Document.
@@ -16,15 +16,19 @@ Func Example()
 	$oSlide = _LOImpress_SlideCurrent($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve current slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set some of the Slide Page's Format settings
-	_LOImpress_SlidePageFormat($oSlide, $LOI_PAGE_WIDTH_DIA_SLIDE, $LOI_PAGE_HEIGHT_DIA_SLIDE, $LOI_PAGE_ORIENT_PORTRAIT)
+	; Retrieve the Master slide for the current Slide.
+	$oMaster = _LOImpress_SlideMasterCurrent($oSlide)
+	If @error Then _ERROR($oDoc, "Failed to retrieve current master slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Set some of the Master Slide Page's Format settings
+	_LOImpress_SlideMasterFormat($oMaster, $LOI_PAGE_WIDTH_DIA_SLIDE, $LOI_PAGE_HEIGHT_DIA_SLIDE, $LOI_PAGE_ORIENT_PORTRAIT)
 	If @error Then _ERROR($oDoc, "Failed to set Page's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve the Slide Page's Format settings. Return will be an array in order of function parameters.
-	$avSettings = _LOImpress_SlidePageFormat($oSlide)
+	; Retrieve the Master Slide Page's Format settings. Return will be an array in order of function parameters.
+	$avSettings = _LOImpress_SlideMasterFormat($oMaster)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Page's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Slide Page's format settings are as follows: " & @CRLF & _
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Master Slide Page's format settings are as follows: " & @CRLF & _
 			"The page's width is, in Hundredths of a Millimeter (HMM): " & $avSettings[0] & @CRLF & _
 			"The page's height is, in Hundredths of a Millimeter (HMM): " & $avSettings[1] & @CRLF & _
 			"The page's orientation is (See UDF Constants): " & $avSettings[2])

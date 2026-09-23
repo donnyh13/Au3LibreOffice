@@ -381,9 +381,10 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOImpress_SlideCopy
   - _LOImpress_SlideCurrent
   - _LOImpress_SlideDeleteByIndex
+  - _LOImpress_SlideDeleteByObj
   - _LOImpress_SlideExists
   - _LOImpress_SlideFooter
-  - _LOImpress_SlideDeleteByObj
+  - _LOImpress_SlideFormat
   - _LOImpress_SlideGetObjByIndex
   - _LOImpress_SlideGetObjByName
   - _LOImpress_SlideHandoutFooter
@@ -392,6 +393,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOImpress_SlideHandoutHeader
   - _LOImpress_SlideHandoutMargins
   - _LOImpress_SlideLayout
+  - _LOImpress_SlideMargins
   - _LOImpress_SlideMasterAdd
   - _LOImpress_SlideMasterBackColor
   - _LOImpress_SlideMasterBackFillStyle
@@ -402,12 +404,12 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOImpress_SlideMasterDeleteByIndex
   - _LOImpress_SlideMasterDeleteByObj
   - _LOImpress_SlideMasterExists
+  - _LOImpress_SlideMasterFormat
   - _LOImpress_SlideMasterGetObjByIndex
   - _LOImpress_SlideMasterGetObjByName
+  - _LOImpress_SlideMasterMargins
   - _LOImpress_SlideMasterName
   - _LOImpress_SlideMasterNotesGetObj
-  - _LOImpress_SlideMasterPageFormat
-  - _LOImpress_SlideMasterPageMargins
   - _LOImpress_SlideMastersGetCount
   - _LOImpress_SlideMastersGetNames
   - _LOImpress_SlideMove
@@ -417,8 +419,6 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOImpress_SlideNotesGetObj
   - _LOImpress_SlideNotesHeader
   - _LOImpress_SlideNotesMargins
-  - _LOImpress_SlidePageFormat
-  - _LOImpress_SlidePageMargins
   - _LOImpress_SlidesGetCount
   - _LOImpress_SlidesGetNames
   - _LOImpress_SlideshowActiveSettings

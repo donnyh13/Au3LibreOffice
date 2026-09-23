@@ -36,6 +36,7 @@
 ; _LOImpress_SlideDeleteByObj
 ; _LOImpress_SlideExists
 ; _LOImpress_SlideFooter
+; _LOImpress_SlideFormat
 ; _LOImpress_SlideGetObjByIndex
 ; _LOImpress_SlideGetObjByName
 ; _LOImpress_SlideHandoutFooter
@@ -44,6 +45,7 @@
 ; _LOImpress_SlideHandoutHeader
 ; _LOImpress_SlideHandoutMargins
 ; _LOImpress_SlideLayout
+; _LOImpress_SlideMargins
 ; _LOImpress_SlideMasterAdd
 ; _LOImpress_SlideMasterBackColor
 ; _LOImpress_SlideMasterBackFillStyle
@@ -54,12 +56,12 @@
 ; _LOImpress_SlideMasterDeleteByIndex
 ; _LOImpress_SlideMasterDeleteByObj
 ; _LOImpress_SlideMasterExists
+; _LOImpress_SlideMasterFormat
 ; _LOImpress_SlideMasterGetObjByIndex
 ; _LOImpress_SlideMasterGetObjByName
+; _LOImpress_SlideMasterMargins
 ; _LOImpress_SlideMasterName
 ; _LOImpress_SlideMasterNotesGetObj
-; _LOImpress_SlideMasterPageFormat
-; _LOImpress_SlideMasterPageMargins
 ; _LOImpress_SlideMastersGetCount
 ; _LOImpress_SlideMastersGetNames
 ; _LOImpress_SlideMove
@@ -69,8 +71,6 @@
 ; _LOImpress_SlideNotesGetObj
 ; _LOImpress_SlideNotesHeader
 ; _LOImpress_SlideNotesMargins
-; _LOImpress_SlidePageFormat
-; _LOImpress_SlidePageMargins
 ; _LOImpress_SlidesGetCount
 ; _LOImpress_SlidesGetNames
 ; _LOImpress_SlideshowActiveSettings
@@ -1254,6 +1254,53 @@ Func _LOImpress_SlideFooter(ByRef $oSlide, $bDateTime = Null, $bDateTimeIsFixed 
 EndFunc   ;==>_LOImpress_SlideFooter
 
 ; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlideFormat
+; Description ...: Set or Retrieve the slide format settings.
+; Syntax ........: _LOImpress_SlideFormat(ByRef $oSlide[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOI_PAGE_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOI_PAGE_HEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOI_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
+; Return values .: Success: 1 or Array.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
+;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
+;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
+;                  @Error: 1, @Extended: 4 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants, $LOI_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current slide width.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  |                               1 = Error setting $iWidth
+;                  |                               2 = Error setting $iHeight
+;                  |                               4 = Error setting $iOrientation
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+;                  When modifying the page format, the shapes etc., aren't readjusted as they are in LibreOffice UI.
+;                  I am unable to find the properties to set for "FitObject to Paper Format", "Background covers margins", "Slide numbers", and "Paper tray".
+; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlideMargins, _LOImpress_SlideHandoutFormat, _LOImpress_SlideMasterFormat, _LOImpress_SlideNotesFormat
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_SlideFormat(ByRef $oSlide, $iWidth = Null, $iHeight = Null, $iOrientation = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $vReturn
+
+	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$vReturn = __LOImpress_Format($oSlide, $iWidth, $iHeight, $iOrientation)
+
+	Return SetError(@error, @extended, $vReturn)
+EndFunc   ;==>_LOImpress_SlideFormat
+
+; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_SlideGetObjByIndex
 ; Description ...: Retrieve a Slide's Object by index.
 ; Syntax ........: _LOImpress_SlideGetObjByIndex(ByRef $oDoc, $iSlide)
@@ -1430,7 +1477,7 @@ EndFunc   ;==>_LOImpress_SlideHandoutFooter
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  When modifying the page format, the shapes etc., aren't readjusted as they are in LibreOffice UI.
-; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlidePageMargins, _LOImpress_SlideMasterPageFormat, _LOImpress_SlideNotesFormat, _LOImpress_SlidePageFormat
+; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlideMargins, _LOImpress_SlideMasterFormat, _LOImpress_SlideNotesFormat, _LOImpress_SlideFormat
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1618,7 +1665,7 @@ EndFunc   ;==>_LOImpress_SlideHandoutHeader
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlidePageFormat, _LOImpress_SlideMasterPageMargins, _LOImpress_SlideNotesMargins, _LOImpress_SlidePageMargins
+; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlideFormat, _LOImpress_SlideMasterMargins, _LOImpress_SlideNotesMargins, _LOImpress_SlideMargins
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1656,7 +1703,7 @@ EndFunc   ;==>_LOImpress_SlideHandoutMargins
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOImpress_SlideName, _LOImpress_SlideTransition, _LOImpress_SlidePageFormat, _LOImpress_SlidePageMargins
+; Related .......: _LOImpress_SlideName, _LOImpress_SlideTransition, _LOImpress_SlideFormat, _LOImpress_SlideMargins
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1685,6 +1732,52 @@ Func _LOImpress_SlideLayout(ByRef $oSlide, $iLayout = Null)
 EndFunc   ;==>_LOImpress_SlideLayout
 
 ; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlideMargins
+; Description ...: Set or Retrieve the slide page margin settings.
+; Syntax ........: _LOImpress_SlideMargins(ByRef $oSlide[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+;                  $iLeft               - [optional] Default is Null. The amount of space to leave between the left edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
+;                  $iRight              - [optional] Default is Null. The amount of space to leave between the right edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
+;                  $iTop                - [optional] Default is Null. The amount of space to leave between the upper edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
+;                  $iBottom             - [optional] Default is Null. The amount of space to leave between the lower edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
+; Return values .: Success: 1 or Array.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
+;                  @Error: 1, @Extended: 2 = $iLeft not an Integer.
+;                  @Error: 1, @Extended: 3 = $iRight not an Integer.
+;                  @Error: 1, @Extended: 4 = $iTop not an Integer.
+;                  @Error: 1, @Extended: 5 = $iBottom not an Integer.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  |                               1 = Error setting $iLeft
+;                  |                               2 = Error setting $iRight
+;                  |                               4 = Error setting $iTop
+;                  |                               8 = Error setting $iBottom
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlideFormat, _LOImpress_SlideHandoutMargins, _LOImpress_SlideMasterMargins, _LOImpress_SlideNotesMargins
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_SlideMargins(ByRef $oSlide, $iLeft = Null, $iRight = Null, $iTop = Null, $iBottom = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $vReturn
+
+	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$vReturn = __LOImpress_Margins($oSlide, $iLeft, $iRight, $iTop, $iBottom)
+
+	Return SetError(@error, @extended, $vReturn)
+EndFunc   ;==>_LOImpress_SlideMargins
+
+; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_SlideMasterAdd
 ; Description ...: Add a master slide to a presentation.
 ; Syntax ........: _LOImpress_SlideMasterAdd(ByRef $oDoc[, $iPos = Null[, $sName = ""]])
@@ -1705,6 +1798,7 @@ EndFunc   ;==>_LOImpress_SlideLayout
 ; Modified ......:
 ; Remarks .......: If $iPos is called with Null, the new master slide is inserted at the end.
 ;                  Call $iPos with the last master slide index to insert the master slide at the end. Call $iPos with 0 to insert the new master slide at the beginning.
+;                  I have not found a way to import Master slide from the LibreOffice templates yet.
 ; Related .......: _LOImpress_SlideMasterDeleteByIndex, _LOImpress_SlideMasterDeleteByObj, _LOImpress_SlideAdd
 ; Link ..........:
 ; Example .......: Yes
@@ -2566,6 +2660,53 @@ Func _LOImpress_SlideMasterExists(ByRef $oDoc, $sName)
 EndFunc   ;==>_LOImpress_SlideMasterExists
 
 ; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlideMasterFormat
+; Description ...: Set or Retrieve the master slide format settings.
+; Syntax ........: _LOImpress_SlideMasterFormat(ByRef $oMaster[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
+; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LOImpress_SlideMasterAdd, _LOImpress_SlideMasterGetObjByIndex, or _LOImpress_SlideMasterGetObjByName function.
+;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOI_PAGE_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOI_PAGE_HEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOI_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
+; Return values .: Success: 1 or Array.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oMaster not an Object.
+;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
+;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
+;                  @Error: 1, @Extended: 4 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants, $LOI_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current slide width.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  |                               1 = Error setting $iWidth
+;                  |                               2 = Error setting $iHeight
+;                  |                               4 = Error setting $iOrientation
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+;                  When modifying the page format, the shapes etc., aren't readjusted as they are in LibreOffice UI.
+;                  I am unable to find the properties to set for "FitObject to Paper Format", "Background covers margins", "Slide numbers", and "Paper tray".
+; Related .......: _LO_UnitConvert, _LOImpress_SlideMasterMargins, _LOImpress_SlideHandoutFormat, _LOImpress_SlideNotesFormat, _LOImpress_SlideFormat
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_SlideMasterFormat(ByRef $oMaster, $iWidth = Null, $iHeight = Null, $iOrientation = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $vReturn
+
+	If Not IsObj($oMaster) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$vReturn = __LOImpress_Format($oMaster, $iWidth, $iHeight, $iOrientation)
+
+	Return SetError(@error, @extended, $vReturn)
+EndFunc   ;==>_LOImpress_SlideMasterFormat
+
+; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_SlideMasterGetObjByIndex
 ; Description ...: Retrieve a Master Slide's Object by index.
 ; Syntax ........: _LOImpress_SlideMasterGetObjByIndex(ByRef $oDoc, $iMaster)
@@ -2618,7 +2759,7 @@ EndFunc   ;==>_LOImpress_SlideMasterGetObjByIndex
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve requested Master Slide.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
+; Remarks .......: I have not found a way to import Master slide from the LibreOffice templates yet.
 ; Related .......: _LOImpress_SlideMasterGetObjByIndex, _LOImpress_SlideMastersGetNames, _LOImpress_SlideGetObjByName
 ; Link ..........:
 ; Example .......: Yes
@@ -2638,6 +2779,52 @@ Func _LOImpress_SlideMasterGetObjByName(ByRef $oDoc, $sName)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oMSlide)
 EndFunc   ;==>_LOImpress_SlideMasterGetObjByName
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlideMasterMargins
+; Description ...: Set or Retrieve the master slide page margin settings.
+; Syntax ........: _LOImpress_SlideMasterMargins(ByRef $oMaster[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
+; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LOImpress_SlideMasterAdd, _LOImpress_SlideMasterGetObjByIndex, or _LOImpress_SlideMasterGetObjByName function.
+;                  $iLeft               - [optional] Default is Null. The amount of space to leave between the left edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
+;                  $iRight              - [optional] Default is Null. The amount of space to leave between the right edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
+;                  $iTop                - [optional] Default is Null. The amount of space to leave between the upper edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
+;                  $iBottom             - [optional] Default is Null. The amount of space to leave between the lower edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
+; Return values .: Success: 1 or Array.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oMaster not an Object.
+;                  @Error: 1, @Extended: 2 = $iLeft not an Integer.
+;                  @Error: 1, @Extended: 3 = $iRight not an Integer.
+;                  @Error: 1, @Extended: 4 = $iTop not an Integer.
+;                  @Error: 1, @Extended: 5 = $iBottom not an Integer.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  |                               1 = Error setting $iLeft
+;                  |                               2 = Error setting $iRight
+;                  |                               4 = Error setting $iTop
+;                  |                               8 = Error setting $iBottom
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LO_UnitConvert, _LOImpress_SlideMasterFormat, _LOImpress_SlideHandoutMargins, _LOImpress_SlideNotesMargins, _LOImpress_SlideMargins
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_SlideMasterMargins(ByRef $oMaster, $iLeft = Null, $iRight = Null, $iTop = Null, $iBottom = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $vReturn
+
+	If Not IsObj($oMaster) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$vReturn = __LOImpress_Margins($oMaster, $iLeft, $iRight, $iTop, $iBottom)
+
+	Return SetError(@error, @extended, $vReturn)
+EndFunc   ;==>_LOImpress_SlideMasterMargins
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_SlideMasterName
@@ -2730,98 +2917,6 @@ Func _LOImpress_SlideMasterNotesGetObj(ByRef $oMaster)
 EndFunc   ;==>_LOImpress_SlideMasterNotesGetObj
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideMasterPageFormat
-; Description ...: Set or Retrieve the master slide format settings.
-; Syntax ........: _LOImpress_SlideMasterPageFormat(ByRef $oMaster[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
-; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LOImpress_SlideMasterAdd, _LOImpress_SlideMasterGetObjByIndex, or _LOImpress_SlideMasterGetObjByName function.
-;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOI_PAGE_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOI_PAGE_HEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOI_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
-; Return values .: Success: 1 or Array.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oMaster not an Object.
-;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
-;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
-;                  @Error: 1, @Extended: 4 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants, $LOI_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to retrieve current slide width.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $iWidth
-;                  |                               2 = Error setting $iHeight
-;                  |                               4 = Error setting $iOrientation
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-;                  When modifying the page format, the shapes etc., aren't readjusted as they are in LibreOffice UI.
-; Related .......: _LO_UnitConvert, _LOImpress_SlideMasterPageMargins, _LOImpress_SlideHandoutFormat, _LOImpress_SlideNotesFormat, _LOImpress_SlidePageFormat
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOImpress_SlideMasterPageFormat(ByRef $oMaster, $iWidth = Null, $iHeight = Null, $iOrientation = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oMaster) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$vReturn = __LOImpress_Format($oMaster, $iWidth, $iHeight, $iOrientation)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LOImpress_SlideMasterPageFormat
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideMasterPageMargins
-; Description ...: Set or Retrieve the master slide page margin settings.
-; Syntax ........: _LOImpress_SlideMasterPageMargins(ByRef $oMaster[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
-; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LOImpress_SlideMasterAdd, _LOImpress_SlideMasterGetObjByIndex, or _LOImpress_SlideMasterGetObjByName function.
-;                  $iLeft               - [optional] Default is Null. The amount of space to leave between the left edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
-;                  $iRight              - [optional] Default is Null. The amount of space to leave between the right edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
-;                  $iTop                - [optional] Default is Null. The amount of space to leave between the upper edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
-;                  $iBottom             - [optional] Default is Null. The amount of space to leave between the lower edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
-; Return values .: Success: 1 or Array.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oMaster not an Object.
-;                  @Error: 1, @Extended: 2 = $iLeft not an Integer.
-;                  @Error: 1, @Extended: 3 = $iRight not an Integer.
-;                  @Error: 1, @Extended: 4 = $iTop not an Integer.
-;                  @Error: 1, @Extended: 5 = $iBottom not an Integer.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $iLeft
-;                  |                               2 = Error setting $iRight
-;                  |                               4 = Error setting $iTop
-;                  |                               8 = Error setting $iBottom
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LOImpress_SlideMasterPageFormat, _LOImpress_SlideHandoutMargins, _LOImpress_SlideNotesMargins, _LOImpress_SlidePageMargins
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOImpress_SlideMasterPageMargins(ByRef $oMaster, $iLeft = Null, $iRight = Null, $iTop = Null, $iBottom = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oMaster) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$vReturn = __LOImpress_Margins($oMaster, $iLeft, $iRight, $iTop, $iBottom)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LOImpress_SlideMasterPageMargins
-
-; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_SlideMastersGetCount
 ; Description ...: Retrieve a count of master slides.
 ; Syntax ........: _LOImpress_SlideMastersGetCount(ByRef $oDoc)
@@ -2871,6 +2966,7 @@ EndFunc   ;==>_LOImpress_SlideMastersGetCount
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This only returns a list of master slide names already loaded into the document.
+;                  I have not found a way to import Master slide from the LibreOffice templates yet.
 ; Related .......: _LOImpress_SlideMasterExists, _LOImpress_SlideMasterGetObjByName, _LOImpress_SlidesGetNames
 ; Link ..........:
 ; Example .......: Yes
@@ -3159,7 +3255,7 @@ EndFunc   ;==>_LOImpress_SlideNotesFooter
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  When modifying the page format, the shapes etc., aren't readjusted as they are in LibreOffice UI.
-; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlidePageMargins, _LOImpress_SlideHandoutFormat, _LOImpress_SlideMasterPageFormat, _LOImpress_SlidePageFormat
+; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlideMargins, _LOImpress_SlideHandoutFormat, _LOImpress_SlideMasterFormat, _LOImpress_SlideFormat
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3350,7 +3446,7 @@ EndFunc   ;==>_LOImpress_SlideNotesHeader
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlidePageFormat, _LOImpress_SlideHandoutMargins, _LOImpress_SlideMasterPageMargins, _LOImpress_SlidePageMargins
+; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlideFormat, _LOImpress_SlideHandoutMargins, _LOImpress_SlideMasterMargins, _LOImpress_SlideMargins
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3366,98 +3462,6 @@ Func _LOImpress_SlideNotesMargins(ByRef $oNotes, $iLeft = Null, $iRight = Null, 
 
 	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOImpress_SlideNotesMargins
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlidePageFormat
-; Description ...: Set or Retrieve the slide format settings.
-; Syntax ........: _LOImpress_SlidePageFormat(ByRef $oSlide[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
-;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOI_PAGE_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOI_PAGE_HEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOI_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
-; Return values .: Success: 1 or Array.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
-;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
-;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
-;                  @Error: 1, @Extended: 4 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants, $LOI_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to retrieve current slide width.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $iWidth
-;                  |                               2 = Error setting $iHeight
-;                  |                               4 = Error setting $iOrientation
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-;                  When modifying the page format, the shapes etc., aren't readjusted as they are in LibreOffice UI.
-; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlidePageMargins, _LOImpress_SlideHandoutFormat, _LOImpress_SlideMasterPageFormat, _LOImpress_SlideNotesFormat
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOImpress_SlidePageFormat(ByRef $oSlide, $iWidth = Null, $iHeight = Null, $iOrientation = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$vReturn = __LOImpress_Format($oSlide, $iWidth, $iHeight, $iOrientation)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LOImpress_SlidePageFormat
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlidePageMargins
-; Description ...: Set or Retrieve the slide page margin settings.
-; Syntax ........: _LOImpress_SlidePageMargins(ByRef $oSlide[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
-;                  $iLeft               - [optional] Default is Null. The amount of space to leave between the left edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
-;                  $iRight              - [optional] Default is Null. The amount of space to leave between the right edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
-;                  $iTop                - [optional] Default is Null. The amount of space to leave between the upper edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
-;                  $iBottom             - [optional] Default is Null. The amount of space to leave between the lower edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
-; Return values .: Success: 1 or Array.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
-;                  @Error: 1, @Extended: 2 = $iLeft not an Integer.
-;                  @Error: 1, @Extended: 3 = $iRight not an Integer.
-;                  @Error: 1, @Extended: 4 = $iTop not an Integer.
-;                  @Error: 1, @Extended: 5 = $iBottom not an Integer.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $iLeft
-;                  |                               2 = Error setting $iRight
-;                  |                               4 = Error setting $iTop
-;                  |                               8 = Error setting $iBottom
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlidePageFormat, _LOImpress_SlideHandoutMargins, _LOImpress_SlideMasterPageMargins, _LOImpress_SlideNotesMargins
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LOImpress_SlidePageMargins(ByRef $oSlide, $iLeft = Null, $iRight = Null, $iTop = Null, $iBottom = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$vReturn = __LOImpress_Margins($oSlide, $iLeft, $iRight, $iTop, $iBottom)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LOImpress_SlidePageMargins
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_SlidesGetCount
