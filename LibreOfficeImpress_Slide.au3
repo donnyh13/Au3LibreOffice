@@ -113,7 +113,7 @@
 ; Remarks .......: If $iPos is called with Null, the new slide is inserted at the end.
 ;                  Call $iPos with the last slide index to insert the slide at the end. Call $iPos with 0 to insert the new slide in the first slide position.
 ;                  Due to limitations in the API, I have made a small workaround for inserting a slide at the beginning. A dispatch is executed to move the slide to the beginning. The current slide will temporarily be set to the new slide in order to move it.
-; Related .......: _LOImpress_SlideDeleteByIndex, _LOImpress_SlideDeleteByObj
+; Related .......: _LOImpress_SlideDeleteByIndex, _LOImpress_SlideDeleteByObj, _LOImpress_SlideMasterAdd
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -185,7 +185,7 @@ EndFunc   ;==>_LOImpress_SlideAdd
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the slide, the Constant $LO_COLOR_OFF is returned.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_SlideBackFillStyle, _LOImpress_SlideBackGradient
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_SlideBackFillStyle, _LOImpress_SlideBackGradient, _LOImpress_SlideMasterBackColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -249,7 +249,7 @@ EndFunc   ;==>_LOImpress_SlideBackColor
 ;                  This is useful because, if a Gradient is active, the solid color value is still present, and thus it would not be possible to determine which function should be used to retrieve the current values for, whether the Color function, or the Gradient function.
 ;                  When the Fill style is disabled for a Slide, the Fill properties are completely removed. This is how Impress works normally.
 ;                  $bFillOff will do nothing if it is called with False, and is not, of course, returned when retrieving the FillStyle value.
-; Related .......: _LOImpress_SlideBackColor, _LOImpress_SlideBackGradient
+; Related .......: _LOImpress_SlideBackColor, _LOImpress_SlideBackGradient, _LOImpress_SlideMasterBackFillStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -347,7 +347,7 @@ EndFunc   ;==>_LOImpress_SlideBackFillStyle
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_SlideBackColor, _LOImpress_SlideBackFillStyle
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_SlideBackColor, _LOImpress_SlideBackFillStyle, _LOImpress_SlideMasterBackGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -576,7 +576,7 @@ EndFunc   ;==>_LOImpress_SlideBackGradient
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the slide, -1 is returned.
-; Related .......: _LOImpress_SlideBackTransparencyGradient
+; Related .......: _LOImpress_SlideBackTransparencyGradient, _LOImpress_SlideMasterBackTransparency
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -669,7 +669,7 @@ EndFunc   ;==>_LOImpress_SlideBackTransparency
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_SlideBackTransparency
+; Related .......: _LOImpress_SlideBackTransparency, _LOImpress_SlideMasterBackTransparencyGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -952,7 +952,7 @@ EndFunc   ;==>_LOImpress_SlideCopy
 ;                  It is not currently possible to set the current view to other than a slide or master slide. You cannot switch to Notes, Handouts, Sorter or Outline views.
 ;                  If the current view is set to Slide outline, the current slide Object is returned, and the slide type will be set to Unknown. There may be other cases when unknown type is returned.
 ;                  This function uses a deprecated method (DrawViewMode), and may stop functioning in the future.
-; Related .......: _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName
+; Related .......: _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, _LOImpress_SlideMasterCurrent
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1027,7 +1027,7 @@ EndFunc   ;==>_LOImpress_SlideCurrent
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_SlideDeleteByObj, _LOImpress_SlidesGetCount
+; Related .......: _LOImpress_SlideDeleteByObj, _LOImpress_SlidesGetCount, _LOImpress_SlideMasterDeleteByIndex
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1070,7 +1070,7 @@ EndFunc   ;==>_LOImpress_SlideDeleteByIndex
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_SlideDeleteByIndex, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName
+; Related .......: _LOImpress_SlideDeleteByIndex, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, _LOImpress_SlideMasterDeleteByObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1114,7 +1114,7 @@ EndFunc   ;==>_LOImpress_SlideDeleteByObj
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_SlideAdd, _LOImpress_SlideName, _LOImpress_SlidesGetNames
+; Related .......: _LOImpress_SlideAdd, _LOImpress_SlideName, _LOImpress_SlidesGetNames, _LOImpress_SlideMasterExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1173,7 +1173,7 @@ EndFunc   ;==>_LOImpress_SlideExists
 ;                  Skip first slide, and Apply to all are not added to this function as they are not actual settings. The user can simulate these easily by making a loop to apply it to all slides, and skip the first slide if required.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName
+; Related .......: _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, _LOImpress_SlideHandoutFooter, _LOImpress_SlideNotesFooter
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1270,7 +1270,7 @@ EndFunc   ;==>_LOImpress_SlideFooter
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_SlideGetObjByName, _LOImpress_SlidesGetCount
+; Related .......: _LOImpress_SlideGetObjByName, _LOImpress_SlidesGetCount, _LOImpress_SlideMasterGetObjByIndex
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1307,7 +1307,7 @@ EndFunc   ;==>_LOImpress_SlideGetObjByIndex
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_SlideGetObjByIndex, _LOImpress_SlidesGetNames
+; Related .......: _LOImpress_SlideGetObjByIndex, _LOImpress_SlidesGetNames, _LOImpress_SlideMasterGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1355,7 +1355,7 @@ EndFunc   ;==>_LOImpress_SlideGetObjByName
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  During basic testing, while the settings were successfully set, LibreOffice seems to ignore footer values set for handout pages.
-; Related .......: _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName
+; Related .......: _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, _LOImpress_SlideFooter, _LOImpress_SlideNotesFooter
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1430,7 +1430,7 @@ EndFunc   ;==>_LOImpress_SlideHandoutFooter
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  When modifying the page format, the shapes etc., aren't readjusted as they are in LibreOffice UI.
-; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlidePageMargins
+; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlidePageMargins, _LOImpress_SlideMasterPageFormat, _LOImpress_SlideNotesFormat, _LOImpress_SlidePageFormat
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1462,7 +1462,7 @@ EndFunc   ;==>_LOImpress_SlideHandoutFormat
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: There seems to be only one handouts page per document.
-; Related .......:
+; Related .......: _LOImpress_SlideNotesGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1517,7 +1517,7 @@ EndFunc   ;==>_LOImpress_SlideHandoutGetObj
 ;                  Apply to all is not added to this function as it is not an actual setting. The user can simulate this easily by making a loop to apply it to all slides.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName
+; Related .......: _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, _LOImpress_SlideNotesHeader
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1618,7 +1618,7 @@ EndFunc   ;==>_LOImpress_SlideHandoutHeader
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlidePageFormat
+; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlidePageFormat, _LOImpress_SlideMasterPageMargins, _LOImpress_SlideNotesMargins, _LOImpress_SlidePageMargins
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1656,7 +1656,7 @@ EndFunc   ;==>_LOImpress_SlideHandoutMargins
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOImpress_SlideName, _LOImpress_SlideTransition
+; Related .......: _LOImpress_SlideName, _LOImpress_SlideTransition, _LOImpress_SlidePageFormat, _LOImpress_SlidePageMargins
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1705,7 +1705,7 @@ EndFunc   ;==>_LOImpress_SlideLayout
 ; Modified ......:
 ; Remarks .......: If $iPos is called with Null, the new master slide is inserted at the end.
 ;                  Call $iPos with the last master slide index to insert the master slide at the end. Call $iPos with 0 to insert the new master slide at the beginning.
-; Related .......: _LOImpress_SlideMasterDeleteByIndex, _LOImpress_SlideMasterDeleteByObj
+; Related .......: _LOImpress_SlideMasterDeleteByIndex, _LOImpress_SlideMasterDeleteByObj, _LOImpress_SlideAdd
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1756,7 +1756,7 @@ EndFunc   ;==>_LOImpress_SlideMasterAdd
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the slide, the Constant $LO_COLOR_OFF is returned.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_SlideMasterBackFillStyle, _LOImpress_SlideMasterBackGradient
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_SlideMasterBackFillStyle, _LOImpress_SlideMasterBackGradient, _LOImpress_SlideBackColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1820,7 +1820,7 @@ EndFunc   ;==>_LOImpress_SlideMasterBackColor
 ;                  This is useful because, if a Gradient is active, the solid color value is still present, and thus it would not be possible to determine which function should be used to retrieve the current values for, whether the Color function, or the Gradient function.
 ;                  When the Fill style is disabled for a Master Slide, the Fill properties are completely removed. This is how Impress works normally.
 ;                  $bFillOff will do nothing if it is called with False, and is not, of course, returned when retrieving the FillStyle value.
-; Related .......: _LOImpress_SlideMasterBackColor, _LOImpress_SlideMasterBackGradient
+; Related .......: _LOImpress_SlideMasterBackColor, _LOImpress_SlideMasterBackGradient, _LOImpress_SlideBackFillStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1916,7 +1916,7 @@ EndFunc   ;==>_LOImpress_SlideMasterBackFillStyle
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_SlideMasterBackColor, _LOImpress_SlideMasterBackFillStyle
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_SlideMasterBackColor, _LOImpress_SlideMasterBackFillStyle, _LOImpress_SlideBackGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2140,7 +2140,7 @@ EndFunc   ;==>_LOImpress_SlideMasterBackGradient
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the Master slide, -1 is returned.
-; Related .......: _LOImpress_SlideMasterBackTransparencyGradient
+; Related .......: _LOImpress_SlideMasterBackTransparencyGradient, _LOImpress_SlideBackTransparency
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2234,7 +2234,7 @@ EndFunc   ;==>_LOImpress_SlideMasterBackTransparency
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  While these properties can be set successfully, LibreOffice doesn't seem to apply it to the master slide, even when done using the UI.
-; Related .......: _LOImpress_SlideMasterBackTransparency
+; Related .......: _LOImpress_SlideMasterBackTransparency, _LOImpress_SlideBackTransparencyGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2412,7 +2412,7 @@ EndFunc   ;==>_LOImpress_SlideMasterBackTransparencyGradient
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOImpress_SlideMasterGetObjByIndex, _LOImpress_SlideMasterGetObjByName, _LOImpress_SlideCurrent
+; Related .......: _LOImpress_SlideMasterGetObjByIndex, _LOImpress_SlideMasterGetObjByName, _LOImpress_SlideCurrent, _LOImpress_SlideCurrent
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2459,7 +2459,7 @@ EndFunc   ;==>_LOImpress_SlideMasterCurrent
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Trying to delete a Master Slide that is used by a slide will result in a processing error. I currently have no way of checking if a master slide is free to be deleted.
-; Related .......: _LOImpress_SlideMasterDeleteByObj, _LOImpress_SlideMastersGetCount
+; Related .......: _LOImpress_SlideMasterDeleteByObj, _LOImpress_SlideMastersGetCount, _LOImpress_SlideDeleteByIndex
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2502,7 +2502,7 @@ EndFunc   ;==>_LOImpress_SlideMasterDeleteByIndex
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Trying to delete a Master Slide that is used by a slide will result in a processing error. I currently have no way of checking if a master slide is free to be deleted.
-; Related .......: _LOImpress_SlideMasterDeleteByIndex, _LOImpress_SlideMasterGetObjByIndex, _LOImpress_SlideMasterGetObjByName
+; Related .......: _LOImpress_SlideMasterDeleteByIndex, _LOImpress_SlideMasterGetObjByIndex, _LOImpress_SlideMasterGetObjByName, _LOImpress_SlideDeleteByObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2546,7 +2546,7 @@ EndFunc   ;==>_LOImpress_SlideMasterDeleteByObj
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_SlideMasterAdd, _LOImpress_SlideMasterName, _LOImpress_SlideMastersGetNames
+; Related .......: _LOImpress_SlideMasterAdd, _LOImpress_SlideMasterName, _LOImpress_SlideMastersGetNames, _LOImpress_SlideExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2582,7 +2582,7 @@ EndFunc   ;==>_LOImpress_SlideMasterExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_SlideMasterGetObjByName, _LOImpress_SlideMastersGetCount
+; Related .......: _LOImpress_SlideMasterGetObjByName, _LOImpress_SlideMastersGetCount, _LOImpress_SlideGetObjByIndex
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2619,7 +2619,7 @@ EndFunc   ;==>_LOImpress_SlideMasterGetObjByIndex
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_SlideMasterGetObjByIndex, _LOImpress_SlideMastersGetNames
+; Related .......: _LOImpress_SlideMasterGetObjByIndex, _LOImpress_SlideMastersGetNames, _LOImpress_SlideGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2663,7 +2663,7 @@ EndFunc   ;==>_LOImpress_SlideMasterGetObjByName
 ; Modified ......:
 ; Remarks .......: If setting the Master slide name to a name and a number, there is a good chance the name won't stay applied, as LibreOffice will assume it is an auto-numbered slide.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOImpress_SlideMasterExists, _LOImpress_SlideMastersGetNames
+; Related .......: _LOImpress_SlideMasterExists, _LOImpress_SlideMastersGetNames, _LOImpress_SlideName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2711,7 +2711,7 @@ EndFunc   ;==>_LOImpress_SlideMasterName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOImpress_SlideNotesGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2758,7 +2758,7 @@ EndFunc   ;==>_LOImpress_SlideMasterNotesGetObj
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  When modifying the page format, the shapes etc., aren't readjusted as they are in LibreOffice UI.
-; Related .......: _LO_UnitConvert, _LOImpress_SlideMasterPageMargins
+; Related .......: _LO_UnitConvert, _LOImpress_SlideMasterPageMargins, _LOImpress_SlideHandoutFormat, _LOImpress_SlideNotesFormat, _LOImpress_SlidePageFormat
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2804,7 +2804,7 @@ EndFunc   ;==>_LOImpress_SlideMasterPageFormat
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LOImpress_SlideMasterPageFormat
+; Related .......: _LO_UnitConvert, _LOImpress_SlideMasterPageFormat, _LOImpress_SlideHandoutMargins, _LOImpress_SlideNotesMargins, _LOImpress_SlidePageMargins
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2836,7 +2836,7 @@ EndFunc   ;==>_LOImpress_SlideMasterPageMargins
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This only returns a count of master slides already loaded into the document.
-; Related .......: _LOImpress_SlideMasterDeleteByIndex, _LOImpress_SlideMasterGetObjByIndex
+; Related .......: _LOImpress_SlideMasterDeleteByIndex, _LOImpress_SlideMasterGetObjByIndex, _LOImpress_SlidesGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2871,7 +2871,7 @@ EndFunc   ;==>_LOImpress_SlideMastersGetCount
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This only returns a list of master slide names already loaded into the document.
-; Related .......: _LOImpress_SlideMasterExists, _LOImpress_SlideMasterGetObjByName
+; Related .......: _LOImpress_SlideMasterExists, _LOImpress_SlideMasterGetObjByName, _LOImpress_SlidesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3021,7 +3021,7 @@ EndFunc   ;==>_LOImpress_SlideMove
 ; Modified ......:
 ; Remarks .......: If setting the slide name to a name and a number, there is a good chance the name won't stay applied, as LibreOffice will assume it is an auto-numbered slide.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOImpress_SlideExists, _LOImpress_SlidesGetNames
+; Related .......: _LOImpress_SlideExists, _LOImpress_SlidesGetNames, _LOImpress_SlideMasterName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3083,7 +3083,7 @@ EndFunc   ;==>_LOImpress_SlideName
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  You can only set or retrieve footer property values for a slide notes page, not a master notes page.
-; Related .......: _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName
+; Related .......: _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, _LOImpress_SlideFooter, _LOImpress_SlideHandoutFooter
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3159,7 +3159,7 @@ EndFunc   ;==>_LOImpress_SlideNotesFooter
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  When modifying the page format, the shapes etc., aren't readjusted as they are in LibreOffice UI.
-; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlidePageMargins
+; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlidePageMargins, _LOImpress_SlideHandoutFormat, _LOImpress_SlideMasterPageFormat, _LOImpress_SlidePageFormat
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3191,7 +3191,7 @@ EndFunc   ;==>_LOImpress_SlideNotesFormat
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LOImpress_SlideMasterNotesGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3248,7 +3248,7 @@ EndFunc   ;==>_LOImpress_SlideNotesGetObj
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  You can only set or retrieve header property values for a slide notes page, not a master notes page.
-; Related .......: _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName
+; Related .......: _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, _LOImpress_SlideHandoutHeader
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3350,7 +3350,7 @@ EndFunc   ;==>_LOImpress_SlideNotesHeader
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlidePageFormat
+; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlidePageFormat, _LOImpress_SlideHandoutMargins, _LOImpress_SlideMasterPageMargins, _LOImpress_SlidePageMargins
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3396,7 +3396,7 @@ EndFunc   ;==>_LOImpress_SlideNotesMargins
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  When modifying the page format, the shapes etc., aren't readjusted as they are in LibreOffice UI.
-; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlidePageMargins
+; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlidePageMargins, _LOImpress_SlideHandoutFormat, _LOImpress_SlideMasterPageFormat, _LOImpress_SlideNotesFormat
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3442,7 +3442,7 @@ EndFunc   ;==>_LOImpress_SlidePageFormat
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlidePageFormat
+; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlidePageFormat, _LOImpress_SlideHandoutMargins, _LOImpress_SlideMasterPageMargins, _LOImpress_SlideNotesMargins
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3474,7 +3474,7 @@ EndFunc   ;==>_LOImpress_SlidePageMargins
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_SlideDeleteByIndex, _LOImpress_SlideGetObjByIndex
+; Related .......: _LOImpress_SlideDeleteByIndex, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideMastersGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3507,7 +3507,7 @@ EndFunc   ;==>_LOImpress_SlidesGetCount
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_SlideExists, _LOImpress_SlideGetObjByName
+; Related .......: _LOImpress_SlideExists, _LOImpress_SlideGetObjByName, _LOImpress_SlideMastersGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

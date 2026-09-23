@@ -68,7 +68,7 @@
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Setting $iFormat while the field is fixed, seems to do nothing.
-; Related .......: _LOImpress_FieldAuthorModify
+; Related .......: _LOImpress_FieldAuthorModify, _LOImpress_FieldDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
