@@ -36,6 +36,7 @@
 ; __LOImpress_CursorParHasTabStop
 ; __LOImpress_DateStructCompare
 ; __LOImpress_DimensionSettings
+; __LOImpress_DocCurrView
 ; __LOImpress_DrawShape_CreateArrow
 ; __LOImpress_DrawShape_CreateBasic
 ; __LOImpress_DrawShape_CreateCallout
@@ -1102,6 +1103,129 @@ Func __LOImpress_DimensionSettings(ByRef $oObj, $iDistance = Null, $iGuideOverha
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>__LOImpress_DimensionSettings
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_DocCurrView
+; Description ...: Set or Retrieve the current Document View mode.
+; Syntax ........: __LOImpress_DocCurrView(ByRef $oDoc[, $iView = Null])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $iView               - [optional] (0-6) Default is Null. The View mode to set the document to. See Constants, $LOI_PAGE_VIEW_* as defined in LibreOfficeImpress_Constants.au3.
+; Return values .: Success: 1 or Object
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Object = Success. All optional parameters were called with Null, returning current active view mode. See Constants, $LOI_PAGE_VIEW_* as defined in LibreOfficeImpress_Constants.au3.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $iView not an Integer, less than 0 or greater than 6. See Constants, $LOI_PAGE_VIEW_* as defined in LibreOfficeImpress_Constants.au3.
+;                  --Initialization Errors--
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.ServiceManager" Object.
+;                  @Error: 2, @Extended: 2 = Error creating "com.sun.star.frame.DispatchHelper" Object.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $iView
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  This function uses a deprecated method (DrawViewMode), and may stop functioning in the future.
+;                  This function assumes two types of view modes without positive evidence:
+;                  If the property CurrentPage returns Null, it is assumed the current view mode is $LOI_PAGE_VIEW_SLIDE_SORTER, as that is the only time I found it returning such.
+;                  If the property CurrentPage returns a page Object, and the property DrawViewMode returns Null, it is assumed current view mode is $LOI_PAGE_VIEW_SLIDE_OUTLINE.
+;                  When switching to Master Notes or Slide Notes, the notes page will correspond to the currently or last active slide/master slide.
+; Related .......: _LOImpress_SlideCurrent
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_DocCurrView(ByRef $oDoc, $iView = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iError = 0, $iCurrView
+	Local Const $__eDrawPage_DRAW = 0, $__eDrawPage_NOTES = 1, $__eDrawPage_HANDOUTS = 2 ; com.sun.star.drawingDrawViewMode (deprecated)
+	Local $sDispatch
+	Local $bIsMasterMode
+	Local $aArray[0]
+	Local $oServiceManager, $oDispatcher, $oCurrSlide
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$oCurrSlide = $oDoc.getCurrentController.CurrentPage()
+
+	If IsObj($oCurrSlide) Then
+		$bIsMasterMode = $oDoc.getCurrentController.IsMasterPageMode()
+
+		Switch $oDoc.getCurrentController.DrawViewMode()
+			Case $__eDrawPage_DRAW
+				If $bIsMasterMode Then
+					$iCurrView = $LOI_PAGE_VIEW_MASTER
+
+				Else
+					$iCurrView = $LOI_PAGE_VIEW_SLIDE
+				EndIf
+
+			Case $__eDrawPage_NOTES
+				If $bIsMasterMode Then
+					$iCurrView = $LOI_PAGE_VIEW_MASTER_NOTES
+
+				Else
+					$iCurrView = $LOI_PAGE_VIEW_SLIDE_NOTES
+				EndIf
+
+			Case $__eDrawPage_HANDOUTS
+				$iCurrView = $LOI_PAGE_VIEW_MASTER_HANDOUT     ; Only Master pages have handouts, so assume it is a Master Handout.
+
+			Case Else
+				; When DrawViewMode is Null, the current view could be in Slide Sorter or Slide Outline modes.
+				; But since CurrentPage is an Object, we know it isn't Slide Sorter, as CurrentPage is null in that mode.
+				$iCurrView = $LOI_PAGE_VIEW_SLIDE_OUTLINE
+		EndSwitch
+
+	Else
+		; If CurrentPage returns Null, it seems to be when the current view is on Slide Sorter. Assuming it is the only time it is.
+		$iCurrView = $LOI_PAGE_VIEW_SLIDE_SORTER
+	EndIf
+
+	If __LO_VarsAreNull($iView) Then
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurrView)
+	EndIf
+
+	If Not __LO_IntIsBetween($iView, $LOI_PAGE_VIEW_SLIDE, $LOI_PAGE_VIEW_MASTER_HANDOUT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	If ($iCurrView <> $iView) Then ; Sometimes applying a view a second time causes it to toggle to slide sorter etc. So make sure the current view isn't already the same as the requested view mode.
+		$oServiceManager = __LO_ServiceManager()
+		If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+		$oDispatcher = $oServiceManager.createInstance("com.sun.star.frame.DispatchHelper")
+		If Not IsObj($oDispatcher) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+		Switch $iView
+			Case $LOI_PAGE_VIEW_SLIDE
+				$sDispatch = ".uno:DrawingMode"
+
+			Case $LOI_PAGE_VIEW_SLIDE_OUTLINE
+				$sDispatch = ".uno:OutlineMode"
+
+			Case $LOI_PAGE_VIEW_SLIDE_NOTES
+				$sDispatch = ".uno:NotesMode"
+
+			Case $LOI_PAGE_VIEW_SLIDE_SORTER
+				$sDispatch = ".uno:DiaMode"
+
+			Case $LOI_PAGE_VIEW_MASTER
+				$sDispatch = ".uno:SlideMasterPage"
+
+			Case $LOI_PAGE_VIEW_MASTER_NOTES
+				$sDispatch = ".uno:NotesMasterPage"
+
+			Case $LOI_PAGE_VIEW_MASTER_HANDOUT
+				$sDispatch = ".uno:HandoutMode"
+		EndSwitch
+
+		$oDispatcher.executeDispatch($oDoc.CurrentController(), $sDispatch, "", 0, $aArray)
+	EndIf
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>__LOImpress_DocCurrView
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_DrawShape_CreateArrow

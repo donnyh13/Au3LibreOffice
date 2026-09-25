@@ -1681,89 +1681,13 @@ Func _LOImpress_DocView(ByRef $oDoc, $iView = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $iError = 0, $iCurrView
-	Local Const $__eDrawPage_DRAW = 0, $__eDrawPage_NOTES = 1, $__eDrawPage_HANDOUTS = 2 ; com.sun.star.drawingDrawViewMode (deprecated)
-	Local $sDispatch
-	Local $bIsMasterMode
-	Local $aArray[0]
-	Local $oServiceManager, $oDispatcher, $oCurrSlide
+	Local $vReturn
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iView) Then
-		$oCurrSlide = $oDoc.getCurrentController.CurrentPage()
+	$vReturn = __LOImpress_DocCurrView($oDoc, $iView)
 
-		If IsObj($oCurrSlide) Then
-			$bIsMasterMode = $oDoc.getCurrentController.IsMasterPageMode()
-
-			Switch $oDoc.getCurrentController.DrawViewMode()
-				Case $__eDrawPage_DRAW
-					If $bIsMasterMode Then
-						$iCurrView = $LOI_PAGE_VIEW_MASTER
-
-					Else
-						$iCurrView = $LOI_PAGE_VIEW_SLIDE
-					EndIf
-
-				Case $__eDrawPage_NOTES
-					If $bIsMasterMode Then
-						$iCurrView = $LOI_PAGE_VIEW_MASTER_NOTES
-
-					Else
-						$iCurrView = $LOI_PAGE_VIEW_SLIDE_NOTES
-					EndIf
-
-				Case $__eDrawPage_HANDOUTS
-					$iCurrView = $LOI_PAGE_VIEW_MASTER_HANDOUT ; Only Master pages have handouts, so assume it is a Master Handout.
-
-				Case Else
-					; When DrawViewMode is Null, the current view could be in Slide Sorter or Slide Outline modes.
-					; But since CurrentPage is an Object, we know it isn't Slide Sorter, as CurrentPage is null in that mode.
-					$iCurrView = $LOI_PAGE_VIEW_SLIDE_OUTLINE
-			EndSwitch
-
-		Else
-			; If CurrentPage returns Null, it seems to be when the current view is on Slide Sorter. Assuming it is the only time it is.
-			$iCurrView = $LOI_PAGE_VIEW_SLIDE_SORTER
-		EndIf
-
-		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurrView)
-	EndIf
-
-	If Not __LO_IntIsBetween($iView, $LOI_PAGE_VIEW_SLIDE, $LOI_PAGE_VIEW_MASTER_HANDOUT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-	$oServiceManager = __LO_ServiceManager()
-	If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-
-	$oDispatcher = $oServiceManager.createInstance("com.sun.star.frame.DispatchHelper")
-	If Not IsObj($oDispatcher) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
-
-	Switch $iView
-		Case $LOI_PAGE_VIEW_SLIDE
-			$sDispatch = ".uno:DrawingMode"
-
-		Case $LOI_PAGE_VIEW_SLIDE_OUTLINE
-			$sDispatch = ".uno:OutlineMode"
-
-		Case $LOI_PAGE_VIEW_SLIDE_NOTES
-			$sDispatch = ".uno:NotesMode"
-
-		Case $LOI_PAGE_VIEW_SLIDE_SORTER
-			$sDispatch = ".uno:DiaMode"
-
-		Case $LOI_PAGE_VIEW_MASTER
-			$sDispatch = ".uno:SlideMasterPage"
-
-		Case $LOI_PAGE_VIEW_MASTER_NOTES
-			$sDispatch = ".uno:NotesMasterPage"
-
-		Case $LOI_PAGE_VIEW_MASTER_HANDOUT
-			$sDispatch = ".uno:HandoutMode"
-	EndSwitch
-
-	$oDispatcher.executeDispatch($oDoc.CurrentController(), $sDispatch, "", 0, $aArray)
-
-	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+	Return SetError(@error, @extended, $vReturn)
 EndFunc   ;==>_LOImpress_DocView
 
 ; #FUNCTION# ====================================================================================================================

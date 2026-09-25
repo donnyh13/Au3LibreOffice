@@ -207,6 +207,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - __LOImpress_CursorParHasTabStop
   - __LOImpress_DateStructCompare
   - __LOImpress_DimensionSettings
+  - __LOImpress_DocCurrView
   - __LOImpress_DrawShape_CreateArrow
   - __LOImpress_DrawShape_CreateBasic
   - __LOImpress_DrawShape_CreateCallout
