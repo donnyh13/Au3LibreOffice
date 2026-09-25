@@ -1817,7 +1817,7 @@ EndFunc   ;==>_LOImpress_SlideMargins
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $iPos                - [optional] Default is Null. The position to insert the new master slide in the collection of slides. 0 Based. This is ignored if $bBlank is False.
 ;                  $sName               - [optional] Default is "". The unique name of the Master Slide. If called with an empty string, LibreOffice automatically names it.
-;                  $bBlank              - [optional] Default is True. If True, the new Master Slide is blank. If False a preformatted Master Slide is inserted. See remarks.
+;                  $bBlank              - [optional] Default is True. If True, the new Master Slide is blank. If False a Master Slide with a preset layout is inserted. See remarks.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning new slide's Object.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -1858,6 +1858,7 @@ Func _LOImpress_SlideMasterAdd(ByRef $oDoc, $iPos = Null, $sName = "", $bBlank =
 	Local $aArray[0]
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
 	If ($iPos = Null) Then $iPos = ($bBlank) ? ($oDoc.MasterPages.getCount()) : ($oDoc.MasterPages.getCount() - 1) ; If I am inserting a Master using the dispatch, I have make position be 1 less than the count so I can retrieve the Object for the last master slide.
 	If ($iPos = $oDoc.MasterPages.getCount()) Then $iPos = $iPos - 1 ; If I am inserting a Master using the dispatch command, and the user called the last slide position plus 1, I need to change it to be 1 less so I can retrieve the Object for the last master slide.
 	If Not __LO_IntIsBetween($iPos, 0, $oDoc.MasterPages.getCount()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -1898,6 +1899,7 @@ Func _LOImpress_SlideMasterAdd(ByRef $oDoc, $iPos = Null, $sName = "", $bBlank =
 		For $i = 0 To $oMasters.getCount() - 1
 			$oMaster = $oMasters.getByIndex($i)
 			If Not IsObj($oMaster) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
 			For $j = 0 To $iMasters - 1
 				; If the Object is a match, exit this loop and continue the top-level loop, bypassing the Objext assignment.
 				If $aoMasters[$j] = $oMaster Then ContinueLoop 2

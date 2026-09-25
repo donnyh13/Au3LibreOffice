@@ -587,13 +587,13 @@ Global Const _                                                       ; com.sun.s
 
 ; Current Document View Modes
 Global Enum _
-		$LOI_PAGE_VIEW_SLIDE = 0, _                                  ; Slide viewing mode.
-		$LOI_PAGE_VIEW_SLIDE_OUTLINE, _                              ; Slide Outline viewing mode.
-		$LOI_PAGE_VIEW_SLIDE_NOTES, _                                ; Slide Notes viewing mode.
-		$LOI_PAGE_VIEW_SLIDE_SORTER, _                               ; Slide Sorter viewing mode.
-		$LOI_PAGE_VIEW_MASTER, _                                     ; Master Slide viewing mode.
-		$LOI_PAGE_VIEW_MASTER_NOTES, _                               ; Master Slide Notes viewing mode.
-		$LOI_PAGE_VIEW_MASTER_HANDOUT                                ; Master Slide Handout viewing mode.
+		$LOI_PAGE_VIEW_SLIDE = 0, _                                  ; 0 Slide viewing mode.
+		$LOI_PAGE_VIEW_SLIDE_OUTLINE, _                              ; 1 Slide Outline viewing mode.
+		$LOI_PAGE_VIEW_SLIDE_NOTES, _                                ; 2 Slide Notes viewing mode.
+		$LOI_PAGE_VIEW_SLIDE_SORTER, _                               ; 3 Slide Sorter viewing mode.
+		$LOI_PAGE_VIEW_MASTER, _                                     ; 4 Master Slide viewing mode.
+		$LOI_PAGE_VIEW_MASTER_NOTES, _                               ; 5 Master Slide Notes viewing mode.
+		$LOI_PAGE_VIEW_MASTER_HANDOUT                                ; 6 Master Slide Handout viewing mode.
 
 ; Slide Page Width in Hundredths of a Millimeter
 Global Const _

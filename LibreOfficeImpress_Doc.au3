@@ -1658,12 +1658,10 @@ EndFunc   ;==>_LOImpress_DocUndoReset
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
-;                  @Error: 1, @Extended: 2 = $iView  not an Integer, less than 0 or greater than 6. See Constants, $LOI_PAGE_VIEW_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iView not an Integer, less than 0 or greater than 6. See Constants, $LOI_PAGE_VIEW_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.ServiceManager" Object.
 ;                  @Error: 2, @Extended: 2 = Error creating "com.sun.star.frame.DispatchHelper" Object.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to retrieve current slide's Object.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iView
@@ -1723,8 +1721,8 @@ Func _LOImpress_DocView(ByRef $oDoc, $iView = Null)
 					; But since CurrentPage is an Object, we know it isn't Slide Sorter, as CurrentPage is null in that mode.
 					$iCurrView = $LOI_PAGE_VIEW_SLIDE_OUTLINE
 			EndSwitch
-		Else
 
+		Else
 			; If CurrentPage returns Null, it seems to be when the current view is on Slide Sorter. Assuming it is the only time it is.
 			$iCurrView = $LOI_PAGE_VIEW_SLIDE_SORTER
 		EndIf
@@ -1761,7 +1759,6 @@ Func _LOImpress_DocView(ByRef $oDoc, $iView = Null)
 
 		Case $LOI_PAGE_VIEW_MASTER_HANDOUT
 			$sDispatch = ".uno:HandoutMode"
-
 	EndSwitch
 
 	$oDispatcher.executeDispatch($oDoc.CurrentController(), $sDispatch, "", 0, $aArray)
