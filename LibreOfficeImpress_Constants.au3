@@ -585,6 +585,16 @@ Global Const _                                                       ; com.sun.s
 		$LOI_PAGE_ORIENT_PORTRAIT = 0, _                             ; Portrait Page Orientation.
 		$LOI_PAGE_ORIENT_LANDSCAPE = 1                               ; Landscape Page Orientation.
 
+; Current Document View Modes
+Global Enum _
+		$LOI_PAGE_VIEW_SLIDE = 0, _                                  ; Slide viewing mode.
+		$LOI_PAGE_VIEW_SLIDE_OUTLINE, _                              ; Slide Outline viewing mode.
+		$LOI_PAGE_VIEW_SLIDE_NOTES, _                                ; Slide Notes viewing mode.
+		$LOI_PAGE_VIEW_SLIDE_SORTER, _                               ; Slide Sorter viewing mode.
+		$LOI_PAGE_VIEW_MASTER, _                                     ; Master Slide viewing mode.
+		$LOI_PAGE_VIEW_MASTER_NOTES, _                               ; Master Slide Notes viewing mode.
+		$LOI_PAGE_VIEW_MASTER_HANDOUT                                ; Master Slide Handout viewing mode.
+
 ; Slide Page Width in Hundredths of a Millimeter
 Global Const _
 		$LOI_PAGE_WIDTH_A6 = 10490, _                                ; A6 page width in Hundredths of a Millimeter (HMM).
@@ -896,15 +906,6 @@ Global Enum Step *2 _
 		$LOI_SHAPE_TYPE_TEXTBOX_TITLE, _                             ; 262144 - A Slide Title Text Box.
 		$LOI_SHAPE_TYPE_TEXTBOX_OUTLINE, _                           ; 524288 - A Slide Outline Text Box.
 		$LOI_SHAPE_TYPE_ALL = 1048575                                ; 1048575 All types above.
-
-; Current Slide Constants
-Global _
-		$LOI_SLIDE_CURRENT_UNKNOWN = -1, _                           ; The current slide page is unknown.
-		$LOI_SLIDE_CURRENT_SLIDE = 0, _                              ; The current slide page is a regular slide.
-		$LOI_SLIDE_CURRENT_SLIDE_NOTES, _                            ; The current slide page is a slide notes page.
-		$LOI_SLIDE_CURRENT_MASTER, _                                 ; The current slide page is a slide master page.
-		$LOI_SLIDE_CURRENT_MASTER_NOTES, _                           ; The current slide page is a slide master notes page.
-		$LOI_SLIDE_CURRENT_MASTER_HANDOUT                            ; The current slide page is a slide master handouts page.
 
 ; Slide Header/Footer Date and Time Display Format
 Global Const _

@@ -945,7 +945,7 @@ EndFunc   ;==>_LOImpress_SlideCopy
 ;                  $oObj                - [optional] Default is Null. A Slide or Master Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, _LOImpress_SlideCopy, _LOImpress_SlideMasterAdd, _LOImpress_SlideMasterGetObjByIndex, or _LOImpress_SlideMasterGetObjByName function.
 ; Return values .: Success: 1 or Object
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Object = Success. All optional parameters were called with Null, returning currently active slide. @Extended is set to the slide's type and the current view mode, if possible. See Constants, $LOI_SLIDE_CURRENT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 0, @Extended: 1, Return: Object = Success. All optional parameters were called with Null, returning currently active slide. @Extended page's type, see remarks.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
@@ -958,11 +958,11 @@ EndFunc   ;==>_LOImpress_SlideCopy
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current slide.
-;                  If this function fails to return an Object with processing error 1, it is possible the current mode is set to Slide sorter.
-;                  It is not currently possible to set the current view to other than a slide or master slide. You cannot switch to Notes, Handouts, Sorter or Outline views.
-;                  If the current view is set to Slide outline, the current slide Object is returned, and the slide type will be set to Unknown. There may be other cases when unknown type is returned.
-;                  This function uses a deprecated method (DrawViewMode), and may stop functioning in the future.
-; Related .......: _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, _LOImpress_SlideMasterCurrent
+;                  If this function fails to return an Object with processing error 1, it is possible the current view mode is set to Slide sorter.
+;                  You can only set the current slide to either a Master slide or a normal slide. To change views to Notes, Handouts etc., see _LOImpress_DocView.
+;                  If the current view mode is set to Slide outline or Slide Notes, the current slide Object is returned. If the current view mode is set to Master Slide Notes or Master Slide Handout, the current Master slide Object is returned.
+;                  When retrieving the current page, @Extended will be set to either $LOI_PAGE_VIEW_SLIDE or $LOI_PAGE_VIEW_MASTER. See Constants, $LOI_PAGE_VIEW_* as defined in LibreOfficeImpress_Constants.au3. Use _LOImpress_DocView to determine the current view mode active.
+; Related .......: _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, _LOImpress_SlideMasterCurrent, _LOImpress_DocView
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -971,8 +971,6 @@ Func _LOImpress_SlideCurrent(ByRef $oDoc, $oObj = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oCurrSlide
-	Local $bIsMasterMode
-	Local Const $__eDrawPage_DRAW = 0, $__eDrawPage_NOTES = 1, $__eDrawPage_HANDOUTS = 2 ; com.sun.star.drawingDrawViewMode (deprecated)
 	Local $iError, $iPageType
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -981,31 +979,7 @@ Func _LOImpress_SlideCurrent(ByRef $oDoc, $oObj = Null)
 		$oCurrSlide = $oDoc.getCurrentController.CurrentPage()
 		If Not IsObj($oCurrSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; Could be because the current mode is set to Slide Sorter.
 
-		$bIsMasterMode = $oDoc.getCurrentController.IsMasterPageMode()
-
-		Switch $oDoc.getCurrentController.DrawViewMode()
-			Case $__eDrawPage_DRAW
-				If $bIsMasterMode Then
-					$iPageType = $LOI_SLIDE_CURRENT_MASTER
-
-				Else
-					$iPageType = $LOI_SLIDE_CURRENT_SLIDE
-				EndIf
-
-			Case $__eDrawPage_NOTES
-				If $bIsMasterMode Then
-					$iPageType = $LOI_SLIDE_CURRENT_MASTER_NOTES
-
-				Else
-					$iPageType = $LOI_SLIDE_CURRENT_SLIDE_NOTES
-				EndIf
-
-			Case $__eDrawPage_HANDOUTS
-				$iPageType = $LOI_SLIDE_CURRENT_MASTER_HANDOUT ; Only Master pages have handouts.
-
-			Case Else
-				$iPageType = $LOI_SLIDE_CURRENT_UNKNOWN ; When DrawViewMode is Null, the current view could be in Slide Sorter or Slide Outline modes.
-		EndSwitch
+		$iPageType = ($oDoc.getCurrentController.IsMasterPageMode()) ? ($LOI_PAGE_VIEW_MASTER) : ($LOI_PAGE_VIEW_SLIDE)
 
 		Return SetError($__LO_STATUS_SUCCESS, $iPageType, $oCurrSlide)
 	EndIf
@@ -1839,10 +1813,11 @@ EndFunc   ;==>_LOImpress_SlideMargins
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_SlideMasterAdd
 ; Description ...: Add a master slide to a presentation.
-; Syntax ........: _LOImpress_SlideMasterAdd(ByRef $oDoc[, $iPos = Null[, $sName = ""]])
+; Syntax ........: _LOImpress_SlideMasterAdd(ByRef $oDoc[, $iPos = Null[, $sName = ""[, $bBlank = True]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $iPos                - [optional] Default is Null. The position to insert the new master slide in the collection of slides. 0 Based.
+;                  $iPos                - [optional] Default is Null. The position to insert the new master slide in the collection of slides. 0 Based. This is ignored if $bBlank is False.
 ;                  $sName               - [optional] Default is "". The unique name of the Master Slide. If called with an empty string, LibreOffice automatically names it.
+;                  $bBlank              - [optional] Default is True. If True, the new Master Slide is blank. If False a preformatted Master Slide is inserted. See remarks.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning new slide's Object.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -1851,35 +1826,92 @@ EndFunc   ;==>_LOImpress_SlideMargins
 ;                  @Error: 1, @Extended: 2 = $iPos not an Integer, less than 0 or greater than number of master slides.
 ;                  @Error: 1, @Extended: 3 = $sName not a String.
 ;                  @Error: 1, @Extended: 4 = Name called in $sName already exists.
+;                  @Error: 1, @Extended: 5 = $bBlank not a Boolean.
+;                  --Initialization Errors--
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.ServiceManager" Object.
+;                  @Error: 2, @Extended: 2 = Error creating "com.sun.star.frame.DispatchHelper" Object.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to create a master slide.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve master pages Object.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve count of master pages.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve master page Object
+;                  @Error: 3, @Extended: 5 = Failed to identify new master slide Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $iPos is called with Null, the new master slide is inserted at the end.
 ;                  Call $iPos with the last master slide index to insert the master slide at the end. Call $iPos with 0 to insert the new master slide at the beginning.
+;                  When inserting a non-blank master slide ($bBlank called with false), the new slide will be inserted AFTER the last slide, $iPos is ignored.
+;                  This function uses two methods to insert a Master slide. Using the API, the resulting new master slide is blank, without text boxes etc., the second method uses a document dispatch command, which results in a normally formatted master slide, like when you add a master slide manually.
+;                  When inserting a new slide with $bBlank set to False, I use the dispatch command to accomplish the insertion, this method seems to only ever insert the new slide at the end of all the slides.
 ;                  I have not found a way to import Master slide from the LibreOffice templates yet.
 ; Related .......: _LOImpress_SlideMasterDeleteByIndex, _LOImpress_SlideMasterDeleteByObj, _LOImpress_SlideAdd, _LOImpress_SlideMasterExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideMasterAdd(ByRef $oDoc, $iPos = Null, $sName = "")
+Func _LOImpress_SlideMasterAdd(ByRef $oDoc, $iPos = Null, $sName = "", $bBlank = True)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oMSlide
-	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	Local $oMSlide, $oServiceManager, $oDispatcher, $oMasters, $oMaster
+	Local $aoMasters[0]
+	Local $iMasters
+	Local $aArray[0]
 
-	If ($iPos = Null) Then $iPos = $oDoc.MasterPages.getCount()
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If ($iPos = Null) Then $iPos = ($bBlank) ? ($oDoc.MasterPages.getCount()) : ($oDoc.MasterPages.getCount() - 1) ; If I am inserting a Master using the dispatch, I have make position be 1 less than the count so I can retrieve the Object for the last master slide.
+	If ($iPos = $oDoc.MasterPages.getCount()) Then $iPos = $iPos - 1 ; If I am inserting a Master using the dispatch command, and the user called the last slide position plus 1, I need to change it to be 1 less so I can retrieve the Object for the last master slide.
 	If Not __LO_IntIsBetween($iPos, 0, $oDoc.MasterPages.getCount()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If ($sName <> "") And _LOImpress_SlideMasterExists($oDoc, $sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not IsBool($bBlank) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
-	$oMSlide = $oDoc.MasterPages.insertNewByIndex($iPos)
-	If Not IsObj($oMSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	If $bBlank Then
+		$oMSlide = $oDoc.MasterPages.insertNewByIndex($iPos)
+		If Not IsObj($oMSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If ($sName <> "") Then
-		$oMSlide.Name = $sName
+	Else
+		; When inserting a new Master using a Dispatch, I have to backup a copy of all current master slide objects so I can identify the new slide.
+		$oServiceManager = __LO_ServiceManager()
+		If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+		$oDispatcher = $oServiceManager.createInstance("com.sun.star.frame.DispatchHelper")
+		If Not IsObj($oDispatcher) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+		$oMasters = $oDoc.MasterPages()
+		If Not IsObj($oMasters) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		$iMasters = $oMasters.getCount()
+		If Not IsInt($iMasters) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+		ReDim $aoMasters[$iMasters]
+
+		For $i = 0 To $iMasters - 1
+			$aoMasters[$i] = $oMasters.getByIndex($i)
+			If Not IsObj($aoMasters[$i]) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+		Next
+
+		$oDispatcher.executeDispatch($oDoc.CurrentController(), ".uno:InsertMasterPage", "", 0, $aArray)
+
+		; Identify the new Master Slide.
+		For $i = 0 To $oMasters.getCount() - 1
+			$oMaster = $oMasters.getByIndex($i)
+			If Not IsObj($oMaster) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+			For $j = 0 To $iMasters - 1
+				; If the Object is a match, exit this loop and continue the top-level loop, bypassing the Objext assignment.
+				If $aoMasters[$j] = $oMaster Then ContinueLoop 2
+
+				Sleep((IsInt($j / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+			Next
+
+			$oMSlide = $oMaster
+		Next
+
+		If Not IsObj($oMSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 	EndIf
+
+	If ($sName <> "") Then $oMSlide.Name = $sName
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oMSlide)
 EndFunc   ;==>_LOImpress_SlideMasterAdd

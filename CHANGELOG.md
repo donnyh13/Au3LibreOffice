@@ -68,6 +68,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOI_ORIENT_VERT_*
   - $LOI_PAGE_HEIGHT_*
   - $LOI_PAGE_ORIENT_*
+  - $LOI_PAGE_VIEW_*
   - $LOI_PAGE_WIDTH_*
   - $LOI_PAR_ALIGN_HOR_*
   - $LOI_PAR_ALIGN_VERT_*
@@ -91,7 +92,6 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOI_SHAPE_TABLE_CELL_TYPE_*
   - $LOI_SHAPE_TEXTBOX_TYPE_*
   - $LOI_SHAPE_TYPE_*
-  - $LOI_SLIDE_CURRENT_*
   - $LOI_SLIDE_DT_FMT_*
   - $LOI_SLIDE_LAYOUT_*
   - $LOI_SLIDE_TRANSITION_*
@@ -155,6 +155,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOImpress_DocUndoGetAllActionTitles
   - _LOImpress_DocUndoIsPossible
   - _LOImpress_DocUndoReset
+  - _LOImpress_DocView
   - _LOImpress_DocVisible
   - _LOImpress_DocZoom
 - Drawing Shape functions

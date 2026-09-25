@@ -131,7 +131,7 @@ EndFunc   ;==>_LOImpress_FieldAuthorInsert
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LOImpress_FieldAuthorInsert
 ; Link ..........:
-; Example .......: No
+; Example .......: Yes
 ; ===============================================================================================================================
 Func _LOImpress_FieldAuthorModify(ByRef $oAuthorField, $bIsFixed = Null, $sAuthor = Null, $iFormat = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
@@ -339,7 +339,7 @@ EndFunc   ;==>_LOImpress_FieldDateTimeInsert
 ;                  To retrieve the current date/time's values pass the returned structure from to function to _LOImpress_DateStructModify.
 ; Related .......: _LOImpress_FieldDateTimeInsert, _LOImpress_DateStructModify, _LOImpress_FieldCurrentDisplayGet
 ; Link ..........:
-; Example .......: No
+; Example .......: Yes
 ; ===============================================================================================================================
 Func _LOImpress_FieldDateTimeModify(ByRef $oDateTimeField, $bIsFixed = Null, $tDateTime = Null, $iFormat = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
@@ -506,7 +506,7 @@ EndFunc   ;==>_LOImpress_FieldFileNameInsert
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LOImpress_FieldFileNameInsert
 ; Link ..........:
-; Example .......: No
+; Example .......: Yes
 ; ===============================================================================================================================
 Func _LOImpress_FieldFileNameModify(ByRef $oFileNameField, $bIsFixed = Null, $iFormat = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)

@@ -20,8 +20,12 @@ Func Example()
 	$iLayout = _LOImpress_SlideHandoutLayout($oHandout)
 	If @error Then _ERROR($oDoc, "Failed to retrieve page Layout. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
+	; Change the current view to the handout view.
+	_LOImpress_DocView($oDoc, $LOI_PAGE_VIEW_MASTER_HANDOUT)
+	If @error Then _ERROR($oDoc, "Failed to change page view. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Page's current layout is (See UDF Constants): " & $iLayout & @CRLF & @CRLF & _
-			"Press ok to change the Page's layout to $LOI_HANDOUT_LAYOUT_THREE_SLIDES. You can switch to that view to see that it worked.")
+			"Press ok to change the Page's layout to $LOI_HANDOUT_LAYOUT_THREE_SLIDES.")
 
 	; Change the Handout Page's layout to $LOI_HANDOUT_LAYOUT_THREE_SLIDES
 	_LOImpress_SlideLayout($oHandout, $LOI_HANDOUT_LAYOUT_THREE_SLIDES)
