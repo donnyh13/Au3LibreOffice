@@ -225,7 +225,7 @@ Func _LOImpress_SlideBackColor(ByRef $oSlide, $iColor = Null)
 	If Not __LO_IntIsBetween($iColor, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If Not IsObj($oBackground) Then ; Have to create the Background service.
-		$oDoc = $oSlide.MasterPage.Forms.Parent()
+		$oDoc = __LOImpress_GetParentDoc($oSlide)
 		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		$oBackground = $oDoc.createInstance("com.sun.star.drawing.Background")
@@ -394,7 +394,7 @@ Func _LOImpress_SlideBackGradient(ByRef $oSlide, $sGradientName = Null, $iType =
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avGradient)
 	EndIf
 
-	$oDoc = $oSlide.MasterPage.Forms.Parent()
+	$oDoc = __LOImpress_GetParentDoc($oSlide)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	If Not IsObj($oBackground) Then ; Have to create the Background service.
@@ -616,7 +616,7 @@ Func _LOImpress_SlideBackTransparency(ByRef $oSlide, $iTransparency = Null)
 	If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If Not IsObj($oBackground) Then ; Have to create the Background service.
-		$oDoc = $oSlide.MasterPage.Forms.Parent()
+		$oDoc = __LOImpress_GetParentDoc($oSlide)
 		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		$oBackground = $oDoc.createInstance("com.sun.star.drawing.Background")
@@ -715,7 +715,7 @@ Func _LOImpress_SlideBackTransparencyGradient(ByRef $oSlide, $iType = Null, $iXC
 		Return SetError($__LO_STATUS_SUCCESS, 1, $aiTransparent)
 	EndIf
 
-	$oDoc = $oSlide.MasterPage.Forms.Parent()
+	$oDoc = __LOImpress_GetParentDoc($oSlide)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	If Not IsObj($oBackground) Then ; Have to create the Background service.
@@ -878,7 +878,7 @@ Func _LOImpress_SlideCopy(ByRef $oSlide, $iPos = Null)
 
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$oDoc = $oSlide.MasterPage.Forms.Parent()
+	$oDoc = __LOImpress_GetParentDoc($oSlide)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 	If ($iPos <> Null) And Not __LO_IntIsBetween($iPos, 0, $oDoc.DrawPages.getCount()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -1072,7 +1072,7 @@ Func _LOImpress_SlideDeleteByObj(ByRef $oSlide)
 
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$oDoc = $oSlide.MasterPage.Forms.Parent()
+	$oDoc = __LOImpress_GetParentDoc($oSlide)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$iCount = $oDoc.DrawPages.getCount()
@@ -1975,7 +1975,7 @@ Func _LOImpress_SlideMasterBackColor(ByRef $oMaster, $iColor = Null)
 	If Not __LO_IntIsBetween($iColor, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If Not IsObj($oBackground) Then ; Have to create the Background service.
-		$oDoc = $oMaster.Forms.Parent()
+		$oDoc = __LOImpress_GetParentDoc($oMaster)
 		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		$oBackground = $oDoc.createInstance("com.sun.star.drawing.Background")
@@ -2142,7 +2142,7 @@ Func _LOImpress_SlideMasterBackGradient(ByRef $oMaster, $sGradientName = Null, $
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avGradient)
 	EndIf
 
-	$oDoc = $oMaster.Forms.Parent()
+	$oDoc = __LOImpress_GetParentDoc($oMaster)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	If Not IsObj($oBackground) Then ; Have to create the Background service.
@@ -2359,7 +2359,7 @@ Func _LOImpress_SlideMasterBackTransparency(ByRef $oMaster, $iTransparency = Nul
 	If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If Not IsObj($oBackground) Then ; Have to create the Background service.
-		$oDoc = $oMaster.Forms.Parent()
+		$oDoc = __LOImpress_GetParentDoc($oMaster)
 		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		$oBackground = $oDoc.createInstance("com.sun.star.drawing.Background")
@@ -2459,7 +2459,7 @@ Func _LOImpress_SlideMasterBackTransparencyGradient(ByRef $oMaster, $iType = Nul
 		Return SetError($__LO_STATUS_SUCCESS, 1, $aiTransparent)
 	EndIf
 
-	$oDoc = $oMaster.Forms.Parent()
+	$oDoc = __LOImpress_GetParentDoc($oMaster)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	If Not IsObj($oBackground) Then ; Have to create the Background service.
@@ -2707,7 +2707,7 @@ Func _LOImpress_SlideMasterDeleteByObj(ByRef $oMaster)
 
 	If Not IsObj($oMaster) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$oDoc = $oMaster.Forms.Parent()
+	$oDoc = __LOImpress_GetParentDoc($oMaster)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$iCount = $oDoc.MasterPages.getCount()
@@ -2971,7 +2971,7 @@ Func _LOImpress_SlideMasterName(ByRef $oMaster, $sName = Null)
 
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	$oDoc = $oMaster.Forms.Parent()
+	$oDoc = __LOImpress_GetParentDoc($oMaster)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 	If $oDoc.Links.getByName("Master Page").Links.hasByName($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
@@ -3134,7 +3134,7 @@ Func _LOImpress_SlideMove(ByRef $oSlide, $iPos)
 
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$oDoc = $oSlide.MasterPage.Forms.Parent()
+	$oDoc = __LOImpress_GetParentDoc($oSlide)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 	If ($iPos <> Null) And Not __LO_IntIsBetween($iPos, 0, $oDoc.DrawPages.getCount() - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -3240,7 +3240,7 @@ Func _LOImpress_SlideName(ByRef $oSlide, $sName = Null)
 
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	$oDoc = $oSlide.MasterPage.Forms.Parent()
+	$oDoc = __LOImpress_GetParentDoc($oSlide)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 	If $oDoc.Links.getByName("Slide").Links.hasByName($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 

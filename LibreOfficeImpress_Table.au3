@@ -303,7 +303,7 @@ Func _LOImpress_TableBackGradient(ByRef $oTable, $sGradientName = Null, $iType =
 
 	If Not IsObj($oTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$oDoc = $oTable.Parent.MasterPage.Forms.Parent()
+	$oDoc = __LOImpress_GetParentDoc($oTable.Parent())
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($sGradientName, $iType, $iIncrement, $iXCenter, $iYCenter, $iAngle, $iTransitionStart, $iFromColor, $iToColor, $iFromIntense, $iToIntense) Then
@@ -3470,8 +3470,7 @@ Func _LOImpress_TableInsert(ByRef $oSlide, $iWidth, $iHeight, $iRows = 2, $iColu
 	If Not __LO_IntIsBetween($iColumns, 1, 75) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not IsInt($iX) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 	If Not IsInt($iY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
-
-	$oDoc = $oSlide.MasterPage.Forms.Parent()
+	$oDoc = __LOImpress_GetParentDoc($oSlide)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$oShape = $oDoc.createInstance("com.sun.star.drawing.TableShape")

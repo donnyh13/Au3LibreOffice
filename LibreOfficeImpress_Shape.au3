@@ -345,7 +345,7 @@ Func _LOImpress_ShapeAreaGradient(ByRef $oShape, $sGradientName = Null, $iType =
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avGradient)
 	EndIf
 
-	$oDoc = $oShape.Parent.MasterPage.Forms.Parent()
+	$oDoc = __LOImpress_GetParentDoc($oShape.Parent())
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	If ($oShape.FillStyle() <> $LOI_AREA_FILL_STYLE_GRADIENT) Then $oShape.FillStyle = $LOI_AREA_FILL_STYLE_GRADIENT
@@ -713,7 +713,7 @@ Func _LOImpress_ShapeAreaTransparencyGradient(ByRef $oShape, $iType = Null, $iXC
 		Return SetError($__LO_STATUS_SUCCESS, 1, $aiTransparent)
 	EndIf
 
-	$oDoc = $oShape.Parent.MasterPage.Forms.Parent()
+	$oDoc = __LOImpress_GetParentDoc($oShape.Parent())
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	If ($iType <> Null) Then
@@ -1668,8 +1668,7 @@ Func _LOImpress_ShapeImageInsert(ByRef $oSlide, $sURL, $iWidth = -1, $iHeight = 
 
 	$sURL = _LO_PathConvert($sURL, $LO_PATHCONV_OFFICE_RETURN)
 	If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-	$oDoc = $oSlide.MasterPage.Forms.Parent()
+	$oDoc = __LOImpress_GetParentDoc($oSlide)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$oImage = $oDoc.createInstance("com.sun.star.drawing.GraphicObjectShape")
@@ -1907,7 +1906,7 @@ Func _LOImpress_ShapeInteraction(ByRef $oShape, $iAction = Null, $sTarget = Null
 				$oSlide = $oShape.Parent()
 				If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-				$oDoc = $oSlide.MasterPage.Forms.Parent()
+				$oDoc = __LOImpress_GetParentDoc($oSlide)
 				If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
 				If Not _LOImpress_ShapeExists($oDoc, $sTarget) And Not _
@@ -2284,7 +2283,7 @@ Func _LOImpress_ShapeName(ByRef $oShape, $sName = Null)
 	$oSlide = $oShape.Parent()
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	$oDoc = $oSlide.MasterPage.Forms.Parent()
+	$oDoc = __LOImpress_GetParentDoc($oSlide)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 	If _LOImpress_ShapeExists($oDoc, $sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
@@ -6393,7 +6392,7 @@ Func _LOImpress_ShapeTextAttrColumns(ByRef $oShape, $iColumns = Null, $iSpacing 
 	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not __LO_VersionCheck(7.2) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
-	$oDoc = $oShape.Parent.MasterPage.Forms.Parent()
+	$oDoc = __LOImpress_GetParentDoc($oShape.Parent())
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$oTextColumns = $oShape.TextColumns()
@@ -6592,8 +6591,7 @@ Func _LOImpress_ShapeTextBoxInsert(ByRef $oSlide, $iTextBoxType, $iWidth, $iHeig
 	If Not IsInt($iHeight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsInt($iX) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not IsInt($iY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-
-	$oDoc = $oSlide.MasterPage.Forms.Parent()
+	$oDoc = __LOImpress_GetParentDoc($oSlide)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Switch $iTextBoxType

@@ -222,6 +222,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - __LOImpress_FieldTypeServices
   - __LOImpress_FilterNameGet
   - __LOImpress_Format
+  - __LOImpress_GetParentDoc
   - __LOImpress_GetShapeName
   - __LOImpress_GradientIsModified
   - __LOImpress_GradientNameInsert

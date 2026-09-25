@@ -554,7 +554,7 @@ Func _LOImpress_CursorInsertString(ByRef $oCursor, $sString, $bOverwrite = False
 		$oSlide = $oCursor.Text.Parent()
 		If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-		$oDoc = $oSlide.MasterPage.Forms.Parent()
+		$oDoc = __LOImpress_GetParentDoc($oSlide)
 		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		If ($oDoc.IsModified() = False) Then $oDoc.Modified = True
