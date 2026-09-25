@@ -3423,8 +3423,8 @@ EndFunc   ;==>_LOImpress_TableColumnInsert
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_TableInsert
 ; Description ...: Create and Insert a Table into a Slide.
-; Syntax ........: _LOImpress_TableInsert(ByRef $oSlide, $iWidth, $iHeight[, $iRows = 2[, $iColumns = 2[, $iX = -1[, $iY = -1]]]])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+; Syntax ........: _LOImpress_TableInsert(ByRef $oObj, $iWidth, $iHeight[, $iRows = 2[, $iColumns = 2[, $iX = -1[, $iY = -1]]]])
+; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
 ;                  $iWidth              - The Table's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Table's Height in Hundredths of a Millimeter (HMM).
 ;                  $iRows               - [optional] (1-75) Default is 2. The number of Rows.
@@ -3435,7 +3435,7 @@ EndFunc   ;==>_LOImpress_TableColumnInsert
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Inserted a new Table. Returning its Object.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iRows not an Integer, less than 1 or greater than 75.
@@ -3456,21 +3456,22 @@ EndFunc   ;==>_LOImpress_TableColumnInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_TableInsert(ByRef $oSlide, $iWidth, $iHeight, $iRows = 2, $iColumns = 2, $iX = -1, $iY = -1)
+Func _LOImpress_TableInsert(ByRef $oObj, $iWidth, $iHeight, $iRows = 2, $iColumns = 2, $iX = -1, $iY = -1)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oShape, $oDoc, $oStyle
 	Local $tSize, $tPos
 
-	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsInt($iWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsInt($iHeight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not __LO_IntIsBetween($iRows, 1, 75) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If Not __LO_IntIsBetween($iColumns, 1, 75) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not IsInt($iX) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 	If Not IsInt($iY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
-	$oDoc = __LOImpress_GetParentDoc($oSlide)
+
+	$oDoc = __LOImpress_GetParentDoc($oObj)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$oShape = $oDoc.createInstance("com.sun.star.drawing.TableShape")
@@ -3482,7 +3483,7 @@ Func _LOImpress_TableInsert(ByRef $oSlide, $iWidth, $iHeight, $iRows = 2, $iColu
 	; Apply Default Table Style, to match L.O.
 	$oShape.TableTemplate = $oStyle
 
-	$oSlide.add($oShape)
+	$oObj.add($oShape)
 
 	$oShape.Model.Rows.insertByIndex(0, ($iRows - 1)) ; Minus one to account for 1 Column/Row being present upon creation.
 	$oShape.Model.Columns.insertByIndex(0, ($iColumns - 1)) ; Minus one to account for 1 Column/Row being present upon creation.
@@ -3490,8 +3491,8 @@ Func _LOImpress_TableInsert(ByRef $oSlide, $iWidth, $iHeight, $iRows = 2, $iColu
 	$tPos = $oShape.Position()
 	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	$tPos.X = ($iX = -1) ? (Int(($oSlide.Width() - $iWidth) / 2)) : ($iX)
-	$tPos.Y = ($iY = -1) ? (Int(($oSlide.Height() - $iHeight) / 2)) : ($iY)
+	$tPos.X = ($iX = -1) ? (Int(($oObj.Width() - $iWidth) / 2)) : ($iX)
+	$tPos.Y = ($iY = -1) ? (Int(($oObj.Height() - $iHeight) / 2)) : ($iY)
 
 	$oShape.Position = $tPos
 

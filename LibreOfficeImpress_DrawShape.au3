@@ -742,8 +742,8 @@ EndFunc   ;==>_LOImpress_DrawShapeGetType
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_DrawShapeInsert
 ; Description ...: Insert a shape into a slide.
-; Syntax ........: _LOImpress_DrawShapeInsert(ByRef $oSlide, $iShapeType, $iWidth, $iHeight[, $iX = -1[, $iY = -1]])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+; Syntax ........: _LOImpress_DrawShapeInsert(ByRef $oObj, $iShapeType, $iWidth, $iHeight[, $iX = -1[, $iY = -1]])
+; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
 ;                  $iShapeType          - (0-187) The Type of shape to create. See remarks. See $LOI_DRAWSHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM). Note, for Lines, Width is the length of the line.
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM). Note, for Lines, Height is the amount the line goes below the point of insertion.
@@ -753,7 +753,7 @@ EndFunc   ;==>_LOImpress_DrawShapeGetType
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. The Shape was successfully inserted. Returning the Shape's Object.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $iShapeType not an Integer, less than 0 or greater than 187. See $LOI_DRAWSHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3
 ;                  @Error: 1, @Extended: 3 = $iWidth not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iHeight not an Integer.
@@ -781,13 +781,13 @@ EndFunc   ;==>_LOImpress_DrawShapeGetType
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_DrawShapeInsert(ByRef $oSlide, $iShapeType, $iWidth, $iHeight, $iX = -1, $iY = -1)
+Func _LOImpress_DrawShapeInsert(ByRef $oObj, $iShapeType, $iWidth, $iHeight, $iX = -1, $iY = -1)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oShape
 
-	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not __LO_IntIsBetween($iShapeType, $LOI_DRAWSHAPE_TYPE_3D_CONE, $LOI_DRAWSHAPE_TYPE_SYMBOL_PUZZLE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsInt($iWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not IsInt($iHeight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
@@ -800,23 +800,23 @@ Func _LOImpress_DrawShapeInsert(ByRef $oSlide, $iShapeType, $iWidth, $iHeight, $
 			Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_4_WAY To $LOI_DRAWSHAPE_TYPE_ARROWS_PENTAGON ; Create an Arrow Shape.
-			$oShape = __LOImpress_DrawShape_CreateArrow($oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+			$oShape = __LOImpress_DrawShape_CreateArrow($oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 			If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 		Case $LOI_DRAWSHAPE_TYPE_BASIC_ARC To $LOI_DRAWSHAPE_TYPE_BASIC_TRIANGLE_RIGHT ; Create a Basic Shape.
-			$oShape = __LOImpress_DrawShape_CreateBasic($oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+			$oShape = __LOImpress_DrawShape_CreateBasic($oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 			If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 		Case $LOI_DRAWSHAPE_TYPE_CALLOUT_CLOUD To $LOI_DRAWSHAPE_TYPE_CALLOUT_ROUND ; Create a Callout Shape.
-			$oShape = __LOImpress_DrawShape_CreateCallout($oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+			$oShape = __LOImpress_DrawShape_CreateCallout($oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 			If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 		Case $LOI_DRAWSHAPE_TYPE_CONNECTOR To $LOI_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT_ENDS_ARROW ; Create a Connector.
-			$oShape = __LOImpress_DrawShape_CreateLine($oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+			$oShape = __LOImpress_DrawShape_CreateLine($oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 			If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_CARD To $LOI_DRAWSHAPE_TYPE_FLOWCHART_TERMINATOR ; Create a Flowchart Shape.
-			$oShape = __LOImpress_DrawShape_CreateFlowchart($oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+			$oShape = __LOImpress_DrawShape_CreateFlowchart($oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 			If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 		Case $LOI_DRAWSHAPE_TYPE_FONTWORK_AIR_MAIL To $LOI_DRAWSHAPE_TYPE_FONTWORK_TRICOLORE ; Can't create Fontwork.
@@ -824,15 +824,15 @@ Func _LOImpress_DrawShapeInsert(ByRef $oSlide, $iShapeType, $iWidth, $iHeight, $
 			Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		Case $LOI_DRAWSHAPE_TYPE_LINE_ARROW_LINE_ARROWS To $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_FILLED ; Create a Line Shape.
-			$oShape = __LOImpress_DrawShape_CreateLine($oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+			$oShape = __LOImpress_DrawShape_CreateLine($oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 			If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 		Case $LOI_DRAWSHAPE_TYPE_STARS_4_POINT To $LOI_DRAWSHAPE_TYPE_STARS_SIGNET ; Create a Star or Banner Shape.
-			$oShape = __LOImpress_DrawShape_CreateStars($oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+			$oShape = __LOImpress_DrawShape_CreateStars($oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 			If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_DIAMOND To $LOI_DRAWSHAPE_TYPE_SYMBOL_PUZZLE ; Create a Symbol Shape.
-			$oShape = __LOImpress_DrawShape_CreateSymbol($oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+			$oShape = __LOImpress_DrawShape_CreateSymbol($oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 			If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 	EndSwitch
 

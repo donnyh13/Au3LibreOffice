@@ -1231,8 +1231,8 @@ EndFunc   ;==>__LOImpress_DocCurrView
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_DrawShape_CreateArrow
 ; Description ...: Create an Arrow type Shape.
-; Syntax ........: __LOImpress_DrawShape_CreateArrow(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+; Syntax ........: __LOImpress_DrawShape_CreateArrow(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
@@ -1242,7 +1242,7 @@ EndFunc   ;==>__LOImpress_DocCurrView
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iX not an Integer.
@@ -1266,7 +1266,7 @@ EndFunc   ;==>__LOImpress_DocCurrView
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_DrawShape_CreateArrow(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+Func __LOImpress_DrawShape_CreateArrow(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1274,14 +1274,14 @@ Func __LOImpress_DrawShape_CreateArrow(ByRef $oSlide, $iWidth, $iHeight, $iX, $i
 	Local $tProp, $tProp2, $tSize, $tPos
 	Local $atCusShapeGeo[1]
 
-	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsInt($iWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsInt($iHeight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not IsInt($iX) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsInt($iY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not IsInt($iShapeType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
-	$oDoc = __LOImpress_GetParentDoc($oSlide)
+	$oDoc = __LOImpress_GetParentDoc($oObj)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$oShape = $oDoc.createInstance("com.sun.star.drawing.CustomShape")
@@ -1376,10 +1376,10 @@ Func __LOImpress_DrawShape_CreateArrow(ByRef $oSlide, $iWidth, $iHeight, $iX, $i
 			$tProp.Value = "pentagon-right"
 	EndSwitch
 
-	$oShape.Name = __LOImpress_GetShapeName($oSlide, "Shape ")
+	$oShape.Name = __LOImpress_GetShapeName($oObj, "Shape ")
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	$oSlide.add($oShape)
+	$oObj.add($oShape)
 
 	$atCusShapeGeo[0] = $tProp
 	$oShape.CustomShapeGeometry = $atCusShapeGeo
@@ -1387,8 +1387,8 @@ Func __LOImpress_DrawShape_CreateArrow(ByRef $oSlide, $iWidth, $iHeight, $iX, $i
 	$tPos = $oShape.Position()
 	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	$tPos.X = ($iX = -1) ? (Int(($oSlide.Width() - $iWidth) / 2)) : ($iX)
-	$tPos.Y = ($iY = -1) ? (Int(($oSlide.Height() - $iHeight) / 2)) : ($iY)
+	$tPos.X = ($iX = -1) ? (Int(($oObj.Width() - $iWidth) / 2)) : ($iX)
+	$tPos.Y = ($iY = -1) ? (Int(($oObj.Height() - $iHeight) / 2)) : ($iY)
 
 	$oShape.Position = $tPos
 
@@ -1413,8 +1413,8 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateArrow
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_DrawShape_CreateBasic
 ; Description ...: Create a Basic type Shape.
-; Syntax ........: __LOImpress_DrawShape_CreateBasic(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+; Syntax ........: __LOImpress_DrawShape_CreateBasic(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
@@ -1424,7 +1424,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateArrow
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iX not an Integer.
@@ -1446,7 +1446,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateArrow
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_DrawShape_CreateBasic(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+Func __LOImpress_DrawShape_CreateBasic(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1456,14 +1456,14 @@ Func __LOImpress_DrawShape_CreateBasic(ByRef $oSlide, $iWidth, $iHeight, $iX, $i
 	Local $iCircleKind_CUT = 2 ; a circle with a cut connected by a line.
 	Local $iCircleKind_ARC = 3 ; a circle with an open cut.
 
-	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsInt($iWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsInt($iHeight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not IsInt($iX) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsInt($iY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not IsInt($iShapeType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
-	$oDoc = __LOImpress_GetParentDoc($oSlide)
+	$oDoc = __LOImpress_GetParentDoc($oObj)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	If ($iShapeType = $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE_SEGMENT) Or ($iShapeType = $LOI_DRAWSHAPE_TYPE_BASIC_ARC) Then ; These two shapes need special procedures.
@@ -1472,15 +1472,15 @@ Func __LOImpress_DrawShape_CreateBasic(ByRef $oSlide, $iWidth, $iHeight, $iX, $i
 
 		Switch $iShapeType
 			Case $LOI_DRAWSHAPE_TYPE_BASIC_ARC
-				$oShape.Name = __LOImpress_GetShapeName($oSlide, "Elliptical arc ")
+				$oShape.Name = __LOImpress_GetShapeName($oObj, "Elliptical arc ")
 				If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 			Case $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE_SEGMENT
-				$oShape.Name = __LOImpress_GetShapeName($oSlide, "Ellipse Segment ")
+				$oShape.Name = __LOImpress_GetShapeName($oObj, "Ellipse Segment ")
 				If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 		EndSwitch
 
-		$oSlide.add($oShape)
+		$oObj.add($oShape)
 
 	Else
 		$oShape = $oDoc.createInstance("com.sun.star.drawing.CustomShape")
@@ -1489,10 +1489,10 @@ Func __LOImpress_DrawShape_CreateBasic(ByRef $oSlide, $iWidth, $iHeight, $iX, $i
 		$tProp = __LO_SetPropertyValue("Type", "")
 		If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-		$oShape.Name = __LOImpress_GetShapeName($oSlide, "Shape ")
+		$oShape.Name = __LOImpress_GetShapeName($oObj, "Shape ")
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-		$oSlide.add($oShape)
+		$oObj.add($oShape)
 	EndIf
 
 	Switch $iShapeType
@@ -1581,8 +1581,8 @@ Func __LOImpress_DrawShape_CreateBasic(ByRef $oSlide, $iWidth, $iHeight, $iX, $i
 	$tPos = $oShape.Position()
 	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	$tPos.X = ($iX = -1) ? (Int(($oSlide.Width() - $iWidth) / 2)) : ($iX)
-	$tPos.Y = ($iY = -1) ? (Int(($oSlide.Height() - $iHeight) / 2)) : ($iY)
+	$tPos.X = ($iX = -1) ? (Int(($oObj.Width() - $iWidth) / 2)) : ($iX)
+	$tPos.Y = ($iY = -1) ? (Int(($oObj.Height() - $iHeight) / 2)) : ($iY)
 
 	$oShape.Position = $tPos
 
@@ -1600,8 +1600,8 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateBasic
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_DrawShape_CreateCallout
 ; Description ...: Create a Callout type Shape.
-; Syntax ........: __LOImpress_DrawShape_CreateCallout(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+; Syntax ........: __LOImpress_DrawShape_CreateCallout(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
@@ -1611,7 +1611,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateBasic
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iX not an Integer.
@@ -1632,7 +1632,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateBasic
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_DrawShape_CreateCallout(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+Func __LOImpress_DrawShape_CreateCallout(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1640,14 +1640,14 @@ Func __LOImpress_DrawShape_CreateCallout(ByRef $oSlide, $iWidth, $iHeight, $iX, 
 	Local $tProp, $tSize, $tPos
 	Local $atCusShapeGeo[1]
 
-	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsInt($iWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsInt($iHeight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not IsInt($iX) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsInt($iY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not IsInt($iShapeType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
-	$oDoc = __LOImpress_GetParentDoc($oSlide)
+	$oDoc = __LOImpress_GetParentDoc($oObj)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$oShape = $oDoc.createInstance("com.sun.star.drawing.CustomShape")
@@ -1679,10 +1679,10 @@ Func __LOImpress_DrawShape_CreateCallout(ByRef $oSlide, $iWidth, $iHeight, $iX, 
 			$tProp.Value = "round-callout"
 	EndSwitch
 
-	$oShape.Name = __LOImpress_GetShapeName($oSlide, "Shape ")
+	$oShape.Name = __LOImpress_GetShapeName($oObj, "Shape ")
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	$oSlide.add($oShape)
+	$oObj.add($oShape)
 
 	$atCusShapeGeo[0] = $tProp
 	$oShape.CustomShapeGeometry = $atCusShapeGeo
@@ -1690,8 +1690,8 @@ Func __LOImpress_DrawShape_CreateCallout(ByRef $oSlide, $iWidth, $iHeight, $iX, 
 	$tPos = $oShape.Position()
 	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	$tPos.X = ($iX = -1) ? (Int(($oSlide.Width() - $iWidth) / 2)) : ($iX)
-	$tPos.Y = ($iY = -1) ? (Int(($oSlide.Height() - $iHeight) / 2)) : ($iY)
+	$tPos.X = ($iX = -1) ? (Int(($oObj.Width() - $iWidth) / 2)) : ($iX)
+	$tPos.Y = ($iY = -1) ? (Int(($oObj.Height() - $iHeight) / 2)) : ($iY)
 
 	$oShape.Position = $tPos
 
@@ -1716,8 +1716,8 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateCallout
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_DrawShape_CreateFlowchart
 ; Description ...: Create a FlowChart type Shape.
-; Syntax ........: __LOImpress_DrawShape_CreateFlowchart(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+; Syntax ........: __LOImpress_DrawShape_CreateFlowchart(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
@@ -1727,7 +1727,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateCallout
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iX not an Integer.
@@ -1748,7 +1748,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateCallout
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_DrawShape_CreateFlowchart(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+Func __LOImpress_DrawShape_CreateFlowchart(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1756,14 +1756,14 @@ Func __LOImpress_DrawShape_CreateFlowchart(ByRef $oSlide, $iWidth, $iHeight, $iX
 	Local $tProp, $tSize, $tPos
 	Local $atCusShapeGeo[1]
 
-	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsInt($iWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsInt($iHeight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not IsInt($iX) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsInt($iY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not IsInt($iShapeType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
-	$oDoc = __LOImpress_GetParentDoc($oSlide)
+	$oDoc = __LOImpress_GetParentDoc($oObj)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$oShape = $oDoc.createInstance("com.sun.star.drawing.CustomShape")
@@ -1858,10 +1858,10 @@ Func __LOImpress_DrawShape_CreateFlowchart(ByRef $oSlide, $iWidth, $iHeight, $iX
 			$tProp.Value = "flowchart-terminator"
 	EndSwitch
 
-	$oShape.Name = __LOImpress_GetShapeName($oSlide, "Shape ")
+	$oShape.Name = __LOImpress_GetShapeName($oObj, "Shape ")
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	$oSlide.add($oShape)
+	$oObj.add($oShape)
 
 	$atCusShapeGeo[0] = $tProp
 	$oShape.CustomShapeGeometry = $atCusShapeGeo
@@ -1869,8 +1869,8 @@ Func __LOImpress_DrawShape_CreateFlowchart(ByRef $oSlide, $iWidth, $iHeight, $iX
 	$tPos = $oShape.Position()
 	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	$tPos.X = ($iX = -1) ? (Int(($oSlide.Width() - $iWidth) / 2)) : ($iX)
-	$tPos.Y = ($iY = -1) ? (Int(($oSlide.Height() - $iHeight) / 2)) : ($iY)
+	$tPos.X = ($iX = -1) ? (Int(($oObj.Width() - $iWidth) / 2)) : ($iX)
+	$tPos.Y = ($iY = -1) ? (Int(($oObj.Height() - $iHeight) / 2)) : ($iY)
 
 	$oShape.Position = $tPos
 
@@ -1895,8 +1895,8 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateFlowchart
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_DrawShape_CreateLine
 ; Description ...: Create a Line type Shape.
-; Syntax ........: __LOImpress_DrawShape_CreateLine(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+; Syntax ........: __LOImpress_DrawShape_CreateLine(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
@@ -1906,7 +1906,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateFlowchart
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iX not an Integer.
@@ -1928,7 +1928,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateFlowchart
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_DrawShape_CreateLine(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+Func __LOImpress_DrawShape_CreateLine(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1937,13 +1937,14 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY
 	Local $atPoint[0], $aiFlags[0]
 	Local $avArray[1]
 
-	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsInt($iWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsInt($iHeight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not IsInt($iX) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsInt($iY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not IsInt($iShapeType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-	$oDoc = __LOImpress_GetParentDoc($oSlide)
+
+	$oDoc = __LOImpress_GetParentDoc($oObj)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	If ($iShapeType <> $LOI_DRAWSHAPE_TYPE_LINE_DIMENSION) Then
@@ -1956,10 +1957,10 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY
 			$oShape = $oDoc.createInstance("com.sun.star.drawing.LineShape")
 			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-			$oShape.Name = __LOImpress_GetShapeName($oSlide, "Line ")
+			$oShape.Name = __LOImpress_GetShapeName($oObj, "Line ")
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-			$oSlide.add($oShape)
+			$oObj.add($oShape)
 
 			ReDim $atPoint[2]
 			ReDim $aiFlags[2]
@@ -2017,10 +2018,10 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY
 			$oShape = $oDoc.createInstance("com.sun.star.drawing.ConnectorShape")
 			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-			$oShape.Name = __LOImpress_GetShapeName($oSlide, "Connector ")
+			$oShape.Name = __LOImpress_GetShapeName($oObj, "Connector ")
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-			$oSlide.add($oShape)
+			$oObj.add($oShape)
 
 			$tStart = __LOImpress_CreatePoint($iX, $iY)
 			If Not IsObj($tStart) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
@@ -2094,10 +2095,10 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY
 			$oShape = $oDoc.createInstance("com.sun.star.drawing.OpenBezierShape")
 			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-			$oShape.Name = __LOImpress_GetShapeName($oSlide, "Bézier curve ")
+			$oShape.Name = __LOImpress_GetShapeName($oObj, "Bézier curve ")
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-			$oSlide.add($oShape)
+			$oObj.add($oShape)
 
 			ReDim $atPoint[4]
 			ReDim $aiFlags[4]
@@ -2125,10 +2126,10 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY
 			$oShape = $oDoc.createInstance("com.sun.star.drawing.ClosedBezierShape")
 			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-			$oShape.Name = __LOImpress_GetShapeName($oSlide, "Bézier curve ")
+			$oShape.Name = __LOImpress_GetShapeName($oObj, "Bézier curve ")
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-			$oSlide.add($oShape)
+			$oObj.add($oShape)
 
 			ReDim $atPoint[4]
 			ReDim $aiFlags[4]
@@ -2156,9 +2157,9 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY
 			$oShape = $oDoc.createInstance("com.sun.star.drawing.MeasureShape")
 			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-			$oSlide.add($oShape)
+			$oObj.add($oShape)
 
-			$oShape.Name = __LOImpress_GetShapeName($oSlide, "Dimension Line ")
+			$oShape.Name = __LOImpress_GetShapeName($oObj, "Dimension Line ")
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 			$tStart = __LOImpress_CreatePoint($iX, $iY)
@@ -2171,10 +2172,10 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY
 			$oShape = $oDoc.createInstance("com.sun.star.drawing.OpenFreeHandShape")
 			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-			$oShape.Name = __LOImpress_GetShapeName($oSlide, "Bézier curve ")
+			$oShape.Name = __LOImpress_GetShapeName($oObj, "Bézier curve ")
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-			$oSlide.add($oShape)
+			$oObj.add($oShape)
 
 			ReDim $atPoint[3]
 			ReDim $aiFlags[3]
@@ -2196,10 +2197,10 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY
 			$oShape = $oDoc.createInstance("com.sun.star.drawing.ClosedFreeHandShape")
 			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-			$oShape.Name = __LOImpress_GetShapeName($oSlide, "Bézier curve ")
+			$oShape.Name = __LOImpress_GetShapeName($oObj, "Bézier curve ")
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-			$oSlide.add($oShape)
+			$oObj.add($oShape)
 
 			ReDim $atPoint[4]
 			ReDim $aiFlags[4]
@@ -2227,10 +2228,10 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY
 			$oShape = $oDoc.createInstance("com.sun.star.drawing.LineShape")
 			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-			$oShape.Name = __LOImpress_GetShapeName($oSlide, "Line ")
+			$oShape.Name = __LOImpress_GetShapeName($oObj, "Line ")
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-			$oSlide.add($oShape)
+			$oObj.add($oShape)
 
 			ReDim $atPoint[2]
 			ReDim $aiFlags[2]
@@ -2248,10 +2249,10 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY
 			$oShape = $oDoc.createInstance("com.sun.star.drawing.PolyLineShape")
 			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-			$oShape.Name = __LOImpress_GetShapeName($oSlide, "Polygon 4 corners ")
+			$oShape.Name = __LOImpress_GetShapeName($oObj, "Polygon 4 corners ")
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-			$oSlide.add($oShape)
+			$oObj.add($oShape)
 
 			ReDim $atPoint[5]
 			ReDim $aiFlags[5]
@@ -2283,10 +2284,10 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY
 			$oShape = $oDoc.createInstance("com.sun.star.drawing.PolyPolygonShape")
 			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-			$oShape.Name = __LOImpress_GetShapeName($oSlide, "Polygon 4 corners ")
+			$oShape.Name = __LOImpress_GetShapeName($oObj, "Polygon 4 corners ")
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-			$oSlide.add($oShape)
+			$oObj.add($oShape)
 
 			ReDim $atPoint[5]
 			ReDim $aiFlags[5]
@@ -2340,8 +2341,8 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY
 	$tPos = $oShape.Position()
 	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
-	$tPos.X = ($iX = -1) ? (Int(($oSlide.Width() - $iWidth) / 2)) : ($iX)
-	$tPos.Y = ($iY = -1) ? (Int(($oSlide.Height() - $iHeight) / 2)) : ($iY)
+	$tPos.X = ($iX = -1) ? (Int(($oObj.Width() - $iWidth) / 2)) : ($iX)
+	$tPos.Y = ($iY = -1) ? (Int(($oObj.Height() - $iHeight) / 2)) : ($iY)
 
 	$oShape.Position = $tPos
 
@@ -2351,8 +2352,8 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateLine
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_DrawShape_CreateStars
 ; Description ...: Create a Star or Banner type Shape.
-; Syntax ........: __LOImpress_DrawShape_CreateStars(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+; Syntax ........: __LOImpress_DrawShape_CreateStars(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
@@ -2362,7 +2363,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateLine
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iX not an Integer.
@@ -2384,7 +2385,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateLine
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_DrawShape_CreateStars(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+Func __LOImpress_DrawShape_CreateStars(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -2392,14 +2393,14 @@ Func __LOImpress_DrawShape_CreateStars(ByRef $oSlide, $iWidth, $iHeight, $iX, $i
 	Local $tProp, $tSize, $tPos
 	Local $atCusShapeGeo[1]
 
-	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsInt($iWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsInt($iHeight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not IsInt($iX) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsInt($iY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not IsInt($iShapeType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
-	$oDoc = __LOImpress_GetParentDoc($oSlide)
+	$oDoc = __LOImpress_GetParentDoc($oObj)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$oShape = $oDoc.createInstance("com.sun.star.drawing.CustomShape")
@@ -2446,10 +2447,10 @@ Func __LOImpress_DrawShape_CreateStars(ByRef $oSlide, $iWidth, $iHeight, $iX, $i
 			$tProp.Value = "signet" ; "non-primitive"
 	EndSwitch
 
-	$oShape.Name = __LOImpress_GetShapeName($oSlide, "Shape ")
+	$oShape.Name = __LOImpress_GetShapeName($oObj, "Shape ")
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	$oSlide.add($oShape)
+	$oObj.add($oShape)
 
 	$atCusShapeGeo[0] = $tProp
 	$oShape.CustomShapeGeometry = $atCusShapeGeo
@@ -2457,8 +2458,8 @@ Func __LOImpress_DrawShape_CreateStars(ByRef $oSlide, $iWidth, $iHeight, $iX, $i
 	$tPos = $oShape.Position()
 	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	$tPos.X = ($iX = -1) ? (Int(($oSlide.Width() - $iWidth) / 2)) : ($iX)
-	$tPos.Y = ($iY = -1) ? (Int(($oSlide.Height() - $iHeight) / 2)) : ($iY)
+	$tPos.X = ($iX = -1) ? (Int(($oObj.Width() - $iWidth) / 2)) : ($iX)
+	$tPos.Y = ($iY = -1) ? (Int(($oObj.Height() - $iHeight) / 2)) : ($iY)
 
 	$oShape.Position = $tPos
 
@@ -2483,8 +2484,8 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateStars
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_DrawShape_CreateSymbol
 ; Description ...: Create a Symbol type Shape.
-; Syntax ........: __LOImpress_DrawShape_CreateSymbol(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+; Syntax ........: __LOImpress_DrawShape_CreateSymbol(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
@@ -2494,7 +2495,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateStars
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iX not an Integer.
@@ -2518,7 +2519,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateStars
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_DrawShape_CreateSymbol(ByRef $oSlide, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+Func __LOImpress_DrawShape_CreateSymbol(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -2526,14 +2527,14 @@ Func __LOImpress_DrawShape_CreateSymbol(ByRef $oSlide, $iWidth, $iHeight, $iX, $
 	Local $tProp, $tSize, $tPos
 	Local $atCusShapeGeo[1]
 
-	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsInt($iWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsInt($iHeight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not IsInt($iX) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsInt($iY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not IsInt($iShapeType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
-	$oDoc = __LOImpress_GetParentDoc($oSlide)
+	$oDoc = __LOImpress_GetParentDoc($oObj)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$oShape = $oDoc.createInstance("com.sun.star.drawing.CustomShape")
@@ -2542,10 +2543,10 @@ Func __LOImpress_DrawShape_CreateSymbol(ByRef $oSlide, $iWidth, $iHeight, $iX, $
 	$tProp = __LO_SetPropertyValue("Type", "")
 	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-	$oShape.Name = __LOImpress_GetShapeName($oSlide, "Shape ")
+	$oShape.Name = __LOImpress_GetShapeName($oObj, "Shape ")
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	$oSlide.add($oShape)
+	$oObj.add($oShape)
 
 	Switch $iShapeType
 		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_DIAMOND
@@ -2618,8 +2619,8 @@ Func __LOImpress_DrawShape_CreateSymbol(ByRef $oSlide, $iWidth, $iHeight, $iX, $
 	$tPos = $oShape.Position()
 	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	$tPos.X = ($iX = -1) ? (Int(($oSlide.Width() - $iWidth) / 2)) : ($iX)
-	$tPos.Y = ($iY = -1) ? (Int(($oSlide.Height() - $iHeight) / 2)) : ($iY)
+	$tPos.X = ($iX = -1) ? (Int(($oObj.Width() - $iWidth) / 2)) : ($iX)
+	$tPos.Y = ($iY = -1) ? (Int(($oObj.Height() - $iHeight) / 2)) : ($iY)
 
 	$oShape.Position = $tPos
 
@@ -4113,7 +4114,7 @@ EndFunc   ;==>__LOImpress_Format
 ; Name ..........: __LOImpress_GetParentDoc
 ; Description ...: Retrieve the Document Object from a Slide, Master Slide, Notes or Handout.
 ; Syntax ........: __LOImpress_GetParentDoc(ByRef $oObj)
-; Parameters ....: $oObj                - A Slide, Master Slide, Notes or Handout object returned by a previous applicable function.
+; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning Parent Document Object.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -4146,6 +4147,7 @@ Func __LOImpress_GetParentDoc(ByRef $oObj)
 		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Else
+
 		Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 	EndIf
 
