@@ -1349,8 +1349,8 @@ EndFunc   ;==>_LOImpress_DrawShapePointsGetCount
 ;                  @Error: 1, @Extended: 3 = $iPoint not an Integer, less than 1 or greater than number of points in the shape.
 ;                  @Error: 1, @Extended: 4 = $iX not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iY not an Integer
-;                  @Error: 1, @Extended: 6 = $PointType not an Integer, less than 0 or greater than 3, or equal to 2.
-;                  @Error: 1, @Extended: 7 = $PointType called with other than Normal while $iPoint is referencing first or last point.
+;                  @Error: 1, @Extended: 6 = $iPointType not an Integer, less than 0 or greater than 3, or equal to 2.
+;                  @Error: 1, @Extended: 7 = $iPointType called with other than Normal while $iPoint is referencing first or last point.
 ;                  @Error: 1, @Extended: 8 = $bIsCurve not a Boolean.
 ;                  @Error: 1, @Extended: 9 = $bIsCurve cannot be set for last point in a shape.
 ;                  --Processing Errors--

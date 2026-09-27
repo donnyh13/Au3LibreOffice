@@ -997,7 +997,7 @@ EndFunc   ;==>_LOImpress_ShapeCharFont
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $FontColor
+;                  |                               1 = Error setting $iFontColor
 ;                  |                               2 = Error setting $iTransparency.
 ;                  |                               4 = Error setting $iHighlight
 ;                  --Version Related Errors--
@@ -1627,8 +1627,8 @@ EndFunc   ;==>_LOImpress_ShapeImageCrop
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
-;                  @Error: 1, @Extended: 2 = $sImage not a String.
-;                  @Error: 1, @Extended: 3 = Image called in $sImage doesn't exist at given path.
+;                  @Error: 1, @Extended: 2 = $sURL not a String.
+;                  @Error: 1, @Extended: 3 = Image called in $sURL doesn't exist at given path.
 ;                  @Error: 1, @Extended: 4 = $iWidth not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iHeight not an Integer.
 ;                  @Error: 1, @Extended: 6 = $iX not an Integer.
@@ -1961,7 +1961,7 @@ EndFunc   ;==>_LOImpress_ShapeInteraction
 ;                  @Error: 1, @Extended: 5 = $bStartCenter not a Boolean.
 ;                  @Error: 1, @Extended: 6 = $bSync not a Boolean.
 ;                  @Error: 1, @Extended: 7 = $vEndStyle not a String, and not an Integer.
-;                  @Error: 1, @Extended: 8 = $vSEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 8 = $vEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 9 = $iEndWidth not an Integer, less than 0 or greater than 5004.
 ;                  @Error: 1, @Extended: 10 = $bEndCenter not a Boolean.
 ;                  --Processing Errors--
@@ -2355,8 +2355,8 @@ EndFunc   ;==>_LOImpress_ShapeParAlignment
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
-;                  @Error: 1, @Extended: 2 = $iBeforeText not an Integer, less than 0 or greater than 1162202.
-;                  @Error: 1, @Extended: 3 = $iAfterText not an Integer, less than 0 or greater than 1162202.
+;                  @Error: 1, @Extended: 2 = $iBeforeTxt not an Integer, less than 0 or greater than 1162202.
+;                  @Error: 1, @Extended: 3 = $iAfterTxt not an Integer, less than 0 or greater than 1162202.
 ;                  @Error: 1, @Extended: 4 = $iFirstLine not an Integer, less than 0 or greater than 1162202.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
@@ -3229,7 +3229,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleCharFont
 ;                  @Error: 1, @Extended: 3 = $iHighlight not an Integer, less than -1 or greater than 16777215.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $FontColor
+;                  |                               1 = Error setting $iFontColor
 ;                  |                               2 = Error setting $iHighlight
 ; Author ........: donnyh13
 ; Modified ......:
@@ -3443,7 +3443,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleGetObjByName
 ;                  @Error: 1, @Extended: 6 = $bStartCenter not a Boolean.
 ;                  @Error: 1, @Extended: 7 = $bSync not a Boolean.
 ;                  @Error: 1, @Extended: 8 = $vEndStyle not a String, and not an Integer.
-;                  @Error: 1, @Extended: 9 = $vSEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 9 = $vEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 10 = $iEndWidth not an Integer, less than 0 or greater than 5004.
 ;                  @Error: 1, @Extended: 11 = $bEndCenter not a Boolean.
 ;                  --Processing Errors--
@@ -3798,8 +3798,8 @@ EndFunc   ;==>_LOImpress_ShapePresStyleParAlignment
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPresStyle not an Object.
-;                  @Error: 1, @Extended: 2 = $iBeforeText not an Integer, less than 0 or greater than 1162202.
-;                  @Error: 1, @Extended: 3 = $iAfterText not an Integer, less than 0 or greater than 1162202.
+;                  @Error: 1, @Extended: 2 = $iBeforeTxt not an Integer, less than 0 or greater than 1162202.
+;                  @Error: 1, @Extended: 3 = $iAfterTxt not an Integer, less than 0 or greater than 1162202.
 ;                  @Error: 1, @Extended: 4 = $iFirstLine not an Integer, less than 0 or greater than 1162202.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
@@ -4967,7 +4967,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleCharFont
 ;                  @Error: 1, @Extended: 3 = $iHighlight not an Integer, less than -1 or greater than 16777215.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $FontColor
+;                  |                               1 = Error setting $iFontColor
 ;                  |                               2 = Error setting $iHighlight
 ; Author ........: donnyh13
 ; Modified ......:
@@ -5556,7 +5556,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleGetObjByName
 ;                  @Error: 1, @Extended: 6 = $bStartCenter not a Boolean.
 ;                  @Error: 1, @Extended: 7 = $bSync not a Boolean.
 ;                  @Error: 1, @Extended: 8 = $vEndStyle not a String, and not an Integer.
-;                  @Error: 1, @Extended: 9 = $vSEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 9 = $vEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 10 = $iEndWidth not an Integer, less than 0 or greater than 5004.
 ;                  @Error: 1, @Extended: 11 = $bEndCenter not a Boolean.
 ;                  --Processing Errors--
@@ -5808,8 +5808,8 @@ EndFunc   ;==>_LOImpress_ShapeStyleParAlignment
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShapeStyle not an Object.
-;                  @Error: 1, @Extended: 2 = $iBeforeText not an Integer, less than 0 or greater than 1162202.
-;                  @Error: 1, @Extended: 3 = $iAfterText not an Integer, less than 0 or greater than 1162202.
+;                  @Error: 1, @Extended: 2 = $iBeforeTxt not an Integer, less than 0 or greater than 1162202.
+;                  @Error: 1, @Extended: 3 = $iAfterTxt not an Integer, less than 0 or greater than 1162202.
 ;                  @Error: 1, @Extended: 4 = $iFirstLine not an Integer, less than 0 or greater than 1162202.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
