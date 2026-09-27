@@ -584,7 +584,7 @@ EndFunc   ;==>_LOCalc_PageStyleExists
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_PageStyleFooter
-; Description ...: Modify or retrieve Footer settings for a page style.
+; Description ...: Set or Retrieve Footer settings for a page style.
 ; Syntax ........: _LOCalc_PageStyleFooter(ByRef $oPageStyle[, $bFooterOn = Null[, $bSameLeftRight = Null[, $bSameOnFirst = Null[, $iLeftMargin = Null[, $iRightMargin = Null[, $iSpacing = Null[, $iHeight = Null[, $bAutoHeight = Null]]]]]]]])
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
 ;                  $bFooterOn           - [optional] Default is Null. If True, adds a footer to the page style.
@@ -1327,7 +1327,7 @@ EndFunc   ;==>_LOCalc_PageStyleGetObjByName
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_PageStyleHeader
-; Description ...: Modify or retrieve Header settings for a page style.
+; Description ...: Set or Retrieve Header settings for a page style.
 ; Syntax ........: _LOCalc_PageStyleHeader(ByRef $oPageStyle[, $bHeaderOn = Null[, $bSameLeftRight = Null[, $bSameOnFirst = Null[, $iLeftMargin = Null[, $iRightMargin = Null[, $iSpacing = Null[, $iHeight = Null[, $bAutoHeight = Null]]]]]]]])
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
 ;                  $bHeaderOn           - [optional] Default is Null. If True, adds a Header to the page style.
@@ -2032,7 +2032,7 @@ EndFunc   ;==>_LOCalc_PageStyleHeaderShadow
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_PageStyleLayout
-; Description ...: Modify or retrieve the Layout settings for a Page Style.
+; Description ...: Set or Retrieve the Layout settings for a Page Style.
 ; Syntax ........: _LOCalc_PageStyleLayout(ByRef $oPageStyle[, $iLayout = Null[, $iNumFormat = Null[, $bTableAlignHori = Null[, $bTableAlignVert = Null[, $sPaperTray = Null]]]]])
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
 ;                  $iLayout             - [optional] (0-4) Default is Null. Specify the current Page layout style, either Left(Even) pages, Right(Odd) pages, or both Left(Even) and Right(Odd) pages or mirrored. See Constants, $LOC_PAGE_LAYOUT_* as defined in LibreOfficeCalc_Constants.au3.
@@ -2125,7 +2125,7 @@ EndFunc   ;==>_LOCalc_PageStyleLayout
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_PageStyleMargins
-; Description ...: Modify or retrieve the margin settings for a Page Style.
+; Description ...: Set or Retrieve the margin settings for a Page Style.
 ; Syntax ........: _LOCalc_PageStyleMargins(ByRef $oPageStyle[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
 ;                  $iLeft               - [optional] Default is Null. The amount of space to leave between the left edge of the page and the document text. If you are using the Mirrored page layout, enter the amount of space to leave between the inner text margin and the inner edge of the page. Set in Hundredths of a Millimeter (HMM).
@@ -2282,7 +2282,7 @@ EndFunc   ;==>_LOCalc_PageStyleOrganizer
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_PageStylePaperFormat
-; Description ...: Modify or retrieve the paper format settings for a Page Style.
+; Description ...: Set or Retrieve the paper format settings for a Page Style.
 ; Syntax ........: _LOCalc_PageStylePaperFormat(ByRef $oPageStyle[, $iWidth = Null[, $iHeight = Null[, $bLandscape = Null]]])
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOCalc_PageStyleCreate, or _LOCalc_PageStyleGetObjByName function.
 ;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOC_PAPER_WIDTH_* as defined in LibreOfficeCalc_Constants.au3.

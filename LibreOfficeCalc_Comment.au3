@@ -196,7 +196,7 @@ EndFunc   ;==>_LOCalc_CommentAreaFillStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_CommentAreaGradient
-; Description ...: Modify or retrieve the settings for Comment Background color Gradient.
+; Description ...: Set or Retrieve the settings for Comment Background color Gradient.
 ; Syntax ........: _LOCalc_CommentAreaGradient(ByRef $oComment[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
 ; Parameters ....: $oComment            - A Comment object returned by a previous _LOCalc_CommentsGetList, _LOCalc_CommentGetObjByCell, or _LOCalc_CommentGetObjByIndex function.
 ;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOC_GRAD_NAME_* as defined in LibreOfficeCalc_Constants.au3.

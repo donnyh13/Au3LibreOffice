@@ -1286,7 +1286,7 @@ EndFunc   ;==>_LOCalc_SortFieldCreate
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_SortFieldModify
-; Description ...: Modify or retrieve the settings for a Sort Field previously created by _LOCalc_SortFieldCreate.
+; Description ...: Set or Retrieve the settings for a Sort Field previously created by _LOCalc_SortFieldCreate.
 ; Syntax ........: _LOCalc_SortFieldModify(ByRef $tSortField[, $iIndex = Null[, $iDataType = Null[, $bAscending = Null[, $bCaseSensitive = Null]]]])
 ; Parameters ....: $tSortField          - A Sort Field Struct created by a previous _LOCalc_SortFieldCreate function.
 ;                  $iIndex              - [optional] Default is Null. The Column or Row to perform the sort upon. 0 Based. 0 is the first Column/Row in the Cell Range.
