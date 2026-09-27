@@ -24,32 +24,32 @@
 ; ===============================================================================================================================
 
 ; #CURRENT# =====================================================================================================================
-; _LOImpress_FieldAuthorInsert
-; _LOImpress_FieldAuthorModify
-; _LOImpress_FieldCurrentDisplayGet
-; _LOImpress_FieldDateTimeInsert
-; _LOImpress_FieldDateTimeModify
-; _LOImpress_FieldDelete
-; _LOImpress_FieldFileNameInsert
-; _LOImpress_FieldFileNameModify
-; _LOImpress_FieldGetAnchor
-; _LOImpress_FieldHyperlinkInsert
-; _LOImpress_FieldHyperlinkModify
-; _LOImpress_FieldsGetList
-; _LOImpress_FieldSlideCountInsert
-; _LOImpress_FieldSlideNumberInsert
-; _LOImpress_FieldSlideTitleInsert
+; _LODraw_FieldAuthorInsert
+; _LODraw_FieldAuthorModify
+; _LODraw_FieldCurrentDisplayGet
+; _LODraw_FieldDateTimeInsert
+; _LODraw_FieldDateTimeModify
+; _LODraw_FieldDelete
+; _LODraw_FieldFileNameInsert
+; _LODraw_FieldFileNameModify
+; _LODraw_FieldGetAnchor
+; _LODraw_FieldHyperlinkInsert
+; _LODraw_FieldHyperlinkModify
+; _LODraw_FieldsGetList
+; _LODraw_FieldSlideCountInsert
+; _LODraw_FieldSlideNumberInsert
+; _LODraw_FieldSlideTitleInsert
 ; ===============================================================================================================================
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_FieldAuthorInsert
+; Name ..........: _LODraw_FieldAuthorInsert
 ; Description ...: Insert an Author field.
-; Syntax ........: _LOImpress_FieldAuthorInsert(ByRef $oDoc, ByRef $oTextCursor[, $bIsFixed = False[, $sAuthor = ""[, $iFormat = $LOI_FIELD_AUTH_NAME_FULL[, $bOverwrite = False]]]])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $oTextCursor         - A Text Cursor Object returned by a previous _LOImpress_ShapeCreateTextCursor function.
+; Syntax ........: _LODraw_FieldAuthorInsert(ByRef $oDoc, ByRef $oTextCursor[, $bIsFixed = False[, $sAuthor = ""[, $iFormat = $LOD_FIELD_AUTH_NAME_FULL[, $bOverwrite = False]]]])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
+;                  $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
 ;                  $bIsFixed            - [optional] Default is False. If True, the field value is fixed at the time of insertion.
 ;                  $sAuthor             - [optional] Default is "". If $bIsFixed is True, the Author name to display.
-;                  $iFormat             - [optional] (0-3) Default is $LOI_FIELD_AUTH_NAME_FULL. The format to display the Author. See Constants, $LOI_FIELD_AUTH_NAME_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iFormat             - [optional] (0-3) Default is $LOD_FIELD_AUTH_NAME_FULL. The format to display the Author. See Constants, $LOD_FIELD_AUTH_NAME_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully inserted the field, returning its Object.
@@ -59,7 +59,7 @@
 ;                  @Error: 1, @Extended: 2 = $oTextCursor not an Object.
 ;                  @Error: 1, @Extended: 3 = $bIsFixed not a Boolean.
 ;                  @Error: 1, @Extended: 4 = $sAuthor not a String.
-;                  @Error: 1, @Extended: 5 = $iFormat not an Integer, less than 0 or greater than 3. See Constants, $LOI_FIELD_AUTH_NAME_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iFormat not an Integer, less than 0 or greater than 3. See Constants, $LOD_FIELD_AUTH_NAME_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 6 = $bOverwrite not a Boolean.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to Create a "com.sun.star.text.TextField.Author" Object.
@@ -68,12 +68,12 @@
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Setting $iFormat while the field is fixed, seems to do nothing.
-; Related .......: _LOImpress_FieldAuthorModify, _LOImpress_FieldDelete
+; Related .......: _LODraw_FieldAuthorModify, _LODraw_FieldDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_FieldAuthorInsert(ByRef $oDoc, ByRef $oTextCursor, $bIsFixed = False, $sAuthor = "", $iFormat = $LOI_FIELD_AUTH_NAME_FULL, $bOverwrite = False)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_FieldAuthorInsert(ByRef $oDoc, ByRef $oTextCursor, $bIsFixed = False, $sAuthor = "", $iFormat = $LOD_FIELD_AUTH_NAME_FULL, $bOverwrite = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oTextField, $oTextFieldReturn
@@ -82,7 +82,7 @@ Func _LOImpress_FieldAuthorInsert(ByRef $oDoc, ByRef $oTextCursor, $bIsFixed = F
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsBool($bIsFixed) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not IsString($sAuthor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If Not __LO_IntIsBetween($iFormat, $LOI_FIELD_AUTH_NAME_FULL, $LOI_FIELD_AUTH_NAME_INITIALS) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If Not __LO_IntIsBetween($iFormat, $LOD_FIELD_AUTH_NAME_FULL, $LOD_FIELD_AUTH_NAME_INITIALS) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not IsBool($bOverwrite) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 	$oTextField = $oDoc.createInstance("com.sun.star.text.TextField.Author")
@@ -97,20 +97,20 @@ Func _LOImpress_FieldAuthorInsert(ByRef $oDoc, ByRef $oTextCursor, $bIsFixed = F
 	$oTextCursor.Text.insertTextContent($oTextCursor, $oTextField, $bOverwrite)
 
 	; Have to retrieve the Field's Object again, otherwise the Field Object seems invalid once inserted (Can't be used for modifying the field etc.).
-	$oTextFieldReturn = __LOImpress_FieldGetObj($oTextCursor, $LOI_FIELD_TYPE_AUTHOR)
+	$oTextFieldReturn = __LODraw_FieldGetObj($oTextCursor, $LOD_FIELD_TYPE_AUTHOR)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oTextFieldReturn)
-EndFunc   ;==>_LOImpress_FieldAuthorInsert
+EndFunc   ;==>_LODraw_FieldAuthorInsert
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_FieldAuthorModify
+; Name ..........: _LODraw_FieldAuthorModify
 ; Description ...: Set or Retrieve the settings of a Author field.
-; Syntax ........: _LOImpress_FieldAuthorModify(ByRef $oAuthorField[, $bIsFixed = Null[, $sAuthor = Null[, $iFormat = Null]]])
-; Parameters ....: $oAuthorField        - An Author Field Object returned by a previous _LOImpress_FieldFileNameInsert or _LOImpress_FieldsGetList function.
+; Syntax ........: _LODraw_FieldAuthorModify(ByRef $oAuthorField[, $bIsFixed = Null[, $sAuthor = Null[, $iFormat = Null]]])
+; Parameters ....: $oAuthorField        - An Author Field Object returned by a previous _LODraw_FieldFileNameInsert or _LODraw_FieldsGetList function.
 ;                  $bIsFixed            - [optional] Default is Null. If True, the field value is fixed at the time of insertion.
 ;                  $sAuthor             - [optional] Default is Null. If $bIsFixed is True, the Author name to display.
-;                  $iFormat             - [optional] (0-3) Default is Null. The format to display the Author name. See Constants, $LOI_FIELD_AUTH_NAME_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iFormat             - [optional] (0-3) Default is Null. The format to display the Author name. See Constants, $LOD_FIELD_AUTH_NAME_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -119,7 +119,7 @@ EndFunc   ;==>_LOImpress_FieldAuthorInsert
 ;                  @Error: 1, @Extended: 1 = $oAuthorField not an Object.
 ;                  @Error: 1, @Extended: 2 = $bIsFixed not a Boolean.
 ;                  @Error: 1, @Extended: 3 = $sAuthor not a String.
-;                  @Error: 1, @Extended: 4 = $iFormat not an Integer, less than 0 or greater than 3. See Constants, $LOI_FIELD_AUTH_NAME_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iFormat not an Integer, less than 0 or greater than 3. See Constants, $LOD_FIELD_AUTH_NAME_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bIsFixed
@@ -129,12 +129,12 @@ EndFunc   ;==>_LOImpress_FieldAuthorInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_FieldAuthorInsert
+; Related .......: _LODraw_FieldAuthorInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_FieldAuthorModify(ByRef $oAuthorField, $bIsFixed = Null, $sAuthor = Null, $iFormat = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_FieldAuthorModify(ByRef $oAuthorField, $bIsFixed = Null, $sAuthor = Null, $iFormat = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -163,20 +163,20 @@ Func _LOImpress_FieldAuthorModify(ByRef $oAuthorField, $bIsFixed = Null, $sAutho
 	EndIf
 
 	If ($iFormat <> Null) Then
-		If Not __LO_IntIsBetween($iFormat, $LOI_FIELD_AUTH_NAME_FULL, $LOI_FIELD_AUTH_NAME_INITIALS) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not __LO_IntIsBetween($iFormat, $LOD_FIELD_AUTH_NAME_FULL, $LOD_FIELD_AUTH_NAME_INITIALS) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		$oAuthorField.AuthorFormat = $iFormat
 		$iError = ($oAuthorField.AuthorFormat() = $iFormat) ? ($iError) : (BitOR($iError, 4))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_FieldAuthorModify
+EndFunc   ;==>_LODraw_FieldAuthorModify
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_FieldCurrentDisplayGet
+; Name ..........: _LODraw_FieldCurrentDisplayGet
 ; Description ...: Retrieve the current data displayed by a field.
-; Syntax ........: _LOImpress_FieldCurrentDisplayGet(ByRef $oField)
-; Parameters ....: $oField              - A Field Object as returned from a previous insert, or _LOImpress_FieldsGetList function.
+; Syntax ........: _LODraw_FieldCurrentDisplayGet(ByRef $oField)
+; Parameters ....: $oField              - A Field Object as returned from a previous insert, or _LODraw_FieldsGetList function.
 ; Return values .: Success: String
 ;                  @Error: 0, @Extended: 0, Return: String = Success. Returning current Field display content in String format.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -192,12 +192,12 @@ EndFunc   ;==>_LOImpress_FieldAuthorModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Both Slide Title and Slide Number fields may return "<slide-name>" or "<number>" respectively instead of their current display value. I don't know why.
-; Related .......: _LOImpress_FieldsGetList
+; Related .......: _LODraw_FieldsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_FieldCurrentDisplayGet(ByRef $oField)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_FieldCurrentDisplayGet(ByRef $oField)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $sPresentation
@@ -238,18 +238,18 @@ Func _LOImpress_FieldCurrentDisplayGet(ByRef $oField)
 	If Not IsString($sPresentation) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $sPresentation)
-EndFunc   ;==>_LOImpress_FieldCurrentDisplayGet
+EndFunc   ;==>_LODraw_FieldCurrentDisplayGet
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_FieldDateTimeInsert
+; Name ..........: _LODraw_FieldDateTimeInsert
 ; Description ...: Insert a Date or Time Field.
-; Syntax ........: _LOImpress_FieldDateTimeInsert(ByRef $oDoc, ByRef $oTextCursor[, $bIsDate = True[, $bIsFixed = False[, $tDateTime = Null[, $iFormat = $LOI_FIELD_DATE_FMT_STANDARD_SHORT[, $bOverwrite = False]]]]])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $oTextCursor         - A Text Cursor Object returned by a previous _LOImpress_ShapeCreateTextCursor function.
+; Syntax ........: _LODraw_FieldDateTimeInsert(ByRef $oDoc, ByRef $oTextCursor[, $bIsDate = True[, $bIsFixed = False[, $tDateTime = Null[, $iFormat = $LOD_FIELD_DATE_FMT_STANDARD_SHORT[, $bOverwrite = False]]]]])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
+;                  $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
 ;                  $bIsDate             - [optional] Default is True. If True, the inserted Field will be a Date Field, if False, the Field will be a Time Field.
 ;                  $bIsFixed            - [optional] Default is False. If True, the field value is fixed at the time of insertion.
-;                  $tDateTime           - [optional] Default is Null. If $bIsFixed is True, The date or time to display for the comment, created previously by _LOImpress_DateStructCreate. If left as Null, the current date or time is used.
-;                  $iFormat             - [optional] (2-9) Default is $LOI_FIELD_DATE_FMT_STANDARD_SHORT. The format to display the date or time in. See Constants, $LOI_FIELD_TIME_FMT_* or $LOI_FIELD_DATE_FMT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $tDateTime           - [optional] Default is Null. If $bIsFixed is True, The date or time to display for the comment, created previously by _LODraw_DateStructCreate. If left as Null, the current date or time is used.
+;                  $iFormat             - [optional] (2-9) Default is $LOD_FIELD_DATE_FMT_STANDARD_SHORT. The format to display the date or time in. See Constants, $LOD_FIELD_TIME_FMT_* or $LOD_FIELD_DATE_FMT_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully inserted the field, returning its Object.
@@ -260,8 +260,8 @@ EndFunc   ;==>_LOImpress_FieldCurrentDisplayGet
 ;                  @Error: 1, @Extended: 3 = $bIsDate not a Boolean.
 ;                  @Error: 1, @Extended: 4 = $bIsFixed not a Boolean.
 ;                  @Error: 1, @Extended: 5 = $tDateTime not an Object.
-;                  @Error: 1, @Extended: 6 = $bIsDate is True and $iFormat not an Integer, less than 2 or greater than 9. See Constants, $LOI_FIELD_DATE_FMT_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 7 = $bIsDate is False and $iFormat not an Integer, less than 2 or greater than 8. See Constants, $LOI_FIELD_TIME_FMT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $bIsDate is True and $iFormat not an Integer, less than 2 or greater than 9. See Constants, $LOD_FIELD_DATE_FMT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 7 = $bIsDate is False and $iFormat not an Integer, less than 2 or greater than 8. See Constants, $LOD_FIELD_TIME_FMT_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 8 = $bOverwrite not a Boolean.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to Create a "com.sun.star.text.TextField.DateTime" Object.
@@ -269,13 +269,13 @@ EndFunc   ;==>_LOImpress_FieldCurrentDisplayGet
 ;                  @Error: 3, @Extended: 1 = Failed to identify and retrieve Field object after insertion.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: If the Field is a Time field, $LOI_FIELD_DATE_FMT_STANDARD_SHORT is the equivalent of $LOI_FIELD_TIME_FMT_STANDARD.
-; Related .......: _LOImpress_FieldDateTimeModify, _LOImpress_FieldDelete, _LOImpress_DateStructCreate
+; Remarks .......: If the Field is a Time field, $LOD_FIELD_DATE_FMT_STANDARD_SHORT is the equivalent of $LOD_FIELD_TIME_FMT_STANDARD.
+; Related .......: _LODraw_FieldDateTimeModify, _LODraw_FieldDelete, _LODraw_DateStructCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_FieldDateTimeInsert(ByRef $oDoc, ByRef $oTextCursor, $bIsDate = True, $bIsFixed = False, $tDateTime = Null, $iFormat = $LOI_FIELD_DATE_FMT_STANDARD_SHORT, $bOverwrite = False)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_FieldDateTimeInsert(ByRef $oDoc, ByRef $oTextCursor, $bIsDate = True, $bIsFixed = False, $tDateTime = Null, $iFormat = $LOD_FIELD_DATE_FMT_STANDARD_SHORT, $bOverwrite = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oTextField, $oTextFieldReturn
@@ -285,8 +285,8 @@ Func _LOImpress_FieldDateTimeInsert(ByRef $oDoc, ByRef $oTextCursor, $bIsDate = 
 	If Not IsBool($bIsDate) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not IsBool($bIsFixed) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If ($tDateTime <> Null) And Not IsObj($tDateTime) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-	If ($bIsDate And Not __LO_IntIsBetween($iFormat, $LOI_FIELD_DATE_FMT_STANDARD_SHORT, $LOI_FIELD_DATE_FMT_DOW_MMMM_DD_YYYY)) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-	If Not $bIsDate And Not __LO_IntIsBetween($iFormat, $LOI_FIELD_TIME_FMT_STANDARD, $LOI_FIELD_TIME_FMT_12H_HMS_MS_AMPM) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+	If ($bIsDate And Not __LO_IntIsBetween($iFormat, $LOD_FIELD_DATE_FMT_STANDARD_SHORT, $LOD_FIELD_DATE_FMT_DOW_MMMM_DD_YYYY)) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+	If Not $bIsDate And Not __LO_IntIsBetween($iFormat, $LOD_FIELD_TIME_FMT_STANDARD, $LOD_FIELD_TIME_FMT_12H_HMS_MS_AMPM) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 	If Not IsBool($bOverwrite) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
 	$oTextField = $oDoc.createInstance("com.sun.star.text.TextField.DateTime")
@@ -302,20 +302,20 @@ Func _LOImpress_FieldDateTimeInsert(ByRef $oDoc, ByRef $oTextCursor, $bIsDate = 
 	$oTextCursor.Text.insertTextContent($oTextCursor, $oTextField, $bOverwrite)
 
 	; Have to retrieve the Field's Object again, otherwise the Field Object seems invalid once inserted (Can't be used for modifying the field etc.).
-	$oTextFieldReturn = __LOImpress_FieldGetObj($oTextCursor, $LOI_FIELD_TYPE_DATE_TIME)
+	$oTextFieldReturn = __LODraw_FieldGetObj($oTextCursor, $LOD_FIELD_TYPE_DATE_TIME)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oTextFieldReturn)
-EndFunc   ;==>_LOImpress_FieldDateTimeInsert
+EndFunc   ;==>_LODraw_FieldDateTimeInsert
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_FieldDateTimeModify
+; Name ..........: _LODraw_FieldDateTimeModify
 ; Description ...: Set or Retrieve the settings of a Date/Time field.
-; Syntax ........: _LOImpress_FieldDateTimeModify(ByRef $oDateTimeField[, $bIsFixed = Null[, $tDateTime = Null[, $iFormat = Null]]])
-; Parameters ....: $oDateTimeField      - A Date/Time Field Object returned by a previous _LOImpress_FieldDateTimeInsert or _LOImpress_FieldsGetList function.
+; Syntax ........: _LODraw_FieldDateTimeModify(ByRef $oDateTimeField[, $bIsFixed = Null[, $tDateTime = Null[, $iFormat = Null]]])
+; Parameters ....: $oDateTimeField      - A Date/Time Field Object returned by a previous _LODraw_FieldDateTimeInsert or _LODraw_FieldsGetList function.
 ;                  $bIsFixed            - [optional] Default is Null. If True, the field value is fixed at the time of insertion.
-;                  $tDateTime           - [optional] Default is Null. If $bIsFixed is True, The date or time to display for the comment, created previously by _LOImpress_DateStructCreate. If left as Null, the current date or time is used.
-;                  $iFormat             - [optional] (2-9) Default is Null. The format to display the date or time in. See Constants, $LOI_FIELD_TIME_FMT_* or $LOI_FIELD_DATE_FMT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $tDateTime           - [optional] Default is Null. If $bIsFixed is True, The date or time to display for the comment, created previously by _LODraw_DateStructCreate. If left as Null, the current date or time is used.
+;                  $iFormat             - [optional] (2-9) Default is Null. The format to display the date or time in. See Constants, $LOD_FIELD_TIME_FMT_* or $LOD_FIELD_DATE_FMT_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current Date Field settings in a 3 Element Array with values in order of function parameters. @Extended is set to 1.
@@ -325,8 +325,8 @@ EndFunc   ;==>_LOImpress_FieldDateTimeInsert
 ;                  @Error: 1, @Extended: 1 = $oDateTimeField not an Object.
 ;                  @Error: 1, @Extended: 2 = $bIsFixed not a Boolean.
 ;                  @Error: 1, @Extended: 3 = $tDateTime not an Object.
-;                  @Error: 1, @Extended: 4 = Field is a Date and $iFormat not an Integer, less than 2 or greater than 9. See Constants, $LOI_FIELD_DATE_FMT_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 5 = Field is a Time and $iFormat not an Integer, less than 2 or greater than 8. See Constants, $LOI_FIELD_TIME_FMT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = Field is a Date and $iFormat not an Integer, less than 2 or greater than 9. See Constants, $LOD_FIELD_DATE_FMT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 5 = Field is a Time and $iFormat not an Integer, less than 2 or greater than 8. See Constants, $LOD_FIELD_TIME_FMT_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bIsFixed
@@ -336,13 +336,13 @@ EndFunc   ;==>_LOImpress_FieldDateTimeInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-;                  To retrieve the current date/time's values pass the returned structure from to function to _LOImpress_DateStructModify.
-; Related .......: _LOImpress_FieldDateTimeInsert, _LOImpress_DateStructModify, _LOImpress_FieldCurrentDisplayGet
+;                  To retrieve the current date/time's values pass the returned structure from to function to _LODraw_DateStructModify.
+; Related .......: _LODraw_FieldDateTimeInsert, _LODraw_DateStructModify, _LODraw_FieldCurrentDisplayGet
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_FieldDateTimeModify(ByRef $oDateTimeField, $bIsFixed = Null, $tDateTime = Null, $iFormat = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_FieldDateTimeModify(ByRef $oDateTimeField, $bIsFixed = Null, $tDateTime = Null, $iFormat = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0, $iExtended
@@ -370,15 +370,15 @@ Func _LOImpress_FieldDateTimeModify(ByRef $oDateTimeField, $bIsFixed = Null, $tD
 
 		$oDateTimeField.DateTime = $tDateTime
 		; If not comparing a Date, I will be comparing a Time, so reverse the IsDate value.
-		$iError = (__LOImpress_DateStructCompare($oDateTimeField.DateTime(), $tDateTime, $oDateTimeField.IsDate(), ($oDateTimeField.IsDate() = True) ? (False) : (True))) ? ($iError) : (BitOR($iError, 2))
+		$iError = (__LODraw_DateStructCompare($oDateTimeField.DateTime(), $tDateTime, $oDateTimeField.IsDate(), ($oDateTimeField.IsDate() = True) ? (False) : (True))) ? ($iError) : (BitOR($iError, 2))
 	EndIf
 
 	If ($iFormat <> Null) Then
 		If $oDateTimeField.IsDate() Then
-			If Not __LO_IntIsBetween($iFormat, $LOI_FIELD_DATE_FMT_STANDARD_SHORT, $LOI_FIELD_DATE_FMT_DOW_MMMM_DD_YYYY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+			If Not __LO_IntIsBetween($iFormat, $LOD_FIELD_DATE_FMT_STANDARD_SHORT, $LOD_FIELD_DATE_FMT_DOW_MMMM_DD_YYYY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		Else
-			If Not __LO_IntIsBetween($iFormat, $LOI_FIELD_TIME_FMT_STANDARD, $LOI_FIELD_TIME_FMT_12H_HMS_MS_AMPM) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+			If Not __LO_IntIsBetween($iFormat, $LOD_FIELD_TIME_FMT_STANDARD, $LOD_FIELD_TIME_FMT_12H_HMS_MS_AMPM) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 		EndIf
 
 		$oDateTimeField.NumberFormat = $iFormat
@@ -386,13 +386,13 @@ Func _LOImpress_FieldDateTimeModify(ByRef $oDateTimeField, $bIsFixed = Null, $tD
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_FieldDateTimeModify
+EndFunc   ;==>_LODraw_FieldDateTimeModify
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_FieldDelete
+; Name ..........: _LODraw_FieldDelete
 ; Description ...: Delete a Field from a Document.
-; Syntax ........: _LOImpress_FieldDelete(ByRef $oField)
-; Parameters ....: $oField              - A Field Object as returned from a previous insert, or _LOImpress_FieldsGetList function.
+; Syntax ........: _LODraw_FieldDelete(ByRef $oField)
+; Parameters ....: $oField              - A Field Object as returned from a previous insert, or _LODraw_FieldsGetList function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully deleted the field.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -403,12 +403,12 @@ EndFunc   ;==>_LOImpress_FieldDateTimeModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_FieldsGetList
+; Related .......: _LODraw_FieldsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_FieldDelete(ByRef $oField)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_FieldDelete(ByRef $oField)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oCursor
@@ -423,16 +423,16 @@ Func _LOImpress_FieldDelete(ByRef $oField)
 	$oCursor.Text.insertString($oCursor, "", True)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LOImpress_FieldDelete
+EndFunc   ;==>_LODraw_FieldDelete
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_FieldFileNameInsert
+; Name ..........: _LODraw_FieldFileNameInsert
 ; Description ...: Insert a File Name field.
-; Syntax ........: _LOImpress_FieldFileNameInsert(ByRef $oDoc, ByRef $oTextCursor[, $bIsFixed = False[, $iFormat = $LOI_FIELD_FILENAME_FULL_PATH[, $bOverwrite = False]]])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $oTextCursor         - A Text Cursor Object returned by a previous _LOImpress_ShapeCreateTextCursor function.
+; Syntax ........: _LODraw_FieldFileNameInsert(ByRef $oDoc, ByRef $oTextCursor[, $bIsFixed = False[, $iFormat = $LOD_FIELD_FILENAME_FULL_PATH[, $bOverwrite = False]]])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
+;                  $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
 ;                  $bIsFixed            - [optional] Default is False. If True, the field value is fixed at the time of insertion.
-;                  $iFormat             - [optional] (0-3) Default is $LOI_FIELD_FILENAME_FULL_PATH. The format to display the File name/path. See Constants, $LOI_FIELD_FILENAME_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iFormat             - [optional] (0-3) Default is $LOD_FIELD_FILENAME_FULL_PATH. The format to display the File name/path. See Constants, $LOD_FIELD_FILENAME_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully inserted the field, returning its Object.
@@ -441,7 +441,7 @@ EndFunc   ;==>_LOImpress_FieldDelete
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oTextCursor not an Object.
 ;                  @Error: 1, @Extended: 3 = $bIsFixed not a Boolean.
-;                  @Error: 1, @Extended: 4 = $iFormat not an Integer, less than 0 or greater than 3. See Constants, $LOI_FIELD_FILENAME_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iFormat not an Integer, less than 0 or greater than 3. See Constants, $LOD_FIELD_FILENAME_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 5 = $bOverwrite not a Boolean.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to Create a "com.sun.star.text.TextField.FileName" Object.
@@ -450,12 +450,12 @@ EndFunc   ;==>_LOImpress_FieldDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_FieldSlideTitleInsert, _LOImpress_FieldFileNameModify, _LOImpress_FieldDelete
+; Related .......: _LODraw_FieldSlideTitleInsert, _LODraw_FieldFileNameModify, _LODraw_FieldDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_FieldFileNameInsert(ByRef $oDoc, ByRef $oTextCursor, $bIsFixed = False, $iFormat = $LOI_FIELD_FILENAME_FULL_PATH, $bOverwrite = False)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_FieldFileNameInsert(ByRef $oDoc, ByRef $oTextCursor, $bIsFixed = False, $iFormat = $LOD_FIELD_FILENAME_FULL_PATH, $bOverwrite = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oTextField, $oTextFieldReturn
@@ -463,7 +463,7 @@ Func _LOImpress_FieldFileNameInsert(ByRef $oDoc, ByRef $oTextCursor, $bIsFixed =
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsBool($bIsFixed) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If Not __LO_IntIsBetween($iFormat, $LOI_FIELD_FILENAME_FULL_PATH, $LOI_FIELD_FILENAME_NAME_AND_EXT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not __LO_IntIsBetween($iFormat, $LOD_FIELD_FILENAME_FULL_PATH, $LOD_FIELD_FILENAME_NAME_AND_EXT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsBool($bOverwrite) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 	$oTextField = $oDoc.createInstance("com.sun.star.text.TextField.FileName")
@@ -475,19 +475,19 @@ Func _LOImpress_FieldFileNameInsert(ByRef $oDoc, ByRef $oTextCursor, $bIsFixed =
 	$oTextCursor.Text.insertTextContent($oTextCursor, $oTextField, $bOverwrite)
 
 	; Have to retrieve the Field's Object again, otherwise the Field Object seems invalid once inserted (Can't be used for modifying the field etc.).
-	$oTextFieldReturn = __LOImpress_FieldGetObj($oTextCursor, $LOI_FIELD_TYPE_FILE_NAME)
+	$oTextFieldReturn = __LODraw_FieldGetObj($oTextCursor, $LOD_FIELD_TYPE_FILE_NAME)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oTextFieldReturn)
-EndFunc   ;==>_LOImpress_FieldFileNameInsert
+EndFunc   ;==>_LODraw_FieldFileNameInsert
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_FieldFileNameModify
+; Name ..........: _LODraw_FieldFileNameModify
 ; Description ...: Set or Retrieve the settings of a File Name field.
-; Syntax ........: _LOImpress_FieldFileNameModify(ByRef $oFileNameField[, $bIsFixed = Null[, $iFormat = Null]])
-; Parameters ....: $oFileNameField      - A File Name Field Object returned by a previous _LOImpress_FieldFileNameInsert or _LOImpress_FieldsGetList function.
+; Syntax ........: _LODraw_FieldFileNameModify(ByRef $oFileNameField[, $bIsFixed = Null[, $iFormat = Null]])
+; Parameters ....: $oFileNameField      - A File Name Field Object returned by a previous _LODraw_FieldFileNameInsert or _LODraw_FieldsGetList function.
 ;                  $bIsFixed            - [optional] Default is Null. If True, the field value is fixed at the time of insertion.
-;                  $iFormat             - [optional] (0-3) Default is Null. The format to display the File name/path. See Constants, $LOI_FIELD_FILENAME_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iFormat             - [optional] (0-3) Default is Null. The format to display the File name/path. See Constants, $LOD_FIELD_FILENAME_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
@@ -495,7 +495,7 @@ EndFunc   ;==>_LOImpress_FieldFileNameInsert
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFileNameField not an Object.
 ;                  @Error: 1, @Extended: 2 = $bIsFixed not a Boolean.
-;                  @Error: 1, @Extended: 3 = $iFormat not an Integer, less than 0 or greater than 3. See Constants, $LOI_FIELD_FILENAME_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iFormat not an Integer, less than 0 or greater than 3. See Constants, $LOD_FIELD_FILENAME_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bIsFixed
@@ -504,12 +504,12 @@ EndFunc   ;==>_LOImpress_FieldFileNameInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_FieldFileNameInsert
+; Related .......: _LODraw_FieldFileNameInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_FieldFileNameModify(ByRef $oFileNameField, $bIsFixed = Null, $iFormat = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_FieldFileNameModify(ByRef $oFileNameField, $bIsFixed = Null, $iFormat = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -531,20 +531,20 @@ Func _LOImpress_FieldFileNameModify(ByRef $oFileNameField, $bIsFixed = Null, $iF
 	EndIf
 
 	If ($iFormat <> Null) Then
-		If Not __LO_IntIsBetween($iFormat, $LOI_FIELD_FILENAME_FULL_PATH, $LOI_FIELD_FILENAME_NAME_AND_EXT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not __LO_IntIsBetween($iFormat, $LOD_FIELD_FILENAME_FULL_PATH, $LOD_FIELD_FILENAME_NAME_AND_EXT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		$oFileNameField.FileFormat = $iFormat
 		$iError = ($oFileNameField.FileFormat() = $iFormat) ? ($iError) : (BitOR($iError, 2))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_FieldFileNameModify
+EndFunc   ;==>_LODraw_FieldFileNameModify
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_FieldGetAnchor
+; Name ..........: _LODraw_FieldGetAnchor
 ; Description ...: Retrieve the Anchor Cursor Object for a Field.
-; Syntax ........: _LOImpress_FieldGetAnchor(ByRef $oField)
-; Parameters ....: $oField              - A Field Object as returned from a previous insert, or _LOImpress_FieldsGetList function.
+; Syntax ........: _LODraw_FieldGetAnchor(ByRef $oField)
+; Parameters ....: $oField              - A Field Object as returned from a previous insert, or _LODraw_FieldsGetList function.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested Field Anchor Cursor Object.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -555,12 +555,12 @@ EndFunc   ;==>_LOImpress_FieldFileNameModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_FieldsGetList, _LOImpress_CursorInsertString, _LOImpress_CursorMove
+; Related .......: _LODraw_FieldsGetList, _LODraw_CursorInsertString, _LODraw_CursorMove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_FieldGetAnchor(ByRef $oField)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_FieldGetAnchor(ByRef $oField)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oFieldAnchor
@@ -571,14 +571,14 @@ Func _LOImpress_FieldGetAnchor(ByRef $oField)
 	If Not IsObj($oFieldAnchor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oFieldAnchor)
-EndFunc   ;==>_LOImpress_FieldGetAnchor
+EndFunc   ;==>_LODraw_FieldGetAnchor
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_FieldHyperlinkInsert
+; Name ..........: _LODraw_FieldHyperlinkInsert
 ; Description ...: Insert a Hyperlink field.
-; Syntax ........: _LOImpress_FieldHyperlinkInsert(ByRef $oDoc, ByRef $oTextCursor, $sURL[, $sText = ""[, $sTargetFrame = ""[, $bOverwrite = False]]])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $oTextCursor         - A Text Cursor Object returned by a previous _LOImpress_ShapeCreateTextCursor function.
+; Syntax ........: _LODraw_FieldHyperlinkInsert(ByRef $oDoc, ByRef $oTextCursor, $sURL[, $sText = ""[, $sTargetFrame = ""[, $bOverwrite = False]]])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
+;                  $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
 ;                  $sURL                - The URL/Hyperlink Address.
 ;                  $sText               - [optional] Default is "". The Text to display instead of the URL. "" means the URL itself is displayed.
 ;                  $sTargetFrame        - [optional] Default is "". Enter the name of the frame that you want the linked file to open in. Pass an empty string to skip.
@@ -600,12 +600,12 @@ EndFunc   ;==>_LOImpress_FieldGetAnchor
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_FieldHyperlinkModify, _LOImpress_FieldDelete
+; Related .......: _LODraw_FieldHyperlinkModify, _LODraw_FieldDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_FieldHyperlinkInsert(ByRef $oDoc, ByRef $oTextCursor, $sURL, $sText = "", $sTargetFrame = "", $bOverwrite = False)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_FieldHyperlinkInsert(ByRef $oDoc, ByRef $oTextCursor, $sURL, $sText = "", $sTargetFrame = "", $bOverwrite = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oTextField, $oTextFieldReturn
@@ -629,17 +629,17 @@ Func _LOImpress_FieldHyperlinkInsert(ByRef $oDoc, ByRef $oTextCursor, $sURL, $sT
 	$oTextCursor.Text.insertTextContent($oTextCursor, $oTextField, $bOverwrite)
 
 	; Have to retrieve the Field's Object again, otherwise the Field Object seems invalid once inserted (Can't be used for modifying the field etc.).
-	$oTextFieldReturn = __LOImpress_FieldGetObj($oTextCursor, $LOI_FIELD_TYPE_URL)
+	$oTextFieldReturn = __LODraw_FieldGetObj($oTextCursor, $LOD_FIELD_TYPE_URL)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oTextFieldReturn)
-EndFunc   ;==>_LOImpress_FieldHyperlinkInsert
+EndFunc   ;==>_LODraw_FieldHyperlinkInsert
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_FieldHyperlinkModify
+; Name ..........: _LODraw_FieldHyperlinkModify
 ; Description ...: Set or Retrieve the settings of a Hyperlink/URL field.
-; Syntax ........: _LOImpress_FieldHyperlinkModify(ByRef $oHyperlinkField[, $sURL = Null[, $sText = Null[, $sTargetFrame = Null]]])
-; Parameters ....: $oHyperlinkField     - A Hyperlink/URL Field Object returned by a previous _LOImpress_FieldHyperlinkInsert or _LOImpress_FieldsGetList function.
+; Syntax ........: _LODraw_FieldHyperlinkModify(ByRef $oHyperlinkField[, $sURL = Null[, $sText = Null[, $sTargetFrame = Null]]])
+; Parameters ....: $oHyperlinkField     - A Hyperlink/URL Field Object returned by a previous _LODraw_FieldHyperlinkInsert or _LODraw_FieldsGetList function.
 ;                  $sURL                - [optional] Default is Null. The URL/Hyperlink Address.
 ;                  $sText               - [optional] Default is Null. The Text to display instead of the URL. "" means the URL itself is displayed.
 ;                  $sTargetFrame        - [optional] Default is Null. Enter the name of the frame that you want the linked file to open in. Pass an empty string to skip.
@@ -661,12 +661,12 @@ EndFunc   ;==>_LOImpress_FieldHyperlinkInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_FieldHyperlinkInsert
+; Related .......: _LODraw_FieldHyperlinkInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_FieldHyperlinkModify(ByRef $oHyperlinkField, $sURL = Null, $sText = Null, $sTargetFrame = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_FieldHyperlinkModify(ByRef $oHyperlinkField, $sURL = Null, $sText = Null, $sTargetFrame = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -702,21 +702,21 @@ Func _LOImpress_FieldHyperlinkModify(ByRef $oHyperlinkField, $sURL = Null, $sTex
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_FieldHyperlinkModify
+EndFunc   ;==>_LODraw_FieldHyperlinkModify
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_FieldsGetList
+; Name ..........: _LODraw_FieldsGetList
 ; Description ...: Retrieve an Array of Field Objects present in a Shape.
-; Syntax ........: _LOImpress_FieldsGetList(ByRef $oTextCursor[, $iType = $LOI_FIELD_TYPE_ALL[, $bFieldTypeNum = True]])
-; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LOImpress_ShapeCreateTextCursor function.
-;                  $iType               - [optional] (1-127) Default is $LOI_FIELD_TYPE_ALL. The type of Field to search for. See Constants, $LOI_FIELD_TYPE_* as defined in LibreOfficeImpress_Constants.au3. Can be BitOr'd together.
-;                  $bFieldTypeNum       - [optional] Default is True. If True, adds a column to the array that has the Field Type Constant Integer for that particular Field, to assist in identifying the Field type. See Constants, $LOI_FIELD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+; Syntax ........: _LODraw_FieldsGetList(ByRef $oTextCursor[, $iType = $LOD_FIELD_TYPE_ALL[, $bFieldTypeNum = True]])
+; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
+;                  $iType               - [optional] (1-127) Default is $LOD_FIELD_TYPE_ALL. The type of Field to search for. See Constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeImpress_Constants.au3. Can be BitOr'd together.
+;                  $bFieldTypeNum       - [optional] Default is True. If True, adds a column to the array that has the Field Type Constant Integer for that particular Field, to assist in identifying the Field type. See Constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning Array of Text Field Objects with @Extended set to number of results. See Remarks for Array sizing.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
-;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 1 or greater than 127. (The total of all Constants added together.) See Constants, $LOI_FIELD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 1 or greater than 127. (The total of all Constants added together.) See Constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $bFieldTypeNum not a Boolean.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create a TextCursor.
@@ -730,14 +730,14 @@ EndFunc   ;==>_LOImpress_FieldHyperlinkModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Array can vary in the number of columns, if $bFieldTypeNum is called with False, the Array will be a single column. If $bFieldTypeNum is called with True, a column will be added to the array. First column will always be the Field's Object.
-;                  Setting $bFieldTypeNum to True will add a Field type Number column, matching the constants, $LOI_FIELD_TYPE_* as defined in LibreOfficeImpress_Constants.au3 for the found Field.
+;                  Setting $bFieldTypeNum to True will add a Field type Number column, matching the constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeImpress_Constants.au3 for the found Field.
 ;                  This function may fail to identify Fields if text has been inserted recently using the same Cursor.
-; Related .......: _LOImpress_FieldDelete
+; Related .......: _LODraw_FieldDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_FieldsGetList(ByRef $oTextCursor, $iType = $LOI_FIELD_TYPE_ALL, $bFieldTypeNum = True)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_FieldsGetList(ByRef $oTextCursor, $iType = $LOD_FIELD_TYPE_ALL, $bFieldTypeNum = True)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $avFieldTypes[0][0]
@@ -746,7 +746,7 @@ Func _LOImpress_FieldsGetList(ByRef $oTextCursor, $iType = $LOI_FIELD_TYPE_ALL, 
 	Local $avTextFields[1]
 
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LO_IntIsBetween($iType, $LOI_FIELD_TYPE_AUTHOR, $LOI_FIELD_TYPE_ALL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iType, $LOD_FIELD_TYPE_AUTHOR, $LOD_FIELD_TYPE_ALL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsBool($bFieldTypeNum) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	; When a Text Cursor has been used to insert Strings previous to inserting or looking for a Field, the fields sometimes are not able to be identified.
@@ -765,12 +765,12 @@ Func _LOImpress_FieldsGetList(ByRef $oTextCursor, $iType = $LOI_FIELD_TYPE_ALL, 
 			ExitLoop
 		EndIf
 
-		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+		Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 	Next
 
 	If Not IsObj($oInternalCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-	$avFieldTypes = __LOImpress_FieldTypeServices($iType)
+	$avFieldTypes = __LODraw_FieldTypeServices($iType)
 	If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 	If $bFieldTypeNum Then ReDim $avTextFields[1][2]
@@ -807,7 +807,7 @@ Func _LOImpress_FieldsGetList(ByRef $oTextCursor, $iType = $LOI_FIELD_TYPE_ALL, 
 
 						ExitLoop
 					EndIf
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 			EndIf
 		WEnd
@@ -821,14 +821,14 @@ Func _LOImpress_FieldsGetList(ByRef $oTextCursor, $iType = $LOI_FIELD_TYPE_ALL, 
 	EndIf
 
 	Return SetError($__LO_STATUS_SUCCESS, $iCount, $avTextFields)
-EndFunc   ;==>_LOImpress_FieldsGetList
+EndFunc   ;==>_LODraw_FieldsGetList
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_FieldSlideCountInsert
+; Name ..........: _LODraw_FieldSlideCountInsert
 ; Description ...: Insert a total Slide Count Field.
-; Syntax ........: _LOImpress_FieldSlideCountInsert(ByRef $oDoc, ByRef $oTextCursor[, $bOverwrite = False])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $oTextCursor         - A Text Cursor Object returned by a previous _LOImpress_ShapeCreateTextCursor function.
+; Syntax ........: _LODraw_FieldSlideCountInsert(ByRef $oDoc, ByRef $oTextCursor[, $bOverwrite = False])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
+;                  $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Map
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully inserted the field, returning its Object.
@@ -844,12 +844,12 @@ EndFunc   ;==>_LOImpress_FieldsGetList
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_FieldSlideNumberInsert, _LOImpress_FieldDelete
+; Related .......: _LODraw_FieldSlideNumberInsert, _LODraw_FieldDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_FieldSlideCountInsert(ByRef $oDoc, ByRef $oTextCursor, $bOverwrite = False)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_FieldSlideCountInsert(ByRef $oDoc, ByRef $oTextCursor, $bOverwrite = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oTextField, $oTextFieldReturn
@@ -864,18 +864,18 @@ Func _LOImpress_FieldSlideCountInsert(ByRef $oDoc, ByRef $oTextCursor, $bOverwri
 	$oTextCursor.Text.insertTextContent($oTextCursor, $oTextField, $bOverwrite)
 
 	; Have to retrieve the Field's Object again, otherwise the Field Object seems invalid once inserted (Can't be used for modifying the field etc.).
-	$oTextFieldReturn = __LOImpress_FieldGetObj($oTextCursor, $LOI_FIELD_TYPE_SLIDE_COUNT)
+	$oTextFieldReturn = __LODraw_FieldGetObj($oTextCursor, $LOD_FIELD_TYPE_SLIDE_COUNT)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oTextFieldReturn)
-EndFunc   ;==>_LOImpress_FieldSlideCountInsert
+EndFunc   ;==>_LODraw_FieldSlideCountInsert
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_FieldSlideNumberInsert
+; Name ..........: _LODraw_FieldSlideNumberInsert
 ; Description ...: Insert a Slide Number Field.
-; Syntax ........: _LOImpress_FieldSlideNumberInsert(ByRef $oDoc, ByRef $oTextCursor[, $bOverwrite = False])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $oTextCursor         - A Text Cursor Object returned by a previous _LOImpress_ShapeCreateTextCursor function.
+; Syntax ........: _LODraw_FieldSlideNumberInsert(ByRef $oDoc, ByRef $oTextCursor[, $bOverwrite = False])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
+;                  $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Map
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully inserted the field, returning its Object.
@@ -891,12 +891,12 @@ EndFunc   ;==>_LOImpress_FieldSlideCountInsert
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_FieldSlideCountInsert, _LOImpress_FieldDelete
+; Related .......: _LODraw_FieldSlideCountInsert, _LODraw_FieldDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_FieldSlideNumberInsert(ByRef $oDoc, ByRef $oTextCursor, $bOverwrite = False)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_FieldSlideNumberInsert(ByRef $oDoc, ByRef $oTextCursor, $bOverwrite = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oTextField, $oTextFieldReturn
@@ -911,18 +911,18 @@ Func _LOImpress_FieldSlideNumberInsert(ByRef $oDoc, ByRef $oTextCursor, $bOverwr
 	$oTextCursor.Text.insertTextContent($oTextCursor, $oTextField, $bOverwrite)
 
 	; Have to retrieve the Field's Object again, otherwise the Field Object seems invalid once inserted (Can't be used for modifying the field etc.).
-	$oTextFieldReturn = __LOImpress_FieldGetObj($oTextCursor, $LOI_FIELD_TYPE_SLIDE_NUM)
+	$oTextFieldReturn = __LODraw_FieldGetObj($oTextCursor, $LOD_FIELD_TYPE_SLIDE_NUM)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oTextFieldReturn)
-EndFunc   ;==>_LOImpress_FieldSlideNumberInsert
+EndFunc   ;==>_LODraw_FieldSlideNumberInsert
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_FieldSlideTitleInsert
+; Name ..........: _LODraw_FieldSlideTitleInsert
 ; Description ...: Insert a Slide Title Field.
-; Syntax ........: _LOImpress_FieldSlideTitleInsert(ByRef $oDoc, ByRef $oTextCursor[, $bOverwrite = False])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $oTextCursor         - A Text Cursor Object returned by a previous _LOImpress_ShapeCreateTextCursor function.
+; Syntax ........: _LODraw_FieldSlideTitleInsert(ByRef $oDoc, ByRef $oTextCursor[, $bOverwrite = False])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
+;                  $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully inserted the field, returning its Object.
@@ -938,12 +938,12 @@ EndFunc   ;==>_LOImpress_FieldSlideNumberInsert
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_FieldFileNameInsert, _LOImpress_FieldAuthorInsert, _LOImpress_FieldDelete
+; Related .......: _LODraw_FieldFileNameInsert, _LODraw_FieldAuthorInsert, _LODraw_FieldDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_FieldSlideTitleInsert(ByRef $oDoc, ByRef $oTextCursor, $bOverwrite = False)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_FieldSlideTitleInsert(ByRef $oDoc, ByRef $oTextCursor, $bOverwrite = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oTextField, $oTextFieldReturn
@@ -958,8 +958,8 @@ Func _LOImpress_FieldSlideTitleInsert(ByRef $oDoc, ByRef $oTextCursor, $bOverwri
 	$oTextCursor.Text.insertTextContent($oTextCursor, $oTextField, $bOverwrite)
 
 	; Have to retrieve the Field's Object again, otherwise the Field Object seems invalid once inserted (Can't be used for modifying the field etc.).
-	$oTextFieldReturn = __LOImpress_FieldGetObj($oTextCursor, $LOI_FIELD_TYPE_SLIDE_TITLE)
+	$oTextFieldReturn = __LODraw_FieldGetObj($oTextCursor, $LOD_FIELD_TYPE_SLIDE_TITLE)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oTextFieldReturn)
-EndFunc   ;==>_LOImpress_FieldSlideTitleInsert
+EndFunc   ;==>_LODraw_FieldSlideTitleInsert

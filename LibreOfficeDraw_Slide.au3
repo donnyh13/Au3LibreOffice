@@ -24,78 +24,78 @@
 ; ===============================================================================================================================
 
 ; #CURRENT# =====================================================================================================================
-; _LOImpress_SlideAdd
-; _LOImpress_SlideBackColor
-; _LOImpress_SlideBackFillStyle
-; _LOImpress_SlideBackGradient
-; _LOImpress_SlideBackTransparency
-; _LOImpress_SlideBackTransparencyGradient
-; _LOImpress_SlideCopy
-; _LOImpress_SlideCurrent
-; _LOImpress_SlideDeleteByIndex
-; _LOImpress_SlideDeleteByObj
-; _LOImpress_SlideExists
-; _LOImpress_SlideFooter
-; _LOImpress_SlideFormat
-; _LOImpress_SlideGetObjByIndex
-; _LOImpress_SlideGetObjByName
-; _LOImpress_SlideHandoutFooter
-; _LOImpress_SlideHandoutFormat
-; _LOImpress_SlideHandoutGetObj
-; _LOImpress_SlideHandoutHeader
-; _LOImpress_SlideHandoutLayout
-; _LOImpress_SlideHandoutMargins
-; _LOImpress_SlideLayout
-; _LOImpress_SlideMargins
-; _LOImpress_SlideMasterAdd
-; _LOImpress_SlideMasterBackColor
-; _LOImpress_SlideMasterBackFillStyle
-; _LOImpress_SlideMasterBackGradient
-; _LOImpress_SlideMasterBackTransparency
-; _LOImpress_SlideMasterBackTransparencyGradient
-; _LOImpress_SlideMasterCurrent
-; _LOImpress_SlideMasterDeleteByIndex
-; _LOImpress_SlideMasterDeleteByObj
-; _LOImpress_SlideMasterExists
-; _LOImpress_SlideMasterFormat
-; _LOImpress_SlideMasterGetObjByIndex
-; _LOImpress_SlideMasterGetObjByName
-; _LOImpress_SlideMasterMargins
-; _LOImpress_SlideMasterName
-; _LOImpress_SlideMasterNotesGetObj
-; _LOImpress_SlideMastersGetCount
-; _LOImpress_SlideMastersGetNames
-; _LOImpress_SlideMove
-; _LOImpress_SlideName
-; _LOImpress_SlideNotesFooter
-; _LOImpress_SlideNotesFormat
-; _LOImpress_SlideNotesGetObj
-; _LOImpress_SlideNotesHeader
-; _LOImpress_SlideNotesMargins
-; _LOImpress_SlidesGetCount
-; _LOImpress_SlidesGetNames
-; _LOImpress_SlideshowActiveSettings
-; _LOImpress_SlideshowCustomCreate
-; _LOImpress_SlideshowCustomDelete
-; _LOImpress_SlideshowCustomModify
-; _LOImpress_SlideshowCustomSetName
-; _LOImpress_SlideshowIsRunning
-; _LOImpress_SlideshowPresentationControl
-; _LOImpress_SlideshowsCustomGetNames
-; _LOImpress_SlideshowSettingsMode
-; _LOImpress_SlideshowSettingsOptions
-; _LOImpress_SlideshowSettingsRange
-; _LOImpress_SlideshowStart
-; _LOImpress_SlideshowStop
-; _LOImpress_SlideSoundsGetNames
-; _LOImpress_SlideTransition
+; _LODraw_SlideAdd
+; _LODraw_SlideBackColor
+; _LODraw_SlideBackFillStyle
+; _LODraw_SlideBackGradient
+; _LODraw_SlideBackTransparency
+; _LODraw_SlideBackTransparencyGradient
+; _LODraw_SlideCopy
+; _LODraw_SlideCurrent
+; _LODraw_SlideDeleteByIndex
+; _LODraw_SlideDeleteByObj
+; _LODraw_SlideExists
+; _LODraw_SlideFooter
+; _LODraw_SlideFormat
+; _LODraw_SlideGetObjByIndex
+; _LODraw_SlideGetObjByName
+; _LODraw_SlideHandoutFooter
+; _LODraw_SlideHandoutFormat
+; _LODraw_SlideHandoutGetObj
+; _LODraw_SlideHandoutHeader
+; _LODraw_SlideHandoutLayout
+; _LODraw_SlideHandoutMargins
+; _LODraw_SlideLayout
+; _LODraw_SlideMargins
+; _LODraw_SlideMasterAdd
+; _LODraw_SlideMasterBackColor
+; _LODraw_SlideMasterBackFillStyle
+; _LODraw_SlideMasterBackGradient
+; _LODraw_SlideMasterBackTransparency
+; _LODraw_SlideMasterBackTransparencyGradient
+; _LODraw_SlideMasterCurrent
+; _LODraw_SlideMasterDeleteByIndex
+; _LODraw_SlideMasterDeleteByObj
+; _LODraw_SlideMasterExists
+; _LODraw_SlideMasterFormat
+; _LODraw_SlideMasterGetObjByIndex
+; _LODraw_SlideMasterGetObjByName
+; _LODraw_SlideMasterMargins
+; _LODraw_SlideMasterName
+; _LODraw_SlideMasterNotesGetObj
+; _LODraw_SlideMastersGetCount
+; _LODraw_SlideMastersGetNames
+; _LODraw_SlideMove
+; _LODraw_SlideName
+; _LODraw_SlideNotesFooter
+; _LODraw_SlideNotesFormat
+; _LODraw_SlideNotesGetObj
+; _LODraw_SlideNotesHeader
+; _LODraw_SlideNotesMargins
+; _LODraw_SlidesGetCount
+; _LODraw_SlidesGetNames
+; _LODraw_SlideshowActiveSettings
+; _LODraw_SlideshowCustomCreate
+; _LODraw_SlideshowCustomDelete
+; _LODraw_SlideshowCustomModify
+; _LODraw_SlideshowCustomSetName
+; _LODraw_SlideshowIsRunning
+; _LODraw_SlideshowPresentationControl
+; _LODraw_SlideshowsCustomGetNames
+; _LODraw_SlideshowSettingsMode
+; _LODraw_SlideshowSettingsOptions
+; _LODraw_SlideshowSettingsRange
+; _LODraw_SlideshowStart
+; _LODraw_SlideshowStop
+; _LODraw_SlideSoundsGetNames
+; _LODraw_SlideTransition
 ; ===============================================================================================================================
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideAdd
+; Name ..........: _LODraw_SlideAdd
 ; Description ...: Add a slide to a presentation.
-; Syntax ........: _LOImpress_SlideAdd(ByRef $oDoc[, $iPos = Null[, $sName = ""]])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: _LODraw_SlideAdd(ByRef $oDoc[, $iPos = Null[, $sName = ""]])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $iPos                - [optional] Default is Null. The position to insert the new slide in the collection of slides. 0 Based. See remarks.
 ;                  $sName               - [optional] Default is "". The unique name of the Slide. If called with an empty string, LibreOffice automatically names it.
 ; Return values .: Success: Object
@@ -116,12 +116,12 @@
 ; Remarks .......: If $iPos is called with Null, the new slide is inserted at the end.
 ;                  Call $iPos with the last slide index to insert the slide at the end. Call $iPos with 0 to insert the new slide in the first slide position.
 ;                  Due to limitations in the API, I have made a small workaround for inserting a slide at the beginning. A dispatch is executed to move the slide to the beginning. The current slide will temporarily be set to the new slide in order to move it.
-; Related .......: _LOImpress_SlideDeleteByIndex, _LOImpress_SlideDeleteByObj, _LOImpress_SlideMasterAdd, _LOImpress_SlideExists
+; Related .......: _LODraw_SlideDeleteByIndex, _LODraw_SlideDeleteByObj, _LODraw_SlideMasterAdd, _LODraw_SlideExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideAdd(ByRef $oDoc, $iPos = Null, $sName = "")
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideAdd(ByRef $oDoc, $iPos = Null, $sName = "")
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oSlide, $oServiceManager, $oDispatcher, $oCurrSlide
@@ -134,7 +134,7 @@ Func _LOImpress_SlideAdd(ByRef $oDoc, $iPos = Null, $sName = "")
 	If ($iPos = Null) Then $iPos = $oDoc.DrawPages.getCount()
 	If Not __LO_IntIsBetween($iPos, 0, $oDoc.DrawPages.getCount()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If ($sName <> "") And _LOImpress_SlideExists($oDoc, $sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If ($sName <> "") And _LODraw_SlideExists($oDoc, $sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 	$iPos -= 1 ; -1 because when 0 is called in insertNewByIndex, it inserts it in position 1, etc. Also there is no way to insert a new slide at position 0, so I made a workaround.
 
@@ -149,7 +149,7 @@ Func _LOImpress_SlideAdd(ByRef $oDoc, $iPos = Null, $sName = "")
 	If $bMoveToFirst Then
 		$oCurrSlide = $oDoc.getCurrentController.CurrentPage() ; Backup current slide and view mode
 
-		$iCurrView = __LOImpress_DocCurrView($oDoc)
+		$iCurrView = __LODraw_DocCurrView($oDoc)
 
 		$oServiceManager = __LO_ServiceManager()
 		If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
@@ -163,7 +163,7 @@ Func _LOImpress_SlideAdd(ByRef $oDoc, $iPos = Null, $sName = "")
 
 		If IsObj($oCurrSlide) Then $oDoc.getCurrentController.setCurrentPage($oCurrSlide) ; Restore current slide and view mode.
 
-		If IsInt($iCurrView) Then __LOImpress_DocCurrView($oDoc, $iCurrView)
+		If IsInt($iCurrView) Then __LODraw_DocCurrView($oDoc, $iCurrView)
 	EndIf
 
 	If ($sName <> "") Then
@@ -171,13 +171,13 @@ Func _LOImpress_SlideAdd(ByRef $oDoc, $iPos = Null, $sName = "")
 	EndIf
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oSlide)
-EndFunc   ;==>_LOImpress_SlideAdd
+EndFunc   ;==>_LODraw_SlideAdd
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideBackColor
+; Name ..........: _LODraw_SlideBackColor
 ; Description ...: Set or Retrieve the Slide's background color.
-; Syntax ........: _LOImpress_SlideBackColor(ByRef $oSlide[, $iColor = Null])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+; Syntax ........: _LODraw_SlideBackColor(ByRef $oSlide[, $iColor = Null])
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
 ;                  $iColor              - [optional] (0-16777215) Default is Null. The Slide background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1 or Integer
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -198,12 +198,12 @@ EndFunc   ;==>_LOImpress_SlideAdd
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the slide, the Constant $LO_COLOR_OFF is returned.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_SlideBackFillStyle, _LOImpress_SlideBackGradient, _LOImpress_SlideMasterBackColor
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_SlideBackFillStyle, _LODraw_SlideBackGradient, _LODraw_SlideMasterBackColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideBackColor(ByRef $oSlide, $iColor = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideBackColor(ByRef $oSlide, $iColor = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oBackground, $oDoc
@@ -216,7 +216,7 @@ Func _LOImpress_SlideBackColor(ByRef $oSlide, $iColor = Null)
 	If __LO_VarsAreNull($iColor) Then
 		If Not IsObj($oBackground) Then Return SetError($__LO_STATUS_SUCCESS, 1, $LO_COLOR_OFF) ; If no background is set, this will be void, instead of an Object.
 
-		$iCurColor = __LOImpress_ColorRemoveAlpha($oBackground.FillColor())
+		$iCurColor = __LODraw_ColorRemoveAlpha($oBackground.FillColor())
 		If Not IsInt($iCurColor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurColor)
@@ -225,30 +225,30 @@ Func _LOImpress_SlideBackColor(ByRef $oSlide, $iColor = Null)
 	If Not __LO_IntIsBetween($iColor, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If Not IsObj($oBackground) Then ; Have to create the Background service.
-		$oDoc = __LOImpress_GetParentDoc($oSlide)
+		$oDoc = __LODraw_GetParentDoc($oSlide)
 		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		$oBackground = $oDoc.createInstance("com.sun.star.drawing.Background")
 		If Not IsObj($oBackground) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 	EndIf
 
-	$oBackground.FillStyle = $LOI_AREA_FILL_STYLE_SOLID
+	$oBackground.FillStyle = $LOD_AREA_FILL_STYLE_SOLID
 	$oBackground.FillColor = $iColor
 
 	$oSlide.Background = $oBackground
 	$iError = ($oSlide.Background.FillColor() = $iColor) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideBackColor
+EndFunc   ;==>_LODraw_SlideBackColor
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideBackFillStyle
+; Name ..........: _LODraw_SlideBackFillStyle
 ; Description ...: Retrieve what kind of background fill is active, if any.
-; Syntax ........: _LOImpress_SlideBackFillStyle(ByRef $oSlide[, $bFillOff = False])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+; Syntax ........: _LODraw_SlideBackFillStyle(ByRef $oSlide[, $bFillOff = False])
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
 ;                  $bFillOff            - [optional] Default is False. If True, the Fill style will be set to Off. See remarks.
 ; Return values .: Success: Integer
-;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOI_AREA_FILL_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOD_AREA_FILL_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 0, @Extended: 1, Return: 0 = Success. Fill style was successfully turned off.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
@@ -262,12 +262,12 @@ EndFunc   ;==>_LOImpress_SlideBackColor
 ;                  This is useful because, if a Gradient is active, the solid color value is still present, and thus it would not be possible to determine which function should be used to retrieve the current values for, whether the Color function, or the Gradient function.
 ;                  When the Fill style is disabled for a Slide, the Fill properties are completely removed. This is how Impress works normally.
 ;                  $bFillOff will do nothing if it is called with False, and is not, of course, returned when retrieving the FillStyle value.
-; Related .......: _LOImpress_SlideBackColor, _LOImpress_SlideBackGradient, _LOImpress_SlideMasterBackFillStyle
+; Related .......: _LODraw_SlideBackColor, _LODraw_SlideBackGradient, _LODraw_SlideMasterBackFillStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideBackFillStyle(ByRef $oSlide, $bFillOff = False)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideBackFillStyle(ByRef $oSlide, $bFillOff = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iFillStyle
@@ -281,7 +281,7 @@ Func _LOImpress_SlideBackFillStyle(ByRef $oSlide, $bFillOff = False)
 			$oBackground = $oSlide.Background
 			If Not IsObj($oBackground) Then Return SetError($__LO_STATUS_SUCCESS, 1, 0) ; If no Background Object, no Fillstyle is active.
 
-			$oBackground.FillStyle = $LOI_AREA_FILL_STYLE_OFF
+			$oBackground.FillStyle = $LOD_AREA_FILL_STYLE_OFF
 			$oSlide.Background = $oBackground
 		EndIf
 
@@ -289,21 +289,21 @@ Func _LOImpress_SlideBackFillStyle(ByRef $oSlide, $bFillOff = False)
 	EndIf
 
 	$oBackground = $oSlide.Background
-	If Not IsObj($oBackground) Then Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_AREA_FILL_STYLE_OFF) ; If no Background Object, no Fillstyle is active.
+	If Not IsObj($oBackground) Then Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_AREA_FILL_STYLE_OFF) ; If no Background Object, no Fillstyle is active.
 
 	$iFillStyle = $oBackground.FillStyle()
 	If Not IsInt($iFillStyle) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $iFillStyle)
-EndFunc   ;==>_LOImpress_SlideBackFillStyle
+EndFunc   ;==>_LODraw_SlideBackFillStyle
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideBackGradient
+; Name ..........: _LODraw_SlideBackGradient
 ; Description ...: Set or Retrieve the settings for Slide Background color Gradient.
-; Syntax ........: _LOImpress_SlideBackGradient(ByRef $oSlide[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
-;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOI_GRAD_NAME_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+; Syntax ........: _LODraw_SlideBackGradient(ByRef $oSlide[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
+;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOD_GRAD_NAME_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iIncrement          - [optional] (0, 3-256) Default is Null. The number of steps of color change. 0 = Automatic.
 ;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient, where 0% corresponds to the current horizontal location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" setting. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage. $iType must be other than "Linear", or "Axial".
@@ -322,7 +322,7 @@ EndFunc   ;==>_LOImpress_SlideBackFillStyle
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
 ;                  @Error: 1, @Extended: 2 = $sGradientName not a String.
-;                  @Error: 1, @Extended: 3 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 4 = $iIncrement not an Integer, less than 3, but not 0, or greater than 256.
 ;                  @Error: 1, @Extended: 5 = $iXCenter not an Integer, less than 0 or greater than 100.
 ;                  @Error: 1, @Extended: 6 = $iYCenter not an Integer, less than 0 or greater than 100.
@@ -360,12 +360,12 @@ EndFunc   ;==>_LOImpress_SlideBackFillStyle
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_SlideBackColor, _LOImpress_SlideBackFillStyle, _LOImpress_SlideMasterBackGradient
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_SlideBackColor, _LODraw_SlideBackFillStyle, _LODraw_SlideMasterBackGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideBackGradient(ByRef $oSlide, $sGradientName = Null, $iType = Null, $iIncrement = Null, $iXCenter = Null, $iYCenter = Null, $iAngle = Null, $iTransitionStart = Null, $iFromColor = Null, $iToColor = Null, $iFromIntense = Null, $iToIntense = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideBackGradient(ByRef $oSlide, $sGradientName = Null, $iType = Null, $iIncrement = Null, $iXCenter = Null, $iYCenter = Null, $iAngle = Null, $iTransitionStart = Null, $iFromColor = Null, $iToColor = Null, $iFromIntense = Null, $iToIntense = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oBackground, $oDoc
@@ -394,7 +394,7 @@ Func _LOImpress_SlideBackGradient(ByRef $oSlide, $sGradientName = Null, $iType =
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avGradient)
 	EndIf
 
-	$oDoc = __LOImpress_GetParentDoc($oSlide)
+	$oDoc = __LODraw_GetParentDoc($oSlide)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	If Not IsObj($oBackground) Then ; Have to create the Background service.
@@ -405,12 +405,12 @@ Func _LOImpress_SlideBackGradient(ByRef $oSlide, $sGradientName = Null, $iType =
 	$tStyleGradient = $oBackground.FillGradient()
 	If Not IsObj($tStyleGradient) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If ($oBackground.FillStyle() <> $LOI_AREA_FILL_STYLE_GRADIENT) Then $oBackground.FillStyle = $LOI_AREA_FILL_STYLE_GRADIENT
+	If ($oBackground.FillStyle() <> $LOD_AREA_FILL_STYLE_GRADIENT) Then $oBackground.FillStyle = $LOD_AREA_FILL_STYLE_GRADIENT
 
 	If ($sGradientName <> Null) Then
 		If Not IsString($sGradientName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-		__LOImpress_GradientPresets($oDoc, $oBackground, $tStyleGradient, $sGradientName)
+		__LODraw_GradientPresets($oDoc, $oBackground, $tStyleGradient, $sGradientName)
 
 		$oSlide.Background = $oBackground
 
@@ -424,15 +424,15 @@ Func _LOImpress_SlideBackGradient(ByRef $oSlide, $sGradientName = Null, $iType =
 	EndIf
 
 	If ($iType <> Null) Then
-		If ($iType = $LOI_GRAD_TYPE_OFF) Then ; Turn Off Gradient
-			$oBackground.FillStyle = $LOI_AREA_FILL_STYLE_OFF
+		If ($iType = $LOD_GRAD_TYPE_OFF) Then ; Turn Off Gradient
+			$oBackground.FillStyle = $LOD_AREA_FILL_STYLE_OFF
 			$oBackground.FillGradientName = ""
 			$oSlide.Background = $oBackground
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, 2)
 		EndIf
 
-		If Not __LO_IntIsBetween($iType, $LOI_GRAD_TYPE_LINEAR, $LOI_GRAD_TYPE_RECT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not __LO_IntIsBetween($iType, $LOD_GRAD_TYPE_LINEAR, $LOD_GRAD_TYPE_RECT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		$tStyleGradient.Style = $iType
 	EndIf
@@ -539,8 +539,8 @@ Func _LOImpress_SlideBackGradient(ByRef $oSlide, $sGradientName = Null, $iType =
 		$tStyleGradient.EndIntensity = $iToIntense
 	EndIf
 
-	If ($oBackground.FillGradientName() = "") Or __LOImpress_GradientIsModified($tStyleGradient, $oBackground.FillGradientName()) Then
-		$sGradName = __LOImpress_GradientNameInsert($oDoc, $tStyleGradient)
+	If ($oBackground.FillGradientName() = "") Or __LODraw_GradientIsModified($tStyleGradient, $oBackground.FillGradientName()) Then
+		$sGradName = __LODraw_GradientNameInsert($oDoc, $tStyleGradient)
 		If @error > 0 Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
 
 		$oBackground.FillGradientName = $sGradName
@@ -562,13 +562,13 @@ Func _LOImpress_SlideBackGradient(ByRef $oSlide, $sGradientName = Null, $iType =
 	$iError = (__LO_VarsAreNull($iToIntense)) ? $iError : ($oSlide.Background.FillGradient.EndIntensity() = $iToIntense) ? ($iError) : (BitOR($iError, 1024))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideBackGradient
+EndFunc   ;==>_LODraw_SlideBackGradient
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideBackTransparency
+; Name ..........: _LODraw_SlideBackTransparency
 ; Description ...: Set or retrieve Transparency settings for a Slide.
-; Syntax ........: _LOImpress_SlideBackTransparency(ByRef $oSlide[, $iTransparency = Null])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+; Syntax ........: _LODraw_SlideBackTransparency(ByRef $oSlide[, $iTransparency = Null])
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
@@ -589,12 +589,12 @@ EndFunc   ;==>_LOImpress_SlideBackGradient
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the slide, -1 is returned.
-; Related .......: _LOImpress_SlideBackTransparencyGradient, _LOImpress_SlideMasterBackTransparency
+; Related .......: _LODraw_SlideBackTransparencyGradient, _LODraw_SlideMasterBackTransparency
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideBackTransparency(ByRef $oSlide, $iTransparency = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideBackTransparency(ByRef $oSlide, $iTransparency = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0, $iCurTransp
@@ -616,7 +616,7 @@ Func _LOImpress_SlideBackTransparency(ByRef $oSlide, $iTransparency = Null)
 	If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If Not IsObj($oBackground) Then ; Have to create the Background service.
-		$oDoc = __LOImpress_GetParentDoc($oSlide)
+		$oDoc = __LODraw_GetParentDoc($oSlide)
 		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		$oBackground = $oDoc.createInstance("com.sun.star.drawing.Background")
@@ -631,14 +631,14 @@ Func _LOImpress_SlideBackTransparency(ByRef $oSlide, $iTransparency = Null)
 	$iError = ($oSlide.Background.FillTransparence() = $iTransparency) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideBackTransparency
+EndFunc   ;==>_LODraw_SlideBackTransparency
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideBackTransparencyGradient
+; Name ..........: _LODraw_SlideBackTransparencyGradient
 ; Description ...: Set or retrieve the Slide's transparency gradient settings.
-; Syntax ........: _LOImpress_SlideBackTransparencyGradient(ByRef $oSlide[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
-;                  $iType               - [optional] (-1-5) Default is Null. The type of transparency gradient to apply. See Constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3. Call with $LOI_GRAD_TYPE_OFF to turn Transparency Gradient off.
+; Syntax ........: _LODraw_SlideBackTransparencyGradient(ByRef $oSlide[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
+;                  $iType               - [optional] (-1-5) Default is Null. The type of transparency gradient to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3. Call with $LOD_GRAD_TYPE_OFF to turn Transparency Gradient off.
 ;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iAngle              - [optional] (0-359) Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
@@ -653,7 +653,7 @@ EndFunc   ;==>_LOImpress_SlideBackTransparency
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
-;                  @Error: 1, @Extended: 2 = $iType Not an Integer, less than -1 or greater than 5. See constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iType Not an Integer, less than -1 or greater than 5. See constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $iXCenter Not an Integer, less than 0 or greater than 100.
 ;                  @Error: 1, @Extended: 4 = $iYCenter Not an Integer, less than 0 or greater than 100.
 ;                  @Error: 1, @Extended: 5 = $iAngle Not an Integer, less than 0 or greater than 359.
@@ -682,12 +682,12 @@ EndFunc   ;==>_LOImpress_SlideBackTransparency
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_SlideBackTransparency, _LOImpress_SlideMasterBackTransparencyGradient
+; Related .......: _LODraw_SlideBackTransparency, _LODraw_SlideMasterBackTransparencyGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideBackTransparencyGradient(ByRef $oSlide, $iType = Null, $iXCenter = Null, $iYCenter = Null, $iAngle = Null, $iTransitionStart = Null, $iStart = Null, $iEnd = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideBackTransparencyGradient(ByRef $oSlide, $iType = Null, $iXCenter = Null, $iYCenter = Null, $iAngle = Null, $iTransitionStart = Null, $iStart = Null, $iEnd = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $tGradient, $tColorStop, $tStopColor
@@ -709,13 +709,13 @@ Func _LOImpress_SlideBackTransparencyGradient(ByRef $oSlide, $iType = Null, $iXC
 		If Not IsObj($tGradient) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 		__LO_ArrayFill($aiTransparent, $tGradient.Style(), $tGradient.XOffset(), $tGradient.YOffset(), _
-				($tGradient.Angle() / 10), $tGradient.Border(), __LOImpress_TransparencyGradientConvert(Null, $tGradient.StartColor()), _
-				__LOImpress_TransparencyGradientConvert(Null, $tGradient.EndColor())) ; Angle is set in thousands
+				($tGradient.Angle() / 10), $tGradient.Border(), __LODraw_TransparencyGradientConvert(Null, $tGradient.StartColor()), _
+				__LODraw_TransparencyGradientConvert(Null, $tGradient.EndColor())) ; Angle is set in thousands
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $aiTransparent)
 	EndIf
 
-	$oDoc = __LOImpress_GetParentDoc($oSlide)
+	$oDoc = __LODraw_GetParentDoc($oSlide)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	If Not IsObj($oBackground) Then ; Have to create the Background service.
@@ -727,14 +727,14 @@ Func _LOImpress_SlideBackTransparencyGradient(ByRef $oSlide, $iType = Null, $iXC
 	If Not IsObj($tGradient) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	If ($iType <> Null) Then
-		If ($iType = $LOI_GRAD_TYPE_OFF) Then ; Turn Off Gradient
+		If ($iType = $LOD_GRAD_TYPE_OFF) Then ; Turn Off Gradient
 			$oBackground.FillTransparenceGradientName = ""
 			$oSlide.Background = $oBackground
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, 2)
 		EndIf
 
-		If Not __LO_IntIsBetween($iType, $LOI_GRAD_TYPE_LINEAR, $LOI_GRAD_TYPE_RECT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+		If Not __LO_IntIsBetween($iType, $LOD_GRAD_TYPE_LINEAR, $LOD_GRAD_TYPE_RECT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		$tGradient.Style = $iType
 	EndIf
@@ -766,7 +766,7 @@ Func _LOImpress_SlideBackTransparencyGradient(ByRef $oSlide, $iType = Null, $iXC
 	If ($iStart <> Null) Then
 		If Not __LO_IntIsBetween($iStart, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
-		$tGradient.StartColor = __LOImpress_TransparencyGradientConvert($iStart)
+		$tGradient.StartColor = __LODraw_TransparencyGradientConvert($iStart)
 
 		If __LO_VersionCheck(7.6) Then
 			$atColorStop = $tGradient.ColorStops()
@@ -793,7 +793,7 @@ Func _LOImpress_SlideBackTransparencyGradient(ByRef $oSlide, $iType = Null, $iXC
 	If ($iEnd <> Null) Then
 		If Not __LO_IntIsBetween($iEnd, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
-		$tGradient.EndColor = __LOImpress_TransparencyGradientConvert($iEnd)
+		$tGradient.EndColor = __LODraw_TransparencyGradientConvert($iEnd)
 
 		If __LO_VersionCheck(7.6) Then
 			$atColorStop = $tGradient.ColorStops()
@@ -818,7 +818,7 @@ Func _LOImpress_SlideBackTransparencyGradient(ByRef $oSlide, $iType = Null, $iXC
 	EndIf
 
 	If ($oBackground.FillTransparenceGradientName() = "") Then
-		$sTGradName = __LOImpress_TransparencyGradientNameInsert($oDoc, $tGradient)
+		$sTGradName = __LODraw_TransparencyGradientNameInsert($oDoc, $tGradient)
 		If @error > 0 Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
 		$oBackground.FillTransparenceGradientName = $sTGradName
@@ -833,17 +833,17 @@ Func _LOImpress_SlideBackTransparencyGradient(ByRef $oSlide, $iType = Null, $iXC
 	$iError = (__LO_VarsAreNull($iYCenter)) ? ($iError) : (($oSlide.Background.FillTransparenceGradient.YOffset() = $iYCenter) ? ($iError) : (BitOR($iError, 4)))
 	$iError = (__LO_VarsAreNull($iAngle)) ? ($iError) : ((($oSlide.Background.FillTransparenceGradient.Angle() / 10) = $iAngle) ? ($iError) : (BitOR($iError, 8)))
 	$iError = (__LO_VarsAreNull($iTransitionStart)) ? ($iError) : (($oSlide.Background.FillTransparenceGradient.Border() = $iTransitionStart) ? ($iError) : (BitOR($iError, 16)))
-	$iError = (__LO_VarsAreNull($iStart)) ? ($iError) : (($oSlide.Background.FillTransparenceGradient.StartColor() = __LOImpress_TransparencyGradientConvert($iStart)) ? ($iError) : (BitOR($iError, 32)))
-	$iError = (__LO_VarsAreNull($iEnd)) ? ($iError) : (($oSlide.Background.FillTransparenceGradient.EndColor() = __LOImpress_TransparencyGradientConvert($iEnd)) ? ($iError) : (BitOR($iError, 64)))
+	$iError = (__LO_VarsAreNull($iStart)) ? ($iError) : (($oSlide.Background.FillTransparenceGradient.StartColor() = __LODraw_TransparencyGradientConvert($iStart)) ? ($iError) : (BitOR($iError, 32)))
+	$iError = (__LO_VarsAreNull($iEnd)) ? ($iError) : (($oSlide.Background.FillTransparenceGradient.EndColor() = __LODraw_TransparencyGradientConvert($iEnd)) ? ($iError) : (BitOR($iError, 64)))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideBackTransparencyGradient
+EndFunc   ;==>_LODraw_SlideBackTransparencyGradient
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideCopy
+; Name ..........: _LODraw_SlideCopy
 ; Description ...: Create a copy of a slide.
-; Syntax ........: _LOImpress_SlideCopy(ByRef $oSlide[, $iPos = Null])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+; Syntax ........: _LODraw_SlideCopy(ByRef $oSlide[, $iPos = Null])
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
 ;                  $iPos                - [optional] Default is Null. The position to insert the new slide in the collection of slides. 0 Based. See remarks.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully copied the slide, returning the new slide's Object.
@@ -863,12 +863,12 @@ EndFunc   ;==>_LOImpress_SlideBackTransparencyGradient
 ; Modified ......:
 ; Remarks .......: The copied slide is inserted after the slide to be copied.
 ;                  If $iPos is called with Null, the slide is left in the position described above. Otherwise, due to limitations in the API, some dispatches are executed to move the slide. The current slide will temporarily be set to the new slide in order to move it.
-; Related .......: _LOImpress_SlideAdd, _LOImpress_SlideDeleteByIndex, _LOImpress_SlideDeleteByObj, _LOImpress_SlideMove
+; Related .......: _LODraw_SlideAdd, _LODraw_SlideDeleteByIndex, _LODraw_SlideDeleteByObj, _LODraw_SlideMove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideCopy(ByRef $oSlide, $iPos = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideCopy(ByRef $oSlide, $iPos = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oDoc, $oNewSlide, $oCurrSlide, $oServiceManager, $oDispatcher
@@ -878,7 +878,7 @@ Func _LOImpress_SlideCopy(ByRef $oSlide, $iPos = Null)
 
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$oDoc = __LOImpress_GetParentDoc($oSlide)
+	$oDoc = __LODraw_GetParentDoc($oSlide)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 	If ($iPos <> Null) And Not __LO_IntIsBetween($iPos, 0, $oDoc.DrawPages.getCount()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -891,7 +891,7 @@ Func _LOImpress_SlideCopy(ByRef $oSlide, $iPos = Null)
 				$iNewPos = $i
 				ExitLoop
 			EndIf
-			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+			Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 		Next
 
 		If Not IsInt($iNewPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
@@ -909,7 +909,7 @@ Func _LOImpress_SlideCopy(ByRef $oSlide, $iPos = Null)
 
 		$oCurrSlide = $oDoc.getCurrentController.CurrentPage() ; Backup current slide
 
-		$iCurrView = __LOImpress_DocCurrView($oDoc)
+		$iCurrView = __LODraw_DocCurrView($oDoc)
 
 		$oServiceManager = __LO_ServiceManager()
 		If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
@@ -921,7 +921,7 @@ Func _LOImpress_SlideCopy(ByRef $oSlide, $iPos = Null)
 
 		For $i = 0 To $iMove - 1
 			$oDispatcher.executeDispatch($oDoc.CurrentController(), $sDispatch, "", 0, $aArray)
-			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+			Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 		Next
 
 		For $i = 0 To $oDoc.DrawPages.getCount() - 1
@@ -929,25 +929,25 @@ Func _LOImpress_SlideCopy(ByRef $oSlide, $iPos = Null)
 				$iNewPos = $i
 				ExitLoop
 			EndIf
-			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+			Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 		Next
 
 		If IsObj($oCurrSlide) Then $oDoc.getCurrentController.setCurrentPage($oCurrSlide) ; Restore current slide and view mode.
 
-		If IsInt($iCurrView) Then __LOImpress_DocCurrView($oDoc, $iCurrView)
+		If IsInt($iCurrView) Then __LODraw_DocCurrView($oDoc, $iCurrView)
 
 		If ($iNewPos <> $iPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 	EndIf
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oNewSlide)
-EndFunc   ;==>_LOImpress_SlideCopy
+EndFunc   ;==>_LODraw_SlideCopy
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideCurrent
+; Name ..........: _LODraw_SlideCurrent
 ; Description ...: Set or Retrieve the currently active slide or master slide.
-; Syntax ........: _LOImpress_SlideCurrent(ByRef $oDoc[, $oObj = Null])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $oObj                - [optional] Default is Null. A Slide or Master Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, _LOImpress_SlideCopy, _LOImpress_SlideMasterAdd, _LOImpress_SlideMasterGetObjByIndex, or _LOImpress_SlideMasterGetObjByName function.
+; Syntax ........: _LODraw_SlideCurrent(ByRef $oDoc[, $oObj = Null])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
+;                  $oObj                - [optional] Default is Null. A Slide or Master Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, _LODraw_SlideCopy, _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
 ; Return values .: Success: 1 or Object
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Object = Success. All optional parameters were called with Null, returning currently active slide. @Extended page's type, see remarks.
@@ -964,15 +964,15 @@ EndFunc   ;==>_LOImpress_SlideCopy
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current slide.
 ;                  If this function fails to return an Object with processing error 1, it is possible the current view mode is set to Slide sorter.
-;                  You can only set the current slide to either a Master slide or a normal slide. To change views to Notes, Handouts etc., see _LOImpress_DocView.
+;                  You can only set the current slide to either a Master slide or a normal slide. To change views to Notes, Handouts etc., see _LODraw_DocView.
 ;                  If the current view mode is set to Slide outline or Slide Notes, the current slide Object is returned. If the current view mode is set to Master Slide Notes or Master Slide Handout, the current Master slide Object is returned.
-;                  When retrieving the current page, @Extended will be set to either $LOI_PAGE_VIEW_SLIDE or $LOI_PAGE_VIEW_MASTER. See Constants, $LOI_PAGE_VIEW_* as defined in LibreOfficeImpress_Constants.au3. Use _LOImpress_DocView to determine the current view mode active.
-; Related .......: _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, _LOImpress_SlideMasterCurrent, _LOImpress_DocView
+;                  When retrieving the current page, @Extended will be set to either $LOD_PAGE_VIEW_SLIDE or $LOD_PAGE_VIEW_MASTER. See Constants, $LOD_PAGE_VIEW_* as defined in LibreOfficeImpress_Constants.au3. Use _LODraw_DocView to determine the current view mode active.
+; Related .......: _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, _LODraw_SlideMasterCurrent, _LODraw_DocView
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideCurrent(ByRef $oDoc, $oObj = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideCurrent(ByRef $oDoc, $oObj = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oCurrSlide
@@ -984,7 +984,7 @@ Func _LOImpress_SlideCurrent(ByRef $oDoc, $oObj = Null)
 		$oCurrSlide = $oDoc.getCurrentController.CurrentPage()
 		If Not IsObj($oCurrSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; Could be because the current mode is set to Slide Sorter.
 
-		$iPageType = ($oDoc.getCurrentController.IsMasterPageMode()) ? ($LOI_PAGE_VIEW_MASTER) : ($LOI_PAGE_VIEW_SLIDE)
+		$iPageType = ($oDoc.getCurrentController.IsMasterPageMode()) ? ($LOD_PAGE_VIEW_MASTER) : ($LOD_PAGE_VIEW_SLIDE)
 
 		Return SetError($__LO_STATUS_SUCCESS, $iPageType, $oCurrSlide)
 	EndIf
@@ -995,13 +995,13 @@ Func _LOImpress_SlideCurrent(ByRef $oDoc, $oObj = Null)
 	$iError = ($oDoc.getCurrentController.CurrentPage() = $oObj) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideCurrent
+EndFunc   ;==>_LODraw_SlideCurrent
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideDeleteByIndex
+; Name ..........: _LODraw_SlideDeleteByIndex
 ; Description ...: Delete a slide by index.
-; Syntax ........: _LOImpress_SlideDeleteByIndex(ByRef $oDoc, $iSlide)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: _LODraw_SlideDeleteByIndex(ByRef $oDoc, $iSlide)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $iSlide              - The slide to delete. 0 based.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Slide was successfully deleted.
@@ -1016,12 +1016,12 @@ EndFunc   ;==>_LOImpress_SlideCurrent
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_SlideDeleteByObj, _LOImpress_SlidesGetCount, _LOImpress_SlideMasterDeleteByIndex
+; Related .......: _LODraw_SlideDeleteByObj, _LODraw_SlidesGetCount, _LODraw_SlideMasterDeleteByIndex
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideDeleteByIndex(ByRef $oDoc, $iSlide)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideDeleteByIndex(ByRef $oDoc, $iSlide)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oSlide
@@ -1040,13 +1040,13 @@ Func _LOImpress_SlideDeleteByIndex(ByRef $oDoc, $iSlide)
 	If ($iCount = $oDoc.DrawPages.getCount()) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to delete because the count is the same.
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LOImpress_SlideDeleteByIndex
+EndFunc   ;==>_LODraw_SlideDeleteByIndex
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideDeleteByObj
+; Name ..........: _LODraw_SlideDeleteByObj
 ; Description ...: Delete a slide using its Object.
-; Syntax ........: _LOImpress_SlideDeleteByObj(ByRef $oSlide)
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+; Syntax ........: _LODraw_SlideDeleteByObj(ByRef $oSlide)
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Slide was successfully deleted.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -1059,12 +1059,12 @@ EndFunc   ;==>_LOImpress_SlideDeleteByIndex
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_SlideDeleteByIndex, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, _LOImpress_SlideMasterDeleteByObj
+; Related .......: _LODraw_SlideDeleteByIndex, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, _LODraw_SlideMasterDeleteByObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideDeleteByObj(ByRef $oSlide)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideDeleteByObj(ByRef $oSlide)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oDoc
@@ -1072,7 +1072,7 @@ Func _LOImpress_SlideDeleteByObj(ByRef $oSlide)
 
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$oDoc = __LOImpress_GetParentDoc($oSlide)
+	$oDoc = __LODraw_GetParentDoc($oSlide)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$iCount = $oDoc.DrawPages.getCount()
@@ -1084,13 +1084,13 @@ Func _LOImpress_SlideDeleteByObj(ByRef $oSlide)
 	$oSlide = Null
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LOImpress_SlideDeleteByObj
+EndFunc   ;==>_LODraw_SlideDeleteByObj
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideExists
+; Name ..........: _LODraw_SlideExists
 ; Description ...: Check whether a slide with a certain name exists in a document.
-; Syntax ........: _LOImpress_SlideExists(ByRef $oDoc, $sName)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: _LODraw_SlideExists(ByRef $oDoc, $sName)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $sName               - The slide name to check for.
 ; Return values .: Success: Boolean.
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Document contains a Slide with the called name, else False.
@@ -1103,12 +1103,12 @@ EndFunc   ;==>_LOImpress_SlideDeleteByObj
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_SlideAdd, _LOImpress_SlideName, _LOImpress_SlidesGetNames, _LOImpress_SlideMasterExists
+; Related .......: _LODraw_SlideAdd, _LODraw_SlideName, _LODraw_SlidesGetNames, _LODraw_SlideMasterExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideExists(ByRef $oDoc, $sName)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideExists(ByRef $oDoc, $sName)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $bExists
@@ -1120,17 +1120,17 @@ Func _LOImpress_SlideExists(ByRef $oDoc, $sName)
 	If Not IsBool($bExists) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $bExists)
-EndFunc   ;==>_LOImpress_SlideExists
+EndFunc   ;==>_LODraw_SlideExists
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideFooter
+; Name ..........: _LODraw_SlideFooter
 ; Description ...: Set or Retrieve Slide Footer settings.
-; Syntax ........: _LOImpress_SlideFooter(ByRef $oSlide[, $bDateTime = Null[, $bDateTimeIsFixed = Null[, $sDateTimeValue = Null[, $iDateTimeFormat = Null[, $bFooter = Null[, $sFooterText = Null[, $bSlideNum = Null]]]]]]])
-; Parameters ....: $oSlide              -  A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+; Syntax ........: _LODraw_SlideFooter(ByRef $oSlide[, $bDateTime = Null[, $bDateTimeIsFixed = Null[, $sDateTimeValue = Null[, $iDateTimeFormat = Null[, $bFooter = Null[, $sFooterText = Null[, $bSlideNum = Null]]]]]]])
+; Parameters ....: $oSlide              -  A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
 ;                  $bDateTime           - [optional] Default is Null. If True, a Date or Time entry is added to the footer of the slide.
 ;                  $bDateTimeIsFixed    - [optional] Default is Null. If True, the Date or Time entry is fixed.
 ;                  $sDateTimeValue      - [optional] Default is Null. If $bDateTimeIsFixed is True, this is the custom date or time value to display.
-;                  $iDateTimeFormat     - [optional] (4-112) Default is Null. If $bDateTimeIsFixed is False, the format to display the Date or Time in. See Constants, $LOI_SLIDE_DT_FMT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iDateTimeFormat     - [optional] (4-112) Default is Null. If $bDateTimeIsFixed is False, the format to display the Date or Time in. See Constants, $LOD_SLIDE_DT_FMT_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $bFooter             - [optional] Default is Null. If True, a Footer entry is added to the footer of the slide.
 ;                  $sFooterText         - [optional] Default is Null. If $bFooter is True, the text to display in the footer of the Slide.
 ;                  $bSlideNum           - [optional] Default is Null. If True, a current Slide number is added to the footer of the slide.
@@ -1143,7 +1143,7 @@ EndFunc   ;==>_LOImpress_SlideExists
 ;                  @Error: 1, @Extended: 2 = $bDateTime not a Boolean.
 ;                  @Error: 1, @Extended: 3 = $bDateTimeIsFixed not a Boolean.
 ;                  @Error: 1, @Extended: 4 = $sDateTimeValue not a String.
-;                  @Error: 1, @Extended: 5 = $iDateTimeFormat not an Integer, less than 4 or greater than 9 but not equal to one of the constant values. See Constants, $LOI_SLIDE_DT_FMT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iDateTimeFormat not an Integer, less than 4 or greater than 9 but not equal to one of the constant values. See Constants, $LOD_SLIDE_DT_FMT_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 6 = $bFooter not a Boolean.
 ;                  @Error: 1, @Extended: 7 = $sFooterText not a String.
 ;                  @Error: 1, @Extended: 8 = $bSlideNum not a Boolean.
@@ -1162,17 +1162,17 @@ EndFunc   ;==>_LOImpress_SlideExists
 ;                  Skip first slide, and Apply to all are not added to this function as they are not actual settings. The user can simulate these easily by making a loop to apply it to all slides, and skip the first slide if required.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, _LOImpress_SlideHandoutFooter, _LOImpress_SlideNotesFooter
+; Related .......: _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, _LODraw_SlideHandoutFooter, _LODraw_SlideNotesFooter
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideFooter(ByRef $oSlide, $bDateTime = Null, $bDateTimeIsFixed = Null, $sDateTimeValue = Null, $iDateTimeFormat = Null, $bFooter = Null, $sFooterText = Null, $bSlideNum = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideFooter(ByRef $oSlide, $bDateTime = Null, $bDateTimeIsFixed = Null, $sDateTimeValue = Null, $iDateTimeFormat = Null, $bFooter = Null, $sFooterText = Null, $bSlideNum = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
 	Local $avFooter[7]
-	Local $sAllowed = $LOI_SLIDE_DT_FMT_24H_HM & ":" & $LOI_SLIDE_DT_FMT_MMDDYY_24H_HM & ":" & $LOI_SLIDE_DT_FMT_24H_HMS & ":" & $LOI_SLIDE_DT_FMT_12H_HM_AMPM & ":" & $LOI_SLIDE_DT_FMT_MMDDYY_12H_HM_AMPM & ":" & $LOI_SLIDE_DT_FMT_12H_HMS_AMPM
+	Local $sAllowed = $LOD_SLIDE_DT_FMT_24H_HM & ":" & $LOD_SLIDE_DT_FMT_MMDDYY_24H_HM & ":" & $LOD_SLIDE_DT_FMT_24H_HMS & ":" & $LOD_SLIDE_DT_FMT_12H_HM_AMPM & ":" & $LOD_SLIDE_DT_FMT_MMDDYY_12H_HM_AMPM & ":" & $LOD_SLIDE_DT_FMT_12H_HMS_AMPM
 
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
@@ -1208,7 +1208,7 @@ Func _LOImpress_SlideFooter(ByRef $oSlide, $bDateTime = Null, $bDateTimeIsFixed 
 	EndIf
 
 	If ($iDateTimeFormat <> Null) Then
-		If Not __LO_IntIsBetween($iDateTimeFormat, $LOI_SLIDE_DT_FMT_MMDDYY, $LOI_SLIDE_DT_FMT_DOW_MMMM_DD_YYYY, "", $sAllowed) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iDateTimeFormat, $LOD_SLIDE_DT_FMT_MMDDYY, $LOD_SLIDE_DT_FMT_DOW_MMMM_DD_YYYY, "", $sAllowed) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oSlide.DateTimeFormat = $iDateTimeFormat
 
@@ -1240,16 +1240,16 @@ Func _LOImpress_SlideFooter(ByRef $oSlide, $bDateTime = Null, $bDateTimeIsFixed 
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideFooter
+EndFunc   ;==>_LODraw_SlideFooter
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideFormat
+; Name ..........: _LODraw_SlideFormat
 ; Description ...: Set or Retrieve the slide format settings.
-; Syntax ........: _LOImpress_SlideFormat(ByRef $oSlide[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
-;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOI_PAGE_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOI_PAGE_HEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOI_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
+; Syntax ........: _LODraw_SlideFormat(ByRef $oSlide[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
+;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_HEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -1258,7 +1258,7 @@ EndFunc   ;==>_LOImpress_SlideFooter
 ;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
 ;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
-;                  @Error: 1, @Extended: 4 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants, $LOI_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve current slide width.
 ;                  --Property Setting Errors--
@@ -1272,28 +1272,28 @@ EndFunc   ;==>_LOImpress_SlideFooter
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  When modifying the page format, the shapes etc., aren't readjusted as they are in LibreOffice UI.
 ;                  I am unable to find the properties to set for "FitObject to Paper Format", "Background covers margins", "Slide numbers", and "Paper tray".
-; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlideMargins, _LOImpress_SlideHandoutFormat, _LOImpress_SlideMasterFormat, _LOImpress_SlideNotesFormat
+; Related .......: _LO_UnitConvert, _LODraw_SlideLayout, _LODraw_SlideMargins, _LODraw_SlideHandoutFormat, _LODraw_SlideMasterFormat, _LODraw_SlideNotesFormat
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideFormat(ByRef $oSlide, $iWidth = Null, $iHeight = Null, $iOrientation = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideFormat(ByRef $oSlide, $iWidth = Null, $iHeight = Null, $iOrientation = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $vReturn
 
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$vReturn = __LOImpress_Format($oSlide, $iWidth, $iHeight, $iOrientation)
+	$vReturn = __LODraw_Format($oSlide, $iWidth, $iHeight, $iOrientation)
 
 	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LOImpress_SlideFormat
+EndFunc   ;==>_LODraw_SlideFormat
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideGetObjByIndex
+; Name ..........: _LODraw_SlideGetObjByIndex
 ; Description ...: Retrieve a Slide's Object by index.
-; Syntax ........: _LOImpress_SlideGetObjByIndex(ByRef $oDoc, $iSlide)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: _LODraw_SlideGetObjByIndex(ByRef $oDoc, $iSlide)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $iSlide              - The slide to retrieve. 0 based.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested slide's Object.
@@ -1306,12 +1306,12 @@ EndFunc   ;==>_LOImpress_SlideFormat
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_SlideGetObjByName, _LOImpress_SlidesGetCount, _LOImpress_SlideMasterGetObjByIndex
+; Related .......: _LODraw_SlideGetObjByName, _LODraw_SlidesGetCount, _LODraw_SlideMasterGetObjByIndex
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideGetObjByIndex(ByRef $oDoc, $iSlide)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideGetObjByIndex(ByRef $oDoc, $iSlide)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oSlide
@@ -1323,13 +1323,13 @@ Func _LOImpress_SlideGetObjByIndex(ByRef $oDoc, $iSlide)
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oSlide)
-EndFunc   ;==>_LOImpress_SlideGetObjByIndex
+EndFunc   ;==>_LODraw_SlideGetObjByIndex
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideGetObjByName
+; Name ..........: _LODraw_SlideGetObjByName
 ; Description ...: Retrieve a Slide's Object by name.
-; Syntax ........: _LOImpress_SlideGetObjByName(ByRef $oDoc, $sName)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: _LODraw_SlideGetObjByName(ByRef $oDoc, $sName)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $sName               - The Slide's name to retrieve the Object for.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested Slide's Object.
@@ -1343,12 +1343,12 @@ EndFunc   ;==>_LOImpress_SlideGetObjByIndex
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_SlideGetObjByIndex, _LOImpress_SlidesGetNames, _LOImpress_SlideMasterGetObjByName
+; Related .......: _LODraw_SlideGetObjByIndex, _LODraw_SlidesGetNames, _LODraw_SlideMasterGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideGetObjByName(ByRef $oDoc, $sName)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideGetObjByName(ByRef $oDoc, $sName)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oSlide
@@ -1361,13 +1361,13 @@ Func _LOImpress_SlideGetObjByName(ByRef $oDoc, $sName)
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oSlide)
-EndFunc   ;==>_LOImpress_SlideGetObjByName
+EndFunc   ;==>_LODraw_SlideGetObjByName
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideFooter
+; Name ..........: _LODraw_SlideFooter
 ; Description ...: Set or Retrieve handout page Footer settings.
-; Syntax ........: _LOImpress_SlideFooter(ByRef $oHandout[, $bFooter = Null[, $sFooterText = Null[, $bSlideNum = Null]]])
-; Parameters ....: $oHandout            - A Handout page object returned by a previous _LOImpress_SlideHandoutGetObj function.
+; Syntax ........: _LODraw_SlideFooter(ByRef $oHandout[, $bFooter = Null[, $sFooterText = Null[, $bSlideNum = Null]]])
+; Parameters ....: $oHandout            - A Handout page object returned by a previous _LODraw_SlideHandoutGetObj function.
 ;                  $bFooter             - [optional] Default is Null. If True, a Footer entry is added to the footer of the page.
 ;                  $sFooterText         - [optional] Default is Null. If $bFooter is True, the text to display in the footer of the page.
 ;                  $bSlideNum           - [optional] Default is Null. If True, a current Slide number is added to the footer of the page.
@@ -1391,12 +1391,12 @@ EndFunc   ;==>_LOImpress_SlideGetObjByName
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  During basic testing, while the settings were successfully set, LibreOffice seems to ignore footer values set for handout pages.
-; Related .......: _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, _LOImpress_SlideFooter, _LOImpress_SlideNotesFooter
+; Related .......: _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, _LODraw_SlideFooter, _LODraw_SlideNotesFooter
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideHandoutFooter(ByRef $oHandout, $bFooter = Null, $sFooterText = Null, $bSlideNum = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideHandoutFooter(ByRef $oHandout, $bFooter = Null, $sFooterText = Null, $bSlideNum = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -1435,16 +1435,16 @@ Func _LOImpress_SlideHandoutFooter(ByRef $oHandout, $bFooter = Null, $sFooterTex
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideHandoutFooter
+EndFunc   ;==>_LODraw_SlideHandoutFooter
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideHandoutFormat
+; Name ..........: _LODraw_SlideHandoutFormat
 ; Description ...: Set or Retrieve the handout page format settings.
-; Syntax ........: _LOImpress_SlideHandoutFormat(ByRef $oHandout[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
-; Parameters ....: $oHandout            - A Handout page object returned by a previous _LOImpress_SlideHandoutGetObj function.
-;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOI_PAGE_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOI_PAGE_HEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOI_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
+; Syntax ........: _LODraw_SlideHandoutFormat(ByRef $oHandout[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
+; Parameters ....: $oHandout            - A Handout page object returned by a previous _LODraw_SlideHandoutGetObj function.
+;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_HEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -1453,7 +1453,7 @@ EndFunc   ;==>_LOImpress_SlideHandoutFooter
 ;                  @Error: 1, @Extended: 1 = $oHandout not an Object.
 ;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
-;                  @Error: 1, @Extended: 4 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants, $LOI_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve current slide width.
 ;                  --Property Setting Errors--
@@ -1466,28 +1466,28 @@ EndFunc   ;==>_LOImpress_SlideHandoutFooter
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  When modifying the page format, the shapes etc., aren't readjusted as they are in LibreOffice UI.
-; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlideMargins, _LOImpress_SlideMasterFormat, _LOImpress_SlideNotesFormat, _LOImpress_SlideFormat
+; Related .......: _LO_UnitConvert, _LODraw_SlideLayout, _LODraw_SlideMargins, _LODraw_SlideMasterFormat, _LODraw_SlideNotesFormat, _LODraw_SlideFormat
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideHandoutFormat(ByRef $oHandout, $iWidth = Null, $iHeight = Null, $iOrientation = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideHandoutFormat(ByRef $oHandout, $iWidth = Null, $iHeight = Null, $iOrientation = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $vReturn
 
 	If Not IsObj($oHandout) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$vReturn = __LOImpress_Format($oHandout, $iWidth, $iHeight, $iOrientation)
+	$vReturn = __LODraw_Format($oHandout, $iWidth, $iHeight, $iOrientation)
 
 	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LOImpress_SlideHandoutFormat
+EndFunc   ;==>_LODraw_SlideHandoutFormat
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideHandoutGetObj
+; Name ..........: _LODraw_SlideHandoutGetObj
 ; Description ...: Retrieve the Handout page Object for an Impress document.
-; Syntax ........: _LOImpress_SlideHandoutGetObj(ByRef $oDoc)
-; Parameters ....: $oDoc                -  A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: _LODraw_SlideHandoutGetObj(ByRef $oDoc)
+; Parameters ....: $oDoc                -  A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning Handouts page Object.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -1498,12 +1498,12 @@ EndFunc   ;==>_LOImpress_SlideHandoutFormat
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: There seems to be only one handouts page per document.
-; Related .......: _LOImpress_SlideNotesGetObj
+; Related .......: _LODraw_SlideNotesGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideHandoutGetObj(ByRef $oDoc)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideHandoutGetObj(ByRef $oDoc)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oHandout
@@ -1514,19 +1514,19 @@ Func _LOImpress_SlideHandoutGetObj(ByRef $oDoc)
 	If Not IsObj($oHandout) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oHandout)
-EndFunc   ;==>_LOImpress_SlideHandoutGetObj
+EndFunc   ;==>_LODraw_SlideHandoutGetObj
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideHandoutHeader
+; Name ..........: _LODraw_SlideHandoutHeader
 ; Description ...: Set or Retrieve handout page header settings.
-; Syntax ........: _LOImpress_SlideHandoutHeader(ByRef $oHandout[, $bHeader = Null[, $sHeaderText = Null[, $bDateTime = Null[, $bDateTimeIsFixed = Null[, $sDateTimeValue = Null[, $iDateTimeFormat = Null]]]]]])
-; Parameters ....: $oHandout            - A Handout page object returned by a previous _LOImpress_SlideHandoutGetObj function.
+; Syntax ........: _LODraw_SlideHandoutHeader(ByRef $oHandout[, $bHeader = Null[, $sHeaderText = Null[, $bDateTime = Null[, $bDateTimeIsFixed = Null[, $sDateTimeValue = Null[, $iDateTimeFormat = Null]]]]]])
+; Parameters ....: $oHandout            - A Handout page object returned by a previous _LODraw_SlideHandoutGetObj function.
 ;                  $bHeader             - [optional] Default is Null. If True, a Header entry is added to the Header of the page.
 ;                  $sHeaderText         - [optional] Default is Null. If $bHeader is True, the text to display in the Header of the page.
 ;                  $bDateTime           - [optional] Default is Null. If True, a Date or Time entry is added to the header of the page.
 ;                  $bDateTimeIsFixed    - [optional] Default is Null. If True, the Date or Time entry is fixed.
 ;                  $sDateTimeValue      - [optional] Default is Null. If $bDateTimeIsFixed is True, this is the custom date or time value to display.
-;                  $iDateTimeFormat     - [optional] (4-112) Default is Null. If $bDateTimeIsFixed is False, the format to display the Date or Time in. See Constants, $LOI_SLIDE_DT_FMT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iDateTimeFormat     - [optional] (4-112) Default is Null. If $bDateTimeIsFixed is False, the format to display the Date or Time in. See Constants, $LOD_SLIDE_DT_FMT_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
@@ -1538,7 +1538,7 @@ EndFunc   ;==>_LOImpress_SlideHandoutGetObj
 ;                  @Error: 1, @Extended: 4 = $bDateTime not a Boolean.
 ;                  @Error: 1, @Extended: 5 = $bDateTimeIsFixed not a Boolean.
 ;                  @Error: 1, @Extended: 6 = $sDateTimeValue not a String.
-;                  @Error: 1, @Extended: 7 = $iDateTimeFormat not an Integer, less than 4 or greater than 9 but not equal to one of the constant values. See Constants, $LOI_SLIDE_DT_FMT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 7 = $iDateTimeFormat not an Integer, less than 4 or greater than 9 but not equal to one of the constant values. See Constants, $LOD_SLIDE_DT_FMT_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bHeader
@@ -1553,17 +1553,17 @@ EndFunc   ;==>_LOImpress_SlideHandoutGetObj
 ;                  Apply to all is not added to this function as it is not an actual setting. The user can simulate this easily by making a loop to apply it to all slides.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, _LOImpress_SlideNotesHeader
+; Related .......: _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, _LODraw_SlideNotesHeader
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideHandoutHeader(ByRef $oHandout, $bHeader = Null, $sHeaderText = Null, $bDateTime = Null, $bDateTimeIsFixed = Null, $sDateTimeValue = Null, $iDateTimeFormat = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideHandoutHeader(ByRef $oHandout, $bHeader = Null, $sHeaderText = Null, $bDateTime = Null, $bDateTimeIsFixed = Null, $sDateTimeValue = Null, $iDateTimeFormat = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
 	Local $avHeader[6]
-	Local $sAllowed = $LOI_SLIDE_DT_FMT_24H_HM & ":" & $LOI_SLIDE_DT_FMT_MMDDYY_24H_HM & ":" & $LOI_SLIDE_DT_FMT_24H_HMS & ":" & $LOI_SLIDE_DT_FMT_12H_HM_AMPM & ":" & $LOI_SLIDE_DT_FMT_MMDDYY_12H_HM_AMPM & ":" & $LOI_SLIDE_DT_FMT_12H_HMS_AMPM
+	Local $sAllowed = $LOD_SLIDE_DT_FMT_24H_HM & ":" & $LOD_SLIDE_DT_FMT_MMDDYY_24H_HM & ":" & $LOD_SLIDE_DT_FMT_24H_HMS & ":" & $LOD_SLIDE_DT_FMT_12H_HM_AMPM & ":" & $LOD_SLIDE_DT_FMT_MMDDYY_12H_HM_AMPM & ":" & $LOD_SLIDE_DT_FMT_12H_HMS_AMPM
 
 	If Not IsObj($oHandout) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
@@ -1615,7 +1615,7 @@ Func _LOImpress_SlideHandoutHeader(ByRef $oHandout, $bHeader = Null, $sHeaderTex
 	EndIf
 
 	If ($iDateTimeFormat <> Null) Then
-		If Not __LO_IntIsBetween($iDateTimeFormat, $LOI_SLIDE_DT_FMT_MMDDYY, $LOI_SLIDE_DT_FMT_DOW_MMMM_DD_YYYY, "", $sAllowed) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+		If Not __LO_IntIsBetween($iDateTimeFormat, $LOD_SLIDE_DT_FMT_MMDDYY, $LOD_SLIDE_DT_FMT_DOW_MMMM_DD_YYYY, "", $sAllowed) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
 		$oHandout.DateTimeFormat = $iDateTimeFormat
 
@@ -1623,21 +1623,21 @@ Func _LOImpress_SlideHandoutHeader(ByRef $oHandout, $bHeader = Null, $sHeaderTex
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideHandoutHeader
+EndFunc   ;==>_LODraw_SlideHandoutHeader
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideHandoutLayout
+; Name ..........: _LODraw_SlideHandoutLayout
 ; Description ...: Set or Retrieve the current Handout page's layout.
-; Syntax ........: _LOImpress_SlideHandoutLayout(ByRef $oHandout[, $iLayout = Null])
-; Parameters ....: $oHandout            - A Handout page object returned by a previous _LOImpress_SlideHandoutGetObj function.
-;                  $iLayout             - [optional] (22-31) Default is Null. The layout format of the Handout page. See Constants, $LOI_HANDOUT_LAYOUT_* as defined in LibreOfficeImpress_Constants.au3.
+; Syntax ........: _LODraw_SlideHandoutLayout(ByRef $oHandout[, $iLayout = Null])
+; Parameters ....: $oHandout            - A Handout page object returned by a previous _LODraw_SlideHandoutGetObj function.
+;                  $iLayout             - [optional] (22-31) Default is Null. The layout format of the Handout page. See Constants, $LOD_HANDOUT_LAYOUT_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1 or Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current layout setting as an Integer.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oHandout not an Object.
-;                  @Error: 1, @Extended: 2 = $iLayout not an Integer, less than 22 or greater than 31. See Constants, $LOI_HANDOUT_LAYOUT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iLayout not an Integer, less than 22 or greater than 31. See Constants, $LOD_HANDOUT_LAYOUT_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Page's current layout.
 ;                  --Property Setting Errors--
@@ -1646,12 +1646,12 @@ EndFunc   ;==>_LOImpress_SlideHandoutHeader
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOImpress_SlideHandoutFormat, _LOImpress_SlideHandoutMargins, _LOImpress_SlideLayout
+; Related .......: _LODraw_SlideHandoutFormat, _LODraw_SlideHandoutMargins, _LODraw_SlideLayout
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideHandoutLayout(ByRef $oHandout, $iLayout = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideHandoutLayout(ByRef $oHandout, $iLayout = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -1666,19 +1666,19 @@ Func _LOImpress_SlideHandoutLayout(ByRef $oHandout, $iLayout = Null)
 		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurrLayout)
 	EndIf
 
-	If Not __LO_IntIsBetween($iLayout, $LOI_HANDOUT_LAYOUT_ONE_SLIDE, $LOI_HANDOUT_LAYOUT_NINE_SLIDES) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iLayout, $LOD_HANDOUT_LAYOUT_ONE_SLIDE, $LOD_HANDOUT_LAYOUT_NINE_SLIDES) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oHandout.Layout = $iLayout
 	$iError = ($oHandout.Layout() = $iLayout) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideHandoutLayout
+EndFunc   ;==>_LODraw_SlideHandoutLayout
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideHandoutMargins
+; Name ..........: _LODraw_SlideHandoutMargins
 ; Description ...: Set or Retrieve the handout page margin settings.
-; Syntax ........: _LOImpress_SlideHandoutMargins(ByRef $oHandout[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
-; Parameters ....: $oHandout            - A Handout page object returned by a previous _LOImpress_SlideHandoutGetObj function.
+; Syntax ........: _LODraw_SlideHandoutMargins(ByRef $oHandout[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
+; Parameters ....: $oHandout            - A Handout page object returned by a previous _LODraw_SlideHandoutGetObj function.
 ;                  $iLeft               - [optional] Default is Null. The amount of space to leave between the left edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
 ;                  $iRight              - [optional] Default is Null. The amount of space to leave between the right edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
 ;                  $iTop                - [optional] Default is Null. The amount of space to leave between the upper edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
@@ -1703,36 +1703,36 @@ EndFunc   ;==>_LOImpress_SlideHandoutLayout
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlideFormat, _LOImpress_SlideMasterMargins, _LOImpress_SlideNotesMargins, _LOImpress_SlideMargins
+; Related .......: _LO_UnitConvert, _LODraw_SlideLayout, _LODraw_SlideFormat, _LODraw_SlideMasterMargins, _LODraw_SlideNotesMargins, _LODraw_SlideMargins
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideHandoutMargins(ByRef $oHandout, $iLeft = Null, $iRight = Null, $iTop = Null, $iBottom = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideHandoutMargins(ByRef $oHandout, $iLeft = Null, $iRight = Null, $iTop = Null, $iBottom = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $vReturn
 
 	If Not IsObj($oHandout) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$vReturn = __LOImpress_Margins($oHandout, $iLeft, $iRight, $iTop, $iBottom)
+	$vReturn = __LODraw_Margins($oHandout, $iLeft, $iRight, $iTop, $iBottom)
 
 	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LOImpress_SlideHandoutMargins
+EndFunc   ;==>_LODraw_SlideHandoutMargins
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideLayout
+; Name ..........: _LODraw_SlideLayout
 ; Description ...: Set or Retrieve the current Slide's layout.
-; Syntax ........: _LOImpress_SlideLayout(ByRef $oSlide[, $iLayout = Null])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
-;                  $iLayout             - [optional] (0-34) Default is Null. The layout format of the Slide. See Constants, $LOI_SLIDE_LAYOUT_* as defined in LibreOfficeImpress_Constants.au3.
+; Syntax ........: _LODraw_SlideLayout(ByRef $oSlide[, $iLayout = Null])
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
+;                  $iLayout             - [optional] (0-34) Default is Null. The layout format of the Slide. See Constants, $LOD_SLIDE_LAYOUT_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1 or Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current layout setting as an Integer.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
-;                  @Error: 1, @Extended: 2 = $iLayout not an Integer, less than 0 or greater than 34. See Constants, $LOI_SLIDE_LAYOUT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iLayout not an Integer, less than 0 or greater than 34. See Constants, $LOD_SLIDE_LAYOUT_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Slide's current layout.
 ;                  --Property Setting Errors--
@@ -1741,12 +1741,12 @@ EndFunc   ;==>_LOImpress_SlideHandoutMargins
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOImpress_SlideName, _LOImpress_SlideTransition, _LOImpress_SlideFormat, _LOImpress_SlideMargins, _LOImpress_SlideHandoutLayout
+; Related .......: _LODraw_SlideName, _LODraw_SlideTransition, _LODraw_SlideFormat, _LODraw_SlideMargins, _LODraw_SlideHandoutLayout
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideLayout(ByRef $oSlide, $iLayout = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideLayout(ByRef $oSlide, $iLayout = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -1761,19 +1761,19 @@ Func _LOImpress_SlideLayout(ByRef $oSlide, $iLayout = Null)
 		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurrLayout)
 	EndIf
 
-	If Not __LO_IntIsBetween($iLayout, $LOI_SLIDE_LAYOUT_TITLE, $LOI_SLIDE_LAYOUT_TITLE_6_CONTENT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iLayout, $LOD_SLIDE_LAYOUT_TITLE, $LOD_SLIDE_LAYOUT_TITLE_6_CONTENT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oSlide.Layout = $iLayout
 	$iError = ($oSlide.Layout() = $iLayout) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideLayout
+EndFunc   ;==>_LODraw_SlideLayout
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideMargins
+; Name ..........: _LODraw_SlideMargins
 ; Description ...: Set or Retrieve the slide page margin settings.
-; Syntax ........: _LOImpress_SlideMargins(ByRef $oSlide[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+; Syntax ........: _LODraw_SlideMargins(ByRef $oSlide[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
 ;                  $iLeft               - [optional] Default is Null. The amount of space to leave between the left edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
 ;                  $iRight              - [optional] Default is Null. The amount of space to leave between the right edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
 ;                  $iTop                - [optional] Default is Null. The amount of space to leave between the upper edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
@@ -1798,28 +1798,28 @@ EndFunc   ;==>_LOImpress_SlideLayout
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlideFormat, _LOImpress_SlideHandoutMargins, _LOImpress_SlideMasterMargins, _LOImpress_SlideNotesMargins
+; Related .......: _LO_UnitConvert, _LODraw_SlideLayout, _LODraw_SlideFormat, _LODraw_SlideHandoutMargins, _LODraw_SlideMasterMargins, _LODraw_SlideNotesMargins
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideMargins(ByRef $oSlide, $iLeft = Null, $iRight = Null, $iTop = Null, $iBottom = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideMargins(ByRef $oSlide, $iLeft = Null, $iRight = Null, $iTop = Null, $iBottom = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $vReturn
 
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$vReturn = __LOImpress_Margins($oSlide, $iLeft, $iRight, $iTop, $iBottom)
+	$vReturn = __LODraw_Margins($oSlide, $iLeft, $iRight, $iTop, $iBottom)
 
 	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LOImpress_SlideMargins
+EndFunc   ;==>_LODraw_SlideMargins
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideMasterAdd
+; Name ..........: _LODraw_SlideMasterAdd
 ; Description ...: Add a master slide to a presentation.
-; Syntax ........: _LOImpress_SlideMasterAdd(ByRef $oDoc[, $iPos = Null[, $sName = ""[, $bBlank = True]]])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: _LODraw_SlideMasterAdd(ByRef $oDoc[, $iPos = Null[, $sName = ""[, $bBlank = True]]])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $iPos                - [optional] Default is Null. The position to insert the new master slide in the collection of slides. 0 Based. This is ignored if $bBlank is False.
 ;                  $sName               - [optional] Default is "". The unique name of the Master Slide. If called with an empty string, LibreOffice automatically names it.
 ;                  $bBlank              - [optional] Default is True. If True, the new Master Slide is blank. If False a Master Slide with a preset layout is inserted. See remarks.
@@ -1849,12 +1849,12 @@ EndFunc   ;==>_LOImpress_SlideMargins
 ;                  This function uses two methods to insert a Master slide. Using the API, the resulting new master slide is blank, without text boxes etc., the second method uses a document dispatch command, which results in a normally formatted master slide, like when you add a master slide manually.
 ;                  When inserting a new slide with $bBlank set to False, I use the dispatch command to accomplish the insertion, this method seems to only ever insert the new slide at the end of all the slides.
 ;                  I have not found a way to import Master slide from the LibreOffice templates yet.
-; Related .......: _LOImpress_SlideMasterDeleteByIndex, _LOImpress_SlideMasterDeleteByObj, _LOImpress_SlideAdd, _LOImpress_SlideMasterExists
+; Related .......: _LODraw_SlideMasterDeleteByIndex, _LODraw_SlideMasterDeleteByObj, _LODraw_SlideAdd, _LODraw_SlideMasterExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideMasterAdd(ByRef $oDoc, $iPos = Null, $sName = "", $bBlank = True)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideMasterAdd(ByRef $oDoc, $iPos = Null, $sName = "", $bBlank = True)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oMSlide, $oServiceManager, $oDispatcher, $oMasters, $oMaster
@@ -1868,7 +1868,7 @@ Func _LOImpress_SlideMasterAdd(ByRef $oDoc, $iPos = Null, $sName = "", $bBlank =
 	If ($iPos = $oDoc.MasterPages.getCount()) Then $iPos = $iPos - 1 ; If I am inserting a Master using the dispatch command, and the user called the last slide position plus 1, I need to change it to be 1 less so I can retrieve the Object for the last master slide.
 	If Not __LO_IntIsBetween($iPos, 0, $oDoc.MasterPages.getCount()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If ($sName <> "") And _LOImpress_SlideMasterExists($oDoc, $sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If ($sName <> "") And _LODraw_SlideMasterExists($oDoc, $sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsBool($bBlank) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 	If $bBlank Then
@@ -1895,7 +1895,7 @@ Func _LOImpress_SlideMasterAdd(ByRef $oDoc, $iPos = Null, $sName = "", $bBlank =
 			$aoMasters[$i] = $oMasters.getByIndex($i)
 			If Not IsObj($aoMasters[$i]) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
-			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+			Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 		Next
 
 		$oDispatcher.executeDispatch($oDoc.CurrentController(), ".uno:InsertMasterPage", "", 0, $aArray)
@@ -1909,7 +1909,7 @@ Func _LOImpress_SlideMasterAdd(ByRef $oDoc, $iPos = Null, $sName = "", $bBlank =
 				; If the Object is a match, exit this loop and continue the top-level loop, bypassing the Objext assignment.
 				If $aoMasters[$j] = $oMaster Then ContinueLoop 2
 
-				Sleep((IsInt($j / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+				Sleep((IsInt($j / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 			Next
 
 			$oMSlide = $oMaster
@@ -1921,13 +1921,13 @@ Func _LOImpress_SlideMasterAdd(ByRef $oDoc, $iPos = Null, $sName = "", $bBlank =
 	If ($sName <> "") Then $oMSlide.Name = $sName
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oMSlide)
-EndFunc   ;==>_LOImpress_SlideMasterAdd
+EndFunc   ;==>_LODraw_SlideMasterAdd
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideMasterBackColor
+; Name ..........: _LODraw_SlideMasterBackColor
 ; Description ...: Set or Retrieve the Master Slide's background color.
-; Syntax ........: _LOImpress_SlideMasterBackColor(ByRef $oMaster[, $iColor = Null])
-; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LOImpress_SlideMasterAdd, _LOImpress_SlideMasterGetObjByIndex, or _LOImpress_SlideMasterGetObjByName function.
+; Syntax ........: _LODraw_SlideMasterBackColor(ByRef $oMaster[, $iColor = Null])
+; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
 ;                  $iColor              - [optional] (0-16777215) Default is Null. The Master Slide background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1 or Integer
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -1948,12 +1948,12 @@ EndFunc   ;==>_LOImpress_SlideMasterAdd
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the slide, the Constant $LO_COLOR_OFF is returned.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_SlideMasterBackFillStyle, _LOImpress_SlideMasterBackGradient, _LOImpress_SlideBackColor
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_SlideMasterBackFillStyle, _LODraw_SlideMasterBackGradient, _LODraw_SlideBackColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideMasterBackColor(ByRef $oMaster, $iColor = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideMasterBackColor(ByRef $oMaster, $iColor = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oBackground, $oDoc
@@ -1966,7 +1966,7 @@ Func _LOImpress_SlideMasterBackColor(ByRef $oMaster, $iColor = Null)
 	If __LO_VarsAreNull($iColor) Then
 		If Not IsObj($oBackground) Then Return SetError($__LO_STATUS_SUCCESS, 1, $LO_COLOR_OFF) ; If no background is set, this will be void, instead of an Object.
 
-		$iCurColor = __LOImpress_ColorRemoveAlpha($oBackground.FillColor())
+		$iCurColor = __LODraw_ColorRemoveAlpha($oBackground.FillColor())
 		If Not IsInt($iCurColor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurColor)
@@ -1975,7 +1975,7 @@ Func _LOImpress_SlideMasterBackColor(ByRef $oMaster, $iColor = Null)
 	If Not __LO_IntIsBetween($iColor, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If Not IsObj($oBackground) Then ; Have to create the Background service.
-		$oDoc = __LOImpress_GetParentDoc($oMaster)
+		$oDoc = __LODraw_GetParentDoc($oMaster)
 		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		$oBackground = $oDoc.createInstance("com.sun.star.drawing.Background")
@@ -1984,21 +1984,21 @@ Func _LOImpress_SlideMasterBackColor(ByRef $oMaster, $iColor = Null)
 		$oMaster.Background = $oBackground
 	EndIf
 
-	$oBackground.FillStyle = $LOI_AREA_FILL_STYLE_SOLID
+	$oBackground.FillStyle = $LOD_AREA_FILL_STYLE_SOLID
 	$oBackground.FillColor = $iColor
 	$iError = ($oMaster.Background.FillColor() = $iColor) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideMasterBackColor
+EndFunc   ;==>_LODraw_SlideMasterBackColor
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideMasterBackFillStyle
+; Name ..........: _LODraw_SlideMasterBackFillStyle
 ; Description ...: Retrieve what kind of background fill is active, if any.
-; Syntax ........: _LOImpress_SlideMasterBackFillStyle(ByRef $oMaster[, $bFillOff = False])
-; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LOImpress_SlideMasterAdd, _LOImpress_SlideMasterGetObjByIndex, or _LOImpress_SlideMasterGetObjByName function.
+; Syntax ........: _LODraw_SlideMasterBackFillStyle(ByRef $oMaster[, $bFillOff = False])
+; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
 ;                  $bFillOff            - [optional] Default is False. If True, the Fill style will be set to Off. See remarks.
 ; Return values .: Success: Integer
-;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOI_AREA_FILL_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOD_AREA_FILL_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 0, @Extended: 1, Return: 0 = Success. Fill style was successfully turned off.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
@@ -2012,12 +2012,12 @@ EndFunc   ;==>_LOImpress_SlideMasterBackColor
 ;                  This is useful because, if a Gradient is active, the solid color value is still present, and thus it would not be possible to determine which function should be used to retrieve the current values for, whether the Color function, or the Gradient function.
 ;                  When the Fill style is disabled for a Master Slide, the Fill properties are completely removed. This is how Impress works normally.
 ;                  $bFillOff will do nothing if it is called with False, and is not, of course, returned when retrieving the FillStyle value.
-; Related .......: _LOImpress_SlideMasterBackColor, _LOImpress_SlideMasterBackGradient, _LOImpress_SlideBackFillStyle
+; Related .......: _LODraw_SlideMasterBackColor, _LODraw_SlideMasterBackGradient, _LODraw_SlideBackFillStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideMasterBackFillStyle(ByRef $oMaster, $bFillOff = False)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideMasterBackFillStyle(ByRef $oMaster, $bFillOff = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iFillStyle
@@ -2031,28 +2031,28 @@ Func _LOImpress_SlideMasterBackFillStyle(ByRef $oMaster, $bFillOff = False)
 			$oBackground = $oMaster.Background
 			If Not IsObj($oBackground) Then Return SetError($__LO_STATUS_SUCCESS, 1, 0) ; If no Background Object, no Fillstyle is active.
 
-			$oBackground.FillStyle = $LOI_AREA_FILL_STYLE_OFF
+			$oBackground.FillStyle = $LOD_AREA_FILL_STYLE_OFF
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, 0)
 	EndIf
 
 	$oBackground = $oMaster.Background()
-	If Not IsObj($oBackground) Then Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_AREA_FILL_STYLE_OFF) ; If no Background Object, no Fillstyle is active.
+	If Not IsObj($oBackground) Then Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_AREA_FILL_STYLE_OFF) ; If no Background Object, no Fillstyle is active.
 
 	$iFillStyle = $oBackground.FillStyle()
 	If Not IsInt($iFillStyle) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $iFillStyle)
-EndFunc   ;==>_LOImpress_SlideMasterBackFillStyle
+EndFunc   ;==>_LODraw_SlideMasterBackFillStyle
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideMasterBackGradient
+; Name ..........: _LODraw_SlideMasterBackGradient
 ; Description ...: Set or Retrieve the settings for Master Slide Background color Gradient.
-; Syntax ........: _LOImpress_SlideMasterBackGradient(ByRef $oMaster[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
-; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LOImpress_SlideMasterAdd, _LOImpress_SlideMasterGetObjByIndex, or _LOImpress_SlideMasterGetObjByName function.
-;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOI_GRAD_NAME_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+; Syntax ........: _LODraw_SlideMasterBackGradient(ByRef $oMaster[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
+; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
+;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOD_GRAD_NAME_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iIncrement          - [optional] (0, 3-256) Default is Null. The number of steps of color change. 0 = Automatic.
 ;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient, where 0% corresponds to the current horizontal location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" setting. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage. $iType must be other than "Linear", or "Axial".
@@ -2071,7 +2071,7 @@ EndFunc   ;==>_LOImpress_SlideMasterBackFillStyle
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oMaster not an Object.
 ;                  @Error: 1, @Extended: 2 = $sGradientName not a String.
-;                  @Error: 1, @Extended: 3 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 4 = $iIncrement not an Integer, less than 3, but not 0, or greater than 256.
 ;                  @Error: 1, @Extended: 5 = $iXCenter not an Integer, less than 0 or greater than 100.
 ;                  @Error: 1, @Extended: 6 = $iYCenter not an Integer, less than 0 or greater than 100.
@@ -2108,12 +2108,12 @@ EndFunc   ;==>_LOImpress_SlideMasterBackFillStyle
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_SlideMasterBackColor, _LOImpress_SlideMasterBackFillStyle, _LOImpress_SlideBackGradient
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_SlideMasterBackColor, _LODraw_SlideMasterBackFillStyle, _LODraw_SlideBackGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideMasterBackGradient(ByRef $oMaster, $sGradientName = Null, $iType = Null, $iIncrement = Null, $iXCenter = Null, $iYCenter = Null, $iAngle = Null, $iTransitionStart = Null, $iFromColor = Null, $iToColor = Null, $iFromIntense = Null, $iToIntense = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideMasterBackGradient(ByRef $oMaster, $sGradientName = Null, $iType = Null, $iIncrement = Null, $iXCenter = Null, $iYCenter = Null, $iAngle = Null, $iTransitionStart = Null, $iFromColor = Null, $iToColor = Null, $iFromIntense = Null, $iToIntense = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oBackground, $oDoc
@@ -2142,7 +2142,7 @@ Func _LOImpress_SlideMasterBackGradient(ByRef $oMaster, $sGradientName = Null, $
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avGradient)
 	EndIf
 
-	$oDoc = __LOImpress_GetParentDoc($oMaster)
+	$oDoc = __LODraw_GetParentDoc($oMaster)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	If Not IsObj($oBackground) Then ; Have to create the Background service.
@@ -2155,12 +2155,12 @@ Func _LOImpress_SlideMasterBackGradient(ByRef $oMaster, $sGradientName = Null, $
 	$tStyleGradient = $oBackground.FillGradient()
 	If Not IsObj($tStyleGradient) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If ($oBackground.FillStyle() <> $LOI_AREA_FILL_STYLE_GRADIENT) Then $oBackground.FillStyle = $LOI_AREA_FILL_STYLE_GRADIENT
+	If ($oBackground.FillStyle() <> $LOD_AREA_FILL_STYLE_GRADIENT) Then $oBackground.FillStyle = $LOD_AREA_FILL_STYLE_GRADIENT
 
 	If ($sGradientName <> Null) Then
 		If Not IsString($sGradientName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-		__LOImpress_GradientPresets($oDoc, $oBackground, $tStyleGradient, $sGradientName)
+		__LODraw_GradientPresets($oDoc, $oBackground, $tStyleGradient, $sGradientName)
 
 		$tStyleGradient = $oBackground.FillGradient()
 		If Not IsObj($tStyleGradient) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
@@ -2169,14 +2169,14 @@ Func _LOImpress_SlideMasterBackGradient(ByRef $oMaster, $sGradientName = Null, $
 	EndIf
 
 	If ($iType <> Null) Then
-		If ($iType = $LOI_GRAD_TYPE_OFF) Then ; Turn Off Gradient
-			$oBackground.FillStyle = $LOI_AREA_FILL_STYLE_OFF
+		If ($iType = $LOD_GRAD_TYPE_OFF) Then ; Turn Off Gradient
+			$oBackground.FillStyle = $LOD_AREA_FILL_STYLE_OFF
 			$oBackground.FillGradientName = ""
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, 2)
 		EndIf
 
-		If Not __LO_IntIsBetween($iType, $LOI_GRAD_TYPE_LINEAR, $LOI_GRAD_TYPE_RECT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not __LO_IntIsBetween($iType, $LOD_GRAD_TYPE_LINEAR, $LOD_GRAD_TYPE_RECT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		$tStyleGradient.Style = $iType
 	EndIf
@@ -2283,8 +2283,8 @@ Func _LOImpress_SlideMasterBackGradient(ByRef $oMaster, $sGradientName = Null, $
 		$tStyleGradient.EndIntensity = $iToIntense
 	EndIf
 
-	If ($oBackground.FillGradientName() = "") Or __LOImpress_GradientIsModified($tStyleGradient, $oBackground.FillGradientName()) Then
-		$sGradName = __LOImpress_GradientNameInsert($oDoc, $tStyleGradient)
+	If ($oBackground.FillGradientName() = "") Or __LODraw_GradientIsModified($tStyleGradient, $oBackground.FillGradientName()) Then
+		$sGradName = __LODraw_GradientNameInsert($oDoc, $tStyleGradient)
 		If @error > 0 Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
 		$oBackground.FillGradientName = $sGradName
@@ -2305,13 +2305,13 @@ Func _LOImpress_SlideMasterBackGradient(ByRef $oMaster, $sGradientName = Null, $
 	$iError = (__LO_VarsAreNull($iToIntense)) ? $iError : ($oMaster.Background.FillGradient.EndIntensity() = $iToIntense) ? ($iError) : (BitOR($iError, 1024))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideMasterBackGradient
+EndFunc   ;==>_LODraw_SlideMasterBackGradient
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideMasterBackTransparency
+; Name ..........: _LODraw_SlideMasterBackTransparency
 ; Description ...: Set or retrieve Transparency settings for a Master Slide.
-; Syntax ........: _LOImpress_SlideMasterBackTransparency(ByRef $oMaster[, $iTransparency = Null])
-; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LOImpress_SlideMasterAdd, _LOImpress_SlideMasterGetObjByIndex, or _LOImpress_SlideMasterGetObjByName function.
+; Syntax ........: _LODraw_SlideMasterBackTransparency(ByRef $oMaster[, $iTransparency = Null])
+; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
@@ -2332,12 +2332,12 @@ EndFunc   ;==>_LOImpress_SlideMasterBackGradient
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the Master slide, -1 is returned.
-; Related .......: _LOImpress_SlideMasterBackTransparencyGradient, _LOImpress_SlideBackTransparency
+; Related .......: _LODraw_SlideMasterBackTransparencyGradient, _LODraw_SlideBackTransparency
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideMasterBackTransparency(ByRef $oMaster, $iTransparency = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideMasterBackTransparency(ByRef $oMaster, $iTransparency = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0, $iCurTransp
@@ -2359,7 +2359,7 @@ Func _LOImpress_SlideMasterBackTransparency(ByRef $oMaster, $iTransparency = Nul
 	If Not __LO_IntIsBetween($iTransparency, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If Not IsObj($oBackground) Then ; Have to create the Background service.
-		$oDoc = __LOImpress_GetParentDoc($oMaster)
+		$oDoc = __LODraw_GetParentDoc($oMaster)
 		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		$oBackground = $oDoc.createInstance("com.sun.star.drawing.Background")
@@ -2374,14 +2374,14 @@ Func _LOImpress_SlideMasterBackTransparency(ByRef $oMaster, $iTransparency = Nul
 	$iError = ($oMaster.Background.FillTransparence() = $iTransparency) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideMasterBackTransparency
+EndFunc   ;==>_LODraw_SlideMasterBackTransparency
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideMasterBackTransparencyGradient
+; Name ..........: _LODraw_SlideMasterBackTransparencyGradient
 ; Description ...: Set or retrieve the Master Slide's transparency gradient settings.
-; Syntax ........: _LOImpress_SlideMasterBackTransparencyGradient(ByRef $oMaster[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
-; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LOImpress_SlideMasterAdd, _LOImpress_SlideMasterGetObjByIndex, or _LOImpress_SlideMasterGetObjByName function.
-;                  $iType               - [optional] (-1-5) Default is Null. The type of transparency gradient to apply. See Constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3. Call with $LOI_GRAD_TYPE_OFF to turn Transparency Gradient off.
+; Syntax ........: _LODraw_SlideMasterBackTransparencyGradient(ByRef $oMaster[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
+; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
+;                  $iType               - [optional] (-1-5) Default is Null. The type of transparency gradient to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3. Call with $LOD_GRAD_TYPE_OFF to turn Transparency Gradient off.
 ;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iAngle              - [optional] (0-359) Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
@@ -2396,7 +2396,7 @@ EndFunc   ;==>_LOImpress_SlideMasterBackTransparency
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oMaster not an Object.
-;                  @Error: 1, @Extended: 2 = $iType Not an Integer, less than -1 or greater than 5. See constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iType Not an Integer, less than -1 or greater than 5. See constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $iXCenter Not an Integer, less than 0 or greater than 100.
 ;                  @Error: 1, @Extended: 4 = $iYCenter Not an Integer, less than 0 or greater than 100.
 ;                  @Error: 1, @Extended: 5 = $iAngle Not an Integer, less than 0 or greater than 359.
@@ -2426,12 +2426,12 @@ EndFunc   ;==>_LOImpress_SlideMasterBackTransparency
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  While these properties can be set successfully, LibreOffice doesn't seem to apply it to the master slide, even when done using the UI.
-; Related .......: _LOImpress_SlideMasterBackTransparency, _LOImpress_SlideBackTransparencyGradient
+; Related .......: _LODraw_SlideMasterBackTransparency, _LODraw_SlideBackTransparencyGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideMasterBackTransparencyGradient(ByRef $oMaster, $iType = Null, $iXCenter = Null, $iYCenter = Null, $iAngle = Null, $iTransitionStart = Null, $iStart = Null, $iEnd = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideMasterBackTransparencyGradient(ByRef $oMaster, $iType = Null, $iXCenter = Null, $iYCenter = Null, $iAngle = Null, $iTransitionStart = Null, $iStart = Null, $iEnd = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $tGradient, $tColorStop, $tStopColor
@@ -2453,13 +2453,13 @@ Func _LOImpress_SlideMasterBackTransparencyGradient(ByRef $oMaster, $iType = Nul
 		If Not IsObj($tGradient) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 		__LO_ArrayFill($aiTransparent, $tGradient.Style(), $tGradient.XOffset(), $tGradient.YOffset(), _
-				($tGradient.Angle() / 10), $tGradient.Border(), __LOImpress_TransparencyGradientConvert(Null, $tGradient.StartColor()), _
-				__LOImpress_TransparencyGradientConvert(Null, $tGradient.EndColor())) ; Angle is set in thousands
+				($tGradient.Angle() / 10), $tGradient.Border(), __LODraw_TransparencyGradientConvert(Null, $tGradient.StartColor()), _
+				__LODraw_TransparencyGradientConvert(Null, $tGradient.EndColor())) ; Angle is set in thousands
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $aiTransparent)
 	EndIf
 
-	$oDoc = __LOImpress_GetParentDoc($oMaster)
+	$oDoc = __LODraw_GetParentDoc($oMaster)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	If Not IsObj($oBackground) Then ; Have to create the Background service.
@@ -2473,13 +2473,13 @@ Func _LOImpress_SlideMasterBackTransparencyGradient(ByRef $oMaster, $iType = Nul
 	If Not IsObj($tGradient) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	If ($iType <> Null) Then
-		If ($iType = $LOI_GRAD_TYPE_OFF) Then ; Turn Off Gradient
+		If ($iType = $LOD_GRAD_TYPE_OFF) Then ; Turn Off Gradient
 			$oBackground.FillTransparenceGradientName = ""
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, 2)
 		EndIf
 
-		If Not __LO_IntIsBetween($iType, $LOI_GRAD_TYPE_LINEAR, $LOI_GRAD_TYPE_RECT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+		If Not __LO_IntIsBetween($iType, $LOD_GRAD_TYPE_LINEAR, $LOD_GRAD_TYPE_RECT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		$tGradient.Style = $iType
 	EndIf
@@ -2511,7 +2511,7 @@ Func _LOImpress_SlideMasterBackTransparencyGradient(ByRef $oMaster, $iType = Nul
 	If ($iStart <> Null) Then
 		If Not __LO_IntIsBetween($iStart, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
-		$tGradient.StartColor = __LOImpress_TransparencyGradientConvert($iStart)
+		$tGradient.StartColor = __LODraw_TransparencyGradientConvert($iStart)
 
 		If __LO_VersionCheck(7.6) Then
 			$atColorStop = $tGradient.ColorStops()
@@ -2538,7 +2538,7 @@ Func _LOImpress_SlideMasterBackTransparencyGradient(ByRef $oMaster, $iType = Nul
 	If ($iEnd <> Null) Then
 		If Not __LO_IntIsBetween($iEnd, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
-		$tGradient.EndColor = __LOImpress_TransparencyGradientConvert($iEnd)
+		$tGradient.EndColor = __LODraw_TransparencyGradientConvert($iEnd)
 
 		If __LO_VersionCheck(7.6) Then
 			$atColorStop = $tGradient.ColorStops()
@@ -2563,7 +2563,7 @@ Func _LOImpress_SlideMasterBackTransparencyGradient(ByRef $oMaster, $iType = Nul
 	EndIf
 
 	If ($oBackground.FillTransparenceGradientName() = "") Then
-		$sTGradName = __LOImpress_TransparencyGradientNameInsert($oDoc, $tGradient)
+		$sTGradName = __LODraw_TransparencyGradientNameInsert($oDoc, $tGradient)
 		If @error > 0 Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
 		$oBackground.FillTransparenceGradientName = $sTGradName
@@ -2577,18 +2577,18 @@ Func _LOImpress_SlideMasterBackTransparencyGradient(ByRef $oMaster, $iType = Nul
 	$iError = (__LO_VarsAreNull($iYCenter)) ? ($iError) : (($oMaster.Background.FillTransparenceGradient.YOffset() = $iYCenter) ? ($iError) : (BitOR($iError, 4)))
 	$iError = (__LO_VarsAreNull($iAngle)) ? ($iError) : ((($oMaster.Background.FillTransparenceGradient.Angle() / 10) = $iAngle) ? ($iError) : (BitOR($iError, 8)))
 	$iError = (__LO_VarsAreNull($iTransitionStart)) ? ($iError) : (($oMaster.Background.FillTransparenceGradient.Border() = $iTransitionStart) ? ($iError) : (BitOR($iError, 16)))
-	$iError = (__LO_VarsAreNull($iStart)) ? ($iError) : (($oMaster.Background.FillTransparenceGradient.StartColor() = __LOImpress_TransparencyGradientConvert($iStart)) ? ($iError) : (BitOR($iError, 32)))
-	$iError = (__LO_VarsAreNull($iEnd)) ? ($iError) : (($oMaster.Background.FillTransparenceGradient.EndColor() = __LOImpress_TransparencyGradientConvert($iEnd)) ? ($iError) : (BitOR($iError, 64)))
+	$iError = (__LO_VarsAreNull($iStart)) ? ($iError) : (($oMaster.Background.FillTransparenceGradient.StartColor() = __LODraw_TransparencyGradientConvert($iStart)) ? ($iError) : (BitOR($iError, 32)))
+	$iError = (__LO_VarsAreNull($iEnd)) ? ($iError) : (($oMaster.Background.FillTransparenceGradient.EndColor() = __LODraw_TransparencyGradientConvert($iEnd)) ? ($iError) : (BitOR($iError, 64)))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideMasterBackTransparencyGradient
+EndFunc   ;==>_LODraw_SlideMasterBackTransparencyGradient
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideMasterCurrent
+; Name ..........: _LODraw_SlideMasterCurrent
 ; Description ...: Set or Retrieve the currently applied Master slide to a slide.
-; Syntax ........: _LOImpress_SlideMasterCurrent(ByRef $oSlide[, $oMaster = Null])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
-;                  $oMaster             - [optional] Default is Null. A Master Slide object returned by a previous _LOImpress_SlideMasterAdd, _LOImpress_SlideMasterGetObjByIndex, or _LOImpress_SlideMasterGetObjByName function.
+; Syntax ........: _LODraw_SlideMasterCurrent(ByRef $oSlide[, $oMaster = Null])
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
+;                  $oMaster             - [optional] Default is Null. A Master Slide object returned by a previous _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
 ; Return values .: Success: 1 or Object.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Object = Success. All optional parameters were called with Null, returning currently applied Master Slide as an Object.
@@ -2604,12 +2604,12 @@ EndFunc   ;==>_LOImpress_SlideMasterBackTransparencyGradient
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOImpress_SlideMasterGetObjByIndex, _LOImpress_SlideMasterGetObjByName, _LOImpress_SlideCurrent, _LOImpress_SlideCurrent
+; Related .......: _LODraw_SlideMasterGetObjByIndex, _LODraw_SlideMasterGetObjByName, _LODraw_SlideCurrent, _LODraw_SlideCurrent
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideMasterCurrent(ByRef $oSlide, $oMaster = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideMasterCurrent(ByRef $oSlide, $oMaster = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oCurrMaster
@@ -2630,13 +2630,13 @@ Func _LOImpress_SlideMasterCurrent(ByRef $oSlide, $oMaster = Null)
 	$iError = ($oSlide.MasterPage() = $oMaster) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideMasterCurrent
+EndFunc   ;==>_LODraw_SlideMasterCurrent
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideMasterDeleteByIndex
+; Name ..........: _LODraw_SlideMasterDeleteByIndex
 ; Description ...: Delete a master slide by index.
-; Syntax ........: _LOImpress_SlideMasterDeleteByIndex(ByRef $oDoc, $iMaster)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: _LODraw_SlideMasterDeleteByIndex(ByRef $oDoc, $iMaster)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $iMaster             - The index of the master slide to delete. 0 based.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Master slide was successfully deleted.
@@ -2651,12 +2651,12 @@ EndFunc   ;==>_LOImpress_SlideMasterCurrent
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Trying to delete a Master Slide that is used by a slide will result in a processing error. I currently have no way of checking if a master slide is free to be deleted.
-; Related .......: _LOImpress_SlideMasterDeleteByObj, _LOImpress_SlideMastersGetCount, _LOImpress_SlideDeleteByIndex
+; Related .......: _LODraw_SlideMasterDeleteByObj, _LODraw_SlideMastersGetCount, _LODraw_SlideDeleteByIndex
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideMasterDeleteByIndex(ByRef $oDoc, $iMaster)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideMasterDeleteByIndex(ByRef $oDoc, $iMaster)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oMSlide
@@ -2675,13 +2675,13 @@ Func _LOImpress_SlideMasterDeleteByIndex(ByRef $oDoc, $iMaster)
 	If ($iCount = $oDoc.MasterPages.getCount()) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to delete because the count is the same.
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LOImpress_SlideMasterDeleteByIndex
+EndFunc   ;==>_LODraw_SlideMasterDeleteByIndex
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideMasterDeleteByObj
+; Name ..........: _LODraw_SlideMasterDeleteByObj
 ; Description ...: Delete a master slide using its Object.
-; Syntax ........: _LOImpress_SlideMasterDeleteByObj(ByRef $oMaster)
-; Parameters ....: $oMaster             -  A Master Slide object returned by a previous _LOImpress_SlideMasterAdd, _LOImpress_SlideMasterGetObjByIndex, or _LOImpress_SlideMasterGetObjByName function.
+; Syntax ........: _LODraw_SlideMasterDeleteByObj(ByRef $oMaster)
+; Parameters ....: $oMaster             -  A Master Slide object returned by a previous _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Slide was successfully deleted.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -2694,12 +2694,12 @@ EndFunc   ;==>_LOImpress_SlideMasterDeleteByIndex
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Trying to delete a Master Slide that is used by a slide will result in a processing error. I currently have no way of checking if a master slide is free to be deleted.
-; Related .......: _LOImpress_SlideMasterDeleteByIndex, _LOImpress_SlideMasterGetObjByIndex, _LOImpress_SlideMasterGetObjByName, _LOImpress_SlideDeleteByObj
+; Related .......: _LODraw_SlideMasterDeleteByIndex, _LODraw_SlideMasterGetObjByIndex, _LODraw_SlideMasterGetObjByName, _LODraw_SlideDeleteByObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideMasterDeleteByObj(ByRef $oMaster)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideMasterDeleteByObj(ByRef $oMaster)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oDoc
@@ -2707,7 +2707,7 @@ Func _LOImpress_SlideMasterDeleteByObj(ByRef $oMaster)
 
 	If Not IsObj($oMaster) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$oDoc = __LOImpress_GetParentDoc($oMaster)
+	$oDoc = __LODraw_GetParentDoc($oMaster)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$iCount = $oDoc.MasterPages.getCount()
@@ -2719,13 +2719,13 @@ Func _LOImpress_SlideMasterDeleteByObj(ByRef $oMaster)
 	$oMaster = Null
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LOImpress_SlideMasterDeleteByObj
+EndFunc   ;==>_LODraw_SlideMasterDeleteByObj
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideMasterExists
+; Name ..........: _LODraw_SlideMasterExists
 ; Description ...: Check whether a master slide with a certain name exists in a document.
-; Syntax ........: _LOImpress_SlideMasterExists(ByRef $oDoc, $sName)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: _LODraw_SlideMasterExists(ByRef $oDoc, $sName)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $sName               - The master slide name to check for.
 ; Return values .: Success: Boolean.
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Document contains a master Slide with the called name, else False.
@@ -2738,12 +2738,12 @@ EndFunc   ;==>_LOImpress_SlideMasterDeleteByObj
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_SlideMasterAdd, _LOImpress_SlideMasterName, _LOImpress_SlideMastersGetNames, _LOImpress_SlideExists
+; Related .......: _LODraw_SlideMasterAdd, _LODraw_SlideMasterName, _LODraw_SlideMastersGetNames, _LODraw_SlideExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideMasterExists(ByRef $oDoc, $sName)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideMasterExists(ByRef $oDoc, $sName)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $bExists
@@ -2755,16 +2755,16 @@ Func _LOImpress_SlideMasterExists(ByRef $oDoc, $sName)
 	If Not IsBool($bExists) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $bExists)
-EndFunc   ;==>_LOImpress_SlideMasterExists
+EndFunc   ;==>_LODraw_SlideMasterExists
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideMasterFormat
+; Name ..........: _LODraw_SlideMasterFormat
 ; Description ...: Set or Retrieve the master slide format settings.
-; Syntax ........: _LOImpress_SlideMasterFormat(ByRef $oMaster[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
-; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LOImpress_SlideMasterAdd, _LOImpress_SlideMasterGetObjByIndex, or _LOImpress_SlideMasterGetObjByName function.
-;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOI_PAGE_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOI_PAGE_HEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOI_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
+; Syntax ........: _LODraw_SlideMasterFormat(ByRef $oMaster[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
+; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
+;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_HEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -2773,7 +2773,7 @@ EndFunc   ;==>_LOImpress_SlideMasterExists
 ;                  @Error: 1, @Extended: 1 = $oMaster not an Object.
 ;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
-;                  @Error: 1, @Extended: 4 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants, $LOI_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve current slide width.
 ;                  --Property Setting Errors--
@@ -2787,28 +2787,28 @@ EndFunc   ;==>_LOImpress_SlideMasterExists
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  When modifying the page format, the shapes etc., aren't readjusted as they are in LibreOffice UI.
 ;                  I am unable to find the properties to set for "FitObject to Paper Format", "Background covers margins", "Slide numbers", and "Paper tray".
-; Related .......: _LO_UnitConvert, _LOImpress_SlideMasterMargins, _LOImpress_SlideHandoutFormat, _LOImpress_SlideNotesFormat, _LOImpress_SlideFormat
+; Related .......: _LO_UnitConvert, _LODraw_SlideMasterMargins, _LODraw_SlideHandoutFormat, _LODraw_SlideNotesFormat, _LODraw_SlideFormat
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideMasterFormat(ByRef $oMaster, $iWidth = Null, $iHeight = Null, $iOrientation = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideMasterFormat(ByRef $oMaster, $iWidth = Null, $iHeight = Null, $iOrientation = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $vReturn
 
 	If Not IsObj($oMaster) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$vReturn = __LOImpress_Format($oMaster, $iWidth, $iHeight, $iOrientation)
+	$vReturn = __LODraw_Format($oMaster, $iWidth, $iHeight, $iOrientation)
 
 	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LOImpress_SlideMasterFormat
+EndFunc   ;==>_LODraw_SlideMasterFormat
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideMasterGetObjByIndex
+; Name ..........: _LODraw_SlideMasterGetObjByIndex
 ; Description ...: Retrieve a Master Slide's Object by index.
-; Syntax ........: _LOImpress_SlideMasterGetObjByIndex(ByRef $oDoc, $iMaster)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: _LODraw_SlideMasterGetObjByIndex(ByRef $oDoc, $iMaster)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $iMaster             - The index of the master slide to retrieve. 0 based.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested master slide's Object.
@@ -2821,12 +2821,12 @@ EndFunc   ;==>_LOImpress_SlideMasterFormat
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_SlideMasterGetObjByName, _LOImpress_SlideMastersGetCount, _LOImpress_SlideGetObjByIndex
+; Related .......: _LODraw_SlideMasterGetObjByName, _LODraw_SlideMastersGetCount, _LODraw_SlideGetObjByIndex
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideMasterGetObjByIndex(ByRef $oDoc, $iMaster)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideMasterGetObjByIndex(ByRef $oDoc, $iMaster)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oMSlide
@@ -2838,13 +2838,13 @@ Func _LOImpress_SlideMasterGetObjByIndex(ByRef $oDoc, $iMaster)
 	If Not IsObj($oMSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oMSlide)
-EndFunc   ;==>_LOImpress_SlideMasterGetObjByIndex
+EndFunc   ;==>_LODraw_SlideMasterGetObjByIndex
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideMasterGetObjByName
+; Name ..........: _LODraw_SlideMasterGetObjByName
 ; Description ...: Retrieve a Master Slide's Object by name.
-; Syntax ........: _LOImpress_SlideMasterGetObjByName(ByRef $oDoc, $sName)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: _LODraw_SlideMasterGetObjByName(ByRef $oDoc, $sName)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $sName               - The Master Slide's name to retrieve the Object for.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested Master Slide's Object.
@@ -2858,12 +2858,12 @@ EndFunc   ;==>_LOImpress_SlideMasterGetObjByIndex
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: I have not found a way to import Master slide from the LibreOffice templates yet.
-; Related .......: _LOImpress_SlideMasterGetObjByIndex, _LOImpress_SlideMastersGetNames, _LOImpress_SlideGetObjByName
+; Related .......: _LODraw_SlideMasterGetObjByIndex, _LODraw_SlideMastersGetNames, _LODraw_SlideGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideMasterGetObjByName(ByRef $oDoc, $sName)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideMasterGetObjByName(ByRef $oDoc, $sName)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oMSlide
@@ -2876,13 +2876,13 @@ Func _LOImpress_SlideMasterGetObjByName(ByRef $oDoc, $sName)
 	If Not IsObj($oMSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oMSlide)
-EndFunc   ;==>_LOImpress_SlideMasterGetObjByName
+EndFunc   ;==>_LODraw_SlideMasterGetObjByName
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideMasterMargins
+; Name ..........: _LODraw_SlideMasterMargins
 ; Description ...: Set or Retrieve the master slide page margin settings.
-; Syntax ........: _LOImpress_SlideMasterMargins(ByRef $oMaster[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
-; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LOImpress_SlideMasterAdd, _LOImpress_SlideMasterGetObjByIndex, or _LOImpress_SlideMasterGetObjByName function.
+; Syntax ........: _LODraw_SlideMasterMargins(ByRef $oMaster[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
+; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
 ;                  $iLeft               - [optional] Default is Null. The amount of space to leave between the left edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
 ;                  $iRight              - [optional] Default is Null. The amount of space to leave between the right edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
 ;                  $iTop                - [optional] Default is Null. The amount of space to leave between the upper edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
@@ -2907,28 +2907,28 @@ EndFunc   ;==>_LOImpress_SlideMasterGetObjByName
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LOImpress_SlideMasterFormat, _LOImpress_SlideHandoutMargins, _LOImpress_SlideNotesMargins, _LOImpress_SlideMargins
+; Related .......: _LO_UnitConvert, _LODraw_SlideMasterFormat, _LODraw_SlideHandoutMargins, _LODraw_SlideNotesMargins, _LODraw_SlideMargins
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideMasterMargins(ByRef $oMaster, $iLeft = Null, $iRight = Null, $iTop = Null, $iBottom = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideMasterMargins(ByRef $oMaster, $iLeft = Null, $iRight = Null, $iTop = Null, $iBottom = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $vReturn
 
 	If Not IsObj($oMaster) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$vReturn = __LOImpress_Margins($oMaster, $iLeft, $iRight, $iTop, $iBottom)
+	$vReturn = __LODraw_Margins($oMaster, $iLeft, $iRight, $iTop, $iBottom)
 
 	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LOImpress_SlideMasterMargins
+EndFunc   ;==>_LODraw_SlideMasterMargins
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideMasterName
+; Name ..........: _LODraw_SlideMasterName
 ; Description ...: Set or Retrieve a Master Slide's name.
-; Syntax ........: _LOImpress_SlideMasterName(ByRef $oMaster[, $sName = Null])
-; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LOImpress_SlideMasterAdd, _LOImpress_SlideMasterGetObjByIndex, or _LOImpress_SlideMasterGetObjByName function.
+; Syntax ........: _LODraw_SlideMasterName(ByRef $oMaster[, $sName = Null])
+; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
 ;                  $sName               - [optional] Default is Null. The new name to set the Master slide to. See Remarks.
 ; Return values .: Success: 1 or String.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -2948,12 +2948,12 @@ EndFunc   ;==>_LOImpress_SlideMasterMargins
 ; Modified ......:
 ; Remarks .......: If setting the Master slide name to a name and a number, there is a good chance the name won't stay applied, as LibreOffice will assume it is an auto-numbered slide.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOImpress_SlideMasterExists, _LOImpress_SlideMastersGetNames, _LOImpress_SlideName
+; Related .......: _LODraw_SlideMasterExists, _LODraw_SlideMastersGetNames, _LODraw_SlideName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideMasterName(ByRef $oMaster, $sName = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideMasterName(ByRef $oMaster, $sName = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -2971,7 +2971,7 @@ Func _LOImpress_SlideMasterName(ByRef $oMaster, $sName = Null)
 
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	$oDoc = __LOImpress_GetParentDoc($oMaster)
+	$oDoc = __LODraw_GetParentDoc($oMaster)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 	If $oDoc.Links.getByName("Master Page").Links.hasByName($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
@@ -2979,13 +2979,13 @@ Func _LOImpress_SlideMasterName(ByRef $oMaster, $sName = Null)
 	$iError = ($oMaster.LinkDisplayName() = $sName) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideMasterName
+EndFunc   ;==>_LODraw_SlideMasterName
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideMasterNotesGetObj
+; Name ..........: _LODraw_SlideMasterNotesGetObj
 ; Description ...: Retrieve the Notes Object for a Master Slide.
-; Syntax ........: _LOImpress_SlideMasterNotesGetObj(ByRef $oMaster)
-; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LOImpress_SlideMasterAdd, _LOImpress_SlideMasterGetObjByIndex, or _LOImpress_SlideMasterGetObjByName function.
+; Syntax ........: _LODraw_SlideMasterNotesGetObj(ByRef $oMaster)
+; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning Notes page Object.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -2996,12 +2996,12 @@ EndFunc   ;==>_LOImpress_SlideMasterName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_SlideNotesGetObj
+; Related .......: _LODraw_SlideNotesGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideMasterNotesGetObj(ByRef $oMaster)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideMasterNotesGetObj(ByRef $oMaster)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oNotes
@@ -3012,13 +3012,13 @@ Func _LOImpress_SlideMasterNotesGetObj(ByRef $oMaster)
 	If Not IsObj($oNotes) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oNotes)
-EndFunc   ;==>_LOImpress_SlideMasterNotesGetObj
+EndFunc   ;==>_LODraw_SlideMasterNotesGetObj
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideMastersGetCount
+; Name ..........: _LODraw_SlideMastersGetCount
 ; Description ...: Retrieve a count of master slides.
-; Syntax ........: _LOImpress_SlideMastersGetCount(ByRef $oDoc)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: _LODraw_SlideMastersGetCount(ByRef $oDoc)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning count of master slides contained in the document.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -3029,12 +3029,12 @@ EndFunc   ;==>_LOImpress_SlideMasterNotesGetObj
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This only returns a count of master slides already loaded into the document.
-; Related .......: _LOImpress_SlideMasterDeleteByIndex, _LOImpress_SlideMasterGetObjByIndex, _LOImpress_SlidesGetCount
+; Related .......: _LODraw_SlideMasterDeleteByIndex, _LODraw_SlideMasterGetObjByIndex, _LODraw_SlidesGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideMastersGetCount(ByRef $oDoc)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideMastersGetCount(ByRef $oDoc)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iCount
@@ -3045,13 +3045,13 @@ Func _LOImpress_SlideMastersGetCount(ByRef $oDoc)
 	If Not IsInt($iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $iCount)
-EndFunc   ;==>_LOImpress_SlideMastersGetCount
+EndFunc   ;==>_LODraw_SlideMastersGetCount
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideMastersGetNames
+; Name ..........: _LODraw_SlideMastersGetNames
 ; Description ...: Retrieve an array of names for all Master Slides contained in the document.
-; Syntax ........: _LOImpress_SlideMastersGetNames(ByRef $oDoc)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: _LODraw_SlideMastersGetNames(ByRef $oDoc)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. An Array containing all Master Slide names. @Extended is set to the number of slide names returned.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -3065,12 +3065,12 @@ EndFunc   ;==>_LOImpress_SlideMastersGetCount
 ; Modified ......:
 ; Remarks .......: This only returns a list of master slide names already loaded into the document.
 ;                  I have not found a way to import Master slide from the LibreOffice templates yet.
-; Related .......: _LOImpress_SlideMasterExists, _LOImpress_SlideMasterGetObjByName, _LOImpress_SlidesGetNames
+; Related .......: _LODraw_SlideMasterExists, _LODraw_SlideMasterGetObjByName, _LODraw_SlidesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideMastersGetNames(ByRef $oDoc)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideMastersGetNames(ByRef $oDoc)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $asMasters[0]
@@ -3091,17 +3091,17 @@ Func _LOImpress_SlideMastersGetNames(ByRef $oDoc)
 		$asMasters[$i] = $oMasters.getByIndex($i).Name()
 		If Not IsString($asMasters[$i]) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+		Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 	Next
 
 	Return SetError($__LO_STATUS_SUCCESS, $iMasters, $asMasters)
-EndFunc   ;==>_LOImpress_SlideMastersGetNames
+EndFunc   ;==>_LODraw_SlideMastersGetNames
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideMove
+; Name ..........: _LODraw_SlideMove
 ; Description ...: Move a slide in the collection of slides.
-; Syntax ........: _LOImpress_SlideMove(ByRef $oSlide, $iPos)
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+; Syntax ........: _LODraw_SlideMove(ByRef $oSlide, $iPos)
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
 ;                  $iPos                - The position to move the slide to in the collection of slides. 0 Based. See remarks.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Slide was successfully moved.
@@ -3119,12 +3119,12 @@ EndFunc   ;==>_LOImpress_SlideMastersGetNames
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Due to limitations in the API, some dispatches are executed to move the slide. The current slide will temporarily be set to the new slide in order to move it.
-; Related .......: _LOImpress_SlideCopy
+; Related .......: _LODraw_SlideCopy
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideMove(ByRef $oSlide, $iPos)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideMove(ByRef $oSlide, $iPos)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oDoc, $oCurrSlide, $oServiceManager, $oDispatcher
@@ -3134,7 +3134,7 @@ Func _LOImpress_SlideMove(ByRef $oSlide, $iPos)
 
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$oDoc = __LOImpress_GetParentDoc($oSlide)
+	$oDoc = __LODraw_GetParentDoc($oSlide)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 	If ($iPos <> Null) And Not __LO_IntIsBetween($iPos, 0, $oDoc.DrawPages.getCount() - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
@@ -3143,7 +3143,7 @@ Func _LOImpress_SlideMove(ByRef $oSlide, $iPos)
 			$iCurrPos = $i
 			ExitLoop
 		EndIf
-		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+		Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 	Next
 
 	If Not IsInt($iCurrPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
@@ -3161,7 +3161,7 @@ Func _LOImpress_SlideMove(ByRef $oSlide, $iPos)
 
 	$oCurrSlide = $oDoc.getCurrentController.CurrentPage()     ; Backup current slide
 
-	$iCurrView = __LOImpress_DocCurrView($oDoc)
+	$iCurrView = __LODraw_DocCurrView($oDoc)
 
 	$oServiceManager = __LO_ServiceManager()
 	If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
@@ -3173,7 +3173,7 @@ Func _LOImpress_SlideMove(ByRef $oSlide, $iPos)
 
 	For $i = 0 To $iMove - 1
 		$oDispatcher.executeDispatch($oDoc.CurrentController(), $sDispatch, "", 0, $aArray)
-		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+		Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 	Next
 
 	For $i = 0 To $oDoc.DrawPages.getCount() - 1
@@ -3181,23 +3181,23 @@ Func _LOImpress_SlideMove(ByRef $oSlide, $iPos)
 			$iCurrPos = $i
 			ExitLoop
 		EndIf
-		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+		Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 	Next
 
 	If IsObj($oCurrSlide) Then $oDoc.getCurrentController.setCurrentPage($oCurrSlide)     ; Restore current slide and view mode.
 
-	If IsInt($iCurrView) Then __LOImpress_DocCurrView($oDoc, $iCurrView)
+	If IsInt($iCurrView) Then __LODraw_DocCurrView($oDoc, $iCurrView)
 
 	If ($iCurrPos <> $iPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LOImpress_SlideMove
+EndFunc   ;==>_LODraw_SlideMove
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideName
+; Name ..........: _LODraw_SlideName
 ; Description ...: Set or Retrieve a Slide's name.
-; Syntax ........: _LOImpress_SlideName(ByRef $oSlide[, $sName = Null])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+; Syntax ........: _LODraw_SlideName(ByRef $oSlide[, $sName = Null])
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
 ;                  $sName               - [optional] Default is Null. The new name to set the slide to. See Remarks.
 ; Return values .: Success: 1 or String.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -3217,12 +3217,12 @@ EndFunc   ;==>_LOImpress_SlideMove
 ; Modified ......:
 ; Remarks .......: If setting the slide name to a name and a number, there is a good chance the name won't stay applied, as LibreOffice will assume it is an auto-numbered slide.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOImpress_SlideExists, _LOImpress_SlidesGetNames, _LOImpress_SlideMasterName
+; Related .......: _LODraw_SlideExists, _LODraw_SlidesGetNames, _LODraw_SlideMasterName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideName(ByRef $oSlide, $sName = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideName(ByRef $oSlide, $sName = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -3240,7 +3240,7 @@ Func _LOImpress_SlideName(ByRef $oSlide, $sName = Null)
 
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	$oDoc = __LOImpress_GetParentDoc($oSlide)
+	$oDoc = __LODraw_GetParentDoc($oSlide)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 	If $oDoc.Links.getByName("Slide").Links.hasByName($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
@@ -3248,13 +3248,13 @@ Func _LOImpress_SlideName(ByRef $oSlide, $sName = Null)
 	$iError = ($oSlide.LinkDisplayName() = $sName) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideName
+EndFunc   ;==>_LODraw_SlideName
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideFooter
+; Name ..........: _LODraw_SlideFooter
 ; Description ...: Set or Retrieve notes page Footer settings.
-; Syntax ........: _LOImpress_SlideFooter(ByRef $oNotes[, $bFooter = Null[, $sFooterText = Null[, $bSlideNum = Null]]])
-; Parameters ....: $oNotes              - A Notes page object returned by a previous _LOImpress_SlideNotesGetObj or _LOImpress_SlideMasterNotesGetObj function.
+; Syntax ........: _LODraw_SlideFooter(ByRef $oNotes[, $bFooter = Null[, $sFooterText = Null[, $bSlideNum = Null]]])
+; Parameters ....: $oNotes              - A Notes page object returned by a previous _LODraw_SlideNotesGetObj or _LODraw_SlideMasterNotesGetObj function.
 ;                  $bFooter             - [optional] Default is Null. If True, a Footer entry is added to the footer of the page.
 ;                  $sFooterText         - [optional] Default is Null. If $bFooter is True, the text to display in the footer of the page.
 ;                  $bSlideNum           - [optional] Default is Null. If True, a current Slide number is added to the footer of the page.
@@ -3279,12 +3279,12 @@ EndFunc   ;==>_LOImpress_SlideName
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  You can only set or retrieve footer property values for a slide notes page, not a master notes page.
-; Related .......: _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, _LOImpress_SlideFooter, _LOImpress_SlideHandoutFooter
+; Related .......: _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, _LODraw_SlideFooter, _LODraw_SlideHandoutFooter
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideNotesFooter(ByRef $oNotes, $bFooter = Null, $sFooterText = Null, $bSlideNum = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideNotesFooter(ByRef $oNotes, $bFooter = Null, $sFooterText = Null, $bSlideNum = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -3324,16 +3324,16 @@ Func _LOImpress_SlideNotesFooter(ByRef $oNotes, $bFooter = Null, $sFooterText = 
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideNotesFooter
+EndFunc   ;==>_LODraw_SlideNotesFooter
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideNotesFormat
+; Name ..........: _LODraw_SlideNotesFormat
 ; Description ...: Set or Retrieve the notes page format settings.
-; Syntax ........: _LOImpress_SlideNotesFormat(ByRef $oNotes[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
-; Parameters ....: $oNotes              - A Notes page object returned by a previous _LOImpress_SlideNotesGetObj or _LOImpress_SlideMasterNotesGetObj function.
-;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOI_PAGE_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOI_PAGE_HEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOI_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
+; Syntax ........: _LODraw_SlideNotesFormat(ByRef $oNotes[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
+; Parameters ....: $oNotes              - A Notes page object returned by a previous _LODraw_SlideNotesGetObj or _LODraw_SlideMasterNotesGetObj function.
+;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_HEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -3342,7 +3342,7 @@ EndFunc   ;==>_LOImpress_SlideNotesFooter
 ;                  @Error: 1, @Extended: 1 = $oNotes not an Object.
 ;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
-;                  @Error: 1, @Extended: 4 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants, $LOI_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve current slide width.
 ;                  --Property Setting Errors--
@@ -3355,28 +3355,28 @@ EndFunc   ;==>_LOImpress_SlideNotesFooter
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  When modifying the page format, the shapes etc., aren't readjusted as they are in LibreOffice UI.
-; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlideMargins, _LOImpress_SlideHandoutFormat, _LOImpress_SlideMasterFormat, _LOImpress_SlideFormat
+; Related .......: _LO_UnitConvert, _LODraw_SlideLayout, _LODraw_SlideMargins, _LODraw_SlideHandoutFormat, _LODraw_SlideMasterFormat, _LODraw_SlideFormat
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideNotesFormat(ByRef $oNotes, $iWidth = Null, $iHeight = Null, $iOrientation = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideNotesFormat(ByRef $oNotes, $iWidth = Null, $iHeight = Null, $iOrientation = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $vReturn
 
 	If Not IsObj($oNotes) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$vReturn = __LOImpress_Format($oNotes, $iWidth, $iHeight, $iOrientation)
+	$vReturn = __LODraw_Format($oNotes, $iWidth, $iHeight, $iOrientation)
 
 	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LOImpress_SlideNotesFormat
+EndFunc   ;==>_LODraw_SlideNotesFormat
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideNotesGetObj
+; Name ..........: _LODraw_SlideNotesGetObj
 ; Description ...: Retrieve the Notes Object for a Slide.
-; Syntax ........: _LOImpress_SlideNotesGetObj(ByRef $oSlide)
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+; Syntax ........: _LODraw_SlideNotesGetObj(ByRef $oSlide)
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning Notes page Object.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -3387,12 +3387,12 @@ EndFunc   ;==>_LOImpress_SlideNotesFormat
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_SlideMasterNotesGetObj
+; Related .......: _LODraw_SlideMasterNotesGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideNotesGetObj(ByRef $oSlide)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideNotesGetObj(ByRef $oSlide)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oNotes
@@ -3403,19 +3403,19 @@ Func _LOImpress_SlideNotesGetObj(ByRef $oSlide)
 	If Not IsObj($oNotes) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oNotes)
-EndFunc   ;==>_LOImpress_SlideNotesGetObj
+EndFunc   ;==>_LODraw_SlideNotesGetObj
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideNotesHeader
+; Name ..........: _LODraw_SlideNotesHeader
 ; Description ...: Set or Retrieve notes page header settings.
-; Syntax ........: _LOImpress_SlideNotesHeader(ByRef $oNotes[, $bHeader = Null[, $sHeaderText = Null[, $bDateTime = Null[, $bDateTimeIsFixed = Null[, $sDateTimeValue = Null[, $iDateTimeFormat = Null]]]]]])
-; Parameters ....: $oNotes              - A Notes page object returned by a previous _LOImpress_SlideNotesGetObj function.
+; Syntax ........: _LODraw_SlideNotesHeader(ByRef $oNotes[, $bHeader = Null[, $sHeaderText = Null[, $bDateTime = Null[, $bDateTimeIsFixed = Null[, $sDateTimeValue = Null[, $iDateTimeFormat = Null]]]]]])
+; Parameters ....: $oNotes              - A Notes page object returned by a previous _LODraw_SlideNotesGetObj function.
 ;                  $bHeader             - [optional] Default is Null. If True, a Header entry is added to the Header of the page.
 ;                  $sHeaderText         - [optional] Default is Null. If $bHeader is True, the text to display in the Header of the page.
 ;                  $bDateTime           - [optional] Default is Null. If True, a Date or Time entry is added to the header of the page.
 ;                  $bDateTimeIsFixed    - [optional] Default is Null. If True, the Date or Time entry is fixed.
 ;                  $sDateTimeValue      - [optional] Default is Null. If $bDateTimeIsFixed is True, this is the custom date or time value to display.
-;                  $iDateTimeFormat     - [optional] (4-112) Default is Null. If $bDateTimeIsFixed is False, the format to display the Date or Time in. See Constants, $LOI_SLIDE_DT_FMT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iDateTimeFormat     - [optional] (4-112) Default is Null. If $bDateTimeIsFixed is False, the format to display the Date or Time in. See Constants, $LOD_SLIDE_DT_FMT_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
@@ -3428,7 +3428,7 @@ EndFunc   ;==>_LOImpress_SlideNotesGetObj
 ;                  @Error: 1, @Extended: 5 = $bDateTime not a Boolean.
 ;                  @Error: 1, @Extended: 6 = $bDateTimeIsFixed not a Boolean.
 ;                  @Error: 1, @Extended: 7 = $sDateTimeValue not a String.
-;                  @Error: 1, @Extended: 8 = $iDateTimeFormat not an Integer, less than 4 or greater than 9 but not equal to one of the constant values. See Constants, $LOI_SLIDE_DT_FMT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 8 = $iDateTimeFormat not an Integer, less than 4 or greater than 9 but not equal to one of the constant values. See Constants, $LOD_SLIDE_DT_FMT_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bHeader
@@ -3444,17 +3444,17 @@ EndFunc   ;==>_LOImpress_SlideNotesGetObj
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  You can only set or retrieve header property values for a slide notes page, not a master notes page.
-; Related .......: _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, _LOImpress_SlideHandoutHeader
+; Related .......: _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, _LODraw_SlideHandoutHeader
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideNotesHeader(ByRef $oNotes, $bHeader = Null, $sHeaderText = Null, $bDateTime = Null, $bDateTimeIsFixed = Null, $sDateTimeValue = Null, $iDateTimeFormat = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideNotesHeader(ByRef $oNotes, $bHeader = Null, $sHeaderText = Null, $bDateTime = Null, $bDateTimeIsFixed = Null, $sDateTimeValue = Null, $iDateTimeFormat = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
 	Local $avHeader[7]
-	Local $sAllowed = $LOI_SLIDE_DT_FMT_24H_HM & ":" & $LOI_SLIDE_DT_FMT_MMDDYY_24H_HM & ":" & $LOI_SLIDE_DT_FMT_24H_HMS & ":" & $LOI_SLIDE_DT_FMT_12H_HM_AMPM & ":" & $LOI_SLIDE_DT_FMT_MMDDYY_12H_HM_AMPM & ":" & $LOI_SLIDE_DT_FMT_12H_HMS_AMPM
+	Local $sAllowed = $LOD_SLIDE_DT_FMT_24H_HM & ":" & $LOD_SLIDE_DT_FMT_MMDDYY_24H_HM & ":" & $LOD_SLIDE_DT_FMT_24H_HMS & ":" & $LOD_SLIDE_DT_FMT_12H_HM_AMPM & ":" & $LOD_SLIDE_DT_FMT_MMDDYY_12H_HM_AMPM & ":" & $LOD_SLIDE_DT_FMT_12H_HMS_AMPM
 
 	If Not IsObj($oNotes) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If $oNotes.supportsService("com.sun.star.drawing.MasterPage") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -3507,7 +3507,7 @@ Func _LOImpress_SlideNotesHeader(ByRef $oNotes, $bHeader = Null, $sHeaderText = 
 	EndIf
 
 	If ($iDateTimeFormat <> Null) Then
-		If Not __LO_IntIsBetween($iDateTimeFormat, $LOI_SLIDE_DT_FMT_MMDDYY, $LOI_SLIDE_DT_FMT_DOW_MMMM_DD_YYYY, "", $sAllowed) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
+		If Not __LO_IntIsBetween($iDateTimeFormat, $LOD_SLIDE_DT_FMT_MMDDYY, $LOD_SLIDE_DT_FMT_DOW_MMMM_DD_YYYY, "", $sAllowed) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
 		$oNotes.DateTimeFormat = $iDateTimeFormat
 
@@ -3515,13 +3515,13 @@ Func _LOImpress_SlideNotesHeader(ByRef $oNotes, $bHeader = Null, $sHeaderText = 
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideNotesHeader
+EndFunc   ;==>_LODraw_SlideNotesHeader
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideNotesMargins
+; Name ..........: _LODraw_SlideNotesMargins
 ; Description ...: Set or Retrieve the notes page margin settings.
-; Syntax ........: _LOImpress_SlideNotesMargins(ByRef $oNotes[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
-; Parameters ....: $oNotes              - A Notes page object returned by a previous _LOImpress_SlideNotesGetObj or _LOImpress_SlideMasterNotesGetObj function.
+; Syntax ........: _LODraw_SlideNotesMargins(ByRef $oNotes[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
+; Parameters ....: $oNotes              - A Notes page object returned by a previous _LODraw_SlideNotesGetObj or _LODraw_SlideMasterNotesGetObj function.
 ;                  $iLeft               - [optional] Default is Null. The amount of space to leave between the left edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
 ;                  $iRight              - [optional] Default is Null. The amount of space to leave between the right edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
 ;                  $iTop                - [optional] Default is Null. The amount of space to leave between the upper edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
@@ -3546,28 +3546,28 @@ EndFunc   ;==>_LOImpress_SlideNotesHeader
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LOImpress_SlideLayout, _LOImpress_SlideFormat, _LOImpress_SlideHandoutMargins, _LOImpress_SlideMasterMargins, _LOImpress_SlideMargins
+; Related .......: _LO_UnitConvert, _LODraw_SlideLayout, _LODraw_SlideFormat, _LODraw_SlideHandoutMargins, _LODraw_SlideMasterMargins, _LODraw_SlideMargins
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideNotesMargins(ByRef $oNotes, $iLeft = Null, $iRight = Null, $iTop = Null, $iBottom = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideNotesMargins(ByRef $oNotes, $iLeft = Null, $iRight = Null, $iTop = Null, $iBottom = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $vReturn
 
 	If Not IsObj($oNotes) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$vReturn = __LOImpress_Margins($oNotes, $iLeft, $iRight, $iTop, $iBottom)
+	$vReturn = __LODraw_Margins($oNotes, $iLeft, $iRight, $iTop, $iBottom)
 
 	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LOImpress_SlideNotesMargins
+EndFunc   ;==>_LODraw_SlideNotesMargins
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlidesGetCount
+; Name ..........: _LODraw_SlidesGetCount
 ; Description ...: Retrieve a count of slides.
-; Syntax ........: _LOImpress_SlidesGetCount(ByRef $oDoc)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: _LODraw_SlidesGetCount(ByRef $oDoc)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning count of slides contained in the document.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -3578,12 +3578,12 @@ EndFunc   ;==>_LOImpress_SlideNotesMargins
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_SlideDeleteByIndex, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideMastersGetCount
+; Related .......: _LODraw_SlideDeleteByIndex, _LODraw_SlideGetObjByIndex, _LODraw_SlideMastersGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlidesGetCount(ByRef $oDoc)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlidesGetCount(ByRef $oDoc)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iCount
@@ -3594,13 +3594,13 @@ Func _LOImpress_SlidesGetCount(ByRef $oDoc)
 	If Not IsInt($iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $iCount)
-EndFunc   ;==>_LOImpress_SlidesGetCount
+EndFunc   ;==>_LODraw_SlidesGetCount
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlidesGetNames
+; Name ..........: _LODraw_SlidesGetNames
 ; Description ...: Retrieve an array of names for all Slides contained in the document.
-; Syntax ........: _LOImpress_SlidesGetNames(ByRef $oDoc)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: _LODraw_SlidesGetNames(ByRef $oDoc)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. An Array containing all Slide names. @Extended is set to the number of slide names returned.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -3611,12 +3611,12 @@ EndFunc   ;==>_LOImpress_SlidesGetCount
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_SlideExists, _LOImpress_SlideGetObjByName, _LOImpress_SlideMastersGetNames
+; Related .......: _LODraw_SlideExists, _LODraw_SlideGetObjByName, _LODraw_SlideMastersGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlidesGetNames(ByRef $oDoc)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlidesGetNames(ByRef $oDoc)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $asSlides[0]
@@ -3627,18 +3627,18 @@ Func _LOImpress_SlidesGetNames(ByRef $oDoc)
 	If Not IsArray($asSlides) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, UBound($asSlides), $asSlides)
-EndFunc   ;==>_LOImpress_SlidesGetNames
+EndFunc   ;==>_LODraw_SlidesGetNames
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideshowActiveSettings
+; Name ..........: _LODraw_SlideshowActiveSettings
 ; Description ...: Set or Retrieve settings for an actively running presentation.
-; Syntax ........: _LOImpress_SlideshowActiveSettings(ByRef $oDoc[, $bKeepOnTop = Null[, $bMouseVisible = Null[, $bMouseAsPen = Null[, $iPenColor = Null[, $iPenWidth = Null]]]]])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: _LODraw_SlideshowActiveSettings(ByRef $oDoc[, $bKeepOnTop = Null[, $bMouseVisible = Null[, $bMouseAsPen = Null[, $iPenColor = Null[, $iPenWidth = Null]]]]])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $bKeepOnTop          - [optional] Default is Null. If True, the presentation will be always kept on top of other programs.
 ;                  $bMouseVisible       - [optional] Default is Null. If True, the mouse is visible in the presentation.
 ;                  $bMouseAsPen         - [optional] Default is Null. If True, the mouse can be used as a pen to draw on slides.
 ;                  $iPenColor           - [optional] (0-16777215) Default is Null. If $bMouseAsPen is True, the color of the drawn line, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iPenWidth           - [optional] (4-400) Default is Null. The width of the drawn line. L.O. 4.2+. See Constants, $LOI_SLIDESHOW_PEN_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iPenWidth           - [optional] (4-400) Default is Null. The width of the drawn line. L.O. 4.2+. See Constants, $LOD_SLIDESHOW_PEN_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters. If The current LibreOffice version is below 4.2, the $iPenWidth parameter will return a Null value.
@@ -3649,7 +3649,7 @@ EndFunc   ;==>_LOImpress_SlidesGetNames
 ;                  @Error: 1, @Extended: 3 = $bMouseVisible not a Boolean.
 ;                  @Error: 1, @Extended: 4 = $bMouseAsPen not a Boolean.
 ;                  @Error: 1, @Extended: 5 = $iPenColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error: 1, @Extended: 6 = $iPenWidth not an Integer, less than 4 or greater than 400. See Constants, $LOI_SLIDESHOW_PEN_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iPenWidth not an Integer, less than 4 or greater than 400. See Constants, $LOD_SLIDESHOW_PEN_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = There is no presentation currently running.
 ;                  @Error: 3, @Extended: 2 = Failed to retrieve Object for currently running presentation.
@@ -3666,12 +3666,12 @@ EndFunc   ;==>_LOImpress_SlidesGetNames
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_SlideshowIsRunning, _LOImpress_SlideshowSettingsMode, _LOImpress_SlideshowSettingsOptions, _LOImpress_SlideshowSettingsRange
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_SlideshowIsRunning, _LODraw_SlideshowSettingsMode, _LODraw_SlideshowSettingsOptions, _LODraw_SlideshowSettingsRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideshowActiveSettings(ByRef $oDoc, $bKeepOnTop = Null, $bMouseVisible = Null, $bMouseAsPen = Null, $iPenColor = Null, $iPenWidth = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideshowActiveSettings(ByRef $oDoc, $bKeepOnTop = Null, $bMouseVisible = Null, $bMouseAsPen = Null, $iPenColor = Null, $iPenWidth = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -3729,7 +3729,7 @@ Func _LOImpress_SlideshowActiveSettings(ByRef $oDoc, $bKeepOnTop = Null, $bMouse
 
 	If ($iPenWidth <> Null) Then
 		If Not __LO_VersionCheck(4.2) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
-		If Not __LO_IntIsBetween($iPenWidth, $LOI_SLIDESHOW_PEN_WIDTH_VERY_THIN, $LOI_SLIDESHOW_PEN_WIDTH_VERY_THICK) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not __LO_IntIsBetween($iPenWidth, $LOD_SLIDESHOW_PEN_WIDTH_VERY_THIN, $LOD_SLIDESHOW_PEN_WIDTH_VERY_THICK) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oPresentation.PenWidth = $iPenWidth
 
@@ -3737,13 +3737,13 @@ Func _LOImpress_SlideshowActiveSettings(ByRef $oDoc, $bKeepOnTop = Null, $bMouse
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideshowActiveSettings
+EndFunc   ;==>_LODraw_SlideshowActiveSettings
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideshowCustomCreate
+; Name ..........: _LODraw_SlideshowCustomCreate
 ; Description ...: Create a Custom Slideshow.
-; Syntax ........: _LOImpress_SlideshowCustomCreate(ByRef $oDoc, $sName, $asSlides)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: _LODraw_SlideshowCustomCreate(ByRef $oDoc, $sName, $asSlides)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $sName               - The name of the Custom Slideshow to create.
 ;                  $asSlides            - A single column Array of Slide names. See remarks.
 ; Return values .: Success: 1
@@ -3766,12 +3766,12 @@ EndFunc   ;==>_LOImpress_SlideshowActiveSettings
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The expected input for $asSlides is a single column array having the Slide names in the order the user wishes the Slides to appear in the presentation, slide names can be placed in the Array multiple times.
-; Related .......: _LOImpress_SlideshowCustomDelete, _LOImpress_SlideshowsCustomGetNames
+; Related .......: _LODraw_SlideshowCustomDelete, _LODraw_SlideshowsCustomGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideshowCustomCreate(ByRef $oDoc, $sName, $asSlides)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideshowCustomCreate(ByRef $oDoc, $sName, $asSlides)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oLinks, $oCustomPres, $oSlide
@@ -3804,13 +3804,13 @@ Func _LOImpress_SlideshowCustomCreate(ByRef $oDoc, $sName, $asSlides)
 	If Not $oDoc.CustomPresentations.hasByName($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LOImpress_SlideshowCustomCreate
+EndFunc   ;==>_LODraw_SlideshowCustomCreate
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideshowCustomDelete
+; Name ..........: _LODraw_SlideshowCustomDelete
 ; Description ...: Deletes a Custom Slideshow.
-; Syntax ........: _LOImpress_SlideshowCustomDelete(ByRef $oDoc, $sName)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: _LODraw_SlideshowCustomDelete(ByRef $oDoc, $sName)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $sName               - The Custom Slideshow's name to delete.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Custom Slideshow was successfully deleted.
@@ -3824,12 +3824,12 @@ EndFunc   ;==>_LOImpress_SlideshowCustomCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_SlideshowCustomCreate, _LOImpress_SlideshowsCustomGetNames
+; Related .......: _LODraw_SlideshowCustomCreate, _LODraw_SlideshowsCustomGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideshowCustomDelete(ByRef $oDoc, $sName)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideshowCustomDelete(ByRef $oDoc, $sName)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -3840,13 +3840,13 @@ Func _LOImpress_SlideshowCustomDelete(ByRef $oDoc, $sName)
 	If $oDoc.CustomPresentations.hasByName($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LOImpress_SlideshowCustomDelete
+EndFunc   ;==>_LODraw_SlideshowCustomDelete
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideshowCustomModify
+; Name ..........: _LODraw_SlideshowCustomModify
 ; Description ...: Set or Retrieve the Slides and order of the slides contained in a Custom Slideshow.
-; Syntax ........: _LOImpress_SlideshowCustomModify(ByRef $oDoc, $sName[, $asSlides = Null])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: _LODraw_SlideshowCustomModify(ByRef $oDoc, $sName[, $asSlides = Null])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $sName               - The name of the Custom Slideshow to modify.
 ;                  $asSlides            - [optional] Default is Null. A single column Array of Slide names. See remarks.
 ; Return values .: Success: 1 or Array.
@@ -3876,12 +3876,12 @@ EndFunc   ;==>_LOImpress_SlideshowCustomDelete
 ; Remarks .......: The expected input for $asSlides is a single column array having the Slide names in the order the user wishes the Slides to appear in the presentation, slide names can be placed in the Array multiple times.
 ;                  When retrieving the current order and content of the Slideshow, an array is returned with all the Slides contained in the Custom Slideshow, in the order they are set to be played. Slides may be present multiple times.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LOImpress_SlideshowCustomCreate, _LOImpress_SlideshowsCustomGetNames
+; Related .......: _LODraw_SlideshowCustomCreate, _LODraw_SlideshowsCustomGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideshowCustomModify(ByRef $oDoc, $sName, $asSlides = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideshowCustomModify(ByRef $oDoc, $sName, $asSlides = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -3901,7 +3901,7 @@ Func _LOImpress_SlideshowCustomModify(ByRef $oDoc, $sName, $asSlides = Null)
 			$asCurrSlides[$i] = $oCustomPres.getByIndex($i).LinkDisplayName()
 			If Not IsString($asCurrSlides[$i]) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+			Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 		Next
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $asCurrSlides)
@@ -3932,13 +3932,13 @@ Func _LOImpress_SlideshowCustomModify(ByRef $oDoc, $sName, $asSlides = Null)
 	$iError = ($oDoc.CustomPresentations.getByName($sName).getCount() = UBound($asSlides)) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideshowCustomModify
+EndFunc   ;==>_LODraw_SlideshowCustomModify
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideshowCustomSetName
+; Name ..........: _LODraw_SlideshowCustomSetName
 ; Description ...: Rename a Custom Slideshow.
-; Syntax ........: _LOImpress_SlideshowCustomSetName(ByRef $oDoc, $sName, $sNewName)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: _LODraw_SlideshowCustomSetName(ByRef $oDoc, $sName, $sNewName)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $sName               - The name of the Custom Slideshow to rename.
 ;                  $sNewName            - The name to rename the Custom Slideshow to.
 ; Return values .: Success: 1
@@ -3958,12 +3958,12 @@ EndFunc   ;==>_LOImpress_SlideshowCustomModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_SlideshowCustomModify, _LOImpress_SlideshowsCustomGetNames
+; Related .......: _LODraw_SlideshowCustomModify, _LODraw_SlideshowsCustomGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideshowCustomSetName(ByRef $oDoc, $sName, $sNewName)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideshowCustomSetName(ByRef $oDoc, $sName, $sNewName)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -3982,13 +3982,13 @@ Func _LOImpress_SlideshowCustomSetName(ByRef $oDoc, $sName, $sNewName)
 	$iError = ($oCustomPres.Name() = $sNewName) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideshowCustomSetName
+EndFunc   ;==>_LODraw_SlideshowCustomSetName
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideshowIsRunning
+; Name ..........: _LODraw_SlideshowIsRunning
 ; Description ...: Check whether there is a presentation currently running.
-; Syntax ........: _LOImpress_SlideshowIsRunning(ByRef $oDoc)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: _LODraw_SlideshowIsRunning(ByRef $oDoc)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if there is currently a Presentation running, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -3999,12 +3999,12 @@ EndFunc   ;==>_LOImpress_SlideshowCustomSetName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_SlideshowStart, _LOImpress_SlideshowStop
+; Related .......: _LODraw_SlideshowStart, _LODraw_SlideshowStop
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideshowIsRunning(ByRef $oDoc)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideshowIsRunning(ByRef $oDoc)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $bIsRunning
@@ -4015,14 +4015,14 @@ Func _LOImpress_SlideshowIsRunning(ByRef $oDoc)
 	If Not IsBool($bIsRunning) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $bIsRunning)
-EndFunc   ;==>_LOImpress_SlideshowIsRunning
+EndFunc   ;==>_LODraw_SlideshowIsRunning
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideshowPresentationControl
+; Name ..........: _LODraw_SlideshowPresentationControl
 ; Description ...: Query the status of, or send commands to, a currently running presentation.
-; Syntax ........: _LOImpress_SlideshowPresentationControl(ByRef $oDoc, $iAction[, $vValue = Null])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $iAction             - The Query or Command to perform on the presentation. See Constants, $LOI_SLIDESHOW_PRES_* as defined in LibreOfficeImpress_Constants.au3.
+; Syntax ........: _LODraw_SlideshowPresentationControl(ByRef $oDoc, $iAction[, $vValue = Null])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
+;                  $iAction             - The Query or Command to perform on the presentation. See Constants, $LOD_SLIDESHOW_PRES_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $vValue              - [optional] Default is Null. If the Query or Command requires an input value, it goes here. See Remarks.
 ; Return values .: Success: Boolean, Integer, or Object.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully processed a command.
@@ -4032,13 +4032,13 @@ EndFunc   ;==>_LOImpress_SlideshowIsRunning
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
-;                  @Error: 1, @Extended: 2 = $iAction not an Integer, less than 0 or greater than 25. See Constants, $LOI_SLIDESHOW_PRES_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 3 = $iAction called with $LOI_SLIDESHOW_PRES_QUERY_GET_SLIDE_BY_INDEX, and index value called in $vValue is not an Integer, less than 0 or greater than number of slides in the Presentation.
-;                  @Error: 1, @Extended: 4 = $iAction called with $LOI_SLIDESHOW_PRES_COMMAND_ACTIVATE_BLANK_SCREEN, and color value called in $vValue is not an Integer, less than 0 or greater than 16777215.
-;                  @Error: 1, @Extended: 5 = $iAction called with $LOI_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE, and value called in $vValue is not an Object.
-;                  @Error: 1, @Extended: 6 = $iAction called with $LOI_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE_BY_INDEX, and index value called in $vValue is not an Integer, less than 0 or greater than number of slides in the Presentation.
-;                  @Error: 1, @Extended: 7 = $iAction called with $LOI_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE_BY_NAME, and value called in $vValue is not a String.
-;                  @Error: 1, @Extended: 8 = $iAction called with $LOI_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE_BY_NAME, and Slide name called in $vValue does not exist.
+;                  @Error: 1, @Extended: 2 = $iAction not an Integer, less than 0 or greater than 25. See Constants, $LOD_SLIDESHOW_PRES_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iAction called with $LOD_SLIDESHOW_PRES_QUERY_GET_SLIDE_BY_INDEX, and index value called in $vValue is not an Integer, less than 0 or greater than number of slides in the Presentation.
+;                  @Error: 1, @Extended: 4 = $iAction called with $LOD_SLIDESHOW_PRES_COMMAND_ACTIVATE_BLANK_SCREEN, and color value called in $vValue is not an Integer, less than 0 or greater than 16777215.
+;                  @Error: 1, @Extended: 5 = $iAction called with $LOD_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE, and value called in $vValue is not an Object.
+;                  @Error: 1, @Extended: 6 = $iAction called with $LOD_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE_BY_INDEX, and index value called in $vValue is not an Integer, less than 0 or greater than number of slides in the Presentation.
+;                  @Error: 1, @Extended: 7 = $iAction called with $LOD_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE_BY_NAME, and value called in $vValue is not a String.
+;                  @Error: 1, @Extended: 8 = $iAction called with $LOD_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE_BY_NAME, and Slide name called in $vValue does not exist.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = There is no presentation currently running.
 ;                  @Error: 3, @Extended: 2 = Failed to retrieve Object for currently running presentation.
@@ -4061,145 +4061,145 @@ EndFunc   ;==>_LOImpress_SlideshowIsRunning
 ;                  @Error: 3, @Extended: 19 = Failed to Pause the presentation.
 ;                  @Error: 3, @Extended: 20 = Failed to Resume the presentation.
 ;                  --Version Related Errors--
-;                  @Error: 6, @Extended: 1 = $iAction called with $LOI_SLIDESHOW_PRES_COMMAND_ERASE_ALL_INK, and current LibreOffice version is less than 7.2.
+;                  @Error: 6, @Extended: 1 = $iAction called with $LOD_SLIDESHOW_PRES_COMMAND_ERASE_ALL_INK, and current LibreOffice version is less than 7.2.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Any queries or commands that require an input parameter will have the type of input required indicated in the description for the Constant.
-; Related .......: _LOImpress_SlideshowActiveSettings, _LOImpress_SlideshowIsRunning
+; Related .......: _LODraw_SlideshowActiveSettings, _LODraw_SlideshowIsRunning
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideshowPresentationControl(ByRef $oDoc, $iAction, $vValue = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideshowPresentationControl(ByRef $oDoc, $iAction, $vValue = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $vReturn = 1
 	Local $oPresentation
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LO_IntIsBetween($iAction, $LOI_SLIDESHOW_PRES_QUERY_GET_CURRENT_SLIDE, $LOI_SLIDESHOW_PRES_COMMAND_STOP_SOUND) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iAction, $LOD_SLIDESHOW_PRES_QUERY_GET_CURRENT_SLIDE, $LOD_SLIDESHOW_PRES_COMMAND_STOP_SOUND) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not $oDoc.Presentation.isRunning() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0) ; No Slideshow active.
 
 	$oPresentation = $oDoc.Presentation.getController()
 	If Not IsObj($oPresentation) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	Switch $iAction
-		Case $LOI_SLIDESHOW_PRES_QUERY_GET_CURRENT_SLIDE
+		Case $LOD_SLIDESHOW_PRES_QUERY_GET_CURRENT_SLIDE
 			$vReturn = $oPresentation.getCurrentSlide()
 			If Not IsObj($vReturn) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-		Case $LOI_SLIDESHOW_PRES_QUERY_GET_CURRENT_SLIDE_INDEX
+		Case $LOD_SLIDESHOW_PRES_QUERY_GET_CURRENT_SLIDE_INDEX
 			$vReturn = $oPresentation.getCurrentSlideIndex()
 			If Not IsInt($vReturn) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
-		Case $LOI_SLIDESHOW_PRES_QUERY_GET_NEXT_SLIDE_INDEX
+		Case $LOD_SLIDESHOW_PRES_QUERY_GET_NEXT_SLIDE_INDEX
 			$vReturn = $oPresentation.getNextSlideIndex()
 			If Not IsInt($vReturn) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
-		Case $LOI_SLIDESHOW_PRES_QUERY_GET_SLIDE_BY_INDEX
+		Case $LOD_SLIDESHOW_PRES_QUERY_GET_SLIDE_BY_INDEX
 			If Not __LO_IntIsBetween($vValue, 0, $oPresentation.getSlideCount() - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 			$vReturn = $oPresentation.getSlideByIndex($vValue)
 			If Not IsObj($vReturn) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
 
-		Case $LOI_SLIDESHOW_PRES_QUERY_GET_SLIDE_COUNT
+		Case $LOD_SLIDESHOW_PRES_QUERY_GET_SLIDE_COUNT
 			$vReturn = $oPresentation.getSlideCount()
 			If Not IsInt($vReturn) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 7, 0)
 
-		Case $LOI_SLIDESHOW_PRES_QUERY_IS_ACTIVE
+		Case $LOD_SLIDESHOW_PRES_QUERY_IS_ACTIVE
 			$vReturn = $oPresentation.isActive()
 			If Not IsBool($vReturn) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 8, 0)
 
-		Case $LOI_SLIDESHOW_PRES_QUERY_IS_ENDLESS
+		Case $LOD_SLIDESHOW_PRES_QUERY_IS_ENDLESS
 			$vReturn = $oPresentation.isEndless()
 			If Not IsBool($vReturn) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 9, 0)
 
-		Case $LOI_SLIDESHOW_PRES_QUERY_IS_FULLSCREEN
+		Case $LOD_SLIDESHOW_PRES_QUERY_IS_FULLSCREEN
 			$vReturn = $oPresentation.isFullScreen()
 			If Not IsBool($vReturn) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 10, 0)
 
-		Case $LOI_SLIDESHOW_PRES_QUERY_IS_PAUSED
+		Case $LOD_SLIDESHOW_PRES_QUERY_IS_PAUSED
 			$vReturn = $oPresentation.isPaused()
 			If Not IsBool($vReturn) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 11, 0)
 
-		Case $LOI_SLIDESHOW_PRES_COMMAND_ACTIVATE
+		Case $LOD_SLIDESHOW_PRES_COMMAND_ACTIVATE
 			$oPresentation.activate()
 			If Not $oPresentation.isActive() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 12, 0)
 
-		Case $LOI_SLIDESHOW_PRES_COMMAND_ACTIVATE_BLANK_SCREEN
+		Case $LOD_SLIDESHOW_PRES_COMMAND_ACTIVATE_BLANK_SCREEN
 			If Not __LO_IntIsBetween($vValue, $LO_COLOR_BLACK, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 			$oPresentation.blankScreen($vValue)
 			If Not $oPresentation.isPaused() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 13, 0)
 
-		Case $LOI_SLIDESHOW_PRES_COMMAND_DEACTIVATE
+		Case $LOD_SLIDESHOW_PRES_COMMAND_DEACTIVATE
 			$oPresentation.deactivate() ; Doesn't seem to set IsActive to False!
 ;~ 			If $oPresentation.isActive() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 14, 0)
 
-		Case $LOI_SLIDESHOW_PRES_COMMAND_ERASE_ALL_INK
+		Case $LOD_SLIDESHOW_PRES_COMMAND_ERASE_ALL_INK
 			If Not __LO_VersionCheck(7.2) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
 			$oPresentation.setEraseAllInk(True)
 
-		Case $LOI_SLIDESHOW_PRES_COMMAND_GOTO_FIRST_SLIDE
+		Case $LOD_SLIDESHOW_PRES_COMMAND_GOTO_FIRST_SLIDE
 			$oPresentation.gotoFirstSlide()
 			If ($oPresentation.getCurrentSlideIndex() <> 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 14, 0)
 
-		Case $LOI_SLIDESHOW_PRES_COMMAND_GOTO_LAST_SLIDE
+		Case $LOD_SLIDESHOW_PRES_COMMAND_GOTO_LAST_SLIDE
 			$oPresentation.gotoLastSlide()
 			If ($oPresentation.getCurrentSlideIndex() <> $oPresentation.getSlideCount() - 1) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 15, 0)
 
-		Case $LOI_SLIDESHOW_PRES_COMMAND_GOTO_NEXT_EFFECT
+		Case $LOD_SLIDESHOW_PRES_COMMAND_GOTO_NEXT_EFFECT
 			$oPresentation.gotoNextEffect()
 
-		Case $LOI_SLIDESHOW_PRES_COMMAND_GOTO_NEXT_SLIDE
+		Case $LOD_SLIDESHOW_PRES_COMMAND_GOTO_NEXT_SLIDE
 			$oPresentation.gotoNextSlide()
 
-		Case $LOI_SLIDESHOW_PRES_COMMAND_GOTO_PREV_EFFECT
+		Case $LOD_SLIDESHOW_PRES_COMMAND_GOTO_PREV_EFFECT
 			$oPresentation.gotoPreviousEffect()
 
-		Case $LOI_SLIDESHOW_PRES_COMMAND_GOTO_PREV_SLIDE
+		Case $LOD_SLIDESHOW_PRES_COMMAND_GOTO_PREV_SLIDE
 			$oPresentation.gotoPreviousSlide()
 
-		Case $LOI_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE
+		Case $LOD_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE
 			If Not IsObj($vValue) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 			$oPresentation.gotoSlide($vValue)
 			If ($oPresentation.getCurrentSlide() <> $vValue) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 16, 0)
 
-		Case $LOI_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE_BY_INDEX
+		Case $LOD_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE_BY_INDEX
 			If Not __LO_IntIsBetween($vValue, 0, $oPresentation.getSlideCount() - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 			$oPresentation.gotoSlideIndex($vValue)
 			If ($oPresentation.getCurrentSlideIndex() <> $vValue) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 17, 0)
 
-		Case $LOI_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE_BY_NAME
+		Case $LOD_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE_BY_NAME
 			If Not IsString($vValue) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 			If Not $oDoc.Links.getByName("Slide").Links.hasByName($vValue) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
 			$oPresentation.gotoBookmark($vValue)
 			If ($oPresentation.getCurrentSlide.LinkDisplayName() <> $vValue) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 18, 0)
 
-		Case $LOI_SLIDESHOW_PRES_COMMAND_PAUSE
+		Case $LOD_SLIDESHOW_PRES_COMMAND_PAUSE
 			$oPresentation.pause()
 			If Not $oPresentation.isPaused() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 19, 0)
 
-		Case $LOI_SLIDESHOW_PRES_COMMAND_RESUME
+		Case $LOD_SLIDESHOW_PRES_COMMAND_RESUME
 			$oPresentation.resume()
 			If $oPresentation.isPaused() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 20, 0)
 
-		Case $LOI_SLIDESHOW_PRES_COMMAND_STOP_SOUND
+		Case $LOD_SLIDESHOW_PRES_COMMAND_STOP_SOUND
 			$oPresentation.stopSound()
 	EndSwitch
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $vReturn)
-EndFunc   ;==>_LOImpress_SlideshowPresentationControl
+EndFunc   ;==>_LODraw_SlideshowPresentationControl
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideshowsCustomGetNames
+; Name ..........: _LODraw_SlideshowsCustomGetNames
 ; Description ...: Retrieve an array of Custom Slideshow names available in the document.
-; Syntax ........: _LOImpress_SlideshowsCustomGetNames(ByRef $oDoc)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: _LODraw_SlideshowsCustomGetNames(ByRef $oDoc)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ; Return values .: Success: Array.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. An Array containing all Custom Slideshow names. @Extended is set to the number of names returned.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -4210,12 +4210,12 @@ EndFunc   ;==>_LOImpress_SlideshowPresentationControl
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_SlideshowCustomCreate, _LOImpress_SlideshowCustomDelete, _LOImpress_SlideshowCustomModify, _LOImpress_SlideshowCustomSetName
+; Related .......: _LODraw_SlideshowCustomCreate, _LODraw_SlideshowCustomDelete, _LODraw_SlideshowCustomModify, _LODraw_SlideshowCustomSetName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideshowsCustomGetNames(ByRef $oDoc)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideshowsCustomGetNames(ByRef $oDoc)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $asCustomSlideShows[0]
@@ -4226,15 +4226,15 @@ Func _LOImpress_SlideshowsCustomGetNames(ByRef $oDoc)
 	If Not IsArray($asCustomSlideShows) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, UBound($asCustomSlideShows), $asCustomSlideShows)
-EndFunc   ;==>_LOImpress_SlideshowsCustomGetNames
+EndFunc   ;==>_LODraw_SlideshowsCustomGetNames
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideshowSettingsMode
+; Name ..........: _LODraw_SlideshowSettingsMode
 ; Description ...: Set or Retrieve the Slideshow's play mode settings.
-; Syntax ........: _LOImpress_SlideshowSettingsMode(ByRef $oDoc[, $iPresMode = Null[, $iRepeatPause = Null[, $bShowLogo = Null]]])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $iPresMode           - [optional] (0-2) Default is Null. The mode the presentation is displayed in. See Constants, $LOI_SLIDESHOW_VIEW_MODE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iRepeatPause        - [optional] (0-86399) Default is Null. If $iPresMode is set to $LOI_SLIDESHOW_VIEW_MODE_LOOP, the amount of seconds before the presentation is played again.
+; Syntax ........: _LODraw_SlideshowSettingsMode(ByRef $oDoc[, $iPresMode = Null[, $iRepeatPause = Null[, $bShowLogo = Null]]])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
+;                  $iPresMode           - [optional] (0-2) Default is Null. The mode the presentation is displayed in. See Constants, $LOD_SLIDESHOW_VIEW_MODE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iRepeatPause        - [optional] (0-86399) Default is Null. If $iPresMode is set to $LOD_SLIDESHOW_VIEW_MODE_LOOP, the amount of seconds before the presentation is played again.
 ;                  $bShowLogo           - [optional] Default is Null. If True, the LibreOffice logo is displayed during the pause.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -4242,7 +4242,7 @@ EndFunc   ;==>_LOImpress_SlideshowsCustomGetNames
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
-;                  @Error: 1, @Extended: 2 = $iPresMode not an Integer, less than 0 or greater than 2. See Constants, $LOI_SLIDESHOW_VIEW_MODE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iPresMode not an Integer, less than 0 or greater than 2. See Constants, $LOD_SLIDESHOW_VIEW_MODE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $iRepeatPause not an Integer, less than 0 or greater than 86399.
 ;                  @Error: 1, @Extended: 4 = $bShowLogo not a Boolean.
 ;                  --Processing Errors--
@@ -4257,12 +4257,12 @@ EndFunc   ;==>_LOImpress_SlideshowsCustomGetNames
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_SlideshowActiveSettings, _LOImpress_SlideshowPresentationControl, _LOImpress_SlideshowSettingsOptions, _LOImpress_SlideshowSettingsRange
+; Related .......: _LODraw_SlideshowActiveSettings, _LODraw_SlideshowPresentationControl, _LODraw_SlideshowSettingsOptions, _LODraw_SlideshowSettingsRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideshowSettingsMode(ByRef $oDoc, $iPresMode = Null, $iRepeatPause = Null, $bShowLogo = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideshowSettingsMode(ByRef $oDoc, $iPresMode = Null, $iRepeatPause = Null, $bShowLogo = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0, $iCurrMode
@@ -4276,13 +4276,13 @@ Func _LOImpress_SlideshowSettingsMode(ByRef $oDoc, $iPresMode = Null, $iRepeatPa
 
 	If __LO_VarsAreNull($iPresMode, $iRepeatPause, $bShowLogo) Then
 		If ($oPresentation.IsFullScreen() = True) And ($oPresentation.IsEndless() = False) Then
-			$iCurrMode = $LOI_SLIDESHOW_VIEW_MODE_FULL_SCREEN
+			$iCurrMode = $LOD_SLIDESHOW_VIEW_MODE_FULL_SCREEN
 
 		ElseIf ($oPresentation.IsFullScreen() = False) And ($oPresentation.IsEndless() = False) Then
-			$iCurrMode = $LOI_SLIDESHOW_VIEW_MODE_IN_WINDOW
+			$iCurrMode = $LOD_SLIDESHOW_VIEW_MODE_IN_WINDOW
 
 		ElseIf ($oPresentation.IsEndless() = True) Then
-			$iCurrMode = $LOI_SLIDESHOW_VIEW_MODE_LOOP
+			$iCurrMode = $LOD_SLIDESHOW_VIEW_MODE_LOOP
 
 		Else
 
@@ -4295,22 +4295,22 @@ Func _LOImpress_SlideshowSettingsMode(ByRef $oDoc, $iPresMode = Null, $iRepeatPa
 	EndIf
 
 	If ($iPresMode <> Null) Then
-		If Not __LO_IntIsBetween($iPresMode, $LOI_SLIDESHOW_VIEW_MODE_FULL_SCREEN, $LOI_SLIDESHOW_VIEW_MODE_LOOP) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+		If Not __LO_IntIsBetween($iPresMode, $LOD_SLIDESHOW_VIEW_MODE_FULL_SCREEN, $LOD_SLIDESHOW_VIEW_MODE_LOOP) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		Switch $iPresMode
-			Case $LOI_SLIDESHOW_VIEW_MODE_FULL_SCREEN
+			Case $LOD_SLIDESHOW_VIEW_MODE_FULL_SCREEN
 				$oPresentation.IsFullScreen = True
 				$oPresentation.IsEndless = False
 				$iError = ($oPresentation.IsFullScreen() = True) ? ($iError) : (BitOR($iError, 1))
 				$iError = ($oPresentation.IsEndless = False) ? ($iError) : (BitOR($iError, 1))
 
-			Case $LOI_SLIDESHOW_VIEW_MODE_IN_WINDOW
+			Case $LOD_SLIDESHOW_VIEW_MODE_IN_WINDOW
 				$oPresentation.IsFullScreen = False
 				$oPresentation.IsEndless = False
 				$iError = ($oPresentation.IsFullScreen() = False) ? ($iError) : (BitOR($iError, 1))
 				$iError = ($oPresentation.IsEndless = False) ? ($iError) : (BitOR($iError, 1))
 
-			Case $LOI_SLIDESHOW_VIEW_MODE_LOOP
+			Case $LOD_SLIDESHOW_VIEW_MODE_LOOP
 				$oPresentation.IsEndless = True
 				$iError = ($oPresentation.IsEndless = True) ? ($iError) : (BitOR($iError, 1))
 		EndSwitch
@@ -4331,13 +4331,13 @@ Func _LOImpress_SlideshowSettingsMode(ByRef $oDoc, $iPresMode = Null, $iRepeatPa
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideshowSettingsMode
+EndFunc   ;==>_LODraw_SlideshowSettingsMode
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideshowSettingsOptions
+; Name ..........: _LODraw_SlideshowSettingsOptions
 ; Description ...: Set or Retrieve the Slideshow's play options settings.
-; Syntax ........: _LOImpress_SlideshowSettingsOptions(ByRef $oDoc[, $bDisableAutoSlides = Null[, $bChangeSlideByClick = Null[, $bMouseVisible = Null[, $bMouseAsPen = Null[, $bPlayAnimatedFiles = Null[, $bKeepOnTop = Null]]]]]])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: _LODraw_SlideshowSettingsOptions(ByRef $oDoc[, $bDisableAutoSlides = Null[, $bChangeSlideByClick = Null[, $bMouseVisible = Null[, $bMouseAsPen = Null[, $bPlayAnimatedFiles = Null[, $bKeepOnTop = Null]]]]]])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $bDisableAutoSlides  - [optional] Default is Null. If True, slides will not transition to the next slide automatically (overriding individual slide settings).
 ;                  $bChangeSlideByClick - [optional] Default is Null. If True, slides will transition when the mouse is clicked.
 ;                  $bMouseVisible       - [optional] Default is Null. If True, the mouse is visible in the presentation.
@@ -4370,12 +4370,12 @@ EndFunc   ;==>_LOImpress_SlideshowSettingsMode
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_SlideshowActiveSettings, _LOImpress_SlideshowPresentationControl, _LOImpress_SlideshowSettingsMode, _LOImpress_SlideshowSettingsRange
+; Related .......: _LODraw_SlideshowActiveSettings, _LODraw_SlideshowPresentationControl, _LODraw_SlideshowSettingsMode, _LODraw_SlideshowSettingsRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideshowSettingsOptions(ByRef $oDoc, $bDisableAutoSlides = Null, $bChangeSlideByClick = Null, $bMouseVisible = Null, $bMouseAsPen = Null, $bPlayAnimatedFiles = Null, $bKeepOnTop = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideshowSettingsOptions(ByRef $oDoc, $bDisableAutoSlides = Null, $bChangeSlideByClick = Null, $bMouseVisible = Null, $bMouseAsPen = Null, $bPlayAnimatedFiles = Null, $bKeepOnTop = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -4437,14 +4437,14 @@ Func _LOImpress_SlideshowSettingsOptions(ByRef $oDoc, $bDisableAutoSlides = Null
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideshowSettingsOptions
+EndFunc   ;==>_LODraw_SlideshowSettingsOptions
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideshowSettingsRange
+; Name ..........: _LODraw_SlideshowSettingsRange
 ; Description ...: Set or Retrieve the Slideshow's play Range settings.
-; Syntax ........: _LOImpress_SlideshowSettingsRange(ByRef $oDoc[, $iRange = Null[, $sValue = Null]])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $iRange              - [optional] (0-2) Default is Null. The Range of slides that will be shown when the Presentation is started. See Constants, $LOI_SLIDESHOW_RANGE_* as defined in LibreOfficeImpress_Constants.au3.
+; Syntax ........: _LODraw_SlideshowSettingsRange(ByRef $oDoc[, $iRange = Null[, $sValue = Null]])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
+;                  $iRange              - [optional] (0-2) Default is Null. The Range of slides that will be shown when the Presentation is started. See Constants, $LOD_SLIDESHOW_RANGE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $sValue              - [optional] Default is Null. The "From" slide or Custom Slide Show name. See remarks.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -4452,32 +4452,32 @@ EndFunc   ;==>_LOImpress_SlideshowSettingsOptions
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
-;                  @Error: 1, @Extended: 2 = $iRange not an Integer, less than 0 or greater than 2. See Constants, $LOI_SLIDESHOW_RANGE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iRange not an Integer, less than 0 or greater than 2. See Constants, $LOD_SLIDESHOW_RANGE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $sValue not a String.
-;                  @Error: 1, @Extended: 4 = Range set to $LOI_SLIDESHOW_RANGE_FROM, and the Slide name called in $sValue does not exist.
-;                  @Error: 1, @Extended: 5 = Range set to $LOI_SLIDESHOW_RANGE_CUSTOM, and the Custom Slideshow name called in $sValue does not exist.
+;                  @Error: 1, @Extended: 4 = Range set to $LOD_SLIDESHOW_RANGE_FROM, and the Slide name called in $sValue does not exist.
+;                  @Error: 1, @Extended: 5 = Range set to $LOD_SLIDESHOW_RANGE_CUSTOM, and the Custom Slideshow name called in $sValue does not exist.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Presentation Object.
 ;                  @Error: 3, @Extended: 2 = Failed to retrieve Start From slide value.
 ;                  @Error: 3, @Extended: 3 = Failed to retrieve Custom Slideshow name.
 ;                  @Error: 3, @Extended: 4 = Failed to identify current range.
-;                  @Error: 3, @Extended: 5 = $iRange is called with other than $LOI_SLIDESHOW_RANGE_ALL, and $sValue is not set.
+;                  @Error: 3, @Extended: 5 = $iRange is called with other than $LOD_SLIDESHOW_RANGE_ALL, and $sValue is not set.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iRange
 ;                  |                               2 = Error setting $sValue
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: If you call $iRange with any other value than $LOI_SLIDESHOW_RANGE_ALL, $sValue must be called with an appropriate name, either a Slide name to start from, or a Custom Slideshow name.
+; Remarks .......: If you call $iRange with any other value than $LOD_SLIDESHOW_RANGE_ALL, $sValue must be called with an appropriate name, either a Slide name to start from, or a Custom Slideshow name.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  If there are two slides with the same name, and one is set to the "From Slide" property, there is no guarantee which slide will be the one used.
-; Related .......: _LOImpress_SlideshowActiveSettings, _LOImpress_SlideshowPresentationControl, _LOImpress_SlideshowSettingsMode, _LOImpress_SlideshowSettingsOptions
+; Related .......: _LODraw_SlideshowActiveSettings, _LODraw_SlideshowPresentationControl, _LODraw_SlideshowSettingsMode, _LODraw_SlideshowSettingsOptions
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideshowSettingsRange(ByRef $oDoc, $iRange = Null, $sValue = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideshowSettingsRange(ByRef $oDoc, $iRange = Null, $sValue = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0, $iCurrRange
@@ -4491,11 +4491,11 @@ Func _LOImpress_SlideshowSettingsRange(ByRef $oDoc, $iRange = Null, $sValue = Nu
 	If Not IsObj($oPresentation) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	If ($oPresentation.IsShowAll() = True) Then
-		$iCurrRange = $LOI_SLIDESHOW_RANGE_ALL
+		$iCurrRange = $LOD_SLIDESHOW_RANGE_ALL
 		$sCurrValue = ""
 
 	ElseIf ($oPresentation.FirstPage() <> "") Then
-		$iCurrRange = $LOI_SLIDESHOW_RANGE_FROM
+		$iCurrRange = $LOD_SLIDESHOW_RANGE_FROM
 		$sCurrValue = $oPresentation.FirstPage()
 		If Not IsString($sCurrValue) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
@@ -4503,7 +4503,7 @@ Func _LOImpress_SlideshowSettingsRange(ByRef $oDoc, $iRange = Null, $sValue = Nu
 		If Not IsString($sCurrValue) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	ElseIf ($oPresentation.CustomShow() <> "") Then
-		$iCurrRange = $LOI_SLIDESHOW_RANGE_CUSTOM
+		$iCurrRange = $LOD_SLIDESHOW_RANGE_CUSTOM
 		$sCurrValue = $oPresentation.CustomShow()
 		If Not IsString($sCurrValue) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
@@ -4519,10 +4519,10 @@ Func _LOImpress_SlideshowSettingsRange(ByRef $oDoc, $iRange = Null, $sValue = Nu
 	EndIf
 
 	If ($iRange <> Null) Then
-		If Not __LO_IntIsBetween($iRange, $LOI_SLIDESHOW_RANGE_ALL, $LOI_SLIDESHOW_RANGE_CUSTOM) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+		If Not __LO_IntIsBetween($iRange, $LOD_SLIDESHOW_RANGE_ALL, $LOD_SLIDESHOW_RANGE_CUSTOM) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		Switch $iRange
-			Case $LOI_SLIDESHOW_RANGE_ALL
+			Case $LOD_SLIDESHOW_RANGE_ALL
 				$oPresentation.IsShowAll = True
 				$oPresentation.FirstPage = ""
 				$oPresentation.CustomShow = ""
@@ -4531,7 +4531,7 @@ Func _LOImpress_SlideshowSettingsRange(ByRef $oDoc, $iRange = Null, $sValue = Nu
 				$iError = ($oPresentation.FirstPage() = "") ? ($iError) : (BitOR($iError, 1))
 				$iError = ($oPresentation.CustomShow() = "") ? ($iError) : (BitOR($iError, 1))
 
-			Case $LOI_SLIDESHOW_RANGE_FROM
+			Case $LOD_SLIDESHOW_RANGE_FROM
 				If ($iCurrRange <> $iRange) Then
 					If ($sValue = Null) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0) ; Value not called
 
@@ -4542,7 +4542,7 @@ Func _LOImpress_SlideshowSettingsRange(ByRef $oDoc, $iRange = Null, $sValue = Nu
 					$iError = ($oPresentation.CustomShow() = "") ? ($iError) : (BitOR($iError, 1))
 				EndIf
 
-			Case $LOI_SLIDESHOW_RANGE_CUSTOM
+			Case $LOD_SLIDESHOW_RANGE_CUSTOM
 				If ($iCurrRange <> $iRange) Then
 					If ($sValue = Null) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0) ; Value not called
 
@@ -4561,7 +4561,7 @@ Func _LOImpress_SlideshowSettingsRange(ByRef $oDoc, $iRange = Null, $sValue = Nu
 		If Not IsString($sValue) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		Switch $iCurrRange
-			Case $LOI_SLIDESHOW_RANGE_FROM
+			Case $LOD_SLIDESHOW_RANGE_FROM
 				If Not $oDoc.Links.getByName("Slide").Links.hasByName($sValue) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 				$sValue = $oDoc.Links.getByName("Slide").Links.getByName($sValue).Name()    ; Overwrite value (LinkDisplayName) with Slide's name, as that is what L.O. uses.
@@ -4569,7 +4569,7 @@ Func _LOImpress_SlideshowSettingsRange(ByRef $oDoc, $iRange = Null, $sValue = Nu
 				$oPresentation.FirstPage = $sValue
 				$iError = ($oPresentation.FirstPage() = $sValue) ? ($iError) : (BitOR($iError, 2))
 
-			Case $LOI_SLIDESHOW_RANGE_CUSTOM
+			Case $LOD_SLIDESHOW_RANGE_CUSTOM
 				If Not $oDoc.CustomPresentations.hasByName($sValue) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 				$oPresentation.CustomShow = $sValue
@@ -4578,13 +4578,13 @@ Func _LOImpress_SlideshowSettingsRange(ByRef $oDoc, $iRange = Null, $sValue = Nu
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideshowSettingsRange
+EndFunc   ;==>_LODraw_SlideshowSettingsRange
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideshowStart
+; Name ..........: _LODraw_SlideshowStart
 ; Description ...: Begins a presentation.
-; Syntax ........: _LOImpress_SlideshowStart(ByRef $oDoc[, $bRehearse = False[, $sStartSlide = ""[, $sCustomShow = ""]]])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: _LODraw_SlideshowStart(ByRef $oDoc[, $bRehearse = False[, $sStartSlide = ""[, $sCustomShow = ""]]])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $bRehearse           - [optional] Default is False. If True, starts the presentation from the beginning and shows a rehearsal timer to the user.
 ;                  $sStartSlide         - [optional] Default is "". The Slide's name to begin this presentation from.
 ;                  $sCustomShow         - [optional] Default is "". The Custom Slideshow's name to play for this presentation.
@@ -4608,12 +4608,12 @@ EndFunc   ;==>_LOImpress_SlideshowSettingsRange
 ; Modified ......:
 ; Remarks .......: If $bRehearse is called with True, both $sStartSlide and $sCustomShow will be ignored.
 ;                  If both $sStartSlide and $sCustomShow are called with a parameter, $sCustomShow will be ignored.
-; Related .......: _LOImpress_SlideshowIsRunning, _LOImpress_SlideshowStop
+; Related .......: _LODraw_SlideshowIsRunning, _LODraw_SlideshowStop
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideshowStart(ByRef $oDoc, $bRehearse = False, $sStartSlide = "", $sCustomShow = "")
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideshowStart(ByRef $oDoc, $bRehearse = False, $sStartSlide = "", $sCustomShow = "")
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $atProperties[0]
@@ -4673,13 +4673,13 @@ Func _LOImpress_SlideshowStart(ByRef $oDoc, $bRehearse = False, $sStartSlide = "
 	If Not $oPresentation.IsRunning() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LOImpress_SlideshowStart
+EndFunc   ;==>_LODraw_SlideshowStart
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideshowStop
+; Name ..........: _LODraw_SlideshowStop
 ; Description ...: Stop the presently playing presentation.
-; Syntax ........: _LOImpress_SlideshowStop(ByRef $oDoc)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: _LODraw_SlideshowStop(ByRef $oDoc)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Presentation was successfully stopped.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -4690,12 +4690,12 @@ EndFunc   ;==>_LOImpress_SlideshowStart
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LOImpress_SlideshowIsRunning, _LOImpress_SlideshowStart
+; Related .......: _LODraw_SlideshowIsRunning, _LODraw_SlideshowStart
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideshowStop(ByRef $oDoc)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideshowStop(ByRef $oDoc)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -4706,12 +4706,12 @@ Func _LOImpress_SlideshowStop(ByRef $oDoc)
 	EndIf
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LOImpress_SlideshowStop
+EndFunc   ;==>_LODraw_SlideshowStop
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideSoundsGetNames
+; Name ..........: _LODraw_SlideSoundsGetNames
 ; Description ...: Retrieve an array of Sound files that are included with LibreOffice Impress.
-; Syntax ........: _LOImpress_SlideSoundsGetNames()
+; Syntax ........: _LODraw_SlideSoundsGetNames()
 ; Parameters ....: None
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning array of included Impress Sound files. @Extended will be set to number of results.
@@ -4725,12 +4725,12 @@ EndFunc   ;==>_LOImpress_SlideshowStop
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: An example path that may be returned is: "C:\Program Files\LibreOffice\program\..\share\gallery\curve.wav"
-; Related .......: _LOImpress_SlideTransition
+; Related .......: _LODraw_SlideTransition
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideSoundsGetNames()
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideSoundsGetNames()
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oServiceManager, $oContext, $oPathSettings
@@ -4773,14 +4773,14 @@ Func _LOImpress_SlideSoundsGetNames()
 	ReDim $asFiles[$iCount]
 
 	Return SetError($__LO_STATUS_SUCCESS, UBound($asFiles), $asFiles)
-EndFunc   ;==>_LOImpress_SlideSoundsGetNames
+EndFunc   ;==>_LODraw_SlideSoundsGetNames
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_SlideTransition
+; Name ..........: _LODraw_SlideTransition
 ; Description ...: Set or Retrieve a Slide's Transition properties.
-; Syntax ........: _LOImpress_SlideTransition(ByRef $oSlide[, $iTransition = Null[, $nDuration = Null[, $sSound = Null[, $bLoopSound = Null[, $nSlideAdvance = Null]]]]])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
-;                  $iTransition         - [optional] (0-78) Default is Null. The Transition effect. See Constants, $LOI_SLIDE_TRANSITION_* as defined in LibreOfficeImpress_Constants.au3.
+; Syntax ........: _LODraw_SlideTransition(ByRef $oSlide[, $iTransition = Null[, $nDuration = Null[, $sSound = Null[, $bLoopSound = Null[, $nSlideAdvance = Null]]]]])
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
+;                  $iTransition         - [optional] (0-78) Default is Null. The Transition effect. See Constants, $LOD_SLIDE_TRANSITION_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $nDuration           - [optional] (0-1000) Default is Null. The duration of the slide's transition effect, in seconds. L.O. 6.1+. See remarks.
 ;                  $sSound              - [optional] Default is Null. The path to the sound to play during slide transition. See remarks.
 ;                  $bLoopSound          - [optional] Default is Null. If True, the sound is repeated.
@@ -4791,7 +4791,7 @@ EndFunc   ;==>_LOImpress_SlideSoundsGetNames
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
-;                  @Error: 1, @Extended: 2 = $iTransition not an Integer, less than 0 or greater than 78. See Constants, $LOI_SLIDE_TRANSITION_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iTransition not an Integer, less than 0 or greater than 78. See Constants, $LOD_SLIDE_TRANSITION_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $nDuration not a Number, less than 0 or greater than 1000.
 ;                  @Error: 1, @Extended: 4 = $sSound not a String.
 ;                  @Error: 1, @Extended: 5 = File called in $sSound does not exist.
@@ -4818,19 +4818,19 @@ EndFunc   ;==>_LOImpress_SlideSoundsGetNames
 ;                  When retrieving current property values previous to LibreOffice 6.1, if Speed is set to Fast, 1 is returned for $nDuration. If Speed is set to Medium, 2 is returned. And if Speed is set to Slow, 3 is returned.
 ;                  $sSound can be called with an empty string to indicate that no sound should be played.
 ;                  If $sSound is called with the string "stop", this equals "Stop Previous Sound" in the UI.
-;                  Otherwise call $sSound with a valid path to a sound file. See _LOImpress_SlideSoundsGetNames, to obtain a list of sound files included with Impress.
+;                  Otherwise call $sSound with a valid path to a sound file. See _LODraw_SlideSoundsGetNames, to obtain a list of sound files included with Impress.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_SlideSoundsGetNames, _LOImpress_SlideLayout
+; Related .......: _LODraw_SlideSoundsGetNames, _LODraw_SlideLayout
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_SlideTransition(ByRef $oSlide, $iTransition = Null, $nDuration = Null, $sSound = Null, $bLoopSound = Null, $nSlideAdvance = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_SlideTransition(ByRef $oSlide, $iTransition = Null, $nDuration = Null, $sSound = Null, $bLoopSound = Null, $nSlideAdvance = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local Const $__LOI_CONST_CHANGE_MANUAL = 0, $__LOI_CONST_CHANGE_AUTO = 1 ;,  $__LOI_CONST_CHANGE_SEMI_MANUAL = 2 ; com.sun.star.presentation.DrawPage:Change
-	Local Const $__LOI_CONST_SPEED_SLOW = 0, $__LOI_CONST_SPEED_MEDIUM = 1, $__LOI_CONST_SPEED_FAST = 2    ; com.sun.star.presentation:AnimationSpeed
+	Local Const $__LOD_CONST_CHANGE_MANUAL = 0, $__LOD_CONST_CHANGE_AUTO = 1 ;,  $__LOD_CONST_CHANGE_SEMI_MANUAL = 2 ; com.sun.star.presentation.DrawPage:Change
+	Local Const $__LOD_CONST_SPEED_SLOW = 0, $__LOD_CONST_SPEED_MEDIUM = 1, $__LOD_CONST_SPEED_FAST = 2    ; com.sun.star.presentation:AnimationSpeed
 	Local $iError = 0, $iCurrTransition, $nCurrDuration, $nCurrSlideAdvance
 	Local $sCurrSound
 	Local $avTransition[5]
@@ -4838,7 +4838,7 @@ Func _LOImpress_SlideTransition(ByRef $oSlide, $iTransition = Null, $nDuration =
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($iTransition, $nDuration, $sSound, $bLoopSound, $nSlideAdvance) Then
-		$iCurrTransition = __LOImpress_Transition($oSlide)
+		$iCurrTransition = __LODraw_Transition($oSlide)
 		If Not IsInt($iCurrTransition) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 		If __LO_VersionCheck(6.1) Then
@@ -4846,13 +4846,13 @@ Func _LOImpress_SlideTransition(ByRef $oSlide, $iTransition = Null, $nDuration =
 
 		Else
 			Switch $oSlide.Speed()
-				Case $__LOI_CONST_SPEED_FAST ; 0 - 1.99 ; Matches L.O. Behaviour.
+				Case $__LOD_CONST_SPEED_FAST ; 0 - 1.99 ; Matches L.O. Behaviour.
 					$nCurrDuration = 1
 
-				Case $__LOI_CONST_SPEED_MEDIUM ; 2
+				Case $__LOD_CONST_SPEED_MEDIUM ; 2
 					$nCurrDuration = 2
 
-				Case Else ; $__LOI_CONST_SPEED_SLOW
+				Case Else ; $__LOD_CONST_SPEED_SLOW
 					$nCurrDuration = 3
 			EndSwitch
 		EndIf
@@ -4865,7 +4865,7 @@ Func _LOImpress_SlideTransition(ByRef $oSlide, $iTransition = Null, $nDuration =
 
 		$sCurrSound = _LO_PathConvert($sCurrSound, $LO_PATHCONV_PCPATH_RETURN)
 
-		If ($oSlide.Change() <> $__LOI_CONST_CHANGE_AUTO) Then
+		If ($oSlide.Change() <> $__LOD_CONST_CHANGE_AUTO) Then
 			$nCurrSlideAdvance = -1
 
 		Else
@@ -4880,12 +4880,12 @@ Func _LOImpress_SlideTransition(ByRef $oSlide, $iTransition = Null, $nDuration =
 	EndIf
 
 	If ($iTransition <> Null) Then
-		If Not __LO_IntIsBetween($iTransition, $LOI_SLIDE_TRANSITION_3D_VENETIAN_VERT, $LOI_SLIDE_TRANSITION_WIPE_TOP_TO_BOTTOM) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+		If Not __LO_IntIsBetween($iTransition, $LOD_SLIDE_TRANSITION_3D_VENETIAN_VERT, $LOD_SLIDE_TRANSITION_WIPE_TOP_TO_BOTTOM) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-		__LOImpress_Transition($oSlide, $iTransition)
+		__LODraw_Transition($oSlide, $iTransition)
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
-		$iError = (__LOImpress_Transition($oSlide) = $iTransition) ? ($iError) : (BitOR($iError, 1))
+		$iError = (__LODraw_Transition($oSlide) = $iTransition) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($nDuration <> Null) Then
@@ -4898,16 +4898,16 @@ Func _LOImpress_SlideTransition(ByRef $oSlide, $iTransition = Null, $nDuration =
 		Else
 			Switch $nDuration
 				Case 0 - 1.99 ; Matches L.O. Behaviour.
-					$oSlide.Speed = $__LOI_CONST_SPEED_FAST
-					$iError = ($oSlide.Speed() = $__LOI_CONST_SPEED_FAST) ? ($iError) : (BitOR($iError, 2))
+					$oSlide.Speed = $__LOD_CONST_SPEED_FAST
+					$iError = ($oSlide.Speed() = $__LOD_CONST_SPEED_FAST) ? ($iError) : (BitOR($iError, 2))
 
 				Case 2
-					$oSlide.Speed = $__LOI_CONST_SPEED_MEDIUM
-					$iError = ($oSlide.Speed() = $__LOI_CONST_SPEED_MEDIUM) ? ($iError) : (BitOR($iError, 2))
+					$oSlide.Speed = $__LOD_CONST_SPEED_MEDIUM
+					$iError = ($oSlide.Speed() = $__LOD_CONST_SPEED_MEDIUM) ? ($iError) : (BitOR($iError, 2))
 
 				Case Else
-					$oSlide.Speed = $__LOI_CONST_SPEED_SLOW
-					$iError = ($oSlide.Speed() = $__LOI_CONST_SPEED_SLOW) ? ($iError) : (BitOR($iError, 2))
+					$oSlide.Speed = $__LOD_CONST_SPEED_SLOW
+					$iError = ($oSlide.Speed() = $__LOD_CONST_SPEED_SLOW) ? ($iError) : (BitOR($iError, 2))
 			EndSwitch
 		EndIf
 	EndIf
@@ -4945,11 +4945,11 @@ Func _LOImpress_SlideTransition(ByRef $oSlide, $iTransition = Null, $nDuration =
 		If Not __LO_NumIsBetween($nSlideAdvance, -1, 1000) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
 		If ($nSlideAdvance = -1) Then
-			$oSlide.Change = $__LOI_CONST_CHANGE_MANUAL
-			$iError = ($oSlide.Change() = $__LOI_CONST_CHANGE_MANUAL) ? ($iError) : (BitOR($iError, 16))
+			$oSlide.Change = $__LOD_CONST_CHANGE_MANUAL
+			$iError = ($oSlide.Change() = $__LOD_CONST_CHANGE_MANUAL) ? ($iError) : (BitOR($iError, 16))
 
 		Else
-			If ($oSlide.Change() <> $__LOI_CONST_CHANGE_AUTO) Then $oSlide.Change = $__LOI_CONST_CHANGE_AUTO
+			If ($oSlide.Change() <> $__LOD_CONST_CHANGE_AUTO) Then $oSlide.Change = $__LOD_CONST_CHANGE_AUTO
 			$oSlide.Duration = $nSlideAdvance
 			$oSlide.HighResDuration = $nSlideAdvance
 			$iError = (($oSlide.Duration() = $nSlideAdvance) And ($oSlide.HighResDuration() = $nSlideAdvance)) ? ($iError) : (BitOR($iError, 16))
@@ -4957,4 +4957,4 @@ Func _LOImpress_SlideTransition(ByRef $oSlide, $iTransition = Null, $nDuration =
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_SlideTransition
+EndFunc   ;==>_LODraw_SlideTransition

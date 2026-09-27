@@ -22,88 +22,88 @@
 ; ===============================================================================================================================
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; __LOImpress_CharEffect
-; __LOImpress_CharFont
-; __LOImpress_CharFontColor
-; __LOImpress_CharOverLine
-; __LOImpress_CharPosition
-; __LOImpress_CharScaling
-; __LOImpress_CharSpacing
-; __LOImpress_CharStrikeOut
-; __LOImpress_CharUnderLine
-; __LOImpress_ColorRemoveAlpha
-; __LOImpress_CreatePoint
-; __LOImpress_CursorParHasTabStop
-; __LOImpress_DateStructCompare
-; __LOImpress_DimensionSettings
-; __LOImpress_DocCurrView
-; __LOImpress_DrawShape_CreateArrow
-; __LOImpress_DrawShape_CreateBasic
-; __LOImpress_DrawShape_CreateCallout
-; __LOImpress_DrawShape_CreateFlowchart
-; __LOImpress_DrawShape_CreateLine
-; __LOImpress_DrawShape_CreateStars
-; __LOImpress_DrawShape_CreateSymbol
-; __LOImpress_DrawShape_GetCustomType
-; __LOImpress_DrawShapePointGetSettings
-; __LOImpress_DrawShapePointModify
-; __LOImpress_FieldGetObj
-; __LOImpress_FieldTypeServices
-; __LOImpress_FilterNameGet
-; __LOImpress_Format
-; __LOImpress_GetParentDoc
-; __LOImpress_GetShapeName
-; __LOImpress_GradientIsModified
-; __LOImpress_GradientNameInsert
-; __LOImpress_GradientPresets
-; __LOImpress_InternalComErrorHandler
-; __LOImpress_Margins
-; __LOImpress_NumRuleCreateMap
-; __LOImpress_ParAlignment
-; __LOImpress_ParIndent
-; __LOImpress_ParSpacing
-; __LOImpress_ParTabStopCreate
-; __LOImpress_ParTabStopDelete
-; __LOImpress_ParTabStopMod
-; __LOImpress_ParTabStopsGetList
-; __LOImpress_ShapeAreaGradientMulticolor
-; __LOImpress_ShapeAreaShadow
-; __LOImpress_ShapeAreaShadowModify
-; __LOImpress_ShapeAreaTransparency
-; __LOImpress_ShapeAreaTransparencyGradientMulti
-; __LOImpress_ShapeGetType
-; __LOImpress_ShapeLineArrowheadNameInsert
-; __LOImpress_ShapeLineArrowStyleName
-; __LOImpress_ShapeLineDashNameInsert
-; __LOImpress_ShapeLineStyleName
-; __LOImpress_ShapePresStyleNumCreateScript
-; __LOImpress_ShapePresStyleNumDeleteScript
-; __LOImpress_ShapePresStyleNumInitiateDocument
-; __LOImpress_ShapePresStyleNumModify
-; __LOImpress_ShapeStyleAreaColor
-; __LOImpress_ShapeStyleAreaGradient
-; __LOImpress_ShapeStyleAreaTransparencyGradient
-; __LOImpress_ShapeStyleCompare
-; __LOImpress_ShapeStyleLineArrowStyles
-; __LOImpress_ShapeStyleLineProperties
-; __LOImpress_ShapeTextAttrAnimation
-; __LOImpress_ShapeTextAttrFit
-; __LOImpress_ShapeTextAttrSettings
-; __LOImpress_StyleCharFontColor
-; __LOImpress_TableBorder
-; __LOImpress_TableCellBorder
-; __LOImpress_Transition
-; __LOImpress_TransparencyGradientConvert
-; __LOImpress_TransparencyGradientNameInsert
+; __LODraw_CharEffect
+; __LODraw_CharFont
+; __LODraw_CharFontColor
+; __LODraw_CharOverLine
+; __LODraw_CharPosition
+; __LODraw_CharScaling
+; __LODraw_CharSpacing
+; __LODraw_CharStrikeOut
+; __LODraw_CharUnderLine
+; __LODraw_ColorRemoveAlpha
+; __LODraw_CreatePoint
+; __LODraw_CursorParHasTabStop
+; __LODraw_DateStructCompare
+; __LODraw_DimensionSettings
+; __LODraw_DocCurrView
+; __LODraw_DrawShape_CreateArrow
+; __LODraw_DrawShape_CreateBasic
+; __LODraw_DrawShape_CreateCallout
+; __LODraw_DrawShape_CreateFlowchart
+; __LODraw_DrawShape_CreateLine
+; __LODraw_DrawShape_CreateStars
+; __LODraw_DrawShape_CreateSymbol
+; __LODraw_DrawShape_GetCustomType
+; __LODraw_DrawShapePointGetSettings
+; __LODraw_DrawShapePointModify
+; __LODraw_FieldGetObj
+; __LODraw_FieldTypeServices
+; __LODraw_FilterNameGet
+; __LODraw_Format
+; __LODraw_GetParentDoc
+; __LODraw_GetShapeName
+; __LODraw_GradientIsModified
+; __LODraw_GradientNameInsert
+; __LODraw_GradientPresets
+; __LODraw_InternalComErrorHandler
+; __LODraw_Margins
+; __LODraw_NumRuleCreateMap
+; __LODraw_ParAlignment
+; __LODraw_ParIndent
+; __LODraw_ParSpacing
+; __LODraw_ParTabStopCreate
+; __LODraw_ParTabStopDelete
+; __LODraw_ParTabStopMod
+; __LODraw_ParTabStopsGetList
+; __LODraw_ShapeAreaGradientMulticolor
+; __LODraw_ShapeAreaShadow
+; __LODraw_ShapeAreaShadowModify
+; __LODraw_ShapeAreaTransparency
+; __LODraw_ShapeAreaTransparencyGradientMulti
+; __LODraw_ShapeGetType
+; __LODraw_ShapeLineArrowheadNameInsert
+; __LODraw_ShapeLineArrowStyleName
+; __LODraw_ShapeLineDashNameInsert
+; __LODraw_ShapeLineStyleName
+; __LODraw_ShapePresStyleNumCreateScript
+; __LODraw_ShapePresStyleNumDeleteScript
+; __LODraw_ShapePresStyleNumInitiateDocument
+; __LODraw_ShapePresStyleNumModify
+; __LODraw_ShapeStyleAreaColor
+; __LODraw_ShapeStyleAreaGradient
+; __LODraw_ShapeStyleAreaTransparencyGradient
+; __LODraw_ShapeStyleCompare
+; __LODraw_ShapeStyleLineArrowStyles
+; __LODraw_ShapeStyleLineProperties
+; __LODraw_ShapeTextAttrAnimation
+; __LODraw_ShapeTextAttrFit
+; __LODraw_ShapeTextAttrSettings
+; __LODraw_StyleCharFontColor
+; __LODraw_TableBorder
+; __LODraw_TableCellBorder
+; __LODraw_Transition
+; __LODraw_TransparencyGradientConvert
+; __LODraw_TransparencyGradientNameInsert
 ; ===============================================================================================================================
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_CharEffect
+; Name ..........: __LODraw_CharEffect
 ; Description ...: Set or Retrieve the Font Effect settings.
-; Syntax ........: __LOImpress_CharEffect(ByRef $oObj[, $iCase = Null[, $iRelief = Null[, $bOutline = Null[, $bShadow = Null]]]])
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
-;                  $iCase               - [optional] (0-4) Default is Null. The Character Case Style. See Constants, $LOI_CHAR_CASEMAP_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iRelief             - [optional] (0-2) Default is Null. The Character Relief style. See Constants, $LOI_CHAR_RELIEF_* as defined in LibreOfficeImpress_Constants.au3.
+; Syntax ........: __LODraw_CharEffect(ByRef $oObj[, $iCase = Null[, $iRelief = Null[, $bOutline = Null[, $bShadow = Null]]]])
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+;                  $iCase               - [optional] (0-4) Default is Null. The Character Case Style. See Constants, $LOD_CHAR_CASEMAP_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iRelief             - [optional] (0-2) Default is Null. The Character Relief style. See Constants, $LOD_CHAR_RELIEF_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $bOutline            - [optional] Default is Null. If True, the characters have an outline around the outside.
 ;                  $bShadow             - [optional] Default is Null. If True, the characters have a shadow.
 ; Return values .: Success: 1 or Array.
@@ -112,8 +112,8 @@
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
-;                  @Error: 1, @Extended: 2 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOI_CHAR_CASEMAP_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 3 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOI_CHAR_RELIEF_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOD_CHAR_CASEMAP_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOD_CHAR_RELIEF_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 4 = $bOutline not a Boolean.
 ;                  @Error: 1, @Extended: 5 = $bShadow not a Boolean.
 ;                  --Property Setting Errors--
@@ -130,8 +130,8 @@
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_CharEffect(ByRef $oObj, $iCase = Null, $iRelief = Null, $bOutline = Null, $bShadow = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_CharEffect(ByRef $oObj, $iCase = Null, $iRelief = Null, $bOutline = Null, $bShadow = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -146,14 +146,14 @@ Func __LOImpress_CharEffect(ByRef $oObj, $iCase = Null, $iRelief = Null, $bOutli
 	EndIf
 
 	If ($iCase <> Null) Then
-		If Not __LO_IntIsBetween($iCase, $LOI_CHAR_CASEMAP_NONE, $LOI_CHAR_CASEMAP_SM_CAPS) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+		If Not __LO_IntIsBetween($iCase, $LOD_CHAR_CASEMAP_NONE, $LOD_CHAR_CASEMAP_SM_CAPS) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		$oObj.CharCaseMap = $iCase
 		$iError = ($oObj.CharCaseMap() = $iCase) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($iRelief <> Null) Then
-		If Not __LO_IntIsBetween($iRelief, $LOI_CHAR_RELIEF_NONE, $LOI_CHAR_RELIEF_ENGRAVED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not __LO_IntIsBetween($iRelief, $LOD_CHAR_RELIEF_NONE, $LOD_CHAR_RELIEF_ENGRAVED) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		$oObj.CharRelief = $iRelief
 		$iError = ($oObj.CharRelief() = $iRelief) ? ($iError) : (BitOR($iError, 2))
@@ -174,17 +174,17 @@ Func __LOImpress_CharEffect(ByRef $oObj, $iCase = Null, $iRelief = Null, $bOutli
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_CharEffect
+EndFunc   ;==>__LODraw_CharEffect
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_CharFont
+; Name ..........: __LODraw_CharFont
 ; Description ...: Set and Retrieve the Font Settings.
-; Syntax ........: __LOImpress_CharFont(ByRef $oObj[, $sFontName = Null[, $nFontSize = Null[, $iPosture = Null[, $iWeight = Null]]]])
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
+; Syntax ........: __LODraw_CharFont(ByRef $oObj[, $sFontName = Null[, $nFontSize = Null[, $iPosture = Null[, $iWeight = Null]]]])
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $sFontName           - [optional] Default is Null. The Font Name to use.
 ;                  $nFontSize           - [optional] Default is Null. The new Font size.
-;                  $iPosture            - [optional] (0-5) Default is Null. The Font Italic setting. See Constants, $LOI_CHAR_POSTURE_* as defined in LibreOfficeImpress_Constants.au3. Also see remarks.
-;                  $iWeight             - [optional] (0, 50-200) Default is Null. The Font Bold settings see Constants, $LOI_CHAR_WEIGHT_* as defined in LibreOfficeImpress_Constants.au3. Also see remarks.
+;                  $iPosture            - [optional] (0-5) Default is Null. The Font Italic setting. See Constants, $LOD_CHAR_POSTURE_* as defined in LibreOfficeImpress_Constants.au3. Also see remarks.
+;                  $iWeight             - [optional] (0, 50-200) Default is Null. The Font Bold settings see Constants, $LOD_CHAR_WEIGHT_* as defined in LibreOfficeImpress_Constants.au3. Also see remarks.
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -194,8 +194,8 @@ EndFunc   ;==>__LOImpress_CharEffect
 ;                  @Error: 1, @Extended: 2 = $sFontName not a String.
 ;                  @Error: 1, @Extended: 3 = Font called in $sFontName not available.
 ;                  @Error: 1, @Extended: 4 = $nFontSize not a number.
-;                  @Error: 1, @Extended: 5 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOI_CHAR_POSTURE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 6 = $iWeight not an Integer, less than 50 but not equal to 0, or greater than 200. See Constants, $LOI_CHAR_WEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOD_CHAR_POSTURE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iWeight not an Integer, less than 50 but not equal to 0, or greater than 200. See Constants, $LOD_CHAR_WEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sFontName
@@ -212,8 +212,8 @@ EndFunc   ;==>__LOImpress_CharEffect
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_CharFont(ByRef $oObj, $sFontName = Null, $nFontSize = Null, $iPosture = Null, $iWeight = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_CharFont(ByRef $oObj, $sFontName = Null, $nFontSize = Null, $iPosture = Null, $iWeight = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -229,7 +229,7 @@ Func __LOImpress_CharFont(ByRef $oObj, $sFontName = Null, $nFontSize = Null, $iP
 
 	If ($sFontName <> Null) Then
 		If Not IsString($sFontName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-		If Not _LOImpress_FontExists($sFontName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not _LODraw_FontExists($sFontName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		$oObj.CharFontName = $sFontName
 		$iError = ($oObj.CharFontName() = $sFontName) ? ($iError) : (BitOR($iError, 1))
@@ -243,27 +243,27 @@ Func __LOImpress_CharFont(ByRef $oObj, $sFontName = Null, $nFontSize = Null, $iP
 	EndIf
 
 	If ($iPosture <> Null) Then
-		If Not __LO_IntIsBetween($iPosture, $LOI_CHAR_POSTURE_NONE, $LOI_CHAR_POSTURE_ITALIC) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iPosture, $LOD_CHAR_POSTURE_NONE, $LOD_CHAR_POSTURE_ITALIC) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oObj.CharPosture = $iPosture
 		$iError = ($oObj.CharPosture() = $iPosture) ? ($iError) : (BitOR($iError, 4))
 	EndIf
 
 	If ($iWeight <> Null) Then
-		If Not __LO_IntIsBetween($iWeight, $LOI_CHAR_WEIGHT_THIN, $LOI_CHAR_WEIGHT_BLACK, "", $LOI_CHAR_WEIGHT_DONT_KNOW) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not __LO_IntIsBetween($iWeight, $LOD_CHAR_WEIGHT_THIN, $LOD_CHAR_WEIGHT_BLACK, "", $LOD_CHAR_WEIGHT_DONT_KNOW) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oObj.CharWeight = $iWeight
 		$iError = ($oObj.CharWeight() = $iWeight) ? ($iError) : (BitOR($iError, 8))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_CharFont
+EndFunc   ;==>__LODraw_CharFont
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_CharFontColor
+; Name ..........: __LODraw_CharFontColor
 ; Description ...: Set or retrieve the font color, transparency and highlighting values.
-; Syntax ........: __LOImpress_CharFontColor(ByRef $oObj[, $iFontColor = Null[, $iTransparency = Null[, $iHighlight = Null]]])
-; Parameters ....: $oObj                - A Text Cursor or Shape object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert or _LOImpress_ShapesGetList function.
+; Syntax ........: __LODraw_CharFontColor(ByRef $oObj[, $iFontColor = Null[, $iTransparency = Null[, $iHighlight = Null]]])
+; Parameters ....: $oObj                - A Text Cursor or Shape object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert or _LODraw_ShapesGetList function.
 ;                  $iFontColor          - [optional] (-1-16777215) Default is Null. The font Color value, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. Transparency percentage. 0 is visible, 100 is invisible. Available for LibreOffice 7.0 and up.
 ;                  $iHighlight          - [optional] (-1-16777215) Default is Null. The highlight Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for No color.
@@ -293,8 +293,8 @@ EndFunc   ;==>__LOImpress_CharFont
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_CharFontColor(ByRef $oObj, $iFontColor = Null, $iTransparency = Null, $iHighlight = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_CharFontColor(ByRef $oObj, $iFontColor = Null, $iTransparency = Null, $iHighlight = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0, $iOldTransparency
@@ -304,10 +304,10 @@ Func __LOImpress_CharFontColor(ByRef $oObj, $iFontColor = Null, $iTransparency =
 
 	If __LO_VarsAreNull($iFontColor, $iTransparency, $iHighlight) Then
 		If __LO_VersionCheck(7.0) Then
-			__LO_ArrayFill($avColor, __LOImpress_ColorRemoveAlpha($oObj.CharColor()), $oObj.CharTransparence(), $oObj.CharBackColor())
+			__LO_ArrayFill($avColor, __LODraw_ColorRemoveAlpha($oObj.CharColor()), $oObj.CharTransparence(), $oObj.CharBackColor())
 
 		Else
-			__LO_ArrayFill($avColor, __LOImpress_ColorRemoveAlpha($oObj.CharColor()), Null, $oObj.CharBackColor())
+			__LO_ArrayFill($avColor, __LODraw_ColorRemoveAlpha($oObj.CharColor()), Null, $oObj.CharBackColor())
 		EndIf
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avColor)
@@ -347,14 +347,14 @@ Func __LOImpress_CharFontColor(ByRef $oObj, $iFontColor = Null, $iTransparency =
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_CharFontColor
+EndFunc   ;==>__LODraw_CharFontColor
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_CharOverLine
+; Name ..........: __LODraw_CharOverLine
 ; Description ...: Set and retrieve the OverLine settings.
-; Syntax ........: __LOImpress_CharOverLine(ByRef $oObj[, $iOverLineStyle = Null[, $iOLColor = Null[, $bWordOnly = Null]]])
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
-;                  $iOverLineStyle      - [optional] (0-18) Default is Null. The style of the Overline line, see constants, $LOI_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
+; Syntax ........: __LODraw_CharOverLine(ByRef $oObj[, $iOverLineStyle = Null[, $iOLColor = Null[, $bWordOnly = Null]]])
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+;                  $iOverLineStyle      - [optional] (0-18) Default is Null. The style of the Overline line, see constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
 ;                  $iOLColor            - [optional] (-1-16777215) Default is Null. The Overline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
 ;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not Overlined.
 ; Return values .: Success: 1 or Array
@@ -363,7 +363,7 @@ EndFunc   ;==>__LOImpress_CharFontColor
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
-;                  @Error: 1, @Extended: 2 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOI_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
+;                  @Error: 1, @Extended: 2 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
 ;                  @Error: 1, @Extended: 3 = $iOLColor not an Integer, less than -1 or greater than 16777215.
 ;                  @Error: 1, @Extended: 4 = $bWordOnly not a Boolean.
 ;                  --Property Setting Errors--
@@ -380,8 +380,8 @@ EndFunc   ;==>__LOImpress_CharFontColor
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_CharOverLine(ByRef $oObj, $iOverLineStyle = Null, $iOLColor = Null, $bWordOnly = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_CharOverLine(ByRef $oObj, $iOverLineStyle = Null, $iOLColor = Null, $bWordOnly = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -396,7 +396,7 @@ Func __LOImpress_CharOverLine(ByRef $oObj, $iOverLineStyle = Null, $iOLColor = N
 	EndIf
 
 	If ($iOverLineStyle <> Null) Then
-		If Not __LO_IntIsBetween($iOverLineStyle, $LOI_CHAR_UNDERLINE_NONE, $LOI_CHAR_UNDERLINE_BOLD_WAVE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+		If Not __LO_IntIsBetween($iOverLineStyle, $LOD_CHAR_UNDERLINE_NONE, $LOD_CHAR_UNDERLINE_BOLD_WAVE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		$oObj.CharOverline = $iOverLineStyle
 		$iError = ($oObj.CharOverline() = $iOverLineStyle) ? ($iError) : (BitOR($iError, 1))
@@ -426,13 +426,13 @@ Func __LOImpress_CharOverLine(ByRef $oObj, $iOverLineStyle = Null, $iOLColor = N
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_CharOverLine
+EndFunc   ;==>__LODraw_CharOverLine
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_CharPosition
+; Name ..........: __LODraw_CharPosition
 ; Description ...: Set and retrieve settings related to Sub/Super Script and relative size.
-; Syntax ........: __LOImpress_CharPosition(ByRef $oObj[, $iSuperScript = Null[, $iSubScript = Null[, $iRelativeSize = Null]]])
-; Parameters ....: $oObj                - A Text Cursor or Shape object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert or _LOImpress_ShapesGetList function.
+; Syntax ........: __LODraw_CharPosition(ByRef $oObj[, $iSuperScript = Null[, $iSubScript = Null[, $iRelativeSize = Null]]])
+; Parameters ....: $oObj                - A Text Cursor or Shape object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert or _LODraw_ShapesGetList function.
 ;                  $iSuperScript        - [optional] (-1-100) Default is Null. The Superscript percentage value. Call with -1 for Automatic SuperScript. See Remarks.
 ;                  $iSubScript          - [optional] (-1-100) Default is Null. Subscript percentage value. Call with -1 for Automatic SubScript. See Remarks.
 ;                  $iRelativeSize       - [optional] (1-100) Default is Null. The size percentage relative to current font size.
@@ -463,8 +463,8 @@ EndFunc   ;==>__LOImpress_CharOverLine
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_CharPosition(ByRef $oObj, $iSuperScript = Null, $iSubScript = Null, $iRelativeSize = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_CharPosition(ByRef $oObj, $iSuperScript = Null, $iSubScript = Null, $iRelativeSize = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -516,13 +516,13 @@ Func __LOImpress_CharPosition(ByRef $oObj, $iSuperScript = Null, $iSubScript = N
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_CharPosition
+EndFunc   ;==>__LODraw_CharPosition
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_CharScaling
+; Name ..........: __LODraw_CharScaling
 ; Description ...: Set or retrieve the character Scale settings.
-; Syntax ........: __LOImpress_CharScaling(ByRef $oObj[, $iScaleWidth = Null])
-; Parameters ....: $oObj                - A Text Cursor or Shape object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert or _LOImpress_ShapesGetList function.
+; Syntax ........: __LODraw_CharScaling(ByRef $oObj[, $iScaleWidth = Null])
+; Parameters ....: $oObj                - A Text Cursor or Shape object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert or _LODraw_ShapesGetList function.
 ;                  $iScaleWidth         - [optional] (1-100) Default is Null. The percentage to horizontally stretch or compress the text. 100 is normal sizing.
 ; Return values .: Success: 1 or Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -545,8 +545,8 @@ EndFunc   ;==>__LOImpress_CharPosition
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_CharScaling(ByRef $oObj, $iScaleWidth = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_CharScaling(ByRef $oObj, $iScaleWidth = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -567,13 +567,13 @@ Func __LOImpress_CharScaling(ByRef $oObj, $iScaleWidth = Null)
 	$iError = ($oObj.CharScaleWidth() = $iScaleWidth) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_CharScaling
+EndFunc   ;==>__LODraw_CharScaling
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_CharSpacing
+; Name ..........: __LODraw_CharSpacing
 ; Description ...: Set and retrieve the spacing between characters (Kerning).
-; Syntax ........: __LOImpress_CharSpacing(ByRef $oObj[, $bAutoKerning = Null[, $nKerning = Null]])
-; Parameters ....: $oObj                - A Text Cursor or Shape object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert or _LOImpress_ShapesGetList function.
+; Syntax ........: __LODraw_CharSpacing(ByRef $oObj[, $bAutoKerning = Null[, $nKerning = Null]])
+; Parameters ....: $oObj                - A Text Cursor or Shape object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert or _LODraw_ShapesGetList function.
 ;                  $bAutoKerning        - [optional] Default is Null. If True, applies a spacing in between certain pairs of characters.
 ;                  $nKerning            - [optional] (-928.8-928.8) Default is Null. The kerning value of the characters. See Remarks. Values are in Printer's Points as set in the LibreOffice UI.
 ; Return values .: Success: Integer or Array.
@@ -599,8 +599,8 @@ EndFunc   ;==>__LOImpress_CharScaling
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_CharSpacing(ByRef $oObj, $bAutoKerning = Null, $nKerning = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_CharSpacing(ByRef $oObj, $bAutoKerning = Null, $nKerning = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -631,14 +631,14 @@ Func __LOImpress_CharSpacing(ByRef $oObj, $bAutoKerning = Null, $nKerning = Null
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_CharSpacing
+EndFunc   ;==>__LODraw_CharSpacing
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_CharStrikeOut
+; Name ..........: __LODraw_CharStrikeOut
 ; Description ...: Set or Retrieve the Strikeout settings.
-; Syntax ........: __LOImpress_CharStrikeOut(ByRef $oObj[, $iStrikeLineStyle = Null[, $bWordOnly = Null]])
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
-;                  $iStrikeLineStyle    - [optional] (0-6) Default is Null. The Strikeout Line Style, see constants, $LOI_CHAR_STRIKEOUT_* as defined in LibreOfficeImpress_Constants.au3.
+; Syntax ........: __LODraw_CharStrikeOut(ByRef $oObj[, $iStrikeLineStyle = Null[, $bWordOnly = Null]])
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+;                  $iStrikeLineStyle    - [optional] (0-6) Default is Null. The Strikeout Line Style, see constants, $LOD_CHAR_STRIKEOUT_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $bWordOnly           - [optional] Default is Null. If True, strike out is applied to words only, skipping whitespaces.
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -646,7 +646,7 @@ EndFunc   ;==>__LOImpress_CharSpacing
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
-;                  @Error: 1, @Extended: 2 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOI_CHAR_STRIKEOUT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOD_CHAR_STRIKEOUT_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $bWordOnly not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
@@ -660,8 +660,8 @@ EndFunc   ;==>__LOImpress_CharSpacing
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_CharStrikeOut(ByRef $oObj, $iStrikeLineStyle = Null, $bWordOnly = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_CharStrikeOut(ByRef $oObj, $iStrikeLineStyle = Null, $bWordOnly = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -676,7 +676,7 @@ Func __LOImpress_CharStrikeOut(ByRef $oObj, $iStrikeLineStyle = Null, $bWordOnly
 	EndIf
 
 	If ($iStrikeLineStyle <> Null) Then
-		If Not __LO_IntIsBetween($iStrikeLineStyle, $LOI_CHAR_STRIKEOUT_NONE, $LOI_CHAR_STRIKEOUT_X) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+		If Not __LO_IntIsBetween($iStrikeLineStyle, $LOD_CHAR_STRIKEOUT_NONE, $LOD_CHAR_STRIKEOUT_X) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		$oObj.CharStrikeout = $iStrikeLineStyle
 		$iError = ($oObj.CharStrikeout() = $iStrikeLineStyle) ? ($iError) : (BitOR($iError, 1))
@@ -690,14 +690,14 @@ Func __LOImpress_CharStrikeOut(ByRef $oObj, $iStrikeLineStyle = Null, $bWordOnly
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_CharStrikeOut
+EndFunc   ;==>__LODraw_CharStrikeOut
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_CharUnderLine
+; Name ..........: __LODraw_CharUnderLine
 ; Description ...: Set and retrieve the Underline settings.
-; Syntax ........: __LOImpress_CharUnderLine(ByRef $oObj[, $iUnderLineStyle = Null[, $iULColor = Null[, $bWordOnly = Null]]])
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
-;                  $iUnderLineStyle     - [optional] (0-18) Default is Null. The Underline line style, see constants, $LOI_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3.
+; Syntax ........: __LODraw_CharUnderLine(ByRef $oObj[, $iUnderLineStyle = Null[, $iULColor = Null[, $bWordOnly = Null]]])
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+;                  $iUnderLineStyle     - [optional] (0-18) Default is Null. The Underline line style, see constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iULColor            - [optional] (-1-16777215) Default is Null. The underline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
 ;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not underlined.
 ; Return values .: Success: 1 or Array
@@ -706,7 +706,7 @@ EndFunc   ;==>__LOImpress_CharStrikeOut
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj an Object.
-;                  @Error: 1, @Extended: 2 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOI_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $iULColor not an Integer, less than -1 or greater than 16777215.
 ;                  @Error: 1, @Extended: 4 = $bWordOnly not a Boolean.
 ;                  --Property Setting Errors--
@@ -722,8 +722,8 @@ EndFunc   ;==>__LOImpress_CharStrikeOut
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_CharUnderLine(ByRef $oObj, $iUnderLineStyle = Null, $iULColor = Null, $bWordOnly = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_CharUnderLine(ByRef $oObj, $iUnderLineStyle = Null, $iULColor = Null, $bWordOnly = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -738,7 +738,7 @@ Func __LOImpress_CharUnderLine(ByRef $oObj, $iUnderLineStyle = Null, $iULColor =
 	EndIf
 
 	If ($iUnderLineStyle <> Null) Then
-		If Not __LO_IntIsBetween($iUnderLineStyle, $LOI_CHAR_UNDERLINE_NONE, $LOI_CHAR_UNDERLINE_BOLD_WAVE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+		If Not __LO_IntIsBetween($iUnderLineStyle, $LOD_CHAR_UNDERLINE_NONE, $LOD_CHAR_UNDERLINE_BOLD_WAVE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		$oObj.CharUnderline = $iUnderLineStyle
 		$iError = ($oObj.CharUnderline() = $iUnderLineStyle) ? ($iError) : (BitOR($iError, 1))
@@ -767,12 +767,12 @@ Func __LOImpress_CharUnderLine(ByRef $oObj, $iUnderLineStyle = Null, $iULColor =
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_CharUnderLine
+EndFunc   ;==>__LODraw_CharUnderLine
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ColorRemoveAlpha
+; Name ..........: __LODraw_ColorRemoveAlpha
 ; Description ...: Remove the Alpha value from a RGB Color Integer.
-; Syntax ........: __LOImpress_ColorRemoveAlpha($iColor)
+; Syntax ........: __LODraw_ColorRemoveAlpha($iColor)
 ; Parameters ....: $iColor              - A RGB Color Integer to remove Alpha from.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Color already has no Alpha value, returning same color.
@@ -787,7 +787,7 @@ EndFunc   ;==>__LOImpress_CharUnderLine
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ColorRemoveAlpha($iColor)
+Func __LODraw_ColorRemoveAlpha($iColor)
 	Local $iRed, $iGreen, $iBlue, $iLong
 
 	If Not IsInt($iColor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, $iColor)
@@ -801,12 +801,12 @@ Func __LOImpress_ColorRemoveAlpha($iColor)
 	$iLong = BitShift($iRed, -16) + BitShift($iGreen, -8) + $iBlue
 
 	Return SetError($__LO_STATUS_SUCCESS, 1, $iLong)
-EndFunc   ;==>__LOImpress_ColorRemoveAlpha
+EndFunc   ;==>__LODraw_ColorRemoveAlpha
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_CreatePoint
+; Name ..........: __LODraw_CreatePoint
 ; Description ...: Creates a Position structure.
-; Syntax ........: __LOImpress_CreatePoint($iX, $iY)
+; Syntax ........: __LODraw_CreatePoint($iX, $iY)
 ; Parameters ....: $iX                  - The X position, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - The Y position, in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: Structure
@@ -824,8 +824,8 @@ EndFunc   ;==>__LOImpress_ColorRemoveAlpha
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_CreatePoint($iX, $iY)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_CreatePoint($iX, $iY)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $tPoint
@@ -840,13 +840,13 @@ Func __LOImpress_CreatePoint($iX, $iY)
 	$tPoint.Y = $iY
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $tPoint)
-EndFunc   ;==>__LOImpress_CreatePoint
+EndFunc   ;==>__LODraw_CreatePoint
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_CursorParHasTabStop
+; Name ..........: __LODraw_CursorParHasTabStop
 ; Description ...: Check whether a Paragraph has a requested TabStop.
-; Syntax ........: __LOImpress_CursorParHasTabStop(ByRef $oTextCursor, $iTabStop)
-; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LOImpress_ShapeCreateTextCursor function.
+; Syntax ........: __LODraw_CursorParHasTabStop(ByRef $oTextCursor, $iTabStop)
+; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
 ;                  $iTabStop            - The Tab Stop to look for.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = True if Paragraph has the requested TabStop. Else False.
@@ -863,8 +863,8 @@ EndFunc   ;==>__LOImpress_CreatePoint
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_CursorParHasTabStop(ByRef $oTextCursor, $iTabStop)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_CursorParHasTabStop(ByRef $oTextCursor, $iTabStop)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $atTabStops
@@ -877,16 +877,16 @@ Func __LOImpress_CursorParHasTabStop(ByRef $oTextCursor, $iTabStop)
 
 	For $i = 0 To UBound($atTabStops) - 1
 		If ($atTabStops[$i].Position() = $iTabStop) Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
-		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+		Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 	Next
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, False)
-EndFunc   ;==>__LOImpress_CursorParHasTabStop
+EndFunc   ;==>__LODraw_CursorParHasTabStop
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_DateStructCompare
+; Name ..........: __LODraw_DateStructCompare
 ; Description ...: Compare two date Structures to see if they are the same Date, Time, etc.
-; Syntax ........: __LOImpress_DateStructCompare($tDateStruct1, $tDateStruct2[, $bIsDate = False[, $bIsTime = False]])
+; Syntax ........: __LODraw_DateStructCompare($tDateStruct1, $tDateStruct2[, $bIsDate = False[, $bIsTime = False]])
 ; Parameters ....: $tDateStruct1        - The First Date Structure.
 ;                  $tDateStruct2        - The Second Date Structure.
 ;                  $bIsDate             - [optional] Default is False. If True, the comparison is two Date Structures.
@@ -906,8 +906,8 @@ EndFunc   ;==>__LOImpress_CursorParHasTabStop
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_DateStructCompare($tDateStruct1, $tDateStruct2, $bIsDate = False, $bIsTime = False)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_DateStructCompare($tDateStruct1, $tDateStruct2, $bIsDate = False, $bIsTime = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	If Not IsObj($tDateStruct1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, False)
@@ -943,13 +943,13 @@ Func __LOImpress_DateStructCompare($tDateStruct1, $tDateStruct2, $bIsDate = Fals
 	EndIf
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, True)
-EndFunc   ;==>__LOImpress_DateStructCompare
+EndFunc   ;==>__LODraw_DateStructCompare
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_DimensionSettings
+; Name ..........: __LODraw_DimensionSettings
 ; Description ...: Set or Retrieve Dimension line settings.
-; Syntax ........: __LOImpress_DimensionSettings(ByRef $oObj[, $iDistance = Null[, $iGuideOverhang = Null[, $iGuideDistance = Null[, $iLGuide = Null[, $iRGuide = Null[, $bBelow = Null[, $iDecimal = Null[, $iVertPos = Null[, $iHoriPos = Null[, $bParallel = Null[, $iUnitType = Null]]]]]]]]]]])
-; Parameters ....: $oObj                - A Dimension Shape or Shape Style object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, or _LOImpress_ShapeStyleGetObjByName function.
+; Syntax ........: __LODraw_DimensionSettings(ByRef $oObj[, $iDistance = Null[, $iGuideOverhang = Null[, $iGuideDistance = Null[, $iLGuide = Null[, $iRGuide = Null[, $bBelow = Null[, $iDecimal = Null[, $iVertPos = Null[, $iHoriPos = Null[, $bParallel = Null[, $iUnitType = Null]]]]]]]]]]])
+; Parameters ....: $oObj                - A Dimension Shape or Shape Style object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, or _LODraw_ShapeStyleGetObjByName function.
 ;                  $iDistance           - [optional] (-10008-10008) Default is Null. The distance between the dimension line and the baseline, in Hundredths of a Millimeter (HMM).
 ;                  $iGuideOverhang      - [optional] (-10008-10008) Default is Null. The length of the left and right guides starting at the baseline. Positive values extend the guides above the baseline and negative values extend the guides below the baseline, in Hundredths of a Millimeter (HMM).
 ;                  $iGuideDistance      - [optional] (-10008-10008) Default is Null. The length of the right and left guides starting at the dimension line. Positive values extend the guides above the dimension line and negative values extend the guides below the dimension line, in Hundredths of a Millimeter (HMM).
@@ -957,10 +957,10 @@ EndFunc   ;==>__LOImpress_DateStructCompare
 ;                  $iRGuide             - [optional] (-10008-10008) Default is Null. The length of the right guide starting at the dimension line. Positive values extend the guide below the dimension line and negative values extend the guide above the dimension line, in Hundredths of a Millimeter (HMM).
 ;                  $bBelow              - [optional] Default is Null. If True, the properties set in the Line area are Reversed.
 ;                  $iDecimal            - [optional] (0-99) Default is Null. The number of decimal places.
-;                  $iVertPos            - [optional] (0-4) Default is Null. The position of the dimension line in reference to the text vertically. See Constants, $LOI_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iHoriPos            - [optional] (0-3) Default is Null. The position of the dimension text horizontally. See Constants, $LOI_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iVertPos            - [optional] (0-4) Default is Null. The position of the dimension line in reference to the text vertically. See Constants, $LOD_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iHoriPos            - [optional] (0-3) Default is Null. The position of the dimension text horizontally. See Constants, $LOD_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $bParallel           - [optional] Default is Null. If True, Displays the text parallel to or at 90 degrees to the dimension line.
-;                  $iUnitType           - [optional] (-1-15) Default is Null. The type of measurement units, if any, to display. See Constants, $LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iUnitType           - [optional] (-1-15) Default is Null. The type of measurement units, if any, to display. See Constants, $LOD_DRAWSHAPE_DIMENSION_UNIT_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
@@ -974,10 +974,10 @@ EndFunc   ;==>__LOImpress_DateStructCompare
 ;                  @Error: 1, @Extended: 6 = $iRGuide not an Integer, less than -10,008 or greater than 10,008.
 ;                  @Error: 1, @Extended: 7 = $bBelow not a Boolean.
 ;                  @Error: 1, @Extended: 8 = $iDecimal not an Integer, less than 0 or greater than 99.
-;                  @Error: 1, @Extended: 9 = $iVertPos not an Integer, less than 0 or greater than 4. See Constants, $LOI_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 10 = $iHoriPos not an Integer, less than 0 or greater than 3. See Constants, $LOI_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 9 = $iVertPos not an Integer, less than 0 or greater than 4. See Constants, $LOD_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 10 = $iHoriPos not an Integer, less than 0 or greater than 3. See Constants, $LOD_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 11 = $bParallel not a Boolean.
-;                  @Error: 1, @Extended: 12 = $iUnitType not an Integer, less than -1 or greater than 15. See Constants, $LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 12 = $iUnitType not an Integer, less than -1 or greater than 15. See Constants, $LOD_DRAWSHAPE_DIMENSION_UNIT_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iDistance
@@ -999,8 +999,8 @@ EndFunc   ;==>__LOImpress_DateStructCompare
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_DimensionSettings(ByRef $oObj, $iDistance = Null, $iGuideOverhang = Null, $iGuideDistance = Null, $iLGuide = Null, $iRGuide = Null, $bBelow = Null, $iDecimal = Null, $iVertPos = Null, $iHoriPos = Null, $bParallel = Null, $iUnitType = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_DimensionSettings(ByRef $oObj, $iDistance = Null, $iGuideOverhang = Null, $iGuideDistance = Null, $iLGuide = Null, $iRGuide = Null, $bBelow = Null, $iDecimal = Null, $iVertPos = Null, $iHoriPos = Null, $bParallel = Null, $iUnitType = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -1013,7 +1013,7 @@ Func __LOImpress_DimensionSettings(ByRef $oObj, $iDistance = Null, $iGuideOverha
 				$oObj.MeasureHelpLine2Length(), $oObj.MeasureBelowReferenceEdge(), $oObj.MeasureDecimalPlaces(), $oObj.MeasureTextVerticalPosition(), _
 				$oObj.MeasureTextHorizontalPosition(), _
 				($oObj.MeasureTextRotate90()) ? (False) : (True), _ ; When MeasureTextRotate90 is True, $bParallel is False and vice versa.
-				($oObj.MeasureShowUnit()) ? ($oObj.MeasureUnit()) : ($LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_OFF)) ; If MeasureShowUnit is True, return the Unit type, else indicate units are off.
+				($oObj.MeasureShowUnit()) ? ($oObj.MeasureUnit()) : ($LOD_DRAWSHAPE_DIMENSION_UNIT_TYPE_OFF)) ; If MeasureShowUnit is True, return the Unit type, else indicate units are off.
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avDimension)
 	EndIf
@@ -1068,14 +1068,14 @@ Func __LOImpress_DimensionSettings(ByRef $oObj, $iDistance = Null, $iGuideOverha
 	EndIf
 
 	If ($iVertPos <> Null) Then
-		If Not __LO_IntIsBetween($iVertPos, $LOI_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_AUTO, $LOI_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_MIDDLE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
+		If Not __LO_IntIsBetween($iVertPos, $LOD_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_AUTO, $LOD_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_MIDDLE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
 
 		$oObj.MeasureTextVerticalPosition = $iVertPos
 		$iError = ($oObj.MeasureTextVerticalPosition() = $iVertPos) ? ($iError) : (BitOR($iError, 128))
 	EndIf
 
 	If ($iHoriPos <> Null) Then
-		If Not __LO_IntIsBetween($iHoriPos, $LOI_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_AUTO, $LOI_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_RIGHT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0)
+		If Not __LO_IntIsBetween($iHoriPos, $LOD_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_AUTO, $LOD_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_RIGHT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0)
 
 		$oObj.MeasureTextHorizontalPosition = $iHoriPos
 		$iError = ($oObj.MeasureTextHorizontalPosition() = $iHoriPos) ? ($iError) : (BitOR($iError, 256))
@@ -1089,9 +1089,9 @@ Func __LOImpress_DimensionSettings(ByRef $oObj, $iDistance = Null, $iGuideOverha
 	EndIf
 
 	If ($iUnitType <> Null) Then
-		If Not __LO_IntIsBetween($iUnitType, $LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_OFF, $LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_LINE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 12, 0)
+		If Not __LO_IntIsBetween($iUnitType, $LOD_DRAWSHAPE_DIMENSION_UNIT_TYPE_OFF, $LOD_DRAWSHAPE_DIMENSION_UNIT_TYPE_LINE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 12, 0)
 
-		If ($iUnitType = $LOI_DRAWSHAPE_DIMENSION_UNIT_TYPE_OFF) Then
+		If ($iUnitType = $LOD_DRAWSHAPE_DIMENSION_UNIT_TYPE_OFF) Then
 			$oObj.MeasureShowUnit = False
 			$iError = ($oObj.MeasureShowUnit() = False) ? ($iError) : (BitOR($iError, 1024))
 
@@ -1103,21 +1103,21 @@ Func __LOImpress_DimensionSettings(ByRef $oObj, $iDistance = Null, $iGuideOverha
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_DimensionSettings
+EndFunc   ;==>__LODraw_DimensionSettings
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_DocCurrView
+; Name ..........: __LODraw_DocCurrView
 ; Description ...: Set or Retrieve the current Document View mode.
-; Syntax ........: __LOImpress_DocCurrView(ByRef $oDoc[, $iView = Null])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $iView               - [optional] (0-6) Default is Null. The View mode to set the document to. See Constants, $LOI_PAGE_VIEW_* as defined in LibreOfficeImpress_Constants.au3.
+; Syntax ........: __LODraw_DocCurrView(ByRef $oDoc[, $iView = Null])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
+;                  $iView               - [optional] (0-6) Default is Null. The View mode to set the document to. See Constants, $LOD_PAGE_VIEW_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1 or Object
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Object = Success. All optional parameters were called with Null, returning current active view mode. See Constants, $LOI_PAGE_VIEW_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 0, @Extended: 1, Return: Object = Success. All optional parameters were called with Null, returning current active view mode. See Constants, $LOD_PAGE_VIEW_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
-;                  @Error: 1, @Extended: 2 = $iView not an Integer, less than 0 or greater than 6. See Constants, $LOI_PAGE_VIEW_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iView not an Integer, less than 0 or greater than 6. See Constants, $LOD_PAGE_VIEW_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.ServiceManager" Object.
 ;                  @Error: 2, @Extended: 2 = Error creating "com.sun.star.frame.DispatchHelper" Object.
@@ -1129,15 +1129,15 @@ EndFunc   ;==>__LOImpress_DimensionSettings
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  This function uses a deprecated method (DrawViewMode), and may stop functioning in the future.
 ;                  This function assumes two types of view modes without positive evidence:
-;                  If the property CurrentPage returns Null, it is assumed the current view mode is $LOI_PAGE_VIEW_SLIDE_SORTER, as that is the only time I found it returning such.
-;                  If the property CurrentPage returns a page Object, and the property DrawViewMode returns Null, it is assumed current view mode is $LOI_PAGE_VIEW_SLIDE_OUTLINE.
+;                  If the property CurrentPage returns Null, it is assumed the current view mode is $LOD_PAGE_VIEW_SLIDE_SORTER, as that is the only time I found it returning such.
+;                  If the property CurrentPage returns a page Object, and the property DrawViewMode returns Null, it is assumed current view mode is $LOD_PAGE_VIEW_SLIDE_OUTLINE.
 ;                  When switching to Master Notes or Slide Notes, the notes page will correspond to the currently or last active slide/master slide.
-; Related .......: _LOImpress_SlideCurrent
+; Related .......: _LODraw_SlideCurrent
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_DocCurrView(ByRef $oDoc, $iView = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_DocCurrView(ByRef $oDoc, $iView = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0, $iCurrView
@@ -1157,32 +1157,32 @@ Func __LOImpress_DocCurrView(ByRef $oDoc, $iView = Null)
 		Switch $oDoc.getCurrentController.DrawViewMode()
 			Case $__eDrawPage_DRAW
 				If $bIsMasterMode Then
-					$iCurrView = $LOI_PAGE_VIEW_MASTER
+					$iCurrView = $LOD_PAGE_VIEW_MASTER
 
 				Else
-					$iCurrView = $LOI_PAGE_VIEW_SLIDE
+					$iCurrView = $LOD_PAGE_VIEW_SLIDE
 				EndIf
 
 			Case $__eDrawPage_NOTES
 				If $bIsMasterMode Then
-					$iCurrView = $LOI_PAGE_VIEW_MASTER_NOTES
+					$iCurrView = $LOD_PAGE_VIEW_MASTER_NOTES
 
 				Else
-					$iCurrView = $LOI_PAGE_VIEW_SLIDE_NOTES
+					$iCurrView = $LOD_PAGE_VIEW_SLIDE_NOTES
 				EndIf
 
 			Case $__eDrawPage_HANDOUTS
-				$iCurrView = $LOI_PAGE_VIEW_MASTER_HANDOUT     ; Only Master pages have handouts, so assume it is a Master Handout.
+				$iCurrView = $LOD_PAGE_VIEW_MASTER_HANDOUT     ; Only Master pages have handouts, so assume it is a Master Handout.
 
 			Case Else
 				; When DrawViewMode is Null, the current view could be in Slide Sorter or Slide Outline modes.
 				; But since CurrentPage is an Object, we know it isn't Slide Sorter, as CurrentPage is null in that mode.
-				$iCurrView = $LOI_PAGE_VIEW_SLIDE_OUTLINE
+				$iCurrView = $LOD_PAGE_VIEW_SLIDE_OUTLINE
 		EndSwitch
 
 	Else
 		; If CurrentPage returns Null, it seems to be when the current view is on Slide Sorter. Assuming it is the only time it is.
-		$iCurrView = $LOI_PAGE_VIEW_SLIDE_SORTER
+		$iCurrView = $LOD_PAGE_VIEW_SLIDE_SORTER
 	EndIf
 
 	If __LO_VarsAreNull($iView) Then
@@ -1190,7 +1190,7 @@ Func __LOImpress_DocCurrView(ByRef $oDoc, $iView = Null)
 		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurrView)
 	EndIf
 
-	If Not __LO_IntIsBetween($iView, $LOI_PAGE_VIEW_SLIDE, $LOI_PAGE_VIEW_MASTER_HANDOUT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iView, $LOD_PAGE_VIEW_SLIDE, $LOD_PAGE_VIEW_MASTER_HANDOUT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If ($iCurrView <> $iView) Then ; Sometimes applying a view a second time causes it to toggle to slide sorter etc. So make sure the current view isn't already the same as the requested view mode.
 		$oServiceManager = __LO_ServiceManager()
@@ -1200,25 +1200,25 @@ Func __LOImpress_DocCurrView(ByRef $oDoc, $iView = Null)
 		If Not IsObj($oDispatcher) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
 		Switch $iView
-			Case $LOI_PAGE_VIEW_SLIDE
+			Case $LOD_PAGE_VIEW_SLIDE
 				$sDispatch = ".uno:DrawingMode"
 
-			Case $LOI_PAGE_VIEW_SLIDE_OUTLINE
+			Case $LOD_PAGE_VIEW_SLIDE_OUTLINE
 				$sDispatch = ".uno:OutlineMode"
 
-			Case $LOI_PAGE_VIEW_SLIDE_NOTES
+			Case $LOD_PAGE_VIEW_SLIDE_NOTES
 				$sDispatch = ".uno:NotesMode"
 
-			Case $LOI_PAGE_VIEW_SLIDE_SORTER
+			Case $LOD_PAGE_VIEW_SLIDE_SORTER
 				$sDispatch = ".uno:DiaMode"
 
-			Case $LOI_PAGE_VIEW_MASTER
+			Case $LOD_PAGE_VIEW_MASTER
 				$sDispatch = ".uno:SlideMasterPage"
 
-			Case $LOI_PAGE_VIEW_MASTER_NOTES
+			Case $LOD_PAGE_VIEW_MASTER_NOTES
 				$sDispatch = ".uno:NotesMasterPage"
 
-			Case $LOI_PAGE_VIEW_MASTER_HANDOUT
+			Case $LOD_PAGE_VIEW_MASTER_HANDOUT
 				$sDispatch = ".uno:HandoutMode"
 		EndSwitch
 
@@ -1226,18 +1226,18 @@ Func __LOImpress_DocCurrView(ByRef $oDoc, $iView = Null)
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_DocCurrView
+EndFunc   ;==>__LODraw_DocCurrView
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_DrawShape_CreateArrow
+; Name ..........: __LODraw_DrawShape_CreateArrow
 ; Description ...: Create an Arrow type Shape.
-; Syntax ........: __LOImpress_DrawShape_CreateArrow(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+; Syntax ........: __LODraw_DrawShape_CreateArrow(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 ; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iShapeType          - (0-25) The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_ARROWS_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iShapeType          - (0-25) The Type of shape to create. See $LOD_DRAWSHAPE_TYPE_ARROWS_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -1247,7 +1247,7 @@ EndFunc   ;==>__LOImpress_DocCurrView
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iX not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iY not an Integer.
-;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_ARROWS_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOD_DRAWSHAPE_TYPE_ARROWS_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.drawing.CustomShape" or "com.sun.star.drawing.EllipseShape" Object.
 ;                  @Error: 2, @Extended: 2 = Failed to create a property structure.
@@ -1260,14 +1260,14 @@ EndFunc   ;==>__LOImpress_DocCurrView
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The following shapes are not implemented into LibreOffice as of L.O. Version 7.3.4.2 for automation, and thus will not work:
-;                  $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_S_SHAPED, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_SPLIT, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_RIGHT_OR_LEFT,
-;                  $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CORNER_RIGHT, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_RIGHT_DOWN, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_RIGHT
+;                  $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_S_SHAPED, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_SPLIT, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_RIGHT_OR_LEFT,
+;                  $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_CORNER_RIGHT, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_RIGHT_DOWN, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_RIGHT
 ; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_DrawShape_CreateArrow(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_DrawShape_CreateArrow(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oShape, $oDoc
@@ -1281,7 +1281,7 @@ Func __LOImpress_DrawShape_CreateArrow(ByRef $oObj, $iWidth, $iHeight, $iX, $iY,
 	If Not IsInt($iY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not IsInt($iShapeType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
-	$oDoc = __LOImpress_GetParentDoc($oObj)
+	$oDoc = __LODraw_GetParentDoc($oObj)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$oShape = $oDoc.createInstance("com.sun.star.drawing.CustomShape")
@@ -1291,76 +1291,76 @@ Func __LOImpress_DrawShape_CreateArrow(ByRef $oObj, $iWidth, $iHeight, $iX, $iY,
 	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
 	Switch $iShapeType
-		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_4_WAY
+		Case $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_4_WAY
 			$tProp.Value = "quad-arrow"
 
-		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_4_WAY
+		Case $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_4_WAY
 			$tProp.Value = "quad-arrow-callout"
 
-		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_DOWN
+		Case $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_DOWN
 			$tProp.Value = "down-arrow-callout"
 
-		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_LEFT
+		Case $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_LEFT
 			$tProp.Value = "left-arrow-callout"
 
-		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_LEFT_RIGHT
+		Case $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_LEFT_RIGHT
 			$tProp.Value = "left-right-arrow-callout"
 
-		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_RIGHT
+		Case $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_RIGHT
 			$tProp.Value = "right-arrow-callout"
 
-		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP
+		Case $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP
 			$tProp.Value = "up-arrow-callout"
 
-		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_DOWN
+		Case $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_DOWN
 			$tProp.Value = "up-down-arrow-callout"
 
-		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_RIGHT
+		Case $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_RIGHT
 			$tProp.Value = "mso-spt100"
 
-		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CIRCULAR
+		Case $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_CIRCULAR
 			$tProp.Value = "circular-arrow"
 
-		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CORNER_RIGHT
+		Case $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_CORNER_RIGHT
 			$tProp.Value = "corner-right-arrow" ; "non-primitive"
 
-		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_DOWN
+		Case $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_DOWN
 			$tProp.Value = "down-arrow"
 
-		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_LEFT
+		Case $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_LEFT
 			$tProp.Value = "left-arrow"
 
-		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_LEFT_RIGHT
+		Case $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_LEFT_RIGHT
 			$tProp.Value = "left-right-arrow"
 
-		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_NOTCHED_RIGHT
+		Case $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_NOTCHED_RIGHT
 			$tProp.Value = "notched-right-arrow"
 
-		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_RIGHT
+		Case $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_RIGHT
 			$tProp.Value = "right-arrow"
 
-		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_RIGHT_OR_LEFT
+		Case $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_RIGHT_OR_LEFT
 			$tProp.Value = "split-arrow" ; "non-primitive"??
 
-		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_S_SHAPED
+		Case $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_S_SHAPED
 			$tProp.Value = "s-sharped-arrow" ; "non-primitive"
 
-		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_SPLIT
+		Case $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_SPLIT
 			$tProp.Value = "split-arrow" ; "non-primitive"
 
-		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_STRIPED_RIGHT
+		Case $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_STRIPED_RIGHT
 			$tProp.Value = "striped-right-arrow" ; "mso-spt100"
 
-		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_UP
+		Case $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_UP
 			$tProp.Value = "up-arrow"
 
-		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_DOWN
+		Case $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_DOWN
 			$tProp.Value = "up-down-arrow"
 
-		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_RIGHT
+		Case $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_RIGHT
 			$tProp.Value = "up-right-arrow-callout" ; "mso-spt89"
 
-		Case $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_RIGHT_DOWN
+		Case $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_RIGHT_DOWN
 			$tProp.Value = "up-right-down-arrow" ; "mso-spt100"
 
 			$tProp2 = __LO_SetPropertyValue("MirroredX", True) ; Shape is an up and left arrow without this Property.
@@ -1369,14 +1369,14 @@ Func __LOImpress_DrawShape_CreateArrow(ByRef $oObj, $iWidth, $iHeight, $iX, $iY,
 			ReDim $atCusShapeGeo[2]
 			$atCusShapeGeo[1] = $tProp2
 
-		Case $LOI_DRAWSHAPE_TYPE_ARROWS_CHEVRON
+		Case $LOD_DRAWSHAPE_TYPE_ARROWS_CHEVRON
 			$tProp.Value = "chevron"
 
-		Case $LOI_DRAWSHAPE_TYPE_ARROWS_PENTAGON
+		Case $LOD_DRAWSHAPE_TYPE_ARROWS_PENTAGON
 			$tProp.Value = "pentagon-right"
 	EndSwitch
 
-	$oShape.Name = __LOImpress_GetShapeName($oObj, "Shape ")
+	$oShape.Name = __LODraw_GetShapeName($oObj, "Shape ")
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$oObj.add($oShape)
@@ -1403,23 +1403,23 @@ Func __LOImpress_DrawShape_CreateArrow(ByRef $oObj, $iWidth, $iHeight, $iX, $iY,
 	; Settings for TextBox use.
 	$oShape.TextMinimumFrameWidth = $iWidth
 	$oShape.TextMinimumFrameHeight = $iHeight
-	$oShape.TextVerticalAdjust = $LOI_ALIGN_VERT_MIDDLE
+	$oShape.TextVerticalAdjust = $LOD_ALIGN_VERT_MIDDLE
 	$oShape.TextAutoGrowHeight = False
 	$oShape.TextAutoGrowWidth = False
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oShape)
-EndFunc   ;==>__LOImpress_DrawShape_CreateArrow
+EndFunc   ;==>__LODraw_DrawShape_CreateArrow
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_DrawShape_CreateBasic
+; Name ..........: __LODraw_DrawShape_CreateBasic
 ; Description ...: Create a Basic type Shape.
-; Syntax ........: __LOImpress_DrawShape_CreateBasic(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+; Syntax ........: __LODraw_DrawShape_CreateBasic(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 ; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iShapeType          - (26-49) The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_BASIC_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iShapeType          - (26-49) The Type of shape to create. See $LOD_DRAWSHAPE_TYPE_BASIC_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -1429,7 +1429,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateArrow
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iX not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iY not an Integer.
-;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_BASIC_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOD_DRAWSHAPE_TYPE_BASIC_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.drawing.CustomShape" or "com.sun.star.drawing.EllipseShape" Object.
 ;                  @Error: 2, @Extended: 2 = Failed to create a property structure.
@@ -1441,13 +1441,13 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateArrow
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The following shapes are not implemented into LibreOffice as of L.O. Version 7.3.4.2 for automation, and thus will not work:
-;                  $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE_PIE, $LOI_DRAWSHAPE_TYPE_BASIC_FRAME
+;                  $LOD_DRAWSHAPE_TYPE_BASIC_CIRCLE_PIE, $LOD_DRAWSHAPE_TYPE_BASIC_FRAME
 ; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_DrawShape_CreateBasic(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_DrawShape_CreateBasic(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oShape, $oDoc
@@ -1463,20 +1463,20 @@ Func __LOImpress_DrawShape_CreateBasic(ByRef $oObj, $iWidth, $iHeight, $iX, $iY,
 	If Not IsInt($iY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not IsInt($iShapeType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
-	$oDoc = __LOImpress_GetParentDoc($oObj)
+	$oDoc = __LODraw_GetParentDoc($oObj)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If ($iShapeType = $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE_SEGMENT) Or ($iShapeType = $LOI_DRAWSHAPE_TYPE_BASIC_ARC) Then ; These two shapes need special procedures.
+	If ($iShapeType = $LOD_DRAWSHAPE_TYPE_BASIC_CIRCLE_SEGMENT) Or ($iShapeType = $LOD_DRAWSHAPE_TYPE_BASIC_ARC) Then ; These two shapes need special procedures.
 		$oShape = $oDoc.createInstance("com.sun.star.drawing.EllipseShape")
 		If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 		Switch $iShapeType
-			Case $LOI_DRAWSHAPE_TYPE_BASIC_ARC
-				$oShape.Name = __LOImpress_GetShapeName($oObj, "Elliptical arc ")
+			Case $LOD_DRAWSHAPE_TYPE_BASIC_ARC
+				$oShape.Name = __LODraw_GetShapeName($oObj, "Elliptical arc ")
 				If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-			Case $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE_SEGMENT
-				$oShape.Name = __LOImpress_GetShapeName($oObj, "Ellipse Segment ")
+			Case $LOD_DRAWSHAPE_TYPE_BASIC_CIRCLE_SEGMENT
+				$oShape.Name = __LODraw_GetShapeName($oObj, "Ellipse Segment ")
 				If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 		EndSwitch
 
@@ -1489,91 +1489,91 @@ Func __LOImpress_DrawShape_CreateBasic(ByRef $oObj, $iWidth, $iHeight, $iX, $iY,
 		$tProp = __LO_SetPropertyValue("Type", "")
 		If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-		$oShape.Name = __LOImpress_GetShapeName($oObj, "Shape ")
+		$oShape.Name = __LODraw_GetShapeName($oObj, "Shape ")
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		$oObj.add($oShape)
 	EndIf
 
 	Switch $iShapeType
-		Case $LOI_DRAWSHAPE_TYPE_BASIC_ARC
+		Case $LOD_DRAWSHAPE_TYPE_BASIC_ARC
 			$oShape.FillColor = $LO_COLOR_OFF
 
 			$oShape.CircleKind = $iCircleKind_ARC
 			$oShape.CircleStartAngle = 0
 			$oShape.CircleEndAngle = 25000
 
-		Case $LOI_DRAWSHAPE_TYPE_BASIC_ARC_BLOCK
+		Case $LOD_DRAWSHAPE_TYPE_BASIC_ARC_BLOCK
 			$tProp.Value = "block-arc"
 
-		Case $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE_PIE
+		Case $LOD_DRAWSHAPE_TYPE_BASIC_CIRCLE_PIE
 			$tProp.Value = "circle-pie" ; "mso-spt100"
 
-		Case $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE_SEGMENT
+		Case $LOD_DRAWSHAPE_TYPE_BASIC_CIRCLE_SEGMENT
 			$oShape.CircleKind = $iCircleKind_CUT
 			$oShape.CircleStartAngle = 0
 			$oShape.CircleEndAngle = 25000
 
-		Case $LOI_DRAWSHAPE_TYPE_BASIC_CROSS
+		Case $LOD_DRAWSHAPE_TYPE_BASIC_CROSS
 			$tProp.Value = "cross"
 
-		Case $LOI_DRAWSHAPE_TYPE_BASIC_CUBE
+		Case $LOD_DRAWSHAPE_TYPE_BASIC_CUBE
 			$tProp.Value = "cube"
 
-		Case $LOI_DRAWSHAPE_TYPE_BASIC_CYLINDER
+		Case $LOD_DRAWSHAPE_TYPE_BASIC_CYLINDER
 			$tProp.Value = "can"
 
-		Case $LOI_DRAWSHAPE_TYPE_BASIC_DIAMOND
+		Case $LOD_DRAWSHAPE_TYPE_BASIC_DIAMOND
 			$tProp.Value = "diamond"
 
-		Case $LOI_DRAWSHAPE_TYPE_BASIC_ELLIPSE, $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE
+		Case $LOD_DRAWSHAPE_TYPE_BASIC_ELLIPSE, $LOD_DRAWSHAPE_TYPE_BASIC_CIRCLE
 			$tProp.Value = "ellipse"
 
-		Case $LOI_DRAWSHAPE_TYPE_BASIC_FOLDED_CORNER
+		Case $LOD_DRAWSHAPE_TYPE_BASIC_FOLDED_CORNER
 			$tProp.Value = "paper"
 
-		Case $LOI_DRAWSHAPE_TYPE_BASIC_FRAME
+		Case $LOD_DRAWSHAPE_TYPE_BASIC_FRAME
 			$tProp.Value = "frame" ; Not working
 
-		Case $LOI_DRAWSHAPE_TYPE_BASIC_HEXAGON
+		Case $LOD_DRAWSHAPE_TYPE_BASIC_HEXAGON
 			$tProp.Value = "hexagon"
 
-		Case $LOI_DRAWSHAPE_TYPE_BASIC_OCTAGON
+		Case $LOD_DRAWSHAPE_TYPE_BASIC_OCTAGON
 			$tProp.Value = "octagon"
 
-		Case $LOI_DRAWSHAPE_TYPE_BASIC_PARALLELOGRAM
+		Case $LOD_DRAWSHAPE_TYPE_BASIC_PARALLELOGRAM
 			$tProp.Value = "parallelogram"
 
-		Case $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE, $LOI_DRAWSHAPE_TYPE_BASIC_SQUARE
+		Case $LOD_DRAWSHAPE_TYPE_BASIC_RECTANGLE, $LOD_DRAWSHAPE_TYPE_BASIC_SQUARE
 			$tProp.Value = "rectangle"
 
-		Case $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE_ROUNDED, $LOI_DRAWSHAPE_TYPE_BASIC_SQUARE_ROUNDED
+		Case $LOD_DRAWSHAPE_TYPE_BASIC_RECTANGLE_ROUNDED, $LOD_DRAWSHAPE_TYPE_BASIC_SQUARE_ROUNDED
 			$tProp.Value = "round-rectangle"
 
-		Case $LOI_DRAWSHAPE_TYPE_BASIC_REGULAR_PENTAGON
+		Case $LOD_DRAWSHAPE_TYPE_BASIC_REGULAR_PENTAGON
 			$tProp.Value = "pentagon"
 
-		Case $LOI_DRAWSHAPE_TYPE_BASIC_RING
+		Case $LOD_DRAWSHAPE_TYPE_BASIC_RING
 			$tProp.Value = "ring"
 
-		Case $LOI_DRAWSHAPE_TYPE_BASIC_TRAPEZOID
+		Case $LOD_DRAWSHAPE_TYPE_BASIC_TRAPEZOID
 			$tProp.Value = "trapezoid"
 
-		Case $LOI_DRAWSHAPE_TYPE_BASIC_TRIANGLE_ISOSCELES
+		Case $LOD_DRAWSHAPE_TYPE_BASIC_TRIANGLE_ISOSCELES
 			$tProp.Value = "isosceles-triangle"
 
-		Case $LOI_DRAWSHAPE_TYPE_BASIC_TRIANGLE_RIGHT
+		Case $LOD_DRAWSHAPE_TYPE_BASIC_TRIANGLE_RIGHT
 			$tProp.Value = "right-triangle"
 	EndSwitch
 
-	If ($iShapeType <> $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE_SEGMENT) And ($iShapeType <> $LOI_DRAWSHAPE_TYPE_BASIC_ARC) Then
+	If ($iShapeType <> $LOD_DRAWSHAPE_TYPE_BASIC_CIRCLE_SEGMENT) And ($iShapeType <> $LOD_DRAWSHAPE_TYPE_BASIC_ARC) Then
 		$atCusShapeGeo[0] = $tProp
 		$oShape.CustomShapeGeometry = $atCusShapeGeo
 
 		; Settings for TextBox use.
 		$oShape.TextMinimumFrameWidth = $iWidth
 		$oShape.TextMinimumFrameHeight = $iHeight
-		$oShape.TextVerticalAdjust = $LOI_ALIGN_VERT_MIDDLE
+		$oShape.TextVerticalAdjust = $LOD_ALIGN_VERT_MIDDLE
 		$oShape.TextAutoGrowHeight = False
 		$oShape.TextAutoGrowWidth = False
 	EndIf
@@ -1595,18 +1595,18 @@ Func __LOImpress_DrawShape_CreateBasic(ByRef $oObj, $iWidth, $iHeight, $iX, $iY,
 	$oShape.Size = $tSize
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oShape)
-EndFunc   ;==>__LOImpress_DrawShape_CreateBasic
+EndFunc   ;==>__LODraw_DrawShape_CreateBasic
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_DrawShape_CreateCallout
+; Name ..........: __LODraw_DrawShape_CreateCallout
 ; Description ...: Create a Callout type Shape.
-; Syntax ........: __LOImpress_DrawShape_CreateCallout(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+; Syntax ........: __LODraw_DrawShape_CreateCallout(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 ; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iShapeType          - (50-56) The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_CALLOUT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iShapeType          - (50-56) The Type of shape to create. See $LOD_DRAWSHAPE_TYPE_CALLOUT_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -1616,7 +1616,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateBasic
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iX not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iY not an Integer.
-;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_CALLOUT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOD_DRAWSHAPE_TYPE_CALLOUT_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.drawing.CustomShape" Object.
 ;                  @Error: 2, @Extended: 2 = Failed to create a property structure.
@@ -1632,8 +1632,8 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateBasic
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_DrawShape_CreateCallout(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_DrawShape_CreateCallout(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oShape, $oDoc
@@ -1647,7 +1647,7 @@ Func __LOImpress_DrawShape_CreateCallout(ByRef $oObj, $iWidth, $iHeight, $iX, $i
 	If Not IsInt($iY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not IsInt($iShapeType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
-	$oDoc = __LOImpress_GetParentDoc($oObj)
+	$oDoc = __LODraw_GetParentDoc($oObj)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$oShape = $oDoc.createInstance("com.sun.star.drawing.CustomShape")
@@ -1657,29 +1657,29 @@ Func __LOImpress_DrawShape_CreateCallout(ByRef $oObj, $iWidth, $iHeight, $iX, $i
 	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
 	Switch $iShapeType
-		Case $LOI_DRAWSHAPE_TYPE_CALLOUT_CLOUD
+		Case $LOD_DRAWSHAPE_TYPE_CALLOUT_CLOUD
 			$tProp.Value = "cloud-callout"
 
-		Case $LOI_DRAWSHAPE_TYPE_CALLOUT_LINE_1
+		Case $LOD_DRAWSHAPE_TYPE_CALLOUT_LINE_1
 			$tProp.Value = "line-callout-1"
 
-		Case $LOI_DRAWSHAPE_TYPE_CALLOUT_LINE_2
+		Case $LOD_DRAWSHAPE_TYPE_CALLOUT_LINE_2
 			$tProp.Value = "line-callout-2"
 
-		Case $LOI_DRAWSHAPE_TYPE_CALLOUT_LINE_3
+		Case $LOD_DRAWSHAPE_TYPE_CALLOUT_LINE_3
 			$tProp.Value = "line-callout-3"
 
-		Case $LOI_DRAWSHAPE_TYPE_CALLOUT_RECTANGULAR
+		Case $LOD_DRAWSHAPE_TYPE_CALLOUT_RECTANGULAR
 			$tProp.Value = "rectangular-callout"
 
-		Case $LOI_DRAWSHAPE_TYPE_CALLOUT_RECTANGULAR_ROUNDED
+		Case $LOD_DRAWSHAPE_TYPE_CALLOUT_RECTANGULAR_ROUNDED
 			$tProp.Value = "round-rectangular-callout"
 
-		Case $LOI_DRAWSHAPE_TYPE_CALLOUT_ROUND
+		Case $LOD_DRAWSHAPE_TYPE_CALLOUT_ROUND
 			$tProp.Value = "round-callout"
 	EndSwitch
 
-	$oShape.Name = __LOImpress_GetShapeName($oObj, "Shape ")
+	$oShape.Name = __LODraw_GetShapeName($oObj, "Shape ")
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$oObj.add($oShape)
@@ -1706,23 +1706,23 @@ Func __LOImpress_DrawShape_CreateCallout(ByRef $oObj, $iWidth, $iHeight, $iX, $i
 	; Settings for TextBox use.
 	$oShape.TextMinimumFrameWidth = $iWidth
 	$oShape.TextMinimumFrameHeight = $iHeight
-	$oShape.TextVerticalAdjust = $LOI_ALIGN_VERT_MIDDLE
+	$oShape.TextVerticalAdjust = $LOD_ALIGN_VERT_MIDDLE
 	$oShape.TextAutoGrowHeight = False
 	$oShape.TextAutoGrowWidth = False
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oShape)
-EndFunc   ;==>__LOImpress_DrawShape_CreateCallout
+EndFunc   ;==>__LODraw_DrawShape_CreateCallout
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_DrawShape_CreateFlowchart
+; Name ..........: __LODraw_DrawShape_CreateFlowchart
 ; Description ...: Create a FlowChart type Shape.
-; Syntax ........: __LOImpress_DrawShape_CreateFlowchart(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+; Syntax ........: __LODraw_DrawShape_CreateFlowchart(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 ; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iShapeType          - (57-84) The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_FLOWCHART_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iShapeType          - (57-84) The Type of shape to create. See $LOD_DRAWSHAPE_TYPE_FLOWCHART_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -1732,7 +1732,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateCallout
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iX not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iY not an Integer.
-;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_FLOWCHART_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOD_DRAWSHAPE_TYPE_FLOWCHART_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.drawing.CustomShape" Object.
 ;                  @Error: 2, @Extended: 2 = Failed to create a property structure.
@@ -1748,8 +1748,8 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateCallout
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_DrawShape_CreateFlowchart(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_DrawShape_CreateFlowchart(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oShape, $oDoc
@@ -1763,7 +1763,7 @@ Func __LOImpress_DrawShape_CreateFlowchart(ByRef $oObj, $iWidth, $iHeight, $iX, 
 	If Not IsInt($iY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not IsInt($iShapeType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
-	$oDoc = __LOImpress_GetParentDoc($oObj)
+	$oDoc = __LODraw_GetParentDoc($oObj)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$oShape = $oDoc.createInstance("com.sun.star.drawing.CustomShape")
@@ -1773,92 +1773,92 @@ Func __LOImpress_DrawShape_CreateFlowchart(ByRef $oObj, $iWidth, $iHeight, $iX, 
 	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
 	Switch $iShapeType
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_CARD
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_CARD
 			$tProp.Value = "flowchart-card"
 
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_COLLATE
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_COLLATE
 			$tProp.Value = "flowchart-collate"
 
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_CONNECTOR
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_CONNECTOR
 			$tProp.Value = "flowchart-connector"
 
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_CONNECTOR_OFF_PAGE
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_CONNECTOR_OFF_PAGE
 			$tProp.Value = "flowchart-off-page-connector"
 
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_DATA
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_DATA
 			$tProp.Value = "flowchart-data"
 
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_DECISION
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_DECISION
 			$tProp.Value = "flowchart-decision"
 
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_DELAY
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_DELAY
 			$tProp.Value = "flowchart-delay"
 
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_DIRECT_ACCESS_STORAGE
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_DIRECT_ACCESS_STORAGE
 			$tProp.Value = "flowchart-direct-access-storage"
 
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_DISPLAY
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_DISPLAY
 			$tProp.Value = "flowchart-display"
 
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_DOCUMENT
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_DOCUMENT
 			$tProp.Value = "flowchart-document"
 
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_EXTRACT
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_EXTRACT
 			$tProp.Value = "flowchart-extract"
 
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_INTERNAL_STORAGE
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_INTERNAL_STORAGE
 			$tProp.Value = "flowchart-internal-storage"
 
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_MAGNETIC_DISC
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_MAGNETIC_DISC
 			$tProp.Value = "flowchart-magnetic-disk"
 
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_MANUAL_INPUT
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_MANUAL_INPUT
 			$tProp.Value = "flowchart-manual-input"
 
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_MANUAL_OPERATION
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_MANUAL_OPERATION
 			$tProp.Value = "flowchart-manual-operation"
 
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_MERGE
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_MERGE
 			$tProp.Value = "flowchart-merge"
 
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_MULTIDOCUMENT
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_MULTIDOCUMENT
 			$tProp.Value = "flowchart-multidocument"
 
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_OR
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_OR
 			$tProp.Value = "flowchart-or"
 
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_PREPARATION
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_PREPARATION
 			$tProp.Value = "flowchart-preparation"
 
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_PROCESS
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_PROCESS
 			$tProp.Value = "flowchart-process"
 
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_PROCESS_ALTERNATE
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_PROCESS_ALTERNATE
 			$tProp.Value = "flowchart-alternate-process"
 
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_PROCESS_PREDEFINED
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_PROCESS_PREDEFINED
 			$tProp.Value = "flowchart-predefined-process"
 
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_PUNCHED_TAPE
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_PUNCHED_TAPE
 			$tProp.Value = "flowchart-punched-tape"
 
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_SEQUENTIAL_ACCESS
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_SEQUENTIAL_ACCESS
 			$tProp.Value = "flowchart-sequential-access"
 
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_SORT
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_SORT
 			$tProp.Value = "flowchart-sort"
 
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_STORED_DATA
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_STORED_DATA
 			$tProp.Value = "flowchart-stored-data"
 
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_SUMMING_JUNCTION
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_SUMMING_JUNCTION
 			$tProp.Value = "flowchart-summing-junction"
 
-		Case $LOI_DRAWSHAPE_TYPE_FLOWCHART_TERMINATOR
+		Case $LOD_DRAWSHAPE_TYPE_FLOWCHART_TERMINATOR
 			$tProp.Value = "flowchart-terminator"
 	EndSwitch
 
-	$oShape.Name = __LOImpress_GetShapeName($oObj, "Shape ")
+	$oShape.Name = __LODraw_GetShapeName($oObj, "Shape ")
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$oObj.add($oShape)
@@ -1885,23 +1885,23 @@ Func __LOImpress_DrawShape_CreateFlowchart(ByRef $oObj, $iWidth, $iHeight, $iX, 
 	; Settings for TextBox use.
 	$oShape.TextMinimumFrameWidth = $iWidth
 	$oShape.TextMinimumFrameHeight = $iHeight
-	$oShape.TextVerticalAdjust = $LOI_ALIGN_VERT_MIDDLE
+	$oShape.TextVerticalAdjust = $LOD_ALIGN_VERT_MIDDLE
 	$oShape.TextAutoGrowHeight = False
 	$oShape.TextAutoGrowWidth = False
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oShape)
-EndFunc   ;==>__LOImpress_DrawShape_CreateFlowchart
+EndFunc   ;==>__LODraw_DrawShape_CreateFlowchart
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_DrawShape_CreateLine
+; Name ..........: __LODraw_DrawShape_CreateLine
 ; Description ...: Create a Line type Shape.
-; Syntax ........: __LOImpress_DrawShape_CreateLine(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+; Syntax ........: __LODraw_DrawShape_CreateLine(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 ; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iShapeType          - (85-92) The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_LINE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iShapeType          - (85-92) The Type of shape to create. See $LOD_DRAWSHAPE_TYPE_LINE_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -1911,7 +1911,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateFlowchart
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iX not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iY not an Integer.
-;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_LINE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOD_DRAWSHAPE_TYPE_LINE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create the requested Line type Object.
 ;                  @Error: 2, @Extended: 2 = Failed to create a Position structure.
@@ -1928,8 +1928,8 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateFlowchart
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_DrawShape_CreateLine(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_DrawShape_CreateLine(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oShape, $oDoc
@@ -1944,20 +1944,20 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, 
 	If Not IsInt($iY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not IsInt($iShapeType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
-	$oDoc = __LOImpress_GetParentDoc($oObj)
+	$oDoc = __LODraw_GetParentDoc($oObj)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	If ($iShapeType <> $LOI_DRAWSHAPE_TYPE_LINE_DIMENSION) Then
+	If ($iShapeType <> $LOD_DRAWSHAPE_TYPE_LINE_DIMENSION) Then
 		$tPolyCoords = __LO_CreateStruct("com.sun.star.drawing.PolyPolygonBezierCoords")
 		If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
 	EndIf
 
 	Switch $iShapeType
-		Case $LOI_DRAWSHAPE_TYPE_LINE_ARROW_LINE_ARROWS To $LOI_DRAWSHAPE_TYPE_LINE_ARROW_LINE_STARTS_ARROW
+		Case $LOD_DRAWSHAPE_TYPE_LINE_ARROW_LINE_ARROWS To $LOD_DRAWSHAPE_TYPE_LINE_ARROW_LINE_STARTS_ARROW
 			$oShape = $oDoc.createInstance("com.sun.star.drawing.LineShape")
 			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-			$oShape.Name = __LOImpress_GetShapeName($oObj, "Line ")
+			$oShape.Name = __LODraw_GetShapeName($oObj, "Line ")
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 			$oObj.add($oShape)
@@ -1965,137 +1965,137 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, 
 			ReDim $atPoint[2]
 			ReDim $aiFlags[2]
 
-			$atPoint[0] = __LOImpress_CreatePoint($iX, $iY)
+			$atPoint[0] = __LODraw_CreatePoint($iX, $iY)
 			If Not IsObj($atPoint[0]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$atPoint[1] = __LOImpress_CreatePoint(Int($iX + $iWidth), Int($iY + $iHeight))
+			$atPoint[1] = __LODraw_CreatePoint(Int($iX + $iWidth), Int($iY + $iHeight))
 			If Not IsObj($atPoint[1]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$aiFlags[0] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
-			$aiFlags[1] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[0] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[1] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL
 
 			Switch $iShapeType
-				Case $LOI_DRAWSHAPE_TYPE_LINE_ARROW_LINE_ARROWS
+				Case $LOD_DRAWSHAPE_TYPE_LINE_ARROW_LINE_ARROWS
 					$oShape.LineStartName = "Arrow"
 					$oShape.LineStartWidth = 300
 					$oShape.LineEndName = "Arrow"
 					$oShape.LineEndWidth = 300
 
-				Case $LOI_DRAWSHAPE_TYPE_LINE_ARROW_LINE_ARROW_CIRCLE
+				Case $LOD_DRAWSHAPE_TYPE_LINE_ARROW_LINE_ARROW_CIRCLE
 					$oShape.LineStartName = "Arrow"
 					$oShape.LineStartWidth = 300
 					$oShape.LineEndName = "Circle"
 					$oShape.LineEndWidth = 300
 
-				Case $LOI_DRAWSHAPE_TYPE_LINE_ARROW_LINE_ARROW_SQUARE
+				Case $LOD_DRAWSHAPE_TYPE_LINE_ARROW_LINE_ARROW_SQUARE
 					$oShape.LineStartName = "Arrow"
 					$oShape.LineStartWidth = 300
 					$oShape.LineEndName = "Square"
 					$oShape.LineEndWidth = 300
 
-				Case $LOI_DRAWSHAPE_TYPE_LINE_ARROW_LINE_CIRCLE_ARROW
+				Case $LOD_DRAWSHAPE_TYPE_LINE_ARROW_LINE_CIRCLE_ARROW
 					$oShape.LineStartName = "Circle"
 					$oShape.LineStartWidth = 300
 					$oShape.LineEndName = "Arrow"
 					$oShape.LineEndWidth = 300
 
-				Case $LOI_DRAWSHAPE_TYPE_LINE_ARROW_LINE_ENDS_ARROW
+				Case $LOD_DRAWSHAPE_TYPE_LINE_ARROW_LINE_ENDS_ARROW
 					$oShape.LineEndName = "Arrow"
 					$oShape.LineEndWidth = 300
 
-				Case $LOI_DRAWSHAPE_TYPE_LINE_ARROW_LINE_SQUARE_ARROW
+				Case $LOD_DRAWSHAPE_TYPE_LINE_ARROW_LINE_SQUARE_ARROW
 					$oShape.LineStartName = "Square"
 					$oShape.LineStartWidth = 300
 					$oShape.LineEndName = "Arrow"
 					$oShape.LineEndWidth = 300
 
-				Case $LOI_DRAWSHAPE_TYPE_LINE_ARROW_LINE_STARTS_ARROW
+				Case $LOD_DRAWSHAPE_TYPE_LINE_ARROW_LINE_STARTS_ARROW
 					$oShape.LineStartName = "Arrow"
 					$oShape.LineStartWidth = 300
 			EndSwitch
 
-		Case $LOI_DRAWSHAPE_TYPE_CONNECTOR To $LOI_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT_ENDS_ARROW
+		Case $LOD_DRAWSHAPE_TYPE_CONNECTOR To $LOD_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT_ENDS_ARROW
 			$oShape = $oDoc.createInstance("com.sun.star.drawing.ConnectorShape")
 			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-			$oShape.Name = __LOImpress_GetShapeName($oObj, "Connector ")
+			$oShape.Name = __LODraw_GetShapeName($oObj, "Connector ")
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 			$oObj.add($oShape)
 
-			$tStart = __LOImpress_CreatePoint($iX, $iY)
+			$tStart = __LODraw_CreatePoint($iX, $iY)
 			If Not IsObj($tStart) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$tEnd = __LOImpress_CreatePoint(Int($iX + $iWidth), Int($iY + $iHeight))
+			$tEnd = __LODraw_CreatePoint(Int($iX + $iWidth), Int($iY + $iHeight))
 			If Not IsObj($tEnd) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
 			Switch $iShapeType
-				Case $LOI_DRAWSHAPE_TYPE_CONNECTOR
-					$oShape.EdgeKind = $LOI_DRAWSHAPE_CONNECTOR_TYPE_STANDARD
+				Case $LOD_DRAWSHAPE_TYPE_CONNECTOR
+					$oShape.EdgeKind = $LOD_DRAWSHAPE_CONNECTOR_TYPE_STANDARD
 
-				Case $LOI_DRAWSHAPE_TYPE_CONNECTOR_ARROWS
-					$oShape.EdgeKind = $LOI_DRAWSHAPE_CONNECTOR_TYPE_STANDARD
+				Case $LOD_DRAWSHAPE_TYPE_CONNECTOR_ARROWS
+					$oShape.EdgeKind = $LOD_DRAWSHAPE_CONNECTOR_TYPE_STANDARD
 					$oShape.LineStartName = "Arrow"
 					$oShape.LineStartWidth = 300
 					$oShape.LineEndName = "Arrow"
 					$oShape.LineEndWidth = 300
 
-				Case $LOI_DRAWSHAPE_TYPE_CONNECTOR_CURVED
-					$oShape.EdgeKind = $LOI_DRAWSHAPE_CONNECTOR_TYPE_CURVE
+				Case $LOD_DRAWSHAPE_TYPE_CONNECTOR_CURVED
+					$oShape.EdgeKind = $LOD_DRAWSHAPE_CONNECTOR_TYPE_CURVE
 
-				Case $LOI_DRAWSHAPE_TYPE_CONNECTOR_CURVED_ARROWS
-					$oShape.EdgeKind = $LOI_DRAWSHAPE_CONNECTOR_TYPE_CURVE
+				Case $LOD_DRAWSHAPE_TYPE_CONNECTOR_CURVED_ARROWS
+					$oShape.EdgeKind = $LOD_DRAWSHAPE_CONNECTOR_TYPE_CURVE
 					$oShape.LineStartName = "Arrow"
 					$oShape.LineStartWidth = 300
 					$oShape.LineEndName = "Arrow"
 					$oShape.LineEndWidth = 300
 
-				Case $LOI_DRAWSHAPE_TYPE_CONNECTOR_CURVED_ENDS_ARROW
-					$oShape.EdgeKind = $LOI_DRAWSHAPE_CONNECTOR_TYPE_CURVE
+				Case $LOD_DRAWSHAPE_TYPE_CONNECTOR_CURVED_ENDS_ARROW
+					$oShape.EdgeKind = $LOD_DRAWSHAPE_CONNECTOR_TYPE_CURVE
 					$oShape.LineEndName = "Arrow"
 					$oShape.LineEndWidth = 300
 
-				Case $LOI_DRAWSHAPE_TYPE_CONNECTOR_ENDS_ARROW
-					$oShape.EdgeKind = $LOI_DRAWSHAPE_CONNECTOR_TYPE_STANDARD
+				Case $LOD_DRAWSHAPE_TYPE_CONNECTOR_ENDS_ARROW
+					$oShape.EdgeKind = $LOD_DRAWSHAPE_CONNECTOR_TYPE_STANDARD
 					$oShape.LineEndName = "Arrow"
 					$oShape.LineEndWidth = 300
 
-				Case $LOI_DRAWSHAPE_TYPE_CONNECTOR_LINE
-					$oShape.EdgeKind = $LOI_DRAWSHAPE_CONNECTOR_TYPE_LINE
+				Case $LOD_DRAWSHAPE_TYPE_CONNECTOR_LINE
+					$oShape.EdgeKind = $LOD_DRAWSHAPE_CONNECTOR_TYPE_LINE
 
-				Case $LOI_DRAWSHAPE_TYPE_CONNECTOR_LINE_ARROWS
-					$oShape.EdgeKind = $LOI_DRAWSHAPE_CONNECTOR_TYPE_LINE
+				Case $LOD_DRAWSHAPE_TYPE_CONNECTOR_LINE_ARROWS
+					$oShape.EdgeKind = $LOD_DRAWSHAPE_CONNECTOR_TYPE_LINE
 					$oShape.LineStartName = "Arrow"
 					$oShape.LineStartWidth = 300
 					$oShape.LineEndName = "Arrow"
 					$oShape.LineEndWidth = 300
 
-				Case $LOI_DRAWSHAPE_TYPE_CONNECTOR_LINE_ENDS_ARROW
-					$oShape.EdgeKind = $LOI_DRAWSHAPE_CONNECTOR_TYPE_LINE
+				Case $LOD_DRAWSHAPE_TYPE_CONNECTOR_LINE_ENDS_ARROW
+					$oShape.EdgeKind = $LOD_DRAWSHAPE_CONNECTOR_TYPE_LINE
 					$oShape.LineEndName = "Arrow"
 					$oShape.LineEndWidth = 300
 
-				Case $LOI_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT
-					$oShape.EdgeKind = $LOI_DRAWSHAPE_CONNECTOR_TYPE_STRAIGHT
+				Case $LOD_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT
+					$oShape.EdgeKind = $LOD_DRAWSHAPE_CONNECTOR_TYPE_STRAIGHT
 
-				Case $LOI_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT_ARROWS
-					$oShape.EdgeKind = $LOI_DRAWSHAPE_CONNECTOR_TYPE_STRAIGHT
+				Case $LOD_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT_ARROWS
+					$oShape.EdgeKind = $LOD_DRAWSHAPE_CONNECTOR_TYPE_STRAIGHT
 					$oShape.LineStartName = "Arrow"
 					$oShape.LineStartWidth = 300
 					$oShape.LineEndName = "Arrow"
 					$oShape.LineEndWidth = 300
 
-				Case $LOI_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT_ENDS_ARROW
-					$oShape.EdgeKind = $LOI_DRAWSHAPE_CONNECTOR_TYPE_STRAIGHT
+				Case $LOD_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT_ENDS_ARROW
+					$oShape.EdgeKind = $LOD_DRAWSHAPE_CONNECTOR_TYPE_STRAIGHT
 					$oShape.LineEndName = "Arrow"
 					$oShape.LineEndWidth = 300
 			EndSwitch
 
-		Case $LOI_DRAWSHAPE_TYPE_LINE_CURVE
+		Case $LOD_DRAWSHAPE_TYPE_LINE_CURVE
 			$oShape = $oDoc.createInstance("com.sun.star.drawing.OpenBezierShape")
 			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-			$oShape.Name = __LOImpress_GetShapeName($oObj, "Bézier curve ")
+			$oShape.Name = __LODraw_GetShapeName($oObj, "Bézier curve ")
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 			$oObj.add($oShape)
@@ -2103,30 +2103,30 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, 
 			ReDim $atPoint[4]
 			ReDim $aiFlags[4]
 
-			$atPoint[0] = __LOImpress_CreatePoint($iX, $iY)
+			$atPoint[0] = __LODraw_CreatePoint($iX, $iY)
 			If Not IsObj($atPoint[0]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$atPoint[1] = __LOImpress_CreatePoint(Int($iX + $iWidth / 2), Int($iY + $iHeight))
+			$atPoint[1] = __LODraw_CreatePoint(Int($iX + $iWidth / 2), Int($iY + $iHeight))
 			If Not IsObj($atPoint[1]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$atPoint[2] = __LOImpress_CreatePoint(Int($iX + $iWidth / 2), Int($iY + $iHeight / 2))
+			$atPoint[2] = __LODraw_CreatePoint(Int($iX + $iWidth / 2), Int($iY + $iHeight / 2))
 			If Not IsObj($atPoint[2]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$atPoint[3] = __LOImpress_CreatePoint(Int($iX + $iWidth), $iY)
+			$atPoint[3] = __LODraw_CreatePoint(Int($iX + $iWidth), $iY)
 			If Not IsObj($atPoint[3]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$aiFlags[0] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
-			$aiFlags[1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
-			$aiFlags[2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
-			$aiFlags[3] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[0] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL
+			$aiFlags[2] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL
+			$aiFlags[3] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL
 
 			$oShape.FillColor = $LO_COLOR_OFF
 
-		Case $LOI_DRAWSHAPE_TYPE_LINE_CURVE_FILLED
+		Case $LOD_DRAWSHAPE_TYPE_LINE_CURVE_FILLED
 			$oShape = $oDoc.createInstance("com.sun.star.drawing.ClosedBezierShape")
 			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-			$oShape.Name = __LOImpress_GetShapeName($oObj, "Bézier curve ")
+			$oShape.Name = __LODraw_GetShapeName($oObj, "Bézier curve ")
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 			$oObj.add($oShape)
@@ -2134,45 +2134,45 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, 
 			ReDim $atPoint[4]
 			ReDim $aiFlags[4]
 
-			$atPoint[0] = __LOImpress_CreatePoint($iX, $iY)
+			$atPoint[0] = __LODraw_CreatePoint($iX, $iY)
 			If Not IsObj($atPoint[0]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$atPoint[1] = __LOImpress_CreatePoint(Int($iX + $iWidth / 2), Int($iY + $iHeight))
+			$atPoint[1] = __LODraw_CreatePoint(Int($iX + $iWidth / 2), Int($iY + $iHeight))
 			If Not IsObj($atPoint[1]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$atPoint[2] = __LOImpress_CreatePoint(Int($iX + $iWidth / 2), Int($iY + $iHeight / 2))
+			$atPoint[2] = __LODraw_CreatePoint(Int($iX + $iWidth / 2), Int($iY + $iHeight / 2))
 			If Not IsObj($atPoint[2]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$atPoint[3] = __LOImpress_CreatePoint(Int($iX + $iWidth), $iY)
+			$atPoint[3] = __LODraw_CreatePoint(Int($iX + $iWidth), $iY)
 			If Not IsObj($atPoint[3]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$aiFlags[0] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
-			$aiFlags[1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
-			$aiFlags[2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
-			$aiFlags[3] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[0] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL
+			$aiFlags[2] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL
+			$aiFlags[3] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL
 
 			$oShape.FillColor = 7512015 ; Light blue
 
-		Case $LOI_DRAWSHAPE_TYPE_LINE_DIMENSION
+		Case $LOD_DRAWSHAPE_TYPE_LINE_DIMENSION
 			$oShape = $oDoc.createInstance("com.sun.star.drawing.MeasureShape")
 			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 			$oObj.add($oShape)
 
-			$oShape.Name = __LOImpress_GetShapeName($oObj, "Dimension Line ")
+			$oShape.Name = __LODraw_GetShapeName($oObj, "Dimension Line ")
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-			$tStart = __LOImpress_CreatePoint($iX, $iY)
+			$tStart = __LODraw_CreatePoint($iX, $iY)
 			If Not IsObj($tStart) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$tEnd = __LOImpress_CreatePoint(Int($iX + $iWidth), Int($iY + $iHeight))
+			$tEnd = __LODraw_CreatePoint(Int($iX + $iWidth), Int($iY + $iHeight))
 			If Not IsObj($tEnd) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-		Case $LOI_DRAWSHAPE_TYPE_LINE_FREEFORM_LINE
+		Case $LOD_DRAWSHAPE_TYPE_LINE_FREEFORM_LINE
 			$oShape = $oDoc.createInstance("com.sun.star.drawing.OpenFreeHandShape")
 			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-			$oShape.Name = __LOImpress_GetShapeName($oObj, "Bézier curve ")
+			$oShape.Name = __LODraw_GetShapeName($oObj, "Bézier curve ")
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 			$oObj.add($oShape)
@@ -2180,24 +2180,24 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, 
 			ReDim $atPoint[3]
 			ReDim $aiFlags[3]
 
-			$atPoint[0] = __LOImpress_CreatePoint($iX, $iY)
+			$atPoint[0] = __LODraw_CreatePoint($iX, $iY)
 			If Not IsObj($atPoint[0]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$atPoint[1] = __LOImpress_CreatePoint(Int($iX + $iWidth / 2), Int($iY + $iHeight / 2))
+			$atPoint[1] = __LODraw_CreatePoint(Int($iX + $iWidth / 2), Int($iY + $iHeight / 2))
 			If Not IsObj($atPoint[1]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$atPoint[2] = __LOImpress_CreatePoint(Int($iX + $iWidth), Int($iY + $iHeight))
+			$atPoint[2] = __LODraw_CreatePoint(Int($iX + $iWidth), Int($iY + $iHeight))
 			If Not IsObj($atPoint[2]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$aiFlags[0] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
-			$aiFlags[1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
-			$aiFlags[2] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[0] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL
+			$aiFlags[2] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL
 
-		Case $LOI_DRAWSHAPE_TYPE_LINE_FREEFORM_LINE_FILLED
+		Case $LOD_DRAWSHAPE_TYPE_LINE_FREEFORM_LINE_FILLED
 			$oShape = $oDoc.createInstance("com.sun.star.drawing.ClosedFreeHandShape")
 			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-			$oShape.Name = __LOImpress_GetShapeName($oObj, "Bézier curve ")
+			$oShape.Name = __LODraw_GetShapeName($oObj, "Bézier curve ")
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 			$oObj.add($oShape)
@@ -2205,30 +2205,30 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, 
 			ReDim $atPoint[4]
 			ReDim $aiFlags[4]
 
-			$atPoint[0] = __LOImpress_CreatePoint($iX, $iY)
+			$atPoint[0] = __LODraw_CreatePoint($iX, $iY)
 			If Not IsObj($atPoint[0]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$atPoint[1] = __LOImpress_CreatePoint(Int($iX + $iWidth) + Int(($iX + $iWidth / 8)), Int(($iY + $iHeight / 2)))
+			$atPoint[1] = __LODraw_CreatePoint(Int($iX + $iWidth) + Int(($iX + $iWidth / 8)), Int(($iY + $iHeight / 2)))
 			If Not IsObj($atPoint[1]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$atPoint[2] = __LOImpress_CreatePoint(Int($iX + $iWidth), Int($iY + $iHeight))
+			$atPoint[2] = __LODraw_CreatePoint(Int($iX + $iWidth), Int($iY + $iHeight))
 			If Not IsObj($atPoint[2]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$atPoint[3] = __LOImpress_CreatePoint($iX, $iY)
+			$atPoint[3] = __LODraw_CreatePoint($iX, $iY)
 			If Not IsObj($atPoint[3]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$aiFlags[0] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
-			$aiFlags[1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
-			$aiFlags[2] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
-			$aiFlags[3] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[0] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL
+			$aiFlags[2] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[3] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL
 
 			$oShape.FillColor = 7512015 ; Light blue
 
-		Case $LOI_DRAWSHAPE_TYPE_LINE_LINE, $LOI_DRAWSHAPE_TYPE_LINE_LINE_45
+		Case $LOD_DRAWSHAPE_TYPE_LINE_LINE, $LOD_DRAWSHAPE_TYPE_LINE_LINE_45
 			$oShape = $oDoc.createInstance("com.sun.star.drawing.LineShape")
 			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-			$oShape.Name = __LOImpress_GetShapeName($oObj, "Line ")
+			$oShape.Name = __LODraw_GetShapeName($oObj, "Line ")
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 			$oObj.add($oShape)
@@ -2236,20 +2236,20 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, 
 			ReDim $atPoint[2]
 			ReDim $aiFlags[2]
 
-			$atPoint[0] = __LOImpress_CreatePoint($iX, $iY)
+			$atPoint[0] = __LODraw_CreatePoint($iX, $iY)
 			If Not IsObj($atPoint[0]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$atPoint[1] = __LOImpress_CreatePoint(Int($iX + $iWidth), Int($iY + $iHeight))
+			$atPoint[1] = __LODraw_CreatePoint(Int($iX + $iWidth), Int($iY + $iHeight))
 			If Not IsObj($atPoint[1]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$aiFlags[0] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
-			$aiFlags[1] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[0] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[1] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL
 
-		Case $LOI_DRAWSHAPE_TYPE_LINE_POLYGON, $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_45
+		Case $LOD_DRAWSHAPE_TYPE_LINE_POLYGON, $LOD_DRAWSHAPE_TYPE_LINE_POLYGON_45
 			$oShape = $oDoc.createInstance("com.sun.star.drawing.PolyLineShape")
 			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-			$oShape.Name = __LOImpress_GetShapeName($oObj, "Polygon 4 corners ")
+			$oShape.Name = __LODraw_GetShapeName($oObj, "Polygon 4 corners ")
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 			$oObj.add($oShape)
@@ -2257,34 +2257,34 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, 
 			ReDim $atPoint[5]
 			ReDim $aiFlags[5]
 
-			$atPoint[0] = __LOImpress_CreatePoint($iX, $iY)
+			$atPoint[0] = __LODraw_CreatePoint($iX, $iY)
 			If Not IsObj($atPoint[0]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$atPoint[1] = __LOImpress_CreatePoint(Int($iX + $iWidth), $iY)
+			$atPoint[1] = __LODraw_CreatePoint(Int($iX + $iWidth), $iY)
 			If Not IsObj($atPoint[1]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$atPoint[2] = __LOImpress_CreatePoint(Int($iX + $iWidth), Int($iY + $iHeight))
+			$atPoint[2] = __LODraw_CreatePoint(Int($iX + $iWidth), Int($iY + $iHeight))
 			If Not IsObj($atPoint[2]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$atPoint[3] = __LOImpress_CreatePoint($iX, Int($iY + $iHeight))
+			$atPoint[3] = __LODraw_CreatePoint($iX, Int($iY + $iHeight))
 			If Not IsObj($atPoint[3]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$atPoint[4] = __LOImpress_CreatePoint($iX, $iY)
+			$atPoint[4] = __LODraw_CreatePoint($iX, $iY)
 			If Not IsObj($atPoint[4]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$aiFlags[0] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
-			$aiFlags[1] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
-			$aiFlags[2] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
-			$aiFlags[3] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
-			$aiFlags[4] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[0] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[1] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[2] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[3] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[4] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL
 
 			$oShape.FillColor = $LO_COLOR_OFF
 
-		Case $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_FILLED, $LOI_DRAWSHAPE_TYPE_LINE_POLYGON_45_FILLED
+		Case $LOD_DRAWSHAPE_TYPE_LINE_POLYGON_FILLED, $LOD_DRAWSHAPE_TYPE_LINE_POLYGON_45_FILLED
 			$oShape = $oDoc.createInstance("com.sun.star.drawing.PolyPolygonShape")
 			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-			$oShape.Name = __LOImpress_GetShapeName($oObj, "Polygon 4 corners ")
+			$oShape.Name = __LODraw_GetShapeName($oObj, "Polygon 4 corners ")
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 			$oObj.add($oShape)
@@ -2292,31 +2292,31 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, 
 			ReDim $atPoint[5]
 			ReDim $aiFlags[5]
 
-			$atPoint[0] = __LOImpress_CreatePoint($iX, $iY)
+			$atPoint[0] = __LODraw_CreatePoint($iX, $iY)
 			If Not IsObj($atPoint[0]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$atPoint[1] = __LOImpress_CreatePoint(Int($iX + $iWidth), $iY)
+			$atPoint[1] = __LODraw_CreatePoint(Int($iX + $iWidth), $iY)
 			If Not IsObj($atPoint[1]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$atPoint[2] = __LOImpress_CreatePoint(Int($iX + $iWidth), Int($iY + $iHeight))
+			$atPoint[2] = __LODraw_CreatePoint(Int($iX + $iWidth), Int($iY + $iHeight))
 			If Not IsObj($atPoint[2]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$atPoint[3] = __LOImpress_CreatePoint($iX, Int($iY + $iHeight))
+			$atPoint[3] = __LODraw_CreatePoint($iX, Int($iY + $iHeight))
 			If Not IsObj($atPoint[3]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$atPoint[4] = __LOImpress_CreatePoint($iX, $iY)
+			$atPoint[4] = __LODraw_CreatePoint($iX, $iY)
 			If Not IsObj($atPoint[4]) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-			$aiFlags[0] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
-			$aiFlags[1] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
-			$aiFlags[2] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
-			$aiFlags[3] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
-			$aiFlags[4] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[0] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[1] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[2] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[3] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL
+			$aiFlags[4] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL
 
 			$oShape.FillColor = 7512015 ; Light blue
 	EndSwitch
 
-	If __LO_IntIsBetween($iShapeType, $LOI_DRAWSHAPE_TYPE_CONNECTOR, $LOI_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT_ENDS_ARROW, "", $LOI_DRAWSHAPE_TYPE_LINE_DIMENSION) Then
+	If __LO_IntIsBetween($iShapeType, $LOD_DRAWSHAPE_TYPE_CONNECTOR, $LOD_DRAWSHAPE_TYPE_CONNECTOR_STRAIGHT_ENDS_ARROW, "", $LOD_DRAWSHAPE_TYPE_LINE_DIMENSION) Then
 		$oShape.StartPosition = $tStart
 		$oShape.EndPosition = $tEnd
 
@@ -2347,18 +2347,18 @@ Func __LOImpress_DrawShape_CreateLine(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, 
 	$oShape.Position = $tPos
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oShape)
-EndFunc   ;==>__LOImpress_DrawShape_CreateLine
+EndFunc   ;==>__LODraw_DrawShape_CreateLine
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_DrawShape_CreateStars
+; Name ..........: __LODraw_DrawShape_CreateStars
 ; Description ...: Create a Star or Banner type Shape.
-; Syntax ........: __LOImpress_DrawShape_CreateStars(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+; Syntax ........: __LODraw_DrawShape_CreateStars(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 ; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iShapeType          - (93-104) The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_STARS_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iShapeType          - (93-104) The Type of shape to create. See $LOD_DRAWSHAPE_TYPE_STARS_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -2368,7 +2368,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateLine
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iX not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iY not an Integer.
-;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_STARS_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOD_DRAWSHAPE_TYPE_STARS_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.drawing.CustomShape" Object.
 ;                  @Error: 2, @Extended: 2 = Failed to create a property structure.
@@ -2380,13 +2380,13 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateLine
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The following shapes are not implemented into LibreOffice as of L.O. Version 7.3.4.2 for automation, and thus will not work:
-;                  $LOI_DRAWSHAPE_TYPE_STARS_6_POINT, $LOI_DRAWSHAPE_TYPE_STARS_12_POINT, $LOI_DRAWSHAPE_TYPE_STARS_SIGNET, $LOI_DRAWSHAPE_TYPE_STARS_6_POINT_CONCAVE.
+;                  $LOD_DRAWSHAPE_TYPE_STARS_6_POINT, $LOD_DRAWSHAPE_TYPE_STARS_12_POINT, $LOD_DRAWSHAPE_TYPE_STARS_SIGNET, $LOD_DRAWSHAPE_TYPE_STARS_6_POINT_CONCAVE.
 ; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_DrawShape_CreateStars(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_DrawShape_CreateStars(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oShape, $oDoc
@@ -2400,7 +2400,7 @@ Func __LOImpress_DrawShape_CreateStars(ByRef $oObj, $iWidth, $iHeight, $iX, $iY,
 	If Not IsInt($iY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not IsInt($iShapeType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
-	$oDoc = __LOImpress_GetParentDoc($oObj)
+	$oDoc = __LODraw_GetParentDoc($oObj)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$oShape = $oDoc.createInstance("com.sun.star.drawing.CustomShape")
@@ -2410,44 +2410,44 @@ Func __LOImpress_DrawShape_CreateStars(ByRef $oObj, $iWidth, $iHeight, $iX, $iY,
 	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
 	Switch $iShapeType
-		Case $LOI_DRAWSHAPE_TYPE_STARS_4_POINT
+		Case $LOD_DRAWSHAPE_TYPE_STARS_4_POINT
 			$tProp.Value = "star4"
 
-		Case $LOI_DRAWSHAPE_TYPE_STARS_5_POINT
+		Case $LOD_DRAWSHAPE_TYPE_STARS_5_POINT
 			$tProp.Value = "star5"
 
-		Case $LOI_DRAWSHAPE_TYPE_STARS_6_POINT
+		Case $LOD_DRAWSHAPE_TYPE_STARS_6_POINT
 			$tProp.Value = "star6" ; "non-primitive"
 
-		Case $LOI_DRAWSHAPE_TYPE_STARS_6_POINT_CONCAVE
+		Case $LOD_DRAWSHAPE_TYPE_STARS_6_POINT_CONCAVE
 			$tProp.Value = "concave-star6" ; "non-primitive"
 
-		Case $LOI_DRAWSHAPE_TYPE_STARS_8_POINT
+		Case $LOD_DRAWSHAPE_TYPE_STARS_8_POINT
 			$tProp.Value = "star8"
 
-		Case $LOI_DRAWSHAPE_TYPE_STARS_12_POINT
+		Case $LOD_DRAWSHAPE_TYPE_STARS_12_POINT
 			$tProp.Value = "star12" ; "non-primitive"
 
-		Case $LOI_DRAWSHAPE_TYPE_STARS_24_POINT
+		Case $LOD_DRAWSHAPE_TYPE_STARS_24_POINT
 			$tProp.Value = "star24"
 
-		Case $LOI_DRAWSHAPE_TYPE_STARS_DOORPLATE
+		Case $LOD_DRAWSHAPE_TYPE_STARS_DOORPLATE
 			$tProp.Value = "mso-spt21" ; "doorplate"
 
-		Case $LOI_DRAWSHAPE_TYPE_STARS_EXPLOSION
+		Case $LOD_DRAWSHAPE_TYPE_STARS_EXPLOSION
 			$tProp.Value = "bang"
 
-		Case $LOI_DRAWSHAPE_TYPE_STARS_SCROLL_HORIZONTAL
+		Case $LOD_DRAWSHAPE_TYPE_STARS_SCROLL_HORIZONTAL
 			$tProp.Value = "horizontal-scroll"
 
-		Case $LOI_DRAWSHAPE_TYPE_STARS_SCROLL_VERTICAL
+		Case $LOD_DRAWSHAPE_TYPE_STARS_SCROLL_VERTICAL
 			$tProp.Value = "vertical-scroll"
 
-		Case $LOI_DRAWSHAPE_TYPE_STARS_SIGNET
+		Case $LOD_DRAWSHAPE_TYPE_STARS_SIGNET
 			$tProp.Value = "signet" ; "non-primitive"
 	EndSwitch
 
-	$oShape.Name = __LOImpress_GetShapeName($oObj, "Shape ")
+	$oShape.Name = __LODraw_GetShapeName($oObj, "Shape ")
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$oObj.add($oShape)
@@ -2474,23 +2474,23 @@ Func __LOImpress_DrawShape_CreateStars(ByRef $oObj, $iWidth, $iHeight, $iX, $iY,
 	; Settings for TextBox use.
 	$oShape.TextMinimumFrameWidth = $iWidth
 	$oShape.TextMinimumFrameHeight = $iHeight
-	$oShape.TextVerticalAdjust = $LOI_ALIGN_VERT_MIDDLE
+	$oShape.TextVerticalAdjust = $LOD_ALIGN_VERT_MIDDLE
 	$oShape.TextAutoGrowHeight = False
 	$oShape.TextAutoGrowWidth = False
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oShape)
-EndFunc   ;==>__LOImpress_DrawShape_CreateStars
+EndFunc   ;==>__LODraw_DrawShape_CreateStars
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_DrawShape_CreateSymbol
+; Name ..........: __LODraw_DrawShape_CreateSymbol
 ; Description ...: Create a Symbol type Shape.
-; Syntax ........: __LOImpress_DrawShape_CreateSymbol(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+; Syntax ........: __LODraw_DrawShape_CreateSymbol(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
 ; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iShapeType          - (105-122) The Type of shape to create. See $LOI_DRAWSHAPE_TYPE_SYMBOL_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iShapeType          - (105-122) The Type of shape to create. See $LOD_DRAWSHAPE_TYPE_SYMBOL_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -2500,7 +2500,7 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateStars
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iX not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iY not an Integer.
-;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOI_DRAWSHAPE_TYPE_SYMBOL_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOD_DRAWSHAPE_TYPE_SYMBOL_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.drawing.CustomShape" Object.
 ;                  @Error: 2, @Extended: 2 = Failed to create a property structure.
@@ -2512,15 +2512,15 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateStars
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The following shapes are not implemented into LibreOffice as of L.O. Version 7.3.4.2 for automation, and thus will not work:
-;                  $LOI_DRAWSHAPE_TYPE_SYMBOL_CLOUD, $LOI_DRAWSHAPE_TYPE_SYMBOL_FLOWER, $LOI_DRAWSHAPE_TYPE_SYMBOL_PUZZLE, $LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_OCTAGON, $LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_DIAMOND
+;                  $LOD_DRAWSHAPE_TYPE_SYMBOL_CLOUD, $LOD_DRAWSHAPE_TYPE_SYMBOL_FLOWER, $LOD_DRAWSHAPE_TYPE_SYMBOL_PUZZLE, $LOD_DRAWSHAPE_TYPE_SYMBOL_BEVEL_OCTAGON, $LOD_DRAWSHAPE_TYPE_SYMBOL_BEVEL_DIAMOND
 ;                  The following shape is visually different from the manually inserted one in L.O. 7.3.4.2:
-;                  $LOI_DRAWSHAPE_TYPE_SYMBOL_LIGHTNING
+;                  $LOD_DRAWSHAPE_TYPE_SYMBOL_LIGHTNING
 ; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_DrawShape_CreateSymbol(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_DrawShape_CreateSymbol(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oShape, $oDoc
@@ -2534,7 +2534,7 @@ Func __LOImpress_DrawShape_CreateSymbol(ByRef $oObj, $iWidth, $iHeight, $iX, $iY
 	If Not IsInt($iY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not IsInt($iShapeType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
-	$oDoc = __LOImpress_GetParentDoc($oObj)
+	$oDoc = __LODraw_GetParentDoc($oObj)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$oShape = $oDoc.createInstance("com.sun.star.drawing.CustomShape")
@@ -2543,73 +2543,73 @@ Func __LOImpress_DrawShape_CreateSymbol(ByRef $oObj, $iWidth, $iHeight, $iX, $iY
 	$tProp = __LO_SetPropertyValue("Type", "")
 	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-	$oShape.Name = __LOImpress_GetShapeName($oObj, "Shape ")
+	$oShape.Name = __LODraw_GetShapeName($oObj, "Shape ")
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$oObj.add($oShape)
 
 	Switch $iShapeType
-		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_DIAMOND
+		Case $LOD_DRAWSHAPE_TYPE_SYMBOL_BEVEL_DIAMOND
 			$tProp.Value = "col-502ad400"
 
-		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_OCTAGON
+		Case $LOD_DRAWSHAPE_TYPE_SYMBOL_BEVEL_OCTAGON
 			$tProp.Value = "col-60da8460"
 
-		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_SQUARE
+		Case $LOD_DRAWSHAPE_TYPE_SYMBOL_BEVEL_SQUARE
 			$tProp.Value = "quad-bevel"
 
-		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_BRACE_DOUBLE
+		Case $LOD_DRAWSHAPE_TYPE_SYMBOL_BRACE_DOUBLE
 			$tProp.Value = "brace-pair"
 			$oShape.FillColor = $LO_COLOR_OFF
 
-		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_BRACE_LEFT
+		Case $LOD_DRAWSHAPE_TYPE_SYMBOL_BRACE_LEFT
 			$tProp.Value = "left-brace"
 			$oShape.FillColor = $LO_COLOR_OFF
 
-		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_BRACE_RIGHT
+		Case $LOD_DRAWSHAPE_TYPE_SYMBOL_BRACE_RIGHT
 			$tProp.Value = "right-brace"
 			$oShape.FillColor = $LO_COLOR_OFF
 
-		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_BRACKET_DOUBLE
+		Case $LOD_DRAWSHAPE_TYPE_SYMBOL_BRACKET_DOUBLE
 			$tProp.Value = "bracket-pair"
 			$oShape.FillColor = $LO_COLOR_OFF
 
-		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_BRACKET_LEFT
+		Case $LOD_DRAWSHAPE_TYPE_SYMBOL_BRACKET_LEFT
 			$tProp.Value = "left-bracket"
 			$oShape.FillColor = $LO_COLOR_OFF
 
-		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_BRACKET_RIGHT
+		Case $LOD_DRAWSHAPE_TYPE_SYMBOL_BRACKET_RIGHT
 			$tProp.Value = "right-bracket"
 			$oShape.FillColor = $LO_COLOR_OFF
 
-		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_CLOUD
+		Case $LOD_DRAWSHAPE_TYPE_SYMBOL_CLOUD
 ;~ Custom Shape Geometry Type = "non-primitive" ???? Try "cloud"
 			$tProp.Value = "cloud"
 
-		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_FLOWER
+		Case $LOD_DRAWSHAPE_TYPE_SYMBOL_FLOWER
 ;~ Custom Shape Geometry Type = "non-primitive" ???? Try "flower"
 			$tProp.Value = "flower"
 
-		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_HEART
+		Case $LOD_DRAWSHAPE_TYPE_SYMBOL_HEART
 			$tProp.Value = "heart"
 
-		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_LIGHTNING
+		Case $LOD_DRAWSHAPE_TYPE_SYMBOL_LIGHTNING
 ;~ Custom Shape Geometry Type = "non-primitive" ???? Try "lightning"
 			$tProp.Value = "lightning"
 
-		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_MOON
+		Case $LOD_DRAWSHAPE_TYPE_SYMBOL_MOON
 			$tProp.Value = "moon"
 
-		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_SMILEY
+		Case $LOD_DRAWSHAPE_TYPE_SYMBOL_SMILEY
 			$tProp.Value = "smiley"
 
-		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_SUN
+		Case $LOD_DRAWSHAPE_TYPE_SYMBOL_SUN
 			$tProp.Value = "sun"
 
-		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_PROHIBITED
+		Case $LOD_DRAWSHAPE_TYPE_SYMBOL_PROHIBITED
 			$tProp.Value = "forbidden"
 
-		Case $LOI_DRAWSHAPE_TYPE_SYMBOL_PUZZLE
+		Case $LOD_DRAWSHAPE_TYPE_SYMBOL_PUZZLE
 			$tProp.Value = "puzzle"
 	EndSwitch
 
@@ -2635,20 +2635,20 @@ Func __LOImpress_DrawShape_CreateSymbol(ByRef $oObj, $iWidth, $iHeight, $iX, $iY
 	; Settings for TextBox use.
 	$oShape.TextMinimumFrameWidth = $iWidth
 	$oShape.TextMinimumFrameHeight = $iHeight
-	$oShape.TextVerticalAdjust = $LOI_ALIGN_VERT_MIDDLE
+	$oShape.TextVerticalAdjust = $LOD_ALIGN_VERT_MIDDLE
 	$oShape.TextAutoGrowHeight = False
 	$oShape.TextAutoGrowWidth = False
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oShape)
-EndFunc   ;==>__LOImpress_DrawShape_CreateSymbol
+EndFunc   ;==>__LODraw_DrawShape_CreateSymbol
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_DrawShape_GetCustomType
+; Name ..........: __LODraw_DrawShape_GetCustomType
 ; Description ...: Return the Shape Type Constant corresponding to the Custom Shape Type string.
-; Syntax ........: __LOImpress_DrawShape_GetCustomType($sCusShapeType)
+; Syntax ........: __LODraw_DrawShape_GetCustomType($sCusShapeType)
 ; Parameters ....: $sCusShapeType       - The Returned Custom Shape Type Value from CustomShapeGeometry Array of properties.
 ; Return values .: Success: Integer or -1
-;                  @Error: 0, @Extended: 0, Return: Integer = Success. Custom Shape Type was successfully identified. Returning the Constant value of the Shape, see Constants $LOI_DRAWSHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Custom Shape Type was successfully identified. Returning the Constant value of the Shape, see Constants $LOD_DRAWSHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3
 ;                  @Error: 0, @Extended: 0, Return: -1 = Success. Custom Shape is of an unimplemented type that has an ambiguous name, and cannot be identified. See Remarks.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
@@ -2657,361 +2657,361 @@ EndFunc   ;==>__LOImpress_DrawShape_CreateSymbol
 ; Modified ......:
 ; Remarks .......: Some shapes are not implemented, or not fully implemented into LibreOffice for automation, consequently they do not have appropriate type names as of yet. Many have simply ambiguous names, such as "non-primitive".
 ;                  #1 Because of this the following shape types cannot be identified, and this function will return -1:
-;                  - $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_RIGHT, known as "mso-spt100".
-;                  - $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CORNER_RIGHT, known as "non-primitive", should be "corner-right-arrow".
-;                  - $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_RIGHT_OR_LEFT, known as "non-primitive", should be "right-left-arrow".
-;                  - $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_S_SHAPED, known as "non-primitive", should be "s-sharped-arrow".
-;                  - $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_SPLIT, known as "non-primitive", should be "split-arrow".
-;                  - $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_STRIPED_RIGHT, known as "mso-spt100", should be "striped-right-arrow".
-;                  - $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_RIGHT, known as "mso-spt89", should be "up-right-arrow-callout".
-;                  - $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_RIGHT_DOWN, known as "mso-spt100", should be "up-right-down-arrow".
-;                  - $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE_PIE, known as "mso-spt100", should be "circle-pie".
-;                  - $LOI_DRAWSHAPE_TYPE_STARS_6_POINT, known as "non-primitive", should be "star6".
-;                  - $LOI_DRAWSHAPE_TYPE_STARS_6_POINT_CONCAVE, known as "non-primitive", should be "concave-star6".
-;                  - $LOI_DRAWSHAPE_TYPE_STARS_12_POINT, known as "non-primitive", should be "star12".
-;                  - $LOI_DRAWSHAPE_TYPE_STARS_SIGNET, known as "non-primitive", should be "signet".
-;                  - $LOI_DRAWSHAPE_TYPE_SYMBOL_CLOUD, known as "non-primitive", should be "cloud"?
-;                  - $LOI_DRAWSHAPE_TYPE_SYMBOL_FLOWER, known as "non-primitive", should be "flower"?
-;                  - $LOI_DRAWSHAPE_TYPE_SYMBOL_LIGHTNING, known as "non-primitive", should be "lightning".
+;                  - $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_RIGHT, known as "mso-spt100".
+;                  - $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_CORNER_RIGHT, known as "non-primitive", should be "corner-right-arrow".
+;                  - $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_RIGHT_OR_LEFT, known as "non-primitive", should be "right-left-arrow".
+;                  - $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_S_SHAPED, known as "non-primitive", should be "s-sharped-arrow".
+;                  - $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_SPLIT, known as "non-primitive", should be "split-arrow".
+;                  - $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_STRIPED_RIGHT, known as "mso-spt100", should be "striped-right-arrow".
+;                  - $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_RIGHT, known as "mso-spt89", should be "up-right-arrow-callout".
+;                  - $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_RIGHT_DOWN, known as "mso-spt100", should be "up-right-down-arrow".
+;                  - $LOD_DRAWSHAPE_TYPE_BASIC_CIRCLE_PIE, known as "mso-spt100", should be "circle-pie".
+;                  - $LOD_DRAWSHAPE_TYPE_STARS_6_POINT, known as "non-primitive", should be "star6".
+;                  - $LOD_DRAWSHAPE_TYPE_STARS_6_POINT_CONCAVE, known as "non-primitive", should be "concave-star6".
+;                  - $LOD_DRAWSHAPE_TYPE_STARS_12_POINT, known as "non-primitive", should be "star12".
+;                  - $LOD_DRAWSHAPE_TYPE_STARS_SIGNET, known as "non-primitive", should be "signet".
+;                  - $LOD_DRAWSHAPE_TYPE_SYMBOL_CLOUD, known as "non-primitive", should be "cloud"?
+;                  - $LOD_DRAWSHAPE_TYPE_SYMBOL_FLOWER, known as "non-primitive", should be "flower"?
+;                  - $LOD_DRAWSHAPE_TYPE_SYMBOL_LIGHTNING, known as "non-primitive", should be "lightning".
 ;                  #2 The following Shapes implement the same type names, and are consequently indistinguishable:
-;                  - $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE, $LOI_DRAWSHAPE_TYPE_BASIC_ELLIPSE (The Value of $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE is returned for either one.)
-;                  - $LOI_DRAWSHAPE_TYPE_BASIC_SQUARE, $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE (The Value of $LOI_DRAWSHAPE_TYPE_BASIC_SQUARE is returned for either one.)
-;                  - $LOI_DRAWSHAPE_TYPE_BASIC_SQUARE_ROUNDED, $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE_ROUNDED (The Value of $LOI_DRAWSHAPE_TYPE_BASIC_SQUARE_ROUNDED is returned for either one.)
+;                  - $LOD_DRAWSHAPE_TYPE_BASIC_CIRCLE, $LOD_DRAWSHAPE_TYPE_BASIC_ELLIPSE (The Value of $LOD_DRAWSHAPE_TYPE_BASIC_CIRCLE is returned for either one.)
+;                  - $LOD_DRAWSHAPE_TYPE_BASIC_SQUARE, $LOD_DRAWSHAPE_TYPE_BASIC_RECTANGLE (The Value of $LOD_DRAWSHAPE_TYPE_BASIC_SQUARE is returned for either one.)
+;                  - $LOD_DRAWSHAPE_TYPE_BASIC_SQUARE_ROUNDED, $LOD_DRAWSHAPE_TYPE_BASIC_RECTANGLE_ROUNDED (The Value of $LOD_DRAWSHAPE_TYPE_BASIC_SQUARE_ROUNDED is returned for either one.)
 ;                  #3 The following Shapes have strange names that may change in the future, but currently are able to be identified:
-;                  - $LOI_DRAWSHAPE_TYPE_STARS_DOORPLATE, known as, "mso-spt21", should be "doorplate"
-;                  - $LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_DIAMOND, known as, "col-502ad400", should be ??
-;                  - $LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_OCTAGON, known as, "col-60da8460", should be ??
+;                  - $LOD_DRAWSHAPE_TYPE_STARS_DOORPLATE, known as, "mso-spt21", should be "doorplate"
+;                  - $LOD_DRAWSHAPE_TYPE_SYMBOL_BEVEL_DIAMOND, known as, "col-502ad400", should be ??
+;                  - $LOD_DRAWSHAPE_TYPE_SYMBOL_BEVEL_OCTAGON, known as, "col-60da8460", should be ??
 ;                  #4 The following Shapes are customizable one to another, and are consequently indistinguishable:
-;                  - $LOI_DRAWSHAPE_TYPE_FONTWORK_* (The Value of $LOI_DRAWSHAPE_TYPE_FONTWORK_AIR_MAIL is returned for any of these.)
+;                  - $LOD_DRAWSHAPE_TYPE_FONTWORK_* (The Value of $LOD_DRAWSHAPE_TYPE_FONTWORK_AIR_MAIL is returned for any of these.)
 ; Related .......:
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_DrawShape_GetCustomType($sCusShapeType)
+Func __LODraw_DrawShape_GetCustomType($sCusShapeType)
 	If Not IsString($sCusShapeType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	Switch $sCusShapeType
 		Case "quad-arrow"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_4_WAY)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_4_WAY)
 
 		Case "quad-arrow-callout"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_4_WAY)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_4_WAY)
 
 		Case "down-arrow-callout"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_DOWN)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_DOWN)
 
 		Case "left-arrow-callout"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_LEFT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_LEFT)
 
 		Case "left-right-arrow-callout"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_LEFT_RIGHT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_LEFT_RIGHT)
 
 		Case "right-arrow-callout"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_RIGHT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_RIGHT)
 
 		Case "up-arrow-callout"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP)
 
 		Case "up-down-arrow-callout"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_DOWN)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_DOWN)
 
 ;~ 	Case "mso-spt100" ; Can't include this one as other shapes return mso-spt100 also
-;~ Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_RIGHT)
+;~ Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_CALLOUT_UP_RIGHT)
 
 		Case "circular-arrow"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CIRCULAR)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_CIRCULAR)
 
 		Case "corner-right-arrow" ; "non-primitive"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_CORNER_RIGHT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_CORNER_RIGHT)
 
 		Case "down-arrow"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_DOWN)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_DOWN)
 
 		Case "left-arrow"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_LEFT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_LEFT)
 
 		Case "left-right-arrow"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_LEFT_RIGHT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_LEFT_RIGHT)
 
 		Case "notched-right-arrow"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_NOTCHED_RIGHT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_NOTCHED_RIGHT)
 
 		Case "right-arrow"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_RIGHT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_RIGHT)
 
 		Case "right-left-arrow" ; "non-primitive"??
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_RIGHT_OR_LEFT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_RIGHT_OR_LEFT)
 
 		Case "s-sharped-arrow" ; "non-primitive"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_S_SHAPED)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_S_SHAPED)
 
 		Case "split-arrow" ; "non-primitive"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_SPLIT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_SPLIT)
 
 		Case "striped-right-arrow" ; "mso-spt100"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_STRIPED_RIGHT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_STRIPED_RIGHT)
 
 		Case "up-arrow"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_UP)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_UP)
 
 		Case "up-down-arrow"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_DOWN)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_DOWN)
 
 		Case "up-right-arrow-callout", "mso-spt89" ; "mso-spt89"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_RIGHT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_RIGHT)
 
 		Case "up-right-down-arrow" ; "mso-spt100"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_RIGHT_DOWN)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_ARROWS_ARROW_UP_RIGHT_DOWN)
 
 		Case "chevron"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_CHEVRON)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_ARROWS_CHEVRON)
 
 		Case "pentagon-right"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_ARROWS_PENTAGON)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_ARROWS_PENTAGON)
 
 		Case "block-arc"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_BASIC_ARC_BLOCK)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_BASIC_ARC_BLOCK)
 
 		Case "circle-pie" ; "mso-spt100"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE_PIE)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_BASIC_CIRCLE_PIE)
 
 		Case "cross"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_BASIC_CROSS)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_BASIC_CROSS)
 
 		Case "cube"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_BASIC_CUBE)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_BASIC_CUBE)
 
 		Case "can"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_BASIC_CYLINDER)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_BASIC_CYLINDER)
 
 		Case "diamond"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_BASIC_DIAMOND)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_BASIC_DIAMOND)
 
 		Case "ellipse"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_BASIC_CIRCLE)
-;~ $LOI_DRAWSHAPE_TYPE_BASIC_ELLIPSE
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_BASIC_CIRCLE)
+;~ $LOD_DRAWSHAPE_TYPE_BASIC_ELLIPSE
 
 		Case "paper"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_BASIC_FOLDED_CORNER)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_BASIC_FOLDED_CORNER)
 
 		Case "frame" ; Not working
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_BASIC_FRAME)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_BASIC_FRAME)
 
 		Case "hexagon"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_BASIC_HEXAGON)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_BASIC_HEXAGON)
 
 		Case "octagon"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_BASIC_OCTAGON)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_BASIC_OCTAGON)
 
 		Case "parallelogram"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_BASIC_PARALLELOGRAM)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_BASIC_PARALLELOGRAM)
 
 		Case "rectangle"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_BASIC_SQUARE)
-;~ $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_BASIC_SQUARE)
+;~ $LOD_DRAWSHAPE_TYPE_BASIC_RECTANGLE
 
 		Case "round-rectangle"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_BASIC_SQUARE_ROUNDED)
-;~ $LOI_DRAWSHAPE_TYPE_BASIC_RECTANGLE_ROUNDED
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_BASIC_SQUARE_ROUNDED)
+;~ $LOD_DRAWSHAPE_TYPE_BASIC_RECTANGLE_ROUNDED
 
 		Case "pentagon"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_BASIC_REGULAR_PENTAGON)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_BASIC_REGULAR_PENTAGON)
 
 		Case "ring"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_BASIC_RING)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_BASIC_RING)
 
 		Case "trapezoid"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_BASIC_TRAPEZOID)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_BASIC_TRAPEZOID)
 
 		Case "isosceles-triangle"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_BASIC_TRIANGLE_ISOSCELES)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_BASIC_TRIANGLE_ISOSCELES)
 
 		Case "right-triangle"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_BASIC_TRIANGLE_RIGHT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_BASIC_TRIANGLE_RIGHT)
 
 		Case "cloud-callout"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_CALLOUT_CLOUD)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_CALLOUT_CLOUD)
 
 		Case "line-callout-1"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_CALLOUT_LINE_1)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_CALLOUT_LINE_1)
 
 		Case "line-callout-2"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_CALLOUT_LINE_2)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_CALLOUT_LINE_2)
 
 		Case "line-callout-3"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_CALLOUT_LINE_3)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_CALLOUT_LINE_3)
 
 		Case "rectangular-callout"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_CALLOUT_RECTANGULAR)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_CALLOUT_RECTANGULAR)
 
 		Case "round-rectangular-callout"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_CALLOUT_RECTANGULAR_ROUNDED)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_CALLOUT_RECTANGULAR_ROUNDED)
 
 		Case "round-callout"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_CALLOUT_ROUND)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_CALLOUT_ROUND)
 
 		Case "flowchart-card"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_CARD)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_CARD)
 
 		Case "flowchart-collate"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_COLLATE)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_COLLATE)
 
 		Case "flowchart-connector"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_CONNECTOR)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_CONNECTOR)
 
 		Case "flowchart-off-page-connector"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_CONNECTOR_OFF_PAGE)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_CONNECTOR_OFF_PAGE)
 
 		Case "flowchart-data"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_DATA)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_DATA)
 
 		Case "flowchart-decision"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_DECISION)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_DECISION)
 
 		Case "flowchart-delay"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_DELAY)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_DELAY)
 
 		Case "flowchart-direct-access-storage"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_DIRECT_ACCESS_STORAGE)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_DIRECT_ACCESS_STORAGE)
 
 		Case "flowchart-display"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_DISPLAY)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_DISPLAY)
 
 		Case "flowchart-document"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_DOCUMENT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_DOCUMENT)
 
 		Case "flowchart-extract"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_EXTRACT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_EXTRACT)
 
 		Case "flowchart-internal-storage"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_INTERNAL_STORAGE)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_INTERNAL_STORAGE)
 
 		Case "flowchart-magnetic-disk"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_MAGNETIC_DISC)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_MAGNETIC_DISC)
 
 		Case "flowchart-manual-input"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_MANUAL_INPUT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_MANUAL_INPUT)
 
 		Case "flowchart-manual-operation"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_MANUAL_OPERATION)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_MANUAL_OPERATION)
 
 		Case "flowchart-merge"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_MERGE)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_MERGE)
 
 		Case "flowchart-multidocument"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_MULTIDOCUMENT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_MULTIDOCUMENT)
 
 		Case "flowchart-or"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_OR)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_OR)
 
 		Case "flowchart-preparation"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_PREPARATION)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_PREPARATION)
 
 		Case "flowchart-process"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_PROCESS)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_PROCESS)
 
 		Case "flowchart-alternate-process"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_PROCESS_ALTERNATE)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_PROCESS_ALTERNATE)
 
 		Case "flowchart-predefined-process"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_PROCESS_PREDEFINED)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_PROCESS_PREDEFINED)
 
 		Case "flowchart-punched-tape"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_PUNCHED_TAPE)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_PUNCHED_TAPE)
 
 		Case "flowchart-sequential-access"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_SEQUENTIAL_ACCESS)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_SEQUENTIAL_ACCESS)
 
 		Case "flowchart-sort"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_SORT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_SORT)
 
 		Case "flowchart-stored-data"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_STORED_DATA)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_STORED_DATA)
 
 		Case "flowchart-summing-junction"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_SUMMING_JUNCTION)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_SUMMING_JUNCTION)
 
 		Case "flowchart-terminator"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FLOWCHART_TERMINATOR)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FLOWCHART_TERMINATOR)
 
 		Case "fontwork-arch-down-pour", "fontwork-arch-left-pour", "fontwork-arch-right-pour", "fontwork-arch-up-pour", "fontwork-arch-down-curve", _
 				"fontwork-arch-left-curve", "fontwork-arch-right-curve", "fontwork-arch-up-curve", "fontwork-chevron-down", "fontwork-chevron-up", _
@@ -3020,141 +3020,141 @@ Func __LOImpress_DrawShape_GetCustomType($sCusShapeType)
 				"fontwork-slant-up", "fontwork-stop", "fontwork-triangle-up", "fontwork-triangle-down", "fontwork-open-circle-curve", "fontwork-open-circle-pour", _
 				"fontwork-plain-text", "fontwork-wave"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_FONTWORK_AIR_MAIL) ; Can't differentiate reliably
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_FONTWORK_AIR_MAIL) ; Can't differentiate reliably
 
 		Case "star4"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_STARS_4_POINT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_STARS_4_POINT)
 
 		Case "star5"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_STARS_5_POINT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_STARS_5_POINT)
 
 		Case "star6" ; "non-primitive"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_STARS_6_POINT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_STARS_6_POINT)
 
 		Case "concave-star6" ; "non-primitive"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_STARS_6_POINT_CONCAVE)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_STARS_6_POINT_CONCAVE)
 
 		Case "star8"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_STARS_8_POINT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_STARS_8_POINT)
 
 		Case "star12" ; "non-primitive"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_STARS_12_POINT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_STARS_12_POINT)
 
 		Case "star24"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_STARS_24_POINT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_STARS_24_POINT)
 
 		Case "mso-spt21", "doorplate" ; "doorplate"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_STARS_DOORPLATE)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_STARS_DOORPLATE)
 
 		Case "bang"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_STARS_EXPLOSION)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_STARS_EXPLOSION)
 
 		Case "horizontal-scroll"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_STARS_SCROLL_HORIZONTAL)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_STARS_SCROLL_HORIZONTAL)
 
 		Case "vertical-scroll"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_STARS_SCROLL_VERTICAL)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_STARS_SCROLL_VERTICAL)
 
 		Case "signet" ; "non-primitive"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_STARS_SIGNET)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_STARS_SIGNET)
 
 		Case "col-502ad400"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_DIAMOND)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_SYMBOL_BEVEL_DIAMOND)
 
 		Case "col-60da8460"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_OCTAGON)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_SYMBOL_BEVEL_OCTAGON)
 
 		Case "quad-bevel"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_BEVEL_SQUARE)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_SYMBOL_BEVEL_SQUARE)
 
 		Case "brace-pair"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_BRACE_DOUBLE)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_SYMBOL_BRACE_DOUBLE)
 
 		Case "left-brace"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_BRACE_LEFT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_SYMBOL_BRACE_LEFT)
 
 		Case "right-brace"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_BRACE_RIGHT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_SYMBOL_BRACE_RIGHT)
 
 		Case "bracket-pair"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_BRACKET_DOUBLE)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_SYMBOL_BRACKET_DOUBLE)
 
 		Case "left-bracket"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_BRACKET_LEFT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_SYMBOL_BRACKET_LEFT)
 
 		Case "right-bracket"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_BRACKET_RIGHT)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_SYMBOL_BRACKET_RIGHT)
 
 		Case "cloud"
 ;~ Custom Shape Geometry Type = "non-primitive" ???? Try "cloud"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_CLOUD)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_SYMBOL_CLOUD)
 
 		Case "flower"
 ;~ Custom Shape Geometry Type = "non-primitive" ???? Try "flower"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_FLOWER)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_SYMBOL_FLOWER)
 
 		Case "heart"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_HEART)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_SYMBOL_HEART)
 
 		Case "lightning"
 ;~ Custom Shape Geometry Type = "non-primitive" ???? Try "lightning"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_LIGHTNING)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_SYMBOL_LIGHTNING)
 
 		Case "moon"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_MOON)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_SYMBOL_MOON)
 
 		Case "smiley"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_SMILEY)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_SYMBOL_SMILEY)
 
 		Case "sun"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_SUN)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_SYMBOL_SUN)
 
 		Case "forbidden"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_PROHIBITED)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_SYMBOL_PROHIBITED)
 
 		Case "puzzle"
 
-			Return SetError($__LO_STATUS_SUCCESS, 0, $LOI_DRAWSHAPE_TYPE_SYMBOL_PUZZLE)
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOD_DRAWSHAPE_TYPE_SYMBOL_PUZZLE)
 
 		Case Else
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, -1)
 	EndSwitch
-EndFunc   ;==>__LOImpress_DrawShape_GetCustomType
+EndFunc   ;==>__LODraw_DrawShape_GetCustomType
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_DrawShapePointGetSettings
+; Name ..........: __LODraw_DrawShapePointGetSettings
 ; Description ...: Retrieve the current settings for a particular point in a shape.
-; Syntax ........: __LOImpress_DrawShapePointGetSettings(ByRef $avArray, ByRef $aiFlags, ByRef $atPoints, $iArrayElement)
+; Syntax ........: __LODraw_DrawShapePointGetSettings(ByRef $avArray, ByRef $aiFlags, ByRef $atPoints, $iArrayElement)
 ; Parameters ....: $avArray             - An array to fill with settings. Array will be directly modified.
 ;                  $aiFlags             - An Array of Point Type Flags returned from the Shape.
 ;                  $atPoints            - An Array of Points returned from the Shape.
@@ -3179,8 +3179,8 @@ EndFunc   ;==>__LOImpress_DrawShape_GetCustomType
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_DrawShapePointGetSettings(ByRef $avArray, ByRef $aiFlags, ByRef $atPoints, $iArrayElement)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_DrawShapePointGetSettings(ByRef $avArray, ByRef $aiFlags, ByRef $atPoints, $iArrayElement)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iX, $iY, $iPointType
@@ -3206,10 +3206,10 @@ Func __LOImpress_DrawShapePointGetSettings(ByRef $avArray, ByRef $aiFlags, ByRef
 
 	$avArray[2] = $iPointType
 
-	If ($iPointType = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL) Then
+	If ($iPointType = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL) Then
 		If ($iArrayElement <> (UBound($atPoints) - 1)) Then ; Requested point is not at the end of the array of points.
 
-			If ($aiFlags[$iArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then ; Point after requested point is a Control Point.
+			If ($aiFlags[$iArrayElement + 1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) Then ; Point after requested point is a Control Point.
 				; If a Point and the following Control point have the same coordinates, the point is not a curve.
 				$bIsCurve = (($atPoints[$iArrayElement].X() = $atPoints[$iArrayElement + 1].X()) And ($atPoints[$iArrayElement].Y() = $atPoints[$iArrayElement + 1].Y())) ? (False) : (True)
 
@@ -3230,18 +3230,18 @@ Func __LOImpress_DrawShapePointGetSettings(ByRef $avArray, ByRef $aiFlags, ByRef
 	$avArray[3] = $bIsCurve
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>__LOImpress_DrawShapePointGetSettings
+EndFunc   ;==>__LODraw_DrawShapePointGetSettings
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_DrawShapePointModify
+; Name ..........: __LODraw_DrawShapePointModify
 ; Description ...: Internal function for modifying A Shape's Points.
-; Syntax ........: __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iArrayElement[, $iX = Null[, $iY = Null[, $iPointType = Null[, $bIsCurve = Null]]]])
+; Syntax ........: __LODraw_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iArrayElement[, $iX = Null[, $iY = Null[, $iPointType = Null[, $bIsCurve = Null]]]])
 ; Parameters ....: $aiFlags             - An Array of Point Type Flags returned from the Shape. Array will be directly modified.
 ;                  $atPoints            - An Array of Points returned from the Shape. Array will be directly modified.
 ;                  $iArrayElement       - The Array element that contains the point to modify. This may be directly modified, depending on the settings.
 ;                  $iX                  - [optional] Default is Null. The X coordinate value, set in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - [optional] Default is Null. The Y coordinate value, set in Hundredths of a Millimeter (HMM).
-;                  $iPointType          - [optional] (0, 1, 3) Default is Null. The Type of Point to change the called point to. See Remarks. See constants $LOI_DRAWSHAPE_POINT_TYPE_* as defined in LibreOfficeImpress_Constants.au3
+;                  $iPointType          - [optional] (0, 1, 3) Default is Null. The Type of Point to change the called point to. See Remarks. See constants $LOD_DRAWSHAPE_POINT_TYPE_* as defined in LibreOfficeImpress_Constants.au3
 ;                  $bIsCurve            - [optional] Default is Null. If True, the Normal Point is a Curve. See remarks.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -3261,7 +3261,7 @@ EndFunc   ;==>__LOImpress_DrawShapePointGetSettings
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To skip parameters: Pass the Null keyword to any optional parameter.
-;                  Only $LOI_DRAWSHAPE_TYPE_LINE_* type shapes have Points that can be added to, removed, or modified.
+;                  Only $LOD_DRAWSHAPE_TYPE_LINE_* type shapes have Points that can be added to, removed, or modified.
 ;                  This is a homemade function as LibreOffice doesn't offer an easy way for modifying points in a shape. Consequently this will not produce similar results as when working with LibreOffice manually, and may wreck your shape's shape. Use with caution.
 ;                  For an unknown reason, I am unable to insert "SMOOTH" Points, and consequently, any smooth Points are reverted back to "Normal" points, but still having their Smooth control points upon insertion that were already present in the shape. If you modify a point to "SMOOTH" type, it will be, for now, replaced with "Symmetrical".
 ;                  The first and last points in a shape can only be a "Normal" Point Type. The last point cannot be Curved, but the first can be.
@@ -3270,8 +3270,8 @@ EndFunc   ;==>__LOImpress_DrawShapePointGetSettings
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iArrayElement, $iX = Null, $iY = Null, $iPointType = Null, $bIsCurve = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iArrayElement, $iX = Null, $iY = Null, $iPointType = Null, $bIsCurve = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iNextArrayElement, $iPreviousArrayElement, $iSymmetricalPointXValue, $iSymmetricalPointYValue, $iOffset, $iForOffset, $iReDimCount
@@ -3285,12 +3285,12 @@ Func __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iA
 	If ($iArrayElement <> UBound($atPoints) - 1) Then ; If The requested point to be modified is not at the end of the Array of points, find the next regular point.
 
 		For $i = ($iArrayElement + 1) To UBound($aiFlags) - 1 ; Locate the next non-Control Point in the Array for later use.
-			If ($aiFlags[$i] <> $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then
+			If ($aiFlags[$i] <> $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) Then
 				$iNextArrayElement = $i
 				ExitLoop
 			EndIf
 
-			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV)) ? (10) : (0))
+			Sleep((IsInt($i / $__LODCONST_SLEEP_DIV)) ? (10) : (0))
 		Next
 
 		If Not IsInt($iNextArrayElement) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
@@ -3302,12 +3302,12 @@ Func __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iA
 	If ($iArrayElement > 0) Then ; If Point requested is not the first point, find the previous Point's position.
 
 		For $i = ($iArrayElement - 1) To 0 Step -1 ; Locate the previous non-Control Point in the Array for later use.
-			If ($aiFlags[$i] <> $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then
+			If ($aiFlags[$i] <> $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) Then
 				$iPreviousArrayElement = $i
 				ExitLoop
 			EndIf
 
-			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV)) ? (10) : (0))
+			Sleep((IsInt($i / $__LODCONST_SLEEP_DIV)) ? (10) : (0))
 		Next
 
 		If Not IsInt($iPreviousArrayElement) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
@@ -3317,7 +3317,7 @@ Func __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iA
 	EndIf
 
 	If ($iX <> Null) Then
-		If ($iArrayElement < UBound($atPoints) - 1) And ($aiFlags[$iArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then ; Next point is a control point, check if this point is a curve.
+		If ($iArrayElement < UBound($atPoints) - 1) And ($aiFlags[$iArrayElement + 1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) Then ; Next point is a control point, check if this point is a curve.
 
 			If ($atPoints[$iArrayElement].X() = $atPoints[$iArrayElement + 1].X()) And ($atPoints[$iArrayElement].Y() = $atPoints[$iArrayElement + 1].Y()) Then ; Update the coordinates, because the point is not a curve.
 				$atPoints[$iArrayElement + 1].X = $iX
@@ -3328,7 +3328,7 @@ Func __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iA
 	EndIf
 
 	If ($iY <> Null) Then
-		If ($iArrayElement < UBound($atPoints) - 1) And ($aiFlags[$iArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then ; Next point is a control point, check if this point is a curve.
+		If ($iArrayElement < UBound($atPoints) - 1) And ($aiFlags[$iArrayElement + 1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) Then ; Next point is a control point, check if this point is a curve.
 
 			If ($atPoints[$iArrayElement].X() = $atPoints[$iArrayElement + 1].X()) And ($atPoints[$iArrayElement].Y() = $atPoints[$iArrayElement + 1].Y()) Then ; Update the coordinates, because the point is not a curve.
 				$atPoints[$iArrayElement + 1].Y = $iY
@@ -3339,17 +3339,17 @@ Func __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iA
 	EndIf
 
 	If ($iPointType <> Null) Then
-		If ($iPointType <> $LOI_DRAWSHAPE_POINT_TYPE_NORMAL) Then ; New point type is a curve.
+		If ($iPointType <> $LOD_DRAWSHAPE_POINT_TYPE_NORMAL) Then ; New point type is a curve.
 
-			If ($aiFlags[$iArrayElement] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL) Then ; Converting point from Normal to a curve.
+			If ($aiFlags[$iArrayElement] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL) Then ; Converting point from Normal to a curve.
 
 				; Pick the lowest X and Y value difference between previous point and current point and Next point and current Point.
 				$iSymmetricalPointXValue = ((($atPoints[$iArrayElement].X() - $atPoints[$iPreviousArrayElement].X()) * .5) < (($atPoints[$iNextArrayElement].X() - $atPoints[$iArrayElement].X()) * .5)) ? Int((($atPoints[$iArrayElement].X() - $atPoints[$iPreviousArrayElement].X()) * .5)) : Int((($atPoints[$iNextArrayElement].X() - $atPoints[$iArrayElement].X()) * .5))
 				$iSymmetricalPointYValue = ((($atPoints[$iArrayElement].Y() - $atPoints[$iPreviousArrayElement].Y()) * .5) < (($atPoints[$iNextArrayElement].Y() - $atPoints[$iArrayElement].Y()) * .5)) ? Int((($atPoints[$iArrayElement].Y() - $atPoints[$iPreviousArrayElement].Y()) * .5)) : Int((($atPoints[$iNextArrayElement].Y() - $atPoints[$iArrayElement].Y()) * .5))
 
-				If ($aiFlags[$iArrayElement - 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then ; previous point is a control Point, might just need to modify it.
+				If ($aiFlags[$iArrayElement - 1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) Then ; previous point is a control Point, might just need to modify it.
 
-					If (($iArrayElement - 2 > $iPreviousArrayElement) And $aiFlags[$iArrayElement - 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then ; there are two control points before this point, I can just modify the first point before.
+					If (($iArrayElement - 2 > $iPreviousArrayElement) And $aiFlags[$iArrayElement - 2] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) Then ; there are two control points before this point, I can just modify the first point before.
 						$tControlPoint1 = $atPoints[$iArrayElement - 2]
 
 						$tControlPoint2 = $atPoints[$iArrayElement - 1]
@@ -3359,21 +3359,21 @@ Func __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iA
 					Else ; There is only one control point, I need to create a new one.
 						$tControlPoint1 = $atPoints[$iArrayElement - 1]
 
-						$tControlPoint2 = __LOImpress_CreatePoint($atPoints[$iArrayElement].X() - $iSymmetricalPointXValue, $atPoints[$iArrayElement].Y() - $iSymmetricalPointYValue)
+						$tControlPoint2 = __LODraw_CreatePoint($atPoints[$iArrayElement].X() - $iSymmetricalPointXValue, $atPoints[$iArrayElement].Y() - $iSymmetricalPointYValue)
 						If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 					EndIf
 
 				Else ; Previous point is a normal point, need to create new control points.
-					$tControlPoint1 = __LOImpress_CreatePoint($atPoints[$iPreviousArrayElement].X(), $atPoints[$iPreviousArrayElement].Y())
+					$tControlPoint1 = __LODraw_CreatePoint($atPoints[$iPreviousArrayElement].X(), $atPoints[$iPreviousArrayElement].Y())
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					$tControlPoint2 = __LOImpress_CreatePoint($atPoints[$iArrayElement].X() - $iSymmetricalPointXValue, $atPoints[$iArrayElement].Y() - $iSymmetricalPointYValue)
+					$tControlPoint2 = __LODraw_CreatePoint($atPoints[$iArrayElement].X() - $iSymmetricalPointXValue, $atPoints[$iArrayElement].Y() - $iSymmetricalPointYValue)
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 				EndIf
 
-				If ($aiFlags[$iArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then ; Next point is a control Point, might just need to modify it.
+				If ($aiFlags[$iArrayElement + 1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) Then ; Next point is a control Point, might just need to modify it.
 
-					If (($iArrayElement + 2 < $iNextArrayElement) And $aiFlags[$iArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then ; there are two control points after this point, I can just modify the first point after.
+					If (($iArrayElement + 2 < $iNextArrayElement) And $aiFlags[$iArrayElement + 2] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) Then ; there are two control points after this point, I can just modify the first point after.
 						$tControlPoint4 = $atPoints[$iArrayElement + 2]
 
 						$tControlPoint3 = $atPoints[$iArrayElement + 1]
@@ -3381,7 +3381,7 @@ Func __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iA
 						$tControlPoint3.Y = ($atPoints[$iArrayElement].Y() + $iSymmetricalPointYValue)
 
 					Else ; There is only one control point, I need to create a new one and modify the other.
-						$tControlPoint3 = __LOImpress_CreatePoint($atPoints[$iArrayElement].X() + $iSymmetricalPointXValue, $atPoints[$iArrayElement].Y() + $iSymmetricalPointYValue)
+						$tControlPoint3 = __LODraw_CreatePoint($atPoints[$iArrayElement].X() + $iSymmetricalPointXValue, $atPoints[$iArrayElement].Y() + $iSymmetricalPointYValue)
 						If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
 
 						$tControlPoint4 = $atPoints[$iArrayElement + 1] ; Modify the Control Point.
@@ -3390,10 +3390,10 @@ Func __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iA
 					EndIf
 
 				Else ; Next point is a normal point, need to create new control points.
-					$tControlPoint3 = __LOImpress_CreatePoint(($atPoints[$iArrayElement].X() + $iSymmetricalPointXValue), ($atPoints[$iArrayElement].Y() + $iSymmetricalPointYValue))
+					$tControlPoint3 = __LODraw_CreatePoint(($atPoints[$iArrayElement].X() + $iSymmetricalPointXValue), ($atPoints[$iArrayElement].Y() + $iSymmetricalPointYValue))
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
 
-					$tControlPoint4 = __LOImpress_CreatePoint(Int($atPoints[$iNextArrayElement].X() - (($atPoints[$iNextArrayElement].X() - $atPoints[$iArrayElement].X()) * .5)), Int($atPoints[$iNextArrayElement].Y() - (($atPoints[$iNextArrayElement].Y() - $atPoints[$iArrayElement].Y()) * .5)))
+					$tControlPoint4 = __LODraw_CreatePoint(Int($atPoints[$iNextArrayElement].X() - (($atPoints[$iNextArrayElement].X() - $atPoints[$iArrayElement].X()) * .5)), Int($atPoints[$iNextArrayElement].Y() - (($atPoints[$iNextArrayElement].Y() - $atPoints[$iArrayElement].Y()) * .5)))
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
 				EndIf
 
@@ -3401,10 +3401,10 @@ Func __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iA
 				$iForOffset = 0
 				$iReDimCount = 4
 				; Check if there already was 4 control point present around this point I am modifying.
-				$iReDimCount -= ($aiFlags[$iArrayElement - 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) ? (1) : (0)
-				$iReDimCount -= (($iArrayElement - 2 > $iPreviousArrayElement) And ($aiFlags[$iArrayElement - 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) ? (1) : (0)
-				$iReDimCount -= ($aiFlags[$iArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) ? (1) : (0)
-				$iReDimCount -= (($iArrayElement + 2 < $iNextArrayElement) And ($aiFlags[$iArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) ? (1) : (0)
+				$iReDimCount -= ($aiFlags[$iArrayElement - 1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) ? (1) : (0)
+				$iReDimCount -= (($iArrayElement - 2 > $iPreviousArrayElement) And ($aiFlags[$iArrayElement - 2] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL)) ? (1) : (0)
+				$iReDimCount -= ($aiFlags[$iArrayElement + 1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) ? (1) : (0)
+				$iReDimCount -= (($iArrayElement + 2 < $iNextArrayElement) And ($aiFlags[$iArrayElement + 2] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL)) ? (1) : (0)
 
 				ReDim $avArray[UBound($atPoints) + $iReDimCount]
 				ReDim $avArray2[UBound($aiFlags) + $iReDimCount]
@@ -3423,31 +3423,31 @@ Func __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iA
 					If ($i = $iPreviousArrayElement) Then ; Insert the new or modified control points.
 
 						$avArray[$i + 1] = $tControlPoint1
-						$avArray2[$i + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+						$avArray2[$i + 1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL
 						$avArray[$i + 2] = $tControlPoint2
-						$avArray2[$i + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+						$avArray2[$i + 2] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL
 						$avArray[$i + 3] = $atPoints[$iArrayElement]
 						$avArray2[$i + 3] = $iPointType
 						$avArray[$i + 4] = $tControlPoint3
-						$avArray2[$i + 4] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+						$avArray2[$i + 4] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL
 						$avArray[$i + 5] = $tControlPoint4
-						$avArray2[$i + 5] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+						$avArray2[$i + 5] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL
 
 						$iOffset = 1 ; Add one to offset to skip the point I am modifying.
-						$iOffset += ($aiFlags[$iArrayElement - 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) ? (1) : (0) ; If the point I am modifying has a control point before it, I need to skip them in the PointsArray.
-						$iOffset += (($iArrayElement - 2 > $iPreviousArrayElement) And ($aiFlags[$iArrayElement - 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) ? (1) : (0) ; If the point I am modifying has two control points before it, I need to skip them in the PointsArray.
-						$iOffset += ($aiFlags[$iArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) ? (1) : (0) ; If the point I am modifying has a control point after it, I need to skip them in the PointsArray.
-						$iOffset += (($iArrayElement + 2 < $iNextArrayElement) And ($aiFlags[$iArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) ? (1) : (0) ; If the point I am modifying has two control points after it, I need to skip them in the PointsArray.
+						$iOffset += ($aiFlags[$iArrayElement - 1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) ? (1) : (0) ; If the point I am modifying has a control point before it, I need to skip them in the PointsArray.
+						$iOffset += (($iArrayElement - 2 > $iPreviousArrayElement) And ($aiFlags[$iArrayElement - 2] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL)) ? (1) : (0) ; If the point I am modifying has two control points before it, I need to skip them in the PointsArray.
+						$iOffset += ($aiFlags[$iArrayElement + 1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) ? (1) : (0) ; If the point I am modifying has a control point after it, I need to skip them in the PointsArray.
+						$iOffset += (($iArrayElement + 2 < $iNextArrayElement) And ($aiFlags[$iArrayElement + 2] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL)) ? (1) : (0) ; If the point I am modifying has two control points after it, I need to skip them in the PointsArray.
 
 						$iForOffset += 5 ; Add to $i to skip the elements I manually added.
 					EndIf
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV)) ? (10) : (0))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV)) ? (10) : (0))
 				Next
 
 				; Update the ArrayElement value to its new position.
-				$iArrayElement += ($aiFlags[$iArrayElement - 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) ? (0) : (1) ; If the point I am modifying has a control point before it, don't add one to array element, because I didn't have to create and insert a new control point.
-				$iArrayElement += (($iArrayElement - 2 > $iPreviousArrayElement) And ($aiFlags[$iArrayElement - 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) ? (0) : (1) ; If the point I am modifying has two control points before it, don't add one to array element, because I didn't have to create and insert a new control point.
+				$iArrayElement += ($aiFlags[$iArrayElement - 1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) ? (0) : (1) ; If the point I am modifying has a control point before it, don't add one to array element, because I didn't have to create and insert a new control point.
+				$iArrayElement += (($iArrayElement - 2 > $iPreviousArrayElement) And ($aiFlags[$iArrayElement - 2] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL)) ? (0) : (1) ; If the point I am modifying has two control points before it, don't add one to array element, because I didn't have to create and insert a new control point.
 
 				$atPoints = $avArray
 				$aiFlags = $avArray2
@@ -3457,35 +3457,35 @@ Func __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iA
 			EndIf
 
 		Else ; New Point is a Normal Point.
-			If ($aiFlags[$iArrayElement] <> $LOI_DRAWSHAPE_POINT_TYPE_NORMAL) Then ; Point being modified is not a normal type of point.
+			If ($aiFlags[$iArrayElement] <> $LOD_DRAWSHAPE_POINT_TYPE_NORMAL) Then ; Point being modified is not a normal type of point.
 
-				If ($aiFlags[$iPreviousArrayElement] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL) Then ; If previous point is a normal point, see if I need to delete control points or not.
+				If ($aiFlags[$iPreviousArrayElement] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL) Then ; If previous point is a normal point, see if I need to delete control points or not.
 
-					If ($aiFlags[$iPreviousArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then ; Point after previous point is a control point, see if previous point is a curved point.
+					If ($aiFlags[$iPreviousArrayElement + 1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) Then ; Point after previous point is a control point, see if previous point is a curved point.
 
 						If ($atPoints[$iPreviousArrayElement].X() <> $atPoints[$iPreviousArrayElement + 1].X()) And ($atPoints[$iPreviousArrayElement].Y() <> $atPoints[$iPreviousArrayElement + 1].Y()) Then
 							; Previous Point is a Curved normal point, copy the control points present.
 
 							$tControlPoint1 = $atPoints[$iPreviousArrayElement + 1]
 
-							If ($iPreviousArrayElement + 2 < $iArrayElement) And ($atPoints[$iPreviousArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint2 = $atPoints[$iPreviousArrayElement + 2] ; If two control points are present, copy them.
+							If ($iPreviousArrayElement + 2 < $iArrayElement) And ($atPoints[$iPreviousArrayElement + 2] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint2 = $atPoints[$iPreviousArrayElement + 2] ; If two control points are present, copy them.
 						EndIf
 					EndIf
 
 				Else ; Previous point is not a normal point.
 					; Copy Control Points present.
 
-					If ($aiFlags[$iPreviousArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint1 = $atPoints[$iPreviousArrayElement + 1]
+					If ($aiFlags[$iPreviousArrayElement + 1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint1 = $atPoints[$iPreviousArrayElement + 1]
 
-					If ($iPreviousArrayElement + 2 < $iArrayElement) And ($aiFlags[$iPreviousArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint2 = $atPoints[$iPreviousArrayElement + 2] ; If two control points are present, copy them.
+					If ($iPreviousArrayElement + 2 < $iArrayElement) And ($aiFlags[$iPreviousArrayElement + 2] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint2 = $atPoints[$iPreviousArrayElement + 2] ; If two control points are present, copy them.
 				EndIf
 
-				If ($aiFlags[$iNextArrayElement] <> $LOI_DRAWSHAPE_POINT_TYPE_NORMAL) Then
+				If ($aiFlags[$iNextArrayElement] <> $LOD_DRAWSHAPE_POINT_TYPE_NORMAL) Then
 					; Next point is a curve of some form, copy the control points.
 
-					If ($aiFlags[$iNextArrayElement - 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint4 = $atPoints[$iNextArrayElement - 1]
+					If ($aiFlags[$iNextArrayElement - 1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint4 = $atPoints[$iNextArrayElement - 1]
 
-					If ($iNextArrayElement - 2 > $iArrayElement) And ($aiFlags[$iNextArrayElement - 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint3 = $atPoints[$iNextArrayElement - 2] ; If two control points are present, copy them.
+					If ($iNextArrayElement - 2 > $iArrayElement) And ($aiFlags[$iNextArrayElement - 2] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint3 = $atPoints[$iNextArrayElement - 2] ; If two control points are present, copy them.
 				EndIf
 
 				$iOffset = 0
@@ -3518,10 +3518,10 @@ Func __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iA
 							$iOffset += 1
 
 							$avArray[$i + $iForOffset] = $tControlPoint1
-							$avArray2[$i + $iForOffset] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+							$avArray2[$i + $iForOffset] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL
 
 						Else
-							If ($aiFlags[$iPreviousArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $iOffset += 1 ; If there is a control point present, I need to skip it.
+							If ($aiFlags[$iPreviousArrayElement + 1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) Then $iOffset += 1 ; If there is a control point present, I need to skip it.
 						EndIf
 
 						If IsObj($tControlPoint2) Then
@@ -3529,10 +3529,10 @@ Func __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iA
 							$iOffset += 1
 
 							$avArray[$i + $iForOffset] = $tControlPoint2
-							$avArray2[$i + $iForOffset] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+							$avArray2[$i + $iForOffset] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL
 
 						Else
-							If (($iPreviousArrayElement + 2 < $iArrayElement) And ($aiFlags[$iPreviousArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) Then $iOffset += 1 ; If there is a control point present, I need to skip it.
+							If (($iPreviousArrayElement + 2 < $iArrayElement) And ($aiFlags[$iPreviousArrayElement + 2] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL)) Then $iOffset += 1 ; If there is a control point present, I need to skip it.
 						EndIf
 
 						$iForOffset += 1
@@ -3545,10 +3545,10 @@ Func __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iA
 							$iOffset += 1
 
 							$avArray[$i + $iForOffset] = $tControlPoint3
-							$avArray2[$i + $iForOffset] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+							$avArray2[$i + $iForOffset] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL
 
 						Else
-							If ($aiFlags[$iNextArrayElement - 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $iOffset += 1
+							If ($aiFlags[$iNextArrayElement - 1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) Then $iOffset += 1
 						EndIf
 
 						If IsObj($tControlPoint3) Then
@@ -3556,14 +3556,14 @@ Func __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iA
 							$iOffset += 1
 
 							$avArray[$i + $iForOffset] = $tControlPoint4
-							$avArray2[$i + $iForOffset] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+							$avArray2[$i + $iForOffset] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL
 
 						Else
-							If (($iNextArrayElement - 2 > $iArrayElement) And ($aiFlags[$iNextArrayElement - 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) Then $iOffset += 1
+							If (($iNextArrayElement - 2 > $iArrayElement) And ($aiFlags[$iNextArrayElement - 2] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL)) Then $iOffset += 1
 						EndIf
 					EndIf
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV)) ? (10) : (0))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV)) ? (10) : (0))
 				Next
 
 				; Update the ArrayElement value to its new position.
@@ -3580,28 +3580,28 @@ Func __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iA
 	EndIf
 
 	If ($bIsCurve <> Null) Then
-		If ($aiFlags[$iArrayElement] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL) Then ; If Point to modify is a normal point, then proceed, else point is a curve already.
+		If ($aiFlags[$iArrayElement] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL) Then ; If Point to modify is a normal point, then proceed, else point is a curve already.
 
-			If ($aiFlags[$iArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then ; Point after point to modify is a control point, just modify it.
+			If ($aiFlags[$iArrayElement + 1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) Then ; Point after point to modify is a control point, just modify it.
 				$tControlPoint3 = $atPoints[$iArrayElement + 1]
 
 				If ($bIsCurve = True) Then
 					$tControlPoint3.X = ($atPoints[$iArrayElement].X() + (($atPoints[$iNextArrayElement].X() - $atPoints[$iArrayElement].X()) * .5))
 					$tControlPoint3.Y = ($atPoints[$iArrayElement].Y() + (($atPoints[$iNextArrayElement].Y() - $atPoints[$iArrayElement].Y()) * .5))
 
-					If (($iArrayElement + 2 < $iNextArrayElement) And ($aiFlags[$iArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) Then
+					If (($iArrayElement + 2 < $iNextArrayElement) And ($aiFlags[$iArrayElement + 2] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL)) Then
 						$tControlPoint4 = $atPoints[$iArrayElement + 2] ; Copy the second control point.
 
 					Else ; Create a new control point.
-						$tControlPoint4 = __LOImpress_CreatePoint(Int($atPoints[$iNextArrayElement].X() - (($atPoints[$iNextArrayElement].X() - $atPoints[$iArrayElement].X()) * .5)), Int($atPoints[$iArrayElement].Y() - (($atPoints[$iNextArrayElement].Y() - $atPoints[$iArrayElement].Y()) * .5)))
+						$tControlPoint4 = __LODraw_CreatePoint(Int($atPoints[$iNextArrayElement].X() - (($atPoints[$iNextArrayElement].X() - $atPoints[$iArrayElement].X()) * .5)), Int($atPoints[$iArrayElement].Y() - (($atPoints[$iNextArrayElement].Y() - $atPoints[$iArrayElement].Y()) * .5)))
 						If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
 					EndIf
 
-				ElseIf ($bIsCurve = False) And ($aiFlags[$iNextArrayElement] <> $LOI_DRAWSHAPE_POINT_TYPE_NORMAL) Then ; Next point is a curve, so just modify the control point.
+				ElseIf ($bIsCurve = False) And ($aiFlags[$iNextArrayElement] <> $LOD_DRAWSHAPE_POINT_TYPE_NORMAL) Then ; Next point is a curve, so just modify the control point.
 					$tControlPoint3.X = $atPoints[$iArrayElement].X() ; When the control point after a point has the same coordinates, it means it is not a curve.
 					$tControlPoint3.Y = $atPoints[$iArrayElement].Y()
 					; Copy the second control point if it exists.
-					If (($iArrayElement + 2 < $iNextArrayElement) And ($aiFlags[$iArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) Then $tControlPoint4 = $atPoints[$iArrayElement + 2]
+					If (($iArrayElement + 2 < $iNextArrayElement) And ($aiFlags[$iArrayElement + 2] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL)) Then $tControlPoint4 = $atPoints[$iArrayElement + 2]
 
 				Else ; IsCurve = False, and next point is normal. delete control points.
 					$tControlPoint3 = Null
@@ -3609,10 +3609,10 @@ Func __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iA
 
 			Else ; Need to create new control points if IsCurve = True.
 				If ($bIsCurve = True) Then
-					$tControlPoint3 = __LOImpress_CreatePoint(Int($atPoints[$iArrayElement].X() + (($atPoints[$iNextArrayElement].X() - $atPoints[$iArrayElement].X()) * .5)), Int($atPoints[$iArrayElement].Y() + (($atPoints[$iNextArrayElement].Y() - $atPoints[$iArrayElement].Y()) * .5)))
+					$tControlPoint3 = __LODraw_CreatePoint(Int($atPoints[$iArrayElement].X() + (($atPoints[$iNextArrayElement].X() - $atPoints[$iArrayElement].X()) * .5)), Int($atPoints[$iArrayElement].Y() + (($atPoints[$iNextArrayElement].Y() - $atPoints[$iArrayElement].Y()) * .5)))
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
 
-					$tControlPoint4 = __LOImpress_CreatePoint(Int($atPoints[$iNextArrayElement].X() - (($atPoints[$iNextArrayElement].X() - $atPoints[$iArrayElement].X()) * .5)), Int($atPoints[$iNextArrayElement].Y() - (($atPoints[$iNextArrayElement].Y() - $atPoints[$iArrayElement].Y()) * .5)))
+					$tControlPoint4 = __LODraw_CreatePoint(Int($atPoints[$iNextArrayElement].X() - (($atPoints[$iNextArrayElement].X() - $atPoints[$iArrayElement].X()) * .5)), Int($atPoints[$iNextArrayElement].Y() - (($atPoints[$iNextArrayElement].Y() - $atPoints[$iArrayElement].Y()) * .5)))
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
 				EndIf
 			EndIf
@@ -3623,8 +3623,8 @@ Func __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iA
 			; Check how many control points I am keeping vs creating.
 			$iReDimCount += (IsObj($tControlPoint3)) ? (1) : (0)
 			$iReDimCount += (IsObj($tControlPoint4)) ? (1) : (0)
-			$iReDimCount -= ($aiFlags[$iArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) ? (1) : (0) ; If a control point already existed, minus one from ReDim as it is either not new, or I am deleting it.
-			$iReDimCount -= (($iArrayElement + 2 < $iNextArrayElement) And ($aiFlags[$iArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) ? (1) : (0)
+			$iReDimCount -= ($aiFlags[$iArrayElement + 1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) ? (1) : (0) ; If a control point already existed, minus one from ReDim as it is either not new, or I am deleting it.
+			$iReDimCount -= (($iArrayElement + 2 < $iNextArrayElement) And ($aiFlags[$iArrayElement + 2] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL)) ? (1) : (0)
 
 			ReDim $avArray[UBound($atPoints) + $iReDimCount]
 			ReDim $avArray2[UBound($aiFlags) + $iReDimCount]
@@ -3645,28 +3645,28 @@ Func __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iA
 
 					If IsObj($tControlPoint3) Then
 						$iForOffset += 1
-						If ($aiFlags[$iArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $iOffset += 1 ; If there is a control point present, I need to skip it.
+						If ($aiFlags[$iArrayElement + 1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) Then $iOffset += 1 ; If there is a control point present, I need to skip it.
 
 						$avArray[$i + $iForOffset] = $tControlPoint3
-						$avArray2[$i + $iForOffset] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+						$avArray2[$i + $iForOffset] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL
 
 					Else
-						If ($aiFlags[$iArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $iOffset += 1 ; If there is a control point present, I need to skip it.
+						If ($aiFlags[$iArrayElement + 1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) Then $iOffset += 1 ; If there is a control point present, I need to skip it.
 					EndIf
 
 					If IsObj($tControlPoint4) Then
 						$iForOffset += 1
-						If (($iArrayElement + 2 < $iNextArrayElement) And ($aiFlags[$iArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) Then $iOffset += 1
+						If (($iArrayElement + 2 < $iNextArrayElement) And ($aiFlags[$iArrayElement + 2] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL)) Then $iOffset += 1
 
 						$avArray[$i + $iForOffset] = $tControlPoint4
-						$avArray2[$i + $iForOffset] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+						$avArray2[$i + $iForOffset] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL
 
 					Else
-						If (($iArrayElement + 2 < $iNextArrayElement) And ($aiFlags[$iArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) Then $iOffset += 1 ; If there is a control point present, I need to skip it.
+						If (($iArrayElement + 2 < $iNextArrayElement) And ($aiFlags[$iArrayElement + 2] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL)) Then $iOffset += 1 ; If there is a control point present, I need to skip it.
 					EndIf
 				EndIf
 
-				Sleep((IsInt($i / $__LOICONST_SLEEP_DIV)) ? (10) : (0))
+				Sleep((IsInt($i / $__LODCONST_SLEEP_DIV)) ? (10) : (0))
 			Next
 
 			$atPoints = $avArray
@@ -3675,24 +3675,24 @@ Func __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iA
 		Else ; Point is a Curve, see if bIsCurve = False.
 			If ($bIsCurve = False) Then ; If bIsCurve = True, I can just skip it, as there is nothing to do when the point is a curve already.
 
-				If ($aiFlags[$iNextArrayElement] <> $LOI_DRAWSHAPE_POINT_TYPE_NORMAL) Then ; Next point is a curve, need to keep the control points.
-					If ($aiFlags[$iArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint3 = $atPoints[$iArrayElement + 1]
-					If ($iArrayElement + 2 < $iNextArrayElement) And ($aiFlags[$iArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint4 = $atPoints[$iArrayElement + 2]
+				If ($aiFlags[$iNextArrayElement] <> $LOD_DRAWSHAPE_POINT_TYPE_NORMAL) Then ; Next point is a curve, need to keep the control points.
+					If ($aiFlags[$iArrayElement + 1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint3 = $atPoints[$iArrayElement + 1]
+					If ($iArrayElement + 2 < $iNextArrayElement) And ($aiFlags[$iArrayElement + 2] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint4 = $atPoints[$iArrayElement + 2]
 				EndIf
 
-				If ($iPreviousArrayElement <> -1) And ($aiFlags[$iPreviousArrayElement] <> $LOI_DRAWSHAPE_POINT_TYPE_NORMAL) Then ; There is a previous point, and it is a curve, I need to keep the control points.
-					If ($aiFlags[$iPreviousArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint1 = $atPoints[$iPreviousArrayElement + 1]
-					If ($iPreviousArrayElement + 2 < $iArrayElement) And ($aiFlags[$iPreviousArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint2 = $atPoints[$iPreviousArrayElement + 2]
+				If ($iPreviousArrayElement <> -1) And ($aiFlags[$iPreviousArrayElement] <> $LOD_DRAWSHAPE_POINT_TYPE_NORMAL) Then ; There is a previous point, and it is a curve, I need to keep the control points.
+					If ($aiFlags[$iPreviousArrayElement + 1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint1 = $atPoints[$iPreviousArrayElement + 1]
+					If ($iPreviousArrayElement + 2 < $iArrayElement) And ($aiFlags[$iPreviousArrayElement + 2] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint2 = $atPoints[$iPreviousArrayElement + 2]
 
-				ElseIf ($iPreviousArrayElement <> -1) And ($aiFlags[$iPreviousArrayElement] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL) Then ; There is a previous point, and it is a normal point.
+				ElseIf ($iPreviousArrayElement <> -1) And ($aiFlags[$iPreviousArrayElement] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL) Then ; There is a previous point, and it is a normal point.
 					; See if it is curved.
 
-					If ($aiFlags[$iPreviousArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) And _
+					If ($aiFlags[$iPreviousArrayElement + 1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) And _
 							(($atPoints[$iPreviousArrayElement].X() <> $atPoints[$iPreviousArrayElement + 1].X()) And _
 							($atPoints[$iPreviousArrayElement].Y() <> $atPoints[$iPreviousArrayElement + 1].Y())) Then ; Previous Point is a curve, need to keep the control points.
 						$tControlPoint1 = $atPoints[$iPreviousArrayElement + 1]
 
-						If ($aiFlags[$iPreviousArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint2 = $atPoints[$iPreviousArrayElement + 2]
+						If ($aiFlags[$iPreviousArrayElement + 2] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) Then $tControlPoint2 = $atPoints[$iPreviousArrayElement + 2]
 					EndIf
 				EndIf
 
@@ -3725,10 +3725,10 @@ Func __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iA
 							$iOffset += 1
 
 							$avArray[$i + $iForOffset] = $tControlPoint1
-							$avArray2[$i + $iForOffset] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+							$avArray2[$i + $iForOffset] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL
 
 						Else
-							If ($aiFlags[$iPreviousArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $iOffset += 1 ; If there is a control point present, I need to skip it.
+							If ($aiFlags[$iPreviousArrayElement + 1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) Then $iOffset += 1 ; If there is a control point present, I need to skip it.
 						EndIf
 
 						If IsObj($tControlPoint2) Then
@@ -3736,25 +3736,25 @@ Func __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iA
 							$iOffset += 1
 
 							$avArray[$i + $iForOffset] = $tControlPoint2
-							$avArray2[$i + $iForOffset] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+							$avArray2[$i + $iForOffset] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL
 
 						Else
-							If (($iPreviousArrayElement + 2 < $iArrayElement) And ($aiFlags[$iPreviousArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) Then $iOffset += 1 ; If there is a control point present, I need to skip it.
+							If (($iPreviousArrayElement + 2 < $iArrayElement) And ($aiFlags[$iPreviousArrayElement + 2] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL)) Then $iOffset += 1 ; If there is a control point present, I need to skip it.
 						EndIf
 
 					ElseIf ($i = $iArrayElement) Then ; Insert or skip Control Points as necessary.
 						$avArray[$i] = $atPoints[$iArrayElement]
-						$avArray2[$i] = $LOI_DRAWSHAPE_POINT_TYPE_NORMAL
+						$avArray2[$i] = $LOD_DRAWSHAPE_POINT_TYPE_NORMAL
 
 						If IsObj($tControlPoint3) Then
 							$iForOffset += 1
 							$iOffset += 1
 
 							$avArray[$i + 1] = $tControlPoint3
-							$avArray2[$i + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+							$avArray2[$i + 1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL
 
 						Else
-							If ($aiFlags[$iPreviousArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL) Then $iOffset += 1 ; If there is a control point present, I need to skip it.
+							If ($aiFlags[$iPreviousArrayElement + 1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL) Then $iOffset += 1 ; If there is a control point present, I need to skip it.
 						EndIf
 
 						If IsObj($tControlPoint4) Then
@@ -3762,19 +3762,19 @@ Func __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iA
 							$iOffset += 1
 
 							$avArray[$i + 2] = $tControlPoint4
-							$avArray2[$i + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL
+							$avArray2[$i + 2] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL
 
 						Else
-							If (($iPreviousArrayElement + 2 < $iArrayElement) And ($aiFlags[$iPreviousArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL)) Then $iOffset += 1 ; If there is a control point present, I need to skip it.
+							If (($iPreviousArrayElement + 2 < $iArrayElement) And ($aiFlags[$iPreviousArrayElement + 2] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL)) Then $iOffset += 1 ; If there is a control point present, I need to skip it.
 						EndIf
 					EndIf
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV)) ? (10) : (0))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV)) ? (10) : (0))
 				Next
 
 				; Update the ArrayElement value to its new position.
-				If ($iPreviousArrayElement <> -1) Then $iArrayElement -= ((IsObj($tControlPoint2) And ($iPreviousArrayElement + 2 < $iArrayElement) And ($aiFlags[$iPreviousArrayElement + 2] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL))) ? (0) : (1) ; If ControlPoint 2 is a object, it means I copied it, meaining I didn't remove that point, so Array element will be in the same position. Else I need to remove from from ArrayElement.
-				If ($iPreviousArrayElement <> -1) Then $iArrayElement -= ((IsObj($tControlPoint1) And ($aiFlags[$iPreviousArrayElement + 1] = $LOI_DRAWSHAPE_POINT_TYPE_CONTROL))) ? (0) : (1) ; If ControlPoint 1 is a object, it means I copied it, meaning I didn't remove that point, so Array element will be in the same position. Else I need to remove from from ArrayElement.
+				If ($iPreviousArrayElement <> -1) Then $iArrayElement -= ((IsObj($tControlPoint2) And ($iPreviousArrayElement + 2 < $iArrayElement) And ($aiFlags[$iPreviousArrayElement + 2] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL))) ? (0) : (1) ; If ControlPoint 2 is a object, it means I copied it, meaining I didn't remove that point, so Array element will be in the same position. Else I need to remove from from ArrayElement.
+				If ($iPreviousArrayElement <> -1) Then $iArrayElement -= ((IsObj($tControlPoint1) And ($aiFlags[$iPreviousArrayElement + 1] = $LOD_DRAWSHAPE_POINT_TYPE_CONTROL))) ? (0) : (1) ; If ControlPoint 1 is a object, it means I copied it, meaning I didn't remove that point, so Array element will be in the same position. Else I need to remove from from ArrayElement.
 
 				$atPoints = $avArray
 				$aiFlags = $avArray2
@@ -3783,20 +3783,20 @@ Func __LOImpress_DrawShapePointModify(ByRef $aiFlags, ByRef $atPoints, ByRef $iA
 	EndIf
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>__LOImpress_DrawShapePointModify
+EndFunc   ;==>__LODraw_DrawShapePointModify
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_FieldGetObj
+; Name ..........: __LODraw_FieldGetObj
 ; Description ...: Retrieve the Field's Object after insertion.
-; Syntax ........: __LOImpress_FieldGetObj(ByRef $oTextCursor[, $iType = $LOI_FIELD_TYPE_ALL])
-; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LOImpress_ShapeCreateTextCursor function.
-;                  $iType               - [optional] (1-127) Default is $LOI_FIELD_TYPE_ALL. The Type of field to search for. Can be BitOR'd together. See Constants, $LOI_FIELD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+; Syntax ........: __LODraw_FieldGetObj(ByRef $oTextCursor[, $iType = $LOD_FIELD_TYPE_ALL])
+; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
+;                  $iType               - [optional] (1-127) Default is $LOD_FIELD_TYPE_ALL. The Type of field to search for. Can be BitOR'd together. See Constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning newly inserted Field's Object.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
-;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 1 or greater than 127. (The total of all Constants added together.) See Constants, $LOI_FIELD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 1 or greater than 127. (The total of all Constants added together.) See Constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create a TextCursor.
 ;                  @Error: 2, @Extended: 2 = Failed to create enumeration of paragraphs.
@@ -3814,15 +3814,15 @@ EndFunc   ;==>__LOImpress_DrawShapePointModify
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_FieldGetObj(ByRef $oTextCursor, $iType = $LOI_FIELD_TYPE_ALL)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_FieldGetObj(ByRef $oTextCursor, $iType = $LOD_FIELD_TYPE_ALL)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $avFieldTypes[0][0]
 	Local $oParEnum, $oPar, $oTextEnum, $oTextPortion, $oTextField, $oInternalCursor, $oDrawPage, $oShape
 
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LO_IntIsBetween($iType, $LOI_FIELD_TYPE_AUTHOR, $LOI_FIELD_TYPE_ALL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iType, $LOD_FIELD_TYPE_AUTHOR, $LOD_FIELD_TYPE_ALL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	; When a Text Cursor has been used to insert Strings previous to inserting or looking for a Field, the fields sometimes are not able to be identified.
 	; The workaround I figured out was to create the Text Cursor again before enumerating the fields.
@@ -3840,12 +3840,12 @@ Func __LOImpress_FieldGetObj(ByRef $oTextCursor, $iType = $LOI_FIELD_TYPE_ALL)
 			ExitLoop
 		EndIf
 
-		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+		Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 	Next
 
 	If Not IsObj($oInternalCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-	$avFieldTypes = __LOImpress_FieldTypeServices($iType)
+	$avFieldTypes = __LODraw_FieldTypeServices($iType)
 	If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 	$oParEnum = $oInternalCursor.getText().createEnumeration()
@@ -3869,20 +3869,20 @@ Func __LOImpress_FieldGetObj(ByRef $oTextCursor, $iType = $LOI_FIELD_TYPE_ALL)
 
 						Return SetError($__LO_STATUS_SUCCESS, 0, $oTextField)
 					EndIf
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 			EndIf
 		WEnd
 	WEnd
 
 	Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
-EndFunc   ;==>__LOImpress_FieldGetObj
+EndFunc   ;==>__LODraw_FieldGetObj
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_FieldTypeServices
+; Name ..........: __LODraw_FieldTypeServices
 ; Description ...: Retrieve an Array of Supported Service Names and Integer Constants to search for Fields.
-; Syntax ........: __LOImpress_FieldTypeServices($iFieldType)
-; Parameters ....: $iFieldType          - The Constant Field type. See Constants, $LOI_FIELD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+; Syntax ........: __LODraw_FieldTypeServices($iFieldType)
+; Parameters ....: $iFieldType          - The Constant Field type. See Constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: 0, Return: Array = Success. $iFieldType called with All, returning full regular Field Service list String Array.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. $iFieldType BitOr'd together, determining which flags are called from the Array. Returning Field Service String list Array.
@@ -3896,18 +3896,18 @@ EndFunc   ;==>__LOImpress_FieldGetObj
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_FieldTypeServices($iFieldType)
-	Local $avFieldTypes[7][2] = [[$LOI_FIELD_TYPE_AUTHOR, "com.sun.star.text.TextField.Author"], [$LOI_FIELD_TYPE_DATE_TIME, "com.sun.star.text.TextField.DateTime"], _
-			[$LOI_FIELD_TYPE_FILE_NAME, "com.sun.star.text.TextField.FileName"], [$LOI_FIELD_TYPE_SLIDE_COUNT, "com.sun.star.text.TextField.PageCount"], _
-			[$LOI_FIELD_TYPE_SLIDE_NUM, "com.sun.star.text.TextField.PageNumber"], [$LOI_FIELD_TYPE_SLIDE_TITLE, "com.sun.star.text.TextField.PageName"], _
-			[$LOI_FIELD_TYPE_URL, "com.sun.star.text.TextField.URL"]]
+Func __LODraw_FieldTypeServices($iFieldType)
+	Local $avFieldTypes[7][2] = [[$LOD_FIELD_TYPE_AUTHOR, "com.sun.star.text.TextField.Author"], [$LOD_FIELD_TYPE_DATE_TIME, "com.sun.star.text.TextField.DateTime"], _
+			[$LOD_FIELD_TYPE_FILE_NAME, "com.sun.star.text.TextField.FileName"], [$LOD_FIELD_TYPE_SLIDE_COUNT, "com.sun.star.text.TextField.PageCount"], _
+			[$LOD_FIELD_TYPE_SLIDE_NUM, "com.sun.star.text.TextField.PageNumber"], [$LOD_FIELD_TYPE_SLIDE_TITLE, "com.sun.star.text.TextField.PageName"], _
+			[$LOD_FIELD_TYPE_URL, "com.sun.star.text.TextField.URL"]]
 
 	Local $avFieldResults[UBound($avFieldTypes)][2]
 	Local $iCount = 0
 
 	If Not IsInt($iFieldType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If (BitAND($iFieldType, $LOI_FIELD_TYPE_ALL)) Then Return SetError($__LO_STATUS_SUCCESS, 0, $avFieldTypes)
+	If (BitAND($iFieldType, $LOD_FIELD_TYPE_ALL)) Then Return SetError($__LO_STATUS_SUCCESS, 0, $avFieldTypes)
 
 	For $i = 0 To UBound($avFieldTypes) - 1
 		If BitAND($avFieldTypes[$i][0], $iFieldType) Then
@@ -3915,18 +3915,18 @@ Func __LOImpress_FieldTypeServices($iFieldType)
 			$avFieldResults[$iCount][1] = $avFieldTypes[$i][1]
 			$iCount += 1
 		EndIf
-		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV)) ? (10) : (0))
+		Sleep((IsInt($i / $__LODCONST_SLEEP_DIV)) ? (10) : (0))
 	Next
 
 	ReDim $avFieldResults[$iCount][2]
 
 	Return SetError($__LO_STATUS_SUCCESS, 1, $avFieldResults)
-EndFunc   ;==>__LOImpress_FieldTypeServices
+EndFunc   ;==>__LODraw_FieldTypeServices
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_FilterNameGet
+; Name ..........: __LODraw_FilterNameGet
 ; Description ...: Retrieves the correct L.O. Filter name for use in SaveAs and Export.
-; Syntax ........: __LOImpress_FilterNameGet(ByRef $sDocSavePath[, $bExportFilters = False])
+; Syntax ........: __LODraw_FilterNameGet(ByRef $sDocSavePath[, $bExportFilters = False])
 ; Parameters ....: $sDocSavePath        - Full path with extension.
 ;                  $bExportFilters      - [optional] Default is False. If True, includes the Filter Names that can be used to Export only, in the search.
 ; Return values .: Success: String.
@@ -3947,7 +3947,7 @@ EndFunc   ;==>__LOImpress_FieldTypeServices
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_FilterNameGet(ByRef $sDocSavePath, $bExportFilters = False)
+Func __LODraw_FilterNameGet(ByRef $sDocSavePath, $bExportFilters = False)
 	Local $iLength, $iSlashLocation, $iDotLocation
 	Local Const $STR_NOCASESENSE = 0, $STR_STRIPALL = 8
 	Local $sFileExtension, $sFilterName
@@ -4028,16 +4028,16 @@ Func __LOImpress_FilterNameGet(ByRef $sDocSavePath, $bExportFilters = False)
 	$sDocSavePath = StringReplace($sDocSavePath, $sFileExtension, ".odp") ; If No results, replace with ODS extension.
 
 	Return SetError($__LO_STATUS_SUCCESS, 3, "impress8")
-EndFunc   ;==>__LOImpress_FilterNameGet
+EndFunc   ;==>__LODraw_FilterNameGet
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_Format
+; Name ..........: __LODraw_Format
 ; Description ...: Set or Retrieve the page format settings.
-; Syntax ........: __LOImpress_Format(ByRef $oObj[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
+; Syntax ........: __LODraw_Format(ByRef $oObj[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
 ; Parameters ....: $oObj                - A Slide, Master Slide, Notes or Handout page object.
-;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOI_PAGE_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOI_PAGE_HEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOI_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_HEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -4046,7 +4046,7 @@ EndFunc   ;==>__LOImpress_FilterNameGet
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
-;                  @Error: 1, @Extended: 4 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants, $LOI_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve current slide width.
 ;                  --Property Setting Errors--
@@ -4059,12 +4059,12 @@ EndFunc   ;==>__LOImpress_FilterNameGet
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  If a slide is square (equal width and height), setting orientation to landscape will result in a property setting error due to the way LibreOffice behaves.
-; Related .......: _LO_UnitConvert, _LOImpress_SlidePageLayout, _LOImpress_SlidePageMargins, _LOImpress_SlideSheetPrint
+; Related .......: _LO_UnitConvert, _LODraw_SlidePageLayout, _LODraw_SlidePageMargins, _LODraw_SlideSheetPrint
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_Format(ByRef $oObj, $iWidth = Null, $iHeight = Null, $iOrientation = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_Format(ByRef $oObj, $iWidth = Null, $iHeight = Null, $iOrientation = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0, $iTempW
@@ -4093,7 +4093,7 @@ Func __LOImpress_Format(ByRef $oObj, $iWidth = Null, $iHeight = Null, $iOrientat
 	EndIf
 
 	If ($iOrientation <> Null) Then
-		If Not __LO_IntIsBetween($iOrientation, $LOI_PAGE_ORIENT_PORTRAIT, $LOI_PAGE_ORIENT_LANDSCAPE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not __LO_IntIsBetween($iOrientation, $LOD_PAGE_ORIENT_PORTRAIT, $LOD_PAGE_ORIENT_LANDSCAPE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		$iTempW = $oObj.Width()
 		If Not IsInt($iTempW) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
@@ -4108,12 +4108,12 @@ Func __LOImpress_Format(ByRef $oObj, $iWidth = Null, $iHeight = Null, $iOrientat
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_Format
+EndFunc   ;==>__LODraw_Format
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_GetParentDoc
+; Name ..........: __LODraw_GetParentDoc
 ; Description ...: Retrieve the Document Object from a Slide, Master Slide, Notes or Handout.
-; Syntax ........: __LOImpress_GetParentDoc(ByRef $oObj)
+; Syntax ........: __LODraw_GetParentDoc(ByRef $oObj)
 ; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning Parent Document Object.
@@ -4130,8 +4130,8 @@ EndFunc   ;==>__LOImpress_Format
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_GetParentDoc(ByRef $oObj)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_GetParentDoc(ByRef $oObj)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oDoc
@@ -4152,13 +4152,13 @@ Func __LOImpress_GetParentDoc(ByRef $oObj)
 	EndIf
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oDoc)
-EndFunc   ;==>__LOImpress_GetParentDoc
+EndFunc   ;==>__LODraw_GetParentDoc
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_GetShapeName
+; Name ..........: __LODraw_GetShapeName
 ; Description ...: Create a Shape Name that hasn't been used yet in the slide.
-; Syntax ........: __LOImpress_GetShapeName(ByRef $oSlide, $sShapeName)
-; Parameters ....: $oSlide              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
+; Syntax ........: __LODraw_GetShapeName(ByRef $oSlide, $sShapeName)
+; Parameters ....: $oSlide              - A Shape or Drawing Shape object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapeTextBoxInsert, _LODraw_ShapeImageInsert, or _LODraw_ShapesGetList function.
 ;                  $sShapeName          - The Shape name to begin with.
 ; Return values .: Success: String
 ;                  @Error: 0, @Extended: 0, Return: String = Success. Slide contained no shapes, returning the Shape name with a "1" appended.
@@ -4174,8 +4174,8 @@ EndFunc   ;==>__LOImpress_GetParentDoc
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_GetShapeName(ByRef $oSlide, $sShapeName)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_GetShapeName(ByRef $oSlide, $sShapeName)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iCount = 0
@@ -4190,7 +4190,7 @@ Func __LOImpress_GetShapeName(ByRef $oSlide, $sShapeName)
 				; Impress doesn't set the Shape name on new shapes. It has names in the UI that would correspond to the order of the shapes inserted, i.e. Shape 1, Shape 2. Etc.
 				If ($oSlide.getByIndex($i).Name() = $sShapeName & $iCount) Or (($oSlide.getByIndex($i).Name() = "") And (("Shape " & ($i + 1)) = $sShapeName & $iCount)) Then ExitLoop
 
-				Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+				Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 			Next
 		Until $i = $oSlide.getCount()
 
@@ -4200,12 +4200,12 @@ Func __LOImpress_GetShapeName(ByRef $oSlide, $sShapeName)
 	EndIf
 
 	Return SetError($__LO_STATUS_SUCCESS, 1, $sShapeName & $iCount)
-EndFunc   ;==>__LOImpress_GetShapeName
+EndFunc   ;==>__LODraw_GetShapeName
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_GradientIsModified
+; Name ..........: __LODraw_GradientIsModified
 ; Description ...: Check whether a pre-set gradient has been modified from its default values.
-; Syntax ........: __LOImpress_GradientIsModified($tGradient, $sGradientName)
+; Syntax ........: __LODraw_GradientIsModified($tGradient, $sGradientName)
 ; Parameters ....: $tGradient           - A Gradient Structure to compare property values with.
 ;                  $sGradientName       - The Gradient's current name.
 ; Return values .: Success: Boolean
@@ -4223,8 +4223,8 @@ EndFunc   ;==>__LOImpress_GetShapeName
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_GradientIsModified($tGradient, $sGradientName)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_GradientIsModified($tGradient, $sGradientName)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $tStopColor
@@ -4234,10 +4234,10 @@ Func __LOImpress_GradientIsModified($tGradient, $sGradientName)
 	If Not IsString($sGradientName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	Switch $sGradientName
-		Case $LOI_GRAD_NAME_PASTEL_BOUQUET
+		Case $LOD_GRAD_NAME_PASTEL_BOUQUET
 			With $tGradient
 				If _
-						(.Style() <> $LOI_GRAD_TYPE_LINEAR) Or _
+						(.Style() <> $LOD_GRAD_TYPE_LINEAR) Or _
 						(.StepCount() <> 0) Or _
 						(.XOffset() <> 0) Or _
 						(.YOffset() <> 0) Or _
@@ -4272,10 +4272,10 @@ Func __LOImpress_GradientIsModified($tGradient, $sGradientName)
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_PASTEL_DREAM
+		Case $LOD_GRAD_NAME_PASTEL_DREAM
 			With $tGradient
 				If _
-						(.Style() <> $LOI_GRAD_TYPE_RECT) Or _
+						(.Style() <> $LOD_GRAD_TYPE_RECT) Or _
 						(.StepCount() <> 0) Or _
 						(.XOffset() <> 50) Or _
 						(.YOffset() <> 50) Or _
@@ -4310,10 +4310,10 @@ Func __LOImpress_GradientIsModified($tGradient, $sGradientName)
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_BLUE_TOUCH
+		Case $LOD_GRAD_NAME_BLUE_TOUCH
 			With $tGradient
 				If _
-						(.Style() <> $LOI_GRAD_TYPE_LINEAR) Or _
+						(.Style() <> $LOD_GRAD_TYPE_LINEAR) Or _
 						(.StepCount() <> 0) Or _
 						(.XOffset() <> 0) Or _
 						(.YOffset() <> 0) Or _
@@ -4348,10 +4348,10 @@ Func __LOImpress_GradientIsModified($tGradient, $sGradientName)
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_BLANK_W_GRAY
+		Case $LOD_GRAD_NAME_BLANK_W_GRAY
 			With $tGradient
 				If _
-						(.Style() <> $LOI_GRAD_TYPE_LINEAR) Or _
+						(.Style() <> $LOD_GRAD_TYPE_LINEAR) Or _
 						(.StepCount() <> 0) Or _
 						(.XOffset() <> 0) Or _
 						(.YOffset() <> 0) Or _
@@ -4386,10 +4386,10 @@ Func __LOImpress_GradientIsModified($tGradient, $sGradientName)
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_LONDON_MIST
+		Case $LOD_GRAD_NAME_LONDON_MIST
 			With $tGradient
 				If _
-						(.Style() <> $LOI_GRAD_TYPE_LINEAR) Or _
+						(.Style() <> $LOD_GRAD_TYPE_LINEAR) Or _
 						(.StepCount() <> 0) Or _
 						(.XOffset() <> 0) Or _
 						(.YOffset() <> 0) Or _
@@ -4424,10 +4424,10 @@ Func __LOImpress_GradientIsModified($tGradient, $sGradientName)
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_SUBMARINE
+		Case $LOD_GRAD_NAME_SUBMARINE
 			With $tGradient
 				If _
-						(.Style() <> $LOI_GRAD_TYPE_LINEAR) Or _
+						(.Style() <> $LOD_GRAD_TYPE_LINEAR) Or _
 						(.StepCount() <> 0) Or _
 						(.XOffset() <> 0) Or _
 						(.YOffset() <> 0) Or _
@@ -4462,10 +4462,10 @@ Func __LOImpress_GradientIsModified($tGradient, $sGradientName)
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_MIDNIGHT
+		Case $LOD_GRAD_NAME_MIDNIGHT
 			With $tGradient
 				If _
-						(.Style() <> $LOI_GRAD_TYPE_LINEAR) Or _
+						(.Style() <> $LOD_GRAD_TYPE_LINEAR) Or _
 						(.StepCount() <> 0) Or _
 						(.XOffset() <> 0) Or _
 						(.YOffset() <> 0) Or _
@@ -4500,10 +4500,10 @@ Func __LOImpress_GradientIsModified($tGradient, $sGradientName)
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_DEEP_OCEAN
+		Case $LOD_GRAD_NAME_DEEP_OCEAN
 			With $tGradient
 				If _
-						(.Style() <> $LOI_GRAD_TYPE_RADIAL) Or _
+						(.Style() <> $LOD_GRAD_TYPE_RADIAL) Or _
 						(.StepCount() <> 0) Or _
 						(.XOffset() <> 50) Or _
 						(.YOffset() <> 50) Or _
@@ -4538,10 +4538,10 @@ Func __LOImpress_GradientIsModified($tGradient, $sGradientName)
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_MAHOGANY
+		Case $LOD_GRAD_NAME_MAHOGANY
 			With $tGradient
 				If _
-						(.Style() <> $LOI_GRAD_TYPE_SQUARE) Or _
+						(.Style() <> $LOD_GRAD_TYPE_SQUARE) Or _
 						(.StepCount() <> 0) Or _
 						(.XOffset() <> 50) Or _
 						(.YOffset() <> 50) Or _
@@ -4576,10 +4576,10 @@ Func __LOImpress_GradientIsModified($tGradient, $sGradientName)
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_GREEN_GRASS
+		Case $LOD_GRAD_NAME_GREEN_GRASS
 			With $tGradient
 				If _
-						(.Style() <> $LOI_GRAD_TYPE_LINEAR) Or _
+						(.Style() <> $LOD_GRAD_TYPE_LINEAR) Or _
 						(.StepCount() <> 0) Or _
 						(.XOffset() <> 0) Or _
 						(.YOffset() <> 0) Or _
@@ -4614,10 +4614,10 @@ Func __LOImpress_GradientIsModified($tGradient, $sGradientName)
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_NEON_LIGHT
+		Case $LOD_GRAD_NAME_NEON_LIGHT
 			With $tGradient
 				If _
-						(.Style() <> $LOI_GRAD_TYPE_ELLIPTICAL) Or _
+						(.Style() <> $LOD_GRAD_TYPE_ELLIPTICAL) Or _
 						(.StepCount() <> 0) Or _
 						(.XOffset() <> 50) Or _
 						(.YOffset() <> 50) Or _
@@ -4652,10 +4652,10 @@ Func __LOImpress_GradientIsModified($tGradient, $sGradientName)
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_SUNSHINE
+		Case $LOD_GRAD_NAME_SUNSHINE
 			With $tGradient
 				If _
-						(.Style() <> $LOI_GRAD_TYPE_RADIAL) Or _
+						(.Style() <> $LOD_GRAD_TYPE_RADIAL) Or _
 						(.StepCount() <> 0) Or _
 						(.XOffset() <> 66) Or _
 						(.YOffset() <> 33) Or _
@@ -4690,10 +4690,10 @@ Func __LOImpress_GradientIsModified($tGradient, $sGradientName)
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_RAINBOW
+		Case $LOD_GRAD_NAME_RAINBOW
 			With $tGradient
 				If _
-						(.Style() <> $LOI_GRAD_TYPE_RADIAL) Or _
+						(.Style() <> $LOD_GRAD_TYPE_RADIAL) Or _
 						(.StepCount() <> 0) Or _
 						(.XOffset() <> 50) Or _
 						(.YOffset() <> 100) Or _
@@ -4768,10 +4768,10 @@ Func __LOImpress_GradientIsModified($tGradient, $sGradientName)
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_SUNRISE
+		Case $LOD_GRAD_NAME_SUNRISE
 			With $tGradient
 				If _
-						(.Style() <> $LOI_GRAD_TYPE_LINEAR) Or _
+						(.Style() <> $LOD_GRAD_TYPE_LINEAR) Or _
 						(.StepCount() <> 0) Or _
 						(.XOffset() <> 0) Or _
 						(.YOffset() <> 0) Or _
@@ -4822,10 +4822,10 @@ Func __LOImpress_GradientIsModified($tGradient, $sGradientName)
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_SUNDOWN
+		Case $LOD_GRAD_NAME_SUNDOWN
 			With $tGradient
 				If _
-						(.Style() <> $LOI_GRAD_TYPE_LINEAR) Or _
+						(.Style() <> $LOD_GRAD_TYPE_LINEAR) Or _
 						(.StepCount() <> 0) Or _
 						(.XOffset() <> 0) Or _
 						(.YOffset() <> 0) Or _
@@ -4886,13 +4886,13 @@ Func __LOImpress_GradientIsModified($tGradient, $sGradientName)
 	EndSwitch
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, False)
-EndFunc   ;==>__LOImpress_GradientIsModified
+EndFunc   ;==>__LODraw_GradientIsModified
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_GradientNameInsert
+; Name ..........: __LODraw_GradientNameInsert
 ; Description ...: Create and insert a new Gradient name.
-; Syntax ........: __LOImpress_GradientNameInsert(ByRef $oDoc, $tGradient[, $sGradientName = "Gradient "])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: __LODraw_GradientNameInsert(ByRef $oDoc, $tGradient[, $sGradientName = "Gradient "])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $tGradient           - A Gradient Structure to copy settings from.
 ;                  $sGradientName       - [optional] Default is "Gradient ". The Gradient name to create.
 ; Return values .: Success: String.
@@ -4916,8 +4916,8 @@ EndFunc   ;==>__LOImpress_GradientIsModified
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_GradientNameInsert(ByRef $oDoc, $tGradient, $sGradientName = "Gradient ")
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_GradientNameInsert(ByRef $oDoc, $tGradient, $sGradientName = "Gradient ")
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $tNewGradient
@@ -4937,7 +4937,7 @@ Func __LOImpress_GradientNameInsert(ByRef $oDoc, $tGradient, $sGradientName = "G
 	If ($sGradientName = "Gradient ") Then
 		While $oGradTable.hasByName($sGradientName & $iCount)
 			$iCount += 1
-			Sleep((IsInt($iCount / $__LOICONST_SLEEP_DIV)) ? (10) : (0))
+			Sleep((IsInt($iCount / $__LODCONST_SLEEP_DIV)) ? (10) : (0))
 		WEnd
 		$sGradientName = $sGradientName & $iCount
 	EndIf
@@ -4967,13 +4967,13 @@ Func __LOImpress_GradientNameInsert(ByRef $oDoc, $tGradient, $sGradientName = "G
 	EndIf
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $sGradientName)
-EndFunc   ;==>__LOImpress_GradientNameInsert
+EndFunc   ;==>__LODraw_GradientNameInsert
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_GradientPresets
+; Name ..........: __LODraw_GradientPresets
 ; Description ...: Set Page background Gradient to preset settings.
-; Syntax ........: __LOImpress_GradientPresets(ByRef $oDoc, ByRef $oObject, ByRef $tGradient, $sGradientName)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: __LODraw_GradientPresets(ByRef $oDoc, ByRef $oObject, ByRef $tGradient, $sGradientName)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $oObject             - The Object to modify the Gradient settings for.
 ;                  $tGradient           - The Fill Gradient Object to modify the Gradient settings for.
 ;                  $sGradientName       - The Gradient Preset name to apply.
@@ -4991,8 +4991,8 @@ EndFunc   ;==>__LOImpress_GradientNameInsert
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_GradientPresets(ByRef $oDoc, ByRef $oObject, ByRef $tGradient, $sGradientName)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_GradientPresets(ByRef $oDoc, ByRef $oObject, ByRef $tGradient, $sGradientName)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $tColorStop, $tStopColor
@@ -5011,9 +5011,9 @@ Func __LOImpress_GradientPresets(ByRef $oDoc, ByRef $oObject, ByRef $tGradient, 
 	EndIf
 
 	Switch $sGradientName
-		Case $LOI_GRAD_NAME_PASTEL_BOUQUET
+		Case $LOD_GRAD_NAME_PASTEL_BOUQUET
 			With $tGradient
-				.Style = $LOI_GRAD_TYPE_LINEAR
+				.Style = $LOD_GRAD_TYPE_LINEAR
 				.StepCount = 0
 				.XOffset = 0
 				.YOffset = 0
@@ -5035,9 +5035,9 @@ Func __LOImpress_GradientPresets(ByRef $oDoc, ByRef $oObject, ByRef $tGradient, 
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_PASTEL_DREAM
+		Case $LOD_GRAD_NAME_PASTEL_DREAM
 			With $tGradient
-				.Style = $LOI_GRAD_TYPE_RECT
+				.Style = $LOD_GRAD_TYPE_RECT
 				.StepCount = 0
 				.XOffset = 50
 				.YOffset = 50
@@ -5059,9 +5059,9 @@ Func __LOImpress_GradientPresets(ByRef $oDoc, ByRef $oObject, ByRef $tGradient, 
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_BLUE_TOUCH
+		Case $LOD_GRAD_NAME_BLUE_TOUCH
 			With $tGradient
-				.Style = $LOI_GRAD_TYPE_LINEAR
+				.Style = $LOD_GRAD_TYPE_LINEAR
 				.StepCount = 0
 				.XOffset = 0
 				.YOffset = 0
@@ -5083,9 +5083,9 @@ Func __LOImpress_GradientPresets(ByRef $oDoc, ByRef $oObject, ByRef $tGradient, 
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_BLANK_W_GRAY
+		Case $LOD_GRAD_NAME_BLANK_W_GRAY
 			With $tGradient
-				.Style = $LOI_GRAD_TYPE_LINEAR
+				.Style = $LOD_GRAD_TYPE_LINEAR
 				.StepCount = 0
 				.XOffset = 0
 				.YOffset = 0
@@ -5107,9 +5107,9 @@ Func __LOImpress_GradientPresets(ByRef $oDoc, ByRef $oObject, ByRef $tGradient, 
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_LONDON_MIST
+		Case $LOD_GRAD_NAME_LONDON_MIST
 			With $tGradient
-				.Style = $LOI_GRAD_TYPE_LINEAR
+				.Style = $LOD_GRAD_TYPE_LINEAR
 				.StepCount = 0
 				.XOffset = 0
 				.YOffset = 0
@@ -5131,9 +5131,9 @@ Func __LOImpress_GradientPresets(ByRef $oDoc, ByRef $oObject, ByRef $tGradient, 
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_SUBMARINE
+		Case $LOD_GRAD_NAME_SUBMARINE
 			With $tGradient
-				.Style = $LOI_GRAD_TYPE_LINEAR
+				.Style = $LOD_GRAD_TYPE_LINEAR
 				.StepCount = 0
 				.XOffset = 0
 				.YOffset = 0
@@ -5155,9 +5155,9 @@ Func __LOImpress_GradientPresets(ByRef $oDoc, ByRef $oObject, ByRef $tGradient, 
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_MIDNIGHT
+		Case $LOD_GRAD_NAME_MIDNIGHT
 			With $tGradient
-				.Style = $LOI_GRAD_TYPE_LINEAR
+				.Style = $LOD_GRAD_TYPE_LINEAR
 				.StepCount = 0
 				.XOffset = 0
 				.YOffset = 0
@@ -5179,9 +5179,9 @@ Func __LOImpress_GradientPresets(ByRef $oDoc, ByRef $oObject, ByRef $tGradient, 
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_DEEP_OCEAN
+		Case $LOD_GRAD_NAME_DEEP_OCEAN
 			With $tGradient
-				.Style = $LOI_GRAD_TYPE_RADIAL
+				.Style = $LOD_GRAD_TYPE_RADIAL
 				.StepCount = 0
 				.XOffset = 50
 				.YOffset = 50
@@ -5203,9 +5203,9 @@ Func __LOImpress_GradientPresets(ByRef $oDoc, ByRef $oObject, ByRef $tGradient, 
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_MAHOGANY
+		Case $LOD_GRAD_NAME_MAHOGANY
 			With $tGradient
-				.Style = $LOI_GRAD_TYPE_SQUARE
+				.Style = $LOD_GRAD_TYPE_SQUARE
 				.StepCount = 0
 				.XOffset = 50
 				.YOffset = 50
@@ -5227,9 +5227,9 @@ Func __LOImpress_GradientPresets(ByRef $oDoc, ByRef $oObject, ByRef $tGradient, 
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_GREEN_GRASS
+		Case $LOD_GRAD_NAME_GREEN_GRASS
 			With $tGradient
-				.Style = $LOI_GRAD_TYPE_LINEAR
+				.Style = $LOD_GRAD_TYPE_LINEAR
 				.StepCount = 0
 				.XOffset = 0
 				.YOffset = 0
@@ -5251,9 +5251,9 @@ Func __LOImpress_GradientPresets(ByRef $oDoc, ByRef $oObject, ByRef $tGradient, 
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_NEON_LIGHT
+		Case $LOD_GRAD_NAME_NEON_LIGHT
 			With $tGradient
-				.Style = $LOI_GRAD_TYPE_ELLIPTICAL
+				.Style = $LOD_GRAD_TYPE_ELLIPTICAL
 				.StepCount = 0
 				.XOffset = 50
 				.YOffset = 50
@@ -5275,9 +5275,9 @@ Func __LOImpress_GradientPresets(ByRef $oDoc, ByRef $oObject, ByRef $tGradient, 
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_SUNSHINE
+		Case $LOD_GRAD_NAME_SUNSHINE
 			With $tGradient
-				.Style = $LOI_GRAD_TYPE_RADIAL
+				.Style = $LOD_GRAD_TYPE_RADIAL
 				.StepCount = 0
 				.XOffset = 66
 				.YOffset = 33
@@ -5299,9 +5299,9 @@ Func __LOImpress_GradientPresets(ByRef $oDoc, ByRef $oObject, ByRef $tGradient, 
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_RAINBOW
+		Case $LOD_GRAD_NAME_RAINBOW
 			With $tGradient
-				.Style = $LOI_GRAD_TYPE_RADIAL
+				.Style = $LOD_GRAD_TYPE_RADIAL
 				.StepCount = 0
 				.XOffset = 50
 				.YOffset = 100
@@ -5392,9 +5392,9 @@ Func __LOImpress_GradientPresets(ByRef $oDoc, ByRef $oObject, ByRef $tGradient, 
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_SUNRISE
+		Case $LOD_GRAD_NAME_SUNRISE
 			With $tGradient
-				.Style = $LOI_GRAD_TYPE_LINEAR
+				.Style = $LOD_GRAD_TYPE_LINEAR
 				.StepCount = 0
 				.XOffset = 0
 				.YOffset = 0
@@ -5446,9 +5446,9 @@ Func __LOImpress_GradientPresets(ByRef $oDoc, ByRef $oObject, ByRef $tGradient, 
 				EndIf
 			EndWith
 
-		Case $LOI_GRAD_NAME_SUNDOWN
+		Case $LOD_GRAD_NAME_SUNDOWN
 			With $tGradient
-				.Style = $LOI_GRAD_TYPE_LINEAR
+				.Style = $LOD_GRAD_TYPE_LINEAR
 				.StepCount = 0
 				.XOffset = 0
 				.YOffset = 0
@@ -5514,7 +5514,7 @@ Func __LOImpress_GradientPresets(ByRef $oDoc, ByRef $oObject, ByRef $tGradient, 
 			EndWith
 
 		Case Else ; Custom Gradient Name
-			__LOImpress_GradientNameInsert($oDoc, $tGradient, $sGradientName)
+			__LODraw_GradientNameInsert($oDoc, $tGradient, $sGradientName)
 			If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 			$oObject.FillGradientName = $sGradientName
@@ -5550,7 +5550,7 @@ Func __LOImpress_GradientPresets(ByRef $oDoc, ByRef $oObject, ByRef $tGradient, 
 		$tGradient.ColorStops = $atColorStop
 	EndIf
 
-	__LOImpress_GradientNameInsert($oDoc, $tGradient, $sGradientName)
+	__LODraw_GradientNameInsert($oDoc, $tGradient, $sGradientName)
 	If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$oObject.FillGradient = $tGradient
@@ -5558,12 +5558,12 @@ Func __LOImpress_GradientPresets(ByRef $oDoc, ByRef $oObject, ByRef $tGradient, 
 	$oObject.FillGradientStepCount = $tGradient.StepCount()
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>__LOImpress_GradientPresets
+EndFunc   ;==>__LODraw_GradientPresets
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_InternalComErrorHandler
+; Name ..........: __LODraw_InternalComErrorHandler
 ; Description ...: ComError Handler
-; Syntax ........: __LOImpress_InternalComErrorHandler(ByRef $oComError)
+; Syntax ........: __LODraw_InternalComErrorHandler(ByRef $oComError)
 ; Parameters ....: $oComError           - The Com Error Object passed by Autoit.Error.
 ; Return values .: None
 ; Author ........: mLipok
@@ -5573,9 +5573,9 @@ EndFunc   ;==>__LOImpress_GradientPresets
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_InternalComErrorHandler(ByRef $oComError)
+Func __LODraw_InternalComErrorHandler(ByRef $oComError)
 	; If not defined ComError_UserFunction then this function does nothing, in which case you can only check @error / @extended after suspect functions.
-	Local $avUserFunction = _LOImpress_ComError_UserFunction(Default)
+	Local $avUserFunction = _LODraw_ComError_UserFunction(Default)
 	Local $vUserFunction, $avUserParams[2] = ["CallArgArray", $oComError]
 
 	If IsArray($avUserFunction) Then
@@ -5618,12 +5618,12 @@ Func __LOImpress_InternalComErrorHandler(ByRef $oComError)
 				Call($vUserFunction, $avUserParams)
 		EndSwitch
 	EndIf
-EndFunc   ;==>__LOImpress_InternalComErrorHandler
+EndFunc   ;==>__LODraw_InternalComErrorHandler
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_Margins
+; Name ..........: __LODraw_Margins
 ; Description ...: Set or Retrieve the page margin settings.
-; Syntax ........: __LOImpress_Margins(ByRef $oObj[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
+; Syntax ........: __LODraw_Margins(ByRef $oObj[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
 ; Parameters ....: $oObj                - A Slide, Master Slide, Notes or Handout page object.
 ;                  $iLeft               - [optional] Default is Null. The amount of space to leave between the left edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
 ;                  $iRight              - [optional] Default is Null. The amount of space to leave between the right edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
@@ -5649,12 +5649,12 @@ EndFunc   ;==>__LOImpress_InternalComErrorHandler
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LOImpress_SlidePageLayout, _LOImpress_SlidePageFormat
+; Related .......: _LO_UnitConvert, _LODraw_SlidePageLayout, _LODraw_SlidePageFormat
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_Margins(ByRef $oObj, $iLeft = Null, $iRight = Null, $iTop = Null, $iBottom = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_Margins(ByRef $oObj, $iLeft = Null, $iRight = Null, $iTop = Null, $iBottom = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -5697,12 +5697,12 @@ Func __LOImpress_Margins(ByRef $oObj, $iLeft = Null, $iRight = Null, $iTop = Nul
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_Margins
+EndFunc   ;==>__LODraw_Margins
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_NumRuleCreateMap
+; Name ..........: __LODraw_NumRuleCreateMap
 ; Description ...: Creates a map with values for each setting location in the Array.
-; Syntax ........: __LOImpress_NumRuleCreateMap(ByRef $atNumLevel)
+; Syntax ........: __LODraw_NumRuleCreateMap(ByRef $atNumLevel)
 ; Parameters ....: $atNumLevel          - An Array of Property Structures for a Numbering Rule.
 ; Return values .: Success: Map
 ;                  @Error: 0, @Extended: 0, Return: Map = Success. Returning a Map containing the location in the array for each setting.
@@ -5716,8 +5716,8 @@ EndFunc   ;==>__LOImpress_Margins
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_NumRuleCreateMap(ByRef $atNumLevel)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_NumRuleCreateMap(ByRef $atNumLevel)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $mNumLevel[]
@@ -5726,29 +5726,29 @@ Func __LOImpress_NumRuleCreateMap(ByRef $atNumLevel)
 
 	For $i = 0 To UBound($atNumLevel) - 1
 		$mNumLevel[$atNumLevel[$i].Name()] = $i
-		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+		Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 	Next
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $mNumLevel)
-EndFunc   ;==>__LOImpress_NumRuleCreateMap
+EndFunc   ;==>__LODraw_NumRuleCreateMap
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ParAlignment
+; Name ..........: __LODraw_ParAlignment
 ; Description ...: Set and Retrieve Paragraph Alignment settings.
-; Syntax ........: __LOImpress_ParAlignment(ByRef $oObj[, $iHorAlign = Null[, $iLastLineAlign = Null[, $iTxtDirection = Null]]])
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
-;                  $iHorAlign           - [optional] (0-3) Default is Null. The Horizontal alignment of the paragraph. See Constants, $LOI_PAR_ALIGN_HOR_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
-;                  $iLastLineAlign      - [optional] (0-3) Default is Null. Specify the alignment for the last line in the paragraph. See Constants, $LOI_PAR_LAST_LINE_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
-;                  $iTxtDirection       - [optional] (0-5) Default is Null. The Text Writing Direction. See Constants, $LOI_PAR_TXT_DIR_* as defined in LibreOfficeImpress_Constants.au3. [LibreOffice Default is 4]
+; Syntax ........: __LODraw_ParAlignment(ByRef $oObj[, $iHorAlign = Null[, $iLastLineAlign = Null[, $iTxtDirection = Null]]])
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+;                  $iHorAlign           - [optional] (0-3) Default is Null. The Horizontal alignment of the paragraph. See Constants, $LOD_PAR_ALIGN_HOR_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
+;                  $iLastLineAlign      - [optional] (0-3) Default is Null. Specify the alignment for the last line in the paragraph. See Constants, $LOD_PAR_LAST_LINE_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
+;                  $iTxtDirection       - [optional] (0-5) Default is Null. The Text Writing Direction. See Constants, $LOD_PAR_TXT_DIR_* as defined in LibreOfficeImpress_Constants.au3. [LibreOffice Default is 4]
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
-;                  @Error: 1, @Extended: 2 = $iHorAlign not an Integer, less than 0 or greater than 3. See Constants, $LOI_PAR_ALIGN_HOR_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 3 = $iLastLineAlign not an Integer, less than 0 or greater than 3. See Constants, $LOI_PAR_LAST_LINE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 4 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOI_PAR_TXT_DIR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iHorAlign not an Integer, less than 0 or greater than 3. See Constants, $LOD_PAR_ALIGN_HOR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iLastLineAlign not an Integer, less than 0 or greater than 3. See Constants, $LOD_PAR_LAST_LINE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOD_PAR_TXT_DIR_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iHorAlign
@@ -5756,7 +5756,7 @@ EndFunc   ;==>__LOImpress_NumRuleCreateMap
 ;                  |                               4 = Error setting $iTxtDirection
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: $iHorAlign must be set to $LOI_PAR_ALIGN_HOR_JUSTIFIED(2) before you can set $iLastLineAlign.
+; Remarks .......: $iHorAlign must be set to $LOD_PAR_ALIGN_HOR_JUSTIFIED(2) before you can set $iLastLineAlign.
 ;                  $iTxtDirection constants 2,3, and 5 may not be available depending on your language settings.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
@@ -5765,8 +5765,8 @@ EndFunc   ;==>__LOImpress_NumRuleCreateMap
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ParAlignment(ByRef $oObj, $iHorAlign = Null, $iLastLineAlign = Null, $iTxtDirection = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ParAlignment(ByRef $oObj, $iHorAlign = Null, $iLastLineAlign = Null, $iTxtDirection = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -5781,34 +5781,34 @@ Func __LOImpress_ParAlignment(ByRef $oObj, $iHorAlign = Null, $iLastLineAlign = 
 	EndIf
 
 	If ($iHorAlign <> Null) Then
-		If Not __LO_IntIsBetween($iHorAlign, $LOI_PAR_ALIGN_HOR_LEFT, $LOI_PAR_ALIGN_HOR_CENTER) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+		If Not __LO_IntIsBetween($iHorAlign, $LOD_PAR_ALIGN_HOR_LEFT, $LOD_PAR_ALIGN_HOR_CENTER) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		$oObj.ParaAdjust = $iHorAlign
 		$iError = ($oObj.ParaAdjust() = $iHorAlign) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($iLastLineAlign <> Null) Then
-		If Not __LO_IntIsBetween($iLastLineAlign, $LOI_PAR_LAST_LINE_JUSTIFIED, $LOI_PAR_LAST_LINE_CENTER, "", $LOI_PAR_LAST_LINE_START) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not __LO_IntIsBetween($iLastLineAlign, $LOD_PAR_LAST_LINE_JUSTIFIED, $LOD_PAR_LAST_LINE_CENTER, "", $LOD_PAR_LAST_LINE_START) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		$oObj.ParaLastLineAdjust = $iLastLineAlign
 		$iError = ($oObj.ParaLastLineAdjust() = $iLastLineAlign) ? ($iError) : (BitOR($iError, 2))
 	EndIf
 
 	If ($iTxtDirection <> Null) Then
-		If Not __LO_IntIsBetween($iTxtDirection, $LOI_PAR_TXT_DIR_LR_TB, $LOI_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not __LO_IntIsBetween($iTxtDirection, $LOD_PAR_TXT_DIR_LR_TB, $LOD_PAR_TXT_DIR_BT_LR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		$oObj.WritingMode = $iTxtDirection
 		$iError = ($oObj.WritingMode() = $iTxtDirection) ? ($iError) : (BitOR($iError, 4))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_ParAlignment
+EndFunc   ;==>__LODraw_ParAlignment
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ParIndent
+; Name ..........: __LODraw_ParIndent
 ; Description ...: Set or Retrieve Paragraph Indent settings.
-; Syntax ........: __LOImpress_ParIndent(ByRef $oObj[, $iBeforeTxt = Null[, $iAfterTxt = Null[, $iFirstLine = Null]]])
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
+; Syntax ........: __LODraw_ParIndent(ByRef $oObj[, $iBeforeTxt = Null[, $iAfterTxt = Null[, $iFirstLine = Null]]])
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $iBeforeTxt          - [optional] (0-1162202) Default is Null. The amount of space that you want to indent the paragraph from the page margin. Set in Hundredths of a Millimeter (HMM).
 ;                  $iAfterTxt           - [optional] (0-1162202) Default is Null. The amount of space that you want to indent the paragraph from the page margin. Set in Hundredths of a Millimeter (HMM)
 ;                  $iFirstLine          - [optional] (0-1162202) Default is Null. Indentation distance of the first line of a paragraph. Set in Hundredths of a Millimeter (HMM).
@@ -5835,8 +5835,8 @@ EndFunc   ;==>__LOImpress_ParAlignment
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ParIndent(ByRef $oObj, $iBeforeTxt = Null, $iAfterTxt = Null, $iFirstLine = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ParIndent(ByRef $oObj, $iBeforeTxt = Null, $iAfterTxt = Null, $iFirstLine = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -5872,16 +5872,16 @@ Func __LOImpress_ParIndent(ByRef $oObj, $iBeforeTxt = Null, $iAfterTxt = Null, $
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_ParIndent
+EndFunc   ;==>__LODraw_ParIndent
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ParSpacing
+; Name ..........: __LODraw_ParSpacing
 ; Description ...: Set and Retrieve Line Spacing settings.
-; Syntax ........: __LOImpress_ParSpacing(ByRef $oObj[, $iAbovePar = Null[, $iBelowPar = Null[, $iLineSpcMode = Null[, $iLineSpcHeight = Null]]]])
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
+; Syntax ........: __LODraw_ParSpacing(ByRef $oObj[, $iAbovePar = Null[, $iBelowPar = Null[, $iLineSpcMode = Null[, $iLineSpcHeight = Null]]]])
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $iAbovePar           - [optional] (0-100000) Default is Null. The Space above a paragraph, in Hundredths of a Millimeter (HMM).
 ;                  $iBelowPar           - [optional] (0-100000) Default is Null. The Space Below a paragraph, in Hundredths of a Millimeter (HMM).
-;                  $iLineSpcMode        - [optional] (0-3) Default is Null. The line spacing type of the paragraph. See Constants, $LOI_PAR_LINE_SPC_MODE_* as defined in LibreOfficeImpress_Constants.au3, also notice min and max values for each.
+;                  $iLineSpcMode        - [optional] (0-3) Default is Null. The line spacing type of the paragraph. See Constants, $LOD_PAR_LINE_SPC_MODE_* as defined in LibreOfficeImpress_Constants.au3, also notice min and max values for each.
 ;                  $iLineSpcHeight      - [optional] Default is Null. This value specifies the height in regard to Mode. See Remarks.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -5891,7 +5891,7 @@ EndFunc   ;==>__LOImpress_ParIndent
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $iAbovePar not an Integer, less than 0 or greater than 100000.
 ;                  @Error: 1, @Extended: 3 = $iBelowPar not an Integer, less than 0 or greater than 100000.
-;                  @Error: 1, @Extended: 4 = $iLineSpcMode not an Integer, less than 0 or greater than 3. See Constants, $LOI_PAR_LINE_SPC_MODE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iLineSpcMode not an Integer, less than 0 or greater than 3. See Constants, $LOD_PAR_LINE_SPC_MODE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 5 = $iLineSpcHeight not an Integer.
 ;                  @Error: 1, @Extended: 6 = $iLineSpcMode set to 0(Proportional) and $iLineSpcHeight less than 6(%) or greater than 65535(%).
 ;                  @Error: 1, @Extended: 7 = $iLineSpcMode set to 1 or 2(Minimum, or Leading) and $iLineSpcHeight less than 0 or greater than 100000.
@@ -5916,8 +5916,8 @@ EndFunc   ;==>__LOImpress_ParIndent
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ParSpacing(ByRef $oObj, $iAbovePar = Null, $iBelowPar = Null, $iLineSpcMode = Null, $iLineSpcHeight = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ParSpacing(ByRef $oObj, $iAbovePar = Null, $iBelowPar = Null, $iLineSpcMode = Null, $iLineSpcHeight = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $tLine
@@ -5947,7 +5947,7 @@ Func __LOImpress_ParSpacing(ByRef $oObj, $iAbovePar = Null, $iBelowPar = Null, $
 	EndIf
 
 	If ($iLineSpcMode <> Null) Then
-		If Not __LO_IntIsBetween($iLineSpcMode, $LOI_PAR_LINE_SPC_MODE_PROP, $LOI_PAR_LINE_SPC_MODE_FIX) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not __LO_IntIsBetween($iLineSpcMode, $LOD_PAR_LINE_SPC_MODE_PROP, $LOD_PAR_LINE_SPC_MODE_FIX) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		$tLine = $oObj.ParaLineSpacing()
 		If Not IsObj($tLine) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
@@ -5964,13 +5964,13 @@ Func __LOImpress_ParSpacing(ByRef $oObj, $iAbovePar = Null, $iBelowPar = Null, $
 		If Not IsObj($tLine) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 		Switch $tLine.Mode()
-			Case $LOI_PAR_LINE_SPC_MODE_PROP ; Proportional
+			Case $LOD_PAR_LINE_SPC_MODE_PROP ; Proportional
 				If Not __LO_IntIsBetween($iLineSpcHeight, 6, 65535) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0) ; Min setting on Proportional is 6%
 
-			Case $LOI_PAR_LINE_SPC_MODE_MIN, $LOI_PAR_LINE_SPC_MODE_LEADING ; Minimum and Leading Modes
+			Case $LOD_PAR_LINE_SPC_MODE_MIN, $LOD_PAR_LINE_SPC_MODE_LEADING ; Minimum and Leading Modes
 				If Not __LO_IntIsBetween($iLineSpcHeight, 0, 100000) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
-			Case $LOI_PAR_LINE_SPC_MODE_FIX ; Fixed Line Spacing Mode
+			Case $LOD_PAR_LINE_SPC_MODE_FIX ; Fixed Line Spacing Mode
 				If Not __LO_IntIsBetween($iLineSpcHeight, 51, 100000) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0) ; Min spacing is 51 when Fixed Mode
 		EndSwitch
 		$tLine.Height = $iLineSpcHeight
@@ -5979,16 +5979,16 @@ Func __LOImpress_ParSpacing(ByRef $oObj, $iAbovePar = Null, $iBelowPar = Null, $
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_ParSpacing
+EndFunc   ;==>__LODraw_ParSpacing
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ParTabStopCreate
+; Name ..........: __LODraw_ParTabStopCreate
 ; Description ...: Create a new TabStop for a Paragraph.
-; Syntax ........: __LOImpress_ParTabStopCreate(ByRef $oObj, $iPosition[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]])
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
+; Syntax ........: __LODraw_ParTabStopCreate(ByRef $oObj, $iPosition[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]])
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $iPosition           - The TabStop position to set the new TabStop to. Set in Hundredths of a Millimeter (HMM). See Remarks.
-;                  $iAlignment          - [optional] (0-4) Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOI_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iDecChar            - [optional] Default is Null. Enter a character(in Asc Value(See AutoIt Asc Function)) that you want the decimal tab to use as a decimal separator. Can only be set if $iAlignment is set to $LOI_PAR_TAB_ALIGN_DECIMAL.
+;                  $iAlignment          - [optional] (0-4) Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iDecChar            - [optional] Default is Null. Enter a character(in Asc Value(See AutoIt Asc Function)) that you want the decimal tab to use as a decimal separator. Can only be set if $iAlignment is set to $LOD_PAR_TAB_ALIGN_DECIMAL.
 ;                  $iFillChar           - [optional] Default is Null. The Asc (see AutoIt function) value of any character (except 0/Null) you want to act as a Tab Fill character. See remarks.
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Settings were successfully set. New TabStop position is returned.
@@ -5997,7 +5997,7 @@ EndFunc   ;==>__LOImpress_ParSpacing
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $iPosition not an Integer.
 ;                  @Error: 1, @Extended: 3 = Tab Stop position called in $iPosition already exists in this Paragraph.
-;                  @Error: 1, @Extended: 4 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOI_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 5 = $iDecChar not an Integer.
 ;                  @Error: 1, @Extended: 6 = $iFillChar not an Integer.
 ;                  --Initialization Errors--
@@ -6023,8 +6023,8 @@ EndFunc   ;==>__LOImpress_ParSpacing
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ParTabStopCreate(ByRef $oObj, $iPosition, $iAlignment = Null, $iDecChar = Null, $iFillChar = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ParTabStopCreate(ByRef $oObj, $iPosition, $iAlignment = Null, $iDecChar = Null, $iFillChar = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $aiTabList
@@ -6036,7 +6036,7 @@ Func __LOImpress_ParTabStopCreate(ByRef $oObj, $iPosition, $iAlignment = Null, $
 
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsInt($iPosition) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If __LOImpress_CursorParHasTabStop($oObj, $iPosition) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If __LODraw_CursorParHasTabStop($oObj, $iPosition) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$atTabStops = $oObj.ParaTabStops()
 	If Not IsArray($atTabStops) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
@@ -6050,7 +6050,7 @@ Func __LOImpress_ParTabStopCreate(ByRef $oObj, $iPosition, $iAlignment = Null, $
 	$tTabStruct.FillChar = 32 ; If set to 0 Libre sets fill character to Null instead of setting to None. 32 = None.(Space character)
 
 	If ($iAlignment <> Null) Then
-		If Not __LO_IntIsBetween($iAlignment, $LOI_PAR_TAB_ALIGN_LEFT, $LOI_PAR_TAB_ALIGN_DEFAULT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not __LO_IntIsBetween($iAlignment, $LOD_PAR_TAB_ALIGN_LEFT, $LOD_PAR_TAB_ALIGN_DEFAULT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		$tTabStruct.Alignment = $iAlignment
 	EndIf
@@ -6069,7 +6069,7 @@ Func __LOImpress_ParTabStopCreate(ByRef $oObj, $iPosition, $iAlignment = Null, $
 
 	__LO_AddTo1DArray($atTabStops, $tTabStruct)
 
-	$aiTabList = __LOImpress_ParTabStopsGetList($oObj)     ; Get an array of existing tabstops to compare with
+	$aiTabList = __LODraw_ParTabStopsGetList($oObj)     ; Get an array of existing tabstops to compare with
 	If Not IsArray($aiTabList) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	__LO_AddTo1DArray($aiTabList, 0)     ; Add a dummy to make Array sizes equal.
@@ -6094,13 +6094,13 @@ Func __LOImpress_ParTabStopCreate(ByRef $oObj, $iPosition, $iAlignment = Null, $
 	$iError = (__LO_VarsAreNull($iFillChar)) ? ($iError) : (($tFoundTabStop.FillChar = $iFillChar) ? ($iError) : (BitOR($iError, 8)))
 
 	Return ($iError > 0) ? SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, $iNewPosition) : SetError($__LO_STATUS_SUCCESS, 0, $iNewPosition)
-EndFunc   ;==>__LOImpress_ParTabStopCreate
+EndFunc   ;==>__LODraw_ParTabStopCreate
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ParTabStopDelete
+; Name ..........: __LODraw_ParTabStopDelete
 ; Description ...: Delete a TabStop from a Paragraph
-; Syntax ........: __LOImpress_ParTabStopDelete(ByRef $oObj, $iTabStop)
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
+; Syntax ........: __LODraw_ParTabStopDelete(ByRef $oObj, $iTabStop)
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $iTabStop            - The Tab position of the TabStop to modify. See Remarks.
 ; Return values .: Success: Boolean.
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Returning True if TabStop was successfully deleted, else False.
@@ -6118,8 +6118,8 @@ EndFunc   ;==>__LOImpress_ParTabStopCreate
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ParTabStopDelete(ByRef $oObj, $iTabStop)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ParTabStopDelete(ByRef $oObj, $iTabStop)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $atOldTabStops[0]
@@ -6128,7 +6128,7 @@ Func __LOImpress_ParTabStopDelete(ByRef $oObj, $iTabStop)
 
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsInt($iTabStop) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not __LOImpress_CursorParHasTabStop($oObj, $iTabStop) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not __LODraw_CursorParHasTabStop($oObj, $iTabStop) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$atOldTabStops = $oObj.ParaTabStops()
 	If Not IsArray($atOldTabStops) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
@@ -6141,7 +6141,7 @@ Func __LOImpress_ParTabStopDelete(ByRef $oObj, $iTabStop)
 			$atOldTabStops[$iCount] = $atOldTabStops[$i]
 			$iCount += 1
 		EndIf
-		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+		Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 	Next
 
 	ReDim $atOldTabStops[$iCount]
@@ -6149,17 +6149,17 @@ Func __LOImpress_ParTabStopDelete(ByRef $oObj, $iTabStop)
 	$oObj.ParaTabStops = $atOldTabStops
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $bDeleted)
-EndFunc   ;==>__LOImpress_ParTabStopDelete
+EndFunc   ;==>__LODraw_ParTabStopDelete
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ParTabStopMod
+; Name ..........: __LODraw_ParTabStopMod
 ; Description ...: Set or Retrieve the properties of an existing TabStop.
-; Syntax ........: __LOImpress_ParTabStopMod(ByRef $oObj, $iTabStop[, $iPosition = Null[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]]])
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
+; Syntax ........: __LODraw_ParTabStopMod(ByRef $oObj, $iTabStop[, $iPosition = Null[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]]])
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $iTabStop            - The Tab position of the TabStop to modify. See Remarks.
 ;                  $iPosition           - [optional] Default is Null. The New position to set the input position to. Set in Hundredths of a Millimeter (HMM). See Remarks.
-;                  $iAlignment          - [optional] (0-4) Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOI_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iDecChar            - [optional] Default is Null. Enter a character(in Asc Value(See AutoIt Asc Function)) that you want the decimal tab to use as a decimal separator. Can only be set if $iAlignment is set to $LOI_PAR_TAB_ALIGN_DECIMAL.
+;                  $iAlignment          - [optional] (0-4) Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iDecChar            - [optional] Default is Null. Enter a character(in Asc Value(See AutoIt Asc Function)) that you want the decimal tab to use as a decimal separator. Can only be set if $iAlignment is set to $LOD_PAR_TAB_ALIGN_DECIMAL.
 ;                  $iFillChar           - [optional] Default is Null. The Asc (see AutoIt function) value of any character (except 0/Null) you want to act as a Tab Fill character. See remarks.
 ; Return values .: Success: Integer or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -6171,7 +6171,7 @@ EndFunc   ;==>__LOImpress_ParTabStopDelete
 ;                  @Error: 1, @Extended: 2 = $iTabStop not an Integer.
 ;                  @Error: 1, @Extended: 3 = TabStop called in $iTabStop not found.
 ;                  @Error: 1, @Extended: 4 = $iPosition not an Integer.
-;                  @Error: 1, @Extended: 5 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOI_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 6 = $iDecChar not an Integer.
 ;                  @Error: 1, @Extended: 7 = $iFillChar not an Integer.
 ;                  --Processing Errors--
@@ -6197,8 +6197,8 @@ EndFunc   ;==>__LOImpress_ParTabStopDelete
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ParTabStopMod(ByRef $oObj, $iTabStop, $iPosition = Null, $iAlignment = Null, $iDecChar = Null, $iFillChar = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ParTabStopMod(ByRef $oObj, $iTabStop, $iPosition = Null, $iAlignment = Null, $iDecChar = Null, $iFillChar = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $atTabStops, $atNewTabStops
@@ -6210,7 +6210,7 @@ Func __LOImpress_ParTabStopMod(ByRef $oObj, $iTabStop, $iPosition = Null, $iAlig
 
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsInt($iTabStop) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not __LOImpress_CursorParHasTabStop($oObj, $iTabStop) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not __LODraw_CursorParHasTabStop($oObj, $iTabStop) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$atTabStops = $oObj.ParaTabStops()
 	If Not IsArray($atTabStops) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
@@ -6218,7 +6218,7 @@ Func __LOImpress_ParTabStopMod(ByRef $oObj, $iTabStop, $iPosition = Null, $iAlig
 	For $i = 0 To UBound($atTabStops) - 1
 		If ($atTabStops[$i].Position() = $iTabStop) Then $tTabStruct = $atTabStops[$i]
 		If IsObj($tTabStruct) Then ExitLoop
-		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+		Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 	Next
 	If Not IsObj($tTabStruct) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
@@ -6230,7 +6230,7 @@ Func __LOImpress_ParTabStopMod(ByRef $oObj, $iTabStop, $iPosition = Null, $iAlig
 
 	If ($iPosition <> Null) Then
 		If Not IsInt($iPosition) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-		If __LOImpress_CursorParHasTabStop($oObj, $iPosition) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+		If __LODraw_CursorParHasTabStop($oObj, $iPosition) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 		$tTabStruct.Position = $iPosition
 		$iError = ($tTabStruct.Position() = $iPosition) ? ($iError) : (BitOR($iError, 1))
@@ -6238,7 +6238,7 @@ Func __LOImpress_ParTabStopMod(ByRef $oObj, $iTabStop, $iPosition = Null, $iAlig
 	EndIf
 
 	If ($iAlignment <> Null) Then
-		If Not __LO_IntIsBetween($iAlignment, $LOI_PAR_TAB_ALIGN_LEFT, $LOI_PAR_TAB_ALIGN_DEFAULT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not __LO_IntIsBetween($iAlignment, $LOD_PAR_TAB_ALIGN_LEFT, $LOD_PAR_TAB_ALIGN_DEFAULT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$tTabStruct.Alignment = $iAlignment
 		$iError = ($tTabStruct.Alignment = $iAlignment) ? ($iError) : (BitOR($iError, 2))
@@ -6262,7 +6262,7 @@ Func __LOImpress_ParTabStopMod(ByRef $oObj, $iTabStop, $iPosition = Null, $iAlig
 	$atTabStops[$i] = $tTabStruct
 
 	If $bNewPosition Then
-		$aiTabList = __LOImpress_ParTabStopsGetList($oObj)
+		$aiTabList = __LODraw_ParTabStopsGetList($oObj)
 		If Not IsArray($aiTabList) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 	EndIf
 
@@ -6275,20 +6275,20 @@ Func __LOImpress_ParTabStopMod(ByRef $oObj, $iTabStop, $iPosition = Null, $iAlig
 				$iNewPosition = $atNewTabStops[$j].Position()
 				ExitLoop
 			EndIf
-			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+			Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 		Next
 
 		Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, $iNewPosition, 2))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_ParTabStopMod
+EndFunc   ;==>__LODraw_ParTabStopMod
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ParTabStopsGetList
+; Name ..........: __LODraw_ParTabStopsGetList
 ; Description ...: Retrieve an array of TabStops available in a Paragraph.
-; Syntax ........: __LOImpress_ParTabStopsGetList(ByRef $oObj)
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
+; Syntax ........: __LODraw_ParTabStopsGetList(ByRef $oObj)
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ; Return values .: Success: Array.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. An Array of TabStops. @Extended set to number of results.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -6303,8 +6303,8 @@ EndFunc   ;==>__LOImpress_ParTabStopMod
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ParTabStopsGetList(ByRef $oObj)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ParTabStopsGetList(ByRef $oObj)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $atTabStops[0]
@@ -6319,17 +6319,17 @@ Func __LOImpress_ParTabStopsGetList(ByRef $oObj)
 
 	For $i = 0 To UBound($atTabStops) - 1
 		$aiTabList[$i] = $atTabStops[$i].Position()
-		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+		Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 	Next
 
 	Return SetError($__LO_STATUS_SUCCESS, $i, $aiTabList)
-EndFunc   ;==>__LOImpress_ParTabStopsGetList
+EndFunc   ;==>__LODraw_ParTabStopsGetList
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ShapeAreaGradientMulticolor
+; Name ..........: __LODraw_ShapeAreaGradientMulticolor
 ; Description ...: Set or Retrieve a Shape, Shape Style, or Presentation Style's Multicolor Gradient settings.
-; Syntax ........: __LOImpress_ShapeAreaGradientMulticolor(ByRef $oObj[, $avColorStops = Null])
-; Parameters ....: $oObj                - A Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
+; Syntax ........: __LODraw_ShapeAreaGradientMulticolor(ByRef $oObj[, $avColorStops = Null])
+; Parameters ....: $oObj                - A Shape, Shape Style or Presentation Style object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -6359,13 +6359,13 @@ EndFunc   ;==>__LOImpress_ParTabStopsGetList
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LOImpress_ShapeAreaTransparencyGradientMulti
+;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
+; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LODraw_ShapeAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ShapeAreaGradientMulticolor(ByRef $oObj, $avColorStops = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ShapeAreaGradientMulticolor(ByRef $oObj, $avColorStops = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $tStyleGradient, $tColorStop, $tStopColor
@@ -6392,7 +6392,7 @@ Func __LOImpress_ShapeAreaGradientMulticolor(ByRef $oObj, $avColorStops = Null)
 			If Not IsObj($tStopColor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 			$avNewColorStops[$i][1] = Int(BitShift(($tStopColor.Red() * 255), -16) + BitShift(($tStopColor.Green() * 255), -8) + ($tStopColor.Blue() * 255)) ; RGB to Long
-			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+			Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 		Next
 
 		Return SetError($__LO_STATUS_SUCCESS, UBound($avNewColorStops), $avNewColorStops)
@@ -6423,7 +6423,7 @@ Func __LOImpress_ShapeAreaGradientMulticolor(ByRef $oObj, $avColorStops = Null)
 
 		$atColorStops[$i] = $tColorStop
 
-		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+		Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 	Next
 
 	$tStyleGradient.ColorStops = $atColorStops
@@ -6432,15 +6432,15 @@ Func __LOImpress_ShapeAreaGradientMulticolor(ByRef $oObj, $avColorStops = Null)
 	$iError = (UBound($avColorStops) = UBound($oObj.FillGradient.ColorStops())) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_ShapeAreaGradientMulticolor
+EndFunc   ;==>__LODraw_ShapeAreaGradientMulticolor
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ShapeAreaShadow
+; Name ..........: __LODraw_ShapeAreaShadow
 ; Description ...: Set or Retrieve the shadow settings for a Shape, Shape Style, or Presentation Style.
-; Syntax ........: __LOImpress_ShapeAreaShadow(ByRef $oObj[, $bShadow = Null[, $iLocation = Null[, $iColor = Null[, $iDistance = Null[, $iBlur = Null[, $iTransparency = Null]]]]]])
-; Parameters ....: $oObj                - A Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
+; Syntax ........: __LODraw_ShapeAreaShadow(ByRef $oObj[, $bShadow = Null[, $iLocation = Null[, $iColor = Null[, $iDistance = Null[, $iBlur = Null[, $iTransparency = Null]]]]]])
+; Parameters ....: $oObj                - A Shape, Shape Style or Presentation Style object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $bShadow             - [optional] Default is Null. If True, a Shadow is present for the Shape.
-;                  $iLocation           - [optional] (0-8) Default is Null. The Location of the Shadow, must be one of the Constants, $LOI_SHAPE_SHADOW_LOCATION_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iLocation           - [optional] (0-8) Default is Null. The Location of the Shadow, must be one of the Constants, $LOD_SHAPE_SHADOW_LOCATION_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iColor              - [optional] (0-16777215) Default is Null. The Shadow color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iDistance           - [optional] Default is Null. The distance of the Shadow from the Shape's edges, set in Hundredths of a Millimeter (HMM).
 ;                  $iBlur               - [optional] (0-150) Default is Null. The amount of blur applied to the Shadow, set in Printer's Points.
@@ -6452,7 +6452,7 @@ EndFunc   ;==>__LOImpress_ShapeAreaGradientMulticolor
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $bShadow not a Boolean.
-;                  @Error: 1, @Extended: 3 = $iLocation not an Integer, less than 0 or greater than 8. See Constants, $LOI_SHAPE_SHADOW_LOCATION_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iLocation not an Integer, less than 0 or greater than 8. See Constants, $LOD_SHAPE_SHADOW_LOCATION_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 4 = $iColor not an Integer, less than 0 or greater than 16777215.
 ;                  @Error: 1, @Extended: 5 = $iDistance not an Integer, or less than 0.
 ;                  @Error: 1, @Extended: 6 = $iBlur not an Integer, less than 0 or greater than 150 Printer's Points.
@@ -6474,13 +6474,13 @@ EndFunc   ;==>__LOImpress_ShapeAreaGradientMulticolor
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  LibreOffice may change the shadow distance +/- a Hundredth of a Millimeter (HMM).
-;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
+;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
 ; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ShapeAreaShadow(ByRef $oObj, $bShadow = Null, $iLocation = Null, $iColor = Null, $iDistance = Null, $iBlur = Null, $iTransparency = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ShapeAreaShadow(ByRef $oObj, $bShadow = Null, $iLocation = Null, $iColor = Null, $iDistance = Null, $iBlur = Null, $iTransparency = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0, $iInternalLocation, $iInternalDistance
@@ -6489,7 +6489,7 @@ Func __LOImpress_ShapeAreaShadow(ByRef $oObj, $bShadow = Null, $iLocation = Null
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($bShadow, $iLocation, $iColor, $iDistance, $iBlur, $iTransparency) Then
-		$iInternalDistance = __LOImpress_ShapeAreaShadowModify($oObj)
+		$iInternalDistance = __LODraw_ShapeAreaShadowModify($oObj)
 		$iInternalLocation = @extended
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
@@ -6508,9 +6508,9 @@ Func __LOImpress_ShapeAreaShadow(ByRef $oObj, $bShadow = Null, $iLocation = Null
 	EndIf
 
 	If ($iLocation <> Null) Then
-		If Not __LO_IntIsBetween($iLocation, $LOI_SHAPE_SHADOW_LOCATION_TOP_LEFT, $LOI_SHAPE_SHADOW_LOCATION_BOTTOM_RIGHT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not __LO_IntIsBetween($iLocation, $LOD_SHAPE_SHADOW_LOCATION_TOP_LEFT, $LOD_SHAPE_SHADOW_LOCATION_BOTTOM_RIGHT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-		__LOImpress_ShapeAreaShadowModify($oObj, $iLocation)
+		__LODraw_ShapeAreaShadowModify($oObj, $iLocation)
 		If (@error = $__LO_STATUS_PROP_SETTING_ERROR) Then
 			$iError = BitOR($iError, 2)
 
@@ -6530,7 +6530,7 @@ Func __LOImpress_ShapeAreaShadow(ByRef $oObj, $bShadow = Null, $iLocation = Null
 	If ($iDistance <> Null) Then
 		If Not __LO_IntIsBetween($iDistance, 0, $iDistance) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
-		__LOImpress_ShapeAreaShadowModify($oObj, Null, $iDistance)
+		__LODraw_ShapeAreaShadowModify($oObj, Null, $iDistance)
 		If (@error = $__LO_STATUS_PROP_SETTING_ERROR) Then
 			$iError = BitOR($iError, 8)
 
@@ -6555,14 +6555,14 @@ Func __LOImpress_ShapeAreaShadow(ByRef $oObj, $bShadow = Null, $iLocation = Null
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_ShapeAreaShadow
+EndFunc   ;==>__LODraw_ShapeAreaShadow
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ShapeAreaShadowModify
+; Name ..........: __LODraw_ShapeAreaShadowModify
 ; Description ...: Internal function for setting or retrieving Shape Shadow Location and Distance settings.
-; Syntax ........: __LOImpress_ShapeAreaShadowModify($oShape[, $iLocation = Null[, $iDistance = Null]])
-; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
-;                  $iLocation           - [optional] (0-8) Default is Null. The Location of the Shadow, must be one of the Constants, $LOI_SHAPE_SHADOW_LOCATION_* as defined in LibreOfficeImpress_Constants.au3.
+; Syntax ........: __LODraw_ShapeAreaShadowModify($oShape[, $iLocation = Null[, $iDistance = Null]])
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapeTextBoxInsert, _LODraw_ShapeImageInsert, or _LODraw_ShapesGetList function.
+;                  $iLocation           - [optional] (0-8) Default is Null. The Location of the Shadow, must be one of the Constants, $LOD_SHAPE_SHADOW_LOCATION_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iDistance           - [optional] Default is Null. The distance of the Shadow from the Shape's edges, set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Integer
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully set the settings.
@@ -6576,14 +6576,14 @@ EndFunc   ;==>__LOImpress_ShapeAreaShadow
 ;                  |                               2 = Error setting $iDistance
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
+; Remarks .......: This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ShapeAreaShadowModify($oShape, $iLocation = Null, $iDistance = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ShapeAreaShadowModify($oShape, $iLocation = Null, $iDistance = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $bReturn = False, $bModifyLocation = True
@@ -6598,31 +6598,31 @@ Func __LOImpress_ShapeAreaShadowModify($oShape, $iLocation = Null, $iDistance = 
 		$iError = 2
 		Select
 			Case (($oShape.ShadowXDistance() < 0) And ($oShape.ShadowYDistance() < 0)) ; Top Left.
-				$iLocation = $LOI_SHAPE_SHADOW_LOCATION_TOP_LEFT
+				$iLocation = $LOD_SHAPE_SHADOW_LOCATION_TOP_LEFT
 
 			Case (($oShape.ShadowXDistance() = 0) And ($oShape.ShadowYDistance() < 0)) ; Top Center
-				$iLocation = $LOI_SHAPE_SHADOW_LOCATION_TOP_CENTER
+				$iLocation = $LOD_SHAPE_SHADOW_LOCATION_TOP_CENTER
 
 			Case (($oShape.ShadowXDistance() > 0) And ($oShape.ShadowYDistance() < 0)) ; Top Right
-				$iLocation = $LOI_SHAPE_SHADOW_LOCATION_TOP_RIGHT
+				$iLocation = $LOD_SHAPE_SHADOW_LOCATION_TOP_RIGHT
 
 			Case (($oShape.ShadowXDistance() < 0) And ($oShape.ShadowYDistance() = 0)) ; Middle Left
-				$iLocation = $LOI_SHAPE_SHADOW_LOCATION_MIDDLE_LEFT
+				$iLocation = $LOD_SHAPE_SHADOW_LOCATION_MIDDLE_LEFT
 
 			Case (($oShape.ShadowXDistance() = 0) And ($oShape.ShadowYDistance() = 0)) ; Middle Center
-				$iLocation = $LOI_SHAPE_SHADOW_LOCATION_MIDDLE_CENTER
+				$iLocation = $LOD_SHAPE_SHADOW_LOCATION_MIDDLE_CENTER
 
 			Case (($oShape.ShadowXDistance() > 0) And ($oShape.ShadowYDistance() = 0)) ; Middle Right
-				$iLocation = $LOI_SHAPE_SHADOW_LOCATION_MIDDLE_RIGHT
+				$iLocation = $LOD_SHAPE_SHADOW_LOCATION_MIDDLE_RIGHT
 
 			Case (($oShape.ShadowXDistance() < 0) And ($oShape.ShadowYDistance() > 0)) ; Bottom Left
-				$iLocation = $LOI_SHAPE_SHADOW_LOCATION_BOTTOM_LEFT
+				$iLocation = $LOD_SHAPE_SHADOW_LOCATION_BOTTOM_LEFT
 
 			Case (($oShape.ShadowXDistance() = 0) And ($oShape.ShadowYDistance() > 0)) ; Bottom Center
-				$iLocation = $LOI_SHAPE_SHADOW_LOCATION_BOTTOM_CENTER
+				$iLocation = $LOD_SHAPE_SHADOW_LOCATION_BOTTOM_CENTER
 
 			Case (($oShape.ShadowXDistance() > 0) And ($oShape.ShadowYDistance() > 0)) ; Bottom Right
-				$iLocation = $LOI_SHAPE_SHADOW_LOCATION_BOTTOM_RIGHT
+				$iLocation = $LOD_SHAPE_SHADOW_LOCATION_BOTTOM_RIGHT
 		EndSelect
 	EndIf
 
@@ -6647,67 +6647,67 @@ Func __LOImpress_ShapeAreaShadowModify($oShape, $iLocation = Null, $iDistance = 
 	If $bReturn Then Return SetError($__LO_STATUS_SUCCESS, $iLocation, $iDistance)
 
 	Switch $iLocation
-		Case $LOI_SHAPE_SHADOW_LOCATION_TOP_LEFT
+		Case $LOD_SHAPE_SHADOW_LOCATION_TOP_LEFT
 			$oShape.ShadowXDistance = ($iDistance * -1)
 			$oShape.ShadowYDistance = ($iDistance * -1)
 
 			Return (($oShape.ShadowXDistance() = ($iDistance * -1)) And ($oShape.ShadowYDistance() = ($iDistance * -1))) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 
-		Case $LOI_SHAPE_SHADOW_LOCATION_TOP_CENTER
+		Case $LOD_SHAPE_SHADOW_LOCATION_TOP_CENTER
 			$oShape.ShadowXDistance = 0
 			$oShape.ShadowYDistance = ($iDistance * -1)
 
 			Return (($oShape.ShadowXDistance() = 0) And ($oShape.ShadowYDistance() = ($iDistance * -1))) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 
-		Case $LOI_SHAPE_SHADOW_LOCATION_TOP_RIGHT
+		Case $LOD_SHAPE_SHADOW_LOCATION_TOP_RIGHT
 			$oShape.ShadowXDistance = $iDistance
 			$oShape.ShadowYDistance = ($iDistance * -1)
 
 			Return (($oShape.ShadowXDistance() = $iDistance) And ($oShape.ShadowYDistance() = ($iDistance * -1))) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 
-		Case $LOI_SHAPE_SHADOW_LOCATION_MIDDLE_LEFT
+		Case $LOD_SHAPE_SHADOW_LOCATION_MIDDLE_LEFT
 			$oShape.ShadowXDistance = ($iDistance * -1)
 			$oShape.ShadowYDistance = 0
 
 			Return (($oShape.ShadowXDistance() = ($iDistance * -1)) And ($oShape.ShadowYDistance() = 0)) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 
-		Case $LOI_SHAPE_SHADOW_LOCATION_MIDDLE_CENTER
+		Case $LOD_SHAPE_SHADOW_LOCATION_MIDDLE_CENTER
 			$oShape.ShadowXDistance = ($bModifyLocation) ? (0) : ($iDistance)
 			$oShape.ShadowYDistance = ($bModifyLocation) ? (0) : ($iDistance)
 
 			Return (($oShape.ShadowXDistance() = (($bModifyLocation) ? (0) : ($iDistance))) And ($oShape.ShadowYDistance() = (($bModifyLocation) ? (0) : ($iDistance)))) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 
-		Case $LOI_SHAPE_SHADOW_LOCATION_MIDDLE_RIGHT
+		Case $LOD_SHAPE_SHADOW_LOCATION_MIDDLE_RIGHT
 			$oShape.ShadowXDistance = $iDistance
 			$oShape.ShadowYDistance = 0
 
 			Return (($oShape.ShadowXDistance() = $iDistance) And ($oShape.ShadowYDistance() = 0)) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 
-		Case $LOI_SHAPE_SHADOW_LOCATION_BOTTOM_LEFT
+		Case $LOD_SHAPE_SHADOW_LOCATION_BOTTOM_LEFT
 			$oShape.ShadowXDistance = ($iDistance * -1)
 			$oShape.ShadowYDistance = $iDistance
 
 			Return (($oShape.ShadowXDistance() = ($iDistance * -1)) And ($oShape.ShadowYDistance() = $iDistance)) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 
-		Case $LOI_SHAPE_SHADOW_LOCATION_BOTTOM_CENTER
+		Case $LOD_SHAPE_SHADOW_LOCATION_BOTTOM_CENTER
 			$oShape.ShadowXDistance = 0
 			$oShape.ShadowYDistance = $iDistance
 
 			Return (($oShape.ShadowXDistance() = 0) And ($oShape.ShadowYDistance() = $iDistance)) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 
-		Case $LOI_SHAPE_SHADOW_LOCATION_BOTTOM_RIGHT
+		Case $LOD_SHAPE_SHADOW_LOCATION_BOTTOM_RIGHT
 			$oShape.ShadowXDistance = $iDistance
 			$oShape.ShadowYDistance = $iDistance
 
 			Return (($oShape.ShadowXDistance() = $iDistance) And ($oShape.ShadowYDistance() = $iDistance)) ? (SetError($__LO_STATUS_SUCCESS, 0, 1)) : (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0))
 	EndSwitch
-EndFunc   ;==>__LOImpress_ShapeAreaShadowModify
+EndFunc   ;==>__LODraw_ShapeAreaShadowModify
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ShapeAreaTransparency
+; Name ..........: __LODraw_ShapeAreaTransparency
 ; Description ...: Set or retrieve Transparency settings for a Shape, Shape Style or Presentation Style.
-; Syntax ........: __LOImpress_ShapeAreaTransparency(ByRef $oObj[, $iTransparency = Null])
-; Parameters ....: $oObj                - A Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
+; Syntax ........: __LODraw_ShapeAreaTransparency(ByRef $oObj[, $iTransparency = Null])
+; Parameters ....: $oObj                - A Shape, Shape Style or Presentation Style object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
@@ -6725,13 +6725,13 @@ EndFunc   ;==>__LOImpress_ShapeAreaShadowModify
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
+;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
 ; Related .......:
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ShapeAreaTransparency(ByRef $oObj, $iTransparency = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ShapeAreaTransparency(ByRef $oObj, $iTransparency = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0, $iCurTransp
@@ -6752,13 +6752,13 @@ Func __LOImpress_ShapeAreaTransparency(ByRef $oObj, $iTransparency = Null)
 	$iError = ($oObj.FillTransparence() = $iTransparency) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_ShapeAreaTransparency
+EndFunc   ;==>__LODraw_ShapeAreaTransparency
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ShapeAreaTransparencyGradientMulti
+; Name ..........: __LODraw_ShapeAreaTransparencyGradientMulti
 ; Description ...: Set or Retrieve a Shape, Shape Style, or Presentation Style's Multi Transparency Gradient settings.
-; Syntax ........: __LOImpress_ShapeAreaTransparencyGradientMulti(ByRef $oObj[, $avColorStops = Null])
-; Parameters ....: $oObj                - A Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
+; Syntax ........: __LODraw_ShapeAreaTransparencyGradientMulti(ByRef $oObj[, $avColorStops = Null])
+; Parameters ....: $oObj                - A Shape, Shape Style or Presentation Style object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -6788,13 +6788,13 @@ EndFunc   ;==>__LOImpress_ShapeAreaTransparency
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
-; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LOImpress_ShapeAreaGradientMulticolor
+;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
+; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LODraw_ShapeAreaGradientMulticolor
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ShapeAreaTransparencyGradientMulti(ByRef $oObj, $avColorStops = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ShapeAreaTransparencyGradientMulti(ByRef $oObj, $avColorStops = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $tStyleGradient, $tColorStop, $tStopColor
@@ -6821,7 +6821,7 @@ Func __LOImpress_ShapeAreaTransparencyGradientMulti(ByRef $oObj, $avColorStops =
 			If Not IsObj($tStopColor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 			$avNewColorStops[$i][1] = Int($tStopColor.Red() * 100) ; One value is the same as all.
-			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+			Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 		Next
 
 		Return SetError($__LO_STATUS_SUCCESS, UBound($avNewColorStops), $avNewColorStops)
@@ -6852,7 +6852,7 @@ Func __LOImpress_ShapeAreaTransparencyGradientMulti(ByRef $oObj, $avColorStops =
 
 		$atColorStops[$i] = $tColorStop
 
-		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+		Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 	Next
 
 	$tStyleGradient.ColorStops = $atColorStops
@@ -6861,15 +6861,15 @@ Func __LOImpress_ShapeAreaTransparencyGradientMulti(ByRef $oObj, $avColorStops =
 	$iError = (UBound($avColorStops) = UBound($oObj.FillTransparenceGradient.ColorStops())) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_ShapeAreaTransparencyGradientMulti
+EndFunc   ;==>__LODraw_ShapeAreaTransparencyGradientMulti
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ShapeGetType
+; Name ..........: __LODraw_ShapeGetType
 ; Description ...: Identify a Shape's type.
-; Syntax ........: __LOImpress_ShapeGetType(ByRef $oShape)
-; Parameters ....: $oShape              - A Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Syntax ........: __LODraw_ShapeGetType(ByRef $oShape)
+; Parameters ....: $oShape              - A Drawing Shape object returned by a previous _LODraw_DrawShapeInsert, or _LODraw_ShapesGetList function.
 ; Return values .: Success: Integer
-;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning the Shape's Type, corresponding to one of the Constants $LOI_SHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning the Shape's Type, corresponding to one of the Constants $LOD_SHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
@@ -6883,26 +6883,26 @@ EndFunc   ;==>__LOImpress_ShapeAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ShapeGetType(ByRef $oShape)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ShapeGetType(ByRef $oShape)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $avShapeTypes[21][2] = [[$LOI_SHAPE_TYPE_CALC, "com.sun.star.presentation.CalcShape"], [$LOI_SHAPE_TYPE_CHART, "com.sun.star.presentation.ChartShape"], _
-			[$LOI_SHAPE_TYPE_DATETIME, "com.sun.star.presentation.DateTimeShape"], [$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.Shape3DSceneObject"], _
-			[$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.CustomShape"], [$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.MeasureShape"], _
-			[$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.EllipseShape"], [$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.ClosedBezierShape"], _
-			[$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.OpenBezierShape"], [$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.PolyPolygonShape"], _
-			[$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.PolyLineShape"], [$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.LineShape"], _
-			[$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.ConnectorShape"], [$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.OpenFreeHandShape"], _
-			[$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.ClosedFreeHandShape"], [$LOI_SHAPE_TYPE_FOOTER, "com.sun.star.presentation.FooterShape"], _
-			[$LOI_SHAPE_TYPE_FORM_CONTROL, "com.sun.star.drawing.ControlShape"], [$LOI_SHAPE_TYPE_HEADER, "com.sun.star.presentation.HeaderShape"], _
-			[$LOI_SHAPE_TYPE_HANDOUT, "com.sun.star.presentation.HandoutShape"], [$LOI_SHAPE_TYPE_IMAGE, "com.sun.star.drawing.GraphicObjectShape"], _
-			[$LOI_SHAPE_TYPE_MEDIA, "com.sun.star.drawing.MediaShape"], [$LOI_SHAPE_TYPE_NOTES, "com.sun.star.presentation.NotesShape"], _
-			[$LOI_SHAPE_TYPE_OLE2, "com.sun.star.drawing.OLE2Shape"], [$LOI_SHAPE_TYPE_ORG_CHART, "com.sun.star.presentation.OrgChartShape"], _
-			[$LOI_SHAPE_TYPE_PAGE, "com.sun.star.presentation.PageShape"], [$LOI_SHAPE_TYPE_SLIDE_NUM, "com.sun.star.presentation.SlideNumberShape"], _
-			[$LOI_SHAPE_TYPE_TABLE, "com.sun.star.drawing.TableShape"], [$LOI_SHAPE_TYPE_TEXTBOX, "com.sun.star.drawing.TextShape"], _
-			[$LOI_SHAPE_TYPE_TEXTBOX_SUBTITLE, "com.sun.star.presentation.SubtitleShape"], [$LOI_SHAPE_TYPE_TEXTBOX_TITLE, "com.sun.star.presentation.TitleTextShape"], _
-			[$LOI_SHAPE_TYPE_TEXTBOX_OUTLINE, "com.sun.star.presentation.OutlinerShape"]]
+	Local $avShapeTypes[21][2] = [[$LOD_SHAPE_TYPE_CALC, "com.sun.star.presentation.CalcShape"], [$LOD_SHAPE_TYPE_CHART, "com.sun.star.presentation.ChartShape"], _
+			[$LOD_SHAPE_TYPE_DATETIME, "com.sun.star.presentation.DateTimeShape"], [$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.Shape3DSceneObject"], _
+			[$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.CustomShape"], [$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.MeasureShape"], _
+			[$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.EllipseShape"], [$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.ClosedBezierShape"], _
+			[$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.OpenBezierShape"], [$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.PolyPolygonShape"], _
+			[$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.PolyLineShape"], [$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.LineShape"], _
+			[$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.ConnectorShape"], [$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.OpenFreeHandShape"], _
+			[$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.ClosedFreeHandShape"], [$LOD_SHAPE_TYPE_FOOTER, "com.sun.star.presentation.FooterShape"], _
+			[$LOD_SHAPE_TYPE_FORM_CONTROL, "com.sun.star.drawing.ControlShape"], [$LOD_SHAPE_TYPE_HEADER, "com.sun.star.presentation.HeaderShape"], _
+			[$LOD_SHAPE_TYPE_HANDOUT, "com.sun.star.presentation.HandoutShape"], [$LOD_SHAPE_TYPE_IMAGE, "com.sun.star.drawing.GraphicObjectShape"], _
+			[$LOD_SHAPE_TYPE_MEDIA, "com.sun.star.drawing.MediaShape"], [$LOD_SHAPE_TYPE_NOTES, "com.sun.star.presentation.NotesShape"], _
+			[$LOD_SHAPE_TYPE_OLE2, "com.sun.star.drawing.OLE2Shape"], [$LOD_SHAPE_TYPE_ORG_CHART, "com.sun.star.presentation.OrgChartShape"], _
+			[$LOD_SHAPE_TYPE_PAGE, "com.sun.star.presentation.PageShape"], [$LOD_SHAPE_TYPE_SLIDE_NUM, "com.sun.star.presentation.SlideNumberShape"], _
+			[$LOD_SHAPE_TYPE_TABLE, "com.sun.star.drawing.TableShape"], [$LOD_SHAPE_TYPE_TEXTBOX, "com.sun.star.drawing.TextShape"], _
+			[$LOD_SHAPE_TYPE_TEXTBOX_SUBTITLE, "com.sun.star.presentation.SubtitleShape"], [$LOD_SHAPE_TYPE_TEXTBOX_TITLE, "com.sun.star.presentation.TitleTextShape"], _
+			[$LOD_SHAPE_TYPE_TEXTBOX_OUTLINE, "com.sun.star.presentation.OutlinerShape"]]
 	Local $sShapeType
 
 	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -6915,20 +6915,20 @@ Func __LOImpress_ShapeGetType(ByRef $oShape)
 	Next
 
 	Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-EndFunc   ;==>__LOImpress_ShapeGetType
+EndFunc   ;==>__LODraw_ShapeGetType
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ShapeLineArrowheadNameInsert
+; Name ..........: __LODraw_ShapeLineArrowheadNameInsert
 ; Description ...: Create and insert a preset Arrowhead name.
-; Syntax ........: __LOImpress_ShapeLineArrowheadNameInsert(ByRef $oDoc, $iArrowStyle)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $iArrowStyle         - The Arrowhead style to insert. See Constants, $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+; Syntax ........: __LODraw_ShapeLineArrowheadNameInsert(ByRef $oDoc, $iArrowStyle)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
+;                  $iArrowStyle         - The Arrowhead style to insert. See Constants, $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. The Arrowhead name was successfully inserted.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
-;                  @Error: 1, @Extended: 2 = $iArrowStyle not an Integer, less than 0 or greater than 32. See Constants, $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iArrowStyle not an Integer, less than 0 or greater than 32. See Constants, $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.drawing.MarkerTable" Object.
 ;                  @Error: 2, @Extended: 2 = Error creating "com.sun.star.drawing.PolyPolygonBezierCoords" structure.
@@ -6943,8 +6943,8 @@ EndFunc   ;==>__LOImpress_ShapeGetType
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ShapeLineArrowheadNameInsert(ByRef $oDoc, $iArrowStyle)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ShapeLineArrowheadNameInsert(ByRef $oDoc, $iArrowStyle)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $tPolyCoords
@@ -6953,20 +6953,20 @@ Func __LOImpress_ShapeLineArrowheadNameInsert(ByRef $oDoc, $iArrowStyle)
 	Local $sPolyCoords = "com.sun.star.drawing.PolyPolygonBezierCoords"
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LO_IntIsBetween($iArrowStyle, $LOI_SHAPE_LINE_ARROW_TYPE_NONE, $LOI_SHAPE_LINE_ARROW_TYPE_CF_ZERO_MANY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iArrowStyle, $LOD_SHAPE_LINE_ARROW_TYPE_NONE, $LOD_SHAPE_LINE_ARROW_TYPE_CF_ZERO_MANY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oArrowTable = $oDoc.createInstance("com.sun.star.drawing.MarkerTable")
 	If Not IsObj($oArrowTable) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	; Retrieve the Arrow name.
-	$sArrowName = __LOImpress_ShapeLineArrowStyleName($iArrowStyle, Null)
+	$sArrowName = __LODraw_ShapeLineArrowStyleName($iArrowStyle, Null)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	If ($sArrowName <> "") And Not $oArrowTable.hasByName($sArrowName) Then ; Check if Arrow name = "", if so, skip, as it is "None" arrow setting, and has no preset values.
 		$tPolyCoords = __LO_CreateStruct($sPolyCoords)
 		If Not IsObj($tPolyCoords) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-		$tPolyCoords = __LOImpress_ShapeLineArrowStyleName($iArrowStyle, Null, True, $tPolyCoords)
+		$tPolyCoords = __LODraw_ShapeLineArrowStyleName($iArrowStyle, Null, True, $tPolyCoords)
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		$oArrowTable.insertByName($sArrowName, $tPolyCoords)
@@ -6974,13 +6974,13 @@ Func __LOImpress_ShapeLineArrowheadNameInsert(ByRef $oDoc, $iArrowStyle)
 	EndIf
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>__LOImpress_ShapeLineArrowheadNameInsert
+EndFunc   ;==>__LODraw_ShapeLineArrowheadNameInsert
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ShapeLineArrowStyleName
+; Name ..........: __LODraw_ShapeLineArrowStyleName
 ; Description ...: Convert a Arrow head Constant to the corresponding name or reverse, or return preset values.
-; Syntax ........: __LOImpress_ShapeLineArrowStyleName([$iArrowStyle = Null[, $sArrowStyle = Null[, $bReturnPresets = False[, $tPolyCoords = Null]]]])
-; Parameters ....: $iArrowStyle         - [optional] (0-32) Default is Null. The Arrow Style Constant to convert to its corresponding name. See $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3
+; Syntax ........: __LODraw_ShapeLineArrowStyleName([$iArrowStyle = Null[, $sArrowStyle = Null[, $bReturnPresets = False[, $tPolyCoords = Null]]]])
+; Parameters ....: $iArrowStyle         - [optional] (0-32) Default is Null. The Arrow Style Constant to convert to its corresponding name. See $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3
 ;                  $sArrowStyle         - [optional] Default is Null. The Arrow Style Name to convert to the corresponding constant if found.
 ;                  $bReturnPresets      - [optional] Default is False. If True, the function will try to fill and return a Structure with preset values.
 ;                  $tPolyCoords         - [optional] Default is Null. If $bReturnPresets is True, this is a PolyPolygonBezierCoords Structure to fill.
@@ -6991,7 +6991,7 @@ EndFunc   ;==>__LOImpress_ShapeLineArrowheadNameInsert
 ;                  @Error: 0, @Extended: 3, Return: String = Success. $bReturnPresets called with True, returning $tPolyCoords filled with preset values.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $iArrowStyle not an Integer, less than 0 or greater than Arrow type constants. See $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3
+;                  @Error: 1, @Extended: 1 = $iArrowStyle not an Integer, less than 0 or greater than Arrow type constants. See $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3
 ;                  @Error: 1, @Extended: 2 = $sArrowStyle not a String.
 ;                  @Error: 1, @Extended: 3 = $bReturnPresets not a Boolean.
 ;                  @Error: 1, @Extended: 4 = $tPolyCoords not an Object.
@@ -7000,50 +7000,50 @@ EndFunc   ;==>__LOImpress_ShapeLineArrowheadNameInsert
 ;                  @Error: 2, @Extended: 1 = Failed to create a Shape position point.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
+; Remarks .......: This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
 ; Related .......:
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ShapeLineArrowStyleName($iArrowStyle = Null, $sArrowStyle = Null, $bReturnPresets = False, $tPolyCoords = Null)
+Func __LODraw_ShapeLineArrowStyleName($iArrowStyle = Null, $sArrowStyle = Null, $bReturnPresets = False, $tPolyCoords = Null)
 	Local $asArrowStyles[33]
 	Local $avArray[1]
 	Local $atCoords[0]
 	Local Const $iX = 0, $iY = 1
 
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_NONE] = ""
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_ARROW_SHORT] = "Arrow short"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_CONCAVE_SHORT] = "Concave short"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_ARROW] = "Arrow"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_TRIANGLE] = "Triangle"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_CONCAVE] = "Concave"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_ARROW_LARGE] = "Arrow large"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_CIRCLE] = "Circle"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_SQUARE] = "Square"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_SQUARE_45] = "Square 45"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_DIAMOND] = "Diamond"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_HALF_CIRCLE] = "Half Circle"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_DIMENSIONAL_LINES] = "Dimension Lines"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_DIMENSIONAL_LINE_ARROW] = "Dimension Line Arrow"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_DIMENSION_LINE] = "Dimension Line"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_LINE_SHORT] = "Line short"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_LINE] = "Line"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_TRIANGLE_UNFILLED] = "Triangle unfilled"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_DIAMOND_UNFILLED] = "Diamond unfilled"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_CIRCLE_UNFILLED] = "Circle unfilled"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_SQUARE_45_UNFILLED] = "Square 45 unfilled"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_SQUARE_UNFILLED] = "Square unfilled"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_HALF_CIRCLE_UNFILLED] = "Half Circle unfilled"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_HALF_ARROW_LEFT] = "Half Arrow left"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_HALF_ARROW_RIGHT] = "Half Arrow right"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_REVERSED_ARROW] = "Reversed Arrow"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_DOUBLE_ARROW] = "Double Arrow"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_CF_ONE] = "CF One"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_CF_ONLY_ONE] = "CF Only One"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_CF_MANY] = "CF Many"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_CF_MANY_ONE] = "CF Many One"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_CF_ZERO_ONE] = "CF Zero One"
-	$asArrowStyles[$LOI_SHAPE_LINE_ARROW_TYPE_CF_ZERO_MANY] = "CF Zero Many"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_NONE] = ""
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_ARROW_SHORT] = "Arrow short"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_CONCAVE_SHORT] = "Concave short"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_ARROW] = "Arrow"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_TRIANGLE] = "Triangle"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_CONCAVE] = "Concave"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_ARROW_LARGE] = "Arrow large"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_CIRCLE] = "Circle"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_SQUARE] = "Square"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_SQUARE_45] = "Square 45"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_DIAMOND] = "Diamond"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_HALF_CIRCLE] = "Half Circle"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_DIMENSIONAL_LINES] = "Dimension Lines"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_DIMENSIONAL_LINE_ARROW] = "Dimension Line Arrow"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_DIMENSION_LINE] = "Dimension Line"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_LINE_SHORT] = "Line short"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_LINE] = "Line"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_TRIANGLE_UNFILLED] = "Triangle unfilled"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_DIAMOND_UNFILLED] = "Diamond unfilled"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_CIRCLE_UNFILLED] = "Circle unfilled"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_SQUARE_45_UNFILLED] = "Square 45 unfilled"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_SQUARE_UNFILLED] = "Square unfilled"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_HALF_CIRCLE_UNFILLED] = "Half Circle unfilled"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_HALF_ARROW_LEFT] = "Half Arrow left"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_HALF_ARROW_RIGHT] = "Half Arrow right"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_REVERSED_ARROW] = "Reversed Arrow"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_DOUBLE_ARROW] = "Double Arrow"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_CF_ONE] = "CF One"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_CF_ONLY_ONE] = "CF Only One"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_CF_MANY] = "CF Many"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_CF_MANY_ONE] = "CF Many One"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_CF_ZERO_ONE] = "CF Zero One"
+	$asArrowStyles[$LOD_SHAPE_LINE_ARROW_TYPE_CF_ZERO_MANY] = "CF Zero Many"
 
 	If Not IsBool($bReturnPresets) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
@@ -7058,7 +7058,7 @@ Func __LOImpress_ShapeLineArrowStyleName($iArrowStyle = Null, $sArrowStyle = Nul
 		For $i = 0 To UBound($asArrowStyles) - 1
 			If ($asArrowStyles[$i] = $sArrowStyle) Then Return SetError($__LO_STATUS_SUCCESS, 1, $i) ; Return the array element where the matching Arrow Style was found.
 
-			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV)) ? (10) : (0))
+			Sleep((IsInt($i / $__LODCONST_SLEEP_DIV)) ? (10) : (0))
 		Next
 
 		Return SetError($__LO_STATUS_SUCCESS, 2, $sArrowStyle) ; If no matches, just return the name, as it could be a custom value.
@@ -7067,102 +7067,102 @@ Func __LOImpress_ShapeLineArrowStyleName($iArrowStyle = Null, $sArrowStyle = Nul
 		If Not IsObj($tPolyCoords) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		Switch $iArrowStyle
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_ARROW_SHORT
-				Local $aiFlags[4] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_ARROW_SHORT
+				Local $aiFlags[4] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[4][2] = [[0, 13], [10, 0], [20, 13], [0, 13]]
 
 				ReDim $atCoords[4]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_CONCAVE_SHORT
-				Local $aiFlags[11] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_CONCAVE_SHORT
+				Local $aiFlags[11] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[11][2] = [[566, 0], [0, 754], [114, 669], [250, 601], [398, 555], [559, 538], [720, 551], [873, 597], [1013, 665], [1131, 754], _
 						[566, 0]]
 
 				ReDim $atCoords[11]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_ARROW
-				Local $aiFlags[4] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_ARROW
+				Local $aiFlags[4] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[4][2] = [[10, 0], [0, 30], [20, 30], [10, 0]]
 
 				ReDim $atCoords[4]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_TRIANGLE
-				Local $aiFlags[20] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_TRIANGLE
+				Local $aiFlags[20] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[20][2] = [[1009, 1050], [560, 42], [538, 12], [509, 0], [475, 12], [454, 38], [5, 1050], [0, 1063], [0, 1071], [5, 1092], _
 						[17, 1113], [34, 1126], [55, 1130], [958, 1130], [979, 1126], [1000, 1113], [1009, 1092], [1013, 1071], [1013, 1063], [1009, 1050]]
 
 				ReDim $atCoords[20]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_CONCAVE
-				Local $aiFlags[11] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_CONCAVE
+				Local $aiFlags[11] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[11][2] = [[1013, 1491], [1131, 1580], [564, 0], [0, 1580], [114, 1495], [250, 1427], [398, 1381], [559, 1364], [720, 1377], [873, 1423], _
 						[1013, 1491]]
 
 				ReDim $atCoords[11]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_ARROW_LARGE
-				Local $aiFlags[4] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_ARROW_LARGE
+				Local $aiFlags[4] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[4][2] = [[0, 40], [10, 0], [20, 40], [0, 40]]
 
 				ReDim $atCoords[4]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_CIRCLE
-				Local $aiFlags[33] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_CIRCLE
+				Local $aiFlags[33] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[33][2] = [[462, 1118], [360, 1089], [258, 1038], [165, 966], [93, 873], [42, 771], [13, 669], [0, 564], [13, 462], [42, 356], _
 						[93, 254], [165, 165], [258, 93], [360, 43], [462, 9], [568, 0], [669, 9], [775, 43], [873, 93], [966, 165], _
 						[1038, 254], [1089, 356], [1118, 462], [1131, 564], [1118, 669], [1089, 771], [1038, 873], [966, 966], [873, 1038], [775, 1089], _
@@ -7171,111 +7171,111 @@ Func __LOImpress_ShapeLineArrowStyleName($iArrowStyle = Null, $sArrowStyle = Nul
 				ReDim $atCoords[33]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_SQUARE
-				Local $aiFlags[5] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_SQUARE
+				Local $aiFlags[5] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[5][2] = [[0, 0], [10, 0], [10, 10], [0, 10], [0, 0]]
 
 				ReDim $atCoords[5]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_SQUARE_45
-				Local $aiFlags[5] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_SQUARE_45
+				Local $aiFlags[5] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[5][2] = [[0, 564], [564, 1131], [1131, 564], [564, 0], [0, 564]]
 
 				ReDim $atCoords[5]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_DIAMOND
-				Local $aiFlags[5] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_DIAMOND
+				Local $aiFlags[5] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[5][2] = [[1500, 0], [3000, 3000], [1500, 6000], [0, 3000], [1500, 0]]
 
 				ReDim $atCoords[5]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_HALF_CIRCLE
-				Local $aiFlags[16] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_HALF_CIRCLE
+				Local $aiFlags[16] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[16][2] = [[29, 0], [0, 653], [244, 2596], [1005, 4400], [2188, 5960], [3750, 7142], [5556, 7902], [7450, 8146], [9444, 7902], [11250, 7142], _
 						[12812, 5960], [13995, 4400], [14756, 2596], [15000, 653], [14971, 0], [29, 0]]
 
 				ReDim $atCoords[16]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_DIMENSIONAL_LINES
-				Local $aiFlags[13] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_DIMENSIONAL_LINES
+				Local $aiFlags[13] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[13][2] = [[0, 0], [278, 0], [556, 0], [836, 0], [836, 36], [836, 72], [836, 110], [558, 110], [280, 110], [0, 110], _
 						[0, 74], [0, 38], [0, 0]]
 
 				ReDim $atCoords[13]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_DIMENSIONAL_LINE_ARROW
-				Local $aiFlags[6] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_DIMENSIONAL_LINE_ARROW
+				Local $aiFlags[6] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[6][2] = [[0, 0], [0, 110], [418, 110], [836, 110], [836, 0], [0, 0]]
 
 				ReDim $atCoords[6]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_DIMENSION_LINE
-				Local $aiFlags[57] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_DIMENSION_LINE
+				Local $aiFlags[57] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[57][2] = [[0, 0], [0, 110], [418, 110], [414, 111], [409, 112], [403, 114], [397, 118], [393, 122], [389, 126], [13, 639], _
 						[7, 650], [5, 659], [4, 665], [5, 675], [9, 684], [13, 691], [17, 695], [22, 699], [29, 703], [36, 706], _
 						[46, 707], [55, 707], [65, 704], [74, 698], [82, 689], [422, 225], [763, 689], [768, 695], [772, 699], [778, 703], _
@@ -7286,24 +7286,24 @@ Func __LOImpress_ShapeLineArrowStyleName($iArrowStyle = Null, $sArrowStyle = Nul
 				ReDim $atCoords[57]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_LINE_SHORT
-				Local $aiFlags[53] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_LINE_SHORT
+				Local $aiFlags[53] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[53][2] = [[1126, 0], [1108, 1], [1096, 3], [1083, 6], [1067, 13], [1053, 22], [1041, 32], [1030, 45], [23, 1418], [8, 1446], _
 						[1, 1472], [0, 1488], [3, 1513], [12, 1538], [24, 1557], [35, 1569], [47, 1579], [66, 1590], [86, 1597], [113, 1601], _
 						[137, 1599], [163, 1591], [187, 1576], [208, 1553], [1120, 308], [2032, 1553], [2045, 1569], [2057, 1579], [2073, 1588], [2088, 1594], _
@@ -7314,21 +7314,21 @@ Func __LOImpress_ShapeLineArrowStyleName($iArrowStyle = Null, $sArrowStyle = Nul
 				ReDim $atCoords[53]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_LINE
-				Local $aiFlags[39] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_LINE
+				Local $aiFlags[39] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[39][2] = [[1125, 0], [1080, 9], [1042, 34], [1021, 64], [12, 2074], [1, 2108], [0, 2142], [12, 2183], [39, 2215], [62, 2230], _
 						[85, 2239], [111, 2243], [148, 2238], [179, 2223], [202, 2202], [217, 2179], [1122, 375], [2021, 2179], [2031, 2196], [2043, 2210], _
 						[2058, 2223], [2073, 2232], [2094, 2240], [2124, 2244], [2144, 2242], [2159, 2238], [2176, 2231], [2192, 2221], [2204, 2211], [2217, 2196], _
@@ -7337,47 +7337,47 @@ Func __LOImpress_ShapeLineArrowStyleName($iArrowStyle = Null, $sArrowStyle = Nul
 				ReDim $atCoords[39]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_TRIANGLE_UNFILLED
-				Local $aiFlags[4] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_TRIANGLE_UNFILLED
+				Local $aiFlags[4] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[4][2] = [[1500, 0], [3000, 3000], [0, 3000], [1500, 0]]
 
 				ReDim $atCoords[4]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_DIAMOND_UNFILLED
-				Local $aiFlags[5] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_DIAMOND_UNFILLED
+				Local $aiFlags[5] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[5][2] = [[1500, 0], [3000, 3000], [1500, 6000], [0, 3000], [1500, 0]]
 
 				ReDim $atCoords[5]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_CIRCLE_UNFILLED
-				Local $aiFlags[37] = [$LOI_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_SYMMETRIC, _
-						$LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_SYMMETRIC, _
-						$LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_CIRCLE_UNFILLED
+				Local $aiFlags[37] = [$LOD_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_SYMMETRIC, _
+						$LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_SYMMETRIC, _
+						$LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[37][2] = [[1500, 3000], [1224, 3000], [989, 2937], [750, 2799], [511, 2661], [339, 2489], [201, 2250], [63, 2011], [0, 1776], [0, 1500], _
 						[0, 1224], [63, 989], [201, 750], [339, 511], [511, 339], [750, 201], [989, 63], [1224, 0], [1500, 0], [1776, 0], _
 						[2011, 63], [2250, 201], [2489, 339], [2661, 511], [2799, 750], [2937, 989], [3000, 1224], [3000, 1500], [3000, 1776], [2937, 2011], _
@@ -7386,58 +7386,58 @@ Func __LOImpress_ShapeLineArrowStyleName($iArrowStyle = Null, $sArrowStyle = Nul
 				ReDim $atCoords[37]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_SQUARE_45_UNFILLED
-				Local $aiFlags[5] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_SQUARE_45_UNFILLED
+				Local $aiFlags[5] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[5][2] = [[1500, 3000], [0, 1500], [1500, 0], [3000, 1500], [1500, 3000]]
 
 				ReDim $atCoords[5]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_SQUARE_UNFILLED
-				Local $aiFlags[5] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_SQUARE_UNFILLED
+				Local $aiFlags[5] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[5][2] = [[0, 0], [300, 0], [300, 300], [0, 300], [0, 0]]
 
 				ReDim $atCoords[5]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_HALF_CIRCLE_UNFILLED
-				Local $aiFlags[92] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_SMOOTH, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_SMOOTH, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_SMOOTH, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_SMOOTH, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_HALF_CIRCLE_UNFILLED
+				Local $aiFlags[92] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_SMOOTH, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_SMOOTH, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_SMOOTH, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_SMOOTH, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[92][2] = [[14971, 0], [14992, 229], [15000, 423], [15000, 653], [15000, 1343], [14921, 1981], [14756, 2596], [14591, 3210], [14340, 3802], [13995, 4400], _
 						[13650, 4997], [13262, 5510], [12812, 5960], [12361, 6410], [11848, 6797], [11250, 7142], [10652, 7487], [10060, 7738], [9444, 7902], [8844, 8063], _
 						[8221, 8142], [7550, 8146], [7550, 8746], [7450, 8746], [7450, 8146], [6779, 8142], [6156, 8063], [5556, 7902], [4940, 7738], [4348, 7487], _
@@ -7452,132 +7452,132 @@ Func __LOImpress_ShapeLineArrowStyleName($iArrowStyle = Null, $sArrowStyle = Nul
 				ReDim $atCoords[92]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_HALF_ARROW_LEFT
-				Local $aiFlags[2] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_HALF_ARROW_LEFT
+				Local $aiFlags[2] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[2][2] = [[10, 0], [10, 0]]
 
 				ReDim $atCoords[2]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_HALF_ARROW_RIGHT
-				Local $aiFlags[2] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_HALF_ARROW_RIGHT
+				Local $aiFlags[2] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[2][2] = [[0, 0], [0, 0]]
 
 				ReDim $atCoords[2]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_REVERSED_ARROW
-				Local $aiFlags[4] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_REVERSED_ARROW
+				Local $aiFlags[4] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[4][2] = [[10, 30], [0, 0], [20, 0], [10, 30]]
 
 				ReDim $atCoords[4]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_DOUBLE_ARROW
-				Local $aiFlags[8] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_DOUBLE_ARROW
+				Local $aiFlags[8] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[8][2] = [[737, 1131], [1131, 1131], [567, 0], [0, 1131], [398, 1131], [0, 1918], [1131, 1918], [737, 1131]]
 
 				ReDim $atCoords[8]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_CF_ONE
-				Local $aiFlags[6] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_CF_ONE
+				Local $aiFlags[6] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[6][2] = [[19, 40], [20, 40], [20, 0], [18, 0], [18, 40], [19, 40]]
 
 				ReDim $atCoords[6]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_CF_ONLY_ONE
-				Local $aiFlags[6] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_CF_ONLY_ONE
+				Local $aiFlags[6] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[6][2] = [[19, 40], [20, 40], [20, 0], [18, 0], [18, 40], [19, 40]]
 
 				ReDim $atCoords[6]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_CF_MANY
-				Local $aiFlags[12] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_CF_MANY
+				Local $aiFlags[12] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[12][2] = [[1500, 3000], [3000, 211], [3000, 0], [2886, 0], [1600, 2392], [1600, 0], [1400, 0], [1400, 2392], [114, 0], [0, 0], _
 						[0, 211], [1500, 3000]]
 
 				ReDim $atCoords[12]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_CF_MANY_ONE
-				Local $aiFlags[6] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_CF_MANY_ONE
+				Local $aiFlags[6] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[6][2] = [[1500, 3200], [3000, 3200], [3000, 3000], [0, 3000], [0, 3200], [1500, 3200]]
 
 				ReDim $atCoords[6]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_CF_ZERO_ONE
-				Local $aiFlags[38] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_SYMMETRIC, _
-						$LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_SMOOTH, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_CF_ZERO_ONE
+				Local $aiFlags[38] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_SYMMETRIC, _
+						$LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_SMOOTH, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[38][2] = [[100, 4300], [100, 4037], [169, 3778], [301, 3551], [433, 3322], [622, 3133], [850, 3001], [1078, 2870], [1337, 2800], [1600, 2800], _
 						[1863, 2800], [2122, 2870], [2350, 3001], [2578, 3133], [2767, 3322], [2899, 3550], [3031, 3779], [3100, 4037], [3100, 4300], [3100, 4564], _
 						[3031, 4822], [2899, 5050], [2767, 5279], [2578, 5468], [2350, 5600], [2122, 5731], [1863, 5801], [1600, 5801], [1337, 5801], [1078, 5731], _
@@ -7586,21 +7586,21 @@ Func __LOImpress_ShapeLineArrowStyleName($iArrowStyle = Null, $sArrowStyle = Nul
 				ReDim $atCoords[38]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 
-			Case $LOI_SHAPE_LINE_ARROW_TYPE_CF_ZERO_MANY
-				Local $aiFlags[38] = [$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_SYMMETRIC, _
-						$LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_SMOOTH, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOI_DRAWSHAPE_POINT_TYPE_CONTROL, _
-						$LOI_DRAWSHAPE_POINT_TYPE_CONTROL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL, $LOI_DRAWSHAPE_POINT_TYPE_NORMAL]
+			Case $LOD_SHAPE_LINE_ARROW_TYPE_CF_ZERO_MANY
+				Local $aiFlags[38] = [$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_SYMMETRIC, _
+						$LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_SMOOTH, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_SYMMETRIC, $LOD_DRAWSHAPE_POINT_TYPE_CONTROL, _
+						$LOD_DRAWSHAPE_POINT_TYPE_CONTROL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL, $LOD_DRAWSHAPE_POINT_TYPE_NORMAL]
 				Local $aiIndvCoords[38][2] = [[0, 4500], [0, 4237], [69, 3978], [201, 3751], [333, 3522], [522, 3333], [750, 3201], [978, 3070], [1237, 3000], [1500, 3000], _
 						[1763, 3000], [2022, 3070], [2250, 3201], [2478, 3333], [2667, 3522], [2799, 3750], [2931, 3979], [3000, 4237], [3000, 4500], [3000, 4764], _
 						[2931, 5022], [2799, 5250], [2667, 5479], [2478, 5668], [2250, 5800], [2022, 5931], [1763, 6001], [1500, 6001], [1237, 6001], [978, 5931], _
@@ -7609,10 +7609,10 @@ Func __LOImpress_ShapeLineArrowStyleName($iArrowStyle = Null, $sArrowStyle = Nul
 				ReDim $atCoords[38]
 
 				For $i = 0 To UBound($atCoords) - 1
-					$atCoords[$i] = __LOImpress_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
+					$atCoords[$i] = __LODraw_CreatePoint($aiIndvCoords[$i][$iX], $aiIndvCoords[$i][$iY])
 					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
-					Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 				Next
 		EndSwitch
 
@@ -7628,20 +7628,20 @@ Func __LOImpress_ShapeLineArrowStyleName($iArrowStyle = Null, $sArrowStyle = Nul
 
 		Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0) ; No values called.
 	EndIf
-EndFunc   ;==>__LOImpress_ShapeLineArrowStyleName
+EndFunc   ;==>__LODraw_ShapeLineArrowStyleName
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ShapeLineDashNameInsert
+; Name ..........: __LODraw_ShapeLineDashNameInsert
 ; Description ...: Create and insert a preset Line Dash name.
-; Syntax ........: __LOImpress_ShapeLineDashNameInsert(ByRef $oDoc, $iLineDashType)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $iLineDashType       - The Line Dash style to insert. See Constants, $LOI_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+; Syntax ........: __LODraw_ShapeLineDashNameInsert(ByRef $oDoc, $iLineDashType)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
+;                  $iLineDashType       - The Line Dash style to insert. See Constants, $LOD_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. The Line Dash name was successfully inserted.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
-;                  @Error: 1, @Extended: 2 = $iLineDashType not an Integer, less than 0 or greater than 31. See Constants, $LOI_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iLineDashType not an Integer, less than 0 or greater than 31. See Constants, $LOD_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.drawing.DashTable" Object.
 ;                  @Error: 2, @Extended: 2 = Error creating "com.sun.star.drawing.LineDash" structure.
@@ -7656,8 +7656,8 @@ EndFunc   ;==>__LOImpress_ShapeLineArrowStyleName
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ShapeLineDashNameInsert(ByRef $oDoc, $iLineDashType)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ShapeLineDashNameInsert(ByRef $oDoc, $iLineDashType)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $tNewDash
@@ -7665,20 +7665,20 @@ Func __LOImpress_ShapeLineDashNameInsert(ByRef $oDoc, $iLineDashType)
 	Local $oDashTable
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LO_IntIsBetween($iLineDashType, $LOI_SHAPE_LINE_STYLE_NONE, $LOI_SHAPE_LINE_STYLE_LINE_WITH_FINE_DOTS) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iLineDashType, $LOD_SHAPE_LINE_STYLE_NONE, $LOD_SHAPE_LINE_STYLE_LINE_WITH_FINE_DOTS) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$oDashTable = $oDoc.createInstance("com.sun.star.drawing.DashTable")
 	If Not IsObj($oDashTable) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	; Retrieve the Dash name.
-	$sDashName = __LOImpress_ShapeLineStyleName($iLineDashType, Null)
+	$sDashName = __LODraw_ShapeLineStyleName($iLineDashType, Null)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	If Not $oDashTable.hasByName($sDashName) Then
 		$tNewDash = __LO_CreateStruct("com.sun.star.drawing.LineDash")
 		If Not IsObj($tNewDash) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-		$tNewDash = __LOImpress_ShapeLineStyleName($iLineDashType, Null, True, $tNewDash)
+		$tNewDash = __LODraw_ShapeLineStyleName($iLineDashType, Null, True, $tNewDash)
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		$oDashTable.insertByName($sDashName, $tNewDash)
@@ -7686,13 +7686,13 @@ Func __LOImpress_ShapeLineDashNameInsert(ByRef $oDoc, $iLineDashType)
 	EndIf
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>__LOImpress_ShapeLineDashNameInsert
+EndFunc   ;==>__LODraw_ShapeLineDashNameInsert
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ShapeLineStyleName
+; Name ..........: __LODraw_ShapeLineStyleName
 ; Description ...: Convert a Line Style Constant to the corresponding name or reverse, or return preset values.
-; Syntax ........: __LOImpress_ShapeLineStyleName([$iLineStyle = Null[, $sLineStyle = Null[, $bReturnPresets = False[, $tDash = Null]]]])
-; Parameters ....: $iLineStyle          - [optional] (0-31) Default is Null. The Line Style Constant to convert to its corresponding name. See $LOI_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3
+; Syntax ........: __LODraw_ShapeLineStyleName([$iLineStyle = Null[, $sLineStyle = Null[, $bReturnPresets = False[, $tDash = Null]]]])
+; Parameters ....: $iLineStyle          - [optional] (0-31) Default is Null. The Line Style Constant to convert to its corresponding name. See $LOD_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3
 ;                  $sLineStyle          - [optional] Default is Null. The Line Style Name to convert to the corresponding constant if found.
 ;                  $bReturnPresets      - [optional] Default is False. If True, the function will try to fill and return a Structure with preset values.
 ;                  $tDash               - [optional] Default is Null. If $bReturnPresets is True, this is a Dash Structure to fill.
@@ -7703,57 +7703,57 @@ EndFunc   ;==>__LOImpress_ShapeLineDashNameInsert
 ;                  @Error: 0, @Extended: 3, Return: Struct = Success. $bReturnPresets called with True, returning $tDash filled with preset values.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $iLineStyle not an Integer, less than 0 or greater than Line Style constants. See $LOI_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3
+;                  @Error: 1, @Extended: 1 = $iLineStyle not an Integer, less than 0 or greater than Line Style constants. See $LOD_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3
 ;                  @Error: 1, @Extended: 2 = $sLineStyle not a String.
 ;                  @Error: 1, @Extended: 3 = $bReturnPresets not a Boolean.
 ;                  @Error: 1, @Extended: 4 = $tDash not an Object.
 ;                  @Error: 1, @Extended: 5 = Both $iLineStyle and $sLineStyle called with Null.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
+; Remarks .......: This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
 ; Related .......:
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ShapeLineStyleName($iLineStyle = Null, $sLineStyle = Null, $bReturnPresets = False, $tDash = Null)
+Func __LODraw_ShapeLineStyleName($iLineStyle = Null, $sLineStyle = Null, $bReturnPresets = False, $tDash = Null)
 	Local $asLineStyles[32]
-	Local Const $__LOI_DASH_STYLE_RECT = 0, $__LOI_DASH_STYLE_RECT_RELATIVE = 2, $__LOI_DASH_STYLE_ROUND_RELATIVE = 3 ; $__LOI_DASH_STYLE_ROUND = 1 (Not Used), com.sun.star.drawing.DashStyle
+	Local Const $__LOD_DASH_STYLE_RECT = 0, $__LOD_DASH_STYLE_RECT_RELATIVE = 2, $__LOD_DASH_STYLE_ROUND_RELATIVE = 3 ; $__LOD_DASH_STYLE_ROUND = 1 (Not Used), com.sun.star.drawing.DashStyle
 
-	; $LOI_SHAPE_LINE_STYLE_NONE, $LOI_SHAPE_LINE_STYLE_CONTINUOUS, don't have a name, so to keep things symmetrical I created my own, but those two won't be used.
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_NONE] = "NONE"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_CONTINUOUS] = "CONTINUOUS"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DOT] = "Dot"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DOT_ROUNDED] = "Dot (Rounded)"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_LONG_DOT] = "Long Dot"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_LONG_DOT_ROUNDED] = "Long Dot (Rounded)"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DASH] = "Dash"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DASH_ROUNDED] = "Dash (Rounded)"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_LONG_DASH] = "Long Dash"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_LONG_DASH_ROUNDED] = "Long Dash (Rounded)"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DOUBLE_DASH] = "Double Dash"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DOUBLE_DASH_ROUNDED] = "Double Dash (Rounded)"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DASH_DOT] = "Dash Dot"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DASH_DOT_ROUNDED] = "Dash Dot (Rounded)"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_LONG_DASH_DOT] = "Long Dash Dot"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_LONG_DASH_DOT_ROUNDED] = "Long Dash Dot (Rounded)"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DOUBLE_DASH_DOT] = "Double Dash Dot"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DOUBLE_DASH_DOT_ROUNDED] = "Double Dash Dot (Rounded)"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DASH_DOT_DOT] = "Dash Dot Dot"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DASH_DOT_DOT_ROUNDED] = "Dash Dot Dot (Rounded)"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DOUBLE_DASH_DOT_DOT] = "Double Dash Dot Dot"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DOUBLE_DASH_DOT_DOT_ROUNDED] = "Double Dash Dot Dot (Rounded)"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_ULTRAFINE_DOTTED] = "Ultrafine Dotted (var)"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_FINE_DOTTED] = "Fine Dotted"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_ULTRAFINE_DASHED] = "Ultrafine Dashed"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_FINE_DASHED] = "Fine Dashed"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_DASHED] = "Dashed (var)"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_SPARSE_DASH] = "Sparse Dash"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_3_DASHES_3_DOTS] = "3 Dashes 3 Dots (var)"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_ULTRAFINE_2_DOTS_3_DASHES] = "Ultrafine 2 Dots 3 Dashes"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_2_DOTS_1_DASH] = "2 Dots 1 Dash"
-	$asLineStyles[$LOI_SHAPE_LINE_STYLE_LINE_WITH_FINE_DOTS] = "Line with Fine Dots"
+	; $LOD_SHAPE_LINE_STYLE_NONE, $LOD_SHAPE_LINE_STYLE_CONTINUOUS, don't have a name, so to keep things symmetrical I created my own, but those two won't be used.
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_NONE] = "NONE"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_CONTINUOUS] = "CONTINUOUS"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_DOT] = "Dot"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_DOT_ROUNDED] = "Dot (Rounded)"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_LONG_DOT] = "Long Dot"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_LONG_DOT_ROUNDED] = "Long Dot (Rounded)"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_DASH] = "Dash"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_DASH_ROUNDED] = "Dash (Rounded)"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_LONG_DASH] = "Long Dash"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_LONG_DASH_ROUNDED] = "Long Dash (Rounded)"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_DOUBLE_DASH] = "Double Dash"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_DOUBLE_DASH_ROUNDED] = "Double Dash (Rounded)"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_DASH_DOT] = "Dash Dot"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_DASH_DOT_ROUNDED] = "Dash Dot (Rounded)"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_LONG_DASH_DOT] = "Long Dash Dot"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_LONG_DASH_DOT_ROUNDED] = "Long Dash Dot (Rounded)"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_DOUBLE_DASH_DOT] = "Double Dash Dot"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_DOUBLE_DASH_DOT_ROUNDED] = "Double Dash Dot (Rounded)"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_DASH_DOT_DOT] = "Dash Dot Dot"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_DASH_DOT_DOT_ROUNDED] = "Dash Dot Dot (Rounded)"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_DOUBLE_DASH_DOT_DOT] = "Double Dash Dot Dot"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_DOUBLE_DASH_DOT_DOT_ROUNDED] = "Double Dash Dot Dot (Rounded)"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_ULTRAFINE_DOTTED] = "Ultrafine Dotted (var)"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_FINE_DOTTED] = "Fine Dotted"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_ULTRAFINE_DASHED] = "Ultrafine Dashed"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_FINE_DASHED] = "Fine Dashed"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_DASHED] = "Dashed (var)"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_SPARSE_DASH] = "Sparse Dash"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_3_DASHES_3_DOTS] = "3 Dashes 3 Dots (var)"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_ULTRAFINE_2_DOTS_3_DASHES] = "Ultrafine 2 Dots 3 Dashes"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_2_DOTS_1_DASH] = "2 Dots 1 Dash"
+	$asLineStyles[$LOD_SHAPE_LINE_STYLE_LINE_WITH_FINE_DOTS] = "Line with Fine Dots"
 
-	If Not __LO_VersionCheck(24.2) Then $asLineStyles[$LOI_SHAPE_LINE_STYLE_SPARSE_DASH] = "Line Style 9"
+	If Not __LO_VersionCheck(24.2) Then $asLineStyles[$LOD_SHAPE_LINE_STYLE_SPARSE_DASH] = "Line Style 9"
 
 	If Not IsBool($bReturnPresets) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
@@ -7768,7 +7768,7 @@ Func __LOImpress_ShapeLineStyleName($iLineStyle = Null, $sLineStyle = Null, $bRe
 		For $i = 0 To UBound($asLineStyles) - 1
 			If ($asLineStyles[$i] = $sLineStyle) Then Return SetError($__LO_STATUS_SUCCESS, 1, $i) ; Return the array element where the matching Line Style was found.
 
-			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV)) ? (10) : (0))
+			Sleep((IsInt($i / $__LODCONST_SLEEP_DIV)) ? (10) : (0))
 		Next
 
 		Return SetError($__LO_STATUS_SUCCESS, 2, $sLineStyle) ; If no matches, just return the name, as it could be a custom value.
@@ -7777,304 +7777,304 @@ Func __LOImpress_ShapeLineStyleName($iLineStyle = Null, $sLineStyle = Null, $bRe
 		If Not IsObj($tDash) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		Switch $iLineStyle
-			Case $LOI_SHAPE_LINE_STYLE_DOT
+			Case $LOD_SHAPE_LINE_STYLE_DOT
 				With $tDash
 					.Dashes = 0
 					.DashLen = 0
 					.Distance = 100
 					.DotLen = 100
 					.Dots = 1
-					.Style = $__LOI_DASH_STYLE_RECT_RELATIVE
+					.Style = $__LOD_DASH_STYLE_RECT_RELATIVE
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_DOT_ROUNDED
+			Case $LOD_SHAPE_LINE_STYLE_DOT_ROUNDED
 				With $tDash
 					.Dashes = 0
 					.DashLen = 0
 					.Distance = 199
 					.DotLen = 1
 					.Dots = 1
-					.Style = $__LOI_DASH_STYLE_ROUND_RELATIVE
+					.Style = $__LOD_DASH_STYLE_ROUND_RELATIVE
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_LONG_DOT
+			Case $LOD_SHAPE_LINE_STYLE_LONG_DOT
 				With $tDash
 					.Dashes = 0
 					.DashLen = 0
 					.Distance = 300
 					.DotLen = 100
 					.Dots = 1
-					.Style = $__LOI_DASH_STYLE_RECT_RELATIVE
+					.Style = $__LOD_DASH_STYLE_RECT_RELATIVE
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_LONG_DOT_ROUNDED
+			Case $LOD_SHAPE_LINE_STYLE_LONG_DOT_ROUNDED
 				With $tDash
 					.Dashes = 0
 					.DashLen = 0
 					.Distance = 399
 					.DotLen = 1
 					.Dots = 1
-					.Style = $__LOI_DASH_STYLE_ROUND_RELATIVE
+					.Style = $__LOD_DASH_STYLE_ROUND_RELATIVE
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_DASH
+			Case $LOD_SHAPE_LINE_STYLE_DASH
 				With $tDash
 					.Dashes = 0
 					.DashLen = 0
 					.Distance = 100
 					.DotLen = 300
 					.Dots = 1
-					.Style = $__LOI_DASH_STYLE_RECT_RELATIVE
+					.Style = $__LOD_DASH_STYLE_RECT_RELATIVE
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_DASH_ROUNDED
+			Case $LOD_SHAPE_LINE_STYLE_DASH_ROUNDED
 				With $tDash
 					.Dashes = 0
 					.DashLen = 0
 					.Distance = 199
 					.DotLen = 201
 					.Dots = 1
-					.Style = $__LOI_DASH_STYLE_ROUND_RELATIVE
+					.Style = $__LOD_DASH_STYLE_ROUND_RELATIVE
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_LONG_DASH
+			Case $LOD_SHAPE_LINE_STYLE_LONG_DASH
 				With $tDash
 					.Dashes = 0
 					.DashLen = 0
 					.Distance = 300
 					.DotLen = 400
 					.Dots = 1
-					.Style = $__LOI_DASH_STYLE_RECT_RELATIVE
+					.Style = $__LOD_DASH_STYLE_RECT_RELATIVE
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_LONG_DASH_ROUNDED
+			Case $LOD_SHAPE_LINE_STYLE_LONG_DASH_ROUNDED
 				With $tDash
 					.Dashes = 0
 					.DashLen = 0
 					.Distance = 399
 					.DotLen = 301
 					.Dots = 1
-					.Style = $__LOI_DASH_STYLE_ROUND_RELATIVE
+					.Style = $__LOD_DASH_STYLE_ROUND_RELATIVE
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_DOUBLE_DASH
+			Case $LOD_SHAPE_LINE_STYLE_DOUBLE_DASH
 				With $tDash
 					.Dashes = 0
 					.DashLen = 0
 					.Distance = 300
 					.DotLen = 800
 					.Dots = 1
-					.Style = $__LOI_DASH_STYLE_RECT_RELATIVE
+					.Style = $__LOD_DASH_STYLE_RECT_RELATIVE
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_DOUBLE_DASH_ROUNDED
+			Case $LOD_SHAPE_LINE_STYLE_DOUBLE_DASH_ROUNDED
 				With $tDash
 					.Dashes = 0
 					.DashLen = 0
 					.Distance = 399
 					.DotLen = 701
 					.Dots = 1
-					.Style = $__LOI_DASH_STYLE_ROUND_RELATIVE
+					.Style = $__LOD_DASH_STYLE_ROUND_RELATIVE
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_DASH_DOT
+			Case $LOD_SHAPE_LINE_STYLE_DASH_DOT
 				With $tDash
 					.Dashes = 1
 					.DashLen = 100
 					.Distance = 100
 					.DotLen = 300
 					.Dots = 1
-					.Style = $__LOI_DASH_STYLE_RECT_RELATIVE
+					.Style = $__LOD_DASH_STYLE_RECT_RELATIVE
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_DASH_DOT_ROUNDED
+			Case $LOD_SHAPE_LINE_STYLE_DASH_DOT_ROUNDED
 				With $tDash
 					.Dashes = 1
 					.DashLen = 1
 					.Distance = 199
 					.DotLen = 201
 					.Dots = 1
-					.Style = $__LOI_DASH_STYLE_ROUND_RELATIVE
+					.Style = $__LOD_DASH_STYLE_ROUND_RELATIVE
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_LONG_DASH_DOT
+			Case $LOD_SHAPE_LINE_STYLE_LONG_DASH_DOT
 				With $tDash
 					.Dashes = 1
 					.DashLen = 100
 					.Distance = 300
 					.DotLen = 400
 					.Dots = 1
-					.Style = $__LOI_DASH_STYLE_RECT_RELATIVE
+					.Style = $__LOD_DASH_STYLE_RECT_RELATIVE
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_LONG_DASH_DOT_ROUNDED
+			Case $LOD_SHAPE_LINE_STYLE_LONG_DASH_DOT_ROUNDED
 				With $tDash
 					.Dashes = 1
 					.DashLen = 1
 					.Distance = 399
 					.DotLen = 301
 					.Dots = 1
-					.Style = $__LOI_DASH_STYLE_ROUND_RELATIVE
+					.Style = $__LOD_DASH_STYLE_ROUND_RELATIVE
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_DOUBLE_DASH_DOT
+			Case $LOD_SHAPE_LINE_STYLE_DOUBLE_DASH_DOT
 				With $tDash
 					.Dashes = 1
 					.DashLen = 100
 					.Distance = 300
 					.DotLen = 800
 					.Dots = 1
-					.Style = $__LOI_DASH_STYLE_RECT_RELATIVE
+					.Style = $__LOD_DASH_STYLE_RECT_RELATIVE
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_DOUBLE_DASH_DOT_ROUNDED
+			Case $LOD_SHAPE_LINE_STYLE_DOUBLE_DASH_DOT_ROUNDED
 				With $tDash
 					.Dashes = 1
 					.DashLen = 1
 					.Distance = 399
 					.DotLen = 701
 					.Dots = 1
-					.Style = $__LOI_DASH_STYLE_ROUND_RELATIVE
+					.Style = $__LOD_DASH_STYLE_ROUND_RELATIVE
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_DASH_DOT_DOT
+			Case $LOD_SHAPE_LINE_STYLE_DASH_DOT_DOT
 				With $tDash
 					.Dashes = 2
 					.DashLen = 100
 					.Distance = 100
 					.DotLen = 300
 					.Dots = 1
-					.Style = $__LOI_DASH_STYLE_RECT_RELATIVE
+					.Style = $__LOD_DASH_STYLE_RECT_RELATIVE
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_DASH_DOT_DOT_ROUNDED
+			Case $LOD_SHAPE_LINE_STYLE_DASH_DOT_DOT_ROUNDED
 				With $tDash
 					.Dashes = 2
 					.DashLen = 1
 					.Distance = 199
 					.DotLen = 201
 					.Dots = 1
-					.Style = $__LOI_DASH_STYLE_ROUND_RELATIVE
+					.Style = $__LOD_DASH_STYLE_ROUND_RELATIVE
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_DOUBLE_DASH_DOT_DOT
+			Case $LOD_SHAPE_LINE_STYLE_DOUBLE_DASH_DOT_DOT
 				With $tDash
 					.Dashes = 2
 					.DashLen = 100
 					.Distance = 300
 					.DotLen = 800
 					.Dots = 1
-					.Style = $__LOI_DASH_STYLE_RECT_RELATIVE
+					.Style = $__LOD_DASH_STYLE_RECT_RELATIVE
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_DOUBLE_DASH_DOT_DOT_ROUNDED
+			Case $LOD_SHAPE_LINE_STYLE_DOUBLE_DASH_DOT_DOT_ROUNDED
 				With $tDash
 					.Dashes = 2
 					.DashLen = 1
 					.Distance = 399
 					.DotLen = 701
 					.Dots = 1
-					.Style = $__LOI_DASH_STYLE_ROUND_RELATIVE
+					.Style = $__LOD_DASH_STYLE_ROUND_RELATIVE
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_ULTRAFINE_DOTTED
+			Case $LOD_SHAPE_LINE_STYLE_ULTRAFINE_DOTTED
 				With $tDash
 					.Dashes = 0
 					.DashLen = 0
 					.Distance = 50
 					.DotLen = 0
 					.Dots = 1
-					.Style = $__LOI_DASH_STYLE_RECT_RELATIVE
+					.Style = $__LOD_DASH_STYLE_RECT_RELATIVE
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_FINE_DOTTED
+			Case $LOD_SHAPE_LINE_STYLE_FINE_DOTTED
 				With $tDash
 					.Dashes = 0
 					.DashLen = 0
 					.Distance = 457
 					.DotLen = 0
 					.Dots = 1
-					.Style = $__LOI_DASH_STYLE_RECT
+					.Style = $__LOD_DASH_STYLE_RECT
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_ULTRAFINE_DASHED
+			Case $LOD_SHAPE_LINE_STYLE_ULTRAFINE_DASHED
 				With $tDash
 					.Dashes = 1
 					.DashLen = 51
 					.Distance = 51
 					.DotLen = 51
 					.Dots = 1
-					.Style = $__LOI_DASH_STYLE_RECT
+					.Style = $__LOD_DASH_STYLE_RECT
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_FINE_DASHED
+			Case $LOD_SHAPE_LINE_STYLE_FINE_DASHED
 				With $tDash
 					.Dashes = 0
 					.DashLen = 0
 					.Distance = 197
 					.DotLen = 197
 					.Dots = 1
-					.Style = $__LOI_DASH_STYLE_RECT_RELATIVE
+					.Style = $__LOD_DASH_STYLE_RECT_RELATIVE
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_DASHED
+			Case $LOD_SHAPE_LINE_STYLE_DASHED
 				With $tDash
 					.Dashes = 0
 					.DashLen = 0
 					.Distance = 127
 					.DotLen = 197
 					.Dots = 1
-					.Style = $__LOI_DASH_STYLE_RECT_RELATIVE
+					.Style = $__LOD_DASH_STYLE_RECT_RELATIVE
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_SPARSE_DASH
+			Case $LOD_SHAPE_LINE_STYLE_SPARSE_DASH
 				With $tDash
 					.Dashes = 0
 					.DashLen = 0
 					.Distance = 120
 					.DotLen = 197
 					.Dots = 1
-					.Style = $__LOI_DASH_STYLE_RECT_RELATIVE
+					.Style = $__LOD_DASH_STYLE_RECT_RELATIVE
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_3_DASHES_3_DOTS
+			Case $LOD_SHAPE_LINE_STYLE_3_DASHES_3_DOTS
 				With $tDash
 					.Dashes = 3
 					.DashLen = 0
 					.Distance = 100
 					.DotLen = 197
 					.Dots = 3
-					.Style = $__LOI_DASH_STYLE_RECT_RELATIVE
+					.Style = $__LOD_DASH_STYLE_RECT_RELATIVE
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_ULTRAFINE_2_DOTS_3_DASHES
+			Case $LOD_SHAPE_LINE_STYLE_ULTRAFINE_2_DOTS_3_DASHES
 				With $tDash
 					.Dashes = 3
 					.DashLen = 254
 					.Distance = 127
 					.DotLen = 51
 					.Dots = 2
-					.Style = $__LOI_DASH_STYLE_RECT
+					.Style = $__LOD_DASH_STYLE_RECT
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_2_DOTS_1_DASH
+			Case $LOD_SHAPE_LINE_STYLE_2_DOTS_1_DASH
 				With $tDash
 					.Dashes = 1
 					.DashLen = 203
 					.Distance = 203
 					.DotLen = 0
 					.Dots = 2
-					.Style = $__LOI_DASH_STYLE_RECT
+					.Style = $__LOD_DASH_STYLE_RECT
 				EndWith
 
-			Case $LOI_SHAPE_LINE_STYLE_LINE_WITH_FINE_DOTS
+			Case $LOD_SHAPE_LINE_STYLE_LINE_WITH_FINE_DOTS
 				With $tDash
 					.Dashes = 10
 					.DashLen = 0
 					.Distance = 152
 					.DotLen = 2007
 					.Dots = 1
-					.Style = $__LOI_DASH_STYLE_RECT
+					.Style = $__LOD_DASH_STYLE_RECT
 				EndWith
 		EndSwitch
 
@@ -8084,13 +8084,13 @@ Func __LOImpress_ShapeLineStyleName($iLineStyle = Null, $sLineStyle = Null, $bRe
 
 		Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0) ; No values called.
 	EndIf
-EndFunc   ;==>__LOImpress_ShapeLineStyleName
+EndFunc   ;==>__LODraw_ShapeLineStyleName
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ShapePresStyleNumCreateScript
+; Name ..........: __LODraw_ShapePresStyleNumCreateScript
 ; Description ...: Part of the Presentation Style Numbering Modification workaround, creates a Macro in a document.
-; Syntax ........: __LOImpress_ShapePresStyleNumCreateScript(ByRef $oDoc)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: __LODraw_ShapePresStyleNumCreateScript(ByRef $oDoc)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Function successfully created the Macro in Document. Returning Script Object.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -8107,8 +8107,8 @@ EndFunc   ;==>__LOImpress_ShapeLineStyleName
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ShapePresStyleNumCreateScript(ByRef $oDoc)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ShapePresStyleNumCreateScript(ByRef $oDoc)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $sNumStyleScript = "Function ReplaceByIndex(oNumRules As Object, iIndex%, vSettings As Variant)" & @CRLF & _
@@ -8135,13 +8135,13 @@ Func __LOImpress_ShapePresStyleNumCreateScript(ByRef $oDoc)
 	If Not IsObj($oScript) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oScript)
-EndFunc   ;==>__LOImpress_ShapePresStyleNumCreateScript
+EndFunc   ;==>__LODraw_ShapePresStyleNumCreateScript
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ShapePresStyleNumDeleteScript
+; Name ..........: __LODraw_ShapePresStyleNumDeleteScript
 ; Description ...: Part of the Presentation Style Numbering Modification workaround, deletes a Macro in a document.
-; Syntax ........: __LOImpress_ShapePresStyleNumDeleteScript(ByRef $oDoc)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: __LODraw_ShapePresStyleNumDeleteScript(ByRef $oDoc)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ; Return values .: Success: 1.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Function successfully deleted the Macro in Document.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -8157,8 +8157,8 @@ EndFunc   ;==>__LOImpress_ShapePresStyleNumCreateScript
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ShapePresStyleNumDeleteScript(ByRef $oDoc)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ShapePresStyleNumDeleteScript(ByRef $oDoc)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oStandardLibrary
@@ -8177,12 +8177,12 @@ Func __LOImpress_ShapePresStyleNumDeleteScript(ByRef $oDoc)
 	If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>__LOImpress_ShapePresStyleNumDeleteScript
+EndFunc   ;==>__LODraw_ShapePresStyleNumDeleteScript
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ShapePresStyleNumInitiateDocument
+; Name ..........: __LODraw_ShapePresStyleNumInitiateDocument
 ; Description ...: Part of the work around method for modifying Presentation Style Numbering settings.
-; Syntax ........: __LOImpress_ShapePresStyleNumInitiateDocument()
+; Syntax ........: __LODraw_ShapePresStyleNumInitiateDocument()
 ; Parameters ....: None
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. The Numbering Style Modification Document was successfully created.
@@ -8204,8 +8204,8 @@ EndFunc   ;==>__LOImpress_ShapePresStyleNumDeleteScript
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ShapePresStyleNumInitiateDocument()
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ShapePresStyleNumInitiateDocument()
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local Const $iMacroExecMode_ALWAYS_EXECUTE_NO_WARN = 4, $iURLFrameCreate = 8 ; Frame will be created if not found
@@ -8235,17 +8235,17 @@ Func __LOImpress_ShapePresStyleNumInitiateDocument()
 	$oNumStyleDoc = $oDesktop.loadComponentFromURL("private:factory/swriter", "_blank", $iURLFrameCreate, $atProperties)
 	If Not IsObj($oNumStyleDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
 
-	__LOImpress_ShapePresStyleNumCreateScript($oNumStyleDoc)
+	__LODraw_ShapePresStyleNumCreateScript($oNumStyleDoc)
 	If (@error > 0) Then Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, $oNumStyleDoc)) : (SetError($__LO_STATUS_SUCCESS, 1, $oNumStyleDoc))
-EndFunc   ;==>__LOImpress_ShapePresStyleNumInitiateDocument
+EndFunc   ;==>__LODraw_ShapePresStyleNumInitiateDocument
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ShapePresStyleNumModify
+; Name ..........: __LODraw_ShapePresStyleNumModify
 ; Description ...: Internal function for modifying Presentation Style Numbering settings.
-; Syntax ........: __LOImpress_ShapePresStyleNumModify(ByRef $oDoc, ByRef $oNumRules, $iLevel, $atNumLevel)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function, to modify NumberingRules for.
+; Syntax ........: __LODraw_ShapePresStyleNumModify(ByRef $oDoc, ByRef $oNumRules, $iLevel, $atNumLevel)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function, to modify NumberingRules for.
 ;                  $oNumRules           - The Numbering Rules object retrieved from a Numbering Style.
 ;                  $iLevel              - (-1-9) The Numbering Style level to modify. -1 = all levels.
 ;                  $atNumLevel          - An array of Numbering Rule settings retrieved from a Numbering Style.
@@ -8269,8 +8269,8 @@ EndFunc   ;==>__LOImpress_ShapePresStyleNumInitiateDocument
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ShapePresStyleNumModify(ByRef $oDoc, ByRef $oNumRules, $iLevel, $atNumLevel)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ShapePresStyleNumModify(ByRef $oDoc, ByRef $oNumRules, $iLevel, $atNumLevel)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oNumStyleDoc, $oScript
@@ -8282,10 +8282,10 @@ Func __LOImpress_ShapePresStyleNumModify(ByRef $oDoc, ByRef $oNumRules, $iLevel,
 	If Not __LO_IntIsBetween($iLevel, -1, 9) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not IsArray($atNumLevel) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-	$oScript = __LOImpress_ShapePresStyleNumCreateScript($oDoc) ; Create my modification Script.
+	$oScript = __LODraw_ShapePresStyleNumCreateScript($oDoc) ; Create my modification Script.
 
 	If Not IsObj($oScript) Then ; If creating my Mod. Script fails, open a new document and create a script in there.
-		$oNumStyleDoc = __LOImpress_ShapePresStyleNumInitiateDocument()
+		$oNumStyleDoc = __LODraw_ShapePresStyleNumInitiateDocument()
 		If Not IsObj($oNumStyleDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 		$oScript = $oNumStyleDoc.getScriptProvider().getScript("vnd.sun.star.script:Standard.AU3LibreOffice_UDF_Macros.ReplaceByIndex?language=Basic&location=document")
@@ -8308,18 +8308,18 @@ Func __LOImpress_ShapePresStyleNumModify(ByRef $oDoc, ByRef $oNumRules, $iLevel,
 		$oNumStyleDoc.Close(True)
 
 	Else
-		__LOImpress_ShapePresStyleNumDeleteScript($oDoc)
+		__LODraw_ShapePresStyleNumDeleteScript($oDoc)
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 	EndIf
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>__LOImpress_ShapePresStyleNumModify
+EndFunc   ;==>__LODraw_ShapePresStyleNumModify
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ShapeStyleAreaColor
+; Name ..........: __LODraw_ShapeStyleAreaColor
 ; Description ...: Set or Retrieve the Fill color settings for a Shape Style or Presentation Style.
-; Syntax ........: __LOImpress_ShapeStyleAreaColor(ByRef $oObj[, $iColor = Null])
-; Parameters ....: $oObj                - A Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
+; Syntax ........: __LODraw_ShapeStyleAreaColor(ByRef $oObj[, $iColor = Null])
+; Parameters ....: $oObj                - A Shape, Shape Style or Presentation Style object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $iColor              - [optional] (-1-16777215) Default is Null. The Fill color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for "None".
 ; Return values .: Success: 1 or Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -8337,13 +8337,13 @@ EndFunc   ;==>__LOImpress_ShapePresStyleNumModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
+;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
 ; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ShapeStyleAreaColor(ByRef $oObj, $iColor = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ShapeStyleAreaColor(ByRef $oObj, $iColor = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0, $iOldTransparency, $iCurColor
@@ -8352,8 +8352,8 @@ Func __LOImpress_ShapeStyleAreaColor(ByRef $oObj, $iColor = Null)
 
 	; If $iColor is Null, and Fill Style is set to solid, then return current color value, else return LO_COLOR_OFF.
 	If __LO_VarsAreNull($iColor) Then
-		If ($oObj.FillStyle() = $LOI_AREA_FILL_STYLE_SOLID) Then ; If FillStyle is set to solid, then return current color value, else return $LO_COLOR_OFF (Probably a Gradient is used or otherwise).
-			$iCurColor = __LOImpress_ColorRemoveAlpha($oObj.FillColor())
+		If ($oObj.FillStyle() = $LOD_AREA_FILL_STYLE_SOLID) Then ; If FillStyle is set to solid, then return current color value, else return $LO_COLOR_OFF (Probably a Gradient is used or otherwise).
+			$iCurColor = __LODraw_ColorRemoveAlpha($oObj.FillColor())
 			If Not IsInt($iCurColor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 		Else
@@ -8366,13 +8366,13 @@ Func __LOImpress_ShapeStyleAreaColor(ByRef $oObj, $iColor = Null)
 	If Not __LO_IntIsBetween($iColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If ($iColor = $LO_COLOR_OFF) Then
-		$oObj.FillStyle = $LOI_AREA_FILL_STYLE_OFF
+		$oObj.FillStyle = $LOD_AREA_FILL_STYLE_OFF
 
 	Else
 		$iOldTransparency = $oObj.FillTransparence()
 		If Not IsInt($iOldTransparency) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-		$oObj.FillStyle = $LOI_AREA_FILL_STYLE_SOLID
+		$oObj.FillStyle = $LOD_AREA_FILL_STYLE_SOLID
 		$oObj.FillColor = $iColor
 		$iError = ($oObj.FillColor() = $iColor) ? ($iError) : (BitOR($iError, 1))
 
@@ -8380,16 +8380,16 @@ Func __LOImpress_ShapeStyleAreaColor(ByRef $oObj, $iColor = Null)
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_ShapeStyleAreaColor
+EndFunc   ;==>__LODraw_ShapeStyleAreaColor
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ShapeStyleAreaGradient
+; Name ..........: __LODraw_ShapeStyleAreaGradient
 ; Description ...: Set or Retrieve the settings for a Shape, Shape Style or Presentation Style Background color Gradient.
-; Syntax ........: __LOImpress_ShapeStyleAreaGradient(ByRef $oDoc, ByRef $oObj[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $oObj                - A Shape Style or Presentation Style object returned by a previous _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
-;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOI_GRAD_NAME_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+; Syntax ........: __LODraw_ShapeStyleAreaGradient(ByRef $oDoc, ByRef $oObj[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
+;                  $oObj                - A Shape Style or Presentation Style object returned by a previous _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOD_GRAD_NAME_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iIncrement          - [optional] (0, 3-256) Default is Null. The number of steps of color change. 0 = Automatic.
 ;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient, where 0% corresponds to the current horizontal location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" setting. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage. $iType must be other than "Linear", or "Axial".
@@ -8408,7 +8408,7 @@ EndFunc   ;==>__LOImpress_ShapeStyleAreaColor
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 3 = $sGradientName not a String.
-;                  @Error: 1, @Extended: 4 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 5 = $iIncrement not an Integer, less than 3, but not 0, or greater than 256.
 ;                  @Error: 1, @Extended: 6 = $iXCenter not an Integer, less than 0 or greater than 100.
 ;                  @Error: 1, @Extended: 7 = $iYCenter not an Integer, less than 0 or greater than 100.
@@ -8445,8 +8445,8 @@ EndFunc   ;==>__LOImpress_ShapeStyleAreaColor
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ShapeStyleAreaGradient(ByRef $oDoc, ByRef $oObj, $sGradientName = Null, $iType = Null, $iIncrement = Null, $iXCenter = Null, $iYCenter = Null, $iAngle = Null, $iTransitionStart = Null, $iFromColor = Null, $iToColor = Null, $iFromIntense = Null, $iToIntense = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ShapeStyleAreaGradient(ByRef $oDoc, ByRef $oObj, $sGradientName = Null, $iType = Null, $iIncrement = Null, $iXCenter = Null, $iYCenter = Null, $iAngle = Null, $iTransitionStart = Null, $iFromColor = Null, $iToColor = Null, $iFromIntense = Null, $iToIntense = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $tStyleGradient, $tColorStop, $tStopColor
@@ -8470,24 +8470,24 @@ Func __LOImpress_ShapeStyleAreaGradient(ByRef $oDoc, ByRef $oObj, $sGradientName
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avGradient)
 	EndIf
 
-	If ($oObj.FillStyle() <> $LOI_AREA_FILL_STYLE_GRADIENT) Then $oObj.FillStyle = $LOI_AREA_FILL_STYLE_GRADIENT
+	If ($oObj.FillStyle() <> $LOD_AREA_FILL_STYLE_GRADIENT) Then $oObj.FillStyle = $LOD_AREA_FILL_STYLE_GRADIENT
 
 	If ($sGradientName <> Null) Then
 		If Not IsString($sGradientName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
-		__LOImpress_GradientPresets($oDoc, $oObj, $tStyleGradient, $sGradientName)
+		__LODraw_GradientPresets($oDoc, $oObj, $tStyleGradient, $sGradientName)
 		$iError = ($oObj.FillGradientName() = $sGradientName) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($iType <> Null) Then
-		If ($iType = $LOI_GRAD_TYPE_OFF) Then ; Turn Off Gradient
-			$oObj.FillStyle = $LOI_AREA_FILL_STYLE_OFF
+		If ($iType = $LOD_GRAD_TYPE_OFF) Then ; Turn Off Gradient
+			$oObj.FillStyle = $LOD_AREA_FILL_STYLE_OFF
 			$oObj.FillGradientName = ""
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, 2)
 		EndIf
 
-		If Not __LO_IntIsBetween($iType, $LOI_GRAD_TYPE_LINEAR, $LOI_GRAD_TYPE_RECT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not __LO_IntIsBetween($iType, $LOD_GRAD_TYPE_LINEAR, $LOD_GRAD_TYPE_RECT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 		$tStyleGradient.Style = $iType
 	EndIf
@@ -8586,8 +8586,8 @@ Func __LOImpress_ShapeStyleAreaGradient(ByRef $oDoc, ByRef $oObj, $sGradientName
 		$tStyleGradient.EndIntensity = $iToIntense
 	EndIf
 
-	If ($oObj.FillGradientName() = "") Or __LOImpress_GradientIsModified($tStyleGradient, $oObj.FillGradientName()) Then
-		$sGradName = __LOImpress_GradientNameInsert($oDoc, $tStyleGradient)
+	If ($oObj.FillGradientName() = "") Or __LODraw_GradientIsModified($tStyleGradient, $oObj.FillGradientName()) Then
+		$sGradName = __LODraw_GradientNameInsert($oDoc, $tStyleGradient)
 		If @error > 0 Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 		$oObj.FillGradientName = $sGradName
@@ -8608,15 +8608,15 @@ Func __LOImpress_ShapeStyleAreaGradient(ByRef $oDoc, ByRef $oObj, $sGradientName
 	$iError = (__LO_VarsAreNull($iToIntense)) ? ($iError) : (($oObj.FillGradient.EndIntensity() = $iToIntense) ? ($iError) : (BitOR($iError, 1024)))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_ShapeStyleAreaGradient
+EndFunc   ;==>__LODraw_ShapeStyleAreaGradient
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ShapeStyleAreaTransparencyGradient
+; Name ..........: __LODraw_ShapeStyleAreaTransparencyGradient
 ; Description ...: Set or retrieve the Shape, Shape Style or Presentation Style transparency gradient settings.
-; Syntax ........: __LOImpress_ShapeStyleAreaTransparencyGradient(ByRef $oDoc, ByRef $oObj[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $oObj                - A Shape Style or Presentation Style object returned by a previous _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
-;                  $iType               - [optional] (-1-5) Default is Null. The type of transparency gradient that you want to apply. See Constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3. Call with $LOI_GRAD_TYPE_OFF to turn Transparency Gradient off.
+; Syntax ........: __LODraw_ShapeStyleAreaTransparencyGradient(ByRef $oDoc, ByRef $oObj[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
+;                  $oObj                - A Shape Style or Presentation Style object returned by a previous _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+;                  $iType               - [optional] (-1-5) Default is Null. The type of transparency gradient that you want to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3. Call with $LOD_GRAD_TYPE_OFF to turn Transparency Gradient off.
 ;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iAngle              - [optional] (0-359) Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
@@ -8631,7 +8631,7 @@ EndFunc   ;==>__LOImpress_ShapeStyleAreaGradient
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oObj not an Object.
-;                  @Error: 1, @Extended: 3 = $iType not an Integer, less than -1 or greater than 5. See constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iType not an Integer, less than -1 or greater than 5. See constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 4 = $iXCenter not an Integer, less than 0 or greater than 100.
 ;                  @Error: 1, @Extended: 5 = $iYCenter not an Integer, less than 0 or greater than 100.
 ;                  @Error: 1, @Extended: 6 = $iAngle not an Integer, less than 0 or greater than 359.
@@ -8660,8 +8660,8 @@ EndFunc   ;==>__LOImpress_ShapeStyleAreaGradient
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ShapeStyleAreaTransparencyGradient(ByRef $oDoc, ByRef $oObj, $iType = Null, $iXCenter = Null, $iYCenter = Null, $iAngle = Null, $iTransitionStart = Null, $iStart = Null, $iEnd = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ShapeStyleAreaTransparencyGradient(ByRef $oDoc, ByRef $oObj, $iType = Null, $iXCenter = Null, $iYCenter = Null, $iAngle = Null, $iTransitionStart = Null, $iStart = Null, $iEnd = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $tGradient, $tColorStop, $tStopColor
@@ -8679,20 +8679,20 @@ Func __LOImpress_ShapeStyleAreaTransparencyGradient(ByRef $oDoc, ByRef $oObj, $i
 
 	If __LO_VarsAreNull($iType, $iXCenter, $iYCenter, $iAngle, $iTransitionStart, $iStart, $iEnd) Then
 		__LO_ArrayFill($aiTransparent, $tGradient.Style(), $tGradient.XOffset(), $tGradient.YOffset(), _
-				Int($tGradient.Angle() / 10), $tGradient.Border(), __LOImpress_TransparencyGradientConvert(Null, $tGradient.StartColor()), _
-				__LOImpress_TransparencyGradientConvert(Null, $tGradient.EndColor())) ; Angle is set in thousands
+				Int($tGradient.Angle() / 10), $tGradient.Border(), __LODraw_TransparencyGradientConvert(Null, $tGradient.StartColor()), _
+				__LODraw_TransparencyGradientConvert(Null, $tGradient.EndColor())) ; Angle is set in thousands
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $aiTransparent)
 	EndIf
 
 	If ($iType <> Null) Then
-		If ($iType = $LOI_GRAD_TYPE_OFF) Then ; Turn Off Gradient
+		If ($iType = $LOD_GRAD_TYPE_OFF) Then ; Turn Off Gradient
 			$oObj.FillTransparenceGradientName = ""
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, 2)
 		EndIf
 
-		If Not __LO_IntIsBetween($iType, $LOI_GRAD_TYPE_LINEAR, $LOI_GRAD_TYPE_RECT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not __LO_IntIsBetween($iType, $LOD_GRAD_TYPE_LINEAR, $LOD_GRAD_TYPE_RECT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		$tGradient.Style = $iType
 	EndIf
@@ -8724,7 +8724,7 @@ Func __LOImpress_ShapeStyleAreaTransparencyGradient(ByRef $oDoc, ByRef $oObj, $i
 	If ($iStart <> Null) Then
 		If Not __LO_IntIsBetween($iStart, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
-		$tGradient.StartColor = __LOImpress_TransparencyGradientConvert($iStart)
+		$tGradient.StartColor = __LODraw_TransparencyGradientConvert($iStart)
 
 		If __LO_VersionCheck(7.6) Then
 			$atColorStop = $tGradient.ColorStops()
@@ -8751,7 +8751,7 @@ Func __LOImpress_ShapeStyleAreaTransparencyGradient(ByRef $oDoc, ByRef $oObj, $i
 	If ($iEnd <> Null) Then
 		If Not __LO_IntIsBetween($iEnd, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
 
-		$tGradient.EndColor = __LOImpress_TransparencyGradientConvert($iEnd)
+		$tGradient.EndColor = __LODraw_TransparencyGradientConvert($iEnd)
 
 		If __LO_VersionCheck(7.6) Then
 			$atColorStop = $tGradient.ColorStops()
@@ -8776,7 +8776,7 @@ Func __LOImpress_ShapeStyleAreaTransparencyGradient(ByRef $oDoc, ByRef $oObj, $i
 	EndIf
 
 	If ($oObj.FillTransparenceGradientName() = "") Then
-		$sTGradName = __LOImpress_TransparencyGradientNameInsert($oDoc, $tGradient)
+		$sTGradName = __LODraw_TransparencyGradientNameInsert($oDoc, $tGradient)
 		If @error > 0 Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 		$oObj.FillTransparenceGradientName = $sTGradName
@@ -8790,17 +8790,17 @@ Func __LOImpress_ShapeStyleAreaTransparencyGradient(ByRef $oDoc, ByRef $oObj, $i
 	$iError = (__LO_VarsAreNull($iYCenter)) ? ($iError) : (($oObj.FillTransparenceGradient.YOffset() = $iYCenter) ? ($iError) : (BitOR($iError, 4)))
 	$iError = (__LO_VarsAreNull($iAngle)) ? ($iError) : ((Int($oObj.FillTransparenceGradient.Angle() / 10) = $iAngle) ? ($iError) : (BitOR($iError, 8)))
 	$iError = (__LO_VarsAreNull($iTransitionStart)) ? ($iError) : (($oObj.FillTransparenceGradient.Border() = $iTransitionStart) ? ($iError) : (BitOR($iError, 16)))
-	$iError = (__LO_VarsAreNull($iStart)) ? ($iError) : (($oObj.FillTransparenceGradient.StartColor() = __LOImpress_TransparencyGradientConvert($iStart)) ? ($iError) : (BitOR($iError, 32)))
-	$iError = (__LO_VarsAreNull($iEnd)) ? ($iError) : (($oObj.FillTransparenceGradient.EndColor() = __LOImpress_TransparencyGradientConvert($iEnd)) ? ($iError) : (BitOR($iError, 64)))
+	$iError = (__LO_VarsAreNull($iStart)) ? ($iError) : (($oObj.FillTransparenceGradient.StartColor() = __LODraw_TransparencyGradientConvert($iStart)) ? ($iError) : (BitOR($iError, 32)))
+	$iError = (__LO_VarsAreNull($iEnd)) ? ($iError) : (($oObj.FillTransparenceGradient.EndColor() = __LODraw_TransparencyGradientConvert($iEnd)) ? ($iError) : (BitOR($iError, 64)))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_ShapeStyleAreaTransparencyGradient
+EndFunc   ;==>__LODraw_ShapeStyleAreaTransparencyGradient
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ShapeStyleCompare
+; Name ..........: __LODraw_ShapeStyleCompare
 ; Description ...: Test whether a set and current Shape Style match.
-; Syntax ........: __LOImpress_ShapeStyleCompare(ByRef $oDoc, $sCurShapeStyle, $sSetShapeStyle)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: __LODraw_ShapeStyleCompare(ByRef $oDoc, $sCurShapeStyle, $sSetShapeStyle)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $sCurShapeStyle      - The currently set Shape Style's name.
 ;                  $sSetShapeStyle      - The Shape Style's name intended to be set.
 ; Return values .: Success: Boolean
@@ -8819,8 +8819,8 @@ EndFunc   ;==>__LOImpress_ShapeStyleAreaTransparencyGradient
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ShapeStyleCompare(ByRef $oDoc, $sCurShapeStyle, $sSetShapeStyle)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ShapeStyleCompare(ByRef $oDoc, $sCurShapeStyle, $sSetShapeStyle)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $sInternalSetShapeStyleName
@@ -8839,19 +8839,19 @@ Func __LOImpress_ShapeStyleCompare(ByRef $oDoc, $sCurShapeStyle, $sSetShapeStyle
 	EndIf
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, False)
-EndFunc   ;==>__LOImpress_ShapeStyleCompare
+EndFunc   ;==>__LODraw_ShapeStyleCompare
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ShapeStyleLineArrowStyles
+; Name ..........: __LODraw_ShapeStyleLineArrowStyles
 ; Description ...: Set or Retrieve Shape Style or Presentation Style Line Start and End Arrow Style settings.
-; Syntax ........: __LOImpress_ShapeStyleLineArrowStyles(ByRef $oDoc, ByRef $oObj[, $vStartStyle = Null[, $iStartWidth = Null[, $bStartCenter = Null[, $bSync = Null[, $vEndStyle = Null[, $iEndWidth = Null[, $bEndCenter = Null]]]]]]])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $oObj                - A Shape Style or Presentation Style object returned by a previous _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
-;                  $vStartStyle         - [optional] (0-32, or String) Default is Null. The Arrow head to apply to the start of the line. Can be a Custom Arrowhead name, or one of the constants, $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3. See remarks.
+; Syntax ........: __LODraw_ShapeStyleLineArrowStyles(ByRef $oDoc, ByRef $oObj[, $vStartStyle = Null[, $iStartWidth = Null[, $bStartCenter = Null[, $bSync = Null[, $vEndStyle = Null[, $iEndWidth = Null[, $bEndCenter = Null]]]]]]])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
+;                  $oObj                - A Shape Style or Presentation Style object returned by a previous _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+;                  $vStartStyle         - [optional] (0-32, or String) Default is Null. The Arrow head to apply to the start of the line. Can be a Custom Arrowhead name, or one of the constants, $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3. See remarks.
 ;                  $iStartWidth         - [optional] (0-5004) Default is Null. The Width of the Starting Arrowhead, in Hundredths of a Millimeter (HMM).
 ;                  $bStartCenter        - [optional] Default is Null. If True, Places the center of the Start arrowhead on the endpoint of the line.
 ;                  $bSync               - [optional] Default is Null. If True, Synchronizes the Start Arrowhead settings with the end Arrowhead settings. See remarks.
-;                  $vEndStyle           - [optional] (0-32, or String) Default is Null. The Arrow head to apply to the end of the line. Can be a Custom Arrowhead name, or one of the constants, $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3. See remarks.
+;                  $vEndStyle           - [optional] (0-32, or String) Default is Null. The Arrow head to apply to the end of the line. Can be a Custom Arrowhead name, or one of the constants, $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3. See remarks.
 ;                  $iEndWidth           - [optional] (0-5004) Default is Null. The Width of the Ending Arrowhead, in Hundredths of a Millimeter (HMM).
 ;                  $bEndCenter          - [optional] Default is Null. If True, Places the center of the End arrowhead on the endpoint of the line.
 ; Return values .: Success: Integer or Array.
@@ -8862,12 +8862,12 @@ EndFunc   ;==>__LOImpress_ShapeStyleCompare
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 3 = $vStartStyle not a String, and not an Integer.
-;                  @Error: 1, @Extended: 4 = $vStartStyle is an Integer, but less than 0 or greater than 32. See constants $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $vStartStyle is an Integer, but less than 0 or greater than 32. See constants $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 5 = $iStartWidth not an Integer, less than 0 or greater than 5004.
 ;                  @Error: 1, @Extended: 6 = $bStartCenter not a Boolean.
 ;                  @Error: 1, @Extended: 7 = $bSync not a Boolean.
 ;                  @Error: 1, @Extended: 8 = $vEndStyle not a String, and not an Integer.
-;                  @Error: 1, @Extended: 9 = $vEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 9 = $vEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 10 = $iEndWidth not an Integer, less than 0 or greater than 5004.
 ;                  @Error: 1, @Extended: 11 = $bEndCenter not a Boolean.
 ;                  --Processing Errors--
@@ -8885,21 +8885,21 @@ EndFunc   ;==>__LOImpress_ShapeStyleCompare
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function works for connector shapes also.
-;                  When the arrowhead type "Arrow" is set in the LO UI, or upon creation of a line with arrows, the internal name of the arrowhead is set to an incrementing name of "Arrowheads x", where x is an Integer value. Since I have no way to determine if the head is a custom arrowhead or supposed to be the "Arrow" type, the return when this is present will be the name "Arrowheads x", and not $LOI_SHAPE_LINE_ARROW_TYPE_ARROW.
-;                  When setting an Arrowhead to be $LOI_SHAPE_LINE_ARROW_TYPE_ARROW, the head is set correctly, but the LibreOffice UI will show "None". The return for Arrowhead type will be correct, $LOI_SHAPE_LINE_ARROW_TYPE_ARROW.
+;                  When the arrowhead type "Arrow" is set in the LO UI, or upon creation of a line with arrows, the internal name of the arrowhead is set to an incrementing name of "Arrowheads x", where x is an Integer value. Since I have no way to determine if the head is a custom arrowhead or supposed to be the "Arrow" type, the return when this is present will be the name "Arrowheads x", and not $LOD_SHAPE_LINE_ARROW_TYPE_ARROW.
+;                  When setting an Arrowhead to be $LOD_SHAPE_LINE_ARROW_TYPE_ARROW, the head is set correctly, but the LibreOffice UI will show "None". The return for Arrowhead type will be correct, $LOD_SHAPE_LINE_ARROW_TYPE_ARROW.
 ;                  LibreOffice has no setting for $bSync, so I have made a manual version of it in this function. It only accepts True, and must be called with True each time you want it to synchronize.
 ;                  When retrieving the current settings, $bSync will be a Boolean value of whether the Start Arrowhead settings are currently equal to the End Arrowhead setting values.
 ;                  Both $vStartStyle and $vEndStyle accept a String or an Integer because there is the possibility of a custom Arrowhead being available the user may want to use.
-;                  When retrieving the current settings, both $vStartStyle and $vEndStyle could be either an Integer or a String. It will be a String if the current Arrowhead is a custom Arrowhead, else an Integer, corresponding to one of the constants, $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  When retrieving the current settings, both $vStartStyle and $vEndStyle could be either an Integer or a String. It will be a String if the current Arrowhead is a custom Arrowhead, else an Integer, corresponding to one of the constants, $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
+;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
 ; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ShapeStyleLineArrowStyles(ByRef $oDoc, ByRef $oObj, $vStartStyle = Null, $iStartWidth = Null, $bStartCenter = Null, $bSync = Null, $vEndStyle = Null, $iEndWidth = Null, $bEndCenter = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ShapeStyleLineArrowStyles(ByRef $oDoc, ByRef $oObj, $vStartStyle = Null, $iStartWidth = Null, $bStartCenter = Null, $bSync = Null, $vEndStyle = Null, $iEndWidth = Null, $bEndCenter = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -8910,9 +8910,9 @@ Func __LOImpress_ShapeStyleLineArrowStyles(ByRef $oDoc, ByRef $oObj, $vStartStyl
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If __LO_VarsAreNull($vStartStyle, $iStartWidth, $bStartCenter, $bSync, $vEndStyle, $iEndWidth, $bEndCenter) Then
-		__LO_ArrayFill($avArrow, __LOImpress_ShapeLineArrowStyleName(Null, $oObj.LineStartName()), $oObj.LineStartWidth(), $oObj.LineStartCenter(), _
+		__LO_ArrayFill($avArrow, __LODraw_ShapeLineArrowStyleName(Null, $oObj.LineStartName()), $oObj.LineStartWidth(), $oObj.LineStartCenter(), _
 				((($oObj.LineStartName() = $oObj.LineEndName()) And ($oObj.LineStartWidth() = $oObj.LineEndWidth()) And ($oObj.LineStartCenter() = $oObj.LineEndCenter())) ? (True) : (False)), _ ; See if Start and End are the same.
-				__LOImpress_ShapeLineArrowStyleName(Null, $oObj.LineEndName()), $oObj.LineEndWidth(), $oObj.LineEndCenter())
+				__LODraw_ShapeLineArrowStyleName(Null, $oObj.LineEndName()), $oObj.LineEndWidth(), $oObj.LineEndCenter())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avArrow)
 	EndIf
@@ -8921,12 +8921,12 @@ Func __LOImpress_ShapeStyleLineArrowStyles(ByRef $oDoc, ByRef $oObj, $vStartStyl
 		If Not IsString($vStartStyle) And Not IsInt($vStartStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		If IsInt($vStartStyle) Then
-			If Not __LO_IntIsBetween($vStartStyle, $LOI_SHAPE_LINE_ARROW_TYPE_NONE, $LOI_SHAPE_LINE_ARROW_TYPE_CF_ZERO_MANY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+			If Not __LO_IntIsBetween($vStartStyle, $LOD_SHAPE_LINE_ARROW_TYPE_NONE, $LOD_SHAPE_LINE_ARROW_TYPE_CF_ZERO_MANY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-			$sStartStyle = __LOImpress_ShapeLineArrowStyleName($vStartStyle)
+			$sStartStyle = __LODraw_ShapeLineArrowStyleName($vStartStyle)
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-			__LOImpress_ShapeLineArrowheadNameInsert($oDoc, $vStartStyle)
+			__LODraw_ShapeLineArrowheadNameInsert($oDoc, $vStartStyle)
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		Else
@@ -8968,12 +8968,12 @@ Func __LOImpress_ShapeStyleLineArrowStyles(ByRef $oDoc, ByRef $oObj, $vStartStyl
 		If Not IsString($vEndStyle) And Not IsInt($vEndStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
 		If IsInt($vEndStyle) Then
-			If Not __LO_IntIsBetween($vEndStyle, $LOI_SHAPE_LINE_ARROW_TYPE_NONE, $LOI_SHAPE_LINE_ARROW_TYPE_CF_ZERO_MANY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
+			If Not __LO_IntIsBetween($vEndStyle, $LOD_SHAPE_LINE_ARROW_TYPE_NONE, $LOD_SHAPE_LINE_ARROW_TYPE_CF_ZERO_MANY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
 
-			$sEndStyle = __LOImpress_ShapeLineArrowStyleName($vEndStyle)
+			$sEndStyle = __LODraw_ShapeLineArrowStyleName($vEndStyle)
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-			__LOImpress_ShapeLineArrowheadNameInsert($oDoc, $vEndStyle)
+			__LODraw_ShapeLineArrowheadNameInsert($oDoc, $vEndStyle)
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		Else
@@ -8999,20 +8999,20 @@ Func __LOImpress_ShapeStyleLineArrowStyles(ByRef $oDoc, ByRef $oObj, $vStartStyl
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_ShapeStyleLineArrowStyles
+EndFunc   ;==>__LODraw_ShapeStyleLineArrowStyles
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ShapeStyleLineProperties
+; Name ..........: __LODraw_ShapeStyleLineProperties
 ; Description ...: Set or Retrieve Shape Style or Presentation Style Line settings.
-; Syntax ........: ; Syntax ........: __LOImpress_ShapeStyleLineProperties(ByRef $oDoc, ByRef $oObj[, $vStyle = Null[, $iColor = Null[, $iWidth = Null[, $iTransparency = Null[, $iCornerStyle = Null[, $iCapStyle = Null]]]]]])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $oObj                - A Shape Style or Presentation Style object returned by a previous _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
-;                  $vStyle              - [optional] (0-31, or String) Default is Null. The Line Style to use. Can be a Custom Line Style name, or one of the constants, $LOI_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3. See remarks.
+; Syntax ........: ; Syntax ........: __LODraw_ShapeStyleLineProperties(ByRef $oDoc, ByRef $oObj[, $vStyle = Null[, $iColor = Null[, $iWidth = Null[, $iTransparency = Null[, $iCornerStyle = Null[, $iCapStyle = Null]]]]]])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
+;                  $oObj                - A Shape Style or Presentation Style object returned by a previous _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+;                  $vStyle              - [optional] (0-31, or String) Default is Null. The Line Style to use. Can be a Custom Line Style name, or one of the constants, $LOD_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3. See remarks.
 ;                  $iColor              - [optional] (0-16777215) Default is Null. The Line color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iWidth              - [optional] (0-5004) Default is Null. The line Width, set in Hundredths of a Millimeter (HMM).
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The Line transparency percentage. 100% = fully transparent.
-;                  $iCornerStyle        - [optional] (0, 2-4) Default is Null. The Line Corner Style. See Constants $LOI_SHAPE_LINE_JOINT_* as defined in LibreOfficeImpress_Constants.au3
-;                  $iCapStyle           - [optional] (0-2) Default is Null. The Line Cap Style. See Constants $LOI_SHAPE_LINE_CAP_* as defined in LibreOfficeImpress_Constants.au3
+;                  $iCornerStyle        - [optional] (0, 2-4) Default is Null. The Line Corner Style. See Constants $LOD_SHAPE_LINE_JOINT_* as defined in LibreOfficeImpress_Constants.au3
+;                  $iCapStyle           - [optional] (0-2) Default is Null. The Line Cap Style. See Constants $LOD_SHAPE_LINE_CAP_* as defined in LibreOfficeImpress_Constants.au3
 ; Return values .: Success: Integer or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
@@ -9021,12 +9021,12 @@ EndFunc   ;==>__LOImpress_ShapeStyleLineArrowStyles
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 3 = $vStyle not a String, and not an Integer.
-;                  @Error: 1, @Extended: 4 = $vStyle is an Integer, but less than 0 or greater than 31. See constants $LOI_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $vStyle is an Integer, but less than 0 or greater than 31. See constants $LOD_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 5 = $iColor not an Integer, less than 0 or greater than 16777215.
 ;                  @Error: 1, @Extended: 6 = $iWidth not an Integer, less than 0 or greater than 5004.
 ;                  @Error: 1, @Extended: 7 = $iTransparency not an Integer, less than 0 or greater than 100.
-;                  @Error: 1, @Extended: 8 = $iCornerStyle not an Integer, not equal to 0, equal to 1, not equal to 2 or greater than 4. See Constants $LOI_SHAPE_LINE_JOINT_* as defined in LibreOfficeImpress_Constants.au3
-;                  @Error: 1, @Extended: 9 = $iCapStyle is an Integer, but less than 0 or greater than 2. See constants $LOI_SHAPE_LINE_CAP_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 8 = $iCornerStyle not an Integer, not equal to 0, equal to 1, not equal to 2 or greater than 4. See Constants $LOD_SHAPE_LINE_JOINT_* as defined in LibreOfficeImpress_Constants.au3
+;                  @Error: 1, @Extended: 9 = $iCapStyle is an Integer, but less than 0 or greater than 2. See constants $LOD_SHAPE_LINE_CAP_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to convert Constant to Line Style name.
 ;                  @Error: 3, @Extended: 2 = Failed to insert Line Style name.
@@ -9041,19 +9041,19 @@ EndFunc   ;==>__LOImpress_ShapeStyleLineArrowStyles
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $vStyle accepts a String or an Integer because there is the possibility of a custom Line Style being available that the user may want to use.
-;                  When retrieving the current settings, $vStyle could be either an Integer or a String. It will be a String if the current Line Style is a custom Line Style, else an Integer, corresponding to one of the constants, $LOI_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  When retrieving the current settings, $vStyle could be either an Integer or a String. It will be a String if the current Line Style is a custom Line Style, else an Integer, corresponding to one of the constants, $LOD_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ShapeStyleLineProperties(ByRef $oDoc, ByRef $oObj, $vStyle = Null, $iColor = Null, $iWidth = Null, $iTransparency = Null, $iCornerStyle = Null, $iCapStyle = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ShapeStyleLineProperties(ByRef $oDoc, ByRef $oObj, $vStyle = Null, $iColor = Null, $iWidth = Null, $iTransparency = Null, $iCornerStyle = Null, $iCapStyle = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local Const $__LOI_SHAPE_LINE_STYLE_NONE = 0, $__LOI_SHAPE_LINE_STYLE_SOLID = 1, $__LOI_SHAPE_LINE_STYLE_DASH = 2
+	Local Const $__LOD_SHAPE_LINE_STYLE_NONE = 0, $__LOD_SHAPE_LINE_STYLE_SOLID = 1, $__LOD_SHAPE_LINE_STYLE_DASH = 2
 	Local $avLine[6]
 	Local $sStyle
 	Local $vReturn
@@ -9063,14 +9063,14 @@ Func __LOImpress_ShapeStyleLineProperties(ByRef $oDoc, ByRef $oObj, $vStyle = Nu
 
 	If __LO_VarsAreNull($vStyle, $iColor, $iWidth, $iTransparency, $iCornerStyle, $iCapStyle) Then
 		Switch $oObj.LineStyle()
-			Case $__LOI_SHAPE_LINE_STYLE_NONE
-				$vReturn = $LOI_SHAPE_LINE_STYLE_NONE
+			Case $__LOD_SHAPE_LINE_STYLE_NONE
+				$vReturn = $LOD_SHAPE_LINE_STYLE_NONE
 
-			Case $__LOI_SHAPE_LINE_STYLE_SOLID
-				$vReturn = $LOI_SHAPE_LINE_STYLE_CONTINUOUS
+			Case $__LOD_SHAPE_LINE_STYLE_SOLID
+				$vReturn = $LOD_SHAPE_LINE_STYLE_CONTINUOUS
 
-			Case $__LOI_SHAPE_LINE_STYLE_DASH
-				$vReturn = __LOImpress_ShapeLineStyleName(Null, $oObj.LineDashName())
+			Case $__LOD_SHAPE_LINE_STYLE_DASH
+				$vReturn = __LODraw_ShapeLineStyleName(Null, $oObj.LineDashName())
 				If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 		EndSwitch
 
@@ -9083,25 +9083,25 @@ Func __LOImpress_ShapeStyleLineProperties(ByRef $oDoc, ByRef $oObj, $vStyle = Nu
 		If Not IsString($vStyle) And Not IsInt($vStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		If IsInt($vStyle) Then
-			If Not __LO_IntIsBetween($vStyle, $LOI_SHAPE_LINE_STYLE_NONE, $LOI_SHAPE_LINE_STYLE_LINE_WITH_FINE_DOTS) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+			If Not __LO_IntIsBetween($vStyle, $LOD_SHAPE_LINE_STYLE_NONE, $LOD_SHAPE_LINE_STYLE_LINE_WITH_FINE_DOTS) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 			Switch $vStyle
-				Case $LOI_SHAPE_LINE_STYLE_NONE
-					$oObj.LineStyle = $__LOI_SHAPE_LINE_STYLE_NONE
-					$iError = ($oObj.LineStyle() = $__LOI_SHAPE_LINE_STYLE_NONE) ? ($iError) : (BitOR($iError, 1))
+				Case $LOD_SHAPE_LINE_STYLE_NONE
+					$oObj.LineStyle = $__LOD_SHAPE_LINE_STYLE_NONE
+					$iError = ($oObj.LineStyle() = $__LOD_SHAPE_LINE_STYLE_NONE) ? ($iError) : (BitOR($iError, 1))
 
-				Case $LOI_SHAPE_LINE_STYLE_CONTINUOUS
-					$oObj.LineStyle = $__LOI_SHAPE_LINE_STYLE_SOLID
-					$iError = ($oObj.LineStyle() = $__LOI_SHAPE_LINE_STYLE_SOLID) ? ($iError) : (BitOR($iError, 1))
+				Case $LOD_SHAPE_LINE_STYLE_CONTINUOUS
+					$oObj.LineStyle = $__LOD_SHAPE_LINE_STYLE_SOLID
+					$iError = ($oObj.LineStyle() = $__LOD_SHAPE_LINE_STYLE_SOLID) ? ($iError) : (BitOR($iError, 1))
 
 				Case Else
-					$sStyle = __LOImpress_ShapeLineStyleName($vStyle)
+					$sStyle = __LODraw_ShapeLineStyleName($vStyle)
 					If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-					__LOImpress_ShapeLineDashNameInsert($oDoc, $vStyle)
+					__LODraw_ShapeLineDashNameInsert($oDoc, $vStyle)
 					If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-					$oObj.LineStyle = $__LOI_SHAPE_LINE_STYLE_DASH
+					$oObj.LineStyle = $__LOD_SHAPE_LINE_STYLE_DASH
 					$oObj.LineDashName = $sStyle
 					$iError = ($oObj.LineDashName() = $sStyle) ? ($iError) : (BitOR($iError, 1))
 			EndSwitch
@@ -9135,29 +9135,29 @@ Func __LOImpress_ShapeStyleLineProperties(ByRef $oDoc, ByRef $oObj, $vStyle = Nu
 	EndIf
 
 	If ($iCornerStyle <> Null) Then
-		If Not __LO_IntIsBetween($iCornerStyle, $LOI_SHAPE_LINE_JOINT_NONE, $LOI_SHAPE_LINE_JOINT_ROUND, $LOI_SHAPE_LINE_JOINT_MIDDLE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
+		If Not __LO_IntIsBetween($iCornerStyle, $LOD_SHAPE_LINE_JOINT_NONE, $LOD_SHAPE_LINE_JOINT_ROUND, $LOD_SHAPE_LINE_JOINT_MIDDLE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
 		$oObj.LineJoint = $iCornerStyle
 		$iError = ($oObj.LineJoint() = $iCornerStyle) ? ($iError) : (BitOR($iError, 16))
 	EndIf
 
 	If ($iCapStyle <> Null) Then
-		If Not __LO_IntIsBetween($iCapStyle, $LOI_SHAPE_LINE_CAP_FLAT, $LOI_SHAPE_LINE_CAP_SQUARE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
+		If Not __LO_IntIsBetween($iCapStyle, $LOD_SHAPE_LINE_CAP_FLAT, $LOD_SHAPE_LINE_CAP_SQUARE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
 
 		$oObj.LineCap = $iCapStyle
 		$iError = ($oObj.LineCap() = $iCapStyle) ? ($iError) : (BitOR($iError, 32))
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_ShapeStyleLineProperties
+EndFunc   ;==>__LODraw_ShapeStyleLineProperties
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ShapeTextAttrAnimation
+; Name ..........: __LODraw_ShapeTextAttrAnimation
 ; Description ...: Set or Retrieve Shape or Shape Style Text Attribute Animation settings.
-; Syntax ........: __LOImpress_ShapeTextAttrAnimation(ByRef $oObj[, $iEffect = Null[, $iDirection = Null[, $bStartInside = Null[, $bVisibleOnExit = Null[, $iCycles = Null[, $iInc = Null[, $bPixels = Null[, $iDelay = Null]]]]]]]])
-; Parameters ....: $oObj                - A Shape or Shape Style object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, or _LOImpress_ShapeStyleGetObjByName function.
-;                  $iEffect             - [optional] (0-4) Default is Null. The Animation type. See Constants, $LOI_ANIMATION_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iDirection          - [optional] (0-3) Default is Null. The Direction of the text's movement, if applicable. See Constants, $LOI_ANIMATION_DIR_* as defined in LibreOfficeImpress_Constants.au3.
+; Syntax ........: __LODraw_ShapeTextAttrAnimation(ByRef $oObj[, $iEffect = Null[, $iDirection = Null[, $bStartInside = Null[, $bVisibleOnExit = Null[, $iCycles = Null[, $iInc = Null[, $bPixels = Null[, $iDelay = Null]]]]]]]])
+; Parameters ....: $oObj                - A Shape or Shape Style object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, or _LODraw_ShapeStyleGetObjByName function.
+;                  $iEffect             - [optional] (0-4) Default is Null. The Animation type. See Constants, $LOD_ANIMATION_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iDirection          - [optional] (0-3) Default is Null. The Direction of the text's movement, if applicable. See Constants, $LOD_ANIMATION_DIR_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $bStartInside        - [optional] Default is Null. If True, Text is visible and inside the shape when the effect is applied.
 ;                  $bVisibleOnExit      - [optional] Default is Null. If True, Text remains visible after the effect is applied.
 ;                  $iCycles             - [optional] (0-100) Default is Null. The number of times to repeat the animation. 0 = Continuous.
@@ -9170,8 +9170,8 @@ EndFunc   ;==>__LOImpress_ShapeStyleLineProperties
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
-;                  @Error: 1, @Extended: 2 = $iEffect not an Integer, less than 0 or greater than 4. See Constants, $LOI_ANIMATION_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 3 = $iDirection not an Integer, less than 0 or greater than 3. See Constants, $LOI_ANIMATION_DIR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iEffect not an Integer, less than 0 or greater than 4. See Constants, $LOD_ANIMATION_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iDirection not an Integer, less than 0 or greater than 3. See Constants, $LOD_ANIMATION_DIR_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 4 = $bStartInside not a Boolean.
 ;                  @Error: 1, @Extended: 5 = $bVisibleOnExit not a Boolean.
 ;                  @Error: 1, @Extended: 6 = $iCycles not an Integer, less than 0 or greater than 100.
@@ -9194,13 +9194,13 @@ EndFunc   ;==>__LOImpress_ShapeStyleLineProperties
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
+;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
 ; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ShapeTextAttrAnimation(ByRef $oObj, $iEffect = Null, $iDirection = Null, $bStartInside = Null, $bVisibleOnExit = Null, $iCycles = Null, $iInc = Null, $bPixels = Null, $iDelay = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ShapeTextAttrAnimation(ByRef $oObj, $iEffect = Null, $iDirection = Null, $bStartInside = Null, $bVisibleOnExit = Null, $iCycles = Null, $iInc = Null, $bPixels = Null, $iDelay = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0, $iValue
@@ -9219,14 +9219,14 @@ Func __LOImpress_ShapeTextAttrAnimation(ByRef $oObj, $iEffect = Null, $iDirectio
 	EndIf
 
 	If ($iEffect <> Null) Then
-		If Not __LO_IntIsBetween($iEffect, $LOI_ANIMATION_TYPE_NONE, $LOI_ANIMATION_TYPE_SCROLL_IN) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+		If Not __LO_IntIsBetween($iEffect, $LOD_ANIMATION_TYPE_NONE, $LOD_ANIMATION_TYPE_SCROLL_IN) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		$oObj.TextAnimationKind = $iEffect
 		$iError = ($oObj.TextAnimationKind() = $iEffect) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($iDirection <> Null) Then
-		If Not __LO_IntIsBetween($iDirection, $LOI_ANIMATION_DIR_LEFT, $LOI_ANIMATION_DIR_DOWN) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not __LO_IntIsBetween($iDirection, $LOD_ANIMATION_DIR_LEFT, $LOD_ANIMATION_DIR_DOWN) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 		$oObj.TextAnimationDirection = $iDirection
 		$iError = ($oObj.TextAnimationDirection() = $iDirection) ? ($iError) : (BitOR($iError, 2))
@@ -9297,13 +9297,13 @@ Func __LOImpress_ShapeTextAttrAnimation(ByRef $oObj, $iEffect = Null, $iDirectio
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_ShapeTextAttrAnimation
+EndFunc   ;==>__LODraw_ShapeTextAttrAnimation
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ShapeTextAttrFit
+; Name ..........: __LODraw_ShapeTextAttrFit
 ; Description ...: Set or Retrieve Shape or Shape Style Text Attribute Fit properties.
-; Syntax ........: __LOImpress_ShapeTextAttrFit(ByRef $oObj[, $bFitWidth = Null[, $bFitHeight = Null[, $bFitToFrame = Null[, $bAdjustContour = Null[, $bWordWrap = Null[, $bResizeShape = Null]]]]]])
-; Parameters ....: $oObj                - A Shape or Shape Style object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, or _LOImpress_ShapeStyleGetObjByName function.
+; Syntax ........: __LODraw_ShapeTextAttrFit(ByRef $oObj[, $bFitWidth = Null[, $bFitHeight = Null[, $bFitToFrame = Null[, $bAdjustContour = Null[, $bWordWrap = Null[, $bResizeShape = Null]]]]]])
+; Parameters ....: $oObj                - A Shape or Shape Style object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, or _LODraw_ShapeStyleGetObjByName function.
 ;                  $bFitWidth           - [optional] Default is Null. If True, Expands the width of the object to the width of the text.
 ;                  $bFitHeight          - [optional] Default is Null. If True, Expands the height of the object to the height of the text.
 ;                  $bFitToFrame         - [optional] Default is Null. If True, Resizes the text to fit the entire area of the drawing object.
@@ -9342,23 +9342,23 @@ EndFunc   ;==>__LOImpress_ShapeTextAttrAnimation
 ;                  When setting the properties for a shape, it is the user's responsibility to ensure the correct properties are used for the corresponding shape type.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
+;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
 ; Related .......:
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ShapeTextAttrFit(ByRef $oObj, $bFitWidth = Null, $bFitHeight = Null, $bFitToFrame = Null, $bAdjustContour = Null, $bWordWrap = Null, $bResizeShape = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ShapeTextAttrFit(ByRef $oObj, $bFitWidth = Null, $bFitHeight = Null, $bFitToFrame = Null, $bAdjustContour = Null, $bWordWrap = Null, $bResizeShape = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local Const $__LOI_TEXT_FIT_NONE = 0, $__LOI_TEXT_FIT_PROP = 1 ; com.sun.star.drawing.TextFitToSizeType
+	Local Const $__LOD_TEXT_FIT_NONE = 0, $__LOD_TEXT_FIT_PROP = 1 ; com.sun.star.drawing.TextFitToSizeType
 	Local $iError = 0
 	Local $avTextAttr[6]
 
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($bFitWidth, $bFitHeight, $bFitToFrame, $bAdjustContour, $bWordWrap, $bResizeShape) Then
-		__LO_ArrayFill($avTextAttr, $oObj.TextAutoGrowWidth(), $oObj.TextAutoGrowHeight(), ($oObj.TextFitToSize() = $__LOI_TEXT_FIT_PROP) ? (True) : (False), _
+		__LO_ArrayFill($avTextAttr, $oObj.TextAutoGrowWidth(), $oObj.TextAutoGrowHeight(), ($oObj.TextFitToSize() = $__LOD_TEXT_FIT_PROP) ? (True) : (False), _
 				$oObj.TextContourFrame(), $oObj.TextWordWrap(), $oObj.TextAutoGrowHeight())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avTextAttr)
@@ -9381,8 +9381,8 @@ Func __LOImpress_ShapeTextAttrFit(ByRef $oObj, $bFitWidth = Null, $bFitHeight = 
 	If ($bFitToFrame <> Null) Then
 		If Not IsBool($bFitToFrame) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-		$oObj.TextFitToSize = ($bFitToFrame) ? ($__LOI_TEXT_FIT_PROP) : ($__LOI_TEXT_FIT_NONE)
-		$iError = ($oObj.TextFitToSize() = ($bFitToFrame) ? ($__LOI_TEXT_FIT_PROP) : ($__LOI_TEXT_FIT_NONE)) ? ($iError) : (BitOR($iError, 4))
+		$oObj.TextFitToSize = ($bFitToFrame) ? ($__LOD_TEXT_FIT_PROP) : ($__LOD_TEXT_FIT_NONE)
+		$iError = ($oObj.TextFitToSize() = ($bFitToFrame) ? ($__LOD_TEXT_FIT_PROP) : ($__LOD_TEXT_FIT_NONE)) ? ($iError) : (BitOR($iError, 4))
 	EndIf
 
 	If ($bAdjustContour <> Null) Then
@@ -9407,18 +9407,18 @@ Func __LOImpress_ShapeTextAttrFit(ByRef $oObj, $bFitWidth = Null, $bFitHeight = 
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_ShapeTextAttrFit
+EndFunc   ;==>__LODraw_ShapeTextAttrFit
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_ShapeTextAttrSettings
+; Name ..........: __LODraw_ShapeTextAttrSettings
 ; Description ...: Set or Retrieve Shape, Shape Style or Presentation Style text Attribute settings.
-; Syntax ........: __LOImpress_ShapeTextAttrSettings(ByRef $oObj[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null[, $iAnchor = Null[, $bFullWidth = Null]]]]]])
-; Parameters ....: $oObj                - A Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
+; Syntax ........: __LODraw_ShapeTextAttrSettings(ByRef $oObj[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null[, $iAnchor = Null[, $bFullWidth = Null]]]]]])
+; Parameters ....: $oObj                - A Shape, Shape Style or Presentation Style object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $iLeft               - [optional] (-100000-100000) Default is Null. The space between the left edge of the drawing object and the left border of the text, in Hundredths of a Millimeter (HMM).
 ;                  $iRight              - [optional] (-100000-100000) Default is Null. The space between the right edge of the drawing object and the right border of the text, in Hundredths of a Millimeter (HMM).
 ;                  $iTop                - [optional] (-100000-100000) Default is Null. The space between the top edge of the drawing object and the top border of the text, in Hundredths of a Millimeter (HMM).
 ;                  $iBottom             - [optional] (-100000-100000) Default is Null. The space between the bottom edge of the drawing object and the bottom border of the text, in Hundredths of a Millimeter (HMM).
-;                  $iAnchor             - [optional] (0-8) Default is Null. The text anchor position. See Constants, $LOI_PAR_TEXT_ANCHOR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iAnchor             - [optional] (0-8) Default is Null. The text anchor position. See Constants, $LOD_PAR_TEXT_ANCHOR_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $bFullWidth          - [optional] Default is Null. If True, Anchors the text to the full width of the drawing object.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -9430,7 +9430,7 @@ EndFunc   ;==>__LOImpress_ShapeTextAttrFit
 ;                  @Error: 1, @Extended: 3 = $iRight not an Integer, less than -100000 or greater than 100000.
 ;                  @Error: 1, @Extended: 4 = $iTop not an Integer, less than -100000 or greater than 100000.
 ;                  @Error: 1, @Extended: 5 = $iBottom not an Integer, less than -100000 or greater than 100000.
-;                  @Error: 1, @Extended: 6 = $iAnchor not an Integer, less than 0 or greater than 8. See Constants, $LOI_PAR_TEXT_ANCHOR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iAnchor not an Integer, less than 0 or greater than 8. See Constants, $LOD_PAR_TEXT_ANCHOR_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 7 = $bFullWidth not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
@@ -9444,13 +9444,13 @@ EndFunc   ;==>__LOImpress_ShapeTextAttrFit
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
+;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
 ; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_ShapeTextAttrSettings(ByRef $oObj, $iLeft = Null, $iRight = Null, $iTop = Null, $iBottom = Null, $iAnchor = Null, $bFullWidth = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_ShapeTextAttrSettings(ByRef $oObj, $iLeft = Null, $iRight = Null, $iTop = Null, $iBottom = Null, $iAnchor = Null, $bFullWidth = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0, $iCurAnchor
@@ -9460,36 +9460,36 @@ Func __LOImpress_ShapeTextAttrSettings(ByRef $oObj, $iLeft = Null, $iRight = Nul
 
 	If __LO_VarsAreNull($iLeft, $iRight, $iTop, $iBottom, $iAnchor, $bFullWidth) Then
 		Select
-			Case ($oObj.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_TOP) And ($oObj.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_LEFT)
-				$iCurAnchor = $LOI_PAR_TEXT_ANCHOR_TOP_LEFT
+			Case ($oObj.TextVerticalAdjust = $LOD_PAR_TEXT_ALIGN_VERT_TOP) And ($oObj.TextHorizontalAdjust = $LOD_PAR_TEXT_ALIGN_HORI_LEFT)
+				$iCurAnchor = $LOD_PAR_TEXT_ANCHOR_TOP_LEFT
 
-			Case ($oObj.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_TOP) And (($oObj.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_CENTER) Or ($oObj.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_BLOCK))
-				$iCurAnchor = $LOI_PAR_TEXT_ANCHOR_TOP_CENTER
+			Case ($oObj.TextVerticalAdjust = $LOD_PAR_TEXT_ALIGN_VERT_TOP) And (($oObj.TextHorizontalAdjust = $LOD_PAR_TEXT_ALIGN_HORI_CENTER) Or ($oObj.TextHorizontalAdjust = $LOD_PAR_TEXT_ALIGN_HORI_BLOCK))
+				$iCurAnchor = $LOD_PAR_TEXT_ANCHOR_TOP_CENTER
 
-			Case ($oObj.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_TOP) And ($oObj.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_RIGHT)
-				$iCurAnchor = $LOI_PAR_TEXT_ANCHOR_TOP_RIGHT
+			Case ($oObj.TextVerticalAdjust = $LOD_PAR_TEXT_ALIGN_VERT_TOP) And ($oObj.TextHorizontalAdjust = $LOD_PAR_TEXT_ALIGN_HORI_RIGHT)
+				$iCurAnchor = $LOD_PAR_TEXT_ANCHOR_TOP_RIGHT
 
-			Case ($oObj.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_CENTER) And ($oObj.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_LEFT)
-				$iCurAnchor = $LOI_PAR_TEXT_ANCHOR_MIDDLE_LEFT
+			Case ($oObj.TextVerticalAdjust = $LOD_PAR_TEXT_ALIGN_VERT_CENTER) And ($oObj.TextHorizontalAdjust = $LOD_PAR_TEXT_ALIGN_HORI_LEFT)
+				$iCurAnchor = $LOD_PAR_TEXT_ANCHOR_MIDDLE_LEFT
 
-			Case ($oObj.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_CENTER) And (($oObj.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_CENTER) Or ($oObj.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_BLOCK))
-				$iCurAnchor = $LOI_PAR_TEXT_ANCHOR_MIDDLE_CENTER
+			Case ($oObj.TextVerticalAdjust = $LOD_PAR_TEXT_ALIGN_VERT_CENTER) And (($oObj.TextHorizontalAdjust = $LOD_PAR_TEXT_ALIGN_HORI_CENTER) Or ($oObj.TextHorizontalAdjust = $LOD_PAR_TEXT_ALIGN_HORI_BLOCK))
+				$iCurAnchor = $LOD_PAR_TEXT_ANCHOR_MIDDLE_CENTER
 
-			Case ($oObj.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_CENTER) And ($oObj.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_RIGHT)
-				$iCurAnchor = $LOI_PAR_TEXT_ANCHOR_MIDDLE_RIGHT
+			Case ($oObj.TextVerticalAdjust = $LOD_PAR_TEXT_ALIGN_VERT_CENTER) And ($oObj.TextHorizontalAdjust = $LOD_PAR_TEXT_ALIGN_HORI_RIGHT)
+				$iCurAnchor = $LOD_PAR_TEXT_ANCHOR_MIDDLE_RIGHT
 
-			Case ($oObj.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_BOTTOM) And ($oObj.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_LEFT)
-				$iCurAnchor = $LOI_PAR_TEXT_ANCHOR_BOTTOM_LEFT
+			Case ($oObj.TextVerticalAdjust = $LOD_PAR_TEXT_ALIGN_VERT_BOTTOM) And ($oObj.TextHorizontalAdjust = $LOD_PAR_TEXT_ALIGN_HORI_LEFT)
+				$iCurAnchor = $LOD_PAR_TEXT_ANCHOR_BOTTOM_LEFT
 
-			Case ($oObj.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_BOTTOM) And (($oObj.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_CENTER) Or ($oObj.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_BLOCK))
-				$iCurAnchor = $LOI_PAR_TEXT_ANCHOR_BOTTOM_CENTER
+			Case ($oObj.TextVerticalAdjust = $LOD_PAR_TEXT_ALIGN_VERT_BOTTOM) And (($oObj.TextHorizontalAdjust = $LOD_PAR_TEXT_ALIGN_HORI_CENTER) Or ($oObj.TextHorizontalAdjust = $LOD_PAR_TEXT_ALIGN_HORI_BLOCK))
+				$iCurAnchor = $LOD_PAR_TEXT_ANCHOR_BOTTOM_CENTER
 
-			Case ($oObj.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_BOTTOM) And ($oObj.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_RIGHT)
-				$iCurAnchor = $LOI_PAR_TEXT_ANCHOR_BOTTOM_RIGHT
+			Case ($oObj.TextVerticalAdjust = $LOD_PAR_TEXT_ALIGN_VERT_BOTTOM) And ($oObj.TextHorizontalAdjust = $LOD_PAR_TEXT_ALIGN_HORI_RIGHT)
+				$iCurAnchor = $LOD_PAR_TEXT_ANCHOR_BOTTOM_RIGHT
 		EndSelect
 
 		__LO_ArrayFill($avTextAttr, $oObj.TextLeftDistance(), $oObj.TextRightDistance(), $oObj.TextUpperDistance(), $oObj.TextLowerDistance(), _
-				$iCurAnchor, ($oObj.TextHorizontalAdjust() = $LOI_PAR_TEXT_ALIGN_HORI_BLOCK) ? (True) : (False))
+				$iCurAnchor, ($oObj.TextHorizontalAdjust() = $LOD_PAR_TEXT_ALIGN_HORI_BLOCK) ? (True) : (False))
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avTextAttr)
 	EndIf
@@ -9523,62 +9523,62 @@ Func __LOImpress_ShapeTextAttrSettings(ByRef $oObj, $iLeft = Null, $iRight = Nul
 	EndIf
 
 	If ($iAnchor <> Null) Then
-		If Not __LO_IntIsBetween($iAnchor, $LOI_PAR_TEXT_ANCHOR_TOP_LEFT, $LOI_PAR_TEXT_ANCHOR_BOTTOM_RIGHT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		If Not __LO_IntIsBetween($iAnchor, $LOD_PAR_TEXT_ANCHOR_TOP_LEFT, $LOD_PAR_TEXT_ANCHOR_BOTTOM_RIGHT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		Switch $iAnchor
-			Case $LOI_PAR_TEXT_ANCHOR_TOP_LEFT
-				$oObj.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_TOP
-				$oObj.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_LEFT
-				$iError = ($oObj.TextVerticalAdjust() = $LOI_PAR_TEXT_ALIGN_VERT_TOP) ? ($iError) : (BitOR($iError, 16))
-				$iError = ($oObj.TextHorizontalAdjust() = $LOI_PAR_TEXT_ALIGN_HORI_LEFT) ? ($iError) : (BitOR($iError, 16))
+			Case $LOD_PAR_TEXT_ANCHOR_TOP_LEFT
+				$oObj.TextVerticalAdjust = $LOD_PAR_TEXT_ALIGN_VERT_TOP
+				$oObj.TextHorizontalAdjust = $LOD_PAR_TEXT_ALIGN_HORI_LEFT
+				$iError = ($oObj.TextVerticalAdjust() = $LOD_PAR_TEXT_ALIGN_VERT_TOP) ? ($iError) : (BitOR($iError, 16))
+				$iError = ($oObj.TextHorizontalAdjust() = $LOD_PAR_TEXT_ALIGN_HORI_LEFT) ? ($iError) : (BitOR($iError, 16))
 
-			Case $LOI_PAR_TEXT_ANCHOR_TOP_CENTER
-				$oObj.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_TOP
-				$oObj.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_CENTER
-				$iError = ($oObj.TextVerticalAdjust() = $LOI_PAR_TEXT_ALIGN_VERT_TOP) ? ($iError) : (BitOR($iError, 16))
-				$iError = ($oObj.TextHorizontalAdjust() = $LOI_PAR_TEXT_ALIGN_HORI_CENTER) ? ($iError) : (BitOR($iError, 16))
+			Case $LOD_PAR_TEXT_ANCHOR_TOP_CENTER
+				$oObj.TextVerticalAdjust = $LOD_PAR_TEXT_ALIGN_VERT_TOP
+				$oObj.TextHorizontalAdjust = $LOD_PAR_TEXT_ALIGN_HORI_CENTER
+				$iError = ($oObj.TextVerticalAdjust() = $LOD_PAR_TEXT_ALIGN_VERT_TOP) ? ($iError) : (BitOR($iError, 16))
+				$iError = ($oObj.TextHorizontalAdjust() = $LOD_PAR_TEXT_ALIGN_HORI_CENTER) ? ($iError) : (BitOR($iError, 16))
 
-			Case $LOI_PAR_TEXT_ANCHOR_TOP_RIGHT
-				$oObj.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_TOP
-				$oObj.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_RIGHT
-				$iError = ($oObj.TextVerticalAdjust() = $LOI_PAR_TEXT_ALIGN_VERT_TOP) ? ($iError) : (BitOR($iError, 16))
-				$iError = ($oObj.TextHorizontalAdjust() = $LOI_PAR_TEXT_ALIGN_HORI_RIGHT) ? ($iError) : (BitOR($iError, 16))
+			Case $LOD_PAR_TEXT_ANCHOR_TOP_RIGHT
+				$oObj.TextVerticalAdjust = $LOD_PAR_TEXT_ALIGN_VERT_TOP
+				$oObj.TextHorizontalAdjust = $LOD_PAR_TEXT_ALIGN_HORI_RIGHT
+				$iError = ($oObj.TextVerticalAdjust() = $LOD_PAR_TEXT_ALIGN_VERT_TOP) ? ($iError) : (BitOR($iError, 16))
+				$iError = ($oObj.TextHorizontalAdjust() = $LOD_PAR_TEXT_ALIGN_HORI_RIGHT) ? ($iError) : (BitOR($iError, 16))
 
-			Case $LOI_PAR_TEXT_ANCHOR_MIDDLE_LEFT
-				$oObj.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_CENTER
-				$oObj.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_LEFT
-				$iError = ($oObj.TextVerticalAdjust() = $LOI_PAR_TEXT_ALIGN_VERT_CENTER) ? ($iError) : (BitOR($iError, 16))
-				$iError = ($oObj.TextHorizontalAdjust() = $LOI_PAR_TEXT_ALIGN_HORI_LEFT) ? ($iError) : (BitOR($iError, 16))
+			Case $LOD_PAR_TEXT_ANCHOR_MIDDLE_LEFT
+				$oObj.TextVerticalAdjust = $LOD_PAR_TEXT_ALIGN_VERT_CENTER
+				$oObj.TextHorizontalAdjust = $LOD_PAR_TEXT_ALIGN_HORI_LEFT
+				$iError = ($oObj.TextVerticalAdjust() = $LOD_PAR_TEXT_ALIGN_VERT_CENTER) ? ($iError) : (BitOR($iError, 16))
+				$iError = ($oObj.TextHorizontalAdjust() = $LOD_PAR_TEXT_ALIGN_HORI_LEFT) ? ($iError) : (BitOR($iError, 16))
 
-			Case $LOI_PAR_TEXT_ANCHOR_MIDDLE_CENTER
-				$oObj.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_CENTER
-				$oObj.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_CENTER
-				$iError = ($oObj.TextVerticalAdjust() = $LOI_PAR_TEXT_ALIGN_VERT_CENTER) ? ($iError) : (BitOR($iError, 16))
-				$iError = ($oObj.TextHorizontalAdjust() = $LOI_PAR_TEXT_ALIGN_HORI_CENTER) ? ($iError) : (BitOR($iError, 16))
+			Case $LOD_PAR_TEXT_ANCHOR_MIDDLE_CENTER
+				$oObj.TextVerticalAdjust = $LOD_PAR_TEXT_ALIGN_VERT_CENTER
+				$oObj.TextHorizontalAdjust = $LOD_PAR_TEXT_ALIGN_HORI_CENTER
+				$iError = ($oObj.TextVerticalAdjust() = $LOD_PAR_TEXT_ALIGN_VERT_CENTER) ? ($iError) : (BitOR($iError, 16))
+				$iError = ($oObj.TextHorizontalAdjust() = $LOD_PAR_TEXT_ALIGN_HORI_CENTER) ? ($iError) : (BitOR($iError, 16))
 
-			Case $LOI_PAR_TEXT_ANCHOR_MIDDLE_RIGHT
-				$oObj.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_CENTER
-				$oObj.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_RIGHT
-				$iError = ($oObj.TextVerticalAdjust() = $LOI_PAR_TEXT_ALIGN_VERT_CENTER) ? ($iError) : (BitOR($iError, 16))
-				$iError = ($oObj.TextHorizontalAdjust() = $LOI_PAR_TEXT_ALIGN_HORI_RIGHT) ? ($iError) : (BitOR($iError, 16))
+			Case $LOD_PAR_TEXT_ANCHOR_MIDDLE_RIGHT
+				$oObj.TextVerticalAdjust = $LOD_PAR_TEXT_ALIGN_VERT_CENTER
+				$oObj.TextHorizontalAdjust = $LOD_PAR_TEXT_ALIGN_HORI_RIGHT
+				$iError = ($oObj.TextVerticalAdjust() = $LOD_PAR_TEXT_ALIGN_VERT_CENTER) ? ($iError) : (BitOR($iError, 16))
+				$iError = ($oObj.TextHorizontalAdjust() = $LOD_PAR_TEXT_ALIGN_HORI_RIGHT) ? ($iError) : (BitOR($iError, 16))
 
-			Case $LOI_PAR_TEXT_ANCHOR_BOTTOM_LEFT
-				$oObj.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_BOTTOM
-				$oObj.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_LEFT
-				$iError = ($oObj.TextVerticalAdjust() = $LOI_PAR_TEXT_ALIGN_VERT_BOTTOM) ? ($iError) : (BitOR($iError, 16))
-				$iError = ($oObj.TextHorizontalAdjust() = $LOI_PAR_TEXT_ALIGN_HORI_LEFT) ? ($iError) : (BitOR($iError, 16))
+			Case $LOD_PAR_TEXT_ANCHOR_BOTTOM_LEFT
+				$oObj.TextVerticalAdjust = $LOD_PAR_TEXT_ALIGN_VERT_BOTTOM
+				$oObj.TextHorizontalAdjust = $LOD_PAR_TEXT_ALIGN_HORI_LEFT
+				$iError = ($oObj.TextVerticalAdjust() = $LOD_PAR_TEXT_ALIGN_VERT_BOTTOM) ? ($iError) : (BitOR($iError, 16))
+				$iError = ($oObj.TextHorizontalAdjust() = $LOD_PAR_TEXT_ALIGN_HORI_LEFT) ? ($iError) : (BitOR($iError, 16))
 
-			Case $LOI_PAR_TEXT_ANCHOR_BOTTOM_CENTER
-				$oObj.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_BOTTOM
-				$oObj.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_CENTER
-				$iError = ($oObj.TextVerticalAdjust() = $LOI_PAR_TEXT_ALIGN_VERT_BOTTOM) ? ($iError) : (BitOR($iError, 16))
-				$iError = ($oObj.TextHorizontalAdjust() = $LOI_PAR_TEXT_ALIGN_HORI_CENTER) ? ($iError) : (BitOR($iError, 16))
+			Case $LOD_PAR_TEXT_ANCHOR_BOTTOM_CENTER
+				$oObj.TextVerticalAdjust = $LOD_PAR_TEXT_ALIGN_VERT_BOTTOM
+				$oObj.TextHorizontalAdjust = $LOD_PAR_TEXT_ALIGN_HORI_CENTER
+				$iError = ($oObj.TextVerticalAdjust() = $LOD_PAR_TEXT_ALIGN_VERT_BOTTOM) ? ($iError) : (BitOR($iError, 16))
+				$iError = ($oObj.TextHorizontalAdjust() = $LOD_PAR_TEXT_ALIGN_HORI_CENTER) ? ($iError) : (BitOR($iError, 16))
 
-			Case $LOI_PAR_TEXT_ANCHOR_BOTTOM_RIGHT
-				$oObj.TextVerticalAdjust = $LOI_PAR_TEXT_ALIGN_VERT_BOTTOM
-				$oObj.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_RIGHT
-				$iError = ($oObj.TextVerticalAdjust() = $LOI_PAR_TEXT_ALIGN_VERT_BOTTOM) ? ($iError) : (BitOR($iError, 16))
-				$iError = ($oObj.TextHorizontalAdjust() = $LOI_PAR_TEXT_ALIGN_HORI_RIGHT) ? ($iError) : (BitOR($iError, 16))
+			Case $LOD_PAR_TEXT_ANCHOR_BOTTOM_RIGHT
+				$oObj.TextVerticalAdjust = $LOD_PAR_TEXT_ALIGN_VERT_BOTTOM
+				$oObj.TextHorizontalAdjust = $LOD_PAR_TEXT_ALIGN_HORI_RIGHT
+				$iError = ($oObj.TextVerticalAdjust() = $LOD_PAR_TEXT_ALIGN_VERT_BOTTOM) ? ($iError) : (BitOR($iError, 16))
+				$iError = ($oObj.TextHorizontalAdjust() = $LOD_PAR_TEXT_ALIGN_HORI_RIGHT) ? ($iError) : (BitOR($iError, 16))
 		EndSwitch
 	EndIf
 
@@ -9586,25 +9586,25 @@ Func __LOImpress_ShapeTextAttrSettings(ByRef $oObj, $iLeft = Null, $iRight = Nul
 		If Not IsBool($bFullWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
 		If $bFullWidth Then
-			$oObj.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_BLOCK
-			$iError = ($oObj.TextHorizontalAdjust() = $LOI_PAR_TEXT_ALIGN_HORI_BLOCK) ? ($iError) : (BitOR($iError, 32))
+			$oObj.TextHorizontalAdjust = $LOD_PAR_TEXT_ALIGN_HORI_BLOCK
+			$iError = ($oObj.TextHorizontalAdjust() = $LOD_PAR_TEXT_ALIGN_HORI_BLOCK) ? ($iError) : (BitOR($iError, 32))
 
 		Else
-			If ($oObj.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_BLOCK) Then ; Only set Horizontal Adjust to Center if it was set to Block already when setting $bFullWidth to False.
-				$oObj.TextHorizontalAdjust = $LOI_PAR_TEXT_ALIGN_HORI_CENTER
-				$iError = ($oObj.TextHorizontalAdjust() = $LOI_PAR_TEXT_ALIGN_HORI_CENTER) ? ($iError) : (BitOR($iError, 32))
+			If ($oObj.TextHorizontalAdjust = $LOD_PAR_TEXT_ALIGN_HORI_BLOCK) Then ; Only set Horizontal Adjust to Center if it was set to Block already when setting $bFullWidth to False.
+				$oObj.TextHorizontalAdjust = $LOD_PAR_TEXT_ALIGN_HORI_CENTER
+				$iError = ($oObj.TextHorizontalAdjust() = $LOD_PAR_TEXT_ALIGN_HORI_CENTER) ? ($iError) : (BitOR($iError, 32))
 			EndIf
 		EndIf
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_ShapeTextAttrSettings
+EndFunc   ;==>__LODraw_ShapeTextAttrSettings
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_StyleCharFontColor
+; Name ..........: __LODraw_StyleCharFontColor
 ; Description ...: Set or retrieve the font color and highlighting values.
-; Syntax ........: __LOImpress_StyleCharFontColor(ByRef $oObj[, $iFontColor = Null[, $iHighlight = Null]])
-; Parameters ....: $oObj                - A Shape Style or Presentation Style object returned by a previous _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
+; Syntax ........: __LODraw_StyleCharFontColor(ByRef $oObj[, $iFontColor = Null[, $iHighlight = Null]])
+; Parameters ....: $oObj                - A Shape Style or Presentation Style object returned by a previous _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $iFontColor          - [optional] (-1-16777215) Default is Null. The font Color value, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
 ;                  $iHighlight          - [optional] (-1-16777215) Default is Null. The highlight Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for No color.
 ; Return values .: Success: 1 or Array.
@@ -9627,8 +9627,8 @@ EndFunc   ;==>__LOImpress_ShapeTextAttrSettings
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_StyleCharFontColor(ByRef $oObj, $iFontColor = Null, $iHighlight = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_StyleCharFontColor(ByRef $oObj, $iFontColor = Null, $iHighlight = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -9637,7 +9637,7 @@ Func __LOImpress_StyleCharFontColor(ByRef $oObj, $iFontColor = Null, $iHighlight
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($iFontColor, $iHighlight) Then
-		__LO_ArrayFill($avColor, __LOImpress_ColorRemoveAlpha($oObj.CharColor()), $oObj.CharBackColor())
+		__LO_ArrayFill($avColor, __LODraw_ColorRemoveAlpha($oObj.CharColor()), $oObj.CharBackColor())
 
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avColor)
 	EndIf
@@ -9661,13 +9661,13 @@ Func __LOImpress_StyleCharFontColor(ByRef $oObj, $iFontColor = Null, $iHighlight
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_StyleCharFontColor
+EndFunc   ;==>__LODraw_StyleCharFontColor
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_TableBorder
+; Name ..........: __LODraw_TableBorder
 ; Description ...: Set or Retrieve Table Border settings -- internal function. LibreOffice 3.6 and Up.
-; Syntax ........: __LOImpress_TableBorder(ByRef $oTable, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $iVert = Null[, $iHori = Null]]]]]])
-; Parameters ....: $oTable              - A Table Shape object returned by a previous _LOImpress_TableInsert, or _LOImpress_ShapesGetList function.
+; Syntax ........: __LODraw_TableBorder(ByRef $oTable, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $iVert = Null[, $iHori = Null]]]]]])
+; Parameters ....: $oTable              - A Table Shape object returned by a previous _LODraw_TableInsert, or _LODraw_ShapesGetList function.
 ;                  $bWid                - If True the calling function is for setting Border Line Width.
 ;                  $bSty                - If True the calling function is for setting Border Line Style.
 ;                  $bCol                - If True the calling function is for setting Border Line Color.
@@ -9720,8 +9720,8 @@ EndFunc   ;==>__LOImpress_StyleCharFontColor
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_TableBorder(ByRef $oTable, $bWid, $bSty, $bCol, $iTop = Null, $iBottom = Null, $iLeft = Null, $iRight = Null, $iVert = Null, $iHori = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_TableBorder(ByRef $oTable, $bWid, $bSty, $bCol, $iTop = Null, $iBottom = Null, $iLeft = Null, $iRight = Null, $iVert = Null, $iHori = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $avBorder[6]
@@ -10399,13 +10399,13 @@ Func __LOImpress_TableBorder(ByRef $oTable, $bWid, $bSty, $bCol, $iTop = Null, $
 	Next
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_TableBorder
+EndFunc   ;==>__LODraw_TableBorder
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_TableCellBorder
+; Name ..........: __LODraw_TableCellBorder
 ; Description ...: Set or Retrieve Cell Border settings. Internal function.
-; Syntax ........: __LOImpress_TableCellBorder(ByRef $oCell, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
-; Parameters ....: $oCell               - A Table Cell object returned by a previous _LOImpress_TableCellGetObjByPosition function.
+; Syntax ........: __LODraw_TableCellBorder(ByRef $oCell, $bWid, $bSty, $bCol[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
+; Parameters ....: $oCell               - A Table Cell object returned by a previous _LODraw_TableCellGetObjByPosition function.
 ;                  $bWid                - If True, the calling function is for setting Border Line Width.
 ;                  $bSty                - If True, the calling function is for setting Border Line Style.
 ;                  $bCol                - If True, the calling function is for setting Border Line Color.
@@ -10444,8 +10444,8 @@ EndFunc   ;==>__LOImpress_TableBorder
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_TableCellBorder(ByRef $oCell, $bWid, $bSty, $bCol, $iTop = Null, $iBottom = Null, $iLeft = Null, $iRight = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_TableCellBorder(ByRef $oCell, $bWid, $bSty, $bCol, $iTop = Null, $iBottom = Null, $iLeft = Null, $iRight = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $avBorder[4]
@@ -10536,21 +10536,21 @@ Func __LOImpress_TableCellBorder(ByRef $oCell, $bWid, $bSty, $bCol, $iTop = Null
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_TableCellBorder
+EndFunc   ;==>__LODraw_TableCellBorder
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_Transition
+; Name ..........: __LODraw_Transition
 ; Description ...: Set or Retrieve the current transition effect of a Slide.
-; Syntax ........: __LOImpress_Transition(ByRef $oSlide[, $iTransition = Null])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
-;                  $iTransition         - [optional] (0-78) Default is Null. The Transition effect. See Constants, $LOI_SLIDE_TRANSITION_* as defined in LibreOfficeImpress_Constants.au3.
+; Syntax ........: __LODraw_Transition(ByRef $oSlide[, $iTransition = Null])
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
+;                  $iTransition         - [optional] (0-78) Default is Null. The Transition effect. See Constants, $LOD_SLIDE_TRANSITION_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: 1 or Integer
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current Transition effect type.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
-;                  @Error: 1, @Extended: 2 = $iTransition not an Integer, less then 0 or greater than 78. See Constants, $LOI_SLIDE_TRANSITION_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iTransition not an Integer, less then 0 or greater than 78. See Constants, $LOD_SLIDE_TRANSITION_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve current Effect value.
 ;                  @Error: 3, @Extended: 2 = Failed to retrieve current Transition Type value.
@@ -10566,8 +10566,8 @@ EndFunc   ;==>__LOImpress_TableCellBorder
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_Transition(ByRef $oSlide, $iTransition = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_Transition(ByRef $oSlide, $iTransition = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0, $iEffect, $iTransitionType, $iTransitionSubType, $iCurrTransition
@@ -10588,184 +10588,184 @@ Func __LOImpress_Transition(ByRef $oSlide, $iTransition = Null)
 			Case 0
 				Switch $iTransitionType
 					Case 0
-						If ($iTransitionSubType = 0) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_NONE
+						If ($iTransitionSubType = 0) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_NONE
 						; $iEffect = 0 $iTransitionType = 0 $iTransitionSubType = 0
 
 					Case 1
-						If ($iTransitionSubType = 104) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_CUT_THROUGH_BLACK
+						If ($iTransitionSubType = 104) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_CUT_THROUGH_BLACK
 						; $iEffect = 0 $iTransitionType = 1 $iTransitionSubType = 104
 
 					Case 17
 						Switch $iTransitionSubType
 							Case 13
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_SHAPE_OVAL_VERT
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_SHAPE_OVAL_VERT
 								; $iEffect = 0 $iTransitionType = 17 $iTransitionSubType = 13
 
 							Case 14
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_SHAPE_OVAL_HORI
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_SHAPE_OVAL_HORI
 								; $iEffect = 0 $iTransitionType = 17 $iTransitionSubType = 14
 						EndSwitch
 
 					Case 21
 						Switch $iTransitionSubType
 							Case 1
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_FALL
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_FALL
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 1
 
 							Case 2
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_TURN_AROUND
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_TURN_AROUND
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 2
 
 							Case 3
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_IRIS
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_IRIS
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 3
 
 							Case 4
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_TURN_DOWN
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_TURN_DOWN
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 4
 
 							Case 5
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_ROCHADE
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_ROCHADE
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 5
 
 							Case 6
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_3D_VENETIAN_VERT
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_3D_VENETIAN_VERT
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 6
 
 							Case 7
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_3D_VENETIAN_HORI
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_3D_VENETIAN_HORI
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 7
 
 							Case 8
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_STATIC
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_STATIC
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 8
 
 							Case 9
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_FINE_DISSOLVE
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_FINE_DISSOLVE
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 9
 
 							Case 11
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_CUBE_INSIDE
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_CUBE_INSIDE
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 11
 
 							Case 12
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_CUBE_OUTSIDE
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_CUBE_OUTSIDE
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 12
 
 							Case 13
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_VORTEX
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_VORTEX
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 13
 
 							Case 14
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_RIPPLE
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_RIPPLE
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 14
 
 							Case 26
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_GLITTER
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_GLITTER
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 26
 
 							Case 27
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_CIRCLES
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_CIRCLES
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 27
 
 							Case 31
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_HONEYCOMB
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_HONEYCOMB
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 31
 
 							Case 55
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_HELIX
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_HELIX
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 55
 
 							Case 108
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_TILES
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_TILES
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 108
 						EndSwitch
 
 					Case 37
-						If ($iTransitionSubType = 104) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_FADE_THROUGH_WHITE
+						If ($iTransitionSubType = 104) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_FADE_THROUGH_WHITE
 						; $iEffect = 0 $iTransitionType = 37 $iTransitionSubType = 104
 				EndSwitch
 
 			Case 1
-				If ($iTransitionType = 1) And ($iTransitionSubType = 1) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_WIPE_LEFT_TO_RIGHT
+				If ($iTransitionType = 1) And ($iTransitionSubType = 1) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_WIPE_LEFT_TO_RIGHT
 				; $iEffect = 1 $iTransitionType = 1 $iTransitionSubType = 1
 
 			Case 2
-				If ($iTransitionType = 1) And ($iTransitionSubType = 2) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_WIPE_TOP_TO_BOTTOM
+				If ($iTransitionType = 1) And ($iTransitionSubType = 2) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_WIPE_TOP_TO_BOTTOM
 				; $iEffect = 2 $iTransitionType = 1 $iTransitionSubType = 2
 
 			Case 3
-				If ($iTransitionType = 1) And ($iTransitionSubType = 1) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_WIPE_RIGHT_TO_LEFT
+				If ($iTransitionType = 1) And ($iTransitionSubType = 1) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_WIPE_RIGHT_TO_LEFT
 				; $iEffect = 3 $iTransitionType = 1 $iTransitionSubType = 1
 
 			Case 4
-				If ($iTransitionType = 1) And ($iTransitionSubType = 2) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_WIPE_BOTTOM_TO_TOP
+				If ($iTransitionType = 1) And ($iTransitionSubType = 2) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_WIPE_BOTTOM_TO_TOP
 				; $iEffect = 4 $iTransitionType = 1 $iTransitionSubType = 2
 
 			Case 5
-				If ($iTransitionType = 12) And ($iTransitionSubType = 25) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_BOX_IN
+				If ($iTransitionType = 12) And ($iTransitionSubType = 25) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_BOX_IN
 				; $iEffect = 5 $iTransitionType = 12 $iTransitionSubType = 25
 
 			Case 6
 				Switch $iTransitionType
 					Case 3
-						If ($iTransitionSubType = 12) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_SHAPE_PLUS
+						If ($iTransitionSubType = 12) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_SHAPE_PLUS
 						; $iEffect = 6 $iTransitionType = 3 $iTransitionSubType = 12
 
 					Case 12
 						Switch $iTransitionSubType
 							Case 25
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_BOX_OUT
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_BOX_OUT
 								; $iEffect = 6 $iTransitionType = 12 $iTransitionSubType = 25
 
 							Case 26
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_SHAPE_DIAMOND
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_SHAPE_DIAMOND
 								; $iEffect = 6 $iTransitionType = 12 $iTransitionSubType = 26
 						EndSwitch
 
 					Case 17
-						If ($iTransitionSubType = 27) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_SHAPE_CIRCLE
+						If ($iTransitionSubType = 27) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_SHAPE_CIRCLE
 						; $iEffect = 6 $iTransitionType = 17 $iTransitionSubType = 27
 				EndSwitch
 
 			Case 7
-				If ($iTransitionType = 36) And ($iTransitionSubType = 97) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_COVER_LEFT_TO_RIGHT
+				If ($iTransitionType = 36) And ($iTransitionSubType = 97) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_COVER_LEFT_TO_RIGHT
 				; $iEffect = 7 $iTransitionType = 36 $iTransitionSubType = 97
 
 			Case 8
-				If ($iTransitionType = 36) And ($iTransitionSubType = 98) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_COVER_TOP_TO_BOTTOM
+				If ($iTransitionType = 36) And ($iTransitionSubType = 98) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_COVER_TOP_TO_BOTTOM
 				; $iEffect = 8 $iTransitionType = 36 $iTransitionSubType = 98
 
 			Case 9
-				If ($iTransitionType = 36) And ($iTransitionSubType = 99) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_COVER_RIGHT_TO_LEFT
+				If ($iTransitionType = 36) And ($iTransitionSubType = 99) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_COVER_RIGHT_TO_LEFT
 				; $iEffect = 9 $iTransitionType = 36 $iTransitionSubType = 99
 
 			Case 10
-				If ($iTransitionType = 36) And ($iTransitionSubType = 100) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_COVER_BOTTOM_TO_TOP
+				If ($iTransitionType = 36) And ($iTransitionSubType = 100) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_COVER_BOTTOM_TO_TOP
 				; $iEffect = 10 $iTransitionType = 36 $iTransitionSubType = 100
 
 			Case 11
-				If ($iTransitionType = 35) And ($iTransitionSubType = 97) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_PUSH_LEFT_TO_RIGHT
+				If ($iTransitionType = 35) And ($iTransitionSubType = 97) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_PUSH_LEFT_TO_RIGHT
 				; $iEffect = 11 $iTransitionType = 35 $iTransitionSubType = 97
 
 			Case 12
-				If ($iTransitionType = 35) And ($iTransitionSubType = 98) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_PUSH_TOP_TO_BOTTOM
+				If ($iTransitionType = 35) And ($iTransitionSubType = 98) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_PUSH_TOP_TO_BOTTOM
 				; $iEffect = 12 $iTransitionType = 35 $iTransitionSubType = 98
 
 			Case 13
-				If ($iTransitionType = 35) And ($iTransitionSubType = 98) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_PUSH_RIGHT_TO_LEFT
+				If ($iTransitionType = 35) And ($iTransitionSubType = 98) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_PUSH_RIGHT_TO_LEFT
 				; $iEffect = 13 $iTransitionType = 35 $iTransitionSubType = 99
 
 			Case 14
-				If ($iTransitionType = 35) And ($iTransitionSubType = 100) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_PUSH_BOTTOM_TO_TOP
+				If ($iTransitionType = 35) And ($iTransitionSubType = 100) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_PUSH_BOTTOM_TO_TOP
 				; $iEffect = 14 $iTransitionType = 35 $iTransitionSubType = 100
 
 			Case 15
-				If ($iTransitionType = 41) And ($iTransitionSubType = 13) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_VENETIAN_VERT
+				If ($iTransitionType = 41) And ($iTransitionSubType = 13) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_VENETIAN_VERT
 				; $iEffect = 15 $iTransitionType = 41 $iTransitionSubType = 13
 
 			Case 16
-				If ($iTransitionType = 41) And ($iTransitionSubType = 14) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_VENETIAN_HORI
+				If ($iTransitionType = 41) And ($iTransitionSubType = 14) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_VENETIAN_HORI
 				; $iEffect = 16 $iTransitionType = 41 $iTransitionSubType = 14
 
 			Case 17
@@ -10773,65 +10773,65 @@ Func __LOImpress_Transition(ByRef $oSlide, $iTransition = Null)
 					Case 23
 						Switch $iTransitionSubType
 							Case 37
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_WHEEL_2_SPOKE
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_WHEEL_2_SPOKE
 								; $iEffect = 17 $iTransitionType = 23 $iTransitionSubType = 37
 
 							Case 39
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_WHEEL_4_SPOKE
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_WHEEL_4_SPOKE
 								; $iEffect = 17 $iTransitionType = 23 $iTransitionSubType = 39
 
 							Case 105
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_WHEEL_3_SPOKE
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_WHEEL_3_SPOKE
 								; $iEffect = 17 $iTransitionType = 23 $iTransitionSubType = 105
 
 							Case 106
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_WHEEL_8_SPOKE
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_WHEEL_8_SPOKE
 								; $iEffect = 17 $iTransitionType = 23 $iTransitionSubType = 106
 
 							Case 107
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_WHEEL_1_SPOKE
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_WHEEL_1_SPOKE
 								; $iEffect = 17 $iTransitionType = 23 $iTransitionSubType = 107
 						EndSwitch
 
 					Case 25
-						If ($iTransitionSubType = 48) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_WEDGE
+						If ($iTransitionSubType = 48) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_WEDGE
 						; $iEffect = 17 $iTransitionType = 25 $iTransitionSubType = 48
 
 					Case 43
-						If ($iTransitionSubType = 114) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_NEWSFLASH
+						If ($iTransitionSubType = 114) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_NEWSFLASH
 						; $iEffect = 17 $iTransitionType = 43 $iTransitionSubType = 114
 				EndSwitch
 
 			Case 19
-				If ($iTransitionType = 34) And ($iTransitionSubType = 95) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_DIAGONAL_TOP_LEFT_TO_BOTTOM_RIGHT
+				If ($iTransitionType = 34) And ($iTransitionSubType = 95) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_DIAGONAL_TOP_LEFT_TO_BOTTOM_RIGHT
 				; $iEffect = 19 $iTransitionType = 34 $iTransitionSubType = 95
 
 			Case 20
-				If ($iTransitionType = 34) And ($iTransitionSubType = 96) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_DIAGONAL_TOP_RIGHT_TO_BOTTOM_LEFT
+				If ($iTransitionType = 34) And ($iTransitionSubType = 96) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_DIAGONAL_TOP_RIGHT_TO_BOTTOM_LEFT
 				; $iEffect = 20 $iTransitionType = 34 $iTransitionSubType = 96
 
 			Case 21
-				If ($iTransitionType = 34) And ($iTransitionSubType = 96) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_DIAGONAL_BOTTOM_LEFT_TO_TOP_RIGHT
+				If ($iTransitionType = 34) And ($iTransitionSubType = 96) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_DIAGONAL_BOTTOM_LEFT_TO_TOP_RIGHT
 				; $iEffect = 21 $iTransitionType = 34 $iTransitionSubType = 96
 
 			Case 22
-				If ($iTransitionType = 34) And ($iTransitionSubType = 95) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_DIAGONAL_BOTTOM_RIGHT_TO_TOP_LEFT
+				If ($iTransitionType = 34) And ($iTransitionSubType = 95) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_DIAGONAL_BOTTOM_RIGHT_TO_TOP_LEFT
 				; $iEffect = 22 $iTransitionType = 34 $iTransitionSubType = 95
 
 			Case 23
-				If ($iTransitionType = 4) And ($iTransitionSubType = 14) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_SPLIT_HORI_IN
+				If ($iTransitionType = 4) And ($iTransitionSubType = 14) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_SPLIT_HORI_IN
 				; $iEffect = 23 $iTransitionType = 4 $iTransitionSubType = 14
 
 			Case 24
-				If ($iTransitionType = 4) And ($iTransitionSubType = 13) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_SPLIT_VERT_IN
+				If ($iTransitionType = 4) And ($iTransitionSubType = 13) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_SPLIT_VERT_IN
 				; $iEffect = 24 $iTransitionType = 4 $iTransitionSubType = 13
 
 			Case 25
-				If ($iTransitionType = 4) And ($iTransitionSubType = 14) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_SPLIT_HORI_OUT
+				If ($iTransitionType = 4) And ($iTransitionSubType = 14) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_SPLIT_HORI_OUT
 				; $iEffect = 25 $iTransitionType = 4 $iTransitionSubType = 14
 
 			Case 26
-				If ($iTransitionType = 4) And ($iTransitionSubType = 13) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_SPLIT_VERT_OUT
+				If ($iTransitionType = 4) And ($iTransitionSubType = 13) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_SPLIT_VERT_OUT
 				; $iEffect = 26 $iTransitionType = 4 $iTransitionSubType = 13
 
 			Case 31
@@ -10839,99 +10839,99 @@ Func __LOImpress_Transition(ByRef $oSlide, $iTransition = Null)
 					Case 37
 						Switch $iTransitionSubType
 							Case 101
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_FADE_SMOOTHLY
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_FADE_SMOOTHLY
 								; $iEffect = 31 $iTransitionType = 37 $iTransitionSubType = 101
 
 							Case 104
-								$iCurrTransition = $LOI_SLIDE_TRANSITION_FADE_THROUGH_BLACK
+								$iCurrTransition = $LOD_SLIDE_TRANSITION_FADE_THROUGH_BLACK
 								; $iEffect = 31 $iTransitionType = 37 $iTransitionSubType = 104
 						EndSwitch
 
 					Case 40
-						If ($iTransitionSubType = 0) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_DISSOLVE
+						If ($iTransitionSubType = 0) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_DISSOLVE
 						; $iEffect = 31 $iTransitionType = 40 $iTransitionSubType = 0
 				EndSwitch
 
 			Case 36
-				If ($iTransitionType = 42) And ($iTransitionSubType = 0) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_RANDOM
+				If ($iTransitionType = 42) And ($iTransitionSubType = 0) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_RANDOM
 				; $iEffect = 36 $iTransitionType = 42 $iTransitionSubType = 0
 
 			Case 41
 				Switch $iTransitionType
 					Case 35
-						If ($iTransitionSubType = 111) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_COMB_VERT
+						If ($iTransitionSubType = 111) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_COMB_VERT
 						; $iEffect = 41 $iTransitionType = 35 $iTransitionSubType = 111
 
 					Case 38
-						If ($iTransitionSubType = 13) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_BARS_VERT
+						If ($iTransitionSubType = 13) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_BARS_VERT
 						; $iEffect = 41 $iTransitionType = 38 $iTransitionSubType = 13
 				EndSwitch
 
 			Case 42
 				Switch $iTransitionType
 					Case 35
-						If ($iTransitionSubType = 110) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_COMB_HORI
+						If ($iTransitionSubType = 110) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_COMB_HORI
 						; $iEffect = 42 $iTransitionType = 35 $iTransitionSubType = 110
 
 					Case 38
-						If ($iTransitionSubType = 14) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_BARS_HORI
+						If ($iTransitionSubType = 14) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_BARS_HORI
 						; $iEffect = 42 $iTransitionType = 38 $iTransitionSubType = 14
 				EndSwitch
 
 			Case 43
-				If ($iTransitionType = 36) And ($iTransitionSubType = 116) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_COVER_TOP_LEFT_TO_BOTTOM_RIGHT
+				If ($iTransitionType = 36) And ($iTransitionSubType = 116) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_COVER_TOP_LEFT_TO_BOTTOM_RIGHT
 				; $iEffect = 43 $iTransitionType = 36 $iTransitionSubType = 116
 
 			Case 44
-				If ($iTransitionType = 36) And ($iTransitionSubType = 117) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_COVER_TOP_RIGHT_TO_BOTTOM_LEFT
+				If ($iTransitionType = 36) And ($iTransitionSubType = 117) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_COVER_TOP_RIGHT_TO_BOTTOM_LEFT
 				; $iEffect = 44 $iTransitionType = 36 $iTransitionSubType = 117
 
 			Case 45
-				If ($iTransitionType = 36) And ($iTransitionSubType = 119) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_COVER_BOTTOM_RIGHT_TO_TOP_LEFT
+				If ($iTransitionType = 36) And ($iTransitionSubType = 119) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_COVER_BOTTOM_RIGHT_TO_TOP_LEFT
 				; $iEffect = 45 $iTransitionType = 36 $iTransitionSubType = 119
 
 			Case 46
-				If ($iTransitionType = 36) And ($iTransitionSubType = 118) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_COVER_BOTTOM_LEFT_TO_TOP_RIGHT
+				If ($iTransitionType = 36) And ($iTransitionSubType = 118) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_COVER_BOTTOM_LEFT_TO_TOP_RIGHT
 				; $iEffect = 46 $iTransitionType = 36 $iTransitionSubType = 118
 
 			Case 47
-				If ($iTransitionType = 36) And ($iTransitionSubType = 99) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_UNCOVER_RIGHT_TO_LEFT
+				If ($iTransitionType = 36) And ($iTransitionSubType = 99) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_UNCOVER_RIGHT_TO_LEFT
 				; $iEffect = 47 $iTransitionType = 36 $iTransitionSubType = 99
 
 			Case 48
-				If ($iTransitionType = 36) And ($iTransitionSubType = 119) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_UNCOVER_BOTTOM_RIGHT_TO_TOP_LEFT
+				If ($iTransitionType = 36) And ($iTransitionSubType = 119) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_UNCOVER_BOTTOM_RIGHT_TO_TOP_LEFT
 				; $iEffect = 48 $iTransitionType = 36 $iTransitionSubType = 119
 
 			Case 49
-				If ($iTransitionType = 36) And ($iTransitionSubType = 100) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_UNCOVER_BOTTOM_TO_TOP
+				If ($iTransitionType = 36) And ($iTransitionSubType = 100) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_UNCOVER_BOTTOM_TO_TOP
 				; $iEffect = 49 $iTransitionType = 36 $iTransitionSubType = 100
 
 			Case 50
-				If ($iTransitionType = 36) And ($iTransitionSubType = 118) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_UNCOVER_BOTTOM_LEFT_TO_TOP_RIGHT
+				If ($iTransitionType = 36) And ($iTransitionSubType = 118) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_UNCOVER_BOTTOM_LEFT_TO_TOP_RIGHT
 				; $iEffect = 50 $iTransitionType = 36 $iTransitionSubType = 118
 
 			Case 51
-				If ($iTransitionType = 36) And ($iTransitionSubType = 97) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_UNCOVER_LEFT_TO_RIGHT
+				If ($iTransitionType = 36) And ($iTransitionSubType = 97) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_UNCOVER_LEFT_TO_RIGHT
 				; $iEffect = 51 $iTransitionType = 36 $iTransitionSubType = 97
 
 			Case 52
-				If ($iTransitionType = 36) And ($iTransitionSubType = 116) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_UNCOVER_TOP_LEFT_TO_BOTTOM_RIGHT
+				If ($iTransitionType = 36) And ($iTransitionSubType = 116) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_UNCOVER_TOP_LEFT_TO_BOTTOM_RIGHT
 				; $iEffect = 52 $iTransitionType = 36 $iTransitionSubType = 116
 
 			Case 53
-				If ($iTransitionType = 36) And ($iTransitionSubType = 98) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_UNCOVER_TOP_TO_BOTTOM
+				If ($iTransitionType = 36) And ($iTransitionSubType = 98) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_UNCOVER_TOP_TO_BOTTOM
 				; $iEffect = 53 $iTransitionType = 36 $iTransitionSubType = 98
 
 			Case 54
-				If ($iTransitionType = 36) And ($iTransitionSubType = 117) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_UNCOVER_TOP_RIGHT_TO_BOTTOM_LEFT
+				If ($iTransitionType = 36) And ($iTransitionSubType = 117) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_UNCOVER_TOP_RIGHT_TO_BOTTOM_LEFT
 				; $iEffect = 54 $iTransitionType = 36 $iTransitionSubType = 117
 
 			Case 55
-				If ($iTransitionType = 39) And ($iTransitionSubType = 19) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_CHECKERS_DOWN
+				If ($iTransitionType = 39) And ($iTransitionSubType = 19) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_CHECKERS_DOWN
 				; $iEffect = 55 $iTransitionType = 39 $iTransitionSubType = 19
 
 			Case 56
-				If ($iTransitionType = 39) And ($iTransitionSubType = 108) Then $iCurrTransition = $LOI_SLIDE_TRANSITION_CHECKERS_ACROSS
+				If ($iTransitionType = 39) And ($iTransitionSubType = 108) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_CHECKERS_ACROSS
 				; $iEffect = 56 $iTransitionType = 39 $iTransitionSubType = 108
 		EndSwitch
 
@@ -10940,400 +10940,400 @@ Func __LOImpress_Transition(ByRef $oSlide, $iTransition = Null)
 		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurrTransition)
 	EndIf
 
-	If Not __LO_IntIsBetween($iTransition, $LOI_SLIDE_TRANSITION_3D_VENETIAN_VERT, $LOI_SLIDE_TRANSITION_WIPE_TOP_TO_BOTTOM) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iTransition, $LOD_SLIDE_TRANSITION_3D_VENETIAN_VERT, $LOD_SLIDE_TRANSITION_WIPE_TOP_TO_BOTTOM) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	Switch $iTransition
-		Case $LOI_SLIDE_TRANSITION_3D_VENETIAN_VERT
+		Case $LOD_SLIDE_TRANSITION_3D_VENETIAN_VERT
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 6
 
-		Case $LOI_SLIDE_TRANSITION_3D_VENETIAN_HORI
+		Case $LOD_SLIDE_TRANSITION_3D_VENETIAN_HORI
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 7
 
-		Case $LOI_SLIDE_TRANSITION_BARS_VERT
+		Case $LOD_SLIDE_TRANSITION_BARS_VERT
 			$iEffect = 41
 			$iTransitionType = 38
 			$iTransitionSubType = 13
 
-		Case $LOI_SLIDE_TRANSITION_BARS_HORI
+		Case $LOD_SLIDE_TRANSITION_BARS_HORI
 			$iEffect = 42
 			$iTransitionType = 38
 			$iTransitionSubType = 14
 
-		Case $LOI_SLIDE_TRANSITION_BOX_OUT
+		Case $LOD_SLIDE_TRANSITION_BOX_OUT
 			$iEffect = 6
 			$iTransitionType = 12
 			$iTransitionSubType = 25
 
-		Case $LOI_SLIDE_TRANSITION_BOX_IN
+		Case $LOD_SLIDE_TRANSITION_BOX_IN
 			$iEffect = 5
 			$iTransitionType = 12
 			$iTransitionSubType = 25
 
-		Case $LOI_SLIDE_TRANSITION_CHECKERS_DOWN
+		Case $LOD_SLIDE_TRANSITION_CHECKERS_DOWN
 			$iEffect = 55
 			$iTransitionType = 39
 			$iTransitionSubType = 19
 
-		Case $LOI_SLIDE_TRANSITION_CHECKERS_ACROSS
+		Case $LOD_SLIDE_TRANSITION_CHECKERS_ACROSS
 			$iEffect = 56
 			$iTransitionType = 39
 			$iTransitionSubType = 108
 
-		Case $LOI_SLIDE_TRANSITION_CIRCLES
+		Case $LOD_SLIDE_TRANSITION_CIRCLES
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 27
 
-		Case $LOI_SLIDE_TRANSITION_COMB_HORI
+		Case $LOD_SLIDE_TRANSITION_COMB_HORI
 			$iEffect = 42
 			$iTransitionType = 35
 			$iTransitionSubType = 110
 
-		Case $LOI_SLIDE_TRANSITION_COMB_VERT
+		Case $LOD_SLIDE_TRANSITION_COMB_VERT
 			$iEffect = 41
 			$iTransitionType = 35
 			$iTransitionSubType = 111
 
-		Case $LOI_SLIDE_TRANSITION_COVER_TOP_TO_BOTTOM
+		Case $LOD_SLIDE_TRANSITION_COVER_TOP_TO_BOTTOM
 			$iEffect = 8
 			$iTransitionType = 36
 			$iTransitionSubType = 98
 
-		Case $LOI_SLIDE_TRANSITION_COVER_RIGHT_TO_LEFT
+		Case $LOD_SLIDE_TRANSITION_COVER_RIGHT_TO_LEFT
 			$iEffect = 9
 			$iTransitionType = 36
 			$iTransitionSubType = 99
 
-		Case $LOI_SLIDE_TRANSITION_COVER_LEFT_TO_RIGHT
+		Case $LOD_SLIDE_TRANSITION_COVER_LEFT_TO_RIGHT
 			$iEffect = 7
 			$iTransitionType = 36
 			$iTransitionSubType = 97
 
-		Case $LOI_SLIDE_TRANSITION_COVER_BOTTOM_TO_TOP
+		Case $LOD_SLIDE_TRANSITION_COVER_BOTTOM_TO_TOP
 			$iEffect = 10
 			$iTransitionType = 36
 			$iTransitionSubType = 100
 
-		Case $LOI_SLIDE_TRANSITION_COVER_TOP_RIGHT_TO_BOTTOM_LEFT
+		Case $LOD_SLIDE_TRANSITION_COVER_TOP_RIGHT_TO_BOTTOM_LEFT
 			$iEffect = 44
 			$iTransitionType = 36
 			$iTransitionSubType = 117
 
-		Case $LOI_SLIDE_TRANSITION_COVER_BOTTOM_RIGHT_TO_TOP_LEFT
+		Case $LOD_SLIDE_TRANSITION_COVER_BOTTOM_RIGHT_TO_TOP_LEFT
 			$iEffect = 45
 			$iTransitionType = 36
 			$iTransitionSubType = 119
 
-		Case $LOI_SLIDE_TRANSITION_COVER_TOP_LEFT_TO_BOTTOM_RIGHT
+		Case $LOD_SLIDE_TRANSITION_COVER_TOP_LEFT_TO_BOTTOM_RIGHT
 			$iEffect = 43
 			$iTransitionType = 36
 			$iTransitionSubType = 116
 
-		Case $LOI_SLIDE_TRANSITION_COVER_BOTTOM_LEFT_TO_TOP_RIGHT
+		Case $LOD_SLIDE_TRANSITION_COVER_BOTTOM_LEFT_TO_TOP_RIGHT
 			$iEffect = 46
 			$iTransitionType = 36
 			$iTransitionSubType = 118
 
-		Case $LOI_SLIDE_TRANSITION_CUBE_OUTSIDE
+		Case $LOD_SLIDE_TRANSITION_CUBE_OUTSIDE
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 12
 
-		Case $LOI_SLIDE_TRANSITION_CUBE_INSIDE
+		Case $LOD_SLIDE_TRANSITION_CUBE_INSIDE
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 11
 
-		Case $LOI_SLIDE_TRANSITION_CUT_THROUGH_BLACK
+		Case $LOD_SLIDE_TRANSITION_CUT_THROUGH_BLACK
 			$iEffect = 0
 			$iTransitionType = 1
 			$iTransitionSubType = 104
 
-		Case $LOI_SLIDE_TRANSITION_DIAGONAL_TOP_RIGHT_TO_BOTTOM_LEFT
+		Case $LOD_SLIDE_TRANSITION_DIAGONAL_TOP_RIGHT_TO_BOTTOM_LEFT
 			$iEffect = 20
 			$iTransitionType = 34
 			$iTransitionSubType = 96
 
-		Case $LOI_SLIDE_TRANSITION_DIAGONAL_BOTTOM_RIGHT_TO_TOP_LEFT
+		Case $LOD_SLIDE_TRANSITION_DIAGONAL_BOTTOM_RIGHT_TO_TOP_LEFT
 			$iEffect = 22
 			$iTransitionType = 34
 			$iTransitionSubType = 95
 
-		Case $LOI_SLIDE_TRANSITION_DIAGONAL_TOP_LEFT_TO_BOTTOM_RIGHT
+		Case $LOD_SLIDE_TRANSITION_DIAGONAL_TOP_LEFT_TO_BOTTOM_RIGHT
 			$iEffect = 19
 			$iTransitionType = 34
 			$iTransitionSubType = 95
 
-		Case $LOI_SLIDE_TRANSITION_DIAGONAL_BOTTOM_LEFT_TO_TOP_RIGHT
+		Case $LOD_SLIDE_TRANSITION_DIAGONAL_BOTTOM_LEFT_TO_TOP_RIGHT
 			$iEffect = 21
 			$iTransitionType = 34
 			$iTransitionSubType = 96
 
-		Case $LOI_SLIDE_TRANSITION_DISSOLVE
+		Case $LOD_SLIDE_TRANSITION_DISSOLVE
 			$iEffect = 31
 			$iTransitionType = 40
 			$iTransitionSubType = 0
 
-		Case $LOI_SLIDE_TRANSITION_FADE_THROUGH_BLACK
+		Case $LOD_SLIDE_TRANSITION_FADE_THROUGH_BLACK
 			$iEffect = 31
 			$iTransitionType = 37
 			$iTransitionSubType = 104
 
-		Case $LOI_SLIDE_TRANSITION_FADE_THROUGH_WHITE
+		Case $LOD_SLIDE_TRANSITION_FADE_THROUGH_WHITE
 			$iEffect = 0
 			$iTransitionType = 37
 			$iTransitionSubType = 104
 
-		Case $LOI_SLIDE_TRANSITION_FADE_SMOOTHLY
+		Case $LOD_SLIDE_TRANSITION_FADE_SMOOTHLY
 			$iEffect = 31
 			$iTransitionType = 37
 			$iTransitionSubType = 101
 
-		Case $LOI_SLIDE_TRANSITION_FALL
+		Case $LOD_SLIDE_TRANSITION_FALL
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 1
 
-		Case $LOI_SLIDE_TRANSITION_FINE_DISSOLVE
+		Case $LOD_SLIDE_TRANSITION_FINE_DISSOLVE
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 9
 
-		Case $LOI_SLIDE_TRANSITION_GLITTER
+		Case $LOD_SLIDE_TRANSITION_GLITTER
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 26
 
-		Case $LOI_SLIDE_TRANSITION_HELIX
+		Case $LOD_SLIDE_TRANSITION_HELIX
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 55
 
-		Case $LOI_SLIDE_TRANSITION_HONEYCOMB
+		Case $LOD_SLIDE_TRANSITION_HONEYCOMB
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 31
 
-		Case $LOI_SLIDE_TRANSITION_IRIS
+		Case $LOD_SLIDE_TRANSITION_IRIS
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 3
 
-		Case $LOI_SLIDE_TRANSITION_NEWSFLASH
+		Case $LOD_SLIDE_TRANSITION_NEWSFLASH
 			$iEffect = 17
 			$iTransitionType = 43
 			$iTransitionSubType = 114
 
-		Case $LOI_SLIDE_TRANSITION_NONE
+		Case $LOD_SLIDE_TRANSITION_NONE
 			$iEffect = 0
 			$iTransitionType = 0
 			$iTransitionSubType = 0
 
-		Case $LOI_SLIDE_TRANSITION_PUSH_TOP_TO_BOTTOM
+		Case $LOD_SLIDE_TRANSITION_PUSH_TOP_TO_BOTTOM
 			$iEffect = 12
 			$iTransitionType = 35
 			$iTransitionSubType = 98
 
-		Case $LOI_SLIDE_TRANSITION_PUSH_RIGHT_TO_LEFT
+		Case $LOD_SLIDE_TRANSITION_PUSH_RIGHT_TO_LEFT
 			$iEffect = 13
 			$iTransitionType = 35
 			$iTransitionSubType = 99
 
-		Case $LOI_SLIDE_TRANSITION_PUSH_LEFT_TO_RIGHT
+		Case $LOD_SLIDE_TRANSITION_PUSH_LEFT_TO_RIGHT
 			$iEffect = 11
 			$iTransitionType = 35
 			$iTransitionSubType = 97
 
-		Case $LOI_SLIDE_TRANSITION_PUSH_BOTTOM_TO_TOP
+		Case $LOD_SLIDE_TRANSITION_PUSH_BOTTOM_TO_TOP
 			$iEffect = 14
 			$iTransitionType = 35
 			$iTransitionSubType = 100
 
-		Case $LOI_SLIDE_TRANSITION_RANDOM
+		Case $LOD_SLIDE_TRANSITION_RANDOM
 			$iEffect = 36
 			$iTransitionType = 42
 			$iTransitionSubType = 0
 
-		Case $LOI_SLIDE_TRANSITION_RIPPLE
+		Case $LOD_SLIDE_TRANSITION_RIPPLE
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 14
 
-		Case $LOI_SLIDE_TRANSITION_ROCHADE
+		Case $LOD_SLIDE_TRANSITION_ROCHADE
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 5
 
-		Case $LOI_SLIDE_TRANSITION_SHAPE_PLUS
+		Case $LOD_SLIDE_TRANSITION_SHAPE_PLUS
 			$iEffect = 6
 			$iTransitionType = 3
 			$iTransitionSubType = 12
 
-		Case $LOI_SLIDE_TRANSITION_SHAPE_DIAMOND
+		Case $LOD_SLIDE_TRANSITION_SHAPE_DIAMOND
 			$iEffect = 6
 			$iTransitionType = 12
 			$iTransitionSubType = 26
 
-		Case $LOI_SLIDE_TRANSITION_SHAPE_CIRCLE
+		Case $LOD_SLIDE_TRANSITION_SHAPE_CIRCLE
 			$iEffect = 6
 			$iTransitionType = 17
 			$iTransitionSubType = 27
 
-		Case $LOI_SLIDE_TRANSITION_SHAPE_OVAL_HORI
+		Case $LOD_SLIDE_TRANSITION_SHAPE_OVAL_HORI
 			$iEffect = 0
 			$iTransitionType = 17
 			$iTransitionSubType = 14
 
-		Case $LOI_SLIDE_TRANSITION_SHAPE_OVAL_VERT
+		Case $LOD_SLIDE_TRANSITION_SHAPE_OVAL_VERT
 			$iEffect = 0
 			$iTransitionType = 17
 			$iTransitionSubType = 13
 
-		Case $LOI_SLIDE_TRANSITION_SPLIT_HORI_IN
+		Case $LOD_SLIDE_TRANSITION_SPLIT_HORI_IN
 			$iEffect = 23
 			$iTransitionType = 4
 			$iTransitionSubType = 14
 
-		Case $LOI_SLIDE_TRANSITION_SPLIT_HORI_OUT
+		Case $LOD_SLIDE_TRANSITION_SPLIT_HORI_OUT
 			$iEffect = 25
 			$iTransitionType = 4
 			$iTransitionSubType = 14
 
-		Case $LOI_SLIDE_TRANSITION_SPLIT_VERT_IN
+		Case $LOD_SLIDE_TRANSITION_SPLIT_VERT_IN
 			$iEffect = 24
 			$iTransitionType = 4
 			$iTransitionSubType = 13
 
-		Case $LOI_SLIDE_TRANSITION_SPLIT_VERT_OUT
+		Case $LOD_SLIDE_TRANSITION_SPLIT_VERT_OUT
 			$iEffect = 26
 			$iTransitionType = 4
 			$iTransitionSubType = 13
 
-		Case $LOI_SLIDE_TRANSITION_STATIC
+		Case $LOD_SLIDE_TRANSITION_STATIC
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 8
 
-		Case $LOI_SLIDE_TRANSITION_TILES
+		Case $LOD_SLIDE_TRANSITION_TILES
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 108
 
-		Case $LOI_SLIDE_TRANSITION_TURN_AROUND
+		Case $LOD_SLIDE_TRANSITION_TURN_AROUND
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 2
 
-		Case $LOI_SLIDE_TRANSITION_TURN_DOWN
+		Case $LOD_SLIDE_TRANSITION_TURN_DOWN
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 4
 
-		Case $LOI_SLIDE_TRANSITION_UNCOVER_TOP_TO_BOTTOM
+		Case $LOD_SLIDE_TRANSITION_UNCOVER_TOP_TO_BOTTOM
 			$iEffect = 53
 			$iTransitionType = 36
 			$iTransitionSubType = 98
 
-		Case $LOI_SLIDE_TRANSITION_UNCOVER_RIGHT_TO_LEFT
+		Case $LOD_SLIDE_TRANSITION_UNCOVER_RIGHT_TO_LEFT
 			$iEffect = 47
 			$iTransitionType = 36
 			$iTransitionSubType = 99
 
-		Case $LOI_SLIDE_TRANSITION_UNCOVER_LEFT_TO_RIGHT
+		Case $LOD_SLIDE_TRANSITION_UNCOVER_LEFT_TO_RIGHT
 			$iEffect = 51
 			$iTransitionType = 36
 			$iTransitionSubType = 97
 
-		Case $LOI_SLIDE_TRANSITION_UNCOVER_BOTTOM_TO_TOP
+		Case $LOD_SLIDE_TRANSITION_UNCOVER_BOTTOM_TO_TOP
 			$iEffect = 49
 			$iTransitionType = 36
 			$iTransitionSubType = 100
 
-		Case $LOI_SLIDE_TRANSITION_UNCOVER_TOP_RIGHT_TO_BOTTOM_LEFT
+		Case $LOD_SLIDE_TRANSITION_UNCOVER_TOP_RIGHT_TO_BOTTOM_LEFT
 			$iEffect = 54
 			$iTransitionType = 36
 			$iTransitionSubType = 117
 
-		Case $LOI_SLIDE_TRANSITION_UNCOVER_BOTTOM_RIGHT_TO_TOP_LEFT
+		Case $LOD_SLIDE_TRANSITION_UNCOVER_BOTTOM_RIGHT_TO_TOP_LEFT
 			$iEffect = 48
 			$iTransitionType = 36
 			$iTransitionSubType = 119
 
-		Case $LOI_SLIDE_TRANSITION_UNCOVER_TOP_LEFT_TO_BOTTOM_RIGHT
+		Case $LOD_SLIDE_TRANSITION_UNCOVER_TOP_LEFT_TO_BOTTOM_RIGHT
 			$iEffect = 52
 			$iTransitionType = 36
 			$iTransitionSubType = 116
 
-		Case $LOI_SLIDE_TRANSITION_UNCOVER_BOTTOM_LEFT_TO_TOP_RIGHT
+		Case $LOD_SLIDE_TRANSITION_UNCOVER_BOTTOM_LEFT_TO_TOP_RIGHT
 			$iEffect = 50
 			$iTransitionType = 36
 			$iTransitionSubType = 118
 
-		Case $LOI_SLIDE_TRANSITION_VENETIAN_VERT
+		Case $LOD_SLIDE_TRANSITION_VENETIAN_VERT
 			$iEffect = 15
 			$iTransitionType = 41
 			$iTransitionSubType = 13
 
-		Case $LOI_SLIDE_TRANSITION_VENETIAN_HORI
+		Case $LOD_SLIDE_TRANSITION_VENETIAN_HORI
 			$iEffect = 16
 			$iTransitionType = 41
 			$iTransitionSubType = 14
 
-		Case $LOI_SLIDE_TRANSITION_VORTEX
+		Case $LOD_SLIDE_TRANSITION_VORTEX
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 13
 
-		Case $LOI_SLIDE_TRANSITION_WEDGE
+		Case $LOD_SLIDE_TRANSITION_WEDGE
 			$iEffect = 17
 			$iTransitionType = 25
 			$iTransitionSubType = 48
 
-		Case $LOI_SLIDE_TRANSITION_WHEEL_1_SPOKE
+		Case $LOD_SLIDE_TRANSITION_WHEEL_1_SPOKE
 			$iEffect = 17
 			$iTransitionType = 23
 			$iTransitionSubType = 107
 
-		Case $LOI_SLIDE_TRANSITION_WHEEL_2_SPOKE
+		Case $LOD_SLIDE_TRANSITION_WHEEL_2_SPOKE
 			$iEffect = 17
 			$iTransitionType = 23
 			$iTransitionSubType = 37
 
-		Case $LOI_SLIDE_TRANSITION_WHEEL_3_SPOKE
+		Case $LOD_SLIDE_TRANSITION_WHEEL_3_SPOKE
 			$iEffect = 17
 			$iTransitionType = 23
 			$iTransitionSubType = 105
 
-		Case $LOI_SLIDE_TRANSITION_WHEEL_4_SPOKE
+		Case $LOD_SLIDE_TRANSITION_WHEEL_4_SPOKE
 			$iEffect = 17
 			$iTransitionType = 23
 			$iTransitionSubType = 39
 
-		Case $LOI_SLIDE_TRANSITION_WHEEL_8_SPOKE
+		Case $LOD_SLIDE_TRANSITION_WHEEL_8_SPOKE
 			$iEffect = 17
 			$iTransitionType = 23
 			$iTransitionSubType = 106
 
-		Case $LOI_SLIDE_TRANSITION_WIPE_BOTTOM_TO_TOP
+		Case $LOD_SLIDE_TRANSITION_WIPE_BOTTOM_TO_TOP
 			$iEffect = 4
 			$iTransitionType = 1
 			$iTransitionSubType = 2
 
-		Case $LOI_SLIDE_TRANSITION_WIPE_LEFT_TO_RIGHT
+		Case $LOD_SLIDE_TRANSITION_WIPE_LEFT_TO_RIGHT
 			$iEffect = 1
 			$iTransitionType = 1
 			$iTransitionSubType = 1
 
-		Case $LOI_SLIDE_TRANSITION_WIPE_RIGHT_TO_LEFT
+		Case $LOD_SLIDE_TRANSITION_WIPE_RIGHT_TO_LEFT
 			$iEffect = 3
 			$iTransitionType = 1
 			$iTransitionSubType = 1
 
-		Case $LOI_SLIDE_TRANSITION_WIPE_TOP_TO_BOTTOM
+		Case $LOD_SLIDE_TRANSITION_WIPE_TOP_TO_BOTTOM
 			$iEffect = 2
 			$iTransitionType = 1
 			$iTransitionSubType = 2
@@ -11348,12 +11348,12 @@ Func __LOImpress_Transition(ByRef $oSlide, $iTransition = Null)
 			($oSlide.TransitionSubType() = $iTransitionSubType)) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>__LOImpress_Transition
+EndFunc   ;==>__LODraw_Transition
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_TransparencyGradientConvert
+; Name ..........: __LODraw_TransparencyGradientConvert
 ; Description ...: Convert a Transparency Gradient percentage value to a color value or from a color value to a percentage.
-; Syntax ........: __LOImpress_TransparencyGradientConvert([$iPercentToLong = Null[, $iLongToPercent = Null]])
+; Syntax ........: __LODraw_TransparencyGradientConvert([$iPercentToLong = Null[, $iLongToPercent = Null]])
 ; Parameters ....: $iPercentToLong      - [optional] Default is Null. The percentage to convert to a RGB Color Integer.
 ;                  $iLongToPercent      - [optional] Default is Null. The RGB Color Integer to convert to percentage.
 ; Return values .: Success: Integer.
@@ -11369,7 +11369,7 @@ EndFunc   ;==>__LOImpress_Transition
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_TransparencyGradientConvert($iPercentToLong = Null, $iLongToPercent = Null)
+Func __LODraw_TransparencyGradientConvert($iPercentToLong = Null, $iLongToPercent = Null)
 	Local $iReturn
 
 	If ($iPercentToLong <> Null) Then
@@ -11388,13 +11388,13 @@ Func __LOImpress_TransparencyGradientConvert($iPercentToLong = Null, $iLongToPer
 
 		Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, Null)
 	EndIf
-EndFunc   ;==>__LOImpress_TransparencyGradientConvert
+EndFunc   ;==>__LODraw_TransparencyGradientConvert
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
-; Name ..........: __LOImpress_TransparencyGradientNameInsert
+; Name ..........: __LODraw_TransparencyGradientNameInsert
 ; Description ...: Create and insert a new Transparency Gradient name.
-; Syntax ........: __LOImpress_TransparencyGradientNameInsert(ByRef $oDoc, $tTGradient)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: __LODraw_TransparencyGradientNameInsert(ByRef $oDoc, $tTGradient)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $tTGradient          - A Gradient Structure to copy settings from.
 ; Return values .: Success: String.
 ;                  @Error: 0, @Extended: 0, Return: String = Success. A new transparency Gradient name was created. Returning the new name as a string.
@@ -11415,8 +11415,8 @@ EndFunc   ;==>__LOImpress_TransparencyGradientConvert
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LOImpress_TransparencyGradientNameInsert(ByRef $oDoc, $tTGradient)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func __LODraw_TransparencyGradientNameInsert(ByRef $oDoc, $tTGradient)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $tNewTGradient
@@ -11434,7 +11434,7 @@ Func __LOImpress_TransparencyGradientNameInsert(ByRef $oDoc, $tTGradient)
 
 	While $oTGradTable.hasByName("Transparency " & $iCount)
 		$iCount += 1
-		Sleep((IsInt($iCount / $__LOICONST_SLEEP_DIV)) ? (10) : (0))
+		Sleep((IsInt($iCount / $__LODCONST_SLEEP_DIV)) ? (10) : (0))
 	WEnd
 
 	$tNewTGradient = __LO_CreateStruct($sGradient)
@@ -11457,4 +11457,4 @@ Func __LOImpress_TransparencyGradientNameInsert(ByRef $oDoc, $tTGradient)
 	If Not ($oTGradTable.hasByName("Transparency " & $iCount)) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, "Transparency " & $iCount)
-EndFunc   ;==>__LOImpress_TransparencyGradientNameInsert
+EndFunc   ;==>__LODraw_TransparencyGradientNameInsert

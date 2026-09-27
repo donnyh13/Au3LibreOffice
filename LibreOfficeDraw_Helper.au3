@@ -24,17 +24,17 @@
 ; ===============================================================================================================================
 
 ; #CURRENT# =====================================================================================================================
-; _LOImpress_ComError_UserFunction
-; _LOImpress_DateStructCreate
-; _LOImpress_DateStructModify
-; _LOImpress_FontExists
-; _LOImpress_FontsGetNames
+; _LODraw_ComError_UserFunction
+; _LODraw_DateStructCreate
+; _LODraw_DateStructModify
+; _LODraw_FontExists
+; _LODraw_FontsGetNames
 ; ===============================================================================================================================
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_ComError_UserFunction
+; Name ..........: _LODraw_ComError_UserFunction
 ; Description ...: Set a UserFunction to receive the Fired COM Error Error outside of the UDF.
-; Syntax ........: _LOImpress_ComError_UserFunction([$vUserFunction = Default[, $vParam1 = Null[, $vParam2 = Null[, $vParam3 = Null[, $vParam4 = Null[, $vParam5 = Null]]]]]])
+; Syntax ........: _LODraw_ComError_UserFunction([$vUserFunction = Default[, $vParam1 = Null[, $vParam2 = Null[, $vParam3 = Null[, $vParam4 = Null[, $vParam5 = Null]]]]]])
 ; Parameters ....: $vUserFunction       - [optional] Default is Default. Accepts a Function, or the Keyword Default and Null. If called with a User function, the function may have up to 5 required parameters.
 ;                  $vParam1             - [optional] Default is Null. Any optional parameter to be called with the user function.
 ;                  $vParam2             - [optional] Default is Null. Any optional parameter to be called with the user function.
@@ -70,7 +70,7 @@
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_ComError_UserFunction($vUserFunction = Default, $vParam1 = Null, $vParam2 = Null, $vParam3 = Null, $vParam4 = Null, $vParam5 = Null)
+Func _LODraw_ComError_UserFunction($vUserFunction = Default, $vParam1 = Null, $vParam2 = Null, $vParam3 = Null, $vParam4 = Null, $vParam5 = Null)
 	#forceref $vParam1, $vParam2, $vParam3, $vParam4, $vParam5
 
 	; If user does not set a function, UDF must use internal function to avoid AutoItError.
@@ -109,12 +109,12 @@ Func _LOImpress_ComError_UserFunction($vUserFunction = Default, $vParam1 = Null,
 
 		Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	EndIf
-EndFunc   ;==>_LOImpress_ComError_UserFunction
+EndFunc   ;==>_LODraw_ComError_UserFunction
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_DateStructCreate
+; Name ..........: _LODraw_DateStructCreate
 ; Description ...: Create a Date Structure for inserting a Date into certain other functions.
-; Syntax ........: _LOImpress_DateStructCreate([$iYear = Null[, $iMonth = Null[, $iDay = Null[, $iHours = Null[, $iMinutes = Null[, $iSeconds = Null[, $iNanoSeconds = Null[, $bIsUTC = Null]]]]]]]])
+; Syntax ........: _LODraw_DateStructCreate([$iYear = Null[, $iMonth = Null[, $iDay = Null[, $iHours = Null[, $iMinutes = Null[, $iSeconds = Null[, $iNanoSeconds = Null[, $bIsUTC = Null]]]]]]]])
 ; Parameters ....: $iYear               - [optional] Default is Null. The Year, as a 4 digit Integer.
 ;                  $iMonth              - [optional] (0-12) Default is Null. The Month, as a 2 digit Integer. Call with 0 for Void date.
 ;                  $iDay                - [optional] (0-31) Default is Null. The Day, as a 2 digit Integer. Call with 0 for Void date.
@@ -143,12 +143,12 @@ EndFunc   ;==>_LOImpress_ComError_UserFunction
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Calling a value with Null keyword will auto fill the value with the current value, such as current hour, etc.
-; Related .......: _LOImpress_DateStructModify
+; Related .......: _LODraw_DateStructModify
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_DateStructCreate($iYear = Null, $iMonth = Null, $iDay = Null, $iHours = Null, $iMinutes = Null, $iSeconds = Null, $iNanoSeconds = Null, $bIsUTC = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_DateStructCreate($iYear = Null, $iMonth = Null, $iDay = Null, $iHours = Null, $iMinutes = Null, $iSeconds = Null, $iNanoSeconds = Null, $bIsUTC = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $tDateStruct
@@ -231,13 +231,13 @@ Func _LOImpress_DateStructCreate($iYear = Null, $iMonth = Null, $iDay = Null, $i
 	EndIf
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $tDateStruct)
-EndFunc   ;==>_LOImpress_DateStructCreate
+EndFunc   ;==>_LODraw_DateStructCreate
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_DateStructModify
+; Name ..........: _LODraw_DateStructModify
 ; Description ...: Set or retrieve Date Structure settings.
-; Syntax ........: _LOImpress_DateStructModify(ByRef $tDateStruct[, $iYear = Null[, $iMonth = Null[, $iDay = Null[, $iHours = Null[, $iMinutes = Null[, $iSeconds = Null[, $iNanoSeconds = Null[, $bIsUTC = Null]]]]]]]])
-; Parameters ....: $tDateStruct         - The Date Structure to modify, returned from a _LOImpress_DateStructCreate, or setting retrieval function. Structure will be directly modified.
+; Syntax ........: _LODraw_DateStructModify(ByRef $tDateStruct[, $iYear = Null[, $iMonth = Null[, $iDay = Null[, $iHours = Null[, $iMinutes = Null[, $iSeconds = Null[, $iNanoSeconds = Null[, $bIsUTC = Null]]]]]]]])
+; Parameters ....: $tDateStruct         - The Date Structure to modify, returned from a _LODraw_DateStructCreate, or setting retrieval function. Structure will be directly modified.
 ;                  $iYear               - [optional] Default is Null. The Year, as a 4 digit Integer.
 ;                  $iMonth              - [optional] (0-12) Default is Null. The Month, as a 2 digit Integer. Call with 0 for Void date.
 ;                  $iDay                - [optional] (0-31) Default is Null. The Day, as a 2 digit Integer. Call with 0 for Void date.
@@ -277,12 +277,12 @@ EndFunc   ;==>_LOImpress_DateStructCreate
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOImpress_DateStructCreate
+; Related .......: _LODraw_DateStructCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_DateStructModify(ByRef $tDateStruct, $iYear = Null, $iMonth = Null, $iDay = Null, $iHours = Null, $iMinutes = Null, $iSeconds = Null, $iNanoSeconds = Null, $bIsUTC = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_DateStructModify(ByRef $tDateStruct, $iYear = Null, $iMonth = Null, $iDay = Null, $iHours = Null, $iMinutes = Null, $iSeconds = Null, $iNanoSeconds = Null, $bIsUTC = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
@@ -362,14 +362,14 @@ Func _LOImpress_DateStructModify(ByRef $tDateStruct, $iYear = Null, $iMonth = Nu
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LOImpress_DateStructModify
+EndFunc   ;==>_LODraw_DateStructModify
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_FontExists
+; Name ..........: _LODraw_FontExists
 ; Description ...: Tests whether a specific font exists by name.
-; Syntax ........: _LOImpress_FontExists($sFontName[, $oDoc = Null])
+; Syntax ........: _LODraw_FontExists($sFontName[, $oDoc = Null])
 ; Parameters ....: $sFontName           - The Font name to search for.
-;                  $oDoc                - [optional] Default is Null. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $oDoc                - [optional] Default is Null. A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ; Return values .: Success: Boolean.
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Font is available, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -385,12 +385,12 @@ EndFunc   ;==>_LOImpress_DateStructModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $oDoc is optional, if not called, an Impress Document is created invisibly to perform the check.
-; Related .......: _LOImpress_FontsGetNames
+; Related .......: _LODraw_FontsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_FontExists($sFontName, $oDoc = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_FontExists($sFontName, $oDoc = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $atFonts, $atProperties[1]
@@ -429,19 +429,19 @@ Func _LOImpress_FontExists($sFontName, $oDoc = Null)
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, True)
 		EndIf
-		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+		Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 	Next
 
 	If $bClose Then $oDoc.Close(True)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, False)
-EndFunc   ;==>_LOImpress_FontExists
+EndFunc   ;==>_LODraw_FontExists
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LOImpress_FontsGetNames
+; Name ..........: _LODraw_FontsGetNames
 ; Description ...: Retrieve an array of currently available font names.
-; Syntax ........: _LOImpress_FontsGetNames([$oDoc = Null])
-; Parameters ....: $oDoc                - [optional] Default is Null. A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+; Syntax ........: _LODraw_FontsGetNames([$oDoc = Null])
+; Parameters ....: $oDoc                - [optional] Default is Null. A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning a 4 Column Array, @Extended is set to the number of results. See remarks
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -460,14 +460,14 @@ EndFunc   ;==>_LOImpress_FontExists
 ;                  The returned array will be as follows:
 ;                  The first column (Array[1][0]) contains the Font Name.
 ;                  The Second column (Array [1][1] contains the style name (Such as Bold Italic etc.)
-;                  The third column (Array[1][2]) contains the Font weight (Bold) See Constants, $LOI_CHAR_WEIGHT_* as defined in LibreOfficeImpress_Constants.au3;
-;                  The fourth column (Array[1][3]) contains the font slant (Italic) See constants, $LOI_CHAR_POSTURE_* as defined in LibreOfficeImpress_Constants.au3.
-; Related .......: _LOImpress_FontExists
+;                  The third column (Array[1][2]) contains the Font weight (Bold) See Constants, $LOD_CHAR_WEIGHT_* as defined in LibreOfficeImpress_Constants.au3;
+;                  The fourth column (Array[1][3]) contains the font slant (Italic) See constants, $LOD_CHAR_POSTURE_* as defined in LibreOfficeImpress_Constants.au3.
+; Related .......: _LODraw_FontExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_FontsGetNames($oDoc = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+Func _LODraw_FontsGetNames($oDoc = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $asFonts[0][4]
@@ -506,10 +506,10 @@ Func _LOImpress_FontsGetNames($oDoc = Null)
 		$asFonts[$i][1] = $atFonts[$i].StyleName()
 		$asFonts[$i][2] = $atFonts[$i].Weight
 		$asFonts[$i][3] = $atFonts[$i].Slant() ; only 0 or 2?
-		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+		Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 	Next
 
 	If $bClose Then $oDoc.Close(True)
 
 	Return SetError($__LO_STATUS_SUCCESS, UBound($atFonts), $asFonts)
-EndFunc   ;==>_LOImpress_FontsGetNames
+EndFunc   ;==>_LODraw_FontsGetNames
