@@ -22,7 +22,6 @@ Things pertaining to the **entire UDF**, or **equally to all sub-Components**.
 - Rename TransparencyGradient to Trans(p)? Gradient?
 - Is it possible to add a global variable that tracks the current func name for use in debugging in COM Errors?
   - Would have to remove crumbs on exiting function?
-- Remove extensive "Related" entries
 - For Border functions, make a Constant value rather than 3 Booleans?
   - Better way to make _LOWriter_DocHeaderGetTextCursor and _LOWriter_DocFooterGetTextCursor decide where to make the cursor?
 
@@ -60,19 +59,10 @@ Things pertaining to **Impress**.
 - Need way to insert Form Controls/Fields etc?
 - Need Effects/Transitions for Slides and Shapes
 - Impress examples use "Slide 1" etc names, in other languages, this may not work, unless I set the name specifically?
-- When I add TextBox insert etc, update this:  A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
-- Need Text Box modify funcs
 - Need Clear Dir Formatting func/ability.
   - See if I can refine/fix this.? Otherwise skip it.
-- Need Notes? (NotesPage) in Slide?
-- Need MasterSlide list and apply functions (This will only list Masters already loaded into Doc, but that's okay)
-  - Look into copying a slide from master Doc into doc using transferrable, (or clipboard if need-be?)
-- Need Master slide modify functions?
-- For different view modes? IsMasterPageMode  etc. OO Dev pg 1075
 - Add copy shape etc? Also copy textContent? Look at methods of shapes
 - Numbering Styles is missing Graphics option support, if it can be added/not too complex??
-- Add insert hyperlink?
-- Modify Applicable shape functions descriptions to say: a Draw Shape or Shape Object.
 - Since I made ShapeExists search all slides to match LO, should I add ShapeGetObjByName function, and maybe ShapesGetNamed? What about ShapeGetParent (Slide).
 
 - For future reference:  The PresentationDocument service implements the DrawingDocument service. This means that every presentation document looks like a drawing document. To distinguish between the two document types, you must first check for a presentation (Impress) document and then check for a drawing document. OOME 4.1. Pg 562
