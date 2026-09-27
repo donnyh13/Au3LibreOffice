@@ -1141,7 +1141,7 @@ EndFunc   ;==>_LOBase_DocSubComponentsGetList
 ;                  |                               1 = Error setting $bVisible
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Call $bVisible with Null to return the current visibility setting.
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ; Related .......: _LOBase_DocMinimize, _LOBase_DocMaximize
 ; Link ..........:
 ; Example .......: Yes
