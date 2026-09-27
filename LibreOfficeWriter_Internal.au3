@@ -473,7 +473,7 @@ EndFunc   ;==>__LOWriter_CharBorder
 ;                  @Error: 1, @Extended: 2 = $iAll not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iTop not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iBottom not an Integer.
-;                  @Error: 1, @Extended: 5 = $Left not an Integer.
+;                  @Error: 1, @Extended: 5 = $iLeft not an Integer.
 ;                  @Error: 1, @Extended: 6 = $iRight not an Integer.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
@@ -738,7 +738,7 @@ EndFunc   ;==>__LOWriter_CharFont
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $FontColor
+;                  |                               1 = Error setting $iFontColor
 ;                  |                               2 = Error setting $iTransparency.
 ;                  |                               4 = Error setting $iHighlight
 ;                  --Version Related Errors--
@@ -1851,9 +1851,10 @@ EndFunc   ;==>__LOWriter_FilterNameGet
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Setting was successfully updated or added.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $aArray not an Array.
+;                  @Error: 1, @Extended: 1 = $atArray not an Array.
 ;                  @Error: 1, @Extended: 2 = $tSetting not an Object.
-;                  @Error: 1, @Extended: 3 = $sSettingName not a String.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Setting Name not a String.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1872,7 +1873,7 @@ Func __LOWriter_FindFormatAddSetting(ByRef $atArray, $tSetting)
 	If Not IsObj($tSetting) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$sSettingName = $tSetting.Name()
-	If Not IsString($sSettingName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsString($sSettingName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	For $i = 0 To UBound($atArray) - 1
 		If $atArray[$i].Name() = $sSettingName Then
@@ -1902,7 +1903,7 @@ EndFunc   ;==>__LOWriter_FindFormatAddSetting
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Setting was either not found or was successfully deleted.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $aArray not an Array
+;                  @Error: 1, @Extended: 1 = $atArray not an Array
 ;                  @Error: 1, @Extended: 2 = $sSettingName not a String.
 ; Author ........: donnyh13
 ; Modified ......:
@@ -4283,7 +4284,7 @@ EndFunc   ;==>__LOWriter_InternalComErrorHandler
 ;                  @Error: 0, @Extended: 0, Return: Boolean = If the cell object is a Cell Range, True is returned. Else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oTable not an Object.
+;                  @Error: 1, @Extended: 1 = $oCell not an Object.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to determine if Cell Object is a Range.
 ; Author ........: donnyh13
@@ -4398,7 +4399,7 @@ EndFunc   ;==>__LOWriter_NumRuleCreateMap
 ;                  @Error: 0, @Extended: 1, Return: String = Success. A String used for modifying ListFormat Numbering Style setting.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oNumRules not an Object.
+;                  @Error: 1, @Extended: 1 = $atNumLevel not an Array.
 ;                  @Error: 1, @Extended: 2 = $iLevel not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iSubLevels not an Integer.
 ;                  --Initialization Errors--
@@ -5567,7 +5568,7 @@ EndFunc   ;==>__LOWriter_ParAreaTransparencyGradientMulti
 ;                  @Error: 1, @Extended: 2 = $iAll not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iTop not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iBottom not an Integer.
-;                  @Error: 1, @Extended: 5 = $Left not an Integer.
+;                  @Error: 1, @Extended: 5 = $iLeft not an Integer.
 ;                  @Error: 1, @Extended: 6 = $iRight not an Integer.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
@@ -5658,7 +5659,7 @@ EndFunc   ;==>__LOWriter_ParBorderPadding
 ;                  @Error: 1, @Extended: 2 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 3 = $iNumChar not an Integer, less than 0 or greater than 9.
 ;                  @Error: 1, @Extended: 4 = $iLines not an Integer, less than 0, equal to 1 or greater than 9
-;                  @Error: 1, @Extended: 5 = $iSpaceTxt not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 5 = $iSpcTxt not an Integer, or less than 0.
 ;                  @Error: 1, @Extended: 6 = $bWholeWord not a Boolean.
 ;                  @Error: 1, @Extended: 7 = $sCharStyle not a String.
 ;                  @Error: 1, @Extended: 8 = Character Style called in $sCharStyle not found in current document.
@@ -5901,8 +5902,8 @@ EndFunc   ;==>__LOWriter_ParHyphenation
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
-;                  @Error: 1, @Extended: 2 = $iBeforeText not an Integer, less than -9998989 or greater than 17094.
-;                  @Error: 1, @Extended: 3 = $iAfterText not an Integer, less than -9998989 or greater than 17094.
+;                  @Error: 1, @Extended: 2 = $iBeforeTxt not an Integer, less than -9998989 or greater than 17094.
+;                  @Error: 1, @Extended: 3 = $iAfterTxt not an Integer, less than -9998989 or greater than 17094.
 ;                  @Error: 1, @Extended: 4 = $iFirstLine not an Integer, less than -57785 or greater than 17094.
 ;                  @Error: 1, @Extended: 5 = $bAutoFirstLine not a Boolean.
 ;                  --Property Setting Errors--
@@ -6231,7 +6232,7 @@ EndFunc   ;==>__LOWriter_ParShadow
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $iAbovePar not an Integer, less than 0 or greater than 10008.
 ;                  @Error: 1, @Extended: 3 = $iBelowPar not an Integer, less than 0 or greater than 10008.
-;                  @Error: 1, @Extended: 4 = $bAddSpc not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bAddSpace not a Boolean.
 ;                  @Error: 1, @Extended: 5 = $iLineSpcMode not an Integer, less than 0 or greater than 3. See Constants, $LOW_PAR_LINE_SPC_MODE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error: 1, @Extended: 6 = $iLineSpcHeight not an Integer.
 ;                  @Error: 1, @Extended: 7 = $iLineSpcMode set to 0(Proportional) and $iLineSpcHeight less than 6(%) or greater than 65535(%).

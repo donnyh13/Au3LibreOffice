@@ -165,7 +165,7 @@ EndFunc   ;==>_LOWriter_DirFrmtCharBorderColor
 ;                  @Error: 1, @Extended: 2 = $iAll not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iTop not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iBottom not an Integer.
-;                  @Error: 1, @Extended: 5 = $Left not an Integer.
+;                  @Error: 1, @Extended: 5 = $iLeft not an Integer.
 ;                  @Error: 1, @Extended: 6 = $iRight not an Integer.
 ;                  @Error: 1, @Extended: 7 = $oSelection does not support any of the following: "com.sun.star.text.Paragraph"; "TextPortion"; "TextCursor"; "TextViewCursor".
 ;                  --Property Setting Errors--
@@ -544,7 +544,7 @@ EndFunc   ;==>_LOWriter_DirFrmtCharFont
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $FontColor
+;                  |                               1 = Error setting $iFontColor
 ;                  |                               2 = Error setting $iTransparency.
 ;                  |                               4 = Error setting $iHighlight
 ;                  --Version Related Errors--
@@ -1658,7 +1658,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParBorderColor
 ;                  @Error: 1, @Extended: 2 = $iAll not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iTop not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iBottom not an Integer.
-;                  @Error: 1, @Extended: 5 = $Left not an Integer.
+;                  @Error: 1, @Extended: 5 = $iLeft not an Integer.
 ;                  @Error: 1, @Extended: 6 = $iRight not an Integer.
 ;                  @Error: 1, @Extended: 7 = $oSelection not a Cursor Object and not a Paragraph portion Object.
 ;                  --Property Setting Errors--
@@ -1903,7 +1903,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParBorderWidth
 ;                  @Error: 1, @Extended: 2 = $oSelection not an Object.
 ;                  @Error: 1, @Extended: 3 = $iNumChar not an Integer, less than 0 or greater than 9.
 ;                  @Error: 1, @Extended: 4 = $iLines not an Integer, less than 0, equal to 1 or greater than 9
-;                  @Error: 1, @Extended: 5 = $iSpaceTxt not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 5 = $iSpcTxt not an Integer, or less than 0.
 ;                  @Error: 1, @Extended: 6 = $bWholeWord not a Boolean.
 ;                  @Error: 1, @Extended: 7 = $sCharStyle not a String.
 ;                  @Error: 1, @Extended: 8 = Character Style called in $sCharStyle not found in current document.
@@ -2029,8 +2029,8 @@ EndFunc   ;==>_LOWriter_DirFrmtParHyphenation
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSelection not an Object.
-;                  @Error: 1, @Extended: 2 = $iBeforeText not an Integer, less than -9998989 or greater than 17094.
-;                  @Error: 1, @Extended: 3 = $iAfterText not an Integer, less than -9998989 or greater than 17094.
+;                  @Error: 1, @Extended: 2 = $iBeforeTxt not an Integer, less than -9998989 or greater than 17094.
+;                  @Error: 1, @Extended: 3 = $iAfterTxt not an Integer, less than -9998989 or greater than 17094.
 ;                  @Error: 1, @Extended: 4 = $iFirstLine not an Integer, less than -57785 or greater than 17094.
 ;                  @Error: 1, @Extended: 5 = $bAutoFirstLine not a Boolean.
 ;                  @Error: 1, @Extended: 6 = $oSelection not a Cursor Object and not a Paragraph portion Object.
@@ -2299,7 +2299,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParShadow
 ;                  @Error: 1, @Extended: 1 = $oSelection not an Object.
 ;                  @Error: 1, @Extended: 2 = $iAbovePar not an Integer, less than 0 or greater than 10008.
 ;                  @Error: 1, @Extended: 3 = $iBelowPar not an Integer, less than 0 or greater than 10008.
-;                  @Error: 1, @Extended: 4 = $bAddSpc not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bAddSpace not a Boolean.
 ;                  @Error: 1, @Extended: 5 = $iLineSpcMode Not an Integer, less than 0 or greater than 3. See Constants, $LOW_PAR_LINE_SPC_MODE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error: 1, @Extended: 6 = $iLineSpcHeight not an Integer.
 ;                  @Error: 1, @Extended: 7 = $iLineSpcMode set to 0 (Proportional) and $iLineSpcHeight less than 6(%) or greater than 65535(%).

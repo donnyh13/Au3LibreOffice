@@ -34,6 +34,10 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 ### LibreOfficeWriter
 
+#### Documented
+
+- Fixed wrong variables used in error return descriptions.
+
 #### Fixed
 
 - Forgot to update name after renaming internal line name from "Line Style 9" to "Sparse Dash".

@@ -212,7 +212,7 @@ EndFunc   ;==>_LOWriter_TableBorderColor
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $iTop not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iBottom not an Integer.
-;                  @Error: 1, @Extended: 4 = $Left not an Integer.
+;                  @Error: 1, @Extended: 4 = $iLeft not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iRight not an Integer.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Error retrieving TableBorderDistances Object.
@@ -616,7 +616,7 @@ EndFunc   ;==>_LOWriter_TableCellBorderColor
 ;                  @Error: 1, @Extended: 1 = $oCell an Object.
 ;                  @Error: 1, @Extended: 2 = $iTop not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iBottom not an Integer.
-;                  @Error: 1, @Extended: 4 = $Left not an Integer.
+;                  @Error: 1, @Extended: 4 = $iLeft not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iRight not an Integer.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:

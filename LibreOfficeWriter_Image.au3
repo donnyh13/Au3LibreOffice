@@ -912,7 +912,7 @@ EndFunc   ;==>_LOWriter_ImageBorderColor
 ;                  @Error: 1, @Extended: 2 = $iAll not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iTop not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iBottom not an Integer.
-;                  @Error: 1, @Extended: 5 = $Left not an Integer.
+;                  @Error: 1, @Extended: 5 = $iLeft not an Integer.
 ;                  @Error: 1, @Extended: 6 = $iRight not an Integer.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:

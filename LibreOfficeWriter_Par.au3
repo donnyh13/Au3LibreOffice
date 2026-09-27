@@ -572,7 +572,7 @@ EndFunc   ;==>_LOWriter_ParStyleBorderColor
 ;                  @Error: 1, @Extended: 2 = $iAll not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iTop not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iBottom not an Integer.
-;                  @Error: 1, @Extended: 5 = $Left not an Integer.
+;                  @Error: 1, @Extended: 5 = $iLeft not an Integer.
 ;                  @Error: 1, @Extended: 6 = $iRight not an Integer.
 ;                  @Error: 1, @Extended: 7 = $oParStyle not a Paragraph Object.
 ;                  --Property Setting Errors--
@@ -947,7 +947,7 @@ EndFunc   ;==>_LOWriter_ParStyleDelete
 ;                  @Error: 1, @Extended: 2 = $oParStyle not an Object.
 ;                  @Error: 1, @Extended: 3 = $iNumChar not an Integer, less than 0 or greater than 9.
 ;                  @Error: 1, @Extended: 4 = $iLines not an Integer, less than 0, equal to 1, or greater than 9
-;                  @Error: 1, @Extended: 5 = $iSpaceTxt not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 5 = $iSpcTxt not an Integer, or less than 0.
 ;                  @Error: 1, @Extended: 6 = $bWholeWord not a Boolean.
 ;                  @Error: 1, @Extended: 7 = $sCharStyle not a String.
 ;                  @Error: 1, @Extended: 8 = Character Style called in $sCharStyle not found in document.
@@ -1141,7 +1141,7 @@ EndFunc   ;==>_LOWriter_ParStyleFont
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $FontColor
+;                  |                               1 = Error setting $iFontColor
 ;                  |                               2 = Error setting $iTransparency.
 ;                  |                               4 = Error setting $iHighlight
 ;                  --Version Related Errors--
@@ -1275,8 +1275,8 @@ EndFunc   ;==>_LOWriter_ParStyleHyphenation
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oParStyle not an Object.
-;                  @Error: 1, @Extended: 2 = $iBeforeText not an Integer, less than -9998989 or greater than 17094.
-;                  @Error: 1, @Extended: 3 = $iAfterText not an Integer, less than -9998989 or greater than 17094.
+;                  @Error: 1, @Extended: 2 = $iBeforeTxt not an Integer, less than -9998989 or greater than 17094.
+;                  @Error: 1, @Extended: 3 = $iAfterTxt not an Integer, less than -9998989 or greater than 17094.
 ;                  @Error: 1, @Extended: 4 = $iFirstLine not an Integer, less than -57785 or greater than 17094.
 ;                  @Error: 1, @Extended: 5 = $bAutoFirstLine not a Boolean.
 ;                  @Error: 1, @Extended: 6 = $oParStyle not a Paragraph Object.
@@ -1779,7 +1779,7 @@ EndFunc   ;==>_LOWriter_ParStyleShadow
 ;                  @Error: 1, @Extended: 1 = $oParStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $iAbovePar not an Integer, less than 0 or greater than 10008.
 ;                  @Error: 1, @Extended: 3 = $iBelowPar not an Integer, less than 0 or greater than 10008.
-;                  @Error: 1, @Extended: 4 = $bAddSpc not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bAddSpace not a Boolean.
 ;                  @Error: 1, @Extended: 5 = $iLineSpcMode not an Integer, less than 0 or greater than 3. See Constants, $LOW_PAR_LINE_SPC_MODE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error: 1, @Extended: 6 = $iLineSpcHeight not an Integer.
 ;                  @Error: 1, @Extended: 7 = $iLineSpcMode set to 0(Proportional) and $iLineSpcHeight less than 6(%) or greater than 65535(%).

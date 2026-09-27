@@ -946,7 +946,7 @@ EndFunc   ;==>_LOWriter_PageStyleBorderColor
 ;                  @Error: 1, @Extended: 3 = $iAll not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iTop not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iBottom not an Integer.
-;                  @Error: 1, @Extended: 6 = $Left not an Integer.
+;                  @Error: 1, @Extended: 6 = $iLeft not an Integer.
 ;                  @Error: 1, @Extended: 7 = $iRight not an Integer.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
@@ -2678,7 +2678,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterBorderColor
 ;                  @Error: 1, @Extended: 3 = $iAll not an Integer, or less than 0.
 ;                  @Error: 1, @Extended: 4 = $iTop not an Integer, or less than 0.
 ;                  @Error: 1, @Extended: 5 = $iBottom not an Integer, or less than 0.
-;                  @Error: 1, @Extended: 6 = $Left not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 6 = $iLeft not an Integer, or less than 0.
 ;                  @Error: 1, @Extended: 7 = $iRight not an Integer, or less than 0.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Footers are not enabled for this Page Style.
@@ -4244,7 +4244,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderBorderColor
 ;                  @Error: 1, @Extended: 3 = $iAll not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iTop not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iBottom not an Integer.
-;                  @Error: 1, @Extended: 6 = $Left not an Integer.
+;                  @Error: 1, @Extended: 6 = $iLeft not an Integer.
 ;                  @Error: 1, @Extended: 7 = $iRight not an Integer.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Headers are not enabled for this Page Style.
@@ -4850,7 +4850,7 @@ EndFunc   ;==>_LOWriter_PageStyleMargins
 ;                  @Error: 1, @Extended: 9 = $bHidden not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $sNewParStyleName
+;                  |                               1 = Error setting $sNewPageStyleName
 ;                  |                               2 = Error setting $sFollowStyle
 ;                  |                               4 = Error setting $bHidden
 ;                  --Version Related Errors--

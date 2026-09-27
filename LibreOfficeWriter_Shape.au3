@@ -1253,7 +1253,7 @@ EndFunc   ;==>_LOWriter_ShapeInsert
 ;                  @Error: 1, @Extended: 5 = $bStartCenter not a Boolean.
 ;                  @Error: 1, @Extended: 6 = $bSync not a Boolean.
 ;                  @Error: 1, @Extended: 7 = $vEndStyle not a String, and not an Integer.
-;                  @Error: 1, @Extended: 8 = $vSEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOW_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 8 = $vEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOW_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error: 1, @Extended: 9 = $iEndWidth not an Integer, less than 0 or greater than 5004.
 ;                  @Error: 1, @Extended: 10 = $bEndCenter not a Boolean.
 ;                  --Processing Errors--
@@ -2082,8 +2082,8 @@ EndFunc   ;==>_LOWriter_ShapePointsGetCount
 ;                  @Error: 1, @Extended: 3 = $iPoint not an Integer, less than 1 or greater than number of points in the shape.
 ;                  @Error: 1, @Extended: 4 = $iX not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iY not an Integer
-;                  @Error: 1, @Extended: 6 = $PointType not an Integer, less than 0 or greater than 3, or equal to 2.
-;                  @Error: 1, @Extended: 7 = $PointType called with other than Normal while $iPoint is referencing first or last point.
+;                  @Error: 1, @Extended: 6 = $iPointType not an Integer, less than 0 or greater than 3, or equal to 2.
+;                  @Error: 1, @Extended: 7 = $iPointType called with other than Normal while $iPoint is referencing first or last point.
 ;                  @Error: 1, @Extended: 8 = $bIsCurve not a Boolean.
 ;                  @Error: 1, @Extended: 9 = $bIsCurve cannot be set for last point in a shape.
 ;                  --Processing Errors--

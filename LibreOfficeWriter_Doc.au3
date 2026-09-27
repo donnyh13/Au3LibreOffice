@@ -951,7 +951,7 @@ EndFunc   ;==>_LOWriter_DocExport
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oSrchDescript not an Object.
-;                  @Error: 1, @Extended: 3 = $oSrchDescriptObject not a Search Descriptor Object.
+;                  @Error: 1, @Extended: 3 = Object called in $oSrchDescript not a Search Descriptor Object.
 ;                  @Error: 1, @Extended: 4 = $sSearchString not a String.
 ;                  @Error: 1, @Extended: 5 = $atFindFormat not an Array.
 ;                  @Error: 1, @Extended: 6 = $atFindFormat does not contain an Object in the first Element.

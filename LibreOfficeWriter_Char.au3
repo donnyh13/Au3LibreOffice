@@ -132,7 +132,7 @@ EndFunc   ;==>_LOWriter_CharStyleBorderColor
 ;                  @Error: 1, @Extended: 2 = $iAll not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iTop not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iBottom not an Integer.
-;                  @Error: 1, @Extended: 5 = $Left not an Integer.
+;                  @Error: 1, @Extended: 5 = $iLeft not an Integer.
 ;                  @Error: 1, @Extended: 6 = $iRight not an Integer.
 ;                  @Error: 1, @Extended: 7 = $oCharStyle not a Character Style Object.
 ;                  --Property Setting Errors--
@@ -421,9 +421,9 @@ EndFunc   ;==>_LOWriter_CharStyleCurrent
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Error retrieving "CharacterStyles" Object.
 ;                  @Error: 3, @Extended: 2 = Error retrieving Character Style Name.
-;                  @Error: 3, @Extended: 3 = $sCharStyle is not a User-Created Character Style and cannot be deleted.
-;                  @Error: 3, @Extended: 4 = $sCharStyle is in use and $bForceDelete is False.
-;                  @Error: 3, @Extended: 5 = $sCharStyle still exists after deletion attempt.
+;                  @Error: 3, @Extended: 3 = $oCharStyle is not a User-Created Character Style and cannot be deleted.
+;                  @Error: 3, @Extended: 4 = $oCharStyle is in use and $bForceDelete is False.
+;                  @Error: 3, @Extended: 5 = $oCharStyle still exists after deletion attempt.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -619,7 +619,7 @@ EndFunc   ;==>_LOWriter_CharStyleFont
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $FontColor
+;                  |                               1 = Error setting $iFontColor
 ;                  |                               2 = Error setting $iTransparency.
 ;                  |                               4 = Error setting $iHighlight
 ;                  --Version Related Errors--
@@ -709,7 +709,7 @@ EndFunc   ;==>_LOWriter_CharStyleGetObjByName
 ;                  @Error: 1, @Extended: 9 = $bHidden not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $sNewParStyleName
+;                  |                               1 = Error setting $sNewCharStyleName
 ;                  |                               2 = Error setting $sParentStyle
 ;                  |                               4 = Error setting $bHidden
 ;                  --Version Related Errors--

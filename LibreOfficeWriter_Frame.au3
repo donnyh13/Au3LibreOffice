@@ -934,7 +934,7 @@ EndFunc   ;==>_LOWriter_FrameBorderColor
 ;                  @Error: 1, @Extended: 2 = $iAll not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iTop not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iBottom not an Integer.
-;                  @Error: 1, @Extended: 5 = $Left not an Integer.
+;                  @Error: 1, @Extended: 5 = $iLeft not an Integer.
 ;                  @Error: 1, @Extended: 6 = $iRight not an Integer.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
@@ -3093,7 +3093,7 @@ EndFunc   ;==>_LOWriter_FrameStyleBorderColor
 ;                  @Error: 1, @Extended: 3 = $iAll not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iTop not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iBottom not an Integer.
-;                  @Error: 1, @Extended: 6 = $Left not an Integer.
+;                  @Error: 1, @Extended: 6 = $iLeft not an Integer.
 ;                  @Error: 1, @Extended: 7 = $iRight not an Integer.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
@@ -3736,7 +3736,7 @@ EndFunc   ;==>_LOWriter_FrameStyleCurrent
 ;                  $bForceDelete        - [optional] Default is False. If True, Frame style will be deleted regardless of whether it is in use or not.
 ;                  $sReplacementStyle   - [optional] Default is "Frame". The Frame style to use instead of the one being deleted if the Frame style being deleted was already applied to a Frame in the document.
 ; Return values .: Success: 1
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Frame Style called in $sFrameStyle was successfully deleted.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Frame Style called in $oFrameStyle was successfully deleted.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
@@ -3748,9 +3748,9 @@ EndFunc   ;==>_LOWriter_FrameStyleCurrent
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Error retrieving "FrameStyles" Object.
 ;                  @Error: 3, @Extended: 2 = Error retrieving Frame Style Name.
-;                  @Error: 3, @Extended: 3 = $sFrameStyle is not a User-Created Frame Style and cannot be deleted.
-;                  @Error: 3, @Extended: 4 = $sFrameStyle is in use and $bForceDelete is False.
-;                  @Error: 3, @Extended: 5 = $sFrameStyle still exists after deletion attempt.
+;                  @Error: 3, @Extended: 3 = $oFrameStyle is not a User-Created Frame Style and cannot be deleted.
+;                  @Error: 3, @Extended: 4 = $oFrameStyle is in use and $bForceDelete is False.
+;                  @Error: 3, @Extended: 5 = $oFrameStyle still exists after deletion attempt.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:

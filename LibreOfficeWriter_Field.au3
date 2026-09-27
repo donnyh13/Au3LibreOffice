@@ -754,7 +754,7 @@ EndFunc   ;==>_LOWriter_FieldCombCharInsert
 ;                  @Error: 0, @Extended: 1, Return: String = Success. All optional parameters were called with Null, returning current Combined Characters value.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oCombCharField not an Object.
 ;                  @Error: 1, @Extended: 2 = $sCharacters not a String.
 ;                  @Error: 1, @Extended: 3 = String called in $sCharacters longer than 6 characters.
 ;                  --Processing Errors--
@@ -1102,7 +1102,7 @@ EndFunc   ;==>_LOWriter_FieldCondTextInsert
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters, with an additional parameter in the last element to indicate if the condition is evaluated as True or not.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oCondTextField not an Object.
 ;                  @Error: 1, @Extended: 2 = $sCondition not a String.
 ;                  @Error: 1, @Extended: 3 = $sThen not a String.
 ;                  @Error: 1, @Extended: 4 = $sElse not a String.
@@ -2313,7 +2313,7 @@ EndFunc   ;==>_LOWriter_FieldDocInfoModDateTimeInsert
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
-;                  @Error: 1, @Extended: 2 = $oDocInfoPrintAuthField not an Object.
+;                  @Error: 1, @Extended: 2 = $oDocInfoModDtTm not an Object.
 ;                  @Error: 1, @Extended: 3 = $bIsFixed not a Boolean.
 ;                  @Error: 1, @Extended: 4 = $iDateFormatKey not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iDateFormatKey not found in document.
@@ -3432,7 +3432,7 @@ EndFunc   ;==>_LOWriter_FieldFuncInputInsert
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oHidTxtField not an Object.
+;                  @Error: 1, @Extended: 1 = $oInputField not an Object.
 ;                  @Error: 1, @Extended: 2 = $sReference not a String.
 ;                  @Error: 1, @Extended: 3 = $sText not a String.
 ;                  --Property Setting Errors--
@@ -5023,8 +5023,8 @@ EndFunc   ;==>_LOWriter_FieldSenderModify
 ;                  @Error: 1, @Extended: 4 = $sName not a String.
 ;                  @Error: 1, @Extended: 5 = $sValue not a String.
 ;                  @Error: 1, @Extended: 6 = $bOverwrite not a Boolean.
-;                  @Error: 1, @Extended: 7 = $iNumFormatKeyKey not an Integer.
-;                  @Error: 1, @Extended: 8 = $iNumFormatKeyKey not equal to -1 and Number Format key called in $iNumFormatKeyKey not found in document.
+;                  @Error: 1, @Extended: 7 = $iNumFormatKey not an Integer.
+;                  @Error: 1, @Extended: 8 = $iNumFormatKey not equal to -1 and Number Format key called in $iNumFormatKey not found in document.
 ;                  @Error: 1, @Extended: 9 = $bIsVisible not a Boolean.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.text.TextField.SetExpression" Object.
@@ -5425,8 +5425,8 @@ EndFunc   ;==>_LOWriter_FieldSetVarMastersGetNames
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oSetVarField not an Object.
 ;                  @Error: 1, @Extended: 3 = $sValue not a String.
-;                  @Error: 1, @Extended: 4 = $iNumFormatKeyKey not an Integer.
-;                  @Error: 1, @Extended: 5 = $iNumFormatKeyKey not equal to -1 and Number Format key called in $iNumFormatKeyKey not found in document.
+;                  @Error: 1, @Extended: 4 = $iNumFormatKey not an Integer.
+;                  @Error: 1, @Extended: 5 = $iNumFormatKey not equal to -1 and Number Format key called in $iNumFormatKey not found in document.
 ;                  @Error: 1, @Extended: 6 = $bIsVisible not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
