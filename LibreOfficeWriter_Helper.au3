@@ -242,7 +242,7 @@ EndFunc   ;==>_LOWriter_DateFormatKeyDelete
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $iFormatKey          - The Date Format Key to check for.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the Date/Time Format already exists in document, True is Returned. Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Date/Time Format already exists in document, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
@@ -2267,7 +2267,7 @@ EndFunc   ;==>_LOWriter_FormatKeyDelete
 ;                  $iFormatKey          - The Format Key to look for.
 ;                  $iFormatType         - [optional] (0-15881) Default is $LOW_FORMAT_KEYS_ALL. The Format Key type to search in. Values can be BitOr'd together. See Constants, $LOW_FORMAT_KEYS_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the Format Key exists in document, True is Returned. Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Format Key exists in document, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.

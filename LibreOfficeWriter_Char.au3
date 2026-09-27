@@ -522,7 +522,7 @@ EndFunc   ;==>_LOWriter_CharStyleEffect
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sCharStyle          - The Character Style name to search for.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If Character Style exists then True is returned, if not, False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if Character Style exists, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object,

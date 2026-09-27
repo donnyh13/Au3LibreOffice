@@ -1600,7 +1600,7 @@ EndFunc   ;==>_LOWriter_FrameDelete
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sFrameName          - The Frame name to search for.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Search was successful, If Frame was found matching $sFrameName True is Returned, else False
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Search was successful, Returning True if Frame was found matching $sFrameName else False
 ;                  @Error: 0, @Extended: 1, Return: Boolean = Success. Search was successful, Frame found matching $sFrameName listed as a shape.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--

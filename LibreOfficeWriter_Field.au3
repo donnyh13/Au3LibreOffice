@@ -316,7 +316,7 @@ EndFunc   ;==>_LOWriter_FieldBookmarkDelete
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sBookmarkName       - The Bookmark name to search for.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the document contains a Bookmark by the called name, then True is returned, Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the document contains a Bookmark by the called name, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
@@ -5243,7 +5243,7 @@ EndFunc   ;==>_LOWriter_FieldSetVarMasterDeleteByObj
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sMasterFieldName    - The Set Variable Master Field name to look for.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the document contains a MasterField called in $sMasterFieldName, then True is returned, Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the document contains a MasterField matching name called in $sMasterFieldName, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.

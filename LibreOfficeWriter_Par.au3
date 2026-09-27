@@ -1044,7 +1044,7 @@ EndFunc   ;==>_LOWriter_ParStyleEffect
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sParStyle           - The Paragraph Style Name to search for.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the Document contains the Paragraph style called in $sParStyle, True is returned, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Document contains the Paragraph style called in $sParStyle, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.

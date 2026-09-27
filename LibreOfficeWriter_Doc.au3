@@ -2874,7 +2874,7 @@ EndFunc   ;==>_LOWriter_DocRedoGetAllActionTitles
 ; Syntax ........: _LOWriter_DocRedoIsPossible(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = If the document has a redo action to perform, True is returned, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Returning True if the document has a redo action to perform, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
@@ -3619,7 +3619,7 @@ EndFunc   ;==>_LOWriter_DocUndoGetAllActionTitles
 ; Syntax ........: _LOWriter_DocUndoIsPossible(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = If the document has an undo action to perform, True is returned, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Returning True if the document has an undo action to perform, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.

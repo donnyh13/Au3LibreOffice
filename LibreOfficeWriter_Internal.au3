@@ -123,7 +123,7 @@
 ;                  $vVar7               - [optional] Default is Null. The variable to test if it is set to Default keyword.
 ;                  $vVar8               - [optional] Default is Null. The variable to test if it is set to Default keyword.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = If Any parameters are equal to Default, True is returned. Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Returning True if Any parameters are equal to Default, else False.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1409,7 +1409,7 @@ EndFunc   ;==>__LOWriter_CreatePoint
 ;                  $bIsDate             - [optional] Default is False. If True, the comparison is two Date Structures.
 ;                  $bIsTime             - [optional] Default is False. If True, the comparison is two Time Structures.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the Dates/Times in $tDateStruct1 and $tDateStruct2 are the same, True is returned. Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Dates/Times in $tDateStruct1 and $tDateStruct2 are the same, else False.
 ;                  Failure: False and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $tDateStruct1 not an Object.
@@ -4281,7 +4281,7 @@ EndFunc   ;==>__LOWriter_InternalComErrorHandler
 ; Syntax ........: __LOWriter_IsCellRange(ByRef $oCell)
 ; Parameters ....: $oCell               - A Table Cell or Cell Range Object returned by a previous _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, or _LOWriter_TableCellGetObjByPosition function.
 ; Return values .: Success: Boolean.
-;                  @Error: 0, @Extended: 0, Return: Boolean = If the cell object is a Cell Range, True is returned. Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Returning True if the cell object is a Cell Range, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCell not an Object.
@@ -9589,7 +9589,7 @@ EndFunc   ;==>__LOWriter_TableBorder
 ; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
 ;                  $sCellName           - The requested cell name.
 ; Return values .: Success: Boolean.
-;                  @Error: 0, @Extended: 0, Return: Boolean = If the table contains the requested Cell Name, True is returned. Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Returning True if the table contains the requested Cell Name, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.

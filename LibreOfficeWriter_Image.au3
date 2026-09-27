@@ -1379,7 +1379,7 @@ EndFunc   ;==>_LOWriter_ImageDelete
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sImageName          - The Image name to search for.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Search was successful, If an Image was found matching $sImageName, True is returned, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Search was successful, Returning True if an Image was found matching $sImageName, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.

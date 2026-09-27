@@ -880,7 +880,7 @@ EndFunc   ;==>_LOWriter_ShapeDelete
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sShapeName          - The Shape name to search for.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If a Shape was found matching $sShapeName, True is returned, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if a Shape was found matching $sShapeName, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
