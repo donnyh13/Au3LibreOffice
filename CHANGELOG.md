@@ -21,6 +21,12 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 ## [0.11.0] - 2027
 
+### LibreOfficeBase 
+
+#### Documented
+
+- Fixed wrong variables used in error return descriptions.
+
 ### LibreOfficeCalc
 
 #### Changed
