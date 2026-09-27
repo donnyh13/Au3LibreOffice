@@ -8,16 +8,16 @@
 #include "LibreOffice_Helper.au3"
 #include "LibreOffice_Internal.au3"
 
-; Common includes for Impress
-#include "LibreOfficeImpress_Internal.au3"
-#include "LibreOfficeImpress_Constants.au3"
+; Common includes for Draw
+#include "LibreOfficeDraw_Internal.au3"
+#include "LibreOfficeDraw_Constants.au3"
 
-; Other includes for Impress
+; Other includes for Draw
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice UDF
 ; AutoIt Version : v3.3.16.1
-; Description ...: Provides basic functionality through AutoIt for inserting or manipulating Impress Fields.
+; Description ...: Provides basic functionality through AutoIt for inserting or manipulating Draw Fields.
 ; Author(s) .....: donnyh13, mLipok
 ; Dll ...........:
 ;
@@ -49,7 +49,7 @@
 ;                  $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
 ;                  $bIsFixed            - [optional] Default is False. If True, the field value is fixed at the time of insertion.
 ;                  $sAuthor             - [optional] Default is "". If $bIsFixed is True, the Author name to display.
-;                  $iFormat             - [optional] (0-3) Default is $LOD_FIELD_AUTH_NAME_FULL. The format to display the Author. See Constants, $LOD_FIELD_AUTH_NAME_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iFormat             - [optional] (0-3) Default is $LOD_FIELD_AUTH_NAME_FULL. The format to display the Author. See Constants, $LOD_FIELD_AUTH_NAME_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully inserted the field, returning its Object.
@@ -59,7 +59,7 @@
 ;                  @Error: 1, @Extended: 2 = $oTextCursor not an Object.
 ;                  @Error: 1, @Extended: 3 = $bIsFixed not a Boolean.
 ;                  @Error: 1, @Extended: 4 = $sAuthor not a String.
-;                  @Error: 1, @Extended: 5 = $iFormat not an Integer, less than 0 or greater than 3. See Constants, $LOD_FIELD_AUTH_NAME_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iFormat not an Integer, less than 0 or greater than 3. See Constants, $LOD_FIELD_AUTH_NAME_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 6 = $bOverwrite not a Boolean.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to Create a "com.sun.star.text.TextField.Author" Object.
@@ -110,7 +110,7 @@ EndFunc   ;==>_LODraw_FieldAuthorInsert
 ; Parameters ....: $oAuthorField        - An Author Field Object returned by a previous _LODraw_FieldFileNameInsert or _LODraw_FieldsGetList function.
 ;                  $bIsFixed            - [optional] Default is Null. If True, the field value is fixed at the time of insertion.
 ;                  $sAuthor             - [optional] Default is Null. If $bIsFixed is True, the Author name to display.
-;                  $iFormat             - [optional] (0-3) Default is Null. The format to display the Author name. See Constants, $LOD_FIELD_AUTH_NAME_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iFormat             - [optional] (0-3) Default is Null. The format to display the Author name. See Constants, $LOD_FIELD_AUTH_NAME_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -119,7 +119,7 @@ EndFunc   ;==>_LODraw_FieldAuthorInsert
 ;                  @Error: 1, @Extended: 1 = $oAuthorField not an Object.
 ;                  @Error: 1, @Extended: 2 = $bIsFixed not a Boolean.
 ;                  @Error: 1, @Extended: 3 = $sAuthor not a String.
-;                  @Error: 1, @Extended: 4 = $iFormat not an Integer, less than 0 or greater than 3. See Constants, $LOD_FIELD_AUTH_NAME_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iFormat not an Integer, less than 0 or greater than 3. See Constants, $LOD_FIELD_AUTH_NAME_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bIsFixed
@@ -249,7 +249,7 @@ EndFunc   ;==>_LODraw_FieldCurrentDisplayGet
 ;                  $bIsDate             - [optional] Default is True. If True, the inserted Field will be a Date Field, if False, the Field will be a Time Field.
 ;                  $bIsFixed            - [optional] Default is False. If True, the field value is fixed at the time of insertion.
 ;                  $tDateTime           - [optional] Default is Null. If $bIsFixed is True, The date or time to display for the comment, created previously by _LODraw_DateStructCreate. If left as Null, the current date or time is used.
-;                  $iFormat             - [optional] (2-9) Default is $LOD_FIELD_DATE_FMT_STANDARD_SHORT. The format to display the date or time in. See Constants, $LOD_FIELD_TIME_FMT_* or $LOD_FIELD_DATE_FMT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iFormat             - [optional] (2-9) Default is $LOD_FIELD_DATE_FMT_STANDARD_SHORT. The format to display the date or time in. See Constants, $LOD_FIELD_TIME_FMT_* or $LOD_FIELD_DATE_FMT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully inserted the field, returning its Object.
@@ -260,8 +260,8 @@ EndFunc   ;==>_LODraw_FieldCurrentDisplayGet
 ;                  @Error: 1, @Extended: 3 = $bIsDate not a Boolean.
 ;                  @Error: 1, @Extended: 4 = $bIsFixed not a Boolean.
 ;                  @Error: 1, @Extended: 5 = $tDateTime not an Object.
-;                  @Error: 1, @Extended: 6 = $bIsDate is True and $iFormat not an Integer, less than 2 or greater than 9. See Constants, $LOD_FIELD_DATE_FMT_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 7 = $bIsDate is False and $iFormat not an Integer, less than 2 or greater than 8. See Constants, $LOD_FIELD_TIME_FMT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $bIsDate is True and $iFormat not an Integer, less than 2 or greater than 9. See Constants, $LOD_FIELD_DATE_FMT_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 7 = $bIsDate is False and $iFormat not an Integer, less than 2 or greater than 8. See Constants, $LOD_FIELD_TIME_FMT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 8 = $bOverwrite not a Boolean.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to Create a "com.sun.star.text.TextField.DateTime" Object.
@@ -315,7 +315,7 @@ EndFunc   ;==>_LODraw_FieldDateTimeInsert
 ; Parameters ....: $oDateTimeField      - A Date/Time Field Object returned by a previous _LODraw_FieldDateTimeInsert or _LODraw_FieldsGetList function.
 ;                  $bIsFixed            - [optional] Default is Null. If True, the field value is fixed at the time of insertion.
 ;                  $tDateTime           - [optional] Default is Null. If $bIsFixed is True, The date or time to display for the comment, created previously by _LODraw_DateStructCreate. If left as Null, the current date or time is used.
-;                  $iFormat             - [optional] (2-9) Default is Null. The format to display the date or time in. See Constants, $LOD_FIELD_TIME_FMT_* or $LOD_FIELD_DATE_FMT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iFormat             - [optional] (2-9) Default is Null. The format to display the date or time in. See Constants, $LOD_FIELD_TIME_FMT_* or $LOD_FIELD_DATE_FMT_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current Date Field settings in a 3 Element Array with values in order of function parameters. @Extended is set to 1.
@@ -325,8 +325,8 @@ EndFunc   ;==>_LODraw_FieldDateTimeInsert
 ;                  @Error: 1, @Extended: 1 = $oDateTimeField not an Object.
 ;                  @Error: 1, @Extended: 2 = $bIsFixed not a Boolean.
 ;                  @Error: 1, @Extended: 3 = $tDateTime not an Object.
-;                  @Error: 1, @Extended: 4 = Field is a Date and $iFormat not an Integer, less than 2 or greater than 9. See Constants, $LOD_FIELD_DATE_FMT_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 5 = Field is a Time and $iFormat not an Integer, less than 2 or greater than 8. See Constants, $LOD_FIELD_TIME_FMT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = Field is a Date and $iFormat not an Integer, less than 2 or greater than 9. See Constants, $LOD_FIELD_DATE_FMT_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 5 = Field is a Time and $iFormat not an Integer, less than 2 or greater than 8. See Constants, $LOD_FIELD_TIME_FMT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bIsFixed
@@ -415,7 +415,7 @@ Func _LODraw_FieldDelete(ByRef $oField)
 
 	If Not IsObj($oField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	; For some reason the only way to delete a field in Impress is the create a TextCursor with the field selected, and then overwriting it with an empty string.
+	; For some reason the only way to delete a field in Draw is the create a TextCursor with the field selected, and then overwriting it with an empty string.
 	; The normal method ($oField.Anchor.Text.removeTextContent($oField)), doesn't throw an error, but it also does nothing at all.
 	$oCursor = $oField.Anchor.Text.createTextCursorByRange($oField.Anchor())
 	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
@@ -432,7 +432,7 @@ EndFunc   ;==>_LODraw_FieldDelete
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
 ;                  $bIsFixed            - [optional] Default is False. If True, the field value is fixed at the time of insertion.
-;                  $iFormat             - [optional] (0-3) Default is $LOD_FIELD_FILENAME_FULL_PATH. The format to display the File name/path. See Constants, $LOD_FIELD_FILENAME_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iFormat             - [optional] (0-3) Default is $LOD_FIELD_FILENAME_FULL_PATH. The format to display the File name/path. See Constants, $LOD_FIELD_FILENAME_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully inserted the field, returning its Object.
@@ -441,7 +441,7 @@ EndFunc   ;==>_LODraw_FieldDelete
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oTextCursor not an Object.
 ;                  @Error: 1, @Extended: 3 = $bIsFixed not a Boolean.
-;                  @Error: 1, @Extended: 4 = $iFormat not an Integer, less than 0 or greater than 3. See Constants, $LOD_FIELD_FILENAME_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iFormat not an Integer, less than 0 or greater than 3. See Constants, $LOD_FIELD_FILENAME_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 5 = $bOverwrite not a Boolean.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to Create a "com.sun.star.text.TextField.FileName" Object.
@@ -487,7 +487,7 @@ EndFunc   ;==>_LODraw_FieldFileNameInsert
 ; Syntax ........: _LODraw_FieldFileNameModify(ByRef $oFileNameField[, $bIsFixed = Null[, $iFormat = Null]])
 ; Parameters ....: $oFileNameField      - A File Name Field Object returned by a previous _LODraw_FieldFileNameInsert or _LODraw_FieldsGetList function.
 ;                  $bIsFixed            - [optional] Default is Null. If True, the field value is fixed at the time of insertion.
-;                  $iFormat             - [optional] (0-3) Default is Null. The format to display the File name/path. See Constants, $LOD_FIELD_FILENAME_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iFormat             - [optional] (0-3) Default is Null. The format to display the File name/path. See Constants, $LOD_FIELD_FILENAME_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
@@ -495,7 +495,7 @@ EndFunc   ;==>_LODraw_FieldFileNameInsert
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oFileNameField not an Object.
 ;                  @Error: 1, @Extended: 2 = $bIsFixed not a Boolean.
-;                  @Error: 1, @Extended: 3 = $iFormat not an Integer, less than 0 or greater than 3. See Constants, $LOD_FIELD_FILENAME_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iFormat not an Integer, less than 0 or greater than 3. See Constants, $LOD_FIELD_FILENAME_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bIsFixed
@@ -709,14 +709,14 @@ EndFunc   ;==>_LODraw_FieldHyperlinkModify
 ; Description ...: Retrieve an Array of Field Objects present in a Shape.
 ; Syntax ........: _LODraw_FieldsGetList(ByRef $oTextCursor[, $iType = $LOD_FIELD_TYPE_ALL[, $bFieldTypeNum = True]])
 ; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
-;                  $iType               - [optional] (1-127) Default is $LOD_FIELD_TYPE_ALL. The type of Field to search for. See Constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeImpress_Constants.au3. Can be BitOr'd together.
-;                  $bFieldTypeNum       - [optional] Default is True. If True, adds a column to the array that has the Field Type Constant Integer for that particular Field, to assist in identifying the Field type. See Constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iType               - [optional] (1-127) Default is $LOD_FIELD_TYPE_ALL. The type of Field to search for. See Constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeDraw_Constants.au3. Can be BitOr'd together.
+;                  $bFieldTypeNum       - [optional] Default is True. If True, adds a column to the array that has the Field Type Constant Integer for that particular Field, to assist in identifying the Field type. See Constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning Array of Text Field Objects with @Extended set to number of results. See Remarks for Array sizing.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
-;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 1 or greater than 127. (The total of all Constants added together.) See Constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 1 or greater than 127. (The total of all Constants added together.) See Constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $bFieldTypeNum not a Boolean.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create a TextCursor.
@@ -730,7 +730,7 @@ EndFunc   ;==>_LODraw_FieldHyperlinkModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Array can vary in the number of columns, if $bFieldTypeNum is called with False, the Array will be a single column. If $bFieldTypeNum is called with True, a column will be added to the array. First column will always be the Field's Object.
-;                  Setting $bFieldTypeNum to True will add a Field type Number column, matching the constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeImpress_Constants.au3 for the found Field.
+;                  Setting $bFieldTypeNum to True will add a Field type Number column, matching the constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeDraw_Constants.au3 for the found Field.
 ;                  This function may fail to identify Fields if text has been inserted recently using the same Cursor.
 ; Related .......: _LODraw_FieldDelete
 ; Link ..........:

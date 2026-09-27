@@ -8,16 +8,16 @@
 #include "LibreOffice_Helper.au3"
 #include "LibreOffice_Internal.au3"
 
-; Common includes for Impress
-#include "LibreOfficeImpress_Internal.au3"
-#include "LibreOfficeImpress_Constants.au3"
+; Common includes for Draw
+#include "LibreOfficeDraw_Internal.au3"
+#include "LibreOfficeDraw_Constants.au3"
 
-; Other includes for Impress
+; Other includes for Draw
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice UDF
 ; AutoIt Version : v3.3.16.1
-; Description ...: Provides basic functionality through AutoIt for manipulating a Text cursor, inserting or retrieving data or setting and retrieving text properties using an Impress Text Cursor.
+; Description ...: Provides basic functionality through AutoIt for manipulating a Text cursor, inserting or retrieving data or setting and retrieving text properties using an Draw Text Cursor.
 ; Author(s) .....: donnyh13, mLipok
 ; Dll ...........:
 ;
@@ -52,8 +52,8 @@
 ; Description ...: Set or Retrieve the Font Effect settings.
 ; Syntax ........: _LODraw_CursorCharEffect(ByRef $oTextCursor[, $iCase = Null[, $iRelief = Null[, $bOutline = Null[, $bShadow = Null]]]])
 ; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
-;                  $iCase               - [optional] (0-4) Default is Null. The Character Case Style. See Constants, $LOD_CHAR_CASEMAP_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iRelief             - [optional] (0-2) Default is Null. The Character Relief style. See Constants, $LOD_CHAR_RELIEF_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iCase               - [optional] (0-4) Default is Null. The Character Case Style. See Constants, $LOD_CHAR_CASEMAP_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iRelief             - [optional] (0-2) Default is Null. The Character Relief style. See Constants, $LOD_CHAR_RELIEF_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $bOutline            - [optional] Default is Null. If True, the characters have an outline around the outside.
 ;                  $bShadow             - [optional] Default is Null. If True, the characters have a shadow.
 ; Return values .: Success: 1 or Array.
@@ -62,8 +62,8 @@
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
-;                  @Error: 1, @Extended: 2 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOD_CHAR_CASEMAP_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 3 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOD_CHAR_RELIEF_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOD_CHAR_CASEMAP_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOD_CHAR_RELIEF_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 4 = $bOutline not a Boolean.
 ;                  @Error: 1, @Extended: 5 = $bShadow not a Boolean.
 ;                  --Property Setting Errors--
@@ -100,8 +100,8 @@ EndFunc   ;==>_LODraw_CursorCharEffect
 ; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
 ;                  $sFontName           - [optional] Default is Null. The Font Name to use.
 ;                  $nFontSize           - [optional] Default is Null. The new Font size.
-;                  $iPosture            - [optional] (0-5) Default is Null. The Font Italic setting. See Constants, $LOD_CHAR_POSTURE_* as defined in LibreOfficeImpress_Constants.au3. Also see remarks.
-;                  $iWeight             - [optional] (0, 50-200) Default is Null. The Font Bold settings see Constants, $LOD_CHAR_WEIGHT_* as defined in LibreOfficeImpress_Constants.au3. Also see remarks.
+;                  $iPosture            - [optional] (0-5) Default is Null. The Font Italic setting. See Constants, $LOD_CHAR_POSTURE_* as defined in LibreOfficeDraw_Constants.au3. Also see remarks.
+;                  $iWeight             - [optional] (0, 50-200) Default is Null. The Font Bold settings see Constants, $LOD_CHAR_WEIGHT_* as defined in LibreOfficeDraw_Constants.au3. Also see remarks.
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -111,8 +111,8 @@ EndFunc   ;==>_LODraw_CursorCharEffect
 ;                  @Error: 1, @Extended: 2 = $sFontName not a String.
 ;                  @Error: 1, @Extended: 3 = Font called in $sFontName not available.
 ;                  @Error: 1, @Extended: 4 = $nFontSize not a number.
-;                  @Error: 1, @Extended: 5 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOD_CHAR_POSTURE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 6 = $iWeight not an Integer, less than 50 but not equal to 0, or greater than 200. See Constants, $LOD_CHAR_WEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOD_CHAR_POSTURE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iWeight not an Integer, less than 50 but not equal to 0, or greater than 200. See Constants, $LOD_CHAR_WEIGHT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sFontName
@@ -194,7 +194,7 @@ EndFunc   ;==>_LODraw_CursorCharFontColor
 ; Description ...: Set and retrieve the OverLine settings for a Paragraph.
 ; Syntax ........: _LODraw_CursorCharOverLine(ByRef $oTextCursor[, $iOverLineStyle = Null[, $iOLColor = Null[, $bWordOnly = Null]]])
 ; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
-;                  $iOverLineStyle      - [optional] (0-18) Default is Null. The style of the Overline line, see constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
+;                  $iOverLineStyle      - [optional] (0-18) Default is Null. The style of the Overline line, see constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeDraw_Constants.au3. See Remarks.
 ;                  $iOLColor            - [optional] (-1-16777215) Default is Null. The Overline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
 ;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not Overlined.
 ; Return values .: Success: 1 or Array
@@ -203,7 +203,7 @@ EndFunc   ;==>_LODraw_CursorCharFontColor
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
-;                  @Error: 1, @Extended: 2 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
+;                  @Error: 1, @Extended: 2 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeDraw_Constants.au3. See Remarks.
 ;                  @Error: 1, @Extended: 3 = $iOLColor not an Integer, less than -1 or greater than 16777215.
 ;                  @Error: 1, @Extended: 4 = $bWordOnly not a Boolean.
 ;                  --Property Setting Errors--
@@ -369,7 +369,7 @@ EndFunc   ;==>_LODraw_CursorCharSpacing
 ; Description ...: Set or Retrieve the Strikeout settings for a Paragraph.
 ; Syntax ........: _LODraw_CursorCharStrikeOut(ByRef $oTextCursor[, $iStrikeLineStyle = Null[, $bWordOnly = Null]])
 ; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
-;                  $iStrikeLineStyle    - [optional] (0-6) Default is Null. The Strikeout Line Style, see constants, $LOD_CHAR_STRIKEOUT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iStrikeLineStyle    - [optional] (0-6) Default is Null. The Strikeout Line Style, see constants, $LOD_CHAR_STRIKEOUT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $bWordOnly           - [optional] Default is Null. If True, strike out is applied to words only, skipping whitespaces.
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -377,7 +377,7 @@ EndFunc   ;==>_LODraw_CursorCharSpacing
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
-;                  @Error: 1, @Extended: 2 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOD_CHAR_STRIKEOUT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOD_CHAR_STRIKEOUT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $bWordOnly not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
@@ -409,7 +409,7 @@ EndFunc   ;==>_LODraw_CursorCharStrikeOut
 ; Description ...: Set and retrieve the Underline settings for a Paragraph.
 ; Syntax ........: _LODraw_CursorCharUnderLine(ByRef $oTextCursor[, $iUnderLineStyle = Null[, $iULColor = Null[, $bWordOnly = Null]]])
 ; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
-;                  $iUnderLineStyle     - [optional] (0-18) Default is Null. The Underline line style, see constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iUnderLineStyle     - [optional] (0-18) Default is Null. The Underline line style, see constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iULColor            - [optional] (-1-16777215) Default is Null. The underline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
 ;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not underlined.
 ; Return values .: Success: 1 or Array
@@ -418,7 +418,7 @@ EndFunc   ;==>_LODraw_CursorCharStrikeOut
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTextCursor an Object.
-;                  @Error: 1, @Extended: 2 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $iULColor not an Integer, less than -1 or greater than 16777215.
 ;                  @Error: 1, @Extended: 4 = $bWordOnly not a Boolean.
 ;                  --Property Setting Errors--
@@ -601,7 +601,7 @@ EndFunc   ;==>_LODraw_CursorIsCollapsed
 ; Description ...: Move a Text Cursor object in a document. Also for Creating/Expanding selections.
 ; Syntax ........: _LODraw_CursorMove(ByRef $oTextCursor, $iMove[, $iCount = 1[, $bSelect = False]])
 ; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
-;                  $iMove               - (0-5) The movement command. See remarks. See Constants, $LOD_TEXTCUR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iMove               - (0-5) The movement command. See remarks. See Constants, $LOD_TEXTCUR_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iCount              - [optional] Default is 1. Number of movements to make. See remarks.
 ;                  $bSelect             - [optional] Default is False. Whether to select data during this cursor movement. See remarks.
 ; Return values .: Success: Boolean.
@@ -609,7 +609,7 @@ EndFunc   ;==>_LODraw_CursorIsCollapsed
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
-;                  @Error: 1, @Extended: 2 = $iMove not an Integer, less than 0 or greater than 5. See Constants, $LOD_TEXTCUR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iMove not an Integer, less than 0 or greater than 5. See Constants, $LOD_TEXTCUR_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $iCount not an Integer or less than 0.
 ;                  @Error: 1, @Extended: 4 = $bSelect not a Boolean.
 ; Author ........: donnyh13
@@ -679,18 +679,18 @@ EndFunc   ;==>_LODraw_CursorMove
 ; Description ...: Set and Retrieve Paragraph Alignment settings.
 ; Syntax ........: _LODraw_CursorParAlignment(ByRef $oTextCursor[, $iHorAlign = Null[, $iLastLineAlign = Null[, $iTxtDirection = Null]]])
 ; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
-;                  $iHorAlign           - [optional] (0-3) Default is Null. The Horizontal alignment of the paragraph. See Constants, $LOD_PAR_ALIGN_HOR_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
-;                  $iLastLineAlign      - [optional] (0-3) Default is Null. Specify the alignment for the last line in the paragraph. See Constants, $LOD_PAR_LAST_LINE_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
-;                  $iTxtDirection       - [optional] (0-5) Default is Null. The Text Writing Direction. See Constants, $LOD_PAR_TXT_DIR_* as defined in LibreOfficeImpress_Constants.au3. [LibreOffice Default is 4]
+;                  $iHorAlign           - [optional] (0-3) Default is Null. The Horizontal alignment of the paragraph. See Constants, $LOD_PAR_ALIGN_HOR_* as defined in LibreOfficeDraw_Constants.au3. See Remarks.
+;                  $iLastLineAlign      - [optional] (0-3) Default is Null. Specify the alignment for the last line in the paragraph. See Constants, $LOD_PAR_LAST_LINE_* as defined in LibreOfficeDraw_Constants.au3. See Remarks.
+;                  $iTxtDirection       - [optional] (0-5) Default is Null. The Text Writing Direction. See Constants, $LOD_PAR_TXT_DIR_* as defined in LibreOfficeDraw_Constants.au3. [LibreOffice Default is 4]
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
-;                  @Error: 1, @Extended: 2 = $iHorAlign not an Integer, less than 0 or greater than 3. See Constants, $LOD_PAR_ALIGN_HOR_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 3 = $iLastLineAlign not an Integer, less than 0 or greater than 3. See Constants, $LOD_PAR_LAST_LINE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 4 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOD_PAR_TXT_DIR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iHorAlign not an Integer, less than 0 or greater than 3. See Constants, $LOD_PAR_ALIGN_HOR_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iLastLineAlign not an Integer, less than 0 or greater than 3. See Constants, $LOD_PAR_LAST_LINE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOD_PAR_TXT_DIR_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iHorAlign
@@ -771,7 +771,7 @@ EndFunc   ;==>_LODraw_CursorParIndent
 ; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
 ;                  $iAbovePar           - [optional] (0-100000) Default is Null. The Space above a paragraph, in Hundredths of a Millimeter (HMM).
 ;                  $iBelowPar           - [optional] (0-100000) Default is Null. The Space Below a paragraph, in Hundredths of a Millimeter (HMM).
-;                  $iLineSpcMode        - [optional] (0-3) Default is Null. The line spacing type of the paragraph. See Constants, $LOD_PAR_LINE_SPC_MODE_* as defined in LibreOfficeImpress_Constants.au3, also notice min and max values for each.
+;                  $iLineSpcMode        - [optional] (0-3) Default is Null. The line spacing type of the paragraph. See Constants, $LOD_PAR_LINE_SPC_MODE_* as defined in LibreOfficeDraw_Constants.au3, also notice min and max values for each.
 ;                  $iLineSpcHeight      - [optional] Default is Null. This value specifies the height in regard to Mode. See Remarks.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -781,7 +781,7 @@ EndFunc   ;==>_LODraw_CursorParIndent
 ;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
 ;                  @Error: 1, @Extended: 2 = $iAbovePar not an Integer, less than 0 or greater than 100000.
 ;                  @Error: 1, @Extended: 3 = $iBelowPar not an Integer, less than 0 or greater than 100000.
-;                  @Error: 1, @Extended: 4 = $iLineSpcMode not an Integer, less than 0 or greater than 3. See Constants, $LOD_PAR_LINE_SPC_MODE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iLineSpcMode not an Integer, less than 0 or greater than 3. See Constants, $LOD_PAR_LINE_SPC_MODE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 5 = $iLineSpcHeight not an Integer.
 ;                  @Error: 1, @Extended: 6 = $iLineSpcMode set to 0(Proportional) and $iLineSpcHeight less than 6(%) or greater than 65535(%).
 ;                  @Error: 1, @Extended: 7 = $iLineSpcMode set to 1 or 2(Minimum, or Leading) and $iLineSpcHeight less than 0 or greater than 100000.
@@ -825,7 +825,7 @@ EndFunc   ;==>_LODraw_CursorParSpacing
 ; Syntax ........: _LODraw_CursorParTabStopCreate(ByRef $oTextCursor, $iPosition[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]])
 ; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
 ;                  $iPosition           - The TabStop position to set the new TabStop to. Set in Hundredths of a Millimeter (HMM). See Remarks.
-;                  $iAlignment          - [optional] (0-4) Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iAlignment          - [optional] (0-4) Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iDecChar            - [optional] Default is Null. Enter a character(in Asc Value(See AutoIt Asc Function)) that you want the decimal tab to use as a decimal separator. Can only be set if $iAlignment is set to $LOD_PAR_TAB_ALIGN_DECIMAL.
 ;                  $iFillChar           - [optional] Default is Null. The Asc (see AutoIt function) value of any character (except 0/Null) you want to act as a Tab Fill character. See remarks.
 ; Return values .: Success: Integer.
@@ -835,7 +835,7 @@ EndFunc   ;==>_LODraw_CursorParSpacing
 ;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
 ;                  @Error: 1, @Extended: 2 = $iPosition not an Integer.
 ;                  @Error: 1, @Extended: 3 = Tab Stop position called in $iPosition already exists in this Paragraph.
-;                  @Error: 1, @Extended: 4 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 5 = $iDecChar not an Integer.
 ;                  @Error: 1, @Extended: 6 = $iFillChar not an Integer.
 ;                  --Initialization Errors--
@@ -916,7 +916,7 @@ EndFunc   ;==>_LODraw_CursorParTabStopDelete
 ; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
 ;                  $iTabStop            - The Tab position of the TabStop to modify. See Remarks.
 ;                  $iPosition           - [optional] Default is Null. The New position to set the input position to. Set in Hundredths of a Millimeter (HMM). See Remarks.
-;                  $iAlignment          - [optional] (0-4) Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iAlignment          - [optional] (0-4) Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iDecChar            - [optional] Default is Null. Enter a character(in Asc Value(See AutoIt Asc Function)) that you want the decimal tab to use as a decimal separator. Can only be set if $iAlignment is set to $LOD_PAR_TAB_ALIGN_DECIMAL.
 ;                  $iFillChar           - [optional] Default is Null. The Asc (see AutoIt function) value of any character (except 0/Null) you want to act as a Tab Fill character. See remarks.
 ; Return values .: Success: Integer or Array.
@@ -929,7 +929,7 @@ EndFunc   ;==>_LODraw_CursorParTabStopDelete
 ;                  @Error: 1, @Extended: 2 = $iTabStop not an Integer.
 ;                  @Error: 1, @Extended: 3 = TabStop called in $iTabStop not found.
 ;                  @Error: 1, @Extended: 4 = $iPosition not an Integer.
-;                  @Error: 1, @Extended: 5 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 6 = $iDecChar not an Integer.
 ;                  @Error: 1, @Extended: 7 = $iFillChar not an Integer.
 ;                  --Processing Errors--

@@ -8,16 +8,16 @@
 #include "LibreOffice_Helper.au3"
 #include "LibreOffice_Internal.au3"
 
-; Common includes for Impress
-#include "LibreOfficeImpress_Internal.au3"
-#include "LibreOfficeImpress_Constants.au3"
+; Common includes for Draw
+#include "LibreOfficeDraw_Internal.au3"
+#include "LibreOfficeDraw_Constants.au3"
 
-; Other includes for Impress
+; Other includes for Draw
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice UDF
 ; AutoIt Version : v3.3.16.1
-; Description ...: Provides basic functionality through AutoIt for Creating, Modifying, and Deleting, etc. Impress Tables.
+; Description ...: Provides basic functionality through AutoIt for Creating, Modifying, and Deleting, etc. Draw Tables.
 ; Author(s) .....: donnyh13, mLipok
 ; Dll ...........:
 ; Note...........:
@@ -179,7 +179,7 @@ EndFunc   ;==>_LODraw_TableBackColor
 ; Syntax ........: _LODraw_TableBackFillStyle(ByRef $oTable)
 ; Parameters ....: $oTable              - A Table Shape object returned by a previous _LODraw_TableInsert, or _LODraw_ShapesGetList function.
 ; Return values .: Success: Integer
-;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOD_AREA_FILL_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOD_AREA_FILL_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
@@ -230,8 +230,8 @@ EndFunc   ;==>_LODraw_TableBackFillStyle
 ; Description ...: Set or Retrieve the settings for Table Background color Gradient.
 ; Syntax ........: _LODraw_TableBackGradient(ByRef $oTable[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
 ; Parameters ....: $oTable              - A Table Shape object returned by a previous _LODraw_TableInsert, or _LODraw_ShapesGetList function.
-;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOD_GRAD_NAME_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOD_GRAD_NAME_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iIncrement          - [optional] (0, 3-256) Default is Null. The number of steps of color change. 0 = Automatic.
 ;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient, where 0% corresponds to the current horizontal location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" setting. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage. $iType must be other than "Linear", or "Axial".
@@ -248,7 +248,7 @@ EndFunc   ;==>_LODraw_TableBackFillStyle
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $sGradientName not a String.
-;                  @Error: 1, @Extended: 3 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 4 = $iIncrement not an Integer, less than 3, but not 0, or greater than 256.
 ;                  @Error: 1, @Extended: 5 = $iXCenter not an Integer, less than 0 or greater than 100.
 ;                  @Error: 1, @Extended: 6 = $iYCenter not an Integer, less than 0 or greater than 100.
@@ -898,24 +898,24 @@ EndFunc   ;==>_LODraw_TableBorderPadding
 ; Description ...: Set or Retrieve the Table Border Line style. L.O. 3.6+.
 ; Syntax ........: _LODraw_TableBorderStyle(ByRef $oTable[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $iVert = Null[, $iHori = Null]]]]]])
 ; Parameters ....: $oTable              - A Table Shape object returned by a previous _LODraw_TableInsert, or _LODraw_ShapesGetList function.
-;                  $iTop                - [optional] (0x7FFF,0-17) Default is Null. The Top Border Line Style of the Table. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iBottom             - [optional] (0x7FFF,0-17) Default is Null. The Bottom Border Line Style of the Table. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iLeft               - [optional] (0x7FFF,0-17) Default is Null. The Left Border Line Style of the Table. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iRight              - [optional] (0x7FFF,0-17) Default is Null. The Right Border Line Style of the Table. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iVert               - [optional] (0x7FFF,0-17) Default is Null. The internal Vertical Border Line Styles of the Table. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iHori               - [optional] (0x7FFF,0-17) Default is Null. The internal Horizontal Border Line Styles of the Table. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iTop                - [optional] (0x7FFF,0-17) Default is Null. The Top Border Line Style of the Table. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iBottom             - [optional] (0x7FFF,0-17) Default is Null. The Bottom Border Line Style of the Table. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iLeft               - [optional] (0x7FFF,0-17) Default is Null. The Left Border Line Style of the Table. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iRight              - [optional] (0x7FFF,0-17) Default is Null. The Right Border Line Style of the Table. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iVert               - [optional] (0x7FFF,0-17) Default is Null. The internal Vertical Border Line Styles of the Table. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iHori               - [optional] (0x7FFF,0-17) Default is Null. The internal Horizontal Border Line Styles of the Table. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
-;                  @Error: 1, @Extended: 2 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 3 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 4 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 5 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 6 = $iVert not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 7 = $iHori not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iVert not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 7 = $iHori not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Error Creating "com.sun.star.table.BorderLine2" Object.
 ;                  --Processing Errors--
@@ -975,12 +975,12 @@ EndFunc   ;==>_LODraw_TableBorderStyle
 ; Description ...: Set or Retrieve the Table Border Line Width. L.O. 3.6+.
 ; Syntax ........: _LODraw_TableBorderWidth(ByRef $oTable[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null[, $iVert = Null[, $iHori = Null]]]]]])
 ; Parameters ....: $oTable              - A Table Shape object returned by a previous _LODraw_TableInsert, or _LODraw_ShapesGetList function.
-;                  $iTop                - [optional] Default is Null. The Top Border Line width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOD_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iBottom             - [optional] Default is Null. The Bottom Border Line Width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOD_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iLeft               - [optional] Default is Null. The Left Border Line width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOD_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iRight              - [optional] Default is Null. The Right Border Line Width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOD_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iVert               - [optional] Default is Null. The Internal Vertical Border Line width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOD_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iHori               - [optional] Default is Null. The Internal Horizontal Border Line width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOD_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iTop                - [optional] Default is Null. The Top Border Line width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOD_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iBottom             - [optional] Default is Null. The Bottom Border Line Width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOD_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iLeft               - [optional] Default is Null. The Left Border Line width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOD_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iRight              - [optional] Default is Null. The Right Border Line Width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOD_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iVert               - [optional] Default is Null. The Internal Vertical Border Line width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOD_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iHori               - [optional] Default is Null. The Internal Horizontal Border Line width of the Table in Hundredths of a Millimeter (HMM). Can be a custom value, or one of the constants, $LOD_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
@@ -1109,7 +1109,7 @@ EndFunc   ;==>_LODraw_TableCellBackColor
 ; Syntax ........: _LODraw_TableCellBackFillStyle(ByRef $oCell)
 ; Parameters ....: $oCell               - A Table Cell object returned by a previous _LODraw_TableCellGetObjByPosition function.
 ; Return values .: Success: Integer
-;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOD_AREA_FILL_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOD_AREA_FILL_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCell not an Object.
@@ -1143,8 +1143,8 @@ EndFunc   ;==>_LODraw_TableCellBackFillStyle
 ; Syntax ........: _LODraw_TableCellBackGradient(ByRef $oDoc, ByRef $oCell[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $oCell               - A Table Cell object returned by a previous _LODraw_TableCellGetObjByPosition function.
-;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOD_GRAD_NAME_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOD_GRAD_NAME_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iIncrement          - [optional] (0, 3-256) Default is Null. The number of steps of color change. 0 = Automatic.
 ;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient, where 0% corresponds to the current horizontal location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" setting. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage. $iType must be other than "Linear", or "Axial".
@@ -1163,7 +1163,7 @@ EndFunc   ;==>_LODraw_TableCellBackFillStyle
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oCell not an Object.
 ;                  @Error: 1, @Extended: 3 = $sGradientName not a String.
-;                  @Error: 1, @Extended: 4 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 5 = $iIncrement not an Integer, less than 3, but not 0, or greater than 256.
 ;                  @Error: 1, @Extended: 6 = $iXCenter not an Integer, less than 0 or greater than 100.
 ;                  @Error: 1, @Extended: 7 = $iYCenter not an Integer, less than 0 or greater than 100.
@@ -1615,20 +1615,20 @@ EndFunc   ;==>_LODraw_TableCellBorderPadding
 ; Description ...: Set or Retrieve the Cell Border Line style. L.O. 3.4+.
 ; Syntax ........: _LODraw_TableCellBorderStyle(ByRef $oCell[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oCell               - A Table Cell object returned by a previous _LODraw_TableCellGetObjByPosition function.
-;                  $iTop                - [optional] (0x7FFF,0-17) Default is Null. The Top Border Line Style of the Cell. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iBottom             - [optional] (0x7FFF,0-17) Default is Null. The Bottom Border Line Style of the Cell. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iLeft               - [optional] (0x7FFF,0-17) Default is Null. The Left Border Line Style of the Cell. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iRight              - [optional] (0x7FFF,0-17) Default is Null. The Right Border Line Style of the Cell. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iTop                - [optional] (0x7FFF,0-17) Default is Null. The Top Border Line Style of the Cell. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iBottom             - [optional] (0x7FFF,0-17) Default is Null. The Bottom Border Line Style of the Cell. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iLeft               - [optional] (0x7FFF,0-17) Default is Null. The Left Border Line Style of the Cell. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iRight              - [optional] (0x7FFF,0-17) Default is Null. The Right Border Line Style of the Cell. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCell not an Object.
-;                  @Error: 1, @Extended: 2 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 3 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 4 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 5 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iTop not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iBottom not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iLeft not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iRight not an Integer, less than 0 or greater than 17, but not equal to 0x7FFF. See Constants, $LOD_SHAPE_BORDER_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Error Creating "com.sun.star.table.BorderLine2" Object.
 ;                  --Processing Errors--
@@ -1673,10 +1673,10 @@ EndFunc   ;==>_LODraw_TableCellBorderStyle
 ; Description ...: Set or Retrieve the Cell Border Line Width. L.O. 3.4+.
 ; Syntax ........: _LODraw_TableCellBorderWidth(ByRef $oCell[, $iTop = Null[, $iBottom = Null[, $iLeft = Null[, $iRight = Null]]]])
 ; Parameters ....: $oCell               - A Table Cell object returned by a previous _LODraw_TableCellGetObjByPosition function.
-;                  $iTop                - [optional] Default is Null. The Top Border Line width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOD_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iBottom             - [optional] Default is Null. The Bottom Border Line Width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOD_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iLeft               - [optional] Default is Null. The Left Border Line width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOD_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iRight              - [optional] Default is Null. The Right Border Line Width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOD_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iTop                - [optional] Default is Null. The Top Border Line width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOD_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iBottom             - [optional] Default is Null. The Bottom Border Line Width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOD_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iLeft               - [optional] Default is Null. The Left Border Line width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOD_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iRight              - [optional] Default is Null. The Right Border Line Width of the Cell in Hundredths of a Millimeter (HMM). Can be a custom value or one of the constants, $LOD_SHAPE_BORDER_WIDTH_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -1727,8 +1727,8 @@ EndFunc   ;==>_LODraw_TableCellBorderWidth
 ; Description ...: Set or Retrieve the Font Effect settings for a Table cell.
 ; Syntax ........: _LODraw_TableCellCharEffect(ByRef $oCell[, $iCase = Null[, $iRelief = Null[, $bOutline = Null[, $bShadow = Null]]]])
 ; Parameters ....: $oCell               - A Table Cell object returned by a previous _LODraw_TableCellGetObjByPosition function.
-;                  $iCase               - [optional] (0-4) Default is Null. The Character Case Style. See Constants, $LOD_CHAR_CASEMAP_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iRelief             - [optional] (0-2) Default is Null. The Character Relief style. See Constants, $LOD_CHAR_RELIEF_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iCase               - [optional] (0-4) Default is Null. The Character Case Style. See Constants, $LOD_CHAR_CASEMAP_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iRelief             - [optional] (0-2) Default is Null. The Character Relief style. See Constants, $LOD_CHAR_RELIEF_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $bOutline            - [optional] Default is Null. If True, the characters have an outline around the outside.
 ;                  $bShadow             - [optional] Default is Null. If True, the characters have a shadow.
 ; Return values .: Success: 1 or Array.
@@ -1737,8 +1737,8 @@ EndFunc   ;==>_LODraw_TableCellBorderWidth
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCell not an Object.
-;                  @Error: 1, @Extended: 2 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOD_CHAR_CASEMAP_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 3 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOD_CHAR_RELIEF_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOD_CHAR_CASEMAP_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOD_CHAR_RELIEF_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 4 = $bOutline not a Boolean.
 ;                  @Error: 1, @Extended: 5 = $bShadow not a Boolean.
 ;                  --Property Setting Errors--
@@ -1775,8 +1775,8 @@ EndFunc   ;==>_LODraw_TableCellCharEffect
 ; Parameters ....: $oCell               - A Table Cell object returned by a previous _LODraw_TableCellGetObjByPosition function.
 ;                  $sFontName           - [optional] Default is Null. The Font Name to use.
 ;                  $nFontSize           - [optional] Default is Null. The new Font size.
-;                  $iPosture            - [optional] (0-5) Default is Null. The Font Italic setting. See Constants, $LOD_CHAR_POSTURE_* as defined in LibreOfficeImpress_Constants.au3. Also see remarks.
-;                  $iWeight             - [optional] (0, 50-200) Default is Null. The Font Bold settings see Constants, $LOD_CHAR_WEIGHT_* as defined in LibreOfficeImpress_Constants.au3. Also see remarks.
+;                  $iPosture            - [optional] (0-5) Default is Null. The Font Italic setting. See Constants, $LOD_CHAR_POSTURE_* as defined in LibreOfficeDraw_Constants.au3. Also see remarks.
+;                  $iWeight             - [optional] (0, 50-200) Default is Null. The Font Bold settings see Constants, $LOD_CHAR_WEIGHT_* as defined in LibreOfficeDraw_Constants.au3. Also see remarks.
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -1786,8 +1786,8 @@ EndFunc   ;==>_LODraw_TableCellCharEffect
 ;                  @Error: 1, @Extended: 2 = $sFontName not a String.
 ;                  @Error: 1, @Extended: 3 = Font called in $sFontName not available.
 ;                  @Error: 1, @Extended: 4 = $nFontSize not a number.
-;                  @Error: 1, @Extended: 5 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOD_CHAR_POSTURE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 6 = $iWeight not an Integer, less than 50 but not equal to 0, or greater than 200. See Constants, $LOD_CHAR_WEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOD_CHAR_POSTURE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iWeight not an Integer, less than 50 but not equal to 0, or greater than 200. See Constants, $LOD_CHAR_WEIGHT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sFontName
@@ -1869,7 +1869,7 @@ EndFunc   ;==>_LODraw_TableCellCharFontColor
 ; Description ...: Set and retrieve the OverLine settings for a Table cell.
 ; Syntax ........: _LODraw_TableCellCharOverLine(ByRef $oCell[, $iOverLineStyle = Null[, $iOLColor = Null[, $bWordOnly = Null]]])
 ; Parameters ....: $oCell               - A Table Cell object returned by a previous _LODraw_TableCellGetObjByPosition function.
-;                  $iOverLineStyle      - [optional] (0-18) Default is Null. The style of the Overline line, see constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
+;                  $iOverLineStyle      - [optional] (0-18) Default is Null. The style of the Overline line, see constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeDraw_Constants.au3. See Remarks.
 ;                  $iOLColor            - [optional] (-1-16777215) Default is Null. The Overline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
 ;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not Overlined.
 ; Return values .: Success: 1 or Array
@@ -1878,7 +1878,7 @@ EndFunc   ;==>_LODraw_TableCellCharFontColor
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCell not an Object.
-;                  @Error: 1, @Extended: 2 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
+;                  @Error: 1, @Extended: 2 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeDraw_Constants.au3. See Remarks.
 ;                  @Error: 1, @Extended: 3 = $iOLColor not an Integer, less than -1 or greater than 16777215.
 ;                  @Error: 1, @Extended: 4 = $bWordOnly not a Boolean.
 ;                  --Property Setting Errors--
@@ -2044,7 +2044,7 @@ EndFunc   ;==>_LODraw_TableCellCharSpacing
 ; Description ...: Set or Retrieve the Strikeout settings for a Table cell.
 ; Syntax ........: _LODraw_TableCellCharStrikeOut(ByRef $oCell[, $iStrikeLineStyle = Null[, $bWordOnly = Null]])
 ; Parameters ....: $oCell               - A Table Cell object returned by a previous _LODraw_TableCellGetObjByPosition function.
-;                  $iStrikeLineStyle    - [optional] (0-6) Default is Null. The Strikeout Line Style, see constants, $LOD_CHAR_STRIKEOUT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iStrikeLineStyle    - [optional] (0-6) Default is Null. The Strikeout Line Style, see constants, $LOD_CHAR_STRIKEOUT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $bWordOnly           - [optional] Default is Null. If True, strike out is applied to words only, skipping whitespaces.
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -2052,7 +2052,7 @@ EndFunc   ;==>_LODraw_TableCellCharSpacing
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCell not an Object.
-;                  @Error: 1, @Extended: 2 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOD_CHAR_STRIKEOUT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOD_CHAR_STRIKEOUT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $bWordOnly not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
@@ -2084,7 +2084,7 @@ EndFunc   ;==>_LODraw_TableCellCharStrikeOut
 ; Description ...: Set or retrieve Underline settings for a Table cell.
 ; Syntax ........: _LODraw_TableCellCharUnderLine(ByRef $oCell[, $iUnderLineStyle = Null[, $iULColor = Null[, $bWordOnly = Null]]])
 ; Parameters ....: $oCell               - A Table Cell object returned by a previous _LODraw_TableCellGetObjByPosition function.
-;                  $iUnderLineStyle     - [optional] (0-18) Default is Null. The Underline line style, see constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iUnderLineStyle     - [optional] (0-18) Default is Null. The Underline line style, see constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iULColor            - [optional] (-1-16777215) Default is Null. The underline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
 ;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not underlined.
 ; Return values .: Success: 1 or Array
@@ -2093,7 +2093,7 @@ EndFunc   ;==>_LODraw_TableCellCharStrikeOut
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCell an Object.
-;                  @Error: 1, @Extended: 2 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $iULColor not an Integer, less than -1 or greater than 16777215.
 ;                  @Error: 1, @Extended: 4 = $bWordOnly not a Boolean.
 ;                  --Property Setting Errors--
@@ -2200,18 +2200,18 @@ EndFunc   ;==>_LODraw_TableCellGetObjByPosition
 ; Description ...: Set and Retrieve Paragraph Alignment settings for a Table cell.
 ; Syntax ........: _LODraw_TableCellParAlignment(ByRef $oCell[, $iHorAlign = Null[, $iLastLineAlign = Null[, $iTxtDirection = Null]]])
 ; Parameters ....: $oCell               - A Table Cell object returned by a previous _LODraw_TableCellGetObjByPosition function.
-;                  $iHorAlign           - [optional] (0-3) Default is Null. The Horizontal alignment of the paragraph. See Constants, $LOD_PAR_ALIGN_HOR_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
-;                  $iLastLineAlign      - [optional] (0-3) Default is Null. Specify the alignment for the last line in the paragraph. See Constants, $LOD_PAR_LAST_LINE_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
-;                  $iTxtDirection       - [optional] (0-5) Default is Null. The Text Writing Direction. See Constants, $LOD_PAR_TXT_DIR_* as defined in LibreOfficeImpress_Constants.au3. [LibreOffice Default is 4]
+;                  $iHorAlign           - [optional] (0-3) Default is Null. The Horizontal alignment of the paragraph. See Constants, $LOD_PAR_ALIGN_HOR_* as defined in LibreOfficeDraw_Constants.au3. See Remarks.
+;                  $iLastLineAlign      - [optional] (0-3) Default is Null. Specify the alignment for the last line in the paragraph. See Constants, $LOD_PAR_LAST_LINE_* as defined in LibreOfficeDraw_Constants.au3. See Remarks.
+;                  $iTxtDirection       - [optional] (0-5) Default is Null. The Text Writing Direction. See Constants, $LOD_PAR_TXT_DIR_* as defined in LibreOfficeDraw_Constants.au3. [LibreOffice Default is 4]
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oCell not an Object.
-;                  @Error: 1, @Extended: 2 = $iHorAlign not an Integer, less than 0 or greater than 3. See Constants, $LOD_PAR_ALIGN_HOR_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 3 = $iLastLineAlign not an Integer, less than 0 or greater than 3. See Constants, $LOD_PAR_LAST_LINE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 4 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOD_PAR_TXT_DIR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iHorAlign not an Integer, less than 0 or greater than 3. See Constants, $LOD_PAR_ALIGN_HOR_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iLastLineAlign not an Integer, less than 0 or greater than 3. See Constants, $LOD_PAR_LAST_LINE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOD_PAR_TXT_DIR_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iHorAlign
@@ -2292,7 +2292,7 @@ EndFunc   ;==>_LODraw_TableCellParIndent
 ; Parameters ....: $oCell               - A Table Cell object returned by a previous _LODraw_TableCellGetObjByPosition function.
 ;                  $iAbovePar           - [optional] (0-100000) Default is Null. The Space above a paragraph, in Hundredths of a Millimeter (HMM).
 ;                  $iBelowPar           - [optional] (0-100000) Default is Null. The Space Below a paragraph, in Hundredths of a Millimeter (HMM).
-;                  $iLineSpcMode        - [optional] (0-3) Default is Null. The line spacing type of the paragraph. See Constants, $LOD_PAR_LINE_SPC_MODE_* as defined in LibreOfficeImpress_Constants.au3, also notice min and max values for each.
+;                  $iLineSpcMode        - [optional] (0-3) Default is Null. The line spacing type of the paragraph. See Constants, $LOD_PAR_LINE_SPC_MODE_* as defined in LibreOfficeDraw_Constants.au3, also notice min and max values for each.
 ;                  $iLineSpcHeight      - [optional] Default is Null. This value specifies the height in regard to Mode. See Remarks.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -2302,7 +2302,7 @@ EndFunc   ;==>_LODraw_TableCellParIndent
 ;                  @Error: 1, @Extended: 1 = $oCell not an Object.
 ;                  @Error: 1, @Extended: 2 = $iAbovePar not an Integer, less than 0 or greater than 100000.
 ;                  @Error: 1, @Extended: 3 = $iBelowPar not an Integer, less than 0 or greater than 100000.
-;                  @Error: 1, @Extended: 4 = $iLineSpcMode not an Integer, less than 0 or greater than 3. See Constants, $LOD_PAR_LINE_SPC_MODE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iLineSpcMode not an Integer, less than 0 or greater than 3. See Constants, $LOD_PAR_LINE_SPC_MODE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 5 = $iLineSpcHeight not an Integer.
 ;                  @Error: 1, @Extended: 6 = $iLineSpcMode set to 0(Proportional) and $iLineSpcHeight less than 6(%) or greater than 65535(%).
 ;                  @Error: 1, @Extended: 7 = $iLineSpcMode set to 1 or 2(Minimum, or Leading) and $iLineSpcHeight less than 0 or greater than 100000.
@@ -2346,7 +2346,7 @@ EndFunc   ;==>_LODraw_TableCellParSpacing
 ; Syntax ........: _LODraw_TableCellParTabStopCreate(ByRef $oCell, $iPosition[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]])
 ; Parameters ....: $oCell               - A Table Cell object returned by a previous _LODraw_TableCellGetObjByPosition function.
 ;                  $iPosition           - The TabStop position to set the new TabStop to. Set in Hundredths of a Millimeter (HMM). See Remarks.
-;                  $iAlignment          - [optional] (0-4) Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iAlignment          - [optional] (0-4) Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iDecChar            - [optional] Default is Null. Enter a character(in Asc Value(See AutoIt Asc Function)) that you want the decimal tab to use as a decimal separator. Can only be set if $iAlignment is set to $LOD_PAR_TAB_ALIGN_DECIMAL.
 ;                  $iFillChar           - [optional] Default is Null. The Asc (see AutoIt function) value of any character (except 0/Null) you want to act as a Tab Fill character. See remarks.
 ; Return values .: Success: Integer.
@@ -2356,7 +2356,7 @@ EndFunc   ;==>_LODraw_TableCellParSpacing
 ;                  @Error: 1, @Extended: 1 = $oCell not an Object.
 ;                  @Error: 1, @Extended: 2 = $iPosition not an Integer.
 ;                  @Error: 1, @Extended: 3 = Tab Stop position called in $iPosition already exists in this Paragraph.
-;                  @Error: 1, @Extended: 4 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 5 = $iDecChar not an Integer.
 ;                  @Error: 1, @Extended: 6 = $iFillChar not an Integer.
 ;                  --Initialization Errors--
@@ -2437,7 +2437,7 @@ EndFunc   ;==>_LODraw_TableCellParTabStopDelete
 ; Parameters ....: $oCell               - A Table Cell object returned by a previous _LODraw_TableCellGetObjByPosition function.
 ;                  $iTabStop            - The Tab position of the TabStop to modify. See Remarks.
 ;                  $iPosition           - [optional] Default is Null. The New position to set the input position to. Set in Hundredths of a Millimeter (HMM). See Remarks.
-;                  $iAlignment          - [optional] (0-4) Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iAlignment          - [optional] (0-4) Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iDecChar            - [optional] Default is Null. Enter a character(in Asc Value(See AutoIt Asc Function)) that you want the decimal tab to use as a decimal separator. Can only be set if $iAlignment is set to $LOD_PAR_TAB_ALIGN_DECIMAL.
 ;                  $iFillChar           - [optional] Default is Null. The Asc (see AutoIt function) value of any character (except 0/Null) you want to act as a Tab Fill character. See remarks.
 ; Return values .: Success: Integer or Array.
@@ -2450,7 +2450,7 @@ EndFunc   ;==>_LODraw_TableCellParTabStopDelete
 ;                  @Error: 1, @Extended: 2 = $iTabStop not an Integer.
 ;                  @Error: 1, @Extended: 3 = TabStop called in $iTabStop not found.
 ;                  @Error: 1, @Extended: 4 = $iPosition not an Integer.
-;                  @Error: 1, @Extended: 5 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 6 = $iDecChar not an Integer.
 ;                  @Error: 1, @Extended: 7 = $iFillChar not an Integer.
 ;                  --Processing Errors--
@@ -2580,8 +2580,8 @@ EndFunc   ;==>_LODraw_TableCellString
 ; Description ...: Set or Retrieve the Font Effect settings for a Table.
 ; Syntax ........: _LODraw_TableCharEffect(ByRef $oTable[, $iCase = Null[, $iRelief = Null[, $bOutline = Null[, $bShadow = Null]]]])
 ; Parameters ....: $oTable              - A Table Shape object returned by a previous _LODraw_TableInsert, or _LODraw_ShapesGetList function.
-;                  $iCase               - [optional] (0-4) Default is Null. The Character Case Style. See Constants, $LOD_CHAR_CASEMAP_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iRelief             - [optional] (0-2) Default is Null. The Character Relief style. See Constants, $LOD_CHAR_RELIEF_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iCase               - [optional] (0-4) Default is Null. The Character Case Style. See Constants, $LOD_CHAR_CASEMAP_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iRelief             - [optional] (0-2) Default is Null. The Character Relief style. See Constants, $LOD_CHAR_RELIEF_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $bOutline            - [optional] Default is Null. If True, the characters have an outline around the outside.
 ;                  $bShadow             - [optional] Default is Null. If True, the characters have a shadow.
 ; Return values .: Success: 1 or Array.
@@ -2590,8 +2590,8 @@ EndFunc   ;==>_LODraw_TableCellString
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
-;                  @Error: 1, @Extended: 2 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOD_CHAR_CASEMAP_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 3 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOD_CHAR_RELIEF_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOD_CHAR_CASEMAP_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOD_CHAR_RELIEF_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 4 = $bOutline not a Boolean.
 ;                  @Error: 1, @Extended: 5 = $bShadow not a Boolean.
 ;                  --Processing Errors--
@@ -2702,8 +2702,8 @@ EndFunc   ;==>_LODraw_TableCharEffect
 ; Parameters ....: $oTable              - A Table Shape object returned by a previous _LODraw_TableInsert, or _LODraw_ShapesGetList function.
 ;                  $sFontName           - [optional] Default is Null. The Font Name to use.
 ;                  $nFontSize           - [optional] Default is Null. The new Font size.
-;                  $iPosture            - [optional] (0-5) Default is Null. The Font Italic setting. See Constants, $LOD_CHAR_POSTURE_* as defined in LibreOfficeImpress_Constants.au3. Also see remarks.
-;                  $iWeight             - [optional] (0, 50-200) Default is Null. The Font Bold settings see Constants, $LOD_CHAR_WEIGHT_* as defined in LibreOfficeImpress_Constants.au3. Also see remarks.
+;                  $iPosture            - [optional] (0-5) Default is Null. The Font Italic setting. See Constants, $LOD_CHAR_POSTURE_* as defined in LibreOfficeDraw_Constants.au3. Also see remarks.
+;                  $iWeight             - [optional] (0, 50-200) Default is Null. The Font Bold settings see Constants, $LOD_CHAR_WEIGHT_* as defined in LibreOfficeDraw_Constants.au3. Also see remarks.
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -2713,8 +2713,8 @@ EndFunc   ;==>_LODraw_TableCharEffect
 ;                  @Error: 1, @Extended: 2 = $sFontName not a String.
 ;                  @Error: 1, @Extended: 3 = Font called in $sFontName not available.
 ;                  @Error: 1, @Extended: 4 = $nFontSize not a number.
-;                  @Error: 1, @Extended: 5 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOD_CHAR_POSTURE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 6 = $iWeight not an Integer, less than 50 but not equal to 0, or greater than 200. See Constants, $LOD_CHAR_WEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOD_CHAR_POSTURE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iWeight not an Integer, less than 50 but not equal to 0, or greater than 200. See Constants, $LOD_CHAR_WEIGHT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Cell Object.
 ;                  --Property Setting Errors--
@@ -2961,7 +2961,7 @@ EndFunc   ;==>_LODraw_TableCharFontColor
 ; Description ...: Set and retrieve the OverLine settings for a Table.
 ; Syntax ........: _LODraw_TableCharOverLine(ByRef $oTable[, $iOverLineStyle = Null[, $iOLColor = Null[, $bWordOnly = Null]]])
 ; Parameters ....: $oTable              - A Table Shape object returned by a previous _LODraw_TableInsert, or _LODraw_ShapesGetList function.
-;                  $iOverLineStyle      - [optional] (0-18) Default is Null. The style of the Overline line, see constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
+;                  $iOverLineStyle      - [optional] (0-18) Default is Null. The style of the Overline line, see constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeDraw_Constants.au3. See Remarks.
 ;                  $iOLColor            - [optional] (-1-16777215) Default is Null. The Overline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
 ;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not Overlined.
 ; Return values .: Success: 1 or Array
@@ -2970,7 +2970,7 @@ EndFunc   ;==>_LODraw_TableCharFontColor
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
-;                  @Error: 1, @Extended: 2 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
+;                  @Error: 1, @Extended: 2 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeDraw_Constants.au3. See Remarks.
 ;                  @Error: 1, @Extended: 3 = $iOLColor not an Integer, less than -1 or greater than 16777215.
 ;                  @Error: 1, @Extended: 4 = $bWordOnly not a Boolean.
 ;                  --Processing Errors--
@@ -3081,7 +3081,7 @@ EndFunc   ;==>_LODraw_TableCharOverLine
 ; Description ...: Set or Retrieve the Strikeout settings for a Table.
 ; Syntax ........: _LODraw_TableCharStrikeOut(ByRef $oTable[, $iStrikeLineStyle = Null[, $bWordOnly = Null]])
 ; Parameters ....: $oTable              - A Table Shape object returned by a previous _LODraw_TableInsert, or _LODraw_ShapesGetList function.
-;                  $iStrikeLineStyle    - [optional] (0-6) Default is Null. The Strikeout Line Style, see constants, $LOD_CHAR_STRIKEOUT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iStrikeLineStyle    - [optional] (0-6) Default is Null. The Strikeout Line Style, see constants, $LOD_CHAR_STRIKEOUT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $bWordOnly           - [optional] Default is Null. If True, strike out is applied to words only, skipping whitespaces.
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -3089,7 +3089,7 @@ EndFunc   ;==>_LODraw_TableCharOverLine
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
-;                  @Error: 1, @Extended: 2 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOD_CHAR_STRIKEOUT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOD_CHAR_STRIKEOUT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $bWordOnly not a Boolean.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Cell Object.
@@ -3181,7 +3181,7 @@ EndFunc   ;==>_LODraw_TableCharStrikeOut
 ; Description ...: Set and retrieve the Underline settings for a Table.
 ; Syntax ........: _LODraw_TableCharUnderLine(ByRef $oTable[, $iUnderLineStyle = Null[, $iULColor = Null[, $bWordOnly = Null]]])
 ; Parameters ....: $oTable              - A Table Shape object returned by a previous _LODraw_TableInsert, or _LODraw_ShapesGetList function.
-;                  $iUnderLineStyle     - [optional] (0-18) Default is Null. The Underline line style, see constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iUnderLineStyle     - [optional] (0-18) Default is Null. The Underline line style, see constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iULColor            - [optional] (-1-16777215) Default is Null. The underline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
 ;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not underlined.
 ; Return values .: Success: 1 or Array
@@ -3190,7 +3190,7 @@ EndFunc   ;==>_LODraw_TableCharStrikeOut
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable an Object.
-;                  @Error: 1, @Extended: 2 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $iULColor not an Integer, less than -1 or greater than 16777215.
 ;                  @Error: 1, @Extended: 4 = $bWordOnly not a Boolean.
 ;                  --Processing Errors--
@@ -3639,7 +3639,7 @@ EndFunc   ;==>_LODraw_TableRowInsert
 ; Syntax ........: _LODraw_TableShadow(ByRef $oTable[, $bShadow = Null[, $iLocation = Null[, $iColor = Null[, $iDistance = Null[, $iBlur = Null[, $iTransparency = Null]]]]]])
 ; Parameters ....: $oTable              - A Table Shape object returned by a previous _LODraw_TableInsert, or _LODraw_ShapesGetList function.
 ;                  $bShadow             - [optional] Default is Null. If True, a Shadow is present for the Shape.
-;                  $iLocation           - [optional] (0-8) Default is Null. The Location of the Shadow, must be one of the Constants, $LOD_SHAPE_SHADOW_LOCATION_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iLocation           - [optional] (0-8) Default is Null. The Location of the Shadow, must be one of the Constants, $LOD_SHAPE_SHADOW_LOCATION_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iColor              - [optional] (0-16777215) Default is Null. The Shadow color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iDistance           - [optional] Default is Null. The distance of the Shadow from the Shape's edges, set in Hundredths of a Millimeter (HMM).
 ;                  $iBlur               - [optional] (0-150) Default is Null. The amount of blur applied to the Shadow, set in Printer's Points.
@@ -3651,7 +3651,7 @@ EndFunc   ;==>_LODraw_TableRowInsert
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $bShadow not a Boolean.
-;                  @Error: 1, @Extended: 3 = $iLocation not an Integer, less than 0 or greater than 8. See Constants, $LOD_SHAPE_SHADOW_LOCATION_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iLocation not an Integer, less than 0 or greater than 8. See Constants, $LOD_SHAPE_SHADOW_LOCATION_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 4 = $iColor not an Integer, less than 0 or greater than 16777215.
 ;                  @Error: 1, @Extended: 5 = $iDistance not an Integer, or less than 0.
 ;                  @Error: 1, @Extended: 6 = $iBlur not an Integer, less than 0 or greater than 150 Printer's Points.

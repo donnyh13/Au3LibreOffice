@@ -8,16 +8,16 @@
 #include "LibreOffice_Helper.au3"
 #include "LibreOffice_Internal.au3"
 
-; Common includes for Impress
-#include "LibreOfficeImpress_Internal.au3"
-#include "LibreOfficeImpress_Constants.au3"
+; Common includes for Draw
+#include "LibreOfficeDraw_Internal.au3"
+#include "LibreOfficeDraw_Constants.au3"
 
-; Other includes for Impress
+; Other includes for Draw
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice UDF
 ; AutoIt Version : v3.3.16.1
-; Description ...: Provides basic functionality through AutoIt for Creating, Modifying, Deleting, etc. L.O. Impress Slides.
+; Description ...: Provides basic functionality through AutoIt for Creating, Modifying, Deleting, etc. L.O. Draw Slides.
 ; Author(s) .....: donnyh13, mLipok
 ; Dll ...........:
 ;
@@ -248,7 +248,7 @@ EndFunc   ;==>_LODraw_SlideBackColor
 ; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
 ;                  $bFillOff            - [optional] Default is False. If True, the Fill style will be set to Off. See remarks.
 ; Return values .: Success: Integer
-;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOD_AREA_FILL_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOD_AREA_FILL_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 0, @Extended: 1, Return: 0 = Success. Fill style was successfully turned off.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
@@ -260,7 +260,7 @@ EndFunc   ;==>_LODraw_SlideBackColor
 ; Modified ......:
 ; Remarks .......: This function is to help determine if a Gradient background, or a solid color background is currently active.
 ;                  This is useful because, if a Gradient is active, the solid color value is still present, and thus it would not be possible to determine which function should be used to retrieve the current values for, whether the Color function, or the Gradient function.
-;                  When the Fill style is disabled for a Slide, the Fill properties are completely removed. This is how Impress works normally.
+;                  When the Fill style is disabled for a Slide, the Fill properties are completely removed. This is how Draw works normally.
 ;                  $bFillOff will do nothing if it is called with False, and is not, of course, returned when retrieving the FillStyle value.
 ; Related .......: _LODraw_SlideBackColor, _LODraw_SlideBackGradient, _LODraw_SlideMasterBackFillStyle
 ; Link ..........:
@@ -302,8 +302,8 @@ EndFunc   ;==>_LODraw_SlideBackFillStyle
 ; Description ...: Set or Retrieve the settings for Slide Background color Gradient.
 ; Syntax ........: _LODraw_SlideBackGradient(ByRef $oSlide[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
 ; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
-;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOD_GRAD_NAME_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOD_GRAD_NAME_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iIncrement          - [optional] (0, 3-256) Default is Null. The number of steps of color change. 0 = Automatic.
 ;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient, where 0% corresponds to the current horizontal location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" setting. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage. $iType must be other than "Linear", or "Axial".
@@ -322,7 +322,7 @@ EndFunc   ;==>_LODraw_SlideBackFillStyle
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
 ;                  @Error: 1, @Extended: 2 = $sGradientName not a String.
-;                  @Error: 1, @Extended: 3 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 4 = $iIncrement not an Integer, less than 3, but not 0, or greater than 256.
 ;                  @Error: 1, @Extended: 5 = $iXCenter not an Integer, less than 0 or greater than 100.
 ;                  @Error: 1, @Extended: 6 = $iYCenter not an Integer, less than 0 or greater than 100.
@@ -638,7 +638,7 @@ EndFunc   ;==>_LODraw_SlideBackTransparency
 ; Description ...: Set or retrieve the Slide's transparency gradient settings.
 ; Syntax ........: _LODraw_SlideBackTransparencyGradient(ByRef $oSlide[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
 ; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
-;                  $iType               - [optional] (-1-5) Default is Null. The type of transparency gradient to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3. Call with $LOD_GRAD_TYPE_OFF to turn Transparency Gradient off.
+;                  $iType               - [optional] (-1-5) Default is Null. The type of transparency gradient to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3. Call with $LOD_GRAD_TYPE_OFF to turn Transparency Gradient off.
 ;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iAngle              - [optional] (0-359) Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
@@ -653,7 +653,7 @@ EndFunc   ;==>_LODraw_SlideBackTransparency
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
-;                  @Error: 1, @Extended: 2 = $iType Not an Integer, less than -1 or greater than 5. See constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iType Not an Integer, less than -1 or greater than 5. See constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $iXCenter Not an Integer, less than 0 or greater than 100.
 ;                  @Error: 1, @Extended: 4 = $iYCenter Not an Integer, less than 0 or greater than 100.
 ;                  @Error: 1, @Extended: 5 = $iAngle Not an Integer, less than 0 or greater than 359.
@@ -966,7 +966,7 @@ EndFunc   ;==>_LODraw_SlideCopy
 ;                  If this function fails to return an Object with processing error 1, it is possible the current view mode is set to Slide sorter.
 ;                  You can only set the current slide to either a Master slide or a normal slide. To change views to Notes, Handouts etc., see _LODraw_DocView.
 ;                  If the current view mode is set to Slide outline or Slide Notes, the current slide Object is returned. If the current view mode is set to Master Slide Notes or Master Slide Handout, the current Master slide Object is returned.
-;                  When retrieving the current page, @Extended will be set to either $LOD_PAGE_VIEW_SLIDE or $LOD_PAGE_VIEW_MASTER. See Constants, $LOD_PAGE_VIEW_* as defined in LibreOfficeImpress_Constants.au3. Use _LODraw_DocView to determine the current view mode active.
+;                  When retrieving the current page, @Extended will be set to either $LOD_PAGE_VIEW_SLIDE or $LOD_PAGE_VIEW_MASTER. See Constants, $LOD_PAGE_VIEW_* as defined in LibreOfficeDraw_Constants.au3. Use _LODraw_DocView to determine the current view mode active.
 ; Related .......: _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, _LODraw_SlideMasterCurrent, _LODraw_DocView
 ; Link ..........:
 ; Example .......: Yes
@@ -1130,7 +1130,7 @@ EndFunc   ;==>_LODraw_SlideExists
 ;                  $bDateTime           - [optional] Default is Null. If True, a Date or Time entry is added to the footer of the slide.
 ;                  $bDateTimeIsFixed    - [optional] Default is Null. If True, the Date or Time entry is fixed.
 ;                  $sDateTimeValue      - [optional] Default is Null. If $bDateTimeIsFixed is True, this is the custom date or time value to display.
-;                  $iDateTimeFormat     - [optional] (4-112) Default is Null. If $bDateTimeIsFixed is False, the format to display the Date or Time in. See Constants, $LOD_SLIDE_DT_FMT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iDateTimeFormat     - [optional] (4-112) Default is Null. If $bDateTimeIsFixed is False, the format to display the Date or Time in. See Constants, $LOD_SLIDE_DT_FMT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $bFooter             - [optional] Default is Null. If True, a Footer entry is added to the footer of the slide.
 ;                  $sFooterText         - [optional] Default is Null. If $bFooter is True, the text to display in the footer of the Slide.
 ;                  $bSlideNum           - [optional] Default is Null. If True, a current Slide number is added to the footer of the slide.
@@ -1143,7 +1143,7 @@ EndFunc   ;==>_LODraw_SlideExists
 ;                  @Error: 1, @Extended: 2 = $bDateTime not a Boolean.
 ;                  @Error: 1, @Extended: 3 = $bDateTimeIsFixed not a Boolean.
 ;                  @Error: 1, @Extended: 4 = $sDateTimeValue not a String.
-;                  @Error: 1, @Extended: 5 = $iDateTimeFormat not an Integer, less than 4 or greater than 9 but not equal to one of the constant values. See Constants, $LOD_SLIDE_DT_FMT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iDateTimeFormat not an Integer, less than 4 or greater than 9 but not equal to one of the constant values. See Constants, $LOD_SLIDE_DT_FMT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 6 = $bFooter not a Boolean.
 ;                  @Error: 1, @Extended: 7 = $sFooterText not a String.
 ;                  @Error: 1, @Extended: 8 = $bSlideNum not a Boolean.
@@ -1247,9 +1247,9 @@ EndFunc   ;==>_LODraw_SlideFooter
 ; Description ...: Set or Retrieve the slide format settings.
 ; Syntax ........: _LODraw_SlideFormat(ByRef $oSlide[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
 ; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
-;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_HEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_WIDTH_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_HEIGHT_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -1258,7 +1258,7 @@ EndFunc   ;==>_LODraw_SlideFooter
 ;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
 ;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
-;                  @Error: 1, @Extended: 4 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve current slide width.
 ;                  --Property Setting Errors--
@@ -1442,9 +1442,9 @@ EndFunc   ;==>_LODraw_SlideHandoutFooter
 ; Description ...: Set or Retrieve the handout page format settings.
 ; Syntax ........: _LODraw_SlideHandoutFormat(ByRef $oHandout[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
 ; Parameters ....: $oHandout            - A Handout page object returned by a previous _LODraw_SlideHandoutGetObj function.
-;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_HEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_WIDTH_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_HEIGHT_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -1453,7 +1453,7 @@ EndFunc   ;==>_LODraw_SlideHandoutFooter
 ;                  @Error: 1, @Extended: 1 = $oHandout not an Object.
 ;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
-;                  @Error: 1, @Extended: 4 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve current slide width.
 ;                  --Property Setting Errors--
@@ -1485,7 +1485,7 @@ EndFunc   ;==>_LODraw_SlideHandoutFormat
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LODraw_SlideHandoutGetObj
-; Description ...: Retrieve the Handout page Object for an Impress document.
+; Description ...: Retrieve the Handout page Object for an Draw document.
 ; Syntax ........: _LODraw_SlideHandoutGetObj(ByRef $oDoc)
 ; Parameters ....: $oDoc                -  A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ; Return values .: Success: Object
@@ -1526,7 +1526,7 @@ EndFunc   ;==>_LODraw_SlideHandoutGetObj
 ;                  $bDateTime           - [optional] Default is Null. If True, a Date or Time entry is added to the header of the page.
 ;                  $bDateTimeIsFixed    - [optional] Default is Null. If True, the Date or Time entry is fixed.
 ;                  $sDateTimeValue      - [optional] Default is Null. If $bDateTimeIsFixed is True, this is the custom date or time value to display.
-;                  $iDateTimeFormat     - [optional] (4-112) Default is Null. If $bDateTimeIsFixed is False, the format to display the Date or Time in. See Constants, $LOD_SLIDE_DT_FMT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iDateTimeFormat     - [optional] (4-112) Default is Null. If $bDateTimeIsFixed is False, the format to display the Date or Time in. See Constants, $LOD_SLIDE_DT_FMT_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
@@ -1538,7 +1538,7 @@ EndFunc   ;==>_LODraw_SlideHandoutGetObj
 ;                  @Error: 1, @Extended: 4 = $bDateTime not a Boolean.
 ;                  @Error: 1, @Extended: 5 = $bDateTimeIsFixed not a Boolean.
 ;                  @Error: 1, @Extended: 6 = $sDateTimeValue not a String.
-;                  @Error: 1, @Extended: 7 = $iDateTimeFormat not an Integer, less than 4 or greater than 9 but not equal to one of the constant values. See Constants, $LOD_SLIDE_DT_FMT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 7 = $iDateTimeFormat not an Integer, less than 4 or greater than 9 but not equal to one of the constant values. See Constants, $LOD_SLIDE_DT_FMT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bHeader
@@ -1630,14 +1630,14 @@ EndFunc   ;==>_LODraw_SlideHandoutHeader
 ; Description ...: Set or Retrieve the current Handout page's layout.
 ; Syntax ........: _LODraw_SlideHandoutLayout(ByRef $oHandout[, $iLayout = Null])
 ; Parameters ....: $oHandout            - A Handout page object returned by a previous _LODraw_SlideHandoutGetObj function.
-;                  $iLayout             - [optional] (22-31) Default is Null. The layout format of the Handout page. See Constants, $LOD_HANDOUT_LAYOUT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iLayout             - [optional] (22-31) Default is Null. The layout format of the Handout page. See Constants, $LOD_HANDOUT_LAYOUT_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1 or Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current layout setting as an Integer.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oHandout not an Object.
-;                  @Error: 1, @Extended: 2 = $iLayout not an Integer, less than 22 or greater than 31. See Constants, $LOD_HANDOUT_LAYOUT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iLayout not an Integer, less than 22 or greater than 31. See Constants, $LOD_HANDOUT_LAYOUT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Page's current layout.
 ;                  --Property Setting Errors--
@@ -1725,14 +1725,14 @@ EndFunc   ;==>_LODraw_SlideHandoutMargins
 ; Description ...: Set or Retrieve the current Slide's layout.
 ; Syntax ........: _LODraw_SlideLayout(ByRef $oSlide[, $iLayout = Null])
 ; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
-;                  $iLayout             - [optional] (0-34) Default is Null. The layout format of the Slide. See Constants, $LOD_SLIDE_LAYOUT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iLayout             - [optional] (0-34) Default is Null. The layout format of the Slide. See Constants, $LOD_SLIDE_LAYOUT_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1 or Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current layout setting as an Integer.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
-;                  @Error: 1, @Extended: 2 = $iLayout not an Integer, less than 0 or greater than 34. See Constants, $LOD_SLIDE_LAYOUT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iLayout not an Integer, less than 0 or greater than 34. See Constants, $LOD_SLIDE_LAYOUT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Slide's current layout.
 ;                  --Property Setting Errors--
@@ -1998,7 +1998,7 @@ EndFunc   ;==>_LODraw_SlideMasterBackColor
 ; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
 ;                  $bFillOff            - [optional] Default is False. If True, the Fill style will be set to Off. See remarks.
 ; Return values .: Success: Integer
-;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOD_AREA_FILL_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOD_AREA_FILL_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 0, @Extended: 1, Return: 0 = Success. Fill style was successfully turned off.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
@@ -2010,7 +2010,7 @@ EndFunc   ;==>_LODraw_SlideMasterBackColor
 ; Modified ......:
 ; Remarks .......: This function is to help determine if a Gradient background, or a solid color background is currently active.
 ;                  This is useful because, if a Gradient is active, the solid color value is still present, and thus it would not be possible to determine which function should be used to retrieve the current values for, whether the Color function, or the Gradient function.
-;                  When the Fill style is disabled for a Master Slide, the Fill properties are completely removed. This is how Impress works normally.
+;                  When the Fill style is disabled for a Master Slide, the Fill properties are completely removed. This is how Draw works normally.
 ;                  $bFillOff will do nothing if it is called with False, and is not, of course, returned when retrieving the FillStyle value.
 ; Related .......: _LODraw_SlideMasterBackColor, _LODraw_SlideMasterBackGradient, _LODraw_SlideBackFillStyle
 ; Link ..........:
@@ -2051,8 +2051,8 @@ EndFunc   ;==>_LODraw_SlideMasterBackFillStyle
 ; Description ...: Set or Retrieve the settings for Master Slide Background color Gradient.
 ; Syntax ........: _LODraw_SlideMasterBackGradient(ByRef $oMaster[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
 ; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
-;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOD_GRAD_NAME_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOD_GRAD_NAME_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iIncrement          - [optional] (0, 3-256) Default is Null. The number of steps of color change. 0 = Automatic.
 ;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient, where 0% corresponds to the current horizontal location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" setting. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage. $iType must be other than "Linear", or "Axial".
@@ -2071,7 +2071,7 @@ EndFunc   ;==>_LODraw_SlideMasterBackFillStyle
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oMaster not an Object.
 ;                  @Error: 1, @Extended: 2 = $sGradientName not a String.
-;                  @Error: 1, @Extended: 3 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 4 = $iIncrement not an Integer, less than 3, but not 0, or greater than 256.
 ;                  @Error: 1, @Extended: 5 = $iXCenter not an Integer, less than 0 or greater than 100.
 ;                  @Error: 1, @Extended: 6 = $iYCenter not an Integer, less than 0 or greater than 100.
@@ -2381,7 +2381,7 @@ EndFunc   ;==>_LODraw_SlideMasterBackTransparency
 ; Description ...: Set or retrieve the Master Slide's transparency gradient settings.
 ; Syntax ........: _LODraw_SlideMasterBackTransparencyGradient(ByRef $oMaster[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
 ; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
-;                  $iType               - [optional] (-1-5) Default is Null. The type of transparency gradient to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3. Call with $LOD_GRAD_TYPE_OFF to turn Transparency Gradient off.
+;                  $iType               - [optional] (-1-5) Default is Null. The type of transparency gradient to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3. Call with $LOD_GRAD_TYPE_OFF to turn Transparency Gradient off.
 ;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iAngle              - [optional] (0-359) Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
@@ -2396,7 +2396,7 @@ EndFunc   ;==>_LODraw_SlideMasterBackTransparency
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oMaster not an Object.
-;                  @Error: 1, @Extended: 2 = $iType Not an Integer, less than -1 or greater than 5. See constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iType Not an Integer, less than -1 or greater than 5. See constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $iXCenter Not an Integer, less than 0 or greater than 100.
 ;                  @Error: 1, @Extended: 4 = $iYCenter Not an Integer, less than 0 or greater than 100.
 ;                  @Error: 1, @Extended: 5 = $iAngle Not an Integer, less than 0 or greater than 359.
@@ -2762,9 +2762,9 @@ EndFunc   ;==>_LODraw_SlideMasterExists
 ; Description ...: Set or Retrieve the master slide format settings.
 ; Syntax ........: _LODraw_SlideMasterFormat(ByRef $oMaster[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
 ; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
-;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_HEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_WIDTH_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_HEIGHT_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -2773,7 +2773,7 @@ EndFunc   ;==>_LODraw_SlideMasterExists
 ;                  @Error: 1, @Extended: 1 = $oMaster not an Object.
 ;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
-;                  @Error: 1, @Extended: 4 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve current slide width.
 ;                  --Property Setting Errors--
@@ -3331,9 +3331,9 @@ EndFunc   ;==>_LODraw_SlideNotesFooter
 ; Description ...: Set or Retrieve the notes page format settings.
 ; Syntax ........: _LODraw_SlideNotesFormat(ByRef $oNotes[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
 ; Parameters ....: $oNotes              - A Notes page object returned by a previous _LODraw_SlideNotesGetObj or _LODraw_SlideMasterNotesGetObj function.
-;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_HEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_WIDTH_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_HEIGHT_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -3342,7 +3342,7 @@ EndFunc   ;==>_LODraw_SlideNotesFooter
 ;                  @Error: 1, @Extended: 1 = $oNotes not an Object.
 ;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
-;                  @Error: 1, @Extended: 4 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve current slide width.
 ;                  --Property Setting Errors--
@@ -3415,7 +3415,7 @@ EndFunc   ;==>_LODraw_SlideNotesGetObj
 ;                  $bDateTime           - [optional] Default is Null. If True, a Date or Time entry is added to the header of the page.
 ;                  $bDateTimeIsFixed    - [optional] Default is Null. If True, the Date or Time entry is fixed.
 ;                  $sDateTimeValue      - [optional] Default is Null. If $bDateTimeIsFixed is True, this is the custom date or time value to display.
-;                  $iDateTimeFormat     - [optional] (4-112) Default is Null. If $bDateTimeIsFixed is False, the format to display the Date or Time in. See Constants, $LOD_SLIDE_DT_FMT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iDateTimeFormat     - [optional] (4-112) Default is Null. If $bDateTimeIsFixed is False, the format to display the Date or Time in. See Constants, $LOD_SLIDE_DT_FMT_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
@@ -3428,7 +3428,7 @@ EndFunc   ;==>_LODraw_SlideNotesGetObj
 ;                  @Error: 1, @Extended: 5 = $bDateTime not a Boolean.
 ;                  @Error: 1, @Extended: 6 = $bDateTimeIsFixed not a Boolean.
 ;                  @Error: 1, @Extended: 7 = $sDateTimeValue not a String.
-;                  @Error: 1, @Extended: 8 = $iDateTimeFormat not an Integer, less than 4 or greater than 9 but not equal to one of the constant values. See Constants, $LOD_SLIDE_DT_FMT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 8 = $iDateTimeFormat not an Integer, less than 4 or greater than 9 but not equal to one of the constant values. See Constants, $LOD_SLIDE_DT_FMT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $bHeader
@@ -3638,7 +3638,7 @@ EndFunc   ;==>_LODraw_SlidesGetNames
 ;                  $bMouseVisible       - [optional] Default is Null. If True, the mouse is visible in the presentation.
 ;                  $bMouseAsPen         - [optional] Default is Null. If True, the mouse can be used as a pen to draw on slides.
 ;                  $iPenColor           - [optional] (0-16777215) Default is Null. If $bMouseAsPen is True, the color of the drawn line, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iPenWidth           - [optional] (4-400) Default is Null. The width of the drawn line. L.O. 4.2+. See Constants, $LOD_SLIDESHOW_PEN_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iPenWidth           - [optional] (4-400) Default is Null. The width of the drawn line. L.O. 4.2+. See Constants, $LOD_SLIDESHOW_PEN_WIDTH_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters. If The current LibreOffice version is below 4.2, the $iPenWidth parameter will return a Null value.
@@ -3649,7 +3649,7 @@ EndFunc   ;==>_LODraw_SlidesGetNames
 ;                  @Error: 1, @Extended: 3 = $bMouseVisible not a Boolean.
 ;                  @Error: 1, @Extended: 4 = $bMouseAsPen not a Boolean.
 ;                  @Error: 1, @Extended: 5 = $iPenColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error: 1, @Extended: 6 = $iPenWidth not an Integer, less than 4 or greater than 400. See Constants, $LOD_SLIDESHOW_PEN_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iPenWidth not an Integer, less than 4 or greater than 400. See Constants, $LOD_SLIDESHOW_PEN_WIDTH_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = There is no presentation currently running.
 ;                  @Error: 3, @Extended: 2 = Failed to retrieve Object for currently running presentation.
@@ -4022,7 +4022,7 @@ EndFunc   ;==>_LODraw_SlideshowIsRunning
 ; Description ...: Query the status of, or send commands to, a currently running presentation.
 ; Syntax ........: _LODraw_SlideshowPresentationControl(ByRef $oDoc, $iAction[, $vValue = Null])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
-;                  $iAction             - The Query or Command to perform on the presentation. See Constants, $LOD_SLIDESHOW_PRES_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iAction             - The Query or Command to perform on the presentation. See Constants, $LOD_SLIDESHOW_PRES_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $vValue              - [optional] Default is Null. If the Query or Command requires an input value, it goes here. See Remarks.
 ; Return values .: Success: Boolean, Integer, or Object.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully processed a command.
@@ -4032,7 +4032,7 @@ EndFunc   ;==>_LODraw_SlideshowIsRunning
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
-;                  @Error: 1, @Extended: 2 = $iAction not an Integer, less than 0 or greater than 25. See Constants, $LOD_SLIDESHOW_PRES_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iAction not an Integer, less than 0 or greater than 25. See Constants, $LOD_SLIDESHOW_PRES_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $iAction called with $LOD_SLIDESHOW_PRES_QUERY_GET_SLIDE_BY_INDEX, and index value called in $vValue is not an Integer, less than 0 or greater than number of slides in the Presentation.
 ;                  @Error: 1, @Extended: 4 = $iAction called with $LOD_SLIDESHOW_PRES_COMMAND_ACTIVATE_BLANK_SCREEN, and color value called in $vValue is not an Integer, less than 0 or greater than 16777215.
 ;                  @Error: 1, @Extended: 5 = $iAction called with $LOD_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE, and value called in $vValue is not an Object.
@@ -4233,7 +4233,7 @@ EndFunc   ;==>_LODraw_SlideshowsCustomGetNames
 ; Description ...: Set or Retrieve the Slideshow's play mode settings.
 ; Syntax ........: _LODraw_SlideshowSettingsMode(ByRef $oDoc[, $iPresMode = Null[, $iRepeatPause = Null[, $bShowLogo = Null]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
-;                  $iPresMode           - [optional] (0-2) Default is Null. The mode the presentation is displayed in. See Constants, $LOD_SLIDESHOW_VIEW_MODE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iPresMode           - [optional] (0-2) Default is Null. The mode the presentation is displayed in. See Constants, $LOD_SLIDESHOW_VIEW_MODE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iRepeatPause        - [optional] (0-86399) Default is Null. If $iPresMode is set to $LOD_SLIDESHOW_VIEW_MODE_LOOP, the amount of seconds before the presentation is played again.
 ;                  $bShowLogo           - [optional] Default is Null. If True, the LibreOffice logo is displayed during the pause.
 ; Return values .: Success: 1 or Array.
@@ -4242,7 +4242,7 @@ EndFunc   ;==>_LODraw_SlideshowsCustomGetNames
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
-;                  @Error: 1, @Extended: 2 = $iPresMode not an Integer, less than 0 or greater than 2. See Constants, $LOD_SLIDESHOW_VIEW_MODE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iPresMode not an Integer, less than 0 or greater than 2. See Constants, $LOD_SLIDESHOW_VIEW_MODE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $iRepeatPause not an Integer, less than 0 or greater than 86399.
 ;                  @Error: 1, @Extended: 4 = $bShowLogo not a Boolean.
 ;                  --Processing Errors--
@@ -4444,7 +4444,7 @@ EndFunc   ;==>_LODraw_SlideshowSettingsOptions
 ; Description ...: Set or Retrieve the Slideshow's play Range settings.
 ; Syntax ........: _LODraw_SlideshowSettingsRange(ByRef $oDoc[, $iRange = Null[, $sValue = Null]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
-;                  $iRange              - [optional] (0-2) Default is Null. The Range of slides that will be shown when the Presentation is started. See Constants, $LOD_SLIDESHOW_RANGE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iRange              - [optional] (0-2) Default is Null. The Range of slides that will be shown when the Presentation is started. See Constants, $LOD_SLIDESHOW_RANGE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $sValue              - [optional] Default is Null. The "From" slide or Custom Slide Show name. See remarks.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -4452,7 +4452,7 @@ EndFunc   ;==>_LODraw_SlideshowSettingsOptions
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
-;                  @Error: 1, @Extended: 2 = $iRange not an Integer, less than 0 or greater than 2. See Constants, $LOD_SLIDESHOW_RANGE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iRange not an Integer, less than 0 or greater than 2. See Constants, $LOD_SLIDESHOW_RANGE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $sValue not a String.
 ;                  @Error: 1, @Extended: 4 = Range set to $LOD_SLIDESHOW_RANGE_FROM, and the Slide name called in $sValue does not exist.
 ;                  @Error: 1, @Extended: 5 = Range set to $LOD_SLIDESHOW_RANGE_CUSTOM, and the Custom Slideshow name called in $sValue does not exist.
@@ -4710,11 +4710,11 @@ EndFunc   ;==>_LODraw_SlideshowStop
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LODraw_SlideSoundsGetNames
-; Description ...: Retrieve an array of Sound files that are included with LibreOffice Impress.
+; Description ...: Retrieve an array of Sound files that are included with LibreOffice Draw.
 ; Syntax ........: _LODraw_SlideSoundsGetNames()
 ; Parameters ....: None
 ; Return values .: Success: Array
-;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning array of included Impress Sound files. @Extended will be set to number of results.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning array of included Draw Sound files. @Extended will be set to number of results.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create the ServiceManager.
@@ -4780,7 +4780,7 @@ EndFunc   ;==>_LODraw_SlideSoundsGetNames
 ; Description ...: Set or Retrieve a Slide's Transition properties.
 ; Syntax ........: _LODraw_SlideTransition(ByRef $oSlide[, $iTransition = Null[, $nDuration = Null[, $sSound = Null[, $bLoopSound = Null[, $nSlideAdvance = Null]]]]])
 ; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
-;                  $iTransition         - [optional] (0-78) Default is Null. The Transition effect. See Constants, $LOD_SLIDE_TRANSITION_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iTransition         - [optional] (0-78) Default is Null. The Transition effect. See Constants, $LOD_SLIDE_TRANSITION_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $nDuration           - [optional] (0-1000) Default is Null. The duration of the slide's transition effect, in seconds. L.O. 6.1+. See remarks.
 ;                  $sSound              - [optional] Default is Null. The path to the sound to play during slide transition. See remarks.
 ;                  $bLoopSound          - [optional] Default is Null. If True, the sound is repeated.
@@ -4791,7 +4791,7 @@ EndFunc   ;==>_LODraw_SlideSoundsGetNames
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
-;                  @Error: 1, @Extended: 2 = $iTransition not an Integer, less than 0 or greater than 78. See Constants, $LOD_SLIDE_TRANSITION_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iTransition not an Integer, less than 0 or greater than 78. See Constants, $LOD_SLIDE_TRANSITION_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $nDuration not a Number, less than 0 or greater than 1000.
 ;                  @Error: 1, @Extended: 4 = $sSound not a String.
 ;                  @Error: 1, @Extended: 5 = File called in $sSound does not exist.
@@ -4818,7 +4818,7 @@ EndFunc   ;==>_LODraw_SlideSoundsGetNames
 ;                  When retrieving current property values previous to LibreOffice 6.1, if Speed is set to Fast, 1 is returned for $nDuration. If Speed is set to Medium, 2 is returned. And if Speed is set to Slow, 3 is returned.
 ;                  $sSound can be called with an empty string to indicate that no sound should be played.
 ;                  If $sSound is called with the string "stop", this equals "Stop Previous Sound" in the UI.
-;                  Otherwise call $sSound with a valid path to a sound file. See _LODraw_SlideSoundsGetNames, to obtain a list of sound files included with Impress.
+;                  Otherwise call $sSound with a valid path to a sound file. See _LODraw_SlideSoundsGetNames, to obtain a list of sound files included with Draw.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LODraw_SlideSoundsGetNames, _LODraw_SlideLayout

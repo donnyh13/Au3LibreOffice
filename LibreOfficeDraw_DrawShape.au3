@@ -8,16 +8,16 @@
 #include "LibreOffice_Helper.au3"
 #include "LibreOffice_Internal.au3"
 
-; Common includes for Impress
-#include "LibreOfficeImpress_Internal.au3"
-#include "LibreOfficeImpress_Constants.au3"
+; Common includes for Draw
+#include "LibreOfficeDraw_Internal.au3"
+#include "LibreOfficeDraw_Constants.au3"
 
-; Other includes for Impress
+; Other includes for Draw
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice UDF
 ; AutoIt Version : v3.3.16.1
-; Description ...: Provides basic functionality through AutoIt for Creating, Modifying, and Deleting, etc. Impress Drawing Shapes, such as lines and rectangles etc.
+; Description ...: Provides basic functionality through AutoIt for Creating, Modifying, and Deleting, etc. Draw Drawing Shapes, such as lines and rectangles etc.
 ; Author(s) .....: donnyh13, mLipok
 ; Dll ...........:
 ;
@@ -272,7 +272,7 @@ EndFunc   ;==>_LODraw_DrawShapeConnectorModify
 ; Description ...: Set or Retrieve Connector line settings.
 ; Syntax ........: _LODraw_DrawShapeConnectorSettings(ByRef $oShape[, $iType = Null[, $iL1Skew = Null[, $iL2Skew = Null[, $iL3Skew = Null[, $iHoriBeg = Null[, $iHoriEnd = Null[, $iVertBeg = Null[, $iVertEnd = Null]]]]]]]])
 ; Parameters ....: $oShape              - A Connector Shape object returned by a previous _LODraw_DrawShapeInsert, or _LODraw_ShapesGetList function.
-;                  $iType               - [optional] (0-3) Default is Null. The connector line type. See Constants, $LOD_DRAWSHAPE_CONNECTOR_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iType               - [optional] (0-3) Default is Null. The connector line type. See Constants, $LOD_DRAWSHAPE_CONNECTOR_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iL1Skew             - [optional] (-100000-100000) Default is Null. The skew amount of line 1, in Hundredths of a Millimeter (HMM).
 ;                  $iL2Skew             - [optional] (-100000-100000) Default is Null. The skew amount of line 2, in Hundredths of a Millimeter (HMM).
 ;                  $iL3Skew             - [optional] (-100000-100000) Default is Null. The skew amount of line 3, in Hundredths of a Millimeter (HMM).
@@ -286,7 +286,7 @@ EndFunc   ;==>_LODraw_DrawShapeConnectorModify
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
-;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 0 or greater than 3. See Constants, $LOD_DRAWSHAPE_CONNECTOR_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 0 or greater than 3. See Constants, $LOD_DRAWSHAPE_CONNECTOR_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $iL1Skew not an Integer, less than -100,000 or greater than 100,000.
 ;                  @Error: 1, @Extended: 4 = $iL2Skew not an Integer, less than -100,000 or greater than 100,000.
 ;                  @Error: 1, @Extended: 5 = $iL3Skew not an Integer, less than -100,000 or greater than 100,000.
@@ -399,10 +399,10 @@ EndFunc   ;==>_LODraw_DrawShapeConnectorSettings
 ;                  $iRGuide             - [optional] (-10008-10008) Default is Null. The length of the right guide starting at the dimension line. Positive values extend the guide below the dimension line and negative values extend the guide above the dimension line, in Hundredths of a Millimeter (HMM).
 ;                  $bBelow              - [optional] Default is Null. If True, the properties set in the Line area are Reversed.
 ;                  $iDecimal            - [optional] (0-99) Default is Null. The number of decimal places.
-;                  $iVertPos            - [optional] (0-4) Default is Null. The position of the dimension line in reference to the text vertically. See Constants, $LOD_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iHoriPos            - [optional] (0-3) Default is Null. The position of the dimension text horizontally. See Constants, $LOD_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iVertPos            - [optional] (0-4) Default is Null. The position of the dimension line in reference to the text vertically. See Constants, $LOD_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iHoriPos            - [optional] (0-3) Default is Null. The position of the dimension text horizontally. See Constants, $LOD_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $bParallel           - [optional] Default is Null. If True, Displays the text parallel to or at 90 degrees to the dimension line.
-;                  $iUnitType           - [optional] (-1-15) Default is Null. The type of measurement units, if any, to display. See Constants, $LOD_DRAWSHAPE_DIMENSION_UNIT_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iUnitType           - [optional] (-1-15) Default is Null. The type of measurement units, if any, to display. See Constants, $LOD_DRAWSHAPE_DIMENSION_UNIT_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
@@ -416,10 +416,10 @@ EndFunc   ;==>_LODraw_DrawShapeConnectorSettings
 ;                  @Error: 1, @Extended: 6 = $iRGuide not an Integer, less than -10,008 or greater than 10,008.
 ;                  @Error: 1, @Extended: 7 = $bBelow not a Boolean.
 ;                  @Error: 1, @Extended: 8 = $iDecimal not an Integer, less than 0 or greater than 99.
-;                  @Error: 1, @Extended: 9 = $iVertPos not an Integer, less than 0 or greater than 4. See Constants, $LOD_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 10 = $iHoriPos not an Integer, less than 0 or greater than 3. See Constants, $LOD_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 9 = $iVertPos not an Integer, less than 0 or greater than 4. See Constants, $LOD_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 10 = $iHoriPos not an Integer, less than 0 or greater than 3. See Constants, $LOD_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 11 = $bParallel not a Boolean.
-;                  @Error: 1, @Extended: 12 = $iUnitType not an Integer, less than -1 or greater than 15. See Constants, $LOD_DRAWSHAPE_DIMENSION_UNIT_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 12 = $iUnitType not an Integer, less than -1 or greater than 15. See Constants, $LOD_DRAWSHAPE_DIMENSION_UNIT_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iDistance
@@ -461,8 +461,8 @@ EndFunc   ;==>_LODraw_DrawShapeDimensionSettings
 ; Parameters ....: $oShape              - A Drawing Shape object returned by a previous _LODraw_DrawShapeInsert, or _LODraw_ShapesGetList function.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. Shape is a $LOD_DRAWSHAPE_TYPE_CONNECTOR_* Type Shape. Returning $LOD_DRAWSHAPE_TYPE_CONNECTOR Constant Value. See Remarks #4.
-;                  @Error: 0, @Extended: 2, Return: Integer = Success. Shape is a Custom Shape Type. Returning appropriate Constant for shape type if successfully identified, else -1 if identification failed. See Remarks #1. See Constants, $LOD_DRAWSHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3
-;                  @Error: 0, @Extended: 3, Return: Integer = Success. Shape is a*_BASIC_CIRCLE_SEGMENT or *_BASIC_ARC Type Shape. Returning appropriate Constant, See Constants, $LOD_DRAWSHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3
+;                  @Error: 0, @Extended: 2, Return: Integer = Success. Shape is a Custom Shape Type. Returning appropriate Constant for shape type if successfully identified, else -1 if identification failed. See Remarks #1. See Constants, $LOD_DRAWSHAPE_TYPE_* as defined in LibreOfficeDraw_Constants.au3
+;                  @Error: 0, @Extended: 3, Return: Integer = Success. Shape is a*_BASIC_CIRCLE_SEGMENT or *_BASIC_ARC Type Shape. Returning appropriate Constant, See Constants, $LOD_DRAWSHAPE_TYPE_* as defined in LibreOfficeDraw_Constants.au3
 ;                  @Error: 0, @Extended: 4, Return: Integer = Success. Shape is a $LOD_DRAWSHAPE_TYPE_LINE_CURVE Shape.
 ;                  @Error: 0, @Extended: 5, Return: Integer = Success. Shape is a $LOD_DRAWSHAPE_TYPE_LINE_CURVE_FILLED Shape.
 ;                  @Error: 0, @Extended: 6, Return: Integer = Success. Shape is a $LOD_DRAWSHAPE_TYPE_LINE_FREEFORM_LINE Shape.
@@ -744,7 +744,7 @@ EndFunc   ;==>_LODraw_DrawShapeGetType
 ; Description ...: Insert a shape into a slide.
 ; Syntax ........: _LODraw_DrawShapeInsert(ByRef $oObj, $iShapeType, $iWidth, $iHeight[, $iX = -1[, $iY = -1]])
 ; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
-;                  $iShapeType          - (0-187) The Type of shape to create. See remarks. See $LOD_DRAWSHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3
+;                  $iShapeType          - (0-187) The Type of shape to create. See remarks. See $LOD_DRAWSHAPE_TYPE_* as defined in LibreOfficeDraw_Constants.au3
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM). Note, for Lines, Width is the length of the line.
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM). Note, for Lines, Height is the amount the line goes below the point of insertion.
 ;                  $iX                  - [optional] Default is -1. The X position from the top-left of the page, in Hundredths of a Millimeter (HMM). Call with -1 to center the shape horizontally.
@@ -754,7 +754,7 @@ EndFunc   ;==>_LODraw_DrawShapeGetType
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
-;                  @Error: 1, @Extended: 2 = $iShapeType not an Integer, less than 0 or greater than 187. See $LOD_DRAWSHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3
+;                  @Error: 1, @Extended: 2 = $iShapeType not an Integer, less than 0 or greater than 187. See $LOD_DRAWSHAPE_TYPE_* as defined in LibreOfficeDraw_Constants.au3
 ;                  @Error: 1, @Extended: 3 = $iWidth not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iHeight not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iX not an Integer.
@@ -847,7 +847,7 @@ EndFunc   ;==>_LODraw_DrawShapeInsert
 ;                  $iPoint              - The Point to insert the new point AFTER. 0 means insert at the beginning.
 ;                  $iX                  - The X coordinate value, set in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - The Y coordinate value, set in Hundredths of a Millimeter (HMM).
-;                  $iPointType          - [optional] (0, 1, 3) Default is $LOD_DRAWSHAPE_POINT_TYPE_NORMAL. The Type of Point this new Point is. See Remarks. See constants $LOD_DRAWSHAPE_POINT_TYPE_* as defined in LibreOfficeImpress_Constants.au3
+;                  $iPointType          - [optional] (0, 1, 3) Default is $LOD_DRAWSHAPE_POINT_TYPE_NORMAL. The Type of Point this new Point is. See Remarks. See constants $LOD_DRAWSHAPE_POINT_TYPE_* as defined in LibreOfficeDraw_Constants.au3
 ;                  $bIsCurve            - [optional] Default is False. If True, the Normal Point is a Curve. See remarks.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. New Position Point was successfully added to the Shape.
@@ -858,7 +858,7 @@ EndFunc   ;==>_LODraw_DrawShapeInsert
 ;                  @Error: 1, @Extended: 3 = $iPoint not an Integer, less than 0 or greater than number of points in the shape.
 ;                  @Error: 1, @Extended: 4 = $iX not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iY not an Integer
-;                  @Error: 1, @Extended: 6 = $iPointType not an Integer, less than 0 or greater than 3, or equal to 2. See constants $LOD_DRAWSHAPE_POINT_TYPE_* as defined in LibreOfficeImpress_Constants.au3
+;                  @Error: 1, @Extended: 6 = $iPointType not an Integer, less than 0 or greater than 3, or equal to 2. See constants $LOD_DRAWSHAPE_POINT_TYPE_* as defined in LibreOfficeDraw_Constants.au3
 ;                  @Error: 1, @Extended: 7 = $bIsCurve not a Boolean.
 ;                  @Error: 1, @Extended: 8 = First or Last Points in a shape can only be a "Normal" type point.
 ;                  --Initialization Errors--
@@ -1337,7 +1337,7 @@ EndFunc   ;==>_LODraw_DrawShapePointsGetCount
 ;                  $iPoint              - The Point to modify, starting at 1.
 ;                  $iX                  - [optional] Default is Null. The X coordinate value, set in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - [optional] Default is Null. The Y coordinate value, set in Hundredths of a Millimeter (HMM).
-;                  $iPointType          - [optional] (0, 1, 3) Default is Null. The Type of Point to change the called point to. See Remarks. See constants $LOD_DRAWSHAPE_POINT_TYPE_* as defined in LibreOfficeImpress_Constants.au3
+;                  $iPointType          - [optional] (0, 1, 3) Default is Null. The Type of Point to change the called point to. See Remarks. See constants $LOD_DRAWSHAPE_POINT_TYPE_* as defined in LibreOfficeDraw_Constants.au3
 ;                  $bIsCurve            - [optional] Default is Null. If True, the Normal Point is a Curve. See remarks.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.

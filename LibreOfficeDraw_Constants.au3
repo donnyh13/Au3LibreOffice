@@ -4,9 +4,9 @@
 #include-once
 
 ; #INDEX# =======================================================================================================================
-; Title .........: LibreOffice Impress Constants for the LibreOffice UDF.
+; Title .........: LibreOffice Draw Constants for the LibreOffice UDF.
 ; AutoIt Version : v3.3.16.1
-; Description ...: Constants for various Impress functions in the LibreOffice UDF.
+; Description ...: Constants for various Draw functions in the LibreOffice UDF.
 ; Author(s) .....: donnyh13, mLipok
 ; Dll ...........:
 ; Note ..........: Descriptions for some Constants are taken from the LibreOffice SDK API documentation.
@@ -885,8 +885,8 @@ Global Enum _
 
 ; Shape Type Constants.
 Global Enum Step *2 _
-		$LOD_SHAPE_TYPE_CALC = 1, _                                  ; 1 Calc sheet in an Impress document. (I have not encountered this shape yet, but it is included here for error prevention.)
-		$LOD_SHAPE_TYPE_CHART, _                                     ; 2 Chart sheet in an Impress document. (I have not encountered this shape yet, but it is included here for error prevention.)
+		$LOD_SHAPE_TYPE_CALC = 1, _                                  ; 1 Calc sheet in an Draw document. (I have not encountered this shape yet, but it is included here for error prevention.)
+		$LOD_SHAPE_TYPE_CHART, _                                     ; 2 Chart sheet in an Draw document. (I have not encountered this shape yet, but it is included here for error prevention.)
 		$LOD_SHAPE_TYPE_DATETIME, _                                  ; 4 A Date/Time shape, such as is found in a Header or Footer or the Notes, Handouts or Master slides.
 		$LOD_SHAPE_TYPE_DRAWING_SHAPE, _                             ; 8 - All shapes, 3D Shapes, Basic Shapes, Block Arrows, Flowcharts, Callouts, Lines, Connectors, Fontwork etc.
 		$LOD_SHAPE_TYPE_FOOTER, _                                    ; 16 A Footer text shape, as is found in the footer of Notes, Handouts or Master slide.

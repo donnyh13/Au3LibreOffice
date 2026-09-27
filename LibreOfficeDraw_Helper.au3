@@ -8,11 +8,11 @@
 #include "LibreOffice_Helper.au3"
 #include "LibreOffice_Internal.au3"
 
-; Common includes for Impress
-#include "LibreOfficeImpress_Constants.au3"
-#include "LibreOfficeImpress_Internal.au3"
+; Common includes for Draw
+#include "LibreOfficeDraw_Constants.au3"
+#include "LibreOfficeDraw_Internal.au3"
 
-; Other includes for Impress
+; Other includes for Draw
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice UDF
@@ -384,7 +384,7 @@ EndFunc   ;==>_LODraw_DateStructModify
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Font list.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: $oDoc is optional, if not called, an Impress Document is created invisibly to perform the check.
+; Remarks .......: $oDoc is optional, if not called, an Draw Document is created invisibly to perform the check.
 ; Related .......: _LODraw_FontsGetNames
 ; Link ..........:
 ; Example .......: Yes
@@ -454,14 +454,14 @@ EndFunc   ;==>_LODraw_FontExists
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Font list.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: $oDoc is optional, if not called, an Impress Document is created invisibly to perform the check.
+; Remarks .......: $oDoc is optional, if not called, an Draw Document is created invisibly to perform the check.
 ;                  Many fonts will be listed multiple times, this is because of the varying settings for them, such as bold, Italic, etc. Style Name is really a repeat of weight(Bold) and Slant (Italic) settings, but is included for easier processing if required.
 ;                  From personal tests, Slant only returns 0 or 2.
 ;                  The returned array will be as follows:
 ;                  The first column (Array[1][0]) contains the Font Name.
 ;                  The Second column (Array [1][1] contains the style name (Such as Bold Italic etc.)
-;                  The third column (Array[1][2]) contains the Font weight (Bold) See Constants, $LOD_CHAR_WEIGHT_* as defined in LibreOfficeImpress_Constants.au3;
-;                  The fourth column (Array[1][3]) contains the font slant (Italic) See constants, $LOD_CHAR_POSTURE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  The third column (Array[1][2]) contains the Font weight (Bold) See Constants, $LOD_CHAR_WEIGHT_* as defined in LibreOfficeDraw_Constants.au3;
+;                  The fourth column (Array[1][3]) contains the font slant (Italic) See constants, $LOD_CHAR_POSTURE_* as defined in LibreOfficeDraw_Constants.au3.
 ; Related .......: _LODraw_FontExists
 ; Link ..........:
 ; Example .......: Yes

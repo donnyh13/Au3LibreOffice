@@ -8,14 +8,14 @@
 #include "LibreOffice_Helper.au3"
 #include "LibreOffice_Internal.au3"
 
-; Common includes for Impress
-#include "LibreOfficeImpress_Constants.au3"
-#include "LibreOfficeImpress_Helper.au3"
+; Common includes for Draw
+#include "LibreOfficeDraw_Constants.au3"
+#include "LibreOfficeDraw_Helper.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice UDF
 ; AutoIt Version : v3.3.16.1
-; Description ...: Various functions for internal data processing, data retrieval, retrieving and applying settings for LibreOffice Impress.
+; Description ...: Various functions for internal data processing, data retrieval, retrieving and applying settings for LibreOffice Draw.
 ; Author(s) .....: donnyh13, mLipok
 ; Dll ...........:
 ;
@@ -102,8 +102,8 @@
 ; Description ...: Set or Retrieve the Font Effect settings.
 ; Syntax ........: __LODraw_CharEffect(ByRef $oObj[, $iCase = Null[, $iRelief = Null[, $bOutline = Null[, $bShadow = Null]]]])
 ; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
-;                  $iCase               - [optional] (0-4) Default is Null. The Character Case Style. See Constants, $LOD_CHAR_CASEMAP_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iRelief             - [optional] (0-2) Default is Null. The Character Relief style. See Constants, $LOD_CHAR_RELIEF_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iCase               - [optional] (0-4) Default is Null. The Character Case Style. See Constants, $LOD_CHAR_CASEMAP_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iRelief             - [optional] (0-2) Default is Null. The Character Relief style. See Constants, $LOD_CHAR_RELIEF_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $bOutline            - [optional] Default is Null. If True, the characters have an outline around the outside.
 ;                  $bShadow             - [optional] Default is Null. If True, the characters have a shadow.
 ; Return values .: Success: 1 or Array.
@@ -112,8 +112,8 @@
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
-;                  @Error: 1, @Extended: 2 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOD_CHAR_CASEMAP_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 3 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOD_CHAR_RELIEF_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOD_CHAR_CASEMAP_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOD_CHAR_RELIEF_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 4 = $bOutline not a Boolean.
 ;                  @Error: 1, @Extended: 5 = $bShadow not a Boolean.
 ;                  --Property Setting Errors--
@@ -183,8 +183,8 @@ EndFunc   ;==>__LODraw_CharEffect
 ; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $sFontName           - [optional] Default is Null. The Font Name to use.
 ;                  $nFontSize           - [optional] Default is Null. The new Font size.
-;                  $iPosture            - [optional] (0-5) Default is Null. The Font Italic setting. See Constants, $LOD_CHAR_POSTURE_* as defined in LibreOfficeImpress_Constants.au3. Also see remarks.
-;                  $iWeight             - [optional] (0, 50-200) Default is Null. The Font Bold settings see Constants, $LOD_CHAR_WEIGHT_* as defined in LibreOfficeImpress_Constants.au3. Also see remarks.
+;                  $iPosture            - [optional] (0-5) Default is Null. The Font Italic setting. See Constants, $LOD_CHAR_POSTURE_* as defined in LibreOfficeDraw_Constants.au3. Also see remarks.
+;                  $iWeight             - [optional] (0, 50-200) Default is Null. The Font Bold settings see Constants, $LOD_CHAR_WEIGHT_* as defined in LibreOfficeDraw_Constants.au3. Also see remarks.
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
@@ -194,8 +194,8 @@ EndFunc   ;==>__LODraw_CharEffect
 ;                  @Error: 1, @Extended: 2 = $sFontName not a String.
 ;                  @Error: 1, @Extended: 3 = Font called in $sFontName not available.
 ;                  @Error: 1, @Extended: 4 = $nFontSize not a number.
-;                  @Error: 1, @Extended: 5 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOD_CHAR_POSTURE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 6 = $iWeight not an Integer, less than 50 but not equal to 0, or greater than 200. See Constants, $LOD_CHAR_WEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOD_CHAR_POSTURE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iWeight not an Integer, less than 50 but not equal to 0, or greater than 200. See Constants, $LOD_CHAR_WEIGHT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $sFontName
@@ -354,7 +354,7 @@ EndFunc   ;==>__LODraw_CharFontColor
 ; Description ...: Set and retrieve the OverLine settings.
 ; Syntax ........: __LODraw_CharOverLine(ByRef $oObj[, $iOverLineStyle = Null[, $iOLColor = Null[, $bWordOnly = Null]]])
 ; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
-;                  $iOverLineStyle      - [optional] (0-18) Default is Null. The style of the Overline line, see constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
+;                  $iOverLineStyle      - [optional] (0-18) Default is Null. The style of the Overline line, see constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeDraw_Constants.au3. See Remarks.
 ;                  $iOLColor            - [optional] (-1-16777215) Default is Null. The Overline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
 ;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not Overlined.
 ; Return values .: Success: 1 or Array
@@ -363,7 +363,7 @@ EndFunc   ;==>__LODraw_CharFontColor
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
-;                  @Error: 1, @Extended: 2 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
+;                  @Error: 1, @Extended: 2 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeDraw_Constants.au3. See Remarks.
 ;                  @Error: 1, @Extended: 3 = $iOLColor not an Integer, less than -1 or greater than 16777215.
 ;                  @Error: 1, @Extended: 4 = $bWordOnly not a Boolean.
 ;                  --Property Setting Errors--
@@ -638,7 +638,7 @@ EndFunc   ;==>__LODraw_CharSpacing
 ; Description ...: Set or Retrieve the Strikeout settings.
 ; Syntax ........: __LODraw_CharStrikeOut(ByRef $oObj[, $iStrikeLineStyle = Null[, $bWordOnly = Null]])
 ; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
-;                  $iStrikeLineStyle    - [optional] (0-6) Default is Null. The Strikeout Line Style, see constants, $LOD_CHAR_STRIKEOUT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iStrikeLineStyle    - [optional] (0-6) Default is Null. The Strikeout Line Style, see constants, $LOD_CHAR_STRIKEOUT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $bWordOnly           - [optional] Default is Null. If True, strike out is applied to words only, skipping whitespaces.
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -646,7 +646,7 @@ EndFunc   ;==>__LODraw_CharSpacing
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
-;                  @Error: 1, @Extended: 2 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOD_CHAR_STRIKEOUT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOD_CHAR_STRIKEOUT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $bWordOnly not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
@@ -697,7 +697,7 @@ EndFunc   ;==>__LODraw_CharStrikeOut
 ; Description ...: Set and retrieve the Underline settings.
 ; Syntax ........: __LODraw_CharUnderLine(ByRef $oObj[, $iUnderLineStyle = Null[, $iULColor = Null[, $bWordOnly = Null]]])
 ; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
-;                  $iUnderLineStyle     - [optional] (0-18) Default is Null. The Underline line style, see constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iUnderLineStyle     - [optional] (0-18) Default is Null. The Underline line style, see constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iULColor            - [optional] (-1-16777215) Default is Null. The underline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
 ;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not underlined.
 ; Return values .: Success: 1 or Array
@@ -706,7 +706,7 @@ EndFunc   ;==>__LODraw_CharStrikeOut
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj an Object.
-;                  @Error: 1, @Extended: 2 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $iULColor not an Integer, less than -1 or greater than 16777215.
 ;                  @Error: 1, @Extended: 4 = $bWordOnly not a Boolean.
 ;                  --Property Setting Errors--
@@ -957,10 +957,10 @@ EndFunc   ;==>__LODraw_DateStructCompare
 ;                  $iRGuide             - [optional] (-10008-10008) Default is Null. The length of the right guide starting at the dimension line. Positive values extend the guide below the dimension line and negative values extend the guide above the dimension line, in Hundredths of a Millimeter (HMM).
 ;                  $bBelow              - [optional] Default is Null. If True, the properties set in the Line area are Reversed.
 ;                  $iDecimal            - [optional] (0-99) Default is Null. The number of decimal places.
-;                  $iVertPos            - [optional] (0-4) Default is Null. The position of the dimension line in reference to the text vertically. See Constants, $LOD_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iHoriPos            - [optional] (0-3) Default is Null. The position of the dimension text horizontally. See Constants, $LOD_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iVertPos            - [optional] (0-4) Default is Null. The position of the dimension line in reference to the text vertically. See Constants, $LOD_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iHoriPos            - [optional] (0-3) Default is Null. The position of the dimension text horizontally. See Constants, $LOD_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $bParallel           - [optional] Default is Null. If True, Displays the text parallel to or at 90 degrees to the dimension line.
-;                  $iUnitType           - [optional] (-1-15) Default is Null. The type of measurement units, if any, to display. See Constants, $LOD_DRAWSHAPE_DIMENSION_UNIT_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iUnitType           - [optional] (-1-15) Default is Null. The type of measurement units, if any, to display. See Constants, $LOD_DRAWSHAPE_DIMENSION_UNIT_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
@@ -974,10 +974,10 @@ EndFunc   ;==>__LODraw_DateStructCompare
 ;                  @Error: 1, @Extended: 6 = $iRGuide not an Integer, less than -10,008 or greater than 10,008.
 ;                  @Error: 1, @Extended: 7 = $bBelow not a Boolean.
 ;                  @Error: 1, @Extended: 8 = $iDecimal not an Integer, less than 0 or greater than 99.
-;                  @Error: 1, @Extended: 9 = $iVertPos not an Integer, less than 0 or greater than 4. See Constants, $LOD_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 10 = $iHoriPos not an Integer, less than 0 or greater than 3. See Constants, $LOD_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 9 = $iVertPos not an Integer, less than 0 or greater than 4. See Constants, $LOD_DRAWSHAPE_DIMENSION_TEXT_VERT_POS_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 10 = $iHoriPos not an Integer, less than 0 or greater than 3. See Constants, $LOD_DRAWSHAPE_DIMENSION_TEXT_HORI_POS_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 11 = $bParallel not a Boolean.
-;                  @Error: 1, @Extended: 12 = $iUnitType not an Integer, less than -1 or greater than 15. See Constants, $LOD_DRAWSHAPE_DIMENSION_UNIT_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 12 = $iUnitType not an Integer, less than -1 or greater than 15. See Constants, $LOD_DRAWSHAPE_DIMENSION_UNIT_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iDistance
@@ -1110,14 +1110,14 @@ EndFunc   ;==>__LODraw_DimensionSettings
 ; Description ...: Set or Retrieve the current Document View mode.
 ; Syntax ........: __LODraw_DocCurrView(ByRef $oDoc[, $iView = Null])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
-;                  $iView               - [optional] (0-6) Default is Null. The View mode to set the document to. See Constants, $LOD_PAGE_VIEW_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iView               - [optional] (0-6) Default is Null. The View mode to set the document to. See Constants, $LOD_PAGE_VIEW_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1 or Object
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Object = Success. All optional parameters were called with Null, returning current active view mode. See Constants, $LOD_PAGE_VIEW_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 0, @Extended: 1, Return: Object = Success. All optional parameters were called with Null, returning current active view mode. See Constants, $LOD_PAGE_VIEW_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
-;                  @Error: 1, @Extended: 2 = $iView not an Integer, less than 0 or greater than 6. See Constants, $LOD_PAGE_VIEW_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iView not an Integer, less than 0 or greater than 6. See Constants, $LOD_PAGE_VIEW_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.ServiceManager" Object.
 ;                  @Error: 2, @Extended: 2 = Error creating "com.sun.star.frame.DispatchHelper" Object.
@@ -1237,7 +1237,7 @@ EndFunc   ;==>__LODraw_DocCurrView
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iShapeType          - (0-25) The Type of shape to create. See $LOD_DRAWSHAPE_TYPE_ARROWS_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iShapeType          - (0-25) The Type of shape to create. See $LOD_DRAWSHAPE_TYPE_ARROWS_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -1247,7 +1247,7 @@ EndFunc   ;==>__LODraw_DocCurrView
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iX not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iY not an Integer.
-;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOD_DRAWSHAPE_TYPE_ARROWS_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOD_DRAWSHAPE_TYPE_ARROWS_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.drawing.CustomShape" or "com.sun.star.drawing.EllipseShape" Object.
 ;                  @Error: 2, @Extended: 2 = Failed to create a property structure.
@@ -1419,7 +1419,7 @@ EndFunc   ;==>__LODraw_DrawShape_CreateArrow
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iShapeType          - (26-49) The Type of shape to create. See $LOD_DRAWSHAPE_TYPE_BASIC_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iShapeType          - (26-49) The Type of shape to create. See $LOD_DRAWSHAPE_TYPE_BASIC_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -1429,7 +1429,7 @@ EndFunc   ;==>__LODraw_DrawShape_CreateArrow
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iX not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iY not an Integer.
-;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOD_DRAWSHAPE_TYPE_BASIC_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOD_DRAWSHAPE_TYPE_BASIC_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.drawing.CustomShape" or "com.sun.star.drawing.EllipseShape" Object.
 ;                  @Error: 2, @Extended: 2 = Failed to create a property structure.
@@ -1606,7 +1606,7 @@ EndFunc   ;==>__LODraw_DrawShape_CreateBasic
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iShapeType          - (50-56) The Type of shape to create. See $LOD_DRAWSHAPE_TYPE_CALLOUT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iShapeType          - (50-56) The Type of shape to create. See $LOD_DRAWSHAPE_TYPE_CALLOUT_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -1616,7 +1616,7 @@ EndFunc   ;==>__LODraw_DrawShape_CreateBasic
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iX not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iY not an Integer.
-;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOD_DRAWSHAPE_TYPE_CALLOUT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOD_DRAWSHAPE_TYPE_CALLOUT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.drawing.CustomShape" Object.
 ;                  @Error: 2, @Extended: 2 = Failed to create a property structure.
@@ -1722,7 +1722,7 @@ EndFunc   ;==>__LODraw_DrawShape_CreateCallout
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iShapeType          - (57-84) The Type of shape to create. See $LOD_DRAWSHAPE_TYPE_FLOWCHART_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iShapeType          - (57-84) The Type of shape to create. See $LOD_DRAWSHAPE_TYPE_FLOWCHART_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -1732,7 +1732,7 @@ EndFunc   ;==>__LODraw_DrawShape_CreateCallout
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iX not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iY not an Integer.
-;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOD_DRAWSHAPE_TYPE_FLOWCHART_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOD_DRAWSHAPE_TYPE_FLOWCHART_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.drawing.CustomShape" Object.
 ;                  @Error: 2, @Extended: 2 = Failed to create a property structure.
@@ -1901,7 +1901,7 @@ EndFunc   ;==>__LODraw_DrawShape_CreateFlowchart
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iShapeType          - (85-92) The Type of shape to create. See $LOD_DRAWSHAPE_TYPE_LINE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iShapeType          - (85-92) The Type of shape to create. See $LOD_DRAWSHAPE_TYPE_LINE_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -1911,7 +1911,7 @@ EndFunc   ;==>__LODraw_DrawShape_CreateFlowchart
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iX not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iY not an Integer.
-;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOD_DRAWSHAPE_TYPE_LINE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOD_DRAWSHAPE_TYPE_LINE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create the requested Line type Object.
 ;                  @Error: 2, @Extended: 2 = Failed to create a Position structure.
@@ -2358,7 +2358,7 @@ EndFunc   ;==>__LODraw_DrawShape_CreateLine
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iShapeType          - (93-104) The Type of shape to create. See $LOD_DRAWSHAPE_TYPE_STARS_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iShapeType          - (93-104) The Type of shape to create. See $LOD_DRAWSHAPE_TYPE_STARS_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -2368,7 +2368,7 @@ EndFunc   ;==>__LODraw_DrawShape_CreateLine
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iX not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iY not an Integer.
-;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOD_DRAWSHAPE_TYPE_STARS_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOD_DRAWSHAPE_TYPE_STARS_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.drawing.CustomShape" Object.
 ;                  @Error: 2, @Extended: 2 = Failed to create a property structure.
@@ -2490,7 +2490,7 @@ EndFunc   ;==>__LODraw_DrawShape_CreateStars
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
-;                  $iShapeType          - (105-122) The Type of shape to create. See $LOD_DRAWSHAPE_TYPE_SYMBOL_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iShapeType          - (105-122) The Type of shape to create. See $LOD_DRAWSHAPE_TYPE_SYMBOL_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning the newly created shape.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -2500,7 +2500,7 @@ EndFunc   ;==>__LODraw_DrawShape_CreateStars
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iX not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iY not an Integer.
-;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOD_DRAWSHAPE_TYPE_SYMBOL_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iShapeType not an Integer. See $LOD_DRAWSHAPE_TYPE_SYMBOL_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.drawing.CustomShape" Object.
 ;                  @Error: 2, @Extended: 2 = Failed to create a property structure.
@@ -2648,7 +2648,7 @@ EndFunc   ;==>__LODraw_DrawShape_CreateSymbol
 ; Syntax ........: __LODraw_DrawShape_GetCustomType($sCusShapeType)
 ; Parameters ....: $sCusShapeType       - The Returned Custom Shape Type Value from CustomShapeGeometry Array of properties.
 ; Return values .: Success: Integer or -1
-;                  @Error: 0, @Extended: 0, Return: Integer = Success. Custom Shape Type was successfully identified. Returning the Constant value of the Shape, see Constants $LOD_DRAWSHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Custom Shape Type was successfully identified. Returning the Constant value of the Shape, see Constants $LOD_DRAWSHAPE_TYPE_* as defined in LibreOfficeDraw_Constants.au3
 ;                  @Error: 0, @Extended: 0, Return: -1 = Success. Custom Shape is of an unimplemented type that has an ambiguous name, and cannot be identified. See Remarks.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
@@ -3241,7 +3241,7 @@ EndFunc   ;==>__LODraw_DrawShapePointGetSettings
 ;                  $iArrayElement       - The Array element that contains the point to modify. This may be directly modified, depending on the settings.
 ;                  $iX                  - [optional] Default is Null. The X coordinate value, set in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - [optional] Default is Null. The Y coordinate value, set in Hundredths of a Millimeter (HMM).
-;                  $iPointType          - [optional] (0, 1, 3) Default is Null. The Type of Point to change the called point to. See Remarks. See constants $LOD_DRAWSHAPE_POINT_TYPE_* as defined in LibreOfficeImpress_Constants.au3
+;                  $iPointType          - [optional] (0, 1, 3) Default is Null. The Type of Point to change the called point to. See Remarks. See constants $LOD_DRAWSHAPE_POINT_TYPE_* as defined in LibreOfficeDraw_Constants.au3
 ;                  $bIsCurve            - [optional] Default is Null. If True, the Normal Point is a Curve. See remarks.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -3790,13 +3790,13 @@ EndFunc   ;==>__LODraw_DrawShapePointModify
 ; Description ...: Retrieve the Field's Object after insertion.
 ; Syntax ........: __LODraw_FieldGetObj(ByRef $oTextCursor[, $iType = $LOD_FIELD_TYPE_ALL])
 ; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
-;                  $iType               - [optional] (1-127) Default is $LOD_FIELD_TYPE_ALL. The Type of field to search for. Can be BitOR'd together. See Constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iType               - [optional] (1-127) Default is $LOD_FIELD_TYPE_ALL. The Type of field to search for. Can be BitOR'd together. See Constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning newly inserted Field's Object.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
-;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 1 or greater than 127. (The total of all Constants added together.) See Constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 1 or greater than 127. (The total of all Constants added together.) See Constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create a TextCursor.
 ;                  @Error: 2, @Extended: 2 = Failed to create enumeration of paragraphs.
@@ -3882,7 +3882,7 @@ EndFunc   ;==>__LODraw_FieldGetObj
 ; Name ..........: __LODraw_FieldTypeServices
 ; Description ...: Retrieve an Array of Supported Service Names and Integer Constants to search for Fields.
 ; Syntax ........: __LODraw_FieldTypeServices($iFieldType)
-; Parameters ....: $iFieldType          - The Constant Field type. See Constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+; Parameters ....: $iFieldType          - The Constant Field type. See Constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: 0, Return: Array = Success. $iFieldType called with All, returning full regular Field Service list String Array.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. $iFieldType BitOr'd together, determining which flags are called from the Array. Returning Field Service String list Array.
@@ -4035,9 +4035,9 @@ EndFunc   ;==>__LODraw_FilterNameGet
 ; Description ...: Set or Retrieve the page format settings.
 ; Syntax ........: __LODraw_Format(ByRef $oObj[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
 ; Parameters ....: $oObj                - A Slide, Master Slide, Notes or Handout page object.
-;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_WIDTH_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_HEIGHT_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_WIDTH_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_HEIGHT_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -4046,7 +4046,7 @@ EndFunc   ;==>__LODraw_FilterNameGet
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
-;                  @Error: 1, @Extended: 4 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve current slide width.
 ;                  --Property Setting Errors--
@@ -4187,7 +4187,7 @@ Func __LODraw_GetShapeName(ByRef $oSlide, $sShapeName)
 		Do ; Cycle through until I find a unique name.
 			$iCount += 1
 			For $i = 0 To $oSlide.getCount() - 1
-				; Impress doesn't set the Shape name on new shapes. It has names in the UI that would correspond to the order of the shapes inserted, i.e. Shape 1, Shape 2. Etc.
+				; Draw doesn't set the Shape name on new shapes. It has names in the UI that would correspond to the order of the shapes inserted, i.e. Shape 1, Shape 2. Etc.
 				If ($oSlide.getByIndex($i).Name() = $sShapeName & $iCount) Or (($oSlide.getByIndex($i).Name() = "") And (("Shape " & ($i + 1)) = $sShapeName & $iCount)) Then ExitLoop
 
 				Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
@@ -5592,7 +5592,7 @@ Func __LODraw_InternalComErrorHandler(ByRef $oComError)
 		Switch $vUserFunction
 			Case ConsoleWrite
 				ConsoleWrite("!--COM Error-Begin--" & @CRLF & _
-						"Module: LibreOffice Impress" & @CRLF & _
+						"Module: LibreOffice Draw" & @CRLF & _
 						"Number: 0x" & Hex($oComError.number, 8) & @CRLF & _
 						"WinDescription: " & $oComError.windescription & @CRLF & _
 						"Source: " & $oComError.source & @CRLF & _
@@ -5604,7 +5604,7 @@ Func __LODraw_InternalComErrorHandler(ByRef $oComError)
 						"!--COM-Error-End--" & @CRLF)
 
 			Case MsgBox
-				MsgBox(0, "COM Error", "Module: LibreOffice Impress" & @CRLF & _
+				MsgBox(0, "COM Error", "Module: LibreOffice Draw" & @CRLF & _
 						"Number: 0x" & Hex($oComError.number, 8) & @CRLF & _
 						"WinDescription: " & $oComError.windescription & @CRLF & _
 						"Source: " & $oComError.source & @CRLF & _
@@ -5737,18 +5737,18 @@ EndFunc   ;==>__LODraw_NumRuleCreateMap
 ; Description ...: Set and Retrieve Paragraph Alignment settings.
 ; Syntax ........: __LODraw_ParAlignment(ByRef $oObj[, $iHorAlign = Null[, $iLastLineAlign = Null[, $iTxtDirection = Null]]])
 ; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
-;                  $iHorAlign           - [optional] (0-3) Default is Null. The Horizontal alignment of the paragraph. See Constants, $LOD_PAR_ALIGN_HOR_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
-;                  $iLastLineAlign      - [optional] (0-3) Default is Null. Specify the alignment for the last line in the paragraph. See Constants, $LOD_PAR_LAST_LINE_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
-;                  $iTxtDirection       - [optional] (0-5) Default is Null. The Text Writing Direction. See Constants, $LOD_PAR_TXT_DIR_* as defined in LibreOfficeImpress_Constants.au3. [LibreOffice Default is 4]
+;                  $iHorAlign           - [optional] (0-3) Default is Null. The Horizontal alignment of the paragraph. See Constants, $LOD_PAR_ALIGN_HOR_* as defined in LibreOfficeDraw_Constants.au3. See Remarks.
+;                  $iLastLineAlign      - [optional] (0-3) Default is Null. Specify the alignment for the last line in the paragraph. See Constants, $LOD_PAR_LAST_LINE_* as defined in LibreOfficeDraw_Constants.au3. See Remarks.
+;                  $iTxtDirection       - [optional] (0-5) Default is Null. The Text Writing Direction. See Constants, $LOD_PAR_TXT_DIR_* as defined in LibreOfficeDraw_Constants.au3. [LibreOffice Default is 4]
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
-;                  @Error: 1, @Extended: 2 = $iHorAlign not an Integer, less than 0 or greater than 3. See Constants, $LOD_PAR_ALIGN_HOR_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 3 = $iLastLineAlign not an Integer, less than 0 or greater than 3. See Constants, $LOD_PAR_LAST_LINE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 4 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOD_PAR_TXT_DIR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iHorAlign not an Integer, less than 0 or greater than 3. See Constants, $LOD_PAR_ALIGN_HOR_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iLastLineAlign not an Integer, less than 0 or greater than 3. See Constants, $LOD_PAR_LAST_LINE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOD_PAR_TXT_DIR_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iHorAlign
@@ -5881,7 +5881,7 @@ EndFunc   ;==>__LODraw_ParIndent
 ; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $iAbovePar           - [optional] (0-100000) Default is Null. The Space above a paragraph, in Hundredths of a Millimeter (HMM).
 ;                  $iBelowPar           - [optional] (0-100000) Default is Null. The Space Below a paragraph, in Hundredths of a Millimeter (HMM).
-;                  $iLineSpcMode        - [optional] (0-3) Default is Null. The line spacing type of the paragraph. See Constants, $LOD_PAR_LINE_SPC_MODE_* as defined in LibreOfficeImpress_Constants.au3, also notice min and max values for each.
+;                  $iLineSpcMode        - [optional] (0-3) Default is Null. The line spacing type of the paragraph. See Constants, $LOD_PAR_LINE_SPC_MODE_* as defined in LibreOfficeDraw_Constants.au3, also notice min and max values for each.
 ;                  $iLineSpcHeight      - [optional] Default is Null. This value specifies the height in regard to Mode. See Remarks.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -5891,7 +5891,7 @@ EndFunc   ;==>__LODraw_ParIndent
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $iAbovePar not an Integer, less than 0 or greater than 100000.
 ;                  @Error: 1, @Extended: 3 = $iBelowPar not an Integer, less than 0 or greater than 100000.
-;                  @Error: 1, @Extended: 4 = $iLineSpcMode not an Integer, less than 0 or greater than 3. See Constants, $LOD_PAR_LINE_SPC_MODE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iLineSpcMode not an Integer, less than 0 or greater than 3. See Constants, $LOD_PAR_LINE_SPC_MODE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 5 = $iLineSpcHeight not an Integer.
 ;                  @Error: 1, @Extended: 6 = $iLineSpcMode set to 0(Proportional) and $iLineSpcHeight less than 6(%) or greater than 65535(%).
 ;                  @Error: 1, @Extended: 7 = $iLineSpcMode set to 1 or 2(Minimum, or Leading) and $iLineSpcHeight less than 0 or greater than 100000.
@@ -5987,7 +5987,7 @@ EndFunc   ;==>__LODraw_ParSpacing
 ; Syntax ........: __LODraw_ParTabStopCreate(ByRef $oObj, $iPosition[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]])
 ; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $iPosition           - The TabStop position to set the new TabStop to. Set in Hundredths of a Millimeter (HMM). See Remarks.
-;                  $iAlignment          - [optional] (0-4) Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iAlignment          - [optional] (0-4) Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iDecChar            - [optional] Default is Null. Enter a character(in Asc Value(See AutoIt Asc Function)) that you want the decimal tab to use as a decimal separator. Can only be set if $iAlignment is set to $LOD_PAR_TAB_ALIGN_DECIMAL.
 ;                  $iFillChar           - [optional] Default is Null. The Asc (see AutoIt function) value of any character (except 0/Null) you want to act as a Tab Fill character. See remarks.
 ; Return values .: Success: Integer.
@@ -5997,7 +5997,7 @@ EndFunc   ;==>__LODraw_ParSpacing
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $iPosition not an Integer.
 ;                  @Error: 1, @Extended: 3 = Tab Stop position called in $iPosition already exists in this Paragraph.
-;                  @Error: 1, @Extended: 4 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 5 = $iDecChar not an Integer.
 ;                  @Error: 1, @Extended: 6 = $iFillChar not an Integer.
 ;                  --Initialization Errors--
@@ -6158,7 +6158,7 @@ EndFunc   ;==>__LODraw_ParTabStopDelete
 ; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $iTabStop            - The Tab position of the TabStop to modify. See Remarks.
 ;                  $iPosition           - [optional] Default is Null. The New position to set the input position to. Set in Hundredths of a Millimeter (HMM). See Remarks.
-;                  $iAlignment          - [optional] (0-4) Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iAlignment          - [optional] (0-4) Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iDecChar            - [optional] Default is Null. Enter a character(in Asc Value(See AutoIt Asc Function)) that you want the decimal tab to use as a decimal separator. Can only be set if $iAlignment is set to $LOD_PAR_TAB_ALIGN_DECIMAL.
 ;                  $iFillChar           - [optional] Default is Null. The Asc (see AutoIt function) value of any character (except 0/Null) you want to act as a Tab Fill character. See remarks.
 ; Return values .: Success: Integer or Array.
@@ -6171,7 +6171,7 @@ EndFunc   ;==>__LODraw_ParTabStopDelete
 ;                  @Error: 1, @Extended: 2 = $iTabStop not an Integer.
 ;                  @Error: 1, @Extended: 3 = TabStop called in $iTabStop not found.
 ;                  @Error: 1, @Extended: 4 = $iPosition not an Integer.
-;                  @Error: 1, @Extended: 5 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 5 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 6 = $iDecChar not an Integer.
 ;                  @Error: 1, @Extended: 7 = $iFillChar not an Integer.
 ;                  --Processing Errors--
@@ -6440,7 +6440,7 @@ EndFunc   ;==>__LODraw_ShapeAreaGradientMulticolor
 ; Syntax ........: __LODraw_ShapeAreaShadow(ByRef $oObj[, $bShadow = Null[, $iLocation = Null[, $iColor = Null[, $iDistance = Null[, $iBlur = Null[, $iTransparency = Null]]]]]])
 ; Parameters ....: $oObj                - A Shape, Shape Style or Presentation Style object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $bShadow             - [optional] Default is Null. If True, a Shadow is present for the Shape.
-;                  $iLocation           - [optional] (0-8) Default is Null. The Location of the Shadow, must be one of the Constants, $LOD_SHAPE_SHADOW_LOCATION_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iLocation           - [optional] (0-8) Default is Null. The Location of the Shadow, must be one of the Constants, $LOD_SHAPE_SHADOW_LOCATION_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iColor              - [optional] (0-16777215) Default is Null. The Shadow color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iDistance           - [optional] Default is Null. The distance of the Shadow from the Shape's edges, set in Hundredths of a Millimeter (HMM).
 ;                  $iBlur               - [optional] (0-150) Default is Null. The amount of blur applied to the Shadow, set in Printer's Points.
@@ -6452,7 +6452,7 @@ EndFunc   ;==>__LODraw_ShapeAreaGradientMulticolor
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $bShadow not a Boolean.
-;                  @Error: 1, @Extended: 3 = $iLocation not an Integer, less than 0 or greater than 8. See Constants, $LOD_SHAPE_SHADOW_LOCATION_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iLocation not an Integer, less than 0 or greater than 8. See Constants, $LOD_SHAPE_SHADOW_LOCATION_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 4 = $iColor not an Integer, less than 0 or greater than 16777215.
 ;                  @Error: 1, @Extended: 5 = $iDistance not an Integer, or less than 0.
 ;                  @Error: 1, @Extended: 6 = $iBlur not an Integer, less than 0 or greater than 150 Printer's Points.
@@ -6562,7 +6562,7 @@ EndFunc   ;==>__LODraw_ShapeAreaShadow
 ; Description ...: Internal function for setting or retrieving Shape Shadow Location and Distance settings.
 ; Syntax ........: __LODraw_ShapeAreaShadowModify($oShape[, $iLocation = Null[, $iDistance = Null]])
 ; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapeTextBoxInsert, _LODraw_ShapeImageInsert, or _LODraw_ShapesGetList function.
-;                  $iLocation           - [optional] (0-8) Default is Null. The Location of the Shadow, must be one of the Constants, $LOD_SHAPE_SHADOW_LOCATION_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iLocation           - [optional] (0-8) Default is Null. The Location of the Shadow, must be one of the Constants, $LOD_SHAPE_SHADOW_LOCATION_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iDistance           - [optional] Default is Null. The distance of the Shadow from the Shape's edges, set in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Integer
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully set the settings.
@@ -6869,7 +6869,7 @@ EndFunc   ;==>__LODraw_ShapeAreaTransparencyGradientMulti
 ; Syntax ........: __LODraw_ShapeGetType(ByRef $oShape)
 ; Parameters ....: $oShape              - A Drawing Shape object returned by a previous _LODraw_DrawShapeInsert, or _LODraw_ShapesGetList function.
 ; Return values .: Success: Integer
-;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning the Shape's Type, corresponding to one of the Constants $LOD_SHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning the Shape's Type, corresponding to one of the Constants $LOD_SHAPE_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
@@ -6922,13 +6922,13 @@ EndFunc   ;==>__LODraw_ShapeGetType
 ; Description ...: Create and insert a preset Arrowhead name.
 ; Syntax ........: __LODraw_ShapeLineArrowheadNameInsert(ByRef $oDoc, $iArrowStyle)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
-;                  $iArrowStyle         - The Arrowhead style to insert. See Constants, $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iArrowStyle         - The Arrowhead style to insert. See Constants, $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. The Arrowhead name was successfully inserted.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
-;                  @Error: 1, @Extended: 2 = $iArrowStyle not an Integer, less than 0 or greater than 32. See Constants, $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iArrowStyle not an Integer, less than 0 or greater than 32. See Constants, $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.drawing.MarkerTable" Object.
 ;                  @Error: 2, @Extended: 2 = Error creating "com.sun.star.drawing.PolyPolygonBezierCoords" structure.
@@ -6980,7 +6980,7 @@ EndFunc   ;==>__LODraw_ShapeLineArrowheadNameInsert
 ; Name ..........: __LODraw_ShapeLineArrowStyleName
 ; Description ...: Convert a Arrow head Constant to the corresponding name or reverse, or return preset values.
 ; Syntax ........: __LODraw_ShapeLineArrowStyleName([$iArrowStyle = Null[, $sArrowStyle = Null[, $bReturnPresets = False[, $tPolyCoords = Null]]]])
-; Parameters ....: $iArrowStyle         - [optional] (0-32) Default is Null. The Arrow Style Constant to convert to its corresponding name. See $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3
+; Parameters ....: $iArrowStyle         - [optional] (0-32) Default is Null. The Arrow Style Constant to convert to its corresponding name. See $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeDraw_Constants.au3
 ;                  $sArrowStyle         - [optional] Default is Null. The Arrow Style Name to convert to the corresponding constant if found.
 ;                  $bReturnPresets      - [optional] Default is False. If True, the function will try to fill and return a Structure with preset values.
 ;                  $tPolyCoords         - [optional] Default is Null. If $bReturnPresets is True, this is a PolyPolygonBezierCoords Structure to fill.
@@ -6991,7 +6991,7 @@ EndFunc   ;==>__LODraw_ShapeLineArrowheadNameInsert
 ;                  @Error: 0, @Extended: 3, Return: String = Success. $bReturnPresets called with True, returning $tPolyCoords filled with preset values.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $iArrowStyle not an Integer, less than 0 or greater than Arrow type constants. See $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3
+;                  @Error: 1, @Extended: 1 = $iArrowStyle not an Integer, less than 0 or greater than Arrow type constants. See $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeDraw_Constants.au3
 ;                  @Error: 1, @Extended: 2 = $sArrowStyle not a String.
 ;                  @Error: 1, @Extended: 3 = $bReturnPresets not a Boolean.
 ;                  @Error: 1, @Extended: 4 = $tPolyCoords not an Object.
@@ -7635,13 +7635,13 @@ EndFunc   ;==>__LODraw_ShapeLineArrowStyleName
 ; Description ...: Create and insert a preset Line Dash name.
 ; Syntax ........: __LODraw_ShapeLineDashNameInsert(ByRef $oDoc, $iLineDashType)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
-;                  $iLineDashType       - The Line Dash style to insert. See Constants, $LOD_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iLineDashType       - The Line Dash style to insert. See Constants, $LOD_SHAPE_LINE_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. The Line Dash name was successfully inserted.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
-;                  @Error: 1, @Extended: 2 = $iLineDashType not an Integer, less than 0 or greater than 31. See Constants, $LOD_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iLineDashType not an Integer, less than 0 or greater than 31. See Constants, $LOD_SHAPE_LINE_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.drawing.DashTable" Object.
 ;                  @Error: 2, @Extended: 2 = Error creating "com.sun.star.drawing.LineDash" structure.
@@ -7692,7 +7692,7 @@ EndFunc   ;==>__LODraw_ShapeLineDashNameInsert
 ; Name ..........: __LODraw_ShapeLineStyleName
 ; Description ...: Convert a Line Style Constant to the corresponding name or reverse, or return preset values.
 ; Syntax ........: __LODraw_ShapeLineStyleName([$iLineStyle = Null[, $sLineStyle = Null[, $bReturnPresets = False[, $tDash = Null]]]])
-; Parameters ....: $iLineStyle          - [optional] (0-31) Default is Null. The Line Style Constant to convert to its corresponding name. See $LOD_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3
+; Parameters ....: $iLineStyle          - [optional] (0-31) Default is Null. The Line Style Constant to convert to its corresponding name. See $LOD_SHAPE_LINE_STYLE_* as defined in LibreOfficeDraw_Constants.au3
 ;                  $sLineStyle          - [optional] Default is Null. The Line Style Name to convert to the corresponding constant if found.
 ;                  $bReturnPresets      - [optional] Default is False. If True, the function will try to fill and return a Structure with preset values.
 ;                  $tDash               - [optional] Default is Null. If $bReturnPresets is True, this is a Dash Structure to fill.
@@ -7703,7 +7703,7 @@ EndFunc   ;==>__LODraw_ShapeLineDashNameInsert
 ;                  @Error: 0, @Extended: 3, Return: Struct = Success. $bReturnPresets called with True, returning $tDash filled with preset values.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $iLineStyle not an Integer, less than 0 or greater than Line Style constants. See $LOD_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3
+;                  @Error: 1, @Extended: 1 = $iLineStyle not an Integer, less than 0 or greater than Line Style constants. See $LOD_SHAPE_LINE_STYLE_* as defined in LibreOfficeDraw_Constants.au3
 ;                  @Error: 1, @Extended: 2 = $sLineStyle not a String.
 ;                  @Error: 1, @Extended: 3 = $bReturnPresets not a Boolean.
 ;                  @Error: 1, @Extended: 4 = $tDash not an Object.
@@ -8388,8 +8388,8 @@ EndFunc   ;==>__LODraw_ShapeStyleAreaColor
 ; Syntax ........: __LODraw_ShapeStyleAreaGradient(ByRef $oDoc, ByRef $oObj[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $oObj                - A Shape Style or Presentation Style object returned by a previous _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
-;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOD_GRAD_NAME_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOD_GRAD_NAME_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iIncrement          - [optional] (0, 3-256) Default is Null. The number of steps of color change. 0 = Automatic.
 ;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient, where 0% corresponds to the current horizontal location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" setting. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage. $iType must be other than "Linear", or "Axial".
@@ -8408,7 +8408,7 @@ EndFunc   ;==>__LODraw_ShapeStyleAreaColor
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 3 = $sGradientName not a String.
-;                  @Error: 1, @Extended: 4 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 5 = $iIncrement not an Integer, less than 3, but not 0, or greater than 256.
 ;                  @Error: 1, @Extended: 6 = $iXCenter not an Integer, less than 0 or greater than 100.
 ;                  @Error: 1, @Extended: 7 = $iYCenter not an Integer, less than 0 or greater than 100.
@@ -8616,7 +8616,7 @@ EndFunc   ;==>__LODraw_ShapeStyleAreaGradient
 ; Syntax ........: __LODraw_ShapeStyleAreaTransparencyGradient(ByRef $oDoc, ByRef $oObj[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $oObj                - A Shape Style or Presentation Style object returned by a previous _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
-;                  $iType               - [optional] (-1-5) Default is Null. The type of transparency gradient that you want to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3. Call with $LOD_GRAD_TYPE_OFF to turn Transparency Gradient off.
+;                  $iType               - [optional] (-1-5) Default is Null. The type of transparency gradient that you want to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3. Call with $LOD_GRAD_TYPE_OFF to turn Transparency Gradient off.
 ;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iAngle              - [optional] (0-359) Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
@@ -8631,7 +8631,7 @@ EndFunc   ;==>__LODraw_ShapeStyleAreaGradient
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oObj not an Object.
-;                  @Error: 1, @Extended: 3 = $iType not an Integer, less than -1 or greater than 5. See constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iType not an Integer, less than -1 or greater than 5. See constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 4 = $iXCenter not an Integer, less than 0 or greater than 100.
 ;                  @Error: 1, @Extended: 5 = $iYCenter not an Integer, less than 0 or greater than 100.
 ;                  @Error: 1, @Extended: 6 = $iAngle not an Integer, less than 0 or greater than 359.
@@ -8847,11 +8847,11 @@ EndFunc   ;==>__LODraw_ShapeStyleCompare
 ; Syntax ........: __LODraw_ShapeStyleLineArrowStyles(ByRef $oDoc, ByRef $oObj[, $vStartStyle = Null[, $iStartWidth = Null[, $bStartCenter = Null[, $bSync = Null[, $vEndStyle = Null[, $iEndWidth = Null[, $bEndCenter = Null]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $oObj                - A Shape Style or Presentation Style object returned by a previous _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
-;                  $vStartStyle         - [optional] (0-32, or String) Default is Null. The Arrow head to apply to the start of the line. Can be a Custom Arrowhead name, or one of the constants, $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3. See remarks.
+;                  $vStartStyle         - [optional] (0-32, or String) Default is Null. The Arrow head to apply to the start of the line. Can be a Custom Arrowhead name, or one of the constants, $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeDraw_Constants.au3. See remarks.
 ;                  $iStartWidth         - [optional] (0-5004) Default is Null. The Width of the Starting Arrowhead, in Hundredths of a Millimeter (HMM).
 ;                  $bStartCenter        - [optional] Default is Null. If True, Places the center of the Start arrowhead on the endpoint of the line.
 ;                  $bSync               - [optional] Default is Null. If True, Synchronizes the Start Arrowhead settings with the end Arrowhead settings. See remarks.
-;                  $vEndStyle           - [optional] (0-32, or String) Default is Null. The Arrow head to apply to the end of the line. Can be a Custom Arrowhead name, or one of the constants, $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3. See remarks.
+;                  $vEndStyle           - [optional] (0-32, or String) Default is Null. The Arrow head to apply to the end of the line. Can be a Custom Arrowhead name, or one of the constants, $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeDraw_Constants.au3. See remarks.
 ;                  $iEndWidth           - [optional] (0-5004) Default is Null. The Width of the Ending Arrowhead, in Hundredths of a Millimeter (HMM).
 ;                  $bEndCenter          - [optional] Default is Null. If True, Places the center of the End arrowhead on the endpoint of the line.
 ; Return values .: Success: Integer or Array.
@@ -8862,12 +8862,12 @@ EndFunc   ;==>__LODraw_ShapeStyleCompare
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 3 = $vStartStyle not a String, and not an Integer.
-;                  @Error: 1, @Extended: 4 = $vStartStyle is an Integer, but less than 0 or greater than 32. See constants $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $vStartStyle is an Integer, but less than 0 or greater than 32. See constants $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 5 = $iStartWidth not an Integer, less than 0 or greater than 5004.
 ;                  @Error: 1, @Extended: 6 = $bStartCenter not a Boolean.
 ;                  @Error: 1, @Extended: 7 = $bSync not a Boolean.
 ;                  @Error: 1, @Extended: 8 = $vEndStyle not a String, and not an Integer.
-;                  @Error: 1, @Extended: 9 = $vEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 9 = $vEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 10 = $iEndWidth not an Integer, less than 0 or greater than 5004.
 ;                  @Error: 1, @Extended: 11 = $bEndCenter not a Boolean.
 ;                  --Processing Errors--
@@ -8890,7 +8890,7 @@ EndFunc   ;==>__LODraw_ShapeStyleCompare
 ;                  LibreOffice has no setting for $bSync, so I have made a manual version of it in this function. It only accepts True, and must be called with True each time you want it to synchronize.
 ;                  When retrieving the current settings, $bSync will be a Boolean value of whether the Start Arrowhead settings are currently equal to the End Arrowhead setting values.
 ;                  Both $vStartStyle and $vEndStyle accept a String or an Integer because there is the possibility of a custom Arrowhead being available the user may want to use.
-;                  When retrieving the current settings, both $vStartStyle and $vEndStyle could be either an Integer or a String. It will be a String if the current Arrowhead is a custom Arrowhead, else an Integer, corresponding to one of the constants, $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  When retrieving the current settings, both $vStartStyle and $vEndStyle could be either an Integer or a String. It will be a String if the current Arrowhead is a custom Arrowhead, else an Integer, corresponding to one of the constants, $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
@@ -9007,12 +9007,12 @@ EndFunc   ;==>__LODraw_ShapeStyleLineArrowStyles
 ; Syntax ........: ; Syntax ........: __LODraw_ShapeStyleLineProperties(ByRef $oDoc, ByRef $oObj[, $vStyle = Null[, $iColor = Null[, $iWidth = Null[, $iTransparency = Null[, $iCornerStyle = Null[, $iCapStyle = Null]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $oObj                - A Shape Style or Presentation Style object returned by a previous _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
-;                  $vStyle              - [optional] (0-31, or String) Default is Null. The Line Style to use. Can be a Custom Line Style name, or one of the constants, $LOD_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3. See remarks.
+;                  $vStyle              - [optional] (0-31, or String) Default is Null. The Line Style to use. Can be a Custom Line Style name, or one of the constants, $LOD_SHAPE_LINE_STYLE_* as defined in LibreOfficeDraw_Constants.au3. See remarks.
 ;                  $iColor              - [optional] (0-16777215) Default is Null. The Line color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iWidth              - [optional] (0-5004) Default is Null. The line Width, set in Hundredths of a Millimeter (HMM).
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The Line transparency percentage. 100% = fully transparent.
-;                  $iCornerStyle        - [optional] (0, 2-4) Default is Null. The Line Corner Style. See Constants $LOD_SHAPE_LINE_JOINT_* as defined in LibreOfficeImpress_Constants.au3
-;                  $iCapStyle           - [optional] (0-2) Default is Null. The Line Cap Style. See Constants $LOD_SHAPE_LINE_CAP_* as defined in LibreOfficeImpress_Constants.au3
+;                  $iCornerStyle        - [optional] (0, 2-4) Default is Null. The Line Corner Style. See Constants $LOD_SHAPE_LINE_JOINT_* as defined in LibreOfficeDraw_Constants.au3
+;                  $iCapStyle           - [optional] (0-2) Default is Null. The Line Cap Style. See Constants $LOD_SHAPE_LINE_CAP_* as defined in LibreOfficeDraw_Constants.au3
 ; Return values .: Success: Integer or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
@@ -9021,12 +9021,12 @@ EndFunc   ;==>__LODraw_ShapeStyleLineArrowStyles
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 3 = $vStyle not a String, and not an Integer.
-;                  @Error: 1, @Extended: 4 = $vStyle is an Integer, but less than 0 or greater than 31. See constants $LOD_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 4 = $vStyle is an Integer, but less than 0 or greater than 31. See constants $LOD_SHAPE_LINE_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 5 = $iColor not an Integer, less than 0 or greater than 16777215.
 ;                  @Error: 1, @Extended: 6 = $iWidth not an Integer, less than 0 or greater than 5004.
 ;                  @Error: 1, @Extended: 7 = $iTransparency not an Integer, less than 0 or greater than 100.
-;                  @Error: 1, @Extended: 8 = $iCornerStyle not an Integer, not equal to 0, equal to 1, not equal to 2 or greater than 4. See Constants $LOD_SHAPE_LINE_JOINT_* as defined in LibreOfficeImpress_Constants.au3
-;                  @Error: 1, @Extended: 9 = $iCapStyle is an Integer, but less than 0 or greater than 2. See constants $LOD_SHAPE_LINE_CAP_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 8 = $iCornerStyle not an Integer, not equal to 0, equal to 1, not equal to 2 or greater than 4. See Constants $LOD_SHAPE_LINE_JOINT_* as defined in LibreOfficeDraw_Constants.au3
+;                  @Error: 1, @Extended: 9 = $iCapStyle is an Integer, but less than 0 or greater than 2. See constants $LOD_SHAPE_LINE_CAP_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to convert Constant to Line Style name.
 ;                  @Error: 3, @Extended: 2 = Failed to insert Line Style name.
@@ -9041,7 +9041,7 @@ EndFunc   ;==>__LODraw_ShapeStyleLineArrowStyles
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $vStyle accepts a String or an Integer because there is the possibility of a custom Line Style being available that the user may want to use.
-;                  When retrieving the current settings, $vStyle could be either an Integer or a String. It will be a String if the current Line Style is a custom Line Style, else an Integer, corresponding to one of the constants, $LOD_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  When retrieving the current settings, $vStyle could be either an Integer or a String. It will be a String if the current Line Style is a custom Line Style, else an Integer, corresponding to one of the constants, $LOD_SHAPE_LINE_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert
@@ -9156,8 +9156,8 @@ EndFunc   ;==>__LODraw_ShapeStyleLineProperties
 ; Description ...: Set or Retrieve Shape or Shape Style Text Attribute Animation settings.
 ; Syntax ........: __LODraw_ShapeTextAttrAnimation(ByRef $oObj[, $iEffect = Null[, $iDirection = Null[, $bStartInside = Null[, $bVisibleOnExit = Null[, $iCycles = Null[, $iInc = Null[, $bPixels = Null[, $iDelay = Null]]]]]]]])
 ; Parameters ....: $oObj                - A Shape or Shape Style object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, or _LODraw_ShapeStyleGetObjByName function.
-;                  $iEffect             - [optional] (0-4) Default is Null. The Animation type. See Constants, $LOD_ANIMATION_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  $iDirection          - [optional] (0-3) Default is Null. The Direction of the text's movement, if applicable. See Constants, $LOD_ANIMATION_DIR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iEffect             - [optional] (0-4) Default is Null. The Animation type. See Constants, $LOD_ANIMATION_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iDirection          - [optional] (0-3) Default is Null. The Direction of the text's movement, if applicable. See Constants, $LOD_ANIMATION_DIR_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $bStartInside        - [optional] Default is Null. If True, Text is visible and inside the shape when the effect is applied.
 ;                  $bVisibleOnExit      - [optional] Default is Null. If True, Text remains visible after the effect is applied.
 ;                  $iCycles             - [optional] (0-100) Default is Null. The number of times to repeat the animation. 0 = Continuous.
@@ -9170,8 +9170,8 @@ EndFunc   ;==>__LODraw_ShapeStyleLineProperties
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
-;                  @Error: 1, @Extended: 2 = $iEffect not an Integer, less than 0 or greater than 4. See Constants, $LOD_ANIMATION_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
-;                  @Error: 1, @Extended: 3 = $iDirection not an Integer, less than 0 or greater than 3. See Constants, $LOD_ANIMATION_DIR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iEffect not an Integer, less than 0 or greater than 4. See Constants, $LOD_ANIMATION_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iDirection not an Integer, less than 0 or greater than 3. See Constants, $LOD_ANIMATION_DIR_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 4 = $bStartInside not a Boolean.
 ;                  @Error: 1, @Extended: 5 = $bVisibleOnExit not a Boolean.
 ;                  @Error: 1, @Extended: 6 = $iCycles not an Integer, less than 0 or greater than 100.
@@ -9418,7 +9418,7 @@ EndFunc   ;==>__LODraw_ShapeTextAttrFit
 ;                  $iRight              - [optional] (-100000-100000) Default is Null. The space between the right edge of the drawing object and the right border of the text, in Hundredths of a Millimeter (HMM).
 ;                  $iTop                - [optional] (-100000-100000) Default is Null. The space between the top edge of the drawing object and the top border of the text, in Hundredths of a Millimeter (HMM).
 ;                  $iBottom             - [optional] (-100000-100000) Default is Null. The space between the bottom edge of the drawing object and the bottom border of the text, in Hundredths of a Millimeter (HMM).
-;                  $iAnchor             - [optional] (0-8) Default is Null. The text anchor position. See Constants, $LOD_PAR_TEXT_ANCHOR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iAnchor             - [optional] (0-8) Default is Null. The text anchor position. See Constants, $LOD_PAR_TEXT_ANCHOR_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $bFullWidth          - [optional] Default is Null. If True, Anchors the text to the full width of the drawing object.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -9430,7 +9430,7 @@ EndFunc   ;==>__LODraw_ShapeTextAttrFit
 ;                  @Error: 1, @Extended: 3 = $iRight not an Integer, less than -100000 or greater than 100000.
 ;                  @Error: 1, @Extended: 4 = $iTop not an Integer, less than -100000 or greater than 100000.
 ;                  @Error: 1, @Extended: 5 = $iBottom not an Integer, less than -100000 or greater than 100000.
-;                  @Error: 1, @Extended: 6 = $iAnchor not an Integer, less than 0 or greater than 8. See Constants, $LOD_PAR_TEXT_ANCHOR_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $iAnchor not an Integer, less than 0 or greater than 8. See Constants, $LOD_PAR_TEXT_ANCHOR_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 7 = $bFullWidth not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
@@ -10543,14 +10543,14 @@ EndFunc   ;==>__LODraw_TableCellBorder
 ; Description ...: Set or Retrieve the current transition effect of a Slide.
 ; Syntax ........: __LODraw_Transition(ByRef $oSlide[, $iTransition = Null])
 ; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
-;                  $iTransition         - [optional] (0-78) Default is Null. The Transition effect. See Constants, $LOD_SLIDE_TRANSITION_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iTransition         - [optional] (0-78) Default is Null. The Transition effect. See Constants, $LOD_SLIDE_TRANSITION_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1 or Integer
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current Transition effect type.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
-;                  @Error: 1, @Extended: 2 = $iTransition not an Integer, less then 0 or greater than 78. See Constants, $LOD_SLIDE_TRANSITION_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iTransition not an Integer, less then 0 or greater than 78. See Constants, $LOD_SLIDE_TRANSITION_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve current Effect value.
 ;                  @Error: 3, @Extended: 2 = Failed to retrieve current Transition Type value.

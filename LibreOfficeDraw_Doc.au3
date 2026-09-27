@@ -8,16 +8,16 @@
 #include "LibreOffice_Helper.au3"
 #include "LibreOffice_Internal.au3"
 
-; Common includes for Impress
-#include "LibreOfficeImpress_Internal.au3"
-#include "LibreOfficeImpress_Constants.au3"
+; Common includes for Draw
+#include "LibreOfficeDraw_Internal.au3"
+#include "LibreOfficeDraw_Constants.au3"
 
-; Other includes for Impress
+; Other includes for Draw
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice UDF
 ; AutoIt Version : v3.3.16.1
-; Description ...: Provides basic functionality through AutoIt for Creating, Modifying, Closing, Saving, etc. L.O. Impress documents.
+; Description ...: Provides basic functionality through AutoIt for Creating, Modifying, Closing, Saving, etc. L.O. Draw documents.
 ; Author(s) .....: donnyh13, mLipok
 ; Dll ...........:
 ;
@@ -62,7 +62,7 @@
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LODraw_DocClose
-; Description ...: Close an existing Impress Document, returning its save path if applicable.
+; Description ...: Close an existing Draw Document, returning its save path if applicable.
 ; Syntax ........: _LODraw_DocClose(ByRef $oDoc[, $bSaveChanges = True[, $sSaveName = ""[, $bDeliverOwnership = True]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $bSaveChanges        - [optional] Default is True. If True, saves changes if any were made before closing. See remarks.
@@ -157,15 +157,15 @@ EndFunc   ;==>_LODraw_DocClose
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LODraw_DocConnect
-; Description ...: Connect to an already opened instance of LibreOffice Impress.
+; Description ...: Connect to an already opened instance of LibreOffice Draw.
 ; Syntax ........: _LODraw_DocConnect([$iMode = $LO_DOC_CONNECT_MODE_CURRENT[, $sSearch = ""[, $bCaseless = False]]])
 ; Parameters ....: $iMode               - [optional] (0-4) Default is $LO_DOC_CONNECT_MODE_CURRENT. The Connect mode. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
 ;                  $sSearch             - [optional] Default is "". The Name, Title or Path of the Document to search for. See remarks.
 ;                  $bCaseless           - [optional] Default is False. If True, searches are caseless when using $LO_DOC_CONNECT_MODE_SEARCH_* flags.
 ; Return values .: Success: Object or Array.
-;                  @Error: 0, @Extended: 1, Return: Object = Success, The Object for the current, or last active Impress document is returned.
+;                  @Error: 0, @Extended: 1, Return: Object = Success, The Object for the current, or last active Draw document is returned.
 ;                  @Error: 0, @Extended: 1, Return: Object = Success, The Object for the found Document with matching Name, Title or Path.
-;                  @Error: 0, @Extended: ?, Return: Array = Success, An Array of all open LibreOffice Impress Documents. @Extended is set to number of results. See remarks.
+;                  @Error: 0, @Extended: ?, Return: Array = Success, An Array of all open LibreOffice Draw Documents. @Extended is set to number of results. See remarks.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $iMode not an Integer, less than 0 or greater than 4. See Constants, $LO_DOC_CONNECT_MODE_* as defined in LibreOffice_Constants.au3.
@@ -180,13 +180,13 @@ EndFunc   ;==>_LODraw_DocClose
 ;                  @Error: 3, @Extended: 2 = Failed to retrieve Document Object.
 ;                  @Error: 3, @Extended: 3 = Failed to identify Document type.
 ;                  @Error: 3, @Extended: 4 = Error converting path to LibreOffice URL.
-;                  @Error: 3, @Extended: 5 = Current Document not a Impress Document.
+;                  @Error: 3, @Extended: 5 = Current Document not a Draw Document.
 ;                  @Error: 3, @Extended: 6 = No matches found.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Only Impress documents are searched or returned using any of the flags.
+; Remarks .......: Only Draw documents are searched or returned using any of the flags.
 ;                  The value used for $sSearch depends on the flag called in $iMode. It is ignored except for the $LO_DOC_CONNECT_MODE_SEARCH_* flags.
-;                  If $iMode is called with $LO_DOC_CONNECT_MODE_SEARCH_TITLE, $sSearch must be the full Title with Office and Component name; e.g: "Test.odp — LibreOffice Impress". This will be the same Title AutoIt would match or return from functions like WinGetTitle.
+;                  If $iMode is called with $LO_DOC_CONNECT_MODE_SEARCH_TITLE, $sSearch must be the full Title with Office and Component name; e.g: "Test.odp — LibreOffice Draw". This will be the same Title AutoIt would match or return from functions like WinGetTitle.
 ;                  If $iMode is called with $LO_DOC_CONNECT_MODE_SEARCH_NAME, $sSearch must be the Document's full name, without the extension; e.g: "Test".
 ;                  If $iMode is called with $LO_DOC_CONNECT_MODE_SEARCH_NAME_WITH_EXT, $sSearch must be the Document's name, with the extension; e.g: "Test.odp". If the Document hasn't been saved, just the name will work, e.g., "Untitled 1".
 ;                  If $iMode is called with $LO_DOC_CONNECT_MODE_SEARCH_PATH, $sSearch must be the full Path of the document (Name and extension included); e.g: "C:\file\Test.odp."
@@ -307,9 +307,9 @@ EndFunc   ;==>_LODraw_DocConnect
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LODraw_DocCreate
-; Description ...: Open a new LibreOffice Impress Document or Connect to an existing blank, unsaved, writable document.
+; Description ...: Open a new LibreOffice Draw Document or Connect to an existing blank, unsaved, writable document.
 ; Syntax ........: _LODraw_DocCreate([$bForceNew = True[, $bHidden = False]])
-; Parameters ....: $bForceNew           - [optional] Default is True. If True, force opening a new Impress Document instead of checking for a usable blank.
+; Parameters ....: $bForceNew           - [optional] Default is True. If True, force opening a new Draw Document instead of checking for a usable blank.
 ;                  $bHidden             - [optional] Default is False. If True opens the new document invisible or changes the existing document to invisible.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 1, Return: Object = Successfully connected to an existing Document. Returning Document's Object
@@ -353,7 +353,7 @@ Func _LODraw_DocCreate($bForceNew = True, $bHidden = False)
 	$oDesktop = $oServiceManager.createInstance("com.sun.star.frame.Desktop")
 	If Not IsObj($oDesktop) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-	; If not force new, and L.O pages exist then see if there are any blank Impress documents to use.
+	; If not force new, and L.O pages exist then see if there are any blank Draw documents to use.
 	If Not $bForceNew And $oDesktop.getComponents.hasElements() Then
 		$oEnumDoc = $oDesktop.getComponents.createEnumeration()
 		If Not IsObj($oEnumDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
@@ -568,8 +568,8 @@ EndFunc   ;==>_LODraw_DocExport
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Document's name.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: If $bReturnFull is True, the return value will be like: "<Impress Doc name>.<extension> — LibreOffice Impress" e.g. "Testing.odp — LibreOffice Impress".
-;                  Else the return value will be like: "<Impress Doc name>.<extension>", e.g. "Testing.odp"
+; Remarks .......: If $bReturnFull is True, the return value will be like: "<Draw Doc name>.<extension> — LibreOffice Draw" e.g. "Testing.odp — LibreOffice Impress".
+;                  Else the return value will be like: "<Draw Doc name>.<extension>", e.g. "Testing.odp"
 ; Related .......: _LODraw_DocSaveAs
 ; Link ..........:
 ; Example .......: Yes
@@ -885,7 +885,7 @@ EndFunc   ;==>_LODraw_DocMinimize
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LODraw_DocOpen
-; Description ...: Open an existing Impress Document, returning its object identifier.
+; Description ...: Open an existing Draw Document, returning its object identifier.
 ; Syntax ........: _LODraw_DocOpen($sFilePath[, $bConnectIfOpen = True[, $bHidden = Null[, $bReadOnly = Null[, $sPassword = Null[, $bLoadAsTemplate = Null[, $sFilterName = Null]]]]]])
 ; Parameters ....: $sFilePath           - Full path and filename of the file to be opened.
 ;                  $bConnectIfOpen      - [optional] Default is True. If True, Connect to the requested document if it is already open. See remarks.
@@ -1651,14 +1651,14 @@ EndFunc   ;==>_LODraw_DocUndoReset
 ; Description ...: Set or Retrieve the current Document View mode.
 ; Syntax ........: _LODraw_DocView(ByRef $oDoc[, $iView = Null])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
-;                  $iView               - [optional] (0-6) Default is Null. The View mode to set the document to. See Constants, $LOD_PAGE_VIEW_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iView               - [optional] (0-6) Default is Null. The View mode to set the document to. See Constants, $LOD_PAGE_VIEW_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1 or Object
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Object = Success. All optional parameters were called with Null, returning current active view mode. See Constants, $LOD_PAGE_VIEW_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 0, @Extended: 1, Return: Object = Success. All optional parameters were called with Null, returning current active view mode. See Constants, $LOD_PAGE_VIEW_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
-;                  @Error: 1, @Extended: 2 = $iView not an Integer, less than 0 or greater than 6. See Constants, $LOD_PAGE_VIEW_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iView not an Integer, less than 0 or greater than 6. See Constants, $LOD_PAGE_VIEW_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.ServiceManager" Object.
 ;                  @Error: 2, @Extended: 2 = Error creating "com.sun.star.frame.DispatchHelper" Object.
@@ -1744,7 +1744,7 @@ EndFunc   ;==>_LODraw_DocVisible
 ; Description ...: Modify the zoom value for a document.
 ; Syntax ........: _LODraw_DocZoom(ByRef $oDoc[, $iZoomType = Null[, $iZoom = Null]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
-;                  $iZoomType           - [optional] (0-4) Default is Null. The Zoom type, See remarks. See constants $LOD_ZOOMTYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  $iZoomType           - [optional] (0-4) Default is Null. The Zoom type, See remarks. See constants $LOD_ZOOMTYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iZoom               - [optional] (20-600) Default is Null. The zoom percentage. Only valid if Zoom type is set to "By Value"
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Settings were successfully set.
@@ -1752,7 +1752,7 @@ EndFunc   ;==>_LODraw_DocVisible
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
-;                  @Error: 1, @Extended: 2 = $iZoomType not an Integer, less than 0 or greater than 4. See constants $LOD_ZOOMTYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iZoomType not an Integer, less than 0 or greater than 4. See constants $LOD_ZOOMTYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $iZoom not an Integer, less than 20 or greater than 600.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:

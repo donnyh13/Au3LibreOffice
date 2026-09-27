@@ -2,24 +2,24 @@
 
 #include-once
 
-; Common includes for Impress
-#include "LibreOfficeImpress_Constants.au3"
-#include "LibreOfficeImpress_Helper.au3"
-#include "LibreOfficeImpress_Internal.au3"
+; Common includes for Draw
+#include "LibreOfficeDraw_Constants.au3"
+#include "LibreOfficeDraw_Helper.au3"
+#include "LibreOfficeDraw_Internal.au3"
 
-; Other includes for Impress
-#include "LibreOfficeImpress_Cursor.au3"
-#include "LibreOfficeImpress_Doc.au3"
-#include "LibreOfficeImpress_DrawShape.au3"
-#include "LibreOfficeImpress_Field.au3"
-#include "LibreOfficeImpress_Shape.au3"
-#include "LibreOfficeImpress_Slide.au3"
-#include "LibreOfficeImpress_Table.au3"
+; Other includes for Draw
+#include "LibreOfficeDraw_Cursor.au3"
+#include "LibreOfficeDraw_Doc.au3"
+#include "LibreOfficeDraw_DrawShape.au3"
+#include "LibreOfficeDraw_Field.au3"
+#include "LibreOfficeDraw_Shape.au3"
+#include "LibreOfficeDraw_Slide.au3"
+#include "LibreOfficeDraw_Table.au3"
 
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice UDF
 ; AutoIt Version : v3.3.16.1
-; Description ...: Provides basic functionality through AutoIt for interacting with LibreOffice Impress.
+; Description ...: Provides basic functionality through AutoIt for interacting with LibreOffice Draw.
 ; Author(s) .....: donnyh13, mLipok
 ; Sources .......: Andrew Pitonyak & Laurent Godard. Useful Macro Information, section 5.7.1. OOo version. Used for VersionGet;
 ;                  jguinch -- Printmgr.au3. Function used: _PrintMgr_EnumPrinter.
@@ -30,7 +30,7 @@
 ; Note...........: Tips/templates taken from OOoCalc UDF written by user GMK; also from Word UDF by user water.
 ;                  I found the book by Andrew Pitonyak very helpful also, titled, "OpenOffice.org Macros Explained; OOME Third Edition".
 ;                  Of course, this UDF is written using the English version of LibreOffice, and may only work for the English version of LibreOffice installations.
-;                  Many functions in this UDF may or may not work with OpenOffice Impress, however some settings are definitely for LibreOffice only.
+;                  Many functions in this UDF may or may not work with OpenOffice Draw, however some settings are definitely for LibreOffice only.
 ; ===============================================================================================================================
 
 ; #CURRENT# =====================================================================================================================
