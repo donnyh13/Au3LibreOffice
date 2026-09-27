@@ -6153,7 +6153,7 @@ EndFunc   ;==>__LOImpress_ParTabStopDelete
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_ParTabStopMod
-; Description ...: Modify or retrieve the properties of an existing TabStop.
+; Description ...: Set or Retrieve the properties of an existing TabStop.
 ; Syntax ........: __LOImpress_ParTabStopMod(ByRef $oObj, $iTabStop[, $iPosition = Null[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]]])
 ; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LOImpress_ShapeCreateTextCursor, _LOImpress_DrawShapeInsert, _LOImpress_ShapesGetList, _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.
 ;                  $iTabStop            - The Tab position of the TabStop to modify. See Remarks.
@@ -8384,7 +8384,7 @@ EndFunc   ;==>__LOImpress_ShapeStyleAreaColor
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_ShapeStyleAreaGradient
-; Description ...: Modify or retrieve the settings for Shape, Shape Style or Presentation Style Background color Gradient.
+; Description ...: Set or Retrieve the settings for a Shape, Shape Style or Presentation Style Background color Gradient.
 ; Syntax ........: __LOImpress_ShapeStyleAreaGradient(ByRef $oDoc, ByRef $oObj[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $oObj                - A Shape Style or Presentation Style object returned by a previous _LOImpress_ShapeStyleCreate, _LOImpress_ShapeStyleGetObjByName, or _LOImpress_ShapePresStyleGetObjByName function.

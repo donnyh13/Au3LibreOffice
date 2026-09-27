@@ -911,7 +911,7 @@ EndFunc   ;==>_LOImpress_CursorParTabStopDelete
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_CursorParTabStopMod
-; Description ...: Modify or retrieve the properties of an existing TabStop.
+; Description ...: Set or Retrieve the properties of an existing TabStop.
 ; Syntax ........: _LOImpress_CursorParTabStopMod(ByRef $oTextCursor, $iTabStop[, $iPosition = Null[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]]])
 ; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LOImpress_ShapeCreateTextCursor function.
 ;                  $iTabStop            - The Tab position of the TabStop to modify. See Remarks.

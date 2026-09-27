@@ -259,7 +259,7 @@ EndFunc   ;==>_LOImpress_ShapeAreaFillStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapeAreaGradient
-; Description ...: Modify or retrieve the settings for Shape Background color Gradient.
+; Description ...: Set or Retrieve the settings for Shape Background color Gradient.
 ; Syntax ........: _LOImpress_ShapeAreaGradient(ByRef $oShape[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
 ; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOI_GRAD_NAME_* as defined in LibreOfficeImpress_Constants.au3.
@@ -2536,7 +2536,7 @@ EndFunc   ;==>_LOImpress_ShapeParTabStopDelete
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapeParTabStopMod
-; Description ...: Modify or retrieve the properties of an existing TabStop in a Shape.
+; Description ...: Set or Retrieve the properties of an existing TabStop in a Shape.
 ; Syntax ........: _LOImpress_ShapeParTabStopMod(ByRef $oShape, $iTabStop[, $iPosition = Null[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]]])
 ; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $iTabStop            - The Tab position of the TabStop to modify. See Remarks.
@@ -2781,7 +2781,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleAreaFillStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapePresStyleAreaGradient
-; Description ...: Modify or retrieve the settings for Presentation Style Background color Gradient.
+; Description ...: Set or Retrieve the settings for Presentation Style Background color Gradient.
 ; Syntax ........: _LOImpress_ShapePresStyleAreaGradient(ByRef $oDoc, ByRef $oPresStyle[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $oPresStyle          - A Presentation Style object returned by a previous _LOImpress_ShapePresStyleGetObjByName function.
@@ -3975,7 +3975,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleParTabStopDelete
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapePresStyleParTabStopMod
-; Description ...: Modify or retrieve the properties of an existing TabStop in a Shape Style.
+; Description ...: Set or Retrieve the properties of an existing TabStop in a Shape Style.
 ; Syntax ........: _LOImpress_ShapePresStyleParTabStopMod(ByRef $oPresStyle, $iTabStop[, $iPosition = Null[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]]])
 ; Parameters ....: $oPresStyle          - A Presentation Style object returned by a previous _LOImpress_ShapePresStyleGetObjByName function.
 ;                  $iTabStop            - The Tab position of the TabStop to modify. See Remarks.
@@ -4519,7 +4519,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleAreaFillStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapeStyleAreaGradient
-; Description ...: Modify or retrieve the settings for Shape Style Background color Gradient.
+; Description ...: Set or Retrieve the settings for Shape Style Background color Gradient.
 ; Syntax ........: _LOImpress_ShapeStyleAreaGradient(ByRef $oDoc, ByRef $oShapeStyle[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $oShapeStyle         - A Shape Style object returned by a previous _LOImpress_ShapeStyleCreate, or _LOImpress_ShapeStyleGetObjByName function.
@@ -5985,7 +5985,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleParTabStopDelete
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapeStyleParTabStopMod
-; Description ...: Modify or retrieve the properties of an existing TabStop in a Shape Style.
+; Description ...: Set or Retrieve the properties of an existing TabStop in a Shape Style.
 ; Syntax ........: _LOImpress_ShapeStyleParTabStopMod(ByRef $oShapeStyle, $iTabStop[, $iPosition = Null[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]]])
 ; Parameters ....: $oShapeStyle         - A Shape Style object returned by a previous _LOImpress_ShapeStyleCreate, or _LOImpress_ShapeStyleGetObjByName function.
 ;                  $iTabStop            - The Tab position of the TabStop to modify. See Remarks.

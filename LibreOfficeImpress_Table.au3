@@ -2432,7 +2432,7 @@ EndFunc   ;==>_LOImpress_TableCellParTabStopDelete
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_TableCellParTabStopMod
-; Description ...: Modify or retrieve the properties of an existing TabStop in a Table cell.
+; Description ...: Set or Retrieve the properties of an existing TabStop in a Table cell.
 ; Syntax ........: _LOImpress_TableCellParTabStopMod(ByRef $oCell, $iTabStop[, $iPosition = Null[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]]])
 ; Parameters ....: $oCell               - A Table Cell object returned by a previous _LOImpress_TableCellGetObjByPosition function.
 ;                  $iTabStop            - The Tab position of the TabStop to modify. See Remarks.

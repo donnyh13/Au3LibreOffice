@@ -299,7 +299,7 @@ EndFunc   ;==>_LOImpress_SlideBackFillStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_SlideBackGradient
-; Description ...: Modify or retrieve the settings for Slide Background color Gradient.
+; Description ...: Set or Retrieve the settings for Slide Background color Gradient.
 ; Syntax ........: _LOImpress_SlideBackGradient(ByRef $oSlide[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
 ; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
 ;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOI_GRAD_NAME_* as defined in LibreOfficeImpress_Constants.au3.
@@ -2048,7 +2048,7 @@ EndFunc   ;==>_LOImpress_SlideMasterBackFillStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_SlideMasterBackGradient
-; Description ...: Modify or retrieve the settings for Master Slide Background color Gradient.
+; Description ...: Set or Retrieve the settings for Master Slide Background color Gradient.
 ; Syntax ........: _LOImpress_SlideMasterBackGradient(ByRef $oMaster[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
 ; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LOImpress_SlideMasterAdd, _LOImpress_SlideMasterGetObjByIndex, or _LOImpress_SlideMasterGetObjByName function.
 ;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOI_GRAD_NAME_* as defined in LibreOfficeImpress_Constants.au3.
