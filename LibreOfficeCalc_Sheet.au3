@@ -481,7 +481,7 @@ EndFunc   ;==>_LOCalc_SheetDetectiveTraceError
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ;                  $sName               - The sheet name to check for.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the document contains a Sheet matching $sName, True is returned. Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the document contains a Sheet matching $sName, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
@@ -659,7 +659,7 @@ EndFunc   ;==>_LOCalc_SheetImport
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ;                  $oSheet              - A Sheet object returned by a previous _LOCalc_SheetAdd, _LOCalc_SheetActive, _LOCalc_SheetCopy, or _LOCalc_SheetGetObjByName function.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the called Sheet is the currently active sheet, True is returned. Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the called Sheet is the currently active sheet, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.

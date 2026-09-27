@@ -64,7 +64,7 @@
 ; Parameters ....: $tCellAddr1          - The first Cell Address Structure to compare.
 ;                  $tCellAddr2          - The second Cell Address Structure to compare.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the Cell Addresses are identical, True is returned, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Cell Addresses are identical, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $tCellAddr1 not an Object.
@@ -2711,7 +2711,7 @@ EndFunc   ;==>__LOCalc_PageStyleHeaderBorder
 ; Parameters ....: $tRange1             - The first Range Address Structure to compare.
 ;                  $tRange2             - The second Range Address Structure to compare.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the Range Addresses are identical, True is returned, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Range Addresses are identical, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $tRange1 not an Object.
