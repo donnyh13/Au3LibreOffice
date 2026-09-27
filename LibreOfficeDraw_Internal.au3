@@ -3932,7 +3932,7 @@ EndFunc   ;==>__LODraw_FieldTypeServices
 ; Return values .: Success: String.
 ;                  @Error: 0, @Extended: 1, Return: String = Success. Returning required filter name from "SaveAs" Filter Names.
 ;                  @Error: 0, @Extended: 2, Return: String = Success. Returning required filter name from "Export" Filter Names.
-;                  @Error: 0, @Extended: 3, Return: String = Filter Name not found for given file extension, defaulting to .odp file format and updating save path accordingly.
+;                  @Error: 0, @Extended: 3, Return: String = Filter Name not found for given file extension, defaulting to .odg file format and updating save path accordingly.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $sDocSavePath is not a string.
@@ -3958,39 +3958,34 @@ Func __LODraw_FilterNameGet(ByRef $sDocSavePath, $bExportFilters = False)
 
 	$iLength = StringLen($sDocSavePath)
 
-	$msSaveAsFilters[".fodp"] = "OpenDocument Presentation Flat XML"
-	$msSaveAsFilters[".pot"] = "MS PowerPoint 97 Vorlage"
-	$msSaveAsFilters[".potx"] = "Impress MS PowerPoint 2007 XML Template" ; Note these have a XML version too.
-	$msSaveAsFilters[".pps"] = "MS PowerPoint 97 AutoPlay"
-	$msSaveAsFilters[".ppt"] = "MS PowerPoint 97"
-	$msSaveAsFilters[".ppsx"] = "Impress MS PowerPoint 2007 XML AutoPlay" ; Note these have a XML version too.
-	$msSaveAsFilters[".pptm"] = "Impress MS PowerPoint 2007 XML VBA"
-	$msSaveAsFilters[".pptx"] = "Impress MS PowerPoint 2007 XML" ; Note these have a XML version too.
-	$msSaveAsFilters[".odg"] = "impress8_draw"
-	$msSaveAsFilters[".odp"] = "impress8"
-	$msSaveAsFilters[".otp"] = "impress8_template"
-	$msSaveAsFilters[".uop"] = "UOF presentation"
+	$msSaveAsFilters[".fodg"] = "OpenDocument Drawing Flat XML"
+	$msSaveAsFilters[".odg"] = "draw8"
+	$msSaveAsFilters[".otg"] = "draw8_template"
 
 	If $bExportFilters Then
-		$msExportFilters[".apng"] = "impress_png_Export"
-		$msExportFilters[".bmp"] = "impress_bmp_Export"
-		$msExportFilters[".emf"] = "impress_emf_Export"
-		$msExportFilters[".eps"] = "impress_eps_Export"
-		$msExportFilters[".gif"] = "impress_gif_Export"
-		$msExportFilters[".htm"] = "impress_html_Export"
-		$msExportFilters[".html"] = "impress_html_Export"
-		$msExportFilters[".jfif"] = "impress_jpg_Export"
-		$msExportFilters[".jif"] = "impress_jpg_Export"
-		$msExportFilters[".jpg"] = "impress_jpg_Export"
-		$msExportFilters[".jpeg"] = "impress_jpg_Export"
-		$msExportFilters[".svg"] = "impress_svg_Export"
-		$msExportFilters[".pdf"] = "impress_pdf_Export"
-		$msExportFilters[".png"] = "impress_png_Export"
-		$msExportFilters[".tif"] = "impress_tif_Export"
-		$msExportFilters[".tiff"] = "impress_tif_Export"
-		$msExportFilters[".webp"] = "impress_webp_Export"
-		$msExportFilters[".wmf"] = "impress_wmf_Export"
-		$msExportFilters[".xhtml"] = "XHTML Impress File"
+		$msExportFilters[".apng"] = "draw_apng_Export"
+		$msExportFilters[".bmp"] = "draw_bmp_Export"
+		$msExportFilters[".emf"] = "draw_emf_Export"
+		$msExportFilters[".emz"] = "draw_emz_Export"
+		$msExportFilters[".eps"] = "draw_eps_Export"
+		$msExportFilters[".gif"] = "draw_gif_Export"
+		$msExportFilters[".htm"] = "draw_html_Export"
+		$msExportFilters[".html"] = "draw_html_Export"
+		$msExportFilters[".jfif"] = "draw_jpg_Export"
+		$msExportFilters[".jif"] = "draw_jpg_Export"
+		$msExportFilters[".jpe"] = "draw_jpg_Export"
+		$msExportFilters[".jpg"] = "draw_jpg_Export"
+		$msExportFilters[".jpeg"] = "draw_jpg_Export"
+		$msExportFilters[".svg"] = "draw_svg_Export"
+		$msExportFilters[".svgz"] = "draw_svgz_Export"
+		$msExportFilters[".pdf"] = "draw_pdf_Export"
+		$msExportFilters[".png"] = "draw_png_Export"
+		$msExportFilters[".tif"] = "draw_tif_Export"
+		$msExportFilters[".tiff"] = "draw_tif_Export"
+		$msExportFilters[".webp"] = "draw_webp_Export"
+		$msExportFilters[".wmf"] = "draw_wmf_Export"
+		$msExportFilters[".wmz"] = "draw_wmz_Export"
+		$msExportFilters[".xhtml"] = "XHTML Draw File"
 	EndIf
 
 	If StringInStr($sDocSavePath, "file:///") Then ;  If L.O. URl Then
@@ -4008,10 +4003,10 @@ Func __LODraw_FilterNameGet(ByRef $sDocSavePath, $bExportFilters = False)
 		Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	EndIf
 
-	If $sFileExtension = $sDocSavePath Then ;  If no file extension identified, append .odp extension and return.
-		$sDocSavePath = $sDocSavePath & ".odp"
+	If $sFileExtension = $sDocSavePath Then ;  If no file extension identified, append .odg extension and return.
+		$sDocSavePath = $sDocSavePath & ".odg"
 
-		Return SetError($__LO_STATUS_SUCCESS, 3, "impress8")
+		Return SetError($__LO_STATUS_SUCCESS, 3, "draw8")
 
 	Else
 		$sFileExtension = StringLower(StringStripWS($sFileExtension, $STR_STRIPALL))
@@ -4025,9 +4020,9 @@ Func __LODraw_FilterNameGet(ByRef $sDocSavePath, $bExportFilters = False)
 
 	If IsString($sFilterName) Then Return SetError($__LO_STATUS_SUCCESS, 2, $sFilterName)
 
-	$sDocSavePath = StringReplace($sDocSavePath, $sFileExtension, ".odp") ; If No results, replace with ODS extension.
+	$sDocSavePath = StringReplace($sDocSavePath, $sFileExtension, ".odg") ; If No results, replace with ODS extension.
 
-	Return SetError($__LO_STATUS_SUCCESS, 3, "impress8")
+	Return SetError($__LO_STATUS_SUCCESS, 3, "draw8")
 EndFunc   ;==>__LODraw_FilterNameGet
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================

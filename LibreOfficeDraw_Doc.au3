@@ -87,7 +87,7 @@
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $bSaveChanges is True and the document hasn't been saved yet, the document is saved to the desktop.
-;                  If $sSaveName is undefined, it is saved as an .odp document to the desktop, named Year-Month-Day_Hour-Minute-Second.odp. $sSaveName may be a name only without an extension, in which case the file will be saved in .odp format. Or you may define your own format by including an extension, such as "Test.ppt"
+;                  If $sSaveName is undefined, it is saved as an .odg document to the desktop, named Year-Month-Day_Hour-Minute-Second.odg. $sSaveName may be a name only without an extension, in which case the file will be saved in .odg format. Or you may define your own format by including an extension, such as "Test.ppt"
 ; Related .......: _LODraw_DocOpen, _LODraw_DocConnect, _LODraw_DocCreate, _LODraw_DocSaveAs, _LODraw_DocSave
 ; Link ..........:
 ; Example .......: Yes
@@ -107,8 +107,8 @@ Func _LODraw_DocClose(ByRef $oDoc, $bSaveChanges = True, $sSaveName = "", $bDeli
 	If Not $oDoc.hasLocation() And ($bSaveChanges = True) Then
 		$sSavePath = @DesktopDir & "\"
 		If ($sSaveName = "") Or ($sSaveName = " ") Then
-			$sSaveName = @YEAR & "-" & @MON & "-" & @MDAY & "_" & @HOUR & "-" & @MIN & "-" & @SEC & ".odp"
-			$sFilterName = "impress8"
+			$sSaveName = @YEAR & "-" & @MON & "-" & @MDAY & "_" & @HOUR & "-" & @MIN & "-" & @SEC & ".odg"
+			$sFilterName = "draw8"
 		EndIf
 
 		$sSavePath = _LO_PathConvert($sSavePath & $sSaveName, 1)
@@ -186,10 +186,10 @@ EndFunc   ;==>_LODraw_DocClose
 ; Modified ......:
 ; Remarks .......: Only Draw documents are searched or returned using any of the flags.
 ;                  The value used for $sSearch depends on the flag called in $iMode. It is ignored except for the $LO_DOC_CONNECT_MODE_SEARCH_* flags.
-;                  If $iMode is called with $LO_DOC_CONNECT_MODE_SEARCH_TITLE, $sSearch must be the full Title with Office and Component name; e.g: "Test.odp — LibreOffice Draw". This will be the same Title AutoIt would match or return from functions like WinGetTitle.
+;                  If $iMode is called with $LO_DOC_CONNECT_MODE_SEARCH_TITLE, $sSearch must be the full Title with Office and Component name; e.g: "Test.odg — LibreOffice Draw". This will be the same Title AutoIt would match or return from functions like WinGetTitle.
 ;                  If $iMode is called with $LO_DOC_CONNECT_MODE_SEARCH_NAME, $sSearch must be the Document's full name, without the extension; e.g: "Test".
-;                  If $iMode is called with $LO_DOC_CONNECT_MODE_SEARCH_NAME_WITH_EXT, $sSearch must be the Document's name, with the extension; e.g: "Test.odp". If the Document hasn't been saved, just the name will work, e.g., "Untitled 1".
-;                  If $iMode is called with $LO_DOC_CONNECT_MODE_SEARCH_PATH, $sSearch must be the full Path of the document (Name and extension included); e.g: "C:\file\Test.odp."
+;                  If $iMode is called with $LO_DOC_CONNECT_MODE_SEARCH_NAME_WITH_EXT, $sSearch must be the Document's name, with the extension; e.g: "Test.odg". If the Document hasn't been saved, just the name will work, e.g., "Untitled 1".
+;                  If $iMode is called with $LO_DOC_CONNECT_MODE_SEARCH_PATH, $sSearch must be the full Path of the document (Name and extension included); e.g: "C:\file\Test.odg."
 ;                  The Connect All option returns a single columned array. ($aArray[0]), each result is stored in a separate row.
 ;                  -Row 1 contains the Object for that document. e.g. $aArray[0] = $oDoc
 ;                  -Row 2 contains the Object for the next document. e.g. $aArray[1] = $oDoc2. And so on.
@@ -229,7 +229,7 @@ Func _LODraw_DocConnect($iMode = $LO_DOC_CONNECT_MODE_CURRENT, $sSearch = "", $b
 				$iDocType = _LO_DocGetType($oDoc)
 				If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
 
-				If ($iDocType = $LO_DOC_TYPE_IMPRESS) Then
+				If ($iDocType = $LO_DOC_TYPE_DRAW) Then
 					If (UBound($aoConnectAll) <= $iCount) Then ReDim $aoConnectAll[$iCount + 1]
 					$aoConnectAll[$iCount] = $oDoc
 					$iCount += 1
@@ -245,7 +245,7 @@ Func _LODraw_DocConnect($iMode = $LO_DOC_CONNECT_MODE_CURRENT, $sSearch = "", $b
 
 			$iDocType = _LO_DocGetType($oDoc)
 			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
-			If ($iDocType <> $LO_DOC_TYPE_IMPRESS) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0) ; Not an Impress Doc.
+			If ($iDocType <> $LO_DOC_TYPE_DRAW) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0) ; Not a Draw Doc.
 
 			Return SetError($__LO_STATUS_SUCCESS, 1, $oDoc)
 
@@ -269,7 +269,7 @@ Func _LODraw_DocConnect($iMode = $LO_DOC_CONNECT_MODE_CURRENT, $sSearch = "", $b
 				$iDocType = _LO_DocGetType($oDoc)
 				If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to identify Doc type.
 
-				If ($iDocType = $LO_DOC_TYPE_IMPRESS) Then
+				If ($iDocType = $LO_DOC_TYPE_DRAW) Then
 					Switch $iMode
 						Case $LO_DOC_CONNECT_MODE_SEARCH_TITLE
 							; First make sure Current Controller is available (It wont be if Document is opened Hidden, in some Components.).
@@ -371,7 +371,7 @@ Func _LODraw_DocCreate($bForceNew = True, $bHidden = False)
 	EndIf
 
 	If Not IsObj($aArgs[0]) Then $iError = BitOR($iError, 1)
-	$oDoc = $oDesktop.loadComponentFromURL("private:factory/simpress", "_blank", $iURLFrameCreate, $aArgs)
+	$oDoc = $oDesktop.loadComponentFromURL("private:factory/sdraw", "_blank", $iURLFrameCreate, $aArgs)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, $oDoc)) : (SetError($__LO_STATUS_SUCCESS, 2, $oDoc))
@@ -463,7 +463,7 @@ EndFunc   ;==>_LODraw_DocExecuteDispatch
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $sFilePath           - Full path to save the document to, including Filename and extension. See Remarks.
 ;                  $bSamePath           - [optional] Default is False. If True, uses the path of the current document to export to. See Remarks
-;                  $sFilterName         - [optional] Default is "". Filter name. If called with "" (blank string), Filter is chosen automatically based on the file extension. If no extension is present, or if not matched to the list of extensions in this UDF, the .odp extension is used instead, with the filter name of "impress8".
+;                  $sFilterName         - [optional] Default is "". Filter name. If called with "" (blank string), Filter is chosen automatically based on the file extension. If no extension is present, or if not matched to the list of extensions in this UDF, the .odg extension is used instead, with the filter name of "draw8".
 ;                  $bOverwrite          - [optional] Default is Null. If True, file will be overwritten.
 ;                  $sPassword           - [optional] Default is Null. Password String to set for the document. (Not all file formats can have a Password set). "" (blank string) or Null = No Password.
 ; Return values .: Success: String
@@ -568,8 +568,8 @@ EndFunc   ;==>_LODraw_DocExport
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Document's name.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: If $bReturnFull is True, the return value will be like: "<Draw Doc name>.<extension> — LibreOffice Draw" e.g. "Testing.odp — LibreOffice Impress".
-;                  Else the return value will be like: "<Draw Doc name>.<extension>", e.g. "Testing.odp"
+; Remarks .......: If $bReturnFull is True, the return value will be like: "<Draw Doc name>.<extension> — LibreOffice Draw" e.g. "Testing.odg — LibreOffice Draw".
+;                  Else the return value will be like: "<Draw Doc name>.<extension>", e.g. "Testing.odg"
 ; Related .......: _LODraw_DocSaveAs
 ; Link ..........:
 ; Example .......: Yes
@@ -1295,7 +1295,7 @@ EndFunc   ;==>_LODraw_DocSave
 ; Syntax ........: _LODraw_DocSaveAs(ByRef $oDoc, $sFilePath[, $sFilterName = ""[, $bOverwrite = Null[, $sPassword = Null]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $sFilePath           - Full path to save the document to, including Filename and extension.
-;                  $sFilterName         - [optional] Default is "". The filter name. Calling "" (blank string), means the filter is chosen automatically based on the file extension. If no extension is present, or if not matched to the list of extensions in this UDF, the .odp extension is used instead, with the filter name of "impress8".
+;                  $sFilterName         - [optional] Default is "". The filter name. Calling "" (blank string), means the filter is chosen automatically based on the file extension. If no extension is present, or if not matched to the list of extensions in this UDF, the .odg extension is used instead, with the filter name of "draw8".
 ;                  $bOverwrite          - [optional] Default is Null. If True, the existing file will be overwritten.
 ;                  $sPassword           - [optional] Default is Null. Sets a password for the document. (Not all file formats can have a Password set). Null or "" (blank string) = No Password.
 ; Return values .: Success: String

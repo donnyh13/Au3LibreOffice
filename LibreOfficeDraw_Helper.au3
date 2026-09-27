@@ -410,7 +410,7 @@ Func _LODraw_FontExists($sFontName, $oDoc = Null)
 		$atProperties[0] = __LO_SetPropertyValue("Hidden", True)
 		If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
 
-		$oDoc = $oDesktop.loadComponentFromURL("private:factory/simpress", "_blank", $iURLFrameCreate, $atProperties)
+		$oDoc = $oDesktop.loadComponentFromURL("private:factory/sdraw", "_blank", $iURLFrameCreate, $atProperties)
 		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
 
 		$bClose = True
@@ -486,7 +486,7 @@ Func _LODraw_FontsGetNames($oDoc = Null)
 		$atProperties[0] = __LO_SetPropertyValue("Hidden", True)
 		If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
 
-		$oDoc = $oDesktop.loadComponentFromURL("private:factory/simpress", "_blank", $iURLFrameCreate, $atProperties)
+		$oDoc = $oDesktop.loadComponentFromURL("private:factory/sdraw", "_blank", $iURLFrameCreate, $atProperties)
 		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
 
 		$bClose = True
