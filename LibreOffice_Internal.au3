@@ -279,7 +279,7 @@ EndFunc   ;==>__LO_InternalComErrorHandler
 ;                  $vNot                - [optional] Default is "". Can be a single number, or a String of numbers separated by ":". Defines numbers inside the min/max range that are not allowed.
 ;                  $vIncl               - [optional] Default is "". Can be a single number, or a String of numbers separated by ":". Defines numbers Outside the min/max range that are allowed.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = If the input is between Min and Max or is an allowed number, and not one of the disallowed numbers, True is returned. Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Returning True if the input is between Min and Max or is an allowed number, and not one of the disallowed numbers, else False.
 ;                  Failure: False and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $iTest not an Integer.
@@ -367,7 +367,7 @@ EndFunc   ;==>__LO_IsObjInvalid
 ;                  $vNot                - [optional] Default is "". Can be a single number, or a String of numbers separated by ":". Defines numbers inside the min/max range that are not allowed.
 ;                  $vIncl               - [optional] Default is "". Can be a single number, or a String of numbers separated by ":". Defines numbers Outside the min/max range that are allowed.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = If the input is between Min and Max or is an allowed number, and not one of the disallowed numbers, True is returned. Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Returning True if the input is between Min and Max or is an allowed number, and not one of the disallowed numbers, else False.
 ;                  Failure: False and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $nTest not a Number.
@@ -900,7 +900,7 @@ EndFunc   ;==>__LO_TestObjCOM
 ;                  $vVar31              - [optional] Default is Null. A variable to test.
 ;                  $vVar32              - [optional] Default is Null. A variable to test.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = If All parameters are Equal to Null, True is returned. Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Returning True if All parameters are Equal to Null, else False.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -942,7 +942,7 @@ EndFunc   ;==>__LO_VarsAreNull
 ; Syntax ........: __LO_VersionCheck($fRequiredVersion)
 ; Parameters ....: $fRequiredVersion    - The version of LibreOffice required.
 ; Return values .: Success: Boolean.
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the Current L.O. version is greater than or equal to the required version, then True is returned, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Current L.O. version is greater than or equal to the required version, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $fRequiredVersion not a Number.
