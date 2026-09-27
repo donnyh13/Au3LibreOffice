@@ -31,6 +31,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 #### Documented
 
 - Fixed minor Documentation typos and errors.
+- Fixed wrong variables used in error return descriptions.
 
 ### LibreOfficeWriter
 

@@ -47,7 +47,7 @@
 ;                  @Error: 0, @Extended: 0, Return: String = Success. Returning current Field display content in String format.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oField not a map.
+;                  @Error: 1, @Extended: 1 = $mField not a map.
 ;                  @Error: 1, @Extended: 2 = $bFieldName not a Boolean.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Field's current display.

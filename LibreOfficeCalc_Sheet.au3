@@ -1599,7 +1599,7 @@ EndFunc   ;==>_LOCalc_SheetUnprotect
 ;                  @Error: 3, @Extended: 1 = Failed to query Sheet's visibility.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
-;                  |                               1 = Error setting $bVisiblee
+;                  |                               1 = Error setting $bVisible
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.

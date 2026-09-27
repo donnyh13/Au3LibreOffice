@@ -1448,7 +1448,7 @@ EndFunc   ;==>_LOCalc_CommentGetObjByIndex
 ;                  @Error: 1, @Extended: 5 = $bStartCenter not a Boolean.
 ;                  @Error: 1, @Extended: 6 = $bSync not a Boolean.
 ;                  @Error: 1, @Extended: 7 = $vEndStyle not a String, and not an Integer.
-;                  @Error: 1, @Extended: 8 = $vSEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOC_COMMENT_LINE_ARROW_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error: 1, @Extended: 8 = $vEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOC_COMMENT_LINE_ARROW_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  @Error: 1, @Extended: 9 = $iEndWidth not an Integer, less than 0 or greater than 5004.
 ;                  @Error: 1, @Extended: 10 = $bEndCenter not a Boolean.
 ;                  --Processing Errors--

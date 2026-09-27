@@ -1373,7 +1373,7 @@ EndFunc   ;==>__LOCalc_CellTextOrient
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $bAutoWrapText not a Boolean.
 ;                  @Error: 1, @Extended: 3 = $bHyphen not a Boolean.
-;                  @Error: 1, @Extended: 4 = $bShrinkToFitnot a Boolean.
+;                  @Error: 1, @Extended: 4 = $bShrinkToFit not a Boolean.
 ;                  @Error: 1, @Extended: 5 = $iTextDirection not an Integer, less than 0 or greater than 1, but not equal to 4. See Constants, $LOC_PAR_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [LibreOffice Default is 4]
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
