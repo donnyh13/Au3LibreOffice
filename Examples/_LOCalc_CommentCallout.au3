@@ -30,7 +30,7 @@ Func Example()
 
 	; Modify the Comment Callout settings to: Callout connector line style = Angled, Line connection spacing from Comment box = 100 Hundredths of a Millimeter (HMM),
 	; Callout connector line joint position = Vertical, Callout Connector line alignment on the Comment = Right.
-	_LOCalc_CommentCallout($oComment, $LOC_COMMENT_CALLOUT_STYLE_ANGLED, 100, $LOC_COMMENT_CALLOUT_EXT_VERT, $LOC_COMMENT_CALLOUT_EXT_ALIGN_VERT_RIGHT)
+	_LOCalc_CommentCallout($oComment, $LOC_COMMENT_CALLOUT_STYLE_ANGLED, 100, $LOC_COMMENT_CALLOUT_EXT_POS_VERT, $LOC_COMMENT_CALLOUT_EXT_ALIGN_VERT_RIGHT)
 	If @error Then _ERROR($oDoc, "Failed to set Comment settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Comment settings. Return will be an array in order of function parameters.

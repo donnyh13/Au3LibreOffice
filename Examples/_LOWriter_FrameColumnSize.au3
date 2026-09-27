@@ -46,7 +46,7 @@ Func Example()
 			"relative width, not a metric width, which is why I don't know how to set this value appropriately." & @CRLF & @CRLF & _
 			"I will now demonstrate values when AutoWidth is deactivated.")
 
-	; Set the Frame  Column size settings for column 2, set auto width to False.
+	; Set the Frame Column size settings for column 2, set auto width to False.
 	_LOWriter_FrameColumnSize($oFrame, 2, False)
 	If @error Then _ERROR($oDoc, "Failed to set Frame settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

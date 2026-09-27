@@ -32,7 +32,7 @@ Func Example()
 	For $iRow = 0 To $iRows - 1
 		For $iColumn = 0 To $iColumns - 1
 			; Retrieve each cell by position in the Table.
-			$oCell = _LOWriter_TableGetCellObjByPosition($oTable, $iColumn, $iRow)
+			$oCell = _LOWriter_TableCellGetObjByPosition($oTable, $iColumn, $iRow)
 			If @error Then _ERROR($oDoc, "Failed to retrieve Text Table Cell by position. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 			; Set Cell text String to Cell's position.

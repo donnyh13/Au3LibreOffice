@@ -29,10 +29,6 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 
-	; Stop the slideshow.
-	If _LOImpress_SlideShowIsRunning($oDoc) Then _LOImpress_SlideShowStop($oDoc)
-	If @error Then _ERROR($oDoc, "Failed to stop the active slideshow. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
 	; Close the document.
 	_LOImpress_DocClose($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)

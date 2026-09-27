@@ -43,7 +43,7 @@ Func Example()
 	$oCellRange = _LOCalc_RangeGetCellByName($oSheet, "C1", "D3")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Range Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Delete Column C, C is column 0 because L.O. Columns are 0 based, and  I am dealing with the cell Range of C to D.
+	; Delete Column C, C is column 0 because L.O. Columns are 0 based, and I am dealing with the cell Range of C to D.
 	_LOCalc_RangeColumnDelete($oCellRange, 0)
 	If @error Then _ERROR($oDoc, "Failed to delete column. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

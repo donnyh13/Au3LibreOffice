@@ -2,7 +2,6 @@
 #include <MsgBoxConstants.au3>
 
 #include "..\LibreOfficeBase.au3"
-#include "..\LibreOfficeWriter.au3"
 
 Global $sPath
 
@@ -12,7 +11,7 @@ Example()
 If IsString($sPath) Then FileDelete($sPath)
 
 Func Example()
-	Local $oDoc, $oFormDoc, $oDBase, $oConnection, $oViewCursor
+	Local $oDoc, $oFormDoc, $oDBase, $oConnection
 	Local $sSavePath
 	Local $bReturn
 
@@ -49,13 +48,9 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Has the form been modified? True/False: " & $bReturn)
 
-	; Retrieve the ViewCursor for the document.
-	$oViewCursor = _LOWriter_CursorViewCursorGetObj($oFormDoc)
-	If @error Then Return _ERROR($oDoc, "Failed to retrieve the ViewCursor Object for the Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Insert some text at the ViewCursor.
-	_LOWriter_CursorInsertString($oFormDoc, $oViewCursor, "Hi!")
-	If @error Then Return _ERROR($oDoc, "Failed to insert text into the Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Set the Document's modified state.
+	_LOBase_FormDocIsModified($oFormDoc, True)
+	If @error Then _ERROR($oDoc, "Failed to Set document modified status. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; See if the form has been modified or not.
 	$bReturn = _LOBase_FormDocIsModified($oFormDoc)

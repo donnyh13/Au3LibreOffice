@@ -21,11 +21,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve top left ("A1") Table Cell Object
-	$oCell = _LOWriter_TableGetCellObjByName($oTable, "A1")
+	$oCell = _LOWriter_TableCellGetObjByName($oTable, "A1")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve top 2nd in cell ("B1" Table Cell Object
-	$oCell2 = _LOWriter_TableGetCellObjByName($oTable, "B1")
+	$oCell2 = _LOWriter_TableCellGetObjByName($oTable, "B1")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set A1 Table Cell's Text.

@@ -42,7 +42,7 @@ Func Example()
 	$tDateStruct = _LOWriter_DateStructCreate(1992, 04, 28, 12, 00, 00)
 	If @error Then _ERROR($oDoc, "Failed to create a Date structure. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Create or retrieve a DateFormat Key,  Month Day Year Hour, Minute, Second, AM/PM
+	; Create or retrieve a DateFormat Key, Month Day Year Hour, Minute, Second, AM/PM
 	$iDateFormatKey = _LOWriter_DateFormatKeyCreate($oDoc, "MM/DD/YYYY H:MM:SS AM/PM")
 	If @error Then _ERROR($oDoc, "Failed to create a Date Format Key. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

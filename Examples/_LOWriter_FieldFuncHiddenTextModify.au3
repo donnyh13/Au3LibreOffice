@@ -30,9 +30,11 @@ Func Example()
 			" view, and under ""Display Fields"" heading, uncheck:""Hidden Text""")
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	$sNewCondition = InputBox("Modify the Field.", "Enter a new condition to set the field to.", "(2*2+4) == 8")
+	$sNewCondition = InputBox("Modify the Field.", "Enter a new condition to set the field to.", "((2*2)+4) == 8")
+	If @error Then $sNewCondition = "(2*2+4) == 8" ; If user cancels, use a default.
 
 	$sNewText = InputBox("Modify the Field.", "Enter new text to display if the condition is True.", "Some Different TEXT")
+	If @error Then $sNewText = "Some Different TEXT" ; If user cancels, use a default.
 
 	; Modify the Hidden Text Field settings. Set the condition to the user set condition, and the Text to the New User Text.
 	_LOWriter_FieldFuncHiddenTextModify($oField, $sNewCondition, $sNewText)

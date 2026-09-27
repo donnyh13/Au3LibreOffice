@@ -20,7 +20,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a new Text Cursor.
-	$oTextCursor = _LOWriter_CursorTextCursorCreate($oDoc, False)
+	$oTextCursor = _LOWriter_CursorCreateTextCursor($oDoc, False)
 	If @error Then _ERROR($oDoc, "Failed to create a Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert some text using the Text Cursor

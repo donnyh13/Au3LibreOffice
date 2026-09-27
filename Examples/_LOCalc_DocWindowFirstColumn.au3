@@ -18,6 +18,9 @@ Func Example()
 
 	$iNewColumn = Int(InputBox("", "The Currently first visible Column is " & $iColumn & ". Please enter a new column number to set as the first visible column.", "10", " M"))
 
+	; If User cancels, use a default.
+	If ($iNewColumn = 0) Then $iNewColumn = 10
+
 	; Set the first visible column to the entered value.
 	_LOCalc_DocWindowFirstColumn($oDoc, $iNewColumn)
 	If @error Then _ERROR($oDoc, "Failed to set first visible Column. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)

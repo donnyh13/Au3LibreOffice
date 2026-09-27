@@ -49,9 +49,9 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Character style's current Font effects settings are as follows: " & @CRLF & _
-			"Relief style (See UDF Constants): " & $avCharStyleSettings[0] & @CRLF & _
-			"Case style (See UDF Constants): " & $avCharStyleSettings[1] & @CRLF & _
-			"Are the words hidden? True/False: " & $avCharStyleSettings[2] & @CRLF & _
+			"Case style (See UDF Constants): " & $avCharStyleSettings[0] & @CRLF & _
+			"Are the words hidden? True/False: " & $avCharStyleSettings[1] & @CRLF & _
+			"Relief style (See UDF Constants): " & $avCharStyleSettings[2] & @CRLF & _
 			"Are the words outlined? True/False: " & $avCharStyleSettings[3] & @CRLF & _
 			"Do the words have a shadow? True/False: " & $avCharStyleSettings[4] & @CRLF & @CRLF & _
 			"I will now set shadow to false, and Outline to True.")
@@ -65,15 +65,15 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Character style's current Font effects settings are as follows: " & @CRLF & _
-			"Relief style (See UDF Constants): " & $avCharStyleSettings[0] & @CRLF & _
-			"Case style (See UDF Constants): " & $avCharStyleSettings[1] & @CRLF & _
-			"Are the words hidden? True/False: " & $avCharStyleSettings[2] & @CRLF & _
+			"Case style (See UDF Constants): " & $avCharStyleSettings[0] & @CRLF & _
+			"Are the words hidden? True/False: " & $avCharStyleSettings[1] & @CRLF & _
+			"Relief style (See UDF Constants): " & $avCharStyleSettings[2] & @CRLF & _
 			"Are the words outlined? True/False: " & $avCharStyleSettings[3] & @CRLF & _
 			"Do the words have a shadow? True/False: " & $avCharStyleSettings[4] & @CRLF & @CRLF & _
 			"I will next set Outline to false, and set Hidden to true.")
 
 	; Set "Example" Character Style Font effects Outline to False, and Hidden to true.
-	_LOWriter_CharStyleEffect($oCharStyle, Null, Null, True, False, Null)
+	_LOWriter_CharStyleEffect($oCharStyle, Null, True, Null, False, Null)
 	If @error Then _ERROR($oDoc, "Failed to set the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -81,9 +81,9 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Character style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Character style's current Font effects settings are as follows: " & @CRLF & _
-			"Relief style (See UDF Constants): " & $avCharStyleSettings[0] & @CRLF & _
-			"Case style (See UDF Constants): " & $avCharStyleSettings[1] & @CRLF & _
-			"Are the words hidden? True/False: " & $avCharStyleSettings[2] & @CRLF & _
+			"Case style (See UDF Constants): " & $avCharStyleSettings[0] & @CRLF & _
+			"Are the words hidden? True/False: " & $avCharStyleSettings[1] & @CRLF & _
+			"Relief style (See UDF Constants): " & $avCharStyleSettings[2] & @CRLF & _
 			"Are the words outlined? True/False: " & $avCharStyleSettings[3] & @CRLF & _
 			"Do the words have a shadow? True/False: " & $avCharStyleSettings[4])
 

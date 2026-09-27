@@ -163,7 +163,7 @@ EndFunc   ;==>_LOImpress_CursorCharFont
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $FontColor
+;                  |                               1 = Error setting $iFontColor
 ;                  |                               2 = Error setting $iTransparency.
 ;                  |                               4 = Error setting $iHighlight
 ;                  --Version Related Errors--
@@ -554,7 +554,7 @@ Func _LOImpress_CursorInsertString(ByRef $oCursor, $sString, $bOverwrite = False
 		$oSlide = $oCursor.Text.Parent()
 		If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-		$oDoc = $oSlide.MasterPage.Forms.Parent()
+		$oDoc = __LOImpress_GetParentDoc($oSlide)
 		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		If ($oDoc.IsModified() = False) Then $oDoc.Modified = True
@@ -734,8 +734,8 @@ EndFunc   ;==>_LOImpress_CursorParAlignment
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
-;                  @Error: 1, @Extended: 2 = $iBeforeText not an Integer, less than 0 or greater than 1162202.
-;                  @Error: 1, @Extended: 3 = $iAfterText not an Integer, less than 0 or greater than 1162202.
+;                  @Error: 1, @Extended: 2 = $iBeforeTxt not an Integer, less than 0 or greater than 1162202.
+;                  @Error: 1, @Extended: 3 = $iAfterTxt not an Integer, less than 0 or greater than 1162202.
 ;                  @Error: 1, @Extended: 4 = $iFirstLine not an Integer, less than 0 or greater than 1162202.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
@@ -911,7 +911,7 @@ EndFunc   ;==>_LOImpress_CursorParTabStopDelete
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_CursorParTabStopMod
-; Description ...: Modify or retrieve the properties of an existing TabStop.
+; Description ...: Set or Retrieve the properties of an existing TabStop.
 ; Syntax ........: _LOImpress_CursorParTabStopMod(ByRef $oTextCursor, $iTabStop[, $iPosition = Null[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]]])
 ; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LOImpress_ShapeCreateTextCursor function.
 ;                  $iTabStop            - The Tab position of the TabStop to modify. See Remarks.

@@ -12,9 +12,9 @@ Func Example()
 	$oDoc = _LOCalc_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Calc Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve the Default Page Style's Object, to modify its settings.
-	$oPageStyle = _LOCalc_PageStyleGetObjByName($oDoc, "Default")
-	If @error Then _ERROR($oDoc, "Failed to retrieve Page Style Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Create a New Page Style.
+	$oPageStyle = _LOCalc_PageStyleCreate($oDoc, "NewPageStyle")
+	If @error Then _ERROR($oDoc, "Failed to create a new Page Style. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Change the Page Style's name to "New-PageStyle-Name", hidden to False
 	_LOCalc_PageStyleOrganizer($oDoc, $oPageStyle, "New-PageStyle-Name", False)

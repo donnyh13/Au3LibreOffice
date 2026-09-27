@@ -34,7 +34,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Strike out the selected text
-	_LOWriter_DirFrmtStrikeOut($oViewCursor, $LOW_CHAR_STRIKEOUT_SINGLE)
+	_LOWriter_DirFrmtCharStrikeOut($oViewCursor, $LOW_CHAR_STRIKEOUT_SINGLE)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a search descriptor for searching with. Set Backward, Match Case, Whole word, Regular Expression, and Search Styles to false, and

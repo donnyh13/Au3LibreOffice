@@ -6,7 +6,7 @@
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice Calc Constants for the LibreOffice UDF.
 ; AutoIt Version : v3.3.16.1
-; Description ...: Constants for various functions in the LibreOffice UDF.
+; Description ...: Constants for various Calc functions in the LibreOffice UDF.
 ; Author(s) .....: donnyh13, mLipok
 ; Dll ...........:
 ; Note ..........: Descriptions for some Constants are taken from the LibreOffice SDK API documentation.
@@ -225,11 +225,11 @@ Global Const _
 
 ; Comment Connector Line Position
 Global Const _                                                  ; com.sun.star.drawing.CaptionEscapeDirection
-		$LOC_COMMENT_CALLOUT_EXT_HORI = 0, _                    ; The Connector line extends Horizontally from the Comment.
-		$LOC_COMMENT_CALLOUT_EXT_VERT = 1, _                    ; The Connector line extends Vertically from the Comment.
-		$LOC_COMMENT_CALLOUT_EXT_OPTIMAL = 2, _                 ; The Connector line extends from the optimal position of the Comment.
-		$LOC_COMMENT_CALLOUT_EXT_FROM_LEFT = 3, _               ; The Connector line extends from the left of the Comment.
-		$LOC_COMMENT_CALLOUT_EXT_FROM_TOP = 4                   ; The Connector line extends from the top of the Comment.
+		$LOC_COMMENT_CALLOUT_EXT_POS_HORI = 0, _                ; The Connector line extends Horizontally from the Comment.
+		$LOC_COMMENT_CALLOUT_EXT_POS_VERT = 1, _                ; The Connector line extends Vertically from the Comment.
+		$LOC_COMMENT_CALLOUT_EXT_POS_OPTIMAL = 2, _             ; The Connector line extends from the optimal position of the Comment.
+		$LOC_COMMENT_CALLOUT_EXT_POS_FROM_LEFT = 3, _           ; The Connector line extends from the left of the Comment.
+		$LOC_COMMENT_CALLOUT_EXT_POS_FROM_TOP = 4               ; The Connector line extends from the top of the Comment.
 
 ; Comment Connector Line Style
 Global Const _                                                  ; com.sun.star.drawing.CaptionType
@@ -316,7 +316,7 @@ Global Enum _
 		$LOC_COMMENT_LINE_STYLE_ULTRAFINE_DASHED, _             ; 24 -- A Ultrafine Dashed Line.
 		$LOC_COMMENT_LINE_STYLE_FINE_DASHED, _                  ; 25 -- A Fine Dashed Line.
 		$LOC_COMMENT_LINE_STYLE_DASHED, _                       ; 26 -- A Dashed Line.
-		$LOC_COMMENT_LINE_STYLE_LINE_STYLE_9, _                 ; 27 -- Line Style 9.
+		$LOC_COMMENT_LINE_STYLE_SPARSE_DASH, _                  ; 27 -- A Sparse Dash, formerly named "Line Style 9".
 		$LOC_COMMENT_LINE_STYLE_3_DASHES_3_DOTS, _              ; 28 -- A Line consisting of 3 Dashes and 3 Dots.
 		$LOC_COMMENT_LINE_STYLE_ULTRAFINE_2_DOTS_3_DASHES, _    ; 29 -- A Ultrafine Line consisting of 2 Dots and 3 Dashes.
 		$LOC_COMMENT_LINE_STYLE_2_DOTS_1_DASH, _                ; 30 -- A Line consisting of 2 Dots and 1 Dash.
@@ -359,14 +359,14 @@ Global Const _
 
 ; Field Types
 Global Enum Step *2 _
-		$LOC_FIELD_TYPE_ALL = 1, _                              ; 1 Returns an array of all field types listed below.
-		$LOC_FIELD_TYPE_DATE_TIME, _                            ; 2 A Date or Time field. {Cell & Header.}
-		$LOC_FIELD_TYPE_DOC_TITLE, _                            ; 4 A Document Title field. {Cell & Header.}
-		$LOC_FIELD_TYPE_FILE_NAME, _                            ; 8 A File Name or Path and File Name field. {Header.}
-		$LOC_FIELD_TYPE_PAGE_NUM, _                             ; 16 A Page Number field. {Header.}
-		$LOC_FIELD_TYPE_PAGE_COUNT, _                           ; 32 A total Page Count field. {Header.}
-		$LOC_FIELD_TYPE_SHEET_NAME, _                           ; 64 A Sheet Name field. {Cell & Header.}
-		$LOC_FIELD_TYPE_URL                                     ; 128 A Hyperlink/URL field. {Cell.}
+		$LOC_FIELD_TYPE_DATE_TIME = 1, _                        ; 1 A Date or Time field. {Cell & Header.}
+		$LOC_FIELD_TYPE_DOC_TITLE, _                            ; 2 A Document Title field. {Cell & Header.}
+		$LOC_FIELD_TYPE_FILE_NAME, _                            ; 4 A File Name or Path and File Name field. {Header.}
+		$LOC_FIELD_TYPE_PAGE_NUM, _                             ; 8 A Page Number field. {Header.}
+		$LOC_FIELD_TYPE_PAGE_COUNT, _                           ; 16 A total Page Count field. {Header.}
+		$LOC_FIELD_TYPE_SHEET_NAME, _                           ; 32 A Sheet Name field. {Cell & Header.}
+		$LOC_FIELD_TYPE_URL, _                                  ; 64 A Hyperlink/URL field. {Cell.}
+		$LOC_FIELD_TYPE_ALL = 127                               ; 127 Returns an array of all field types listed above.
 
 ; Fill Date Mode
 Global Const _                                                  ; com.sun.star.sheet.FillDateMode

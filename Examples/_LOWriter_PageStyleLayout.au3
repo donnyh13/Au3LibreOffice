@@ -34,25 +34,14 @@ Func Example()
 	$avPageStyleSettings = _LOWriter_PageStyleLayout($oDoc, $oPageStyle)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Page style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; If LibreOffice version is higher or equal to 7.2 then display the Gutter margin setting.
-	If (_LO_VersionGet(True) >= 7.2) Then
-		MsgBox($MB_OK + $MB_TOPMOST, Default, "The Page Style's current Layout settings are as follows: " & @CRLF & _
-				"The current Page Layout is, (see UDF constants): " & $avPageStyleSettings[0] & @CRLF & _
-				"The Numbering format used is, (See UDF constants): " & $avPageStyleSettings[1] & @CRLF & _
-				"The Reference Paragraph Style name is: " & $avPageStyleSettings[2] & @CRLF & _
-				"Gutter is on the right? True/False: " & $avPageStyleSettings[3] & @CRLF & _
-				"Gutter is on the top? True/False: " & $avPageStyleSettings[4] & @CRLF & _
-				"Background covers the margins? True/False: " & $avPageStyleSettings[5] & @CRLF & _
-				"The paper tray to use, when printing this document is: " & $avPageStyleSettings[6])
-
-	Else ; Display all other margin settings, except the Gutter margin.
-		MsgBox($MB_OK + $MB_TOPMOST, Default, "The Page Style's current Layout settings are as follows: " & @CRLF & _
-				"The current Page Layout is, (see UDF constants): " & $avPageStyleSettings[0] & @CRLF & _
-				"The Numbering format used is, (See UDF constants): " & $avPageStyleSettings[1] & @CRLF & _
-				"The Reference Paragraph Style name is: " & $avPageStyleSettings[2] & @CRLF & _
-				"Background covers the margins? True/False: " & $avPageStyleSettings[3] & @CRLF & _
-				"The paper tray to use, when printing this document is: " & $avPageStyleSettings[4])
-	EndIf
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Page Style's current Layout settings are as follows: " & @CRLF & _
+			"The current Page Layout is, (see UDF constants): " & $avPageStyleSettings[0] & @CRLF & _
+			"The Numbering format used is, (See UDF constants): " & $avPageStyleSettings[1] & @CRLF & _
+			"The Reference Paragraph Style name is: " & $avPageStyleSettings[2] & @CRLF & _
+			"Gutter is on the right? True/False: " & $avPageStyleSettings[3] & @CRLF & _
+			"Gutter is on the top? True/False: " & $avPageStyleSettings[4] & @CRLF & _
+			"Background covers the margins? True/False: " & $avPageStyleSettings[5] & @CRLF & _
+			"The paper tray to use, when printing this document is: " & $avPageStyleSettings[6])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

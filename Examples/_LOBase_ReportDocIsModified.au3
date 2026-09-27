@@ -11,7 +11,7 @@ Example()
 If IsString($sPath) Then FileDelete($sPath)
 
 Func Example()
-	Local $oDoc, $oDBase, $oConnection, $oReportDoc, $oSection
+	Local $oDoc, $oDBase, $oConnection, $oReportDoc
 	Local $bReturn
 	Local $sSavePath
 
@@ -48,13 +48,9 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Has the Report been modified? True/False: " & $bReturn)
 
-	; Retrieve the Detail Section of the Report.
-	$oSection = _LOBase_ReportDocSectionGetObj($oReportDoc, $LOB_REP_SECTION_TYPE_DETAIL)
-	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to retrieve Section Object of Report Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Insert a Control.
-	_LOBase_ReportConInsert($oSection, $LOB_REP_CON_TYPE_TEXT_BOX, 150, 50, 2000, 1500)
-	If @error Then Return _ERROR($oDoc, $oReportDoc, "Failed to insert a Control. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Set the Document's modified state.
+	_LOBase_ReportDocIsModified($oReportDoc, True)
+	If @error Then _ERROR($oDoc, $oReportDoc, "Failed to Set document modified status. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; See if the Report has been modified or not.
 	$bReturn = _LOBase_ReportDocIsModified($oReportDoc)

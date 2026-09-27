@@ -22,8 +22,8 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert an Image. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Modify the Image Name Option settings. Set the Image name to "AutotTest", Set the Alternate text to "This is a Plain Image", Set the description to
-	; "This is an Image to demonstrate _LOWriter_ImageOptionsName."
-	_LOWriter_ImageOptionsName($oDoc, $oImage, "AutoItTest", "This is a Plain Image", "This is an Image to demonstrate _LOWriter_ImageOptionsName.")
+	; "This is an Image to demonstrate _LOWriter_ImageOptionsName.", And Decorative to False.
+	_LOWriter_ImageOptionsName($oDoc, $oImage, "AutoItTest", "This is a Plain Image", "This is an Image to demonstrate _LOWriter_ImageOptionsName.", False)
 	If @error Then _ERROR($oDoc, "Failed to set Image settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current Image settings. Return will be an array in order of function parameters.
@@ -33,7 +33,8 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Image's Name Option settings are as follows: " & @CRLF & _
 			"The Image's name is: " & $avSettings[0] & @CRLF & _
 			"The Image's Alternate Text is: " & $avSettings[1] & @CRLF & _
-			"The Image's description is: " & $avSettings[2])
+			"The Image's description is: " & $avSettings[2] & @CRLF & _
+			"Is the Image considered decorative? True/False: " & $avSettings[3])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

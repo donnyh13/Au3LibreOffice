@@ -33,9 +33,9 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Paragraph's current font Effects settings are as follows: " & @CRLF & _
-			"Relief style (See UDF Constants): " & $avParStyleSettings[0] & @CRLF & _
-			"Case style (See UDF Constants): " & $avParStyleSettings[1] & @CRLF & _
-			"Are the words hidden? True/False: " & $avParStyleSettings[2] & @CRLF & _
+			"Case style (See UDF Constants): " & $avParStyleSettings[0] & @CRLF & _
+			"Are the words hidden? True/False: " & $avParStyleSettings[1] & @CRLF & _
+			"Relief style (See UDF Constants): " & $avParStyleSettings[2] & @CRLF & _
 			"Are the words outlined? True/False: " & $avParStyleSettings[3] & @CRLF & _
 			"Do the words have a shadow? True/False: " & $avParStyleSettings[4] & @CRLF & @CRLF & _
 			"I will now set shadow to false, and Outline to True.")
@@ -49,15 +49,15 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Paragraph's new font Effects settings are as follows: " & @CRLF & _
-			"Relief style (See UDF Constants): " & $avParStyleSettings[0] & @CRLF & _
-			"Case style (See UDF Constants): " & $avParStyleSettings[1] & @CRLF & _
-			"Are the words hidden? True/False: " & $avParStyleSettings[2] & @CRLF & _
+			"Case style (See UDF Constants): " & $avParStyleSettings[0] & @CRLF & _
+			"Are the words hidden? True/False: " & $avParStyleSettings[1] & @CRLF & _
+			"Relief style (See UDF Constants): " & $avParStyleSettings[2] & @CRLF & _
 			"Are the words outlined? True/False: " & $avParStyleSettings[3] & @CRLF & _
 			"Do the words have a shadow? True/False: " & $avParStyleSettings[4] & @CRLF & @CRLF & _
 			"I will next set Outline to false, and set Hidden to true.")
 
 	; Set "Standard" Font effects Outline to False, and Hidden to true.
-	_LOWriter_ParStyleEffect($oParStyle, Null, Null, True, False, Null)
+	_LOWriter_ParStyleEffect($oParStyle, Null, True, Null, False, Null)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
@@ -65,9 +65,9 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Paragraph's new font Effects settings are as follows: " & @CRLF & _
-			"Relief style (See UDF Constants): " & $avParStyleSettings[0] & @CRLF & _
-			"Case style (See UDF Constants): " & $avParStyleSettings[1] & @CRLF & _
-			"Are the words hidden? True/False: " & $avParStyleSettings[2] & @CRLF & _
+			"Case style (See UDF Constants): " & $avParStyleSettings[0] & @CRLF & _
+			"Are the words hidden? True/False: " & $avParStyleSettings[1] & @CRLF & _
+			"Relief style (See UDF Constants): " & $avParStyleSettings[2] & @CRLF & _
 			"Are the words outlined? True/False: " & $avParStyleSettings[3] & @CRLF & _
 			"Do the words have a shadow? True/False: " & $avParStyleSettings[4])
 

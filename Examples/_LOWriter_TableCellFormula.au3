@@ -29,7 +29,7 @@ Func Example()
 	; Insert Cell names
 	For $i = 0 To UBound($asCellNames) - 1
 		; Retrieve each cell by name as returned in the array of cell names.
-		$oCell = _LOWriter_TableGetCellObjByName($oTable, $asCellNames[$i])
+		$oCell = _LOWriter_TableCellGetObjByName($oTable, $asCellNames[$i])
 		If @error Then _ERROR($oDoc, "Failed To retrieve Text Table Cell by name. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 		; Set Cell text String to each Cell's name.
@@ -38,7 +38,7 @@ Func Example()
 	Next
 
 	; Retrieve top left ("A1") Table Cell Object
-	$oCell = _LOWriter_TableGetCellObjByName($oTable, "A1")
+	$oCell = _LOWriter_TableCellGetObjByName($oTable, "A1")
 	If @error Then _ERROR($oDoc, "Failed To retrieve Text Table cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Cell Formula to (2 + 2) / 4 * 8

@@ -5,7 +5,7 @@
 Example()
 
 Func Example()
-	Local $oDoc, $oViewCursor
+	Local $oDoc
 	Local $bReturn
 
 	; Create a New, visible, Blank LibreOffice Document.
@@ -18,13 +18,9 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Has the document been modified since being created or saved? True/False: " & $bReturn)
 
-	; Retrieve the document view cursor to insert text with.
-	$oViewCursor = _LOWriter_CursorViewCursorGetObj($oDoc)
-	If @error Then _ERROR($oDoc, "Failed to retrieve the View Cursor Object for the Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
-	; Insert some text.
-	_LOWriter_CursorInsertString($oDoc, $oViewCursor, "Some text for demonstration.")
-	If @error Then _ERROR($oDoc, "Failed to insert text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Set the Document's modified state.
+	_LOWriter_DocIsModified($oDoc, True)
+	If @error Then _ERROR($oDoc, "Failed to Set document modified status. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Check if the document has been modified since being saved or created.
 	$bReturn = _LOWriter_DocIsModified($oDoc)

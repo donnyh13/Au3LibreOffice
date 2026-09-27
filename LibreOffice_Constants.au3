@@ -62,7 +62,7 @@ Global Enum _
 Global Enum _
 		$LO_DOC_CONNECT_MODE_ALL, _                   ; 0 Return an array of all opened Documents.
 		$LO_DOC_CONNECT_MODE_CURRENT, _               ; 1 Return the Object of the last active Document.
-		$LO_DOC_CONNECT_MODE_SEARCH_TITLE, _          ; 2 Search for a Document with a matching Title, this is the Document name plus the Component and Office name. e.g.: "Test.docx — LibreOffice Calc". This should be the same as Window Title in AutoIt.
+		$LO_DOC_CONNECT_MODE_SEARCH_TITLE, _          ; 2 Search for a Document with a matching Title, this is the Document name plus the Component and Office name. e.g.: "Test.ods — LibreOffice Calc". This should be the same as Window Title in AutoIt.
 		$LO_DOC_CONNECT_MODE_SEARCH_NAME, _           ; 3 Search for a Document with a full matching Name, without an extension, e.g.: "Test".
 		$LO_DOC_CONNECT_MODE_SEARCH_NAME_WITH_EXT, _  ; 4 Search for a Document with a matching Name, with extension, e.g.: "Test.docx". If the Document is unsaved, just the name will work, e.g. "Untitled1".
 		$LO_DOC_CONNECT_MODE_SEARCH_PATH              ; 5 Search for a Document with a matching save path, e.g.: "C:\Folder1\Folder2\Test.docx".

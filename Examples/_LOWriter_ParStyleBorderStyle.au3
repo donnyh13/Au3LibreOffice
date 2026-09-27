@@ -28,7 +28,7 @@ Func Example()
 	_LOWriter_ParStyleBorderWidth($oParStyle, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK, $LOW_BORDER_WIDTH_THICK)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Set Default Paragraph Style Border Style to, Top =  $LOW_BORDER_STYLE_DASH_DOT_DOT. Bottom = $LOW_BORDER_STYLE_FINE_DASHED,
+	; Set Default Paragraph Style Border Style to, Top = $LOW_BORDER_STYLE_DASH_DOT_DOT. Bottom = $LOW_BORDER_STYLE_FINE_DASHED,
 	; Left = $LOW_BORDER_STYLE_THICKTHIN_MEDIUMGAP Right = $LOW_BORDER_STYLE_SOLID
 	_LOWriter_ParStyleBorderStyle($oParStyle, $LOW_BORDER_STYLE_DASH_DOT_DOT, $LOW_BORDER_STYLE_FINE_DASHED, $LOW_BORDER_STYLE_THICKTHIN_MEDIUMGAP, $LOW_BORDER_STYLE_SOLID)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)

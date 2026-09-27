@@ -55,6 +55,7 @@
 ; _LOImpress_DocUndoGetAllActionTitles
 ; _LOImpress_DocUndoIsPossible
 ; _LOImpress_DocUndoReset
+; _LOImpress_DocView
 ; _LOImpress_DocVisible
 ; _LOImpress_DocZoom
 ; ===============================================================================================================================
@@ -106,7 +107,7 @@ Func _LOImpress_DocClose(ByRef $oDoc, $bSaveChanges = True, $sSaveName = "", $bD
 	If Not $oDoc.hasLocation() And ($bSaveChanges = True) Then
 		$sSavePath = @DesktopDir & "\"
 		If ($sSaveName = "") Or ($sSaveName = " ") Then
-			$sSaveName = @YEAR & "-" & @MON & "-" & @MDAY & "_" & @HOUR & "-" & @MIN & "-" & @SEC & ".ods"
+			$sSaveName = @YEAR & "-" & @MON & "-" & @MDAY & "_" & @HOUR & "-" & @MIN & "-" & @SEC & ".odp"
 			$sFilterName = "impress8"
 		EndIf
 
@@ -1230,7 +1231,7 @@ EndFunc   ;==>_LOImpress_DocRedoGetAllActionTitles
 ; Syntax ........: _LOImpress_DocRedoIsPossible(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = If the document has a redo action to perform, True is returned, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Returning True if the document has a redo action to perform, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
@@ -1590,7 +1591,7 @@ EndFunc   ;==>_LOImpress_DocUndoGetAllActionTitles
 ; Syntax ........: _LOImpress_DocUndoIsPossible(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = If the document has an undo action to perform, True is returned, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Returning True if the document has an undo action to perform, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
@@ -1644,6 +1645,50 @@ Func _LOImpress_DocUndoReset(ByRef $oDoc)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOImpress_DocUndoReset
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_DocView
+; Description ...: Set or Retrieve the current Document View mode.
+; Syntax ........: _LOImpress_DocView(ByRef $oDoc[, $iView = Null])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
+;                  $iView               - [optional] (0-6) Default is Null. The View mode to set the document to. See Constants, $LOI_PAGE_VIEW_* as defined in LibreOfficeImpress_Constants.au3.
+; Return values .: Success: 1 or Object
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Object = Success. All optional parameters were called with Null, returning current active view mode. See Constants, $LOI_PAGE_VIEW_* as defined in LibreOfficeImpress_Constants.au3.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $iView not an Integer, less than 0 or greater than 6. See Constants, $LOI_PAGE_VIEW_* as defined in LibreOfficeImpress_Constants.au3.
+;                  --Initialization Errors--
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.ServiceManager" Object.
+;                  @Error: 2, @Extended: 2 = Error creating "com.sun.star.frame.DispatchHelper" Object.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $iView
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  This function uses a deprecated method (DrawViewMode), and may stop functioning in the future.
+;                  This function assumes two types of view modes without positive evidence:
+;                  If the property CurrentPage returns Null, it is assumed the current view mode is $LOI_PAGE_VIEW_SLIDE_SORTER, as that is the only time I found it returning such.
+;                  If the property CurrentPage returns a page Object, and the property DrawViewMode returns Null, it is assumed current view mode is $LOI_PAGE_VIEW_SLIDE_OUTLINE.
+;                  When switching to Master Notes or Slide Notes, the notes page will correspond to the currently or last active slide/master slide.
+; Related .......: _LOImpress_SlideCurrent
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_DocView(ByRef $oDoc, $iView = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $vReturn
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$vReturn = __LOImpress_DocCurrView($oDoc, $iView)
+
+	Return SetError(@error, @extended, $vReturn)
+EndFunc   ;==>_LOImpress_DocView
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_DocVisible

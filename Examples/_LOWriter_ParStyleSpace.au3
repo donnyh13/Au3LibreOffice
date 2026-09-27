@@ -34,7 +34,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set Default Paragraph Style line space settings to, 1/4" above paragraph, 1/4" below paragraph, AddSpace = True, Line space mode =
-	; $LOW_PAR_LINE_SPC_MODE_FIX, Line space height = 1/2",  and Page Line Space = False.
+	; $LOW_PAR_LINE_SPC_MODE_FIX, Line space height = 1/2", and Page Line Space = False.
 	_LOWriter_ParStyleSpace($oParStyle, $iHMM, $iHMM, True, $LOW_PAR_LINE_SPC_MODE_FIX, $iHMM2, False)
 	If @error Then _ERROR($oDoc, "Failed to set the Paragraph style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

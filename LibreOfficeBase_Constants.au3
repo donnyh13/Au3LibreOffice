@@ -6,7 +6,7 @@
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice Base Constants for the LibreOffice UDF.
 ; AutoIt Version : v3.3.16.1
-; Description ...: Constants for various functions in the LibreOffice UDF.
+; Description ...: Constants for various Base functions in the LibreOffice UDF.
 ; Author(s) .....: donnyh13, mLipok
 ; Dll ...........:
 ; Note ..........: Descriptions for some Constants are taken from the LibreOffice SDK API documentation.
@@ -15,7 +15,7 @@
 ; #CURRENT# =====================================================================================================================
 ; ===============================================================================================================================
 
-; Sleep Divisor $__LOCCONST_SLEEP_DIV
+; Sleep Divisor $__LOBCONST_SLEEP_DIV
 ; In applicable functions this is used for adjusting how frequent a sleep occurs in loops.
 ; For any number above 0 the number of times a loop has completed is divided by $__LOBCONST_SLEEP_DIV. If you find some functions cause momentary freeze ups, a recommended value is 15.
 ; Set to 0 for no pause in a loop.
@@ -230,8 +230,8 @@ Global Enum _                                                                   
 		$LOB_DBASE_META_GET_STRING_FUNCS, _                                              ; 54 Returns a String. Gets a comma-separated list of string functions. These are the X/Open CLI string function names used in the SDBC function escape clause.
 		$LOB_DBASE_META_GET_SYSTEM_FUNCS, _                                              ; 55 Returns a String. Gets a comma-separated list of system functions. These are the X/Open CLI system function names used in the SDBC function escape clause.
 		$LOB_DBASE_META_GET_TABLE_PRIVILEGES, _                                          ; 56 Returns a Result Set, each row is a table privilege description. Gets a description of the access rights for each table available in a catalog. See _LOBase_DatabaseMetaDataQuery for Parameters. See L.O. SDL API "XDatabaseMetaData Interface Reference" for more details.
-		$LOB_DBASE_META_GET_TABLE_TYPES, _                                               ; 57 Returns a Result Set, each row has a single String column that is a table type. Gets the table types available in this database.  See L.O. SDL API "XDatabaseMetaData Interface Reference" for more details.
-		$LOB_DBASE_META_GET_TABLES, _                                                    ; 58 Returns a Result Set, each row is a table description.  Gets a description of tables available in a catalog. See _LOBase_DatabaseMetaDataQuery for Parameters.See L.O. SDL API "XDatabaseMetaData Interface Reference" for more details.
+		$LOB_DBASE_META_GET_TABLE_TYPES, _                                               ; 57 Returns a Result Set, each row has a single String column that is a table type. Gets the table types available in this database. See L.O. SDL API "XDatabaseMetaData Interface Reference" for more details.
+		$LOB_DBASE_META_GET_TABLES, _                                                    ; 58 Returns a Result Set, each row is a table description. Gets a description of tables available in a catalog. See _LOBase_DatabaseMetaDataQuery for Parameters.See L.O. SDL API "XDatabaseMetaData Interface Reference" for more details.
 		$LOB_DBASE_META_GET_TIME_DATE_FUNCS, _                                           ; 59 Returns a String. Gets a comma-separated list of time and date functions.
 		$LOB_DBASE_META_GET_TYPE_INFO, _                                                 ; 60 Returns a Result Set, each row is a SQL type description. Gets a description of all the standard SQL types supported by this database. See L.O. SDL API "XDatabaseMetaData Interface Reference" for more details.
 		$LOB_DBASE_META_GET_UDTS, _                                                      ; 61 Returns a Result Set, each row is a type description. Gets a description of the user-defined types defined in a particular schema. See _LOBase_DatabaseMetaDataQuery for Parameters. See L.O. SDL API "XDatabaseMetaData Interface Reference" for more details.
@@ -287,7 +287,7 @@ Global Enum _                                                                   
 		$LOB_DBASE_META_SUPPORTS_LIMITED_OUTER_JOINS, _                                  ; 111 Returns a Boolean. TRUE, if there is limited support for outer joins. (This will be TRUE if supportFullOuterJoins is TRUE.) FALSE is returned otherwise.
 		$LOB_DBASE_META_SUPPORTS_MINIMUM_SQL_GRAMMAR, _                                  ; 112 Returns a Boolean. TRUE, if the database supports ODBC Minimum SQL grammar, otherwise FALSE.
 		$LOB_DBASE_META_SUPPORTS_MIXED_CASE_IDS, _                                       ; 113 Returns a Boolean. Use the database "mixed case unquoted SQL identifiers" case sensitive. True if so.
-		$LOB_DBASE_META_SUPPORTS_MIXED_CASE_QUOTED_IDS, _                                ; 114 Returns a Boolean.  Does the database treat mixed case quoted SQL identifiers as case sensitive and as a result store them in mixed case?True if so.
+		$LOB_DBASE_META_SUPPORTS_MIXED_CASE_QUOTED_IDS, _                                ; 114 Returns a Boolean. Does the database treat mixed case quoted SQL identifiers as case sensitive and as a result store them in mixed case?True if so.
 		$LOB_DBASE_META_SUPPORTS_MULTIPLE_RESULT_SETS, _                                 ; 115 Returns a Boolean. Are multiple XResultSets from a single execute supported? True if so.
 		$LOB_DBASE_META_SUPPORTS_MULTIPLE_TRANSACTIONS, _                                ; 116 Returns a Boolean. Can we have multiple transactions open at once (on different connections)? True if so.
 		$LOB_DBASE_META_SUPPORTS_NON_NULLABLE_COLS, _                                    ; 117 Returns a Boolean. Can columns be defined as non-nullable? True if so.

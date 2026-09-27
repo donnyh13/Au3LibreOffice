@@ -21,7 +21,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create Text Table. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve top left ("A1") Table Cell Object
-	$oCell = _LOWriter_TableGetCellObjByName($oTable, "A1")
+	$oCell = _LOWriter_TableCellGetObjByName($oTable, "A1")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Text Table cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Border width so I can set the Border Style.

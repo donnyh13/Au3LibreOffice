@@ -31,7 +31,7 @@ Func Example()
 			" As an example of what a paragraph Object can be used for, I will change the font size of the first paragraph to 22 point.")
 
 	; An example of what I can do with a paragraph Object. Set the first paragraph's font size to 22 point.
-	_LOWriter_DirFrmtFont($aoParagraphs[0], Null, 22)
+	_LOWriter_DirFrmtCharFont($aoParagraphs[0], Null, 22)
 	If @error Then _ERROR($oDoc, "Failed to direct format Paragraph Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")

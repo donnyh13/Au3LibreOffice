@@ -36,7 +36,7 @@ Func Example()
 	_LOCalc_RangeNumbers($oCellRange, $aavData)
 	If @error Then _ERROR($oDoc, "Failed to fill Cell Range. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve Cell  D1
+	; Retrieve Cell D1
 	$oCell = _LOCalc_RangeGetCellByName($oSheet, "D1")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -44,7 +44,7 @@ Func Example()
 	_LOCalc_CellFormula($oCell, "=SUM(A1:C1)")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Range Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve Cell  H1
+	; Retrieve Cell H1
 	$oCell = _LOCalc_RangeGetCellByName($oSheet, "H1")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

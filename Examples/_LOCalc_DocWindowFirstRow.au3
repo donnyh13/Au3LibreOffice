@@ -18,6 +18,9 @@ Func Example()
 
 	$iNewRow = Int(InputBox("", "The Currently first visible Row is " & $iRow & ". Please enter a new Row number to set as the first visible Row.", "10", " M"))
 
+	; If User cancels, use a default.
+	If ($iNewRow = 0) Then $iNewRow = 10
+
 	; Set the first visible Row to the entered value.
 	_LOCalc_DocWindowFirstRow($oDoc, $iNewRow)
 	If @error Then _ERROR($oDoc, "Failed to set first visible Row. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)

@@ -38,7 +38,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to set Slide background color. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Insert a new slide.
-	$oSlide = _LOImpress_SlideAdd($oDoc, 2)
+	$oSlide = _LOImpress_SlideAdd($oDoc, 2, "AutoIt-Slide")
 	If @error Then _ERROR($oDoc, "Failed to Insert a new slide. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set slide background.

@@ -34,7 +34,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to move ViewCursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the selected text to Small Caps
-	_LOWriter_DirFrmtCharEffect($oViewCursor, Null, $LOW_CHAR_CASEMAP_SM_CAPS)
+	_LOWriter_DirFrmtCharEffect($oViewCursor, $LOW_CHAR_CASEMAP_SM_CAPS)
 	If @error Then _ERROR($oDoc, "Failed to set the Selected text's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a search descriptor for searching with. Set Backward, Match Case, Whole word, Regular Expression, and Search Styles to false, and
@@ -43,7 +43,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to create a search descriptor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a Find Format Search Array for any Small Caps case words
-	_LOWriter_FindFormatModifyEffects($atFindFormat, Null, $LOW_CHAR_CASEMAP_SM_CAPS)
+	_LOWriter_FindFormatModifyEffects($atFindFormat, $LOW_CHAR_CASEMAP_SM_CAPS)
 	If @error Then _ERROR($oDoc, "Failed to modify a Find format array. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Search for the word "search".

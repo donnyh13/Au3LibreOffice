@@ -139,7 +139,7 @@
 ; Name ..........: _LOImpress_ShapeAreaColor
 ; Description ...: Set or Retrieve the Fill color settings for a Shape.
 ; Syntax ........: _LOImpress_ShapeAreaColor(ByRef $oShape[, $iColor = Null])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $iColor              - [optional] (-2-16777215) Default is Null. The Fill color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for "None", or $LOI_SHAPE_COLOR_USE_SLIDE_BACKGROUND (-2) to use the Slide's background color (L.O. 7.5 +).
 ; Return values .: Success: 1 or Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -226,7 +226,7 @@ EndFunc   ;==>_LOImpress_ShapeAreaColor
 ; Name ..........: _LOImpress_ShapeAreaFillStyle
 ; Description ...: Retrieve what kind of background fill is active, if any.
 ; Syntax ........: _LOImpress_ShapeAreaFillStyle(ByRef $oShape)
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOI_AREA_FILL_STYLE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -259,9 +259,9 @@ EndFunc   ;==>_LOImpress_ShapeAreaFillStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapeAreaGradient
-; Description ...: Modify or retrieve the settings for Shape Background color Gradient.
+; Description ...: Set or Retrieve the settings for Shape Background color Gradient.
 ; Syntax ........: _LOImpress_ShapeAreaGradient(ByRef $oShape[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOI_GRAD_NAME_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iIncrement          - [optional] (0, 3-256) Default is Null. The number of steps of color change. 0 = Automatic.
@@ -345,7 +345,7 @@ Func _LOImpress_ShapeAreaGradient(ByRef $oShape, $sGradientName = Null, $iType =
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avGradient)
 	EndIf
 
-	$oDoc = $oShape.Parent.MasterPage.Forms.Parent()
+	$oDoc = __LOImpress_GetParentDoc($oShape.Parent())
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	If ($oShape.FillStyle() <> $LOI_AREA_FILL_STYLE_GRADIENT) Then $oShape.FillStyle = $LOI_AREA_FILL_STYLE_GRADIENT
@@ -492,7 +492,7 @@ EndFunc   ;==>_LOImpress_ShapeAreaGradient
 ; Name ..........: _LOImpress_ShapeAreaGradientMulticolor
 ; Description ...: Set or Retrieve a Shape's Multicolor Gradient settings.
 ; Syntax ........: _LOImpress_ShapeAreaGradientMulticolor(ByRef $oShape[, $avColorStops = Null])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -544,7 +544,7 @@ EndFunc   ;==>_LOImpress_ShapeAreaGradientMulticolor
 ; Name ..........: _LOImpress_ShapeAreaShadow
 ; Description ...: Set or Retrieve the shadow settings for a Shape.
 ; Syntax ........: _LOImpress_ShapeAreaShadow(ByRef $oShape[, $bShadow = Null[, $iLocation = Null[, $iColor = Null[, $iDistance = Null[, $iBlur = Null[, $iTransparency = Null]]]]]])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $bShadow             - [optional] Default is Null. If True, a Shadow is present for the Shape.
 ;                  $iLocation           - [optional] (0-8) Default is Null. The Location of the Shadow, must be one of the Constants, $LOI_SHAPE_SHADOW_LOCATION_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iColor              - [optional] (0-16777215) Default is Null. The Shadow color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
@@ -602,7 +602,7 @@ EndFunc   ;==>_LOImpress_ShapeAreaShadow
 ; Name ..........: _LOImpress_ShapeAreaTransparency
 ; Description ...: Set or retrieve Transparency settings for a Shape.
 ; Syntax ........: _LOImpress_ShapeAreaTransparency(ByRef $oShape[, $iTransparency = Null])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
@@ -642,7 +642,7 @@ EndFunc   ;==>_LOImpress_ShapeAreaTransparency
 ; Name ..........: _LOImpress_ShapeAreaTransparencyGradient
 ; Description ...: Set or retrieve the Shape transparency gradient settings.
 ; Syntax ........: _LOImpress_ShapeAreaTransparencyGradient(ByRef $oShape[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $iType               - [optional] (-1-5) Default is Null. The type of transparency gradient that you want to apply. See Constants, $LOI_GRAD_TYPE_* as defined in LibreOfficeImpress_Constants.au3. Call with $LOI_GRAD_TYPE_OFF to turn Transparency Gradient off.
 ;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
@@ -713,7 +713,7 @@ Func _LOImpress_ShapeAreaTransparencyGradient(ByRef $oShape, $iType = Null, $iXC
 		Return SetError($__LO_STATUS_SUCCESS, 1, $aiTransparent)
 	EndIf
 
-	$oDoc = $oShape.Parent.MasterPage.Forms.Parent()
+	$oDoc = __LOImpress_GetParentDoc($oShape.Parent())
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	If ($iType <> Null) Then
@@ -831,7 +831,7 @@ EndFunc   ;==>_LOImpress_ShapeAreaTransparencyGradient
 ; Name ..........: _LOImpress_ShapeAreaTransparencyGradientMulti
 ; Description ...: Set or Retrieve a Shape's Multi Transparency Gradient settings.
 ; Syntax ........: _LOImpress_ShapeAreaTransparencyGradientMulti(ByRef $oShape[, $avColorStops = Null])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -883,7 +883,7 @@ EndFunc   ;==>_LOImpress_ShapeAreaTransparencyGradientMulti
 ; Name ..........: _LOImpress_ShapeCharEffect
 ; Description ...: Set or Retrieve the Font Effect settings for a Shape.
 ; Syntax ........: _LOImpress_ShapeCharEffect(ByRef $oShape[, $iCase = Null[, $iRelief = Null[, $bOutline = Null[, $bShadow = Null]]]])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $iCase               - [optional] (0-4) Default is Null. The Character Case Style. See Constants, $LOI_CHAR_CASEMAP_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iRelief             - [optional] (0-2) Default is Null. The Character Relief style. See Constants, $LOI_CHAR_RELIEF_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $bOutline            - [optional] Default is Null. If True, the characters have an outline around the outside.
@@ -908,6 +908,7 @@ EndFunc   ;==>_LOImpress_ShapeAreaTransparencyGradientMulti
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
+;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
 ; Related .......: _LOImpress_ShapeCharOverLine, _LOImpress_ShapeCharStrikeOut, _LOImpress_ShapeCharUnderLine, _LOImpress_ShapePresStyleCharEffect, _LOImpress_ShapeStyleCharEffect
 ; Link ..........:
 ; Example .......: Yes
@@ -929,7 +930,7 @@ EndFunc   ;==>_LOImpress_ShapeCharEffect
 ; Name ..........: _LOImpress_ShapeCharFont
 ; Description ...: Set and Retrieve the Font Settings for a Shape.
 ; Syntax ........: _LOImpress_ShapeCharFont(ByRef $oShape[, $sFontName = Null[, $nFontSize = Null[, $iPosture = Null[, $iWeight = Null]]]])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $sFontName           - [optional] Default is Null. The Font Name to use.
 ;                  $nFontSize           - [optional] Default is Null. The new Font size.
 ;                  $iPosture            - [optional] (0-5) Default is Null. The Font Italic setting. See Constants, $LOI_CHAR_POSTURE_* as defined in LibreOfficeImpress_Constants.au3. Also see remarks.
@@ -957,6 +958,7 @@ EndFunc   ;==>_LOImpress_ShapeCharEffect
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
 ;                  LibreOffice accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
+;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
 ; Related .......: _LOImpress_ShapeCharFontColor, _LOImpress_ShapePresStyleCharFont, _LOImpress_ShapeStyleCharFont, _LOImpress_FontsGetNames
 ; Link ..........:
 ; Example .......: Yes
@@ -978,7 +980,7 @@ EndFunc   ;==>_LOImpress_ShapeCharFont
 ; Name ..........: _LOImpress_ShapeCharFontColor
 ; Description ...: Set or retrieve the font color, transparency and highlighting values for a Shape.
 ; Syntax ........: _LOImpress_ShapeCharFontColor(ByRef $oShape[, $iFontColor = Null[, $iTransparency = Null[, $iHighlight = Null]]])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $iFontColor          - [optional] (-1-16777215) Default is Null. The font Color value, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. Transparency percentage. 0 is visible, 100 is invisible. Available for LibreOffice 7.0 and up.
 ;                  $iHighlight          - [optional] (-1-16777215) Default is Null. The highlight Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for No color.
@@ -995,7 +997,7 @@ EndFunc   ;==>_LOImpress_ShapeCharFont
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $FontColor
+;                  |                               1 = Error setting $iFontColor
 ;                  |                               2 = Error setting $iTransparency.
 ;                  |                               4 = Error setting $iHighlight
 ;                  --Version Related Errors--
@@ -1004,6 +1006,7 @@ EndFunc   ;==>_LOImpress_ShapeCharFont
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
+;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
 ; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapeCharFont, _LOImpress_ShapePresStyleCharFontColor, _LOImpress_ShapeStyleCharFontColor
 ; Link ..........:
 ; Example .......: Yes
@@ -1025,7 +1028,7 @@ EndFunc   ;==>_LOImpress_ShapeCharFontColor
 ; Name ..........: _LOImpress_ShapeCharOverLine
 ; Description ...: Set and retrieve the OverLine settings for a Shape.
 ; Syntax ........: _LOImpress_ShapeCharOverLine(ByRef $oShape[, $iOverLineStyle = Null[, $iOLColor = Null[, $bWordOnly = Null]]])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $iOverLineStyle      - [optional] (0-18) Default is Null. The style of the Overline line, see constants, $LOI_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
 ;                  $iOLColor            - [optional] (-1-16777215) Default is Null. The Overline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
 ;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not Overlined.
@@ -1048,6 +1051,7 @@ EndFunc   ;==>_LOImpress_ShapeCharFontColor
 ; Remarks .......: Overline line style uses the same constants as underline style.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
+;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
 ; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapeCharEffect, _LOImpress_ShapeCharStrikeOut, _LOImpress_ShapeCharUnderLine, _LOImpress_ShapePresStyleCharOverLine, _LOImpress_ShapeStyleCharOverLine
 ; Link ..........:
 ; Example .......: Yes
@@ -1069,7 +1073,7 @@ EndFunc   ;==>_LOImpress_ShapeCharOverLine
 ; Name ..........: _LOImpress_ShapeCharPosition
 ; Description ...: Set and retrieve settings related to Sub/Super Script and relative size for a Shape.
 ; Syntax ........: _LOImpress_ShapeCharPosition(ByRef $oShape[, $iSuperScript = Null[, $iSubScript = Null[, $iRelativeSize = Null]]])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $iSuperScript        - [optional] (-1-100) Default is Null. The Superscript percentage value. Call with -1 for Automatic SuperScript. See Remarks.
 ;                  $iSubScript          - [optional] (-1-100) Default is Null. Subscript percentage value. Call with -1 for Automatic SubScript. See Remarks.
 ;                  $iRelativeSize       - [optional] (1-100) Default is Null. The size percentage relative to current font size.
@@ -1096,6 +1100,7 @@ EndFunc   ;==>_LOImpress_ShapeCharOverLine
 ;                  The way LibreOffice is set up Super/Subscript are set in the same setting, Superscript is a positive number from 1 to 100 (percentage), Subscript is a negative number set to -1 to -100 percentage. For the user's convenience this function automatically converts the positive numbers to negative, and back when setting or retrieving subscript values.
 ;                  Automatic Superscript has an Integer value of 14000, Auto Subscript has a Integer value of -14000. Being that there is no settable setting of Automatic Super/Sub Script, it has been chosen to use -1 to indicate an automatic Sub/SuperScript value.
 ;                  If you set both $iSuperScript and $iSubScript to -1 (Automatic), or both $iSuperScript and $iSubScript to any value, Subscript will be the result, as it is the last in the function to be set, and thus will overwrite any Superscript values.
+;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
 ; Related .......: _LOImpress_ShapeParAlignment, _LOImpress_ShapeParIndent, _LOImpress_ShapeParSpacing
 ; Link ..........:
 ; Example .......: Yes
@@ -1117,7 +1122,7 @@ EndFunc   ;==>_LOImpress_ShapeCharPosition
 ; Name ..........: _LOImpress_ShapeCharScaling
 ; Description ...: Set or retrieve the character Scale settings for a Shape.
 ; Syntax ........: _LOImpress_ShapeCharScaling(ByRef $oShape[, $iScaleWidth = Null])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $iScaleWidth         - [optional] (1-100) Default is Null. The percentage to horizontally stretch or compress the text. 100 is normal sizing.
 ; Return values .: Success: 1 or Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -1136,6 +1141,7 @@ EndFunc   ;==>_LOImpress_ShapeCharPosition
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Fit to line seems to be unavailable in the API, and does not seem to work in LibreOffice anyway.
+;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
 ; Related .......: _LOImpress_ShapeCharSpacing
 ; Link ..........:
 ; Example .......: Yes
@@ -1157,7 +1163,7 @@ EndFunc   ;==>_LOImpress_ShapeCharScaling
 ; Name ..........: _LOImpress_ShapeCharSpacing
 ; Description ...: Set and retrieve the spacing between characters (Kerning) for a Shape.
 ; Syntax ........: _LOImpress_ShapeCharSpacing(ByRef $oShape[, $bAutoKerning = Null[, $nKerning = Null]])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $bAutoKerning        - [optional] Default is Null. If True, applies a spacing in between certain pairs of characters.
 ;                  $nKerning            - [optional] (-928.8-928.8) Default is Null. The kerning value of the characters. See Remarks. Values are in Printer's Points as set in the LibreOffice UI.
 ; Return values .: Success: Integer or Array.
@@ -1179,6 +1185,7 @@ EndFunc   ;==>_LOImpress_ShapeCharScaling
 ;                  When setting Kerning values in LibreOffice, the measurement is listed in Pt (Printer's Points) in the User Display, however the internal setting is measured in Hundredths of a Millimeter (HMM). They will be automatically converted from Points to Hundredths of a Millimeter and back for retrieval of settings.
 ;                  The acceptable values are from -2 Pt to 928.8 Pt. The values can be directly converted easily, however, for an unknown reason to myself, LibreOffice begins counting backwards and in negative Hundredths of a Millimeter internally from 928.9 up to 1000 Pt (Max setting).
 ;                  For example, 928.8Pt is the last correct value, which equals 32766 Hundredths of a Millimeter (HMM), after this LibreOffice reports the following: 928.9 Pt = -32766 HMM; 929 Pt = -32763 HMM; 929.1 = -32759; 1000 pt = -30258. Attempting to set Libre's kerning value to anything over 32768 HMM causes a COM exception, and attempting to set the kerning to any of these negative numbers sets the User viewable kerning value to -2.0 Pt. For these reasons the max settable kerning is -2.0 Pt to 928.8 Pt.
+;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
 ; Related .......: _LOImpress_ShapeCharScaling, _LOImpress_ShapeParSpacing
 ; Link ..........:
 ; Example .......: Yes
@@ -1200,7 +1207,7 @@ EndFunc   ;==>_LOImpress_ShapeCharSpacing
 ; Name ..........: _LOImpress_ShapeCharStrikeOut
 ; Description ...: Set or Retrieve the Strikeout settings for a Shape.
 ; Syntax ........: _LOImpress_ShapeCharStrikeOut(ByRef $oShape[, $iStrikeLineStyle = Null[, $bWordOnly = Null]])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $iStrikeLineStyle    - [optional] (0-6) Default is Null. The Strikeout Line Style, see constants, $LOI_CHAR_STRIKEOUT_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $bWordOnly           - [optional] Default is Null. If True, strike out is applied to words only, skipping whitespaces.
 ; Return values .: Success: 1 or Array
@@ -1219,6 +1226,7 @@ EndFunc   ;==>_LOImpress_ShapeCharSpacing
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
+;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
 ; Related .......: _LOImpress_ShapeCharEffect, _LOImpress_ShapeCharOverLine, _LOImpress_ShapeCharUnderLine, _LOImpress_ShapePresStyleCharStrikeOut, _LOImpress_ShapeStyleCharStrikeOut
 ; Link ..........:
 ; Example .......: Yes
@@ -1240,7 +1248,7 @@ EndFunc   ;==>_LOImpress_ShapeCharStrikeOut
 ; Name ..........: _LOImpress_ShapeCharUnderLine
 ; Description ...: Set and retrieve the Underline settings for a Shape.
 ; Syntax ........: _LOImpress_ShapeCharUnderLine(ByRef $oShape[, $iUnderLineStyle = Null[, $iULColor = Null[, $bWordOnly = Null]]])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $iUnderLineStyle     - [optional] (0-18) Default is Null. The Underline line style, see constants, $LOI_CHAR_UNDERLINE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iULColor            - [optional] (-1-16777215) Default is Null. The underline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
 ;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not underlined.
@@ -1262,6 +1270,7 @@ EndFunc   ;==>_LOImpress_ShapeCharStrikeOut
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
+;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
 ; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_ShapeCharEffect, _LOImpress_ShapeCharOverLine, _LOImpress_ShapeCharStrikeOut, _LOImpress_ShapePresStyleCharUnderLine, _LOImpress_ShapeStyleCharUnderLine
 ; Link ..........:
 ; Example .......: Yes
@@ -1283,7 +1292,7 @@ EndFunc   ;==>_LOImpress_ShapeCharUnderLine
 ; Name ..........: _LOImpress_ShapeCreateTextCursor
 ; Description ...: Create a Text Cursor in a Shape's Textbox for inserting text etc.
 ; Syntax ........: _LOImpress_ShapeCreateTextCursor(ByRef $oShape)
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ; Return values .: Success: Object.
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. A Text Cursor Object located in the Textbox.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -1318,7 +1327,7 @@ EndFunc   ;==>_LOImpress_ShapeCreateTextCursor
 ; Name ..........: _LOImpress_ShapeDelete
 ; Description ...: Delete a Shape.
 ; Syntax ........: _LOImpress_ShapeDelete(ByRef $oShape)
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Shape was successfully deleted.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -1365,7 +1374,7 @@ EndFunc   ;==>_LOImpress_ShapeDelete
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $sShapeName          - The Shape name to search for.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If a Shape was found matching $sShapeName, True is returned, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if a Shape with name called in $sShapeName exists, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
@@ -1606,8 +1615,8 @@ EndFunc   ;==>_LOImpress_ShapeImageCrop
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapeImageInsert
 ; Description ...: Insert an image into a slide.
-; Syntax ........: _LOImpress_ShapeImageInsert(ByRef $oSlide, $sURL[, $iWidth = -1[, $iHeight = -1[, $iX = -1[, $iY = -1]]]])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+; Syntax ........: _LOImpress_ShapeImageInsert(ByRef $oObj, $sURL[, $iWidth = -1[, $iHeight = -1[, $iX = -1[, $iY = -1]]]])
+; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
 ;                  $sURL                - The file path to the image to insert.
 ;                  $iWidth              - [optional] Default is -1. The Images's Width in Hundredths of a Millimeter (HMM). Call with -1 for automatic width.
 ;                  $iHeight             - [optional] Default is -1. The Images's Height in Hundredths of a Millimeter (HMM). Call with -1 for automatic height.
@@ -1617,9 +1626,9 @@ EndFunc   ;==>_LOImpress_ShapeImageCrop
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Image was successfully inserted, returning image Object.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
-;                  @Error: 1, @Extended: 2 = $sImage not a String.
-;                  @Error: 1, @Extended: 3 = Image called in $sImage doesn't exist at given path.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $sURL not a String.
+;                  @Error: 1, @Extended: 3 = Image called in $sURL doesn't exist at given path.
 ;                  @Error: 1, @Extended: 4 = $iWidth not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iHeight not an Integer.
 ;                  @Error: 1, @Extended: 6 = $iX not an Integer.
@@ -1641,7 +1650,7 @@ EndFunc   ;==>_LOImpress_ShapeImageCrop
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_ShapeImageInsert(ByRef $oSlide, $sURL, $iWidth = -1, $iHeight = -1, $iX = -1, $iY = -1)
+Func _LOImpress_ShapeImageInsert(ByRef $oObj, $sURL, $iWidth = -1, $iHeight = -1, $iX = -1, $iY = -1)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1649,7 +1658,7 @@ Func _LOImpress_ShapeImageInsert(ByRef $oSlide, $sURL, $iWidth = -1, $iHeight = 
 	Local $tBitmapSize, $tNewSize, $tPos
 	Local $nImageRatio, $nPageRatio
 
-	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsString($sURL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not FileExists($sURL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not IsInt($iWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
@@ -1660,7 +1669,7 @@ Func _LOImpress_ShapeImageInsert(ByRef $oSlide, $sURL, $iWidth = -1, $iHeight = 
 	$sURL = _LO_PathConvert($sURL, $LO_PATHCONV_OFFICE_RETURN)
 	If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	$oDoc = $oSlide.MasterPage.Forms.Parent()
+	$oDoc = __LOImpress_GetParentDoc($oObj)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$oImage = $oDoc.createInstance("com.sun.star.drawing.GraphicObjectShape")
@@ -1668,7 +1677,7 @@ Func _LOImpress_ShapeImageInsert(ByRef $oSlide, $sURL, $iWidth = -1, $iHeight = 
 
 	$oImage.GraphicURL = $sURL
 
-	$oSlide.add($oImage)
+	$oObj.add($oImage)
 
 	$tNewSize = $oImage.Size()
 	If Not IsObj($tNewSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
@@ -1680,23 +1689,23 @@ Func _LOImpress_ShapeImageInsert(ByRef $oSlide, $sURL, $iWidth = -1, $iHeight = 
 	$nImageRatio = (Number($tBitmapSize.Height()) / Number($tBitmapSize.Width()))
 	If Not IsNumber($nImageRatio) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
-	$nPageRatio = (Number($oSlide.Height()) / Number($oSlide.Width()))
+	$nPageRatio = (Number($oObj.Height()) / Number($oObj.Width()))
 	If Not IsNumber($nPageRatio) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
 
 	If ($nPageRatio > $nImageRatio) Then ; Compare the ratios to see which is wider.
-		$tNewSize.Width = ($iWidth = -1) ? ($oSlide.Width()) : ($iWidth)
-		$tNewSize.Height = ($iHeight = -1) ? (($iWidth = -1) ? (Int($oSlide.Width() * $nImageRatio)) : ($iWidth * $nImageRatio)) : ($iHeight) ;
+		$tNewSize.Width = ($iWidth = -1) ? ($oObj.Width()) : ($iWidth)
+		$tNewSize.Height = ($iHeight = -1) ? (($iWidth = -1) ? (Int($oObj.Width() * $nImageRatio)) : ($iWidth * $nImageRatio)) : ($iHeight) ;
 
 	Else
-		$tNewSize.Width = ($iWidth = -1) ? (Int($oSlide.Width() / $nImageRatio)) : ($iWidth)
-		$tNewSize.Height = ($iHeight = -1) ? ($oSlide.Height()) : ($iHeight)
+		$tNewSize.Width = ($iWidth = -1) ? (Int($oObj.Width() / $nImageRatio)) : ($iWidth)
+		$tNewSize.Height = ($iHeight = -1) ? ($oObj.Height()) : ($iHeight)
 	EndIf
 
 	$tPos = $oImage.Position()
 	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 7, 0)
 
-	$tPos.X = ($iX = -1) ? (Int(($oSlide.Width() - $tNewSize.Width()) / 2)) : ($iX)
-	$tPos.Y = ($iY = -1) ? (Int(($oSlide.Height() - $tNewSize.Height()) / 2)) : ($iY)
+	$tPos.X = ($iX = -1) ? (Int(($oObj.Width() - $tNewSize.Width()) / 2)) : ($iX)
+	$tPos.Y = ($iY = -1) ? (Int(($oObj.Height() - $tNewSize.Height()) / 2)) : ($iY)
 
 	$oImage.Size = $tNewSize
 	$oImage.Position = $tPos
@@ -1815,7 +1824,7 @@ EndFunc   ;==>_LOImpress_ShapeImageReplace
 ; Name ..........: _LOImpress_ShapeInteraction
 ; Description ...: Set or Retrieve a Shape's current Interaction settings.
 ; Syntax ........: _LOImpress_ShapeInteraction(ByRef $oShape[, $iAction = Null[, $sTarget = Null[, $iVerb = Null]]])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $iAction             - [optional] (0-13) Default is Null. The action to perform when the shape is clicked. See Constants, $LOI_SHAPE_INTERACTION_ACTION_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $sTarget             - [optional] Default is Null. The target for the action. See remarks.
 ;                  $iVerb               - [optional] Default is Null. If $iAction is set to $LOI_SHAPE_INTERACTION_ACTION_OBJ_ACTION, this is the action to perform on the OLE Object. See remarks.
@@ -1898,7 +1907,7 @@ Func _LOImpress_ShapeInteraction(ByRef $oShape, $iAction = Null, $sTarget = Null
 				$oSlide = $oShape.Parent()
 				If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-				$oDoc = $oSlide.MasterPage.Forms.Parent()
+				$oDoc = __LOImpress_GetParentDoc($oSlide)
 				If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
 				If Not _LOImpress_ShapeExists($oDoc, $sTarget) And Not _
@@ -1932,7 +1941,7 @@ EndFunc   ;==>_LOImpress_ShapeInteraction
 ; Name ..........: _LOImpress_ShapeLineArrowStyles
 ; Description ...: Set or Retrieve Shape Line Start and End Arrow Style settings.
 ; Syntax ........: _LOImpress_ShapeLineArrowStyles(ByRef $oShape[, $vStartStyle = Null[, $iStartWidth = Null[, $bStartCenter = Null[, $bSync = Null[, $vEndStyle = Null[, $iEndWidth = Null[, $bEndCenter = Null]]]]]]])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $vStartStyle         - [optional] (0-32, or String) Default is Null. The Arrow head to apply to the start of the line. Can be a Custom Arrowhead name, or one of the constants, $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3. See remarks.
 ;                  $iStartWidth         - [optional] (0-5004) Default is Null. The Width of the Starting Arrowhead, in Hundredths of a Millimeter (HMM).
 ;                  $bStartCenter        - [optional] Default is Null. If True, Places the center of the Start arrowhead on the endpoint of the line.
@@ -1952,7 +1961,7 @@ EndFunc   ;==>_LOImpress_ShapeInteraction
 ;                  @Error: 1, @Extended: 5 = $bStartCenter not a Boolean.
 ;                  @Error: 1, @Extended: 6 = $bSync not a Boolean.
 ;                  @Error: 1, @Extended: 7 = $vEndStyle not a String, and not an Integer.
-;                  @Error: 1, @Extended: 8 = $vSEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 8 = $vEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 9 = $iEndWidth not an Integer, less than 0 or greater than 5004.
 ;                  @Error: 1, @Extended: 10 = $bEndCenter not a Boolean.
 ;                  --Processing Errors--
@@ -2082,7 +2091,7 @@ EndFunc   ;==>_LOImpress_ShapeLineArrowStyles
 ; Name ..........: _LOImpress_ShapeLineProperties
 ; Description ...: Set or Retrieve Shape Line settings.
 ; Syntax ........: _LOImpress_ShapeLineProperties(ByRef $oShape[, $vStyle = Null[, $iColor = Null[, $iWidth = Null[, $iTransparency = Null[, $iCornerStyle = Null[, $iCapStyle = Null]]]]]])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $vStyle              - [optional] (0-31, or String) Default is Null. The Line Style to use. Can be a Custom Line Style name, or one of the constants, $LOI_SHAPE_LINE_STYLE_* as defined in LibreOfficeImpress_Constants.au3. See remarks.
 ;                  $iColor              - [optional] (0-16777215) Default is Null. The Line color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iWidth              - [optional] (0-5004) Default is Null. The line Width, set in Hundredths of a Millimeter (HMM).
@@ -2226,7 +2235,7 @@ EndFunc   ;==>_LOImpress_ShapeLineProperties
 ; Name ..........: _LOImpress_ShapeName
 ; Description ...: Set or Retrieve a Shape's Name.
 ; Syntax ........: _LOImpress_ShapeName(ByRef $oShape[, $sName = Null])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $sName               - [optional] Default is Null. The new, unique Name for the Shape.
 ; Return values .: Success: 1 or String
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Shape's name was successfully set.
@@ -2275,7 +2284,7 @@ Func _LOImpress_ShapeName(ByRef $oShape, $sName = Null)
 	$oSlide = $oShape.Parent()
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	$oDoc = $oSlide.MasterPage.Forms.Parent()
+	$oDoc = __LOImpress_GetParentDoc($oSlide)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 	If _LOImpress_ShapeExists($oDoc, $sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
@@ -2289,7 +2298,7 @@ EndFunc   ;==>_LOImpress_ShapeName
 ; Name ..........: _LOImpress_ShapeParAlignment
 ; Description ...: Set and Retrieve Paragraph Alignment settings for a Shape.
 ; Syntax ........: _LOImpress_ShapeParAlignment(ByRef $oShape[, $iHorAlign = Null[, $iLastLineAlign = Null[, $iTxtDirection = Null]]])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $iHorAlign           - [optional] (0-3) Default is Null. The Horizontal alignment of the paragraph. See Constants, $LOI_PAR_ALIGN_HOR_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
 ;                  $iLastLineAlign      - [optional] (0-3) Default is Null. Specify the alignment for the last line in the paragraph. See Constants, $LOI_PAR_LAST_LINE_* as defined in LibreOfficeImpress_Constants.au3. See Remarks.
 ;                  $iTxtDirection       - [optional] (0-5) Default is Null. The Text Writing Direction. See Constants, $LOI_PAR_TXT_DIR_* as defined in LibreOfficeImpress_Constants.au3. [LibreOffice Default is 4]
@@ -2314,6 +2323,7 @@ EndFunc   ;==>_LOImpress_ShapeName
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Expand single word, Snap to grid, and Vertical align (Text-To-Text), seem to be unavailable in the API, and do not seem to work in LibreOffice.
+;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
 ; Related .......: _LOImpress_ShapeCharPosition, _LOImpress_ShapeParIndent, _LOImpress_ShapeParSpacing, _LOImpress_ShapePresStyleParAlignment, _LOImpress_ShapeStyleParAlignment
 ; Link ..........:
 ; Example .......: Yes
@@ -2335,7 +2345,7 @@ EndFunc   ;==>_LOImpress_ShapeParAlignment
 ; Name ..........: _LOImpress_ShapeParIndent
 ; Description ...: Set or Retrieve Paragraph Indent settings for a Shape.
 ; Syntax ........: _LOImpress_ShapeParIndent(ByRef $oShape[, $iBeforeTxt = Null[, $iAfterTxt = Null[, $iFirstLine = Null]]])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $iBeforeTxt          - [optional] (0-1162202) Default is Null. The amount of space that you want to indent the paragraph from the page margin. Set in Hundredths of a Millimeter (HMM).
 ;                  $iAfterTxt           - [optional] (0-1162202) Default is Null. The amount of space that you want to indent the paragraph from the page margin. Set in Hundredths of a Millimeter (HMM)
 ;                  $iFirstLine          - [optional] (0-1162202) Default is Null. Indentation distance of the first line of a paragraph. Set in Hundredths of a Millimeter (HMM).
@@ -2345,8 +2355,8 @@ EndFunc   ;==>_LOImpress_ShapeParAlignment
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
-;                  @Error: 1, @Extended: 2 = $iBeforeText not an Integer, less than 0 or greater than 1162202.
-;                  @Error: 1, @Extended: 3 = $iAfterText not an Integer, less than 0 or greater than 1162202.
+;                  @Error: 1, @Extended: 2 = $iBeforeTxt not an Integer, less than 0 or greater than 1162202.
+;                  @Error: 1, @Extended: 3 = $iAfterTxt not an Integer, less than 0 or greater than 1162202.
 ;                  @Error: 1, @Extended: 4 = $iFirstLine not an Integer, less than 0 or greater than 1162202.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
@@ -2358,6 +2368,7 @@ EndFunc   ;==>_LOImpress_ShapeParAlignment
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Auto indent first line does not seem to work in LibreOffice, and seems to be not available in the API.
+;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
 ; Related .......: _LO_UnitConvert, _LOImpress_ShapeParAlignment, _LOImpress_ShapeParSpacing, _LOImpress_ShapePresStyleParIndent, _LOImpress_ShapeStyleParIndent
 ; Link ..........:
 ; Example .......: Yes
@@ -2379,7 +2390,7 @@ EndFunc   ;==>_LOImpress_ShapeParIndent
 ; Name ..........: _LOImpress_ShapeParSpacing
 ; Description ...: Set and Retrieve Line Spacing settings for a Shape.
 ; Syntax ........: _LOImpress_ShapeParSpacing(ByRef $oShape[, $iAbovePar = Null[, $iBelowPar = Null[, $iLineSpcMode = Null[, $iLineSpcHeight = Null]]]])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $iAbovePar           - [optional] (0-100000) Default is Null. The Space above a paragraph, in Hundredths of a Millimeter (HMM).
 ;                  $iBelowPar           - [optional] (0-100000) Default is Null. The Space Below a paragraph, in Hundredths of a Millimeter (HMM).
 ;                  $iLineSpcMode        - [optional] (0-3) Default is Null. The line spacing type of the paragraph. See Constants, $LOI_PAR_LINE_SPC_MODE_* as defined in LibreOfficeImpress_Constants.au3, also notice min and max values for each.
@@ -2413,6 +2424,7 @@ EndFunc   ;==>_LOImpress_ShapeParIndent
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  The "Do not add space between paragraphs as the same style" setting seems to be not available to set or retrieve in the API, and seems to do nothing in LibreOffice anyway.
+;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
 ; Related .......: _LO_UnitConvert, _LOImpress_ShapeCharSpacing, _LOImpress_ShapeParAlignment, _LOImpress_ShapeParIndent, _LOImpress_ShapePresStyleParSpacing, _LOImpress_ShapeStyleParSpacing
 ; Link ..........:
 ; Example .......: Yes
@@ -2434,7 +2446,7 @@ EndFunc   ;==>_LOImpress_ShapeParSpacing
 ; Name ..........: _LOImpress_ShapeParTabStopCreate
 ; Description ...: Create a new TabStop for a Shape.
 ; Syntax ........: _LOImpress_ShapeParTabStopCreate(ByRef $oShape, $iPosition[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $iPosition           - The TabStop position to set the new TabStop to. Set in Hundredths of a Millimeter (HMM). See Remarks.
 ;                  $iAlignment          - [optional] (0-4) Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOI_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iDecChar            - [optional] Default is Null. Enter a character(in Asc Value(See AutoIt Asc Function)) that you want the decimal tab to use as a decimal separator. Can only be set if $iAlignment is set to $LOI_PAR_TAB_ALIGN_DECIMAL.
@@ -2468,6 +2480,7 @@ EndFunc   ;==>_LOImpress_ShapeParSpacing
 ;                  $iFillChar, Libre's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by Libre are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  $iNewTabStop position is still returned as even though some settings weren't successfully set, the new TabStop was still created.
+;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
 ; Related .......: _LO_UnitConvert, _LOImpress_ShapeParTabStopDelete, _LOImpress_ShapeParTabStopMod, _LOImpress_ShapeParTabStopsGetList, _LOImpress_ShapePresStyleParTabStopCreate, _LOImpress_ShapeStyleParTabStopCreate
 ; Link ..........:
 ; Example .......: Yes
@@ -2489,7 +2502,7 @@ EndFunc   ;==>_LOImpress_ShapeParTabStopCreate
 ; Name ..........: _LOImpress_ShapeParTabStopDelete
 ; Description ...: Delete a TabStop from a Shape.
 ; Syntax ........: _LOImpress_ShapeParTabStopDelete(ByRef $oShape, $iTabStop)
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $iTabStop            - The Tab position of the TabStop to modify. See Remarks.
 ; Return values .: Success: Boolean.
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Returning True if TabStop was successfully deleted, else False.
@@ -2503,6 +2516,7 @@ EndFunc   ;==>_LOImpress_ShapeParTabStopCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $iTabStop refers to the position, or essential the "length" of a TabStop from the edge of a page margin. This is the only reliable way to identify a Tabstop to be able to interact with it, as there can only be one of a certain length per paragraph.
+;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
 ; Related .......: _LOImpress_ShapeParTabStopCreate, _LOImpress_ShapeParTabStopsGetList, _LOImpress_ShapePresStyleParTabStopDelete, _LOImpress_ShapeStyleParTabStopDelete
 ; Link ..........:
 ; Example .......: Yes
@@ -2522,9 +2536,9 @@ EndFunc   ;==>_LOImpress_ShapeParTabStopDelete
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapeParTabStopMod
-; Description ...: Modify or retrieve the properties of an existing TabStop in a Shape.
+; Description ...: Set or Retrieve the properties of an existing TabStop in a Shape.
 ; Syntax ........: _LOImpress_ShapeParTabStopMod(ByRef $oShape, $iTabStop[, $iPosition = Null[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]]])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $iTabStop            - The Tab position of the TabStop to modify. See Remarks.
 ;                  $iPosition           - [optional] Default is Null. The New position to set the input position to. Set in Hundredths of a Millimeter (HMM). See Remarks.
 ;                  $iAlignment          - [optional] (0-4) Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOI_PAR_TAB_ALIGN_* as defined in LibreOfficeImpress_Constants.au3.
@@ -2562,6 +2576,7 @@ EndFunc   ;==>_LOImpress_ShapeParTabStopDelete
 ;                  $iFillChar, Libre's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by Libre are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
+;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
 ; Related .......: _LO_UnitConvert, _LOImpress_ShapeParTabStopCreate, _LOImpress_ShapeParTabStopsGetList, _LOImpress_ShapePresStyleParTabStopMod, _LOImpress_ShapeStyleParTabStopMod
 ; Link ..........:
 ; Example .......: Yes
@@ -2583,7 +2598,7 @@ EndFunc   ;==>_LOImpress_ShapeParTabStopMod
 ; Name ..........: _LOImpress_ShapeParTabStopsGetList
 ; Description ...: Retrieve an array of TabStops available in a Shape.
 ; Syntax ........: _LOImpress_ShapeParTabStopsGetList(ByRef $oShape)
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ; Return values .: Success: Array.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. An Array of TabStops. @Extended set to number of results.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -2593,7 +2608,7 @@ EndFunc   ;==>_LOImpress_ShapeParTabStopMod
 ;                  @Error: 3, @Extended: 1 = Error retrieving ParaTabStops Object.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
+; Remarks .......: This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LOImpress_ShapesGetList.
 ; Related .......: _LOImpress_ShapeParTabStopCreate, _LOImpress_ShapeParTabStopDelete, _LOImpress_ShapePresStyleParTabStopsGetList, _LOImpress_ShapeStyleParTabStopsGetList
 ; Link ..........:
 ; Example .......: Yes
@@ -2615,7 +2630,7 @@ EndFunc   ;==>_LOImpress_ShapeParTabStopsGetList
 ; Name ..........: _LOImpress_ShapePosition
 ; Description ...: Set or Retrieve the Shape's position settings.
 ; Syntax ........: _LOImpress_ShapePosition(ByRef $oShape[, $iX = Null[, $iY = Null[, $bProtectPos = Null]]])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $iX                  - [optional] Default is Null. The X position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - [optional] Default is Null. The Y position from the insertion point, in Hundredths of a Millimeter (HMM).
 ;                  $bProtectPos         - [optional] Default is Null. If True, the Shape's position is locked.
@@ -2766,7 +2781,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleAreaFillStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapePresStyleAreaGradient
-; Description ...: Modify or retrieve the settings for Presentation Style Background color Gradient.
+; Description ...: Set or Retrieve the settings for Presentation Style Background color Gradient.
 ; Syntax ........: _LOImpress_ShapePresStyleAreaGradient(ByRef $oDoc, ByRef $oPresStyle[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $oPresStyle          - A Presentation Style object returned by a previous _LOImpress_ShapePresStyleGetObjByName function.
@@ -3214,7 +3229,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleCharFont
 ;                  @Error: 1, @Extended: 3 = $iHighlight not an Integer, less than -1 or greater than 16777215.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $FontColor
+;                  |                               1 = Error setting $iFontColor
 ;                  |                               2 = Error setting $iHighlight
 ; Author ........: donnyh13
 ; Modified ......:
@@ -3428,7 +3443,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleGetObjByName
 ;                  @Error: 1, @Extended: 6 = $bStartCenter not a Boolean.
 ;                  @Error: 1, @Extended: 7 = $bSync not a Boolean.
 ;                  @Error: 1, @Extended: 8 = $vEndStyle not a String, and not an Integer.
-;                  @Error: 1, @Extended: 9 = $vSEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 9 = $vEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 10 = $iEndWidth not an Integer, less than 0 or greater than 5004.
 ;                  @Error: 1, @Extended: 11 = $bEndCenter not a Boolean.
 ;                  --Processing Errors--
@@ -3783,8 +3798,8 @@ EndFunc   ;==>_LOImpress_ShapePresStyleParAlignment
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPresStyle not an Object.
-;                  @Error: 1, @Extended: 2 = $iBeforeText not an Integer, less than 0 or greater than 1162202.
-;                  @Error: 1, @Extended: 3 = $iAfterText not an Integer, less than 0 or greater than 1162202.
+;                  @Error: 1, @Extended: 2 = $iBeforeTxt not an Integer, less than 0 or greater than 1162202.
+;                  @Error: 1, @Extended: 3 = $iAfterTxt not an Integer, less than 0 or greater than 1162202.
 ;                  @Error: 1, @Extended: 4 = $iFirstLine not an Integer, less than 0 or greater than 1162202.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
@@ -3960,7 +3975,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleParTabStopDelete
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapePresStyleParTabStopMod
-; Description ...: Modify or retrieve the properties of an existing TabStop in a Shape Style.
+; Description ...: Set or Retrieve the properties of an existing TabStop in a Shape Style.
 ; Syntax ........: _LOImpress_ShapePresStyleParTabStopMod(ByRef $oPresStyle, $iTabStop[, $iPosition = Null[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]]])
 ; Parameters ....: $oPresStyle          - A Presentation Style object returned by a previous _LOImpress_ShapePresStyleGetObjByName function.
 ;                  $iTabStop            - The Tab position of the TabStop to modify. See Remarks.
@@ -4230,7 +4245,7 @@ EndFunc   ;==>_LOImpress_ShapePresStyleTextAttrSettings
 ; Name ..........: _LOImpress_ShapeRotateSlant
 ; Description ...: Set or retrieve Rotation and Slant settings for a Shape.
 ; Syntax ........: _LOImpress_ShapeRotateSlant(ByRef $oShape[, $nRotate = Null[, $nSlant = Null]])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $nRotate             - [optional] (0-359.99) Default is Null. The Degrees to rotate the shape. See remarks.
 ;                  $nSlant              - [optional] (-89-89.00) Default is Null. The Degrees to slant the shape. See remarks.
 ; Return values .: Success: 1 or Array.
@@ -4293,15 +4308,15 @@ EndFunc   ;==>_LOImpress_ShapeRotateSlant
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapesGetList
 ; Description ...: Retrieve an array of Shapes (Text Boxes, DrawShapes, Images etc) contained in a Slide.
-; Syntax ........: _LOImpress_ShapesGetList(ByRef $oSlide[, $iTypes = $LOI_SHAPE_TYPE_ALL])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
-;                  $iTypes              - [optional] (0-1023) Default is $LOI_SHAPE_TYPE_ALL. The type of Shapes to return in the Array. Can be BitOR'd. See Constants, $LOI_SHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+; Syntax ........: _LOImpress_ShapesGetList(ByRef $oObj[, $iTypes = $LOI_SHAPE_TYPE_ALL])
+; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
+;                  $iTypes              - [optional] (0-1048575) Default is $LOI_SHAPE_TYPE_ALL. The type of Shapes to return in the Array. Can be BitOR'd. See Constants, $LOI_SHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. A two columned Array containing the Shape Objects contained in the Slide. See Remarks. @Extended is set to number of results.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
-;                  @Error: 1, @Extended: 2 = $iTypes not an Integer, less than 1 or greater than 1023. See Constants, $LOI_SHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $iTypes not an Integer, less than 1 or greater than 1048575. See Constants, $LOI_SHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Shape Object.
 ;                  @Error: 3, @Extended: 2 = Failed to identify Shape Type.
@@ -4312,7 +4327,7 @@ EndFunc   ;==>_LOImpress_ShapeRotateSlant
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_ShapesGetList(ByRef $oSlide, $iTypes = $LOI_SHAPE_TYPE_ALL)
+Func _LOImpress_ShapesGetList(ByRef $oObj, $iTypes = $LOI_SHAPE_TYPE_ALL)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -4320,14 +4335,14 @@ Func _LOImpress_ShapesGetList(ByRef $oSlide, $iTypes = $LOI_SHAPE_TYPE_ALL)
 	Local $oShape
 	Local $iShapeType, $iCount = 0
 
-	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LO_IntIsBetween($iTypes, $LOI_SHAPE_TYPE_DRAWING_SHAPE, $LOI_SHAPE_TYPE_ALL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not __LO_IntIsBetween($iTypes, $LOI_SHAPE_TYPE_CALC, $LOI_SHAPE_TYPE_ALL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If $oSlide.hasElements() Then
-		ReDim $avShapes[$oSlide.getCount()][2]
+	If $oObj.hasElements() Then
+		ReDim $avShapes[$oObj.getCount()][2]
 
-		For $i = 0 To $oSlide.getCount() - 1
-			$oShape = $oSlide.getByIndex($i)
+		For $i = 0 To $oObj.getCount() - 1
+			$oShape = $oObj.getByIndex($i)
 			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 			$iShapeType = __LOImpress_ShapeGetType($oShape)
@@ -4351,7 +4366,7 @@ EndFunc   ;==>_LOImpress_ShapesGetList
 ; Name ..........: _LOImpress_ShapeSize
 ; Description ...: Set or Retrieve Shape Size related settings.
 ; Syntax ........: _LOImpress_ShapeSize(ByRef $oShape[, $iWidth = Null[, $iHeight = Null[, $bProtectSize = Null]]])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $iWidth              - [optional] Default is Null. The width of the Shape, in Hundredths of a Millimeter (HMM). Min. 51.
 ;                  $iHeight             - [optional] Default is Null. The height of the Shape, in Hundredths of a Millimeter (HMM). Min. 51.
 ;                  $bProtectSize        - [optional] Default is Null. If True, Locks the size of the Shape.
@@ -4504,7 +4519,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleAreaFillStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapeStyleAreaGradient
-; Description ...: Modify or retrieve the settings for Shape Style Background color Gradient.
+; Description ...: Set or Retrieve the settings for Shape Style Background color Gradient.
 ; Syntax ........: _LOImpress_ShapeStyleAreaGradient(ByRef $oDoc, ByRef $oShapeStyle[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $oShapeStyle         - A Shape Style object returned by a previous _LOImpress_ShapeStyleCreate, or _LOImpress_ShapeStyleGetObjByName function.
@@ -4952,7 +4967,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleCharFont
 ;                  @Error: 1, @Extended: 3 = $iHighlight not an Integer, less than -1 or greater than 16777215.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $FontColor
+;                  |                               1 = Error setting $iFontColor
 ;                  |                               2 = Error setting $iHighlight
 ; Author ........: donnyh13
 ; Modified ......:
@@ -5250,7 +5265,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleCreate
 ; Description ...: Set or Retrieve the current Drawing/Shape style for a Shape.
 ; Syntax ........: _LOImpress_ShapeStyleCurrent(ByRef $oDoc, ByRef $oShape[, $sShapeStyle = Null])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
-;                  $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function. See remarks.
+;                  $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $sShapeStyle         - [optional] Default is Null. The Drawing/Shape Style name to set the Shape to. See remarks.
 ; Return values .: Success: 1 or String.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Drawing/Shape Style successfully set.
@@ -5453,7 +5468,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleDimensionSettings
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOImpress_DocOpen, _LOImpress_DocConnect, or _LOImpress_DocCreate function.
 ;                  $sShapeStyle         - The Drawing/Shape Style Name to search for.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the Document contains the Drawing/Shape style called in $sShapeStyle, True is returned, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Document contains the Drawing/Shape style called in $sShapeStyle, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
@@ -5541,7 +5556,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleGetObjByName
 ;                  @Error: 1, @Extended: 6 = $bStartCenter not a Boolean.
 ;                  @Error: 1, @Extended: 7 = $bSync not a Boolean.
 ;                  @Error: 1, @Extended: 8 = $vEndStyle not a String, and not an Integer.
-;                  @Error: 1, @Extended: 9 = $vSEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  @Error: 1, @Extended: 9 = $vEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOI_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 10 = $iEndWidth not an Integer, less than 0 or greater than 5004.
 ;                  @Error: 1, @Extended: 11 = $bEndCenter not a Boolean.
 ;                  --Processing Errors--
@@ -5793,8 +5808,8 @@ EndFunc   ;==>_LOImpress_ShapeStyleParAlignment
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShapeStyle not an Object.
-;                  @Error: 1, @Extended: 2 = $iBeforeText not an Integer, less than 0 or greater than 1162202.
-;                  @Error: 1, @Extended: 3 = $iAfterText not an Integer, less than 0 or greater than 1162202.
+;                  @Error: 1, @Extended: 2 = $iBeforeTxt not an Integer, less than 0 or greater than 1162202.
+;                  @Error: 1, @Extended: 3 = $iAfterTxt not an Integer, less than 0 or greater than 1162202.
 ;                  @Error: 1, @Extended: 4 = $iFirstLine not an Integer, less than 0 or greater than 1162202.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
@@ -5970,7 +5985,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleParTabStopDelete
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapeStyleParTabStopMod
-; Description ...: Modify or retrieve the properties of an existing TabStop in a Shape Style.
+; Description ...: Set or Retrieve the properties of an existing TabStop in a Shape Style.
 ; Syntax ........: _LOImpress_ShapeStyleParTabStopMod(ByRef $oShapeStyle, $iTabStop[, $iPosition = Null[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]]])
 ; Parameters ....: $oShapeStyle         - A Shape Style object returned by a previous _LOImpress_ShapeStyleCreate, or _LOImpress_ShapeStyleGetObjByName function.
 ;                  $iTabStop            - The Tab position of the TabStop to modify. See Remarks.
@@ -6276,7 +6291,7 @@ EndFunc   ;==>_LOImpress_ShapeStyleTextAttrSettings
 ; Name ..........: _LOImpress_ShapeTextAttrAnimation
 ; Description ...: Set or Retrieve Shape Text Attribute Animation settings.
 ; Syntax ........: _LOImpress_ShapeTextAttrAnimation(ByRef $oShape[, $iEffect = Null[, $iDirection = Null[, $bStartInside = Null[, $bVisibleOnExit = Null[, $iCycles = Null[, $iInc = Null[, $bPixels = Null[, $iDelay = Null]]]]]]]])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $iEffect             - [optional] (0-4) Default is Null. The Animation type. See Constants, $LOI_ANIMATION_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iDirection          - [optional] (0-3) Default is Null. The Direction of the text's movement, if applicable. See Constants, $LOI_ANIMATION_DIR_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $bStartInside        - [optional] Default is Null. If True, Text is visible and inside the shape when the effect is applied.
@@ -6337,7 +6352,7 @@ EndFunc   ;==>_LOImpress_ShapeTextAttrAnimation
 ; Name ..........: _LOImpress_ShapeTextAttrColumns
 ; Description ...: Set or Retrieve Shape Text Attribute Column settings. (L.O. 7.2+)
 ; Syntax ........: _LOImpress_ShapeTextAttrColumns(ByRef $oShape[, $iColumns = Null[, $iSpacing = Null]])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $iColumns            - [optional] (1-16) Default is Null. The number of columns.
 ;                  $iSpacing            - [optional] Default is Null. The spacing between each column, in Hundredths of a Millimeter (HMM).
 ; Return values .: Success: 1 or Array.
@@ -6378,7 +6393,7 @@ Func _LOImpress_ShapeTextAttrColumns(ByRef $oShape, $iColumns = Null, $iSpacing 
 	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not __LO_VersionCheck(7.2) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
-	$oDoc = $oShape.Parent.MasterPage.Forms.Parent()
+	$oDoc = __LOImpress_GetParentDoc($oShape.Parent())
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$oTextColumns = $oShape.TextColumns()
@@ -6421,7 +6436,7 @@ EndFunc   ;==>_LOImpress_ShapeTextAttrColumns
 ; Name ..........: _LOImpress_ShapeTextAttrFit
 ; Description ...: Set or Retrieve Shape Text Attribute Fit properties.
 ; Syntax ........: _LOImpress_ShapeTextAttrFit(ByRef $oShape[, $bFitWidth = Null[, $bFitHeight = Null[, $bFitToFrame = Null[, $bAdjustContour = Null[, $bWordWrap = Null[, $bResizeShape = Null]]]]]])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $bFitWidth           - [optional] Default is Null. If True, Expands the width of the object to the width of the text.
 ;                  $bFitHeight          - [optional] Default is Null. If True, Expands the height of the object to the height of the text.
 ;                  $bFitToFrame         - [optional] Default is Null. If True, Resizes the text to fit the entire area of the drawing object.
@@ -6482,7 +6497,7 @@ EndFunc   ;==>_LOImpress_ShapeTextAttrFit
 ; Name ..........: _LOImpress_ShapeTextAttrSettings
 ; Description ...: Set or Retrieve Shape text Attribute settings.
 ; Syntax ........: _LOImpress_ShapeTextAttrSettings(ByRef $oShape[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null[, $iAnchor = Null[, $bFullWidth = Null]]]]]])
-; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LOImpress_DrawShapeInsert, _LOImpress_ShapeTextBoxInsert, _LOImpress_ShapeImageInsert, or _LOImpress_ShapesGetList function.
 ;                  $iLeft               - [optional] (-100000-100000) Default is Null. The space between the left edge of the drawing object and the left border of the text, in Hundredths of a Millimeter (HMM).
 ;                  $iRight              - [optional] (-100000-100000) Default is Null. The space between the right edge of the drawing object and the right border of the text, in Hundredths of a Millimeter (HMM).
 ;                  $iTop                - [optional] (-100000-100000) Default is Null. The space between the top edge of the drawing object and the top border of the text, in Hundredths of a Millimeter (HMM).
@@ -6534,8 +6549,8 @@ EndFunc   ;==>_LOImpress_ShapeTextAttrSettings
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapeTextBoxInsert
 ; Description ...: Create and Insert a Text box into a Slide.
-; Syntax ........: _LOImpress_ShapeTextBoxInsert(ByRef $oSlide, $iTextBoxType, $iWidth, $iHeight[, $iX = -1[, $iY = -1]])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, or _LOImpress_SlideCopy function.
+; Syntax ........: _LOImpress_ShapeTextBoxInsert(ByRef $oObj, $iTextBoxType, $iWidth, $iHeight[, $iX = -1[, $iY = -1]])
+; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
 ;                  $iTextBoxType        - (0-3) The type of Text Box to create. See Constants, $LOI_SHAPE_TEXTBOX_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  $iWidth              - The Text Box's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Text Box's Height in Hundredths of a Millimeter (HMM).
@@ -6545,7 +6560,7 @@ EndFunc   ;==>_LOImpress_ShapeTextAttrSettings
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Inserted a new Text Box. Returning its Object.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $iTextBoxType not an Integer, less than 0 or greater than 3. See Constants, $LOI_SHAPE_TEXTBOX_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $iWidth not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iHeight not an Integer.
@@ -6564,21 +6579,21 @@ EndFunc   ;==>_LOImpress_ShapeTextAttrSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LOImpress_ShapeTextBoxInsert(ByRef $oSlide, $iTextBoxType, $iWidth, $iHeight, $iX = -1, $iY = -1)
+Func _LOImpress_ShapeTextBoxInsert(ByRef $oObj, $iTextBoxType, $iWidth, $iHeight, $iX = -1, $iY = -1)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oShape, $oDoc
 	Local $tSize, $tPos
 
-	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not __LO_IntIsBetween($iTextBoxType, $LOI_SHAPE_TEXTBOX_TYPE_TEXTBOX, $LOI_SHAPE_TEXTBOX_TYPE_TITLE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsInt($iWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not IsInt($iHeight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsInt($iX) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not IsInt($iY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
-	$oDoc = $oSlide.MasterPage.Forms.Parent()
+	$oDoc = __LOImpress_GetParentDoc($oObj)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Switch $iTextBoxType
@@ -6599,13 +6614,13 @@ Func _LOImpress_ShapeTextBoxInsert(ByRef $oSlide, $iTextBoxType, $iWidth, $iHeig
 			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 	EndSwitch
 
-	$oSlide.add($oShape)
+	$oObj.add($oShape)
 
 	$tPos = $oShape.Position()
 	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	$tPos.X = ($iX = -1) ? (Int(($oSlide.Width() - $iWidth) / 2)) : ($iX)
-	$tPos.Y = ($iY = -1) ? (Int(($oSlide.Height() - $iHeight) / 2)) : ($iY)
+	$tPos.X = ($iX = -1) ? (Int(($oObj.Width() - $iWidth) / 2)) : ($iX)
+	$tPos.Y = ($iY = -1) ? (Int(($oObj.Height() - $iHeight) / 2)) : ($iY)
 
 	$oShape.Position = $tPos
 

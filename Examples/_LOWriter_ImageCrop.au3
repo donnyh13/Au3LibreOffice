@@ -43,7 +43,7 @@ Func Example()
 			"The image's Right crop value, in Hundredths of a Millimeter (HMM) is: " & $avSettings[1] & @CRLF & _
 			"The image's Top crop value, in Hundredths of a Millimeter (HMM) is: " & $avSettings[2] & @CRLF & _
 			"The image's Bottom crop value, in Hundredths of a Millimeter (HMM) is: " & $avSettings[3] & @CRLF & _
-			"Keep the image's Scale? True/False: " & $avSettings[4])
+			"Keep Scale; This is always Null: " & $avSettings[4])
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

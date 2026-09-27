@@ -6,7 +6,7 @@
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice Impress Constants for the LibreOffice UDF.
 ; AutoIt Version : v3.3.16.1
-; Description ...: Constants for various functions in the LibreOffice UDF.
+; Description ...: Constants for various Impress functions in the LibreOffice UDF.
 ; Author(s) .....: donnyh13, mLipok
 ; Dll ...........:
 ; Note ..........: Descriptions for some Constants are taken from the LibreOffice SDK API documentation.
@@ -363,6 +363,52 @@ Global Enum _
 		$LOI_DRAWSHAPE_TYPE_SYMBOL_PROHIBITED, _                     ; 186 -- A Prohibited Shape.
 		$LOI_DRAWSHAPE_TYPE_SYMBOL_PUZZLE                            ; 187 -- A Puzzle Piece Shape. ## Not implemented into LibreOffice SDK as of 7.3.4.2 or higher.
 
+; Field Author Display Format
+Global Const _                                                       ; com.sun.star.text.AuthorDisplayFormat
+		$LOI_FIELD_AUTH_NAME_FULL = 0, _                             ; The full name of the author is displayed.
+		$LOI_FIELD_AUTH_NAME_LAST = 1, _                             ; Only the last name of the author is displayed.
+		$LOI_FIELD_AUTH_NAME_FIRST = 2, _                            ; Only the first name of the author is displayed.
+		$LOI_FIELD_AUTH_NAME_INITIALS = 3                            ; The initials of the author are displayed.
+
+; Field Date Display Format
+Global Const _
+		$LOI_FIELD_DATE_FMT_STANDARD_SHORT = 2, _                    ; Standard Short Date (e.g., 03/28/92)
+		$LOI_FIELD_DATE_FMT_STANDARD_LONG = 3, _                     ; Standard Long Date (e.g., Saturday, March 28, 1992)
+		$LOI_FIELD_DATE_FMT_MMDDYY = 4, _                            ; Numerical Month, Day, Two-digit year (03/28/92)
+		$LOI_FIELD_DATE_FMT_MMDDYYYY = 5, _                          ; Numerical Month, Day, Four-digit year (03/28/1992)
+		$LOI_FIELD_DATE_FMT_MMM_DD_YYYY = 6, _                       ; Abbreviated Month Name, Day, Year (Mar 28, 1992)
+		$LOI_FIELD_DATE_FMT_MMMM_DD_YYYY = 7, _                      ; Full Month Name, Day, Year (March 28, 1992)
+		$LOI_FIELD_DATE_FMT_DOW_MMM_DD_YYYY = 8, _                   ; Abbreviated Day of Week + Full Month (Sat, March 28, 1992)
+		$LOI_FIELD_DATE_FMT_DOW_MMMM_DD_YYYY = 9                     ; Full Day of Week + Full Month (Saturday, March 28, 1992)
+
+; File Name Field Display Format
+Global Const _                                                       ; com.sun.star.text.FilenameDisplayFormat
+		$LOI_FIELD_FILENAME_FULL_PATH = 0, _                         ; The Path and File name is displayed.
+		$LOI_FIELD_FILENAME_PATH = 1, _                              ; Only the path of the file is displayed.
+		$LOI_FIELD_FILENAME_NAME = 2, _                              ; Only the name of the file without the file extension is displayed.
+		$LOI_FIELD_FILENAME_NAME_AND_EXT = 3                         ; The file name including the file extension is displayed.
+
+; Field Time Display Format
+Global Const _
+		$LOI_FIELD_TIME_FMT_STANDARD = 2, _                          ; Standard Time format (HH:MM)
+		$LOI_FIELD_TIME_FMT_24H_HM = 3, _                            ; 24-Hour: Hours and Minutes (15:24)
+		$LOI_FIELD_TIME_FMT_24H_HMS = 4, _                           ; 24-Hour: Hours, Minutes, Seconds (15:24:55)
+		$LOI_FIELD_TIME_FMT_24H_HMS_MS = 5, _                        ; 24-Hour: With Milliseconds (15:24:55.32)
+		$LOI_FIELD_TIME_FMT_12H_HM_AMPM = 6, _                       ; 12-Hour: Hours and Minutes AM/PM (5:02 PM)
+		$LOI_FIELD_TIME_FMT_12H_HMS_AMPM = 7, _                      ; 12-Hour: Hours, Minutes, Seconds AM/PM (5:02:43 PM)
+		$LOI_FIELD_TIME_FMT_12H_HMS_MS_AMPM = 8                      ; 12-Hour: With Milliseconds AM/PM (5:02:43.23 PM)
+
+; Field Types
+Global Enum Step *2 _
+		$LOI_FIELD_TYPE_AUTHOR = 1, _                                ; 1 An Author field.
+		$LOI_FIELD_TYPE_DATE_TIME, _                                 ; 2 A Date or Time field.
+		$LOI_FIELD_TYPE_FILE_NAME, _                                 ; 4 A File Name field.
+		$LOI_FIELD_TYPE_SLIDE_COUNT, _                               ; 8 A total Slide Count field.
+		$LOI_FIELD_TYPE_SLIDE_NUM, _                                 ; 16 A Slide Number field.
+		$LOI_FIELD_TYPE_SLIDE_TITLE, _                               ; 32 A Slide Title field.
+		$LOI_FIELD_TYPE_URL, _                                       ; 64 A Hyperlink/URL field.
+		$LOI_FIELD_TYPE_ALL = 127                                    ; 127 Returns an array of all field types listed above.
+
 ; Gradient Names
 Global Const _
 		$LOI_GRAD_NAME_PASTEL_BOUQUET = "Pastel Bouquet", _          ; The "Pastel Bouquet" Gradient Preset.
@@ -390,6 +436,15 @@ Global Const _                                                       ; com.sun.s
 		$LOI_GRAD_TYPE_ELLIPTICAL = 3, _                             ; Elliptical type Gradient
 		$LOI_GRAD_TYPE_SQUARE = 4, _                                 ; Square type Gradient
 		$LOI_GRAD_TYPE_RECT = 5                                      ; Rectangle type Gradient
+
+; Handout layout arrangements.
+Global Const _
+		$LOI_HANDOUT_LAYOUT_ONE_SLIDE = 22, _                        ; The Handout page will contain one slide placeholder.
+		$LOI_HANDOUT_LAYOUT_TWO_SLIDES = 23, _                       ; The Handout page will contain two slide placeholders.
+		$LOI_HANDOUT_LAYOUT_THREE_SLIDES = 24, _                     ; The Handout page will contain three slide placeholders.
+		$LOI_HANDOUT_LAYOUT_FOUR_SLIDES = 25, _                      ; The Handout page will contain four slide placeholders.
+		$LOI_HANDOUT_LAYOUT_SIX_SLIDES = 26, _                       ; The Handout page will contain six slide placeholders.
+		$LOI_HANDOUT_LAYOUT_NINE_SLIDES = 31                         ; The Handout page will contain nine slide placeholders.
 
 ; Numbering Style Type
 Global Const _                                                       ; com.sun.star.style.NumberingType
@@ -487,6 +542,95 @@ Global Const _                                                       ; com.sun.s
 		$LOI_ORIENT_VERT_LINE_TOP = 7, _                             ; Aligned at the top of the line. Available only when anchor is set to "As character". Equal to L.O. UI setting of "Vertical" = Top, and "To" = Row.
 		$LOI_ORIENT_VERT_LINE_CENTER = 8, _                          ; Aligned at the center of the line. Available only when anchor is set to "As character". Equal to L.O. UI setting of "Vertical" = Center, and "To" = Row.
 		$LOI_ORIENT_VERT_LINE_BOTTOM = 9                             ; Aligned at the bottom of the line. Available only when anchor is set to "As character". Equal to L.O. UI setting of "Vertical" = Center, and "To" = Row.
+
+; Slide Page Height in Hundredths of a Millimeter
+Global Const _
+		$LOI_PAGE_HEIGHT_A6 = 14808, _                               ; A6 page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_A5 = 21000, _                               ; A5 page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_A4 = 29700, _                               ; A4 page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_A3 = 42012, _                               ; A3 page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_A2 = 59411, _                               ; A2 page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_A1 = 84099, _                               ; A1 page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_A0 = 11890, _                               ; A0 page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_B6ISO = 17600, _                            ; B6ISO page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_B5ISO = 25000, _                            ; B5ISO page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_B4ISO = 35300, _                            ; B4ISO page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_LETTER = 27940, _                           ; Letter page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_LEGAL = 35560, _                            ; Legal page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_LONG_BOND = 33020, _                        ; Long Bond page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_TABLOID = 43180, _                          ; Tabloid page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_B6JIS = 18212, _                            ; B6JIS page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_B5JIS = 25705, _                            ; B5JIS page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_B4JIS = 36400, _                            ; B4JIS page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_16KAI = 26010, _                            ; 16KAI page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_32KAI = 18390, _                            ; 32KAI page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_BIG_32KAI = 20300, _                        ; Big 32KAI page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_DLENVELOPE = 22000, _                       ; DL Envelope page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_C6ENVELOPE = 16200, _                       ; C6 Envelope page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_C6_5_ENVELOPE = 22911, _                    ; C6/5 Envelope page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_C5ENVELOPE = 22911, _                       ; C5 Envelope page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_C4ENVELOPE = 32410, _                       ; C4 Envelope page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_DIA_SLIDE = 27000, _                        ; Dia Slide page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_SCREEN_4_3 = 28000, _                       ; Screen 4:3 page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_SCREEN_16_9 = 28000, _                      ; Screen 16:9 page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_SCREEN_16_10 = 28000, _                     ; Screen 16:10 page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_WIDESCREEN = 33866, _                       ; Widescreen page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_ON_SCREEN_SHOW_4_3 = 25400, _               ; On Screen Show (4:3) page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_ON_SCREEN_SHOW_16_9 = 25400, _              ; On Screen Show (16:9) page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_ON_SCREEN_SHOW_16_10 = 25400, _             ; On Screen Show (16:10) page height in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_HEIGHT_JAP_POSTCARD = 14800                        ; Japanese Postcard page height in Hundredths of a Millimeter (HMM).
+
+; Slide Page Orientation Constants.
+Global Const _                                                       ; com.sun.star.view.PaperOrientation
+		$LOI_PAGE_ORIENT_PORTRAIT = 0, _                             ; Portrait Page Orientation.
+		$LOI_PAGE_ORIENT_LANDSCAPE = 1                               ; Landscape Page Orientation.
+
+; Current Document View Modes
+Global Enum _
+		$LOI_PAGE_VIEW_SLIDE = 0, _                                  ; 0 Slide viewing mode.
+		$LOI_PAGE_VIEW_SLIDE_OUTLINE, _                              ; 1 Slide Outline viewing mode.
+		$LOI_PAGE_VIEW_SLIDE_NOTES, _                                ; 2 Slide Notes viewing mode.
+		$LOI_PAGE_VIEW_SLIDE_SORTER, _                               ; 3 Slide Sorter viewing mode.
+		$LOI_PAGE_VIEW_MASTER, _                                     ; 4 Master Slide viewing mode.
+		$LOI_PAGE_VIEW_MASTER_NOTES, _                               ; 5 Master Slide Notes viewing mode.
+		$LOI_PAGE_VIEW_MASTER_HANDOUT                                ; 6 Master Slide Handout viewing mode.
+
+; Slide Page Width in Hundredths of a Millimeter
+Global Const _
+		$LOI_PAGE_WIDTH_A6 = 10490, _                                ; A6 page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_A5 = 14800, _                                ; A5 page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_A4 = 21000, _                                ; A4 page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_A3 = 29693, _                                ; A3 page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_A2 = 42012, _                                ; A2 page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_A1 = 59411, _                                ; A1 page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_A0 = 84100, _                                ; A0 page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_B6ISO = 12500, _                             ; B6ISO page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_B5ISO = 17600, _                             ; B5ISO page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_B4ISO = 25000, _                             ; B4ISO page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_LETTER = 21590, _                            ; Letter page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_LEGAL = 21590, _                             ; Legal page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_LONG_BOND = 21590, _                         ; Long Bond page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_TABLOID = 27940, _                           ; Tabloid page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_B6JIS = 12802, _                             ; B6JIS page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_B5JIS = 18212, _                             ; B5JIS page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_B4JIS = 25700, _                             ; B4JIS page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_16KAI = 18390, _                             ; 16KAI page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_32KAI = 13005, _                             ; 32KAI page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_BIG_32KAI = 14000, _                         ; Big 32KAI page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_DLENVELOPE = 11000, _                        ; DL Envelope page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_C6ENVELOPE = 11400, _                        ; C6 Envelope page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_C6_5_ENVELOPE = 11405, _                     ; C6/5 Envelope page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_C5ENVELOPE = 16205, _                        ; C5 Envelope page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_C4ENVELOPE = 22911, _                        ; C4 Envelope page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_DIA_SLIDE = 18009, _                         ; Dia Slide page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_SCREEN_4_3 = 21000, _                        ; Screen 4:3 page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_SCREEN_16_9 = 15750, _                       ; Screen 16:9 page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_SCREEN_16_10 = 17500, _                      ; Screen 16:10 page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_WIDESCREEN = 19050, _                        ; Widescreen page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_ON_SCREEN_SHOW_4_3 = 19050, _                ; On Screen Show (4:3) page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_ON_SCREEN_SHOW_16_9 = 14300, _               ; On Screen Show (16:9) page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_ON_SCREEN_SHOW_16_10 = 15875, _              ; On Screen Show (16:10) page width in Hundredths of a Millimeter (HMM).
+		$LOI_PAGE_WIDTH_JAP_POSTCARD = 10000                         ; Japanese Postcard page width in Hundredths of a Millimeter (HMM).
 
 ; Paragraph Horizontal Align
 Global Const _                                                       ; com.sun.star.style.ParagraphAdjust
@@ -741,17 +885,42 @@ Global Enum _
 
 ; Shape Type Constants.
 Global Enum Step *2 _
-		$LOI_SHAPE_TYPE_DRAWING_SHAPE = 1, _                         ; 1 - All shapes, 3D Shapes, Basic Shapes, Block Arrows, Flowcharts, Callouts, Lines, Connectors, Fontwork etc.
-		$LOI_SHAPE_TYPE_FORM_CONTROL, _                              ; 2 - Form Controls.
-		$LOI_SHAPE_TYPE_IMAGE, _                                     ; 4 - An Image, Barcode or QR code.
-		$LOI_SHAPE_TYPE_MEDIA, _                                     ; 8 - A Video or Audio shape.
-		$LOI_SHAPE_TYPE_OLE2, _                                      ; 16 - An OLE2 shape, such as a Chart, Formula etc.
-		$LOI_SHAPE_TYPE_TABLE, _                                     ; 32 - A Table.
-		$LOI_SHAPE_TYPE_TEXTBOX, _                                   ; 64 - A Text Box, including Hyperlinks, and most Fields.
-		$LOI_SHAPE_TYPE_TEXTBOX_SUBTITLE, _                          ; 128 - A Slide Subtitle Text Box.
-		$LOI_SHAPE_TYPE_TEXTBOX_TITLE, _                             ; 256 - A Slide Title Text Box.
-		$LOI_SHAPE_TYPE_TEXTBOX_OUTLINE, _                           ; 512 - A Slide Outline Text Box.
-		$LOI_SHAPE_TYPE_ALL = 1023                                   ; 1023 All types above.
+		$LOI_SHAPE_TYPE_CALC = 1, _                                  ; 1 Calc sheet in an Impress document. (I have not encountered this shape yet, but it is included here for error prevention.)
+		$LOI_SHAPE_TYPE_CHART, _                                     ; 2 Chart sheet in an Impress document. (I have not encountered this shape yet, but it is included here for error prevention.)
+		$LOI_SHAPE_TYPE_DATETIME, _                                  ; 4 A Date/Time shape, such as is found in a Header or Footer or the Notes, Handouts or Master slides.
+		$LOI_SHAPE_TYPE_DRAWING_SHAPE, _                             ; 8 - All shapes, 3D Shapes, Basic Shapes, Block Arrows, Flowcharts, Callouts, Lines, Connectors, Fontwork etc.
+		$LOI_SHAPE_TYPE_FOOTER, _                                    ; 16 A Footer text shape, as is found in the footer of Notes, Handouts or Master slide.
+		$LOI_SHAPE_TYPE_FORM_CONTROL, _                              ; 32 - Form Controls.
+		$LOI_SHAPE_TYPE_HANDOUT, _                                   ; 64 A Handouts page shape, as found in the Master Handouts preview page.
+		$LOI_SHAPE_TYPE_HEADER, _                                    ; 128 A Header text shape, as is found in the footer of Notes, Handouts or Master slide.
+		$LOI_SHAPE_TYPE_IMAGE, _                                     ; 256 - An Image, Barcode or QR code.
+		$LOI_SHAPE_TYPE_MEDIA, _                                     ; 512 - A Video or Audio shape.
+		$LOI_SHAPE_TYPE_NOTES, _                                     ; 1024 A Notes page shape, as found in the slide and master slide notes pages.
+		$LOI_SHAPE_TYPE_OLE2, _                                      ; 2048 - An OLE2 shape, such as a Chart, Formula etc.
+		$LOI_SHAPE_TYPE_ORG_CHART, _                                 ; 4096 An Org Chart shape. (I have not encountered this shape yet, but it is included here for error prevention.)
+		$LOI_SHAPE_TYPE_PAGE, _                                      ; 8192 A Page preview shape, as found in the notes and handouts pages.
+		$LOI_SHAPE_TYPE_SLIDE_NUM, _                                 ; 16384 A slide number shape, as found in notes, handouts and master slides.
+		$LOI_SHAPE_TYPE_TABLE, _                                     ; 32768 - A Table.
+		$LOI_SHAPE_TYPE_TEXTBOX, _                                   ; 65536 - A Text Box, including Hyperlinks, and most Fields.
+		$LOI_SHAPE_TYPE_TEXTBOX_SUBTITLE, _                          ; 131072 - A Slide Subtitle Text Box.
+		$LOI_SHAPE_TYPE_TEXTBOX_TITLE, _                             ; 262144 - A Slide Title Text Box.
+		$LOI_SHAPE_TYPE_TEXTBOX_OUTLINE, _                           ; 524288 - A Slide Outline Text Box.
+		$LOI_SHAPE_TYPE_ALL = 1048575                                ; 1048575 All types above.
+
+; Slide Header/Footer Date and Time Display Format
+Global Const _
+		$LOI_SLIDE_DT_FMT_MMDDYY = 4, _                              ; Numerical Month, Day, Two-digit year (03/28/92).
+		$LOI_SLIDE_DT_FMT_MMDDYYYY = 5, _                            ; Numerical Month, Day, Four-digit year (03/28/1992).
+		$LOI_SLIDE_DT_FMT_MMM_DD_YYYY = 6, _                         ; Abbreviated Month Name, Day, Year (Mar 28, 1992).
+		$LOI_SLIDE_DT_FMT_MMMM_DD_YYYY = 7, _                        ; Full Month Name, Day, Year (March 28, 1992).
+		$LOI_SLIDE_DT_FMT_DOW_MMM_DD_YYYY = 8, _                     ; Abbreviated Day of Week + Full Month (Sat, March 28, 1992).
+		$LOI_SLIDE_DT_FMT_DOW_MMMM_DD_YYYY = 9, _                    ; Full Day of Week + Full Month (Saturday, March 28, 1992).
+		$LOI_SLIDE_DT_FMT_24H_HM = 48, _                             ; 24-Hour: Hours and Minutes (15:24).
+		$LOI_SLIDE_DT_FMT_MMDDYY_24H_HM = 52, _                      ; Numerical Month, Day, Two-digit year (03/28/92), 24-Hour: Hours and Minutes (15:24).
+		$LOI_SLIDE_DT_FMT_24H_HMS = 64, _                            ; 24-Hour: Hours, Minutes, Seconds (15:24:55)
+		$LOI_SLIDE_DT_FMT_12H_HM_AMPM = 96, _                        ; 12-Hour: Hours and Minutes AM/PM (5:02 PM).
+		$LOI_SLIDE_DT_FMT_MMDDYY_12H_HM_AMPM = 100, _                ; Numerical Month, Day, Two-digit year (03/28/92), 12-Hour: Hours and Minutes AM/PM (5:02 PM).
+		$LOI_SLIDE_DT_FMT_12H_HMS_AMPM = 112                         ; 12-Hour: Hours, Minutes, Seconds AM/PM (5:02:43 PM).
 
 ; Slide layout arrangements.
 Global Const _

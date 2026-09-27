@@ -21,7 +21,7 @@ Func Example()
 	$oShape = _LOWriter_ShapeInsert($oDoc, $oViewCursor, $LOW_SHAPE_TYPE_BASIC_RECTANGLE, 3000, 6000)
 	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Modify the Shape  Background Color settings. Background color = $LO_COLOR_TEAL.
+	; Modify the Shape Background Color settings. Background color = $LO_COLOR_TEAL.
 	_LOWriter_ShapeAreaColor($oShape, $LO_COLOR_TEAL)
 	If @error Then _ERROR($oDoc, "Failed to set Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 

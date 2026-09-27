@@ -30,7 +30,7 @@ Func Example()
 	_LOCalc_FieldTitleInsert($oDoc, $oTextCursor)
 	If @error Then _ERROR($oDoc, "Failed to insert field at Text Cursor 4. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	;Insert a space after the field.
+	; Insert a space after the field.
 	_LOCalc_TextCursorInsertString($oTextCursor, " ")
 	If @error Then _ERROR($oDoc, "Failed to insert a String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -38,7 +38,7 @@ Func Example()
 	_LOCalc_FieldSheetNameInsert($oDoc, $oTextCursor)
 	If @error Then _ERROR($oDoc, "Failed to insert field at Text Cursor 2. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	;Insert a space after the field.
+	; Insert a space after the field.
 	_LOCalc_TextCursorInsertString($oTextCursor, " ")
 	If @error Then _ERROR($oDoc, "Failed to insert a String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -46,7 +46,7 @@ Func Example()
 	_LOCalc_FieldDateTimeInsert($oDoc, $oTextCursor, True)
 	If @error Then _ERROR($oDoc, "Failed to insert field at Text Cursor 3. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	;Insert a space after the field.
+	; Insert a space after the field.
 	_LOCalc_TextCursorInsertString($oTextCursor, " ")
 	If @error Then _ERROR($oDoc, "Failed to insert a String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
