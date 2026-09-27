@@ -892,7 +892,7 @@ EndFunc   ;==>__LOImpress_CursorParHasTabStop
 ;                  $bIsDate             - [optional] Default is False. If True, the comparison is two Date Structures.
 ;                  $bIsTime             - [optional] Default is False. If True, the comparison is two Time Structures.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the Dates/Times in $tDateStruct1 and $tDateStruct2 are the same, True is returned. Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True tf the Dates/Times in $tDateStruct1 and $tDateStruct2 are the same, else False.
 ;                  Failure: False and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $tDateStruct1 not an Object.
