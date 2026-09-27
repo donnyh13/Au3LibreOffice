@@ -176,7 +176,7 @@ EndFunc   ;==>_LOWriter_PageStyleAreaFillStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleAreaGradient
-; Description ...: Modify or retrieve the settings for Page Style Background color Gradient.
+; Description ...: Set or Retrieve the settings for Page Style Background color Gradient.
 ; Syntax ........: _LOWriter_PageStyleAreaGradient(ByRef $oDoc, ByRef $oPageStyle[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
@@ -515,7 +515,7 @@ EndFunc   ;==>_LOWriter_PageStyleAreaGradientMulticolor
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleAreaTransparency
-; Description ...: Modify or retrieve Transparency settings for a page style.
+; Description ...: Set or Retrieve Transparency settings for a page style.
 ; Syntax ........: _LOWriter_PageStyleAreaTransparency(ByRef $oPageStyle[, $iTransparency = Null])
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
@@ -567,7 +567,7 @@ EndFunc   ;==>_LOWriter_PageStyleAreaTransparency
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleAreaTransparencyGradient
-; Description ...: Modify or retrieve the transparency gradient settings.
+; Description ...: Set or Retrieve the transparency gradient settings.
 ; Syntax ........: _LOWriter_PageStyleAreaTransparencyGradient(ByRef $oDoc, ByRef $oPageStyle[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
@@ -1142,7 +1142,7 @@ EndFunc   ;==>_LOWriter_PageStyleBorderWidth
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleColumnSeparator
-; Description ...: Modify or retrieve Page Style Column Separator line settings.
+; Description ...: Set or Retrieve Page Style Column Separator line settings.
 ; Syntax ........: _LOWriter_PageStyleColumnSeparator(ByRef $oPageStyle[, $bSeparatorOn = Null[, $iStyle = Null[, $iWidth = Null[, $iColor = Null[, $iHeight = Null[, $iPosition = Null]]]]]])
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $bSeparatorOn        - [optional] Default is Null. If True, add a separator line between two or more columns.
@@ -1252,7 +1252,7 @@ EndFunc   ;==>_LOWriter_PageStyleColumnSeparator
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleColumnSettings
-; Description ...: Modify or retrieve page style Column count.
+; Description ...: Set or Retrieve page style Column count.
 ; Syntax ........: _LOWriter_PageStyleColumnSettings(ByRef $oPageStyle[, $iColumns = Null])
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $iColumns            - [optional] Default is Null. The number of columns that you want in the page. Minimum 1.
@@ -1310,7 +1310,7 @@ EndFunc   ;==>_LOWriter_PageStyleColumnSettings
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleColumnSize
-; Description ...: Modify or retrieve Column sizing settings.
+; Description ...: Set or Retrieve Column sizing settings.
 ; Syntax ........: _LOWriter_PageStyleColumnSize(ByRef $oPageStyle, $iColumn[, $bAutoWidth = Null[, $iGlobalSpacing = Null[, $iSpacing = Null[, $iWidth = Null]]]])
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $iColumn             - The column to modify the settings on. See Remarks.
@@ -1667,7 +1667,7 @@ EndFunc   ;==>_LOWriter_PageStyleExists
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleFooter
-; Description ...: Modify or retrieve Footer settings for a page style.
+; Description ...: Set or Retrieve Footer settings for a page style.
 ; Syntax ........: _LOWriter_PageStyleFooter(ByRef $oPageStyle[, $bFooterOn = Null[, $bSameLeftRight = Null[, $bSameOnFirst = Null[, $iLeftMargin = Null[, $iRightMargin = Null[, $iSpacing = Null[, $bDynamicSpacing = Null[, $iHeight = Null[, $bAutoHeight = Null]]]]]]]]])
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $bFooterOn           - [optional] Default is Null. If True, adds a footer to the page style.
@@ -1903,7 +1903,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaFillStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleFooterAreaGradient
-; Description ...: Modify or retrieve the settings for Page Style Footer Background color Gradient.
+; Description ...: Set or Retrieve the settings for Page Style Footer Background color Gradient.
 ; Syntax ........: _LOWriter_PageStyleFooterAreaGradient(ByRef $oDoc, ByRef $oPageStyle[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
@@ -2244,7 +2244,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaGradientMulticolor
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleFooterAreaTransparency
-; Description ...: Modify or retrieve Transparency settings for a page style Footer.
+; Description ...: Set or Retrieve Transparency settings for a page style Footer.
 ; Syntax ........: _LOWriter_PageStyleFooterAreaTransparency(ByRef $oPageStyle[, $iTransparency = Null])
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency percentage. 0% is fully opaque and 100% is fully transparent.
@@ -2298,7 +2298,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterAreaTransparency
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleFooterAreaTransparencyGradient
-; Description ...: Modify or retrieve the Page Style Footer transparency gradient settings.
+; Description ...: Set or Retrieve the Page Style Footer transparency gradient settings.
 ; Syntax ........: _LOWriter_PageStyleFooterAreaTransparencyGradient(ByRef $oDoc, ByRef $oPageStyle[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
@@ -3026,7 +3026,7 @@ EndFunc   ;==>_LOWriter_PageStyleFooterShadow
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleFootnoteArea
-; Description ...: Modify or retrieve Page Style Footnote Size settings.
+; Description ...: Set or Retrieve Page Style Footnote Size settings.
 ; Syntax ........: _LOWriter_PageStyleFootnoteArea(ByRef $oPageStyle[, $iFootnoteHeight = Null[, $iSpaceToText = Null]])
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $iFootnoteHeight     - [optional] Default is Null. The maximum height for the footnote area. Set in Hundredths of a Millimeter (HMM). Enter 0 for "Not larger than page", else minimum 508.
@@ -3087,7 +3087,7 @@ EndFunc   ;==>_LOWriter_PageStyleFootnoteArea
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleFootnoteLine
-; Description ...: Modify or retrieve the page style footnote separator line settings.
+; Description ...: Set or Retrieve the page style footnote separator line settings.
 ; Syntax ........: _LOWriter_PageStyleFootnoteLine(ByRef $oPageStyle[, $iPosition = Null[, $iStyle = Null[, $nThickness = Null[, $iColor = Null[, $iLength = Null[, $iSpacing = Null]]]]]])
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $iPosition           - [optional] (0-2) Default is Null. The horizontal alignment for the line that separates the main text from the footnote area. See Constants, $LOW_ALIGN_HORI_* as defined in LibreOfficeWriter_Constants.au3.
@@ -3233,7 +3233,7 @@ EndFunc   ;==>_LOWriter_PageStyleGetObjByName
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleHeader
-; Description ...: Modify or retrieve Header settings for a page style.
+; Description ...: Set or Retrieve Header settings for a page style.
 ; Syntax ........: _LOWriter_PageStyleHeader(ByRef $oPageStyle[, $bHeaderOn = Null[, $bSameLeftRight = Null[, $bSameOnFirst = Null[, $iLeftMargin = Null[, $iRightMargin = Null[, $iSpacing = Null[, $bDynamicSpacing = Null[, $iHeight = Null[, $bAutoHeight = Null]]]]]]]]])
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $bHeaderOn           - [optional] Default is Null. If True, adds a Header to the page style.
@@ -3469,7 +3469,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaFillStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleHeaderAreaGradient
-; Description ...: Modify or retrieve settings for Page Style Header Background color Gradient.
+; Description ...: Set or Retrieve settings for Page Style Header Background color Gradient.
 ; Syntax ........: _LOWriter_PageStyleHeaderAreaGradient(ByRef $oDoc, ByRef $oPageStyle[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
@@ -3810,7 +3810,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaGradientMulticolor
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleHeaderAreaTransparency
-; Description ...: Modify or retrieve Transparency settings for a page style Header.
+; Description ...: Set or Retrieve Transparency settings for a page style Header.
 ; Syntax ........: _LOWriter_PageStyleHeaderAreaTransparency(ByRef $oPageStyle[, $iTransparency = Null])
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
@@ -3864,7 +3864,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderAreaTransparency
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleHeaderAreaTransparencyGradient
-; Description ...: Modify or retrieve the Page Style Header transparency gradient settings.
+; Description ...: Set or Retrieve the Page Style Header transparency gradient settings.
 ; Syntax ........: _LOWriter_PageStyleHeaderAreaTransparencyGradient(ByRef $oDoc, ByRef $oPageStyle[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
@@ -4592,7 +4592,7 @@ EndFunc   ;==>_LOWriter_PageStyleHeaderShadow
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleLayout
-; Description ...: Modify or retrieve the Layout settings for a Page Style.
+; Description ...: Set or Retrieve the Layout settings for a Page Style.
 ; Syntax ........: _LOWriter_PageStyleLayout(ByRef $oDoc, $oPageStyle[, $iLayout = Null[, $iNumFormat = Null[, $sRefStyle = Null[, $bGutterOnRight = Null[, $bGutterAtTop = Null[, $bBackCoversMargins = Null[, $sPaperTray = Null]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
@@ -4727,7 +4727,7 @@ EndFunc   ;==>_LOWriter_PageStyleLayout
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStyleMargins
-; Description ...: Modify or retrieve the margin settings for a Page Style.
+; Description ...: Set or Retrieve the margin settings for a Page Style.
 ; Syntax ........: _LOWriter_PageStyleMargins(ByRef $oPageStyle[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null[, $iGutter = Null]]]]])
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $iLeft               - [optional] Default is Null. The amount of space to leave between the left edge of the page and the document text. If you are using the Mirrored page layout, enter the amount of space to leave between the inner text margin and the inner edge of the page. Set in Hundredths of a Millimeter (HMM).
@@ -4915,7 +4915,7 @@ EndFunc   ;==>_LOWriter_PageStyleOrganizer
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_PageStylePaperFormat
-; Description ...: Modify or retrieve the paper format settings for a Page Style.
+; Description ...: Set or Retrieve the paper format settings for a Page Style.
 ; Syntax ........: _LOWriter_PageStylePaperFormat(ByRef $oPageStyle[, $iWidth = Null[, $iHeight = Null[, $bLandscape = Null]]])
 ; Parameters ....: $oPageStyle          - A Page Style object returned by a previous _LOWriter_PageStyleCreate, or _LOWriter_PageStyleGetObjByName function.
 ;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOW_PAPER_WIDTH_* as defined in LibreOfficeWriter_Constants.au3.

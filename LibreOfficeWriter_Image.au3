@@ -154,7 +154,7 @@ EndFunc   ;==>_LOWriter_ImageAreaFillStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ImageAreaGradient
-; Description ...: Modify or retrieve the settings for an Image Background color Gradient.
+; Description ...: Set or Retrieve the settings for an Image Background color Gradient.
 ; Syntax ........: _LOWriter_ImageAreaGradient(ByRef $oDoc, ByRef $oImage[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oImage              - A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
@@ -490,7 +490,7 @@ EndFunc   ;==>_LOWriter_ImageAreaGradientMulticolor
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ImageAreaTransparency
-; Description ...: Modify or retrieve Transparency settings for an Image's background color.
+; Description ...: Set or Retrieve Transparency settings for an Image's background color.
 ; Syntax ........: _LOWriter_ImageAreaTransparency(ByRef $oImage[, $iTransparency = Null])
 ; Parameters ....: $oImage              - A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
@@ -540,7 +540,7 @@ EndFunc   ;==>_LOWriter_ImageAreaTransparency
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ImageAreaTransparencyGradient
-; Description ...: Modify or retrieve the Image's background transparency gradient settings.
+; Description ...: Set or Retrieve the Image's background transparency gradient settings.
 ; Syntax ........: _LOWriter_ImageAreaTransparencyGradient(ByRef $oDoc, ByRef $oImage[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oImage              - A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.

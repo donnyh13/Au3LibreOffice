@@ -6596,7 +6596,7 @@ EndFunc   ;==>__LOWriter_ParTabStopDelete
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOWriter_ParTabStopMod
-; Description ...: Modify or retrieve the properties of an existing TabStop.
+; Description ...: Set or Retrieve the properties of an existing TabStop.
 ; Syntax ........: __LOWriter_ParTabStopMod(ByRef $oObj, $iTabStop[, $iPosition = Null[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]]])
 ; Parameters ....: $oObj                - Paragraph Style Object or a Cursor or Paragraph Object.
 ;                  $iTabStop            - The Tab position of the TabStop to modify. See Remarks.

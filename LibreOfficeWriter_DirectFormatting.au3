@@ -2479,7 +2479,7 @@ EndFunc   ;==>_LOWriter_DirFrmtParTabStopDelete
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_DirFrmtParTabStopMod
-; Description ...: Modify or retrieve the properties of an existing TabStop in a Paragraph from Direct Formatting.
+; Description ...: Set or Retrieve the properties of an existing TabStop in a Paragraph from Direct Formatting.
 ; Syntax ........: _LOWriter_DirFrmtParTabStopMod(ByRef $oSelection, $iTabStop[, $iPosition = Null[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]]])
 ; Parameters ....: $oSelection          - A Cursor Object returned from any Cursor Object creation or retrieval functions, Or A Paragraph Object/Object Section returned from _LOWriter_CursorParObjCreateList or _LOWriter_CursorParObjSectionsGet function.
 ;                  $iTabStop            - The TabStop position of the TabStop to modify. See Remarks.
