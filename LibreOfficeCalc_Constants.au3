@@ -316,7 +316,7 @@ Global Enum _
 		$LOC_COMMENT_LINE_STYLE_ULTRAFINE_DASHED, _             ; 24 -- A Ultrafine Dashed Line.
 		$LOC_COMMENT_LINE_STYLE_FINE_DASHED, _                  ; 25 -- A Fine Dashed Line.
 		$LOC_COMMENT_LINE_STYLE_DASHED, _                       ; 26 -- A Dashed Line.
-		$LOC_COMMENT_LINE_STYLE_SPARSE_DASH, _                 ; 27 -- A Sparse Dash, formerly named "Line Style 9".
+		$LOC_COMMENT_LINE_STYLE_SPARSE_DASH, _                  ; 27 -- A Sparse Dash, formerly named "Line Style 9".
 		$LOC_COMMENT_LINE_STYLE_3_DASHES_3_DOTS, _              ; 28 -- A Line consisting of 3 Dashes and 3 Dots.
 		$LOC_COMMENT_LINE_STYLE_ULTRAFINE_2_DOTS_3_DASHES, _    ; 29 -- A Ultrafine Line consisting of 2 Dots and 3 Dashes.
 		$LOC_COMMENT_LINE_STYLE_2_DOTS_1_DASH, _                ; 30 -- A Line consisting of 2 Dots and 1 Dash.
