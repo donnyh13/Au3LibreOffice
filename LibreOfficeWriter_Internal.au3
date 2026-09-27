@@ -8740,7 +8740,7 @@ Func __LOWriter_ShapeLineStyleName($iLineStyle = Null, $sLineStyle = Null)
 	$asLineStyles[$LOW_SHAPE_LINE_STYLE_ULTRAFINE_DASHED] = "Ultrafine Dashed"
 	$asLineStyles[$LOW_SHAPE_LINE_STYLE_FINE_DASHED] = "Fine Dashed"
 	$asLineStyles[$LOW_SHAPE_LINE_STYLE_DASHED] = "Dashed (var)"
-	$asLineStyles[$LOW_SHAPE_LINE_STYLE_SPARSE_DASH] = "Line Style 9"
+	$asLineStyles[$LOW_SHAPE_LINE_STYLE_SPARSE_DASH] = "Sparse Dash"
 	$asLineStyles[$LOW_SHAPE_LINE_STYLE_3_DASHES_3_DOTS] = "3 Dashes 3 Dots (var)"
 	$asLineStyles[$LOW_SHAPE_LINE_STYLE_ULTRAFINE_2_DOTS_3_DASHES] = "Ultrafine 2 Dots 3 Dashes"
 	$asLineStyles[$LOW_SHAPE_LINE_STYLE_2_DOTS_1_DASH] = "2 Dots 1 Dash"

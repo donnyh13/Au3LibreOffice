@@ -32,6 +32,12 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 - Fixed minor Documentation typos and errors.
 
+### LibreOfficeWriter
+
+#### Fixed
+
+- Forgot to update name after renaming internal line name from "Line Style 9" to "Sparse Dash".
+
 ## [0.10.0] - 2026-08-23
 
 ### LibreOfficeUDF
