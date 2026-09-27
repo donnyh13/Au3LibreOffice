@@ -1848,11 +1848,13 @@ Func __LOCalc_CommentLineStyleName($iLineStyle = Null, $sLineStyle = Null)
 	$asLineStyles[$LOC_COMMENT_LINE_STYLE_ULTRAFINE_DASHED] = "Ultrafine Dashed"
 	$asLineStyles[$LOC_COMMENT_LINE_STYLE_FINE_DASHED] = "Fine Dashed"
 	$asLineStyles[$LOC_COMMENT_LINE_STYLE_DASHED] = "Dashed (var)"
-	$asLineStyles[$LOC_COMMENT_LINE_STYLE_LINE_STYLE_9] = "Line Style 9"
+	$asLineStyles[$LOC_COMMENT_LINE_STYLE_SPARSE_DASH] = "Sparse Dash"
 	$asLineStyles[$LOC_COMMENT_LINE_STYLE_3_DASHES_3_DOTS] = "3 Dashes 3 Dots (var)"
 	$asLineStyles[$LOC_COMMENT_LINE_STYLE_ULTRAFINE_2_DOTS_3_DASHES] = "Ultrafine 2 Dots 3 Dashes"
 	$asLineStyles[$LOC_COMMENT_LINE_STYLE_2_DOTS_1_DASH] = "2 Dots 1 Dash"
 	$asLineStyles[$LOC_COMMENT_LINE_STYLE_LINE_WITH_FINE_DOTS] = "Line with Fine Dots"
+
+	If Not __LO_VersionCheck(24.2) Then $asLineStyles[$LOC_COMMENT_LINE_STYLE_SPARSE_DASH] = "Line Style 9"
 
 	If ($iLineStyle <> Null) Then
 		If Not __LO_IntIsBetween($iLineStyle, 0, UBound($asLineStyles) - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)

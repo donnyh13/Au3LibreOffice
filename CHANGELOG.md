@@ -26,6 +26,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 #### Changed
 
 - Renumbered $LOC_FIELD_TYPE_ALL from 1 to 127.
+- Renamed Line style name $LOC_COMMENT_LINE_STYLE_LINE_STYLE_9 to $LOC_COMMENT_LINE_STYLE_SPARSE_DASH to match new name in 24.2.
 
 #### Documented
 
