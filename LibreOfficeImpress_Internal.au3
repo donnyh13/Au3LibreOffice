@@ -6887,7 +6887,7 @@ Func __LOImpress_ShapeGetType(ByRef $oShape)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $avShapeTypes[21][2] = [[$LOI_SHAPE_TYPE_CALC, "com.sun.star.presentation.CalcShape"], [$LOI_SHAPE_TYPE_CHART, "com.sun.star.presentation.ChartShape"], _
+	Local $avShapeTypes[31][2] = [[$LOI_SHAPE_TYPE_CALC, "com.sun.star.presentation.CalcShape"], [$LOI_SHAPE_TYPE_CHART, "com.sun.star.presentation.ChartShape"], _
 			[$LOI_SHAPE_TYPE_DATETIME, "com.sun.star.presentation.DateTimeShape"], [$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.Shape3DSceneObject"], _
 			[$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.CustomShape"], [$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.MeasureShape"], _
 			[$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.EllipseShape"], [$LOI_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.ClosedBezierShape"], _
