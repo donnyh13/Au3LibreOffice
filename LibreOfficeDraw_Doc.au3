@@ -1673,7 +1673,7 @@ EndFunc   ;==>_LODraw_DocUndoReset
 ;                  If the property CurrentPage returns Null, it is assumed the current view mode is $LOD_PAGE_VIEW_SLIDE_SORTER, as that is the only time I found it returning such.
 ;                  If the property CurrentPage returns a page Object, and the property DrawViewMode returns Null, it is assumed current view mode is $LOD_PAGE_VIEW_SLIDE_OUTLINE.
 ;                  When switching to Master Notes or Slide Notes, the notes page will correspond to the currently or last active slide/master slide.
-; Related .......: _LODraw_SlideCurrent
+; Related .......: _LODraw_PageCurrent
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

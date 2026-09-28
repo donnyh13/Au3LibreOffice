@@ -13,7 +13,7 @@
 #include "LibreOfficeDraw_DrawShape.au3"
 #include "LibreOfficeDraw_Field.au3"
 #include "LibreOfficeDraw_Shape.au3"
-#include "LibreOfficeDraw_Slide.au3"
+#include "LibreOfficeDraw_Page.au3"
 #include "LibreOfficeDraw_Table.au3"
 
 ; #INDEX# =======================================================================================================================

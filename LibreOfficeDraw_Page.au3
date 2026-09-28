@@ -24,77 +24,77 @@
 ; ===============================================================================================================================
 
 ; #CURRENT# =====================================================================================================================
-; _LODraw_SlideAdd
-; _LODraw_SlideBackColor
-; _LODraw_SlideBackFillStyle
-; _LODraw_SlideBackGradient
-; _LODraw_SlideBackTransparency
-; _LODraw_SlideBackTransparencyGradient
-; _LODraw_SlideCopy
-; _LODraw_SlideCurrent
-; _LODraw_SlideDeleteByIndex
-; _LODraw_SlideDeleteByObj
-; _LODraw_SlideExists
-; _LODraw_SlideFooter
-; _LODraw_SlideFormat
-; _LODraw_SlideGetObjByIndex
-; _LODraw_SlideGetObjByName
-; _LODraw_SlideHandoutFooter
-; _LODraw_SlideHandoutFormat
-; _LODraw_SlideHandoutGetObj
-; _LODraw_SlideHandoutHeader
-; _LODraw_SlideHandoutLayout
-; _LODraw_SlideHandoutMargins
-; _LODraw_SlideLayout
-; _LODraw_SlideMargins
-; _LODraw_SlideMasterAdd
-; _LODraw_SlideMasterBackColor
-; _LODraw_SlideMasterBackFillStyle
-; _LODraw_SlideMasterBackGradient
-; _LODraw_SlideMasterBackTransparency
-; _LODraw_SlideMasterBackTransparencyGradient
-; _LODraw_SlideMasterCurrent
-; _LODraw_SlideMasterDeleteByIndex
-; _LODraw_SlideMasterDeleteByObj
-; _LODraw_SlideMasterExists
-; _LODraw_SlideMasterFormat
-; _LODraw_SlideMasterGetObjByIndex
-; _LODraw_SlideMasterGetObjByName
-; _LODraw_SlideMasterMargins
-; _LODraw_SlideMasterName
-; _LODraw_SlideMasterNotesGetObj
-; _LODraw_SlideMastersGetCount
-; _LODraw_SlideMastersGetNames
-; _LODraw_SlideMove
-; _LODraw_SlideName
-; _LODraw_SlideNotesFooter
-; _LODraw_SlideNotesFormat
-; _LODraw_SlideNotesGetObj
-; _LODraw_SlideNotesHeader
-; _LODraw_SlideNotesMargins
-; _LODraw_SlidesGetCount
-; _LODraw_SlidesGetNames
-; _LODraw_SlideshowActiveSettings
-; _LODraw_SlideshowCustomCreate
-; _LODraw_SlideshowCustomDelete
-; _LODraw_SlideshowCustomModify
-; _LODraw_SlideshowCustomSetName
-; _LODraw_SlideshowIsRunning
-; _LODraw_SlideshowPresentationControl
-; _LODraw_SlideshowsCustomGetNames
-; _LODraw_SlideshowSettingsMode
-; _LODraw_SlideshowSettingsOptions
-; _LODraw_SlideshowSettingsRange
-; _LODraw_SlideshowStart
-; _LODraw_SlideshowStop
-; _LODraw_SlideSoundsGetNames
-; _LODraw_SlideTransition
+; _LODraw_PageAdd
+; _LODraw_PageBackColor
+; _LODraw_PageBackFillStyle
+; _LODraw_PageBackGradient
+; _LODraw_PageBackTransparency
+; _LODraw_PageBackTransparencyGradient
+; _LODraw_PageCopy
+; _LODraw_PageCurrent
+; _LODraw_PageDeleteByIndex
+; _LODraw_PageDeleteByObj
+; _LODraw_PageExists
+; _LODraw_PageFooter
+; _LODraw_PageFormat
+; _LODraw_PageGetObjByIndex
+; _LODraw_PageGetObjByName
+; _LODraw_PageHandoutFooter
+; _LODraw_PageHandoutFormat
+; _LODraw_PageHandoutGetObj
+; _LODraw_PageHandoutHeader
+; _LODraw_PageHandoutLayout
+; _LODraw_PageHandoutMargins
+; _LODraw_PageLayout
+; _LODraw_PageMargins
+; _LODraw_PageMasterAdd
+; _LODraw_PageMasterBackColor
+; _LODraw_PageMasterBackFillStyle
+; _LODraw_PageMasterBackGradient
+; _LODraw_PageMasterBackTransparency
+; _LODraw_PageMasterBackTransparencyGradient
+; _LODraw_PageMasterCurrent
+; _LODraw_PageMasterDeleteByIndex
+; _LODraw_PageMasterDeleteByObj
+; _LODraw_PageMasterExists
+; _LODraw_PageMasterFormat
+; _LODraw_PageMasterGetObjByIndex
+; _LODraw_PageMasterGetObjByName
+; _LODraw_PageMasterMargins
+; _LODraw_PageMasterName
+; _LODraw_PageMasterNotesGetObj
+; _LODraw_PageMastersGetCount
+; _LODraw_PageMastersGetNames
+; _LODraw_PageMove
+; _LODraw_PageName
+; _LODraw_PageNotesFooter
+; _LODraw_PageNotesFormat
+; _LODraw_PageNotesGetObj
+; _LODraw_PageNotesHeader
+; _LODraw_PageNotesMargins
+; _LODraw_PagesGetCount
+; _LODraw_PagesGetNames
+; _LODraw_PageshowActiveSettings
+; _LODraw_PageshowCustomCreate
+; _LODraw_PageshowCustomDelete
+; _LODraw_PageshowCustomModify
+; _LODraw_PageshowCustomSetName
+; _LODraw_PageshowIsRunning
+; _LODraw_PageshowPresentationControl
+; _LODraw_PageshowsCustomGetNames
+; _LODraw_PageshowSettingsMode
+; _LODraw_PageshowSettingsOptions
+; _LODraw_PageshowSettingsRange
+; _LODraw_PageshowStart
+; _LODraw_PageshowStop
+; _LODraw_PageSoundsGetNames
+; _LODraw_PageTransition
 ; ===============================================================================================================================
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideAdd
+; Name ..........: _LODraw_PageAdd
 ; Description ...: Add a slide to a presentation.
-; Syntax ........: _LODraw_SlideAdd(ByRef $oDoc[, $iPos = Null[, $sName = ""]])
+; Syntax ........: _LODraw_PageAdd(ByRef $oDoc[, $iPos = Null[, $sName = ""]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $iPos                - [optional] Default is Null. The position to insert the new slide in the collection of slides. 0 Based. See remarks.
 ;                  $sName               - [optional] Default is "". The unique name of the Slide. If called with an empty string, LibreOffice automatically names it.
@@ -116,11 +116,11 @@
 ; Remarks .......: If $iPos is called with Null, the new slide is inserted at the end.
 ;                  Call $iPos with the last slide index to insert the slide at the end. Call $iPos with 0 to insert the new slide in the first slide position.
 ;                  Due to limitations in the API, I have made a small workaround for inserting a slide at the beginning. A dispatch is executed to move the slide to the beginning. The current slide will temporarily be set to the new slide in order to move it.
-; Related .......: _LODraw_SlideDeleteByIndex, _LODraw_SlideDeleteByObj, _LODraw_SlideMasterAdd, _LODraw_SlideExists
+; Related .......: _LODraw_PageDeleteByIndex, _LODraw_PageDeleteByObj, _LODraw_PageMasterAdd, _LODraw_PageExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideAdd(ByRef $oDoc, $iPos = Null, $sName = "")
+Func _LODraw_PageAdd(ByRef $oDoc, $iPos = Null, $sName = "")
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -134,7 +134,7 @@ Func _LODraw_SlideAdd(ByRef $oDoc, $iPos = Null, $sName = "")
 	If ($iPos = Null) Then $iPos = $oDoc.DrawPages.getCount()
 	If Not __LO_IntIsBetween($iPos, 0, $oDoc.DrawPages.getCount()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If ($sName <> "") And _LODraw_SlideExists($oDoc, $sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If ($sName <> "") And _LODraw_PageExists($oDoc, $sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 	$iPos -= 1 ; -1 because when 0 is called in insertNewByIndex, it inserts it in position 1, etc. Also there is no way to insert a new slide at position 0, so I made a workaround.
 
@@ -171,13 +171,13 @@ Func _LODraw_SlideAdd(ByRef $oDoc, $iPos = Null, $sName = "")
 	EndIf
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oSlide)
-EndFunc   ;==>_LODraw_SlideAdd
+EndFunc   ;==>_LODraw_PageAdd
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideBackColor
+; Name ..........: _LODraw_PageBackColor
 ; Description ...: Set or Retrieve the Slide's background color.
-; Syntax ........: _LODraw_SlideBackColor(ByRef $oSlide[, $iColor = Null])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
+; Syntax ........: _LODraw_PageBackColor(ByRef $oSlide[, $iColor = Null])
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ;                  $iColor              - [optional] (0-16777215) Default is Null. The Slide background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1 or Integer
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -198,11 +198,11 @@ EndFunc   ;==>_LODraw_SlideAdd
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the slide, the Constant $LO_COLOR_OFF is returned.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_SlideBackFillStyle, _LODraw_SlideBackGradient, _LODraw_SlideMasterBackColor
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_PageBackFillStyle, _LODraw_PageBackGradient, _LODraw_PageMasterBackColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideBackColor(ByRef $oSlide, $iColor = Null)
+Func _LODraw_PageBackColor(ByRef $oSlide, $iColor = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -239,13 +239,13 @@ Func _LODraw_SlideBackColor(ByRef $oSlide, $iColor = Null)
 	$iError = ($oSlide.Background.FillColor() = $iColor) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_SlideBackColor
+EndFunc   ;==>_LODraw_PageBackColor
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideBackFillStyle
+; Name ..........: _LODraw_PageBackFillStyle
 ; Description ...: Retrieve what kind of background fill is active, if any.
-; Syntax ........: _LODraw_SlideBackFillStyle(ByRef $oSlide[, $bFillOff = False])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
+; Syntax ........: _LODraw_PageBackFillStyle(ByRef $oSlide[, $bFillOff = False])
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ;                  $bFillOff            - [optional] Default is False. If True, the Fill style will be set to Off. See remarks.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOD_AREA_FILL_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
@@ -262,11 +262,11 @@ EndFunc   ;==>_LODraw_SlideBackColor
 ;                  This is useful because, if a Gradient is active, the solid color value is still present, and thus it would not be possible to determine which function should be used to retrieve the current values for, whether the Color function, or the Gradient function.
 ;                  When the Fill style is disabled for a Slide, the Fill properties are completely removed. This is how Draw works normally.
 ;                  $bFillOff will do nothing if it is called with False, and is not, of course, returned when retrieving the FillStyle value.
-; Related .......: _LODraw_SlideBackColor, _LODraw_SlideBackGradient, _LODraw_SlideMasterBackFillStyle
+; Related .......: _LODraw_PageBackColor, _LODraw_PageBackGradient, _LODraw_PageMasterBackFillStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideBackFillStyle(ByRef $oSlide, $bFillOff = False)
+Func _LODraw_PageBackFillStyle(ByRef $oSlide, $bFillOff = False)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -295,13 +295,13 @@ Func _LODraw_SlideBackFillStyle(ByRef $oSlide, $bFillOff = False)
 	If Not IsInt($iFillStyle) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $iFillStyle)
-EndFunc   ;==>_LODraw_SlideBackFillStyle
+EndFunc   ;==>_LODraw_PageBackFillStyle
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideBackGradient
+; Name ..........: _LODraw_PageBackGradient
 ; Description ...: Set or Retrieve the settings for Slide Background color Gradient.
-; Syntax ........: _LODraw_SlideBackGradient(ByRef $oSlide[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
+; Syntax ........: _LODraw_PageBackGradient(ByRef $oSlide[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOD_GRAD_NAME_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iIncrement          - [optional] (0, 3-256) Default is Null. The number of steps of color change. 0 = Automatic.
@@ -360,11 +360,11 @@ EndFunc   ;==>_LODraw_SlideBackFillStyle
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_SlideBackColor, _LODraw_SlideBackFillStyle, _LODraw_SlideMasterBackGradient
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_PageBackColor, _LODraw_PageBackFillStyle, _LODraw_PageMasterBackGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideBackGradient(ByRef $oSlide, $sGradientName = Null, $iType = Null, $iIncrement = Null, $iXCenter = Null, $iYCenter = Null, $iAngle = Null, $iTransitionStart = Null, $iFromColor = Null, $iToColor = Null, $iFromIntense = Null, $iToIntense = Null)
+Func _LODraw_PageBackGradient(ByRef $oSlide, $sGradientName = Null, $iType = Null, $iIncrement = Null, $iXCenter = Null, $iYCenter = Null, $iAngle = Null, $iTransitionStart = Null, $iFromColor = Null, $iToColor = Null, $iFromIntense = Null, $iToIntense = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -562,13 +562,13 @@ Func _LODraw_SlideBackGradient(ByRef $oSlide, $sGradientName = Null, $iType = Nu
 	$iError = (__LO_VarsAreNull($iToIntense)) ? $iError : ($oSlide.Background.FillGradient.EndIntensity() = $iToIntense) ? ($iError) : (BitOR($iError, 1024))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_SlideBackGradient
+EndFunc   ;==>_LODraw_PageBackGradient
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideBackTransparency
+; Name ..........: _LODraw_PageBackTransparency
 ; Description ...: Set or retrieve Transparency settings for a Slide.
-; Syntax ........: _LODraw_SlideBackTransparency(ByRef $oSlide[, $iTransparency = Null])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
+; Syntax ........: _LODraw_PageBackTransparency(ByRef $oSlide[, $iTransparency = Null])
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
@@ -589,11 +589,11 @@ EndFunc   ;==>_LODraw_SlideBackGradient
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the slide, -1 is returned.
-; Related .......: _LODraw_SlideBackTransparencyGradient, _LODraw_SlideMasterBackTransparency
+; Related .......: _LODraw_PageBackTransparencyGradient, _LODraw_PageMasterBackTransparency
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideBackTransparency(ByRef $oSlide, $iTransparency = Null)
+Func _LODraw_PageBackTransparency(ByRef $oSlide, $iTransparency = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -631,13 +631,13 @@ Func _LODraw_SlideBackTransparency(ByRef $oSlide, $iTransparency = Null)
 	$iError = ($oSlide.Background.FillTransparence() = $iTransparency) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_SlideBackTransparency
+EndFunc   ;==>_LODraw_PageBackTransparency
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideBackTransparencyGradient
+; Name ..........: _LODraw_PageBackTransparencyGradient
 ; Description ...: Set or retrieve the Slide's transparency gradient settings.
-; Syntax ........: _LODraw_SlideBackTransparencyGradient(ByRef $oSlide[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
+; Syntax ........: _LODraw_PageBackTransparencyGradient(ByRef $oSlide[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ;                  $iType               - [optional] (-1-5) Default is Null. The type of transparency gradient to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3. Call with $LOD_GRAD_TYPE_OFF to turn Transparency Gradient off.
 ;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
@@ -682,11 +682,11 @@ EndFunc   ;==>_LODraw_SlideBackTransparency
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LODraw_SlideBackTransparency, _LODraw_SlideMasterBackTransparencyGradient
+; Related .......: _LODraw_PageBackTransparency, _LODraw_PageMasterBackTransparencyGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideBackTransparencyGradient(ByRef $oSlide, $iType = Null, $iXCenter = Null, $iYCenter = Null, $iAngle = Null, $iTransitionStart = Null, $iStart = Null, $iEnd = Null)
+Func _LODraw_PageBackTransparencyGradient(ByRef $oSlide, $iType = Null, $iXCenter = Null, $iYCenter = Null, $iAngle = Null, $iTransitionStart = Null, $iStart = Null, $iEnd = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -837,13 +837,13 @@ Func _LODraw_SlideBackTransparencyGradient(ByRef $oSlide, $iType = Null, $iXCent
 	$iError = (__LO_VarsAreNull($iEnd)) ? ($iError) : (($oSlide.Background.FillTransparenceGradient.EndColor() = __LODraw_TransparencyGradientConvert($iEnd)) ? ($iError) : (BitOR($iError, 64)))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_SlideBackTransparencyGradient
+EndFunc   ;==>_LODraw_PageBackTransparencyGradient
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideCopy
+; Name ..........: _LODraw_PageCopy
 ; Description ...: Create a copy of a slide.
-; Syntax ........: _LODraw_SlideCopy(ByRef $oSlide[, $iPos = Null])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
+; Syntax ........: _LODraw_PageCopy(ByRef $oSlide[, $iPos = Null])
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ;                  $iPos                - [optional] Default is Null. The position to insert the new slide in the collection of slides. 0 Based. See remarks.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully copied the slide, returning the new slide's Object.
@@ -863,11 +863,11 @@ EndFunc   ;==>_LODraw_SlideBackTransparencyGradient
 ; Modified ......:
 ; Remarks .......: The copied slide is inserted after the slide to be copied.
 ;                  If $iPos is called with Null, the slide is left in the position described above. Otherwise, due to limitations in the API, some dispatches are executed to move the slide. The current slide will temporarily be set to the new slide in order to move it.
-; Related .......: _LODraw_SlideAdd, _LODraw_SlideDeleteByIndex, _LODraw_SlideDeleteByObj, _LODraw_SlideMove
+; Related .......: _LODraw_PageAdd, _LODraw_PageDeleteByIndex, _LODraw_PageDeleteByObj, _LODraw_PageMove
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideCopy(ByRef $oSlide, $iPos = Null)
+Func _LODraw_PageCopy(ByRef $oSlide, $iPos = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -940,14 +940,14 @@ Func _LODraw_SlideCopy(ByRef $oSlide, $iPos = Null)
 	EndIf
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oNewSlide)
-EndFunc   ;==>_LODraw_SlideCopy
+EndFunc   ;==>_LODraw_PageCopy
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideCurrent
+; Name ..........: _LODraw_PageCurrent
 ; Description ...: Set or Retrieve the currently active slide or master slide.
-; Syntax ........: _LODraw_SlideCurrent(ByRef $oDoc[, $oObj = Null])
+; Syntax ........: _LODraw_PageCurrent(ByRef $oDoc[, $oObj = Null])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
-;                  $oObj                - [optional] Default is Null. A Slide or Master Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, _LODraw_SlideCopy, _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
+;                  $oObj                - [optional] Default is Null. A Slide or Master Slide object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, _LODraw_PageCopy, _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ; Return values .: Success: 1 or Object
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Object = Success. All optional parameters were called with Null, returning currently active slide. @Extended page's type, see remarks.
@@ -967,11 +967,11 @@ EndFunc   ;==>_LODraw_SlideCopy
 ;                  You can only set the current slide to either a Master slide or a normal slide. To change views to Notes, Handouts etc., see _LODraw_DocView.
 ;                  If the current view mode is set to Slide outline or Slide Notes, the current slide Object is returned. If the current view mode is set to Master Slide Notes or Master Slide Handout, the current Master slide Object is returned.
 ;                  When retrieving the current page, @Extended will be set to either $LOD_PAGE_VIEW_SLIDE or $LOD_PAGE_VIEW_MASTER. See Constants, $LOD_PAGE_VIEW_* as defined in LibreOfficeDraw_Constants.au3. Use _LODraw_DocView to determine the current view mode active.
-; Related .......: _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, _LODraw_SlideMasterCurrent, _LODraw_DocView
+; Related .......: _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, _LODraw_PageMasterCurrent, _LODraw_DocView
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideCurrent(ByRef $oDoc, $oObj = Null)
+Func _LODraw_PageCurrent(ByRef $oDoc, $oObj = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -995,12 +995,12 @@ Func _LODraw_SlideCurrent(ByRef $oDoc, $oObj = Null)
 	$iError = ($oDoc.getCurrentController.CurrentPage() = $oObj) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_SlideCurrent
+EndFunc   ;==>_LODraw_PageCurrent
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideDeleteByIndex
+; Name ..........: _LODraw_PageDeleteByIndex
 ; Description ...: Delete a slide by index.
-; Syntax ........: _LODraw_SlideDeleteByIndex(ByRef $oDoc, $iSlide)
+; Syntax ........: _LODraw_PageDeleteByIndex(ByRef $oDoc, $iSlide)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $iSlide              - The slide to delete. 0 based.
 ; Return values .: Success: 1
@@ -1016,11 +1016,11 @@ EndFunc   ;==>_LODraw_SlideCurrent
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LODraw_SlideDeleteByObj, _LODraw_SlidesGetCount, _LODraw_SlideMasterDeleteByIndex
+; Related .......: _LODraw_PageDeleteByObj, _LODraw_PagesGetCount, _LODraw_PageMasterDeleteByIndex
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideDeleteByIndex(ByRef $oDoc, $iSlide)
+Func _LODraw_PageDeleteByIndex(ByRef $oDoc, $iSlide)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1040,13 +1040,13 @@ Func _LODraw_SlideDeleteByIndex(ByRef $oDoc, $iSlide)
 	If ($iCount = $oDoc.DrawPages.getCount()) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to delete because the count is the same.
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LODraw_SlideDeleteByIndex
+EndFunc   ;==>_LODraw_PageDeleteByIndex
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideDeleteByObj
+; Name ..........: _LODraw_PageDeleteByObj
 ; Description ...: Delete a slide using its Object.
-; Syntax ........: _LODraw_SlideDeleteByObj(ByRef $oSlide)
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
+; Syntax ........: _LODraw_PageDeleteByObj(ByRef $oSlide)
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Slide was successfully deleted.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -1059,11 +1059,11 @@ EndFunc   ;==>_LODraw_SlideDeleteByIndex
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LODraw_SlideDeleteByIndex, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, _LODraw_SlideMasterDeleteByObj
+; Related .......: _LODraw_PageDeleteByIndex, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, _LODraw_PageMasterDeleteByObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideDeleteByObj(ByRef $oSlide)
+Func _LODraw_PageDeleteByObj(ByRef $oSlide)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1084,12 +1084,12 @@ Func _LODraw_SlideDeleteByObj(ByRef $oSlide)
 	$oSlide = Null
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LODraw_SlideDeleteByObj
+EndFunc   ;==>_LODraw_PageDeleteByObj
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideExists
+; Name ..........: _LODraw_PageExists
 ; Description ...: Check whether a slide with a certain name exists in a document.
-; Syntax ........: _LODraw_SlideExists(ByRef $oDoc, $sName)
+; Syntax ........: _LODraw_PageExists(ByRef $oDoc, $sName)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $sName               - The slide name to check for.
 ; Return values .: Success: Boolean.
@@ -1103,11 +1103,11 @@ EndFunc   ;==>_LODraw_SlideDeleteByObj
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LODraw_SlideAdd, _LODraw_SlideName, _LODraw_SlidesGetNames, _LODraw_SlideMasterExists
+; Related .......: _LODraw_PageAdd, _LODraw_PageName, _LODraw_PagesGetNames, _LODraw_PageMasterExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideExists(ByRef $oDoc, $sName)
+Func _LODraw_PageExists(ByRef $oDoc, $sName)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1120,13 +1120,13 @@ Func _LODraw_SlideExists(ByRef $oDoc, $sName)
 	If Not IsBool($bExists) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $bExists)
-EndFunc   ;==>_LODraw_SlideExists
+EndFunc   ;==>_LODraw_PageExists
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideFooter
+; Name ..........: _LODraw_PageFooter
 ; Description ...: Set or Retrieve Slide Footer settings.
-; Syntax ........: _LODraw_SlideFooter(ByRef $oSlide[, $bDateTime = Null[, $bDateTimeIsFixed = Null[, $sDateTimeValue = Null[, $iDateTimeFormat = Null[, $bFooter = Null[, $sFooterText = Null[, $bSlideNum = Null]]]]]]])
-; Parameters ....: $oSlide              -  A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
+; Syntax ........: _LODraw_PageFooter(ByRef $oSlide[, $bDateTime = Null[, $bDateTimeIsFixed = Null[, $sDateTimeValue = Null[, $iDateTimeFormat = Null[, $bFooter = Null[, $sFooterText = Null[, $bSlideNum = Null]]]]]]])
+; Parameters ....: $oSlide              -  A Slide object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ;                  $bDateTime           - [optional] Default is Null. If True, a Date or Time entry is added to the footer of the slide.
 ;                  $bDateTimeIsFixed    - [optional] Default is Null. If True, the Date or Time entry is fixed.
 ;                  $sDateTimeValue      - [optional] Default is Null. If $bDateTimeIsFixed is True, this is the custom date or time value to display.
@@ -1162,11 +1162,11 @@ EndFunc   ;==>_LODraw_SlideExists
 ;                  Skip first slide, and Apply to all are not added to this function as they are not actual settings. The user can simulate these easily by making a loop to apply it to all slides, and skip the first slide if required.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, _LODraw_SlideHandoutFooter, _LODraw_SlideNotesFooter
+; Related .......: _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, _LODraw_PageHandoutFooter, _LODraw_PageNotesFooter
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideFooter(ByRef $oSlide, $bDateTime = Null, $bDateTimeIsFixed = Null, $sDateTimeValue = Null, $iDateTimeFormat = Null, $bFooter = Null, $sFooterText = Null, $bSlideNum = Null)
+Func _LODraw_PageFooter(ByRef $oSlide, $bDateTime = Null, $bDateTimeIsFixed = Null, $sDateTimeValue = Null, $iDateTimeFormat = Null, $bFooter = Null, $sFooterText = Null, $bSlideNum = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1240,13 +1240,13 @@ Func _LODraw_SlideFooter(ByRef $oSlide, $bDateTime = Null, $bDateTimeIsFixed = N
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_SlideFooter
+EndFunc   ;==>_LODraw_PageFooter
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideFormat
+; Name ..........: _LODraw_PageFormat
 ; Description ...: Set or Retrieve the slide format settings.
-; Syntax ........: _LODraw_SlideFormat(ByRef $oSlide[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
+; Syntax ........: _LODraw_PageFormat(ByRef $oSlide[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_WIDTH_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_HEIGHT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeDraw_Constants.au3.
@@ -1272,11 +1272,11 @@ EndFunc   ;==>_LODraw_SlideFooter
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  When modifying the page format, the shapes etc., aren't readjusted as they are in LibreOffice UI.
 ;                  I am unable to find the properties to set for "FitObject to Paper Format", "Background covers margins", "Slide numbers", and "Paper tray".
-; Related .......: _LO_UnitConvert, _LODraw_SlideLayout, _LODraw_SlideMargins, _LODraw_SlideHandoutFormat, _LODraw_SlideMasterFormat, _LODraw_SlideNotesFormat
+; Related .......: _LO_UnitConvert, _LODraw_PageLayout, _LODraw_PageMargins, _LODraw_PageHandoutFormat, _LODraw_PageMasterFormat, _LODraw_PageNotesFormat
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideFormat(ByRef $oSlide, $iWidth = Null, $iHeight = Null, $iOrientation = Null)
+Func _LODraw_PageFormat(ByRef $oSlide, $iWidth = Null, $iHeight = Null, $iOrientation = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1287,12 +1287,12 @@ Func _LODraw_SlideFormat(ByRef $oSlide, $iWidth = Null, $iHeight = Null, $iOrien
 	$vReturn = __LODraw_Format($oSlide, $iWidth, $iHeight, $iOrientation)
 
 	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_SlideFormat
+EndFunc   ;==>_LODraw_PageFormat
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideGetObjByIndex
+; Name ..........: _LODraw_PageGetObjByIndex
 ; Description ...: Retrieve a Slide's Object by index.
-; Syntax ........: _LODraw_SlideGetObjByIndex(ByRef $oDoc, $iSlide)
+; Syntax ........: _LODraw_PageGetObjByIndex(ByRef $oDoc, $iSlide)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $iSlide              - The slide to retrieve. 0 based.
 ; Return values .: Success: Object
@@ -1306,11 +1306,11 @@ EndFunc   ;==>_LODraw_SlideFormat
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LODraw_SlideGetObjByName, _LODraw_SlidesGetCount, _LODraw_SlideMasterGetObjByIndex
+; Related .......: _LODraw_PageGetObjByName, _LODraw_PagesGetCount, _LODraw_PageMasterGetObjByIndex
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideGetObjByIndex(ByRef $oDoc, $iSlide)
+Func _LODraw_PageGetObjByIndex(ByRef $oDoc, $iSlide)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1323,12 +1323,12 @@ Func _LODraw_SlideGetObjByIndex(ByRef $oDoc, $iSlide)
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oSlide)
-EndFunc   ;==>_LODraw_SlideGetObjByIndex
+EndFunc   ;==>_LODraw_PageGetObjByIndex
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideGetObjByName
+; Name ..........: _LODraw_PageGetObjByName
 ; Description ...: Retrieve a Slide's Object by name.
-; Syntax ........: _LODraw_SlideGetObjByName(ByRef $oDoc, $sName)
+; Syntax ........: _LODraw_PageGetObjByName(ByRef $oDoc, $sName)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $sName               - The Slide's name to retrieve the Object for.
 ; Return values .: Success: Object
@@ -1343,11 +1343,11 @@ EndFunc   ;==>_LODraw_SlideGetObjByIndex
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LODraw_SlideGetObjByIndex, _LODraw_SlidesGetNames, _LODraw_SlideMasterGetObjByName
+; Related .......: _LODraw_PageGetObjByIndex, _LODraw_PagesGetNames, _LODraw_PageMasterGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideGetObjByName(ByRef $oDoc, $sName)
+Func _LODraw_PageGetObjByName(ByRef $oDoc, $sName)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1361,13 +1361,13 @@ Func _LODraw_SlideGetObjByName(ByRef $oDoc, $sName)
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oSlide)
-EndFunc   ;==>_LODraw_SlideGetObjByName
+EndFunc   ;==>_LODraw_PageGetObjByName
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideFooter
+; Name ..........: _LODraw_PageFooter
 ; Description ...: Set or Retrieve handout page Footer settings.
-; Syntax ........: _LODraw_SlideFooter(ByRef $oHandout[, $bFooter = Null[, $sFooterText = Null[, $bSlideNum = Null]]])
-; Parameters ....: $oHandout            - A Handout page object returned by a previous _LODraw_SlideHandoutGetObj function.
+; Syntax ........: _LODraw_PageFooter(ByRef $oHandout[, $bFooter = Null[, $sFooterText = Null[, $bSlideNum = Null]]])
+; Parameters ....: $oHandout            - A Handout page object returned by a previous _LODraw_PageHandoutGetObj function.
 ;                  $bFooter             - [optional] Default is Null. If True, a Footer entry is added to the footer of the page.
 ;                  $sFooterText         - [optional] Default is Null. If $bFooter is True, the text to display in the footer of the page.
 ;                  $bSlideNum           - [optional] Default is Null. If True, a current Slide number is added to the footer of the page.
@@ -1391,11 +1391,11 @@ EndFunc   ;==>_LODraw_SlideGetObjByName
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  During basic testing, while the settings were successfully set, LibreOffice seems to ignore footer values set for handout pages.
-; Related .......: _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, _LODraw_SlideFooter, _LODraw_SlideNotesFooter
+; Related .......: _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, _LODraw_PageFooter, _LODraw_PageNotesFooter
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideHandoutFooter(ByRef $oHandout, $bFooter = Null, $sFooterText = Null, $bSlideNum = Null)
+Func _LODraw_PageHandoutFooter(ByRef $oHandout, $bFooter = Null, $sFooterText = Null, $bSlideNum = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1435,13 +1435,13 @@ Func _LODraw_SlideHandoutFooter(ByRef $oHandout, $bFooter = Null, $sFooterText =
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_SlideHandoutFooter
+EndFunc   ;==>_LODraw_PageHandoutFooter
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideHandoutFormat
+; Name ..........: _LODraw_PageHandoutFormat
 ; Description ...: Set or Retrieve the handout page format settings.
-; Syntax ........: _LODraw_SlideHandoutFormat(ByRef $oHandout[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
-; Parameters ....: $oHandout            - A Handout page object returned by a previous _LODraw_SlideHandoutGetObj function.
+; Syntax ........: _LODraw_PageHandoutFormat(ByRef $oHandout[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
+; Parameters ....: $oHandout            - A Handout page object returned by a previous _LODraw_PageHandoutGetObj function.
 ;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_WIDTH_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_HEIGHT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeDraw_Constants.au3.
@@ -1466,11 +1466,11 @@ EndFunc   ;==>_LODraw_SlideHandoutFooter
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  When modifying the page format, the shapes etc., aren't readjusted as they are in LibreOffice UI.
-; Related .......: _LO_UnitConvert, _LODraw_SlideLayout, _LODraw_SlideMargins, _LODraw_SlideMasterFormat, _LODraw_SlideNotesFormat, _LODraw_SlideFormat
+; Related .......: _LO_UnitConvert, _LODraw_PageLayout, _LODraw_PageMargins, _LODraw_PageMasterFormat, _LODraw_PageNotesFormat, _LODraw_PageFormat
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideHandoutFormat(ByRef $oHandout, $iWidth = Null, $iHeight = Null, $iOrientation = Null)
+Func _LODraw_PageHandoutFormat(ByRef $oHandout, $iWidth = Null, $iHeight = Null, $iOrientation = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1481,12 +1481,12 @@ Func _LODraw_SlideHandoutFormat(ByRef $oHandout, $iWidth = Null, $iHeight = Null
 	$vReturn = __LODraw_Format($oHandout, $iWidth, $iHeight, $iOrientation)
 
 	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_SlideHandoutFormat
+EndFunc   ;==>_LODraw_PageHandoutFormat
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideHandoutGetObj
+; Name ..........: _LODraw_PageHandoutGetObj
 ; Description ...: Retrieve the Handout page Object for an Draw document.
-; Syntax ........: _LODraw_SlideHandoutGetObj(ByRef $oDoc)
+; Syntax ........: _LODraw_PageHandoutGetObj(ByRef $oDoc)
 ; Parameters ....: $oDoc                -  A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning Handouts page Object.
@@ -1498,11 +1498,11 @@ EndFunc   ;==>_LODraw_SlideHandoutFormat
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: There seems to be only one handouts page per document.
-; Related .......: _LODraw_SlideNotesGetObj
+; Related .......: _LODraw_PageNotesGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideHandoutGetObj(ByRef $oDoc)
+Func _LODraw_PageHandoutGetObj(ByRef $oDoc)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1514,13 +1514,13 @@ Func _LODraw_SlideHandoutGetObj(ByRef $oDoc)
 	If Not IsObj($oHandout) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oHandout)
-EndFunc   ;==>_LODraw_SlideHandoutGetObj
+EndFunc   ;==>_LODraw_PageHandoutGetObj
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideHandoutHeader
+; Name ..........: _LODraw_PageHandoutHeader
 ; Description ...: Set or Retrieve handout page header settings.
-; Syntax ........: _LODraw_SlideHandoutHeader(ByRef $oHandout[, $bHeader = Null[, $sHeaderText = Null[, $bDateTime = Null[, $bDateTimeIsFixed = Null[, $sDateTimeValue = Null[, $iDateTimeFormat = Null]]]]]])
-; Parameters ....: $oHandout            - A Handout page object returned by a previous _LODraw_SlideHandoutGetObj function.
+; Syntax ........: _LODraw_PageHandoutHeader(ByRef $oHandout[, $bHeader = Null[, $sHeaderText = Null[, $bDateTime = Null[, $bDateTimeIsFixed = Null[, $sDateTimeValue = Null[, $iDateTimeFormat = Null]]]]]])
+; Parameters ....: $oHandout            - A Handout page object returned by a previous _LODraw_PageHandoutGetObj function.
 ;                  $bHeader             - [optional] Default is Null. If True, a Header entry is added to the Header of the page.
 ;                  $sHeaderText         - [optional] Default is Null. If $bHeader is True, the text to display in the Header of the page.
 ;                  $bDateTime           - [optional] Default is Null. If True, a Date or Time entry is added to the header of the page.
@@ -1553,11 +1553,11 @@ EndFunc   ;==>_LODraw_SlideHandoutGetObj
 ;                  Apply to all is not added to this function as it is not an actual setting. The user can simulate this easily by making a loop to apply it to all slides.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, _LODraw_SlideNotesHeader
+; Related .......: _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, _LODraw_PageNotesHeader
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideHandoutHeader(ByRef $oHandout, $bHeader = Null, $sHeaderText = Null, $bDateTime = Null, $bDateTimeIsFixed = Null, $sDateTimeValue = Null, $iDateTimeFormat = Null)
+Func _LODraw_PageHandoutHeader(ByRef $oHandout, $bHeader = Null, $sHeaderText = Null, $bDateTime = Null, $bDateTimeIsFixed = Null, $sDateTimeValue = Null, $iDateTimeFormat = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1623,13 +1623,13 @@ Func _LODraw_SlideHandoutHeader(ByRef $oHandout, $bHeader = Null, $sHeaderText =
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_SlideHandoutHeader
+EndFunc   ;==>_LODraw_PageHandoutHeader
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideHandoutLayout
+; Name ..........: _LODraw_PageHandoutLayout
 ; Description ...: Set or Retrieve the current Handout page's layout.
-; Syntax ........: _LODraw_SlideHandoutLayout(ByRef $oHandout[, $iLayout = Null])
-; Parameters ....: $oHandout            - A Handout page object returned by a previous _LODraw_SlideHandoutGetObj function.
+; Syntax ........: _LODraw_PageHandoutLayout(ByRef $oHandout[, $iLayout = Null])
+; Parameters ....: $oHandout            - A Handout page object returned by a previous _LODraw_PageHandoutGetObj function.
 ;                  $iLayout             - [optional] (22-31) Default is Null. The layout format of the Handout page. See Constants, $LOD_HANDOUT_LAYOUT_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1 or Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -1646,11 +1646,11 @@ EndFunc   ;==>_LODraw_SlideHandoutHeader
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LODraw_SlideHandoutFormat, _LODraw_SlideHandoutMargins, _LODraw_SlideLayout
+; Related .......: _LODraw_PageHandoutFormat, _LODraw_PageHandoutMargins, _LODraw_PageLayout
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideHandoutLayout(ByRef $oHandout, $iLayout = Null)
+Func _LODraw_PageHandoutLayout(ByRef $oHandout, $iLayout = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1672,13 +1672,13 @@ Func _LODraw_SlideHandoutLayout(ByRef $oHandout, $iLayout = Null)
 	$iError = ($oHandout.Layout() = $iLayout) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_SlideHandoutLayout
+EndFunc   ;==>_LODraw_PageHandoutLayout
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideHandoutMargins
+; Name ..........: _LODraw_PageHandoutMargins
 ; Description ...: Set or Retrieve the handout page margin settings.
-; Syntax ........: _LODraw_SlideHandoutMargins(ByRef $oHandout[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
-; Parameters ....: $oHandout            - A Handout page object returned by a previous _LODraw_SlideHandoutGetObj function.
+; Syntax ........: _LODraw_PageHandoutMargins(ByRef $oHandout[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
+; Parameters ....: $oHandout            - A Handout page object returned by a previous _LODraw_PageHandoutGetObj function.
 ;                  $iLeft               - [optional] Default is Null. The amount of space to leave between the left edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
 ;                  $iRight              - [optional] Default is Null. The amount of space to leave between the right edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
 ;                  $iTop                - [optional] Default is Null. The amount of space to leave between the upper edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
@@ -1703,11 +1703,11 @@ EndFunc   ;==>_LODraw_SlideHandoutLayout
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LODraw_SlideLayout, _LODraw_SlideFormat, _LODraw_SlideMasterMargins, _LODraw_SlideNotesMargins, _LODraw_SlideMargins
+; Related .......: _LO_UnitConvert, _LODraw_PageLayout, _LODraw_PageFormat, _LODraw_PageMasterMargins, _LODraw_PageNotesMargins, _LODraw_PageMargins
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideHandoutMargins(ByRef $oHandout, $iLeft = Null, $iRight = Null, $iTop = Null, $iBottom = Null)
+Func _LODraw_PageHandoutMargins(ByRef $oHandout, $iLeft = Null, $iRight = Null, $iTop = Null, $iBottom = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1718,13 +1718,13 @@ Func _LODraw_SlideHandoutMargins(ByRef $oHandout, $iLeft = Null, $iRight = Null,
 	$vReturn = __LODraw_Margins($oHandout, $iLeft, $iRight, $iTop, $iBottom)
 
 	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_SlideHandoutMargins
+EndFunc   ;==>_LODraw_PageHandoutMargins
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideLayout
+; Name ..........: _LODraw_PageLayout
 ; Description ...: Set or Retrieve the current Slide's layout.
-; Syntax ........: _LODraw_SlideLayout(ByRef $oSlide[, $iLayout = Null])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
+; Syntax ........: _LODraw_PageLayout(ByRef $oSlide[, $iLayout = Null])
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ;                  $iLayout             - [optional] (0-34) Default is Null. The layout format of the Slide. See Constants, $LOD_SLIDE_LAYOUT_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1 or Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -1741,11 +1741,11 @@ EndFunc   ;==>_LODraw_SlideHandoutMargins
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LODraw_SlideName, _LODraw_SlideTransition, _LODraw_SlideFormat, _LODraw_SlideMargins, _LODraw_SlideHandoutLayout
+; Related .......: _LODraw_PageName, _LODraw_PageTransition, _LODraw_PageFormat, _LODraw_PageMargins, _LODraw_PageHandoutLayout
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideLayout(ByRef $oSlide, $iLayout = Null)
+Func _LODraw_PageLayout(ByRef $oSlide, $iLayout = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1767,13 +1767,13 @@ Func _LODraw_SlideLayout(ByRef $oSlide, $iLayout = Null)
 	$iError = ($oSlide.Layout() = $iLayout) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_SlideLayout
+EndFunc   ;==>_LODraw_PageLayout
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideMargins
+; Name ..........: _LODraw_PageMargins
 ; Description ...: Set or Retrieve the slide page margin settings.
-; Syntax ........: _LODraw_SlideMargins(ByRef $oSlide[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
+; Syntax ........: _LODraw_PageMargins(ByRef $oSlide[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ;                  $iLeft               - [optional] Default is Null. The amount of space to leave between the left edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
 ;                  $iRight              - [optional] Default is Null. The amount of space to leave between the right edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
 ;                  $iTop                - [optional] Default is Null. The amount of space to leave between the upper edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
@@ -1798,11 +1798,11 @@ EndFunc   ;==>_LODraw_SlideLayout
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LODraw_SlideLayout, _LODraw_SlideFormat, _LODraw_SlideHandoutMargins, _LODraw_SlideMasterMargins, _LODraw_SlideNotesMargins
+; Related .......: _LO_UnitConvert, _LODraw_PageLayout, _LODraw_PageFormat, _LODraw_PageHandoutMargins, _LODraw_PageMasterMargins, _LODraw_PageNotesMargins
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideMargins(ByRef $oSlide, $iLeft = Null, $iRight = Null, $iTop = Null, $iBottom = Null)
+Func _LODraw_PageMargins(ByRef $oSlide, $iLeft = Null, $iRight = Null, $iTop = Null, $iBottom = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1813,12 +1813,12 @@ Func _LODraw_SlideMargins(ByRef $oSlide, $iLeft = Null, $iRight = Null, $iTop = 
 	$vReturn = __LODraw_Margins($oSlide, $iLeft, $iRight, $iTop, $iBottom)
 
 	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_SlideMargins
+EndFunc   ;==>_LODraw_PageMargins
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideMasterAdd
+; Name ..........: _LODraw_PageMasterAdd
 ; Description ...: Add a master slide to a presentation.
-; Syntax ........: _LODraw_SlideMasterAdd(ByRef $oDoc[, $iPos = Null[, $sName = ""[, $bBlank = True]]])
+; Syntax ........: _LODraw_PageMasterAdd(ByRef $oDoc[, $iPos = Null[, $sName = ""[, $bBlank = True]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $iPos                - [optional] Default is Null. The position to insert the new master slide in the collection of slides. 0 Based. This is ignored if $bBlank is False.
 ;                  $sName               - [optional] Default is "". The unique name of the Master Slide. If called with an empty string, LibreOffice automatically names it.
@@ -1849,11 +1849,11 @@ EndFunc   ;==>_LODraw_SlideMargins
 ;                  This function uses two methods to insert a Master slide. Using the API, the resulting new master slide is blank, without text boxes etc., the second method uses a document dispatch command, which results in a normally formatted master slide, like when you add a master slide manually.
 ;                  When inserting a new slide with $bBlank set to False, I use the dispatch command to accomplish the insertion, this method seems to only ever insert the new slide at the end of all the slides.
 ;                  I have not found a way to import Master slide from the LibreOffice templates yet.
-; Related .......: _LODraw_SlideMasterDeleteByIndex, _LODraw_SlideMasterDeleteByObj, _LODraw_SlideAdd, _LODraw_SlideMasterExists
+; Related .......: _LODraw_PageMasterDeleteByIndex, _LODraw_PageMasterDeleteByObj, _LODraw_PageAdd, _LODraw_PageMasterExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideMasterAdd(ByRef $oDoc, $iPos = Null, $sName = "", $bBlank = True)
+Func _LODraw_PageMasterAdd(ByRef $oDoc, $iPos = Null, $sName = "", $bBlank = True)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1868,7 +1868,7 @@ Func _LODraw_SlideMasterAdd(ByRef $oDoc, $iPos = Null, $sName = "", $bBlank = Tr
 	If ($iPos = $oDoc.MasterPages.getCount()) Then $iPos = $iPos - 1 ; If I am inserting a Master using the dispatch command, and the user called the last slide position plus 1, I need to change it to be 1 less so I can retrieve the Object for the last master slide.
 	If Not __LO_IntIsBetween($iPos, 0, $oDoc.MasterPages.getCount()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If ($sName <> "") And _LODraw_SlideMasterExists($oDoc, $sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If ($sName <> "") And _LODraw_PageMasterExists($oDoc, $sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If Not IsBool($bBlank) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 	If $bBlank Then
@@ -1921,13 +1921,13 @@ Func _LODraw_SlideMasterAdd(ByRef $oDoc, $iPos = Null, $sName = "", $bBlank = Tr
 	If ($sName <> "") Then $oMSlide.Name = $sName
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oMSlide)
-EndFunc   ;==>_LODraw_SlideMasterAdd
+EndFunc   ;==>_LODraw_PageMasterAdd
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideMasterBackColor
+; Name ..........: _LODraw_PageMasterBackColor
 ; Description ...: Set or Retrieve the Master Slide's background color.
-; Syntax ........: _LODraw_SlideMasterBackColor(ByRef $oMaster[, $iColor = Null])
-; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
+; Syntax ........: _LODraw_PageMasterBackColor(ByRef $oMaster[, $iColor = Null])
+; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ;                  $iColor              - [optional] (0-16777215) Default is Null. The Master Slide background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1 or Integer
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -1948,11 +1948,11 @@ EndFunc   ;==>_LODraw_SlideMasterAdd
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the slide, the Constant $LO_COLOR_OFF is returned.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_SlideMasterBackFillStyle, _LODraw_SlideMasterBackGradient, _LODraw_SlideBackColor
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_PageMasterBackFillStyle, _LODraw_PageMasterBackGradient, _LODraw_PageBackColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideMasterBackColor(ByRef $oMaster, $iColor = Null)
+Func _LODraw_PageMasterBackColor(ByRef $oMaster, $iColor = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -1989,13 +1989,13 @@ Func _LODraw_SlideMasterBackColor(ByRef $oMaster, $iColor = Null)
 	$iError = ($oMaster.Background.FillColor() = $iColor) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_SlideMasterBackColor
+EndFunc   ;==>_LODraw_PageMasterBackColor
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideMasterBackFillStyle
+; Name ..........: _LODraw_PageMasterBackFillStyle
 ; Description ...: Retrieve what kind of background fill is active, if any.
-; Syntax ........: _LODraw_SlideMasterBackFillStyle(ByRef $oMaster[, $bFillOff = False])
-; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
+; Syntax ........: _LODraw_PageMasterBackFillStyle(ByRef $oMaster[, $bFillOff = False])
+; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ;                  $bFillOff            - [optional] Default is False. If True, the Fill style will be set to Off. See remarks.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOD_AREA_FILL_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
@@ -2012,11 +2012,11 @@ EndFunc   ;==>_LODraw_SlideMasterBackColor
 ;                  This is useful because, if a Gradient is active, the solid color value is still present, and thus it would not be possible to determine which function should be used to retrieve the current values for, whether the Color function, or the Gradient function.
 ;                  When the Fill style is disabled for a Master Slide, the Fill properties are completely removed. This is how Draw works normally.
 ;                  $bFillOff will do nothing if it is called with False, and is not, of course, returned when retrieving the FillStyle value.
-; Related .......: _LODraw_SlideMasterBackColor, _LODraw_SlideMasterBackGradient, _LODraw_SlideBackFillStyle
+; Related .......: _LODraw_PageMasterBackColor, _LODraw_PageMasterBackGradient, _LODraw_PageBackFillStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideMasterBackFillStyle(ByRef $oMaster, $bFillOff = False)
+Func _LODraw_PageMasterBackFillStyle(ByRef $oMaster, $bFillOff = False)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -2044,13 +2044,13 @@ Func _LODraw_SlideMasterBackFillStyle(ByRef $oMaster, $bFillOff = False)
 	If Not IsInt($iFillStyle) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $iFillStyle)
-EndFunc   ;==>_LODraw_SlideMasterBackFillStyle
+EndFunc   ;==>_LODraw_PageMasterBackFillStyle
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideMasterBackGradient
+; Name ..........: _LODraw_PageMasterBackGradient
 ; Description ...: Set or Retrieve the settings for Master Slide Background color Gradient.
-; Syntax ........: _LODraw_SlideMasterBackGradient(ByRef $oMaster[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
-; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
+; Syntax ........: _LODraw_PageMasterBackGradient(ByRef $oMaster[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
+; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOD_GRAD_NAME_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iIncrement          - [optional] (0, 3-256) Default is Null. The number of steps of color change. 0 = Automatic.
@@ -2108,11 +2108,11 @@ EndFunc   ;==>_LODraw_SlideMasterBackFillStyle
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_SlideMasterBackColor, _LODraw_SlideMasterBackFillStyle, _LODraw_SlideBackGradient
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_PageMasterBackColor, _LODraw_PageMasterBackFillStyle, _LODraw_PageBackGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideMasterBackGradient(ByRef $oMaster, $sGradientName = Null, $iType = Null, $iIncrement = Null, $iXCenter = Null, $iYCenter = Null, $iAngle = Null, $iTransitionStart = Null, $iFromColor = Null, $iToColor = Null, $iFromIntense = Null, $iToIntense = Null)
+Func _LODraw_PageMasterBackGradient(ByRef $oMaster, $sGradientName = Null, $iType = Null, $iIncrement = Null, $iXCenter = Null, $iYCenter = Null, $iAngle = Null, $iTransitionStart = Null, $iFromColor = Null, $iToColor = Null, $iFromIntense = Null, $iToIntense = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -2305,13 +2305,13 @@ Func _LODraw_SlideMasterBackGradient(ByRef $oMaster, $sGradientName = Null, $iTy
 	$iError = (__LO_VarsAreNull($iToIntense)) ? $iError : ($oMaster.Background.FillGradient.EndIntensity() = $iToIntense) ? ($iError) : (BitOR($iError, 1024))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_SlideMasterBackGradient
+EndFunc   ;==>_LODraw_PageMasterBackGradient
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideMasterBackTransparency
+; Name ..........: _LODraw_PageMasterBackTransparency
 ; Description ...: Set or retrieve Transparency settings for a Master Slide.
-; Syntax ........: _LODraw_SlideMasterBackTransparency(ByRef $oMaster[, $iTransparency = Null])
-; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
+; Syntax ........: _LODraw_PageMasterBackTransparency(ByRef $oMaster[, $iTransparency = Null])
+; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
@@ -2332,11 +2332,11 @@ EndFunc   ;==>_LODraw_SlideMasterBackGradient
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the Master slide, -1 is returned.
-; Related .......: _LODraw_SlideMasterBackTransparencyGradient, _LODraw_SlideBackTransparency
+; Related .......: _LODraw_PageMasterBackTransparencyGradient, _LODraw_PageBackTransparency
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideMasterBackTransparency(ByRef $oMaster, $iTransparency = Null)
+Func _LODraw_PageMasterBackTransparency(ByRef $oMaster, $iTransparency = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -2374,13 +2374,13 @@ Func _LODraw_SlideMasterBackTransparency(ByRef $oMaster, $iTransparency = Null)
 	$iError = ($oMaster.Background.FillTransparence() = $iTransparency) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_SlideMasterBackTransparency
+EndFunc   ;==>_LODraw_PageMasterBackTransparency
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideMasterBackTransparencyGradient
+; Name ..........: _LODraw_PageMasterBackTransparencyGradient
 ; Description ...: Set or retrieve the Master Slide's transparency gradient settings.
-; Syntax ........: _LODraw_SlideMasterBackTransparencyGradient(ByRef $oMaster[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
-; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
+; Syntax ........: _LODraw_PageMasterBackTransparencyGradient(ByRef $oMaster[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
+; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ;                  $iType               - [optional] (-1-5) Default is Null. The type of transparency gradient to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3. Call with $LOD_GRAD_TYPE_OFF to turn Transparency Gradient off.
 ;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
@@ -2426,11 +2426,11 @@ EndFunc   ;==>_LODraw_SlideMasterBackTransparency
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  While these properties can be set successfully, LibreOffice doesn't seem to apply it to the master slide, even when done using the UI.
-; Related .......: _LODraw_SlideMasterBackTransparency, _LODraw_SlideBackTransparencyGradient
+; Related .......: _LODraw_PageMasterBackTransparency, _LODraw_PageBackTransparencyGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideMasterBackTransparencyGradient(ByRef $oMaster, $iType = Null, $iXCenter = Null, $iYCenter = Null, $iAngle = Null, $iTransitionStart = Null, $iStart = Null, $iEnd = Null)
+Func _LODraw_PageMasterBackTransparencyGradient(ByRef $oMaster, $iType = Null, $iXCenter = Null, $iYCenter = Null, $iAngle = Null, $iTransitionStart = Null, $iStart = Null, $iEnd = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -2581,14 +2581,14 @@ Func _LODraw_SlideMasterBackTransparencyGradient(ByRef $oMaster, $iType = Null, 
 	$iError = (__LO_VarsAreNull($iEnd)) ? ($iError) : (($oMaster.Background.FillTransparenceGradient.EndColor() = __LODraw_TransparencyGradientConvert($iEnd)) ? ($iError) : (BitOR($iError, 64)))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_SlideMasterBackTransparencyGradient
+EndFunc   ;==>_LODraw_PageMasterBackTransparencyGradient
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideMasterCurrent
+; Name ..........: _LODraw_PageMasterCurrent
 ; Description ...: Set or Retrieve the currently applied Master slide to a slide.
-; Syntax ........: _LODraw_SlideMasterCurrent(ByRef $oSlide[, $oMaster = Null])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
-;                  $oMaster             - [optional] Default is Null. A Master Slide object returned by a previous _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
+; Syntax ........: _LODraw_PageMasterCurrent(ByRef $oSlide[, $oMaster = Null])
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
+;                  $oMaster             - [optional] Default is Null. A Master Slide object returned by a previous _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ; Return values .: Success: 1 or Object.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Object = Success. All optional parameters were called with Null, returning currently applied Master Slide as an Object.
@@ -2604,11 +2604,11 @@ EndFunc   ;==>_LODraw_SlideMasterBackTransparencyGradient
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LODraw_SlideMasterGetObjByIndex, _LODraw_SlideMasterGetObjByName, _LODraw_SlideCurrent, _LODraw_SlideCurrent
+; Related .......: _LODraw_PageMasterGetObjByIndex, _LODraw_PageMasterGetObjByName, _LODraw_PageCurrent, _LODraw_PageCurrent
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideMasterCurrent(ByRef $oSlide, $oMaster = Null)
+Func _LODraw_PageMasterCurrent(ByRef $oSlide, $oMaster = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -2630,12 +2630,12 @@ Func _LODraw_SlideMasterCurrent(ByRef $oSlide, $oMaster = Null)
 	$iError = ($oSlide.MasterPage() = $oMaster) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_SlideMasterCurrent
+EndFunc   ;==>_LODraw_PageMasterCurrent
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideMasterDeleteByIndex
+; Name ..........: _LODraw_PageMasterDeleteByIndex
 ; Description ...: Delete a master slide by index.
-; Syntax ........: _LODraw_SlideMasterDeleteByIndex(ByRef $oDoc, $iMaster)
+; Syntax ........: _LODraw_PageMasterDeleteByIndex(ByRef $oDoc, $iMaster)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $iMaster             - The index of the master slide to delete. 0 based.
 ; Return values .: Success: 1
@@ -2651,11 +2651,11 @@ EndFunc   ;==>_LODraw_SlideMasterCurrent
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Trying to delete a Master Slide that is used by a slide will result in a processing error. I currently have no way of checking if a master slide is free to be deleted.
-; Related .......: _LODraw_SlideMasterDeleteByObj, _LODraw_SlideMastersGetCount, _LODraw_SlideDeleteByIndex
+; Related .......: _LODraw_PageMasterDeleteByObj, _LODraw_PageMastersGetCount, _LODraw_PageDeleteByIndex
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideMasterDeleteByIndex(ByRef $oDoc, $iMaster)
+Func _LODraw_PageMasterDeleteByIndex(ByRef $oDoc, $iMaster)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -2675,13 +2675,13 @@ Func _LODraw_SlideMasterDeleteByIndex(ByRef $oDoc, $iMaster)
 	If ($iCount = $oDoc.MasterPages.getCount()) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to delete because the count is the same.
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LODraw_SlideMasterDeleteByIndex
+EndFunc   ;==>_LODraw_PageMasterDeleteByIndex
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideMasterDeleteByObj
+; Name ..........: _LODraw_PageMasterDeleteByObj
 ; Description ...: Delete a master slide using its Object.
-; Syntax ........: _LODraw_SlideMasterDeleteByObj(ByRef $oMaster)
-; Parameters ....: $oMaster             -  A Master Slide object returned by a previous _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
+; Syntax ........: _LODraw_PageMasterDeleteByObj(ByRef $oMaster)
+; Parameters ....: $oMaster             -  A Master Slide object returned by a previous _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Slide was successfully deleted.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -2694,11 +2694,11 @@ EndFunc   ;==>_LODraw_SlideMasterDeleteByIndex
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Trying to delete a Master Slide that is used by a slide will result in a processing error. I currently have no way of checking if a master slide is free to be deleted.
-; Related .......: _LODraw_SlideMasterDeleteByIndex, _LODraw_SlideMasterGetObjByIndex, _LODraw_SlideMasterGetObjByName, _LODraw_SlideDeleteByObj
+; Related .......: _LODraw_PageMasterDeleteByIndex, _LODraw_PageMasterGetObjByIndex, _LODraw_PageMasterGetObjByName, _LODraw_PageDeleteByObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideMasterDeleteByObj(ByRef $oMaster)
+Func _LODraw_PageMasterDeleteByObj(ByRef $oMaster)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -2719,12 +2719,12 @@ Func _LODraw_SlideMasterDeleteByObj(ByRef $oMaster)
 	$oMaster = Null
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LODraw_SlideMasterDeleteByObj
+EndFunc   ;==>_LODraw_PageMasterDeleteByObj
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideMasterExists
+; Name ..........: _LODraw_PageMasterExists
 ; Description ...: Check whether a master slide with a certain name exists in a document.
-; Syntax ........: _LODraw_SlideMasterExists(ByRef $oDoc, $sName)
+; Syntax ........: _LODraw_PageMasterExists(ByRef $oDoc, $sName)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $sName               - The master slide name to check for.
 ; Return values .: Success: Boolean.
@@ -2738,11 +2738,11 @@ EndFunc   ;==>_LODraw_SlideMasterDeleteByObj
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LODraw_SlideMasterAdd, _LODraw_SlideMasterName, _LODraw_SlideMastersGetNames, _LODraw_SlideExists
+; Related .......: _LODraw_PageMasterAdd, _LODraw_PageMasterName, _LODraw_PageMastersGetNames, _LODraw_PageExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideMasterExists(ByRef $oDoc, $sName)
+Func _LODraw_PageMasterExists(ByRef $oDoc, $sName)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -2755,13 +2755,13 @@ Func _LODraw_SlideMasterExists(ByRef $oDoc, $sName)
 	If Not IsBool($bExists) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $bExists)
-EndFunc   ;==>_LODraw_SlideMasterExists
+EndFunc   ;==>_LODraw_PageMasterExists
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideMasterFormat
+; Name ..........: _LODraw_PageMasterFormat
 ; Description ...: Set or Retrieve the master slide format settings.
-; Syntax ........: _LODraw_SlideMasterFormat(ByRef $oMaster[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
-; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
+; Syntax ........: _LODraw_PageMasterFormat(ByRef $oMaster[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
+; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_WIDTH_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_HEIGHT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeDraw_Constants.au3.
@@ -2787,11 +2787,11 @@ EndFunc   ;==>_LODraw_SlideMasterExists
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  When modifying the page format, the shapes etc., aren't readjusted as they are in LibreOffice UI.
 ;                  I am unable to find the properties to set for "FitObject to Paper Format", "Background covers margins", "Slide numbers", and "Paper tray".
-; Related .......: _LO_UnitConvert, _LODraw_SlideMasterMargins, _LODraw_SlideHandoutFormat, _LODraw_SlideNotesFormat, _LODraw_SlideFormat
+; Related .......: _LO_UnitConvert, _LODraw_PageMasterMargins, _LODraw_PageHandoutFormat, _LODraw_PageNotesFormat, _LODraw_PageFormat
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideMasterFormat(ByRef $oMaster, $iWidth = Null, $iHeight = Null, $iOrientation = Null)
+Func _LODraw_PageMasterFormat(ByRef $oMaster, $iWidth = Null, $iHeight = Null, $iOrientation = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -2802,12 +2802,12 @@ Func _LODraw_SlideMasterFormat(ByRef $oMaster, $iWidth = Null, $iHeight = Null, 
 	$vReturn = __LODraw_Format($oMaster, $iWidth, $iHeight, $iOrientation)
 
 	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_SlideMasterFormat
+EndFunc   ;==>_LODraw_PageMasterFormat
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideMasterGetObjByIndex
+; Name ..........: _LODraw_PageMasterGetObjByIndex
 ; Description ...: Retrieve a Master Slide's Object by index.
-; Syntax ........: _LODraw_SlideMasterGetObjByIndex(ByRef $oDoc, $iMaster)
+; Syntax ........: _LODraw_PageMasterGetObjByIndex(ByRef $oDoc, $iMaster)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $iMaster             - The index of the master slide to retrieve. 0 based.
 ; Return values .: Success: Object
@@ -2821,11 +2821,11 @@ EndFunc   ;==>_LODraw_SlideMasterFormat
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LODraw_SlideMasterGetObjByName, _LODraw_SlideMastersGetCount, _LODraw_SlideGetObjByIndex
+; Related .......: _LODraw_PageMasterGetObjByName, _LODraw_PageMastersGetCount, _LODraw_PageGetObjByIndex
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideMasterGetObjByIndex(ByRef $oDoc, $iMaster)
+Func _LODraw_PageMasterGetObjByIndex(ByRef $oDoc, $iMaster)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -2838,12 +2838,12 @@ Func _LODraw_SlideMasterGetObjByIndex(ByRef $oDoc, $iMaster)
 	If Not IsObj($oMSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oMSlide)
-EndFunc   ;==>_LODraw_SlideMasterGetObjByIndex
+EndFunc   ;==>_LODraw_PageMasterGetObjByIndex
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideMasterGetObjByName
+; Name ..........: _LODraw_PageMasterGetObjByName
 ; Description ...: Retrieve a Master Slide's Object by name.
-; Syntax ........: _LODraw_SlideMasterGetObjByName(ByRef $oDoc, $sName)
+; Syntax ........: _LODraw_PageMasterGetObjByName(ByRef $oDoc, $sName)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $sName               - The Master Slide's name to retrieve the Object for.
 ; Return values .: Success: Object
@@ -2858,11 +2858,11 @@ EndFunc   ;==>_LODraw_SlideMasterGetObjByIndex
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: I have not found a way to import Master slide from the LibreOffice templates yet.
-; Related .......: _LODraw_SlideMasterGetObjByIndex, _LODraw_SlideMastersGetNames, _LODraw_SlideGetObjByName
+; Related .......: _LODraw_PageMasterGetObjByIndex, _LODraw_PageMastersGetNames, _LODraw_PageGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideMasterGetObjByName(ByRef $oDoc, $sName)
+Func _LODraw_PageMasterGetObjByName(ByRef $oDoc, $sName)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -2876,13 +2876,13 @@ Func _LODraw_SlideMasterGetObjByName(ByRef $oDoc, $sName)
 	If Not IsObj($oMSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oMSlide)
-EndFunc   ;==>_LODraw_SlideMasterGetObjByName
+EndFunc   ;==>_LODraw_PageMasterGetObjByName
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideMasterMargins
+; Name ..........: _LODraw_PageMasterMargins
 ; Description ...: Set or Retrieve the master slide page margin settings.
-; Syntax ........: _LODraw_SlideMasterMargins(ByRef $oMaster[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
-; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
+; Syntax ........: _LODraw_PageMasterMargins(ByRef $oMaster[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
+; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ;                  $iLeft               - [optional] Default is Null. The amount of space to leave between the left edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
 ;                  $iRight              - [optional] Default is Null. The amount of space to leave between the right edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
 ;                  $iTop                - [optional] Default is Null. The amount of space to leave between the upper edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
@@ -2907,11 +2907,11 @@ EndFunc   ;==>_LODraw_SlideMasterGetObjByName
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LODraw_SlideMasterFormat, _LODraw_SlideHandoutMargins, _LODraw_SlideNotesMargins, _LODraw_SlideMargins
+; Related .......: _LO_UnitConvert, _LODraw_PageMasterFormat, _LODraw_PageHandoutMargins, _LODraw_PageNotesMargins, _LODraw_PageMargins
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideMasterMargins(ByRef $oMaster, $iLeft = Null, $iRight = Null, $iTop = Null, $iBottom = Null)
+Func _LODraw_PageMasterMargins(ByRef $oMaster, $iLeft = Null, $iRight = Null, $iTop = Null, $iBottom = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -2922,13 +2922,13 @@ Func _LODraw_SlideMasterMargins(ByRef $oMaster, $iLeft = Null, $iRight = Null, $
 	$vReturn = __LODraw_Margins($oMaster, $iLeft, $iRight, $iTop, $iBottom)
 
 	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_SlideMasterMargins
+EndFunc   ;==>_LODraw_PageMasterMargins
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideMasterName
+; Name ..........: _LODraw_PageMasterName
 ; Description ...: Set or Retrieve a Master Slide's name.
-; Syntax ........: _LODraw_SlideMasterName(ByRef $oMaster[, $sName = Null])
-; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
+; Syntax ........: _LODraw_PageMasterName(ByRef $oMaster[, $sName = Null])
+; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ;                  $sName               - [optional] Default is Null. The new name to set the Master slide to. See Remarks.
 ; Return values .: Success: 1 or String.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -2948,11 +2948,11 @@ EndFunc   ;==>_LODraw_SlideMasterMargins
 ; Modified ......:
 ; Remarks .......: If setting the Master slide name to a name and a number, there is a good chance the name won't stay applied, as LibreOffice will assume it is an auto-numbered slide.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LODraw_SlideMasterExists, _LODraw_SlideMastersGetNames, _LODraw_SlideName
+; Related .......: _LODraw_PageMasterExists, _LODraw_PageMastersGetNames, _LODraw_PageName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideMasterName(ByRef $oMaster, $sName = Null)
+Func _LODraw_PageMasterName(ByRef $oMaster, $sName = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -2979,13 +2979,13 @@ Func _LODraw_SlideMasterName(ByRef $oMaster, $sName = Null)
 	$iError = ($oMaster.LinkDisplayName() = $sName) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_SlideMasterName
+EndFunc   ;==>_LODraw_PageMasterName
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideMasterNotesGetObj
+; Name ..........: _LODraw_PageMasterNotesGetObj
 ; Description ...: Retrieve the Notes Object for a Master Slide.
-; Syntax ........: _LODraw_SlideMasterNotesGetObj(ByRef $oMaster)
-; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_SlideMasterAdd, _LODraw_SlideMasterGetObjByIndex, or _LODraw_SlideMasterGetObjByName function.
+; Syntax ........: _LODraw_PageMasterNotesGetObj(ByRef $oMaster)
+; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning Notes page Object.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -2996,11 +2996,11 @@ EndFunc   ;==>_LODraw_SlideMasterName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LODraw_SlideNotesGetObj
+; Related .......: _LODraw_PageNotesGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideMasterNotesGetObj(ByRef $oMaster)
+Func _LODraw_PageMasterNotesGetObj(ByRef $oMaster)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -3012,12 +3012,12 @@ Func _LODraw_SlideMasterNotesGetObj(ByRef $oMaster)
 	If Not IsObj($oNotes) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oNotes)
-EndFunc   ;==>_LODraw_SlideMasterNotesGetObj
+EndFunc   ;==>_LODraw_PageMasterNotesGetObj
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideMastersGetCount
+; Name ..........: _LODraw_PageMastersGetCount
 ; Description ...: Retrieve a count of master slides.
-; Syntax ........: _LODraw_SlideMastersGetCount(ByRef $oDoc)
+; Syntax ........: _LODraw_PageMastersGetCount(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning count of master slides contained in the document.
@@ -3029,11 +3029,11 @@ EndFunc   ;==>_LODraw_SlideMasterNotesGetObj
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This only returns a count of master slides already loaded into the document.
-; Related .......: _LODraw_SlideMasterDeleteByIndex, _LODraw_SlideMasterGetObjByIndex, _LODraw_SlidesGetCount
+; Related .......: _LODraw_PageMasterDeleteByIndex, _LODraw_PageMasterGetObjByIndex, _LODraw_PagesGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideMastersGetCount(ByRef $oDoc)
+Func _LODraw_PageMastersGetCount(ByRef $oDoc)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -3045,12 +3045,12 @@ Func _LODraw_SlideMastersGetCount(ByRef $oDoc)
 	If Not IsInt($iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $iCount)
-EndFunc   ;==>_LODraw_SlideMastersGetCount
+EndFunc   ;==>_LODraw_PageMastersGetCount
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideMastersGetNames
+; Name ..........: _LODraw_PageMastersGetNames
 ; Description ...: Retrieve an array of names for all Master Slides contained in the document.
-; Syntax ........: _LODraw_SlideMastersGetNames(ByRef $oDoc)
+; Syntax ........: _LODraw_PageMastersGetNames(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. An Array containing all Master Slide names. @Extended is set to the number of slide names returned.
@@ -3065,11 +3065,11 @@ EndFunc   ;==>_LODraw_SlideMastersGetCount
 ; Modified ......:
 ; Remarks .......: This only returns a list of master slide names already loaded into the document.
 ;                  I have not found a way to import Master slide from the LibreOffice templates yet.
-; Related .......: _LODraw_SlideMasterExists, _LODraw_SlideMasterGetObjByName, _LODraw_SlidesGetNames
+; Related .......: _LODraw_PageMasterExists, _LODraw_PageMasterGetObjByName, _LODraw_PagesGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideMastersGetNames(ByRef $oDoc)
+Func _LODraw_PageMastersGetNames(ByRef $oDoc)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -3095,13 +3095,13 @@ Func _LODraw_SlideMastersGetNames(ByRef $oDoc)
 	Next
 
 	Return SetError($__LO_STATUS_SUCCESS, $iMasters, $asMasters)
-EndFunc   ;==>_LODraw_SlideMastersGetNames
+EndFunc   ;==>_LODraw_PageMastersGetNames
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideMove
+; Name ..........: _LODraw_PageMove
 ; Description ...: Move a slide in the collection of slides.
-; Syntax ........: _LODraw_SlideMove(ByRef $oSlide, $iPos)
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
+; Syntax ........: _LODraw_PageMove(ByRef $oSlide, $iPos)
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ;                  $iPos                - The position to move the slide to in the collection of slides. 0 Based. See remarks.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Slide was successfully moved.
@@ -3119,11 +3119,11 @@ EndFunc   ;==>_LODraw_SlideMastersGetNames
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Due to limitations in the API, some dispatches are executed to move the slide. The current slide will temporarily be set to the new slide in order to move it.
-; Related .......: _LODraw_SlideCopy
+; Related .......: _LODraw_PageCopy
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideMove(ByRef $oSlide, $iPos)
+Func _LODraw_PageMove(ByRef $oSlide, $iPos)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -3191,13 +3191,13 @@ Func _LODraw_SlideMove(ByRef $oSlide, $iPos)
 	If ($iCurrPos <> $iPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LODraw_SlideMove
+EndFunc   ;==>_LODraw_PageMove
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideName
+; Name ..........: _LODraw_PageName
 ; Description ...: Set or Retrieve a Slide's name.
-; Syntax ........: _LODraw_SlideName(ByRef $oSlide[, $sName = Null])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
+; Syntax ........: _LODraw_PageName(ByRef $oSlide[, $sName = Null])
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ;                  $sName               - [optional] Default is Null. The new name to set the slide to. See Remarks.
 ; Return values .: Success: 1 or String.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -3217,11 +3217,11 @@ EndFunc   ;==>_LODraw_SlideMove
 ; Modified ......:
 ; Remarks .......: If setting the slide name to a name and a number, there is a good chance the name won't stay applied, as LibreOffice will assume it is an auto-numbered slide.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LODraw_SlideExists, _LODraw_SlidesGetNames, _LODraw_SlideMasterName
+; Related .......: _LODraw_PageExists, _LODraw_PagesGetNames, _LODraw_PageMasterName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideName(ByRef $oSlide, $sName = Null)
+Func _LODraw_PageName(ByRef $oSlide, $sName = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -3248,13 +3248,13 @@ Func _LODraw_SlideName(ByRef $oSlide, $sName = Null)
 	$iError = ($oSlide.LinkDisplayName() = $sName) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_SlideName
+EndFunc   ;==>_LODraw_PageName
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideFooter
+; Name ..........: _LODraw_PageFooter
 ; Description ...: Set or Retrieve notes page Footer settings.
-; Syntax ........: _LODraw_SlideFooter(ByRef $oNotes[, $bFooter = Null[, $sFooterText = Null[, $bSlideNum = Null]]])
-; Parameters ....: $oNotes              - A Notes page object returned by a previous _LODraw_SlideNotesGetObj or _LODraw_SlideMasterNotesGetObj function.
+; Syntax ........: _LODraw_PageFooter(ByRef $oNotes[, $bFooter = Null[, $sFooterText = Null[, $bSlideNum = Null]]])
+; Parameters ....: $oNotes              - A Notes page object returned by a previous _LODraw_PageNotesGetObj or _LODraw_PageMasterNotesGetObj function.
 ;                  $bFooter             - [optional] Default is Null. If True, a Footer entry is added to the footer of the page.
 ;                  $sFooterText         - [optional] Default is Null. If $bFooter is True, the text to display in the footer of the page.
 ;                  $bSlideNum           - [optional] Default is Null. If True, a current Slide number is added to the footer of the page.
@@ -3279,11 +3279,11 @@ EndFunc   ;==>_LODraw_SlideName
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  You can only set or retrieve footer property values for a slide notes page, not a master notes page.
-; Related .......: _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, _LODraw_SlideFooter, _LODraw_SlideHandoutFooter
+; Related .......: _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, _LODraw_PageFooter, _LODraw_PageHandoutFooter
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideNotesFooter(ByRef $oNotes, $bFooter = Null, $sFooterText = Null, $bSlideNum = Null)
+Func _LODraw_PageNotesFooter(ByRef $oNotes, $bFooter = Null, $sFooterText = Null, $bSlideNum = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -3324,13 +3324,13 @@ Func _LODraw_SlideNotesFooter(ByRef $oNotes, $bFooter = Null, $sFooterText = Nul
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_SlideNotesFooter
+EndFunc   ;==>_LODraw_PageNotesFooter
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideNotesFormat
+; Name ..........: _LODraw_PageNotesFormat
 ; Description ...: Set or Retrieve the notes page format settings.
-; Syntax ........: _LODraw_SlideNotesFormat(ByRef $oNotes[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
-; Parameters ....: $oNotes              - A Notes page object returned by a previous _LODraw_SlideNotesGetObj or _LODraw_SlideMasterNotesGetObj function.
+; Syntax ........: _LODraw_PageNotesFormat(ByRef $oNotes[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
+; Parameters ....: $oNotes              - A Notes page object returned by a previous _LODraw_PageNotesGetObj or _LODraw_PageMasterNotesGetObj function.
 ;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_WIDTH_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_HEIGHT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeDraw_Constants.au3.
@@ -3355,11 +3355,11 @@ EndFunc   ;==>_LODraw_SlideNotesFooter
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  When modifying the page format, the shapes etc., aren't readjusted as they are in LibreOffice UI.
-; Related .......: _LO_UnitConvert, _LODraw_SlideLayout, _LODraw_SlideMargins, _LODraw_SlideHandoutFormat, _LODraw_SlideMasterFormat, _LODraw_SlideFormat
+; Related .......: _LO_UnitConvert, _LODraw_PageLayout, _LODraw_PageMargins, _LODraw_PageHandoutFormat, _LODraw_PageMasterFormat, _LODraw_PageFormat
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideNotesFormat(ByRef $oNotes, $iWidth = Null, $iHeight = Null, $iOrientation = Null)
+Func _LODraw_PageNotesFormat(ByRef $oNotes, $iWidth = Null, $iHeight = Null, $iOrientation = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -3370,13 +3370,13 @@ Func _LODraw_SlideNotesFormat(ByRef $oNotes, $iWidth = Null, $iHeight = Null, $i
 	$vReturn = __LODraw_Format($oNotes, $iWidth, $iHeight, $iOrientation)
 
 	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_SlideNotesFormat
+EndFunc   ;==>_LODraw_PageNotesFormat
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideNotesGetObj
+; Name ..........: _LODraw_PageNotesGetObj
 ; Description ...: Retrieve the Notes Object for a Slide.
-; Syntax ........: _LODraw_SlideNotesGetObj(ByRef $oSlide)
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
+; Syntax ........: _LODraw_PageNotesGetObj(ByRef $oSlide)
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning Notes page Object.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -3387,11 +3387,11 @@ EndFunc   ;==>_LODraw_SlideNotesFormat
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LODraw_SlideMasterNotesGetObj
+; Related .......: _LODraw_PageMasterNotesGetObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideNotesGetObj(ByRef $oSlide)
+Func _LODraw_PageNotesGetObj(ByRef $oSlide)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -3403,13 +3403,13 @@ Func _LODraw_SlideNotesGetObj(ByRef $oSlide)
 	If Not IsObj($oNotes) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oNotes)
-EndFunc   ;==>_LODraw_SlideNotesGetObj
+EndFunc   ;==>_LODraw_PageNotesGetObj
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideNotesHeader
+; Name ..........: _LODraw_PageNotesHeader
 ; Description ...: Set or Retrieve notes page header settings.
-; Syntax ........: _LODraw_SlideNotesHeader(ByRef $oNotes[, $bHeader = Null[, $sHeaderText = Null[, $bDateTime = Null[, $bDateTimeIsFixed = Null[, $sDateTimeValue = Null[, $iDateTimeFormat = Null]]]]]])
-; Parameters ....: $oNotes              - A Notes page object returned by a previous _LODraw_SlideNotesGetObj function.
+; Syntax ........: _LODraw_PageNotesHeader(ByRef $oNotes[, $bHeader = Null[, $sHeaderText = Null[, $bDateTime = Null[, $bDateTimeIsFixed = Null[, $sDateTimeValue = Null[, $iDateTimeFormat = Null]]]]]])
+; Parameters ....: $oNotes              - A Notes page object returned by a previous _LODraw_PageNotesGetObj function.
 ;                  $bHeader             - [optional] Default is Null. If True, a Header entry is added to the Header of the page.
 ;                  $sHeaderText         - [optional] Default is Null. If $bHeader is True, the text to display in the Header of the page.
 ;                  $bDateTime           - [optional] Default is Null. If True, a Date or Time entry is added to the header of the page.
@@ -3444,11 +3444,11 @@ EndFunc   ;==>_LODraw_SlideNotesGetObj
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  You can only set or retrieve header property values for a slide notes page, not a master notes page.
-; Related .......: _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, _LODraw_SlideHandoutHeader
+; Related .......: _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, _LODraw_PageHandoutHeader
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideNotesHeader(ByRef $oNotes, $bHeader = Null, $sHeaderText = Null, $bDateTime = Null, $bDateTimeIsFixed = Null, $sDateTimeValue = Null, $iDateTimeFormat = Null)
+Func _LODraw_PageNotesHeader(ByRef $oNotes, $bHeader = Null, $sHeaderText = Null, $bDateTime = Null, $bDateTimeIsFixed = Null, $sDateTimeValue = Null, $iDateTimeFormat = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -3515,13 +3515,13 @@ Func _LODraw_SlideNotesHeader(ByRef $oNotes, $bHeader = Null, $sHeaderText = Nul
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_SlideNotesHeader
+EndFunc   ;==>_LODraw_PageNotesHeader
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideNotesMargins
+; Name ..........: _LODraw_PageNotesMargins
 ; Description ...: Set or Retrieve the notes page margin settings.
-; Syntax ........: _LODraw_SlideNotesMargins(ByRef $oNotes[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
-; Parameters ....: $oNotes              - A Notes page object returned by a previous _LODraw_SlideNotesGetObj or _LODraw_SlideMasterNotesGetObj function.
+; Syntax ........: _LODraw_PageNotesMargins(ByRef $oNotes[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
+; Parameters ....: $oNotes              - A Notes page object returned by a previous _LODraw_PageNotesGetObj or _LODraw_PageMasterNotesGetObj function.
 ;                  $iLeft               - [optional] Default is Null. The amount of space to leave between the left edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
 ;                  $iRight              - [optional] Default is Null. The amount of space to leave between the right edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
 ;                  $iTop                - [optional] Default is Null. The amount of space to leave between the upper edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
@@ -3546,11 +3546,11 @@ EndFunc   ;==>_LODraw_SlideNotesHeader
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LODraw_SlideLayout, _LODraw_SlideFormat, _LODraw_SlideHandoutMargins, _LODraw_SlideMasterMargins, _LODraw_SlideMargins
+; Related .......: _LO_UnitConvert, _LODraw_PageLayout, _LODraw_PageFormat, _LODraw_PageHandoutMargins, _LODraw_PageMasterMargins, _LODraw_PageMargins
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideNotesMargins(ByRef $oNotes, $iLeft = Null, $iRight = Null, $iTop = Null, $iBottom = Null)
+Func _LODraw_PageNotesMargins(ByRef $oNotes, $iLeft = Null, $iRight = Null, $iTop = Null, $iBottom = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -3561,12 +3561,12 @@ Func _LODraw_SlideNotesMargins(ByRef $oNotes, $iLeft = Null, $iRight = Null, $iT
 	$vReturn = __LODraw_Margins($oNotes, $iLeft, $iRight, $iTop, $iBottom)
 
 	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_SlideNotesMargins
+EndFunc   ;==>_LODraw_PageNotesMargins
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlidesGetCount
+; Name ..........: _LODraw_PagesGetCount
 ; Description ...: Retrieve a count of slides.
-; Syntax ........: _LODraw_SlidesGetCount(ByRef $oDoc)
+; Syntax ........: _LODraw_PagesGetCount(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning count of slides contained in the document.
@@ -3578,11 +3578,11 @@ EndFunc   ;==>_LODraw_SlideNotesMargins
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LODraw_SlideDeleteByIndex, _LODraw_SlideGetObjByIndex, _LODraw_SlideMastersGetCount
+; Related .......: _LODraw_PageDeleteByIndex, _LODraw_PageGetObjByIndex, _LODraw_PageMastersGetCount
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlidesGetCount(ByRef $oDoc)
+Func _LODraw_PagesGetCount(ByRef $oDoc)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -3594,12 +3594,12 @@ Func _LODraw_SlidesGetCount(ByRef $oDoc)
 	If Not IsInt($iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $iCount)
-EndFunc   ;==>_LODraw_SlidesGetCount
+EndFunc   ;==>_LODraw_PagesGetCount
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlidesGetNames
+; Name ..........: _LODraw_PagesGetNames
 ; Description ...: Retrieve an array of names for all Slides contained in the document.
-; Syntax ........: _LODraw_SlidesGetNames(ByRef $oDoc)
+; Syntax ........: _LODraw_PagesGetNames(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. An Array containing all Slide names. @Extended is set to the number of slide names returned.
@@ -3611,11 +3611,11 @@ EndFunc   ;==>_LODraw_SlidesGetCount
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LODraw_SlideExists, _LODraw_SlideGetObjByName, _LODraw_SlideMastersGetNames
+; Related .......: _LODraw_PageExists, _LODraw_PageGetObjByName, _LODraw_PageMastersGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlidesGetNames(ByRef $oDoc)
+Func _LODraw_PagesGetNames(ByRef $oDoc)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -3627,12 +3627,12 @@ Func _LODraw_SlidesGetNames(ByRef $oDoc)
 	If Not IsArray($asSlides) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, UBound($asSlides), $asSlides)
-EndFunc   ;==>_LODraw_SlidesGetNames
+EndFunc   ;==>_LODraw_PagesGetNames
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideshowActiveSettings
+; Name ..........: _LODraw_PageshowActiveSettings
 ; Description ...: Set or Retrieve settings for an actively running presentation.
-; Syntax ........: _LODraw_SlideshowActiveSettings(ByRef $oDoc[, $bKeepOnTop = Null[, $bMouseVisible = Null[, $bMouseAsPen = Null[, $iPenColor = Null[, $iPenWidth = Null]]]]])
+; Syntax ........: _LODraw_PageshowActiveSettings(ByRef $oDoc[, $bKeepOnTop = Null[, $bMouseVisible = Null[, $bMouseAsPen = Null[, $iPenColor = Null[, $iPenWidth = Null]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $bKeepOnTop          - [optional] Default is Null. If True, the presentation will be always kept on top of other programs.
 ;                  $bMouseVisible       - [optional] Default is Null. If True, the mouse is visible in the presentation.
@@ -3666,11 +3666,11 @@ EndFunc   ;==>_LODraw_SlidesGetNames
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_SlideshowIsRunning, _LODraw_SlideshowSettingsMode, _LODraw_SlideshowSettingsOptions, _LODraw_SlideshowSettingsRange
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_PageshowIsRunning, _LODraw_PageshowSettingsMode, _LODraw_PageshowSettingsOptions, _LODraw_PageshowSettingsRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideshowActiveSettings(ByRef $oDoc, $bKeepOnTop = Null, $bMouseVisible = Null, $bMouseAsPen = Null, $iPenColor = Null, $iPenWidth = Null)
+Func _LODraw_PageshowActiveSettings(ByRef $oDoc, $bKeepOnTop = Null, $bMouseVisible = Null, $bMouseAsPen = Null, $iPenColor = Null, $iPenWidth = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -3737,12 +3737,12 @@ Func _LODraw_SlideshowActiveSettings(ByRef $oDoc, $bKeepOnTop = Null, $bMouseVis
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_SlideshowActiveSettings
+EndFunc   ;==>_LODraw_PageshowActiveSettings
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideshowCustomCreate
+; Name ..........: _LODraw_PageshowCustomCreate
 ; Description ...: Create a Custom Slideshow.
-; Syntax ........: _LODraw_SlideshowCustomCreate(ByRef $oDoc, $sName, $asSlides)
+; Syntax ........: _LODraw_PageshowCustomCreate(ByRef $oDoc, $sName, $asSlides)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $sName               - The name of the Custom Slideshow to create.
 ;                  $asSlides            - A single column Array of Slide names. See remarks.
@@ -3766,11 +3766,11 @@ EndFunc   ;==>_LODraw_SlideshowActiveSettings
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The expected input for $asSlides is a single column array having the Slide names in the order the user wishes the Slides to appear in the presentation, slide names can be placed in the Array multiple times.
-; Related .......: _LODraw_SlideshowCustomDelete, _LODraw_SlideshowsCustomGetNames
+; Related .......: _LODraw_PageshowCustomDelete, _LODraw_PageshowsCustomGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideshowCustomCreate(ByRef $oDoc, $sName, $asSlides)
+Func _LODraw_PageshowCustomCreate(ByRef $oDoc, $sName, $asSlides)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -3804,12 +3804,12 @@ Func _LODraw_SlideshowCustomCreate(ByRef $oDoc, $sName, $asSlides)
 	If Not $oDoc.CustomPresentations.hasByName($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LODraw_SlideshowCustomCreate
+EndFunc   ;==>_LODraw_PageshowCustomCreate
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideshowCustomDelete
+; Name ..........: _LODraw_PageshowCustomDelete
 ; Description ...: Deletes a Custom Slideshow.
-; Syntax ........: _LODraw_SlideshowCustomDelete(ByRef $oDoc, $sName)
+; Syntax ........: _LODraw_PageshowCustomDelete(ByRef $oDoc, $sName)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $sName               - The Custom Slideshow's name to delete.
 ; Return values .: Success: 1
@@ -3824,11 +3824,11 @@ EndFunc   ;==>_LODraw_SlideshowCustomCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LODraw_SlideshowCustomCreate, _LODraw_SlideshowsCustomGetNames
+; Related .......: _LODraw_PageshowCustomCreate, _LODraw_PageshowsCustomGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideshowCustomDelete(ByRef $oDoc, $sName)
+Func _LODraw_PageshowCustomDelete(ByRef $oDoc, $sName)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -3840,12 +3840,12 @@ Func _LODraw_SlideshowCustomDelete(ByRef $oDoc, $sName)
 	If $oDoc.CustomPresentations.hasByName($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LODraw_SlideshowCustomDelete
+EndFunc   ;==>_LODraw_PageshowCustomDelete
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideshowCustomModify
+; Name ..........: _LODraw_PageshowCustomModify
 ; Description ...: Set or Retrieve the Slides and order of the slides contained in a Custom Slideshow.
-; Syntax ........: _LODraw_SlideshowCustomModify(ByRef $oDoc, $sName[, $asSlides = Null])
+; Syntax ........: _LODraw_PageshowCustomModify(ByRef $oDoc, $sName[, $asSlides = Null])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $sName               - The name of the Custom Slideshow to modify.
 ;                  $asSlides            - [optional] Default is Null. A single column Array of Slide names. See remarks.
@@ -3876,11 +3876,11 @@ EndFunc   ;==>_LODraw_SlideshowCustomDelete
 ; Remarks .......: The expected input for $asSlides is a single column array having the Slide names in the order the user wishes the Slides to appear in the presentation, slide names can be placed in the Array multiple times.
 ;                  When retrieving the current order and content of the Slideshow, an array is returned with all the Slides contained in the Custom Slideshow, in the order they are set to be played. Slides may be present multiple times.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LODraw_SlideshowCustomCreate, _LODraw_SlideshowsCustomGetNames
+; Related .......: _LODraw_PageshowCustomCreate, _LODraw_PageshowsCustomGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideshowCustomModify(ByRef $oDoc, $sName, $asSlides = Null)
+Func _LODraw_PageshowCustomModify(ByRef $oDoc, $sName, $asSlides = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -3932,12 +3932,12 @@ Func _LODraw_SlideshowCustomModify(ByRef $oDoc, $sName, $asSlides = Null)
 	$iError = ($oDoc.CustomPresentations.getByName($sName).getCount() = UBound($asSlides)) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_SlideshowCustomModify
+EndFunc   ;==>_LODraw_PageshowCustomModify
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideshowCustomSetName
+; Name ..........: _LODraw_PageshowCustomSetName
 ; Description ...: Rename a Custom Slideshow.
-; Syntax ........: _LODraw_SlideshowCustomSetName(ByRef $oDoc, $sName, $sNewName)
+; Syntax ........: _LODraw_PageshowCustomSetName(ByRef $oDoc, $sName, $sNewName)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $sName               - The name of the Custom Slideshow to rename.
 ;                  $sNewName            - The name to rename the Custom Slideshow to.
@@ -3958,11 +3958,11 @@ EndFunc   ;==>_LODraw_SlideshowCustomModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LODraw_SlideshowCustomModify, _LODraw_SlideshowsCustomGetNames
+; Related .......: _LODraw_PageshowCustomModify, _LODraw_PageshowsCustomGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideshowCustomSetName(ByRef $oDoc, $sName, $sNewName)
+Func _LODraw_PageshowCustomSetName(ByRef $oDoc, $sName, $sNewName)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -3982,12 +3982,12 @@ Func _LODraw_SlideshowCustomSetName(ByRef $oDoc, $sName, $sNewName)
 	$iError = ($oCustomPres.Name() = $sNewName) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_SlideshowCustomSetName
+EndFunc   ;==>_LODraw_PageshowCustomSetName
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideshowIsRunning
+; Name ..........: _LODraw_PageshowIsRunning
 ; Description ...: Check whether there is a presentation currently running.
-; Syntax ........: _LODraw_SlideshowIsRunning(ByRef $oDoc)
+; Syntax ........: _LODraw_PageshowIsRunning(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if there is currently a Presentation running, else False.
@@ -3999,11 +3999,11 @@ EndFunc   ;==>_LODraw_SlideshowCustomSetName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LODraw_SlideshowStart, _LODraw_SlideshowStop
+; Related .......: _LODraw_PageshowStart, _LODraw_PageshowStop
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideshowIsRunning(ByRef $oDoc)
+Func _LODraw_PageshowIsRunning(ByRef $oDoc)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -4015,12 +4015,12 @@ Func _LODraw_SlideshowIsRunning(ByRef $oDoc)
 	If Not IsBool($bIsRunning) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $bIsRunning)
-EndFunc   ;==>_LODraw_SlideshowIsRunning
+EndFunc   ;==>_LODraw_PageshowIsRunning
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideshowPresentationControl
+; Name ..........: _LODraw_PageshowPresentationControl
 ; Description ...: Query the status of, or send commands to, a currently running presentation.
-; Syntax ........: _LODraw_SlideshowPresentationControl(ByRef $oDoc, $iAction[, $vValue = Null])
+; Syntax ........: _LODraw_PageshowPresentationControl(ByRef $oDoc, $iAction[, $vValue = Null])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $iAction             - The Query or Command to perform on the presentation. See Constants, $LOD_SLIDESHOW_PRES_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $vValue              - [optional] Default is Null. If the Query or Command requires an input value, it goes here. See Remarks.
@@ -4065,11 +4065,11 @@ EndFunc   ;==>_LODraw_SlideshowIsRunning
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Any queries or commands that require an input parameter will have the type of input required indicated in the description for the Constant.
-; Related .......: _LODraw_SlideshowActiveSettings, _LODraw_SlideshowIsRunning
+; Related .......: _LODraw_PageshowActiveSettings, _LODraw_PageshowIsRunning
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideshowPresentationControl(ByRef $oDoc, $iAction, $vValue = Null)
+Func _LODraw_PageshowPresentationControl(ByRef $oDoc, $iAction, $vValue = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -4193,12 +4193,12 @@ Func _LODraw_SlideshowPresentationControl(ByRef $oDoc, $iAction, $vValue = Null)
 	EndSwitch
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $vReturn)
-EndFunc   ;==>_LODraw_SlideshowPresentationControl
+EndFunc   ;==>_LODraw_PageshowPresentationControl
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideshowsCustomGetNames
+; Name ..........: _LODraw_PageshowsCustomGetNames
 ; Description ...: Retrieve an array of Custom Slideshow names available in the document.
-; Syntax ........: _LODraw_SlideshowsCustomGetNames(ByRef $oDoc)
+; Syntax ........: _LODraw_PageshowsCustomGetNames(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ; Return values .: Success: Array.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. An Array containing all Custom Slideshow names. @Extended is set to the number of names returned.
@@ -4210,11 +4210,11 @@ EndFunc   ;==>_LODraw_SlideshowPresentationControl
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LODraw_SlideshowCustomCreate, _LODraw_SlideshowCustomDelete, _LODraw_SlideshowCustomModify, _LODraw_SlideshowCustomSetName
+; Related .......: _LODraw_PageshowCustomCreate, _LODraw_PageshowCustomDelete, _LODraw_PageshowCustomModify, _LODraw_PageshowCustomSetName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideshowsCustomGetNames(ByRef $oDoc)
+Func _LODraw_PageshowsCustomGetNames(ByRef $oDoc)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -4226,12 +4226,12 @@ Func _LODraw_SlideshowsCustomGetNames(ByRef $oDoc)
 	If Not IsArray($asCustomSlideShows) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, UBound($asCustomSlideShows), $asCustomSlideShows)
-EndFunc   ;==>_LODraw_SlideshowsCustomGetNames
+EndFunc   ;==>_LODraw_PageshowsCustomGetNames
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideshowSettingsMode
+; Name ..........: _LODraw_PageshowSettingsMode
 ; Description ...: Set or Retrieve the Slideshow's play mode settings.
-; Syntax ........: _LODraw_SlideshowSettingsMode(ByRef $oDoc[, $iPresMode = Null[, $iRepeatPause = Null[, $bShowLogo = Null]]])
+; Syntax ........: _LODraw_PageshowSettingsMode(ByRef $oDoc[, $iPresMode = Null[, $iRepeatPause = Null[, $bShowLogo = Null]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $iPresMode           - [optional] (0-2) Default is Null. The mode the presentation is displayed in. See Constants, $LOD_SLIDESHOW_VIEW_MODE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iRepeatPause        - [optional] (0-86399) Default is Null. If $iPresMode is set to $LOD_SLIDESHOW_VIEW_MODE_LOOP, the amount of seconds before the presentation is played again.
@@ -4257,11 +4257,11 @@ EndFunc   ;==>_LODraw_SlideshowsCustomGetNames
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LODraw_SlideshowActiveSettings, _LODraw_SlideshowPresentationControl, _LODraw_SlideshowSettingsOptions, _LODraw_SlideshowSettingsRange
+; Related .......: _LODraw_PageshowActiveSettings, _LODraw_PageshowPresentationControl, _LODraw_PageshowSettingsOptions, _LODraw_PageshowSettingsRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideshowSettingsMode(ByRef $oDoc, $iPresMode = Null, $iRepeatPause = Null, $bShowLogo = Null)
+Func _LODraw_PageshowSettingsMode(ByRef $oDoc, $iPresMode = Null, $iRepeatPause = Null, $bShowLogo = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -4331,12 +4331,12 @@ Func _LODraw_SlideshowSettingsMode(ByRef $oDoc, $iPresMode = Null, $iRepeatPause
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_SlideshowSettingsMode
+EndFunc   ;==>_LODraw_PageshowSettingsMode
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideshowSettingsOptions
+; Name ..........: _LODraw_PageshowSettingsOptions
 ; Description ...: Set or Retrieve the Slideshow's play options settings.
-; Syntax ........: _LODraw_SlideshowSettingsOptions(ByRef $oDoc[, $bDisableAutoSlides = Null[, $bChangeSlideByClick = Null[, $bMouseVisible = Null[, $bMouseAsPen = Null[, $bPlayAnimatedFiles = Null[, $bKeepOnTop = Null]]]]]])
+; Syntax ........: _LODraw_PageshowSettingsOptions(ByRef $oDoc[, $bDisableAutoSlides = Null[, $bChangeSlideByClick = Null[, $bMouseVisible = Null[, $bMouseAsPen = Null[, $bPlayAnimatedFiles = Null[, $bKeepOnTop = Null]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $bDisableAutoSlides  - [optional] Default is Null. If True, slides will not transition to the next slide automatically (overriding individual slide settings).
 ;                  $bChangeSlideByClick - [optional] Default is Null. If True, slides will transition when the mouse is clicked.
@@ -4370,11 +4370,11 @@ EndFunc   ;==>_LODraw_SlideshowSettingsMode
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LODraw_SlideshowActiveSettings, _LODraw_SlideshowPresentationControl, _LODraw_SlideshowSettingsMode, _LODraw_SlideshowSettingsRange
+; Related .......: _LODraw_PageshowActiveSettings, _LODraw_PageshowPresentationControl, _LODraw_PageshowSettingsMode, _LODraw_PageshowSettingsRange
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideshowSettingsOptions(ByRef $oDoc, $bDisableAutoSlides = Null, $bChangeSlideByClick = Null, $bMouseVisible = Null, $bMouseAsPen = Null, $bPlayAnimatedFiles = Null, $bKeepOnTop = Null)
+Func _LODraw_PageshowSettingsOptions(ByRef $oDoc, $bDisableAutoSlides = Null, $bChangeSlideByClick = Null, $bMouseVisible = Null, $bMouseAsPen = Null, $bPlayAnimatedFiles = Null, $bKeepOnTop = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -4437,12 +4437,12 @@ Func _LODraw_SlideshowSettingsOptions(ByRef $oDoc, $bDisableAutoSlides = Null, $
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_SlideshowSettingsOptions
+EndFunc   ;==>_LODraw_PageshowSettingsOptions
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideshowSettingsRange
+; Name ..........: _LODraw_PageshowSettingsRange
 ; Description ...: Set or Retrieve the Slideshow's play Range settings.
-; Syntax ........: _LODraw_SlideshowSettingsRange(ByRef $oDoc[, $iRange = Null[, $sValue = Null]])
+; Syntax ........: _LODraw_PageshowSettingsRange(ByRef $oDoc[, $iRange = Null[, $sValue = Null]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $iRange              - [optional] (0-2) Default is Null. The Range of slides that will be shown when the Presentation is started. See Constants, $LOD_SLIDESHOW_RANGE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $sValue              - [optional] Default is Null. The "From" slide or Custom Slide Show name. See remarks.
@@ -4472,11 +4472,11 @@ EndFunc   ;==>_LODraw_SlideshowSettingsOptions
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  If there are two slides with the same name, and one is set to the "From Slide" property, there is no guarantee which slide will be the one used.
-; Related .......: _LODraw_SlideshowActiveSettings, _LODraw_SlideshowPresentationControl, _LODraw_SlideshowSettingsMode, _LODraw_SlideshowSettingsOptions
+; Related .......: _LODraw_PageshowActiveSettings, _LODraw_PageshowPresentationControl, _LODraw_PageshowSettingsMode, _LODraw_PageshowSettingsOptions
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideshowSettingsRange(ByRef $oDoc, $iRange = Null, $sValue = Null)
+Func _LODraw_PageshowSettingsRange(ByRef $oDoc, $iRange = Null, $sValue = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -4578,12 +4578,12 @@ Func _LODraw_SlideshowSettingsRange(ByRef $oDoc, $iRange = Null, $sValue = Null)
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_SlideshowSettingsRange
+EndFunc   ;==>_LODraw_PageshowSettingsRange
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideshowStart
+; Name ..........: _LODraw_PageshowStart
 ; Description ...: Begins a presentation.
-; Syntax ........: _LODraw_SlideshowStart(ByRef $oDoc[, $bRehearse = False[, $sStartSlide = ""[, $sCustomShow = ""]]])
+; Syntax ........: _LODraw_PageshowStart(ByRef $oDoc[, $bRehearse = False[, $sStartSlide = ""[, $sCustomShow = ""]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $bRehearse           - [optional] Default is False. If True, starts the presentation from the beginning and shows a rehearsal timer to the user.
 ;                  $sStartSlide         - [optional] Default is "". The Slide's name to begin this presentation from.
@@ -4608,11 +4608,11 @@ EndFunc   ;==>_LODraw_SlideshowSettingsRange
 ; Modified ......:
 ; Remarks .......: If $bRehearse is called with True, both $sStartSlide and $sCustomShow will be ignored.
 ;                  If both $sStartSlide and $sCustomShow are called with a parameter, $sCustomShow will be ignored.
-; Related .......: _LODraw_SlideshowIsRunning, _LODraw_SlideshowStop
+; Related .......: _LODraw_PageshowIsRunning, _LODraw_PageshowStop
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideshowStart(ByRef $oDoc, $bRehearse = False, $sStartSlide = "", $sCustomShow = "")
+Func _LODraw_PageshowStart(ByRef $oDoc, $bRehearse = False, $sStartSlide = "", $sCustomShow = "")
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -4673,12 +4673,12 @@ Func _LODraw_SlideshowStart(ByRef $oDoc, $bRehearse = False, $sStartSlide = "", 
 	If Not $oPresentation.IsRunning() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LODraw_SlideshowStart
+EndFunc   ;==>_LODraw_PageshowStart
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideshowStop
+; Name ..........: _LODraw_PageshowStop
 ; Description ...: Stop the presently playing presentation.
-; Syntax ........: _LODraw_SlideshowStop(ByRef $oDoc)
+; Syntax ........: _LODraw_PageshowStop(ByRef $oDoc)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Presentation was successfully stopped.
@@ -4690,11 +4690,11 @@ EndFunc   ;==>_LODraw_SlideshowStart
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LODraw_SlideshowIsRunning, _LODraw_SlideshowStart
+; Related .......: _LODraw_PageshowIsRunning, _LODraw_PageshowStart
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideshowStop(ByRef $oDoc)
+Func _LODraw_PageshowStop(ByRef $oDoc)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -4706,12 +4706,12 @@ Func _LODraw_SlideshowStop(ByRef $oDoc)
 	EndIf
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LODraw_SlideshowStop
+EndFunc   ;==>_LODraw_PageshowStop
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideSoundsGetNames
+; Name ..........: _LODraw_PageSoundsGetNames
 ; Description ...: Retrieve an array of Sound files that are included with LibreOffice Draw.
-; Syntax ........: _LODraw_SlideSoundsGetNames()
+; Syntax ........: _LODraw_PageSoundsGetNames()
 ; Parameters ....: None
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning array of included Draw Sound files. @Extended will be set to number of results.
@@ -4725,11 +4725,11 @@ EndFunc   ;==>_LODraw_SlideshowStop
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: An example path that may be returned is: "C:\Program Files\LibreOffice\program\..\share\gallery\curve.wav"
-; Related .......: _LODraw_SlideTransition
+; Related .......: _LODraw_PageTransition
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideSoundsGetNames()
+Func _LODraw_PageSoundsGetNames()
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -4773,13 +4773,13 @@ Func _LODraw_SlideSoundsGetNames()
 	ReDim $asFiles[$iCount]
 
 	Return SetError($__LO_STATUS_SUCCESS, UBound($asFiles), $asFiles)
-EndFunc   ;==>_LODraw_SlideSoundsGetNames
+EndFunc   ;==>_LODraw_PageSoundsGetNames
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_SlideTransition
+; Name ..........: _LODraw_PageTransition
 ; Description ...: Set or Retrieve a Slide's Transition properties.
-; Syntax ........: _LODraw_SlideTransition(ByRef $oSlide[, $iTransition = Null[, $nDuration = Null[, $sSound = Null[, $bLoopSound = Null[, $nSlideAdvance = Null]]]]])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
+; Syntax ........: _LODraw_PageTransition(ByRef $oSlide[, $iTransition = Null[, $nDuration = Null[, $sSound = Null[, $bLoopSound = Null[, $nSlideAdvance = Null]]]]])
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ;                  $iTransition         - [optional] (0-78) Default is Null. The Transition effect. See Constants, $LOD_SLIDE_TRANSITION_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $nDuration           - [optional] (0-1000) Default is Null. The duration of the slide's transition effect, in seconds. L.O. 6.1+. See remarks.
 ;                  $sSound              - [optional] Default is Null. The path to the sound to play during slide transition. See remarks.
@@ -4818,14 +4818,14 @@ EndFunc   ;==>_LODraw_SlideSoundsGetNames
 ;                  When retrieving current property values previous to LibreOffice 6.1, if Speed is set to Fast, 1 is returned for $nDuration. If Speed is set to Medium, 2 is returned. And if Speed is set to Slow, 3 is returned.
 ;                  $sSound can be called with an empty string to indicate that no sound should be played.
 ;                  If $sSound is called with the string "stop", this equals "Stop Previous Sound" in the UI.
-;                  Otherwise call $sSound with a valid path to a sound file. See _LODraw_SlideSoundsGetNames, to obtain a list of sound files included with Draw.
+;                  Otherwise call $sSound with a valid path to a sound file. See _LODraw_PageSoundsGetNames, to obtain a list of sound files included with Draw.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LODraw_SlideSoundsGetNames, _LODraw_SlideLayout
+; Related .......: _LODraw_PageSoundsGetNames, _LODraw_PageLayout
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_SlideTransition(ByRef $oSlide, $iTransition = Null, $nDuration = Null, $sSound = Null, $bLoopSound = Null, $nSlideAdvance = Null)
+Func _LODraw_PageTransition(ByRef $oSlide, $iTransition = Null, $nDuration = Null, $sSound = Null, $bLoopSound = Null, $nSlideAdvance = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -4957,4 +4957,4 @@ Func _LODraw_SlideTransition(ByRef $oSlide, $iTransition = Null, $nDuration = Nu
 	EndIf
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_SlideTransition
+EndFunc   ;==>_LODraw_PageTransition

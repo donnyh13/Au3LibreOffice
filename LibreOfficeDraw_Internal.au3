@@ -1132,7 +1132,7 @@ EndFunc   ;==>__LODraw_DimensionSettings
 ;                  If the property CurrentPage returns Null, it is assumed the current view mode is $LOD_PAGE_VIEW_SLIDE_SORTER, as that is the only time I found it returning such.
 ;                  If the property CurrentPage returns a page Object, and the property DrawViewMode returns Null, it is assumed current view mode is $LOD_PAGE_VIEW_SLIDE_OUTLINE.
 ;                  When switching to Master Notes or Slide Notes, the notes page will correspond to the currently or last active slide/master slide.
-; Related .......: _LODraw_SlideCurrent
+; Related .......: _LODraw_PageCurrent
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -4054,7 +4054,7 @@ EndFunc   ;==>__LODraw_FilterNameGet
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  If a slide is square (equal width and height), setting orientation to landscape will result in a property setting error due to the way LibreOffice behaves.
-; Related .......: _LO_UnitConvert, _LODraw_SlidePageLayout, _LODraw_SlidePageMargins, _LODraw_SlideSheetPrint
+; Related .......: _LO_UnitConvert, _LODraw_PagePageLayout, _LODraw_PagePageMargins, _LODraw_PageSheetPrint
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -5644,7 +5644,7 @@ EndFunc   ;==>__LODraw_InternalComErrorHandler
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LODraw_SlidePageLayout, _LODraw_SlidePageFormat
+; Related .......: _LO_UnitConvert, _LODraw_PagePageLayout, _LODraw_PagePageFormat
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -10537,7 +10537,7 @@ EndFunc   ;==>__LODraw_TableCellBorder
 ; Name ..........: __LODraw_Transition
 ; Description ...: Set or Retrieve the current transition effect of a Slide.
 ; Syntax ........: __LODraw_Transition(ByRef $oSlide[, $iTransition = Null])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_SlideAdd, _LODraw_SlideGetObjByIndex, _LODraw_SlideGetObjByName, or _LODraw_SlideCopy function.
+; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ;                  $iTransition         - [optional] (0-78) Default is Null. The Transition effect. See Constants, $LOD_SLIDE_TRANSITION_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1 or Integer
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
