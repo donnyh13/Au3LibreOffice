@@ -158,12 +158,12 @@ Func _LODraw_TableBackColor(ByRef $oTable, $iBackColor = Null)
 
 			If ($iBackColor = $LO_COLOR_OFF) Then
 				$oCell.FillStyle = $LOD_AREA_FILL_STYLE_OFF
-				If ($oCell.PropertySetInfo.hasPropertyByName("FillUseSlideBackground")) Then $oCell.FillUseSlideBackground = False
+				If ($oCell.PropertySetInfo.hasPropertyByName("FillUsePageBackground")) Then $oCell.FillUsePageBackground = False
 				$iError = ($oCell.FillStyle() = $LOD_AREA_FILL_STYLE_OFF) ? ($iError) : (BitOR($iError, 1))
 
 			Else
 				$oCell.FillStyle = $LOD_AREA_FILL_STYLE_SOLID
-				If ($oCell.PropertySetInfo.hasPropertyByName("FillUseSlideBackground")) Then $oCell.FillUseSlideBackground = False
+				If ($oCell.PropertySetInfo.hasPropertyByName("FillUsePageBackground")) Then $oCell.FillUsePageBackground = False
 				$oCell.FillColor = $iBackColor
 				$iError = ($oCell.FillColor() = $iBackColor) ? ($iError) : (BitOR($iError, 1))
 			EndIf
@@ -1091,11 +1091,11 @@ Func _LODraw_TableCellBackColor(ByRef $oCell, $iBackColor = Null)
 
 	If ($iBackColor = $LO_COLOR_OFF) Then
 		$oCell.FillStyle = $LOD_AREA_FILL_STYLE_OFF
-		If ($oCell.PropertySetInfo.hasPropertyByName("FillUseSlideBackground")) Then $oCell.FillUseSlideBackground = False
+		If ($oCell.PropertySetInfo.hasPropertyByName("FillUsePageBackground")) Then $oCell.FillUsePageBackground = False
 
 	Else
 		$oCell.FillStyle = $LOD_AREA_FILL_STYLE_SOLID
-		If ($oCell.PropertySetInfo.hasPropertyByName("FillUseSlideBackground")) Then $oCell.FillUseSlideBackground = False
+		If ($oCell.PropertySetInfo.hasPropertyByName("FillUsePageBackground")) Then $oCell.FillUsePageBackground = False
 		$oCell.FillColor = $iBackColor
 		$iError = ($oCell.FillColor() = $iBackColor) ? ($iError) : (BitOR($iError, 1))
 	EndIf
@@ -3422,9 +3422,9 @@ EndFunc   ;==>_LODraw_TableColumnInsert
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LODraw_TableInsert
-; Description ...: Create and Insert a Table into a Slide.
+; Description ...: Create and Insert a Table into a Page.
 ; Syntax ........: _LODraw_TableInsert(ByRef $oObj, $iWidth, $iHeight[, $iRows = 2[, $iColumns = 2[, $iX = -1[, $iY = -1]]]])
-; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
 ;                  $iWidth              - The Table's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Table's Height in Hundredths of a Millimeter (HMM).
 ;                  $iRows               - [optional] (1-75) Default is 2. The number of Rows.

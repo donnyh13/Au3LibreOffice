@@ -406,16 +406,16 @@ EndFunc   ;==>_LODraw_DocCreate
 ;                  - uno:Delete -- Simulates pressing the Delete key.
 ;                  - uno:InsertDateFieldFix -- Insert a fixed Date field.
 ;                  - uno:InsertDateFieldVar -- Insert a variable Date field.
-;                  - uno:InsertPageField -- Insert a current Page (slide) field.
-;                  - uno:InsertPageTitleField -- Insert a current Page (slide) Title field.
-;                  - uno:InsertPagesField -- Insert a total Pages (slides) field.
+;                  - uno:InsertPageField -- Insert a current Page (page) field.
+;                  - uno:InsertPageTitleField -- Insert a current Page (page) Title field.
+;                  - uno:InsertPagesField -- Insert a total Pages (pages) field.
 ;                  - uno:InsertPageQuick -- Insert a new page.
 ;                  - uno:InsertTimeFieldFix -- Insert a fixed Time field.
 ;                  - uno:InsertTimeFieldVar -- Insert a variable Time field.
-;                  - uno:MovePageDown -- Move the currently active slide Down one position,
-;                  - uno:MovePageFirst -- Move the currently active slide to the First slide position.
-;                  - uno:MovePageLast -- Move the currently active slide to the Last slide position.
-;                  - uno:MovePageUp -- Move the currently active slide Up one position.
+;                  - uno:MovePageDown -- Move the currently active page Down one position,
+;                  - uno:MovePageFirst -- Move the currently active page to the First page position.
+;                  - uno:MovePageLast -- Move the currently active page to the Last page position.
+;                  - uno:MovePageUp -- Move the currently active page Up one position.
 ;                  - uno:Paste -- Pastes the data out of the clipboard. Simulating Ctrl+V.
 ;                  - uno:PasteUnformatted -- Pastes the data out of the clipboard unformatted.
 ;                  - uno:PasteSpecial -- Simulates pasting with Ctrl+Shift+V, opens a dialog for selecting paste format.
@@ -1670,9 +1670,9 @@ EndFunc   ;==>_LODraw_DocUndoReset
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  This function uses a deprecated method (DrawViewMode), and may stop functioning in the future.
 ;                  This function assumes two types of view modes without positive evidence:
-;                  If the property CurrentPage returns Null, it is assumed the current view mode is $LOD_PAGE_VIEW_SLIDE_SORTER, as that is the only time I found it returning such.
-;                  If the property CurrentPage returns a page Object, and the property DrawViewMode returns Null, it is assumed current view mode is $LOD_PAGE_VIEW_SLIDE_OUTLINE.
-;                  When switching to Master Notes or Slide Notes, the notes page will correspond to the currently or last active slide/master slide.
+;                  If the property CurrentPage returns Null, it is assumed the current view mode is $LOD_PAGE_VIEW_PAGE_SORTER, as that is the only time I found it returning such.
+;                  If the property CurrentPage returns a page Object, and the property DrawViewMode returns Null, it is assumed current view mode is $LOD_PAGE_VIEW_PAGE_OUTLINE.
+;                  When switching to Master Notes or Page Notes, the notes page will correspond to the currently or last active page/master page.
 ; Related .......: _LODraw_PageCurrent
 ; Link ..........:
 ; Example .......: Yes

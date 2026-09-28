@@ -741,9 +741,9 @@ EndFunc   ;==>_LODraw_DrawShapeGetType
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LODraw_DrawShapeInsert
-; Description ...: Insert a shape into a slide.
+; Description ...: Insert a shape into a page.
 ; Syntax ........: _LODraw_DrawShapeInsert(ByRef $oObj, $iShapeType, $iWidth, $iHeight[, $iX = -1[, $iY = -1]])
-; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
 ;                  $iShapeType          - (0-187) The Type of shape to create. See remarks. See $LOD_DRAWSHAPE_TYPE_* as defined in LibreOfficeDraw_Constants.au3
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM). Note, for Lines, Width is the length of the line.
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM). Note, for Lines, Height is the amount the line goes below the point of insertion.

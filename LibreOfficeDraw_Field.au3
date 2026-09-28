@@ -36,9 +36,9 @@
 ; _LODraw_FieldHyperlinkInsert
 ; _LODraw_FieldHyperlinkModify
 ; _LODraw_FieldsGetList
-; _LODraw_FieldSlideCountInsert
-; _LODraw_FieldSlideNumberInsert
-; _LODraw_FieldSlideTitleInsert
+; _LODraw_FieldPageCountInsert
+; _LODraw_FieldPageNumberInsert
+; _LODraw_FieldPageTitleInsert
 ; ===============================================================================================================================
 
 ; #FUNCTION# ====================================================================================================================
@@ -191,7 +191,7 @@ EndFunc   ;==>_LODraw_FieldAuthorModify
 ;                  @Error: 3, @Extended: 2 = Failed to retrieve Field's current display.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Both Slide Title and Slide Number fields may return "<slide-name>" or "<number>" respectively instead of their current display value. I don't know why.
+; Remarks .......: Both Page Title and Page Number fields may return "<page-name>" or "<number>" respectively instead of their current display value. I don't know why.
 ; Related .......: _LODraw_FieldsGetList
 ; Link ..........:
 ; Example .......: Yes
@@ -450,7 +450,7 @@ EndFunc   ;==>_LODraw_FieldDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LODraw_FieldSlideTitleInsert, _LODraw_FieldFileNameModify, _LODraw_FieldDelete
+; Related .......: _LODraw_FieldPageTitleInsert, _LODraw_FieldFileNameModify, _LODraw_FieldDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -723,7 +723,7 @@ EndFunc   ;==>_LODraw_FieldHyperlinkModify
 ;                  @Error: 2, @Extended: 2 = Failed to create enumeration of paragraphs.
 ;                  @Error: 2, @Extended: 3 = Failed to create enumeration of Text Portions in Paragraph.
 ;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to retrieve parent slide Object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve parent page Object.
 ;                  @Error: 3, @Extended: 2 = Failed to retrieve containing Shape Object.
 ;                  @Error: 3, @Extended: 3 = Failed to identify requested Field Types.
 ;                  @Error: 3, @Extended: 4 = Failed to retrieve Text Field Object.
@@ -751,8 +751,8 @@ Func _LODraw_FieldsGetList(ByRef $oTextCursor, $iType = $LOD_FIELD_TYPE_ALL, $bF
 
 	; When a Text Cursor has been used to insert Strings previous to inserting or looking for a Field, the fields sometimes are not able to be identified.
 	; The workaround I figured out was to create the Text Cursor again before enumerating the fields.
-	; To do this I have to retrieve the shape Object again, then create a textcursor using the new Object. The parent of the shape is the drawpage (Slide), I
-	; then cycle through all shapes in the slide to identify which one the current textcursor is in. Once found, I create a new cursor.
+	; To do this I have to retrieve the shape Object again, then create a textcursor using the new Object. The parent of the shape is the drawpage (Page), I
+	; then cycle through all shapes in the page to identify which one the current textcursor is in. Once found, I create a new cursor.
 	$oDrawPage = $oTextCursor.Text.getParent()
 	If Not IsObj($oDrawPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
@@ -824,9 +824,9 @@ Func _LODraw_FieldsGetList(ByRef $oTextCursor, $iType = $LOD_FIELD_TYPE_ALL, $bF
 EndFunc   ;==>_LODraw_FieldsGetList
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_FieldSlideCountInsert
-; Description ...: Insert a total Slide Count Field.
-; Syntax ........: _LODraw_FieldSlideCountInsert(ByRef $oDoc, ByRef $oTextCursor[, $bOverwrite = False])
+; Name ..........: _LODraw_FieldPageCountInsert
+; Description ...: Insert a total Page Count Field.
+; Syntax ........: _LODraw_FieldPageCountInsert(ByRef $oDoc, ByRef $oTextCursor[, $bOverwrite = False])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
@@ -844,11 +844,11 @@ EndFunc   ;==>_LODraw_FieldsGetList
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LODraw_FieldSlideNumberInsert, _LODraw_FieldDelete
+; Related .......: _LODraw_FieldPageNumberInsert, _LODraw_FieldDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_FieldSlideCountInsert(ByRef $oDoc, ByRef $oTextCursor, $bOverwrite = False)
+Func _LODraw_FieldPageCountInsert(ByRef $oDoc, ByRef $oTextCursor, $bOverwrite = False)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -864,16 +864,16 @@ Func _LODraw_FieldSlideCountInsert(ByRef $oDoc, ByRef $oTextCursor, $bOverwrite 
 	$oTextCursor.Text.insertTextContent($oTextCursor, $oTextField, $bOverwrite)
 
 	; Have to retrieve the Field's Object again, otherwise the Field Object seems invalid once inserted (Can't be used for modifying the field etc.).
-	$oTextFieldReturn = __LODraw_FieldGetObj($oTextCursor, $LOD_FIELD_TYPE_SLIDE_COUNT)
+	$oTextFieldReturn = __LODraw_FieldGetObj($oTextCursor, $LOD_FIELD_TYPE_PAGE_COUNT)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oTextFieldReturn)
-EndFunc   ;==>_LODraw_FieldSlideCountInsert
+EndFunc   ;==>_LODraw_FieldPageCountInsert
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_FieldSlideNumberInsert
-; Description ...: Insert a Slide Number Field.
-; Syntax ........: _LODraw_FieldSlideNumberInsert(ByRef $oDoc, ByRef $oTextCursor[, $bOverwrite = False])
+; Name ..........: _LODraw_FieldPageNumberInsert
+; Description ...: Insert a Page Number Field.
+; Syntax ........: _LODraw_FieldPageNumberInsert(ByRef $oDoc, ByRef $oTextCursor[, $bOverwrite = False])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
@@ -891,11 +891,11 @@ EndFunc   ;==>_LODraw_FieldSlideCountInsert
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LODraw_FieldSlideCountInsert, _LODraw_FieldDelete
+; Related .......: _LODraw_FieldPageCountInsert, _LODraw_FieldDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_FieldSlideNumberInsert(ByRef $oDoc, ByRef $oTextCursor, $bOverwrite = False)
+Func _LODraw_FieldPageNumberInsert(ByRef $oDoc, ByRef $oTextCursor, $bOverwrite = False)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -911,16 +911,16 @@ Func _LODraw_FieldSlideNumberInsert(ByRef $oDoc, ByRef $oTextCursor, $bOverwrite
 	$oTextCursor.Text.insertTextContent($oTextCursor, $oTextField, $bOverwrite)
 
 	; Have to retrieve the Field's Object again, otherwise the Field Object seems invalid once inserted (Can't be used for modifying the field etc.).
-	$oTextFieldReturn = __LODraw_FieldGetObj($oTextCursor, $LOD_FIELD_TYPE_SLIDE_NUM)
+	$oTextFieldReturn = __LODraw_FieldGetObj($oTextCursor, $LOD_FIELD_TYPE_PAGE_NUM)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oTextFieldReturn)
-EndFunc   ;==>_LODraw_FieldSlideNumberInsert
+EndFunc   ;==>_LODraw_FieldPageNumberInsert
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_FieldSlideTitleInsert
-; Description ...: Insert a Slide Title Field.
-; Syntax ........: _LODraw_FieldSlideTitleInsert(ByRef $oDoc, ByRef $oTextCursor[, $bOverwrite = False])
+; Name ..........: _LODraw_FieldPageTitleInsert
+; Description ...: Insert a Page Title Field.
+; Syntax ........: _LODraw_FieldPageTitleInsert(ByRef $oDoc, ByRef $oTextCursor[, $bOverwrite = False])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
@@ -942,7 +942,7 @@ EndFunc   ;==>_LODraw_FieldSlideNumberInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_FieldSlideTitleInsert(ByRef $oDoc, ByRef $oTextCursor, $bOverwrite = False)
+Func _LODraw_FieldPageTitleInsert(ByRef $oDoc, ByRef $oTextCursor, $bOverwrite = False)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -958,8 +958,8 @@ Func _LODraw_FieldSlideTitleInsert(ByRef $oDoc, ByRef $oTextCursor, $bOverwrite 
 	$oTextCursor.Text.insertTextContent($oTextCursor, $oTextField, $bOverwrite)
 
 	; Have to retrieve the Field's Object again, otherwise the Field Object seems invalid once inserted (Can't be used for modifying the field etc.).
-	$oTextFieldReturn = __LODraw_FieldGetObj($oTextCursor, $LOD_FIELD_TYPE_SLIDE_TITLE)
+	$oTextFieldReturn = __LODraw_FieldGetObj($oTextCursor, $LOD_FIELD_TYPE_PAGE_TITLE)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oTextFieldReturn)
-EndFunc   ;==>_LODraw_FieldSlideTitleInsert
+EndFunc   ;==>_LODraw_FieldPageTitleInsert

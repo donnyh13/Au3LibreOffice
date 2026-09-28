@@ -140,7 +140,7 @@
 ; Description ...: Set or Retrieve the Fill color settings for a Shape.
 ; Syntax ........: _LODraw_ShapeAreaColor(ByRef $oShape[, $iColor = Null])
 ; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapeTextBoxInsert, _LODraw_ShapeImageInsert, or _LODraw_ShapesGetList function.
-;                  $iColor              - [optional] (-2-16777215) Default is Null. The Fill color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for "None", or $LOD_SHAPE_COLOR_USE_SLIDE_BACKGROUND (-2) to use the Slide's background color (L.O. 7.5 +).
+;                  $iColor              - [optional] (-2-16777215) Default is Null. The Fill color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for "None", or $LOD_SHAPE_COLOR_USE_PAGE_BACKGROUND (-2) to use the Page's background color (L.O. 7.5 +).
 ; Return values .: Success: 1 or Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current Fill color as an Integer.
@@ -160,7 +160,7 @@
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
-;                  So far, I have found that Textboxes and all drawing shapes support the $LOD_SHAPE_COLOR_USE_SLIDE_BACKGROUND flag. Images and Tables do not, and will throw a property setting error.
+;                  So far, I have found that Textboxes and all drawing shapes support the $LOD_SHAPE_COLOR_USE_PAGE_BACKGROUND flag. Images and Tables do not, and will throw a property setting error.
 ; Related .......: _LODraw_ShapePresStyleAreaColor, _LODraw_ShapeStyleAreaColor, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
@@ -179,8 +179,8 @@ Func _LODraw_ShapeAreaColor(ByRef $oShape, $iColor = Null)
 			$iCurColor = __LODraw_ColorRemoveAlpha($oShape.FillColor())
 			If Not IsInt($iCurColor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-		ElseIf ($oShape.FillStyle() = $LOD_AREA_FILL_STYLE_OFF) And $oShape.PropertySetInfo.hasPropertyByName("FillUseSlideBackground") And $oShape.FillUseSlideBackground() Then
-			$iCurColor = $LOD_SHAPE_COLOR_USE_SLIDE_BACKGROUND
+		ElseIf ($oShape.FillStyle() = $LOD_AREA_FILL_STYLE_OFF) And $oShape.PropertySetInfo.hasPropertyByName("FillUsePageBackground") And $oShape.FillUsePageBackground() Then
+			$iCurColor = $LOD_SHAPE_COLOR_USE_PAGE_BACKGROUND
 
 		Else
 			$iCurColor = $LO_COLOR_OFF
@@ -189,19 +189,19 @@ Func _LODraw_ShapeAreaColor(ByRef $oShape, $iColor = Null)
 		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurColor)
 	EndIf
 
-	If Not __LO_IntIsBetween($iColor, $LO_COLOR_OFF, $LO_COLOR_WHITE, "", $LOD_SHAPE_COLOR_USE_SLIDE_BACKGROUND) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iColor, $LO_COLOR_OFF, $LO_COLOR_WHITE, "", $LOD_SHAPE_COLOR_USE_PAGE_BACKGROUND) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If ($iColor = $LO_COLOR_OFF) Then
 		$oShape.FillStyle = $LOD_AREA_FILL_STYLE_OFF
-		$oShape.FillUseSlideBackground = False
+		$oShape.FillUsePageBackground = False
 
-	ElseIf ($iColor = $LOD_SHAPE_COLOR_USE_SLIDE_BACKGROUND) Then
+	ElseIf ($iColor = $LOD_SHAPE_COLOR_USE_PAGE_BACKGROUND) Then
 		If Not __LO_VersionCheck(7.5) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
-		If ($oShape.PropertySetInfo.hasPropertyByName("FillUseSlideBackground")) Then
+		If ($oShape.PropertySetInfo.hasPropertyByName("FillUsePageBackground")) Then
 			$oShape.FillStyle = $LOD_AREA_FILL_STYLE_OFF
-			$oShape.FillUseSlideBackground = True
-			$iError = ($oShape.FillUseSlideBackground() = True) ? ($iError) : (BitOR($iError, 1))
+			$oShape.FillUsePageBackground = True
+			$iError = ($oShape.FillUsePageBackground() = True) ? ($iError) : (BitOR($iError, 1))
 
 		Else
 			$iError = BitOR($iError, 1)
@@ -212,7 +212,7 @@ Func _LODraw_ShapeAreaColor(ByRef $oShape, $iColor = Null)
 		If Not IsInt($iOldTransparency) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		$oShape.FillStyle = $LOD_AREA_FILL_STYLE_SOLID
-		$oShape.FillUseSlideBackground = False
+		$oShape.FillUsePageBackground = False
 		$oShape.FillColor = $iColor
 		$iError = ($oShape.FillColor() = $iColor) ? ($iError) : (BitOR($iError, 1))
 
@@ -1334,7 +1334,7 @@ EndFunc   ;==>_LODraw_ShapeCreateTextCursor
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to retrieve Shape's containing Slide.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Shape's containing Page.
 ;                  @Error: 3, @Extended: 2 = Failed to retrieve count of shapes.
 ;                  @Error: 3, @Extended: 3 = Same number of shapes still present. Failed to delete the Shape.
 ; Author ........: donnyh13
@@ -1380,12 +1380,12 @@ EndFunc   ;==>_LODraw_ShapeDelete
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $sShapeName not a String.
 ;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Error retrieving Slide Object.
+;                  @Error: 3, @Extended: 1 = Error retrieving Page Object.
 ;                  @Error: 3, @Extended: 2 = Error retrieving Shape Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: For all shapes that have not been renamed by the user, the name value is blank, even though the shape in the UI has a name. Therefore this function will only work for user-renamed shapes.
-;                  This function searches all slides, because a Shape name must be unique for an entire slideshow document.
+;                  This function searches all pages, because a Shape name must be unique for an entire pageshow document.
 ;                  This function will work for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
 ; Related .......: _LODraw_ShapesGetList, _LODraw_DrawShapeInsert, _LODraw_ShapeImageInsert, _LODraw_ShapeTextBoxInsert
 ; Link ..........:
@@ -1395,18 +1395,18 @@ Func _LODraw_ShapeExists(ByRef $oDoc, $sShapeName)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oSlide, $oShape
+	Local $oPage, $oShape
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsString($sShapeName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	For $i = 0 To $oDoc.DrawPages.getCount() - 1
-		$oSlide = $oDoc.DrawPages.getByIndex($i)
-		If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+		$oPage = $oDoc.DrawPages.getByIndex($i)
+		If Not IsObj($oPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-		If $oSlide.hasElements() Then
-			For $j = 0 To $oSlide.getCount() - 1
-				$oShape = $oSlide.getByIndex($j)
+		If $oPage.hasElements() Then
+			For $j = 0 To $oPage.getCount() - 1
+				$oShape = $oPage.getByIndex($j)
 				If Not IsObj($oShape) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 				If ($oShape.Name() <> "") And ($oShape.Name() = $sShapeName) Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
@@ -1614,9 +1614,9 @@ EndFunc   ;==>_LODraw_ShapeImageCrop
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LODraw_ShapeImageInsert
-; Description ...: Insert an image into a slide.
+; Description ...: Insert an image into a page.
 ; Syntax ........: _LODraw_ShapeImageInsert(ByRef $oObj, $sURL[, $iWidth = -1[, $iHeight = -1[, $iX = -1[, $iY = -1]]]])
-; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
 ;                  $sURL                - The file path to the image to insert.
 ;                  $iWidth              - [optional] Default is -1. The Images's Width in Hundredths of a Millimeter (HMM). Call with -1 for automatic width.
 ;                  $iHeight             - [optional] Default is -1. The Images's Height in Hundredths of a Millimeter (HMM). Call with -1 for automatic height.
@@ -1641,7 +1641,7 @@ EndFunc   ;==>_LODraw_ShapeImageCrop
 ;                  @Error: 3, @Extended: 3 = Error retrieving image's size structure.
 ;                  @Error: 3, @Extended: 4 = Error retrieving Bitmap size.
 ;                  @Error: 3, @Extended: 5 = Error calculating image's ratio.
-;                  @Error: 3, @Extended: 6 = Error calculating Slide's ratio.
+;                  @Error: 3, @Extended: 6 = Error calculating Page's ratio.
 ;                  @Error: 3, @Extended: 7 = Error retrieving image's Position structure.
 ; Author ........: donnyh13
 ; Modified ......:
@@ -1836,13 +1836,13 @@ EndFunc   ;==>_LODraw_ShapeImageReplace
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
 ;                  @Error: 1, @Extended: 2 = $iAction not an Integer, less than 0 or greater than 13. See Constants, $LOD_SHAPE_INTERACTION_ACTION_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $sTarget not a String.
-;                  @Error: 1, @Extended: 4 = Slide or shape does not exist with name called in $sTarget.
+;                  @Error: 1, @Extended: 4 = Page or shape does not exist with name called in $sTarget.
 ;                  @Error: 1, @Extended: 5 = File called in $sTarget does not exist.
 ;                  @Error: 1, @Extended: 6 = $iVerb not an Integer.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve current Target value.
 ;                  @Error: 3, @Extended: 2 = Failed to convert current Target path.
-;                  @Error: 3, @Extended: 3 = Failed to retrieve parent Slide Object.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve parent Page Object.
 ;                  @Error: 3, @Extended: 4 = Failed to retrieve parent Document Object.
 ;                  @Error: 3, @Extended: 5 = Failed to convert target path.
 ;                  --Property Setting Errors--
@@ -1859,7 +1859,7 @@ EndFunc   ;==>_LODraw_ShapeImageReplace
 ;                  - When setting the action to "edit", $sTarget has a value of "-1" (as a string), and $iVerb has a value of 65535.
 ;                  - When setting the action to "Save a Copy As", $sTarget has a value of "-8" (as a string), and $iVerb has a value of 65528.
 ;                  $iVerb determines the action performed, and $sTarget determines the action showing selected in the UI.
-;                  User is responsible for ensuring values are correctly called (i.e. that a shape, or slide etc exists by that name) for $LOD_SHAPE_INTERACTION_ACTION_GOTO_PAGE_OBJ, $LOD_SHAPE_INTERACTION_ACTION_OBJ_ACTION, and $LOD_SHAPE_INTERACTION_ACTION_MACRO.
+;                  User is responsible for ensuring values are correctly called (i.e. that a shape, or page etc exists by that name) for $LOD_SHAPE_INTERACTION_ACTION_GOTO_PAGE_OBJ, $LOD_SHAPE_INTERACTION_ACTION_OBJ_ACTION, and $LOD_SHAPE_INTERACTION_ACTION_MACRO.
 ;                  See comments for each $LOD_SHAPE_INTERACTION_ACTION_* Constant for what values are expected in $sTarget otherwise.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
 ; Related .......: _LODraw_ShapeTextAttrAnimation
@@ -1872,7 +1872,7 @@ Func _LODraw_ShapeInteraction(ByRef $oShape, $iAction = Null, $sTarget = Null, $
 
 	Local $iError = 0
 	Local $sCurVal
-	Local $oSlide, $oDoc
+	Local $oPage, $oDoc
 	Local $avInteraction[3]
 
 	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -1904,14 +1904,14 @@ Func _LODraw_ShapeInteraction(ByRef $oShape, $iAction = Null, $sTarget = Null, $
 
 		Switch $oShape.OnClick()
 			Case $LOD_SHAPE_INTERACTION_ACTION_GOTO_PAGE_OBJ
-				$oSlide = $oShape.Parent()
-				If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+				$oPage = $oShape.Parent()
+				If Not IsObj($oPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-				$oDoc = __LODraw_GetParentDoc($oSlide)
+				$oDoc = __LODraw_GetParentDoc($oPage)
 				If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
 				If Not _LODraw_ShapeExists($oDoc, $sTarget) And Not _
-						$oDoc.Links.getByName("Slide").Links.hasByName($sTarget) And Not _
+						$oDoc.Links.getByName("Page").Links.hasByName($sTarget) And Not _
 						$oDoc.Links.getByName("Notes").Links.hasByName($sTarget) And Not _
 						$oDoc.Links.getByName("Master Page").Links.hasByName($sTarget) And Not _
 						$oDoc.Links.getByName("Handouts").Links.hasByName($sTarget) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0) ; Not sure if I need to check Handouts?
@@ -2247,7 +2247,7 @@ EndFunc   ;==>_LODraw_ShapeLineProperties
 ;                  @Error: 1, @Extended: 3 = Document already contains a Shape with the same name as called in $sName.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Shape's name.
-;                  @Error: 3, @Extended: 2 = Failed to retrieve Parent Slide Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Parent Page Object.
 ;                  @Error: 3, @Extended: 3 = Failed to retrieve Parent Document Object.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
@@ -2256,7 +2256,7 @@ EndFunc   ;==>_LODraw_ShapeLineProperties
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  For all shapes that have not been renamed by the user, the name value is blank, even though the shape in the UI has a name.
-;                  When renaming a shape, the Shape name must be unique to the entire slideshow (at least in the LibreOffice UI), however due to the above issue, it is possible to have two shapes with the same name in the UI (and also internally if I don't make a safety check).
+;                  When renaming a shape, the Shape name must be unique to the entire pageshow (at least in the LibreOffice UI), however due to the above issue, it is possible to have two shapes with the same name in the UI (and also internally if I don't make a safety check).
 ;                  This function will work for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
 ; Related .......: _LODraw_ShapeExists
 ; Link ..........:
@@ -2267,7 +2267,7 @@ Func _LODraw_ShapeName(ByRef $oShape, $sName = Null)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $oSlide, $oDoc
+	Local $oPage, $oDoc
 	Local $sCurrName
 
 	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -2281,10 +2281,10 @@ Func _LODraw_ShapeName(ByRef $oShape, $sName = Null)
 
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	$oSlide = $oShape.Parent()
-	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+	$oPage = $oShape.Parent()
+	If Not IsObj($oPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	$oDoc = __LODraw_GetParentDoc($oSlide)
+	$oDoc = __LODraw_GetParentDoc($oPage)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 	If _LODraw_ShapeExists($oDoc, $sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
@@ -4307,12 +4307,12 @@ EndFunc   ;==>_LODraw_ShapeRotateSlant
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LODraw_ShapesGetList
-; Description ...: Retrieve an array of Shapes (Text Boxes, DrawShapes, Images etc) contained in a Slide.
+; Description ...: Retrieve an array of Shapes (Text Boxes, DrawShapes, Images etc) contained in a Page.
 ; Syntax ........: _LODraw_ShapesGetList(ByRef $oObj[, $iTypes = $LOD_SHAPE_TYPE_ALL])
-; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
 ;                  $iTypes              - [optional] (0-1048575) Default is $LOD_SHAPE_TYPE_ALL. The type of Shapes to return in the Array. Can be BitOR'd. See Constants, $LOD_SHAPE_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: Array
-;                  @Error: 0, @Extended: ?, Return: Array = Success. A two columned Array containing the Shape Objects contained in the Slide. See Remarks. @Extended is set to number of results.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. A two columned Array containing the Shape Objects contained in the Page. See Remarks. @Extended is set to number of results.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
@@ -6548,9 +6548,9 @@ EndFunc   ;==>_LODraw_ShapeTextAttrSettings
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LODraw_ShapeTextBoxInsert
-; Description ...: Create and Insert a Text box into a Slide.
+; Description ...: Create and Insert a Text box into a Page.
 ; Syntax ........: _LODraw_ShapeTextBoxInsert(ByRef $oObj, $iTextBoxType, $iWidth, $iHeight[, $iX = -1[, $iY = -1]])
-; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
 ;                  $iTextBoxType        - (0-3) The type of Text Box to create. See Constants, $LOD_SHAPE_TEXTBOX_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iWidth              - The Text Box's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Text Box's Height in Hundredths of a Millimeter (HMM).

@@ -1129,9 +1129,9 @@ EndFunc   ;==>__LODraw_DimensionSettings
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  This function uses a deprecated method (DrawViewMode), and may stop functioning in the future.
 ;                  This function assumes two types of view modes without positive evidence:
-;                  If the property CurrentPage returns Null, it is assumed the current view mode is $LOD_PAGE_VIEW_SLIDE_SORTER, as that is the only time I found it returning such.
-;                  If the property CurrentPage returns a page Object, and the property DrawViewMode returns Null, it is assumed current view mode is $LOD_PAGE_VIEW_SLIDE_OUTLINE.
-;                  When switching to Master Notes or Slide Notes, the notes page will correspond to the currently or last active slide/master slide.
+;                  If the property CurrentPage returns Null, it is assumed the current view mode is $LOD_PAGE_VIEW_PAGE_SORTER, as that is the only time I found it returning such.
+;                  If the property CurrentPage returns a page Object, and the property DrawViewMode returns Null, it is assumed current view mode is $LOD_PAGE_VIEW_PAGE_OUTLINE.
+;                  When switching to Master Notes or Page Notes, the notes page will correspond to the currently or last active page/master page.
 ; Related .......: _LODraw_PageCurrent
 ; Link ..........:
 ; Example .......: No
@@ -1145,13 +1145,13 @@ Func __LODraw_DocCurrView(ByRef $oDoc, $iView = Null)
 	Local $sDispatch
 	Local $bIsMasterMode
 	Local $aArray[0]
-	Local $oServiceManager, $oDispatcher, $oCurrSlide
+	Local $oServiceManager, $oDispatcher, $oCurrPage
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$oCurrSlide = $oDoc.getCurrentController.CurrentPage()
+	$oCurrPage = $oDoc.getCurrentController.CurrentPage()
 
-	If IsObj($oCurrSlide) Then
+	If IsObj($oCurrPage) Then
 		$bIsMasterMode = $oDoc.getCurrentController.IsMasterPageMode()
 
 		Switch $oDoc.getCurrentController.DrawViewMode()
@@ -1160,7 +1160,7 @@ Func __LODraw_DocCurrView(ByRef $oDoc, $iView = Null)
 					$iCurrView = $LOD_PAGE_VIEW_MASTER
 
 				Else
-					$iCurrView = $LOD_PAGE_VIEW_SLIDE
+					$iCurrView = $LOD_PAGE_VIEW_PAGE
 				EndIf
 
 			Case $__eDrawPage_NOTES
@@ -1168,21 +1168,21 @@ Func __LODraw_DocCurrView(ByRef $oDoc, $iView = Null)
 					$iCurrView = $LOD_PAGE_VIEW_MASTER_NOTES
 
 				Else
-					$iCurrView = $LOD_PAGE_VIEW_SLIDE_NOTES
+					$iCurrView = $LOD_PAGE_VIEW_PAGE_NOTES
 				EndIf
 
 			Case $__eDrawPage_HANDOUTS
 				$iCurrView = $LOD_PAGE_VIEW_MASTER_HANDOUT     ; Only Master pages have handouts, so assume it is a Master Handout.
 
 			Case Else
-				; When DrawViewMode is Null, the current view could be in Slide Sorter or Slide Outline modes.
-				; But since CurrentPage is an Object, we know it isn't Slide Sorter, as CurrentPage is null in that mode.
-				$iCurrView = $LOD_PAGE_VIEW_SLIDE_OUTLINE
+				; When DrawViewMode is Null, the current view could be in Page Sorter or Page Outline modes.
+				; But since CurrentPage is an Object, we know it isn't Page Sorter, as CurrentPage is null in that mode.
+				$iCurrView = $LOD_PAGE_VIEW_PAGE_OUTLINE
 		EndSwitch
 
 	Else
-		; If CurrentPage returns Null, it seems to be when the current view is on Slide Sorter. Assuming it is the only time it is.
-		$iCurrView = $LOD_PAGE_VIEW_SLIDE_SORTER
+		; If CurrentPage returns Null, it seems to be when the current view is on Page Sorter. Assuming it is the only time it is.
+		$iCurrView = $LOD_PAGE_VIEW_PAGE_SORTER
 	EndIf
 
 	If __LO_VarsAreNull($iView) Then
@@ -1190,9 +1190,9 @@ Func __LODraw_DocCurrView(ByRef $oDoc, $iView = Null)
 		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurrView)
 	EndIf
 
-	If Not __LO_IntIsBetween($iView, $LOD_PAGE_VIEW_SLIDE, $LOD_PAGE_VIEW_MASTER_HANDOUT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iView, $LOD_PAGE_VIEW_PAGE, $LOD_PAGE_VIEW_MASTER_HANDOUT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If ($iCurrView <> $iView) Then ; Sometimes applying a view a second time causes it to toggle to slide sorter etc. So make sure the current view isn't already the same as the requested view mode.
+	If ($iCurrView <> $iView) Then ; Sometimes applying a view a second time causes it to toggle to page sorter etc. So make sure the current view isn't already the same as the requested view mode.
 		$oServiceManager = __LO_ServiceManager()
 		If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
@@ -1200,20 +1200,20 @@ Func __LODraw_DocCurrView(ByRef $oDoc, $iView = Null)
 		If Not IsObj($oDispatcher) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
 		Switch $iView
-			Case $LOD_PAGE_VIEW_SLIDE
+			Case $LOD_PAGE_VIEW_PAGE
 				$sDispatch = ".uno:DrawingMode"
 
-			Case $LOD_PAGE_VIEW_SLIDE_OUTLINE
+			Case $LOD_PAGE_VIEW_PAGE_OUTLINE
 				$sDispatch = ".uno:OutlineMode"
 
-			Case $LOD_PAGE_VIEW_SLIDE_NOTES
+			Case $LOD_PAGE_VIEW_PAGE_NOTES
 				$sDispatch = ".uno:NotesMode"
 
-			Case $LOD_PAGE_VIEW_SLIDE_SORTER
+			Case $LOD_PAGE_VIEW_PAGE_SORTER
 				$sDispatch = ".uno:DiaMode"
 
 			Case $LOD_PAGE_VIEW_MASTER
-				$sDispatch = ".uno:SlideMasterPage"
+				$sDispatch = ".uno:PageMasterPage"
 
 			Case $LOD_PAGE_VIEW_MASTER_NOTES
 				$sDispatch = ".uno:NotesMasterPage"
@@ -1232,7 +1232,7 @@ EndFunc   ;==>__LODraw_DocCurrView
 ; Name ..........: __LODraw_DrawShape_CreateArrow
 ; Description ...: Create an Arrow type Shape.
 ; Syntax ........: __LODraw_DrawShape_CreateArrow(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
@@ -1414,7 +1414,7 @@ EndFunc   ;==>__LODraw_DrawShape_CreateArrow
 ; Name ..........: __LODraw_DrawShape_CreateBasic
 ; Description ...: Create a Basic type Shape.
 ; Syntax ........: __LODraw_DrawShape_CreateBasic(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
@@ -1601,7 +1601,7 @@ EndFunc   ;==>__LODraw_DrawShape_CreateBasic
 ; Name ..........: __LODraw_DrawShape_CreateCallout
 ; Description ...: Create a Callout type Shape.
 ; Syntax ........: __LODraw_DrawShape_CreateCallout(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
@@ -1717,7 +1717,7 @@ EndFunc   ;==>__LODraw_DrawShape_CreateCallout
 ; Name ..........: __LODraw_DrawShape_CreateFlowchart
 ; Description ...: Create a FlowChart type Shape.
 ; Syntax ........: __LODraw_DrawShape_CreateFlowchart(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
@@ -1896,7 +1896,7 @@ EndFunc   ;==>__LODraw_DrawShape_CreateFlowchart
 ; Name ..........: __LODraw_DrawShape_CreateLine
 ; Description ...: Create a Line type Shape.
 ; Syntax ........: __LODraw_DrawShape_CreateLine(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
@@ -2353,7 +2353,7 @@ EndFunc   ;==>__LODraw_DrawShape_CreateLine
 ; Name ..........: __LODraw_DrawShape_CreateStars
 ; Description ...: Create a Star or Banner type Shape.
 ; Syntax ........: __LODraw_DrawShape_CreateStars(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
@@ -2485,7 +2485,7 @@ EndFunc   ;==>__LODraw_DrawShape_CreateStars
 ; Name ..........: __LODraw_DrawShape_CreateSymbol
 ; Description ...: Create a Symbol type Shape.
 ; Syntax ........: __LODraw_DrawShape_CreateSymbol(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
@@ -3802,7 +3802,7 @@ EndFunc   ;==>__LODraw_DrawShapePointModify
 ;                  @Error: 2, @Extended: 2 = Failed to create enumeration of paragraphs.
 ;                  @Error: 2, @Extended: 3 = Failed to create enumeration of Text Portions in Paragraph.
 ;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to retrieve parent slide Object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve parent page Object.
 ;                  @Error: 3, @Extended: 2 = Failed to retrieve containing Shape Object.
 ;                  @Error: 3, @Extended: 3 = Failed to identify requested Field Types.
 ;                  @Error: 3, @Extended: 4 = Failed to retrieve Text Field Object.
@@ -3826,8 +3826,8 @@ Func __LODraw_FieldGetObj(ByRef $oTextCursor, $iType = $LOD_FIELD_TYPE_ALL)
 
 	; When a Text Cursor has been used to insert Strings previous to inserting or looking for a Field, the fields sometimes are not able to be identified.
 	; The workaround I figured out was to create the Text Cursor again before enumerating the fields.
-	; To do this I have to retrieve the shape Object again, then create a textcursor using the new Object. The parent of the shape is the drawpage (Slide), I
-	; then cycle through all shapes in the slide to identify which one the current textcursor is in. Once found, I create a new cursor.
+	; To do this I have to retrieve the shape Object again, then create a textcursor using the new Object. The parent of the shape is the drawpage (Page), I
+	; then cycle through all shapes in the page to identify which one the current textcursor is in. Once found, I create a new cursor.
 	$oDrawPage = $oTextCursor.Text.getParent()
 	If Not IsObj($oDrawPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
@@ -3898,8 +3898,8 @@ EndFunc   ;==>__LODraw_FieldGetObj
 ; ===============================================================================================================================
 Func __LODraw_FieldTypeServices($iFieldType)
 	Local $avFieldTypes[7][2] = [[$LOD_FIELD_TYPE_AUTHOR, "com.sun.star.text.TextField.Author"], [$LOD_FIELD_TYPE_DATE_TIME, "com.sun.star.text.TextField.DateTime"], _
-			[$LOD_FIELD_TYPE_FILE_NAME, "com.sun.star.text.TextField.FileName"], [$LOD_FIELD_TYPE_SLIDE_COUNT, "com.sun.star.text.TextField.PageCount"], _
-			[$LOD_FIELD_TYPE_SLIDE_NUM, "com.sun.star.text.TextField.PageNumber"], [$LOD_FIELD_TYPE_SLIDE_TITLE, "com.sun.star.text.TextField.PageName"], _
+			[$LOD_FIELD_TYPE_FILE_NAME, "com.sun.star.text.TextField.FileName"], [$LOD_FIELD_TYPE_PAGE_COUNT, "com.sun.star.text.TextField.PageCount"], _
+			[$LOD_FIELD_TYPE_PAGE_NUM, "com.sun.star.text.TextField.PageNumber"], [$LOD_FIELD_TYPE_PAGE_TITLE, "com.sun.star.text.TextField.PageName"], _
 			[$LOD_FIELD_TYPE_URL, "com.sun.star.text.TextField.URL"]]
 
 	Local $avFieldResults[UBound($avFieldTypes)][2]
@@ -4029,7 +4029,7 @@ EndFunc   ;==>__LODraw_FilterNameGet
 ; Name ..........: __LODraw_Format
 ; Description ...: Set or Retrieve the page format settings.
 ; Syntax ........: __LODraw_Format(ByRef $oObj[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
-; Parameters ....: $oObj                - A Slide, Master Slide, Notes or Handout page object.
+; Parameters ....: $oObj                - A Page, Master Page, Notes or Handout page object.
 ;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_WIDTH_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_HEIGHT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeDraw_Constants.au3.
@@ -4043,7 +4043,7 @@ EndFunc   ;==>__LODraw_FilterNameGet
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iOrientation not an Integer, less than 0 or greater than 1. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to retrieve current slide width.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current page width.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iWidth
@@ -4053,7 +4053,7 @@ EndFunc   ;==>__LODraw_FilterNameGet
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-;                  If a slide is square (equal width and height), setting orientation to landscape will result in a property setting error due to the way LibreOffice behaves.
+;                  If a page is square (equal width and height), setting orientation to landscape will result in a property setting error due to the way LibreOffice behaves.
 ; Related .......: _LO_UnitConvert, _LODraw_PagePageLayout, _LODraw_PagePageMargins, _LODraw_PageSheetPrint
 ; Link ..........:
 ; Example .......: No
@@ -4107,9 +4107,9 @@ EndFunc   ;==>__LODraw_Format
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LODraw_GetParentDoc
-; Description ...: Retrieve the Document Object from a Slide, Master Slide, Notes or Handout.
+; Description ...: Retrieve the Document Object from a Page, Master Page, Notes or Handout.
 ; Syntax ........: __LODraw_GetParentDoc(ByRef $oObj)
-; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning Parent Document Object.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -4117,7 +4117,7 @@ EndFunc   ;==>__LODraw_Format
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Document Object.
-;                  @Error: 3, @Extended: 2 = Unknown slide type passed.
+;                  @Error: 3, @Extended: 2 = Unknown page type passed.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -4133,11 +4133,11 @@ Func __LODraw_GetParentDoc(ByRef $oObj)
 
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If $oObj.SupportsService("com.sun.star.drawing.DrawPage") Then ; This covers Slides, and Slide Notes.
+	If $oObj.SupportsService("com.sun.star.drawing.DrawPage") Then ; This covers Pages, and Page Notes.
 		$oDoc = $oObj.MasterPage.Forms.Parent()
 		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	ElseIf $oObj.SupportsService("com.sun.star.drawing.MasterPage") Then     ; This covers Master Slides, Master Slide Notes, and Handouts.
+	ElseIf $oObj.SupportsService("com.sun.star.drawing.MasterPage") Then     ; This covers Master Pages, Master Page Notes, and Handouts.
 		$oDoc = $oObj.Forms.Parent()
 		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
@@ -4151,16 +4151,16 @@ EndFunc   ;==>__LODraw_GetParentDoc
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LODraw_GetShapeName
-; Description ...: Create a Shape Name that hasn't been used yet in the slide.
-; Syntax ........: __LODraw_GetShapeName(ByRef $oSlide, $sShapeName)
-; Parameters ....: $oSlide              - A Shape or Drawing Shape object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapeTextBoxInsert, _LODraw_ShapeImageInsert, or _LODraw_ShapesGetList function.
+; Description ...: Create a Shape Name that hasn't been used yet in the page.
+; Syntax ........: __LODraw_GetShapeName(ByRef $oPage, $sShapeName)
+; Parameters ....: $oPage              - A Shape or Drawing Shape object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapeTextBoxInsert, _LODraw_ShapeImageInsert, or _LODraw_ShapesGetList function.
 ;                  $sShapeName          - The Shape name to begin with.
 ; Return values .: Success: String
-;                  @Error: 0, @Extended: 0, Return: String = Success. Slide contained no shapes, returning the Shape name with a "1" appended.
+;                  @Error: 0, @Extended: 0, Return: String = Success. Page contained no shapes, returning the Shape name with a "1" appended.
 ;                  @Error: 0, @Extended: 1, Return: String = Success. Returning the unique Shape name to use.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
+;                  @Error: 1, @Extended: 1 = $oPage not an Object.
 ;                  @Error: 1, @Extended: 2 = $sShapeName not a String.
 ; Author ........: donnyh13
 ; Modified ......:
@@ -4169,25 +4169,25 @@ EndFunc   ;==>__LODraw_GetParentDoc
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LODraw_GetShapeName(ByRef $oSlide, $sShapeName)
+Func __LODraw_GetShapeName(ByRef $oPage, $sShapeName)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iCount = 0
 
-	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oPage) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsString($sShapeName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If $oSlide.hasElements() Then
+	If $oPage.hasElements() Then
 		Do ; Cycle through until I find a unique name.
 			$iCount += 1
-			For $i = 0 To $oSlide.getCount() - 1
+			For $i = 0 To $oPage.getCount() - 1
 				; Draw doesn't set the Shape name on new shapes. It has names in the UI that would correspond to the order of the shapes inserted, i.e. Shape 1, Shape 2. Etc.
-				If ($oSlide.getByIndex($i).Name() = $sShapeName & $iCount) Or (($oSlide.getByIndex($i).Name() = "") And (("Shape " & ($i + 1)) = $sShapeName & $iCount)) Then ExitLoop
+				If ($oPage.getByIndex($i).Name() = $sShapeName & $iCount) Or (($oPage.getByIndex($i).Name() = "") And (("Shape " & ($i + 1)) = $sShapeName & $iCount)) Then ExitLoop
 
 				Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 			Next
-		Until $i = $oSlide.getCount()
+		Until $i = $oPage.getCount()
 
 	Else
 
@@ -5619,7 +5619,7 @@ EndFunc   ;==>__LODraw_InternalComErrorHandler
 ; Name ..........: __LODraw_Margins
 ; Description ...: Set or Retrieve the page margin settings.
 ; Syntax ........: __LODraw_Margins(ByRef $oObj[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
-; Parameters ....: $oObj                - A Slide, Master Slide, Notes or Handout page object.
+; Parameters ....: $oObj                - A Page, Master Page, Notes or Handout page object.
 ;                  $iLeft               - [optional] Default is Null. The amount of space to leave between the left edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
 ;                  $iRight              - [optional] Default is Null. The amount of space to leave between the right edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
 ;                  $iTop                - [optional] Default is Null. The amount of space to leave between the upper edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
@@ -6894,7 +6894,7 @@ Func __LODraw_ShapeGetType(ByRef $oShape)
 			[$LOD_SHAPE_TYPE_HANDOUT, "com.sun.star.presentation.HandoutShape"], [$LOD_SHAPE_TYPE_IMAGE, "com.sun.star.drawing.GraphicObjectShape"], _
 			[$LOD_SHAPE_TYPE_MEDIA, "com.sun.star.drawing.MediaShape"], [$LOD_SHAPE_TYPE_NOTES, "com.sun.star.presentation.NotesShape"], _
 			[$LOD_SHAPE_TYPE_OLE2, "com.sun.star.drawing.OLE2Shape"], [$LOD_SHAPE_TYPE_ORG_CHART, "com.sun.star.presentation.OrgChartShape"], _
-			[$LOD_SHAPE_TYPE_PAGE, "com.sun.star.presentation.PageShape"], [$LOD_SHAPE_TYPE_SLIDE_NUM, "com.sun.star.presentation.SlideNumberShape"], _
+			[$LOD_SHAPE_TYPE_PAGE, "com.sun.star.presentation.PageShape"], [$LOD_SHAPE_TYPE_PAGE_NUM, "com.sun.star.presentation.PageNumberShape"], _
 			[$LOD_SHAPE_TYPE_TABLE, "com.sun.star.drawing.TableShape"], [$LOD_SHAPE_TYPE_TEXTBOX, "com.sun.star.drawing.TextShape"], _
 			[$LOD_SHAPE_TYPE_TEXTBOX_SUBTITLE, "com.sun.star.presentation.SubtitleShape"], [$LOD_SHAPE_TYPE_TEXTBOX_TITLE, "com.sun.star.presentation.TitleTextShape"], _
 			[$LOD_SHAPE_TYPE_TEXTBOX_OUTLINE, "com.sun.star.presentation.OutlinerShape"]]
@@ -10535,17 +10535,17 @@ EndFunc   ;==>__LODraw_TableCellBorder
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LODraw_Transition
-; Description ...: Set or Retrieve the current transition effect of a Slide.
-; Syntax ........: __LODraw_Transition(ByRef $oSlide[, $iTransition = Null])
-; Parameters ....: $oSlide              - A Slide object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
-;                  $iTransition         - [optional] (0-78) Default is Null. The Transition effect. See Constants, $LOD_SLIDE_TRANSITION_* as defined in LibreOfficeDraw_Constants.au3.
+; Description ...: Set or Retrieve the current transition effect of a Page.
+; Syntax ........: __LODraw_Transition(ByRef $oPage[, $iTransition = Null])
+; Parameters ....: $oPage              - A Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
+;                  $iTransition         - [optional] (0-78) Default is Null. The Transition effect. See Constants, $LOD_PAGE_TRANSITION_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: 1 or Integer
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current Transition effect type.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
-;                  @Error: 1, @Extended: 2 = $iTransition not an Integer, less then 0 or greater than 78. See Constants, $LOD_SLIDE_TRANSITION_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oPage not an Object.
+;                  @Error: 1, @Extended: 2 = $iTransition not an Integer, less then 0 or greater than 78. See Constants, $LOD_PAGE_TRANSITION_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve current Effect value.
 ;                  @Error: 3, @Extended: 2 = Failed to retrieve current Transition Type value.
@@ -10561,206 +10561,206 @@ EndFunc   ;==>__LODraw_TableCellBorder
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LODraw_Transition(ByRef $oSlide, $iTransition = Null)
+Func __LODraw_Transition(ByRef $oPage, $iTransition = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0, $iEffect, $iTransitionType, $iTransitionSubType, $iCurrTransition
 
-	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oPage) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($iTransition) Then
-		$iEffect = $oSlide.Effect()
+		$iEffect = $oPage.Effect()
 		If Not IsInt($iEffect) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-		$iTransitionType = $oSlide.TransitionType()
+		$iTransitionType = $oPage.TransitionType()
 		If Not IsInt($iTransitionType) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-		$iTransitionSubType = $oSlide.TransitionSubType()
+		$iTransitionSubType = $oPage.TransitionSubType()
 		If Not IsInt($iTransitionSubType) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 		Switch $iEffect ; Determine current Transition Type
 			Case 0
 				Switch $iTransitionType
 					Case 0
-						If ($iTransitionSubType = 0) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_NONE
+						If ($iTransitionSubType = 0) Then $iCurrTransition = $LOD_PAGE_TRANSITION_NONE
 						; $iEffect = 0 $iTransitionType = 0 $iTransitionSubType = 0
 
 					Case 1
-						If ($iTransitionSubType = 104) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_CUT_THROUGH_BLACK
+						If ($iTransitionSubType = 104) Then $iCurrTransition = $LOD_PAGE_TRANSITION_CUT_THROUGH_BLACK
 						; $iEffect = 0 $iTransitionType = 1 $iTransitionSubType = 104
 
 					Case 17
 						Switch $iTransitionSubType
 							Case 13
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_SHAPE_OVAL_VERT
+								$iCurrTransition = $LOD_PAGE_TRANSITION_SHAPE_OVAL_VERT
 								; $iEffect = 0 $iTransitionType = 17 $iTransitionSubType = 13
 
 							Case 14
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_SHAPE_OVAL_HORI
+								$iCurrTransition = $LOD_PAGE_TRANSITION_SHAPE_OVAL_HORI
 								; $iEffect = 0 $iTransitionType = 17 $iTransitionSubType = 14
 						EndSwitch
 
 					Case 21
 						Switch $iTransitionSubType
 							Case 1
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_FALL
+								$iCurrTransition = $LOD_PAGE_TRANSITION_FALL
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 1
 
 							Case 2
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_TURN_AROUND
+								$iCurrTransition = $LOD_PAGE_TRANSITION_TURN_AROUND
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 2
 
 							Case 3
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_IRIS
+								$iCurrTransition = $LOD_PAGE_TRANSITION_IRIS
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 3
 
 							Case 4
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_TURN_DOWN
+								$iCurrTransition = $LOD_PAGE_TRANSITION_TURN_DOWN
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 4
 
 							Case 5
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_ROCHADE
+								$iCurrTransition = $LOD_PAGE_TRANSITION_ROCHADE
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 5
 
 							Case 6
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_3D_VENETIAN_VERT
+								$iCurrTransition = $LOD_PAGE_TRANSITION_3D_VENETIAN_VERT
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 6
 
 							Case 7
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_3D_VENETIAN_HORI
+								$iCurrTransition = $LOD_PAGE_TRANSITION_3D_VENETIAN_HORI
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 7
 
 							Case 8
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_STATIC
+								$iCurrTransition = $LOD_PAGE_TRANSITION_STATIC
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 8
 
 							Case 9
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_FINE_DISSOLVE
+								$iCurrTransition = $LOD_PAGE_TRANSITION_FINE_DISSOLVE
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 9
 
 							Case 11
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_CUBE_INSIDE
+								$iCurrTransition = $LOD_PAGE_TRANSITION_CUBE_INSIDE
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 11
 
 							Case 12
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_CUBE_OUTSIDE
+								$iCurrTransition = $LOD_PAGE_TRANSITION_CUBE_OUTSIDE
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 12
 
 							Case 13
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_VORTEX
+								$iCurrTransition = $LOD_PAGE_TRANSITION_VORTEX
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 13
 
 							Case 14
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_RIPPLE
+								$iCurrTransition = $LOD_PAGE_TRANSITION_RIPPLE
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 14
 
 							Case 26
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_GLITTER
+								$iCurrTransition = $LOD_PAGE_TRANSITION_GLITTER
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 26
 
 							Case 27
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_CIRCLES
+								$iCurrTransition = $LOD_PAGE_TRANSITION_CIRCLES
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 27
 
 							Case 31
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_HONEYCOMB
+								$iCurrTransition = $LOD_PAGE_TRANSITION_HONEYCOMB
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 31
 
 							Case 55
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_HELIX
+								$iCurrTransition = $LOD_PAGE_TRANSITION_HELIX
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 55
 
 							Case 108
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_TILES
+								$iCurrTransition = $LOD_PAGE_TRANSITION_TILES
 								; $iEffect = 0 $iTransitionType = 21 $iTransitionSubType = 108
 						EndSwitch
 
 					Case 37
-						If ($iTransitionSubType = 104) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_FADE_THROUGH_WHITE
+						If ($iTransitionSubType = 104) Then $iCurrTransition = $LOD_PAGE_TRANSITION_FADE_THROUGH_WHITE
 						; $iEffect = 0 $iTransitionType = 37 $iTransitionSubType = 104
 				EndSwitch
 
 			Case 1
-				If ($iTransitionType = 1) And ($iTransitionSubType = 1) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_WIPE_LEFT_TO_RIGHT
+				If ($iTransitionType = 1) And ($iTransitionSubType = 1) Then $iCurrTransition = $LOD_PAGE_TRANSITION_WIPE_LEFT_TO_RIGHT
 				; $iEffect = 1 $iTransitionType = 1 $iTransitionSubType = 1
 
 			Case 2
-				If ($iTransitionType = 1) And ($iTransitionSubType = 2) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_WIPE_TOP_TO_BOTTOM
+				If ($iTransitionType = 1) And ($iTransitionSubType = 2) Then $iCurrTransition = $LOD_PAGE_TRANSITION_WIPE_TOP_TO_BOTTOM
 				; $iEffect = 2 $iTransitionType = 1 $iTransitionSubType = 2
 
 			Case 3
-				If ($iTransitionType = 1) And ($iTransitionSubType = 1) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_WIPE_RIGHT_TO_LEFT
+				If ($iTransitionType = 1) And ($iTransitionSubType = 1) Then $iCurrTransition = $LOD_PAGE_TRANSITION_WIPE_RIGHT_TO_LEFT
 				; $iEffect = 3 $iTransitionType = 1 $iTransitionSubType = 1
 
 			Case 4
-				If ($iTransitionType = 1) And ($iTransitionSubType = 2) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_WIPE_BOTTOM_TO_TOP
+				If ($iTransitionType = 1) And ($iTransitionSubType = 2) Then $iCurrTransition = $LOD_PAGE_TRANSITION_WIPE_BOTTOM_TO_TOP
 				; $iEffect = 4 $iTransitionType = 1 $iTransitionSubType = 2
 
 			Case 5
-				If ($iTransitionType = 12) And ($iTransitionSubType = 25) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_BOX_IN
+				If ($iTransitionType = 12) And ($iTransitionSubType = 25) Then $iCurrTransition = $LOD_PAGE_TRANSITION_BOX_IN
 				; $iEffect = 5 $iTransitionType = 12 $iTransitionSubType = 25
 
 			Case 6
 				Switch $iTransitionType
 					Case 3
-						If ($iTransitionSubType = 12) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_SHAPE_PLUS
+						If ($iTransitionSubType = 12) Then $iCurrTransition = $LOD_PAGE_TRANSITION_SHAPE_PLUS
 						; $iEffect = 6 $iTransitionType = 3 $iTransitionSubType = 12
 
 					Case 12
 						Switch $iTransitionSubType
 							Case 25
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_BOX_OUT
+								$iCurrTransition = $LOD_PAGE_TRANSITION_BOX_OUT
 								; $iEffect = 6 $iTransitionType = 12 $iTransitionSubType = 25
 
 							Case 26
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_SHAPE_DIAMOND
+								$iCurrTransition = $LOD_PAGE_TRANSITION_SHAPE_DIAMOND
 								; $iEffect = 6 $iTransitionType = 12 $iTransitionSubType = 26
 						EndSwitch
 
 					Case 17
-						If ($iTransitionSubType = 27) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_SHAPE_CIRCLE
+						If ($iTransitionSubType = 27) Then $iCurrTransition = $LOD_PAGE_TRANSITION_SHAPE_CIRCLE
 						; $iEffect = 6 $iTransitionType = 17 $iTransitionSubType = 27
 				EndSwitch
 
 			Case 7
-				If ($iTransitionType = 36) And ($iTransitionSubType = 97) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_COVER_LEFT_TO_RIGHT
+				If ($iTransitionType = 36) And ($iTransitionSubType = 97) Then $iCurrTransition = $LOD_PAGE_TRANSITION_COVER_LEFT_TO_RIGHT
 				; $iEffect = 7 $iTransitionType = 36 $iTransitionSubType = 97
 
 			Case 8
-				If ($iTransitionType = 36) And ($iTransitionSubType = 98) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_COVER_TOP_TO_BOTTOM
+				If ($iTransitionType = 36) And ($iTransitionSubType = 98) Then $iCurrTransition = $LOD_PAGE_TRANSITION_COVER_TOP_TO_BOTTOM
 				; $iEffect = 8 $iTransitionType = 36 $iTransitionSubType = 98
 
 			Case 9
-				If ($iTransitionType = 36) And ($iTransitionSubType = 99) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_COVER_RIGHT_TO_LEFT
+				If ($iTransitionType = 36) And ($iTransitionSubType = 99) Then $iCurrTransition = $LOD_PAGE_TRANSITION_COVER_RIGHT_TO_LEFT
 				; $iEffect = 9 $iTransitionType = 36 $iTransitionSubType = 99
 
 			Case 10
-				If ($iTransitionType = 36) And ($iTransitionSubType = 100) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_COVER_BOTTOM_TO_TOP
+				If ($iTransitionType = 36) And ($iTransitionSubType = 100) Then $iCurrTransition = $LOD_PAGE_TRANSITION_COVER_BOTTOM_TO_TOP
 				; $iEffect = 10 $iTransitionType = 36 $iTransitionSubType = 100
 
 			Case 11
-				If ($iTransitionType = 35) And ($iTransitionSubType = 97) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_PUSH_LEFT_TO_RIGHT
+				If ($iTransitionType = 35) And ($iTransitionSubType = 97) Then $iCurrTransition = $LOD_PAGE_TRANSITION_PUSH_LEFT_TO_RIGHT
 				; $iEffect = 11 $iTransitionType = 35 $iTransitionSubType = 97
 
 			Case 12
-				If ($iTransitionType = 35) And ($iTransitionSubType = 98) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_PUSH_TOP_TO_BOTTOM
+				If ($iTransitionType = 35) And ($iTransitionSubType = 98) Then $iCurrTransition = $LOD_PAGE_TRANSITION_PUSH_TOP_TO_BOTTOM
 				; $iEffect = 12 $iTransitionType = 35 $iTransitionSubType = 98
 
 			Case 13
-				If ($iTransitionType = 35) And ($iTransitionSubType = 98) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_PUSH_RIGHT_TO_LEFT
+				If ($iTransitionType = 35) And ($iTransitionSubType = 98) Then $iCurrTransition = $LOD_PAGE_TRANSITION_PUSH_RIGHT_TO_LEFT
 				; $iEffect = 13 $iTransitionType = 35 $iTransitionSubType = 99
 
 			Case 14
-				If ($iTransitionType = 35) And ($iTransitionSubType = 100) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_PUSH_BOTTOM_TO_TOP
+				If ($iTransitionType = 35) And ($iTransitionSubType = 100) Then $iCurrTransition = $LOD_PAGE_TRANSITION_PUSH_BOTTOM_TO_TOP
 				; $iEffect = 14 $iTransitionType = 35 $iTransitionSubType = 100
 
 			Case 15
-				If ($iTransitionType = 41) And ($iTransitionSubType = 13) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_VENETIAN_VERT
+				If ($iTransitionType = 41) And ($iTransitionSubType = 13) Then $iCurrTransition = $LOD_PAGE_TRANSITION_VENETIAN_VERT
 				; $iEffect = 15 $iTransitionType = 41 $iTransitionSubType = 13
 
 			Case 16
-				If ($iTransitionType = 41) And ($iTransitionSubType = 14) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_VENETIAN_HORI
+				If ($iTransitionType = 41) And ($iTransitionSubType = 14) Then $iCurrTransition = $LOD_PAGE_TRANSITION_VENETIAN_HORI
 				; $iEffect = 16 $iTransitionType = 41 $iTransitionSubType = 14
 
 			Case 17
@@ -10768,65 +10768,65 @@ Func __LODraw_Transition(ByRef $oSlide, $iTransition = Null)
 					Case 23
 						Switch $iTransitionSubType
 							Case 37
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_WHEEL_2_SPOKE
+								$iCurrTransition = $LOD_PAGE_TRANSITION_WHEEL_2_SPOKE
 								; $iEffect = 17 $iTransitionType = 23 $iTransitionSubType = 37
 
 							Case 39
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_WHEEL_4_SPOKE
+								$iCurrTransition = $LOD_PAGE_TRANSITION_WHEEL_4_SPOKE
 								; $iEffect = 17 $iTransitionType = 23 $iTransitionSubType = 39
 
 							Case 105
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_WHEEL_3_SPOKE
+								$iCurrTransition = $LOD_PAGE_TRANSITION_WHEEL_3_SPOKE
 								; $iEffect = 17 $iTransitionType = 23 $iTransitionSubType = 105
 
 							Case 106
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_WHEEL_8_SPOKE
+								$iCurrTransition = $LOD_PAGE_TRANSITION_WHEEL_8_SPOKE
 								; $iEffect = 17 $iTransitionType = 23 $iTransitionSubType = 106
 
 							Case 107
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_WHEEL_1_SPOKE
+								$iCurrTransition = $LOD_PAGE_TRANSITION_WHEEL_1_SPOKE
 								; $iEffect = 17 $iTransitionType = 23 $iTransitionSubType = 107
 						EndSwitch
 
 					Case 25
-						If ($iTransitionSubType = 48) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_WEDGE
+						If ($iTransitionSubType = 48) Then $iCurrTransition = $LOD_PAGE_TRANSITION_WEDGE
 						; $iEffect = 17 $iTransitionType = 25 $iTransitionSubType = 48
 
 					Case 43
-						If ($iTransitionSubType = 114) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_NEWSFLASH
+						If ($iTransitionSubType = 114) Then $iCurrTransition = $LOD_PAGE_TRANSITION_NEWSFLASH
 						; $iEffect = 17 $iTransitionType = 43 $iTransitionSubType = 114
 				EndSwitch
 
 			Case 19
-				If ($iTransitionType = 34) And ($iTransitionSubType = 95) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_DIAGONAL_TOP_LEFT_TO_BOTTOM_RIGHT
+				If ($iTransitionType = 34) And ($iTransitionSubType = 95) Then $iCurrTransition = $LOD_PAGE_TRANSITION_DIAGONAL_TOP_LEFT_TO_BOTTOM_RIGHT
 				; $iEffect = 19 $iTransitionType = 34 $iTransitionSubType = 95
 
 			Case 20
-				If ($iTransitionType = 34) And ($iTransitionSubType = 96) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_DIAGONAL_TOP_RIGHT_TO_BOTTOM_LEFT
+				If ($iTransitionType = 34) And ($iTransitionSubType = 96) Then $iCurrTransition = $LOD_PAGE_TRANSITION_DIAGONAL_TOP_RIGHT_TO_BOTTOM_LEFT
 				; $iEffect = 20 $iTransitionType = 34 $iTransitionSubType = 96
 
 			Case 21
-				If ($iTransitionType = 34) And ($iTransitionSubType = 96) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_DIAGONAL_BOTTOM_LEFT_TO_TOP_RIGHT
+				If ($iTransitionType = 34) And ($iTransitionSubType = 96) Then $iCurrTransition = $LOD_PAGE_TRANSITION_DIAGONAL_BOTTOM_LEFT_TO_TOP_RIGHT
 				; $iEffect = 21 $iTransitionType = 34 $iTransitionSubType = 96
 
 			Case 22
-				If ($iTransitionType = 34) And ($iTransitionSubType = 95) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_DIAGONAL_BOTTOM_RIGHT_TO_TOP_LEFT
+				If ($iTransitionType = 34) And ($iTransitionSubType = 95) Then $iCurrTransition = $LOD_PAGE_TRANSITION_DIAGONAL_BOTTOM_RIGHT_TO_TOP_LEFT
 				; $iEffect = 22 $iTransitionType = 34 $iTransitionSubType = 95
 
 			Case 23
-				If ($iTransitionType = 4) And ($iTransitionSubType = 14) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_SPLIT_HORI_IN
+				If ($iTransitionType = 4) And ($iTransitionSubType = 14) Then $iCurrTransition = $LOD_PAGE_TRANSITION_SPLIT_HORI_IN
 				; $iEffect = 23 $iTransitionType = 4 $iTransitionSubType = 14
 
 			Case 24
-				If ($iTransitionType = 4) And ($iTransitionSubType = 13) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_SPLIT_VERT_IN
+				If ($iTransitionType = 4) And ($iTransitionSubType = 13) Then $iCurrTransition = $LOD_PAGE_TRANSITION_SPLIT_VERT_IN
 				; $iEffect = 24 $iTransitionType = 4 $iTransitionSubType = 13
 
 			Case 25
-				If ($iTransitionType = 4) And ($iTransitionSubType = 14) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_SPLIT_HORI_OUT
+				If ($iTransitionType = 4) And ($iTransitionSubType = 14) Then $iCurrTransition = $LOD_PAGE_TRANSITION_SPLIT_HORI_OUT
 				; $iEffect = 25 $iTransitionType = 4 $iTransitionSubType = 14
 
 			Case 26
-				If ($iTransitionType = 4) And ($iTransitionSubType = 13) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_SPLIT_VERT_OUT
+				If ($iTransitionType = 4) And ($iTransitionSubType = 13) Then $iCurrTransition = $LOD_PAGE_TRANSITION_SPLIT_VERT_OUT
 				; $iEffect = 26 $iTransitionType = 4 $iTransitionSubType = 13
 
 			Case 31
@@ -10834,99 +10834,99 @@ Func __LODraw_Transition(ByRef $oSlide, $iTransition = Null)
 					Case 37
 						Switch $iTransitionSubType
 							Case 101
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_FADE_SMOOTHLY
+								$iCurrTransition = $LOD_PAGE_TRANSITION_FADE_SMOOTHLY
 								; $iEffect = 31 $iTransitionType = 37 $iTransitionSubType = 101
 
 							Case 104
-								$iCurrTransition = $LOD_SLIDE_TRANSITION_FADE_THROUGH_BLACK
+								$iCurrTransition = $LOD_PAGE_TRANSITION_FADE_THROUGH_BLACK
 								; $iEffect = 31 $iTransitionType = 37 $iTransitionSubType = 104
 						EndSwitch
 
 					Case 40
-						If ($iTransitionSubType = 0) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_DISSOLVE
+						If ($iTransitionSubType = 0) Then $iCurrTransition = $LOD_PAGE_TRANSITION_DISSOLVE
 						; $iEffect = 31 $iTransitionType = 40 $iTransitionSubType = 0
 				EndSwitch
 
 			Case 36
-				If ($iTransitionType = 42) And ($iTransitionSubType = 0) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_RANDOM
+				If ($iTransitionType = 42) And ($iTransitionSubType = 0) Then $iCurrTransition = $LOD_PAGE_TRANSITION_RANDOM
 				; $iEffect = 36 $iTransitionType = 42 $iTransitionSubType = 0
 
 			Case 41
 				Switch $iTransitionType
 					Case 35
-						If ($iTransitionSubType = 111) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_COMB_VERT
+						If ($iTransitionSubType = 111) Then $iCurrTransition = $LOD_PAGE_TRANSITION_COMB_VERT
 						; $iEffect = 41 $iTransitionType = 35 $iTransitionSubType = 111
 
 					Case 38
-						If ($iTransitionSubType = 13) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_BARS_VERT
+						If ($iTransitionSubType = 13) Then $iCurrTransition = $LOD_PAGE_TRANSITION_BARS_VERT
 						; $iEffect = 41 $iTransitionType = 38 $iTransitionSubType = 13
 				EndSwitch
 
 			Case 42
 				Switch $iTransitionType
 					Case 35
-						If ($iTransitionSubType = 110) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_COMB_HORI
+						If ($iTransitionSubType = 110) Then $iCurrTransition = $LOD_PAGE_TRANSITION_COMB_HORI
 						; $iEffect = 42 $iTransitionType = 35 $iTransitionSubType = 110
 
 					Case 38
-						If ($iTransitionSubType = 14) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_BARS_HORI
+						If ($iTransitionSubType = 14) Then $iCurrTransition = $LOD_PAGE_TRANSITION_BARS_HORI
 						; $iEffect = 42 $iTransitionType = 38 $iTransitionSubType = 14
 				EndSwitch
 
 			Case 43
-				If ($iTransitionType = 36) And ($iTransitionSubType = 116) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_COVER_TOP_LEFT_TO_BOTTOM_RIGHT
+				If ($iTransitionType = 36) And ($iTransitionSubType = 116) Then $iCurrTransition = $LOD_PAGE_TRANSITION_COVER_TOP_LEFT_TO_BOTTOM_RIGHT
 				; $iEffect = 43 $iTransitionType = 36 $iTransitionSubType = 116
 
 			Case 44
-				If ($iTransitionType = 36) And ($iTransitionSubType = 117) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_COVER_TOP_RIGHT_TO_BOTTOM_LEFT
+				If ($iTransitionType = 36) And ($iTransitionSubType = 117) Then $iCurrTransition = $LOD_PAGE_TRANSITION_COVER_TOP_RIGHT_TO_BOTTOM_LEFT
 				; $iEffect = 44 $iTransitionType = 36 $iTransitionSubType = 117
 
 			Case 45
-				If ($iTransitionType = 36) And ($iTransitionSubType = 119) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_COVER_BOTTOM_RIGHT_TO_TOP_LEFT
+				If ($iTransitionType = 36) And ($iTransitionSubType = 119) Then $iCurrTransition = $LOD_PAGE_TRANSITION_COVER_BOTTOM_RIGHT_TO_TOP_LEFT
 				; $iEffect = 45 $iTransitionType = 36 $iTransitionSubType = 119
 
 			Case 46
-				If ($iTransitionType = 36) And ($iTransitionSubType = 118) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_COVER_BOTTOM_LEFT_TO_TOP_RIGHT
+				If ($iTransitionType = 36) And ($iTransitionSubType = 118) Then $iCurrTransition = $LOD_PAGE_TRANSITION_COVER_BOTTOM_LEFT_TO_TOP_RIGHT
 				; $iEffect = 46 $iTransitionType = 36 $iTransitionSubType = 118
 
 			Case 47
-				If ($iTransitionType = 36) And ($iTransitionSubType = 99) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_UNCOVER_RIGHT_TO_LEFT
+				If ($iTransitionType = 36) And ($iTransitionSubType = 99) Then $iCurrTransition = $LOD_PAGE_TRANSITION_UNCOVER_RIGHT_TO_LEFT
 				; $iEffect = 47 $iTransitionType = 36 $iTransitionSubType = 99
 
 			Case 48
-				If ($iTransitionType = 36) And ($iTransitionSubType = 119) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_UNCOVER_BOTTOM_RIGHT_TO_TOP_LEFT
+				If ($iTransitionType = 36) And ($iTransitionSubType = 119) Then $iCurrTransition = $LOD_PAGE_TRANSITION_UNCOVER_BOTTOM_RIGHT_TO_TOP_LEFT
 				; $iEffect = 48 $iTransitionType = 36 $iTransitionSubType = 119
 
 			Case 49
-				If ($iTransitionType = 36) And ($iTransitionSubType = 100) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_UNCOVER_BOTTOM_TO_TOP
+				If ($iTransitionType = 36) And ($iTransitionSubType = 100) Then $iCurrTransition = $LOD_PAGE_TRANSITION_UNCOVER_BOTTOM_TO_TOP
 				; $iEffect = 49 $iTransitionType = 36 $iTransitionSubType = 100
 
 			Case 50
-				If ($iTransitionType = 36) And ($iTransitionSubType = 118) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_UNCOVER_BOTTOM_LEFT_TO_TOP_RIGHT
+				If ($iTransitionType = 36) And ($iTransitionSubType = 118) Then $iCurrTransition = $LOD_PAGE_TRANSITION_UNCOVER_BOTTOM_LEFT_TO_TOP_RIGHT
 				; $iEffect = 50 $iTransitionType = 36 $iTransitionSubType = 118
 
 			Case 51
-				If ($iTransitionType = 36) And ($iTransitionSubType = 97) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_UNCOVER_LEFT_TO_RIGHT
+				If ($iTransitionType = 36) And ($iTransitionSubType = 97) Then $iCurrTransition = $LOD_PAGE_TRANSITION_UNCOVER_LEFT_TO_RIGHT
 				; $iEffect = 51 $iTransitionType = 36 $iTransitionSubType = 97
 
 			Case 52
-				If ($iTransitionType = 36) And ($iTransitionSubType = 116) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_UNCOVER_TOP_LEFT_TO_BOTTOM_RIGHT
+				If ($iTransitionType = 36) And ($iTransitionSubType = 116) Then $iCurrTransition = $LOD_PAGE_TRANSITION_UNCOVER_TOP_LEFT_TO_BOTTOM_RIGHT
 				; $iEffect = 52 $iTransitionType = 36 $iTransitionSubType = 116
 
 			Case 53
-				If ($iTransitionType = 36) And ($iTransitionSubType = 98) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_UNCOVER_TOP_TO_BOTTOM
+				If ($iTransitionType = 36) And ($iTransitionSubType = 98) Then $iCurrTransition = $LOD_PAGE_TRANSITION_UNCOVER_TOP_TO_BOTTOM
 				; $iEffect = 53 $iTransitionType = 36 $iTransitionSubType = 98
 
 			Case 54
-				If ($iTransitionType = 36) And ($iTransitionSubType = 117) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_UNCOVER_TOP_RIGHT_TO_BOTTOM_LEFT
+				If ($iTransitionType = 36) And ($iTransitionSubType = 117) Then $iCurrTransition = $LOD_PAGE_TRANSITION_UNCOVER_TOP_RIGHT_TO_BOTTOM_LEFT
 				; $iEffect = 54 $iTransitionType = 36 $iTransitionSubType = 117
 
 			Case 55
-				If ($iTransitionType = 39) And ($iTransitionSubType = 19) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_CHECKERS_DOWN
+				If ($iTransitionType = 39) And ($iTransitionSubType = 19) Then $iCurrTransition = $LOD_PAGE_TRANSITION_CHECKERS_DOWN
 				; $iEffect = 55 $iTransitionType = 39 $iTransitionSubType = 19
 
 			Case 56
-				If ($iTransitionType = 39) And ($iTransitionSubType = 108) Then $iCurrTransition = $LOD_SLIDE_TRANSITION_CHECKERS_ACROSS
+				If ($iTransitionType = 39) And ($iTransitionSubType = 108) Then $iCurrTransition = $LOD_PAGE_TRANSITION_CHECKERS_ACROSS
 				; $iEffect = 56 $iTransitionType = 39 $iTransitionSubType = 108
 		EndSwitch
 
@@ -10935,412 +10935,412 @@ Func __LODraw_Transition(ByRef $oSlide, $iTransition = Null)
 		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurrTransition)
 	EndIf
 
-	If Not __LO_IntIsBetween($iTransition, $LOD_SLIDE_TRANSITION_3D_VENETIAN_VERT, $LOD_SLIDE_TRANSITION_WIPE_TOP_TO_BOTTOM) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iTransition, $LOD_PAGE_TRANSITION_3D_VENETIAN_VERT, $LOD_PAGE_TRANSITION_WIPE_TOP_TO_BOTTOM) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	Switch $iTransition
-		Case $LOD_SLIDE_TRANSITION_3D_VENETIAN_VERT
+		Case $LOD_PAGE_TRANSITION_3D_VENETIAN_VERT
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 6
 
-		Case $LOD_SLIDE_TRANSITION_3D_VENETIAN_HORI
+		Case $LOD_PAGE_TRANSITION_3D_VENETIAN_HORI
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 7
 
-		Case $LOD_SLIDE_TRANSITION_BARS_VERT
+		Case $LOD_PAGE_TRANSITION_BARS_VERT
 			$iEffect = 41
 			$iTransitionType = 38
 			$iTransitionSubType = 13
 
-		Case $LOD_SLIDE_TRANSITION_BARS_HORI
+		Case $LOD_PAGE_TRANSITION_BARS_HORI
 			$iEffect = 42
 			$iTransitionType = 38
 			$iTransitionSubType = 14
 
-		Case $LOD_SLIDE_TRANSITION_BOX_OUT
+		Case $LOD_PAGE_TRANSITION_BOX_OUT
 			$iEffect = 6
 			$iTransitionType = 12
 			$iTransitionSubType = 25
 
-		Case $LOD_SLIDE_TRANSITION_BOX_IN
+		Case $LOD_PAGE_TRANSITION_BOX_IN
 			$iEffect = 5
 			$iTransitionType = 12
 			$iTransitionSubType = 25
 
-		Case $LOD_SLIDE_TRANSITION_CHECKERS_DOWN
+		Case $LOD_PAGE_TRANSITION_CHECKERS_DOWN
 			$iEffect = 55
 			$iTransitionType = 39
 			$iTransitionSubType = 19
 
-		Case $LOD_SLIDE_TRANSITION_CHECKERS_ACROSS
+		Case $LOD_PAGE_TRANSITION_CHECKERS_ACROSS
 			$iEffect = 56
 			$iTransitionType = 39
 			$iTransitionSubType = 108
 
-		Case $LOD_SLIDE_TRANSITION_CIRCLES
+		Case $LOD_PAGE_TRANSITION_CIRCLES
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 27
 
-		Case $LOD_SLIDE_TRANSITION_COMB_HORI
+		Case $LOD_PAGE_TRANSITION_COMB_HORI
 			$iEffect = 42
 			$iTransitionType = 35
 			$iTransitionSubType = 110
 
-		Case $LOD_SLIDE_TRANSITION_COMB_VERT
+		Case $LOD_PAGE_TRANSITION_COMB_VERT
 			$iEffect = 41
 			$iTransitionType = 35
 			$iTransitionSubType = 111
 
-		Case $LOD_SLIDE_TRANSITION_COVER_TOP_TO_BOTTOM
+		Case $LOD_PAGE_TRANSITION_COVER_TOP_TO_BOTTOM
 			$iEffect = 8
 			$iTransitionType = 36
 			$iTransitionSubType = 98
 
-		Case $LOD_SLIDE_TRANSITION_COVER_RIGHT_TO_LEFT
+		Case $LOD_PAGE_TRANSITION_COVER_RIGHT_TO_LEFT
 			$iEffect = 9
 			$iTransitionType = 36
 			$iTransitionSubType = 99
 
-		Case $LOD_SLIDE_TRANSITION_COVER_LEFT_TO_RIGHT
+		Case $LOD_PAGE_TRANSITION_COVER_LEFT_TO_RIGHT
 			$iEffect = 7
 			$iTransitionType = 36
 			$iTransitionSubType = 97
 
-		Case $LOD_SLIDE_TRANSITION_COVER_BOTTOM_TO_TOP
+		Case $LOD_PAGE_TRANSITION_COVER_BOTTOM_TO_TOP
 			$iEffect = 10
 			$iTransitionType = 36
 			$iTransitionSubType = 100
 
-		Case $LOD_SLIDE_TRANSITION_COVER_TOP_RIGHT_TO_BOTTOM_LEFT
+		Case $LOD_PAGE_TRANSITION_COVER_TOP_RIGHT_TO_BOTTOM_LEFT
 			$iEffect = 44
 			$iTransitionType = 36
 			$iTransitionSubType = 117
 
-		Case $LOD_SLIDE_TRANSITION_COVER_BOTTOM_RIGHT_TO_TOP_LEFT
+		Case $LOD_PAGE_TRANSITION_COVER_BOTTOM_RIGHT_TO_TOP_LEFT
 			$iEffect = 45
 			$iTransitionType = 36
 			$iTransitionSubType = 119
 
-		Case $LOD_SLIDE_TRANSITION_COVER_TOP_LEFT_TO_BOTTOM_RIGHT
+		Case $LOD_PAGE_TRANSITION_COVER_TOP_LEFT_TO_BOTTOM_RIGHT
 			$iEffect = 43
 			$iTransitionType = 36
 			$iTransitionSubType = 116
 
-		Case $LOD_SLIDE_TRANSITION_COVER_BOTTOM_LEFT_TO_TOP_RIGHT
+		Case $LOD_PAGE_TRANSITION_COVER_BOTTOM_LEFT_TO_TOP_RIGHT
 			$iEffect = 46
 			$iTransitionType = 36
 			$iTransitionSubType = 118
 
-		Case $LOD_SLIDE_TRANSITION_CUBE_OUTSIDE
+		Case $LOD_PAGE_TRANSITION_CUBE_OUTSIDE
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 12
 
-		Case $LOD_SLIDE_TRANSITION_CUBE_INSIDE
+		Case $LOD_PAGE_TRANSITION_CUBE_INSIDE
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 11
 
-		Case $LOD_SLIDE_TRANSITION_CUT_THROUGH_BLACK
+		Case $LOD_PAGE_TRANSITION_CUT_THROUGH_BLACK
 			$iEffect = 0
 			$iTransitionType = 1
 			$iTransitionSubType = 104
 
-		Case $LOD_SLIDE_TRANSITION_DIAGONAL_TOP_RIGHT_TO_BOTTOM_LEFT
+		Case $LOD_PAGE_TRANSITION_DIAGONAL_TOP_RIGHT_TO_BOTTOM_LEFT
 			$iEffect = 20
 			$iTransitionType = 34
 			$iTransitionSubType = 96
 
-		Case $LOD_SLIDE_TRANSITION_DIAGONAL_BOTTOM_RIGHT_TO_TOP_LEFT
+		Case $LOD_PAGE_TRANSITION_DIAGONAL_BOTTOM_RIGHT_TO_TOP_LEFT
 			$iEffect = 22
 			$iTransitionType = 34
 			$iTransitionSubType = 95
 
-		Case $LOD_SLIDE_TRANSITION_DIAGONAL_TOP_LEFT_TO_BOTTOM_RIGHT
+		Case $LOD_PAGE_TRANSITION_DIAGONAL_TOP_LEFT_TO_BOTTOM_RIGHT
 			$iEffect = 19
 			$iTransitionType = 34
 			$iTransitionSubType = 95
 
-		Case $LOD_SLIDE_TRANSITION_DIAGONAL_BOTTOM_LEFT_TO_TOP_RIGHT
+		Case $LOD_PAGE_TRANSITION_DIAGONAL_BOTTOM_LEFT_TO_TOP_RIGHT
 			$iEffect = 21
 			$iTransitionType = 34
 			$iTransitionSubType = 96
 
-		Case $LOD_SLIDE_TRANSITION_DISSOLVE
+		Case $LOD_PAGE_TRANSITION_DISSOLVE
 			$iEffect = 31
 			$iTransitionType = 40
 			$iTransitionSubType = 0
 
-		Case $LOD_SLIDE_TRANSITION_FADE_THROUGH_BLACK
+		Case $LOD_PAGE_TRANSITION_FADE_THROUGH_BLACK
 			$iEffect = 31
 			$iTransitionType = 37
 			$iTransitionSubType = 104
 
-		Case $LOD_SLIDE_TRANSITION_FADE_THROUGH_WHITE
+		Case $LOD_PAGE_TRANSITION_FADE_THROUGH_WHITE
 			$iEffect = 0
 			$iTransitionType = 37
 			$iTransitionSubType = 104
 
-		Case $LOD_SLIDE_TRANSITION_FADE_SMOOTHLY
+		Case $LOD_PAGE_TRANSITION_FADE_SMOOTHLY
 			$iEffect = 31
 			$iTransitionType = 37
 			$iTransitionSubType = 101
 
-		Case $LOD_SLIDE_TRANSITION_FALL
+		Case $LOD_PAGE_TRANSITION_FALL
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 1
 
-		Case $LOD_SLIDE_TRANSITION_FINE_DISSOLVE
+		Case $LOD_PAGE_TRANSITION_FINE_DISSOLVE
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 9
 
-		Case $LOD_SLIDE_TRANSITION_GLITTER
+		Case $LOD_PAGE_TRANSITION_GLITTER
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 26
 
-		Case $LOD_SLIDE_TRANSITION_HELIX
+		Case $LOD_PAGE_TRANSITION_HELIX
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 55
 
-		Case $LOD_SLIDE_TRANSITION_HONEYCOMB
+		Case $LOD_PAGE_TRANSITION_HONEYCOMB
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 31
 
-		Case $LOD_SLIDE_TRANSITION_IRIS
+		Case $LOD_PAGE_TRANSITION_IRIS
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 3
 
-		Case $LOD_SLIDE_TRANSITION_NEWSFLASH
+		Case $LOD_PAGE_TRANSITION_NEWSFLASH
 			$iEffect = 17
 			$iTransitionType = 43
 			$iTransitionSubType = 114
 
-		Case $LOD_SLIDE_TRANSITION_NONE
+		Case $LOD_PAGE_TRANSITION_NONE
 			$iEffect = 0
 			$iTransitionType = 0
 			$iTransitionSubType = 0
 
-		Case $LOD_SLIDE_TRANSITION_PUSH_TOP_TO_BOTTOM
+		Case $LOD_PAGE_TRANSITION_PUSH_TOP_TO_BOTTOM
 			$iEffect = 12
 			$iTransitionType = 35
 			$iTransitionSubType = 98
 
-		Case $LOD_SLIDE_TRANSITION_PUSH_RIGHT_TO_LEFT
+		Case $LOD_PAGE_TRANSITION_PUSH_RIGHT_TO_LEFT
 			$iEffect = 13
 			$iTransitionType = 35
 			$iTransitionSubType = 99
 
-		Case $LOD_SLIDE_TRANSITION_PUSH_LEFT_TO_RIGHT
+		Case $LOD_PAGE_TRANSITION_PUSH_LEFT_TO_RIGHT
 			$iEffect = 11
 			$iTransitionType = 35
 			$iTransitionSubType = 97
 
-		Case $LOD_SLIDE_TRANSITION_PUSH_BOTTOM_TO_TOP
+		Case $LOD_PAGE_TRANSITION_PUSH_BOTTOM_TO_TOP
 			$iEffect = 14
 			$iTransitionType = 35
 			$iTransitionSubType = 100
 
-		Case $LOD_SLIDE_TRANSITION_RANDOM
+		Case $LOD_PAGE_TRANSITION_RANDOM
 			$iEffect = 36
 			$iTransitionType = 42
 			$iTransitionSubType = 0
 
-		Case $LOD_SLIDE_TRANSITION_RIPPLE
+		Case $LOD_PAGE_TRANSITION_RIPPLE
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 14
 
-		Case $LOD_SLIDE_TRANSITION_ROCHADE
+		Case $LOD_PAGE_TRANSITION_ROCHADE
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 5
 
-		Case $LOD_SLIDE_TRANSITION_SHAPE_PLUS
+		Case $LOD_PAGE_TRANSITION_SHAPE_PLUS
 			$iEffect = 6
 			$iTransitionType = 3
 			$iTransitionSubType = 12
 
-		Case $LOD_SLIDE_TRANSITION_SHAPE_DIAMOND
+		Case $LOD_PAGE_TRANSITION_SHAPE_DIAMOND
 			$iEffect = 6
 			$iTransitionType = 12
 			$iTransitionSubType = 26
 
-		Case $LOD_SLIDE_TRANSITION_SHAPE_CIRCLE
+		Case $LOD_PAGE_TRANSITION_SHAPE_CIRCLE
 			$iEffect = 6
 			$iTransitionType = 17
 			$iTransitionSubType = 27
 
-		Case $LOD_SLIDE_TRANSITION_SHAPE_OVAL_HORI
+		Case $LOD_PAGE_TRANSITION_SHAPE_OVAL_HORI
 			$iEffect = 0
 			$iTransitionType = 17
 			$iTransitionSubType = 14
 
-		Case $LOD_SLIDE_TRANSITION_SHAPE_OVAL_VERT
+		Case $LOD_PAGE_TRANSITION_SHAPE_OVAL_VERT
 			$iEffect = 0
 			$iTransitionType = 17
 			$iTransitionSubType = 13
 
-		Case $LOD_SLIDE_TRANSITION_SPLIT_HORI_IN
+		Case $LOD_PAGE_TRANSITION_SPLIT_HORI_IN
 			$iEffect = 23
 			$iTransitionType = 4
 			$iTransitionSubType = 14
 
-		Case $LOD_SLIDE_TRANSITION_SPLIT_HORI_OUT
+		Case $LOD_PAGE_TRANSITION_SPLIT_HORI_OUT
 			$iEffect = 25
 			$iTransitionType = 4
 			$iTransitionSubType = 14
 
-		Case $LOD_SLIDE_TRANSITION_SPLIT_VERT_IN
+		Case $LOD_PAGE_TRANSITION_SPLIT_VERT_IN
 			$iEffect = 24
 			$iTransitionType = 4
 			$iTransitionSubType = 13
 
-		Case $LOD_SLIDE_TRANSITION_SPLIT_VERT_OUT
+		Case $LOD_PAGE_TRANSITION_SPLIT_VERT_OUT
 			$iEffect = 26
 			$iTransitionType = 4
 			$iTransitionSubType = 13
 
-		Case $LOD_SLIDE_TRANSITION_STATIC
+		Case $LOD_PAGE_TRANSITION_STATIC
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 8
 
-		Case $LOD_SLIDE_TRANSITION_TILES
+		Case $LOD_PAGE_TRANSITION_TILES
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 108
 
-		Case $LOD_SLIDE_TRANSITION_TURN_AROUND
+		Case $LOD_PAGE_TRANSITION_TURN_AROUND
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 2
 
-		Case $LOD_SLIDE_TRANSITION_TURN_DOWN
+		Case $LOD_PAGE_TRANSITION_TURN_DOWN
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 4
 
-		Case $LOD_SLIDE_TRANSITION_UNCOVER_TOP_TO_BOTTOM
+		Case $LOD_PAGE_TRANSITION_UNCOVER_TOP_TO_BOTTOM
 			$iEffect = 53
 			$iTransitionType = 36
 			$iTransitionSubType = 98
 
-		Case $LOD_SLIDE_TRANSITION_UNCOVER_RIGHT_TO_LEFT
+		Case $LOD_PAGE_TRANSITION_UNCOVER_RIGHT_TO_LEFT
 			$iEffect = 47
 			$iTransitionType = 36
 			$iTransitionSubType = 99
 
-		Case $LOD_SLIDE_TRANSITION_UNCOVER_LEFT_TO_RIGHT
+		Case $LOD_PAGE_TRANSITION_UNCOVER_LEFT_TO_RIGHT
 			$iEffect = 51
 			$iTransitionType = 36
 			$iTransitionSubType = 97
 
-		Case $LOD_SLIDE_TRANSITION_UNCOVER_BOTTOM_TO_TOP
+		Case $LOD_PAGE_TRANSITION_UNCOVER_BOTTOM_TO_TOP
 			$iEffect = 49
 			$iTransitionType = 36
 			$iTransitionSubType = 100
 
-		Case $LOD_SLIDE_TRANSITION_UNCOVER_TOP_RIGHT_TO_BOTTOM_LEFT
+		Case $LOD_PAGE_TRANSITION_UNCOVER_TOP_RIGHT_TO_BOTTOM_LEFT
 			$iEffect = 54
 			$iTransitionType = 36
 			$iTransitionSubType = 117
 
-		Case $LOD_SLIDE_TRANSITION_UNCOVER_BOTTOM_RIGHT_TO_TOP_LEFT
+		Case $LOD_PAGE_TRANSITION_UNCOVER_BOTTOM_RIGHT_TO_TOP_LEFT
 			$iEffect = 48
 			$iTransitionType = 36
 			$iTransitionSubType = 119
 
-		Case $LOD_SLIDE_TRANSITION_UNCOVER_TOP_LEFT_TO_BOTTOM_RIGHT
+		Case $LOD_PAGE_TRANSITION_UNCOVER_TOP_LEFT_TO_BOTTOM_RIGHT
 			$iEffect = 52
 			$iTransitionType = 36
 			$iTransitionSubType = 116
 
-		Case $LOD_SLIDE_TRANSITION_UNCOVER_BOTTOM_LEFT_TO_TOP_RIGHT
+		Case $LOD_PAGE_TRANSITION_UNCOVER_BOTTOM_LEFT_TO_TOP_RIGHT
 			$iEffect = 50
 			$iTransitionType = 36
 			$iTransitionSubType = 118
 
-		Case $LOD_SLIDE_TRANSITION_VENETIAN_VERT
+		Case $LOD_PAGE_TRANSITION_VENETIAN_VERT
 			$iEffect = 15
 			$iTransitionType = 41
 			$iTransitionSubType = 13
 
-		Case $LOD_SLIDE_TRANSITION_VENETIAN_HORI
+		Case $LOD_PAGE_TRANSITION_VENETIAN_HORI
 			$iEffect = 16
 			$iTransitionType = 41
 			$iTransitionSubType = 14
 
-		Case $LOD_SLIDE_TRANSITION_VORTEX
+		Case $LOD_PAGE_TRANSITION_VORTEX
 			$iEffect = 0
 			$iTransitionType = 21
 			$iTransitionSubType = 13
 
-		Case $LOD_SLIDE_TRANSITION_WEDGE
+		Case $LOD_PAGE_TRANSITION_WEDGE
 			$iEffect = 17
 			$iTransitionType = 25
 			$iTransitionSubType = 48
 
-		Case $LOD_SLIDE_TRANSITION_WHEEL_1_SPOKE
+		Case $LOD_PAGE_TRANSITION_WHEEL_1_SPOKE
 			$iEffect = 17
 			$iTransitionType = 23
 			$iTransitionSubType = 107
 
-		Case $LOD_SLIDE_TRANSITION_WHEEL_2_SPOKE
+		Case $LOD_PAGE_TRANSITION_WHEEL_2_SPOKE
 			$iEffect = 17
 			$iTransitionType = 23
 			$iTransitionSubType = 37
 
-		Case $LOD_SLIDE_TRANSITION_WHEEL_3_SPOKE
+		Case $LOD_PAGE_TRANSITION_WHEEL_3_SPOKE
 			$iEffect = 17
 			$iTransitionType = 23
 			$iTransitionSubType = 105
 
-		Case $LOD_SLIDE_TRANSITION_WHEEL_4_SPOKE
+		Case $LOD_PAGE_TRANSITION_WHEEL_4_SPOKE
 			$iEffect = 17
 			$iTransitionType = 23
 			$iTransitionSubType = 39
 
-		Case $LOD_SLIDE_TRANSITION_WHEEL_8_SPOKE
+		Case $LOD_PAGE_TRANSITION_WHEEL_8_SPOKE
 			$iEffect = 17
 			$iTransitionType = 23
 			$iTransitionSubType = 106
 
-		Case $LOD_SLIDE_TRANSITION_WIPE_BOTTOM_TO_TOP
+		Case $LOD_PAGE_TRANSITION_WIPE_BOTTOM_TO_TOP
 			$iEffect = 4
 			$iTransitionType = 1
 			$iTransitionSubType = 2
 
-		Case $LOD_SLIDE_TRANSITION_WIPE_LEFT_TO_RIGHT
+		Case $LOD_PAGE_TRANSITION_WIPE_LEFT_TO_RIGHT
 			$iEffect = 1
 			$iTransitionType = 1
 			$iTransitionSubType = 1
 
-		Case $LOD_SLIDE_TRANSITION_WIPE_RIGHT_TO_LEFT
+		Case $LOD_PAGE_TRANSITION_WIPE_RIGHT_TO_LEFT
 			$iEffect = 3
 			$iTransitionType = 1
 			$iTransitionSubType = 1
 
-		Case $LOD_SLIDE_TRANSITION_WIPE_TOP_TO_BOTTOM
+		Case $LOD_PAGE_TRANSITION_WIPE_TOP_TO_BOTTOM
 			$iEffect = 2
 			$iTransitionType = 1
 			$iTransitionSubType = 2
 	EndSwitch
 
-	$oSlide.Effect = $iEffect
-	$oSlide.TransitionType = $iTransitionType
-	$oSlide.TransitionSubType = $iTransitionSubType
+	$oPage.Effect = $iEffect
+	$oPage.TransitionType = $iTransitionType
+	$oPage.TransitionSubType = $iTransitionSubType
 
-	$iError = (($oSlide.Effect() = $iEffect) And _
-			($oSlide.TransitionType() = $iTransitionType) And _
-			($oSlide.TransitionSubType() = $iTransitionSubType)) ? ($iError) : (BitOR($iError, 1))
+	$iError = (($oPage.Effect() = $iEffect) And _
+			($oPage.TransitionType() = $iTransitionType) And _
+			($oPage.TransitionSubType() = $iTransitionSubType)) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>__LODraw_Transition

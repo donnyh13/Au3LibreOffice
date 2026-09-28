@@ -529,7 +529,7 @@ EndFunc   ;==>_LODraw_CursorGoToRange
 ;                  @Error: 1, @Extended: 2 = $sString not a string..
 ;                  @Error: 1, @Extended: 3 = $bOverwrite not a Boolean.
 ;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to retrieve Parent Slide Object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Parent Page Object.
 ;                  @Error: 3, @Extended: 2 = Failed to retrieve Parent Document Object.
 ; Author ........: donnyh13
 ; Modified ......:
@@ -542,7 +542,7 @@ Func _LODraw_CursorInsertString(ByRef $oCursor, $sString, $bOverwrite = False)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oDoc, $oSlide
+	Local $oDoc, $oPage
 
 	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsString($sString) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -550,11 +550,11 @@ Func _LODraw_CursorInsertString(ByRef $oCursor, $sString, $bOverwrite = False)
 
 	$oCursor.Text.insertString($oCursor, $sString, $bOverwrite)
 
-	If ($sString <> "") And Not $oCursor.Text.getPropertySetInfo.hasPropertyByName("TableBorder") Then ; If the Object containing the cursor has the TableBorder Property, it's most likely a cell, I can't get the parent slide from a cell, so skip setting the modified state.
-		$oSlide = $oCursor.Text.Parent()
-		If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	If ($sString <> "") And Not $oCursor.Text.getPropertySetInfo.hasPropertyByName("TableBorder") Then ; If the Object containing the cursor has the TableBorder Property, it's most likely a cell, I can't get the parent page from a cell, so skip setting the modified state.
+		$oPage = $oCursor.Text.Parent()
+		If Not IsObj($oPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-		$oDoc = __LODraw_GetParentDoc($oSlide)
+		$oDoc = __LODraw_GetParentDoc($oPage)
 		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		If ($oDoc.IsModified() = False) Then $oDoc.Modified = True
