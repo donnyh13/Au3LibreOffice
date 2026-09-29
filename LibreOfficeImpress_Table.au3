@@ -259,13 +259,14 @@ EndFunc   ;==>_LOImpress_TableBackFillStyle
 ;                  @Error: 1, @Extended: 11 = $iFromIntense not an Integer, less than 0 or greater than 100.
 ;                  @Error: 1, @Extended: 12 = $iToIntense not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to retrieve Parent Document Object.
-;                  @Error: 3, @Extended: 2 = Failed to retrieve Cell Object.
-;                  @Error: 3, @Extended: 3 = Failed to retrieve "FillGradient" Object.
-;                  @Error: 3, @Extended: 4 = Failed to retrieve ColorStops Array.
-;                  @Error: 3, @Extended: 5 = Error creating Gradient Name.
-;                  @Error: 3, @Extended: 6 = Error setting Gradient Name.
-;                  @Error: 3, @Extended: 7 = Error retrieving Gradient Name.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Parent Slide Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Parent Document Object.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve Cell Object.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve "FillGradient" Object.
+;                  @Error: 3, @Extended: 5 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 6 = Error creating Gradient Name.
+;                  @Error: 3, @Extended: 7 = Error setting Gradient Name.
+;                  @Error: 3, @Extended: 8 = Error retrieving Gradient Name.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sGradientName
@@ -303,17 +304,20 @@ Func _LOImpress_TableBackGradient(ByRef $oTable, $sGradientName = Null, $iType =
 
 	If Not IsObj($oTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$oDoc = __LOImpress_GetParentDoc($oTable.Parent())
+	$oSlide = $oTable.Parent()
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	
+	$oDoc = __LOImpress_GetParentDoc($oSlide)
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	If __LO_VarsAreNull($sGradientName, $iType, $iIncrement, $iXCenter, $iYCenter, $iAngle, $iTransitionStart, $iFromColor, $iToColor, $iFromIntense, $iToIntense) Then
 		For $iRow = 0 To $oTable.Model.RowCount() - 1
 			For $iCol = 0 To $oTable.Model.ColumnCount() - 1
 				$oCell = $oTable.Model.getCellByPosition($iCol, $iRow)
-				If Not IsObj($oCell) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+				If Not IsObj($oCell) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 				$tStyleGradient = $oCell.FillGradient()
-				If Not IsObj($tStyleGradient) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+				If Not IsObj($tStyleGradient) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
 				If ($iRow = 0) And ($iCol = 0) Then     ; Retrieve the value once the first time, to use to test against the rest.
 					__LO_ArrayFill($avGradient, $oCell.FillGradientName(), $tStyleGradient.Style(), _
@@ -349,10 +353,10 @@ Func _LOImpress_TableBackGradient(ByRef $oTable, $sGradientName = Null, $iType =
 	For $iRow = 0 To $oTable.Model.RowCount() - 1
 		For $iCol = 0 To $oTable.Model.ColumnCount() - 1
 			$oCell = $oTable.Model.getCellByPosition($iCol, $iRow)
-			If Not IsObj($oCell) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+			If Not IsObj($oCell) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 			$tStyleGradient = $oCell.FillGradient()
-			If Not IsObj($tStyleGradient) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+			If Not IsObj($tStyleGradient) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
 			If IsString($sGradName) And ($sGradName <> "") Then
 				If ($oCell.FillStyle() <> $LOI_AREA_FILL_STYLE_GRADIENT) Then $oCell.FillStyle = $LOI_AREA_FILL_STYLE_GRADIENT
@@ -364,7 +368,7 @@ Func _LOImpress_TableBackGradient(ByRef $oTable, $sGradientName = Null, $iType =
 				EndIf
 
 				$oCell.FillGradientName = $sGradName
-				If ($oCell.FillGradientName <> $sGradName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
+				If ($oCell.FillGradientName <> $sGradName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 7, 0)
 
 				If ($sGradientName <> Null) Then         ; If Gradient name is set, just check to make sure it was set correctly for the rest of the cells.
 					$iError = ($oCell.FillGradientName() = $sGradientName) ? ($iError) : (BitOR($iError, 1))
@@ -432,7 +436,7 @@ Func _LOImpress_TableBackGradient(ByRef $oTable, $sGradientName = Null, $iType =
 
 					If __LO_VersionCheck(7.6) Then
 						$atColorStop = $tStyleGradient.ColorStops()
-						If Not IsArray($atColorStop) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+						If Not IsArray($atColorStop) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
 						$tColorStop = $atColorStop[0] ; StopOffset 0 is the "From Color" Value.
 
@@ -457,7 +461,7 @@ Func _LOImpress_TableBackGradient(ByRef $oTable, $sGradientName = Null, $iType =
 
 					If __LO_VersionCheck(7.6) Then
 						$atColorStop = $tStyleGradient.ColorStops()
-						If Not IsArray($atColorStop) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+						If Not IsArray($atColorStop) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
 						$tColorStop = $atColorStop[UBound($atColorStop) - 1] ; Last StopOffset is the "To Color" Value.
 
@@ -489,17 +493,17 @@ Func _LOImpress_TableBackGradient(ByRef $oTable, $sGradientName = Null, $iType =
 
 				If ($oCell.FillGradientName() = "") Or __LOImpress_GradientIsModified($tStyleGradient, $oCell.FillGradientName()) Then
 					$sGradName = __LOImpress_GradientNameInsert($oDoc, $tStyleGradient)
-					If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+					If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
 
 					$oCell.FillGradientName = $sGradName
-					If ($oCell.FillGradientName <> $sGradName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
+					If ($oCell.FillGradientName <> $sGradName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 7, 0)
 				EndIf
 
 				$oCell.FillGradient = $tStyleGradient
 
 				; If Gradient is not turned off, then set rest of the Table cells to same Gradient name.
 				$sGradName = $oCell.FillGradientName()
-				If Not IsString($sGradName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 7, 0)
+				If Not IsString($sGradName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 8, 0)
 			EndIf
 
 			; Error checking

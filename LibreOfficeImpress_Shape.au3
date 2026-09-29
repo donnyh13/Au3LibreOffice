@@ -293,6 +293,7 @@ EndFunc   ;==>_LOImpress_ShapeAreaFillStyle
 ;                  @Error: 1, @Extended: 12 = $iToIntense not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Error retrieving "FillGradient" Object.
+;                  @Error: 3, @Extended: 2 = Error retrieving Parent Slide Object.
 ;                  @Error: 3, @Extended: 2 = Error retrieving Parent Document Object.
 ;                  @Error: 3, @Extended: 3 = Failed to retrieve ColorStops Array.
 ;                  @Error: 3, @Extended: 4 = Error creating Gradient Name.
@@ -324,7 +325,7 @@ Func _LOImpress_ShapeAreaGradient(ByRef $oShape, $sGradientName = Null, $iType =
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oDoc
+	Local $oDoc, $oSlide
 	Local $tStyleGradient, $tColorStop, $tStopColor
 	Local $iError = 0
 	Local $avGradient[11]
@@ -345,8 +346,11 @@ Func _LOImpress_ShapeAreaGradient(ByRef $oShape, $sGradientName = Null, $iType =
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avGradient)
 	EndIf
 
-	$oDoc = __LOImpress_GetParentDoc($oShape.Parent())
-	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+	$oSlide = $oShape.Parent()
+	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	$oDoc = __LOImpress_GetParentDoc($oSlide)
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 	If ($oShape.FillStyle() <> $LOI_AREA_FILL_STYLE_GRADIENT) Then $oShape.FillStyle = $LOI_AREA_FILL_STYLE_GRADIENT
 
@@ -409,7 +413,7 @@ Func _LOImpress_ShapeAreaGradient(ByRef $oShape, $sGradientName = Null, $iType =
 
 		If __LO_VersionCheck(7.6) Then
 			$atColorStop = $tStyleGradient.ColorStops()
-			If Not IsArray($atColorStop) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+			If Not IsArray($atColorStop) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
 			$tColorStop = $atColorStop[0] ; StopOffset 0 is the "From Color" Value.
 
@@ -434,7 +438,7 @@ Func _LOImpress_ShapeAreaGradient(ByRef $oShape, $sGradientName = Null, $iType =
 
 		If __LO_VersionCheck(7.6) Then
 			$atColorStop = $tStyleGradient.ColorStops()
-			If Not IsArray($atColorStop) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+			If Not IsArray($atColorStop) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
 			$tColorStop = $atColorStop[UBound($atColorStop) - 1] ; Last StopOffset is the "To Color" Value.
 
@@ -466,10 +470,10 @@ Func _LOImpress_ShapeAreaGradient(ByRef $oShape, $sGradientName = Null, $iType =
 
 	If ($oShape.FillGradientName() = "") Or __LOImpress_GradientIsModified($tStyleGradient, $oShape.FillGradientName()) Then
 		$sGradName = __LOImpress_GradientNameInsert($oDoc, $tStyleGradient)
-		If @error > 0 Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+		If @error > 0 Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
 		$oShape.FillGradientName = $sGradName
-		If ($oShape.FillGradientName <> $sGradName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+		If ($oShape.FillGradientName <> $sGradName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
 	EndIf
 
 	$oShape.FillGradient = $tStyleGradient
@@ -666,10 +670,11 @@ EndFunc   ;==>_LOImpress_ShapeAreaTransparency
 ;                  @Error: 1, @Extended: 8 = $iEnd not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Error retrieving "FillTransparenceGradient" Object.
-;                  @Error: 3, @Extended: 2 = Error retrieving Parent Document Object.
-;                  @Error: 3, @Extended: 3 = Failed to retrieve ColorStops Array.
-;                  @Error: 3, @Extended: 4 = Error creating Transparency Gradient Name.
-;                  @Error: 3, @Extended: 5 = Error setting Transparency Gradient Name.
+;                  @Error: 3, @Extended: 2 = Error retrieving Parent Slide Object.
+;                  @Error: 3, @Extended: 3 = Error retrieving Parent Document Object.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 5 = Error creating Transparency Gradient Name.
+;                  @Error: 3, @Extended: 6 = Error setting Transparency Gradient Name.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iType
@@ -692,7 +697,7 @@ Func _LOImpress_ShapeAreaTransparencyGradient(ByRef $oShape, $iType = Null, $iXC
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oDoc
+	Local $oDoc, $oSlide
 	Local $tGradient, $tColorStop, $tStopColor
 	Local $sTGradName
 	Local $iError = 0
@@ -713,8 +718,11 @@ Func _LOImpress_ShapeAreaTransparencyGradient(ByRef $oShape, $iType = Null, $iXC
 		Return SetError($__LO_STATUS_SUCCESS, 1, $aiTransparent)
 	EndIf
 
-	$oDoc = __LOImpress_GetParentDoc($oShape.Parent())
-	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+	$oSlide = $oShape.Parent()
+	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	$oDoc = __LOImpress_GetParentDoc($oSlide)
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 	If ($iType <> Null) Then
 		If ($iType = $LOI_GRAD_TYPE_OFF) Then ; Turn Off Gradient
@@ -759,7 +767,7 @@ Func _LOImpress_ShapeAreaTransparencyGradient(ByRef $oShape, $iType = Null, $iXC
 
 		If __LO_VersionCheck(7.6) Then
 			$atColorStop = $tGradient.ColorStops()
-			If Not IsArray($atColorStop) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+			If Not IsArray($atColorStop) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
 			$tColorStop = $atColorStop[0] ; StopOffset 0 is the "Start" Value.
 
@@ -786,7 +794,7 @@ Func _LOImpress_ShapeAreaTransparencyGradient(ByRef $oShape, $iType = Null, $iXC
 
 		If __LO_VersionCheck(7.6) Then
 			$atColorStop = $tGradient.ColorStops()
-			If Not IsArray($atColorStop) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+			If Not IsArray($atColorStop) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
 			$tColorStop = $atColorStop[UBound($atColorStop) - 1] ; StopOffset 0 is the "End" Value.
 
@@ -808,10 +816,10 @@ Func _LOImpress_ShapeAreaTransparencyGradient(ByRef $oShape, $iType = Null, $iXC
 
 	If ($oShape.FillTransparenceGradientName() = "") Then
 		$sTGradName = __LOImpress_TransparencyGradientNameInsert($oDoc, $tGradient)
-		If @error > 0 Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+		If @error > 0 Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
 		$oShape.FillTransparenceGradientName = $sTGradName
-		If ($oShape.FillTransparenceGradientName <> $sTGradName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+		If ($oShape.FillTransparenceGradientName <> $sTGradName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
 	EndIf
 
 	$oShape.FillTransparenceGradient = $tGradient
@@ -6366,7 +6374,8 @@ EndFunc   ;==>_LOImpress_ShapeTextAttrAnimation
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create com.sun.star.text.TextColumns Object.
 ;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to retrieve parent Document Object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve parent Slide Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve parent Document Object.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iColumns
@@ -6387,14 +6396,17 @@ Func _LOImpress_ShapeTextAttrColumns(ByRef $oShape, $iColumns = Null, $iSpacing 
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $oDoc, $oTextColumns
+	Local $oDoc, $oSlide, $oTextColumns
 	Local $aiColumns[2]
 
 	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not __LO_VersionCheck(7.2) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
-	$oDoc = __LOImpress_GetParentDoc($oShape.Parent())
-	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	$oSlide = $oShape.Parent()
+	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$oDoc = __LOImpress_GetParentDoc($oSlide)
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$oTextColumns = $oShape.TextColumns()
 
