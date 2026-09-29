@@ -1864,8 +1864,7 @@ Func _LOImpress_SlideMasterAdd(ByRef $oDoc, $iPos = Null, $sName = "", $bBlank =
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If ($iPos = Null) Then $iPos = ($bBlank) ? ($oDoc.MasterPages.getCount()) : ($oDoc.MasterPages.getCount() - 1) ; If I am inserting a Master using the dispatch, I have make position be 1 less than the count so I can retrieve the Object for the last master slide.
-	If ($iPos = $oDoc.MasterPages.getCount()) Then $iPos = $iPos - 1 ; If I am inserting a Master using the dispatch command, and the user called the last slide position plus 1, I need to change it to be 1 less so I can retrieve the Object for the last master slide.
+	If ($iPos = Null) Then $iPos = $oDoc.MasterPages.getCount()
 	If Not __LO_IntIsBetween($iPos, 0, $oDoc.MasterPages.getCount()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If ($sName <> "") And _LOImpress_SlideMasterExists($oDoc, $sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
