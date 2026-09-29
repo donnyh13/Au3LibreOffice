@@ -20,7 +20,7 @@ Func Example()
 	_LOImpress_SlideMasterBackColor($oMaster, $LO_COLOR_GOLD)
 	If @error Then _ERROR($oDoc, "Failed to set Master Slide settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve the current rectangle Shape settings. Return will be an Integer.
+	; Retrieve the current settings. Return will be an Integer.
 	$iColor = _LOImpress_SlideMasterBackColor($oMaster)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Master Slide settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
