@@ -46,11 +46,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Create a TabStop at 1/4" Tab Stop position.
-	$iTabStop = _LOImpress_ShapePresStyleParTabStopCreate($oStyle, $iHMM)
+	$iTabStop = _LOImpress_ShapeStyleParTabStopCreate($oStyle, $iHMM)
 	If @error Then _ERROR($oDoc, "Failed to Create a Paragraph Tab stop. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Delete the newly created tab stop.
-	$bDeleted = _LOImpress_ShapePresStyleParTabStopDelete($oStyle, $iTabStop)
+	$bDeleted = _LOImpress_ShapeStyleParTabStopDelete($oStyle, $iTabStop)
 	If @error Then _ERROR($oDoc, "Failed to delete the Paragraph Tab stop. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Was the Tab stop successfully deleted? True/False: " & $bDeleted)

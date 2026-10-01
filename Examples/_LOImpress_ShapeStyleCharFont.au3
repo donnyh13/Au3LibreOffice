@@ -37,11 +37,11 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to insert some text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Set the Style's Font to "Arial", Font size to 18, Posture (Italic) to $LOI_CHAR_POSTURE_ITALIC, and weight (Bold) to $LOI_CHAR_WEIGHT_BOLD
-	_LOImpress_ShapePresStyleCharFont($oStyle, "Arial", 18, $LOI_CHAR_POSTURE_ITALIC, $LOI_CHAR_WEIGHT_BOLD)
+	_LOImpress_ShapeStyleCharFont($oStyle, "Arial", 18, $LOI_CHAR_POSTURE_ITALIC, $LOI_CHAR_WEIGHT_BOLD)
 	If @error Then _ERROR($oDoc, "Failed to set the Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
-	$avSettings = _LOImpress_ShapePresStyleCharFont($oStyle)
+	$avSettings = _LOImpress_ShapeStyleCharFont($oStyle)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Style's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Style's current Font settings are as follows: " & @CRLF & _
