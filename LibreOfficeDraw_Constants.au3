@@ -437,15 +437,6 @@ Global Const _                                                       ; com.sun.s
 		$LOD_GRAD_TYPE_SQUARE = 4, _                                 ; Square type Gradient
 		$LOD_GRAD_TYPE_RECT = 5                                      ; Rectangle type Gradient
 
-; Handout layout arrangements.
-Global Const _
-		$LOD_HANDOUT_LAYOUT_ONE_PAGE = 22, _                         ; The Handout page will contain one page placeholder.
-		$LOD_HANDOUT_LAYOUT_TWO_PAGES = 23, _                        ; The Handout page will contain two page placeholders.
-		$LOD_HANDOUT_LAYOUT_THREE_PAGES = 24, _                      ; The Handout page will contain three page placeholders.
-		$LOD_HANDOUT_LAYOUT_FOUR_PAGES = 25, _                       ; The Handout page will contain four page placeholders.
-		$LOD_HANDOUT_LAYOUT_SIX_PAGES = 26, _                        ; The Handout page will contain six page placeholders.
-		$LOD_HANDOUT_LAYOUT_NINE_PAGES = 31                          ; The Handout page will contain nine page placeholders.
-
 ; Numbering Style Type
 Global Const _                                                       ; com.sun.star.style.NumberingType
 		$LOD_NUM_FRMT_CHARS_UPPER_LETTER = 0, _                      ; Numbering is put in upper case letters. ("A, B, C, D)
@@ -842,13 +833,6 @@ Global Enum _
 		$LOD_SHAPE_SHADOW_LOCATION_BOTTOM_LEFT, _                    ; 6 The Shadow is positioned in the Lower-Left corner of the shape.
 		$LOD_SHAPE_SHADOW_LOCATION_BOTTOM_CENTER, _                  ; 7 The Shadow is positioned in the Lower-Center of the shape.
 		$LOD_SHAPE_SHADOW_LOCATION_BOTTOM_RIGHT                      ; 8 The Shadow is positioned in the Lower-Right corner of the shape.
-
-; Table Cell Type
-Global Const _                                                       ; com.sun.star.table.CellContentType
-		$LOD_SHAPE_TABLE_CELL_TYPE_EMPTY = 0, _                      ; Cell is empty.
-		$LOD_SHAPE_TABLE_CELL_TYPE_VALUE = 1, _                      ; Cell contains a value.
-		$LOD_SHAPE_TABLE_CELL_TYPE_TEXT = 2, _                       ; Cell contains text.
-		$LOD_SHAPE_TABLE_CELL_TYPE_FORMULA = 3                       ; Cell contains a formula.
 
 ; Shape Type Constants.
 Global Enum Step *2 _
