@@ -45,7 +45,7 @@ Func Example()
 	$avSettings = _LOImpress_ShapeStyleTextAttrAnimation($oStyle)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Style settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Text Box's settings are as follows: " & @CRLF & _
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Style's settings are as follows: " & @CRLF & _
 			"The Animation type is (See UDF Constants): " & $avSettings[0] & @CRLF & _
 			"The Animation direction is (See UDF Constants): " & $avSettings[1] & @CRLF & _
 			"Is the Text visible and inside shape when the effect is applied? True/False: " & $avSettings[2] & @CRLF & _
