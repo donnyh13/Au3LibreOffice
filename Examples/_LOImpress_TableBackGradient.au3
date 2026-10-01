@@ -1,7 +1,6 @@
 #include <MsgBoxConstants.au3>
 
 #include "..\LibreOfficeImpress.au3"
-_LOImpress_ComError_UserFunction(ConsoleWrite)
 
 Example()
 
