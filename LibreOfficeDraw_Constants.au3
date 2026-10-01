@@ -836,17 +836,17 @@ Global Enum _
 
 ; Shape Type Constants.
 Global Enum Step *2 _
-		$LOD_SHAPE_TYPE_CALC = 1, _                                  ; 1 Calc sheet in a Draw document. (I have not encountered this shape yet, but it is included here for error prevention.)
-		$LOD_SHAPE_TYPE_CHART, _                                     ; 2 Chart sheet in a Draw document. (I have not encountered this shape yet, but it is included here for error prevention.)
-		$LOD_SHAPE_TYPE_DATETIME, _                                  ; 4 A Date/Time shape, such as is found in a Header or Footer or the Notes, Handouts or Master pages.
-		$LOD_SHAPE_TYPE_DRAWING_SHAPE, _                             ; 8 - All shapes, 3D Shapes, Basic Shapes, Block Arrows, Flowcharts, Callouts, Lines, Connectors, Fontwork etc.
+		$LOD_SHAPE_TYPE_APPLET = 1, _                                ; 1 A Java Applet. (I have not encountered this shape yet, but it is included here for error prevention.)
+		$LOD_SHAPE_TYPE_CAPTION, _                                   ; 2 A Rectangular drawing shape. (I have not encountered this shape yet, but it is included here for error prevention.)
+		$LOD_SHAPE_TYPE_DRAWING_SHAPE, _                             ; 4 - All shapes, 3D Shapes, Basic Shapes, Block Arrows, Flowcharts, Callouts, Lines, Connectors, Fontwork etc.
+		$LOD_SHAPE_TYPE_FRAME, _                                     ; 8 - A Frame (I have not encountered this shape yet, but it is included here for error prevention.).
 		$LOD_SHAPE_TYPE_FORM_CONTROL, _                              ; 16 - Form Controls.
-		$LOD_SHAPE_TYPE_IMAGE, _                                     ; 32 - An Image, Barcode or QR code.
-		$LOD_SHAPE_TYPE_MEDIA, _                                     ; 64 - A Video or Audio shape.
-		$LOD_SHAPE_TYPE_OLE2, _                                      ; 128 - An OLE2 shape, such as a Chart, Formula etc.
-		$LOD_SHAPE_TYPE_ORG_CHART, _                                 ; 256 An Org Chart shape. (I have not encountered this shape yet, but it is included here for error prevention.)
+		$LOD_SHAPE_TYPE_GROUP, _                                     ; 32 - A Group of drawing shapes.
+		$LOD_SHAPE_TYPE_IMAGE, _                                     ; 64 - An Image, Barcode or QR code.
+		$LOD_SHAPE_TYPE_MEDIA, _                                     ; 128 - A Video or Audio shape.
+		$LOD_SHAPE_TYPE_OLE2, _                                      ; 256 - An OLE2 shape, such as a Chart, Formula etc.
 		$LOD_SHAPE_TYPE_PAGE, _                                      ; 512 A Page preview shape, as found in the notes and handouts pages.
-		$LOD_SHAPE_TYPE_PAGE_NUM, _                                  ; 1024 A page number shape, as found in notes, handouts and master pages.
+		$LOD_SHAPE_TYPE_PLUGIN, _                                    ; 1024 A plugin shape (I have not encountered this shape yet, but it is included here for error prevention.).
 		$LOD_SHAPE_TYPE_TABLE, _                                     ; 2048 - A Table.
 		$LOD_SHAPE_TYPE_TEXTBOX, _                                   ; 4096 - A Text Box, including Hyperlinks, and most Fields.
 		$LOD_SHAPE_TYPE_ALL = 8191                                   ; 8191 All types above.

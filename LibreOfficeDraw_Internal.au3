@@ -6817,17 +6817,17 @@ Func __LODraw_ShapeGetType(ByRef $oShape)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $avShapeTypes[24][2] = [[$LOD_SHAPE_TYPE_CALC, "com.sun.star.presentation.CalcShape"], [$LOD_SHAPE_TYPE_CHART, "com.sun.star.presentation.ChartShape"], _
-			[$LOD_SHAPE_TYPE_DATETIME, "com.sun.star.presentation.DateTimeShape"], [$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.Shape3DSceneObject"], _
-			[$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.CustomShape"], [$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.MeasureShape"], _
-			[$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.EllipseShape"], [$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.ClosedBezierShape"], _
-			[$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.OpenBezierShape"], [$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.PolyPolygonShape"], _
-			[$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.PolyLineShape"], [$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.LineShape"], _
-			[$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.ConnectorShape"], [$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.OpenFreeHandShape"], _
-			[$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.ClosedFreeHandShape"], [$LOD_SHAPE_TYPE_FORM_CONTROL, "com.sun.star.drawing.ControlShape"], _
-			[$LOD_SHAPE_TYPE_IMAGE, "com.sun.star.drawing.GraphicObjectShape"], [$LOD_SHAPE_TYPE_MEDIA, "com.sun.star.drawing.MediaShape"], _
-			[$LOD_SHAPE_TYPE_OLE2, "com.sun.star.drawing.OLE2Shape"], [$LOD_SHAPE_TYPE_ORG_CHART, "com.sun.star.presentation.OrgChartShape"], _
-			[$LOD_SHAPE_TYPE_PAGE, "com.sun.star.presentation.PageShape"], [$LOD_SHAPE_TYPE_PAGE_NUM, "com.sun.star.presentation.PageNumberShape"], _
+	Local $avShapeTypes[24][2] = [[$LOD_SHAPE_TYPE_APPLET, "com.sun.star.drawing.AppletShape"], [$LOD_SHAPE_TYPE_CAPTION, "com.sun.star.drawing.CaptionShape "], _
+			[$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.Shape3DSceneObject"], [$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.CustomShape"], _
+			[$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.MeasureShape"], [$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.EllipseShape"], _
+			[$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.ClosedBezierShape"], [$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.OpenBezierShape"], _
+			[$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.PolyPolygonShape"], [$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.PolyLineShape"], _
+			[$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.LineShape"], [$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.ConnectorShape"], _
+			[$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.OpenFreeHandShape"], [$LOD_SHAPE_TYPE_DRAWING_SHAPE, "com.sun.star.drawing.ClosedFreeHandShape"], _
+			[$LOD_SHAPE_TYPE_FRAME, "com.sun.star.drawing.FrameShape"], [$LOD_SHAPE_TYPE_FORM_CONTROL, "com.sun.star.drawing.ControlShape"], _
+			[$LOD_SHAPE_TYPE_GROUP, "com.sun.star.drawing.GroupShape"], [$LOD_SHAPE_TYPE_IMAGE, "com.sun.star.drawing.GraphicObjectShape"], _
+			[$LOD_SHAPE_TYPE_MEDIA, "com.sun.star.drawing.MediaShape"], [$LOD_SHAPE_TYPE_OLE2, "com.sun.star.drawing.OLE2Shape"], _
+			[$LOD_SHAPE_TYPE_PAGE, "com.sun.star.presentation.PageShape"], [$LOD_SHAPE_TYPE_PLUGIN, "com.sun.star.drawing.PluginShape"], _
 			[$LOD_SHAPE_TYPE_TABLE, "com.sun.star.drawing.TableShape"], [$LOD_SHAPE_TYPE_TEXTBOX, "com.sun.star.drawing.TextShape"]]
 	Local $sShapeType
 

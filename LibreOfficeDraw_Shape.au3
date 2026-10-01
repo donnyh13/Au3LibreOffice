@@ -2643,7 +2643,7 @@ Func _LODraw_ShapesGetList(ByRef $oObj, $iTypes = $LOD_SHAPE_TYPE_ALL)
 	Local $iShapeType, $iCount = 0
 
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LO_IntIsBetween($iTypes, $LOD_SHAPE_TYPE_CALC, $LOD_SHAPE_TYPE_ALL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iTypes, $LOD_SHAPE_TYPE_APPLET, $LOD_SHAPE_TYPE_ALL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If $oObj.hasElements() Then
 		ReDim $avShapes[$oObj.getCount()][2]
