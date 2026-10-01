@@ -341,7 +341,7 @@ Func _LODraw_DocCreate($bForceNew = True, $bHidden = False)
 	Local $aArgs[1]
 	Local $iError = 0
 	Local $oServiceManager, $oDesktop, $oDoc, $oEnumDoc
-	Local $sServiceName = "com.sun.star.presentation.PresentationDocument"
+	Local $sServiceName = "com.sun.star.drawing.DrawingDocument", $sImpress = "com.sun.star.presentation.PresentationDocument"
 
 	If Not IsBool($bForceNew) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsBool($bHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -360,7 +360,7 @@ Func _LODraw_DocCreate($bForceNew = True, $bHidden = False)
 
 		While $oEnumDoc.hasMoreElements()
 			$oDoc = $oEnumDoc.nextElement()
-			If $oDoc.supportsService($sServiceName) _
+			If $oDoc.supportsService($sServiceName) And Not $oDoc.supportsService($sImpress) _ ; Impress Documents support the DrawDoc service, so have to make sure it's not an Impress Doc.
 					And Not ($oDoc.hasLocation() And Not $oDoc.isReadOnly()) And Not ($oDoc.isModified()) Then
 				$oDoc.CurrentController.Frame.ContainerWindow.Visible = ($bHidden) ? (False) : (True) ; opposite value of $bHidden.
 				$iError = ($oDoc.CurrentController.Frame.isHidden() = $bHidden) ? ($iError) : (BitOR($iError, 1))
