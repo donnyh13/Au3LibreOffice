@@ -856,23 +856,16 @@ Global Enum Step *2 _
 		$LOD_SHAPE_TYPE_CHART, _                                     ; 2 Chart sheet in a Draw document. (I have not encountered this shape yet, but it is included here for error prevention.)
 		$LOD_SHAPE_TYPE_DATETIME, _                                  ; 4 A Date/Time shape, such as is found in a Header or Footer or the Notes, Handouts or Master pages.
 		$LOD_SHAPE_TYPE_DRAWING_SHAPE, _                             ; 8 - All shapes, 3D Shapes, Basic Shapes, Block Arrows, Flowcharts, Callouts, Lines, Connectors, Fontwork etc.
-		$LOD_SHAPE_TYPE_FOOTER, _                                    ; 16 A Footer text shape, as is found in the footer of Notes, Handouts or Master page.
-		$LOD_SHAPE_TYPE_FORM_CONTROL, _                              ; 32 - Form Controls.
-		$LOD_SHAPE_TYPE_HANDOUT, _                                   ; 64 A Handouts page shape, as found in the Master Handouts preview page.
-		$LOD_SHAPE_TYPE_HEADER, _                                    ; 128 A Header text shape, as is found in the footer of Notes, Handouts or Master page.
-		$LOD_SHAPE_TYPE_IMAGE, _                                     ; 256 - An Image, Barcode or QR code.
-		$LOD_SHAPE_TYPE_MEDIA, _                                     ; 512 - A Video or Audio shape.
-		$LOD_SHAPE_TYPE_NOTES, _                                     ; 1024 A Notes page shape, as found in the page and master page notes pages.
-		$LOD_SHAPE_TYPE_OLE2, _                                      ; 2048 - An OLE2 shape, such as a Chart, Formula etc.
-		$LOD_SHAPE_TYPE_ORG_CHART, _                                 ; 4096 An Org Chart shape. (I have not encountered this shape yet, but it is included here for error prevention.)
-		$LOD_SHAPE_TYPE_PAGE, _                                      ; 8192 A Page preview shape, as found in the notes and handouts pages.
-		$LOD_SHAPE_TYPE_PAGE_NUM, _                                  ; 16384 A page number shape, as found in notes, handouts and master pages.
-		$LOD_SHAPE_TYPE_TABLE, _                                     ; 32768 - A Table.
-		$LOD_SHAPE_TYPE_TEXTBOX, _                                   ; 65536 - A Text Box, including Hyperlinks, and most Fields.
-		$LOD_SHAPE_TYPE_TEXTBOX_SUBTITLE, _                          ; 131072 - A Page Subtitle Text Box.
-		$LOD_SHAPE_TYPE_TEXTBOX_TITLE, _                             ; 262144 - A Page Title Text Box.
-		$LOD_SHAPE_TYPE_TEXTBOX_OUTLINE, _                           ; 524288 - A Page Outline Text Box.
-		$LOD_SHAPE_TYPE_ALL = 1048575                                ; 1048575 All types above.
+		$LOD_SHAPE_TYPE_FORM_CONTROL, _                              ; 16 - Form Controls.
+		$LOD_SHAPE_TYPE_IMAGE, _                                     ; 32 - An Image, Barcode or QR code.
+		$LOD_SHAPE_TYPE_MEDIA, _                                     ; 64 - A Video or Audio shape.
+		$LOD_SHAPE_TYPE_OLE2, _                                      ; 128 - An OLE2 shape, such as a Chart, Formula etc.
+		$LOD_SHAPE_TYPE_ORG_CHART, _                                 ; 256 An Org Chart shape. (I have not encountered this shape yet, but it is included here for error prevention.)
+		$LOD_SHAPE_TYPE_PAGE, _                                      ; 512 A Page preview shape, as found in the notes and handouts pages.
+		$LOD_SHAPE_TYPE_PAGE_NUM, _                                  ; 1024 A page number shape, as found in notes, handouts and master pages.
+		$LOD_SHAPE_TYPE_TABLE, _                                     ; 2048 - A Table.
+		$LOD_SHAPE_TYPE_TEXTBOX, _                                   ; 4096 - A Text Box, including Hyperlinks, and most Fields.
+		$LOD_SHAPE_TYPE_ALL = 8191                                   ; 8191 All types above.
 
 ; Text Cursor Movement Constants.
 Global Enum _

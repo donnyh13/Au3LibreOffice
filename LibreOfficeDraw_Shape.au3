@@ -2617,13 +2617,13 @@ EndFunc   ;==>_LODraw_ShapeRotateSlant
 ; Description ...: Retrieve an array of Shapes (Text Boxes, DrawShapes, Images etc) contained in a Page.
 ; Syntax ........: _LODraw_ShapesGetList(ByRef $oObj[, $iTypes = $LOD_SHAPE_TYPE_ALL])
 ; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
-;                  $iTypes              - [optional] (0-1048575) Default is $LOD_SHAPE_TYPE_ALL. The type of Shapes to return in the Array. Can be BitOR'd. See Constants, $LOD_SHAPE_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  $iTypes              - [optional] (0-8191) Default is $LOD_SHAPE_TYPE_ALL. The type of Shapes to return in the Array. Can be BitOR'd. See Constants, $LOD_SHAPE_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. A two columned Array containing the Shape Objects contained in the Page. See Remarks. @Extended is set to number of results.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
-;                  @Error: 1, @Extended: 2 = $iTypes not an Integer, less than 1 or greater than 1048575. See Constants, $LOD_SHAPE_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iTypes not an Integer, less than 1 or greater than 8191. See Constants, $LOD_SHAPE_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Shape Object.
 ;                  @Error: 3, @Extended: 2 = Failed to identify Shape Type.
@@ -3592,8 +3592,6 @@ EndFunc   ;==>_LODraw_ShapeStyleCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  Because a Shape can have either a Presentation Style or a Drawing/Shape style applied to them, this function has two different @Extended values depending on whether the current style applied is a Presentation style or a Drawing/Shape style.
-;                  You cannot set the style for a Presentation shape, which is a shape that is not user-created. These include Title, Subtitle, Outline and Note TextBoxes, also background shapes.
 ; Related .......: _LODraw_ShapeStyleExists, _LODraw_ShapeStylesGetNames
 ; Link ..........:
 ; Example .......: Yes

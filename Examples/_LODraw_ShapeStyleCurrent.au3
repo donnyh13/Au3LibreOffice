@@ -34,11 +34,11 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The rectangle shape currently has the following Shape Style applied: " & $sStyle)
 
-	; Retrieve the current Presentation Style for the TextBox. Return will be a String.
+	; Retrieve the current Style for the TextBox. Return will be a String.
 	$sStyle = _LODraw_ShapeStyleCurrent($oDoc, $oTextBox)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Text Box currently has the following Presentation Style applied: " & $sStyle)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Text Box currently has the following Style applied: " & $sStyle)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

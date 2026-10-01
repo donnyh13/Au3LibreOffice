@@ -64,7 +64,7 @@
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LODraw_PageAdd
-; Description ...: Add a page to a presentation.
+; Description ...: Add a page to a Draw Document.
 ; Syntax ........: _LODraw_PageAdd(ByRef $oDoc[, $iPos = Null[, $sName = ""]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $iPos                - [optional] Default is Null. The position to insert the new page in the collection of pages. 0 Based. See remarks.
@@ -1262,7 +1262,7 @@ EndFunc   ;==>_LODraw_PageMargins
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LODraw_PageMasterAdd
-; Description ...: Add a master page to a presentation.
+; Description ...: Add a master page to a Draw Document.
 ; Syntax ........: _LODraw_PageMasterAdd(ByRef $oDoc[, $iPos = Null[, $sName = ""]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
 ;                  $iPos                - [optional] Default is Null. The position to insert the new master page in the collection of pages. 0 Based.

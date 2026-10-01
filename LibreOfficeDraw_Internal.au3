@@ -96,7 +96,7 @@
 ; Name ..........: __LODraw_CharEffect
 ; Description ...: Set or Retrieve the Font Effect settings.
 ; Syntax ........: __LODraw_CharEffect(ByRef $oObj[, $iCase = Null[, $iRelief = Null[, $bOutline = Null[, $bShadow = Null]]]])
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $iCase               - [optional] (0-4) Default is Null. The Character Case Style. See Constants, $LOD_CHAR_CASEMAP_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iRelief             - [optional] (0-2) Default is Null. The Character Relief style. See Constants, $LOD_CHAR_RELIEF_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $bOutline            - [optional] Default is Null. If True, the characters have an outline around the outside.
@@ -175,7 +175,7 @@ EndFunc   ;==>__LODraw_CharEffect
 ; Name ..........: __LODraw_CharFont
 ; Description ...: Set and Retrieve the Font Settings.
 ; Syntax ........: __LODraw_CharFont(ByRef $oObj[, $sFontName = Null[, $nFontSize = Null[, $iPosture = Null[, $iWeight = Null]]]])
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $sFontName           - [optional] Default is Null. The Font Name to use.
 ;                  $nFontSize           - [optional] Default is Null. The new Font size.
 ;                  $iPosture            - [optional] (0-5) Default is Null. The Font Italic setting. See Constants, $LOD_CHAR_POSTURE_* as defined in LibreOfficeDraw_Constants.au3. Also see remarks.
@@ -348,7 +348,7 @@ EndFunc   ;==>__LODraw_CharFontColor
 ; Name ..........: __LODraw_CharOverLine
 ; Description ...: Set and retrieve the OverLine settings.
 ; Syntax ........: __LODraw_CharOverLine(ByRef $oObj[, $iOverLineStyle = Null[, $iOLColor = Null[, $bWordOnly = Null]]])
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $iOverLineStyle      - [optional] (0-18) Default is Null. The style of the Overline line, see constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeDraw_Constants.au3. See Remarks.
 ;                  $iOLColor            - [optional] (-1-16777215) Default is Null. The Overline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
 ;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not Overlined.
@@ -632,7 +632,7 @@ EndFunc   ;==>__LODraw_CharSpacing
 ; Name ..........: __LODraw_CharStrikeOut
 ; Description ...: Set or Retrieve the Strikeout settings.
 ; Syntax ........: __LODraw_CharStrikeOut(ByRef $oObj[, $iStrikeLineStyle = Null[, $bWordOnly = Null]])
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $iStrikeLineStyle    - [optional] (0-6) Default is Null. The Strikeout Line Style, see constants, $LOD_CHAR_STRIKEOUT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $bWordOnly           - [optional] Default is Null. If True, strike out is applied to words only, skipping whitespaces.
 ; Return values .: Success: 1 or Array
@@ -691,7 +691,7 @@ EndFunc   ;==>__LODraw_CharStrikeOut
 ; Name ..........: __LODraw_CharUnderLine
 ; Description ...: Set and retrieve the Underline settings.
 ; Syntax ........: __LODraw_CharUnderLine(ByRef $oObj[, $iUnderLineStyle = Null[, $iULColor = Null[, $bWordOnly = Null]]])
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $iUnderLineStyle     - [optional] (0-18) Default is Null. The Underline line style, see constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iULColor            - [optional] (-1-16777215) Default is Null. The underline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
 ;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not underlined.
@@ -5666,7 +5666,7 @@ EndFunc   ;==>__LODraw_NumRuleCreateMap
 ; Name ..........: __LODraw_ParAlignment
 ; Description ...: Set and Retrieve Paragraph Alignment settings.
 ; Syntax ........: __LODraw_ParAlignment(ByRef $oObj[, $iHorAlign = Null[, $iLastLineAlign = Null[, $iTxtDirection = Null]]])
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $iHorAlign           - [optional] (0-3) Default is Null. The Horizontal alignment of the paragraph. See Constants, $LOD_PAR_ALIGN_HOR_* as defined in LibreOfficeDraw_Constants.au3. See Remarks.
 ;                  $iLastLineAlign      - [optional] (0-3) Default is Null. Specify the alignment for the last line in the paragraph. See Constants, $LOD_PAR_LAST_LINE_* as defined in LibreOfficeDraw_Constants.au3. See Remarks.
 ;                  $iTxtDirection       - [optional] (0-5) Default is Null. The Text Writing Direction. See Constants, $LOD_PAR_TXT_DIR_* as defined in LibreOfficeDraw_Constants.au3. [LibreOffice Default is 4]
@@ -5738,7 +5738,7 @@ EndFunc   ;==>__LODraw_ParAlignment
 ; Name ..........: __LODraw_ParIndent
 ; Description ...: Set or Retrieve Paragraph Indent settings.
 ; Syntax ........: __LODraw_ParIndent(ByRef $oObj[, $iBeforeTxt = Null[, $iAfterTxt = Null[, $iFirstLine = Null]]])
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $iBeforeTxt          - [optional] (0-1162202) Default is Null. The amount of space that you want to indent the paragraph from the page margin. Set in Hundredths of a Millimeter (HMM).
 ;                  $iAfterTxt           - [optional] (0-1162202) Default is Null. The amount of space that you want to indent the paragraph from the page margin. Set in Hundredths of a Millimeter (HMM)
 ;                  $iFirstLine          - [optional] (0-1162202) Default is Null. Indentation distance of the first line of a paragraph. Set in Hundredths of a Millimeter (HMM).
@@ -5808,7 +5808,7 @@ EndFunc   ;==>__LODraw_ParIndent
 ; Name ..........: __LODraw_ParSpacing
 ; Description ...: Set and Retrieve Line Spacing settings.
 ; Syntax ........: __LODraw_ParSpacing(ByRef $oObj[, $iAbovePar = Null[, $iBelowPar = Null[, $iLineSpcMode = Null[, $iLineSpcHeight = Null]]]])
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $iAbovePar           - [optional] (0-100000) Default is Null. The Space above a paragraph, in Hundredths of a Millimeter (HMM).
 ;                  $iBelowPar           - [optional] (0-100000) Default is Null. The Space Below a paragraph, in Hundredths of a Millimeter (HMM).
 ;                  $iLineSpcMode        - [optional] (0-3) Default is Null. The line spacing type of the paragraph. See Constants, $LOD_PAR_LINE_SPC_MODE_* as defined in LibreOfficeDraw_Constants.au3, also notice min and max values for each.
@@ -5915,7 +5915,7 @@ EndFunc   ;==>__LODraw_ParSpacing
 ; Name ..........: __LODraw_ParTabStopCreate
 ; Description ...: Create a new TabStop for a Paragraph.
 ; Syntax ........: __LODraw_ParTabStopCreate(ByRef $oObj, $iPosition[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]])
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $iPosition           - The TabStop position to set the new TabStop to. Set in Hundredths of a Millimeter (HMM). See Remarks.
 ;                  $iAlignment          - [optional] (0-4) Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iDecChar            - [optional] Default is Null. Enter a character(in Asc Value(See AutoIt Asc Function)) that you want the decimal tab to use as a decimal separator. Can only be set if $iAlignment is set to $LOD_PAR_TAB_ALIGN_DECIMAL.
@@ -6030,7 +6030,7 @@ EndFunc   ;==>__LODraw_ParTabStopCreate
 ; Name ..........: __LODraw_ParTabStopDelete
 ; Description ...: Delete a TabStop from a Paragraph
 ; Syntax ........: __LODraw_ParTabStopDelete(ByRef $oObj, $iTabStop)
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $iTabStop            - The Tab position of the TabStop to modify. See Remarks.
 ; Return values .: Success: Boolean.
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Returning True if TabStop was successfully deleted, else False.
@@ -6085,7 +6085,7 @@ EndFunc   ;==>__LODraw_ParTabStopDelete
 ; Name ..........: __LODraw_ParTabStopMod
 ; Description ...: Set or Retrieve the properties of an existing TabStop.
 ; Syntax ........: __LODraw_ParTabStopMod(ByRef $oObj, $iTabStop[, $iPosition = Null[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]]])
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $iTabStop            - The Tab position of the TabStop to modify. See Remarks.
 ;                  $iPosition           - [optional] Default is Null. The New position to set the input position to. Set in Hundredths of a Millimeter (HMM). See Remarks.
 ;                  $iAlignment          - [optional] (0-4) Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeDraw_Constants.au3.
@@ -6218,7 +6218,7 @@ EndFunc   ;==>__LODraw_ParTabStopMod
 ; Name ..........: __LODraw_ParTabStopsGetList
 ; Description ...: Retrieve an array of TabStops available in a Paragraph.
 ; Syntax ........: __LODraw_ParTabStopsGetList(ByRef $oObj)
-; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style or Presentation Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+; Parameters ....: $oObj                - A Text Cursor, Shape, Shape Style object returned by a previous _LODraw_ShapeCreateTextCursor, _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ; Return values .: Success: Array.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. An Array of TabStops. @Extended set to number of results.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -6257,9 +6257,9 @@ EndFunc   ;==>__LODraw_ParTabStopsGetList
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LODraw_ShapeAreaGradientMulticolor
-; Description ...: Set or Retrieve a Shape, Shape Style, or Presentation Style's Multicolor Gradient settings.
+; Description ...: Set or Retrieve a Shape, Shape Style's Multicolor Gradient settings.
 ; Syntax ........: __LODraw_ShapeAreaGradientMulticolor(ByRef $oObj[, $avColorStops = Null])
-; Parameters ....: $oObj                - A Shape, Shape Style or Presentation Style object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+; Parameters ....: $oObj                - A Shape, Shape Style object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -6366,9 +6366,9 @@ EndFunc   ;==>__LODraw_ShapeAreaGradientMulticolor
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LODraw_ShapeAreaShadow
-; Description ...: Set or Retrieve the shadow settings for a Shape, Shape Style, or Presentation Style.
+; Description ...: Set or Retrieve the shadow settings for a Shape, Shape Style.
 ; Syntax ........: __LODraw_ShapeAreaShadow(ByRef $oObj[, $bShadow = Null[, $iLocation = Null[, $iColor = Null[, $iDistance = Null[, $iBlur = Null[, $iTransparency = Null]]]]]])
-; Parameters ....: $oObj                - A Shape, Shape Style or Presentation Style object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+; Parameters ....: $oObj                - A Shape, Shape Style object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $bShadow             - [optional] Default is Null. If True, a Shadow is present for the Shape.
 ;                  $iLocation           - [optional] (0-8) Default is Null. The Location of the Shadow, must be one of the Constants, $LOD_SHAPE_SHADOW_LOCATION_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iColor              - [optional] (0-16777215) Default is Null. The Shadow color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
@@ -6635,9 +6635,9 @@ EndFunc   ;==>__LODraw_ShapeAreaShadowModify
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LODraw_ShapeAreaTransparency
-; Description ...: Set or retrieve Transparency settings for a Shape, Shape Style or Presentation Style.
+; Description ...: Set or retrieve Transparency settings for a Shape, Shape Style.
 ; Syntax ........: __LODraw_ShapeAreaTransparency(ByRef $oObj[, $iTransparency = Null])
-; Parameters ....: $oObj                - A Shape, Shape Style or Presentation Style object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+; Parameters ....: $oObj                - A Shape, Shape Style object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
@@ -6686,9 +6686,9 @@ EndFunc   ;==>__LODraw_ShapeAreaTransparency
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LODraw_ShapeAreaTransparencyGradientMulti
-; Description ...: Set or Retrieve a Shape, Shape Style, or Presentation Style's Multi Transparency Gradient settings.
+; Description ...: Set or Retrieve a Shape, Shape Style's Multi Transparency Gradient settings.
 ; Syntax ........: __LODraw_ShapeAreaTransparencyGradientMulti(ByRef $oObj[, $avColorStops = Null])
-; Parameters ....: $oObj                - A Shape, Shape Style or Presentation Style object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+; Parameters ....: $oObj                - A Shape, Shape Style object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
 ; Return values .: Success: 1 or Array
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -8014,9 +8014,9 @@ EndFunc   ;==>__LODraw_ShapeLineStyleName
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LODraw_ShapeStyleAreaColor
-; Description ...: Set or Retrieve the Fill color settings for a Shape Style or Presentation Style.
+; Description ...: Set or Retrieve the Fill color settings for a Shape Style.
 ; Syntax ........: __LODraw_ShapeStyleAreaColor(ByRef $oObj[, $iColor = Null])
-; Parameters ....: $oObj                - A Shape, Shape Style or Presentation Style object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+; Parameters ....: $oObj                - A Shape, Shape Style object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $iColor              - [optional] (-1-16777215) Default is Null. The Fill color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for "None".
 ; Return values .: Success: 1 or Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -8081,10 +8081,10 @@ EndFunc   ;==>__LODraw_ShapeStyleAreaColor
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LODraw_ShapeStyleAreaGradient
-; Description ...: Set or Retrieve the settings for a Shape, Shape Style or Presentation Style Background color Gradient.
+; Description ...: Set or Retrieve the settings for a Shape, Shape Style Background color Gradient.
 ; Syntax ........: __LODraw_ShapeStyleAreaGradient(ByRef $oDoc, ByRef $oObj[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
-;                  $oObj                - A Shape Style or Presentation Style object returned by a previous _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+;                  $oObj                - A Shape Style object returned by a previous _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOD_GRAD_NAME_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iIncrement          - [optional] (0, 3-256) Default is Null. The number of steps of color change. 0 = Automatic.
@@ -8309,10 +8309,10 @@ EndFunc   ;==>__LODraw_ShapeStyleAreaGradient
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LODraw_ShapeStyleAreaTransparencyGradient
-; Description ...: Set or retrieve the Shape, Shape Style or Presentation Style transparency gradient settings.
+; Description ...: Set or retrieve the Shape, Shape Style transparency gradient settings.
 ; Syntax ........: __LODraw_ShapeStyleAreaTransparencyGradient(ByRef $oDoc, ByRef $oObj[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
-;                  $oObj                - A Shape Style or Presentation Style object returned by a previous _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+;                  $oObj                - A Shape Style object returned by a previous _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $iType               - [optional] (-1-5) Default is Null. The type of transparency gradient that you want to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3. Call with $LOD_GRAD_TYPE_OFF to turn Transparency Gradient off.
 ;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
@@ -8540,10 +8540,10 @@ EndFunc   ;==>__LODraw_ShapeStyleCompare
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LODraw_ShapeStyleLineArrowStyles
-; Description ...: Set or Retrieve Shape Style or Presentation Style Line Start and End Arrow Style settings.
+; Description ...: Set or Retrieve Shape Style Line Start and End Arrow Style settings.
 ; Syntax ........: __LODraw_ShapeStyleLineArrowStyles(ByRef $oDoc, ByRef $oObj[, $vStartStyle = Null[, $iStartWidth = Null[, $bStartCenter = Null[, $bSync = Null[, $vEndStyle = Null[, $iEndWidth = Null[, $bEndCenter = Null]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
-;                  $oObj                - A Shape Style or Presentation Style object returned by a previous _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+;                  $oObj                - A Shape Style object returned by a previous _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $vStartStyle         - [optional] (0-32, or String) Default is Null. The Arrow head to apply to the start of the line. Can be a Custom Arrowhead name, or one of the constants, $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeDraw_Constants.au3. See remarks.
 ;                  $iStartWidth         - [optional] (0-5004) Default is Null. The Width of the Starting Arrowhead, in Hundredths of a Millimeter (HMM).
 ;                  $bStartCenter        - [optional] Default is Null. If True, Places the center of the Start arrowhead on the endpoint of the line.
@@ -8700,10 +8700,10 @@ EndFunc   ;==>__LODraw_ShapeStyleLineArrowStyles
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LODraw_ShapeStyleLineProperties
-; Description ...: Set or Retrieve Shape Style or Presentation Style Line settings.
+; Description ...: Set or Retrieve Shape Style Line settings.
 ; Syntax ........: ; Syntax ........: __LODraw_ShapeStyleLineProperties(ByRef $oDoc, ByRef $oObj[, $vStyle = Null[, $iColor = Null[, $iWidth = Null[, $iTransparency = Null[, $iCornerStyle = Null[, $iCapStyle = Null]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
-;                  $oObj                - A Shape Style or Presentation Style object returned by a previous _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+;                  $oObj                - A Shape Style object returned by a previous _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $vStyle              - [optional] (0-31, or String) Default is Null. The Line Style to use. Can be a Custom Line Style name, or one of the constants, $LOD_SHAPE_LINE_STYLE_* as defined in LibreOfficeDraw_Constants.au3. See remarks.
 ;                  $iColor              - [optional] (0-16777215) Default is Null. The Line color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ;                  $iWidth              - [optional] (0-5004) Default is Null. The line Width, set in Hundredths of a Millimeter (HMM).
@@ -9108,9 +9108,9 @@ EndFunc   ;==>__LODraw_ShapeTextAttrFit
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LODraw_ShapeTextAttrSettings
-; Description ...: Set or Retrieve Shape, Shape Style or Presentation Style text Attribute settings.
+; Description ...: Set or Retrieve Shape, Shape Style text Attribute settings.
 ; Syntax ........: __LODraw_ShapeTextAttrSettings(ByRef $oObj[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null[, $iAnchor = Null[, $bFullWidth = Null]]]]]])
-; Parameters ....: $oObj                - A Shape, Shape Style or Presentation Style object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+; Parameters ....: $oObj                - A Shape, Shape Style object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapesGetList, _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $iLeft               - [optional] (-100000-100000) Default is Null. The space between the left edge of the drawing object and the left border of the text, in Hundredths of a Millimeter (HMM).
 ;                  $iRight              - [optional] (-100000-100000) Default is Null. The space between the right edge of the drawing object and the right border of the text, in Hundredths of a Millimeter (HMM).
 ;                  $iTop                - [optional] (-100000-100000) Default is Null. The space between the top edge of the drawing object and the top border of the text, in Hundredths of a Millimeter (HMM).
@@ -9301,7 +9301,7 @@ EndFunc   ;==>__LODraw_ShapeTextAttrSettings
 ; Name ..........: __LODraw_StyleCharFontColor
 ; Description ...: Set or retrieve the font color and highlighting values.
 ; Syntax ........: __LODraw_StyleCharFontColor(ByRef $oObj[, $iFontColor = Null[, $iHighlight = Null]])
-; Parameters ....: $oObj                - A Shape Style or Presentation Style object returned by a previous _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
+; Parameters ....: $oObj                - A Shape Style object returned by a previous _LODraw_ShapeStyleCreate, _LODraw_ShapeStyleGetObjByName, or _LODraw_ShapePresStyleGetObjByName function.
 ;                  $iFontColor          - [optional] (-1-16777215) Default is Null. The font Color value, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
 ;                  $iHighlight          - [optional] (-1-16777215) Default is Null. The highlight Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for No color.
 ; Return values .: Success: 1 or Array.
