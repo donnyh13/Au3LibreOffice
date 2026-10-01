@@ -869,13 +869,6 @@ Global Enum _
 		$LOI_SHAPE_SHADOW_LOCATION_BOTTOM_CENTER, _                  ; 7 The Shadow is positioned in the Lower-Center of the shape.
 		$LOI_SHAPE_SHADOW_LOCATION_BOTTOM_RIGHT                      ; 8 The Shadow is positioned in the Lower-Right corner of the shape.
 
-; Table Cell Type
-Global Const _                                                       ; com.sun.star.table.CellContentType
-		$LOI_SHAPE_TABLE_CELL_TYPE_EMPTY = 0, _                      ; Cell is empty.
-		$LOI_SHAPE_TABLE_CELL_TYPE_VALUE = 1, _                      ; Cell contains a value.
-		$LOI_SHAPE_TABLE_CELL_TYPE_TEXT = 2, _                       ; Cell contains text.
-		$LOI_SHAPE_TABLE_CELL_TYPE_FORMULA = 3                       ; Cell contains a formula.
-
 ; Text Box type Constants.
 Global Enum _
 		$LOI_SHAPE_TEXTBOX_TYPE_TEXTBOX, _                           ; 0 - A Text Box, including Hyperlinks, and most Fields.
