@@ -1134,15 +1134,15 @@ Func __LODraw_DocCurrView(ByRef $oDoc, $iView = Null)
 
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-		$bIsMasterMode = $oDoc.getCurrentController.IsMasterPageMode()
-		If Not IsBool($bIsMasterMode) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	$bIsMasterMode = $oDoc.getCurrentController.IsMasterPageMode()
+	If Not IsBool($bIsMasterMode) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-				If $bIsMasterMode Then
-					$iCurrView = $LOD_PAGE_VIEW_MASTER
+	If $bIsMasterMode Then
+		$iCurrView = $LOD_PAGE_VIEW_MASTER
 
-				Else
-					$iCurrView = $LOD_PAGE_VIEW_PAGE
-				EndIf
+	Else
+		$iCurrView = $LOD_PAGE_VIEW_PAGE
+	EndIf
 
 	If __LO_VarsAreNull($iView) Then
 
@@ -1151,15 +1151,14 @@ Func __LODraw_DocCurrView(ByRef $oDoc, $iView = Null)
 
 	If Not __LO_IntIsBetween($iView, $LOD_PAGE_VIEW_PAGE, $LOD_PAGE_VIEW_MASTER) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-		If ($iView = $LOD_PAGE_VIEW_PAGE) Then
-				$oDoc.CurrentController.IsMasterPageMode = False
+	If ($iView = $LOD_PAGE_VIEW_PAGE) Then
+		$oDoc.CurrentController.IsMasterPageMode = False
 
-		Else ; $LOD_PAGE_VIEW_MASTER
-				$oDoc.CurrentController.IsMasterPageMode = True
+	Else     ; $LOD_PAGE_VIEW_MASTER
+		$oDoc.CurrentController.IsMasterPageMode = True
+	EndIf
 
-		EndIf
-
-		$iError = ($oDoc.CurrentController.IsMasterPageMode() = (($iView = $LOD_PAGE_VIEW_PAGE) ? (False) : (True))) ? ($iError) : (BitOR($iError, 1))
+	$iError = ($oDoc.CurrentController.IsMasterPageMode() = (($iView = $LOD_PAGE_VIEW_PAGE) ? (False) : (True))) ? ($iError) : (BitOR($iError, 1))
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>__LODraw_DocCurrView
@@ -4089,7 +4088,7 @@ EndFunc   ;==>__LODraw_GetParentDoc
 ; Name ..........: __LODraw_GetShapeName
 ; Description ...: Create a Shape Name that hasn't been used yet in the page.
 ; Syntax ........: __LODraw_GetShapeName(ByRef $oPage, $sShapeName)
-; Parameters ....: $oPage              - A Shape or Drawing Shape object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapeTextBoxInsert, _LODraw_ShapeImageInsert, or _LODraw_ShapesGetList function.
+; Parameters ....: $oPage               - A Shape or Drawing Shape object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapeTextBoxInsert, _LODraw_ShapeImageInsert, or _LODraw_ShapesGetList function.
 ;                  $sShapeName          - The Shape name to begin with.
 ; Return values .: Success: String
 ;                  @Error: 0, @Extended: 0, Return: String = Success. Page contained no shapes, returning the Shape name with a "1" appended.

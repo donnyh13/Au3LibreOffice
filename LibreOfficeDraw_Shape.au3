@@ -111,28 +111,25 @@
 ; Description ...: Set or Retrieve the Fill color settings for a Shape.
 ; Syntax ........: _LODraw_ShapeAreaColor(ByRef $oShape[, $iColor = Null])
 ; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapeTextBoxInsert, _LODraw_ShapeImageInsert, or _LODraw_ShapesGetList function.
-;                  $iColor              - [optional] (-2-16777215) Default is Null. The Fill color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for "None", or $LOD_SHAPE_COLOR_USE_PAGE_BACKGROUND (-2) to use the Page's background color (L.O. 7.5 +).
+;                  $iColor              - [optional] (-1-16777215) Default is Null. The Fill color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for "None".
 ; Return values .: Success: 1 or Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current Fill color as an Integer.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
-;                  @Error: 1, @Extended: 2 = $iColor not an Integer, less than -2 or greater than 16777215.
+;                  @Error: 1, @Extended: 2 = $iColor not an Integer, less than -1 or greater than 16777215.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve current color value.
 ;                  @Error: 3, @Extended: 2 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iColor
-;                  --Version Related Errors--
-;                  @Error: 6, @Extended: 1 = Current LibreOffice version less than 7.5.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
-;                  So far, I have found that Textboxes and all drawing shapes support the $LOD_SHAPE_COLOR_USE_PAGE_BACKGROUND flag. Images and Tables do not, and will throw a property setting error.
-; Related .......: _LODraw_ShapePresStyleAreaColor, _LODraw_ShapeStyleAreaColor, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Related .......: _LODraw_ShapeStyleAreaColor, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -193,7 +190,7 @@ EndFunc   ;==>_LODraw_ShapeAreaColor
 ; Remarks .......: This function is to help determine if a Gradient background, or a solid color background is currently active.
 ;                  This is useful because, if a Gradient is active, the solid color value is still present, and thus it would not be possible to determine which function should be used to retrieve the current values for, whether the Color function, or the Gradient function.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
-; Related .......: _LODraw_ShapeAreaColor, _LODraw_ShapeAreaGradient, _LODraw_ShapePresStyleAreaFillStyle, _LODraw_ShapeStyleAreaFillStyle
+; Related .......: _LODraw_ShapeAreaColor, _LODraw_ShapeAreaGradient, _LODraw_ShapeStyleAreaFillStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -271,7 +268,7 @@ EndFunc   ;==>_LODraw_ShapeAreaFillStyle
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapeAreaFillStyle, _LODraw_ShapeAreaGradientMulticolor, _LODraw_ShapePresStyleAreaGradient, _LODraw_ShapeStyleAreaGradient
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapeAreaFillStyle, _LODraw_ShapeAreaGradientMulticolor, _LODraw_ShapeStyleAreaGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -481,7 +478,7 @@ EndFunc   ;==>_LODraw_ShapeAreaGradient
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
-; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LODraw_ShapeAreaGradient, _LODraw_ShapePresStyleAreaGradientMulticolor, _LODraw_ShapeStyleAreaTransparencyGradientMulti, _LODraw_ShapeAreaTransparencyGradientMulti
+; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LODraw_ShapeAreaGradient, _LODraw_ShapeStyleAreaTransparencyGradientMulti, _LODraw_ShapeAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -539,7 +536,7 @@ EndFunc   ;==>_LODraw_ShapeAreaGradientMulticolor
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  LibreOffice may change the shadow distance +/- a Hundredth of a Millimeter (HMM).
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LODraw_ShapePresStyleAreaShadow, _LODraw_ShapeStyleAreaShadow
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LODraw_ShapeStyleAreaShadow
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -579,7 +576,7 @@ EndFunc   ;==>_LODraw_ShapeAreaShadow
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
-; Related .......: _LODraw_ShapeAreaTransparencyGradient, _LODraw_ShapePresStyleAreaTransparency, _LODraw_ShapeStyleAreaTransparency
+; Related .......: _LODraw_ShapeAreaTransparencyGradient, _LODraw_ShapeStyleAreaTransparency
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -643,7 +640,7 @@ EndFunc   ;==>_LODraw_ShapeAreaTransparency
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
-; Related .......: _LODraw_ShapeAreaTransparency, _LODraw_ShapePresStyleAreaTransparencyGradient, _LODraw_ShapeStyleAreaTransparencyGradient
+; Related .......: _LODraw_ShapeAreaTransparency, _LODraw_ShapeStyleAreaTransparencyGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -824,7 +821,7 @@ EndFunc   ;==>_LODraw_ShapeAreaTransparencyGradient
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
-; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LODraw_ShapeAreaTransparencyGradient, _LODraw_ShapePresStyleAreaTransparencyGradientMulti, _LODraw_ShapeStyleAreaTransparencyGradientMulti, _LODraw_ShapeAreaGradientMulticolor
+; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LODraw_ShapeAreaTransparencyGradient, _LODraw_ShapeStyleAreaTransparencyGradientMulti, _LODraw_ShapeAreaGradientMulticolor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -871,7 +868,7 @@ EndFunc   ;==>_LODraw_ShapeAreaTransparencyGradientMulti
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
-; Related .......: _LODraw_ShapeCharOverLine, _LODraw_ShapeCharStrikeOut, _LODraw_ShapeCharUnderLine, _LODraw_ShapePresStyleCharEffect, _LODraw_ShapeStyleCharEffect
+; Related .......: _LODraw_ShapeCharOverLine, _LODraw_ShapeCharStrikeOut, _LODraw_ShapeCharUnderLine, _LODraw_ShapeStyleCharEffect
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -921,7 +918,7 @@ EndFunc   ;==>_LODraw_ShapeCharEffect
 ;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
 ;                  LibreOffice accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
-; Related .......: _LODraw_ShapeCharFontColor, _LODraw_ShapePresStyleCharFont, _LODraw_ShapeStyleCharFont, _LODraw_FontsGetNames
+; Related .......: _LODraw_ShapeCharFontColor, _LODraw_ShapeStyleCharFont, _LODraw_FontsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -969,7 +966,7 @@ EndFunc   ;==>_LODraw_ShapeCharFont
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapeCharFont, _LODraw_ShapePresStyleCharFontColor, _LODraw_ShapeStyleCharFontColor
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapeCharFont, _LODraw_ShapeStyleCharFontColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1014,7 +1011,7 @@ EndFunc   ;==>_LODraw_ShapeCharFontColor
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapeCharEffect, _LODraw_ShapeCharStrikeOut, _LODraw_ShapeCharUnderLine, _LODraw_ShapePresStyleCharOverLine, _LODraw_ShapeStyleCharOverLine
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapeCharEffect, _LODraw_ShapeCharStrikeOut, _LODraw_ShapeCharUnderLine, _LODraw_ShapeStyleCharOverLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1189,7 +1186,7 @@ EndFunc   ;==>_LODraw_ShapeCharSpacing
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
-; Related .......: _LODraw_ShapeCharEffect, _LODraw_ShapeCharOverLine, _LODraw_ShapeCharUnderLine, _LODraw_ShapePresStyleCharStrikeOut, _LODraw_ShapeStyleCharStrikeOut
+; Related .......: _LODraw_ShapeCharEffect, _LODraw_ShapeCharOverLine, _LODraw_ShapeCharUnderLine, _LODraw_ShapeStyleCharStrikeOut
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1233,7 +1230,7 @@ EndFunc   ;==>_LODraw_ShapeCharStrikeOut
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapeCharEffect, _LODraw_ShapeCharOverLine, _LODraw_ShapeCharStrikeOut, _LODraw_ShapePresStyleCharUnderLine, _LODraw_ShapeStyleCharUnderLine
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapeCharEffect, _LODraw_ShapeCharOverLine, _LODraw_ShapeCharStrikeOut, _LODraw_ShapeStyleCharUnderLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1832,7 +1829,7 @@ EndFunc   ;==>_LODraw_ShapeImageReplace
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
-; Related .......: _LO_UnitConvert, _LODraw_ShapeLineProperties, _LODraw_ShapePresStyleLineArrowStyles, _LODraw_ShapeStyleLineArrowStyles
+; Related .......: _LO_UnitConvert, _LODraw_ShapeLineProperties, _LODraw_ShapeStyleLineArrowStyles
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1973,7 +1970,7 @@ EndFunc   ;==>_LODraw_ShapeLineArrowStyles
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
-; Related .......: _LO_UnitConvert, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapeLineArrowStyles, _LODraw_ShapePresStyleLineProperties, _LODraw_ShapeStyleLineProperties
+; Related .......: _LO_UnitConvert, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapeLineArrowStyles, _LODraw_ShapeStyleLineProperties
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2169,7 +2166,7 @@ EndFunc   ;==>_LODraw_ShapeName
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Expand single word, Snap to grid, and Vertical align (Text-To-Text), seem to be unavailable in the API, and do not seem to work in LibreOffice.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
-; Related .......: _LODraw_ShapeCharPosition, _LODraw_ShapeParIndent, _LODraw_ShapeParSpacing, _LODraw_ShapePresStyleParAlignment, _LODraw_ShapeStyleParAlignment
+; Related .......: _LODraw_ShapeCharPosition, _LODraw_ShapeParIndent, _LODraw_ShapeParSpacing, _LODraw_ShapeStyleParAlignment
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2214,7 +2211,7 @@ EndFunc   ;==>_LODraw_ShapeParAlignment
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Auto indent first line does not seem to work in LibreOffice, and seems to be not available in the API.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
-; Related .......: _LO_UnitConvert, _LODraw_ShapeParAlignment, _LODraw_ShapeParSpacing, _LODraw_ShapePresStyleParIndent, _LODraw_ShapeStyleParIndent
+; Related .......: _LO_UnitConvert, _LODraw_ShapeParAlignment, _LODraw_ShapeParSpacing, _LODraw_ShapeStyleParIndent
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2270,7 +2267,7 @@ EndFunc   ;==>_LODraw_ShapeParIndent
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  The "Do not add space between paragraphs as the same style" setting seems to be not available to set or retrieve in the API, and seems to do nothing in LibreOffice anyway.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
-; Related .......: _LO_UnitConvert, _LODraw_ShapeCharSpacing, _LODraw_ShapeParAlignment, _LODraw_ShapeParIndent, _LODraw_ShapePresStyleParSpacing, _LODraw_ShapeStyleParSpacing
+; Related .......: _LO_UnitConvert, _LODraw_ShapeCharSpacing, _LODraw_ShapeParAlignment, _LODraw_ShapeParIndent, _LODraw_ShapeStyleParSpacing
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2326,7 +2323,7 @@ EndFunc   ;==>_LODraw_ShapeParSpacing
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  $iNewTabStop position is still returned as even though some settings weren't successfully set, the new TabStop was still created.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
-; Related .......: _LO_UnitConvert, _LODraw_ShapeParTabStopDelete, _LODraw_ShapeParTabStopMod, _LODraw_ShapeParTabStopsGetList, _LODraw_ShapePresStyleParTabStopCreate, _LODraw_ShapeStyleParTabStopCreate
+; Related .......: _LO_UnitConvert, _LODraw_ShapeParTabStopDelete, _LODraw_ShapeParTabStopMod, _LODraw_ShapeParTabStopsGetList, _LODraw_ShapeStyleParTabStopCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2362,7 +2359,7 @@ EndFunc   ;==>_LODraw_ShapeParTabStopCreate
 ; Modified ......:
 ; Remarks .......: $iTabStop refers to the position, or essential the "length" of a TabStop from the edge of a page margin. This is the only reliable way to identify a Tabstop to be able to interact with it, as there can only be one of a certain length per paragraph.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
-; Related .......: _LODraw_ShapeParTabStopCreate, _LODraw_ShapeParTabStopsGetList, _LODraw_ShapePresStyleParTabStopDelete, _LODraw_ShapeStyleParTabStopDelete
+; Related .......: _LODraw_ShapeParTabStopCreate, _LODraw_ShapeParTabStopsGetList, _LODraw_ShapeStyleParTabStopDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2422,7 +2419,7 @@ EndFunc   ;==>_LODraw_ShapeParTabStopDelete
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
-; Related .......: _LO_UnitConvert, _LODraw_ShapeParTabStopCreate, _LODraw_ShapeParTabStopsGetList, _LODraw_ShapePresStyleParTabStopMod, _LODraw_ShapeStyleParTabStopMod
+; Related .......: _LO_UnitConvert, _LODraw_ShapeParTabStopCreate, _LODraw_ShapeParTabStopsGetList, _LODraw_ShapeStyleParTabStopMod
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2454,7 +2451,7 @@ EndFunc   ;==>_LODraw_ShapeParTabStopMod
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
-; Related .......: _LODraw_ShapeParTabStopCreate, _LODraw_ShapeParTabStopDelete, _LODraw_ShapePresStyleParTabStopsGetList, _LODraw_ShapeStyleParTabStopsGetList
+; Related .......: _LODraw_ShapeParTabStopCreate, _LODraw_ShapeParTabStopDelete, _LODraw_ShapeStyleParTabStopsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2776,7 +2773,7 @@ EndFunc   ;==>_LODraw_ShapeSize
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapeStyleAreaFillStyle, _LODraw_ShapeStyleAreaGradient, _LODraw_ShapeAreaColor, _LODraw_ShapePresStyleAreaColor
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapeStyleAreaFillStyle, _LODraw_ShapeStyleAreaGradient, _LODraw_ShapeAreaColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2809,7 +2806,7 @@ EndFunc   ;==>_LODraw_ShapeStyleAreaColor
 ; Modified ......:
 ; Remarks .......: This function is to help determine if a Gradient background, or a solid color background is currently active.
 ;                  This is useful because, if a Gradient is active, the solid color value is still present, and thus it would not be possible to determine which function should be used to retrieve the current values for, whether the Color function, or the Gradient function.
-; Related .......: _LODraw_ShapeStyleAreaColor, _LODraw_ShapeStyleAreaGradient, _LODraw_ShapeAreaFillStyle, _LODraw_ShapePresStyleAreaFillStyle
+; Related .......: _LODraw_ShapeStyleAreaColor, _LODraw_ShapeStyleAreaGradient, _LODraw_ShapeAreaFillStyle
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2886,7 +2883,7 @@ EndFunc   ;==>_LODraw_ShapeStyleAreaFillStyle
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapeStyleAreaFillStyle, _LODraw_ShapeStyleAreaGradientMulticolor, _LODraw_ShapeAreaGradient, _LODraw_ShapePresStyleAreaGradient
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapeStyleAreaFillStyle, _LODraw_ShapeStyleAreaGradientMulticolor, _LODraw_ShapeAreaGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2937,7 +2934,7 @@ EndFunc   ;==>_LODraw_ShapeStyleAreaGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LODraw_ShapeStyleAreaTransparencyGradient, _LODraw_ShapeAreaTransparencyGradientMulti, _LODraw_ShapeAreaGradientMulticolor, _LODraw_ShapePresStyleAreaGradientMulticolor
+; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LODraw_ShapeStyleAreaTransparencyGradient, _LODraw_ShapeAreaTransparencyGradientMulti, _LODraw_ShapeAreaGradientMulticolor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2994,7 +2991,7 @@ EndFunc   ;==>_LODraw_ShapeStyleAreaGradientMulticolor
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  LibreOffice may change the shadow distance +/- a Hundredth of a Millimeter (HMM).
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LODraw_ShapeAreaShadow, _LODraw_ShapePresStyleAreaShadow
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LODraw_ShapeAreaShadow
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3033,7 +3030,7 @@ EndFunc   ;==>_LODraw_ShapeStyleAreaShadow
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LODraw_ShapeStyleAreaTransparencyGradient, _LODraw_ShapeAreaTransparency, _LODraw_ShapePresStyleAreaTransparency
+; Related .......: _LODraw_ShapeStyleAreaTransparencyGradient, _LODraw_ShapeAreaTransparency
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3096,7 +3093,7 @@ EndFunc   ;==>_LODraw_ShapeStyleAreaTransparency
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LODraw_ShapeStyleAreaTransparencyGradientMulti, _LODraw_ShapeAreaTransparencyGradient, _LODraw_ShapePresStyleAreaTransparencyGradient
+; Related .......: _LODraw_ShapeStyleAreaTransparencyGradientMulti, _LODraw_ShapeAreaTransparencyGradient
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3148,7 +3145,7 @@ EndFunc   ;==>_LODraw_ShapeStyleAreaTransparencyGradient
 ;                  $avColorStops expects an array as described above.
 ;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LODraw_ShapeStyleAreaTransparencyGradient, _LODraw_ShapeAreaGradientMulticolor, _LODraw_ShapeAreaTransparencyGradientMulti, _LODraw_ShapePresStyleAreaTransparencyGradientMulti
+; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LODraw_ShapeStyleAreaTransparencyGradient, _LODraw_ShapeAreaGradientMulticolor, _LODraw_ShapeAreaTransparencyGradientMulti
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3194,7 +3191,7 @@ EndFunc   ;==>_LODraw_ShapeStyleAreaTransparencyGradientMulti
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LODraw_ShapeStyleCharOverLine, _LODraw_ShapeStyleCharStrikeOut, _LODraw_ShapeStyleCharUnderLine, _LODraw_ShapeCharEffect, _LODraw_ShapePresStyleCharEffect
+; Related .......: _LODraw_ShapeStyleCharOverLine, _LODraw_ShapeStyleCharStrikeOut, _LODraw_ShapeStyleCharUnderLine, _LODraw_ShapeCharEffect
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3243,7 +3240,7 @@ EndFunc   ;==>_LODraw_ShapeStyleCharEffect
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
 ;                  LibreOffice accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
-; Related .......: _LODraw_ShapeStyleCharFontColor, _LODraw_ShapeCharFont, _LODraw_ShapePresStyleCharFont, _LODraw_FontsGetNames
+; Related .......: _LODraw_ShapeStyleCharFontColor, _LODraw_ShapeCharFont, _LODraw_FontsGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3283,7 +3280,7 @@ EndFunc   ;==>_LODraw_ShapeStyleCharFont
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapeStyleCharFont, _LODraw_ShapeCharFontColor, _LODraw_ShapePresStyleCharFontColor
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapeStyleCharFont, _LODraw_ShapeCharFontColor
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3327,7 +3324,7 @@ EndFunc   ;==>_LODraw_ShapeStyleCharFontColor
 ; Remarks .......: Overline line style uses the same constants as underline style.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapeStyleCharEffect, _LODraw_ShapeStyleCharStrikeOut, _LODraw_ShapeStyleCharUnderLine, _LODraw_ShapeCharOverLine, _LODraw_ShapePresStyleCharOverLine
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapeStyleCharEffect, _LODraw_ShapeStyleCharStrikeOut, _LODraw_ShapeStyleCharUnderLine, _LODraw_ShapeCharOverLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3367,7 +3364,7 @@ EndFunc   ;==>_LODraw_ShapeStyleCharOverLine
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LODraw_ShapeStyleCharEffect, _LODraw_ShapeStyleCharOverLine, _LODraw_ShapeStyleCharUnderLine, _LODraw_ShapeCharStrikeOut, _LODraw_ShapePresStyleCharStrikeOut
+; Related .......: _LODraw_ShapeStyleCharEffect, _LODraw_ShapeStyleCharOverLine, _LODraw_ShapeStyleCharUnderLine, _LODraw_ShapeCharStrikeOut
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3410,7 +3407,7 @@ EndFunc   ;==>_LODraw_ShapeStyleCharStrikeOut
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapeStyleCharEffect, _LODraw_ShapeStyleCharOverLine, _LODraw_ShapeStyleCharStrikeOut, _LODraw_ShapeCharUnderLine, _LODraw_ShapePresStyleCharUnderLine
+; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapeStyleCharEffect, _LODraw_ShapeStyleCharOverLine, _LODraw_ShapeStyleCharStrikeOut, _LODraw_ShapeCharUnderLine
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3812,7 +3809,7 @@ EndFunc   ;==>_LODraw_ShapeStyleExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LODraw_ShapeStylesGetNames, _LODraw_ShapeStyleExists, _LODraw_ShapePresStyleGetObjByName
+; Related .......: _LODraw_ShapeStylesGetNames, _LODraw_ShapeStyleExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3883,7 +3880,7 @@ EndFunc   ;==>_LODraw_ShapeStyleGetObjByName
 ;                  When retrieving the current settings, both $vStartStyle and $vEndStyle could be either an Integer or a String. It will be a String if the current Arrowhead is a custom Arrowhead, else an Integer, corresponding to one of the constants, $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LODraw_ShapeStyleLineProperties, _LODraw_ShapeLineArrowStyles, _LODraw_ShapePresStyleLineArrowStyles
+; Related .......: _LO_UnitConvert, _LODraw_ShapeStyleLineProperties, _LODraw_ShapeLineArrowStyles
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -3944,7 +3941,7 @@ EndFunc   ;==>_LODraw_ShapeStyleLineArrowStyles
 ;                  When retrieving the current settings, $vStyle could be either an Integer or a String. It will be a String if the current Line Style is a custom Line Style, else an Integer, corresponding to one of the constants, $LOD_SHAPE_LINE_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapeStyleLineArrowStyles, _LODraw_ShapeLineProperties, _LODraw_ShapePresStyleLineProperties
+; Related .......: _LO_UnitConvert, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapeStyleLineArrowStyles, _LODraw_ShapeLineProperties
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4079,7 +4076,7 @@ EndFunc   ;==>_LODraw_ShapeStyleOrganizer
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Expand single word, Snap to grid, and Vertical align (Text-To-Text), seem to be unavailable in the API, and do not seem to work in LibreOffice.
-; Related .......: _LODraw_ShapeStyleParIndent, _LODraw_ShapeStyleParSpacing, _LODraw_ShapeParAlignment, _LODraw_ShapePresStyleParAlignment
+; Related .......: _LODraw_ShapeStyleParIndent, _LODraw_ShapeStyleParSpacing, _LODraw_ShapeParAlignment
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4123,7 +4120,7 @@ EndFunc   ;==>_LODraw_ShapeStyleParAlignment
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  Auto indent first line does not seem to work in LibreOffice, and seems to be not available in the API.
-; Related .......: _LO_UnitConvert, _LODraw_ShapeStyleParAlignment, _LODraw_ShapeStyleParSpacing, _LODraw_ShapeParIndent, _LODraw_ShapePresStyleParIndent
+; Related .......: _LO_UnitConvert, _LODraw_ShapeStyleParAlignment, _LODraw_ShapeStyleParSpacing, _LODraw_ShapeParIndent
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4178,7 +4175,7 @@ EndFunc   ;==>_LODraw_ShapeStyleParIndent
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  The "Do not add space between paragraphs as the same style" setting seems to be not available to set or retrieve in the API, and seems to do nothing in LibreOffice anyway.
-; Related .......: _LO_UnitConvert, _LODraw_ShapeStyleParAlignment, _LODraw_ShapeStyleParIndent, _LODraw_ShapeParSpacing, _LODraw_ShapePresStyleParSpacing
+; Related .......: _LO_UnitConvert, _LODraw_ShapeStyleParAlignment, _LODraw_ShapeStyleParIndent, _LODraw_ShapeParSpacing
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4233,7 +4230,7 @@ EndFunc   ;==>_LODraw_ShapeStyleParSpacing
 ;                  $iFillChar, Libre's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by Libre are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  $iNewTabStop position is still returned as even though some settings weren't successfully set, the new TabStop was still created.
-; Related .......: _LO_UnitConvert, _LODraw_ShapeStyleParTabStopDelete, _LODraw_ShapeStyleParTabStopMod, _LODraw_ShapeStyleParTabStopsGetList, _LODraw_ShapeParTabStopCreate, _LODraw_ShapePresStyleParTabStopCreate
+; Related .......: _LO_UnitConvert, _LODraw_ShapeStyleParTabStopDelete, _LODraw_ShapeStyleParTabStopMod, _LODraw_ShapeStyleParTabStopsGetList, _LODraw_ShapeParTabStopCreate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4268,7 +4265,7 @@ EndFunc   ;==>_LODraw_ShapeStyleParTabStopCreate
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $iTabStop refers to the position, or essential the "length" of a TabStop from the edge of a page margin. This is the only reliable way to identify a Tabstop to be able to interact with it, as there can only be one of a certain length per paragraph.
-; Related .......: _LODraw_ShapeStyleParTabStopCreate, _LODraw_ShapeStyleParTabStopsGetList, _LODraw_ShapeParTabStopDelete, _LODraw_ShapePresStyleParTabStopDelete
+; Related .......: _LODraw_ShapeStyleParTabStopCreate, _LODraw_ShapeStyleParTabStopsGetList, _LODraw_ShapeParTabStopDelete
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4327,7 +4324,7 @@ EndFunc   ;==>_LODraw_ShapeStyleParTabStopDelete
 ;                  $iFillChar, Libre's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by Libre are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LODraw_ShapeStyleParTabStopCreate, _LODraw_ShapeStyleParTabStopsGetList, _LODraw_ShapeParTabStopMod, _LODraw_ShapePresStyleParTabStopMod
+; Related .......: _LO_UnitConvert, _LODraw_ShapeStyleParTabStopCreate, _LODraw_ShapeStyleParTabStopsGetList, _LODraw_ShapeParTabStopMod
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4359,7 +4356,7 @@ EndFunc   ;==>_LODraw_ShapeStyleParTabStopMod
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......: _LODraw_ShapeStyleParTabStopCreate, _LODraw_ShapeStyleParTabStopDelete, _LODraw_ShapeStyleParTabStopMod, _LODraw_ShapeParTabStopsGetList, _LODraw_ShapePresStyleParTabStopsGetList
+; Related .......: _LODraw_ShapeStyleParTabStopCreate, _LODraw_ShapeStyleParTabStopDelete, _LODraw_ShapeStyleParTabStopMod, _LODraw_ShapeParTabStopsGetList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4403,7 +4400,7 @@ EndFunc   ;==>_LODraw_ShapeStyleParTabStopsGetList
 ;                  - "Object without fill" is internally called "objectwithoutfill".
 ;                  Previous to LibreOffice 25.2 either name would work when setting a Style, however after 25.2 only the internal, or programmatic style names, will work.
 ;                  Calling $bDisplayName with True will return a list of Style names, as the user sees them in the UI, in the same order as they are returned if $bDisplayName is False. It is best not to use these when setting Styling.
-; Related .......: _LODraw_ShapeStyleGetObjByName, _LODraw_ShapeStyleExists, _LODraw_ShapePresStylesGetNames
+; Related .......: _LODraw_ShapeStyleGetObjByName, _LODraw_ShapeStyleExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -4899,8 +4896,8 @@ Func _LODraw_ShapeTextBoxInsert(ByRef $oObj, $iWidth, $iHeight, $iX = -1, $iY = 
 	$oDoc = __LODraw_GetParentDoc($oObj)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-			$oShape = $oDoc.createInstance("com.sun.star.drawing.TextShape")
-			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+	$oShape = $oDoc.createInstance("com.sun.star.drawing.TextShape")
+	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	$oObj.add($oShape)
 

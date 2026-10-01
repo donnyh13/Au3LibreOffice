@@ -148,7 +148,7 @@ EndFunc   ;==>_LODraw_PageAdd
 ; Name ..........: _LODraw_PageBackColor
 ; Description ...: Set or Retrieve the Page's background color.
 ; Syntax ........: _LODraw_PageBackColor(ByRef $oPage[, $iColor = Null])
-; Parameters ....: $oPage              - A Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
+; Parameters ....: $oPage               - A Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ;                  $iColor              - [optional] (0-16777215) Default is Null. The Page background color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
 ; Return values .: Success: 1 or Integer
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -216,7 +216,7 @@ EndFunc   ;==>_LODraw_PageBackColor
 ; Name ..........: _LODraw_PageBackFillStyle
 ; Description ...: Retrieve what kind of background fill is active, if any.
 ; Syntax ........: _LODraw_PageBackFillStyle(ByRef $oPage[, $bFillOff = False])
-; Parameters ....: $oPage              - A Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
+; Parameters ....: $oPage               - A Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ;                  $bFillOff            - [optional] Default is False. If True, the Fill style will be set to Off. See remarks.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOD_AREA_FILL_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
@@ -272,7 +272,7 @@ EndFunc   ;==>_LODraw_PageBackFillStyle
 ; Name ..........: _LODraw_PageBackGradient
 ; Description ...: Set or Retrieve the settings for Page Background color Gradient.
 ; Syntax ........: _LODraw_PageBackGradient(ByRef $oPage[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
-; Parameters ....: $oPage              - A Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
+; Parameters ....: $oPage               - A Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOD_GRAD_NAME_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iIncrement          - [optional] (0, 3-256) Default is Null. The number of steps of color change. 0 = Automatic.
@@ -539,7 +539,7 @@ EndFunc   ;==>_LODraw_PageBackGradient
 ; Name ..........: _LODraw_PageBackTransparency
 ; Description ...: Set or retrieve Transparency settings for a Page.
 ; Syntax ........: _LODraw_PageBackTransparency(ByRef $oPage[, $iTransparency = Null])
-; Parameters ....: $oPage              - A Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
+; Parameters ....: $oPage               - A Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
 ; Return values .: Success: Integer.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
@@ -608,7 +608,7 @@ EndFunc   ;==>_LODraw_PageBackTransparency
 ; Name ..........: _LODraw_PageBackTransparencyGradient
 ; Description ...: Set or retrieve the Page's transparency gradient settings.
 ; Syntax ........: _LODraw_PageBackTransparencyGradient(ByRef $oPage[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
-; Parameters ....: $oPage              - A Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
+; Parameters ....: $oPage               - A Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ;                  $iType               - [optional] (-1-5) Default is Null. The type of transparency gradient to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3. Call with $LOD_GRAD_TYPE_OFF to turn Transparency Gradient off.
 ;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
 ;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
@@ -814,7 +814,7 @@ EndFunc   ;==>_LODraw_PageBackTransparencyGradient
 ; Name ..........: _LODraw_PageCopy
 ; Description ...: Create a copy of a page.
 ; Syntax ........: _LODraw_PageCopy(ByRef $oPage[, $iPos = Null])
-; Parameters ....: $oPage              - A Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
+; Parameters ....: $oPage               - A Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ;                  $iPos                - [optional] Default is Null. The position to insert the new page in the collection of pages. 0 Based. See remarks.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully copied the page, returning the new page's Object.
@@ -973,7 +973,7 @@ EndFunc   ;==>_LODraw_PageCurrent
 ; Description ...: Delete a page by index.
 ; Syntax ........: _LODraw_PageDeleteByIndex(ByRef $oDoc, $iPage)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
-;                  $iPage              - The page to delete. 0 based.
+;                  $iPage               - The page to delete. 0 based.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Page was successfully deleted.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -1017,7 +1017,7 @@ EndFunc   ;==>_LODraw_PageDeleteByIndex
 ; Name ..........: _LODraw_PageDeleteByObj
 ; Description ...: Delete a page using its Object.
 ; Syntax ........: _LODraw_PageDeleteByObj(ByRef $oPage)
-; Parameters ....: $oPage              - A Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
+; Parameters ....: $oPage               - A Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Page was successfully deleted.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -1097,7 +1097,7 @@ EndFunc   ;==>_LODraw_PageExists
 ; Name ..........: _LODraw_PageFormat
 ; Description ...: Set or Retrieve the page format settings.
 ; Syntax ........: _LODraw_PageFormat(ByRef $oPage[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
-; Parameters ....: $oPage              - A Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
+; Parameters ....: $oPage               - A Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_WIDTH_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_HEIGHT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeDraw_Constants.au3.
@@ -1123,7 +1123,7 @@ EndFunc   ;==>_LODraw_PageExists
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  When modifying the page format, the shapes etc., aren't readjusted as they are in LibreOffice UI.
 ;                  I am unable to find the properties to set for "FitObject to Paper Format", "Background covers margins", "Page numbers", and "Paper tray".
-; Related .......: _LO_UnitConvert, _LODraw_PageLayout, _LODraw_PageMargins, _LODraw_PageHandoutFormat, _LODraw_PageMasterFormat, _LODraw_PageNotesFormat
+; Related .......: _LO_UnitConvert, _LODraw_PageMargins, _LODraw_PageMasterFormat
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1145,7 +1145,7 @@ EndFunc   ;==>_LODraw_PageFormat
 ; Description ...: Retrieve a Page's Object by index.
 ; Syntax ........: _LODraw_PageGetObjByIndex(ByRef $oDoc, $iPage)
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
-;                  $iPage              - The page to retrieve. 0 based.
+;                  $iPage               - The page to retrieve. 0 based.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested page's Object.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -1218,7 +1218,7 @@ EndFunc   ;==>_LODraw_PageGetObjByName
 ; Name ..........: _LODraw_PageMargins
 ; Description ...: Set or Retrieve the page margin settings.
 ; Syntax ........: _LODraw_PageMargins(ByRef $oPage[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
-; Parameters ....: $oPage              - A Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
+; Parameters ....: $oPage               - A Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ;                  $iLeft               - [optional] Default is Null. The amount of space to leave between the left edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
 ;                  $iRight              - [optional] Default is Null. The amount of space to leave between the right edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
 ;                  $iTop                - [optional] Default is Null. The amount of space to leave between the upper edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
@@ -1243,7 +1243,7 @@ EndFunc   ;==>_LODraw_PageGetObjByName
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LODraw_PageLayout, _LODraw_PageFormat, _LODraw_PageHandoutMargins, _LODraw_PageMasterMargins, _LODraw_PageNotesMargins
+; Related .......: _LO_UnitConvert, _LODraw_PageFormat, _LODraw_PageMasterMargins
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1298,8 +1298,8 @@ Func _LODraw_PageMasterAdd(ByRef $oDoc, $iPos = Null, $sName = "")
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If ($sName <> "") And _LODraw_PageMasterExists($oDoc, $sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-		$oMPage = $oDoc.MasterPages.insertNewByIndex($iPos)
-		If Not IsObj($oMPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	$oMPage = $oDoc.MasterPages.insertNewByIndex($iPos)
+	If Not IsObj($oMPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	If ($sName <> "") Then $oMPage.Name = $sName
 
@@ -1971,7 +1971,7 @@ EndFunc   ;==>_LODraw_PageMasterBackTransparencyGradient
 ; Name ..........: _LODraw_PageMasterCurrent
 ; Description ...: Set or Retrieve the currently applied Master page to a page.
 ; Syntax ........: _LODraw_PageMasterCurrent(ByRef $oPage[, $oMaster = Null])
-; Parameters ....: $oPage              - A Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
+; Parameters ....: $oPage               - A Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ;                  $oMaster             - [optional] Default is Null. A Master Page object returned by a previous _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ; Return values .: Success: 1 or Object.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
@@ -2171,7 +2171,7 @@ EndFunc   ;==>_LODraw_PageMasterExists
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  When modifying the page format, the shapes etc., aren't readjusted as they are in LibreOffice UI.
 ;                  I am unable to find the properties to set for "FitObject to Paper Format", "Background covers margins", "Page numbers", and "Paper tray".
-; Related .......: _LO_UnitConvert, _LODraw_PageMasterMargins, _LODraw_PageHandoutFormat, _LODraw_PageNotesFormat, _LODraw_PageFormat
+; Related .......: _LO_UnitConvert, _LODraw_PageMasterMargins, _LODraw_PageFormat
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2291,7 +2291,7 @@ EndFunc   ;==>_LODraw_PageMasterGetObjByName
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LODraw_PageMasterFormat, _LODraw_PageHandoutMargins, _LODraw_PageNotesMargins, _LODraw_PageMargins
+; Related .......: _LO_UnitConvert, _LODraw_PageMasterFormat, _LODraw_PageMargins
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2452,7 +2452,7 @@ EndFunc   ;==>_LODraw_PageMastersGetNames
 ; Name ..........: _LODraw_PageMove
 ; Description ...: Move a page in the collection of pages.
 ; Syntax ........: _LODraw_PageMove(ByRef $oPage, $iPos)
-; Parameters ....: $oPage              - A Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
+; Parameters ....: $oPage               - A Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ;                  $iPos                - The position to move the page to in the collection of pages. 0 Based. See remarks.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Page was successfully moved.
@@ -2548,7 +2548,7 @@ EndFunc   ;==>_LODraw_PageMove
 ; Name ..........: _LODraw_PageName
 ; Description ...: Set or Retrieve a Page's name.
 ; Syntax ........: _LODraw_PageName(ByRef $oPage[, $sName = Null])
-; Parameters ....: $oPage              - A Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
+; Parameters ....: $oPage               - A Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, or _LODraw_PageCopy function.
 ;                  $sName               - [optional] Default is Null. The new name to set the page to. See Remarks.
 ; Return values .: Success: 1 or String.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.

@@ -1659,9 +1659,8 @@ EndFunc   ;==>_LODraw_DocUndoReset
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $iView not an Integer, less than 0 or greater than 6. See Constants, $LOD_PAGE_VIEW_* as defined in LibreOfficeDraw_Constants.au3.
-;                  --Initialization Errors--
-;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.ServiceManager" Object.
-;                  @Error: 2, @Extended: 2 = Error creating "com.sun.star.frame.DispatchHelper" Object.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current Master Page view mode.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iView

@@ -403,9 +403,9 @@ Global Enum Step *2 _
 		$LOD_FIELD_TYPE_AUTHOR = 1, _                                ; 1 An Author field.
 		$LOD_FIELD_TYPE_DATE_TIME, _                                 ; 2 A Date or Time field.
 		$LOD_FIELD_TYPE_FILE_NAME, _                                 ; 4 A File Name field.
-		$LOD_FIELD_TYPE_PAGE_COUNT, _                               ; 8 A total Page Count field.
-		$LOD_FIELD_TYPE_PAGE_NUM, _                                 ; 16 A Page Number field.
-		$LOD_FIELD_TYPE_PAGE_TITLE, _                               ; 32 A Page Title field.
+		$LOD_FIELD_TYPE_PAGE_COUNT, _                                ; 8 A total Page Count field.
+		$LOD_FIELD_TYPE_PAGE_NUM, _                                  ; 16 A Page Number field.
+		$LOD_FIELD_TYPE_PAGE_TITLE, _                                ; 32 A Page Title field.
 		$LOD_FIELD_TYPE_URL, _                                       ; 64 A Hyperlink/URL field.
 		$LOD_FIELD_TYPE_ALL = 127                                    ; 127 Returns an array of all field types listed above.
 
@@ -439,12 +439,12 @@ Global Const _                                                       ; com.sun.s
 
 ; Handout layout arrangements.
 Global Const _
-		$LOD_HANDOUT_LAYOUT_ONE_PAGE = 22, _                        ; The Handout page will contain one page placeholder.
-		$LOD_HANDOUT_LAYOUT_TWO_PAGES = 23, _                       ; The Handout page will contain two page placeholders.
-		$LOD_HANDOUT_LAYOUT_THREE_PAGES = 24, _                     ; The Handout page will contain three page placeholders.
-		$LOD_HANDOUT_LAYOUT_FOUR_PAGES = 25, _                      ; The Handout page will contain four page placeholders.
-		$LOD_HANDOUT_LAYOUT_SIX_PAGES = 26, _                       ; The Handout page will contain six page placeholders.
-		$LOD_HANDOUT_LAYOUT_NINE_PAGES = 31                         ; The Handout page will contain nine page placeholders.
+		$LOD_HANDOUT_LAYOUT_ONE_PAGE = 22, _                         ; The Handout page will contain one page placeholder.
+		$LOD_HANDOUT_LAYOUT_TWO_PAGES = 23, _                        ; The Handout page will contain two page placeholders.
+		$LOD_HANDOUT_LAYOUT_THREE_PAGES = 24, _                      ; The Handout page will contain three page placeholders.
+		$LOD_HANDOUT_LAYOUT_FOUR_PAGES = 25, _                       ; The Handout page will contain four page placeholders.
+		$LOD_HANDOUT_LAYOUT_SIX_PAGES = 26, _                        ; The Handout page will contain six page placeholders.
+		$LOD_HANDOUT_LAYOUT_NINE_PAGES = 31                          ; The Handout page will contain nine page placeholders.
 
 ; Numbering Style Type
 Global Const _                                                       ; com.sun.star.style.NumberingType
@@ -587,8 +587,8 @@ Global Const _                                                       ; com.sun.s
 
 ; Current Document View Modes
 Global Enum _
-		$LOD_PAGE_VIEW_PAGE = 0, _                                  ; 0 Page viewing mode.
-		$LOD_PAGE_VIEW_MASTER                                     ; 4 Master Page viewing mode.
+		$LOD_PAGE_VIEW_PAGE = 0, _                                   ; 0 Page viewing mode.
+		$LOD_PAGE_VIEW_MASTER                                        ; 1 Master Page viewing mode.
 
 ; Page Width in Hundredths of a Millimeter
 Global Const _
@@ -866,7 +866,7 @@ Global Enum Step *2 _
 		$LOD_SHAPE_TYPE_OLE2, _                                      ; 2048 - An OLE2 shape, such as a Chart, Formula etc.
 		$LOD_SHAPE_TYPE_ORG_CHART, _                                 ; 4096 An Org Chart shape. (I have not encountered this shape yet, but it is included here for error prevention.)
 		$LOD_SHAPE_TYPE_PAGE, _                                      ; 8192 A Page preview shape, as found in the notes and handouts pages.
-		$LOD_SHAPE_TYPE_PAGE_NUM, _                                 ; 16384 A page number shape, as found in notes, handouts and master pages.
+		$LOD_SHAPE_TYPE_PAGE_NUM, _                                  ; 16384 A page number shape, as found in notes, handouts and master pages.
 		$LOD_SHAPE_TYPE_TABLE, _                                     ; 32768 - A Table.
 		$LOD_SHAPE_TYPE_TEXTBOX, _                                   ; 65536 - A Text Box, including Hyperlinks, and most Fields.
 		$LOD_SHAPE_TYPE_TEXTBOX_SUBTITLE, _                          ; 131072 - A Page Subtitle Text Box.

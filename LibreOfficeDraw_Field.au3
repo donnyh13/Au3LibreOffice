@@ -705,125 +705,6 @@ Func _LODraw_FieldHyperlinkModify(ByRef $oHyperlinkField, $sURL = Null, $sText =
 EndFunc   ;==>_LODraw_FieldHyperlinkModify
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_FieldsGetList
-; Description ...: Retrieve an Array of Field Objects present in a Shape.
-; Syntax ........: _LODraw_FieldsGetList(ByRef $oTextCursor[, $iType = $LOD_FIELD_TYPE_ALL[, $bFieldTypeNum = True]])
-; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
-;                  $iType               - [optional] (1-127) Default is $LOD_FIELD_TYPE_ALL. The type of Field to search for. See Constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeDraw_Constants.au3. Can be BitOr'd together.
-;                  $bFieldTypeNum       - [optional] Default is True. If True, adds a column to the array that has the Field Type Constant Integer for that particular Field, to assist in identifying the Field type. See Constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
-; Return values .: Success: Array
-;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning Array of Text Field Objects with @Extended set to number of results. See Remarks for Array sizing.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
-;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 1 or greater than 127. (The total of all Constants added together.) See Constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
-;                  @Error: 1, @Extended: 3 = $bFieldTypeNum not a Boolean.
-;                  --Initialization Errors--
-;                  @Error: 2, @Extended: 1 = Failed to create a TextCursor.
-;                  @Error: 2, @Extended: 2 = Failed to create enumeration of paragraphs.
-;                  @Error: 2, @Extended: 3 = Failed to create enumeration of Text Portions in Paragraph.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to retrieve parent page Object.
-;                  @Error: 3, @Extended: 2 = Failed to retrieve containing Shape Object.
-;                  @Error: 3, @Extended: 3 = Failed to identify requested Field Types.
-;                  @Error: 3, @Extended: 4 = Failed to retrieve Text Field Object.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: The Array can vary in the number of columns, if $bFieldTypeNum is called with False, the Array will be a single column. If $bFieldTypeNum is called with True, a column will be added to the array. First column will always be the Field's Object.
-;                  Setting $bFieldTypeNum to True will add a Field type Number column, matching the constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeDraw_Constants.au3 for the found Field.
-;                  This function may fail to identify Fields if text has been inserted recently using the same Cursor.
-; Related .......: _LODraw_FieldDelete
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_FieldsGetList(ByRef $oTextCursor, $iType = $LOD_FIELD_TYPE_ALL, $bFieldTypeNum = True)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $avFieldTypes[0][0]
-	Local $oParEnum, $oPar, $oTextEnum, $oTextPortion, $oTextField, $oInternalCursor, $oDrawPage, $oShape
-	Local $iCount = 0
-	Local $avTextFields[1]
-
-	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LO_IntIsBetween($iType, $LOD_FIELD_TYPE_AUTHOR, $LOD_FIELD_TYPE_ALL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not IsBool($bFieldTypeNum) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-	; When a Text Cursor has been used to insert Strings previous to inserting or looking for a Field, the fields sometimes are not able to be identified.
-	; The workaround I figured out was to create the Text Cursor again before enumerating the fields.
-	; To do this I have to retrieve the shape Object again, then create a textcursor using the new Object. The parent of the shape is the drawpage (Page), I
-	; then cycle through all shapes in the page to identify which one the current textcursor is in. Once found, I create a new cursor.
-	$oDrawPage = $oTextCursor.Text.getParent()
-	If Not IsObj($oDrawPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-	For $i = 0 To $oDrawPage.Count() - 1
-		$oShape = $oDrawPage.getByIndex($i)
-		If Not IsObj($oShape) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-		If ($oShape.Text() = $oTextCursor.Text()) Then
-			$oInternalCursor = $oShape.Text.createTextCursorByRange($oTextCursor)
-			ExitLoop
-		EndIf
-
-		Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
-	Next
-
-	If Not IsObj($oInternalCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-
-	$avFieldTypes = __LODraw_FieldTypeServices($iType)
-	If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
-	If $bFieldTypeNum Then ReDim $avTextFields[1][2]
-
-	$oParEnum = $oInternalCursor.getText().createEnumeration()
-	If Not IsObj($oParEnum) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
-
-	While $oParEnum.hasMoreElements()
-		$oPar = $oParEnum.nextElement()
-
-		$oTextEnum = $oPar.createEnumeration()
-		If Not IsObj($oTextEnum) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
-
-		While $oTextEnum.hasMoreElements()
-			$oTextPortion = $oTextEnum.nextElement()
-
-			If ($oTextPortion.TextPortionType = "TextField") Then
-				$oTextField = $oTextPortion.TextField()
-				If Not IsObj($oTextField) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
-
-				For $i = 0 To UBound($avFieldTypes) - 1
-					If $oTextField.supportsService($avFieldTypes[$i][1]) Then
-						If $bFieldTypeNum Then
-							$avTextFields[$iCount][0] = $oTextField
-							$avTextFields[$iCount][1] = $avFieldTypes[$i][0]
-							$iCount += 1
-							If ($iCount = UBound($avTextFields)) Then ReDim $avTextFields[$iCount * 2][2]
-
-						Else
-							$avTextFields[$iCount] = $oTextField
-							$iCount += 1
-							If ($iCount = UBound($avTextFields)) Then ReDim $avTextFields[$iCount * 2]
-						EndIf
-
-						ExitLoop
-					EndIf
-					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
-				Next
-			EndIf
-		WEnd
-	WEnd
-
-	If $bFieldTypeNum Then
-		ReDim $avTextFields[$iCount][2]
-
-	Else
-		ReDim $avTextFields[$iCount]
-	EndIf
-
-	Return SetError($__LO_STATUS_SUCCESS, $iCount, $avTextFields)
-EndFunc   ;==>_LODraw_FieldsGetList
-
-; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LODraw_FieldPageCountInsert
 ; Description ...: Insert a total Page Count Field.
 ; Syntax ........: _LODraw_FieldPageCountInsert(ByRef $oDoc, ByRef $oTextCursor[, $bOverwrite = False])
@@ -963,3 +844,122 @@ Func _LODraw_FieldPageTitleInsert(ByRef $oDoc, ByRef $oTextCursor, $bOverwrite =
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oTextFieldReturn)
 EndFunc   ;==>_LODraw_FieldPageTitleInsert
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LODraw_FieldsGetList
+; Description ...: Retrieve an Array of Field Objects present in a Shape.
+; Syntax ........: _LODraw_FieldsGetList(ByRef $oTextCursor[, $iType = $LOD_FIELD_TYPE_ALL[, $bFieldTypeNum = True]])
+; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LODraw_ShapeCreateTextCursor function.
+;                  $iType               - [optional] (1-127) Default is $LOD_FIELD_TYPE_ALL. The type of Field to search for. See Constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeDraw_Constants.au3. Can be BitOr'd together.
+;                  $bFieldTypeNum       - [optional] Default is True. If True, adds a column to the array that has the Field Type Constant Integer for that particular Field, to assist in identifying the Field type. See Constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
+; Return values .: Success: Array
+;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning Array of Text Field Objects with @Extended set to number of results. See Remarks for Array sizing.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
+;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 1 or greater than 127. (The total of all Constants added together.) See Constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $bFieldTypeNum not a Boolean.
+;                  --Initialization Errors--
+;                  @Error: 2, @Extended: 1 = Failed to create a TextCursor.
+;                  @Error: 2, @Extended: 2 = Failed to create enumeration of paragraphs.
+;                  @Error: 2, @Extended: 3 = Failed to create enumeration of Text Portions in Paragraph.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve parent page Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve containing Shape Object.
+;                  @Error: 3, @Extended: 3 = Failed to identify requested Field Types.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve Text Field Object.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: The Array can vary in the number of columns, if $bFieldTypeNum is called with False, the Array will be a single column. If $bFieldTypeNum is called with True, a column will be added to the array. First column will always be the Field's Object.
+;                  Setting $bFieldTypeNum to True will add a Field type Number column, matching the constants, $LOD_FIELD_TYPE_* as defined in LibreOfficeDraw_Constants.au3 for the found Field.
+;                  This function may fail to identify Fields if text has been inserted recently using the same Cursor.
+; Related .......: _LODraw_FieldDelete
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LODraw_FieldsGetList(ByRef $oTextCursor, $iType = $LOD_FIELD_TYPE_ALL, $bFieldTypeNum = True)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $avFieldTypes[0][0]
+	Local $oParEnum, $oPar, $oTextEnum, $oTextPortion, $oTextField, $oInternalCursor, $oDrawPage, $oShape
+	Local $iCount = 0
+	Local $avTextFields[1]
+
+	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not __LO_IntIsBetween($iType, $LOD_FIELD_TYPE_AUTHOR, $LOD_FIELD_TYPE_ALL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsBool($bFieldTypeNum) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	; When a Text Cursor has been used to insert Strings previous to inserting or looking for a Field, the fields sometimes are not able to be identified.
+	; The workaround I figured out was to create the Text Cursor again before enumerating the fields.
+	; To do this I have to retrieve the shape Object again, then create a textcursor using the new Object. The parent of the shape is the drawpage (Page), I
+	; then cycle through all shapes in the page to identify which one the current textcursor is in. Once found, I create a new cursor.
+	$oDrawPage = $oTextCursor.Text.getParent()
+	If Not IsObj($oDrawPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	For $i = 0 To $oDrawPage.Count() - 1
+		$oShape = $oDrawPage.getByIndex($i)
+		If Not IsObj($oShape) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		If ($oShape.Text() = $oTextCursor.Text()) Then
+			$oInternalCursor = $oShape.Text.createTextCursorByRange($oTextCursor)
+			ExitLoop
+		EndIf
+
+		Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
+	Next
+
+	If Not IsObj($oInternalCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	$avFieldTypes = __LODraw_FieldTypeServices($iType)
+	If (@error > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	If $bFieldTypeNum Then ReDim $avTextFields[1][2]
+
+	$oParEnum = $oInternalCursor.getText().createEnumeration()
+	If Not IsObj($oParEnum) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+	While $oParEnum.hasMoreElements()
+		$oPar = $oParEnum.nextElement()
+
+		$oTextEnum = $oPar.createEnumeration()
+		If Not IsObj($oTextEnum) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
+
+		While $oTextEnum.hasMoreElements()
+			$oTextPortion = $oTextEnum.nextElement()
+
+			If ($oTextPortion.TextPortionType = "TextField") Then
+				$oTextField = $oTextPortion.TextField()
+				If Not IsObj($oTextField) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+				For $i = 0 To UBound($avFieldTypes) - 1
+					If $oTextField.supportsService($avFieldTypes[$i][1]) Then
+						If $bFieldTypeNum Then
+							$avTextFields[$iCount][0] = $oTextField
+							$avTextFields[$iCount][1] = $avFieldTypes[$i][0]
+							$iCount += 1
+							If ($iCount = UBound($avTextFields)) Then ReDim $avTextFields[$iCount * 2][2]
+
+						Else
+							$avTextFields[$iCount] = $oTextField
+							$iCount += 1
+							If ($iCount = UBound($avTextFields)) Then ReDim $avTextFields[$iCount * 2]
+						EndIf
+
+						ExitLoop
+					EndIf
+					Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
+				Next
+			EndIf
+		WEnd
+	WEnd
+
+	If $bFieldTypeNum Then
+		ReDim $avTextFields[$iCount][2]
+
+	Else
+		ReDim $avTextFields[$iCount]
+	EndIf
+
+	Return SetError($__LO_STATUS_SUCCESS, $iCount, $avTextFields)
+EndFunc   ;==>_LODraw_FieldsGetList

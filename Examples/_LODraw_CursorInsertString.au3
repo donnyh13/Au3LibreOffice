@@ -31,13 +31,13 @@ Func Example()
 	$oTextBox2 = _LODraw_ShapeTextBoxInsert($oPage, 10500, 5000, -1, 3500)
 	If @error Then _ERROR($oDoc, "Failed to insert a Text Box. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-		; Create a Text Cursor in the Textbox.
-		$oTextCursor2 = _LODraw_ShapeCreateTextCursor($oTextBox2)
-		If @error Then _ERROR($oDoc, "Failed to create a Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Create a Text Cursor in the Textbox.
+	$oTextCursor2 = _LODraw_ShapeCreateTextCursor($oTextBox2)
+	If @error Then _ERROR($oDoc, "Failed to create a Text Cursor. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-		; Insert some text.
-		_LODraw_CursorInsertString($oTextCursor2, "This is some text entered using AutoIt!")
-		If @error Then _ERROR($oDoc, "Failed to insert some text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	; Insert some text.
+	_LODraw_CursorInsertString($oTextCursor2, "This is some text entered using AutoIt!")
+	If @error Then _ERROR($oDoc, "Failed to insert some text. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 
