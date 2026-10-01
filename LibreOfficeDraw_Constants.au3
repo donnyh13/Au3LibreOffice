@@ -543,7 +543,7 @@ Global Const _                                                       ; com.sun.s
 		$LOD_ORIENT_VERT_LINE_CENTER = 8, _                          ; Aligned at the center of the line. Available only when anchor is set to "As character". Equal to L.O. UI setting of "Vertical" = Center, and "To" = Row.
 		$LOD_ORIENT_VERT_LINE_BOTTOM = 9                             ; Aligned at the bottom of the line. Available only when anchor is set to "As character". Equal to L.O. UI setting of "Vertical" = Center, and "To" = Row.
 
-; Page Page Height in Hundredths of a Millimeter
+; Page Height in Hundredths of a Millimeter
 Global Const _
 		$LOD_PAGE_HEIGHT_A6 = 14808, _                               ; A6 page height in Hundredths of a Millimeter (HMM).
 		$LOD_PAGE_HEIGHT_A5 = 21000, _                               ; A5 page height in Hundredths of a Millimeter (HMM).
@@ -588,12 +588,7 @@ Global Const _                                                       ; com.sun.s
 ; Current Document View Modes
 Global Enum _
 		$LOD_PAGE_VIEW_PAGE = 0, _                                  ; 0 Page viewing mode.
-		$LOD_PAGE_VIEW_PAGE_OUTLINE, _                              ; 1 Page Outline viewing mode.
-		$LOD_PAGE_VIEW_PAGE_NOTES, _                                ; 2 Page Notes viewing mode.
-		$LOD_PAGE_VIEW_PAGE_SORTER, _                               ; 3 Page Sorter viewing mode.
-		$LOD_PAGE_VIEW_MASTER, _                                     ; 4 Master Page viewing mode.
-		$LOD_PAGE_VIEW_MASTER_NOTES, _                               ; 5 Master Page Notes viewing mode.
-		$LOD_PAGE_VIEW_MASTER_HANDOUT                                ; 6 Master Page Handout viewing mode.
+		$LOD_PAGE_VIEW_MASTER                                     ; 4 Master Page viewing mode.
 
 ; Page Width in Hundredths of a Millimeter
 Global Const _
@@ -751,27 +746,6 @@ Global Const _
 		$LOD_SHAPE_BORDER_WIDTH_THICK = 79, _                        ; Thick Border line width.
 		$LOD_SHAPE_BORDER_WIDTH_EXTRA_THICK = 159                    ; Extra Thick Border line width.
 
-; Shape Use Page Background color.
-Global Const _
-		$LOD_SHAPE_COLOR_USE_PAGE_BACKGROUND = -2                   ; Use the Page's background color as the Shape's background color.
-
-; Shape Interaction Action on Click
-Global Const _                                                       ; com.sun.star.presentation.ClickAction
-		$LOD_SHAPE_INTERACTION_ACTION_NONE = 0, _                    ; No action is performed on click.
-		$LOD_SHAPE_INTERACTION_ACTION_PREV_PAGE = 1, _               ; The presentation jumps to the previous page.
-		$LOD_SHAPE_INTERACTION_ACTION_NEXT_PAGE = 2, _               ; The presentation jumps to the next page.
-		$LOD_SHAPE_INTERACTION_ACTION_FIRST_PAGE = 3, _              ; The presentation continues with the first page.
-		$LOD_SHAPE_INTERACTION_ACTION_LAST_PAGE = 4, _               ; The presentation continues with the last page.
-		$LOD_SHAPE_INTERACTION_ACTION_GOTO_PAGE_OBJ = 5, _           ; The presentation jumps to a Page or Object. Call $sTarget with the Page name, or shape name to jump to.
-		$LOD_SHAPE_INTERACTION_ACTION_DOCUMENT = 6, _                ; The presentation jumps to another document. Call $sTarget with the path to the Document to open.
-		$LOD_SHAPE_INTERACTION_ACTION_INVISIBLE = 7, _               ; [Not used?] The object renders itself invisible after a click.
-		$LOD_SHAPE_INTERACTION_ACTION_SOUND = 8, _                   ; A sound is played after a click. Call $sTarget with the path to the sound file to play.
-		$LOD_SHAPE_INTERACTION_ACTION_OBJ_ACTION = 9, _              ; An OLE verb is performed on this object. Call $sTarget and $iVerb with the appropriate flags for the action to perform on the OLE Object.
-		$LOD_SHAPE_INTERACTION_ACTION_VANISH = 10, _                 ; [Not used?] The object vanishes with its effect.
-		$LOD_SHAPE_INTERACTION_ACTION_PROGRAM = 11, _                ; Another program is executed after a click. Call $sTarget with the path to the program to run.
-		$LOD_SHAPE_INTERACTION_ACTION_MACRO = 12, _                  ; A macro is executed after the click. Call $sTarget with the appropriate Macro URL to call.
-		$LOD_SHAPE_INTERACTION_ACTION_EXIT = 13                      ; The presentation is stopped after the click.
-
 ; Arrowhead Type Constants
 Global Enum _
 		$LOD_SHAPE_LINE_ARROW_TYPE_NONE, _                           ; 0 -- No Arrow head.
@@ -876,17 +850,10 @@ Global Const _                                                       ; com.sun.s
 		$LOD_SHAPE_TABLE_CELL_TYPE_TEXT = 2, _                       ; Cell contains text.
 		$LOD_SHAPE_TABLE_CELL_TYPE_FORMULA = 3                       ; Cell contains a formula.
 
-; Text Box type Constants.
-Global Enum _
-		$LOD_SHAPE_TEXTBOX_TYPE_TEXTBOX, _                           ; 0 - A Text Box, including Hyperlinks, and most Fields.
-		$LOD_SHAPE_TEXTBOX_TYPE_OUTLINE, _                           ; 1 - A Page Outline Text Box.
-		$LOD_SHAPE_TEXTBOX_TYPE_SUBTITLE, _                          ; 2 - A Page Subtitle Text Box.
-		$LOD_SHAPE_TEXTBOX_TYPE_TITLE                                ; 3 - A Page Title Text Box.
-
 ; Shape Type Constants.
 Global Enum Step *2 _
-		$LOD_SHAPE_TYPE_CALC = 1, _                                  ; 1 Calc sheet in an Draw document. (I have not encountered this shape yet, but it is included here for error prevention.)
-		$LOD_SHAPE_TYPE_CHART, _                                     ; 2 Chart sheet in an Draw document. (I have not encountered this shape yet, but it is included here for error prevention.)
+		$LOD_SHAPE_TYPE_CALC = 1, _                                  ; 1 Calc sheet in a Draw document. (I have not encountered this shape yet, but it is included here for error prevention.)
+		$LOD_SHAPE_TYPE_CHART, _                                     ; 2 Chart sheet in a Draw document. (I have not encountered this shape yet, but it is included here for error prevention.)
 		$LOD_SHAPE_TYPE_DATETIME, _                                  ; 4 A Date/Time shape, such as is found in a Header or Footer or the Notes, Handouts or Master pages.
 		$LOD_SHAPE_TYPE_DRAWING_SHAPE, _                             ; 8 - All shapes, 3D Shapes, Basic Shapes, Block Arrows, Flowcharts, Callouts, Lines, Connectors, Fontwork etc.
 		$LOD_SHAPE_TYPE_FOOTER, _                                    ; 16 A Footer text shape, as is found in the footer of Notes, Handouts or Master page.
@@ -906,170 +873,6 @@ Global Enum Step *2 _
 		$LOD_SHAPE_TYPE_TEXTBOX_TITLE, _                             ; 262144 - A Page Title Text Box.
 		$LOD_SHAPE_TYPE_TEXTBOX_OUTLINE, _                           ; 524288 - A Page Outline Text Box.
 		$LOD_SHAPE_TYPE_ALL = 1048575                                ; 1048575 All types above.
-
-; Page Header/Footer Date and Time Display Format
-Global Const _
-		$LOD_PAGE_DT_FMT_MMDDYY = 4, _                              ; Numerical Month, Day, Two-digit year (03/28/92).
-		$LOD_PAGE_DT_FMT_MMDDYYYY = 5, _                            ; Numerical Month, Day, Four-digit year (03/28/1992).
-		$LOD_PAGE_DT_FMT_MMM_DD_YYYY = 6, _                         ; Abbreviated Month Name, Day, Year (Mar 28, 1992).
-		$LOD_PAGE_DT_FMT_MMMM_DD_YYYY = 7, _                        ; Full Month Name, Day, Year (March 28, 1992).
-		$LOD_PAGE_DT_FMT_DOW_MMM_DD_YYYY = 8, _                     ; Abbreviated Day of Week + Full Month (Sat, March 28, 1992).
-		$LOD_PAGE_DT_FMT_DOW_MMMM_DD_YYYY = 9, _                    ; Full Day of Week + Full Month (Saturday, March 28, 1992).
-		$LOD_PAGE_DT_FMT_24H_HM = 48, _                             ; 24-Hour: Hours and Minutes (15:24).
-		$LOD_PAGE_DT_FMT_MMDDYY_24H_HM = 52, _                      ; Numerical Month, Day, Two-digit year (03/28/92), 24-Hour: Hours and Minutes (15:24).
-		$LOD_PAGE_DT_FMT_24H_HMS = 64, _                            ; 24-Hour: Hours, Minutes, Seconds (15:24:55)
-		$LOD_PAGE_DT_FMT_12H_HM_AMPM = 96, _                        ; 12-Hour: Hours and Minutes AM/PM (5:02 PM).
-		$LOD_PAGE_DT_FMT_MMDDYY_12H_HM_AMPM = 100, _                ; Numerical Month, Day, Two-digit year (03/28/92), 12-Hour: Hours and Minutes AM/PM (5:02 PM).
-		$LOD_PAGE_DT_FMT_12H_HMS_AMPM = 112                         ; 12-Hour: Hours, Minutes, Seconds AM/PM (5:02:43 PM).
-
-; Page layout arrangements.
-Global Const _
-		$LOD_PAGE_LAYOUT_TITLE = 0, _                               ; The Page will contain a Title textbox and a Subtitle textbox.
-		$LOD_PAGE_LAYOUT_TITLE_CONTENT = 1, _                       ; The Page will contain a Title textbox and a content textbox.
-		$LOD_PAGE_LAYOUT_TITLE_2_CONTENT = 3, _                     ; The Page will contain a Title textbox and two content textboxes.
-		$LOD_PAGE_LAYOUT_TITLE_CONTENT_AND_2_CONTENT = 12, _        ; The Page will contain a Title textbox and a content textbox beside the two smaller content boxes.
-		$LOD_PAGE_LAYOUT_TITLE_CONTENT_OVER_CONTENT = 14, _         ; The Page will contain a Title textbox two content textboxes one positioned over top the other.
-		$LOD_PAGE_LAYOUT_TITLE_2_CONTENT_AND_CONTENT = 15, _        ; The Page will contain a Title textbox with two smaller content textboxes beside a third content text box.
-		$LOD_PAGE_LAYOUT_TITLE_2_CONTENT_OVER_CONTENT = 16, _       ; The Page will contain a Title textbox with two smaller content textboxes over top of a third content text box.
-		$LOD_PAGE_LAYOUT_TITLE_4_CONTENT = 18, _                    ; The Page will contain a Title textbox with four smaller content textboxes.
-		$LOD_PAGE_LAYOUT_TITLE_ONLY = 19, _                         ; The Page will contain a Title textbox only.
-		$LOD_PAGE_LAYOUT_BLANK = 20, _                              ; The Page will contain no textbox.
-		$LOD_PAGE_LAYOUT_VERT_TITLE_TEXT_CHART = 27, _              ; The Page will contain a Vertical Title with a vertical textbox, a horizontal textbox and chart placeholders.
-		$LOD_PAGE_LAYOUT_VERT_TITLE_VERT_TEXT = 28, _               ; The Page will contain a Vertical Title with vertical textbox.
-		$LOD_PAGE_LAYOUT_TITLE_VERT_TEXT = 29, _                    ; The Page will contain a Horizontal Title with vertical textbox.
-		$LOD_PAGE_LAYOUT_TITLE_2_VERT_TEXT_CLIPART = 30, _          ; The Page will contain a Horizontal Title with two vertical textboxes and clipart placeholders.
-		$LOD_PAGE_LAYOUT_CENTERED_TEXT = 32, _                      ; The Page will contain a content textbox with centered text.
-		$LOD_PAGE_LAYOUT_TITLE_6_CONTENT = 34                       ; The Page will contain a Title textbox with six smaller content textboxes.
-
-; Page Transition Effects
-Global Enum _
-		$LOD_PAGE_TRANSITION_3D_VENETIAN_VERT, _                    ; 0 The page will transition with the 3D Venetian effect Vertically.
-		$LOD_PAGE_TRANSITION_3D_VENETIAN_HORI, _                    ; 1 The page will transition with the 3D Venetian effect Horizontally.
-		$LOD_PAGE_TRANSITION_BARS_VERT, _                           ; 2 The page will transition with the Bars effect Vertically.
-		$LOD_PAGE_TRANSITION_BARS_HORI, _                           ; 3 The page will transition with the Bars effect Horizontally.
-		$LOD_PAGE_TRANSITION_BOX_OUT, _                             ; 4 The page will transition with the Box effect expanding Out.
-		$LOD_PAGE_TRANSITION_BOX_IN, _                              ; 5 The page will transition with the Box effect shrinking In.
-		$LOD_PAGE_TRANSITION_CHECKERS_DOWN, _                       ; 6 The page will transition with the Checkers effect Down.
-		$LOD_PAGE_TRANSITION_CHECKERS_ACROSS, _                     ; 7 The page will transition with the Checkers effect Across.
-		$LOD_PAGE_TRANSITION_CIRCLES, _                             ; 8 The page will transition with the Circles effect.
-		$LOD_PAGE_TRANSITION_COMB_HORI, _                           ; 9 The page will transition with the Comb effect Horizontally.
-		$LOD_PAGE_TRANSITION_COMB_VERT, _                           ; 10 The page will transition with the Comb effect Vertically.
-		$LOD_PAGE_TRANSITION_COVER_TOP_TO_BOTTOM, _                 ; 11 The page will transition with the Cover effect from Top to Bottom.
-		$LOD_PAGE_TRANSITION_COVER_RIGHT_TO_LEFT, _                 ; 12 The page will transition with the Cover effect from Right to Left.
-		$LOD_PAGE_TRANSITION_COVER_LEFT_TO_RIGHT, _                 ; 13 The page will transition with the Cover effect from Left to Right.
-		$LOD_PAGE_TRANSITION_COVER_BOTTOM_TO_TOP, _                 ; 14 The page will transition with the Cover effect from Bottom to Top.
-		$LOD_PAGE_TRANSITION_COVER_TOP_RIGHT_TO_BOTTOM_LEFT, _      ; 15 The page will transition with the Cover effect from Top Right to Bottom Left.
-		$LOD_PAGE_TRANSITION_COVER_BOTTOM_RIGHT_TO_TOP_LEFT, _      ; 16 The page will transition with the Cover effect from Bottom Right to Top Left.
-		$LOD_PAGE_TRANSITION_COVER_TOP_LEFT_TO_BOTTOM_RIGHT, _      ; 17 The page will transition with the Cover effect from Top Left to Bottom Right.
-		$LOD_PAGE_TRANSITION_COVER_BOTTOM_LEFT_TO_TOP_RIGHT, _      ; 18 The page will transition with the Cover effect from Bottom Left to Top Right.
-		$LOD_PAGE_TRANSITION_CUBE_OUTSIDE, _                        ; 19 The page will transition with the Cube effect from the Outside.
-		$LOD_PAGE_TRANSITION_CUBE_INSIDE, _                         ; 20 The page will transition with the Cube effect from the Inside.
-		$LOD_PAGE_TRANSITION_CUT_THROUGH_BLACK, _                   ; 21 The page will transition with the Cut effect through the Back.
-		$LOD_PAGE_TRANSITION_DIAGONAL_TOP_RIGHT_TO_BOTTOM_LEFT, _   ; 22 The page will transition with the Diagonal effect from Top Right to Bottom Left.
-		$LOD_PAGE_TRANSITION_DIAGONAL_BOTTOM_RIGHT_TO_TOP_LEFT, _   ; 23 The page will transition with the Diagonal effect from Bottom Right to Top Left.
-		$LOD_PAGE_TRANSITION_DIAGONAL_TOP_LEFT_TO_BOTTOM_RIGHT, _   ; 24 The page will transition with the Diagonal effect from Top Left to Bottom Right.
-		$LOD_PAGE_TRANSITION_DIAGONAL_BOTTOM_LEFT_TO_TOP_RIGHT, _   ; 25 The page will transition with the Diagonal effect from Bottom Left to Top Right.
-		$LOD_PAGE_TRANSITION_DISSOLVE, _                            ; 26 The page will transition with the Dissolve effect.
-		$LOD_PAGE_TRANSITION_FADE_THROUGH_BLACK, _                  ; 27 The page will transition with the Fade effect through Black.
-		$LOD_PAGE_TRANSITION_FADE_THROUGH_WHITE, _                  ; 28 The page will transition with the Fade effect through White.
-		$LOD_PAGE_TRANSITION_FADE_SMOOTHLY, _                       ; 29 The page will transition with the Fade effect Smoothly.
-		$LOD_PAGE_TRANSITION_FALL, _                                ; 30 The page will transition with the Fall effect.
-		$LOD_PAGE_TRANSITION_FINE_DISSOLVE, _                       ; 31 The page will transition with the Fine Dissolve effect.
-		$LOD_PAGE_TRANSITION_GLITTER, _                             ; 32 The page will transition with the Glitter effect.
-		$LOD_PAGE_TRANSITION_HELIX, _                               ; 33 The page will transition with the Helix effect.
-		$LOD_PAGE_TRANSITION_HONEYCOMB, _                           ; 34 The page will transition with the Honeycomb effect.
-		$LOD_PAGE_TRANSITION_IRIS, _                                ; 35 The page will transition with the Iris effect.
-		$LOD_PAGE_TRANSITION_NEWSFLASH, _                           ; 36 The page will transition with the Newsflash effect.
-		$LOD_PAGE_TRANSITION_NONE, _                                ; 37 The page will transition with no effect.
-		$LOD_PAGE_TRANSITION_PUSH_TOP_TO_BOTTOM, _                  ; 38 The page will transition with the Push effect from Top to Bottom.
-		$LOD_PAGE_TRANSITION_PUSH_RIGHT_TO_LEFT, _                  ; 39 The page will transition with the Push effect from Right to Left.
-		$LOD_PAGE_TRANSITION_PUSH_LEFT_TO_RIGHT, _                  ; 40 The page will transition with the Push effect from Left to Right.
-		$LOD_PAGE_TRANSITION_PUSH_BOTTOM_TO_TOP, _                  ; 41 The page will transition with the Push effect from Bottom to Top.
-		$LOD_PAGE_TRANSITION_RANDOM, _                              ; 42 The page will transition with a Random effect.
-		$LOD_PAGE_TRANSITION_RIPPLE, _                              ; 43 The page will transition with the Ripple effect.
-		$LOD_PAGE_TRANSITION_ROCHADE, _                             ; 44 The page will transition with the Rochade effect.
-		$LOD_PAGE_TRANSITION_SHAPE_PLUS, _                          ; 45 The page will transition with the Plus Shape effect.
-		$LOD_PAGE_TRANSITION_SHAPE_DIAMOND, _                       ; 46 The page will transition with the Diamond Shape effect.
-		$LOD_PAGE_TRANSITION_SHAPE_CIRCLE, _                        ; 47 The page will transition with the Circle Shape effect.
-		$LOD_PAGE_TRANSITION_SHAPE_OVAL_HORI, _                     ; 48 The page will transition with the Horizontal Oval Shape effect.
-		$LOD_PAGE_TRANSITION_SHAPE_OVAL_VERT, _                     ; 49 The page will transition with the Vertical Oval Shape effect.
-		$LOD_PAGE_TRANSITION_SPLIT_HORI_IN, _                       ; 50 The page will transition with the Split effect Horizontally Inward.
-		$LOD_PAGE_TRANSITION_SPLIT_HORI_OUT, _                      ; 51 The page will transition with the Split effect Horizontally Outward.
-		$LOD_PAGE_TRANSITION_SPLIT_VERT_IN, _                       ; 52 The page will transition with the Split effect Vertically Inward.
-		$LOD_PAGE_TRANSITION_SPLIT_VERT_OUT, _                      ; 53 The page will transition with the Split effect Vertically Outward.
-		$LOD_PAGE_TRANSITION_STATIC, _                              ; 54 The page will transition with the Static effect.
-		$LOD_PAGE_TRANSITION_TILES, _                               ; 55 The page will transition with the Tiles effect.
-		$LOD_PAGE_TRANSITION_TURN_AROUND, _                         ; 56 The page will transition with the Turn Around effect.
-		$LOD_PAGE_TRANSITION_TURN_DOWN, _                           ; 57 The page will transition with the Turn Downward effect.
-		$LOD_PAGE_TRANSITION_UNCOVER_TOP_TO_BOTTOM, _               ; 58 The page will transition with the Uncover effect from Top to Bottom.
-		$LOD_PAGE_TRANSITION_UNCOVER_RIGHT_TO_LEFT, _               ; 59 The page will transition with the Uncover effect from Right to Left.
-		$LOD_PAGE_TRANSITION_UNCOVER_LEFT_TO_RIGHT, _               ; 60 The page will transition with the Uncover effect from Left to Right.
-		$LOD_PAGE_TRANSITION_UNCOVER_BOTTOM_TO_TOP, _               ; 61 The page will transition with the Uncover effect from Bottom to Top.
-		$LOD_PAGE_TRANSITION_UNCOVER_TOP_RIGHT_TO_BOTTOM_LEFT, _    ; 62 The page will transition with the Uncover effect from Top Right to Bottom Left.
-		$LOD_PAGE_TRANSITION_UNCOVER_BOTTOM_RIGHT_TO_TOP_LEFT, _    ; 63 The page will transition with the Uncover effect from Bottom Right to Top Left.
-		$LOD_PAGE_TRANSITION_UNCOVER_TOP_LEFT_TO_BOTTOM_RIGHT, _    ; 64 The page will transition with the Uncover effect from Top Left to Bottom Right.
-		$LOD_PAGE_TRANSITION_UNCOVER_BOTTOM_LEFT_TO_TOP_RIGHT, _    ; 65 The page will transition with the Uncover effect from Bottom Left to Top Right.
-		$LOD_PAGE_TRANSITION_VENETIAN_VERT, _                       ; 66 The page will transition with the Venetian effect Vertically.
-		$LOD_PAGE_TRANSITION_VENETIAN_HORI, _                       ; 67 The page will transition with the Venetian effect Horizontally.
-		$LOD_PAGE_TRANSITION_VORTEX, _                              ; 68 The page will transition with the Vortex effect.
-		$LOD_PAGE_TRANSITION_WEDGE, _                               ; 69 The page will transition with the Wedge effect.
-		$LOD_PAGE_TRANSITION_WHEEL_1_SPOKE, _                       ; 70 The page will transition with the Wheel effect with One Spoke.
-		$LOD_PAGE_TRANSITION_WHEEL_2_SPOKE, _                       ; 71 The page will transition with the Wheel effect with Two Spokes.
-		$LOD_PAGE_TRANSITION_WHEEL_3_SPOKE, _                       ; 72 The page will transition with the Wheel effect with Three Spokes.
-		$LOD_PAGE_TRANSITION_WHEEL_4_SPOKE, _                       ; 73 The page will transition with the Wheel effect with Four Spokes.
-		$LOD_PAGE_TRANSITION_WHEEL_8_SPOKE, _                       ; 74 The page will transition with the Wheel effect with Eight Spokes.
-		$LOD_PAGE_TRANSITION_WIPE_BOTTOM_TO_TOP, _                  ; 75 The page will transition with the Wipe effect from Bottom to Top.
-		$LOD_PAGE_TRANSITION_WIPE_LEFT_TO_RIGHT, _                  ; 76 The page will transition with the Wipe effect from Left to Right.
-		$LOD_PAGE_TRANSITION_WIPE_RIGHT_TO_LEFT, _                  ; 77 The page will transition with the Wipe effect from Right to Left.
-		$LOD_PAGE_TRANSITION_WIPE_TOP_TO_BOTTOM                     ; 78 The page will transition with the Wipe effect from Top to Bottom.
-
-; Slideshow Presentation Mode.
-Global Enum _
-		$LOD_SLIDESHOW_VIEW_MODE_FULL_SCREEN, _                      ; 0 The Pageshow is Full Screen.
-		$LOD_SLIDESHOW_VIEW_MODE_IN_WINDOW, _                        ; 1 The Pageshow is displayed in the LibreOffice program window.
-		$LOD_SLIDESHOW_VIEW_MODE_LOOP                                ; 2 The Pageshow is looped after a set pause.
-
-; Slideshow Pen Width
-Global Const _
-		$LOD_SLIDESHOW_PEN_WIDTH_VERY_THIN = 4, _                    ; A very thin width pen line for drawing with.
-		$LOD_SLIDESHOW_PEN_WIDTH_THIN = 100, _                       ; A thin width pen line for drawing with.
-		$LOD_SLIDESHOW_PEN_WIDTH_NORMAL = 150, _                     ; A normal width pen line for drawing with.
-		$LOD_SLIDESHOW_PEN_WIDTH_THICK = 200, _                      ; A thick width pen line for drawing with.
-		$LOD_SLIDESHOW_PEN_WIDTH_VERY_THICK = 400                    ; A very thick width pen line for drawing with.
-
-; Slideshow active Presentation commands and queries.
-Global Enum _
-		$LOD_SLIDESHOW_PRES_QUERY_GET_CURRENT_SLIDE, _               ; 0 Returns the Object for the page that is currently displayed.
-		$LOD_SLIDESHOW_PRES_QUERY_GET_CURRENT_PAGE_INDEX, _         ; 1 Returns the index of the current page. Index is 0 based.
-		$LOD_SLIDESHOW_PRES_QUERY_GET_NEXT_PAGE_INDEX, _            ; 2 Returns the index for the page that is displayed next. Index is 0 based.
-		$LOD_SLIDESHOW_PRES_QUERY_GET_PAGE_BY_INDEX, _              ; 3 Returns the Object for the page at the index. Index is 0 based. Pages are in the order they will be displayed in the presentation which can be different than the orders of pages in the document. Not all pages must be present and each page can be used more than once.
-		$LOD_SLIDESHOW_PRES_QUERY_GET_PAGE_COUNT, _                 ; 4 Returns the number of pages in this page show.
-		$LOD_SLIDESHOW_PRES_QUERY_IS_ACTIVE, _                       ; 5 Determines if the page show is active. Returns TRUE for UI active page show, FALSE otherwise.
-		$LOD_SLIDESHOW_PRES_QUERY_IS_ENDLESS, _                      ; 6 Returns TRUE if the page show was started to run endlessly.
-		$LOD_SLIDESHOW_PRES_QUERY_IS_FULLSCREEN, _                   ; 7 Returns TRUE if the page show was started in full-screen mode.
-		$LOD_SLIDESHOW_PRES_QUERY_IS_PAUSED, _                       ; 8 Returns TRUE if the page show is currently paused.
-		$LOD_SLIDESHOW_PRES_COMMAND_ACTIVATE, _                      ; 9 Activates the user interface of this page show.
-		$LOD_SLIDESHOW_PRES_COMMAND_ACTIVATE_BLANK_SCREEN, _         ; 10 >Expects Parameter: Pause Screen Color as a RGB Color Integer.< Pauses the page show and blanks the screen in the given color. Call Resume to unpause the page show.
-		$LOD_SLIDESHOW_PRES_COMMAND_DEACTIVATE, _                    ; 11 Can be called to deactivate the user interface of this page show. (Doesn't seem to set IsActive to False!)
-		$LOD_SLIDESHOW_PRES_COMMAND_ERASE_ALL_INK, _                 ; 12 Clears ink drawing from the pageshow being played. L.O. 7.2+
-		$LOD_SLIDESHOW_PRES_COMMAND_GOTO_FIRST_SLIDE, _              ; 13 Goto and display the first page.
-		$LOD_SLIDESHOW_PRES_COMMAND_GOTO_LAST_SLIDE, _               ; 14 Goto and display last page. Remaining effects on the current page will be skipped.
-		$LOD_SLIDESHOW_PRES_COMMAND_GOTO_NEXT_EFFECT, _              ; 15 Start next effects that wait on a generic trigger. If no generic triggers are waiting the next page will be displayed.
-		$LOD_SLIDESHOW_PRES_COMMAND_GOTO_NEXT_SLIDE, _               ; 16 Goto and display next page. Remaining effects on the current page will be skipped.
-		$LOD_SLIDESHOW_PRES_COMMAND_GOTO_PREV_EFFECT, _              ; 17 Undo the last effects that were triggered by a generic trigger. If there is no previous effect that can be undone then the previous page will be displayed.
-		$LOD_SLIDESHOW_PRES_COMMAND_GOTO_PREV_SLIDE, _               ; 18 Goto and display previous page. Remaining effects on the current page will be skipped.
-		$LOD_SLIDESHOW_PRES_COMMAND_GOTO_SLIDE, _                    ; 19 >Expects Parameter: Page Object to jump to.< Jumps to the given page. The page can also be a page that would normally not be shown during the current page show.
-		$LOD_SLIDESHOW_PRES_COMMAND_GOTO_PAGE_BY_INDEX, _           ; 20 >Expects Parameter: Page's index to jump to.< Jumps to the page at the given index. 0 based.
-		$LOD_SLIDESHOW_PRES_COMMAND_GOTO_PAGE_BY_NAME, _            ; 21 >Expects Parameter: Page's name to jump to.< Jumps to the page with the given name.
-		$LOD_SLIDESHOW_PRES_COMMAND_PAUSE, _                         ; 22 Pauses the page show. All effects are paused. The page show continues on next user input or if resume is called.
-		$LOD_SLIDESHOW_PRES_COMMAND_RESUME, _                        ; 23 Resumes a paused page show.
-		$LOD_SLIDESHOW_PRES_COMMAND_STOP_SOUND                       ; 24 Stop all currently played sounds
-
-; Slideshow Presentation Range
-Global Enum _
-		$LOD_SLIDESHOW_RANGE_ALL, _                                  ; 0 All the pages in the presentation are included in the Pageshow.
-		$LOD_SLIDESHOW_RANGE_FROM, _                                 ; 1 The Pageshow begins at the defined page.
-		$LOD_SLIDESHOW_RANGE_CUSTOM                                  ; 2 A custom Pageshow order is followed.
 
 ; Text Cursor Movement Constants.
 Global Enum _

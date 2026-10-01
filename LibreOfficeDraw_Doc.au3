@@ -406,9 +406,9 @@ EndFunc   ;==>_LODraw_DocCreate
 ;                  - uno:Delete -- Simulates pressing the Delete key.
 ;                  - uno:InsertDateFieldFix -- Insert a fixed Date field.
 ;                  - uno:InsertDateFieldVar -- Insert a variable Date field.
-;                  - uno:InsertPageField -- Insert a current Page (page) field.
+;                  - uno:InsertPageField -- Insert a current Page field.
 ;                  - uno:InsertPageTitleField -- Insert a current Page (page) Title field.
-;                  - uno:InsertPagesField -- Insert a total Pages (pages) field.
+;                  - uno:InsertPagesField -- Insert a total Pages field.
 ;                  - uno:InsertPageQuick -- Insert a new page.
 ;                  - uno:InsertTimeFieldFix -- Insert a fixed Time field.
 ;                  - uno:InsertTimeFieldVar -- Insert a variable Time field.
@@ -1668,11 +1668,6 @@ EndFunc   ;==>_LODraw_DocUndoReset
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  This function uses a deprecated method (DrawViewMode), and may stop functioning in the future.
-;                  This function assumes two types of view modes without positive evidence:
-;                  If the property CurrentPage returns Null, it is assumed the current view mode is $LOD_PAGE_VIEW_PAGE_SORTER, as that is the only time I found it returning such.
-;                  If the property CurrentPage returns a page Object, and the property DrawViewMode returns Null, it is assumed current view mode is $LOD_PAGE_VIEW_PAGE_OUTLINE.
-;                  When switching to Master Notes or Page Notes, the notes page will correspond to the currently or last active page/master page.
 ; Related .......: _LODraw_PageCurrent
 ; Link ..........:
 ; Example .......: Yes

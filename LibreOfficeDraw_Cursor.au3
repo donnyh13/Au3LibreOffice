@@ -17,7 +17,7 @@
 ; #INDEX# =======================================================================================================================
 ; Title .........: LibreOffice UDF
 ; AutoIt Version : v3.3.16.1
-; Description ...: Provides basic functionality through AutoIt for manipulating a Text cursor, inserting or retrieving data or setting and retrieving text properties using an Draw Text Cursor.
+; Description ...: Provides basic functionality through AutoIt for manipulating a Text cursor, inserting or retrieving data or setting and retrieving text properties using a Draw Text Cursor.
 ; Author(s) .....: donnyh13, mLipok
 ; Dll ...........:
 ;

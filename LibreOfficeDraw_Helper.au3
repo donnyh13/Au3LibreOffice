@@ -384,7 +384,7 @@ EndFunc   ;==>_LODraw_DateStructModify
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Font list.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: $oDoc is optional, if not called, an Draw Document is created invisibly to perform the check.
+; Remarks .......: $oDoc is optional, if not called, a Draw Document is created invisibly to perform the check.
 ; Related .......: _LODraw_FontsGetNames
 ; Link ..........:
 ; Example .......: Yes
@@ -454,7 +454,7 @@ EndFunc   ;==>_LODraw_FontExists
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Font list.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: $oDoc is optional, if not called, an Draw Document is created invisibly to perform the check.
+; Remarks .......: $oDoc is optional, if not called, a Draw Document is created invisibly to perform the check.
 ;                  Many fonts will be listed multiple times, this is because of the varying settings for them, such as bold, Italic, etc. Style Name is really a repeat of weight(Bold) and Slant (Italic) settings, but is included for easier processing if required.
 ;                  From personal tests, Slant only returns 0 or 2.
 ;                  The returned array will be as follows:

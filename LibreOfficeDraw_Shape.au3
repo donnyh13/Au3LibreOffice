@@ -50,7 +50,6 @@
 ; _LODraw_ShapeImageInsert
 ; _LODraw_ShapeImageModify
 ; _LODraw_ShapeImageReplace
-; _LODraw_ShapeInteraction
 ; _LODraw_ShapeLineArrowStyles
 ; _LODraw_ShapeLineProperties
 ; _LODraw_ShapeName
@@ -62,34 +61,6 @@
 ; _LODraw_ShapeParTabStopMod
 ; _LODraw_ShapeParTabStopsGetList
 ; _LODraw_ShapePosition
-; _LODraw_ShapePresStyleAreaColor
-; _LODraw_ShapePresStyleAreaFillStyle
-; _LODraw_ShapePresStyleAreaGradient
-; _LODraw_ShapePresStyleAreaGradientMulticolor
-; _LODraw_ShapePresStyleAreaShadow
-; _LODraw_ShapePresStyleAreaTransparency
-; _LODraw_ShapePresStyleAreaTransparencyGradient
-; _LODraw_ShapePresStyleAreaTransparencyGradientMulti
-; _LODraw_ShapePresStyleCharEffect
-; _LODraw_ShapePresStyleCharFont
-; _LODraw_ShapePresStyleCharFontColor
-; _LODraw_ShapePresStyleCharOverLine
-; _LODraw_ShapePresStyleCharStrikeOut
-; _LODraw_ShapePresStyleCharUnderLine
-; _LODraw_ShapePresStyleGetObjByName
-; _LODraw_ShapePresStyleLineArrowStyles
-; _LODraw_ShapePresStyleLineProperties
-; _LODraw_ShapePresStyleNumCustomize
-; _LODraw_ShapePresStyleParAlignment
-; _LODraw_ShapePresStyleParIndent
-; _LODraw_ShapePresStyleParSpacing
-; _LODraw_ShapePresStyleParTabStopCreate
-; _LODraw_ShapePresStyleParTabStopDelete
-; _LODraw_ShapePresStyleParTabStopMod
-; _LODraw_ShapePresStyleParTabStopsGetList
-; _LODraw_ShapePresStylesGetNames
-; _LODraw_ShapePresStyleTextAttrFit
-; _LODraw_ShapePresStyleTextAttrSettings
 ; _LODraw_ShapeRotateSlant
 ; _LODraw_ShapesGetList
 ; _LODraw_ShapeSize
@@ -179,9 +150,6 @@ Func _LODraw_ShapeAreaColor(ByRef $oShape, $iColor = Null)
 			$iCurColor = __LODraw_ColorRemoveAlpha($oShape.FillColor())
 			If Not IsInt($iCurColor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-		ElseIf ($oShape.FillStyle() = $LOD_AREA_FILL_STYLE_OFF) And $oShape.PropertySetInfo.hasPropertyByName("FillUsePageBackground") And $oShape.FillUsePageBackground() Then
-			$iCurColor = $LOD_SHAPE_COLOR_USE_PAGE_BACKGROUND
-
 		Else
 			$iCurColor = $LO_COLOR_OFF
 		EndIf
@@ -189,30 +157,16 @@ Func _LODraw_ShapeAreaColor(ByRef $oShape, $iColor = Null)
 		Return SetError($__LO_STATUS_SUCCESS, 1, $iCurColor)
 	EndIf
 
-	If Not __LO_IntIsBetween($iColor, $LO_COLOR_OFF, $LO_COLOR_WHITE, "", $LOD_SHAPE_COLOR_USE_PAGE_BACKGROUND) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If ($iColor = $LO_COLOR_OFF) Then
 		$oShape.FillStyle = $LOD_AREA_FILL_STYLE_OFF
-		$oShape.FillUsePageBackground = False
-
-	ElseIf ($iColor = $LOD_SHAPE_COLOR_USE_PAGE_BACKGROUND) Then
-		If Not __LO_VersionCheck(7.5) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
-
-		If ($oShape.PropertySetInfo.hasPropertyByName("FillUsePageBackground")) Then
-			$oShape.FillStyle = $LOD_AREA_FILL_STYLE_OFF
-			$oShape.FillUsePageBackground = True
-			$iError = ($oShape.FillUsePageBackground() = True) ? ($iError) : (BitOR($iError, 1))
-
-		Else
-			$iError = BitOR($iError, 1)
-		EndIf
 
 	Else
 		$iOldTransparency = $oShape.FillTransparence()
 		If Not IsInt($iOldTransparency) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		$oShape.FillStyle = $LOD_AREA_FILL_STYLE_SOLID
-		$oShape.FillUsePageBackground = False
 		$oShape.FillColor = $iColor
 		$iError = ($oShape.FillColor() = $iColor) ? ($iError) : (BitOR($iError, 1))
 
@@ -293,10 +247,11 @@ EndFunc   ;==>_LODraw_ShapeAreaFillStyle
 ;                  @Error: 1, @Extended: 12 = $iToIntense not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Error retrieving "FillGradient" Object.
-;                  @Error: 3, @Extended: 2 = Error retrieving Parent Document Object.
-;                  @Error: 3, @Extended: 3 = Failed to retrieve ColorStops Array.
-;                  @Error: 3, @Extended: 4 = Error creating Gradient Name.
-;                  @Error: 3, @Extended: 5 = Error setting Gradient Name.
+;                  @Error: 3, @Extended: 2 = Error retrieving Parent Page Object.
+;                  @Error: 3, @Extended: 3 = Error retrieving Parent Document Object.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 5 = Error creating Gradient Name.
+;                  @Error: 3, @Extended: 6 = Error setting Gradient Name.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sGradientName
@@ -324,7 +279,7 @@ Func _LODraw_ShapeAreaGradient(ByRef $oShape, $sGradientName = Null, $iType = Nu
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oDoc
+	Local $oDoc, $oPage
 	Local $tStyleGradient, $tColorStop, $tStopColor
 	Local $iError = 0
 	Local $avGradient[11]
@@ -345,8 +300,11 @@ Func _LODraw_ShapeAreaGradient(ByRef $oShape, $sGradientName = Null, $iType = Nu
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avGradient)
 	EndIf
 
-	$oDoc = __LODraw_GetParentDoc($oShape.Parent())
-	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+	$oPage = $oShape.Parent()
+	If Not IsObj($oPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	$oDoc = __LODraw_GetParentDoc($oPage)
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 	If ($oShape.FillStyle() <> $LOD_AREA_FILL_STYLE_GRADIENT) Then $oShape.FillStyle = $LOD_AREA_FILL_STYLE_GRADIENT
 
@@ -409,7 +367,7 @@ Func _LODraw_ShapeAreaGradient(ByRef $oShape, $sGradientName = Null, $iType = Nu
 
 		If __LO_VersionCheck(7.6) Then
 			$atColorStop = $tStyleGradient.ColorStops()
-			If Not IsArray($atColorStop) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+			If Not IsArray($atColorStop) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
 			$tColorStop = $atColorStop[0] ; StopOffset 0 is the "From Color" Value.
 
@@ -434,7 +392,7 @@ Func _LODraw_ShapeAreaGradient(ByRef $oShape, $sGradientName = Null, $iType = Nu
 
 		If __LO_VersionCheck(7.6) Then
 			$atColorStop = $tStyleGradient.ColorStops()
-			If Not IsArray($atColorStop) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+			If Not IsArray($atColorStop) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
 			$tColorStop = $atColorStop[UBound($atColorStop) - 1] ; Last StopOffset is the "To Color" Value.
 
@@ -466,10 +424,10 @@ Func _LODraw_ShapeAreaGradient(ByRef $oShape, $sGradientName = Null, $iType = Nu
 
 	If ($oShape.FillGradientName() = "") Or __LODraw_GradientIsModified($tStyleGradient, $oShape.FillGradientName()) Then
 		$sGradName = __LODraw_GradientNameInsert($oDoc, $tStyleGradient)
-		If @error > 0 Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+		If @error > 0 Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
 		$oShape.FillGradientName = $sGradName
-		If ($oShape.FillGradientName <> $sGradName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+		If ($oShape.FillGradientName <> $sGradName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
 	EndIf
 
 	$oShape.FillGradient = $tStyleGradient
@@ -666,10 +624,11 @@ EndFunc   ;==>_LODraw_ShapeAreaTransparency
 ;                  @Error: 1, @Extended: 8 = $iEnd not an Integer, less than 0 or greater than 100.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Error retrieving "FillTransparenceGradient" Object.
-;                  @Error: 3, @Extended: 2 = Error retrieving Parent Document Object.
-;                  @Error: 3, @Extended: 3 = Failed to retrieve ColorStops Array.
-;                  @Error: 3, @Extended: 4 = Error creating Transparency Gradient Name.
-;                  @Error: 3, @Extended: 5 = Error setting Transparency Gradient Name.
+;                  @Error: 3, @Extended: 2 = Error retrieving Parent Page Object.
+;                  @Error: 3, @Extended: 3 = Error retrieving Parent Document Object.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 5 = Error creating Transparency Gradient Name.
+;                  @Error: 3, @Extended: 6 = Error setting Transparency Gradient Name.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $iType
@@ -692,7 +651,7 @@ Func _LODraw_ShapeAreaTransparencyGradient(ByRef $oShape, $iType = Null, $iXCent
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oDoc
+	Local $oDoc, $oPage
 	Local $tGradient, $tColorStop, $tStopColor
 	Local $sTGradName
 	Local $iError = 0
@@ -713,8 +672,11 @@ Func _LODraw_ShapeAreaTransparencyGradient(ByRef $oShape, $iType = Null, $iXCent
 		Return SetError($__LO_STATUS_SUCCESS, 1, $aiTransparent)
 	EndIf
 
-	$oDoc = __LODraw_GetParentDoc($oShape.Parent())
-	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+	$oPage = $oShape.Parent()
+	If Not IsObj($oPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	$oDoc = __LODraw_GetParentDoc($oPage)
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 	If ($iType <> Null) Then
 		If ($iType = $LOD_GRAD_TYPE_OFF) Then ; Turn Off Gradient
@@ -759,7 +721,7 @@ Func _LODraw_ShapeAreaTransparencyGradient(ByRef $oShape, $iType = Null, $iXCent
 
 		If __LO_VersionCheck(7.6) Then
 			$atColorStop = $tGradient.ColorStops()
-			If Not IsArray($atColorStop) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+			If Not IsArray($atColorStop) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
 			$tColorStop = $atColorStop[0] ; StopOffset 0 is the "Start" Value.
 
@@ -786,7 +748,7 @@ Func _LODraw_ShapeAreaTransparencyGradient(ByRef $oShape, $iType = Null, $iXCent
 
 		If __LO_VersionCheck(7.6) Then
 			$atColorStop = $tGradient.ColorStops()
-			If Not IsArray($atColorStop) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+			If Not IsArray($atColorStop) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
 			$tColorStop = $atColorStop[UBound($atColorStop) - 1] ; StopOffset 0 is the "End" Value.
 
@@ -808,10 +770,10 @@ Func _LODraw_ShapeAreaTransparencyGradient(ByRef $oShape, $iType = Null, $iXCent
 
 	If ($oShape.FillTransparenceGradientName() = "") Then
 		$sTGradName = __LODraw_TransparencyGradientNameInsert($oDoc, $tGradient)
-		If @error > 0 Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+		If @error > 0 Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
 		$oShape.FillTransparenceGradientName = $sTGradName
-		If ($oShape.FillTransparenceGradientName <> $sTGradName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+		If ($oShape.FillTransparenceGradientName <> $sTGradName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
 	EndIf
 
 	$oShape.FillTransparenceGradient = $tGradient
@@ -1821,123 +1783,6 @@ Func _LODraw_ShapeImageReplace(ByRef $oImage, $sNewImage)
 EndFunc   ;==>_LODraw_ShapeImageReplace
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapeInteraction
-; Description ...: Set or Retrieve a Shape's current Interaction settings.
-; Syntax ........: _LODraw_ShapeInteraction(ByRef $oShape[, $iAction = Null[, $sTarget = Null[, $iVerb = Null]]])
-; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapeTextBoxInsert, _LODraw_ShapeImageInsert, or _LODraw_ShapesGetList function.
-;                  $iAction             - [optional] (0-13) Default is Null. The action to perform when the shape is clicked. See Constants, $LOD_SHAPE_INTERACTION_ACTION_* as defined in LibreOfficeDraw_Constants.au3.
-;                  $sTarget             - [optional] Default is Null. The target for the action. See remarks.
-;                  $iVerb               - [optional] Default is Null. If $iAction is set to $LOD_SHAPE_INTERACTION_ACTION_OBJ_ACTION, this is the action to perform on the OLE Object. See remarks.
-; Return values .: Success: 1 or Array.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oShape not an Object.
-;                  @Error: 1, @Extended: 2 = $iAction not an Integer, less than 0 or greater than 13. See Constants, $LOD_SHAPE_INTERACTION_ACTION_* as defined in LibreOfficeDraw_Constants.au3.
-;                  @Error: 1, @Extended: 3 = $sTarget not a String.
-;                  @Error: 1, @Extended: 4 = Page or shape does not exist with name called in $sTarget.
-;                  @Error: 1, @Extended: 5 = File called in $sTarget does not exist.
-;                  @Error: 1, @Extended: 6 = $iVerb not an Integer.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to retrieve current Target value.
-;                  @Error: 3, @Extended: 2 = Failed to convert current Target path.
-;                  @Error: 3, @Extended: 3 = Failed to retrieve parent Page Object.
-;                  @Error: 3, @Extended: 4 = Failed to retrieve parent Document Object.
-;                  @Error: 3, @Extended: 5 = Failed to convert target path.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
-;                  |                               1 = Error setting $iAction
-;                  |                               2 = Error setting $sTarget
-;                  |                               4 = Error setting $iVerb
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-;                  When $iAction is set to $LOD_SHAPE_INTERACTION_ACTION_OBJ_ACTION, call $sTarget with the appropriate flag as a string for the action to perform on the OLE Object, and call $iVerb with the appropriate flag as an integer.
-;                  As an example for values to use with $LOD_SHAPE_INTERACTION_ACTION_OBJ_ACTION, I have observed the following values:
-;                  - When setting the action to "edit", $sTarget has a value of "-1" (as a string), and $iVerb has a value of 65535.
-;                  - When setting the action to "Save a Copy As", $sTarget has a value of "-8" (as a string), and $iVerb has a value of 65528.
-;                  $iVerb determines the action performed, and $sTarget determines the action showing selected in the UI.
-;                  User is responsible for ensuring values are correctly called (i.e. that a shape, or page etc exists by that name) for $LOD_SHAPE_INTERACTION_ACTION_GOTO_PAGE_OBJ, $LOD_SHAPE_INTERACTION_ACTION_OBJ_ACTION, and $LOD_SHAPE_INTERACTION_ACTION_MACRO.
-;                  See comments for each $LOD_SHAPE_INTERACTION_ACTION_* Constant for what values are expected in $sTarget otherwise.
-;                  This function will work, where applicable, for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
-; Related .......: _LODraw_ShapeTextAttrAnimation
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapeInteraction(ByRef $oShape, $iAction = Null, $sTarget = Null, $iVerb = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $iError = 0
-	Local $sCurVal
-	Local $oPage, $oDoc
-	Local $avInteraction[3]
-
-	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	If __LO_VarsAreNull($iAction, $sTarget) Then
-		$sCurVal = $oShape.Bookmark()
-		If Not IsString($sCurVal) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-		Switch $oShape.OnClick()
-			Case $LOD_SHAPE_INTERACTION_ACTION_DOCUMENT, $LOD_SHAPE_INTERACTION_ACTION_SOUND, $LOD_SHAPE_INTERACTION_ACTION_PROGRAM
-				$sCurVal = _LO_PathConvert($oShape.Bookmark(), $LO_PATHCONV_PCPATH_RETURN)
-				If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-		EndSwitch
-
-		__LO_ArrayFill($avInteraction, $oShape.OnClick(), $sCurVal, $oShape.Verb())
-
-		Return SetError($__LO_STATUS_SUCCESS, 1, $avInteraction)
-	EndIf
-
-	If ($iAction <> Null) Then
-		If Not __LO_IntIsBetween($iAction, $LOD_SHAPE_INTERACTION_ACTION_NONE, $LOD_SHAPE_INTERACTION_ACTION_EXIT) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-		$oShape.OnClick = $iAction
-		$iError = ($oShape.OnClick() = $iAction) ? ($iError) : (BitOR($iError, 1))
-	EndIf
-
-	If ($sTarget <> Null) Then
-		If Not IsString($sTarget) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-		Switch $oShape.OnClick()
-			Case $LOD_SHAPE_INTERACTION_ACTION_GOTO_PAGE_OBJ
-				$oPage = $oShape.Parent()
-				If Not IsObj($oPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
-				$oDoc = __LODraw_GetParentDoc($oPage)
-				If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
-
-				If Not _LODraw_ShapeExists($oDoc, $sTarget) And Not _
-						$oDoc.Links.getByName("Page").Links.hasByName($sTarget) And Not _
-						$oDoc.Links.getByName("Notes").Links.hasByName($sTarget) And Not _
-						$oDoc.Links.getByName("Master Page").Links.hasByName($sTarget) And Not _
-						$oDoc.Links.getByName("Handouts").Links.hasByName($sTarget) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0) ; Not sure if I need to check Handouts?
-
-			Case $LOD_SHAPE_INTERACTION_ACTION_DOCUMENT, $LOD_SHAPE_INTERACTION_ACTION_SOUND, $LOD_SHAPE_INTERACTION_ACTION_PROGRAM
-				If Not FileExists($sTarget) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-
-				$sTarget = _LO_PathConvert($sTarget, $LO_PATHCONV_OFFICE_RETURN)
-				If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
-		EndSwitch
-
-		$oShape.Bookmark = $sTarget
-		$iError = ($oShape.Bookmark() = $sTarget) ? ($iError) : (BitOR($iError, 2))
-	EndIf
-
-	If ($iVerb <> Null) Then
-		If Not IsInt($iVerb) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-
-		$oShape.Verb = $iVerb
-		$iError = ($oShape.Verb() = $iVerb) ? ($iError) : (BitOR($iError, 4))
-	EndIf
-
-	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_ShapeInteraction
-
-; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LODraw_ShapeLineArrowStyles
 ; Description ...: Set or Retrieve Shape Line Start and End Arrow Style settings.
 ; Syntax ........: _LODraw_ShapeLineArrowStyles(ByRef $oShape[, $vStartStyle = Null[, $iStartWidth = Null[, $bStartCenter = Null[, $bSync = Null[, $vEndStyle = Null[, $iEndWidth = Null[, $bEndCenter = Null]]]]]]])
@@ -2705,1541 +2550,6 @@ Func _LODraw_ShapePosition(ByRef $oShape, $iX = Null, $iY = Null, $bProtectPos =
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LODraw_ShapePosition
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStyleAreaColor
-; Description ...: Set or Retrieve the Fill color settings for a Presentation Style.
-; Syntax ........: _LODraw_ShapePresStyleAreaColor(ByRef $oPresStyle[, $iColor = Null])
-; Parameters ....: $oPresStyle          - A Presentation Style object returned by a previous _LODraw_ShapePresStyleGetObjByName function.
-;                  $iColor              - [optional] (-1-16777215) Default is Null. The Fill color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for "None".
-; Return values .: Success: 1 or Integer.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current Fill color as an Integer.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oPresStyle not an Object.
-;                  @Error: 1, @Extended: 2 = $iColor not an Integer, less than -1 or greater than 16777215.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to retrieve current color value.
-;                  @Error: 3, @Extended: 2 = Failed to retrieve old Transparency value.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $iColor
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapePresStyleAreaFillStyle, _LODraw_ShapePresStyleAreaGradient, _LODraw_ShapeAreaColor, _LODraw_ShapeStyleAreaColor
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStyleAreaColor(ByRef $oPresStyle, $iColor = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$vReturn = __LODraw_ShapeStyleAreaColor($oPresStyle, $iColor)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_ShapePresStyleAreaColor
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStyleAreaFillStyle
-; Description ...: Retrieve what kind of background fill is active, if any.
-; Syntax ........: _LODraw_ShapePresStyleAreaFillStyle(ByRef $oPresStyle)
-; Parameters ....: $oPresStyle          - A Presentation Style object returned by a previous _LODraw_ShapePresStyleGetObjByName function.
-; Return values .: Success: Integer
-;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning current background fill style. Return will be one of the constants $LOD_AREA_FILL_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oPresStyle not an Object.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to retrieve current Fill Style.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: This function is to help determine if a Gradient background, or a solid color background is currently active.
-;                  This is useful because, if a Gradient is active, the solid color value is still present, and thus it would not be possible to determine which function should be used to retrieve the current values for, whether the Color function, or the Gradient function.
-; Related .......: _LODraw_ShapeAreaFillStyle, _LODraw_ShapePresStyleAreaColor, _LODraw_ShapePresStyleAreaGradient, _LODraw_ShapeStyleAreaFillStyle
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStyleAreaFillStyle(ByRef $oPresStyle)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $iFillStyle
-
-	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$iFillStyle = $oPresStyle.FillStyle()
-	If Not IsInt($iFillStyle) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, $iFillStyle)
-EndFunc   ;==>_LODraw_ShapePresStyleAreaFillStyle
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStyleAreaGradient
-; Description ...: Set or Retrieve the settings for Presentation Style Background color Gradient.
-; Syntax ........: _LODraw_ShapePresStyleAreaGradient(ByRef $oDoc, ByRef $oPresStyle[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
-;                  $oPresStyle          - A Presentation Style object returned by a previous _LODraw_ShapePresStyleGetObjByName function.
-;                  $sGradientName       - [optional] Default is Null. A Preset Gradient Name. See remarks. See constants, $LOD_GRAD_NAME_* as defined in LibreOfficeDraw_Constants.au3.
-;                  $iType               - [optional] (-1-5) Default is Null. The gradient type to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
-;                  $iIncrement          - [optional] (0, 3-256) Default is Null. The number of steps of color change. 0 = Automatic.
-;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient, where 0% corresponds to the current horizontal location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" setting. Set in percentage. $iType must be other than "Linear", or "Axial".
-;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient, where 0% corresponds to the current vertical location of the endpoint color in the gradient. The endpoint color is the color that is selected in the "To Color" Setting. Set in percentage. $iType must be other than "Linear", or "Axial".
-;                  $iAngle              - [optional] (0-359) Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
-;                  $iTransitionStart    - [optional] (0-100) Default is Null. The amount by which to adjust the transparent area of the gradient. Set in percentage.
-;                  $iFromColor          - [optional] (0-16777215) Default is Null. A color for the beginning point of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iToColor            - [optional] (0-16777215) Default is Null. A color for the endpoint of the gradient, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iFromIntense        - [optional] (0-100) Default is Null. Enter the intensity for the color in the "From Color", where 0% corresponds to black, and 100 % to the selected color.
-;                  $iToIntense          - [optional] (0-100) Default is Null. Enter the intensity for the color in the "To Color", where 0% corresponds to black, and 100 % to the selected color.
-; Return values .: Success: Integer or Array.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
-;                  @Error: 0, @Extended: 0, Return: 2 = Success. Gradient has been successfully turned off.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 11 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
-;                  @Error: 1, @Extended: 2 = $oPresStyle not an Object.
-;                  @Error: 1, @Extended: 3 = $sGradientName not a String.
-;                  @Error: 1, @Extended: 4 = $iType not an Integer, less than -1 or greater than 5. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
-;                  @Error: 1, @Extended: 5 = $iIncrement not an Integer, less than 3, but not 0, or greater than 256.
-;                  @Error: 1, @Extended: 6 = $iXCenter not an Integer, less than 0 or greater than 100.
-;                  @Error: 1, @Extended: 7 = $iYCenter not an Integer, less than 0 or greater than 100.
-;                  @Error: 1, @Extended: 8 = $iAngle not an Integer, less than 0 or greater than 359.
-;                  @Error: 1, @Extended: 9 = $iTransitionStart not an Integer, less than 0 or greater than 100.
-;                  @Error: 1, @Extended: 10 = $iFromColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error: 1, @Extended: 11 = $iToColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error: 1, @Extended: 12 = $iFromIntense not an Integer, less than 0 or greater than 100.
-;                  @Error: 1, @Extended: 13 = $iToIntense not an Integer, less than 0 or greater than 100.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Error retrieving "FillGradient" Object.
-;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
-;                  @Error: 3, @Extended: 3 = Error creating Gradient Name.
-;                  @Error: 3, @Extended: 4 = Error setting Gradient Name.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $sGradientName
-;                  |                               2 = Error setting $iType
-;                  |                               4 = Error setting $iIncrement
-;                  |                               8 = Error setting $iXCenter
-;                  |                               16 = Error setting $iYCenter
-;                  |                               32 = Error setting $iAngle
-;                  |                               64 = Error setting $iTransitionStart
-;                  |                               128 = Error setting $iFromColor
-;                  |                               256 = Error setting $iToColor
-;                  |                               512 = Error setting $iFromIntense
-;                  |                               1024 = Error setting $iToIntense
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-;                  Gradient Name has no use other than for applying a pre-existing preset gradient.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapePresStyleAreaFillStyle, _LODraw_ShapePresStyleAreaGradientMulticolor, _LODraw_ShapeAreaGradient, _LODraw_ShapeStyleAreaGradient
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStyleAreaGradient(ByRef $oDoc, ByRef $oPresStyle, $sGradientName = Null, $iType = Null, $iIncrement = Null, $iXCenter = Null, $iYCenter = Null, $iAngle = Null, $iTransitionStart = Null, $iFromColor = Null, $iToColor = Null, $iFromIntense = Null, $iToIntense = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$vReturn = __LODraw_ShapeStyleAreaGradient($oDoc, $oPresStyle, $sGradientName, $iType, $iIncrement, $iXCenter, $iYCenter, $iAngle, $iTransitionStart, $iFromColor, $iToColor, $iFromIntense, $iToIntense)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_ShapePresStyleAreaGradient
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStyleAreaGradientMulticolor
-; Description ...: Set or Retrieve a Presentation Style's Multicolor Gradient settings.
-; Syntax ........: _LODraw_ShapePresStyleAreaGradientMulticolor(ByRef $oPresStyle[, $avColorStops = Null])
-; Parameters ....: $oPresStyle          - A Presentation Style object returned by a previous _LODraw_ShapePresStyleGetObjByName function.
-;                  $avColorStops        - [optional] Default is Null. A Two column array of Colors and ColorStop offsets. See remarks.
-; Return values .: Success: 1 or Array
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
-;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oPresStyle not an Object.
-;                  @Error: 1, @Extended: 2 = $avColorStops not an Array, or does not contain two columns.
-;                  @Error: 1, @Extended: 3 = $avColorStops contains less than two rows.
-;                  @Error: 1, @Extended: 4 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
-;                  @Error: 1, @Extended: 5 = ColorStop color not an Integer, less than 0 or greater than 16777215. Returning problem element index.
-;                  --Initialization Errors--
-;                  @Error: 2, @Extended: 1 = Failed to create com.sun.star.awt.ColorStop Struct.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to retrieve FillGradient Struct.
-;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
-;                  @Error: 3, @Extended: 3 = Failed to retrieve StopColor Struct.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
-;                  |                               1 = Error setting $avColorStops
-;                  --Version Related Errors--
-;                  @Error: 6, @Extended: 1 = Current version less than 7.6.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: Starting with version 7.6 LibreOffice introduced an option to have multiple color stops in a Gradient rather than just a beginning and an ending color, but as of yet, the option is not available in the User Interface. However it has been made available in the API.
-;                  The returned array will contain two columns, the first column will contain the ColorStop offset values, a number between 0 and 1.0. The second column will contain an Integer, the color value, as a RGB Color Integer.
-;                  $avColorStops expects an array as described above.
-;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
-;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_GradientMulticolorAdd, _LO_GradientMulticolorDelete, _LO_GradientMulticolorModify, _LODraw_ShapeAreaGradientMulticolor, _LODraw_ShapePresStyleAreaGradient, _LODraw_ShapeStyleAreaGradientMulticolor, _LODraw_ShapeAreaTransparencyGradientMulti
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStyleAreaGradientMulticolor(ByRef $oPresStyle, $avColorStops = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$vReturn = __LODraw_ShapeAreaGradientMulticolor($oPresStyle, $avColorStops)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_ShapePresStyleAreaGradientMulticolor
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStyleAreaShadow
-; Description ...: Set or Retrieve the shadow settings for a Presentation Style.
-; Syntax ........: _LODraw_ShapePresStyleAreaShadow(ByRef $oPresStyle[, $bShadow = Null[, $iLocation = Null[, $iColor = Null[, $iDistance = Null[, $iBlur = Null[, $iTransparency = Null]]]]]])
-; Parameters ....: $oPresStyle          - A Presentation Style object returned by a previous _LODraw_ShapePresStyleGetObjByName function.
-;                  $bShadow             - [optional] Default is Null. If True, a Shadow is present for the Shape.
-;                  $iLocation           - [optional] (0-8) Default is Null. The Location of the Shadow, must be one of the Constants, $LOD_SHAPE_SHADOW_LOCATION_* as defined in LibreOfficeDraw_Constants.au3.
-;                  $iColor              - [optional] (0-16777215) Default is Null. The Shadow color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iDistance           - [optional] Default is Null. The distance of the Shadow from the Shape's edges, set in Hundredths of a Millimeter (HMM).
-;                  $iBlur               - [optional] (0-150) Default is Null. The amount of blur applied to the Shadow, set in Printer's Points.
-;                  $iTransparency       - [optional] (0-100) Default is Null. The percentage of Shadow transparency. 100% means completely transparent.
-; Return values .: Success: 1 or Array.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oPresStyle not an Object.
-;                  @Error: 1, @Extended: 2 = $bShadow not a Boolean.
-;                  @Error: 1, @Extended: 3 = $iLocation not an Integer, less than 0 or greater than 8. See Constants, $LOD_SHAPE_SHADOW_LOCATION_* as defined in LibreOfficeDraw_Constants.au3.
-;                  @Error: 1, @Extended: 4 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error: 1, @Extended: 5 = $iDistance not an Integer, or less than 0.
-;                  @Error: 1, @Extended: 6 = $iBlur not an Integer, less than 0 or greater than 150 Printer's Points.
-;                  @Error: 1, @Extended: 7 = $iTransparency not an Integer, less than 0 or greater than 100.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to retrieve current Distance and Location Values.
-;                  @Error: 3, @Extended: 2 = Failed to modify Location property.
-;                  @Error: 3, @Extended: 3 = Failed to modify Distance property.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $bShadow
-;                  |                               2 = Error setting $iLocation
-;                  |                               4 = Error setting $iColor
-;                  |                               8 = Error setting $iDistance
-;                  |                               16 = Error setting $iBlur
-;                  |                               32 = Error setting $iTransparency
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-;                  LibreOffice may change the shadow distance +/- a Hundredth of a Millimeter (HMM).
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LO_UnitConvert, _LODraw_ShapeAreaShadow, _LODraw_ShapeStyleAreaShadow
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStyleAreaShadow(ByRef $oPresStyle, $bShadow = Null, $iLocation = Null, $iColor = Null, $iDistance = Null, $iBlur = Null, $iTransparency = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$vReturn = __LODraw_ShapeAreaShadow($oPresStyle, $bShadow, $iLocation, $iColor, $iDistance, $iBlur, $iTransparency)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_ShapePresStyleAreaShadow
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStyleAreaTransparency
-; Description ...: Set or retrieve Transparency settings for a Presentation Style.
-; Syntax ........: _LODraw_ShapePresStyleAreaTransparency(ByRef $oPresStyleStyle[, $iTransparency = Null])
-; Parameters ....: $oPresStyleStyle     - A Presentation Style object returned by a previous _LODraw_ShapePresStyleGetObjByName function.
-;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
-; Return values .: Success: Integer.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
-;                  @Error: 0, @Extended: 1, Return: Integer = Success. All optional parameters were called with Null, returning current setting for Transparency as an Integer.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oPresStyleStyle not an Object.
-;                  @Error: 1, @Extended: 2 = $iTransparency not an Integer, less than 0 or greater than 100.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to retrieve current Transparency value.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $iTransparency
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LODraw_ShapeAreaTransparency, _LODraw_ShapePresStyleAreaTransparencyGradient, _LODraw_ShapeStyleAreaTransparency
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStyleAreaTransparency(ByRef $oPresStyleStyle, $iTransparency = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oPresStyleStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$vReturn = __LODraw_ShapeAreaTransparency($oPresStyleStyle, $iTransparency)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_ShapePresStyleAreaTransparency
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStyleAreaTransparencyGradient
-; Description ...: Set or retrieve the Presentation Style transparency gradient settings.
-; Syntax ........: _LODraw_ShapePresStyleAreaTransparencyGradient(ByRef $oDoc, ByRef $oPresStyle[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
-;                  $oPresStyle          - A Presentation Style object returned by a previous _LODraw_ShapePresStyleGetObjByName function.
-;                  $iType               - [optional] (-1-5) Default is Null. The type of transparency gradient that you want to apply. See Constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3. Call with $LOD_GRAD_TYPE_OFF to turn Transparency Gradient off.
-;                  $iXCenter            - [optional] (0-100) Default is Null. The horizontal offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
-;                  $iYCenter            - [optional] (0-100) Default is Null. The vertical offset for the gradient. Set in percentage. $iType must be other than "Linear", or "Axial".
-;                  $iAngle              - [optional] (0-359) Default is Null. The rotation angle for the gradient. Set in degrees. $iType must be other than "Radial".
-;                  $iTransitionStart    - [optional] (0-100) Default is Null. The amount by which you want to adjust the transparent area of the gradient. Set in percentage.
-;                  $iStart              - [optional] (0-100) Default is Null. The transparency value for the beginning point of the gradient, where 0% is fully opaque and 100% is fully transparent.
-;                  $iEnd                - [optional] (0-100) Default is Null. The transparency value for the endpoint of the gradient, where 0% is fully opaque and 100% is fully transparent.
-; Return values .: Success: Integer or Array.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
-;                  @Error: 0, @Extended: 0, Return: 2 = Success. Transparency Gradient has been successfully turned off.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
-;                  @Error: 1, @Extended: 2 = $oPresStyle not an Object.
-;                  @Error: 1, @Extended: 3 = $iType not an Integer, less than -1 or greater than 5. See constants, $LOD_GRAD_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
-;                  @Error: 1, @Extended: 4 = $iXCenter not an Integer, less than 0 or greater than 100.
-;                  @Error: 1, @Extended: 5 = $iYCenter not an Integer, less than 0 or greater than 100.
-;                  @Error: 1, @Extended: 6 = $iAngle not an Integer, less than 0 or greater than 359.
-;                  @Error: 1, @Extended: 7 = $iTransitionStart not an Integer, less than 0 or greater than 100.
-;                  @Error: 1, @Extended: 8 = $iStart not an Integer, less than 0 or greater than 100.
-;                  @Error: 1, @Extended: 9 = $iEnd not an Integer, less than 0 or greater than 100.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Error retrieving "FillTransparenceGradient" Object.
-;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
-;                  @Error: 3, @Extended: 3 = Error creating Transparency Gradient Name.
-;                  @Error: 3, @Extended: 4 = Error setting Transparency Gradient Name.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $iType
-;                  |                               2 = Error setting $iXCenter
-;                  |                               4 = Error setting $iYCenter
-;                  |                               8 = Error setting $iAngle
-;                  |                               16 = Error setting $iTransitionStart
-;                  |                               32 = Error setting $iStart
-;                  |                               64 = Error setting $iEnd
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LODraw_ShapeAreaTransparencyGradient, _LODraw_ShapePresStyleAreaTransparency, _LODraw_ShapePresStyleAreaTransparencyGradientMulti, _LODraw_ShapeStyleAreaTransparencyGradient
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStyleAreaTransparencyGradient(ByRef $oDoc, ByRef $oPresStyle, $iType = Null, $iXCenter = Null, $iYCenter = Null, $iAngle = Null, $iTransitionStart = Null, $iStart = Null, $iEnd = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-	$vReturn = __LODraw_ShapeStyleAreaTransparencyGradient($oDoc, $oPresStyle, $iType, $iXCenter, $iYCenter, $iAngle, $iTransitionStart, $iStart, $iEnd)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_ShapePresStyleAreaTransparencyGradient
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStyleAreaTransparencyGradientMulti
-; Description ...: Set or Retrieve a Presentation Style's Multi Transparency Gradient settings.
-; Syntax ........: _LODraw_ShapePresStyleAreaTransparencyGradientMulti(ByRef $oPresStyle[, $avColorStops = Null])
-; Parameters ....: $oPresStyle          - A Presentation Style object returned by a previous _LODraw_ShapePresStyleGetObjByName function.
-;                  $avColorStops        - [optional] Default is Null. A Two column array of Transparency values and ColorStop offsets. See remarks.
-; Return values .: Success: 1 or Array
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current Array of ColorStops. See remarks. @Extended set to number of ColorStops returned.
-;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oPresStyle not an Object.
-;                  @Error: 1, @Extended: 2 = $avColorStops not an Array, or does not contain two columns.
-;                  @Error: 1, @Extended: 3 = $avColorStops contains less than two rows.
-;                  @Error: 1, @Extended: 4 = ColorStop offset not a number, less than 0 or greater than 1.0. Returning problem element index.
-;                  @Error: 1, @Extended: 5 = ColorStop Transparency value not an Integer, less than 0 or greater than 100. Returning problem element index.
-;                  --Initialization Errors--
-;                  @Error: 2, @Extended: 1 = Failed to create com.sun.star.awt.ColorStop Struct.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to retrieve FillTransparenceGradient Struct.
-;                  @Error: 3, @Extended: 2 = Failed to retrieve ColorStops Array.
-;                  @Error: 3, @Extended: 3 = Failed to retrieve StopColor Struct.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
-;                  |                               1 = Error setting $avColorStops
-;                  --Version Related Errors--
-;                  @Error: 6, @Extended: 1 = Current version less than 7.6.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: Starting with version 7.6 LibreOffice introduced an option to have multiple Transparency stops in a Gradient rather than just a beginning and an ending value, but as of yet, the option is not available in the User Interface. However it has been made available in the API.
-;                  The returned array will contain two columns, the first column will contain the ColorStop offset values, a number between 0 and 1.0. The second column will contain an Integer, the Transparency percentage value between 0 and 100%.
-;                  $avColorStops expects an array as described above.
-;                  ColorStop offsets are sorted in ascending order, you can have more than one of the same value. There must be a minimum of two ColorStops. The first and last ColorStop offsets do not need to have an offset value of 0 and 1 respectively.
-;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......: _LO_TransparencyGradientMultiModify, _LO_TransparencyGradientMultiDelete, _LO_TransparencyGradientMultiAdd, _LODraw_ShapeAreaTransparencyGradientMulti, _LODraw_ShapePresStyleAreaTransparencyGradient, _LODraw_ShapeStyleAreaTransparencyGradientMulti, _LODraw_ShapeAreaGradientMulticolor
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStyleAreaTransparencyGradientMulti(ByRef $oPresStyle, $avColorStops = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$vReturn = __LODraw_ShapeAreaTransparencyGradientMulti($oPresStyle, $avColorStops)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_ShapePresStyleAreaTransparencyGradientMulti
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStyleCharEffect
-; Description ...: Set or Retrieve the Font Effect settings for a Presentation Style.
-; Syntax ........: _LODraw_ShapePresStyleCharEffect(ByRef $oPresStyle[, $iCase = Null[, $iRelief = Null[, $bOutline = Null[, $bShadow = Null]]]])
-; Parameters ....: $oPresStyle          - A Presentation Style object returned by a previous _LODraw_ShapePresStyleGetObjByName function.
-;                  $iCase               - [optional] (0-4) Default is Null. The Character Case Style. See Constants, $LOD_CHAR_CASEMAP_* as defined in LibreOfficeDraw_Constants.au3.
-;                  $iRelief             - [optional] (0-2) Default is Null. The Character Relief style. See Constants, $LOD_CHAR_RELIEF_* as defined in LibreOfficeDraw_Constants.au3.
-;                  $bOutline            - [optional] Default is Null. If True, the characters have an outline around the outside.
-;                  $bShadow             - [optional] Default is Null. If True, the characters have a shadow.
-; Return values .: Success: 1 or Array.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oPresStyle not an Object.
-;                  @Error: 1, @Extended: 2 = $iCase not an Integer, less than 0 or greater than 4. See Constants, $LOD_CHAR_CASEMAP_* as defined in LibreOfficeDraw_Constants.au3.
-;                  @Error: 1, @Extended: 3 = $iRelief not an Integer, less than 0 or greater than 2. See Constants, $LOD_CHAR_RELIEF_* as defined in LibreOfficeDraw_Constants.au3.
-;                  @Error: 1, @Extended: 4 = $bOutline not a Boolean.
-;                  @Error: 1, @Extended: 5 = $bShadow not a Boolean.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $iCase
-;                  |                               2 = Error setting $iRelief
-;                  |                               4 = Error setting $bOutline
-;                  |                               8 = Error setting $bShadow
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LODraw_ShapePresStyleCharOverLine, _LODraw_ShapePresStyleCharStrikeOut, _LODraw_ShapePresStyleCharUnderLine, _LODraw_ShapeCharEffect, _LODraw_ShapeStyleCharEffect
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStyleCharEffect(ByRef $oPresStyle, $iCase = Null, $iRelief = Null, $bOutline = Null, $bShadow = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$vReturn = __LODraw_CharEffect($oPresStyle, $iCase, $iRelief, $bOutline, $bShadow)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_ShapePresStyleCharEffect
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStyleCharFont
-; Description ...: Set and Retrieve the Font Settings for a Presentation Style.
-; Syntax ........: _LODraw_ShapePresStyleCharFont(ByRef $oPresStyle[, $sFontName = Null[, $nFontSize = Null[, $iPosture = Null[, $iWeight = Null]]]])
-; Parameters ....: $oPresStyle          - A Presentation Style object returned by a previous _LODraw_ShapePresStyleGetObjByName function.
-;                  $sFontName           - [optional] Default is Null. The Font Name to use.
-;                  $nFontSize           - [optional] Default is Null. The new Font size.
-;                  $iPosture            - [optional] (0-5) Default is Null. The Font Italic setting. See Constants, $LOD_CHAR_POSTURE_* as defined in LibreOfficeDraw_Constants.au3. Also see remarks.
-;                  $iWeight             - [optional] (0, 50-200) Default is Null. The Font Bold settings see Constants, $LOD_CHAR_WEIGHT_* as defined in LibreOfficeDraw_Constants.au3. Also see remarks.
-; Return values .: Success: 1 or Array
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oPresStyle not an Object.
-;                  @Error: 1, @Extended: 2 = $sFontName not a String.
-;                  @Error: 1, @Extended: 3 = Font called in $sFontName not available.
-;                  @Error: 1, @Extended: 4 = $nFontSize not a number.
-;                  @Error: 1, @Extended: 5 = $iPosture not an Integer, less than 0 or greater than 5. See Constants, $LOD_CHAR_POSTURE_* as defined in LibreOfficeDraw_Constants.au3.
-;                  @Error: 1, @Extended: 6 = $iWeight not an Integer, less than 50 but not equal to 0, or greater than 200. See Constants, $LOD_CHAR_WEIGHT_* as defined in LibreOfficeDraw_Constants.au3.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
-;                  |                               1 = Error setting $sFontName
-;                  |                               2 = Error setting $nFontSize
-;                  |                               4 = Error setting $iPosture
-;                  |                               8 = Error setting $iWeight
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-;                  Not every font accepts Bold and Italic settings, and not all settings for bold and Italic are accepted, such as oblique, ultra Bold etc.
-;                  LibreOffice accepts only the predefined weight values, any other values are changed automatically to an acceptable value, which could trigger a settings error.
-; Related .......: _LODraw_ShapePresStyleCharFontColor, _LODraw_ShapeCharFont, _LODraw_ShapeStyleCharFont, _LODraw_FontsGetNames
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStyleCharFont(ByRef $oPresStyle, $sFontName = Null, $nFontSize = Null, $iPosture = Null, $iWeight = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$vReturn = __LODraw_CharFont($oPresStyle, $sFontName, $nFontSize, $iPosture, $iWeight)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_ShapePresStyleCharFont
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStyleCharFontColor
-; Description ...: Set or retrieve the font color and highlighting values for a Presentation Style.
-; Syntax ........: _LODraw_ShapePresStyleCharFontColor(ByRef $oPresStyle[, $iFontColor = Null[, $iHighlight = Null]])
-; Parameters ....: $oPresStyle          - A Presentation Style object returned by a previous _LODraw_ShapePresStyleGetObjByName function.
-;                  $iFontColor          - [optional] (-1-16777215) Default is Null. The font Color value, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for Auto color.
-;                  $iHighlight          - [optional] (-1-16777215) Default is Null. The highlight Color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for No color.
-; Return values .: Success: 1 or Array.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oPresStyle not an Object.
-;                  @Error: 1, @Extended: 2 = $iFontColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error: 1, @Extended: 3 = $iHighlight not an Integer, less than -1 or greater than 16777215.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $iFontColor
-;                  |                               2 = Error setting $iHighlight
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LODraw_ShapePresStyleCharFont, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapeCharFontColor, _LODraw_ShapeStyleCharFontColor
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStyleCharFontColor(ByRef $oPresStyle, $iFontColor = Null, $iHighlight = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$vReturn = __LODraw_StyleCharFontColor($oPresStyle, $iFontColor, $iHighlight)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_ShapePresStyleCharFontColor
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStyleCharOverLine
-; Description ...: Set and retrieve the OverLine settings for a Presentation Style.
-; Syntax ........: _LODraw_ShapePresStyleCharOverLine(ByRef $oPresStyle[, $iOverLineStyle = Null[, $iOLColor = Null[, $bWordOnly = Null]]])
-; Parameters ....: $oPresStyle          - A Presentation Style object returned by a previous _LODraw_ShapePresStyleGetObjByName function.
-;                  $iOverLineStyle      - [optional] (0-18) Default is Null. The style of the Overline line, see constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeDraw_Constants.au3. See Remarks.
-;                  $iOLColor            - [optional] (-1-16777215) Default is Null. The Overline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
-;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not Overlined.
-; Return values .: Success: 1 or Array
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oPresStyle not an Object.
-;                  @Error: 1, @Extended: 2 = $iOverLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeDraw_Constants.au3. See Remarks.
-;                  @Error: 1, @Extended: 3 = $iOLColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error: 1, @Extended: 4 = $bWordOnly not a Boolean.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
-;                  |                               1 = Error setting $iOverLineStyle
-;                  |                               2 = Error setting $iOLColor
-;                  |                               4 = Error setting $bWordOnly
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: Overline line style uses the same constants as underline style.
-;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapeCharOverLine, _LODraw_ShapePresStyleCharEffect, _LODraw_ShapePresStyleCharStrikeOut, _LODraw_ShapePresStyleCharUnderLine, _LODraw_ShapeStyleCharOverLine
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStyleCharOverLine(ByRef $oPresStyle, $iOverLineStyle = Null, $iOLColor = Null, $bWordOnly = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$vReturn = __LODraw_CharOverLine($oPresStyle, $iOverLineStyle, $iOLColor, $bWordOnly)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_ShapePresStyleCharOverLine
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStyleCharStrikeOut
-; Description ...: Set or Retrieve the Strikeout settings for a Presentation Style.
-; Syntax ........: _LODraw_ShapePresStyleCharStrikeOut(ByRef $oPresStyle[, $iStrikeLineStyle = Null[, $bWordOnly = Null]])
-; Parameters ....: $oPresStyle          - A Presentation Style object returned by a previous _LODraw_ShapePresStyleGetObjByName function.
-;                  $iStrikeLineStyle    - [optional] (0-6) Default is Null. The Strikeout Line Style, see constants, $LOD_CHAR_STRIKEOUT_* as defined in LibreOfficeDraw_Constants.au3.
-;                  $bWordOnly           - [optional] Default is Null. If True, strike out is applied to words only, skipping whitespaces.
-; Return values .: Success: 1 or Array
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oPresStyle not an Object.
-;                  @Error: 1, @Extended: 2 = $iStrikeLineStyle not an Integer, less than 0 or greater than 6. See constants, $LOD_CHAR_STRIKEOUT_* as defined in LibreOfficeDraw_Constants.au3.
-;                  @Error: 1, @Extended: 3 = $bWordOnly not a Boolean.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
-;                  |                               1 = Error setting $iStrikeLineStyle
-;                  |                               2 = Error setting $bWordOnly
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LODraw_ShapePresStyleCharEffect, _LODraw_ShapePresStyleCharOverLine, _LODraw_ShapePresStyleCharUnderLine, _LODraw_ShapeCharStrikeOut, _LODraw_ShapeStyleCharStrikeOut
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStyleCharStrikeOut(ByRef $oPresStyle, $iStrikeLineStyle = Null, $bWordOnly = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$vReturn = __LODraw_CharStrikeOut($oPresStyle, $iStrikeLineStyle, $bWordOnly)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_ShapePresStyleCharStrikeOut
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStyleCharUnderLine
-; Description ...: Set and retrieve the Underline settings for a Presentation Style.
-; Syntax ........: _LODraw_ShapePresStyleCharUnderLine(ByRef $oPresStyle[, $iUnderLineStyle = Null[, $iULColor = Null[, $bWordOnly = Null]]])
-; Parameters ....: $oPresStyle          - A Presentation Style object returned by a previous _LODraw_ShapePresStyleGetObjByName function.
-;                  $iUnderLineStyle     - [optional] (0-18) Default is Null. The Underline line style, see constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeDraw_Constants.au3.
-;                  $iULColor            - [optional] (-1-16777215) Default is Null. The underline color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3. Call with $LO_COLOR_OFF(-1) for automatic color mode.
-;                  $bWordOnly           - [optional] Default is Null. If True, white spaces are not underlined.
-; Return values .: Success: 1 or Array
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oPresStyle an Object.
-;                  @Error: 1, @Extended: 2 = $iUnderLineStyle not an Integer, less than 0 or greater than 18. See constants, $LOD_CHAR_UNDERLINE_* as defined in LibreOfficeDraw_Constants.au3.
-;                  @Error: 1, @Extended: 3 = $iULColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error: 1, @Extended: 4 = $bWordOnly not a Boolean.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
-;                  |                               1 = Error setting $iUnderLineStyle
-;                  |                               2 = Error setting $iULColor
-;                  |                               4 = Error setting $bWordOnly
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapePresStyleCharEffect, _LODraw_ShapePresStyleCharStrikeOut, _LODraw_ShapePresStyleCharUnderLine, _LODraw_ShapeCharUnderLine, _LODraw_ShapeStyleCharUnderLine
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStyleCharUnderLine(ByRef $oPresStyle, $iUnderLineStyle = Null, $iULColor = Null, $bWordOnly = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$vReturn = __LODraw_CharUnderLine($oPresStyle, $iUnderLineStyle, $iULColor, $bWordOnly)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_ShapePresStyleCharUnderLine
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStyleGetObjByName
-; Description ...: Retrieve a Presentation Style Object for use with other Presentation Style functions.
-; Syntax ........: _LODraw_ShapePresStyleGetObjByName(ByRef $oDoc, $sPresStyle)
-; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
-;                  $sPresStyle          - The Presentation Style name to retrieve the Object for.
-; Return values .: Success: Object
-;                  @Error: 0, @Extended: 0, Return: Object = Success. Presentation Style successfully retrieved, returning its Object.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
-;                  @Error: 1, @Extended: 2 = $sPresStyle not a String.
-;                  @Error: 1, @Extended: 3 = Presentation Style called in $sPresStyle not found in Document.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Error retrieving Presentation Style Object.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......: _LODraw_ShapePresStylesGetNames
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStyleGetObjByName(ByRef $oDoc, $sPresStyle)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $oPresStyle
-
-	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsString($sPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not $oDoc.StyleFamilies.getByName("Default").hasByName($sPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-	$oPresStyle = $oDoc.StyleFamilies().getByName("Default").getByName($sPresStyle)
-	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oPresStyle)
-EndFunc   ;==>_LODraw_ShapePresStyleGetObjByName
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStyleLineArrowStyles
-; Description ...: Set or Retrieve Presentation Style Line Start and End Arrow Style settings.
-; Syntax ........: _LODraw_ShapePresStyleLineArrowStyles(ByRef $oDoc, ByRef $oPresStyle[, $vStartStyle = Null[, $iStartWidth = Null[, $bStartCenter = Null[, $bSync = Null[, $vEndStyle = Null[, $iEndWidth = Null[, $bEndCenter = Null]]]]]]])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
-;                  $oPresStyle          - A Presentation Style object returned by a previous _LODraw_ShapePresStyleGetObjByName function.
-;                  $vStartStyle         - [optional] (0-32, or String) Default is Null. The Arrow head to apply to the start of the line. Can be a Custom Arrowhead name, or one of the constants, $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeDraw_Constants.au3. See remarks.
-;                  $iStartWidth         - [optional] (0-5004) Default is Null. The Width of the Starting Arrowhead, in Hundredths of a Millimeter (HMM).
-;                  $bStartCenter        - [optional] Default is Null. If True, Places the center of the Start arrowhead on the endpoint of the line.
-;                  $bSync               - [optional] Default is Null. If True, Synchronizes the Start Arrowhead settings with the end Arrowhead settings. See remarks.
-;                  $vEndStyle           - [optional] (0-32, or String) Default is Null. The Arrow head to apply to the end of the line. Can be a Custom Arrowhead name, or one of the constants, $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeDraw_Constants.au3. See remarks.
-;                  $iEndWidth           - [optional] (0-5004) Default is Null. The Width of the Ending Arrowhead, in Hundredths of a Millimeter (HMM).
-;                  $bEndCenter          - [optional] Default is Null. If True, Places the center of the End arrowhead on the endpoint of the line.
-; Return values .: Success: Integer or Array.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
-;                  @Error: 1, @Extended: 2 = $oPresStyle not an Object.
-;                  @Error: 1, @Extended: 3 = $vStartStyle not a String, and not an Integer.
-;                  @Error: 1, @Extended: 4 = $vStartStyle is an Integer, but less than 0 or greater than 32. See constants $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
-;                  @Error: 1, @Extended: 5 = $iStartWidth not an Integer, less than 0 or greater than 5004.
-;                  @Error: 1, @Extended: 6 = $bStartCenter not a Boolean.
-;                  @Error: 1, @Extended: 7 = $bSync not a Boolean.
-;                  @Error: 1, @Extended: 8 = $vEndStyle not a String, and not an Integer.
-;                  @Error: 1, @Extended: 9 = $vEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
-;                  @Error: 1, @Extended: 10 = $iEndWidth not an Integer, less than 0 or greater than 5004.
-;                  @Error: 1, @Extended: 11 = $bEndCenter not a Boolean.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to convert Constant to Arrowhead name.
-;                  @Error: 3, @Extended: 2 = Failed to insert preset Arrowhead name and style.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $vStartStyle
-;                  |                               2 = Error setting $iStartWidth
-;                  |                               4 = Error setting $bStartCenter
-;                  |                               8 = Error setting $bSync
-;                  |                               16 = Error setting $vEndStyle
-;                  |                               32 = Error setting $iEndWidth
-;                  |                               64 = Error setting $bEndCenter
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: When the arrowhead type "Arrow" is set in the LO UI, or upon creation of a line with arrows, the internal name of the arrowhead is set to an incrementing name of "Arrowheads x", where x is an Integer value. Since I have no way to determine if the head is a custom arrowhead or supposed to be the "Arrow" type, the return when this is present will be the name "Arrowheads x", and not $LOD_SHAPE_LINE_ARROW_TYPE_ARROW.
-;                  When setting an Arrowhead to be $LOD_SHAPE_LINE_ARROW_TYPE_ARROW, the head is set correctly, but the LibreOffice UI will show "None". The return for Arrowhead type will be correct, $LOD_SHAPE_LINE_ARROW_TYPE_ARROW.
-;                  LibreOffice has no setting for $bSync, so I have made a manual version of it in this function. It only accepts True, and must be called with True each time you want it to synchronize.
-;                  When retrieving the current settings, $bSync will be a Boolean value of whether the Start Arrowhead settings are currently equal to the End Arrowhead setting values.
-;                  Both $vStartStyle and $vEndStyle accept a String or an Integer because there is the possibility of a custom Arrowhead being available the user may want to use.
-;                  When retrieving the current settings, both $vStartStyle and $vEndStyle could be either an Integer or a String. It will be a String if the current Arrowhead is a custom Arrowhead, else an Integer, corresponding to one of the constants, $LOD_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
-;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LODraw_ShapePresStyleLineProperties, _LODraw_ShapeLineArrowStyles, _LODraw_ShapeStyleLineArrowStyles
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStyleLineArrowStyles(ByRef $oDoc, ByRef $oPresStyle, $vStartStyle = Null, $iStartWidth = Null, $bStartCenter = Null, $bSync = Null, $vEndStyle = Null, $iEndWidth = Null, $bEndCenter = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-	$vReturn = __LODraw_ShapeStyleLineArrowStyles($oDoc, $oPresStyle, $vStartStyle, $iStartWidth, $bStartCenter, $bSync, $vEndStyle, $iEndWidth, $bEndCenter)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_ShapePresStyleLineArrowStyles
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStyleLineProperties
-; Description ...: Set or Retrieve Presentation Style Line settings.
-; Syntax ........: _LODraw_ShapePresStyleLineProperties(ByRef $oDoc, ByRef $oPresStyle[, $vStyle = Null[, $iColor = Null[, $iWidth = Null[, $iTransparency = Null[, $iCornerStyle = Null[, $iCapStyle = Null]]]]]])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
-;                  $oPresStyle          - A Presentation Style object returned by a previous _LODraw_ShapePresStyleGetObjByName function.
-;                  $vStyle              - [optional] (0-31, or String) Default is Null. The Line Style to use. Can be a Custom Line Style name, or one of the constants, $LOD_SHAPE_LINE_STYLE_* as defined in LibreOfficeDraw_Constants.au3. See remarks.
-;                  $iColor              - [optional] (0-16777215) Default is Null. The Line color, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iWidth              - [optional] (0-5004) Default is Null. The line Width, set in Hundredths of a Millimeter (HMM).
-;                  $iTransparency       - [optional] (0-100) Default is Null. The Line transparency percentage. 100% = fully transparent.
-;                  $iCornerStyle        - [optional] (0, 2-4) Default is Null. The Line Corner Style. See Constants $LOD_SHAPE_LINE_JOINT_* as defined in LibreOfficeDraw_Constants.au3
-;                  $iCapStyle           - [optional] (0-2) Default is Null. The Line Cap Style. See Constants $LOD_SHAPE_LINE_CAP_* as defined in LibreOfficeDraw_Constants.au3
-; Return values .: Success: Integer or Array.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings have been successfully set.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
-;                  @Error: 1, @Extended: 2 = $oPresStyle not an Object.
-;                  @Error: 1, @Extended: 3 = $vStyle not a String, and not an Integer.
-;                  @Error: 1, @Extended: 4 = $vStyle is an Integer, but less than 0 or greater than 31. See constants $LOD_SHAPE_LINE_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
-;                  @Error: 1, @Extended: 5 = $iColor not an Integer, less than 0 or greater than 16777215.
-;                  @Error: 1, @Extended: 6 = $iWidth not an Integer, less than 0 or greater than 5004.
-;                  @Error: 1, @Extended: 7 = $iTransparency not an Integer, less than 0 or greater than 100.
-;                  @Error: 1, @Extended: 8 = $iCornerStyle not an Integer, not equal to 0, equal to 1, not equal to 2 or greater than 4. See Constants $LOD_SHAPE_LINE_JOINT_* as defined in LibreOfficeDraw_Constants.au3
-;                  @Error: 1, @Extended: 9 = $iCapStyle is an Integer, but less than 0 or greater than 2. See constants $LOD_SHAPE_LINE_CAP_* as defined in LibreOfficeDraw_Constants.au3.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to convert Constant to Line Style name.
-;                  @Error: 3, @Extended: 2 = Failed to insert Line Style name.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $vStyle
-;                  |                               2 = Error setting $iColor
-;                  |                               4 = Error setting $iWidth
-;                  |                               8 = Error setting $iTransparency
-;                  |                               16 = Error setting $iCornerStyle
-;                  |                               32 = Error setting $iCapStyle
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: $vStyle accepts a String or an Integer because there is the possibility of a custom Line Style being available that the user may want to use.
-;                  When retrieving the current settings, $vStyle could be either an Integer or a String. It will be a String if the current Line Style is a custom Line Style, else an Integer, corresponding to one of the constants, $LOD_SHAPE_LINE_STYLE_* as defined in LibreOfficeDraw_Constants.au3.
-;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapePresStyleLineArrowStyles, _LODraw_ShapeLineProperties, _LODraw_ShapeStyleLineProperties
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStyleLineProperties(ByRef $oDoc, ByRef $oPresStyle, $vStyle = Null, $iColor = Null, $iWidth = Null, $iTransparency = Null, $iCornerStyle = Null, $iCapStyle = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-	$vReturn = __LODraw_ShapeStyleLineProperties($oDoc, $oPresStyle, $vStyle, $iColor, $iWidth, $iTransparency, $iCornerStyle, $iCapStyle)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_ShapePresStyleLineProperties
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStyleNumCustomize
-; Description ...: Retrieve and Set Numbering Customize settings for a Presentation Style.
-; Syntax ........: _LODraw_ShapePresStyleNumCustomize(ByRef $oDoc, ByRef $oPresStyle, $iLevel[, $iNumFormat = Null[, $iStartAt = Null[, $iColor = Null[, $iRelSize = Null[, $sSepBefore = Null[, $sSepAfter = Null[, $iCharDecimal = Null]]]]]]])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
-;                  $oPresStyle          - A Presentation Style object returned by a previous _LODraw_ShapePresStyleGetObjByName function.
-;                  $iLevel              - (0-10) The Numbering Level to modify; enter 0 to modify all levels.
-;                  $iNumFormat          - [optional] (0-71) Default is Null. The numbering scheme for the selected levels. See Constants, $LOD_NUM_FRMT_* as defined in LibreOfficeDraw_Constants.au3.
-;                  $iStartAt            - [optional] Default is Null. A new starting number for the current level
-;                  $iColor              - [optional] (-1-16777215) Default is Null. The color of the numbering symbol, as a RGB Color Integer. Can be a custom value, or one of the constants, $LO_COLOR_* as defined in LibreOffice_Constants.au3.
-;                  $iRelSize            - [optional] (25-400) Default is Null. The percentage to resize the numbering symbol, relative to the paragraph font size.
-;                  $sSepBefore          - [optional] Default is Null. A character or the text to display in front of the number in the list.
-;                  $sSepAfter           - [optional] Default is Null. A character or the text to display behind the number in the list.
-;                  $iCharDecimal        - [optional] Default is Null. The ASCII Decimal character code value (See ASC function) of the desired character. Note: $iNumFormat must be set to $LOD_NUM_FRMT_CHAR_SPECIAL(6) before these can be set.
-; Return values .: Success: 1 or Array.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully set the requested Properties.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 7 Element Array with values in order of function parameters. See remarks.
-;                  @Error: 0, @Extended: 2, Return: Array = Success. All optional parameters were called with Null, returning a 10 Element Array containing arrays of settings for each Numbering level corresponding to their position in the array. Each array will be as described above. See remarks.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
-;                  @Error: 1, @Extended: 2 = $oPresStyle not an Object.
-;                  @Error: 1, @Extended: 3 = $oPresStyle not a Presentation Style Object.
-;                  @Error: 1, @Extended: 4 = $iLevel not between 0 - 10.
-;                  @Error: 1, @Extended: 5 = $iNumFormat not an Integer, less than 0 or greater than 71. See Constants, $LOD_NUM_FRMT_* as defined in LibreOfficeDraw_Constants.au3.
-;                  @Error: 1, @Extended: 6 = $iStartAt not an Integer.
-;                  @Error: 1, @Extended: 7 = $iColor not an Integer, less than -1 or greater than 16777215.
-;                  @Error: 1, @Extended: 8 = $iRelSize not an Integer, less than 25 or greater than 400.
-;                  @Error: 1, @Extended: 9 = $sSepBefore not a string.
-;                  @Error: 1, @Extended: 10 = $sSepAfter not a string.
-;                  @Error: 1, @Extended: 11 = $iCharDecimal not an Integer.
-;                  @Error: 1, @Extended: 12 = $iCharDecimal was called and Number Format not set to $LOD_NUM_FRMT_CHAR_SPECIAL.
-;                  --Initialization Errors--
-;                  @Error: 2, @Extended: 1 = Error mapping setting values.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Error retrieving Numbering Rules Object.
-;                  @Error: 3, @Extended: 2 = Error retrieving Numbering Rule Array for level.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $iNumFormat
-;                  |                               2 = Error setting $iStartAt
-;                  |                               4 = Error setting $iColor
-;                  |                               8 = Error setting $iRelSize
-;                  |                               16 = Error setting $sSepBefore
-;                  |                               32 = Error setting $sSepAfter
-;                  |                               64 = Error setting $iCharDecimal
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: This function should work just fine as the others do for modifying styles, but for setting Numbering Style settings, it would seem that the Array of Setting Objects passed by AutoIt is not recognized as an appropriate array/sequence by LibreOffice, and consequently causes a com.sun.star.lang.IllegalArgumentException COM error. See __LODraw_ShapePresStyleNumModify function for a more detailed explanation. This function can still be used to set and retrieve, setting values, however now, this function either inserts a temporary macro into $oDoc for performing the needed procedure, or if that fails, it invisibly opens an .odt Libre document and inserts a macro, see __LODraw_ShapePresStyleNumInitiateDocument which is then called with the necessary parameters to set.
-;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  If Current numbering type is set to Bullet, the returned array will be a 7 Element Array with values in order of function parameters, the parameters $iStartAt, $sSepBefore, and $sSepAfter will return a Null value, as they are not valid for Bullets.
-;                  If the current numbering type is other than bullet style, a 7 element array will be returned, the $iCharDecimal parameter will return a Null value.
-;                  You can request setting values for one numbering level at a time, or all at once (see below).
-;                  If you retrieve the current settings for all levels (by calling $iLevel with 0), the return will be a 10 element array containing an array of settings for each Numbering Level.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-;                  When a lot of settings are set, especially for all levels, this function can be a bit slow.
-; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_ShapePresStyleParIndent, _LODraw_ShapePresStyleParTabStopCreate
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStyleNumCustomize(ByRef $oDoc, ByRef $oPresStyle, $iLevel, $iNumFormat = Null, $iStartAt = Null, $iColor = Null, $iRelSize = Null, $sSepBefore = Null, $sSepAfter = Null, $iCharDecimal = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $oNumRules
-	Local $iError = 0
-	Local $avCustomize[7], $aaAllLevels[10]
-	Local $atNumLevel[0]
-	Local $mNumLevel[]
-
-	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not $oPresStyle.supportsService("com.sun.star.style.Style") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If Not __LO_IntIsBetween($iLevel, 0, 10) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-
-	$iLevel = ($iLevel - 1) ; Numbering Levels are 0 based, minus 1 to compensate.
-
-	$oNumRules = $oPresStyle.NumberingRules()
-	If Not IsObj($oNumRules) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-	If __LO_VarsAreNull($iNumFormat, $iStartAt, $iColor, $iRelSize, $sSepBefore, $sSepAfter, $iCharDecimal) Then
-		For $i = (($iLevel = -1) ? (0) : ($iLevel)) To (($iLevel = -1) ? (9) : ($iLevel)) ; Determine if I'm retrieving settings for all levels or just one.
-			$atNumLevel = $oNumRules.getByIndex($i)
-			If Not IsArray($atNumLevel) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-			$mNumLevel = __LODraw_NumRuleCreateMap($atNumLevel)
-			If Not IsMap($mNumLevel) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-
-			If MapExists($mNumLevel, "BulletChar") Then
-				__LO_ArrayFill($avCustomize, $atNumLevel[$mNumLevel["NumberingType"]].Value(), _
-						Null, _
-						$atNumLevel[$mNumLevel["BulletColor"]].Value(), _
-						$atNumLevel[$mNumLevel["BulletRelSize"]].Value(), _
-						Null, Null, _
-						Asc($atNumLevel[$mNumLevel["BulletChar"]].Value()))
-
-			Else ; If not set for Bullet style, return only these settings as BulletChar doesn't exist.
-				__LO_ArrayFill($avCustomize, $atNumLevel[$mNumLevel["NumberingType"]].Value(), _
-						$atNumLevel[$mNumLevel["StartWith"]].Value(), _
-						$atNumLevel[$mNumLevel["BulletColor"]].Value(), _
-						$atNumLevel[$mNumLevel["BulletRelSize"]].Value(), _
-						$atNumLevel[$mNumLevel["Prefix"]].Value(), _
-						$atNumLevel[$mNumLevel["Suffix"]].Value(), Null)
-			EndIf
-
-			If ($iLevel = -1) Then $aaAllLevels[$i] = $avCustomize
-		Next
-
-		Return ($iLevel = -1) ? (SetError($__LO_STATUS_SUCCESS, 2, $aaAllLevels)) : (SetError($__LO_STATUS_SUCCESS, 1, $avCustomize))
-	EndIf
-
-	For $i = (($iLevel = -1) ? (0) : ($iLevel)) To (($iLevel = -1) ? (9) : ($iLevel)) ; Determine if I am setting settings for all levels or just one.
-		$atNumLevel = $oNumRules.getByIndex($i)
-		If Not IsArray($atNumLevel) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-		$mNumLevel = __LODraw_NumRuleCreateMap($atNumLevel) ; Map what elements each setting is located at.
-		If Not IsMap($mNumLevel) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-
-		If ($iNumFormat <> Null) Then
-			If Not __LO_IntIsBetween($iNumFormat, $LOD_NUM_FRMT_CHARS_UPPER_LETTER, $LOD_NUM_FRMT_NUMBER_LEGAL_KO) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-
-			$atNumLevel[$mNumLevel["NumberingType"]].Value = $iNumFormat
-
-			__LODraw_ShapePresStyleNumModify($oDoc, $oNumRules, $i, $atNumLevel) ; Modify the Setting in case it is switching from/to a bullet type.
-
-			$atNumLevel = $oNumRules.getByIndex($i)
-			If Not IsArray($atNumLevel) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-			$mNumLevel = __LODraw_NumRuleCreateMap($atNumLevel)
-			If Not IsMap($mNumLevel) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-		EndIf
-
-		If ($iStartAt <> Null) Then
-			If Not IsInt($iStartAt) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-
-			$atNumLevel[$mNumLevel["StartWith"]].Value = $iStartAt
-		EndIf
-
-		If ($iColor <> Null) Then
-			If Not __LO_IntIsBetween($iColor, $LO_COLOR_OFF, $LO_COLOR_WHITE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
-
-			$atNumLevel[$mNumLevel["BulletColor"]].Value = $iColor
-		EndIf
-
-		If ($iRelSize <> Null) Then
-			If Not __LO_IntIsBetween($iRelSize, 25, 400) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
-
-			$atNumLevel[$mNumLevel["BulletRelSize"]].Value = $iRelSize
-		EndIf
-
-		If ($sSepBefore <> Null) Then
-			If Not IsString($sSepBefore) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
-
-			$atNumLevel[$mNumLevel["Prefix"]].Value = $sSepBefore
-		EndIf
-
-		If ($sSepAfter <> Null) Then
-			If Not IsString($sSepAfter) Then Return SetError($__LO_STATUS_INPUT_ERROR, 10, 0)
-
-			$atNumLevel[$mNumLevel["Suffix"]].Value = $sSepAfter
-		EndIf
-
-		If ($iCharDecimal <> Null) Then
-			If Not IsInt($iCharDecimal) Then Return SetError($__LO_STATUS_INPUT_ERROR, 11, 0)
-			If Not MapExists($mNumLevel, "BulletChar") Then Return SetError($__LO_STATUS_INPUT_ERROR, 12, 0)
-
-			$atNumLevel[$mNumLevel["BulletChar"]].Value = Chr($iCharDecimal)
-		EndIf
-
-		__LODraw_ShapePresStyleNumModify($oDoc, $oNumRules, $i, $atNumLevel)
-		$oPresStyle.NumberingRules = $oNumRules
-
-		$atNumLevel = $oPresStyle.NumberingRules.getByIndex($i)
-		If Not IsArray($atNumLevel) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-		$mNumLevel = __LODraw_NumRuleCreateMap($atNumLevel)
-		If Not IsMap($mNumLevel) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-
-		; Error Checking
-		$iError = (__LO_VarsAreNull($iNumFormat)) ? ($iError) : (($atNumLevel[$mNumLevel["NumberingType"]].Value() = $iNumFormat) ? ($iError) : (BitOR($iError, 1)))
-		$iError = (__LO_VarsAreNull($iStartAt)) ? ($iError) : (($atNumLevel[$mNumLevel["StartWith"]].Value() = $iStartAt) ? ($iError) : (BitOR($iError, 2)))
-		$iError = (__LO_VarsAreNull($iColor)) ? ($iError) : (($atNumLevel[$mNumLevel["BulletColor"]].Value() = $iColor) ? ($iError) : (BitOR($iError, 4)))
-		$iError = (__LO_VarsAreNull($iRelSize)) ? ($iError) : (($atNumLevel[$mNumLevel["BulletRelSize"]].Value() = $iRelSize) ? ($iError) : (BitOR($iError, 8)))
-		$iError = (__LO_VarsAreNull($sSepBefore)) ? ($iError) : (($atNumLevel[$mNumLevel["Prefix"]].Value() = $sSepBefore) ? ($iError) : (BitOR($iError, 16)))
-		$iError = (__LO_VarsAreNull($sSepAfter)) ? ($iError) : (($atNumLevel[$mNumLevel["Suffix"]].Value() = $sSepAfter) ? ($iError) : (BitOR($iError, 32)))
-		$iError = (__LO_VarsAreNull($iCharDecimal)) ? ($iError) : ((Asc($atNumLevel[$mNumLevel["BulletChar"]].Value()) = $iCharDecimal) ? ($iError) : (BitOR($iError, 64)))
-	Next
-
-	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_ShapePresStyleNumCustomize
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStyleParAlignment
-; Description ...: Set and Retrieve Paragraph Alignment settings for a Presentation Style.
-; Syntax ........: _LODraw_ShapePresStyleParAlignment(ByRef $oPresStyle[, $iHorAlign = Null[, $iLastLineAlign = Null[, $iTxtDirection = Null]]])
-; Parameters ....: $oPresStyle          - A Presentation Style object returned by a previous _LODraw_ShapePresStyleGetObjByName function.
-;                  $iHorAlign           - [optional] (0-3) Default is Null. The Horizontal alignment of the paragraph. See Constants, $LOD_PAR_ALIGN_HOR_* as defined in LibreOfficeDraw_Constants.au3. See Remarks.
-;                  $iLastLineAlign      - [optional] (0-3) Default is Null. Specify the alignment for the last line in the paragraph. See Constants, $LOD_PAR_LAST_LINE_* as defined in LibreOfficeDraw_Constants.au3. See Remarks.
-;                  $iTxtDirection       - [optional] (0-5) Default is Null. The Text Writing Direction. See Constants, $LOD_PAR_TXT_DIR_* as defined in LibreOfficeDraw_Constants.au3. [LibreOffice Default is 4]
-; Return values .: Success: 1 or Array.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oPresStyle not an Object.
-;                  @Error: 1, @Extended: 2 = $iHorAlign not an Integer, less than 0 or greater than 3. See Constants, $LOD_PAR_ALIGN_HOR_* as defined in LibreOfficeDraw_Constants.au3.
-;                  @Error: 1, @Extended: 3 = $iLastLineAlign not an Integer, less than 0 or greater than 3. See Constants, $LOD_PAR_LAST_LINE_* as defined in LibreOfficeDraw_Constants.au3.
-;                  @Error: 1, @Extended: 4 = $iTxtDirection not an Integer, less than 0 or greater than 5. See Constants, $LOD_PAR_TXT_DIR_* as defined in LibreOfficeDraw_Constants.au3.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $iHorAlign
-;                  |                               2 = Error setting $iLastLineALign
-;                  |                               4 = Error setting $iTxtDirection
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: $iHorAlign must be set to $LOD_PAR_ALIGN_HOR_JUSTIFIED(2) before you can set $iLastLineAlign.
-;                  $iTxtDirection constants 2,3, and 5 may not be available depending on your language settings.
-;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-;                  Expand single word, Snap to grid, and Vertical align (Text-To-Text), seem to be unavailable in the API, and do not seem to work in LibreOffice.
-; Related .......: _LODraw_ShapeParAlignment, _LODraw_ShapePresStyleParIndent, _LODraw_ShapePresStyleParSpacing, _LODraw_ShapeStyleParAlignment
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStyleParAlignment(ByRef $oPresStyle, $iHorAlign = Null, $iLastLineAlign = Null, $iTxtDirection = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$vReturn = __LODraw_ParAlignment($oPresStyle, $iHorAlign, $iLastLineAlign, $iTxtDirection)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_ShapePresStyleParAlignment
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStyleParIndent
-; Description ...: Set or Retrieve Paragraph Indent settings for a Presentation Style.
-; Syntax ........: _LODraw_ShapePresStyleParIndent(ByRef $oPresStyle[, $iBeforeTxt = Null[, $iAfterTxt = Null[, $iFirstLine = Null]]])
-; Parameters ....: $oPresStyle          - A Presentation Style object returned by a previous _LODraw_ShapePresStyleGetObjByName function.
-;                  $iBeforeTxt          - [optional] (0-1162202) Default is Null. The amount of space that you want to indent the paragraph from the page margin. Set in Hundredths of a Millimeter (HMM).
-;                  $iAfterTxt           - [optional] (0-1162202) Default is Null. The amount of space that you want to indent the paragraph from the page margin. Set in Hundredths of a Millimeter (HMM)
-;                  $iFirstLine          - [optional] (0-1162202) Default is Null. Indentation distance of the first line of a paragraph. Set in Hundredths of a Millimeter (HMM).
-; Return values .: Success: 1 or Array.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oPresStyle not an Object.
-;                  @Error: 1, @Extended: 2 = $iBeforeTxt not an Integer, less than 0 or greater than 1162202.
-;                  @Error: 1, @Extended: 3 = $iAfterTxt not an Integer, less than 0 or greater than 1162202.
-;                  @Error: 1, @Extended: 4 = $iFirstLine not an Integer, less than 0 or greater than 1162202.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $iBeforeTxt
-;                  |                               2 = Error setting $iAfterTxt
-;                  |                               4 = Error setting $iFirstLine
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-;                  Auto indent first line does not seem to work in LibreOffice, and seems to be not available in the API.
-; Related .......: _LO_UnitConvert, _LODraw_ShapeParIndent, _LODraw_ShapePresStyleParAlignment, _LODraw_ShapePresStyleParSpacing, _LODraw_ShapeStyleParIndent
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStyleParIndent(ByRef $oPresStyle, $iBeforeTxt = Null, $iAfterTxt = Null, $iFirstLine = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$vReturn = __LODraw_ParIndent($oPresStyle, $iBeforeTxt, $iAfterTxt, $iFirstLine)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_ShapePresStyleParIndent
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStyleParSpacing
-; Description ...: Set and Retrieve Line Spacing settings for a Presentation Style.
-; Syntax ........: _LODraw_ShapePresStyleParSpacing(ByRef $oPresStyle[, $iAbovePar = Null[, $iBelowPar = Null[, $iLineSpcMode = Null[, $iLineSpcHeight = Null]]]])
-; Parameters ....: $oPresStyle          - A Presentation Style object returned by a previous _LODraw_ShapePresStyleGetObjByName function.
-;                  $iAbovePar           - [optional] (0-100000) Default is Null. The Space above a paragraph, in Hundredths of a Millimeter (HMM).
-;                  $iBelowPar           - [optional] (0-100000) Default is Null. The Space Below a paragraph, in Hundredths of a Millimeter (HMM).
-;                  $iLineSpcMode        - [optional] (0-3) Default is Null. The line spacing type of the paragraph. See Constants, $LOD_PAR_LINE_SPC_MODE_* as defined in LibreOfficeDraw_Constants.au3, also notice min and max values for each.
-;                  $iLineSpcHeight      - [optional] Default is Null. This value specifies the height in regard to Mode. See Remarks.
-; Return values .: Success: 1 or Array.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oPresStyle not an Object.
-;                  @Error: 1, @Extended: 2 = $iAbovePar not an Integer, less than 0 or greater than 100000.
-;                  @Error: 1, @Extended: 3 = $iBelowPar not an Integer, less than 0 or greater than 100000.
-;                  @Error: 1, @Extended: 4 = $iLineSpcMode not an Integer, less than 0 or greater than 3. See Constants, $LOD_PAR_LINE_SPC_MODE_* as defined in LibreOfficeDraw_Constants.au3.
-;                  @Error: 1, @Extended: 5 = $iLineSpcHeight not an Integer.
-;                  @Error: 1, @Extended: 6 = $iLineSpcMode set to 0(Proportional) and $iLineSpcHeight less than 6(%) or greater than 65535(%).
-;                  @Error: 1, @Extended: 7 = $iLineSpcMode set to 1 or 2(Minimum, or Leading) and $iLineSpcHeight less than 0 or greater than 100000.
-;                  @Error: 1, @Extended: 8 = $iLineSpcMode set to 3(Fixed) and $iLineSpcHeight less than 51 or greater than 100000.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Error retrieving ParaLineSpacing Object.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $iAbovePar
-;                  |                               2 = Error setting $iBelowPar
-;                  |                               4 = Error setting $iLineSpcMode
-;                  |                               8 = Error setting $iLineSpcHeight
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: The settings in LibreOffice, (Single, 1.15, 1.5, Double), Use the Proportional mode, and are just varying percentages. e.g Single = 100, 1.15 = 115%, 1.5 = 150%, Double = 200%.
-;                  $iLineSpcHeight depends on the $iLineSpcMode used, see constants for accepted Input values.
-;                  $iAbovePar, $iBelowPar, $iLineSpcHeight may change +/- a Hundredth of a Millimeter (HMM) once set.
-;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-;                  The "Do not add space between paragraphs as the same style" setting seems to be not available to set or retrieve in the API, and seems to do nothing in LibreOffice anyway.
-; Related .......: _LO_UnitConvert, _LODraw_ShapePresStyleParAlignment, _LODraw_ShapePresStyleParIndent, _LODraw_ShapeParSpacing, _LODraw_ShapeStyleParSpacing
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStyleParSpacing(ByRef $oPresStyle, $iAbovePar = Null, $iBelowPar = Null, $iLineSpcMode = Null, $iLineSpcHeight = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$vReturn = __LODraw_ParSpacing($oPresStyle, $iAbovePar, $iBelowPar, $iLineSpcMode, $iLineSpcHeight)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_ShapePresStyleParSpacing
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStyleParTabStopCreate
-; Description ...: Create a new TabStop for a Presentation Style.
-; Syntax ........: _LODraw_ShapePresStyleParTabStopCreate(ByRef $oPresStyle, $iPosition[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]])
-; Parameters ....: $oPresStyle          - A Presentation Style object returned by a previous _LODraw_ShapePresStyleGetObjByName function.
-;                  $iPosition           - The TabStop position to set the new TabStop to. Set in Hundredths of a Millimeter (HMM). See Remarks.
-;                  $iAlignment          - [optional] (0-4) Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeDraw_Constants.au3.
-;                  $iDecChar            - [optional] Default is Null. Enter a character(in Asc Value(See AutoIt Asc Function)) that you want the decimal tab to use as a decimal separator. Can only be set if $iAlignment is set to $LOD_PAR_TAB_ALIGN_DECIMAL.
-;                  $iFillChar           - [optional] Default is Null. The Asc (see AutoIt function) value of any character (except 0/Null) you want to act as a Tab Fill character. See remarks.
-; Return values .: Success: Integer.
-;                  @Error: 0, @Extended: 0, Return: Integer = Success. Settings were successfully set. New TabStop position is returned.
-;                  Failure: 0 or Integer and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oPresStyle not an Object.
-;                  @Error: 1, @Extended: 2 = $iPosition not an Integer.
-;                  @Error: 1, @Extended: 3 = Tab Stop position called in $iPosition already exists in this Paragraph.
-;                  @Error: 1, @Extended: 4 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeDraw_Constants.au3.
-;                  @Error: 1, @Extended: 5 = $iDecChar not an Integer.
-;                  @Error: 1, @Extended: 6 = $iFillChar not an Integer.
-;                  --Initialization Errors--
-;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.style.TabStop" Object.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Error retrieving ParaTabStops Array Object.
-;                  @Error: 3, @Extended: 2 = Error retrieving list of TabStop Positions.
-;                  @Error: 3, @Extended: 3 = Failed to identify the new Tabstop once inserted.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $iPosition
-;                  |                               2 = Error setting $iAlignment
-;                  |                               4 = Error setting $iDecChar
-;                  |                               8 = Error setting $iFillChar
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: $iPosition once set can vary +/- a Hundredth of a Millimeter (HMM). To ensure you can identify the tabstop to modify it again, This function returns the new TabStop position.
-;                  Since $iPosition can fluctuate +/- a Hundredth of a Millimeter (HMM) when it is inserted into LibreOffice, it is possible to accidentally overwrite an already existing TabStop.
-;                  $iFillChar, Libre's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by Libre are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-;                  $iNewTabStop position is still returned as even though some settings weren't successfully set, the new TabStop was still created.
-; Related .......: _LO_UnitConvert, _LODraw_ShapePresStyleParTabStopDelete, _LODraw_ShapePresStyleParTabStopMod, _LODraw_ShapePresStyleParTabStopsGetList, _LODraw_ShapeParTabStopCreate, _LODraw_ShapeStyleParTabStopCreate
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStyleParTabStopCreate(ByRef $oPresStyle, $iPosition, $iAlignment = Null, $iDecChar = Null, $iFillChar = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$vReturn = __LODraw_ParTabStopCreate($oPresStyle, $iPosition, $iAlignment, $iDecChar, $iFillChar)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_ShapePresStyleParTabStopCreate
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStyleParTabStopDelete
-; Description ...: Delete a TabStop from a Presentation Style.
-; Syntax ........: _LODraw_ShapePresStyleParTabStopDelete(ByRef $oPresStyle, $iTabStop)
-; Parameters ....: $oPresStyle          - A Presentation Style object returned by a previous _LODraw_ShapePresStyleGetObjByName function.
-;                  $iTabStop            - The Tab position of the TabStop to modify. See Remarks.
-; Return values .: Success: Boolean.
-;                  @Error: 0, @Extended: 0, Return: Boolean = Returning True if TabStop was successfully deleted, else False.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oPresStyle not an Object.
-;                  @Error: 1, @Extended: 2 = $iTabStop not an Integer.
-;                  @Error: 1, @Extended: 3 = $iTabStop not found.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Error retrieving ParaTabStops Object.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: $iTabStop refers to the position, or essential the "length" of a TabStop from the edge of a page margin. This is the only reliable way to identify a Tabstop to be able to interact with it, as there can only be one of a certain length per paragraph.
-; Related .......: _LODraw_ShapePresStyleParTabStopCreate, _LODraw_ShapePresStyleParTabStopsGetList, _LODraw_ShapeParTabStopDelete, _LODraw_ShapeStyleParTabStopDelete
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStyleParTabStopDelete(ByRef $oPresStyle, $iTabStop)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$vReturn = __LODraw_ParTabStopDelete($oPresStyle, $iTabStop)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_ShapePresStyleParTabStopDelete
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStyleParTabStopMod
-; Description ...: Set or Retrieve the properties of an existing TabStop in a Shape Style.
-; Syntax ........: _LODraw_ShapePresStyleParTabStopMod(ByRef $oPresStyle, $iTabStop[, $iPosition = Null[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]]])
-; Parameters ....: $oPresStyle          - A Presentation Style object returned by a previous _LODraw_ShapePresStyleGetObjByName function.
-;                  $iTabStop            - The Tab position of the TabStop to modify. See Remarks.
-;                  $iPosition           - [optional] Default is Null. The New position to set the input position to. Set in Hundredths of a Millimeter (HMM). See Remarks.
-;                  $iAlignment          - [optional] (0-4) Default is Null. The position of where the end of a Tab is aligned to compared to the text. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeDraw_Constants.au3.
-;                  $iDecChar            - [optional] Default is Null. Enter a character(in Asc Value(See AutoIt Asc Function)) that you want the decimal tab to use as a decimal separator. Can only be set if $iAlignment is set to $LOD_PAR_TAB_ALIGN_DECIMAL.
-;                  $iFillChar           - [optional] Default is Null. The Asc (see AutoIt function) value of any character (except 0/Null) you want to act as a Tab Fill character. See remarks.
-; Return values .: Success: Integer or Array.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 4 Element Array with values in order of function parameters.
-;                  @Error: 0, @Extended: ?, Return: 2 = Success. Settings were successfully set. New TabStop position is returned in @Extended.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oPresStyle not an Object.
-;                  @Error: 1, @Extended: 2 = $iTabStop not an Integer.
-;                  @Error: 1, @Extended: 3 = TabStop called in $iTabStop not found.
-;                  @Error: 1, @Extended: 4 = $iPosition not an Integer.
-;                  @Error: 1, @Extended: 5 = $iAlignment not an Integer, less than 0 or greater than 4. See Constants, $LOD_PAR_TAB_ALIGN_* as defined in LibreOfficeDraw_Constants.au3.
-;                  @Error: 1, @Extended: 6 = $iDecChar not an Integer.
-;                  @Error: 1, @Extended: 7 = $iFillChar not an Integer.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Error retrieving ParaTabStops Object.
-;                  @Error: 3, @Extended: 2 = Error retrieving Requested TabStop Object.
-;                  @Error: 3, @Extended: 3 = Paragraph already contains a TabStop at the length/Position specified in $iPosition.
-;                  @Error: 3, @Extended: 4 = Error retrieving list of TabStop Positions.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $iPosition
-;                  |                               2 = Error setting $iAlignment
-;                  |                               4 = Error setting $iDecChar
-;                  |                               8 = Error setting $iFillChar
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: $iTabStop refers to the position, or essential the "length" of a TabStop from the edge of a page margin. This is the only reliable way to identify a Tabstop to be able to interact with it, as there can only be one of a certain length per Paragraph.
-;                  $iPosition once set can vary +/- a Hundredth of a Millimeter (HMM). To ensure you can identify the tabstop to modify it again, This function returns the new TabStop position in @Extended when $iPosition is set, return value will be set to 2. See Return Values.
-;                  Since $iPosition can fluctuate +/- a Hundredth of a Millimeter (HMM) when it is inserted into LibreOffice, it is possible to accidentally overwrite an already existing TabStop.
-;                  $iFillChar, Libre's Default value, "None" is in reality a space character which is Asc value 32. The other values offered by Libre are: Period (ASC 46), Dash (ASC 45) and Underscore (ASC 95). You can also enter a custom ASC value. See ASC AutoIt Func. and "ASCII Character Codes" in the AutoIt help file.
-;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LODraw_ShapePresStyleParTabStopCreate, _LODraw_ShapePresStyleParTabStopsGetList, _LODraw_ShapeParTabStopMod, _LODraw_ShapeStyleParTabStopMod
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStyleParTabStopMod(ByRef $oPresStyle, $iTabStop, $iPosition = Null, $iAlignment = Null, $iDecChar = Null, $iFillChar = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$vReturn = __LODraw_ParTabStopMod($oPresStyle, $iTabStop, $iPosition, $iAlignment, $iDecChar, $iFillChar)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_ShapePresStyleParTabStopMod
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStyleParTabStopsGetList
-; Description ...: Retrieve an array of TabStops available in a Presentation Style.
-; Syntax ........: _LODraw_ShapePresStyleParTabStopsGetList(ByRef $oPresStyle)
-; Parameters ....: $oPresStyle          - A Presentation Style object returned by a previous _LODraw_ShapePresStyleGetObjByName function.
-; Return values .: Success: Array.
-;                  @Error: 0, @Extended: ?, Return: Array = Success. An Array of TabStops. @Extended set to number of results.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oPresStyle not an Object.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Error retrieving ParaTabStops Object.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......:
-; Related .......: _LODraw_ShapePresStyleParTabStopCreate, _LODraw_ShapePresStyleParTabStopDelete, _LODraw_ShapePresStyleParTabStopMod, _LODraw_ShapeParTabStopsGetList, _LODraw_ShapeStyleParTabStopsGetList
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStyleParTabStopsGetList(ByRef $oPresStyle)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$vReturn = __LODraw_ParTabStopsGetList($oPresStyle)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_ShapePresStyleParTabStopsGetList
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStylesGetNames
-; Description ...: Retrieve an array of all Presentation Style names available for a document.
-; Syntax ........: _LODraw_ShapePresStylesGetNames(ByRef $oDoc[, $bAppliedOnly = False[, $bDisplayName = False]])
-; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
-;                  $bAppliedOnly        - [optional] Default is False. If True, only Applied Presentation Styles are returned.
-;                  $bDisplayName        - [optional] Default is False. If True, the style name displayed in the UI (Display Name), instead of the programmatic style name, is returned. See remarks.
-; Return values .: Success: Array
-;                  @Error: 0, @Extended: ?, Return: Array = Success. An Array containing all Presentation Styles matching the called parameters. See remarks. @Extended contains the count of results returned.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
-;                  @Error: 1, @Extended: 2 = $bAppliedOnly not a Boolean.
-;                  @Error: 1, @Extended: 3 = $bDisplayName not a Boolean.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to retrieve Array of Presentation Style names.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: If Only a Document object is called, all available Presentation styles will be returned.
-;                  If $bAppliedOnly is called with True, only styles that are applied are returned.
-;                  Ten Presentation styles have different internal names:
-;                  - "Background objects" is internally called "backgroundobjects".
-;                  - "Outline 1" is internally called "outline1".
-;                  - "Outline 2" is internally called "outline2".
-;                  - "Outline 3" is internally called "outline3".
-;                  - "Outline 4" is internally called "outline4".
-;                  - "Outline 5" is internally called "outline5".
-;                  - "Outline 6" is internally called "outline6".
-;                  - "Outline 7" is internally called "outline7".
-;                  - "Outline 8" is internally called "outline8".
-;                  - "Outline 9" is internally called "outline9".
-;                  Previous to LibreOffice 25.2 either name would work when setting a Style, however after 25.2 only the internal, or programmatic style names, will work.
-;                  Calling $bDisplayName with True will return a list of Style names, as the user sees them in the UI, in the same order as they are returned if $bDisplayName is False. It is best not to use these when setting Styling.
-; Related .......: _LODraw_ShapePresStyleGetObjByName, _LODraw_ShapeStylesGetNames
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStylesGetNames(ByRef $oDoc, $bAppliedOnly = False, $bDisplayName = False)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $asStyles[0]
-
-	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsBool($bAppliedOnly) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not IsBool($bDisplayName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-	$asStyles = __LO_StylesGetNames($oDoc, "Default", False, $bAppliedOnly, $bDisplayName)
-	If Not IsArray($asStyles) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-	Return SetError($__LO_STATUS_SUCCESS, UBound($asStyles), $asStyles)
-EndFunc   ;==>_LODraw_ShapePresStylesGetNames
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStyleTextAttrFit
-; Description ...: Set or Retrieve Presentation Style Text Attribute Fit properties.
-; Syntax ........: _LODraw_ShapePresStyleTextAttrFit(ByRef $oPresStyle[, $bFitWidth = Null[, $bFitHeight = Null[, $bFitToFrame = Null]]])
-; Parameters ....: $oPresStyle          - A Presentation Style object returned by a previous _LODraw_ShapePresStyleGetObjByName function.
-;                  $bFitWidth           - [optional] Default is Null. If True, Expands the width of the object to the width of the text.
-;                  $bFitHeight          - [optional] Default is Null. If True, Expands the height of the object to the height of the text.
-;                  $bFitToFrame         - [optional] Default is Null. If True, Resizes the text to fit the entire area of the drawing object.
-; Return values .: Success: 1 or Array.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oPresStyle not an Object.
-;                  @Error: 1, @Extended: 2 = $bFitWidth not a Boolean.
-;                  @Error: 1, @Extended: 3 = $bFitHeight not a Boolean.
-;                  @Error: 1, @Extended: 4 = $bFitToFrame not a Boolean.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
-;                  |                               1 = Error setting $bFitWidth
-;                  |                               2 = Error setting $bFitHeight
-;                  |                               4 = Error setting $bFitToFrame
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: Properties as found in the UI, and their equivalent: "Fit Width to Text" = $bFitWidth. "Fit Height to Text" = $bFitHeight. "Fit to Frame" = $bFitToFrame.
-;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LODraw_ShapePresStyleTextAttrSettings, _LODraw_ShapeStyleTextAttrFit, _LODraw_ShapeTextAttrFit
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStyleTextAttrFit(ByRef $oPresStyle, $bFitWidth = Null, $bFitHeight = Null, $bFitToFrame = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local Const $__LOD_TEXT_FIT_NONE = 0, $__LOD_TEXT_FIT_PROP = 1 ; com.sun.star.drawing.TextFitToSizeType
-	Local $iError = 0
-	Local $avTextAttr[3]
-
-	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	If __LO_VarsAreNull($bFitWidth, $bFitHeight, $bFitToFrame) Then
-		__LO_ArrayFill($avTextAttr, $oPresStyle.TextAutoGrowWidth(), $oPresStyle.TextAutoGrowHeight(), ($oPresStyle.TextFitToSize() = $__LOD_TEXT_FIT_PROP) ? (True) : (False))
-
-		Return SetError($__LO_STATUS_SUCCESS, 1, $avTextAttr)
-	EndIf
-
-	; I could use the internal function __LODraw_ShapeTextAttrFit, but I would have to ReDim the Array returned, this is simpler.
-	If ($bFitWidth <> Null) Then
-		If Not IsBool($bFitWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-		$oPresStyle.TextAutoGrowWidth = $bFitWidth
-		$iError = ($oPresStyle.TextAutoGrowWidth() = $bFitWidth) ? ($iError) : (BitOR($iError, 1))
-	EndIf
-
-	If ($bFitHeight <> Null) Then
-		If Not IsBool($bFitHeight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-
-		$oPresStyle.TextAutoGrowHeight = $bFitHeight
-		$iError = ($oPresStyle.TextAutoGrowHeight() = $bFitHeight) ? ($iError) : (BitOR($iError, 2))
-	EndIf
-
-	If ($bFitToFrame <> Null) Then
-		If Not IsBool($bFitToFrame) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-
-		$oPresStyle.TextFitToSize = ($bFitToFrame) ? ($__LOD_TEXT_FIT_PROP) : ($__LOD_TEXT_FIT_NONE)
-		$iError = ($oPresStyle.TextFitToSize() = ($bFitToFrame) ? ($__LOD_TEXT_FIT_PROP) : ($__LOD_TEXT_FIT_NONE)) ? ($iError) : (BitOR($iError, 4))
-	EndIf
-
-	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
-EndFunc   ;==>_LODraw_ShapePresStyleTextAttrFit
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LODraw_ShapePresStyleTextAttrSettings
-; Description ...: Set or Retrieve Presentation Style text Attribute settings.
-; Syntax ........: _LODraw_ShapePresStyleTextAttrSettings(ByRef $oPresStyle[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null[, $iAnchor = Null[, $bFullWidth = Null]]]]]])
-; Parameters ....: $oPresStyle          - A Presentation Style object returned by a previous _LODraw_ShapePresStyleGetObjByName function.
-;                  $iLeft               - [optional] (-100000-100000) Default is Null. The space between the left edge of the drawing object and the left border of the text, in Hundredths of a Millimeter (HMM).
-;                  $iRight              - [optional] (-100000-100000) Default is Null. The space between the right edge of the drawing object and the right border of the text, in Hundredths of a Millimeter (HMM).
-;                  $iTop                - [optional] (-100000-100000) Default is Null. The space between the top edge of the drawing object and the top border of the text, in Hundredths of a Millimeter (HMM).
-;                  $iBottom             - [optional] (-100000-100000) Default is Null. The space between the bottom edge of the drawing object and the bottom border of the text, in Hundredths of a Millimeter (HMM).
-;                  $iAnchor             - [optional] (0-8) Default is Null. The text anchor position. See Constants, $LOD_PAR_TEXT_ANCHOR_* as defined in LibreOfficeDraw_Constants.au3.
-;                  $bFullWidth          - [optional] Default is Null. If True, Anchors the text to the full width of the drawing object.
-; Return values .: Success: 1 or Array.
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oPresStyle not an Object.
-;                  @Error: 1, @Extended: 2 = $iLeft not an Integer, less than -100000 or greater than 100000.
-;                  @Error: 1, @Extended: 3 = $iRight not an Integer, less than -100000 or greater than 100000.
-;                  @Error: 1, @Extended: 4 = $iTop not an Integer, less than -100000 or greater than 100000.
-;                  @Error: 1, @Extended: 5 = $iBottom not an Integer, less than -100000 or greater than 100000.
-;                  @Error: 1, @Extended: 6 = $iAnchor not an Integer, less than 0 or greater than 8. See Constants, $LOD_PAR_TEXT_ANCHOR_* as defined in LibreOfficeDraw_Constants.au3.
-;                  @Error: 1, @Extended: 7 = $bFullWidth not a Boolean.
-;                  --Property Setting Errors--
-;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
-;                  |                               1 = Error setting $iLeft
-;                  |                               2 = Error setting $iRight
-;                  |                               4 = Error setting $iTop
-;                  |                               8 = Error setting $iBottom
-;                  |                               16 = Error setting $iAnchor
-;                  |                               32 = Error setting $bFullWidth
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LO_UnitConvert, _LODraw_ShapePresStyleTextAttrFit, _LODraw_ShapeStyleTextAttrSettings, _LODraw_ShapeTextAttrSettings
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LODraw_ShapePresStyleTextAttrSettings(ByRef $oPresStyle, $iLeft = Null, $iRight = Null, $iTop = Null, $iBottom = Null, $iAnchor = Null, $bFullWidth = Null)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	Local $vReturn
-
-	If Not IsObj($oPresStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$vReturn = __LODraw_ShapeTextAttrSettings($oPresStyle, $iLeft, $iRight, $iTop, $iBottom, $iAnchor, $bFullWidth)
-
-	Return SetError(@error, @extended, $vReturn)
-EndFunc   ;==>_LODraw_ShapePresStyleTextAttrSettings
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LODraw_ShapeRotateSlant
@@ -5270,7 +3580,6 @@ EndFunc   ;==>_LODraw_ShapeStyleCreate
 ; Return values .: Success: 1 or String.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Drawing/Shape Style successfully set.
 ;                  @Error: 0, @Extended: 1, Return: String = Success. All optional parameters were called with Null, returning current Drawing/Shape Style name set for the Shape.
-;                  @Error: 0, @Extended: 2, Return: String = Success. All optional parameters were called with Null, returning current Presentation Style name set for the Shape.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
@@ -5278,7 +3587,6 @@ EndFunc   ;==>_LODraw_ShapeStyleCreate
 ;                  @Error: 1, @Extended: 3 = $oShape does not support Shape Service.
 ;                  @Error: 1, @Extended: 4 = $sShapeStyle not a String.
 ;                  @Error: 1, @Extended: 5 = Drawing/Shape Style called in $sShapeStyle not found in Document.
-;                  @Error: 1, @Extended: 6 = Can't set Drawing/Shape Style for Title/Subtitle/Outline text box, or other non-user created shapes.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve current Drawing/Shape Style name.
 ;                  --Property Setting Errors--
@@ -5309,17 +3617,11 @@ Func _LODraw_ShapeStyleCurrent(ByRef $oDoc, ByRef $oShape, $sShapeStyle = Null)
 		$sCurrStyle = $oShape.Style.Name()
 		If Not IsString($sCurrStyle) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-		If $oShape.IsPresentationObject() Then ; Presentation Objects (Title, Subtitle, Outline textboxes etc) only have Presentation styles.
-
-			Return SetError($__LO_STATUS_SUCCESS, 2, $sCurrStyle) ; Style is a Presentation Style.
-		EndIf
-
 		Return SetError($__LO_STATUS_SUCCESS, 1, $sCurrStyle) ; Style is a Graphics/Drawing/Shape Style.
 	EndIf
 
 	If Not IsString($sShapeStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If Not _LODraw_ShapeStyleExists($oDoc, $sShapeStyle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-	If $oShape.IsPresentationObject() Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0) ; If this is a presentation object, this property is TRUE, Presentation objects are objects like TitleTextShape and OutlinerShape. Can't modify Presentation Objects.
 
 	$oShapeStyle = $oDoc.StyleFamilies().getByName("graphics").getByName($sShapeStyle)
 	If Not IsObj($oShapeStyle) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
@@ -6366,7 +4668,8 @@ EndFunc   ;==>_LODraw_ShapeTextAttrAnimation
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create com.sun.star.text.TextColumns Object.
 ;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to retrieve parent Document Object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve parent Page Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve parent Document Object.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $iColumns
@@ -6387,14 +4690,17 @@ Func _LODraw_ShapeTextAttrColumns(ByRef $oShape, $iColumns = Null, $iSpacing = N
 	#forceref $oCOM_ErrorHandler
 
 	Local $iError = 0
-	Local $oDoc, $oTextColumns
+	Local $oDoc, $oPage, $oTextColumns
 	Local $aiColumns[2]
 
 	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not __LO_VersionCheck(7.2) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
-	$oDoc = __LODraw_GetParentDoc($oShape.Parent())
-	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	$oPage = $oShape.Parent()
+	If Not IsObj($oPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$oDoc = __LODraw_GetParentDoc($oPage)
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$oTextColumns = $oShape.TextColumns()
 
@@ -6549,9 +4855,8 @@ EndFunc   ;==>_LODraw_ShapeTextAttrSettings
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LODraw_ShapeTextBoxInsert
 ; Description ...: Create and Insert a Text box into a Page.
-; Syntax ........: _LODraw_ShapeTextBoxInsert(ByRef $oObj, $iTextBoxType, $iWidth, $iHeight[, $iX = -1[, $iY = -1]])
+; Syntax ........: _LODraw_ShapeTextBoxInsert(ByRef $oObj, $iWidth, $iHeight[, $iX = -1[, $iY = -1]])
 ; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
-;                  $iTextBoxType        - (0-3) The type of Text Box to create. See Constants, $LOD_SHAPE_TEXTBOX_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iWidth              - The Text Box's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Text Box's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - [optional] Default is -1. The X position from the top-left of the page, in Hundredths of a Millimeter (HMM). Call with -1 to center the Text Box horizontally.
@@ -6561,13 +4866,12 @@ EndFunc   ;==>_LODraw_ShapeTextAttrSettings
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
-;                  @Error: 1, @Extended: 2 = $iTextBoxType not an Integer, less than 0 or greater than 3. See Constants, $LOD_SHAPE_TEXTBOX_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
-;                  @Error: 1, @Extended: 3 = $iWidth not an Integer.
-;                  @Error: 1, @Extended: 4 = $iHeight not an Integer.
-;                  @Error: 1, @Extended: 5 = $iX not an Integer.
-;                  @Error: 1, @Extended: 6 = $iY not an Integer.
+;                  @Error: 1, @Extended: 2 = $iWidth not an Integer.
+;                  @Error: 1, @Extended: 3 = $iHeight not an Integer.
+;                  @Error: 1, @Extended: 4 = $iX not an Integer.
+;                  @Error: 1, @Extended: 5 = $iY not an Integer.
 ;                  --Initialization Errors--
-;                  @Error: 2, @Extended: 1 = Failed to create the requested Text Box type.
+;                  @Error: 2, @Extended: 1 = Failed to create a Text Box.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve parent Document Object.
 ;                  @Error: 3, @Extended: 2 = Failed to retrieve Position Structure.
@@ -6579,7 +4883,7 @@ EndFunc   ;==>_LODraw_ShapeTextAttrSettings
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LODraw_ShapeTextBoxInsert(ByRef $oObj, $iTextBoxType, $iWidth, $iHeight, $iX = -1, $iY = -1)
+Func _LODraw_ShapeTextBoxInsert(ByRef $oObj, $iWidth, $iHeight, $iX = -1, $iY = -1)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
@@ -6587,32 +4891,16 @@ Func _LODraw_ShapeTextBoxInsert(ByRef $oObj, $iTextBoxType, $iWidth, $iHeight, $
 	Local $tSize, $tPos
 
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LO_IntIsBetween($iTextBoxType, $LOD_SHAPE_TEXTBOX_TYPE_TEXTBOX, $LOD_SHAPE_TEXTBOX_TYPE_TITLE) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not IsInt($iWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	If Not IsInt($iHeight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If Not IsInt($iX) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-	If Not IsInt($iY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+	If Not IsInt($iWidth) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsInt($iHeight) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsInt($iX) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not IsInt($iY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 	$oDoc = __LODraw_GetParentDoc($oObj)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	Switch $iTextBoxType
-		Case $LOD_SHAPE_TEXTBOX_TYPE_TEXTBOX
 			$oShape = $oDoc.createInstance("com.sun.star.drawing.TextShape")
 			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-
-		Case $LOD_SHAPE_TEXTBOX_TYPE_OUTLINE
-			$oShape = $oDoc.createInstance("com.sun.star.presentation.OutlinerShape")
-			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-
-		Case $LOD_SHAPE_TEXTBOX_TYPE_SUBTITLE
-			$oShape = $oDoc.createInstance("com.sun.star.presentation.SubtitleShape")
-			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-
-		Case $LOD_SHAPE_TEXTBOX_TYPE_TITLE
-			$oShape = $oDoc.createInstance("com.sun.star.presentation.TitleTextShape")
-			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-	EndSwitch
 
 	$oObj.add($oShape)
 
