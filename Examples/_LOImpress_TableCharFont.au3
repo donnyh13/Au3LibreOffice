@@ -45,19 +45,15 @@ Func Example()
 		Next
 	Next
 
-	; Retrieve top left Table Cell Object
-	$oCell = _LOImpress_TableCellGetObjByPosition($oTable, 0, 0)
-	If @error Then _ERROR($oDoc, "Failed to retrieve Table cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-
 	; Set the Cell's Font to "Arial", Font size to 18, Posture (Italic) to $LOI_CHAR_POSTURE_ITALIC, and weight (Bold) to $LOI_CHAR_WEIGHT_BOLD
-	_LOImpress_TableCellCharFont($oCell, "Arial", 18, $LOI_CHAR_POSTURE_ITALIC, $LOI_CHAR_WEIGHT_BOLD)
-	If @error Then _ERROR($oDoc, "Failed to set the Cell's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	_LOImpress_TableCharFont($oTable, "Arial", 18, $LOI_CHAR_POSTURE_ITALIC, $LOI_CHAR_WEIGHT_BOLD)
+	If @error Then _ERROR($oDoc, "Failed to set the Table's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve the current settings. Return will be an array with element values in order of function parameters.
-	$avSettings = _LOImpress_TableCellCharFont($oCell)
-	If @error Then _ERROR($oDoc, "Failed to retrieve the Cell's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	$avSettings = _LOImpress_TableCharFont($oTable)
+	If @error Then _ERROR($oDoc, "Failed to retrieve the Table's settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Cell's current Font settings are as follows: " & @CRLF & _
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Table's current Font settings are as follows: " & @CRLF & _
 			"Font name: " & $avSettings[0] & @CRLF & _
 			"Font size: " & $avSettings[1] & @CRLF & _
 			"Italic/Posture setting (See UDF Constants): " & $avSettings[2] & @CRLF & _
