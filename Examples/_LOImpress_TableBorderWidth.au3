@@ -28,7 +28,7 @@ Func Example()
 	_LOImpress_TableBorderWidth($oTable, $LOI_SHAPE_BORDER_WIDTH_THICK, $LOI_SHAPE_BORDER_WIDTH_THICK, $LOI_SHAPE_BORDER_WIDTH_THICK, $LOI_SHAPE_BORDER_WIDTH_THICK, $LOI_SHAPE_BORDER_WIDTH_THICK, $LOI_SHAPE_BORDER_WIDTH_THICK)
 	If @error Then _ERROR($oDoc, "Failed to set Table Border width settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve current Border Style settings. Return will be an array in order of function parameters.
+	; Retrieve current Border settings. Return will be an array in order of function parameters.
 	$avSettings = _LOImpress_TableBorderWidth($oTable)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Table Border Width settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
