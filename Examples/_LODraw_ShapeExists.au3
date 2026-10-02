@@ -28,7 +28,7 @@ Func Example()
 	$bReturn = _LODraw_ShapeExists($oDoc, "AutoIt-Shape")
 	If @error Then _ERROR($oDoc, "Failed to look for Shape name. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Does this Slideshow contain a Shape named ""AutoIt-Shape""? True/ False. " & $bReturn)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Does this Page contain a Shape named ""AutoIt-Shape""? True/ False. " & $bReturn)
 
 	; Delete the Shape.
 	_LODraw_ShapeDelete($oShape)
@@ -38,7 +38,7 @@ Func Example()
 	$bReturn = _LODraw_ShapeExists($oDoc, "AutoIt-Shape")
 	If @error Then _ERROR($oDoc, "Failed to look for Shape name. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Now does this Slideshow document contain a Shape named ""AutoIt-Shape""? True/ False. " & $bReturn)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Now does this Page contain a Shape named ""AutoIt-Shape""? True/ False. " & $bReturn)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

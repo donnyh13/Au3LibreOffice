@@ -90,7 +90,7 @@ Func Example()
 				"And the current display of the field is: " & _LODraw_FieldCurrentDisplayGet($avFields[$i][0]) & @CRLF & @CRLF
 	Next
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "I Found " & $iResults & " fields, the Fields found are: " & @CRLF & @CRLF & $sString)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "I found " & $iResults & " fields, the Fields found are: " & @CRLF & @CRLF & $sString)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

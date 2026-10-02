@@ -43,7 +43,7 @@ Func Example()
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to insert two rows at the bottom of the table.")
 
 	_LODraw_TableRowInsert($oTable, 2, $iRow)
-	If @error Then _ERROR($oDoc, "Failed to insert a Table ROw. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+	If @error Then _ERROR($oDoc, "Failed to insert a Table Row. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

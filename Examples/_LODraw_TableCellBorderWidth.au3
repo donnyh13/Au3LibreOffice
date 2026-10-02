@@ -28,7 +28,7 @@ Func Example()
 	_LODraw_TableCellBorderWidth($oCell, $LOD_SHAPE_BORDER_WIDTH_THICK, $LOD_SHAPE_BORDER_WIDTH_THICK, $LOD_SHAPE_BORDER_WIDTH_THICK, $LOD_SHAPE_BORDER_WIDTH_THICK)
 	If @error Then _ERROR($oDoc, "Failed to set Cell Border width settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve current Border Style settings. Return will be an array in order of function parameters.
+	; Retrieve current Border settings. Return will be an array in order of function parameters.
 	$avSettings = _LODraw_TableCellBorderWidth($oCell)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Border Width settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
