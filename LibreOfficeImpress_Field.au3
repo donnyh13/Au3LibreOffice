@@ -336,7 +336,7 @@ EndFunc   ;==>_LOImpress_FieldDateTimeInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-;                  To retrieve the current date/time's values pass the returned structure from to function to _LOImpress_DateStructModify.
+;                  To retrieve the current date/time's values pass the returned structure from this function to _LOImpress_DateStructModify.
 ; Related .......: _LOImpress_FieldDateTimeInsert, _LOImpress_DateStructModify, _LOImpress_FieldCurrentDisplayGet
 ; Link ..........:
 ; Example .......: Yes
