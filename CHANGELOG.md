@@ -107,7 +107,6 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOI_SHAPE_LINE_JOINT_*
   - $LOI_SHAPE_LINE_STYLE_*
   - $LOI_SHAPE_SHADOW_LOCATION_*
-  - $LOI_SHAPE_TABLE_CELL_TYPE_*
   - $LOI_SHAPE_TEXTBOX_TYPE_*
   - $LOI_SHAPE_TYPE_*
   - $LOI_SLIDE_DT_FMT_*
