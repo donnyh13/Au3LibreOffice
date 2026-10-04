@@ -884,21 +884,22 @@ Global Enum Step *2 _
 		$LOI_SHAPE_TYPE_DRAWING_SHAPE, _                             ; 8 - All shapes, 3D Shapes, Basic Shapes, Block Arrows, Flowcharts, Callouts, Lines, Connectors, Fontwork etc.
 		$LOI_SHAPE_TYPE_FOOTER, _                                    ; 16 A Footer text shape, as is found in the footer of Notes, Handouts or Master slide.
 		$LOI_SHAPE_TYPE_FORM_CONTROL, _                              ; 32 - Form Controls.
-		$LOI_SHAPE_TYPE_HANDOUT, _                                   ; 64 A Handouts page shape, as found in the Master Handouts preview page.
-		$LOI_SHAPE_TYPE_HEADER, _                                    ; 128 A Header text shape, as is found in the footer of Notes, Handouts or Master slide.
-		$LOI_SHAPE_TYPE_IMAGE, _                                     ; 256 - An Image, Barcode or QR code.
-		$LOI_SHAPE_TYPE_MEDIA, _                                     ; 512 - A Video or Audio shape.
-		$LOI_SHAPE_TYPE_NOTES, _                                     ; 1024 A Notes page shape, as found in the slide and master slide notes pages.
-		$LOI_SHAPE_TYPE_OLE2, _                                      ; 2048 - An OLE2 shape, such as a Chart, Formula etc.
-		$LOI_SHAPE_TYPE_ORG_CHART, _                                 ; 4096 An Org Chart shape. (I have not encountered this shape yet, but it is included here for error prevention.)
-		$LOI_SHAPE_TYPE_PAGE, _                                      ; 8192 A Page preview shape, as found in the notes and handouts pages.
-		$LOI_SHAPE_TYPE_SLIDE_NUM, _                                 ; 16384 A slide number shape, as found in notes, handouts and master slides.
-		$LOI_SHAPE_TYPE_TABLE, _                                     ; 32768 - A Table.
-		$LOI_SHAPE_TYPE_TEXTBOX, _                                   ; 65536 - A Text Box, including Hyperlinks, and most Fields.
-		$LOI_SHAPE_TYPE_TEXTBOX_SUBTITLE, _                          ; 131072 - A Slide Subtitle Text Box.
-		$LOI_SHAPE_TYPE_TEXTBOX_TITLE, _                             ; 262144 - A Slide Title Text Box.
-		$LOI_SHAPE_TYPE_TEXTBOX_OUTLINE, _                           ; 524288 - A Slide Outline Text Box.
-		$LOI_SHAPE_TYPE_ALL = 1048575                                ; 1048575 All types above.
+		$LOI_SHAPE_TYPE_GROUP, _                                     ; 64 - A Group of shapes.
+		$LOI_SHAPE_TYPE_HANDOUT, _                                   ; 128 A Handouts page shape, as found in the Master Handouts preview page.
+		$LOI_SHAPE_TYPE_HEADER, _                                    ; 256 A Header text shape, as is found in the footer of Notes, Handouts or Master slide.
+		$LOI_SHAPE_TYPE_IMAGE, _                                     ; 512 - An Image, Barcode or QR code.
+		$LOI_SHAPE_TYPE_MEDIA, _                                     ; 1024 - A Video or Audio shape.
+		$LOI_SHAPE_TYPE_NOTES, _                                     ; 2048 A Notes page shape, as found in the slide and master slide notes pages.
+		$LOI_SHAPE_TYPE_OLE2, _                                      ; 4096 - An OLE2 shape, such as a Chart, Formula etc.
+		$LOI_SHAPE_TYPE_ORG_CHART, _                                 ; 8192 An Org Chart shape. (I have not encountered this shape yet, but it is included here for error prevention.)
+		$LOI_SHAPE_TYPE_PAGE, _                                      ; 16384 A Page preview shape, as found in the notes and handouts pages.
+		$LOI_SHAPE_TYPE_SLIDE_NUM, _                                 ; 32768 A slide number shape, as found in notes, handouts and master slides.
+		$LOI_SHAPE_TYPE_TABLE, _                                     ; 65536 - A Table.
+		$LOI_SHAPE_TYPE_TEXTBOX, _                                   ; 131072 - A Text Box, including Hyperlinks, and most Fields.
+		$LOI_SHAPE_TYPE_TEXTBOX_SUBTITLE, _                          ; 262144 - A Slide Subtitle Text Box.
+		$LOI_SHAPE_TYPE_TEXTBOX_TITLE, _                             ; 524288 - A Slide Title Text Box.
+		$LOI_SHAPE_TYPE_TEXTBOX_OUTLINE, _                           ; 1048576 - A Slide Outline Text Box.
+		$LOI_SHAPE_TYPE_ALL = 2097151                                ; 2097151 All types above.
 
 ; Slide Header/Footer Date and Time Display Format
 Global Const _
