@@ -1389,7 +1389,7 @@ EndFunc   ;==>_LODraw_ShapeExists
 ; Name ..........: _LODraw_ShapeGroupAdd
 ; Description ...: Add a shape to an existing group of shapes.
 ; Syntax ........: _LODraw_ShapeGroupAdd(ByRef $oGroup, ByRef $oShape)
-; Parameters ....: $oGroup              - A Group Shape object returned by a previous _LODraw_ShapeGroupCreate, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oGroup              - A Group Shape object returned by a previous _LODraw_ShapeGroupCreate, or _LODraw_ShapesGetList function.
 ;                  $oShape              - A Shape object returned by a previous _LODraw_DrawShapeInsert, or _LODraw_ShapesGetList function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully added shape to the group of shapes.
@@ -1445,10 +1445,10 @@ EndFunc   ;==>_LODraw_ShapeGroupAdd
 ;                  @Error: 1, @Extended: 3 = Item in $aoShapes not an Object. Returning problem element.
 ;                  @Error: 1, @Extended: 4 = Item in $aoShapes not found in same page as $oObj. Returning problem element.
 ;                  --Initialization Errors--
-;                  @Error: 2, @Extended: 1 = Failed to create a "com.sun.star.drawing.Shapes" Object.
+;                  @Error: 2, @Extended: 1 = Failed to create ServiceManager.
+;                  @Error: 2, @Extended: 2 = Failed to create a "com.sun.star.drawing.Shapes" Object.
 ;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to get parent Document for the page.
-;                  @Error: 3, @Extended: 2 = Failed to group shapes.
+;                  @Error: 3, @Extended: 1 = Failed to group shapes.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: The Array expected in $aoShapes must be a single dimension, single column array, containing only shape Objects that are present on the same page.
@@ -1468,14 +1468,15 @@ Func _LODraw_ShapeGroupCreate(ByRef $oObj, ByRef $aoShapes)
 	For $i = 0 To UBound($aoShapes) - 1
 		If Not IsObj($aoShapes[$i]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, $i)
 		If ($oObj <> $aoShapes[$i].Parent()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, $i) ; Called Master or normal page Object doesn't contain one of the shapes in the array. Can't group it.
+
 		Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 	Next
 
 	$oServiceManager = __LO_ServiceManager()
-	If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 	$oShapes = $oServiceManager.createInstance("com.sun.star.drawing.ShapeCollection")
-	If Not IsObj($oShapes) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+	If Not IsObj($oShapes) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
 	For $i = 0 To UBound($aoShapes) - 1
 		$oShapes.Add($aoShapes[$i]) ; Have to add the shapes to the Shapes collection before I can group them.
@@ -1483,7 +1484,7 @@ Func _LODraw_ShapeGroupCreate(ByRef $oObj, ByRef $aoShapes)
 	Next
 
 	$oGroup = $oObj.group($oShapes)
-	If Not IsObj($oGroup) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+	If Not IsObj($oGroup) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oGroup)
 EndFunc   ;==>_LODraw_ShapeGroupCreate
@@ -1492,7 +1493,7 @@ EndFunc   ;==>_LODraw_ShapeGroupCreate
 ; Name ..........: _LODraw_ShapeGroupDelete
 ; Description ...: Ungroup a group of shapes.
 ; Syntax ........: _LODraw_ShapeGroupDelete(ByRef $oGroup)
-; Parameters ....: $oGroup              - A Group Shape object returned by a previous _LODraw_ShapeGroupCreate, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oGroup              - A Group Shape object returned by a previous _LODraw_ShapeGroupCreate, or _LODraw_ShapesGetList function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully ungrouped the group of shapes.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -1525,6 +1526,7 @@ Func _LODraw_ShapeGroupDelete(ByRef $oGroup)
 
 	For $i = 0 To $oPage.getCount() - 1
 		If ($oGroup = $oPage.getByIndex($i)) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
 		Sleep((IsInt($i / $__LODCONST_SLEEP_DIV) ? (10) : (0)))
 	Next
 
@@ -1537,7 +1539,7 @@ EndFunc   ;==>_LODraw_ShapeGroupDelete
 ; Name ..........: _LODraw_ShapeGroupRemove
 ; Description ...: Remove and delete a shape from a group of shapes.
 ; Syntax ........: _LODraw_ShapeGroupRemove(ByRef $oGroup, ByRef $oShape)
-; Parameters ....: $oGroup              - A Group Shape object returned by a previous _LODraw_ShapeGroupCreate, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oGroup              - A Group Shape object returned by a previous _LODraw_ShapeGroupCreate, or _LODraw_ShapesGetList function.
 ;                  $oShape              - A Shape object returned by a previous _LODraw_ShapeGroupShapesGetList function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully removed shape from the group of shapes.
@@ -1582,7 +1584,7 @@ EndFunc   ;==>_LODraw_ShapeGroupRemove
 ; Name ..........: _LODraw_ShapeGroupShapesGetList
 ; Description ...: Retrieve an array of Shapes (Text Boxes, DrawShapes, Images etc) contained in the group of shapes.
 ; Syntax ........: _LODraw_ShapeGroupShapesGetList(ByRef $oGroup)
-; Parameters ....: $oGroup              - A Group Shape object returned by a previous _LODraw_ShapeGroupCreate, or _LOImpress_ShapesGetList function.
+; Parameters ....: $oGroup              - A Group Shape object returned by a previous _LODraw_ShapeGroupCreate, or _LODraw_ShapesGetList function.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. A two columned Array containing the Shape Objects contained in the group. See Remarks. @Extended is set to number of results.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
