@@ -294,10 +294,10 @@ EndFunc   ;==>_LOImpress_ShapeAreaFillStyle
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Error retrieving "FillGradient" Object.
 ;                  @Error: 3, @Extended: 2 = Error retrieving Parent Slide Object.
-;                  @Error: 3, @Extended: 2 = Error retrieving Parent Document Object.
-;                  @Error: 3, @Extended: 3 = Failed to retrieve ColorStops Array.
-;                  @Error: 3, @Extended: 4 = Error creating Gradient Name.
-;                  @Error: 3, @Extended: 5 = Error setting Gradient Name.
+;                  @Error: 3, @Extended: 3 = Error retrieving Parent Document Object.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve ColorStops Array.
+;                  @Error: 3, @Extended: 5 = Error creating Gradient Name.
+;                  @Error: 3, @Extended: 6 = Error setting Gradient Name.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
 ;                  |                               1 = Error setting $sGradientName
@@ -1885,7 +1885,7 @@ Func _LOImpress_ShapeInteraction(ByRef $oShape, $iAction = Null, $sTarget = Null
 
 	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If __LO_VarsAreNull($iAction, $sTarget) Then
+	If __LO_VarsAreNull($iAction, $sTarget, $iVerb) Then
 		$sCurVal = $oShape.Bookmark()
 		If Not IsString($sCurVal) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 

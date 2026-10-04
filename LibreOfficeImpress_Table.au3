@@ -297,7 +297,7 @@ Func _LOImpress_TableBackGradient(ByRef $oTable, $sGradientName = Null, $iType =
 
 	Local $tStyleGradient, $tColorStop, $tStopColor
 	Local $iError = 0
-	Local $oDoc, $oCell
+	Local $oDoc, $oCell, $oSlide
 	Local $avGradient[11], $avTemp[11]
 	Local $atColorStop
 	Local $sGradName
@@ -305,8 +305,8 @@ Func _LOImpress_TableBackGradient(ByRef $oTable, $sGradientName = Null, $iType =
 	If Not IsObj($oTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	$oSlide = $oTable.Parent()
-	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-	
+	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
 	$oDoc = __LOImpress_GetParentDoc($oSlide)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
