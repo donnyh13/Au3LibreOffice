@@ -197,7 +197,7 @@ EndFunc   ;==>_LOImpress_SlideAdd
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the slide, the Constant $LO_COLOR_OFF is returned.
+;                  If no background, of any kind (i.e. Solid fill, Gradient, etc.), is set for the slide, the Constant $LO_COLOR_OFF is returned.
 ; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_SlideBackFillStyle, _LOImpress_SlideBackGradient, _LOImpress_SlideMasterBackColor
 ; Link ..........:
 ; Example .......: Yes
@@ -588,7 +588,7 @@ EndFunc   ;==>_LOImpress_SlideBackGradient
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the slide, -1 is returned.
+;                  If no background, of any kind (i.e. Solid fill, Gradient, etc.), is set for the slide, -1 is returned.
 ; Related .......: _LOImpress_SlideBackTransparencyGradient, _LOImpress_SlideMasterBackTransparency
 ; Link ..........:
 ; Example .......: Yes
@@ -1946,7 +1946,7 @@ EndFunc   ;==>_LOImpress_SlideMasterAdd
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the slide, the Constant $LO_COLOR_OFF is returned.
+;                  If no background, of any kind (i.e. Solid fill, Gradient, etc.), is set for the slide, the Constant $LO_COLOR_OFF is returned.
 ; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LOImpress_SlideMasterBackFillStyle, _LOImpress_SlideMasterBackGradient, _LOImpress_SlideBackColor
 ; Link ..........:
 ; Example .......: Yes
@@ -2330,7 +2330,7 @@ EndFunc   ;==>_LOImpress_SlideMasterBackGradient
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the Master slide, -1 is returned.
+;                  If no background, of any kind (i.e. Solid fill, Gradient, etc.), is set for the Master slide, -1 is returned.
 ; Related .......: _LOImpress_SlideMasterBackTransparencyGradient, _LOImpress_SlideBackTransparency
 ; Link ..........:
 ; Example .......: Yes
