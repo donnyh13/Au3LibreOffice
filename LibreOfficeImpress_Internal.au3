@@ -1225,6 +1225,8 @@ Func __LOImpress_DocCurrView(ByRef $oDoc, $iView = Null)
 		$oDispatcher.executeDispatch($oDoc.CurrentController(), $sDispatch, "", 0, $aArray)
 	EndIf
 
+	$iError = (__LOImpress_DocCurrView($oDoc) = $iView) ? ($iError) : (BitOR($iError, 1))
+
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>__LOImpress_DocCurrView
 
