@@ -1344,7 +1344,7 @@ EndFunc   ;==>_LODraw_ShapeDelete
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: For all shapes that have not been renamed by the user, the name value is blank, even though the shape in the UI has a name. Therefore this function will only work for user-renamed shapes.
-;                  This function searches all pages, because a Shape name must be unique for an entire pageshow document.
+;                  This function searches all pages, because a Shape name must be unique for an entire document.
 ;                  This function will work for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
 ; Related .......: _LODraw_ShapesGetList, _LODraw_DrawShapeInsert, _LODraw_ShapeImageInsert, _LODraw_ShapeTextBoxInsert
 ; Link ..........:
@@ -1575,7 +1575,7 @@ EndFunc   ;==>_LODraw_ShapeImageCrop
 ; Name ..........: _LODraw_ShapeImageInsert
 ; Description ...: Insert an image into a page.
 ; Syntax ........: _LODraw_ShapeImageInsert(ByRef $oObj, $sURL[, $iWidth = -1[, $iHeight = -1[, $iX = -1[, $iY = -1]]]])
-; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oObj                - A Page or Master Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, _LODraw_PageCopy, _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ;                  $sURL                - The file path to the image to insert.
 ;                  $iWidth              - [optional] Default is -1. The Images's Width in Hundredths of a Millimeter (HMM). Call with -1 for automatic width.
 ;                  $iHeight             - [optional] Default is -1. The Images's Height in Hundredths of a Millimeter (HMM). Call with -1 for automatic height.
@@ -2098,7 +2098,7 @@ EndFunc   ;==>_LODraw_ShapeLineProperties
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  For all shapes that have not been renamed by the user, the name value is blank, even though the shape in the UI has a name.
-;                  When renaming a shape, the Shape name must be unique to the entire pageshow (at least in the LibreOffice UI), however due to the above issue, it is possible to have two shapes with the same name in the UI (and also internally if I don't make a safety check).
+;                  When renaming a shape, the Shape name must be unique to the entire Document (at least in the LibreOffice UI), however due to the above issue, it is possible to have two shapes with the same name in the UI (and also internally if I don't make a safety check).
 ;                  This function will work for all drawing shapes, as well as other shapes that are returned by _LODraw_ShapesGetList.
 ; Related .......: _LODraw_ShapeExists
 ; Link ..........:
@@ -2616,7 +2616,7 @@ EndFunc   ;==>_LODraw_ShapeRotateSlant
 ; Name ..........: _LODraw_ShapesGetList
 ; Description ...: Retrieve an array of Shapes (Text Boxes, DrawShapes, Images etc) contained in a Page.
 ; Syntax ........: _LODraw_ShapesGetList(ByRef $oObj[, $iTypes = $LOD_SHAPE_TYPE_ALL])
-; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oObj                - A Page or Master Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, _LODraw_PageCopy, _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ;                  $iTypes              - [optional] (0-8191) Default is $LOD_SHAPE_TYPE_ALL. The type of Shapes to return in the Array. Can be BitOR'd. See Constants, $LOD_SHAPE_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. A two columned Array containing the Shape Objects contained in the Page. See Remarks. @Extended is set to number of results.
@@ -4851,7 +4851,7 @@ EndFunc   ;==>_LODraw_ShapeTextAttrSettings
 ; Name ..........: _LODraw_ShapeTextBoxInsert
 ; Description ...: Create and Insert a Text box into a Page.
 ; Syntax ........: _LODraw_ShapeTextBoxInsert(ByRef $oObj, $iWidth, $iHeight[, $iX = -1[, $iY = -1]])
-; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oObj                - A Page or Master Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, _LODraw_PageCopy, _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ;                  $iWidth              - The Text Box's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Text Box's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - [optional] Default is -1. The X position from the top-left of the page, in Hundredths of a Millimeter (HMM). Call with -1 to center the Text Box horizontally.

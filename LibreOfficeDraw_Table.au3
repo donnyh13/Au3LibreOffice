@@ -3424,7 +3424,7 @@ EndFunc   ;==>_LODraw_TableColumnInsert
 ; Name ..........: _LODraw_TableInsert
 ; Description ...: Create and Insert a Table into a Page.
 ; Syntax ........: _LODraw_TableInsert(ByRef $oObj, $iWidth, $iHeight[, $iRows = 2[, $iColumns = 2[, $iX = -1[, $iY = -1]]]])
-; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oObj                - A Page or Master Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, _LODraw_PageCopy, _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ;                  $iWidth              - The Table's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Table's Height in Hundredths of a Millimeter (HMM).
 ;                  $iRows               - [optional] (1-75) Default is 2. The number of Rows.

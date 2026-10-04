@@ -1167,7 +1167,7 @@ EndFunc   ;==>__LODraw_DocCurrView
 ; Name ..........: __LODraw_DrawShape_CreateArrow
 ; Description ...: Create an Arrow type Shape.
 ; Syntax ........: __LODraw_DrawShape_CreateArrow(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oObj                - A Page or Master Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, _LODraw_PageCopy, _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
@@ -1349,7 +1349,7 @@ EndFunc   ;==>__LODraw_DrawShape_CreateArrow
 ; Name ..........: __LODraw_DrawShape_CreateBasic
 ; Description ...: Create a Basic type Shape.
 ; Syntax ........: __LODraw_DrawShape_CreateBasic(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oObj                - A Page or Master Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, _LODraw_PageCopy, _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
@@ -1536,7 +1536,7 @@ EndFunc   ;==>__LODraw_DrawShape_CreateBasic
 ; Name ..........: __LODraw_DrawShape_CreateCallout
 ; Description ...: Create a Callout type Shape.
 ; Syntax ........: __LODraw_DrawShape_CreateCallout(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oObj                - A Page or Master Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, _LODraw_PageCopy, _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
@@ -1652,7 +1652,7 @@ EndFunc   ;==>__LODraw_DrawShape_CreateCallout
 ; Name ..........: __LODraw_DrawShape_CreateFlowchart
 ; Description ...: Create a FlowChart type Shape.
 ; Syntax ........: __LODraw_DrawShape_CreateFlowchart(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oObj                - A Page or Master Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, _LODraw_PageCopy, _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
@@ -1831,7 +1831,7 @@ EndFunc   ;==>__LODraw_DrawShape_CreateFlowchart
 ; Name ..........: __LODraw_DrawShape_CreateLine
 ; Description ...: Create a Line type Shape.
 ; Syntax ........: __LODraw_DrawShape_CreateLine(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oObj                - A Page or Master Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, _LODraw_PageCopy, _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
@@ -2288,7 +2288,7 @@ EndFunc   ;==>__LODraw_DrawShape_CreateLine
 ; Name ..........: __LODraw_DrawShape_CreateStars
 ; Description ...: Create a Star or Banner type Shape.
 ; Syntax ........: __LODraw_DrawShape_CreateStars(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oObj                - A Page or Master Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, _LODraw_PageCopy, _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
@@ -2420,7 +2420,7 @@ EndFunc   ;==>__LODraw_DrawShape_CreateStars
 ; Name ..........: __LODraw_DrawShape_CreateSymbol
 ; Description ...: Create a Symbol type Shape.
 ; Syntax ........: __LODraw_DrawShape_CreateSymbol(ByRef $oObj, $iWidth, $iHeight, $iX, $iY, $iShapeType)
-; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oObj                - A Page or Master Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, _LODraw_PageCopy, _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM).
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM).
 ;                  $iX                  - The X position from the insertion point, in Hundredths of a Millimeter (HMM).
@@ -3200,7 +3200,7 @@ EndFunc   ;==>__LODraw_DrawShapePointGetSettings
 ;                  This is a homemade function as LibreOffice doesn't offer an easy way for modifying points in a shape. Consequently this will not produce similar results as when working with LibreOffice manually, and may wreck your shape's shape. Use with caution.
 ;                  For an unknown reason, I am unable to insert "SMOOTH" Points, and consequently, any smooth Points are reverted back to "Normal" points, but still having their Smooth control points upon insertion that were already present in the shape. If you modify a point to "SMOOTH" type, it will be, for now, replaced with "Symmetrical".
 ;                  The first and last points in a shape can only be a "Normal" Point Type. The last point cannot be Curved, but the first can be.
-;                  Calling and Smooth or Symmetrical point types with $bIsCurve = True, will be ignored, as they are already a curve.
+;                  Calling any Smooth or Symmetrical point types with $bIsCurve = True, will be ignored, as they are already a curve.
 ; Related .......: _LO_UnitConvert
 ; Link ..........:
 ; Example .......: No
@@ -3964,7 +3964,7 @@ EndFunc   ;==>__LODraw_FilterNameGet
 ; Name ..........: __LODraw_Format
 ; Description ...: Set or Retrieve the page format settings.
 ; Syntax ........: __LODraw_Format(ByRef $oObj[, $iWidth = Null[, $iHeight = Null[, $iOrientation = Null]]])
-; Parameters ....: $oObj                - A Page, Master Page, Notes or Handout page object.
+; Parameters ....: $oObj                - A Page or Master Page object.
 ;                  $iWidth              - [optional] Default is Null. The Width of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_WIDTH_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iHeight             - [optional] Default is Null. The Height of the page, may be a custom value in Hundredths of a Millimeter (HMM), or one of the constants, $LOD_PAGE_HEIGHT_* as defined in LibreOfficeDraw_Constants.au3.
 ;                  $iOrientation        - [optional] (0-1) Default is Null. The page orientation. See Constants, $LOD_PAGE_ORIENT_* as defined in LibreOfficeDraw_Constants.au3.
@@ -4042,9 +4042,9 @@ EndFunc   ;==>__LODraw_Format
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LODraw_GetParentDoc
-; Description ...: Retrieve the Document Object from a Page, Master Page, Notes or Handout.
+; Description ...: Retrieve the Document Object from a Page or Master Page.
 ; Syntax ........: __LODraw_GetParentDoc(ByRef $oObj)
-; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oObj                - A Page or Master Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, _LODraw_PageCopy, _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning Parent Document Object.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -4068,11 +4068,11 @@ Func __LODraw_GetParentDoc(ByRef $oObj)
 
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	If $oObj.SupportsService("com.sun.star.drawing.DrawPage") Then ; This covers Pages, and Page Notes.
+	If $oObj.SupportsService("com.sun.star.drawing.DrawPage") Then
 		$oDoc = $oObj.MasterPage.Forms.Parent()
 		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
-	ElseIf $oObj.SupportsService("com.sun.star.drawing.MasterPage") Then     ; This covers Master Pages, Master Page Notes, and Handouts.
+	ElseIf $oObj.SupportsService("com.sun.star.drawing.MasterPage") Then 
 		$oDoc = $oObj.Forms.Parent()
 		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
@@ -5554,7 +5554,7 @@ EndFunc   ;==>__LODraw_InternalComErrorHandler
 ; Name ..........: __LODraw_Margins
 ; Description ...: Set or Retrieve the page margin settings.
 ; Syntax ........: __LODraw_Margins(ByRef $oObj[, $iLeft = Null[, $iRight = Null[, $iTop = Null[, $iBottom = Null]]]])
-; Parameters ....: $oObj                - A Page, Master Page, Notes or Handout page object.
+; Parameters ....: $oObj                - A Page or Master Page object.
 ;                  $iLeft               - [optional] Default is Null. The amount of space to leave between the left edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
 ;                  $iRight              - [optional] Default is Null. The amount of space to leave between the right edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).
 ;                  $iTop                - [optional] Default is Null. The amount of space to leave between the upper edge of the page and the page content. Set in Hundredths of a Millimeter (HMM).

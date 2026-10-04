@@ -336,7 +336,7 @@ EndFunc   ;==>_LODraw_FieldDateTimeInsert
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-;                  To retrieve the current date/time's values pass the returned structure from to function to _LODraw_DateStructModify.
+;                  To retrieve the current date/time's values pass the returned structure from this function to _LODraw_DateStructModify.
 ; Related .......: _LODraw_FieldDateTimeInsert, _LODraw_DateStructModify, _LODraw_FieldCurrentDisplayGet
 ; Link ..........:
 ; Example .......: Yes

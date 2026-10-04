@@ -845,7 +845,7 @@ Global Enum Step *2 _
 		$LOD_SHAPE_TYPE_IMAGE, _                                     ; 64 - An Image, Barcode or QR code.
 		$LOD_SHAPE_TYPE_MEDIA, _                                     ; 128 - A Video or Audio shape.
 		$LOD_SHAPE_TYPE_OLE2, _                                      ; 256 - An OLE2 shape, such as a Chart, Formula etc.
-		$LOD_SHAPE_TYPE_PAGE, _                                      ; 512 A Page preview shape, as found in the notes and handouts pages.
+		$LOD_SHAPE_TYPE_PAGE, _                                      ; 512 A Page preview shape.
 		$LOD_SHAPE_TYPE_PLUGIN, _                                    ; 1024 A plugin shape (I have not encountered this shape yet, but it is included here for error prevention.).
 		$LOD_SHAPE_TYPE_TABLE, _                                     ; 2048 - A Table.
 		$LOD_SHAPE_TYPE_TEXTBOX, _                                   ; 4096 - A Text Box, including Hyperlinks, and most Fields.

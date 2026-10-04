@@ -168,7 +168,7 @@ EndFunc   ;==>_LODraw_PageAdd
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the page, the Constant $LO_COLOR_OFF is returned.
+;                  If no background, of any kind (i.e. Solid fill, Gradient, etc.), is set for the page, the Constant $LO_COLOR_OFF is returned.
 ; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_PageBackFillStyle, _LODraw_PageBackGradient, _LODraw_PageMasterBackColor
 ; Link ..........:
 ; Example .......: Yes
@@ -559,7 +559,7 @@ EndFunc   ;==>_LODraw_PageBackGradient
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the page, -1 is returned.
+;                  If no background, of any kind (i.e. Solid fill, Gradient, etc.), is set for the page, -1 is returned.
 ; Related .......: _LODraw_PageBackTransparencyGradient, _LODraw_PageMasterBackTransparency
 ; Link ..........:
 ; Example .......: Yes
@@ -934,10 +934,7 @@ EndFunc   ;==>_LODraw_PageCopy
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: Call this function with only the required parameters (or by calling all other parameters with the Null keyword), to get the current page.
-;                  If this function fails to return an Object with processing error 1, it is possible the current view mode is set to Page sorter.
-;                  You can only set the current page to either a Master page or a normal page. To change views to Notes, Handouts etc., see _LODraw_DocView.
-;                  If the current view mode is set to Page outline or Page Notes, the current page Object is returned. If the current view mode is set to Master Page Notes or Master Page Handout, the current Master page Object is returned.
-;                  When retrieving the current page, @Extended will be set to either $LOD_PAGE_VIEW_PAGE or $LOD_PAGE_VIEW_MASTER. See Constants, $LOD_PAGE_VIEW_* as defined in LibreOfficeDraw_Constants.au3. Use _LODraw_DocView to determine the current view mode active.
+;                  When retrieving the current page, @Extended will be set to either $LOD_PAGE_VIEW_PAGE or $LOD_PAGE_VIEW_MASTER. See Constants, $LOD_PAGE_VIEW_* as defined in LibreOfficeDraw_Constants.au3.
 ; Related .......: _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, _LODraw_PageMasterCurrent, _LODraw_DocView
 ; Link ..........:
 ; Example .......: Yes
@@ -1330,7 +1327,7 @@ EndFunc   ;==>_LODraw_PageMasterAdd
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the page, the Constant $LO_COLOR_OFF is returned.
+;                  If no background, of any kind (i.e. Solid fill, Gradient, etc.), is set for the page, the Constant $LO_COLOR_OFF is returned.
 ; Related .......: _LO_ConvertColorFromLong, _LO_ConvertColorToLong, _LODraw_PageMasterBackFillStyle, _LODraw_PageMasterBackGradient, _LODraw_PageBackColor
 ; Link ..........:
 ; Example .......: Yes
@@ -1715,7 +1712,7 @@ EndFunc   ;==>_LODraw_PageMasterBackGradient
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-;                  If no background, of any kind (i.e. Solid fill, Gradient, etc., is set for the Master page, -1 is returned.
+;                  If no background, of any kind (i.e. Solid fill, Gradient, etc.), is set for the Master page, -1 is returned.
 ; Related .......: _LODraw_PageMasterBackTransparencyGradient, _LODraw_PageBackTransparency
 ; Link ..........:
 ; Example .......: Yes

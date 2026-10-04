@@ -743,7 +743,7 @@ EndFunc   ;==>_LODraw_DrawShapeGetType
 ; Name ..........: _LODraw_DrawShapeInsert
 ; Description ...: Insert a shape into a page.
 ; Syntax ........: _LODraw_DrawShapeInsert(ByRef $oObj, $iShapeType, $iWidth, $iHeight[, $iX = -1[, $iY = -1]])
-; Parameters ....: $oObj                - A Page, Master Page, Page Note, Master Page Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oObj                - A Page or Master Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, _LODraw_PageCopy, _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ;                  $iShapeType          - (0-187) The Type of shape to create. See remarks. See $LOD_DRAWSHAPE_TYPE_* as defined in LibreOfficeDraw_Constants.au3
 ;                  $iWidth              - The Shape's Width in Hundredths of a Millimeter (HMM). Note, for Lines, Width is the length of the line.
 ;                  $iHeight             - The Shape's Height in Hundredths of a Millimeter (HMM). Note, for Lines, Height is the amount the line goes below the point of insertion.
@@ -1368,7 +1368,7 @@ EndFunc   ;==>_LODraw_DrawShapePointsGetCount
 ;                  This is a homemade function as LibreOffice doesn't offer an easy way for modifying points in a shape. Consequently this will not produce similar results as when working with LibreOffice manually, and may wreck your shape's shape. Use with caution.
 ;                  For an unknown reason, I am unable to insert "SMOOTH" Points, and consequently, any smooth Points are reverted back to "Normal" points, but still having their Smooth control points upon insertion that were already present in the shape. If you modify a point to "SMOOTH" type, it will be, for now, replaced with "Symmetrical".
 ;                  The first and last points in a shape can only be a "Normal" Point Type. The last point cannot be Curved, but the first can be.
-;                  Calling and Smooth or Symmetrical point types with $bIsCurve = True, will be ignored, as they are already a curve.
+;                  Calling any Smooth or Symmetrical point types with $bIsCurve = True, will be ignored, as they are already a curve.
 ; Related .......: _LODraw_DrawShapePointsAdd, _LODraw_DrawShapePointsRemove, _LODraw_DrawShapePointsGetCount, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
