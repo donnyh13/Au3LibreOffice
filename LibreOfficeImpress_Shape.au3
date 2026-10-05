@@ -351,7 +351,7 @@ Func _LOImpress_ShapeAreaGradient(ByRef $oShape, $sGradientName = Null, $iType =
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avGradient)
 	EndIf
 
-	$oSlide = $oShape.Parent()
+	$oSlide = __LOImpress_ShapeGetParentPage($oShape)
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$oDoc = __LOImpress_GetParentDoc($oSlide)
@@ -723,7 +723,7 @@ Func _LOImpress_ShapeAreaTransparencyGradient(ByRef $oShape, $iType = Null, $iXC
 		Return SetError($__LO_STATUS_SUCCESS, 1, $aiTransparent)
 	EndIf
 
-	$oSlide = $oShape.Parent()
+	$oSlide = __LOImpress_ShapeGetParentPage($oShape)
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$oDoc = __LOImpress_GetParentDoc($oSlide)
@@ -1366,7 +1366,7 @@ Func _LOImpress_ShapeDelete(ByRef $oShape)
 
 	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$oDrawPage = $oShape.Parent()
+	$oDrawPage = __LOImpress_ShapeGetParentPage($oShape)
 	If Not IsObj($oDrawPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$iShapes = $oDrawPage.getCount()
@@ -2170,7 +2170,7 @@ Func _LOImpress_ShapeInteraction(ByRef $oShape, $iAction = Null, $sTarget = Null
 
 		Switch $oShape.OnClick()
 			Case $LOI_SHAPE_INTERACTION_ACTION_GOTO_PAGE_OBJ
-				$oSlide = $oShape.Parent()
+				$oSlide = __LOImpress_ShapeGetParentPage($oShape)
 				If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 				$oDoc = __LOImpress_GetParentDoc($oSlide)
@@ -2547,7 +2547,7 @@ Func _LOImpress_ShapeName(ByRef $oShape, $sName = Null)
 
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	$oSlide = $oShape.Parent()
+	$oSlide = __LOImpress_ShapeGetParentPage($oShape)
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$oDoc = __LOImpress_GetParentDoc($oSlide)
@@ -6660,7 +6660,7 @@ Func _LOImpress_ShapeTextAttrColumns(ByRef $oShape, $iColumns = Null, $iSpacing 
 	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not __LO_VersionCheck(7.2) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
-	$oSlide = $oShape.Parent()
+	$oSlide = __LOImpress_ShapeGetParentPage($oShape)
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$oDoc = __LOImpress_GetParentDoc($oSlide)

@@ -304,7 +304,7 @@ Func _LOImpress_TableBackGradient(ByRef $oTable, $sGradientName = Null, $iType =
 
 	If Not IsObj($oTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$oSlide = $oTable.Parent()
+	$oSlide = __LOImpress_ShapeGetParentPage($oTable)
 	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$oDoc = __LOImpress_GetParentDoc($oSlide)
