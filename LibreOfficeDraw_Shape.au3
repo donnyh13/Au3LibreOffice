@@ -302,7 +302,7 @@ Func _LODraw_ShapeAreaGradient(ByRef $oShape, $sGradientName = Null, $iType = Nu
 		Return SetError($__LO_STATUS_SUCCESS, 1, $avGradient)
 	EndIf
 
-	$oPage = $oShape.Parent()
+	$oPage = __LODraw_ShapeGetParentPage($oShape)
 	If Not IsObj($oPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$oDoc = __LODraw_GetParentDoc($oPage)
@@ -674,7 +674,7 @@ Func _LODraw_ShapeAreaTransparencyGradient(ByRef $oShape, $iType = Null, $iXCent
 		Return SetError($__LO_STATUS_SUCCESS, 1, $aiTransparent)
 	EndIf
 
-	$oPage = $oShape.Parent()
+	$oPage = __LODraw_ShapeGetParentPage($oShape)
 	If Not IsObj($oPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$oDoc = __LODraw_GetParentDoc($oPage)
@@ -1317,7 +1317,7 @@ Func _LODraw_ShapeDelete(ByRef $oShape)
 
 	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$oDrawPage = $oShape.Parent()
+	$oDrawPage = __LODraw_ShapeGetParentPage($oShape)
 	If Not IsObj($oDrawPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$iShapes = $oDrawPage.getCount()
@@ -2375,7 +2375,7 @@ Func _LODraw_ShapeName(ByRef $oShape, $sName = Null)
 
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	$oPage = $oShape.Parent()
+	$oPage = __LODraw_ShapeGetParentPage($oShape)
 	If Not IsObj($oPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$oDoc = __LODraw_GetParentDoc($oPage)
@@ -4943,7 +4943,7 @@ Func _LODraw_ShapeTextAttrColumns(ByRef $oShape, $iColumns = Null, $iSpacing = N
 	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not __LO_VersionCheck(7.2) Then Return SetError($__LO_STATUS_VER_ERROR, 1, 0)
 
-	$oPage = $oShape.Parent()
+	$oPage = __LODraw_ShapeGetParentPage($oShape)
 	If Not IsObj($oPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$oDoc = __LODraw_GetParentDoc($oPage)

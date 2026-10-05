@@ -302,7 +302,7 @@ Func _LODraw_TableBackGradient(ByRef $oTable, $sGradientName = Null, $iType = Nu
 
 	If Not IsObj($oTable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-	$oPage = $oTable.Parent()
+	$oPage = __LODraw_ShapeGetParentPage($oTable)
 	If Not IsObj($oPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$oDoc = __LODraw_GetParentDoc($oPage)

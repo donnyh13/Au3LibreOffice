@@ -529,8 +529,9 @@ EndFunc   ;==>_LODraw_CursorGoToRange
 ;                  @Error: 1, @Extended: 2 = $sString not a string..
 ;                  @Error: 1, @Extended: 3 = $bOverwrite not a Boolean.
 ;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to retrieve Parent Page Object.
-;                  @Error: 3, @Extended: 2 = Failed to retrieve Parent Document Object.
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Text Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Parent Page Object.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve Parent Document Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: For some reason the string insert method doesn't set the document modified status to True, therefore I have attempted to do it manually. This still may fail however, and changes could be inadvertently lost if the user closes without saving, as the Document will not ask if the user wishes to save changes.
@@ -542,7 +543,7 @@ Func _LODraw_CursorInsertString(ByRef $oCursor, $sString, $bOverwrite = False)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oDoc, $oPage
+	Local $oDoc, $oPage, $oText
 
 	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsString($sString) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -551,11 +552,14 @@ Func _LODraw_CursorInsertString(ByRef $oCursor, $sString, $bOverwrite = False)
 	$oCursor.Text.insertString($oCursor, $sString, $bOverwrite)
 
 	If ($sString <> "") And Not $oCursor.Text.getPropertySetInfo.hasPropertyByName("TableBorder") Then ; If the Object containing the cursor has the TableBorder Property, it's most likely a cell, I can't get the parent page from a cell, so skip setting the modified state.
-		$oPage = $oCursor.Text.Parent()
-		If Not IsObj($oPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+		$oText = $oCursor.Text()
+		If Not IsObj($oText) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+		
+		$oPage = __LODraw_ShapeGetParentPage($oText)
+		If Not IsObj($oPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 		$oDoc = __LODraw_GetParentDoc($oPage)
-		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+		If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 		If ($oDoc.IsModified() = False) Then $oDoc.Modified = True
 	EndIf
