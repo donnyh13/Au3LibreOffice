@@ -71,6 +71,7 @@
 ; __LOImpress_ShapeAreaShadowModify
 ; __LOImpress_ShapeAreaTransparency
 ; __LOImpress_ShapeAreaTransparencyGradientMulti
+; __LOImpress_ShapeGetParentPage
 ; __LOImpress_ShapeGetType
 ; __LOImpress_ShapeLineArrowheadNameInsert
 ; __LOImpress_ShapeLineArrowStyleName
@@ -4128,7 +4129,7 @@ EndFunc   ;==>__LOImpress_Format
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: __LOImpress_ShapeGetParentPage
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
@@ -6864,6 +6865,41 @@ Func __LOImpress_ShapeAreaTransparencyGradientMulti(ByRef $oObj, $avColorStops =
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>__LOImpress_ShapeAreaTransparencyGradientMulti
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LOImpress_ShapeGetParentPage
+; Description ...: Retrieve the parent page Object of a shape.
+; Syntax ........: __LOImpress_ShapeGetParentPage(ByRef $oShape)
+; Parameters ....: $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Return values .: Success: Object
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning parent page Object of the shape.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oShape not an Object.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve parent Object.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: If a shape is in a group, the parent is the group shape, not the page. This function ensures we retrieve a page or master page Object.
+; Related .......: __LOImpress_GetParentDoc
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LOImpress_ShapeGetParentPage(ByRef $oShape)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oParent
+
+	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	Do ; The parent of a shape is usually the Master/Normal draw page, but it can be the group shape the shape is in, if it is in one. So keep retrieving the parent until I hit the page.
+		$oParent = $oShape.Parent()
+		If Not IsObj($oParent) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	Until $oParent.supportsService("com.sun.star.drawing.GenericDrawPage")
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oParent)
+EndFunc   ;==>__LOImpress_ShapeGetParentPage
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOImpress_ShapeGetType

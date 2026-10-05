@@ -259,6 +259,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - __LOImpress_ShapeAreaShadowModify
   - __LOImpress_ShapeAreaTransparency
   - __LOImpress_ShapeAreaTransparencyGradientMulti
+  - __LOImpress_ShapeGetParentPage
   - __LOImpress_ShapeGetType
   - __LOImpress_ShapeLineArrowheadNameInsert
   - __LOImpress_ShapeLineArrowStyleName
@@ -304,6 +305,11 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOImpress_ShapeCreateTextCursor
   - _LOImpress_ShapeDelete
   - _LOImpress_ShapeExists
+  - _LOImpress_ShapeGroupAdd
+  - _LOImpress_ShapeGroupCreate
+  - _LOImpress_ShapeGroupDelete
+  - _LOImpress_ShapeGroupRemove
+  - _LOImpress_ShapeGroupShapesGetList
   - _LOImpress_ShapeImageAltText
   - _LOImpress_ShapeImageCrop
   - _LOImpress_ShapeImageInsert

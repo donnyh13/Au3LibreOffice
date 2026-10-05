@@ -45,6 +45,11 @@
 ; _LOImpress_ShapeCreateTextCursor
 ; _LOImpress_ShapeDelete
 ; _LOImpress_ShapeExists
+; _LOImpress_ShapeGroupAdd
+; _LOImpress_ShapeGroupCreate
+; _LOImpress_ShapeGroupDelete
+; _LOImpress_ShapeGroupRemove
+; _LOImpress_ShapeGroupShapesGetList
 ; _LOImpress_ShapeImageAltText
 ; _LOImpress_ShapeImageCrop
 ; _LOImpress_ShapeImageInsert
@@ -1428,6 +1433,259 @@ Func _LOImpress_ShapeExists(ByRef $oDoc, $sShapeName)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, False) ; No matches
 EndFunc   ;==>_LOImpress_ShapeExists
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_ShapeGroupAdd
+; Description ...: Add a shape to an existing group of shapes.
+; Syntax ........: _LOImpress_ShapeGroupAdd(ByRef $oGroup, ByRef $oShape)
+; Parameters ....: $oGroup              - A Group Shape object returned by a previous _LOImpress_ShapeGroupCreate, or _LOImpress_ShapesGetList function.
+;                  $oShape              - A Shape object returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Return values .: Success: 1
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully added shape to the group of shapes.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oGroup not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oGroup not a group shape.
+;                  @Error: 1, @Extended: 3 = $oShape not an Object.
+;                  @Error: 1, @Extended: 4 = Shape called in $oShape not on the same page as group shape, or is in another group.
+;                  @Error: 1, @Extended: 5 = Shape called in $oShape cannot be added to the group shape.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve count of shapes.
+;                  @Error: 3, @Extended: 2 = Failed to add shape to group of shapes.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: The shape called in $oShape must be on the same page as the group shape.
+;                  You cannot group Title, Outliner, or Subtitle Text boxes, nor page preview shapes, header/footer fields etc. Any shapes that are automatically added to a slide. You can group draw shapes, table shapes, Text boxes, etc.
+; Related .......: _LOImpress_ShapeGroupShapesGetList, _LOImpress_ShapeGroupRemove
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_ShapeGroupAdd(ByRef $oGroup, ByRef $oShape)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iCount
+
+	If Not IsObj($oGroup) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not $oGroup.supportsService("com.sun.star.drawing.GroupShape") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If ($oShape.Parent() <> $oGroup.Parent()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0) ; Shape needs to be in same page as group shape.
+	If $oShape.IsPresentationObject() Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0) ; Can't group presentation shapes (Title, Subtitle, Outliner, Header/footer etc.
+
+	$iCount = $oGroup.getCount()
+	If Not IsInt($iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$oGroup.Add($oShape)
+
+	If ($oGroup.getCount() <> ($iCount + 1)) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOImpress_ShapeGroupAdd
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_ShapeGroupCreate
+; Description ...: Create a shape group
+; Syntax ........: _LOImpress_ShapeGroupCreate(ByRef $oObj, ByRef $aoShapes)
+; Parameters ....: $oObj                - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
+;                  $aoShapes            - A single column array containing Shape objects returned by a previous _LOImpress_DrawShapeInsert, or _LOImpress_ShapesGetList function.
+; Return values .: Success: Object
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully grouped all shapes, returning group shape Object.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oObj not an Object.
+;                  @Error: 1, @Extended: 2 = $aoShapes not an Array.
+;                  @Error: 1, @Extended: 3 = Item in $aoShapes not an Object. Returning problem element.
+;                  @Error: 1, @Extended: 4 = Item in $aoShapes not found in same page as $oObj. Returning problem element.
+;                  @Error: 1, @Extended: 5 = Shape in $aoShapes cannot be grouped. Returning problem element.
+;                  --Initialization Errors--
+;                  @Error: 2, @Extended: 1 = Failed to create ServiceManager.
+;                  @Error: 2, @Extended: 2 = Failed to create a "com.sun.star.drawing.Shapes" Object.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to group shapes.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: The Array expected in $aoShapes must be a single dimension, single column array, containing only shape Objects that are present on the same page.
+;                  You cannot group Title, Outliner, or Subtitle Text boxes, nor page preview shapes, header/footer fields etc. Any shapes that are automatically added to a slide. You can group draw shapes, table shapes, Text boxes, etc.
+; Related .......: _LOImpress_ShapeGroupDelete
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_ShapeGroupCreate(ByRef $oObj, ByRef $aoShapes)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oShapes, $oServiceManager, $oGroup
+
+	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsArray($aoShapes) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	For $i = 0 To UBound($aoShapes) - 1
+		If Not IsObj($aoShapes[$i]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, $i)
+		If ($oObj <> $aoShapes[$i].Parent()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, $i) ; Called Master or normal page Object doesn't contain one of the shapes in the array. Can't group it.
+		If $aoShapes[$i].IsPresentationObject() Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, $i)
+
+		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+	Next
+
+	$oServiceManager = __LO_ServiceManager()
+	If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	$oShapes = $oServiceManager.createInstance("com.sun.star.drawing.ShapeCollection")
+	If Not IsObj($oShapes) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+	For $i = 0 To UBound($aoShapes) - 1
+		$oShapes.Add($aoShapes[$i]) ; Have to add the shapes to the Shapes collection before I can group them.
+		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+	Next
+
+	$oGroup = $oObj.group($oShapes)
+	If Not IsObj($oGroup) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oGroup)
+EndFunc   ;==>_LOImpress_ShapeGroupCreate
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_ShapeGroupDelete
+; Description ...: Ungroup a group of shapes.
+; Syntax ........: _LOImpress_ShapeGroupDelete(ByRef $oGroup)
+; Parameters ....: $oGroup              - A Group Shape object returned by a previous _LOImpress_ShapeGroupCreate, or _LOImpress_ShapesGetList function.
+; Return values .: Success: 1
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully ungrouped the group of shapes.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oGroup not an Object
+;                  @Error: 1, @Extended: 2 = Object called in $oGroup not a group shape.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve parent page Object.
+;                  @Error: 3, @Extended: 2 = Failed to ungroup the group of shapes.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: _LOImpress_ShapeGroupCreate, _LOImpress_ShapeGroupRemove
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_ShapeGroupDelete(ByRef $oGroup)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oSlide
+
+	If Not IsObj($oGroup) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not $oGroup.supportsService("com.sun.star.drawing.GroupShape") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$oSlide = __LOImpress_ShapeGetParentPage($oGroup)
+	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$oSlide.ungroup($oGroup)
+
+	For $i = 0 To $oSlide.getCount() - 1
+		If ($oGroup = $oSlide.getByIndex($i)) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+	Next
+
+	$oGroup = Null
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOImpress_ShapeGroupDelete
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_ShapeGroupRemove
+; Description ...: Remove a shape from a group of shapes.
+; Syntax ........: _LOImpress_ShapeGroupRemove(ByRef $oGroup, ByRef $oShape)
+; Parameters ....: $oGroup              - A Group Shape object returned by a previous _LOImpress_ShapeGroupCreate, or _LOImpress_ShapesGetList function.
+;                  $oShape              - A Shape object returned by a previous _LOImpress_ShapeGroupShapesGetList function.
+; Return values .: Success: 1
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully removed shape from the group of shapes.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oGroup not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oGroup not a group shape.
+;                  @Error: 1, @Extended: 3 = $oShape not an Object.
+;                  @Error: 1, @Extended: 4 = Shape called in $oShape not contained in the group shape called in $oGroup.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve count of shapes.
+;                  @Error: 3, @Extended: 2 = Failed to remove shape to group of shapes.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: The shape called in $oShape must be a part of the group of shapes called in $oGroup.
+; Related .......: _LOImpress_ShapeGroupShapesGetList, _LOImpress_ShapeGroupAdd
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_ShapeGroupRemove(ByRef $oGroup, ByRef $oShape)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iCount
+
+	If Not IsObj($oGroup) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not $oGroup.supportsService("com.sun.star.drawing.GroupShape") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If ($oShape.Parent() <> $oGroup) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+	$iCount = $oGroup.getCount()
+	If Not IsInt($iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$oGroup.remove($oShape)
+
+	If ($oGroup.getCount() <> ($iCount - 1)) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LOImpress_ShapeGroupRemove
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_ShapeGroupShapesGetList
+; Description ...: Retrieve an array of Shapes (Text Boxes, DrawShapes, Images etc) contained in the group of shapes.
+; Syntax ........: _LOImpress_ShapeGroupShapesGetList(ByRef $oGroup)
+; Parameters ....: $oGroup              - A Group Shape object returned by a previous _LOImpress_ShapeGroupCreate, or _LOImpress_ShapesGetList function.
+; Return values .: Success: Array
+;                  @Error: 0, @Extended: ?, Return: Array = Success. A two columned Array containing the Shape Objects contained in the group. See Remarks. @Extended is set to number of results.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oGroup not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oGroup not a group shape.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Shape Object.
+;                  @Error: 3, @Extended: 2 = Failed to identify Shape Type.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: The Array returned has two columns. The first column is the shape Object. The second column is the Shape Type, corresponding to one of the Constants $LOI_SHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+; Related .......: _LOImpress_ShapeGroupRemove, _LOImpress_ShapeGroupAdd
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_ShapeGroupShapesGetList(ByRef $oGroup)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $avShapes[0][2]
+	Local $oShape
+	Local $iShapeType
+
+	If Not IsObj($oGroup) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not $oGroup.supportsService("com.sun.star.drawing.GroupShape") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	If $oGroup.hasElements() Then
+		ReDim $avShapes[$oGroup.getCount()][2]
+
+		For $i = 0 To $oGroup.getCount() - 1
+			$oShape = $oGroup.getByIndex($i)
+			If Not IsObj($oShape) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+			$iShapeType = __LOImpress_ShapeGetType($oShape)
+			If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+			$avShapes[$i][0] = $oShape
+			$avShapes[$i][1] = $iShapeType
+
+			Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+		Next
+	EndIf
+
+	Return SetError($__LO_STATUS_SUCCESS, UBound($avShapes), $avShapes)
+EndFunc   ;==>_LOImpress_ShapeGroupShapesGetList
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapeImageAltText
