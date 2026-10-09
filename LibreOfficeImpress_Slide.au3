@@ -950,7 +950,7 @@ EndFunc   ;==>_LOImpress_SlideCopy
 ;                  $oObj                - [optional] Default is Null. A Slide or Master Slide object returned by a previous _LOImpress_SlideAdd, _LOImpress_SlideGetObjByIndex, _LOImpress_SlideGetObjByName, _LOImpress_SlideCopy, _LOImpress_SlideMasterAdd, _LOImpress_SlideMasterGetObjByIndex, or _LOImpress_SlideMasterGetObjByName function.
 ; Return values .: Success: 1 or Object
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Object = Success. All optional parameters were called with Null, returning currently active slide. @Extended page's type, see remarks.
+;                  @Error: 0, @Extended: ?, Return: Object = Success. All optional parameters were called with Null, returning currently active slide. @Extended page's type, see remarks.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
