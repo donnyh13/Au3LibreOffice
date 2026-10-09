@@ -921,7 +921,7 @@ EndFunc   ;==>_LODraw_PageCopy
 ;                  $oObj                - [optional] Default is Null. A Page or Master Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, _LODraw_PageCopy, _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ; Return values .: Success: 1 or Object
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
-;                  @Error: 0, @Extended: 1, Return: Object = Success. All optional parameters were called with Null, returning currently active page. @Extended page's type, see remarks.
+;                  @Error: 0, @Extended: ?, Return: Object = Success. All optional parameters were called with Null, returning currently active page. @Extended page's type, see remarks.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
