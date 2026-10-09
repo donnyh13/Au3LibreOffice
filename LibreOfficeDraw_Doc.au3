@@ -1328,7 +1328,6 @@ Func _LODraw_DocLayerVisible(ByRef $oLayer, $bVisible = Null)
 	If Not IsObj($oLayer) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($bVisible) Then
-
 		$bCurrVisible = $oLayer.IsVisible()
 		If Not IsBool($bCurrVisible) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 

@@ -554,7 +554,7 @@ Func _LODraw_CursorInsertString(ByRef $oCursor, $sString, $bOverwrite = False)
 	If ($sString <> "") And Not $oCursor.Text.getPropertySetInfo.hasPropertyByName("TableBorder") Then ; If the Object containing the cursor has the TableBorder Property, it's most likely a cell, I can't get the parent page from a cell, so skip setting the modified state.
 		$oText = $oCursor.Text()
 		If Not IsObj($oText) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-		
+
 		$oPage = __LODraw_ShapeGetParentPage($oText)
 		If Not IsObj($oPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
