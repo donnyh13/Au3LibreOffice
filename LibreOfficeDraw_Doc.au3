@@ -35,6 +35,17 @@
 ; _LODraw_DocIsActive
 ; _LODraw_DocIsModified
 ; _LODraw_DocIsReadOnly
+; _LODraw_DocLayerCurrent
+; _LODraw_DocLayerDeleteByName
+; _LODraw_DocLayerDeleteByObj
+; _LODraw_DocLayerExists
+; _LODraw_DocLayerGetObjByIndex
+; _LODraw_DocLayerGetObjByName
+; _LODraw_DocLayerInsert
+; _LODraw_DocLayerModify
+; _LODraw_DocLayersGetCount
+; _LODraw_DocLayersGetNames
+; _LODraw_DocLayerVisible
 ; _LODraw_DocMaximize
 ; _LODraw_DocMinimize
 ; _LODraw_DocOpen
@@ -784,6 +795,553 @@ Func _LODraw_DocIsReadOnly(ByRef $oDoc)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $bIsReadOnly)
 EndFunc   ;==>_LODraw_DocIsReadOnly
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LODraw_DocLayerCurrent
+; Description ...: Set or Retrieve the currently active layer.
+; Syntax ........: _LODraw_DocLayerCurrent(ByRef $oDoc[, $oLayer = Null])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
+;                  $oLayer              - [optional] Default is Null. A Layer object returned by a previous _LODraw_DocLayerInsert, _LODraw_DocLayerGetObjByName, or _LODraw_DocLayerGetObjByIndex function.
+; Return values .: Success: 1 or Object.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Object = Success. All optional parameters were called with Null, returning currently active Layer's Object.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oLayer not an Object.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve currently active layer Object.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $oLayer
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LODraw_DocLayerCurrent(ByRef $oDoc, $oLayer = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oCurrLayer
+	Local $iError
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	If __LO_VarsAreNull($oLayer) Then
+		$oCurrLayer = $oDoc.getCurrentController.ActiveLayer()
+		If Not IsObj($oCurrLayer) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $oCurrLayer)
+	EndIf
+
+	If Not IsObj($oLayer) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$oDoc.getCurrentController.ActiveLayer = $oLayer
+	$iError = ($oDoc.getCurrentController.ActiveLayer() = $oLayer) ? ($iError) : (BitOR($iError, 1))
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LODraw_DocLayerCurrent
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LODraw_DocLayerDeleteByName
+; Description ...: Delete a document layer by name.
+; Syntax ........: _LODraw_DocLayerDeleteByName(ByRef $oDoc, $sLayer)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
+;                  $sLayer              - The Layer's name to delete.
+; Return values .: Success: 1
+;                  @Error: 0, @Extended: 0, Return: 1 = Success.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sLayer not a String.
+;                  @Error: 1, @Extended: 3 = Name called in $sLayer doesn't exist.
+;                  @Error: 1, @Extended: 4 = Layer called in $sLayer is a built-in layer and cannot be deleted.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve layer Object.
+;                  @Error: 3, @Extended: 2 = Failed to delete layer.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: According to LibreOffice the following built-in layers cannot be renamed or deleted: layout, background, backgroundobjects, controls, measurelines.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LODraw_DocLayerDeleteByName(ByRef $oDoc, $sLayer)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oLayer
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsString($sLayer) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not $oDoc.LayerManager.hasByName($sLayer) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If __LODraw_LayerIsBuiltIn($sLayer) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+	$oLayer = $oDoc.LayerManager.getByName($sLayer)
+	If Not IsObj($oLayer) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$oDoc.LayerManager.Remove($oLayer)
+	If ($oDoc.LayerManager.hasByName($sLayer)) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LODraw_DocLayerDeleteByName
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LODraw_DocLayerDeleteByObj
+; Description ...: Delete a document layer by its Object.
+; Syntax ........: _LODraw_DocLayerDeleteByObj(ByRef $oLayer)
+; Parameters ....: $oLayer              - A Layer object returned by a previous _LODraw_DocLayerInsert, _LODraw_DocLayerGetObjByName, or _LODraw_DocLayerGetObjByIndex function.
+; Return values .: Success: 1
+;                  @Error: 0, @Extended: 0, Return: 1 = Success.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oLayer not an Object.
+;                  @Error: 1, @Extended: 2 = Layer called in $oLayer is a built-in layer and cannot be deleted.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve layer manager Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve layer name.
+;                  @Error: 3, @Extended: 3 = Failed to delete layer.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: According to LibreOffice the following built-in layers cannot be renamed or deleted: layout, background, backgroundobjects, controls, measurelines.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LODraw_DocLayerDeleteByObj(ByRef $oLayer)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oLayerManager
+	Local $sLayer
+
+	If Not IsObj($oLayer) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If __LODraw_LayerIsBuiltIn($oLayer.Name()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$oLayerManager = $oLayer.Parent()
+	If Not IsObj($oLayerManager) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$sLayer = $oLayer.Name()
+	If Not IsString($sLayer) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	$oLayerManager.Remove($oLayer)
+	If ($oLayerManager.hasByName($sLayer)) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	$oLayer = Null
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>_LODraw_DocLayerDeleteByObj
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LODraw_DocLayerExists
+; Description ...: Check whether a layer exists by name.
+; Syntax ........: _LODraw_DocLayerExists(ByRef $oDoc, $sLayer)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
+;                  $sLayer              - The layer's name to look for.
+; Return values .: Success: Boolean.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Document contains a Layer with the called name, else False.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sLayer not a String.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to query for Layer name.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LODraw_DocLayerExists(ByRef $oDoc, $sLayer)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $bExists
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsString($sLayer) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$bExists = $oDoc.LayerManager.hasByName($sLayer)
+	If Not IsBool($bExists) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $bExists)
+EndFunc   ;==>_LODraw_DocLayerExists
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LODraw_DocLayerGetObjByIndex
+; Description ...: Retrieve a layer Object by index.
+; Syntax ........: _LODraw_DocLayerGetObjByIndex(ByRef $oDoc, $iLayer)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
+;                  $iLayer              - The index number of the layer to retrieve the Object for. 0 based.
+; Return values .: Success: Object
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested layer's Object.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $iLayer not an Integer, less than 0 or greater than number of layers minus one.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve requested layer.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LODraw_DocLayerGetObjByIndex(ByRef $oDoc, $iLayer)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oLayer
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not __LO_IntIsBetween($iLayer, 0, $oDoc.LayerManager.getCount() - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$oLayer = $oDoc.LayerManager.getByIndex($iLayer)
+	If Not IsObj($oLayer) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oLayer)
+EndFunc   ;==>_LODraw_DocLayerGetObjByIndex
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LODraw_DocLayerGetObjByName
+; Description ...: Retrieve a layer Object using its name.
+; Syntax ........: _LODraw_DocLayerGetObjByName(ByRef $oDoc, $sLayer)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
+;                  $sLayer              - The layer's name to retrieve the Object for.
+; Return values .: Success: Object
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested Layer's Object.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sLayer not a String.
+;                  @Error: 1, @Extended: 3 = Layer name called in $sLayer not found.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve requested Layer.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LODraw_DocLayerGetObjByName(ByRef $oDoc, $sLayer)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oLayer
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsString($sLayer) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not $oDoc.LayerManager.hasByName($sLayer) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	$oLayer = $oDoc.LayerManager.getByName($sLayer)
+	If Not IsObj($oLayer) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oLayer)
+EndFunc   ;==>_LODraw_DocLayerGetObjByName
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LODraw_DocLayerInsert
+; Description ...: Insert a new layer in a Document.
+; Syntax ........: _LODraw_DocLayerInsert(ByRef $oDoc[, $sName = ""[, $sTitle = ""[, $sDesc = ""[, $bVisible = True[, $bPrintable = True[, $bLocked = False]]]]]])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
+;                  $sName               - [optional] Default is "". The unique name of the layer. If called with "", LibreOffice automatically names it.
+;                  $sTitle              - [optional] Default is "". The Title of the layer.
+;                  $sDesc               - [optional] Default is "". The Description of the layer.
+;                  $bVisible            - [optional] Default is True. If True, the layer if visible.
+;                  $bPrintable          - [optional] Default is True. If True, the layer will be printable.
+;                  $bLocked             - [optional] Default is False. If True, the items on the layer are locked from modification.
+; Return values .: Success: Object
+;                  @Error: 0, @Extended: 0, Return: Object = Success.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $sName not a String.
+;                  @Error: 1, @Extended: 3 = Layer name called in $sName already exists.
+;                  @Error: 1, @Extended: 4 = $sTitle not a String.
+;                  @Error: 1, @Extended: 5 = $sDesc not a String.
+;                  @Error: 1, @Extended: 6 = $bVisible not a Boolean.
+;                  @Error: 1, @Extended: 7 = $bPrintable not a Boolean.
+;                  @Error: 1, @Extended: 8 = $bLocked not a Boolean.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve count of layers.
+;                  @Error: 3, @Extended: 2 = Failed to insert new layer.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LODraw_DocLayerInsert(ByRef $oDoc, $sName = "", $sTitle = "", $sDesc = "", $bVisible = True, $bPrintable = True, $bLocked = False)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oLayer
+	Local $iPos
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If ($sName <> "") And _LODraw_DocLayerExists($oDoc, $sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsString($sTitle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not IsString($sDesc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If Not IsBool($bVisible) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+	If Not IsBool($bPrintable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+	If Not IsBool($bLocked) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
+
+	$iPos = $oDoc.LayerManager.getCount()
+	If Not IsInt($iPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$oLayer = $oDoc.LayerManager.insertNewByIndex($iPos)
+	If Not IsObj($oLayer) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	If ($sName <> "") Then
+		$oLayer.Name = $sName
+	EndIf
+
+	If ($sTitle <> "") Then
+		$oLayer.Title = $sTitle
+	EndIf
+
+	If ($sDesc <> "") Then
+		$oLayer.Description = $sDesc
+	EndIf
+
+	$oLayer.IsVisible = $bVisible
+	$oLayer.IsPrintable = $bPrintable
+	$oLayer.IsLocked = $bLocked
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oLayer)
+EndFunc   ;==>_LODraw_DocLayerInsert
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LODraw_DocLayerModify
+; Description ...: Set or Retrieve Layer settings.
+; Syntax ........: _LODraw_DocLayerModify(ByRef $oLayer[, $sName = Null[, $sTitle = Null[, $sDesc = Null[, $bVisible = Null[, $bPrintable = Null[, $bLocked = Null]]]]]])
+; Parameters ....: $oLayer              - A Layer object returned by a previous _LODraw_DocLayerInsert, _LODraw_DocLayerGetObjByName, or _LODraw_DocLayerGetObjByIndex function.
+;                  $sName               - [optional] Default is Null. The unique name of the layer.
+;                  $sTitle              - [optional] Default is Null. The Title of the layer.
+;                  $sDesc               - [optional] Default is Null. The Description of the layer.
+;                  $bVisible            - [optional] Default is Null. If True, the layer if visible.
+;                  $bPrintable          - [optional] Default is Null. If True, the layer will be printable.
+;                  $bLocked             - [optional] Default is Null. If True, the items on the layer are locked from modification.
+; Return values .: Success: 1 or Array.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 6 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oLayer not an Object.
+;                  @Error: 1, @Extended: 2 = $sName not a String.
+;                  @Error: 1, @Extended: 3 = Name called in $sName already exists.
+;                  @Error: 1, @Extended: 4 = Layer called in $oLayer is a built-in layer and cannot be renamed.
+;                  @Error: 1, @Extended: 5 = $sTitle not a String.
+;                  @Error: 1, @Extended: 6 = $sDesc not a String.
+;                  @Error: 1, @Extended: 7 = $bVisible not a Boolean.
+;                  @Error: 1, @Extended: 8 = $bPrintable not a Boolean.
+;                  @Error: 1, @Extended: 9 = $bLocked not a Boolean.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $sName
+;                  |                               2 = Error setting $sTitle
+;                  |                               4 = Error setting $sDesc
+;                  |                               8 = Error setting $bVisible
+;                  |                               16 = Error setting $bPrintable
+;                  |                               32 = Error setting $bLocked
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+;                  According to LibreOffice the following built-in layers cannot be renamed or deleted: layout, background, backgroundobjects, controls, measurelines.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LODraw_DocLayerModify(ByRef $oLayer, $sName = Null, $sTitle = Null, $sDesc = Null, $bVisible = Null, $bPrintable = Null, $bLocked = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iError = 0
+	Local $avLayer[6]
+	Local Const $__STR_STRIPALL = 8
+
+	If Not IsObj($oLayer) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	If __LO_VarsAreNull($sName, $sTitle, $sDesc, $bVisible, $bPrintable, $bLocked) Then
+		__LO_ArrayFill($avLayer, $oLayer.Name(), $oLayer.Title(), $oLayer.Description(), $oLayer.IsVisible(), $oLayer.IsPrintable(), $oLayer.IsLocked())
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $avLayer)
+	EndIf
+
+	If ($sName <> Null) Then
+		If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+		If $oLayer.Parent.hasByName($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If __LODraw_LayerIsBuiltIn($oLayer.Name()) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+		$oLayer.Name = $sName
+		$iError = ($oLayer.Name() = $sName) ? ($iError) : (BitOR($iError, 1))
+	EndIf
+
+	If ($sTitle <> Null) Then
+		If Not IsString($sTitle) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+		$oLayer.Title = $sTitle
+		$iError = ($oLayer.Title() = $sTitle) ? ($iError) : (BitOR($iError, 2))
+	EndIf
+
+	If ($sDesc <> Null) Then
+		If Not IsString($sDesc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+
+		$oLayer.Description = $sDesc
+		$iError = (StringStripWS($oLayer.Description(), $__STR_STRIPALL) = StringStripWS($sDesc, $__STR_STRIPALL)) ? ($iError) : (BitOR($iError, 4)) ; Have to strip CR or LF from text as LO sometimes converts these, so just strip it all and compare, otherwise there could be a false error thrown.
+	EndIf
+
+	If ($bVisible <> Null) Then
+		If Not IsBool($bVisible) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+
+		$oLayer.IsVisible = $bVisible
+		$iError = ($oLayer.IsVisible() = $bVisible) ? ($iError) : (BitOR($iError, 8))
+	EndIf
+
+	If ($bPrintable <> Null) Then
+		If Not IsBool($bPrintable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
+
+		$oLayer.IsPrintable = $bPrintable
+		$iError = ($oLayer.IsPrintable() = $bPrintable) ? ($iError) : (BitOR($iError, 16))
+	EndIf
+
+	If ($bLocked <> Null) Then
+		If Not IsBool($bLocked) Then Return SetError($__LO_STATUS_INPUT_ERROR, 9, 0)
+
+		$oLayer.IsLocked = $bLocked
+		$iError = ($oLayer.IsLocked() = $bLocked) ? ($iError) : (BitOR($iError, 32))
+	EndIf
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LODraw_DocLayerModify
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LODraw_DocLayersGetCount
+; Description ...: Retrieve a count of layers contained in the Document.
+; Syntax ........: _LODraw_DocLayersGetCount(ByRef $oDoc)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
+; Return values .: Success: Integer
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning count of layers contained in the document.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve a count of layer.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LODraw_DocLayersGetCount(ByRef $oDoc)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iCount
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$iCount = $oDoc.LayerManager.getCount()
+	If Not IsInt($iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $iCount)
+EndFunc   ;==>_LODraw_DocLayersGetCount
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LODraw_DocLayersGetNames
+; Description ...: Retrieve an array of layer names contained in a document.
+; Syntax ........: _LODraw_DocLayersGetNames(ByRef $oDoc)
+; Parameters ....: $oDoc                - A Document object returned by a previous _LODraw_DocOpen, _LODraw_DocConnect, or _LODraw_DocCreate function.
+; Return values .: Success: Array
+;                  @Error: 0, @Extended: 0, Return: Array = Success. An Array containing all layer names. @Extended is set to the number of results.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve array of layer names.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: There are 5 built-in layers present in all Draw documents, layout, background, backgroundobjects, controls, measurelines
+;                  layout, controls and measurelines layers are visible in normal view and correspond to the predefined layers Layout, Controls and Dimension Lines, respectively.
+;                  The backgroundobjects layer is visible in master view under the name Background objects.
+;                  The background layer is never visible and is not intended to be used.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LODraw_DocLayersGetNames(ByRef $oDoc)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $asLayers[0]
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$asLayers = $oDoc.LayerManager.getElementNames()
+	If Not IsArray($asLayers) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, UBound($asLayers), $asLayers)
+EndFunc   ;==>_LODraw_DocLayersGetNames
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LODraw_DocLayerVisible
+; Description ...: Set or Retrieve a layer's current visibility settings.
+; Syntax ........: _LODraw_DocLayerVisible(ByRef $oLayer[, $bVisible = Null])
+; Parameters ....: $oLayer              - A Layer object returned by a previous _LODraw_DocLayerInsert, _LODraw_DocLayerGetObjByName, or _LODraw_DocLayerGetObjByIndex function.
+;                  $bVisible            - [optional] Default is Null. If True, the layer if visible.
+; Return values .: Success: 1 or Boolean.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Boolean = Success. All optional parameters were called with Null, returning current visibility setting.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oLayer not an Object.
+;                  @Error: 1, @Extended: 2 = $bVisible not a Boolean.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve current visibility value.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $bVisible
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LODraw_DocLayerVisible(ByRef $oLayer, $bVisible = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iError = 0
+	Local $bCurrVisible
+
+	If Not IsObj($oLayer) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	If __LO_VarsAreNull($bVisible) Then
+
+		$bCurrVisible = $oLayer.IsVisible()
+		If Not IsBool($bCurrVisible) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $bCurrVisible)
+	EndIf
+
+	If Not IsBool($bVisible) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$oLayer.IsVisible = $bVisible
+	$iError = ($oLayer.IsVisible() = $bVisible) ? ($iError) : (BitOR($iError, 1))
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LODraw_DocLayerVisible
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LODraw_DocMaximize

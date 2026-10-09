@@ -57,6 +57,7 @@
 ; __LODraw_GradientNameInsert
 ; __LODraw_GradientPresets
 ; __LODraw_InternalComErrorHandler
+; __LODraw_LayerIsBuiltIn
 ; __LODraw_Margins
 ; __LODraw_NumRuleCreateMap
 ; __LODraw_ParAlignment
@@ -5550,6 +5551,38 @@ Func __LODraw_InternalComErrorHandler(ByRef $oComError)
 		EndSwitch
 	EndIf
 EndFunc   ;==>__LODraw_InternalComErrorHandler
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LODraw_LayerIsBuiltIn
+; Description ...: See if a layer is a built in Layer or a user layer.
+; Syntax ........: __LODraw_LayerIsBuiltIn($sLayerName)
+; Parameters ....: $sLayerName          - The Layer name to check.
+; Return values .: Success: Boolean
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the layer name called is a built-in layer, True is returned, else False.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $sLayerName not a String.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: According to LibreOffice, the following layer names are used internally and cannot be set or modified: layout, background, backgroundobjects, controls, measurelines.
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LODraw_LayerIsBuiltIn($sLayerName)
+	Local $asLibOffLayers[5] = ["layout", "background", "backgroundobjects", "controls", "measurelines"]
+	Local Const $__STR_STRIPALL = 8
+
+	If Not IsString($sLayerName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$sLayerName = StringStripWS($sLayerName, $__STR_STRIPALL)
+
+	For $i = 0 To UBound($asLibOffLayers) - 1
+		If ($sLayerName = $asLibOffLayers[$i]) Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
+	Next
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, False)
+EndFunc   ;==>__LODraw_LayerIsBuiltIn
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LODraw_Margins

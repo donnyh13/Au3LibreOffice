@@ -55,6 +55,7 @@
 ; _LODraw_ShapeImageInsert
 ; _LODraw_ShapeImageModify
 ; _LODraw_ShapeImageReplace
+; _LODraw_ShapeLayerCurrent
 ; _LODraw_ShapeLineArrowStyles
 ; _LODraw_ShapeLineProperties
 ; _LODraw_ShapeName
@@ -2030,6 +2031,68 @@ Func _LODraw_ShapeImageReplace(ByRef $oImage, $sNewImage)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LODraw_ShapeImageReplace
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LODraw_ShapeLayerCurrent
+; Description ...: Set or Retrieve the current layer a shape is located in.
+; Syntax ........: _LODraw_ShapeLayerCurrent(ByRef $oShape[, $oLayer = Null])
+; Parameters ....: $oShape              - A Shape or Drawing Shape object returned by a previous _LODraw_DrawShapeInsert, _LODraw_ShapeTextBoxInsert, _LODraw_ShapeImageInsert, or _LODraw_ShapesGetList function.
+;                  $oLayer              - [optional] Default is Null. A Layer object returned by a previous _LODraw_DocLayerInsert, _LODraw_DocLayerGetObjByName, or _LODraw_DocLayerGetObjByIndex function.
+; Return values .: Success: 1 or Object.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Object = Success. All optional parameters were called with Null, returning current layer assigned to the Shape.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oShape not an Object.
+;                  @Error: 1, @Extended: 2 = $oLayer not an Object.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve parent page.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve parent Document.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve currently applied layer name.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve layer Object.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $oLayer
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LODraw_ShapeLayerCurrent(ByRef $oShape, $oLayer = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $sCurrLayer
+	Local $oPage, $oDoc, $oCurrLayer
+	Local $iError
+
+	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$oPage = __LODraw_ShapeGetParentPage($oShape)
+	If Not IsObj($oPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$oDoc = __LODraw_GetParentDoc($oPage)
+	If Not IsObj($oPage) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	If __LO_VarsAreNull($oLayer) Then
+		$sCurrLayer = $oShape.LayerName()
+		If Not IsString($sCurrLayer) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+		$oCurrLayer = $oDoc.LayerManager.getByName($sCurrLayer)
+		If Not IsObj($oCurrLayer) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $oCurrLayer)
+	EndIf
+
+	If Not IsObj($oLayer) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$oShape.LayerName = $oLayer.Name()
+	$iError = ($oShape.LayerName() = $oLayer.Name()) ? ($iError) : (BitOR($iError, 1))
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LODraw_ShapeLayerCurrent
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LODraw_ShapeLineArrowStyles
