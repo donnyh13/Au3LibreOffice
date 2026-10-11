@@ -1442,7 +1442,7 @@ EndFunc   ;==>_LOImpress_ShapeExists
 ; Name ..........: _LOImpress_ShapeGetObjByIndex
 ; Description ...: Retrieve a Shape's Object by Index from a page.
 ; Syntax ........: _LOImpress_ShapeGetObjByIndex(ByRef $oSlide, $iShape)
-; Parameters ....: $oSlide               - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oSlide              - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
 ;                  $iShape              - The index of the Shape to retrieve the Object for. 0 based.
 ; Return values .: Success: Object
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested Shape's Object. @Extended set to Shape's type. See Constants, $LOI_SHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
@@ -4698,7 +4698,7 @@ EndFunc   ;==>_LOImpress_ShapeRotateSlant
 ; Name ..........: _LOImpress_ShapesGetCount
 ; Description ...: Retrieve a count of shapes contained in a page.
 ; Syntax ........: _LOImpress_ShapesGetCount(ByRef $oSlide)
-; Parameters ....: $oSlide               - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
+; Parameters ....: $oSlide              - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
 ; Return values .: Success: Integer
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning total count of shapes contained in the Slide.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
