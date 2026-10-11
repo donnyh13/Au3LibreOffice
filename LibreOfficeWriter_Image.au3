@@ -1900,7 +1900,7 @@ Func _LOWriter_ImageOptionsName(ByRef $oDoc, ByRef $oImage, $sName = Null, $sAlt
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oImage) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If __LO_VarsAreNull($sName, $sAltText, $sDesc) Then
+	If __LO_VarsAreNull($sName, $sAltText, $sDesc, $bDecorative) Then
 		If __LO_VersionCheck(7.6) Then
 			__LO_ArrayFill($asName, $oImage.Name(), $oImage.Title(), $oImage.Description(), $oImage.Decorative())
 

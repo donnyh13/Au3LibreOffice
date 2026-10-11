@@ -994,6 +994,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 #### Fixed
 
 - Forgot to update name after renaming internal line name from "Line Style 9" to "Sparse Dash".
+- Fixed missing variable in Null check, would cause unexpected behaviour. `_LOWriter_ImageOptionsName`.
 
 ## [0.10.0] - 2026-08-23
 
