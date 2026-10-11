@@ -55,9 +55,8 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to remove a shape from the group. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve a count of shapes in the group.
-	_LODraw_ShapeGroupShapesGetList($oGroup)
-	If @error Then _ERROR($oDoc, "Failed to retrieve a list of shapes in the group. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
-	$iCount = @extended
+	$iCount = _LODraw_ShapeGroupShapesGetCount($oGroup)
+	If @error Then _ERROR($oDoc, "Failed to retrieve a count of shapes in the group. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Now the group contains " & $iCount & " shapes.")
 

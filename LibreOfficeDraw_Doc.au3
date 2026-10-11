@@ -907,7 +907,7 @@ EndFunc   ;==>_LODraw_DocLayerDeleteByName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: According to LibreOffice the following built-in layers cannot be renamed or deleted: layout, background, backgroundobjects, controls, measurelines.
-; Related .......: _LODraw_DocLayerDeleteByName, _LODraw_DocLayerGetObjByIndex, _LODraw_DocLayerGetObjByName 
+; Related .......: _LODraw_DocLayerDeleteByName, _LODraw_DocLayerGetObjByIndex, _LODraw_DocLayerGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

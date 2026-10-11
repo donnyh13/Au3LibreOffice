@@ -45,10 +45,13 @@
 ; _LODraw_ShapeCreateTextCursor
 ; _LODraw_ShapeDelete
 ; _LODraw_ShapeExists
+; _LODraw_ShapeGetObjByIndex
 ; _LODraw_ShapeGroupAdd
 ; _LODraw_ShapeGroupCreate
 ; _LODraw_ShapeGroupDelete
 ; _LODraw_ShapeGroupRemove
+; _LODraw_ShapeGroupShapeGetObjByIndex
+; _LODraw_ShapeGroupShapesGetCount
 ; _LODraw_ShapeGroupShapesGetList
 ; _LODraw_ShapeImageAltText
 ; _LODraw_ShapeImageCrop
@@ -68,6 +71,7 @@
 ; _LODraw_ShapeParTabStopsGetList
 ; _LODraw_ShapePosition
 ; _LODraw_ShapeRotateSlant
+; _LODraw_ShapesGetCount
 ; _LODraw_ShapesGetList
 ; _LODraw_ShapeSize
 ; _LODraw_ShapeStyleAreaColor
@@ -1387,6 +1391,47 @@ Func _LODraw_ShapeExists(ByRef $oDoc, $sShapeName)
 EndFunc   ;==>_LODraw_ShapeExists
 
 ; #FUNCTION# ====================================================================================================================
+; Name ..........: _LODraw_ShapeGetObjByIndex
+; Description ...: Retrieve a Shape's Object by Index from a page.
+; Syntax ........: _LODraw_ShapeGetObjByIndex(ByRef $oPage, $iShape)
+; Parameters ....: $oPage               - A Page or Master Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, _LODraw_PageCopy, _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
+;                  $iShape              - The index of the Shape to retrieve the Object for. 0 based.
+; Return values .: Success: Object
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested Shape's Object. @Extended set to Shape's type. See Constants, $LOD_SHAPE_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oPage not an Object.
+;                  @Error: 1, @Extended: 2 = $iShape not an Integer, less than 0 or greater than number of shapes minus one.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve requested Shape.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Shape type.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: _LODraw_ShapesGetCount, _LODraw_ShapeGroupShapeGetObjByIndex
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LODraw_ShapeGetObjByIndex(ByRef $oPage, $iShape)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oShape
+	Local $iShapeType
+
+	If Not IsObj($oPage) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not __LO_IntIsBetween($iShape, 0, $oPage.getCount() - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$oShape = $oPage.getByIndex($iShape)
+	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$iShapeType = __LODraw_ShapeGetType($oShape)
+	If Not IsInt($iShapeType) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, $iShapeType, $oShape)
+EndFunc   ;==>_LODraw_ShapeGetObjByIndex
+
+; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LODraw_ShapeGroupAdd
 ; Description ...: Add a shape to an existing group of shapes.
 ; Syntax ........: _LODraw_ShapeGroupAdd(ByRef $oGroup, ByRef $oShape)
@@ -1580,6 +1625,84 @@ Func _LODraw_ShapeGroupRemove(ByRef $oGroup, ByRef $oShape)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LODraw_ShapeGroupRemove
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LODraw_ShapeGroupShapeGetObjByIndex
+; Description ...: Retrieve a Shape's Object by Index from a Group of shapes.
+; Syntax ........: _LODraw_ShapeGroupShapeGetObjByIndex(ByRef $oGroup, $iShape)
+; Parameters ....: $oGroup              - A Group Shape object returned by a previous _LODraw_ShapeGroupCreate, or _LODraw_ShapesGetList function.
+;                  $iShape              - The index of the Shape to retrieve the Object for. 0 based.
+; Return values .: Success: Object
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested Shape's Object. @Extended set to Shape's type. See Constants, $LOD_SHAPE_TYPE_* as defined in LibreOfficeDraw_Constants.au3.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oGroup not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oGroup not a group shape.
+;                  @Error: 1, @Extended: 3 = $iShape not an Integer, less than 0 or greater than number of shapes minus one.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve requested Shape.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Shape type.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: _LODraw_ShapeGetObjByIndex, _LODraw_ShapeGroupShapesGetCount
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LODraw_ShapeGroupShapeGetObjByIndex(ByRef $oGroup, $iShape)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oShape
+	Local $iShapeType
+
+	If Not IsObj($oGroup) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not $oGroup.supportsService("com.sun.star.drawing.GroupShape") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iShape, 0, $oGroup.getCount() - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	$oShape = $oGroup.getByIndex($iShape)
+	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$iShapeType = __LODraw_ShapeGetType($oShape)
+	If Not IsInt($iShapeType) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, $iShapeType, $oShape)
+EndFunc   ;==>_LODraw_ShapeGroupShapeGetObjByIndex
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LODraw_ShapeGroupShapesGetCount
+; Description ...: Retrieve a count of shapes contained in a Group of shapes.
+; Syntax ........: _LODraw_ShapeGroupShapesGetCount(ByRef $oGroup)
+; Parameters ....: $oGroup              - A Group Shape object returned by a previous _LODraw_ShapeGroupCreate, or _LODraw_ShapesGetList function.
+; Return values .: Success: Integer
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning total count of shapes contained in the group.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oGroup not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oGroup not a group shape.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve count of shapes.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: _LODraw_ShapeGroupShapeGetObjByIndex, _LODraw_ShapesGetCount
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LODraw_ShapeGroupShapesGetCount(ByRef $oGroup)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iCount
+
+	If Not IsObj($oGroup) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not $oGroup.supportsService("com.sun.star.drawing.GroupShape") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$iCount = $oGroup.getCount()
+	If Not IsInt($iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $iCount)
+EndFunc   ;==>_LODraw_ShapeGroupShapesGetCount
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LODraw_ShapeGroupShapesGetList
@@ -2926,6 +3049,39 @@ Func _LODraw_ShapeRotateSlant(ByRef $oShape, $nRotate = Null, $nSlant = Null)
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LODraw_ShapeRotateSlant
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LODraw_ShapesGetCount
+; Description ...: Retrieve a count of shapes contained in a page.
+; Syntax ........: _LODraw_ShapesGetCount(ByRef $oPage)
+; Parameters ....: $oPage               - A Page or Master Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, _LODraw_PageCopy, _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
+; Return values .: Success: Integer
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning total count of shapes contained in the group.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oPage not an Object.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve count of shapes.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: _LODraw_ShapeGetObjByIndex, _LODraw_ShapeGroupShapesGetCount
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LODraw_ShapesGetCount(ByRef $oPage)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LODraw_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iCount
+
+	If Not IsObj($oPage) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$iCount = $oPage.getCount()
+	If Not IsInt($iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $iCount)
+EndFunc   ;==>_LODraw_ShapesGetCount
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LODraw_ShapesGetList
