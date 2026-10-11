@@ -5,6 +5,7 @@
 #include "LibreOffice_Helper.au3"
 #include "LibreOfficeBase.au3"
 #include "LibreOfficeCalc.au3"
+#include "LibreOfficeDraw.au3"
 #include "LibreOfficeImpress.au3"
 #include "LibreOfficeWriter.au3"
 
