@@ -26,7 +26,6 @@ Things pertaining to the **entire UDF**, or **equally to all sub-Components**.
   - Better way to make _LOWriter_DocHeaderGetTextCursor and _LOWriter_DocFooterGetTextCursor decide where to make the cursor?
 - Look into Writer Web?
   = "private:factory/swriter/web"
-  = Make sure Writer currently avoids Writer webs ?
 - Add Themes? (Format>Theme)
 - For DocCLose, remove the auto-save option?
 
@@ -98,4 +97,3 @@ Things pertaining to **Writer**.
 - Add predefined List Style settings (Numbering Styles).
 - Numbering Styles is missing Graphics option support, if it can be added/not too complex??
 - Method available for cursor.Text?? convertToTable -- can replace dispatch? -- See Apache OpenOffice Community Forum - [Solved] Writer convertToTable
-- Make sure Writer currently avoids Writer webs ?
