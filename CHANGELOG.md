@@ -305,10 +305,13 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOImpress_ShapeCreateTextCursor
   - _LOImpress_ShapeDelete
   - _LOImpress_ShapeExists
+  - _LOImpress_ShapeGetObjByIndex
   - _LOImpress_ShapeGroupAdd
   - _LOImpress_ShapeGroupCreate
   - _LOImpress_ShapeGroupDelete
   - _LOImpress_ShapeGroupRemove
+  - _LOImpress_ShapeGroupShapeGetObjByIndex
+  - _LOImpress_ShapeGroupShapesGetCount
   - _LOImpress_ShapeGroupShapesGetList
   - _LOImpress_ShapeImageAltText
   - _LOImpress_ShapeImageCrop
@@ -356,6 +359,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOImpress_ShapePresStyleTextAttrFit
   - _LOImpress_ShapePresStyleTextAttrSettings
   - _LOImpress_ShapeRotateSlant
+  - _LOImpress_ShapesGetCount
   - _LOImpress_ShapesGetList
   - _LOImpress_ShapeSize
   - _LOImpress_ShapeStyleAreaColor

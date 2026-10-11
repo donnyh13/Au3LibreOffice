@@ -45,10 +45,13 @@
 ; _LOImpress_ShapeCreateTextCursor
 ; _LOImpress_ShapeDelete
 ; _LOImpress_ShapeExists
+; _LOImpress_ShapeGetObjByIndex
 ; _LOImpress_ShapeGroupAdd
 ; _LOImpress_ShapeGroupCreate
 ; _LOImpress_ShapeGroupDelete
 ; _LOImpress_ShapeGroupRemove
+; _LOImpress_ShapeGroupShapeGetObjByIndex
+; _LOImpress_ShapeGroupShapesGetCount
 ; _LOImpress_ShapeGroupShapesGetList
 ; _LOImpress_ShapeImageAltText
 ; _LOImpress_ShapeImageCrop
@@ -96,6 +99,7 @@
 ; _LOImpress_ShapePresStyleTextAttrFit
 ; _LOImpress_ShapePresStyleTextAttrSettings
 ; _LOImpress_ShapeRotateSlant
+; _LOImpress_ShapesGetCount
 ; _LOImpress_ShapesGetList
 ; _LOImpress_ShapeSize
 ; _LOImpress_ShapeStyleAreaColor
@@ -1435,6 +1439,47 @@ Func _LOImpress_ShapeExists(ByRef $oDoc, $sShapeName)
 EndFunc   ;==>_LOImpress_ShapeExists
 
 ; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_ShapeGetObjByIndex
+; Description ...: Retrieve a Shape's Object by Index from a page.
+; Syntax ........: _LOImpress_ShapeGetObjByIndex(ByRef $oSlide, $iShape)
+; Parameters ....: $oSlide               - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
+;                  $iShape              - The index of the Shape to retrieve the Object for. 0 based.
+; Return values .: Success: Object
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested Shape's Object. @Extended set to Shape's type. See Constants, $LOI_SHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
+;                  @Error: 1, @Extended: 2 = $iShape not an Integer, less than 0 or greater than number of shapes minus one.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve requested Shape.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Shape type.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: _LOImpress_ShapesGetCount, _LOImpress_ShapeGroupShapeGetObjByIndex
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_ShapeGetObjByIndex(ByRef $oSlide, $iShape)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oShape
+	Local $iShapeType
+
+	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not __LO_IntIsBetween($iShape, 0, $oSlide.getCount() - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$oShape = $oSlide.getByIndex($iShape)
+	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$iShapeType = __LOImpress_ShapeGetType($oShape)
+	If Not IsInt($iShapeType) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, $iShapeType, $oShape)
+EndFunc   ;==>_LOImpress_ShapeGetObjByIndex
+
+; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapeGroupAdd
 ; Description ...: Add a shape to an existing group of shapes.
 ; Syntax ........: _LOImpress_ShapeGroupAdd(ByRef $oGroup, ByRef $oShape)
@@ -1634,6 +1679,84 @@ Func _LOImpress_ShapeGroupRemove(ByRef $oGroup, ByRef $oShape)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOImpress_ShapeGroupRemove
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_ShapeGroupShapeGetObjByIndex
+; Description ...: Retrieve a Shape's Object by Index from a Group of shapes.
+; Syntax ........: _LOImpress_ShapeGroupShapeGetObjByIndex(ByRef $oGroup, $iShape)
+; Parameters ....: $oGroup              - A Group Shape object returned by a previous _LOImpress_ShapeGroupCreate, or _LOImpress_ShapesGetList function.
+;                  $iShape              - The index of the Shape to retrieve the Object for. 0 based.
+; Return values .: Success: Object
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning requested Shape's Object. @Extended set to Shape's type. See Constants, $LOI_SHAPE_TYPE_* as defined in LibreOfficeImpress_Constants.au3.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oGroup not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oGroup not a group shape.
+;                  @Error: 1, @Extended: 3 = $iShape not an Integer, less than 0 or greater than number of shapes minus one.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve requested Shape.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Shape type.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: _LOImpress_ShapeGetObjByIndex, _LOImpress_ShapeGroupShapesGetCount
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_ShapeGroupShapeGetObjByIndex(ByRef $oGroup, $iShape)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oShape
+	Local $iShapeType
+
+	If Not IsObj($oGroup) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not $oGroup.supportsService("com.sun.star.drawing.GroupShape") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iShape, 0, $oGroup.getCount() - 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	$oShape = $oGroup.getByIndex($iShape)
+	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$iShapeType = __LOImpress_ShapeGetType($oShape)
+	If Not IsInt($iShapeType) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, $iShapeType, $oShape)
+EndFunc   ;==>_LOImpress_ShapeGroupShapeGetObjByIndex
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_ShapeGroupShapesGetCount
+; Description ...: Retrieve a count of shapes contained in a Group of shapes.
+; Syntax ........: _LOImpress_ShapeGroupShapesGetCount(ByRef $oGroup)
+; Parameters ....: $oGroup              - A Group Shape object returned by a previous _LOImpress_ShapeGroupCreate, or _LOImpress_ShapesGetList function.
+; Return values .: Success: Integer
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning total count of shapes contained in the group.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oGroup not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oGroup not a group shape.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve count of shapes.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: _LOImpress_ShapeGroupShapeGetObjByIndex, _LOImpress_ShapesGetCount
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_ShapeGroupShapesGetCount(ByRef $oGroup)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iCount
+
+	If Not IsObj($oGroup) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not $oGroup.supportsService("com.sun.star.drawing.GroupShape") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$iCount = $oGroup.getCount()
+	If Not IsInt($iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $iCount)
+EndFunc   ;==>_LOImpress_ShapeGroupShapesGetCount
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapeGroupShapesGetList
@@ -4570,6 +4693,39 @@ Func _LOImpress_ShapeRotateSlant(ByRef $oShape, $nRotate = Null, $nSlant = Null)
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOImpress_ShapeRotateSlant
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_ShapesGetCount
+; Description ...: Retrieve a count of shapes contained in a page.
+; Syntax ........: _LOImpress_ShapesGetCount(ByRef $oSlide)
+; Parameters ....: $oSlide               - A Slide, Master Slide, Slide Note, Master Slide Note or Handout page object returned by a corresponding previous function call.
+; Return values .: Success: Integer
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning total count of shapes contained in the Slide.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oSlide not an Object.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve count of shapes.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: _LOImpress_ShapeGetObjByIndex, _LOImpress_ShapeGroupShapesGetCount
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_ShapesGetCount(ByRef $oSlide)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iCount
+
+	If Not IsObj($oSlide) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$iCount = $oSlide.getCount()
+	If Not IsInt($iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $iCount)
+EndFunc   ;==>_LOImpress_ShapesGetCount
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_ShapesGetList

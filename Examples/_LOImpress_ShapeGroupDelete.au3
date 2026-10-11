@@ -1,19 +1,3 @@
-#AutoIt3Wrapper_Au3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
-#SciTE4AutoIt3_Dynamic_Include_Path="C:\Users\Dave\Documents\GitHub\donnyh13\Au3LibreOffice"
-#Tidy_Parameters=/sefc /reel /bdir="C:\Users\Dave\Documents\GitHub\Tidy_Backups\"
-
-#Region ; *** Dynamically added Include files ***
-#include "C:\Users\Dave\Documents\GitHub\donnyh13\Au3LibreOffice\LibreOfficeImpress_Constants.au3" ; added:12/27/23 06:54:24
-#include "C:\Users\Dave\Documents\GitHub\donnyh13\Au3LibreOffice\LibreOfficeImpress_Cursor.au3" ; added:12/27/23 06:54:24
-#include "C:\Users\Dave\Documents\GitHub\donnyh13\Au3LibreOffice\LibreOfficeImpress_Helper.au3" ; added:12/31/23 12:23:37
-#include "C:\Users\Dave\Documents\GitHub\donnyh13\Au3LibreOffice\LibreOfficeImpress_Doc.au3" ; added:12/31/23 12:23:37
-#include "C:\Users\Dave\Documents\GitHub\donnyh13\Au3LibreOffice\LibreOfficeImpress_Field.au3" ; added:12/31/23 12:23:37
-#include "C:\Users\Dave\Documents\GitHub\donnyh13\Au3LibreOffice\LibreOfficeImpress_Shape.au3" ; added:12/31/23 12:23:37
-#include "C:\Users\Dave\Documents\GitHub\donnyh13\Au3LibreOffice\LibreOfficeImpress_Slide.au3" ; added:12/31/23 12:23:37
-#include "C:\Users\Dave\Documents\GitHub\donnyh13\Au3LibreOffice\LibreOfficeImpress_Internal.au3" ; added:12/31/23 12:23:37
-#EndRegion ; *** Dynamically added Include files ***
-_LOImpress_ComError_UserFunction(ConsoleWrite)
-
 #include <MsgBoxConstants.au3>
 
 #include "..\LibreOfficeImpress.au3"
