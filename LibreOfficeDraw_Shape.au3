@@ -2056,7 +2056,7 @@ EndFunc   ;==>_LODraw_ShapeImageReplace
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LODraw_DocLayerCurrent
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================

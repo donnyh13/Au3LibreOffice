@@ -817,7 +817,7 @@ EndFunc   ;==>_LODraw_DocIsReadOnly
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LODraw_ShapeLayerCurrent
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -865,7 +865,7 @@ EndFunc   ;==>_LODraw_DocLayerCurrent
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: According to LibreOffice the following built-in layers cannot be renamed or deleted: layout, background, backgroundobjects, controls, measurelines.
-; Related .......:
+; Related .......: _LODraw_DocLayerDeleteByObj, _LODraw_DocLayersGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -907,7 +907,7 @@ EndFunc   ;==>_LODraw_DocLayerDeleteByName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: According to LibreOffice the following built-in layers cannot be renamed or deleted: layout, background, backgroundobjects, controls, measurelines.
-; Related .......:
+; Related .......: _LODraw_DocLayerDeleteByName, _LODraw_DocLayerGetObjByIndex, _LODraw_DocLayerGetObjByName 
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -952,7 +952,7 @@ EndFunc   ;==>_LODraw_DocLayerDeleteByObj
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LODraw_DocLayerDeleteByName, _LODraw_DocLayerGetObjByName, _LODraw_DocLayersGetNames, _LODraw_DocLayerInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -988,7 +988,7 @@ EndFunc   ;==>_LODraw_DocLayerExists
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LODraw_DocLayersGetCount, _LODraw_DocLayerGetObjByName, _LODraw_DocLayerCurrent, _LODraw_ShapeLayerCurrent
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1025,7 +1025,7 @@ EndFunc   ;==>_LODraw_DocLayerGetObjByIndex
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LODraw_DocLayerGetObjByIndex, _LODraw_DocLayerExists, _LODraw_DocLayersGetNames, _LODraw_DocLayerCurrent, _LODraw_ShapeLayerCurrent
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1074,7 +1074,7 @@ EndFunc   ;==>_LODraw_DocLayerGetObjByName
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LODraw_DocLayerCurrent, _LODraw_DocLayerDeleteByName, _LODraw_DocLayerExists
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1157,7 +1157,7 @@ EndFunc   ;==>_LODraw_DocLayerInsert
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  According to LibreOffice the following built-in layers cannot be renamed or deleted: layout, background, backgroundobjects, controls, measurelines.
-; Related .......:
+; Related .......: _LODraw_DocLayerVisible, _LODraw_DocLayerInsert, _LODraw_DocLayerGetObjByIndex, _LODraw_DocLayerGetObjByName
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1239,7 +1239,7 @@ EndFunc   ;==>_LODraw_DocLayerModify
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
-; Related .......:
+; Related .......: _LODraw_DocLayerGetObjByIndex, _LODraw_DocLayersGetNames
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1275,7 +1275,7 @@ EndFunc   ;==>_LODraw_DocLayersGetCount
 ;                  layout, controls and measurelines layers are visible in normal view and correspond to the predefined layers Layout, Controls and Dimension Lines, respectively.
 ;                  The backgroundobjects layer is visible in master view under the name Background objects.
 ;                  The background layer is never visible and is not intended to be used.
-; Related .......:
+; Related .......: _LODraw_DocLayerExists, _LODraw_DocLayerGetObjByName, _LODraw_DocLayerInsert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1314,7 +1314,7 @@ EndFunc   ;==>_LODraw_DocLayersGetNames
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
-; Related .......:
+; Related .......: _LODraw_DocLayerModify
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
