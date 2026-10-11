@@ -3056,7 +3056,7 @@ EndFunc   ;==>_LODraw_ShapeRotateSlant
 ; Syntax ........: _LODraw_ShapesGetCount(ByRef $oPage)
 ; Parameters ....: $oPage               - A Page or Master Page object returned by a previous _LODraw_PageAdd, _LODraw_PageGetObjByIndex, _LODraw_PageGetObjByName, _LODraw_PageCopy, _LODraw_PageMasterAdd, _LODraw_PageMasterGetObjByIndex, or _LODraw_PageMasterGetObjByName function.
 ; Return values .: Success: Integer
-;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning total count of shapes contained in the group.
+;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning total count of shapes contained in the page.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oPage not an Object.
