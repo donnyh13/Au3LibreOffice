@@ -10,10 +10,11 @@ This [AutoIt](https://www.autoitscript.com/) UDF for [LibreOffice API/SDK](https
 
 Au3LibreOffice UDF currently provides support for the following LibreOffice components:
 
-- **Writer**
-- **Calc**
 - **Base**
-- ~~Impress~~ ***Development Pending***
+- **Calc**
+- **Draw**
+- **Impress**
+- **Writer**
 
 Support for other components will be provided as time permits.
 
@@ -35,7 +36,6 @@ Distributed under the MIT License. See the [LICENSE](LICENSE) for more informati
 
 ## Notes
 
-- ~~This UDF currently works **only** with the **INSTALLED** version of LibreOffice. The **Portable** version will **Not work**.~~
 - The ability to Automate LibreOffice Portable (and OpenOffice) has been added, and *Should* work correctly. It currently adds some temporary Registry entries however. See `_LO_InitializePortable`.
 - For those using AutoIt versions **older** than ***3.3.16.1,*** some functions use Maps, which will **Not** be recognized as proper syntax in the older AutoIt versions.
 - LibreOffice uses Hundredths of a Millimeter (100th MM) for sizing internally, all functions in this UDF, unless otherwise stated, use these units. A converter has been created for converting Inches, Centimeters, Printer’s Points, and Millimeters to/from 100th MMs, for all sizing needs. `_LO_UnitConvert`.
