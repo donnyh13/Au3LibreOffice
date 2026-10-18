@@ -383,7 +383,7 @@ EndFunc   ;==>_LOMath_MathFormatFonts
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOMath_MathFormatFonts
+; Related .......: _LOMath_MathFormatFonts, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -405,36 +405,42 @@ Func _LOMath_MathFormatFontSizes(ByRef $oDoc, $iBase = Null, $iText = Null, $iIn
 
 	If ($iBase <> Null) Then
 		If Not __LO_IntIsBetween($iBase, 4, 127) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
 		$oDoc.BaseFontHeight = $iBase
 		$iError = ($oDoc.BaseFontHeight() = $iBase) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($iText <> Null) Then
 		If Not __LO_IntIsBetween($iText, 5, 200) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
 		$oDoc.RelativeFontHeightText = $iText
 		$iError = ($oDoc.RelativeFontHeightText() = $iText) ? ($iError) : (BitOR($iError, 2))
 	EndIf
 
 	If ($iIndexes <> Null) Then
 		If Not __LO_IntIsBetween($iIndexes, 5, 200) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
 		$oDoc.RelativeFontHeightIndices = $iIndexes
 		$iError = ($oDoc.RelativeFontHeightIndices() = $iIndexes) ? ($iError) : (BitOR($iError, 4))
 	EndIf
 
 	If ($iFunctions <> Null) Then
 		If Not __LO_IntIsBetween($iFunctions, 5, 200) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
 		$oDoc.RelativeFontHeightFunctions = $iFunctions
 		$iError = ($oDoc.RelativeFontHeightFunctions() = $iFunctions) ? ($iError) : (BitOR($iError, 8))
 	EndIf
 
 	If ($iOperators <> Null) Then
 		If Not __LO_IntIsBetween($iOperators, 5, 200) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+
 		$oDoc.RelativeFontHeightOperators = $iOperators
 		$iError = ($oDoc.RelativeFontHeightOperators() = $iOperators) ? ($iError) : (BitOR($iError, 16))
 	EndIf
 
 	If ($iLimits <> Null) Then
 		If Not __LO_IntIsBetween($iLimits, 5, 200) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+
 		$oDoc.RelativeFontHeightLimits = $iLimits
 		$iError = ($oDoc.RelativeFontHeightLimits() = $iLimits) ? ($iError) : (BitOR($iError, 32))
 	EndIf
@@ -489,18 +495,21 @@ Func _LOMath_MathFormatSpacing(ByRef $oDoc, $iSpacing = Null, $iLineSpacing = Nu
 
 	If ($iSpacing <> Null) Then
 		If Not __LO_IntIsBetween($iSpacing, 0, 200) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
 		$oDoc.RelativeSpacing = $iSpacing
 		$iError = ($oDoc.RelativeSpacing() = $iSpacing) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($iLineSpacing <> Null) Then
 		If Not __LO_IntIsBetween($iLineSpacing, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
 		$oDoc.RelativeLineSpacing = $iLineSpacing
 		$iError = ($oDoc.RelativeLineSpacing() = $iLineSpacing) ? ($iError) : (BitOR($iError, 2))
 	EndIf
 
 	If ($iRootSpacing <> Null) Then
 		If Not __LO_IntIsBetween($iRootSpacing, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
 		$oDoc.RelativeRootSpacing = $iRootSpacing
 		$iError = ($oDoc.RelativeRootSpacing() = $iRootSpacing) ? ($iError) : (BitOR($iError, 4))
 	EndIf
@@ -537,7 +546,7 @@ EndFunc   ;==>_LOMath_MathFormatSpacing
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOMath_MathFormatSpacing
+; Related .......: _LOMath_MathFormatSpacing, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -558,24 +567,28 @@ Func _LOMath_MathFormatSpacingBorders(ByRef $oDoc, $iLeft = Null, $iRight = Null
 
 	If ($iLeft <> Null) Then
 		If Not __LO_IntIsBetween($iLeft, 0, 10000) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
 		$oDoc.LeftMargin = $iLeft
 		$iError = ($oDoc.LeftMargin() = $iLeft) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($iRight <> Null) Then
 		If Not __LO_IntIsBetween($iRight, 0, 10000) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
 		$oDoc.RightMargin = $iRight
 		$iError = ($oDoc.RightMargin() = $iRight) ? ($iError) : (BitOR($iError, 2))
 	EndIf
 
 	If ($iTop <> Null) Then
 		If Not __LO_IntIsBetween($iTop, 0, 10000) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
 		$oDoc.TopMargin = $iTop
 		$iError = ($oDoc.TopMargin() = $iTop) ? ($iError) : (BitOR($iError, 4))
 	EndIf
 
 	If ($iBottom <> Null) Then
 		If Not __LO_IntIsBetween($iBottom, 0, 10000) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
 		$oDoc.BottomMargin = $iBottom
 		$iError = ($oDoc.BottomMargin() = $iBottom) ? ($iError) : (BitOR($iError, 8))
 	EndIf
@@ -634,24 +647,28 @@ Func _LOMath_MathFormatSpacingBrackets(ByRef $oDoc, $iExcess = Null, $iSpacing =
 
 	If ($iExcess <> Null) Then
 		If Not __LO_IntIsBetween($iExcess, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
 		$oDoc.RelativeBracketExcessSize = $iExcess
 		$iError = ($oDoc.RelativeBracketExcessSize() = $iExcess) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($iSpacing <> Null) Then
 		If Not __LO_IntIsBetween($iSpacing, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
 		$oDoc.RelativeBracketDistance = $iSpacing
 		$iError = ($oDoc.RelativeBracketDistance() = $iSpacing) ? ($iError) : (BitOR($iError, 2))
 	EndIf
 
 	If ($bScaleAll <> Null) Then
 		If Not IsBool($bScaleAll) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
 		$oDoc.IsScaleAllBrackets = $bScaleAll
 		$iError = ($oDoc.IsScaleAllBrackets() = $bScaleAll) ? ($iError) : (BitOR($iError, 4))
 	EndIf
 
 	If ($iExcessSize <> Null) Then
 		If Not __LO_IntIsBetween($iExcessSize, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
 		$oDoc.RelativeScaleBracketExcessSize = $iExcessSize
 		$iError = ($oDoc.RelativeScaleBracketExcessSize() = $iExcessSize) ? ($iError) : (BitOR($iError, 8))
 	EndIf
@@ -703,12 +720,14 @@ Func _LOMath_MathFormatSpacingFractionBars(ByRef $oDoc, $iExcessLength = Null, $
 
 	If ($iExcessLength <> Null) Then
 		If Not __LO_IntIsBetween($iExcessLength, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
 		$oDoc.RelativeFractionBarExcessLength = $iExcessLength
 		$iError = ($oDoc.RelativeFractionBarExcessLength() = $iExcessLength) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($iWeight <> Null) Then
 		If Not __LO_IntIsBetween($iWeight, 1, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
 		$oDoc.RelativeFractionBarLineWeight = $iWeight
 		$iError = ($oDoc.RelativeFractionBarLineWeight() = $iWeight) ? ($iError) : (BitOR($iError, 2))
 	EndIf
@@ -760,12 +779,14 @@ Func _LOMath_MathFormatSpacingFractions(ByRef $oDoc, $iNumerator = Null, $iDenom
 
 	If ($iNumerator <> Null) Then
 		If Not __LO_IntIsBetween($iNumerator, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
 		$oDoc.RelativeFractionNumeratorHeight = $iNumerator
 		$iError = ($oDoc.RelativeFractionNumeratorHeight() = $iNumerator) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($iDenominator <> Null) Then
 		If Not __LO_IntIsBetween($iDenominator, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
 		$oDoc.RelativeFractionDenominatorDepth = $iDenominator
 		$iError = ($oDoc.RelativeFractionDenominatorDepth() = $iDenominator) ? ($iError) : (BitOR($iError, 2))
 	EndIf
@@ -817,12 +838,14 @@ Func _LOMath_MathFormatSpacingIndexes(ByRef $oDoc, $iSuperscript = Null, $iSubsc
 
 	If ($iSuperscript <> Null) Then
 		If Not __LO_IntIsBetween($iSuperscript, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
 		$oDoc.RelativeIndexSuperscript = $iSuperscript
 		$iError = ($oDoc.RelativeIndexSuperscript() = $iSuperscript) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($iSubscript <> Null) Then
 		If Not __LO_IntIsBetween($iSubscript, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
 		$oDoc.RelativeIndexSubscript = $iSubscript
 		$iError = ($oDoc.RelativeIndexSubscript() = $iSubscript) ? ($iError) : (BitOR($iError, 2))
 	EndIf
@@ -874,12 +897,14 @@ Func _LOMath_MathFormatSpacingLimits(ByRef $oDoc, $iUpper = Null, $iLower = Null
 
 	If ($iUpper <> Null) Then
 		If Not __LO_IntIsBetween($iUpper, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
 		$oDoc.RelativeUpperLimitDistance = $iUpper
 		$iError = ($oDoc.RelativeUpperLimitDistance() = $iUpper) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($iLower <> Null) Then
 		If Not __LO_IntIsBetween($iLower, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
 		$oDoc.RelativeLowerLimitDistance = $iLower
 		$iError = ($oDoc.RelativeLowerLimitDistance() = $iLower) ? ($iError) : (BitOR($iError, 2))
 	EndIf
@@ -931,12 +956,14 @@ Func _LOMath_MathFormatSpacingMatrices(ByRef $oDoc, $iLineSpacing = Null, $iColu
 
 	If ($iLineSpacing <> Null) Then
 		If Not __LO_IntIsBetween($iLineSpacing, 0, 300) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
 		$oDoc.RelativeMatrixLineSpacing = $iLineSpacing
 		$iError = ($oDoc.RelativeMatrixLineSpacing() = $iLineSpacing) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($iColumnSpacing <> Null) Then
 		If Not __LO_IntIsBetween($iColumnSpacing, 0, 300) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
 		$oDoc.RelativeMatrixColumnSpacing = $iColumnSpacing
 		$iError = ($oDoc.RelativeMatrixColumnSpacing() = $iColumnSpacing) ? ($iError) : (BitOR($iError, 2))
 	EndIf
@@ -988,12 +1015,14 @@ Func _LOMath_MathFormatSpacingOperators(ByRef $oDoc, $iExcessSize = Null, $iSpac
 
 	If ($iExcessSize <> Null) Then
 		If Not __LO_IntIsBetween($iExcessSize, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
 		$oDoc.RelativeOperatorExcessSize = $iExcessSize
 		$iError = ($oDoc.RelativeOperatorExcessSize() = $iExcessSize) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($iSpacing <> Null) Then
 		If Not __LO_IntIsBetween($iSpacing, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
 		$oDoc.RelativeOperatorSpacing = $iSpacing
 		$iError = ($oDoc.RelativeOperatorSpacing() = $iSpacing) ? ($iError) : (BitOR($iError, 2))
 	EndIf
@@ -1045,12 +1074,14 @@ Func _LOMath_MathFormatSpacingSymbols(ByRef $oDoc, $iPrimary = Null, $iMinimum =
 
 	If ($iPrimary <> Null) Then
 		If Not __LO_IntIsBetween($iPrimary, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
 		$oDoc.RelativeSymbolPrimaryHeight = $iPrimary
 		$iError = ($oDoc.RelativeSymbolPrimaryHeight() = $iPrimary) ? ($iError) : (BitOR($iError, 1))
 	EndIf
 
 	If ($iMinimum <> Null) Then
 		If Not __LO_IntIsBetween($iMinimum, 0, 100) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
 		$oDoc.RelativeSymbolMinimumHeight = $iMinimum
 		$iError = ($oDoc.RelativeSymbolMinimumHeight() = $iMinimum) ? ($iError) : (BitOR($iError, 2))
 	EndIf

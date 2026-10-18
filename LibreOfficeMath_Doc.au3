@@ -52,7 +52,6 @@
 ; _LOMath_DocUndoCurActionTitle
 ; _LOMath_DocUndoGetAllActionTitles
 ; _LOMath_DocUndoIsPossible
-; _LOMath_DocUndoReset
 ; _LOMath_DocVisible
 ; ===============================================================================================================================
 
@@ -408,7 +407,7 @@ EndFunc   ;==>_LOMath_DocCreate
 ;                  - uno:PrevError -- Go to the previous error.
 ;                  - uno:NextMark -- Go to the next marker.
 ;                  - uno:PrevMark -- Go to the previous marker.
-;                  - uno:Textmode  -- Toggle TextMode.
+;                  - uno:Textmode -- Toggle TextMode.
 ;                  - uno:ZoomIn -- Zoom in.
 ;                  - uno:ZoomOptimal -- Zoom to optimal level.
 ;                  - uno:ZoomOut -- Zoom out.
@@ -1014,7 +1013,7 @@ EndFunc   ;==>_LOMath_DocOpen
 ;                  If you want more accurate functionality, use the "WinMove" AutoIt function.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
-; Related .......: _LOMath_DocMaximize, _LOMath_DocMinimize, _LOMath_DocToFront, _LOMath_DocZoom
+; Related .......: _LOMath_DocMaximize, _LOMath_DocMinimize, _LOMath_DocToFront
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1125,8 +1124,8 @@ EndFunc   ;==>_LOMath_DocRedo
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: This will silently fail if there are any _LOMath_DocUndoActionBegin still active.
-; Related .......: _LOMath_DocUndoReset, _LOMath_DocUndoClear
+; Remarks .......:
+; Related .......: _LOMath_DocUndoClear
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -1426,8 +1425,8 @@ EndFunc   ;==>_LOMath_DocUndo
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: This will silently fail if there are any _LOMath_DocUndoActionBegin still active.
-; Related .......: _LOMath_DocUndoReset, _LOMath_DocRedoClear
+; Remarks .......:
+; Related .......: _LOMath_DocRedoClear
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
