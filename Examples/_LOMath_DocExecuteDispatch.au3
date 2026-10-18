@@ -11,12 +11,12 @@ Func Example()
 	$oDoc = _LOMath_DocCreate(True, False)
 	If @error Then _ERROR($oDoc, "Failed to Create a new Math Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	 _LOMath_DocExecuteDispatch($oDoc, "uno:FullScreen")
+	_LOMath_DocExecuteDispatch($oDoc, "uno:FullScreen")
 	If @error Then _ERROR($oDoc, "Failed to perform a Document dispatch. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have toggled the Math window to fullscreen, press ok to toggle it back.")
 
-	 _LOMath_DocExecuteDispatch($oDoc, "uno:FullScreen")
+	_LOMath_DocExecuteDispatch($oDoc, "uno:FullScreen")
 	If @error Then _ERROR($oDoc, "Failed to perform a Document dispatch. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
