@@ -990,6 +990,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 #### Changed
 
 - Added support to `_LOWriter_CursorGoToRange` to go to Paragraph or paragraph section Objects.
+- Added ability to `_LOWriter_CursorParObjCreateList` to retrieve Paragraph Objects for only those within a cursor selection.
 
 #### Documented
 

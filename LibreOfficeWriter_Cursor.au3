@@ -778,11 +778,13 @@ EndFunc   ;==>_LOWriter_CursorParObjCopy
 ;                  @Error: 1, @Extended: 2 = $bTableCheck not a Boolean.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create Enumeration of Paragraphs.
+;                  @Error: 2, @Extended: 2 = Failed to create TextCursor at ViewCursor's position.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $oCursor can be either a ViewCursor or a TextCursor, the paragraphs are enumerated for the area the cursor is currently within, for example, the ViewCursor is currently in a Table, the enumeration of paragraphs would be for the Cell the cursor was presently in.
 ;                  In the main document the enumeration would be for the entire Text Body, in the Header, it would for the that Header for that Page Style etc.
 ;                  The different possible areas are: Text Body, Table Cell, Header, Footer, Footnote, Endnote, Frame.
+;                  If the cursor has data selected, only the paragraph(s) within that selection are returned.
 ;                  Returns an Array of objects for Direct Formatting paragraphs in a document, or for copying and inserting etc.
 ;                  Table Objects returned from this function can be used as a regular Table Object to modify the Table with.
 ; Related .......: _LOWriter_CursorParObjSectionsGet, _LOWriter_DocSelection, _LOWriter_CursorParObjDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
@@ -793,15 +795,26 @@ Func _LOWriter_CursorParObjCreateList(ByRef $oCursor, $bTableCheck = False)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oEnum, $oPar
+	Local $oEnum, $oPar, $oTextCursor = $oCursor
 	Local $iCount = 0
 	Local $aoParagraphs[1]
 
 	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsBool($bTableCheck) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	$oEnum = $oCursor.Text.createEnumeration()
-	If Not IsObj($oEnum) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+	If ($oCursor.isCollapsed()) Then
+		$oEnum = $oTextCursor.Text.createEnumeration()
+		If Not IsObj($oEnum) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	Else
+		If (__LOWriter_Internal_CursorGetType($oCursor) = $LOW_CURTYPE_VIEW_CURSOR) Then
+			$oTextCursor = $oCursor.Text.createTextCursorByRange($oCursor)
+			If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+		EndIf
+
+		$oEnum = $oTextCursor.createEnumeration()
+		If Not IsObj($oEnum) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+	EndIf
 
 	If ($bTableCheck = True) Then ReDim $aoParagraphs[1][2]
 
