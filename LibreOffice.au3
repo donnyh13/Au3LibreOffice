@@ -7,6 +7,7 @@
 #include "LibreOfficeCalc.au3"
 #include "LibreOfficeDraw.au3"
 #include "LibreOfficeImpress.au3"
+#include "LibreOfficeMath.au3"
 #include "LibreOfficeWriter.au3"
 
 ; #INDEX# =======================================================================================================================
