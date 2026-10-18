@@ -987,6 +987,10 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 ### LibreOfficeWriter
 
+#### Changed
+
+- Added support to `_LOWriter_CursorGoToRange` to go to Paragraph or paragraph section Objects.
+
 #### Documented
 
 - Fixed wrong variables used in error return descriptions.
