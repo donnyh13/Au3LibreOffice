@@ -14,9 +14,8 @@ Au3LibreOffice UDF currently provides support for the following LibreOffice comp
 - **Calc**
 - **Draw**
 - **Impress**
+- **Math**
 - **Writer**
-
-Support for other components will be provided as time permits.
 
 ## Release
 
