@@ -60,6 +60,7 @@
 ; _LOImpress_SlideMasterFormat
 ; _LOImpress_SlideMasterGetObjByIndex
 ; _LOImpress_SlideMasterGetObjByName
+; _LOImpress_SlideMasterIsInUse
 ; _LOImpress_SlideMasterMargins
 ; _LOImpress_SlideMasterName
 ; _LOImpress_SlideMasterNotesGetObj
@@ -2646,11 +2647,12 @@ EndFunc   ;==>_LOImpress_SlideMasterCurrent
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve count of master slides.
 ;                  @Error: 3, @Extended: 2 = Failed to retrieve master slide's Object.
-;                  @Error: 3, @Extended: 3 = Failed to delete master slide.
+;                  @Error: 3, @Extended: 3 = Master Slide still in use by a slide.
+;                  @Error: 3, @Extended: 4 = Failed to delete master slide.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Trying to delete a Master Slide that is used by a slide will result in a processing error. I currently have no way of checking if a master slide is free to be deleted.
-; Related .......: _LOImpress_SlideMasterDeleteByObj, _LOImpress_SlideMastersGetCount, _LOImpress_SlideDeleteByIndex
+; Remarks .......: Trying to delete a Master Slide that is used by a slide will result in a processing error.
+; Related .......: _LOImpress_SlideMasterDeleteByObj, _LOImpress_SlideMasterIsInUse, _LOImpress_SlideMastersGetCount, _LOImpress_SlideDeleteByIndex
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2669,9 +2671,10 @@ Func _LOImpress_SlideMasterDeleteByIndex(ByRef $oDoc, $iMaster)
 
 	$oMSlide = $oDoc.MasterPages.getByIndex($iMaster)
 	If Not IsObj($oMSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+	If _LOImpress_SlideMasterIsInUse($oMSlide) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 	$oDoc.MasterPages.remove($oMSlide)
-	If ($iCount = $oDoc.MasterPages.getCount()) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to delete because the count is the same.
+	If ($iCount = $oDoc.MasterPages.getCount()) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0) ; Failed to delete because the count is the same.
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOImpress_SlideMasterDeleteByIndex
@@ -2680,7 +2683,7 @@ EndFunc   ;==>_LOImpress_SlideMasterDeleteByIndex
 ; Name ..........: _LOImpress_SlideMasterDeleteByObj
 ; Description ...: Delete a master slide using its Object.
 ; Syntax ........: _LOImpress_SlideMasterDeleteByObj(ByRef $oMaster)
-; Parameters ....: $oMaster             -  A Master Slide object returned by a previous _LOImpress_SlideMasterAdd, _LOImpress_SlideMasterGetObjByIndex, or _LOImpress_SlideMasterGetObjByName function.
+; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LOImpress_SlideMasterAdd, _LOImpress_SlideMasterGetObjByIndex, or _LOImpress_SlideMasterGetObjByName function.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Slide was successfully deleted.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -2688,12 +2691,13 @@ EndFunc   ;==>_LOImpress_SlideMasterDeleteByIndex
 ;                  @Error: 1, @Extended: 1 = $oMaster not an Object.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Parent Document.
-;                  @Error: 3, @Extended: 2 = Failed to retrieve count of master slides.
-;                  @Error: 3, @Extended: 3 = Failed to delete master slide.
+;                  @Error: 3, @Extended: 2 = Master Slide still in use by a slide.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve count of master slides.
+;                  @Error: 3, @Extended: 4 = Failed to delete master slide.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......: Trying to delete a Master Slide that is used by a slide will result in a processing error. I currently have no way of checking if a master slide is free to be deleted.
-; Related .......: _LOImpress_SlideMasterDeleteByIndex, _LOImpress_SlideMasterGetObjByIndex, _LOImpress_SlideMasterGetObjByName, _LOImpress_SlideDeleteByObj
+; Remarks .......: Trying to delete a Master Slide that is used by a slide will result in a processing error.
+; Related .......: _LOImpress_SlideMasterDeleteByIndex, _LOImpress_SlideMasterIsInUse, _LOImpress_SlideMasterGetObjByIndex, _LOImpress_SlideMasterGetObjByName, _LOImpress_SlideDeleteByObj
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -2708,12 +2712,13 @@ Func _LOImpress_SlideMasterDeleteByObj(ByRef $oMaster)
 
 	$oDoc = __LOImpress_GetParentDoc($oMaster)
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	If _LOImpress_SlideMasterIsInUse($oMaster) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	$iCount = $oDoc.MasterPages.getCount()
-	If Not IsInt($iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+	If Not IsInt($iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 	$oDoc.MasterPages.Remove($oMaster)
-	If ($oDoc.MasterPages.getCount() = $iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Failed to delete because the count is the same.
+	If ($oDoc.MasterPages.getCount() = $iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0) ; Failed to delete because the count is the same.
 
 	$oMaster = Null
 
@@ -2876,6 +2881,44 @@ Func _LOImpress_SlideMasterGetObjByName(ByRef $oDoc, $sName)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oMSlide)
 EndFunc   ;==>_LOImpress_SlideMasterGetObjByName
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOImpress_SlideMasterIsInUse
+; Description ...: Check if a Master Slide is still used by a slide.
+; Syntax ........: _LOImpress_SlideMasterIsInUse(ByRef $oMaster)
+; Parameters ....: $oMaster             - A Master Slide object returned by a previous _LOImpress_SlideMasterAdd, _LOImpress_SlideMasterGetObjByIndex, or _LOImpress_SlideMasterGetObjByName function.
+; Return values .: Success: Boolean
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the Master Slide is still applied to a Slide, True is returned, else False.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oMaster not an Object.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Parent Document.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: _LOImpress_SlideMasterDeleteByIndex, _LOImpress_SlideMasterDeleteByObj
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOImpress_SlideMasterIsInUse(ByRef $oMaster)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOImpress_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oDoc
+
+	If Not IsObj($oMaster) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$oDoc = __LOImpress_GetParentDoc($oMaster)
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	For $i = 0 To $oDoc.DrawPages.getCount() - 1
+		If ($oDoc.DrawPages.getByIndex($i).MasterPage() = $oMaster) Then Return SetError($__LO_STATUS_SUCCESS, 0, True)
+		Sleep((IsInt($i / $__LOICONST_SLEEP_DIV) ? (10) : (0)))
+	Next
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, False)
+EndFunc   ;==>_LOImpress_SlideMasterIsInUse
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOImpress_SlideMasterMargins

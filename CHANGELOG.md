@@ -859,6 +859,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOImpress_SlideMasterFormat
   - _LOImpress_SlideMasterGetObjByIndex
   - _LOImpress_SlideMasterGetObjByName
+  - _LOImpress_SlideMasterIsInUse
   - _LOImpress_SlideMasterMargins
   - _LOImpress_SlideMasterName
   - _LOImpress_SlideMasterNotesGetObj
