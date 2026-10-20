@@ -43,9 +43,6 @@ Things pertaining to **Calc**.
 - Find Optimal Width/Height "Add" property? Format>Rows/Columns>OptimalWidth/Height
 - Add Shapes?
 - Make easier way to delete header fields after reinserting header -- or way to re-identify it?
-- Can't I eliminate the need for Field Maps by using the main Field Object and enumerating the text to find the field? Or why did I not do this?
-  - I think I Can't because the Field's anchor is always covering the entire text area, thus how would I identify it?
-  - Maybe could enumerate, and get TextField Object for text portion? Then compare Objects?
 
 ## Draw
 
