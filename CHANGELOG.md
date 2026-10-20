@@ -986,6 +986,77 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - $LOI_PATHCONV_*
   - $LOI_COLOR_*
 
+### LibreOfficeMath
+
+#### Added
+
+- Main Math File
+  - LibreOfficeMath.au3
+-Individual Math Module Files
+  - LibreOfficeMath_Constants.au3
+  - LibreOfficeMath_Doc.au3
+  - LibreOfficeMath_Helper.au3
+  - LibreOfficeMath_Internal.au3
+  - LibreOfficeMath_Math.au3
+- Constants
+  - $LOM_CHAR_POSTURE_*
+  - $LOM_CHAR_WEIGHT_*
+  - $LOM_FMT_FONT_KIND_*
+  - $LOM_FORMULA_ALIGN_HORI_*
+- Document Functions
+  - _LOMath_DocClose
+  - _LOMath_DocConnect
+  - _LOMath_DocCreate
+  - _LOMath_DocExecuteDispatch
+  - _LOMath_DocExport
+  - _LOMath_DocGetName
+  - _LOMath_DocGetPath
+  - _LOMath_DocHasPath
+  - _LOMath_DocIsActive
+  - _LOMath_DocIsModified
+  - _LOMath_DocIsReadOnly
+  - _LOMath_DocMaximize
+  - _LOMath_DocMinimize
+  - _LOMath_DocOpen
+  - _LOMath_DocPosAndSize
+  - _LOMath_DocRedo
+  - _LOMath_DocRedoClear
+  - _LOMath_DocRedoCurActionTitle
+  - _LOMath_DocRedoGetAllActionTitles
+  - _LOMath_DocRedoIsPossible
+  - _LOMath_DocSave
+  - _LOMath_DocSaveAs
+  - _LOMath_DocToFront
+  - _LOMath_DocUndo
+  - _LOMath_DocUndoClear
+  - _LOMath_DocUndoCurActionTitle
+  - _LOMath_DocUndoGetAllActionTitles
+  - _LOMath_DocUndoIsPossible
+  - _LOMath_DocVisible
+- Helper Functions
+  - _LOMath_ComError_UserFunction
+  - _LOMath_FontExists
+  - _LOMath_FontsGetNames
+- Internal Functions
+  - __LOMath_FilterNameGet
+  - __LOMath_InternalComErrorHandler
+- Math Functions
+  - _LOMath_MathFormatAlignment
+  - _LOMath_MathFormatFonts
+  - _LOMath_MathFormatFontSizes
+  - _LOMath_MathFormatSpacing
+  - _LOMath_MathFormatSpacingBorders
+  - _LOMath_MathFormatSpacingBrackets
+  - _LOMath_MathFormatSpacingFractionBars
+  - _LOMath_MathFormatSpacingFractions
+  - _LOMath_MathFormatSpacingIndexes
+  - _LOMath_MathFormatSpacingLimits
+  - _LOMath_MathFormatSpacingMatrices
+  - _LOMath_MathFormatSpacingOperators
+  - _LOMath_MathFormatSpacingSymbols
+  - _LOMath_MathFormula
+  - _LOMath_MathTextMode
+
 ### LibreOfficeWriter
 
 #### Changed
