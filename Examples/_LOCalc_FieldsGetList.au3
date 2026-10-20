@@ -18,7 +18,7 @@ Func Example()
 	$oSheet = _LOCalc_SheetActive($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve the currently active Sheet Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Retrieve Cell A1
+	; Retrieve Cell A2
 	$oCell = _LOCalc_RangeGetCellByName($oSheet, "A2")
 	If @error Then _ERROR($oDoc, "Failed to retrieve Cell Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -26,7 +26,7 @@ Func Example()
 	$oTextCursor = _LOCalc_CellCreateTextCursor($oCell)
 	If @error Then _ERROR($oDoc, "Failed to create Text Cursor in Cell. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Insert a Document Title field in the cell A1.
+	; Insert a Document Title field in the cell A2.
 	_LOCalc_FieldTitleInsert($oDoc, $oTextCursor)
 	If @error Then _ERROR($oDoc, "Failed to insert field at Text Cursor 4. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -34,7 +34,7 @@ Func Example()
 	_LOCalc_TextCursorInsertString($oTextCursor, " ")
 	If @error Then _ERROR($oDoc, "Failed to insert a String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Insert a Sheet name field in the cell A1.
+	; Insert a Sheet name field in the cell A2.
 	_LOCalc_FieldSheetNameInsert($oDoc, $oTextCursor)
 	If @error Then _ERROR($oDoc, "Failed to insert field at Text Cursor 2. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -42,7 +42,7 @@ Func Example()
 	_LOCalc_TextCursorInsertString($oTextCursor, " ")
 	If @error Then _ERROR($oDoc, "Failed to insert a String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Insert a Date field in the cell A1.
+	; Insert a Date field in the cell A2.
 	_LOCalc_FieldDateTimeInsert($oDoc, $oTextCursor, True)
 	If @error Then _ERROR($oDoc, "Failed to insert field at Text Cursor 3. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
@@ -50,7 +50,7 @@ Func Example()
 	_LOCalc_TextCursorInsertString($oTextCursor, " ")
 	If @error Then _ERROR($oDoc, "Failed to insert a String. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	; Insert a URL field in the cell A1.
+	; Insert a URL field in the cell A2.
 	_LOCalc_FieldHyperlinkInsert($oDoc, $oTextCursor, "https://www.autoitscript.com/site/autoit/", "AutoIt")
 	If @error Then _ERROR($oDoc, "Failed to insert field at Text Cursor 1. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
