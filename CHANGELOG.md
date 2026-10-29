@@ -27,6 +27,42 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 - Fixed wrong variables used in error return descriptions.
 
+### LibreOfficeBasic
+
+- Main Basic File
+  - LibreOfficeBasic.au3
+-Individual Basic Module Files
+  - LibreOfficeBasic_Helper.au3
+  - LibreOfficeBasic_Internal.au3
+  - LibreOfficeBasic_Macro.au3
+- Helper  Functions
+  - _LOBasic_ComError_UserFunction
+- Internal Functions
+  - __LOBasic_InternalComErrorHandler
+- Macro Functions
+  - _LOBasic_MacroExecute
+  - _LOBasic_MacroExecuteLinkCreate
+  - _LOBasic_MacroLibContainerGetObj
+  - _LOBasic_MacroLibrariesAreModified
+  - _LOBasic_MacroLibrariesGetNames
+  - _LOBasic_MacroLibrariesSave
+  - _LOBasic_MacroLibraryCreate
+  - _LOBasic_MacroLibraryExists
+  - _LOBasic_MacroLibraryHasPassword
+  - _LOBasic_MacroLibraryIsLoaded
+  - _LOBasic_MacroLibraryLoad
+  - _LOBasic_MacroLibraryPasswordChange
+  - _LOBasic_MacroLibraryPasswordIsVerified
+  - _LOBasic_MacroLibraryPasswordVerify
+  - _LOBasic_MacroLibraryRemove
+  - _LOBasic_MacroLibraryRename
+  - _LOBasic_MacroModuleCreate
+  - _LOBasic_MacroModuleExists
+  - _LOBasic_MacroModuleMacros
+  - _LOBasic_MacroModuleRemove
+  - _LOBasic_MacroModuleRename
+  - _LOBasic_MacroModulesGetNames
+
 ### LibreOfficeCalc
 
 #### Changed

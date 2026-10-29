@@ -1,0 +1,62 @@
+#include <MsgBoxConstants.au3>
+
+#include "..\LibreOfficeWriter.au3"
+#include "..\LibreOfficeBasic.au3"
+
+Example()
+
+Func Example()
+	Local $oDoc, $oLibContainer
+	Local $asLibraries
+	Local $sLibraries = ""
+
+	; Create a New, visible, Blank LibreOffice Document.
+	$oDoc = _LOWriter_DocCreate(True, False)
+	If @error Then _ERROR($oDoc, "Failed to Create a new Writer Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	$oLibContainer = _LOBasic_MacroLibContainerGetObj($oDoc)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Library Container Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	_LOBasic_MacroLibraryCreate($oLibContainer, "Au3-Test")
+	If @error Then _ERROR($oDoc, "Failed to create a Library. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	$asLibraries = _LOBasic_MacroLibrariesGetNames($oLibContainer)
+	If @error Then _ERROR($oDoc, "Failed to retrieve array of Library names. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	For $i = 0 To @extended - 1
+		$sLibraries &= $asLibraries[$i] & @CRLF
+	Next
+
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Document contains the following Libraries:" & @CRLF & $sLibraries & @CRLF & @CRLF & _
+			"Press ok to remove the ""Au3-Test"" library.")
+
+	_LOBasic_MacroLibraryRemove($oLibContainer, "Au3-Test")
+	If @error Then _ERROR($oDoc, "Failed to rename Library. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	$asLibraries = _LOBasic_MacroLibrariesGetNames($oLibContainer)
+	If @error Then _ERROR($oDoc, "Failed to retrieve array of Library names. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	$sLibraries = ""
+
+	For $i = 0 To @extended - 1
+		$sLibraries &= $asLibraries[$i] & @CRLF
+	Next
+
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Document now contains the following Libraries:" & @CRLF & $sLibraries)
+
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
+
+	; Close the document, don't save changes.
+	_LOWriter_DocClose($oDoc, False)
+	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+EndFunc
+
+Func _ERROR($oDoc, $sErrorText)
+	MsgBox($MB_OK + $MB_ICONERROR + $MB_TOPMOST, "Error", $sErrorText)
+	If IsObj($oDoc) Then _LOWriter_DocClose($oDoc, False)
+	Exit
+EndFunc
