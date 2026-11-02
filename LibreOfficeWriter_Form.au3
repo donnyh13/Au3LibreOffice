@@ -4555,7 +4555,6 @@ Func _LOWriter_FormConInsert(ByRef $oParentForm, $iControl, $iX, $iY, $iWidth, $
 		Until ($i >= $oDoc.DrawPage.Count())
 
 		$sShapeName = "AU3_FORM_SHAPE_" & $iCount
-
 	EndIf
 
 	$sControl = __LOWriter_FormConIdentify(Null, $iControl)
@@ -4584,7 +4583,6 @@ Func _LOWriter_FormConInsert(ByRef $oParentForm, $iControl, $iX, $iY, $iWidth, $
 	EndSwitch
 
 	If ($iControl = $LOW_FORM_CON_TYPE_HIDDEN_CONTROL) Then
-
 		While $oParentForm.hasByName($sTempName & $iNameCount)
 			$iNameCount += 1
 		WEnd
@@ -8158,7 +8156,6 @@ Func _LOWriter_FormConsGetList(ByRef $oObj, $iType = $LOW_FORM_CON_TYPE_ALL)
 
 				$iArrayCount += 1
 			WEnd
-
 		EndIf
 
 	ElseIf $oObj.supportsService("com.sun.star.drawing.GroupShape") Then

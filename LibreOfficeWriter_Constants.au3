@@ -471,18 +471,18 @@ Global Enum Step *2 _
 		$LOW_FORM_CON_TYPE_GROUP_BOX, _                         ; 64 GROUP_BOX
 		$LOW_FORM_CON_TYPE_GROUPED_CONTROL, _                   ; 128 A Group of Controls, consisting of a Group box and various controls.
 		$LOW_FORM_CON_TYPE_HIDDEN_CONTROL, _                    ; 256 HIDDEN_CONTROL
-		$LOW_FORM_CON_TYPE_IMAGE_BUTTON, _                      ; 256 IMAGE_BUTTON
-		$LOW_FORM_CON_TYPE_IMAGE_CONTROL, _                     ; 512 IMAGE_CONTROL
-		$LOW_FORM_CON_TYPE_LABEL, _                             ; 1024 FIXED_TEXT
-		$LOW_FORM_CON_TYPE_LIST_BOX, _                          ; 2048 LIST_BOX
-		$LOW_FORM_CON_TYPE_NAV_BAR, _                           ; 4096 NAV_TOOLBAR
-		$LOW_FORM_CON_TYPE_NUMERIC_FIELD, _                     ; 8192 NUMERIC_FIELD
-		$LOW_FORM_CON_TYPE_OPTION_BUTTON, _                     ; 16384 RADIO_BUTTON
-		$LOW_FORM_CON_TYPE_PATTERN_FIELD, _                     ; 32768 PATTERN_FIELD
-		$LOW_FORM_CON_TYPE_PUSH_BUTTON, _                       ; 65536 COMMAND_BUTTON
-		$LOW_FORM_CON_TYPE_TABLE_CONTROL, _                     ; 131072 GRID_CONTROL
-		$LOW_FORM_CON_TYPE_TEXT_BOX, _                          ; 262144 TEXT_FIELD
-		$LOW_FORM_CON_TYPE_TIME_FIELD, _                        ; 524288 TIME_FIELD
+		$LOW_FORM_CON_TYPE_IMAGE_BUTTON, _                      ; 512 IMAGE_BUTTON
+		$LOW_FORM_CON_TYPE_IMAGE_CONTROL, _                     ; 1024 IMAGE_CONTROL
+		$LOW_FORM_CON_TYPE_LABEL, _                             ; 2048 FIXED_TEXT
+		$LOW_FORM_CON_TYPE_LIST_BOX, _                          ; 4096 LIST_BOX
+		$LOW_FORM_CON_TYPE_NAV_BAR, _                           ; 8192 NAV_TOOLBAR
+		$LOW_FORM_CON_TYPE_NUMERIC_FIELD, _                     ; 16384 NUMERIC_FIELD
+		$LOW_FORM_CON_TYPE_OPTION_BUTTON, _                     ; 32768 RADIO_BUTTON
+		$LOW_FORM_CON_TYPE_PATTERN_FIELD, _                     ; 65536 PATTERN_FIELD
+		$LOW_FORM_CON_TYPE_PUSH_BUTTON, _                       ; 131072 COMMAND_BUTTON
+		$LOW_FORM_CON_TYPE_TABLE_CONTROL, _                     ; 262144 GRID_CONTROL
+		$LOW_FORM_CON_TYPE_TEXT_BOX, _                          ; 524288 TEXT_FIELD
+		$LOW_FORM_CON_TYPE_TIME_FIELD, _                        ; 1048576 TIME_FIELD
 		$LOW_FORM_CON_TYPE_ALL = 2097151                        ; 2097151 All of the above Control Types. (This value is the BitOR value of all above)
 
 ; Form Tab Key Action.
