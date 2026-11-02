@@ -1108,6 +1108,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 - Forgot to update name after renaming internal line name from "Line Style 9" to "Sparse Dash".
 - Fixed missing variable in Null check, would cause unexpected behaviour. `_LOWriter_ImageOptionsName`.
+- `_LOWriter_FormAdd` Wrong temporary name was being applied to new forms, possibly returning and renaming the wrong form.
 
 ## [0.10.0] - 2026-08-23
 

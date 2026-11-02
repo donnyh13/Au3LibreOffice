@@ -177,10 +177,10 @@ Func _LOWriter_FormAdd(ByRef $oObj, $sName)
 		$iCount += 1
 	WEnd
 
-	$oInsertObj.insertByName($sTempName, $oForm)
-	If Not $oInsertObj.hasByName($sTempName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+	$oInsertObj.insertByName($sTempName & $iCount, $oForm)
+	If Not $oInsertObj.hasByName($sTempName & $iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	$oForm = $oInsertObj.getByName($sTempName)
+	$oForm = $oInsertObj.getByName($sTempName & $iCount)
 	If Not IsObj($oForm) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
 	$oForm.Name = $sName
