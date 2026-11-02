@@ -2165,13 +2165,13 @@ EndFunc   ;==>__LOWriter_FormConGetObj
 ; Description ...: Identify the type of Control being called, or return the Service name of a control type.
 ; Syntax ........: __LOWriter_FormConIdentify($oObj[, $iControlType = Null])
 ; Parameters ....: $oObj                - A Control object returned by a previous _LOWriter_FormConInsert, _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConsGetList function.
-;                  $iControlType        - [optional] (1-524288) Default is Null. The Control Type Constant. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iControlType        - [optional] (1-2097151) Default is Null. The Control Type Constant. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Integer or String
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning Constant value for Control type.
 ;                  @Error: 0, @Extended: 1, Return: String = Success. Returning requested Control type's service name.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oObj not an Object, and $iControlType not an Integer, less than 1 or greater than 524288. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object, and $iControlType not an Integer, less than 1 or greater than 2097151. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to identify Control, or return requested Service name.
 ; Author ........: donnyh13
@@ -2185,11 +2185,12 @@ Func __LOWriter_FormConIdentify($oObj, $iControlType = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $avControls[20][2] = [["com.sun.star.form.component.CheckBox", $LOW_FORM_CON_TYPE_CHECK_BOX], ["com.sun.star.form.component.ComboBox", $LOW_FORM_CON_TYPE_COMBO_BOX], _
+	Local $avControls[21][2] = [["com.sun.star.form.component.CheckBox", $LOW_FORM_CON_TYPE_CHECK_BOX], ["com.sun.star.form.component.ComboBox", $LOW_FORM_CON_TYPE_COMBO_BOX], _
 			["com.sun.star.form.component.CurrencyField", $LOW_FORM_CON_TYPE_CURRENCY_FIELD], ["com.sun.star.form.component.DateField", $LOW_FORM_CON_TYPE_DATE_FIELD], _
 			["com.sun.star.form.component.FileControl", $LOW_FORM_CON_TYPE_FILE_SELECTION], ["com.sun.star.form.component.FormattedField", $LOW_FORM_CON_TYPE_FORMATTED_FIELD], _
 			["com.sun.star.form.component.GroupBox", $LOW_FORM_CON_TYPE_GROUP_BOX], ["com.sun.star.form.component.GroupBox", $LOW_FORM_CON_TYPE_GROUPED_CONTROL], _ ; This will never match as the previous group box will be tested first. This is added here for completeness of the constants and for creating a grouped control. com.sun.star.drawing.GroupShape
-			["com.sun.star.form.component.ImageButton", $LOW_FORM_CON_TYPE_IMAGE_BUTTON], ["com.sun.star.form.component.DatabaseImageControl", $LOW_FORM_CON_TYPE_IMAGE_CONTROL], _ ; This seems to be used instead of this--> "com.sun.star.form.control.ImageControl"
+			["com.sun.star.form.component.HiddenControl", $LOW_FORM_CON_TYPE_HIDDEN_CONTROL], ["com.sun.star.form.component.ImageButton", $LOW_FORM_CON_TYPE_IMAGE_BUTTON], _
+			["com.sun.star.form.component.DatabaseImageControl", $LOW_FORM_CON_TYPE_IMAGE_CONTROL], _ ; This seems to be used instead of this--> "com.sun.star.form.control.ImageControl"
 			["com.sun.star.form.component.FixedText", $LOW_FORM_CON_TYPE_LABEL], ["com.sun.star.form.component.ListBox", $LOW_FORM_CON_TYPE_LIST_BOX], _
 			["com.sun.star.form.component.NavigationToolBar", $LOW_FORM_CON_TYPE_NAV_BAR], ["com.sun.star.form.component.NumericField", $LOW_FORM_CON_TYPE_NUMERIC_FIELD], _
 			["com.sun.star.form.component.RadioButton", $LOW_FORM_CON_TYPE_OPTION_BUTTON], ["com.sun.star.form.component.PatternField", $LOW_FORM_CON_TYPE_PATTERN_FIELD], _
@@ -2207,6 +2208,10 @@ Func __LOWriter_FormConIdentify($oObj, $iControlType = Null)
 		ElseIf $oObj.supportsService("com.sun.star.drawing.GroupShape") Then ; If a Group shape, it is a Grouped control.
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_FORM_CON_TYPE_GROUPED_CONTROL)
+
+		ElseIf $oObj.supportsService("com.sun.star.form.component.HiddenControl") Then
+
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_FORM_CON_TYPE_HIDDEN_CONTROL)
 
 		Else     ; Normal control housed in a shape.
 			For $i = 0 To UBound($avControls) - 1

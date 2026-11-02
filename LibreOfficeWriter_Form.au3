@@ -46,6 +46,7 @@
 ; _LOWriter_FormConFormattedFieldValue
 ; _LOWriter_FormConGetParent
 ; _LOWriter_FormConGroupBoxGeneral
+; _LOWriter_FormConHiddenGeneral
 ; _LOWriter_FormConImageButtonGeneral
 ; _LOWriter_FormConImageControlData
 ; _LOWriter_FormConImageControlGeneral
@@ -2436,7 +2437,9 @@ EndFunc   ;==>_LOWriter_FormConDateFieldValue
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Control's parent Object.
 ;                  @Error: 3, @Extended: 2 = Cannot delete the last control in a Grouped control.
-;                  @Error: 3, @Extended: 3 = Failed to delete the Control.
+;                  @Error: 3, @Extended: 3 = Failed to rename Hidden Control.
+;                  @Error: 3, @Extended: 4 = Failed to delete Hidden Control by name.
+;                  @Error: 3, @Extended: 5 = Failed to delete the Control.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: You cannot delete the last control contained in a Grouped Control.
@@ -2449,6 +2452,8 @@ Func _LOWriter_FormConDelete(ByRef $oControl)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oParent
+	Local $sTempName = "AutoIt_CONTROL_"
+	Local $iCount = 1
 
 	If Not IsObj($oControl) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
@@ -2456,9 +2461,25 @@ Func _LOWriter_FormConDelete(ByRef $oControl)
 	If Not IsObj($oParent) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 	If ($oParent.supportsService("com.sun.star.drawing.GroupShape") And ($oParent.Count() = 1)) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	$oParent.remove($oControl)
+	If $oControl.supportsService("com.sun.star.drawing.ControlShape") Or $oControl.supportsService("com.sun.star.drawing.GroupShape") Then
+		$oParent.remove($oControl)
 
-	If IsObj($oControl.Parent()) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Parent will be Null when the control is deleted.
+	Else ; Hidden Control
+		; Create a Unique name.
+		While $oParent.hasByName($sTempName & $iCount)
+			$iCount += 1
+		WEnd
+
+		; Rename the Control.
+		$oControl.Name = $sTempName & $iCount
+		If Not ($oControl.Name() = $sTempName & $iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+		$oParent.removeByName($sTempName & $iCount)
+
+		If $oParent.hasByName($sTempName & $iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+	EndIf
+
+	If IsObj($oControl.Parent()) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0) ; Parent will be Null when the control is deleted.
 
 	$oControl = Null
 
@@ -3420,29 +3441,32 @@ Func _LOWriter_FormConGetParent(ByRef $oControl)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oOldParent
+	Local $oParent
 
 	If Not IsObj($oControl) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If $oControl.supportsService("com.sun.star.drawing.ControlShape") Then
-		$oOldParent = $oControl.Control.Parent()
+		$oParent = $oControl.Control.Parent()
+
+	ElseIf $oControl.supportsService("com.sun.star.form.component.HiddenControl") Then
+		$oParent = $oControl.Parent()
 
 	ElseIf $oControl.supportsService("com.sun.star.drawing.GroupShape") Then     ; If shape is a grouped control
 		For $i = 0 To $oControl.Count() - 1
 			If $oControl.getByIndex($i).supportsService("com.sun.star.drawing.ControlShape") Then ; Retrieve the controls contained in the grouped control, to find the parent form.
-				$oOldParent = $oControl.getByIndex($i).Control.Parent()
-				If IsObj($oOldParent) Then ExitLoop
+				$oParent = $oControl.getByIndex($i).Control.Parent()
+				If IsObj($oParent) Then ExitLoop
 			EndIf
 		Next
 
-		If Not IsObj($oOldParent) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+		If Not IsObj($oParent) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Else
 
 		Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	EndIf
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oOldParent)
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oParent)
 EndFunc   ;==>_LOWriter_FormConGetParent
 
 ; #FUNCTION# ====================================================================================================================
@@ -3622,6 +3646,91 @@ Func _LOWriter_FormConGroupBoxGeneral(ByRef $oGroupBox, $sName = Null, $sLabel =
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_FormConGroupBoxGeneral
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_FormConHiddenGeneral
+; Description ...: Set or Retrieve general Hidden control settings.
+; Syntax ........: _LOWriter_FormConHiddenGeneral(ByRef $oHidden[, $sName = Null[, $sValue = Null[, $sAddInfo = Null]]])
+; Parameters ....: $oHidden             - A Hidden Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sName               - [optional] Default is Null. The name of the Hidden control.
+;                  $sValue              - [optional] Default is Null. The Value of the control.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+; Return values .: Success: 1 or Array
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oHidden not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oHidden not a Hidden Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $sValue not a String.
+;                  @Error: 1, @Extended: 5 = $sAddInfo not a String.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $sName
+;                  |                               2 = Error setting $sValue
+;                  |                               4 = Error setting $sAddInfo
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
+;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $sValue, $sAddInfo.
+; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_FormConHiddenGeneral(ByRef $oHidden, $sName = Null, $sValue = Null, $sAddInfo = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iError = 0
+	Local $avControl[3]
+
+	If Not IsObj($oHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If (__LOWriter_FormConIdentify($oHidden) <> $LOW_FORM_CON_TYPE_HIDDEN_CONTROL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	If __LO_VarsAreNull($sName, $sValue, $sAddInfo) Then
+		__LO_ArrayFill($avControl, $oHidden.Name(), $oHidden.HiddenValue(), $oHidden.Tag())
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $avControl)
+	EndIf
+
+	If ($sName = Default) Then
+		$iError = BitOR($iError, 1) ; Can't Default Name.
+
+	ElseIf ($sName <> Null) Then
+		If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+		$oHidden.Name = $sName
+		$iError = ($oHidden.Name() = $sName) ? ($iError) : (BitOR($iError, 1))
+	EndIf
+
+	If ($sValue = Default) Then
+		$iError = BitOR($iError, 2)
+
+	ElseIf ($sValue <> Null) Then
+		If Not IsString($sValue) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+		$oHidden.HiddenValue = $sValue
+		$iError = ($oHidden.HiddenValue() = $sValue) ? ($iError) : (BitOR($iError, 2))
+	EndIf
+
+	If ($sAddInfo = Default) Then
+		$iError = BitOR($iError, 4)
+
+	ElseIf ($sAddInfo <> Null) Then
+		If Not IsString($sAddInfo) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+		$oHidden.Tag = $sAddInfo
+		$iError = ($oHidden.Tag() = $sAddInfo) ? ($iError) : (BitOR($iError, 4))
+	EndIf
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LOWriter_FormConHiddenGeneral
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FormConImageButtonGeneral
@@ -4357,7 +4466,7 @@ EndFunc   ;==>_LOWriter_FormConImageControlGeneral
 ; Description ...: Insert a control into a form and document.
 ; Syntax ........: _LOWriter_FormConInsert(ByRef $oParentForm, $iControl, $iX, $iY, $iWidth, $iHeight[, $sName = ""])
 ; Parameters ....: $oParentForm         - A Form object returned by a previous _LOWriter_FormAdd, _LOWriter_FormGetObjByIndex or _LOWriter_FormsGetList function.
-;                  $iControl            - (1-524288) The control type to insert. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iControl            - (1-1048576) The control type to insert. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iX                  - The X Coordinate, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - The Y Coordinate, in Hundredths of a Millimeter (HMM).
 ;                  $iWidth              - The Width of the control, in Hundredths of a Millimeter (HMM).
@@ -4370,7 +4479,7 @@ EndFunc   ;==>_LOWriter_FormConImageControlGeneral
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oParentForm not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oParentForm not a Form Object.
-;                  @Error: 1, @Extended: 3 = $iControl not an Integer, less than 1 or greater than 524288. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iControl not an Integer, less than 1 or greater than 1048576. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error: 1, @Extended: 4 = $iX not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iY not an Integer.
 ;                  @Error: 1, @Extended: 6 = $iWidth not an Integer.
@@ -4384,12 +4493,16 @@ EndFunc   ;==>_LOWriter_FormConImageControlGeneral
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Form parent document Object.
 ;                  @Error: 3, @Extended: 2 = Parent Document is ReadOnly.
 ;                  @Error: 3, @Extended: 3 = Failed to retrieve Control Service name.
-;                  @Error: 3, @Extended: 4 = Failed to retrieve Shape Position Structure.
-;                  @Error: 3, @Extended: 5 = Failed to retrieve Shape Size Structure.
+;                  @Error: 3, @Extended: 4 = Failed to insert Hidden Control.
+;                  @Error: 3, @Extended: 5 = Failed to retrieve Hidden Control's Object.
+;                  @Error: 3, @Extended: 6 = Failed to rename Hidden Control.
+;                  @Error: 3, @Extended: 7 = Failed to retrieve Shape Size Structure.
+;                  @Error: 3, @Extended: 8 = Failed to retrieve Shape Position Structure.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: When inserting a Grouped Control, a Group box will be automatically created and inserted into it.
 ;                  I have not found a reliable and working way to add controls to a Group of Controls.
+;                  X, Y, Width and Height are ignored for Hidden Controls. Enter any value for them when inserting.
 ; Related .......: _LOWriter_FormConsGetList, _LOWriter_FormConDelete, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
@@ -4401,7 +4514,8 @@ Func _LOWriter_FormConInsert(ByRef $oParentForm, $iControl, $iX, $iY, $iWidth, $
 	Local $oControl, $oShape, $oGroupShape, $oDoc
 	Local $sControl, $sShapeName
 	Local $tPos, $tSize
-	Local $iCount = 1
+	Local $sTempName = "AutoIt_CONTROL_"
+	Local $iNameCount = 1, $iCount = 1
 
 	If Not IsObj($oParentForm) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oParentForm.supportsService("com.sun.star.form.component.Form") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -4429,26 +4543,26 @@ Func _LOWriter_FormConInsert(ByRef $oParentForm, $iControl, $iX, $iY, $iWidth, $
 
 	If $oDoc.IsReadOnly() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	$iCount = 0
+	If ($iControl <> $LOW_FORM_CON_TYPE_HIDDEN_CONTROL) Then
+		$iCount = 0
 
-	Do
-		$iCount += 1
-		For $i = 0 To $oDoc.DrawPage.Count() - 1
-			If ($oDoc.DrawPage.getByIndex($i).Name() = "AU3_FORM_SHAPE_" & $iCount) Then ExitLoop
-			Sleep((IsInt(($i / $__LOWCONST_SLEEP_DIV))) ? (10) : (0))
-		Next
-	Until ($i >= $oDoc.DrawPage.Count())
+		Do
+			$iCount += 1
+			For $i = 0 To $oDoc.DrawPage.Count() - 1
+				If ($oDoc.DrawPage.getByIndex($i).Name() = "AU3_FORM_SHAPE_" & $iCount) Then ExitLoop
+				Sleep((IsInt(($i / $__LOWCONST_SLEEP_DIV))) ? (10) : (0))
+			Next
+		Until ($i >= $oDoc.DrawPage.Count())
 
-	$sShapeName = "AU3_FORM_SHAPE_" & $iCount
+		$sShapeName = "AU3_FORM_SHAPE_" & $iCount
+
+	EndIf
 
 	$sControl = __LOWriter_FormConIdentify(Null, $iControl)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 	$oControl = $oDoc.createInstance($sControl)
 	If Not IsObj($oControl) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-
-	$oShape = $oDoc.createInstance("com.sun.star.drawing.ControlShape")
-	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
 	$oControl.Name = $sName
 
@@ -4469,60 +4583,80 @@ Func _LOWriter_FormConInsert(ByRef $oParentForm, $iControl, $iX, $iY, $iWidth, $
 			$oControl.Label = "Push Button"
 	EndSwitch
 
-	$tSize = $oShape.Size()
-	If Not IsObj($tSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+	If ($iControl = $LOW_FORM_CON_TYPE_HIDDEN_CONTROL) Then
 
-	$tSize.Width = $iWidth
-	$tSize.Height = $iHeight
+		While $oParentForm.hasByName($sTempName & $iNameCount)
+			$iNameCount += 1
+		WEnd
 
-	$oShape.Size = $tSize
+		$oParentForm.insertByName($sTempName & $iNameCount, $oControl)
+		If Not $oParentForm.hasByName($sTempName & $iNameCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
-	$oShape.Control = $oControl
-	$oShape.Name = $sShapeName
+		$oShape = $oParentForm.getByName($sTempName & $iNameCount)
+		If Not IsObj($oShape) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
-	If ($iControl = $LOW_FORM_CON_TYPE_GROUPED_CONTROL) Then
-		$oGroupShape = $oDoc.createInstance("com.sun.star.drawing.GroupShape")
-		If Not IsObj($oGroupShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
+		$oShape.Name = $sName
+		If ($oShape.Name() <> $sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
 
-		$tSize = $oGroupShape.Size()
-		If Not IsObj($tSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+	Else
+		$oShape = $oDoc.createInstance("com.sun.star.drawing.ControlShape")
+		If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+		$tSize = $oShape.Size()
+		If Not IsObj($tSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 7, 0)
 
 		$tSize.Width = $iWidth
 		$tSize.Height = $iHeight
 
-		$oGroupShape.Size = $tSize
+		$oShape.Size = $tSize
 
-		$oDoc.DrawPage.Add($oGroupShape)
-		$oGroupShape.Add($oShape)
+		$oShape.Control = $oControl
+		$oShape.Name = $sShapeName
 
-		$oGroupShape.AnchorType = $LOW_ANCHOR_AT_PARAGRAPH ; Have to set anchor after insertion.
+		If ($iControl = $LOW_FORM_CON_TYPE_GROUPED_CONTROL) Then
+			$oGroupShape = $oDoc.createInstance("com.sun.star.drawing.GroupShape")
+			If Not IsObj($oGroupShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
 
-		$tPos = $oGroupShape.Position()
-		If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+			$tSize = $oGroupShape.Size()
+			If Not IsObj($tSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 7, 0)
+
+			$tSize.Width = $iWidth
+			$tSize.Height = $iHeight
+
+			$oGroupShape.Size = $tSize
+
+			$oDoc.DrawPage.Add($oGroupShape)
+			$oGroupShape.Add($oShape)
+
+			$oGroupShape.AnchorType = $LOW_ANCHOR_AT_PARAGRAPH ; Have to set anchor after insertion.
+
+			$tPos = $oGroupShape.Position()
+			If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 8, 0)
+
+			$tPos.X = $iX
+			$tPos.Y = $iY
+
+			$oGroupShape.Position = $tPos
+
+			$oGroupShape.getByIndex(0).Control.setParent($oParentForm) ; Have to set parent form after otherwise a COM Error is triggered.
+
+			Return SetError($__LO_STATUS_SUCCESS, 1, $oGroupShape)
+
+		Else ; Non-Group Box Control
+			$oDoc.DrawPage.Add($oShape)
+			$oShape.Control.SetParent($oParentForm)
+			$oShape.AnchorType = $LOW_ANCHOR_AT_PARAGRAPH
+		EndIf
+
+		; Have to set Position after insertion.
+		$tPos = $oShape.Position()
+		If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 8, 0)
 
 		$tPos.X = $iX
 		$tPos.Y = $iY
 
-		$oGroupShape.Position = $tPos
-
-		$oGroupShape.getByIndex(0).Control.setParent($oParentForm) ; Have to set parent form after otherwise a COM Error is triggered.
-
-		Return SetError($__LO_STATUS_SUCCESS, 1, $oGroupShape)
-
-	Else ; Non-Group Box Control
-		$oDoc.DrawPage.Add($oShape)
-		$oShape.Control.SetParent($oParentForm)
-		$oShape.AnchorType = $LOW_ANCHOR_AT_PARAGRAPH
+		$oShape.Position = $tPos
 	EndIf
-
-	; Have to set Position after insertion.
-	$tPos = $oShape.Position()
-	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
-
-	$tPos.X = $iX
-	$tPos.Y = $iY
-
-	$oShape.Position = $tPos
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oShape)
 EndFunc   ;==>_LOWriter_FormConInsert
@@ -7229,10 +7363,11 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldValue
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oControl not an Object.
-;                  @Error: 1, @Extended: 2 = $iX not an Integer.
-;                  @Error: 1, @Extended: 3 = $iY not an Integer.
-;                  @Error: 1, @Extended: 4 = $iAnchor not an Integer, less than 0 or greater than 4. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error: 1, @Extended: 5 = $bProtectPos not a Boolean.
+;                  @Error: 1, @Extended: 2 = Cannot set or retrieve position for a Hidden Control.
+;                  @Error: 1, @Extended: 3 = $iX not an Integer.
+;                  @Error: 1, @Extended: 4 = $iY not an Integer.
+;                  @Error: 1, @Extended: 5 = $iAnchor not an Integer, less than 0 or greater than 4. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $bProtectPos not a Boolean.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Control's Position Structure.
 ;                  --Property Setting Errors--
@@ -7244,6 +7379,7 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldValue
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  You cannot Set or Retrieve Position values for a Hidden Control.
 ; Related .......: _LO_UnitConvert, _LOWriter_FormConSize
 ; Link ..........:
 ; Example .......: Yes
@@ -7257,6 +7393,7 @@ Func _LOWriter_FormConPosition(ByRef $oControl, $iX = Null, $iY = Null, $iAnchor
 	Local $tPos
 
 	If Not IsObj($oControl) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If $oControl.supportsService("com.sun.star.form.component.HiddenControl") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$tPos = $oControl.Position()
 	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
@@ -7269,13 +7406,13 @@ Func _LOWriter_FormConPosition(ByRef $oControl, $iX = Null, $iY = Null, $iAnchor
 
 	If ($iX <> Null) Or ($iY <> Null) Then
 		If ($iX <> Null) Then
-			If Not IsInt($iX) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+			If Not IsInt($iX) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 			$tPos.X = $iX
 		EndIf
 
 		If ($iY <> Null) Then
-			If Not IsInt($iY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+			If Not IsInt($iY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 			$tPos.Y = $iY
 		EndIf
@@ -7287,14 +7424,14 @@ Func _LOWriter_FormConPosition(ByRef $oControl, $iX = Null, $iY = Null, $iAnchor
 	EndIf
 
 	If ($iAnchor <> Null) Then
-		If Not __LO_IntIsBetween($iAnchor, $LOW_ANCHOR_AT_PARAGRAPH, $LOW_ANCHOR_AT_CHARACTER) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not __LO_IntIsBetween($iAnchor, $LOW_ANCHOR_AT_PARAGRAPH, $LOW_ANCHOR_AT_CHARACTER) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oControl.AnchorType = $iAnchor
 		$iError = ($oControl.AnchorType() = $iAnchor) ? ($iError) : (BitOR($iError, 4))
 	EndIf
 
 	If ($bProtectPos <> Null) Then
-		If Not IsBool($bProtectPos) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not IsBool($bProtectPos) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oControl.MoveProtect = $bProtectPos
 		$iError = ($oControl.MoveProtect() = $bProtectPos) ? ($iError) : (BitOR($iError, 8))
@@ -7876,20 +8013,22 @@ EndFunc   ;==>_LOWriter_FormConPushButtonState
 ; Description ...: Retrieve an array of Control Objects contained in a Document or a Form.
 ; Syntax ........: _LOWriter_FormConsGetList(ByRef $oObj[, $iType = $LOW_FORM_CON_TYPE_ALL])
 ; Parameters ....: $oObj                - Either a Document Object or a Form object, or a Grouped Control. See Remarks. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or a Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function. Also a Grouped Control or Group Box returned from a _LOWriter_FormConsGetList function.
-;                  $iType               - [optional] (1-1048575) Default is $LOW_FORM_CON_TYPE_ALL. The type of control(s) to return in the array. Can be BitOr'd together. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iType               - [optional] (1-2097151) Default is $LOW_FORM_CON_TYPE_ALL. The type of control(s) to return in the array. Can be BitOr'd together. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning a 2D array of Control Objects in the first column, and the type of Control in the second column, corresponding to the Constants $LOW_FORM_CON_* as defined in LibreOfficeWriter_Constants.au3
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
-;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 1 or greater than 1048575. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 1 or greater than 2097151. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = Called Object in $oObj, not a Document Object, not a Form Object, and not a Grouped Control.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to identify parent document of Form.
 ;                  @Error: 3, @Extended: 2 = Failed to retrieve Draw Page object.
 ;                  @Error: 3, @Extended: 3 = Failed to retrieve Shape Object.
 ;                  @Error: 3, @Extended: 4 = Failed to identify Control type.
-;                  @Error: 3, @Extended: 5 = Failed to retrieve Control Object.
+;                  @Error: 3, @Extended: 5 = Failed to retrieve Form Control Object.
+;                  @Error: 3, @Extended: 6 = Failed to retrieve Form Object.
+;                  @Error: 3, @Extended: 7 = Failed to retrieve Control Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If a Document object is called in $oObj, all the controls are returned (except controls in a Grouped Control). If a Form Object is called in $oObj, only the controls contained in the Form are returned. And if a Grouped control is called, only controls in the group are returned.
@@ -7903,9 +8042,9 @@ Func _LOWriter_FormConsGetList(ByRef $oObj, $iType = $LOW_FORM_CON_TYPE_ALL)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $aoControls[0][2]
-	Local $oShapes, $oShape, $oDoc, $oControl
-	Local $iCount = 0, $iControlType
+	Local $aoControls[0][2], $aoForms[0]
+	Local $oShapes, $oShape, $oDoc, $oControl, $oCurrObj
+	Local $iCount = 0, $iControlType, $iArrayCount = 0
 
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not __LO_IntIsBetween($iType, $LOW_FORM_CON_TYPE_CHECK_BOX, $LOW_FORM_CON_TYPE_ALL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -7953,6 +8092,21 @@ Func _LOWriter_FormConsGetList(ByRef $oObj, $iType = $LOW_FORM_CON_TYPE_ALL)
 			Sleep((IsInt(($i / $__LOWCONST_SLEEP_DIV))) ? (10) : (0))
 		Next
 
+		If BitAND($iType, $LOW_FORM_CON_TYPE_HIDDEN_CONTROL) Then ; Only do this if searching for Hidden Controls. All other controls will be identified already, only hidden controls are stored solely in forms.
+			For $i = 0 To $oObj.Count() - 1
+				$oCurrObj = $oObj.getByIndex($i)
+				If Not IsObj($oCurrObj) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+
+				If $oCurrObj.supportsService("com.sun.star.form.component.HiddenControl") Then
+					If ($iCount <= UBound($aoControls)) Then ReDim $aoControls[$iCount + 1][2]
+					$aoControls[$iCount][0] = $oCurrObj
+					$aoControls[$iCount][1] = $LOW_FORM_CON_TYPE_HIDDEN_CONTROL
+					$iCount += 1
+				EndIf
+				Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+			Next
+		EndIf
+
 	ElseIf $oObj.supportsService("com.sun.star.text.TextDocument") Then ; Get all controls in document.
 		$oShapes = $oObj.DrawPage()
 		If Not IsObj($oShapes) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
@@ -7976,12 +8130,43 @@ Func _LOWriter_FormConsGetList(ByRef $oObj, $iType = $LOW_FORM_CON_TYPE_ALL)
 			Sleep((IsInt(($i / $__LOWCONST_SLEEP_DIV))) ? (10) : (0))
 		Next
 
+		If BitAND($iType, $LOW_FORM_CON_TYPE_HIDDEN_CONTROL) Then ; Only do this if searching for Hidden Controls. All other controls will be identified already, only hidden controls are stored solely in forms.
+			ReDim $aoForms[$oObj.DrawPage.Forms.Count()]
+
+			For $i = 0 To $oObj.DrawPage.Forms.Count() - 1
+				$aoForms[$i] = $oObj.DrawPage.Forms.getByIndex($i)
+				If Not IsObj($aoForms[$i]) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
+			Next
+
+			While ($iArrayCount < UBound($aoForms))
+				For $i = 0 To $aoForms[$iArrayCount].Count() - 1
+					$oCurrObj = $aoForms[$iArrayCount].getByIndex($i)
+					If Not IsObj($oCurrObj) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+
+					If $oCurrObj.supportsService("com.sun.star.form.component.Form") Then
+						ReDim $aoForms[UBound($aoForms) + 1]
+						$aoForms[UBound($aoForms) - 1] = $oCurrObj
+
+					ElseIf $oCurrObj.supportsService("com.sun.star.form.component.HiddenControl") Then
+						If ($iCount <= UBound($aoControls)) Then ReDim $aoControls[$iCount + 1][2]
+						$aoControls[$iCount][0] = $oCurrObj
+						$aoControls[$iCount][1] = $LOW_FORM_CON_TYPE_HIDDEN_CONTROL
+						$iCount += 1
+					EndIf
+					Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+				Next
+
+				$iArrayCount += 1
+			WEnd
+
+		EndIf
+
 	ElseIf $oObj.supportsService("com.sun.star.drawing.GroupShape") Then
 		ReDim $aoControls[$oObj.Count()][2]
 
 		For $i = 0 To $oObj.Count() - 1
 			$oControl = $oObj.getByIndex($i)
-			If Not IsObj($oControl) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+			If Not IsObj($oControl) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 7, 0)
 
 			If $oControl.supportsService("com.sun.star.drawing.ControlShape") Then
 				$iControlType = __LOWriter_FormConIdentify($oControl)
@@ -8020,9 +8205,10 @@ EndFunc   ;==>_LOWriter_FormConsGetList
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oControl not an Object.
-;                  @Error: 1, @Extended: 2 = $iWidth not an Integer, or less than 51.
-;                  @Error: 1, @Extended: 3 = $iHeight not an Integer, or less than 51.
-;                  @Error: 1, @Extended: 4 = $bProtectSize not a Boolean.
+;                  @Error: 1, @Extended: 2 = Cannot set or retrieve size for a Hidden Control.
+;                  @Error: 1, @Extended: 3 = $iWidth not an Integer, or less than 51.
+;                  @Error: 1, @Extended: 4 = $iHeight not an Integer, or less than 51.
+;                  @Error: 1, @Extended: 5 = $bProtectSize not a Boolean.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Control Size Structure.
 ;                  --Property Setting Errors--
@@ -8035,6 +8221,7 @@ EndFunc   ;==>_LOWriter_FormConsGetList
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  I have skipped Keep Ratio, as currently it seems unable to be set for controls.
+;                  You cannot Set or Retrieve size values for a Hidden Control.
 ; Related .......: _LO_UnitConvert, _LOWriter_FormConPosition
 ; Link ..........:
 ; Example .......: Yes
@@ -8048,6 +8235,7 @@ Func _LOWriter_FormConSize(ByRef $oControl, $iWidth = Null, $iHeight = Null, $bP
 	Local $tSize
 
 	If Not IsObj($oControl) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If $oControl.supportsService("com.sun.star.form.component.HiddenControl") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$tSize = $oControl.Size()
 	If Not IsObj($tSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
@@ -8060,13 +8248,13 @@ Func _LOWriter_FormConSize(ByRef $oControl, $iWidth = Null, $iHeight = Null, $bP
 
 	If ($iWidth <> Null) Or ($iHeight <> Null) Then
 		If ($iWidth <> Null) Then ; Min 51
-			If Not __LO_IntIsBetween($iWidth, 51) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+			If Not __LO_IntIsBetween($iWidth, 51) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 			$tSize.Width = $iWidth
 		EndIf
 
 		If ($iHeight <> Null) Then
-			If Not __LO_IntIsBetween($iHeight, 51) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+			If Not __LO_IntIsBetween($iHeight, 51) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 			$tSize.Height = $iHeight
 		EndIf
@@ -8078,7 +8266,7 @@ Func _LOWriter_FormConSize(ByRef $oControl, $iWidth = Null, $iHeight = Null, $bP
 	EndIf
 
 	If ($bProtectSize <> Null) Then
-		If Not IsBool($bProtectSize) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not IsBool($bProtectSize) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oControl.SizeProtect = $bProtectSize
 		$iError = ($oControl.SizeProtect() = $bProtectSize) ? ($iError) : (BitOR($iError, 4))

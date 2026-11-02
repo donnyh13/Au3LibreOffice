@@ -470,6 +470,7 @@ Global Enum Step *2 _
 		$LOW_FORM_CON_TYPE_FORMATTED_FIELD, _                   ; 32 FORMATTED_FIELD
 		$LOW_FORM_CON_TYPE_GROUP_BOX, _                         ; 64 GROUP_BOX
 		$LOW_FORM_CON_TYPE_GROUPED_CONTROL, _                   ; 128 A Group of Controls, consisting of a Group box and various controls.
+		$LOW_FORM_CON_TYPE_HIDDEN_CONTROL, _                    ; 256 HIDDEN_CONTROL
 		$LOW_FORM_CON_TYPE_IMAGE_BUTTON, _                      ; 256 IMAGE_BUTTON
 		$LOW_FORM_CON_TYPE_IMAGE_CONTROL, _                     ; 512 IMAGE_CONTROL
 		$LOW_FORM_CON_TYPE_LABEL, _                             ; 1024 FIXED_TEXT
@@ -482,7 +483,7 @@ Global Enum Step *2 _
 		$LOW_FORM_CON_TYPE_TABLE_CONTROL, _                     ; 131072 GRID_CONTROL
 		$LOW_FORM_CON_TYPE_TEXT_BOX, _                          ; 262144 TEXT_FIELD
 		$LOW_FORM_CON_TYPE_TIME_FIELD, _                        ; 524288 TIME_FIELD
-		$LOW_FORM_CON_TYPE_ALL = 1048575                        ; 1048575 All of the above Control Types. (This value is the BitOR value of all above)
+		$LOW_FORM_CON_TYPE_ALL = 2097151                        ; 2097151 All of the above Control Types. (This value is the BitOR value of all above)
 
 ; Form Tab Key Action.
 Global Const _                                                  ; com.sun.star.form.TabulatorCycle
