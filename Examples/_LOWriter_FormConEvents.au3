@@ -9,7 +9,7 @@ Example()
 Func Example()
 	Local $oDoc, $oForm, $oLibContainer, $oControl
 	Local $sExecuteLink, $sMacro = "Sub AutoIt_Test" & @LF & "MsgBox ""Hello World!""" & @LF & "End Sub" & @LF
-Local $asFormConEvents[1][3]
+	Local $asFormConEvents[1][3]
 
 	; Create a New, visible, Blank LibreOffice Document.
 	$oDoc = _LOWriter_DocCreate(True, False)
