@@ -1061,6 +1061,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOMath_DocClose
   - _LOMath_DocConnect
   - _LOMath_DocCreate
+  - _LOMath_DocEvents
   - _LOMath_DocExecuteDispatch
   - _LOMath_DocExport
   - _LOMath_DocGetName
