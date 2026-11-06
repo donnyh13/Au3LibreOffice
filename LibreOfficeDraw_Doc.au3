@@ -525,7 +525,6 @@ Func _LODraw_DocEvents(ByRef $oDoc, $asEvents = Null)
 			Next
 			$iError = ($asEvents[$i][1] = $sCurrEvent) ? ($iError) : (BitOR($iError, 1))
 		EndIf
-
 	Next
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))

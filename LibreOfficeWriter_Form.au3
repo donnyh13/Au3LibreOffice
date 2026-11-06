@@ -2564,6 +2564,7 @@ Func _LOWriter_FormConEvents(ByRef $oControl, $asEvents = Null)
 
 	ElseIf $oControl.supportsService("com.sun.star.drawing.GroupShape") Then
 		If Not ($oControl.Count() > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
 		$oParentControl = $oControl.getByIndex(0).Control() ; Retrieve the GroupBox control obj.
 	EndIf
 
@@ -2732,7 +2733,6 @@ Func _LOWriter_FormConEvents(ByRef $oControl, $asEvents = Null)
 					$asControlEvents[$i][2] = $atCurrEvents[$j].ListenerType()
 					ContinueLoop 2
 				EndIf
-
 			Next
 			; If not set in Events, set the Macro link to an empty string.
 			$asControlEvents[$i][1] = ""
@@ -2774,7 +2774,6 @@ Func _LOWriter_FormConEvents(ByRef $oControl, $asEvents = Null)
 
 				Case $LOW_FORM_CON_EVENT_UPDATE_AFTER, $LOW_FORM_CON_EVENT_UPDATE_BEFORE
 					$asControlEvents[$i][2] = "XUpdateListener"
-
 			EndSwitch
 		Next
 
@@ -2790,7 +2789,6 @@ Func _LOWriter_FormConEvents(ByRef $oControl, $asEvents = Null)
 			$asControlEvents[UBound($asControlEvents) - 1][0] = $atCurrEvents[$i].EventMethod()
 			$asControlEvents[UBound($asControlEvents) - 1][1] = $atCurrEvents[$i].ScriptCode()
 			$asControlEvents[UBound($asControlEvents) - 1][2] = $atCurrEvents[$i].ListenerType()
-
 		Next
 
 		Return SetError($__LO_STATUS_SUCCESS, UBound($asControlEvents), $asControlEvents)
@@ -2811,7 +2809,6 @@ Func _LOWriter_FormConEvents(ByRef $oControl, $asEvents = Null)
 
 				; Remove the event entry. If the event needs modified, the first step is to remove it.
 				$oParent.revokeScriptEvent($iConIndex, $atCurrEvents[$j].ListenerType(), $atCurrEvents[$j].EventMethod(), $atCurrEvents[$j].AddListenerParam())
-
 			EndIf
 		Next
 
@@ -14478,7 +14475,6 @@ Func _LOWriter_FormEvents(ByRef $oForm, $asEvents = Null)
 					$asFormEvents[$i][1] = $atCurrEvents[$j].ScriptCode()
 					ContinueLoop 2
 				EndIf
-
 			Next
 		Next
 
@@ -14494,7 +14490,6 @@ Func _LOWriter_FormEvents(ByRef $oForm, $asEvents = Null)
 			$asFormEvents[UBound($asFormEvents) - 1][0] = $atCurrEvents[$i].EventMethod()
 			$asFormEvents[UBound($asFormEvents) - 1][1] = $atCurrEvents[$i].ScriptCode()
 			$asFormEvents[UBound($asFormEvents) - 1][2] = $atCurrEvents[$i].ListenerType()
-
 		Next
 
 		Return SetError($__LO_STATUS_SUCCESS, UBound($asFormEvents), $asFormEvents)
@@ -14515,7 +14510,6 @@ Func _LOWriter_FormEvents(ByRef $oForm, $asEvents = Null)
 
 				; Remove the event entry. If the event needs modified, the first step is to remove it.
 				$oParentForm.revokeScriptEvent($iFormIndex, $atCurrEvents[$j].ListenerType(), $atCurrEvents[$j].EventMethod(), $atCurrEvents[$j].AddListenerParam())
-
 			EndIf
 		Next
 

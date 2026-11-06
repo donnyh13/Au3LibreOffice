@@ -128,9 +128,9 @@ EndFunc   ;==>_LO_ComError_UserFunction
 ;                  $iCMYK               - [optional] Default is Null. Convert a RGB Color Integer to C.M.Y.K.
 ; Return values .: Success: String or Array.
 ;                  @Error: 0, @Extended: 1, Return: String = RGB Integer converted To Hexadecimal (as a String). (Without the "0x" prefix)
-;                  @Error: 0, @Extended: 2, Return: Array = Array containing RGB Integer converted To Red, Green, Blue,(RGB). $Array[0] = R, $Array[1] = G, etc.
-;                  @Error: 0, @Extended: 3, Return: Array = Array containing RGB Integer converted To Hue, Saturation, Brightness, (HSB). $Array[0] = H, $Array[1] = S, etc.
-;                  @Error: 0, @Extended: 4, Return: Array = Array containing RGB Integer converted To Cyan, Magenta, Yellow, Black, (CMYK). $Array[0] = C, $Array[1] = M, etc.
+;                  @Error: 0, @Extended: 2, Return: Array = Array containing RGB Integer converted To Red, Green, Blue,(RGB). $aArray[0] = R, $aArray[1] = G, etc.
+;                  @Error: 0, @Extended: 3, Return: Array = Array containing RGB Integer converted To Hue, Saturation, Brightness, (HSB). $aArray[0] = H, $aArray[1] = S, etc.
+;                  @Error: 0, @Extended: 4, Return: Array = Array containing RGB Integer converted To Cyan, Magenta, Yellow, Black, (CMYK). $aArray[0] = C, $aArray[1] = M, etc.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = No parameters set.
@@ -903,7 +903,6 @@ Func _LO_Events($asEvents = Null)
 			Next
 			$iError = ($asEvents[$i][1] = $sCurrEvent) ? ($iError) : (BitOR($iError, 1))
 		EndIf
-
 	Next
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))

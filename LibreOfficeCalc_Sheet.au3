@@ -494,7 +494,6 @@ EndFunc   ;==>_LOCalc_SheetDetectiveTraceError
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Events Object.
 ;                  @Error: 3, @Extended: 2 = Failed to retrieve array of event names.
-;                  @Error: 3, @Extended: 3 = Failed to retrieve event array.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
 ;                  |                               1 = Error setting $asEvents
@@ -616,7 +615,6 @@ Func _LOCalc_SheetEvents(ByRef $oSheet, $asEvents = Null)
 
 			$iError = ($asEvents[$i][1] = $sCurrEvent) ? ($iError) : (BitOR($iError, 1))
 		EndIf
-
 	Next
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))

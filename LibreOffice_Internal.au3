@@ -217,7 +217,7 @@ EndFunc   ;==>__LO_DeleteTempReg
 ; Parameters ....: $oEvents             - A Document or Application events Object.
 ;                  $sName               - The Event type name.
 ;                  $atEvent             - An array of event properties.
-;                  $oDoc                - [optional] Default is null.
+;                  $oDoc                - [optional] Default is null. If the event is stored in a Document, the Document Object can be passed here.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully set the requested settings.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
