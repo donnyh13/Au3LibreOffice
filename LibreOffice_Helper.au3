@@ -22,6 +22,7 @@
 ; _LO_ConvertColorToLong
 ; _LO_DocConnect
 ; _LO_DocGetType
+; _LO_Events
 ; _LO_GradientMulticolorAdd
 ; _LO_GradientMulticolorDelete
 ; _LO_GradientMulticolorModify
@@ -760,6 +761,153 @@ Func _LO_DocGetType(ByRef $oDoc)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $iDocType)
 EndFunc   ;==>_LO_DocGetType
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LO_Events
+; Description ...: Set or Retrieve Events for the LibreOffice application.
+; Syntax ........: _LO_Events([, $asEvents = Null])
+; Parameters ....: $asEvents            - [optional] Default is Null. A two columned array of event settings. See remarks.
+; Return values .: Success: 1 or Array.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current events as a two columned Array. @Extended set to number of events.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $asEvents not an array.
+;                  @Error: 1, @Extended: 2 = $asEvents does not contain 2 columns.
+;                  @Error: 1, @Extended: 3 = Event type value in $asEvents not a String. Returning problem element's index.
+;                  @Error: 1, @Extended: 4 = Event type in $asEvents not supported. Returning problem element's index.
+;                  @Error: 1, @Extended: 5 = Macro execution link in $asEvents not a String. Returning problem element's index.
+;                  --Initialization Errors--
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.ServiceManager" Object.
+;                  @Error: 2, @Extended: 2 = Error creating "com.sun.star.frame.GlobalEventBroadcaster" Object.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Events Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve array of event names.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve event array.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $asEvents
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: This function temporarily creates a Document and executes a macro in order to modify Event values.
+;                  The expected array must contain two columns, with values in the following order:
+;                  - $aArray[0][0] is the event type name as a string.
+;                  - $aArray[0][1] is the macro execution string returned by a previous _LOBasic_MacroExecuteLinkCreate function. Pass an empty string to disable an event.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+; Related .......: _LO_Events
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LO_Events($asEvents = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local Const $__UBOUND_COLUMNS = 2
+	Local $iError = 0
+	Local $oEvents, $oServiceManager, $oGlobalEvents
+	Local $sCurrEvent
+	Local $asEventNames, $asCurrEvents[0][2]
+	Local $atEvent, $atProps[2]
+
+	$oServiceManager = __LO_ServiceManager()
+	If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	$oGlobalEvents = $oServiceManager.createInstance("com.sun.star.frame.GlobalEventBroadcaster")
+	If Not IsObj($oGlobalEvents) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+	$oEvents = $oGlobalEvents.getEvents()
+	If Not IsObj($oEvents) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	If __LO_VarsAreNull($asEvents) Then
+		$asEventNames = $oEvents.getElementNames()
+		If Not IsArray($asEventNames) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		ReDim $asCurrEvents[UBound($asEventNames)][2]
+
+		For $i = 0 To UBound($asCurrEvents) - 1
+			Sleep((IsInt($i / $__LOCONST_SLEEP_DIV) ? (10) : (0)))
+
+			$asCurrEvents[$i][0] = $asEventNames[$i]
+
+			$atEvent = $oEvents.getByName($asEventNames[$i])
+			If Not IsArray($atEvent) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+			For $j = 0 To UBound($atEvent) - 1
+				If ($atEvent[$j].Name() = "Script") Then
+					$asCurrEvents[$i][1] = $atEvent[$j].Value()
+					ContinueLoop 2
+				EndIf
+			Next
+
+			$asCurrEvents[$i][1] = "" ; Set macro value to an empty string if no macro was found.
+		Next
+
+		Return SetError($__LO_STATUS_SUCCESS, UBound($asCurrEvents), $asCurrEvents)
+	EndIf
+
+	If Not IsArray($asEvents) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If (UBound($asEvents, $__UBOUND_COLUMNS) <> 2) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$atProps[0] = __LO_SetPropertyValue("EventType", "Script")
+	$atProps[1] = __LO_SetPropertyValue("Script", "")
+
+	For $i = 0 To UBound($asEvents) - 1
+		Sleep((IsInt($i / $__LOCONST_SLEEP_DIV) ? (10) : (0)))
+
+		If Not IsString($asEvents[$i][0]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, $i)
+		If Not $oEvents.hasByName($asEvents[$i][0]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, $i)
+		If Not IsString($asEvents[$i][1]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, $i)
+
+		$atEvent = $oEvents.getByName($asEvents[$i][0])
+		If Not IsArray($atEvent) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+		$sCurrEvent = ""
+
+		For $j = 0 To UBound($atEvent) - 1
+			If ($atEvent[$j].Name() = "Script") Then
+				$sCurrEvent = $atEvent[$j].Value()
+				ExitLoop
+			EndIf
+		Next
+
+		If ($asEvents[$i][1] = "") And (UBound($atEvent) = 0) Then ; No macro is to be assigned, and none are currently assigned. Skip.
+			ContinueLoop
+
+		Else ; Have to remove a macro, replace it, or a macro is to be assigned.
+			If ($asEvents[$i][1] = $sCurrEvent) Then ; Macro to assign and the current macro are the same, skip it.
+				ContinueLoop
+
+			Else
+				$atProps[1].Value = $asEvents[$i][1]
+				If ($asEvents[$i][1] = "") Then
+					$atProps[0].Value = ""
+
+				Else
+					$atProps[0].Value = "Script"
+				EndIf
+			EndIf
+			; This should work, but throws a COM illegal argument error. It seems properties contained in an array don't work with ReplaceByName/ReplaceByIndex.
+;~ 				$oEvents.replaceByName($asEvents[$i][0], $atProps)
+
+			__LO_EventReplaceScript($oEvents, $asEvents[$i][0], $atProps)
+
+			$atEvent = $oEvents.getByName($asEvents[$i][0])
+			If Not IsArray($atEvent) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+			$sCurrEvent = ""
+
+			For $j = 0 To UBound($atEvent) - 1
+				If ($atEvent[$j].Name() = "Script") Then
+					$sCurrEvent = $atEvent[$j].Value()
+					ExitLoop
+				EndIf
+			Next
+			$iError = ($asEvents[$i][1] = $sCurrEvent) ? ($iError) : (BitOR($iError, 1))
+		EndIf
+
+	Next
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LO_Events
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LO_GradientMulticolorAdd
