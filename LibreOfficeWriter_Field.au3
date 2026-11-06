@@ -83,6 +83,8 @@
 ; _LOWriter_FieldGetAnchor
 ; _LOWriter_FieldInputListInsert
 ; _LOWriter_FieldInputListModify
+; _LOWriter_FieldMacroInsert
+; _LOWriter_FieldMacroModify
 ; _LOWriter_FieldPageNumberInsert
 ; _LOWriter_FieldPageNumberModify
 ; _LOWriter_FieldRefBookmarkInsert
@@ -3793,6 +3795,128 @@ Func _LOWriter_FieldInputListModify(ByRef $oInputField, $asItems = Null, $sName 
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_FieldInputListModify
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_FieldMacroInsert
+; Description ...: Insert a Macro Field.
+; Syntax ........: _LOWriter_FieldMacroInsert(ByRef $oDoc, ByRef $oCursor[, $bOverwrite = False[, $sMacroLink = Null[, $sReference = Null]]])
+; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
+;                  $oCursor             - A Cursor Object returned from any Cursor Object creation Or retrieval function. Cannot be a Table Cursor.
+;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the cursor will be overwritten. If False, content will be inserted to the left of any selection.
+;                  $sMacroLink          - [optional] Default is Null. A Macro execution link returned by a previous _LOBasic_MacroExecuteLinkCreate function.
+;                  $sReference          - [optional] Default is Null. The text to display for the Macro Field.
+; Return values .: Success: Object.
+;                  @Error: 0, @Extended: 0, Return: Object = Success. Successfully inserted Macro field, returning Macro Field Object.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 2 = $oCursor not an Object.
+;                  @Error: 1, @Extended: 3 = $oCursor is a Table Cursor, and is not supported.
+;                  @Error: 1, @Extended: 4 = $bOverwrite not a Boolean.
+;                  @Error: 1, @Extended: 5 = $sMacroLink not a String.
+;                  @Error: 1, @Extended: 6 = $sReference not a String.
+;                  --Initialization Errors--
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.text.TextField.Macro" Object.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......:
+; Related .......: _LOWriter_FieldMacroModify, _LOWriter_FieldDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_FieldMacroInsert(ByRef $oDoc, ByRef $oCursor, $bOverwrite = False, $sMacroLink = Null, $sReference = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $oMacroField
+
+	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If (__LOWriter_Internal_CursorGetType($oCursor) = $LOW_CURTYPE_TABLE_CURSOR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsBool($bOverwrite) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+	$oMacroField = $oDoc.createInstance("com.sun.star.text.TextField.Macro")
+	If Not IsObj($oMacroField) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	If ($sMacroLink <> Null) Then
+		If Not IsString($sMacroLink) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+		$oMacroField.MacroName = $sMacroLink
+	EndIf
+
+	If ($sReference <> Null) Then
+		If Not IsString($sReference) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+
+		$oMacroField.Hint = $sReference
+	EndIf
+
+	$oCursor.Text.insertTextContent($oCursor, $oMacroField, $bOverwrite)
+
+	$oMacroField.Update()
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oMacroField)
+EndFunc   ;==>_LOWriter_FieldMacroInsert
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_FieldMacroModify
+; Description ...: Set or Retrieve a Macro Field's settings.
+; Syntax ........: _LOWriter_FieldMacroModify(ByRef $oMacroField[, $sMacroLink = Null[, $sReference = Null]])
+; Parameters ....: $oMacroField         - A Macro field Object from _LOWriter_FieldMacroInsert, or _LOWriter_FieldsGetList function.
+;                  $sMacroLink          - [optional] Default is Null. A Macro execution link returned by a previous _LOBasic_MacroExecuteLinkCreate function.
+;                  $sReference          - [optional] Default is Null. The text to display for the Macro Field.
+; Return values .: Success: 1 or Array.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oMacroField not an Object.
+;                  @Error: 1, @Extended: 2 = $sMacroLink not a String.
+;                  @Error: 1, @Extended: 3 = $sReference not a String.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
+;                  |                               1 = Error setting $sMacroLink
+;                  |                               2 = Error setting $sReference
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LOWriter_FieldMacroInsert, _LOWriter_FieldsGetList, _LOWriter_FieldUpdate
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_FieldMacroModify(ByRef $oMacroField, $sMacroLink = Null, $sReference = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iError = 0
+	Local $avMacro[2]
+
+	If Not IsObj($oMacroField) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	If __LO_VarsAreNull($sMacroLink, $sReference) Then
+		__LO_ArrayFill($avMacro, $oMacroField.MacroName(), $oMacroField.Hint())
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $avMacro)
+	EndIf
+
+	If ($sMacroLink <> Null) Then
+		If Not IsString($sMacroLink) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+		$oMacroField.MacroName = $sMacroLink
+		$iError = ($oMacroField.MacroName() = $sMacroLink) ? ($iError) : (BitOR($iError, 1))
+	EndIf
+
+	If ($sReference <> Null) Then
+		If Not IsString($sReference) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+		$oMacroField.Hint = $sReference
+		$iError = ($oMacroField.Hint() = $sReference) ? ($iError) : (BitOR($iError, 2))
+	EndIf
+
+	$oMacroField.Update()
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LOWriter_FieldMacroModify
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FieldPageNumberInsert

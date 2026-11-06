@@ -39,6 +39,7 @@
 ; _LOWriter_FormConDateFieldGeneral
 ; _LOWriter_FormConDateFieldValue
 ; _LOWriter_FormConDelete
+; _LOWriter_FormConEvents
 ; _LOWriter_FormConFileSelFieldGeneral
 ; _LOWriter_FormConFileSelFieldValue
 ; _LOWriter_FormConFormattedFieldData
@@ -103,6 +104,7 @@
 ; _LOWriter_FormConTimeFieldValue
 ; _LOWriter_FormDelete
 ; _LOWriter_FormDocSettings
+; _LOWriter_FormEvents
 ; _LOWriter_FormGetObjByIndex
 ; _LOWriter_FormParent
 ; _LOWriter_FormPropertiesData
@@ -2485,6 +2487,365 @@ Func _LOWriter_FormConDelete(ByRef $oControl)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_FormConDelete
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_FormConEvents
+; Description ...: Set or Retrieve events for a Form control.
+; Syntax ........: _LOWriter_FormConEvents(ByRef $oControl[, $asEvents = Null])
+; Parameters ....: $oControl            - A Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $asEvents            - [optional] Default is Null. A three columned array of event settings. See remarks.
+; Return values .: Success: 1 or Array.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current events as a three columned Array. @Extended set to number of events.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oControl not an Object.
+;                  @Error: 1, @Extended: 2 = Can't set or retrieve events for a hidden control.
+;                  @Error: 1, @Extended: 3 = $asEvents not an array.
+;                  @Error: 1, @Extended: 4 = $asEvents does not contain 3 columns.
+;                  @Error: 1, @Extended: 5 = Event type value in $asEvents not a String. Returning problem element's index.
+;                  @Error: 1, @Extended: 6 = Macro execution link in $asEvents not a String. Returning problem element's index.
+;                  @Error: 1, @Extended: 7 = Event listener type in $asEvents not a String. Returning problem element's index.
+;                  --Initialization Errors--
+;                  @Error: 2, @Extended: 1 = Failed to create a "com.sun.star.script.ScriptEventDescriptor" struct.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve control's parent form or table Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve shape's control Object.
+;                  @Error: 3, @Extended: 3 = Failed to identify Control's index location.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve array of events.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $asEvents
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: The expected array must contain three columns, with values in the following order:
+;                  - $aArray[0][0] is the event type name as a string, normally matching one of the Form Control Event constants (See below for potential exceptions). See Constants $LOW_FORM_CON_EVENT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  - $aArray[0][1] is the macro execution string returned by a previous _LOBasic_MacroExecuteLinkCreate function. Pass an empty string to disable an event.
+;                  - $aArray[0][2] is the Event Listener type, this is required to register new events. This should always be already filled in, and should not need to be modified. It is also found in the description for each event name Constant.
+;                  There is no way to retrieve programmatically all event types available to be set, therefore I have made a prefilled list of event types matching the Form Control Event constants $LOW_FORM_CON_EVENT_*. If LibreOffice adds new events, and these are set and active, they will be added to the end of the events array with all necessary information.
+;                  Thanks to LibreOffice forum user Ratslinger for event information, https://ask.libreoffice.org/t/how-to-access-the-settings-under-the-events-tab-of-a-form-control-to-get-set-the-routines/47798
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_FormConEvents(ByRef $oControl, $asEvents = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local Const $__UBOUND_COLUMNS = 2
+	Local $oParent, $oParentControl = $oControl
+	Local $iError = 0, $iConIndex
+	Local $tEventDesc
+	Local $atCurrEvents
+	Local $asScriptEvents[0], $asControlEvents[0][3]
+
+	If Not IsObj($oControl) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not ($oControl.Parent.supportsService("com.sun.star.form.component.GridControl")) And $oControl.supportsService("com.sun.star.form.component.HiddenControl") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	If $oControl.Parent.supportsService("com.sun.star.form.component.GridControl") Then
+		$oParent = $oControl.Parent() ; Events are stored in the Grid control (Table) instead of the form when working with table control columns.
+
+	Else
+		$oParent = $oControl ; Identify the parent Form.
+
+		Do
+			$oParent = _LOWriter_FormConGetParent($oParent)
+			If Not IsObj($oParent) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+		Until $oParent.supportsService("com.sun.star.form.component.Form") ; The parent could be a group shape, so cycle through till I hit the parent form.
+	EndIf
+
+	If Not IsObj($oParent) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	If $oControl.Parent.supportsService("com.sun.star.form.component.GridControl") Then
+		$oParentControl = $oControl
+
+	ElseIf $oControl.supportsService("com.sun.star.drawing.ControlShape") Then
+		$oParentControl = $oControl.Control() ; All shapes besides group shapes I have to compare the .Control Object, not the Shape Object.
+
+	ElseIf $oControl.supportsService("com.sun.star.drawing.GroupShape") Then
+		If Not ($oControl.Count() > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+		$oParentControl = $oControl.getByIndex(0).Control() ; Retrieve the GroupBox control obj.
+	EndIf
+
+	If Not IsObj($oParentControl) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	For $i = 0 To $oParent.getCount() - 1
+		If ($oParent.getByIndex($i) = $oParentControl) Then
+			$iConIndex = $i
+			ExitLoop
+		EndIf
+
+		Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+	Next
+
+	If Not IsInt($iConIndex) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	$atCurrEvents = $oParent.getScriptEvents($iConIndex)
+	If Not IsArray($atCurrEvents) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+	If __LO_VarsAreNull($asEvents) Then
+		Switch __LOWriter_FormConIdentify($oControl)
+			Case $LOW_FORM_CON_TYPE_CHECK_BOX
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_ACTION_EXECUTE, _
+						$LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, $LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, _
+						$LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, _
+						$LOW_FORM_CON_EVENT_RESET_AFTER, $LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_STATUS_CHANGED)
+
+			Case $LOW_FORM_CON_TYPE_COMBO_BOX
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_ACTION_EXECUTE, _
+						$LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, $LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, _
+						$LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, _
+						$LOW_FORM_CON_EVENT_RESET_AFTER, $LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_STATUS_CHANGED, $LOW_FORM_CON_EVENT_UPDATE_AFTER, $LOW_FORM_CON_EVENT_UPDATE_BEFORE, $LOW_FORM_CON_EVENT_TEXT_MODIFIED, _
+						$LOW_FORM_CON_EVENT_ERROR_OCCURRED)
+
+			Case $LOW_FORM_CON_TYPE_CURRENCY_FIELD
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, _
+						$LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, _
+						$LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, $LOW_FORM_CON_EVENT_RESET_AFTER, _
+						$LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_UPDATE_AFTER, $LOW_FORM_CON_EVENT_UPDATE_BEFORE, $LOW_FORM_CON_EVENT_TEXT_MODIFIED)
+
+			Case $LOW_FORM_CON_TYPE_DATE_FIELD
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, _
+						$LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, _
+						$LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, $LOW_FORM_CON_EVENT_RESET_AFTER, _
+						$LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_UPDATE_AFTER, $LOW_FORM_CON_EVENT_UPDATE_BEFORE, $LOW_FORM_CON_EVENT_TEXT_MODIFIED)
+
+			Case $LOW_FORM_CON_TYPE_FILE_SELECTION
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, _
+						$LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, _
+						$LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, $LOW_FORM_CON_EVENT_RESET_AFTER, _
+						$LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_TEXT_MODIFIED)
+
+			Case $LOW_FORM_CON_TYPE_FORMATTED_FIELD
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, _
+						$LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, _
+						$LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, $LOW_FORM_CON_EVENT_RESET_AFTER, _
+						$LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_UPDATE_AFTER, $LOW_FORM_CON_EVENT_UPDATE_BEFORE, $LOW_FORM_CON_EVENT_TEXT_MODIFIED, _
+						$LOW_FORM_CON_EVENT_ERROR_OCCURRED)
+
+			Case $LOW_FORM_CON_TYPE_GROUP_BOX, $LOW_FORM_CON_TYPE_GROUPED_CONTROL
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, _
+						$LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, _
+						$LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, _
+						$LOW_FORM_CON_EVENT_FOCUS_LOST)
+
+			Case $LOW_FORM_CON_TYPE_IMAGE_BUTTON
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_ACTION_APPROVE, _
+						$LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, $LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, _
+						$LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, _
+						$LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST)
+
+			Case $LOW_FORM_CON_TYPE_IMAGE_CONTROL
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, _
+						$LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, _
+						$LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, $LOW_FORM_CON_EVENT_RESET_AFTER, _
+						$LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST)
+
+			Case $LOW_FORM_CON_TYPE_LABEL
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, _
+						$LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, _
+						$LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, _
+						$LOW_FORM_CON_EVENT_FOCUS_LOST)
+
+			Case $LOW_FORM_CON_TYPE_LIST_BOX
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_ACTION_EXECUTE, _
+						$LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, $LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, _
+						$LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, _
+						$LOW_FORM_CON_EVENT_RESET_AFTER, $LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_STATUS_CHANGED, $LOW_FORM_CON_EVENT_UPDATE_AFTER, $LOW_FORM_CON_EVENT_UPDATE_BEFORE, $LOW_FORM_CON_EVENT_CHANGED, _
+						$LOW_FORM_CON_EVENT_ERROR_OCCURRED)
+
+			Case $LOW_FORM_CON_TYPE_NAV_BAR
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, _
+						$LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, _
+						$LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, _
+						$LOW_FORM_CON_EVENT_FOCUS_LOST)
+
+			Case $LOW_FORM_CON_TYPE_NUMERIC_FIELD
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, _
+						$LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, _
+						$LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, $LOW_FORM_CON_EVENT_RESET_AFTER, _
+						$LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_UPDATE_AFTER, $LOW_FORM_CON_EVENT_UPDATE_BEFORE, $LOW_FORM_CON_EVENT_TEXT_MODIFIED)
+
+			Case $LOW_FORM_CON_TYPE_OPTION_BUTTON
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_ACTION_EXECUTE, _
+						$LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, $LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, _
+						$LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, _
+						$LOW_FORM_CON_EVENT_RESET_AFTER, $LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_STATUS_CHANGED)
+
+			Case $LOW_FORM_CON_TYPE_PATTERN_FIELD
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, _
+						$LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, _
+						$LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, $LOW_FORM_CON_EVENT_RESET_AFTER, _
+						$LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_UPDATE_AFTER, $LOW_FORM_CON_EVENT_UPDATE_BEFORE, $LOW_FORM_CON_EVENT_TEXT_MODIFIED)
+
+			Case $LOW_FORM_CON_TYPE_PUSH_BUTTON
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_ACTION_EXECUTE, _
+						$LOW_FORM_CON_EVENT_ACTION_APPROVE, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, $LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, _
+						$LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, _
+						$LOW_FORM_CON_EVENT_RESET_AFTER, $LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_STATUS_CHANGED)
+
+			Case $LOW_FORM_CON_TYPE_TABLE_CONTROL
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, _
+						$LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, _
+						$LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, $LOW_FORM_CON_EVENT_RESET_AFTER, _
+						$LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_UPDATE_AFTER, $LOW_FORM_CON_EVENT_UPDATE_BEFORE, $LOW_FORM_CON_EVENT_ERROR_OCCURRED)
+
+			Case $LOW_FORM_CON_TYPE_TEXT_BOX
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, _
+						$LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, _
+						$LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, $LOW_FORM_CON_EVENT_RESET_AFTER, _
+						$LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_UPDATE_AFTER, $LOW_FORM_CON_EVENT_UPDATE_BEFORE, $LOW_FORM_CON_EVENT_TEXT_MODIFIED, _
+						$LOW_FORM_CON_EVENT_CHANGED)
+
+			Case $LOW_FORM_CON_TYPE_TIME_FIELD
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, _
+						$LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, _
+						$LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, $LOW_FORM_CON_EVENT_RESET_AFTER, _
+						$LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_UPDATE_AFTER, $LOW_FORM_CON_EVENT_UPDATE_BEFORE, $LOW_FORM_CON_EVENT_TEXT_MODIFIED)
+
+			Case Else
+				; error
+		EndSwitch
+
+		ReDim $asControlEvents[UBound($asScriptEvents)][3]
+
+		For $i = 0 To UBound($asControlEvents) - 1
+			Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+			$asControlEvents[$i][0] = $asScriptEvents[$i]
+			For $j = 0 To UBound($atCurrEvents) - 1
+				If (($atCurrEvents[$j].EventMethod()) = $asControlEvents[$i][0]) Then
+					$asControlEvents[$i][1] = $atCurrEvents[$j].ScriptCode()
+					$asControlEvents[$i][2] = $atCurrEvents[$j].ListenerType()
+					ContinueLoop 2
+				EndIf
+
+			Next
+			; If not set in Events, set the Macro link to an empty string.
+			$asControlEvents[$i][1] = ""
+
+			; Set the appropriate listener type.
+			Switch $asControlEvents[$i][0]
+				Case $LOW_FORM_CON_EVENT_ACTION_APPROVE
+					$asControlEvents[$i][2] = "XApproveActionListener"
+
+				Case $LOW_FORM_CON_EVENT_ACTION_EXECUTE
+					$asControlEvents[$i][2] = "XActionListener"
+
+				Case $LOW_FORM_CON_EVENT_CHANGED
+					$asControlEvents[$i][2] = "XChangeListener"
+
+				Case $LOW_FORM_CON_EVENT_ERROR_OCCURRED
+					$asControlEvents[$i][2] = "XSQLErrorListener"
+
+				Case $LOW_FORM_CON_EVENT_FOCUS_LOST, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED
+					$asControlEvents[$i][2] = "XFocusListener"
+
+				Case $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_KEY_PRESSED
+					$asControlEvents[$i][2] = "XKeyListener"
+
+				Case $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE
+					$asControlEvents[$i][2] = "XMouseListener"
+
+				Case $LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED
+					$asControlEvents[$i][2] = "XMouseMotionListener"
+
+				Case $LOW_FORM_CON_EVENT_RESET_AFTER, $LOW_FORM_CON_EVENT_RESET_PRIOR
+					$asControlEvents[$i][2] = "XResetListener"
+
+				Case $LOW_FORM_CON_EVENT_STATUS_CHANGED
+					$asControlEvents[$i][2] = "XItemListener"
+
+				Case $LOW_FORM_CON_EVENT_TEXT_MODIFIED
+					$asControlEvents[$i][2] = "XTextListener"
+
+				Case $LOW_FORM_CON_EVENT_UPDATE_AFTER, $LOW_FORM_CON_EVENT_UPDATE_BEFORE
+					$asControlEvents[$i][2] = "XUpdateListener"
+
+			EndSwitch
+		Next
+
+		; Cycle through and make sure there aren't any event types I don't know about, add them to the array if there are.
+		For $i = 0 To UBound($atCurrEvents) - 1
+			Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+
+			For $j = 0 To UBound($asControlEvents) - 1
+				If (($atCurrEvents[$i].EventMethod()) = $asControlEvents[$j][0]) Then ContinueLoop 2
+			Next
+
+			ReDim $asControlEvents[UBound($asControlEvents) + 1][3]
+			$asControlEvents[UBound($asControlEvents) - 1][0] = $atCurrEvents[$i].EventMethod()
+			$asControlEvents[UBound($asControlEvents) - 1][1] = $atCurrEvents[$i].ScriptCode()
+			$asControlEvents[UBound($asControlEvents) - 1][2] = $atCurrEvents[$i].ListenerType()
+
+		Next
+
+		Return SetError($__LO_STATUS_SUCCESS, UBound($asControlEvents), $asControlEvents)
+	EndIf
+
+	If Not IsArray($asEvents) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If (UBound($asEvents, $__UBOUND_COLUMNS) <> 3) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+	For $i = 0 To UBound($asEvents) - 1
+		Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+		If Not IsString($asEvents[$i][0]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, $i)
+		If Not IsString($asEvents[$i][1]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, $i)
+		If Not IsString($asEvents[$i][2]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, $i)
+
+		For $j = 0 To UBound($atCurrEvents) - 1
+			If (($atCurrEvents[$j].EventMethod()) = $asEvents[$i][0]) Then
+				If (($atCurrEvents[$j].ScriptCode()) = $asEvents[$i][1]) Then ContinueLoop 2 ; Event is assigned to a macro, and the macro strings are the same, skip it.
+
+				; Remove the event entry. If the event needs modified, the first step is to remove it.
+				$oParent.revokeScriptEvent($iConIndex, $atCurrEvents[$j].ListenerType(), $atCurrEvents[$j].EventMethod(), $atCurrEvents[$j].AddListenerParam())
+
+			EndIf
+		Next
+
+		If ($asEvents[$i][1] = "") Then ContinueLoop ; If Macro event is blank, skip it, otherwise insert the event.
+		$tEventDesc = __LO_CreateStruct("com.sun.star.script.ScriptEventDescriptor")
+		If Not IsObj($tEventDesc) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+		With $tEventDesc
+			.AddListenerParam = ""
+			.EventMethod = $asEvents[$i][0]
+			.ListenerType = $asEvents[$i][2]
+			.ScriptCode = $asEvents[$i][1]
+			.ScriptType = "Script"
+		EndWith
+
+		$oParent.registerScriptEvent($iConIndex, $tEventDesc)
+	Next
+
+	$atCurrEvents = $oParent.getScriptEvents($iConIndex)
+	If Not IsArray($atCurrEvents) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+	For $i = 0 To UBound($asEvents) - 1
+		Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+		For $j = 0 To UBound($atCurrEvents) - 1
+			If ($asEvents[$i][0] = $atCurrEvents[$j].EventMethod()) Then
+				$iError = (($asEvents[$i][1] = $atCurrEvents[$j].ScriptCode())) ? ($iError) : (BitOR($iError, 1))
+				ContinueLoop 2
+			EndIf
+		Next
+		If ($asEvents[$i][1] <> "") Then $iError = BitOR($iError, 1) ; If the script reaches here when the macro string isn't empty, an event failed to be added, so indicate an error.
+	Next
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LOWriter_FormConEvents
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FormConFileSelFieldGeneral
@@ -14037,6 +14398,158 @@ Func _LOWriter_FormDocSettings(ByRef $oDoc, $bFormDesignMode = Null, $bOpenInDes
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_FormDocSettings
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_FormEvents
+; Description ...: Set or Retrieve events for a Form.
+; Syntax ........: _LOWriter_FormEvents(ByRef $oForm[, $asEvents = Null])
+; Parameters ....: $oForm               - A Form object returned by a previous _LOWriter_FormAdd, _LOWriter_FormGetObjByIndex or _LOWriter_FormsGetList function.
+;                  $asEvents            - [optional] Default is Null. A three columned array of event settings. See remarks.
+; Return values .: Success: 1 or Array.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current events as a three columned Array. @Extended set to number of events.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oForm not an Object.
+;                  @Error: 1, @Extended: 2 = $asEvents not an array.
+;                  @Error: 1, @Extended: 3 = $asEvents does not contain 3 columns.
+;                  @Error: 1, @Extended: 4 = Event type value in $asEvents not a String. Returning problem element's index.
+;                  @Error: 1, @Extended: 5 = Macro execution link in $asEvents not a String. Returning problem element's index.
+;                  @Error: 1, @Extended: 6 = Event listener type in $asEvents not a String. Returning problem element's index.
+;                  --Initialization Errors--
+;                  @Error: 2, @Extended: 1 = Failed to create a "com.sun.star.script.ScriptEventDescriptor" struct.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to identify Form's index location.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve array of events.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $asEvents
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: The expected array must contain three columns, with values in the following order:
+;                  - $aArray[0][0] is the event type name as a string, normally matching one of the Form Event constants (See below for potential exceptions). See Constants $LOW_FORM_EVENT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  - $aArray[0][1] is the macro execution string returned by a previous _LOBasic_MacroExecuteLinkCreate function. Pass an empty string to disable an event.
+;                  - $aArray[0][2] is the Event Listener type, this is required to register new events. This should always be already filled in, and should not need to be modified. It is also found in the description for each event name Constant.
+;                  There is no way to retrieve programmatically all event types available to be set, therefore I have made a prefilled list of event types matching the Form Event constants $LOW_FORM_EVENT_*. If LibreOffice adds new events, and these are set and active, they will be added to the end of the events array with all necessary information.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_FormEvents(ByRef $oForm, $asEvents = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local Const $__UBOUND_COLUMNS = 2
+	Local $oParentForm
+	Local $iError = 0, $iFormIndex
+	Local $tEventDesc
+	Local $atCurrEvents
+	Local $asFormEvents[15][3] = [[$LOW_FORM_EVENT_CONFIRM_DELETION, "", "XConfirmDeleteListener"], [$LOW_FORM_EVENT_ERROR_OCCURRED, "", "XSQLErrorListener"], _
+			[$LOW_FORM_EVENT_FILL_PARAMS, "", "XDatabaseParameterListener"], [$LOW_FORM_EVENT_LOADING_WHEN, "", "XLoadListener"], _
+			[$LOW_FORM_EVENT_RECORD_ACTION_AFTER, "", "XRowSetListener"], [$LOW_FORM_EVENT_RECORD_ACTION_BEFORE, "", "XRowSetApproveListener"], _
+			[$LOW_FORM_EVENT_RECORD_CHANGE_AFTER, "", "XRowSetListener"], [$LOW_FORM_EVENT_RECORD_CHANGE_BEFORE, "", "XRowSetApproveListener"], _
+			[$LOW_FORM_EVENT_RELOAD_BEFORE, "", "XLoadListener"], [$LOW_FORM_EVENT_RELOAD_WHEN, "", "XLoadListener"], [$LOW_FORM_EVENT_RESET_AFTER, "", "XResetListener"], _
+			[$LOW_FORM_EVENT_RESET_PRIOR, "", "XResetListener"], [$LOW_FORM_EVENT_SUBMIT_BEFORE, "", "XSubmitListener"], [$LOW_FORM_EVENT_UNLOAD_BEFORE, "", "XLoadListener"], _
+			[$LOW_FORM_EVENT_UNLOAD_WHEN, "", "XLoadListener"]]
+
+	If Not IsObj($oForm) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$oParentForm = $oForm.Parent()
+
+	For $i = 0 To $oParentForm.getCount() - 1
+		If ($oParentForm.getByIndex($i) = $oForm) Then
+			$iFormIndex = $i
+			ExitLoop
+		EndIf
+
+		Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+	Next
+
+	If Not IsInt($iFormIndex) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$atCurrEvents = $oParentForm.getScriptEvents($iFormIndex)
+	If Not IsArray($atCurrEvents) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	If __LO_VarsAreNull($asEvents) Then
+		For $i = 0 To UBound($asFormEvents) - 1
+			Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+			For $j = 0 To UBound($atCurrEvents) - 1
+				If (($atCurrEvents[$j].EventMethod()) = $asFormEvents[$i][0]) Then
+					$asFormEvents[$i][1] = $atCurrEvents[$j].ScriptCode()
+					ContinueLoop 2
+				EndIf
+
+			Next
+		Next
+
+		; Cycle through and make sure there aren't any event types I don't know about, add them to the array if there are.
+		For $i = 0 To UBound($atCurrEvents) - 1
+			Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+
+			For $j = 0 To UBound($asFormEvents) - 1
+				If (($atCurrEvents[$i].EventMethod()) = $asFormEvents[$j][0]) Then ContinueLoop 2
+			Next
+
+			ReDim $asFormEvents[UBound($asFormEvents) + 1][3]
+			$asFormEvents[UBound($asFormEvents) - 1][0] = $atCurrEvents[$i].EventMethod()
+			$asFormEvents[UBound($asFormEvents) - 1][1] = $atCurrEvents[$i].ScriptCode()
+			$asFormEvents[UBound($asFormEvents) - 1][2] = $atCurrEvents[$i].ListenerType()
+
+		Next
+
+		Return SetError($__LO_STATUS_SUCCESS, UBound($asFormEvents), $asFormEvents)
+	EndIf
+
+	If Not IsArray($asEvents) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If (UBound($asEvents, $__UBOUND_COLUMNS) <> 3) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	For $i = 0 To UBound($asEvents) - 1
+		Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+		If Not IsString($asEvents[$i][0]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, $i)
+		If Not IsString($asEvents[$i][1]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, $i)
+		If Not IsString($asEvents[$i][2]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, $i)
+
+		For $j = 0 To UBound($atCurrEvents) - 1
+			If (($atCurrEvents[$j].EventMethod()) = $asEvents[$i][0]) Then
+				If (($atCurrEvents[$j].ScriptCode()) = $asEvents[$i][1]) Then ContinueLoop 2 ; Event is assigned to a macro, and the macro strings are the same, skip it.
+
+				; Remove the event entry. If the event needs modified, the first step is to remove it.
+				$oParentForm.revokeScriptEvent($iFormIndex, $atCurrEvents[$j].ListenerType(), $atCurrEvents[$j].EventMethod(), $atCurrEvents[$j].AddListenerParam())
+
+			EndIf
+		Next
+
+		If ($asEvents[$i][1] = "") Then ContinueLoop ; Macro event is blank, skip it, otherwise insert the event.
+		$tEventDesc = __LO_CreateStruct("com.sun.star.script.ScriptEventDescriptor")
+		If Not IsObj($tEventDesc) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+		With $tEventDesc
+			.AddListenerParam = ""
+			.EventMethod = $asEvents[$i][0]
+			.ListenerType = $asEvents[$i][2]
+			.ScriptCode = $asEvents[$i][1]
+			.ScriptType = "Script"
+		EndWith
+
+		$oParentForm.registerScriptEvent($iFormIndex, $tEventDesc)
+	Next
+
+	$atCurrEvents = $oParentForm.getScriptEvents($iFormIndex)
+	If Not IsArray($atCurrEvents) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	For $i = 0 To UBound($asEvents) - 1
+		Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+		For $j = 0 To UBound($atCurrEvents) - 1
+			If ($asEvents[$i][0] = $atCurrEvents[$j].EventMethod()) Then
+				$iError = (($asEvents[$i][1] = $atCurrEvents[$j].ScriptCode())) ? ($iError) : (BitOR($iError, 1))
+				ContinueLoop 2
+			EndIf
+		Next
+		If ($asEvents[$i][1] <> "") Then $iError = BitOR($iError, 1) ; If the script reaches here when the macro string isn't empty, an event failed to be added, so indicate an error.
+	Next
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LOWriter_FormEvents
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FormGetObjByIndex

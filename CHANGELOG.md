@@ -1095,6 +1095,15 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 ### LibreOfficeWriter
 
+#### Added
+
+- _LOWriter_DocEvents
+- _LOWriter_FormEvents
+- _LOWriter_FormConEvents
+- Form Event constants:
+  - $LOW_FORM_CON_EVENT_*
+  - $LOW_FORM_EVENT_*
+
 #### Changed
 
 - Added support to `_LOWriter_CursorGoToRange` to go to Paragraph or paragraph section Objects.

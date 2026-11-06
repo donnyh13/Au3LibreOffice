@@ -21,6 +21,7 @@
 ; __LO_ArrayFill
 ; __LO_CreateStruct
 ; __LO_DeleteTempReg
+; __LO_EventReplaceScript
 ; __LO_InternalComErrorHandler
 ; __LO_IntIsBetween
 ; __LO_IsObjInvalid
@@ -208,6 +209,123 @@ Func __LO_DeleteTempReg($asRegKeys = Null)
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROCESSING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 2))
 EndFunc   ;==>__LO_DeleteTempReg
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LO_EventReplaceScript
+; Description ...: Internal function for modifying Event settings.
+; Syntax ........: __LO_EventReplaceScript(ByRef $oEvents, $sName, $atEvent[, $oDoc = null])
+; Parameters ....: $oEvents             - A Document or Application events Object.
+;                  $sName               - The Event type name.
+;                  $atEvent             - An array of event properties.
+;                  $oDoc                - [optional] Default is null.
+; Return values .: Success: 1
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully set the requested settings.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oEvents not an Object.
+;                  @Error: 1, @Extended: 2 = $sName not a String.
+;                  @Error: 1, @Extended: 3 = $atEvent not an array.
+;                  --Initialization Errors--
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.ServiceManager" Object.
+;                  @Error: 2, @Extended: 2 = Error creating "com.sun.star.frame.Desktop" Object.
+;                  @Error: 2, @Extended: 3 = Error Creating document.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Error retrieving Standard Macro Library.
+;                  @Error: 3, @Extended: 2 = Error creating Macro in Document.
+;                  @Error: 3, @Extended: 3 = Error retrieving Script Object.
+;                  @Error: 3, @Extended: 4 = Error deleting ReplaceByName Macro from Document.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: This works, but only with the work-around method of inserting a macro into the Document.
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LO_EventReplaceScript(ByRef $oEvents, $sName, $atEvent, $oDoc = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $sNumStyleScript = "Function ReplaceByName(oEvents As Object, sName As String, vSettings As Variant)" & @CRLF & _
+			"oEvents.replaceByName(sName,vSettings)" & @CRLF & _
+			"ReplaceByName = oEvents" & @CRLF & _
+			"End Function"
+	Local $oServiceManager, $oDesktop, $oStandardLibrary, $oScript, $oNumStyleDoc
+	Local $aDummyArray[0], $avParamArray[3]
+	Local $atProperties[3]
+	Local $bNumDocOpen = False
+	Local Const $iMacroExecMode_ALWAYS_EXECUTE_NO_WARN = 4, $iURLFrameCreate = 8 ; Frame will be created if not found
+	Local $vProperty
+
+	If Not IsObj($oEvents) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsArray($atEvent) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	If IsObj($oDoc) Then
+		; Retrieving the BasicLibrary.Standard Object fails when using a newly opened document, I found a workaround by updating the following setting.
+		$oDoc.BasicLibraries.VBACompatibilityMode = $oDoc.BasicLibraries.VBACompatibilityMode()
+
+		$oStandardLibrary = $oDoc.BasicLibraries.Standard()
+		If Not IsObj($oStandardLibrary) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then $oStandardLibrary.removeByName("AU3LibreOffice_UDF_Macros")
+
+		$oStandardLibrary.insertByName("AU3LibreOffice_UDF_Macros", $sNumStyleScript)
+	EndIf
+
+	If Not IsObj($oDoc) Or Not $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then ; If creating my Mod. Script fails, open a new document and create a script in there.
+		$oServiceManager = __LO_ServiceManager()
+		If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+		$oDesktop = $oServiceManager.createInstance("com.sun.star.frame.Desktop")
+		If Not IsObj($oDesktop) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+		$vProperty = __LO_SetPropertyValue("Hidden", True)
+		If Not @error Then $atProperties[0] = $vProperty
+
+		$vProperty = __LO_SetPropertyValue("MacroExecutionMode", $iMacroExecMode_ALWAYS_EXECUTE_NO_WARN)
+		If Not @error Then $atProperties[1] = $vProperty
+
+		$vProperty = __LO_SetPropertyValue("ReadOnly", True)
+		If Not @error Then $atProperties[2] = $vProperty
+
+		$oNumStyleDoc = $oDesktop.loadComponentFromURL("private:factory/swriter", "_blank", $iURLFrameCreate, $atProperties)
+		If Not IsObj($oNumStyleDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
+
+		; Retrieving the BasicLibrary.Standard Object fails when using a newly opened document, I found a workaround by updating the following setting.
+		$oNumStyleDoc.BasicLibraries.VBACompatibilityMode = $oNumStyleDoc.BasicLibraries.VBACompatibilityMode()
+
+		$oStandardLibrary = $oNumStyleDoc.BasicLibraries.Standard()
+		If Not IsObj($oStandardLibrary) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		$oStandardLibrary.insertByName("AU3LibreOffice_UDF_Macros", $sNumStyleScript)
+		If Not $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		$oScript = $oNumStyleDoc.getScriptProvider().getScript("vnd.sun.star.script:Standard.AU3LibreOffice_UDF_Macros.ReplaceByName?language=Basic&location=document")
+		If Not IsObj($oScript) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+		$bNumDocOpen = True
+
+	Else
+		$oScript = $oDoc.getScriptProvider().getScript("vnd.sun.star.script:Standard.AU3LibreOffice_UDF_Macros.ReplaceByName?language=Basic&location=document")
+		If Not IsObj($oScript) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+	EndIf
+
+	$avParamArray[0] = $oEvents
+	$avParamArray[1] = $sName
+	$avParamArray[2] = $atEvent
+
+	$oEvents = $oScript.Invoke($avParamArray, $aDummyArray, $aDummyArray)
+
+	If ($bNumDocOpen = True) Then
+		$oNumStyleDoc.Close(True)
+
+	Else
+		If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then $oStandardLibrary.removeByName("AU3LibreOffice_UDF_Macros")
+		If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+	EndIf
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>__LO_EventReplaceScript
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LO_InternalComErrorHandler
