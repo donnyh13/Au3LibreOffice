@@ -46,7 +46,7 @@
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_ComError_UserFunction
-; Description ...: Set a UserFunction to receive the Fired COM Error Error outside of the UDF.
+; Description ...: Set a UserFunction to receive the Fired COM Error outside of the UDF.
 ; Syntax ........: _LOCalc_ComError_UserFunction([$vUserFunction = Default[, $vParam1 = Null[, $vParam2 = Null[, $vParam3 = Null[, $vParam4 = Null[, $vParam5 = Null]]]]]])
 ; Parameters ....: $vUserFunction       - [optional] a Function or Keyword. Default is Default. Accepts a Function, or the Keyword Default and Null. If called with a User function, the function may have up to 5 required parameters.
 ;                  $vParam1             - [optional] Default is Null. Any optional parameter to be called with the user function.
