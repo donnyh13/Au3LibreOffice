@@ -23,6 +23,7 @@
 ; #CURRENT# =====================================================================================================================
 ; _LOBasic_MacroExecute
 ; _LOBasic_MacroExecuteLinkCreate
+; _LOBasic_MacroExecuteLinkModify
 ; _LOBasic_MacroLibContainerGetObj
 ; _LOBasic_MacroLibrariesAreModified
 ; _LOBasic_MacroLibrariesGetNames
@@ -147,7 +148,7 @@ EndFunc   ;==>_LOBasic_MacroExecute
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: A Macro execution link can be used to execute a macro manually, or to assign a macro to a button, form control, etc.
-; Related .......: _LOBasic_MacroExecute, _LOBasic_MacroLibrariesGetNames, _LOBasic_MacroModulesGetNames, _LOBasic_MacroModuleMacros
+; Related .......: _LOBasic_MacroExecuteLinkModify, _LOBasic_MacroExecute, _LOBasic_MacroLibrariesGetNames, _LOBasic_MacroModulesGetNames, _LOBasic_MacroModuleMacros
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -180,6 +181,118 @@ Func _LOBasic_MacroExecuteLinkCreate(ByRef $oLibContainer, $sLibrary, $sModule, 
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $sScript)
 EndFunc   ;==>_LOBasic_MacroExecuteLinkCreate
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOBasic_MacroExecuteLinkModify
+; Description ...: Set or Retrieve Macro execution link values.
+; Syntax ........: _LOBasic_MacroExecuteLinkModify($sMacroLink[, $sLibrary = Null[, $sModule = Null[, $sMacro = Null[, $sLanguageType = Null[, $bMacroInDoc = Null]]]]])
+; Parameters ....: $sMacroLink          - The Macro Execution Link to modify.
+;                  $sLibrary            - The Library name containing the Module.
+;                  $sModule             - The Module name containing the Macro.
+;                  $sMacro              - The Macro to execute.
+;                  $sLanguageType       - The language type of the Macro. Usually this is "Basic".
+;                  $bMacroInDoc         - If True, the Macro to be called is contained in a Document, Else it is stored in the LibreOffice Application library.
+; Return values .: Success: String or Array.
+;                  @Error: 0, @Extended: 0, Return: String = Success. Settings were successfully set. Returning new Macro Execution link.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oLibContainer not a String.
+;                  @Error: 1, @Extended: 2 = $sLibrary not a String.
+;                  @Error: 1, @Extended: 3 = $sModule not a String.
+;                  @Error: 1, @Extended: 4 = $sMacro not a String.
+;                  @Error: 1, @Extended: 5 = $sLanguageType not a String.
+;                  @Error: 1, @Extended: 6 = $bMacroInDoc not a Boolean.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to identify current Link values.
+;                  @Error: 3, @Extended: 2 = Failed to identify new Link values.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $sLibrary
+;                  |                               2 = Error setting $sModule
+;                  |                               4 = Error setting $sMacro
+;                  |                               8 = Error setting $sLanguageType
+;                  |                               16 = Error setting $bMacroInDoc
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: A Macro execution link can be used to execute a macro manually, or to assign a macro to a button, form control, etc.
+;                  None of the values are checked for validity, i.e. whether a library exists, etc.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+; Related .......: _LOBasic_MacroExecuteLinkCreate, _LOBasic_MacroExecute, _LOBasic_MacroLibrariesGetNames, _LOBasic_MacroModulesGetNames, _LOBasic_MacroModuleMacros
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOBasic_MacroExecuteLinkModify($sMacroLink, $sLibrary = Null, $sModule = Null, $sMacro = Null, $sLanguageType = Null, $bMacroInDoc = Null)
+	Local Enum $__eLibrary, $__eModule, $__eMacro, $__eLangType, $__eMacroInDoc
+	Local $__STR_REGEXPARRAYGLOBALMATCH = 3
+	Local $sCurrLib, $sCurrModule, $sCurrMacro, $sCurrLangType, $sNewMacroLink
+	Local $bCurrInDoc
+	Local $avExecuteLink[5]
+	Local $asRegExp
+	Local $iError = 0
+
+	If Not IsString($sMacroLink) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, $sMacroLink)
+
+	; "vnd.sun.star.script:CreateError.Module1.Main?language=Basic&location=application"
+	$asRegExp = StringRegExp($sMacroLink, "\:(.+?)\.(.+?)\.(.+?)\?language\=(.+?)\&location\=(.+)$", $__STR_REGEXPARRAYGLOBALMATCH)
+	If Not IsArray($asRegExp) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, $sMacroLink)
+
+	$sCurrLib = $asRegExp[$__eLibrary]
+	$sCurrModule = $asRegExp[$__eModule]
+	$sCurrMacro = $asRegExp[$__eMacro]
+	$sCurrLangType = $asRegExp[$__eLangType]
+	$bCurrInDoc = ($asRegExp[$__eMacroInDoc] = "document") ? (True) : (False)
+
+	If __LO_VarsAreNull($sLibrary, $sModule, $sMacro, $sLanguageType, $bMacroInDoc) Then
+		__LO_ArrayFill($avExecuteLink, $sCurrLib, $sCurrModule, $sCurrMacro, $sCurrLangType, $bCurrInDoc)
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $avExecuteLink)
+	EndIf
+
+	If ($sLibrary <> Null) Then
+		If Not IsString($sLibrary) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, $sMacroLink)
+		$sCurrLib = $sLibrary
+
+	EndIf
+
+	If ($sModule <> Null) Then
+		If Not IsString($sModule) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, $sMacroLink)
+		$sCurrModule = $sModule
+
+	EndIf
+
+	If ($sMacro <> Null) Then
+		If Not IsString($sMacro) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, $sMacroLink)
+		$sCurrMacro = $sMacro
+
+	EndIf
+
+	If ($sLanguageType <> Null) Then
+		If Not IsString($sLanguageType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, $sMacroLink)
+		$sCurrLangType = $sLanguageType
+
+	EndIf
+
+	If ($bMacroInDoc <> Null) Then
+		If Not IsBool($bMacroInDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, $sMacroLink)
+		$bCurrInDoc = $bMacroInDoc
+
+	EndIf
+
+	$sNewMacroLink = "vnd.sun.star.script:" & $sCurrLib & "." & $sCurrModule & "." & $sCurrMacro & "?language=" & $sCurrLangType & "&location=" & (($bMacroInDoc) ? ("document") : ("application"))
+
+	$asRegExp = StringRegExp($sNewMacroLink, "\:(.+?)\.(.+?)\.(.+?)\?language\=(.+?)\&location\=(.+)$", $__STR_REGEXPARRAYGLOBALMATCH)
+	If Not IsArray($asRegExp) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, $sNewMacroLink)
+
+	$iError = ($sLibrary = Null) ? ($iError) : (($asRegExp[$__eLibrary] = $sLibrary) ? ($iError) : (BitOR($iError, 1)))
+	$iError = ($sModule = Null) ? ($iError) : (($asRegExp[$__eModule] = $sModule) ? ($iError) : (BitOR($iError, 2)))
+	$iError = ($sMacro = Null) ? ($iError) : (($asRegExp[$__eMacro] = $sMacro) ? ($iError) : (BitOR($iError, 4)))
+	$iError = ($sLanguageType = Null) ? ($iError) : (($asRegExp[$__eLangType] = $sLanguageType) ? ($iError) : (BitOR($iError, 8)))
+	$iError = ($bMacroInDoc = Null) ? ($iError) : ((($asRegExp[$__eMacroInDoc] = "document") ? (True) : (False) = $bMacroInDoc) ? ($iError) : (BitOR($iError, 16)))
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, $sNewMacroLink)) : (SetError($__LO_STATUS_SUCCESS, 0, $sNewMacroLink))
+EndFunc   ;==>_LOBasic_MacroExecuteLinkModify
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOBasic_MacroLibContainerGetObj

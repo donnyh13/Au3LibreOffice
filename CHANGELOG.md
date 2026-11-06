@@ -53,6 +53,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - Macro Functions
   - _LOBasic_MacroExecute
   - _LOBasic_MacroExecuteLinkCreate
+  - _LOBasic_MacroExecuteLinkModify
   - _LOBasic_MacroLibContainerGetObj
   - _LOBasic_MacroLibrariesAreModified
   - _LOBasic_MacroLibrariesGetNames
