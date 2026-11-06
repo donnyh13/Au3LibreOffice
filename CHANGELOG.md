@@ -186,6 +186,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LODraw_DocClose
   - _LODraw_DocConnect
   - _LODraw_DocCreate
+  - _LODraw_DocEvents
   - _LODraw_DocExecuteDispatch
   - _LODraw_DocExport
   - _LODraw_DocGetName
