@@ -30,6 +30,10 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 ### LibreOfficeBase
 
+#### Added
+
+- _LOBase_DocEvents
+
 #### Documented
 
 - Fixed wrong variables used in error return descriptions.
