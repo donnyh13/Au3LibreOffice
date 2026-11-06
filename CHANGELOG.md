@@ -72,6 +72,11 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 ### LibreOfficeCalc
 
+#### Added
+
+- _LOCalc_DocEvents
+- _LOCalc_SheetEvents
+
 #### Changed
 
 - Renumbered $LOC_FIELD_TYPE_ALL from 1 to 127.
