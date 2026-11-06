@@ -612,6 +612,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
   - _LOImpress_DocClose
   - _LOImpress_DocConnect
   - _LOImpress_DocCreate
+  - _LOImpress_DocEvents
   - _LOImpress_DocExecuteDispatch
   - _LOImpress_DocExport
   - _LOImpress_DocGetName
