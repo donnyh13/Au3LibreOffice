@@ -4,6 +4,9 @@
 
 #include-once
 
+#include <File.au3>
+#include <WinAPICom.au3>
+
 #include "LibreOffice_Constants.au3"
 #include "LibreOffice_Internal.au3"
 
@@ -26,6 +29,7 @@
 ; _LO_GradientMulticolorDelete
 ; _LO_GradientMulticolorModify
 ; _LO_InitializePortable
+; _LO_InitializePortable2
 ; _LO_PathConvert
 ; _LO_PrintersGetNames
 ; _LO_PrintersGetNamesAlt
@@ -972,6 +976,79 @@ Func _LO_InitializePortable($sOfficePortablePath)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LO_InitializePortable
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LO_InitializePortable2
+; Description ...: Connects to LibreOffice Portable without writing COM registration to the Windows registry.
+; Syntax ........: _LO_InitializePortable2($sOfficePortablePath)
+; Parameters ....: $sOfficePortablePath - LibreOffice Portable root containing App\libreoffice\program\soffice.exe.
+;                  Pass an empty string to clear the stored connection without closing LibreOffice.
+; Return values .: Success: 1.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  @Error: 1, @Extended: 1 = $sOfficePortablePath is not a string.
+;                  @Error: 1, @Extended: 2 = Portable soffice.exe not found.
+;                  @Error: 3, @Extended: 1 = Failed to generate the UNO pipe name.
+;                  @Error: 3, @Extended: 2 = Failed to launch Portable LibreOffice.
+;                  @Error: 2, @Extended: 1 = Timed out obtaining a COM ServiceManager / UNO URL resolver.
+;                  @Error: 2, @Extended: 2 = Timed out connecting to the requested Portable LibreOffice instance.
+;                  @Error: 2, @Extended: 3 = The Portable ServiceManager could not be stored.
+; Author ........: mLipok
+; Modified ......:
+; Remarks .......: Experimental, LibreOffice only. Starts headless with the portable Data\settings profile.
+;                  Windows must be able to obtain a ServiceManager by CLSID. The bootstrap manager is only used to
+;                  resolve a uniquely named UNO pipe. Document operations use the manager returned by that pipe.
+;                  Call again to reconnect if the Portable process exits or disconnects.
+; Related .......: _LO_InitializePortable, _LO_Terminate
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LO_InitializePortable2($sOfficePortablePath)
+	If Not IsString($sOfficePortablePath) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	$sOfficePortablePath = StringStripWS($sOfficePortablePath, 3)
+	If $sOfficePortablePath = "" Then Return __LO_ServiceManager(Default, False)
+
+	$sOfficePortablePath = _PathFull($sOfficePortablePath)
+	Local $sProgramDir = $sOfficePortablePath & "\App\libreoffice\program"
+	Local $sExecutable = $sProgramDir & "\soffice.exe"
+	If Not FileExists($sExecutable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	Local $sGuid = _WinAPI_CreateGUID()
+	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	Local $sPipe = "pipe,name=Au3LibreOffice-" & StringTrimRight(StringTrimLeft($sGuid, 1), 1) & ";urp;"
+	Local $sProfile = _LO_PathConvert($sOfficePortablePath & "\Data\settings", $LO_PATHCONV_OFFICE_RETURN)
+	Run('"' & $sExecutable & '" "-env:UserInstallation=' & $sProfile & '" --headless --norestore --nologo --accept="' & $sPipe & '"', $sProgramDir, @SW_HIDE)
+	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+	Local Const $sServiceManagerCLSID = "{82154420-0FBF-11D4-8313-005004526AB4}"
+	Local Const $iTimeoutMs = 15000
+	Local $oBootstrap, $oResolver, $oContext, $oServiceManager
+	Local $hTimer = TimerInit()
+
+	Do
+		If Not IsObj($oResolver) Then
+			$oBootstrap = ObjCreate($sServiceManagerCLSID)
+			If IsObj($oBootstrap) Then $oResolver = $oBootstrap.createInstance("com.sun.star.bridge.UnoUrlResolver")
+		EndIf
+
+		If IsObj($oResolver) Then
+			$oContext = $oResolver.resolve("uno:" & $sPipe & "StarOffice.ComponentContext")
+			If IsObj($oContext) Then
+				$oServiceManager = $oContext.getServiceManager()
+				If IsObj($oServiceManager) Then
+					__LO_ServiceManager($oServiceManager, True, True)
+					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
+					Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+				EndIf
+			EndIf
+		EndIf
+		Sleep(100)
+	Until TimerDiff($hTimer) >= $iTimeoutMs
+
+	Return SetError($__LO_STATUS_INIT_ERROR, IsObj($oResolver) ? 2 : 1, 0)
+EndFunc   ;==>_LO_InitializePortable2
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LO_PathConvert

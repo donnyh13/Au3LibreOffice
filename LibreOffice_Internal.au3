@@ -418,9 +418,10 @@ EndFunc   ;==>__LO_NumIsBetween
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LO_ServiceManager
 ; Description ...: Set or Retrieve a stored Service Manager Object for use in the UDF.
-; Syntax ........: __LO_ServiceManager([$oServiceManager = Null[, $bPortable = Null]])
+; Syntax ........: __LO_ServiceManager([$oServiceManager = Null[, $bPortable = Null[, $bPortableNoRegistry = False]]])
 ; Parameters ....: $oServiceManager     - [optional] Default is Null. A ServiceManager Object. Typically this is used to store a Portable Service Manager Object.
 ;                  $bPortable           - [optional] Default is Null. If True, a Portable LibreOffice ServiceManager will be stored.
+;                  $bPortableNoRegistry - [optional] Default is False. If True, a lost connection must be reinitialized by the caller.
 ; Return values .: Success: 1 or Object
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully cleared stored ServiceManager.
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning ServiceManager Object.
@@ -438,12 +439,13 @@ EndFunc   ;==>__LO_NumIsBetween
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LO_ServiceManager($oServiceManager = Null, $bPortable = Null)
+Func __LO_ServiceManager($oServiceManager = Null, $bPortable = Null, $bPortableNoRegistry = False)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local Static $oStaticServiceManager
 	Local Static $bIsPortable = False
+	Local Static $bIsPortableNoRegistry = False
 
 	If ($bPortable <> Null) Then
 		If Not IsBool($bPortable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -462,6 +464,7 @@ Func __LO_ServiceManager($oServiceManager = Null, $bPortable = Null)
 			$oStaticServiceManager = $oServiceManager
 		EndIf
 
+		$bIsPortableNoRegistry = $bPortableNoRegistry
 		Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 	EndIf
 
@@ -470,6 +473,7 @@ Func __LO_ServiceManager($oServiceManager = Null, $bPortable = Null)
 	EndIf
 
 	If Not IsObj($oStaticServiceManager) Then
+		If $bIsPortableNoRegistry Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 		If $bIsPortable Then
 			; Try to create the ServiceManager again for the portable version.
 			__LO_SetPortableServiceManager()
