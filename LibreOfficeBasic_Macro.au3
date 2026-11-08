@@ -187,8 +187,8 @@ EndFunc   ;==>_LOBasic_MacroExecuteLinkCreate
 ; Description ...: Set or Retrieve Macro execution link values.
 ; Syntax ........: _LOBasic_MacroExecuteLinkModify($sMacroLink[, $sLibrary = Null[, $sModule = Null[, $sMacro = Null[, $sLanguageType = Null[, $bMacroInDoc = Null]]]]])
 ; Parameters ....: $sMacroLink          - The Macro Execution Link to modify.
-;                  $sLibrary            - The Library name containing the Module.
-;                  $sModule             - The Module name containing the Macro.
+;                  $sLibrary            - The Library name containing the Module. See remarks.
+;                  $sModule             - The Module name containing the Macro. See remarks.
 ;                  $sMacro              - The Macro to execute.
 ;                  $sLanguageType       - The language type of the Macro. Usually this is "Basic".
 ;                  $bMacroInDoc         - If True, the Macro to be called is contained in a Document, Else it is stored in the LibreOffice Application library.
@@ -199,10 +199,12 @@ EndFunc   ;==>_LOBasic_MacroExecuteLinkCreate
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oLibContainer not a String.
 ;                  @Error: 1, @Extended: 2 = $sLibrary not a String.
-;                  @Error: 1, @Extended: 3 = $sModule not a String.
-;                  @Error: 1, @Extended: 4 = $sMacro not a String.
-;                  @Error: 1, @Extended: 5 = $sLanguageType not a String.
-;                  @Error: 1, @Extended: 6 = $bMacroInDoc not a Boolean.
+;                  @Error: 1, @Extended: 3 = Name called in $sLibrary contains invalid characters or starts with an invalid character.
+;                  @Error: 1, @Extended: 4 = $sModule not a String.
+;                  @Error: 1, @Extended: 5 = Name called in $sModule contains invalid characters or starts with an invalid character.
+;                  @Error: 1, @Extended: 6 = $sMacro not a String.
+;                  @Error: 1, @Extended: 7 = $sLanguageType not a String.
+;                  @Error: 1, @Extended: 8 = $bMacroInDoc not a Boolean.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to identify current Link values.
 ;                  @Error: 3, @Extended: 2 = Failed to identify new Link values.
@@ -217,6 +219,7 @@ EndFunc   ;==>_LOBasic_MacroExecuteLinkCreate
 ; Modified ......:
 ; Remarks .......: A Macro execution link can be used to execute a macro manually, or to assign a macro to a button, form control, etc.
 ;                  None of the values are checked for validity, i.e. whether a library exists, etc.
+;                  Both Library and Module names are only allowed to contain the following: letters (a-zA-Z), digits (0-9), and underscores (_). They must start with letters or an underscore. No spaces allowed.
 ;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ; Related .......: _LOBasic_MacroExecuteLinkCreate, _LOBasic_MacroExecute, _LOBasic_MacroLibrariesGetNames, _LOBasic_MacroModulesGetNames, _LOBasic_MacroModuleMacros
@@ -252,30 +255,32 @@ Func _LOBasic_MacroExecuteLinkModify($sMacroLink, $sLibrary = Null, $sModule = N
 
 	If ($sLibrary <> Null) Then
 		If Not IsString($sLibrary) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, $sMacroLink)
+		If Not StringRegExp($sLibrary, "^[a-zA-Z_]\w+$") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, $sMacroLink)
 		$sCurrLib = $sLibrary
 
 	EndIf
 
 	If ($sModule <> Null) Then
-		If Not IsString($sModule) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, $sMacroLink)
+		If Not IsString($sModule) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, $sMacroLink)
+		If Not StringRegExp($sModule, "^[a-zA-Z_]\w+$") Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, $sMacroLink)
 		$sCurrModule = $sModule
 
 	EndIf
 
 	If ($sMacro <> Null) Then
-		If Not IsString($sMacro) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, $sMacroLink)
+		If Not IsString($sMacro) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, $sMacroLink)
 		$sCurrMacro = $sMacro
 
 	EndIf
 
 	If ($sLanguageType <> Null) Then
-		If Not IsString($sLanguageType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, $sMacroLink)
+		If Not IsString($sLanguageType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, $sMacroLink)
 		$sCurrLangType = $sLanguageType
 
 	EndIf
 
 	If ($bMacroInDoc <> Null) Then
-		If Not IsBool($bMacroInDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, $sMacroLink)
+		If Not IsBool($bMacroInDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, $sMacroLink)
 		$bCurrInDoc = $bMacroInDoc
 
 	EndIf
@@ -461,19 +466,20 @@ EndFunc   ;==>_LOBasic_MacroLibrariesSave
 ; Description ...: Create a new Library in a Library Container.
 ; Syntax ........: _LOBasic_MacroLibraryCreate(ByRef $oLibContainer, $sLibrary)
 ; Parameters ....: $oLibContainer       - A Library Container object returned by a previous _LOBasic_MacroLibContainerGetObj function.
-;                  $sLibrary            - The unique Library name to create.
+;                  $sLibrary            - The unique Library name to create. See remarks.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully created the Library.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oLibContainer not an Object.
 ;                  @Error: 1, @Extended: 2 = $sLibrary not a String.
-;                  @Error: 1, @Extended: 3 = Library name called in $sLibrary already exists.
+;                  @Error: 1, @Extended: 3 = Name called in $sLibrary contains invalid characters or starts with an invalid character.
+;                  @Error: 1, @Extended: 4 = Library name called in $sLibrary already exists.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create Library.
 ; Author ........: donnyh13
 ; Modified ......:
-; Remarks .......:
+; Remarks .......: Library names can only contain the following: letters (a-zA-Z), digits (0-9), and underscores (_). The name must start with letters or an underscore. No spaces allowed.
 ; Related .......: _LOBasic_MacroLibraryExists, _LOBasic_MacroLibraryRemove, _LOBasic_MacroModuleCreate
 ; Link ..........:
 ; Example .......: Yes
@@ -484,7 +490,8 @@ Func _LOBasic_MacroLibraryCreate(ByRef $oLibContainer, $sLibrary)
 
 	If Not IsObj($oLibContainer) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsString($sLibrary) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If $oLibContainer.hasByName($sLibrary) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not StringRegExp($sLibrary, "^[a-zA-Z_]\w+$") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If $oLibContainer.hasByName($sLibrary) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 	$oLibContainer.createLibrary($sLibrary)
 	If Not $oLibContainer.hasByName($sLibrary) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
@@ -821,7 +828,7 @@ EndFunc   ;==>_LOBasic_MacroLibraryRemove
 ; Syntax ........: _LOBasic_MacroLibraryRename(ByRef $oLibContainer, $sLibrary, $sName)
 ; Parameters ....: $oLibContainer       - A Library Container object returned by a previous _LOBasic_MacroLibContainerGetObj function.
 ;                  $sLibrary            - The Library name to rename.
-;                  $sName               - The unique Library name to rename the Library to.
+;                  $sName               - The unique Library name to rename the Library to. See remarks.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully renamed the Library.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -832,13 +839,15 @@ EndFunc   ;==>_LOBasic_MacroLibraryRemove
 ;                  @Error: 1, @Extended: 4 = Cannot rename built-in libraries, or Read-Only Libraries.
 ;                  @Error: 1, @Extended: 5 = Cannot rename the "Standard" library.
 ;                  @Error: 1, @Extended: 6 = $sName not a String.
-;                  @Error: 1, @Extended: 7 = Library called in $sName already exists.
+;                  @Error: 1, @Extended: 7 = Name called in $sName contains invalid characters or starts with an invalid character.
+;                  @Error: 1, @Extended: 8 = Library called in $sName already exists.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to rename Library.
 ;                  @Error: 3, @Extended: 2 = Failed to delete old Library.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: You cannot rename built in Libraries or the "Standard" library.
+;                  Library names can only contain the following: letters (a-zA-Z), digits (0-9), and underscores (_). The name must start with letters or an underscore. No spaces allowed.
 ; Related .......: _LOBasic_MacroLibraryExists, _LOBasic_MacroModuleRename
 ; Link ..........:
 ; Example .......: Yes
@@ -853,7 +862,8 @@ Func _LOBasic_MacroLibraryRename(ByRef $oLibContainer, $sLibrary, $sName)
 	If $oLibContainer.isLibraryReadOnly($sLibrary) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If ($sLibrary = "Standard") Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-	If $oLibContainer.hasByName($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+	If Not StringRegExp($sName, "^[a-zA-Z_]\w+$") Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+	If $oLibContainer.hasByName($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
 	$oLibContainer.renameLibrary($sLibrary, $sName)
 	If Not $oLibContainer.hasByName($sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
@@ -870,7 +880,7 @@ EndFunc   ;==>_LOBasic_MacroLibraryRename
 ; Syntax ........: _LOBasic_MacroModuleCreate(ByRef $oLibContainer, $sLibrary, $sModule[, $sMacro = Null])
 ; Parameters ....: $oLibContainer       - A Library Container object returned by a previous _LOBasic_MacroLibContainerGetObj function.
 ;                  $sLibrary            - The Library name to create the Module in.
-;                  $sModule             - The unique Module name to create.
+;                  $sModule             - The unique Module name to create. See remarks.
 ;                  $sMacro              - [optional] Default is Null. The Macro(s) to insert in the Module. Calling with Null will insert a blank Macro. See remarks.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully created the Module.
@@ -880,8 +890,9 @@ EndFunc   ;==>_LOBasic_MacroLibraryRename
 ;                  @Error: 1, @Extended: 2 = $sLibrary not a String.
 ;                  @Error: 1, @Extended: 3 = Library called in $sLibrary not found.
 ;                  @Error: 1, @Extended: 4 = $sModule not a String.
-;                  @Error: 1, @Extended: 5 = Module called in $sModule not found.
-;                  @Error: 1, @Extended: 6 = $sMacro not a String.
+;                  @Error: 1, @Extended: 5 = Name called in $sModule contains invalid characters or starts with an invalid character.
+;                  @Error: 1, @Extended: 6 = Module called in $sModule not found.
+;                  @Error: 1, @Extended: 7 = $sMacro not a String.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Cannot create Module in built-in libraries, or Read-Only Libraries.
 ;                  @Error: 3, @Extended: 2 = Failed to retrieve Library Object.
@@ -889,6 +900,7 @@ EndFunc   ;==>_LOBasic_MacroLibraryRename
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: You cannot create Modules in built in Libraries.
+;                  Module names can only contain the following: letters (a-zA-Z), digits (0-9), and underscores (_). The name must start with letters or an underscore. No spaces allowed.
 ;                  Modules only contain one string, which contains the whole collection of macros contained in the Module, they are not separated individually.
 ;                  New lines use the LF (Line Feed) sequence. When setting the Macro(s), all newlines are automatically converted to LF by LibreOffice.
 ; Related .......: _LOBasic_MacroLibraryCreate, _LOBasic_MacroModuleExists
@@ -906,12 +918,13 @@ Func _LOBasic_MacroModuleCreate(ByRef $oLibContainer, $sLibrary, $sModule, $sMac
 	If Not IsString($sLibrary) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not $oLibContainer.hasByName($sLibrary) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not IsString($sModule) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not StringRegExp($sModule, "^[a-zA-Z_]\w+$") Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If $oLibContainer.isLibraryReadOnly($sLibrary) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	$oLibrary = $oLibContainer.getByName($sLibrary)
 	If Not IsObj($oLibrary) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-	If $oLibrary.hasByName($sModule) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
-	If ($sMacro <> Null) And Not IsString($sMacro) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+	If $oLibrary.hasByName($sModule) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+	If ($sMacro <> Null) And Not IsString($sMacro) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
 
 	If ($sMacro = Null) Then $sMacro = $sBlankMacro
 
@@ -1092,7 +1105,7 @@ EndFunc   ;==>_LOBasic_MacroModuleRemove
 ; Parameters ....: $oLibContainer       - A Library Container object returned by a previous _LOBasic_MacroLibContainerGetObj function.
 ;                  $sLibrary            - The Library name to rename the Module in.
 ;                  $sModule             - The Module name to rename.
-;                  $sName               - The unique Module name to set the Module to.
+;                  $sName               - The unique Module name to set the Module to. See remarks.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully renamed the Module.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
@@ -1103,7 +1116,8 @@ EndFunc   ;==>_LOBasic_MacroModuleRemove
 ;                  @Error: 1, @Extended: 4 = $sModule not a String.
 ;                  @Error: 1, @Extended: 5 = Module called in $sModule not found.
 ;                  @Error: 1, @Extended: 6 = $sName not a String.
-;                  @Error: 1, @Extended: 7 = Module called in $sName already exists.
+;                  @Error: 1, @Extended: 7 = Name called in $sName contains invalid characters or starts with an invalid character.
+;                  @Error: 1, @Extended: 8 = Module called in $sName already exists.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Cannot rename Modules in built-in libraries, or Read-Only Libraries.
 ;                  @Error: 3, @Extended: 2 = Failed to retrieve Library Object.
@@ -1113,6 +1127,7 @@ EndFunc   ;==>_LOBasic_MacroModuleRemove
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: You cannot rename Modules in built in Libraries.
+;                  Module names can only contain the following: letters (a-zA-Z), digits (0-9), and underscores (_). The name must start with letters or an underscore. No spaces allowed.
 ; Related .......: _LOBasic_MacroModuleExists, _LOBasic_MacroLibraryRename
 ; Link ..........:
 ; Example .......: Yes
@@ -1134,7 +1149,8 @@ Func _LOBasic_MacroModuleRename(ByRef $oLibContainer, $sLibrary, $sModule, $sNam
 	If Not IsObj($oLibrary) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 	If Not $oLibrary.hasByName($sModule) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-	If $oLibrary.hasByName($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+	If Not StringRegExp($sName, "^[a-zA-Z_]\w+$") Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, 0)
+	If $oLibrary.hasByName($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, 0)
 
 	$sMacro = $oLibrary.getByName($sModule)
 	If Not IsString($sMacro) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
