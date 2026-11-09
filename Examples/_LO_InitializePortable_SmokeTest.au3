@@ -8,8 +8,8 @@ EndIf
 Exit Example($CmdLine[1])
 
 Func Example($sPortableRoot)
-	_LO_InitializePortable2($sPortableRoot)
-	If @error Then Return _ExampleError("_LO_InitializePortable2", @error, @extended)
+	_LO_InitializePortable($sPortableRoot)
+	If @error Then Return _ExampleError("_LO_InitializePortable", @error, @extended)
 
 	Local $oManager = __LO_ServiceManager()
 	If Not IsObj($oManager) Then Return _ExampleError("ServiceManager", @error, @extended)

@@ -491,8 +491,9 @@ EndFunc   ;==>__LO_ServiceManager
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LO_SetPortableServiceManager
 ; Description ...: Create and store a Portable LibreOffice ServiceManager Object.
-; Syntax ........: __LO_SetPortableServiceManager([$sPortableLO_Path = Null])
+; Syntax ........: __LO_SetPortableServiceManager([$sPortableLO_Path = Null[, $iTimeoutMs = 15000]])
 ; Parameters ....: $sPortableLO_Path    - [optional] Default is Null. A path to the Portable LibreOffice soffice.exe file.
+;                  $iTimeoutMs          - [optional] Startup polling timeout in milliseconds. Reconnection reuses the last successful timeout.
 ; Return values .: Success: 1, 2
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Created and stored Portable LibreOffice ServiceManager.
 ;                  @Error: 0, @Extended: 0, Return: 2 = Success. Cleared stored Portable LibreOffice path.
@@ -518,11 +519,12 @@ EndFunc   ;==>__LO_ServiceManager
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LO_SetPortableServiceManager($sPortableLO_Path = Null)
+Func __LO_SetPortableServiceManager($sPortableLO_Path = Null, $iTimeoutMs = 15000)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local Static $sStaticPortablePath = ""
+	Local Static $iStaticTimeoutMs = 15000
 	Local Static $bTempReg = False
 	Local $iError = 0, $iPort = 2002, $iSocket, $iErrorRet
 	Local $hTimer
@@ -530,7 +532,7 @@ Func __LO_SetPortableServiceManager($sPortableLO_Path = Null)
 	Local Const $__eReg_LocalServer32 = 2 ; Make sure to sync this.
 	Local Enum $__eReg_KeyName, $__eReg_ValueName, $__eReg_Type, $__eReg_Value
 	Local Const $sHKCU = (@OSArch = "X86") ? ("HKCU") : ("HKCU64")
-	Local Const $sHKLM = (@OSArch = "X86") ? ("HKLM") : ("HLM64")
+	Local Const $sHKLM = (@OSArch = "X86") ? ("HKLM") : ("HKLM64")
 	Local $asRegKeysMain[2] = ["\Software\Classes\CLSID\{82154420-0FBF-11d4-8313-005004526AB4}", _
 			"\Software\Classes\com.sun.star.ServiceManager"]
 	Local $asRegKeys[11][4] = [["\Software\Classes\CLSID\{82154420-0FBF-11d4-8313-005004526AB4}", "", "REG_SZ", "LibreOffice Service Manager (Ver 1.0)"], _
@@ -548,23 +550,22 @@ Func __LO_SetPortableServiceManager($sPortableLO_Path = Null)
 	If ($sPortableLO_Path <> Null) Then
 		If Not IsString($sPortableLO_Path) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
-		If ($sPortableLO_Path <> "") Then
-			If Not FileExists($sPortableLO_Path) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-			$sStaticPortablePath = $sPortableLO_Path
-
-		Else
-			$sStaticPortablePath = $sPortableLO_Path
+		If ($sPortableLO_Path = "") Then
+			$sStaticPortablePath = ""
+			$iStaticTimeoutMs = 15000
 			__LO_ServiceManager(Default, False) ; Clear any stored ServiceManager, and set Boolean for Portable to False.
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, 2)
 		EndIf
+		If Not FileExists($sPortableLO_Path) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	Else
+		If ($sStaticPortablePath = "") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+		If Not FileExists($sStaticPortablePath) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+		$sPortableLO_Path = $sStaticPortablePath
+		$iTimeoutMs = $iStaticTimeoutMs
 	EndIf
 
-	If ($sStaticPortablePath = "") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-	If Not FileExists($sStaticPortablePath) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0) ; Check to make sure the stored path to the LO File is still good.
-
-	$asRegKeys[$__eReg_LocalServer32][$__eReg_Value] = $sStaticPortablePath & " --nodefault --nologo"
+	$asRegKeys[$__eReg_LocalServer32][$__eReg_Value] = '"' & $sPortableLO_Path & '" --nodefault --nologo'
 
 	RegRead($sHKLM & $asRegKeysMain[1], "") ; Classes are shared, so I only need to check one place.
 	If @error Then ; Seems like no LibreOffice is installed, add temp Registry.
@@ -604,7 +605,7 @@ Func __LO_SetPortableServiceManager($sPortableLO_Path = Null)
 	WEnd
 
 	; Start LibreOffice Portable in listening mode
-	Run('"' & $sStaticPortablePath & '" --headless --norestore --nologo --accept="socket,host=127.0.0.1,port=' & $iPort & ',tcpNoDelay=1;urp;"', "", @SW_HIDE)
+	Run('"' & $sPortableLO_Path & '" --headless --norestore --nologo --accept="socket,host=127.0.0.1,port=' & $iPort & ',tcpNoDelay=1;urp;"', "", @SW_HIDE)
 	If (@error <> 0) Then
 		If $bTempReg Then
 			__LO_DeleteTempReg()
@@ -623,10 +624,11 @@ Func __LO_SetPortableServiceManager($sPortableLO_Path = Null)
 		Sleep(10)
 		$iSocket = TCPConnect("127.0.0.1", $iPort)
 		$iErrorRet = @error
-	Until (($iErrorRet = 0) And ($iSocket > 0)) Or (TimerDiff($hTimer) > 15000) ; Timeout in 15 seconds.
+	Until (($iErrorRet = 0) And ($iSocket > 0)) Or (TimerDiff($hTimer) >= $iTimeoutMs)
+	If ($iSocket > 0) Then TCPCloseSocket($iSocket)
 	TCPShutdown()
 
-	If ($iErrorRet > 0) Then ; Error initializing LO.
+	If ($iErrorRet <> 0) Or ($iSocket <= 0) Then ; Error initializing LO.
 		If $bTempReg Then
 			__LO_DeleteTempReg()
 			If (@error = 0) Then OnAutoItExitUnRegister("__LO_DeleteTempReg")
@@ -672,6 +674,8 @@ Func __LO_SetPortableServiceManager($sPortableLO_Path = Null)
 	EndIf
 
 	__LO_ServiceManager($oPortable_ServiceManager, True) ; Set the stored ServiceManager.
+	$sStaticPortablePath = $sPortableLO_Path
+	$iStaticTimeoutMs = $iTimeoutMs
 
 	If $bTempReg Then ; Clean up Temp Registry.
 		__LO_DeleteTempReg()

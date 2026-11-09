@@ -29,7 +29,6 @@
 ; _LO_GradientMulticolorDelete
 ; _LO_GradientMulticolorModify
 ; _LO_InitializePortable
-; _LO_InitializePortable2
 ; _LO_PathConvert
 ; _LO_PrintersGetNames
 ; _LO_PrintersGetNamesAlt
@@ -916,114 +915,83 @@ EndFunc   ;==>_LO_GradientMulticolorModify
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LO_InitializePortable
-; Description ...: Setup Portable LibreOffice (Or Open Office) for use in this UDF.
-; Syntax ........: _LO_InitializePortable($sOfficePortablePath)
-; Parameters ....: $sOfficePortablePath - The Path to the Portable LibreOffice/OpenOffice folder. See remarks.
-; Return values .: Success: 1
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Portable LibreOffice/OpenOffice ServiceManager successfully created and stored.
-;                  Failure: 0 and sets @Error and @Extended to non-zero.
-;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $sOfficePortablePath not a String.
-;                  @Error: 1, @Extended: 2 = Folder called in $sOfficePortablePath does not contain the App folder. Perhaps wrong directory?
-;                  @Error: 1, @Extended: 3 = soffice.exe not found in $sOfficePortablePath\App\libreoffice\program\ or $sOfficePortablePath\App\openoffice\program\.
-;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = Failed to clear stored Portable LO/OO ServiceManager.
-;                  @Error: 3, @Extended: 2 = Failed to initialize portable LibreOffice ServiceManager.
-;                  @Error: 3, @Extended: 3 = Failed to initialize portable OpenOffice ServiceManager.
-; Author ........: donnyh13
-; Modified ......:
-; Remarks .......: The path called in $sOfficePortablePath should be to the Portable LibreOffice folder containing the shortcuts to each element, and also the "App", "Data" and "Other" folders. e.g. C:\LibreOfficePortablePrevious
-;                  This UDF hasn't been thoroughly tested using portable LibreOffice, but rather the Installed version. Make sure to test all things yourself!
-;                  So far, the following method is the only way I've been able to successfully initialize the portable LibreOffice version from AutoIt. How it works is as follows:
-;                  1a. If LibreOffice/OpenOffice is already installed on the system, an instance of com.sun.star.ServiceManager is started. __OR__
-;                  1b. If LibreOffice/OpenOffice is NOT already installed on the system, a handful of temporary registry entries are created in HKEY_CURRENT_USER, to allow an instance of com.sun.star.ServiceManager to be started.
-;                  2. The Portable LibreOffice/OpenOffice (LO/OO) is started in --headless mode as a listening server, using the flag --accept.
-;                  3. The ServiceManager created in step 1 is used to create a UNO URL resolver, which is used to obtain a ServiceManager Object from the listening Portable LO/OO.
-;                  4. The retrieved Portable LO/OO ServiceManager is stored as a static variable for future use. The Portable LO/OO path is also stored as a static variable in case I need to re-create the ServiceManager.
-;                  5a. The ServiceManager created from the registry is no longer used.
-;                  5b. The ServiceManager created from the registry is no longer used, and the temporary Registry entries created in HKEY_CURRENT_USER are (hopefully) deleted.
-;                  If the COM error "Binary URP bridge already disposed" is encountered, all instances of soffice.exe or soffice.bin must be closed with TaskManager.
-;                  If running this with an installed version of LibreOffice present the flag SingleAppInstance may need to be set to False in the "LibreOfficePortablePrevious.ini" [or similar name], found at: C:\LibreOfficePortablePrevious\App\AppInfo\Launcher\LibreOfficePortablePrevious.ini.
-; Related .......:
-; Link ..........:
-; Example .......: Yes
-; ===============================================================================================================================
-Func _LO_InitializePortable($sOfficePortablePath)
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-
-	If Not IsString($sOfficePortablePath) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-
-	$sOfficePortablePath = StringRegExpReplace($sOfficePortablePath, "^\s+|\s+$", "") ; Strip beginning and ending spaces.
-	If ($sOfficePortablePath <> "") And Not FileExists($sOfficePortablePath & "\App") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0) ; Make sure we're starting from the right folder.
-
-	If ($sOfficePortablePath = "") Then
-		__LO_SetPortableServiceManager($sOfficePortablePath)
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-
-	ElseIf FileExists($sOfficePortablePath & "\App\libreoffice\program\soffice.exe") Then ; Check LibreOffice path.
-		__LO_SetPortableServiceManager($sOfficePortablePath & "\App\libreoffice\program\soffice.exe")
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-	ElseIf FileExists($sOfficePortablePath & "\App\openoffice\program\soffice.exe") Then ; Check OpenOffice path.
-		__LO_SetPortableServiceManager($sOfficePortablePath & "\App\openoffice\program\soffice.exe")
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-
-	Else
-
-		Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
-	EndIf
-
-	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-EndFunc   ;==>_LO_InitializePortable
-
-; #FUNCTION# ====================================================================================================================
-; Name ..........: _LO_InitializePortable2
-; Description ...: Connects to LibreOffice Portable without writing COM registration to the Windows registry.
-; Syntax ........: _LO_InitializePortable2($sOfficePortablePath)
-; Parameters ....: $sOfficePortablePath - LibreOffice Portable root containing App\libreoffice\program\soffice.exe.
-;                  Pass an empty string to clear the stored connection without closing LibreOffice.
+; Description ...: Connects the UDF to LibreOffice Portable or OpenOffice Portable.
+; Syntax ........: _LO_InitializePortable($sOfficePortablePath[, $bRegistryFree = Default[, $iTimeoutMs = 15000]])
+; Parameters ....: $sOfficePortablePath - Portable root containing the App folder. Pass an empty string to clear the stored connection.
+;                  $bRegistryFree       - [optional] Default selects registry-free for LibreOffice and the registry-based method for OpenOffice.
+;                                        True requires registry-free initialization. False selects the registry-based method.
+;                  $iTimeoutMs          - [optional] Default is 15000. Positive integer in milliseconds for startup polling.
 ; Return values .: Success: 1.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  @Error: 1, @Extended: 1 = $sOfficePortablePath is not a string.
-;                  @Error: 1, @Extended: 2 = Portable soffice.exe not found.
-;                  @Error: 3, @Extended: 1 = Failed to generate the UNO pipe name.
-;                  @Error: 3, @Extended: 2 = Failed to launch Portable LibreOffice.
-;                  @Error: 2, @Extended: 1 = Timed out obtaining a COM ServiceManager / UNO URL resolver.
-;                  @Error: 2, @Extended: 2 = Timed out connecting to the requested Portable LibreOffice instance.
-;                  @Error: 2, @Extended: 3 = The Portable ServiceManager could not be stored.
-; Author ........: mLipok
-; Modified ......:
-; Remarks .......: Experimental, LibreOffice only. Starts headless with the portable Data\settings profile.
-;                  Windows must be able to obtain a ServiceManager by CLSID. The bootstrap manager is only used to
-;                  resolve a uniquely named UNO pipe. Document operations use the manager returned by that pipe.
-;                  Call again to reconnect if the Portable process exits or disconnects.
-; Related .......: _LO_InitializePortable, _LO_Terminate
+;                  @Error: 1, @Extended: 2 = The Portable root does not contain the App folder.
+;                  @Error: 1, @Extended: 3 = Portable soffice.exe not found.
+;                  @Error: 1, @Extended: 4 = $bRegistryFree is neither a Boolean nor Default.
+;                  @Error: 1, @Extended: 5 = $iTimeoutMs is not a positive integer.
+;                  @Error: 1, @Extended: 6 = Registry-free initialization is not supported for OpenOffice Portable.
+;                  @Error: 2, @Extended: 1 = Timed out obtaining a COM ServiceManager / UNO URL resolver in registry-free mode.
+;                  @Error: 2, @Extended: 2 = Timed out connecting to the requested instance in registry-free mode.
+;                  @Error: 2, @Extended: 3 = Failed to store the registry-free ServiceManager.
+;                  @Error: 3, @Extended: 1 = Failed to clear the stored Portable ServiceManager.
+;                  @Error: 3, @Extended: 2 = Failed to initialize LibreOffice Portable using the registry-based method.
+;                  @Error: 3, @Extended: 3 = Failed to initialize OpenOffice Portable.
+;                  @Error: 3, @Extended: 4 = Failed to generate the UNO pipe name.
+;                  @Error: 3, @Extended: 5 = Failed to launch LibreOffice Portable in registry-free mode.
+; Author ........: donnyh13
+; Modified ......: mLipok
+; Remarks .......: LibreOffice Portable defaults to a local UNO pipe and uses the Data\settings profile in the Portable root.
+;                  OpenOffice Portable always uses the existing registry-based method. This method may create temporary COM registration in HKCU.
+;                  The timeout controls polling and cannot interrupt a COM call already in progress.
+;                  If a registry-free connection is lost, call this function again to reconnect.
+;                  Passing an empty path does not close the Portable process.
+; Related .......: _LO_Terminate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
-Func _LO_InitializePortable2($sOfficePortablePath)
+Func _LO_InitializePortable($sOfficePortablePath, $bRegistryFree = Default, $iTimeoutMs = 15000)
+	Local $bAutomaticMode = (IsKeyword($bRegistryFree) = 1)
 	If Not IsString($sOfficePortablePath) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	$sOfficePortablePath = StringStripWS($sOfficePortablePath, 3)
-	If $sOfficePortablePath = "" Then Return __LO_ServiceManager(Default, False)
+	If Not $bAutomaticMode And Not IsBool($bRegistryFree) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not IsInt($iTimeoutMs) Or ($iTimeoutMs < 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+	$sOfficePortablePath = StringRegExpReplace($sOfficePortablePath, "^\s+|\s+$", "")
+	If ($sOfficePortablePath = "") Then
+		__LO_SetPortableServiceManager("")
+		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+		Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	EndIf
 
 	$sOfficePortablePath = _PathFull($sOfficePortablePath)
+	If Not FileExists($sOfficePortablePath & "\App") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
 	Local $sProgramDir = $sOfficePortablePath & "\App\libreoffice\program"
 	Local $sExecutable = $sProgramDir & "\soffice.exe"
-	If Not FileExists($sExecutable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not FileExists($sExecutable) Then
+		$sExecutable = $sOfficePortablePath & "\App\openoffice\program\soffice.exe"
+		If Not FileExists($sExecutable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not $bAutomaticMode And $bRegistryFree Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
+		__LO_SetPortableServiceManager($sExecutable, $iTimeoutMs)
+		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+		Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	EndIf
+
+	If Not $bAutomaticMode And Not $bRegistryFree Then
+		__LO_SetPortableServiceManager($sExecutable, $iTimeoutMs)
+		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+		Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	EndIf
 
 	Local $sGuid = _WinAPI_CreateGUID()
-	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
 	Local $sPipe = "pipe,name=Au3LibreOffice-" & StringTrimRight(StringTrimLeft($sGuid, 1), 1) & ";urp;"
 	Local $sProfile = _LO_PathConvert($sOfficePortablePath & "\Data\settings", $LO_PATHCONV_OFFICE_RETURN)
 	Run('"' & $sExecutable & '" "-env:UserInstallation=' & $sProfile & '" --headless --norestore --nologo --accept="' & $sPipe & '"', $sProgramDir, @SW_HIDE)
-	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 	Local Const $sServiceManagerCLSID = "{82154420-0FBF-11D4-8313-005004526AB4}"
-	Local Const $iTimeoutMs = 15000
 	Local $oBootstrap, $oResolver, $oContext, $oServiceManager
 	Local $hTimer = TimerInit()
 
@@ -1048,7 +1016,7 @@ Func _LO_InitializePortable2($sOfficePortablePath)
 	Until TimerDiff($hTimer) >= $iTimeoutMs
 
 	Return SetError($__LO_STATUS_INIT_ERROR, IsObj($oResolver) ? 2 : 1, 0)
-EndFunc   ;==>_LO_InitializePortable2
+EndFunc   ;==>_LO_InitializePortable
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LO_PathConvert
