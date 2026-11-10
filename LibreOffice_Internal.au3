@@ -503,7 +503,7 @@ EndFunc   ;==>__LO_ServiceManager
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Timed out obtaining a COM ServiceManager / UNO URL resolver in registry-free mode.
 ;                  @Error: 2, @Extended: 2 = Timed out connecting to the requested instance in registry-free mode.
-;                  @Error: 2, @Extended: 3 = Failed to store the registry-free ServiceManager.
+;                  @Error: 2, @Extended: 3 = Failed to store the Portable ServiceManager.
 ;                  @Error: 2, @Extended: 4 = Failed to create "com.sun.star.ServiceManager" Object.
 ;                  @Error: 2, @Extended: 5 = Failed to create "com.sun.star.bridge.UnoUrlResolver" Object.
 ;                  --Processing Errors--
@@ -532,7 +532,7 @@ Func __LO_SetPortableServiceManager($sPortableLO_Path = Null, $sProgramDir = Nul
 	Local Static $bTempReg = False, $bStaticIsRegFree = False
 	Local $iError = 0, $iPort = 2002, $iSocket, $iErrorRet
 	Local $hTimer
-	Local $oReg_ServiceManager, $oURLResolver, $oCompContext, $oPortable_ServiceManager, $oBootstrap, $oResolver, $oContext, $oServiceManager
+	Local $oReg_ServiceManager, $oURLResolver, $oCompContext, $oPortable_ServiceManager, $oBootstrap, $oResolver, $oContext
 	Local $sExecutable, $sProfile
 	Local Const $__eReg_LocalServer32 = 2 ; Make sure to sync this.
 	Local Enum $__eReg_KeyName, $__eReg_ValueName, $__eReg_Type, $__eReg_Value
@@ -555,7 +555,6 @@ Func __LO_SetPortableServiceManager($sPortableLO_Path = Null, $sProgramDir = Nul
 
 	If ($sPortableLO_Path <> Null) Then
 		If Not IsString($sPortableLO_Path) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-		If Not IsString($sProgramDir) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		If ($sPortableLO_Path = "") Then
 			$sStaticPortablePath = ""
@@ -566,11 +565,13 @@ Func __LO_SetPortableServiceManager($sPortableLO_Path = Null, $sProgramDir = Nul
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, 2)
 		EndIf
+		If Not IsString($sProgramDir) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 		$sExecutable = $sProgramDir & "\soffice.exe"
 		$sProfile = _LO_PathConvert($sPortableLO_Path & "\Data\settings", $LO_PATHCONV_OFFICE_RETURN)
 		If Not FileExists($sExecutable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	Else
 		If ($sStaticPortablePath = "") Or ($sStaticProgramDir = "") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+		$sPortableLO_Path = $sStaticPortablePath
 		$sProgramDir = $sStaticProgramDir
 		$sExecutable = $sProgramDir & "\soffice.exe"
 		$sProfile = _LO_PathConvert($sStaticPortablePath & "\Data\settings", $LO_PATHCONV_OFFICE_RETURN)
@@ -598,18 +599,14 @@ Func __LO_SetPortableServiceManager($sPortableLO_Path = Null, $sProgramDir = Nul
 			If IsObj($oResolver) Then
 				$oContext = $oResolver.resolve("uno:" & $sPipe & "StarOffice.ComponentContext")
 				If IsObj($oContext) Then
-					$oServiceManager = $oContext.getServiceManager()
-					If IsObj($oServiceManager) Then
-						__LO_ServiceManager($oServiceManager, True)
-						If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
-						Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-					EndIf
+					$oPortable_ServiceManager = $oContext.getServiceManager()
+					If IsObj($oPortable_ServiceManager) Then ExitLoop
 				EndIf
 			EndIf
 			Sleep(100)
 		Until TimerDiff($hTimer) >= $iTimeoutMs
 
-		Return SetError($__LO_STATUS_INIT_ERROR, IsObj($oResolver) ? 2 : 1, 0)
+		If Not IsObj($oPortable_ServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, IsObj($oResolver) ? 2 : 1, 0)
 
 	Else     ; Registry method.
 		$asRegKeys[$__eReg_LocalServer32][$__eReg_Value] = '"' & $sExecutable & '" --nodefault --nologo'
@@ -729,6 +726,7 @@ Func __LO_SetPortableServiceManager($sPortableLO_Path = Null, $sProgramDir = Nul
 	EndIf
 
 	__LO_ServiceManager($oPortable_ServiceManager, True) ; Set the stored ServiceManager.
+	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
 	$sStaticPortablePath = $sPortableLO_Path
 	$sStaticProgramDir = $sProgramDir
 	$bStaticIsRegFree = $bRegistryFree

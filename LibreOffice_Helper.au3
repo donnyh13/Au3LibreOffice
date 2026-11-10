@@ -924,21 +924,25 @@ EndFunc   ;==>_LO_GradientMulticolorModify
 ; Return values .: Success: 1.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  @Error: 1, @Extended: 1 = $sOfficePortablePath is not a string.
-;                  @Error: 1, @Extended: 2 = $bRegistryFree is neither a Boolean nor Default.
-;                  @Error: 1, @Extended: 3 = $iTimeoutMs is not a positive integer.
-;                  @Error: 1, @Extended: 4 = The Portable root does not contain the App folder.
-;                  @Error: 1, @Extended: 5 = Portable soffice.exe not found.
+;                  @Error: 1, @Extended: 2 = The Portable root does not contain the App folder.
+;                  @Error: 1, @Extended: 3 = Portable soffice.exe not found.
+;                  @Error: 1, @Extended: 4 = $bRegistryFree is neither a Boolean nor Default.
+;                  @Error: 1, @Extended: 5 = $iTimeoutMs is not a positive integer.
 ;                  @Error: 1, @Extended: 6 = Registry-free initialization is not supported for OpenOffice Portable.
+;                  @Error: 2, @Extended: 1 = Timed out obtaining a COM ServiceManager / UNO URL resolver in registry-free mode.
+;                  @Error: 2, @Extended: 2 = Timed out connecting to the requested instance in registry-free mode.
+;                  @Error: 2, @Extended: 3 = Failed to store the registry-free ServiceManager.
 ;                  @Error: 3, @Extended: 1 = Failed to clear the stored Portable ServiceManager.
-;                  @Error: 3, @Extended: 2 =  Failed to initialize OpenOffice Portable.
-;                  @Error: 3, @Extended: 3 = Failed to initialize LibreOffice Portable using the registry-based method.
-;                  @Error: 3, @Extended: 4 = Failed to initialize LibreOffice Portable using the registry-free method.
+;                  @Error: 3, @Extended: 2 = Failed to initialize LibreOffice Portable using the registry-based method.
+;                  @Error: 3, @Extended: 3 = Failed to initialize OpenOffice Portable.
+;                  @Error: 3, @Extended: 4 = Failed to generate the UNO pipe name.
+;                  @Error: 3, @Extended: 5 = Failed to launch LibreOffice Portable in registry-free mode.
 ; Author ........: mLipok, donnyh13
 ; Modified ......: mLipok
 ; Remarks .......: LibreOffice Portable defaults to a local UNO pipe and uses the Data\settings profile in the Portable root.
 ;                  OpenOffice Portable always uses the existing registry-based method. This method may create temporary COM registration in HKCU.
 ;                  The timeout controls polling and cannot interrupt a COM call already in progress.
-;                  If a registry-free connection is lost, call this function again to reconnect.
+;                  If a Portable connection is lost, the UDF attempts to reconnect using the last successful settings.
 ;                  Passing an empty path does not close the Portable process.
 ;                  If the COM error "Binary URP bridge already disposed" is encountered, all instances of soffice.exe or soffice.bin must be closed with TaskManager.
 ;                  If running this with an installed version of LibreOffice present the flag SingleAppInstance may need to be set to False in the "LibreOfficePortablePrevious.ini" [or similar name], found at: C:\LibreOfficePortablePrevious\App\AppInfo\Launcher\LibreOfficePortablePrevious.ini.
@@ -950,8 +954,8 @@ Func _LO_InitializePortable($sOfficePortablePath, $bRegistryFree = Default, $iTi
 	Local $sProgramDir, $sExecutable
 	Local $bAutomaticMode = (IsKeyword($bRegistryFree) = 1)
 	If Not IsString($sOfficePortablePath) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not $bAutomaticMode And Not IsBool($bRegistryFree) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-	If Not __LO_IntIsBetween($iTimeoutMs, 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not $bAutomaticMode And Not IsBool($bRegistryFree) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not __LO_IntIsBetween($iTimeoutMs, 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 	$sOfficePortablePath = StringRegExpReplace($sOfficePortablePath, "^\s+|\s+$", "")
 	If ($sOfficePortablePath = "") Then
@@ -961,30 +965,30 @@ Func _LO_InitializePortable($sOfficePortablePath, $bRegistryFree = Default, $iTi
 	EndIf
 
 	$sOfficePortablePath = _PathFull($sOfficePortablePath)
-	If Not FileExists($sOfficePortablePath & "\App") Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not FileExists($sOfficePortablePath & "\App") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$sProgramDir = $sOfficePortablePath & "\App\libreoffice\program"
 	$sExecutable = $sProgramDir & "\soffice.exe"
 	If Not FileExists($sExecutable) Then
 		$sProgramDir = $sOfficePortablePath & "\App\openoffice\program"
 		$sExecutable = $sProgramDir & "\soffice.exe"
-		If Not FileExists($sExecutable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not FileExists($sExecutable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 		If Not $bAutomaticMode And $bRegistryFree Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 		__LO_SetPortableServiceManager($sOfficePortablePath, $sProgramDir, False, $iTimeoutMs)
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-		Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-	EndIf
-
-	If Not $bAutomaticMode And Not $bRegistryFree Then
-		__LO_SetPortableServiceManager($sOfficePortablePath, $sProgramDir, $bRegistryFree, $iTimeoutMs)
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 		Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 	EndIf
 
-	__LO_SetPortableServiceManager($sOfficePortablePath, $sProgramDir, $bRegistryFree, $iTimeoutMs)
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+	Local $bUseRegistryFree = ($bAutomaticMode Or $bRegistryFree)
+	__LO_SetPortableServiceManager($sOfficePortablePath, $sProgramDir, $bUseRegistryFree, $iTimeoutMs)
+	Local $iError = @error, $iExtended = @extended
+	If $iError Then
+		If Not $bUseRegistryFree Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+		If $iError = $__LO_STATUS_PROCESSING_ERROR Then Return SetError($iError, $iExtended + 1, 0)
+		Return SetError($iError, $iExtended, 0)
+	EndIf
 
- Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LO_InitializePortable
 
 ; #FUNCTION# ====================================================================================================================
