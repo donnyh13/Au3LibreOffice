@@ -28,6 +28,15 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 - _LO_Events
 - __LO_EventReplaceScript
 
+#### Changed
+
+- Added Registry-Free method for initializing LibreOffice Portable. (@mLipok).
+
+#### Fixed
+
+- Typo in Registry key. (@mLipok).
+- Missing quotation marks in path. (@mLipok).
+
 ### LibreOfficeBase
 
 #### Added
