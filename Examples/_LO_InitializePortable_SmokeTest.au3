@@ -43,6 +43,8 @@ Func Example($sPortableRoot)
 	If @error Then Return _ExampleError("_LOWriter_DocClose", @error, @extended)
 	ConsoleWrite("Writer text round trip: " & ($bWriter ? "PASS" : "FAIL") & @CRLF)
 
+	ConsoleWrite(_LO_VersionGet(False, True) & @CRLF)
+
 	Local $bTerminated = _LO_Terminate()
 	If @error Or Not $bTerminated Then Return _ExampleError("_LO_Terminate", @error, @extended)
 	Return ($bCalc And $bWriter) ? 0 : 1
