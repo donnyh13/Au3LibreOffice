@@ -924,35 +924,34 @@ EndFunc   ;==>_LO_GradientMulticolorModify
 ; Return values .: Success: 1.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  @Error: 1, @Extended: 1 = $sOfficePortablePath is not a string.
-;                  @Error: 1, @Extended: 2 = The Portable root does not contain the App folder.
-;                  @Error: 1, @Extended: 3 = Portable soffice.exe not found.
-;                  @Error: 1, @Extended: 4 = $bRegistryFree is neither a Boolean nor Default.
-;                  @Error: 1, @Extended: 5 = $iTimeoutMs is not a positive integer.
+;                  @Error: 1, @Extended: 2 = $bRegistryFree is neither a Boolean nor Default.
+;                  @Error: 1, @Extended: 3 = $iTimeoutMs is not a positive integer.
+;                  @Error: 1, @Extended: 4 = The Portable root does not contain the App folder.
+;                  @Error: 1, @Extended: 5 = Portable soffice.exe not found.
 ;                  @Error: 1, @Extended: 6 = Registry-free initialization is not supported for OpenOffice Portable.
-;                  @Error: 2, @Extended: 1 = Timed out obtaining a COM ServiceManager / UNO URL resolver in registry-free mode.
-;                  @Error: 2, @Extended: 2 = Timed out connecting to the requested instance in registry-free mode.
-;                  @Error: 2, @Extended: 3 = Failed to store the registry-free ServiceManager.
 ;                  @Error: 3, @Extended: 1 = Failed to clear the stored Portable ServiceManager.
-;                  @Error: 3, @Extended: 2 = Failed to initialize LibreOffice Portable using the registry-based method.
-;                  @Error: 3, @Extended: 3 = Failed to initialize OpenOffice Portable.
-;                  @Error: 3, @Extended: 4 = Failed to generate the UNO pipe name.
-;                  @Error: 3, @Extended: 5 = Failed to launch LibreOffice Portable in registry-free mode.
-; Author ........: donnyh13
+;                  @Error: 3, @Extended: 2 =  Failed to initialize OpenOffice Portable.
+;                  @Error: 3, @Extended: 3 = Failed to initialize LibreOffice Portable using the registry-based method.
+;                  @Error: 3, @Extended: 4 = Failed to initialize LibreOffice Portable using the registry-free method.
+; Author ........: mLipok, donnyh13
 ; Modified ......: mLipok
 ; Remarks .......: LibreOffice Portable defaults to a local UNO pipe and uses the Data\settings profile in the Portable root.
 ;                  OpenOffice Portable always uses the existing registry-based method. This method may create temporary COM registration in HKCU.
 ;                  The timeout controls polling and cannot interrupt a COM call already in progress.
 ;                  If a registry-free connection is lost, call this function again to reconnect.
 ;                  Passing an empty path does not close the Portable process.
+;                  If the COM error "Binary URP bridge already disposed" is encountered, all instances of soffice.exe or soffice.bin must be closed with TaskManager.
+;                  If running this with an installed version of LibreOffice present the flag SingleAppInstance may need to be set to False in the "LibreOfficePortablePrevious.ini" [or similar name], found at: C:\LibreOfficePortablePrevious\App\AppInfo\Launcher\LibreOfficePortablePrevious.ini.
 ; Related .......: _LO_Terminate
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
 Func _LO_InitializePortable($sOfficePortablePath, $bRegistryFree = Default, $iTimeoutMs = 15000)
+	Local $sProgramDir, $sExecutable
 	Local $bAutomaticMode = (IsKeyword($bRegistryFree) = 1)
 	If Not IsString($sOfficePortablePath) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not $bAutomaticMode And Not IsBool($bRegistryFree) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If Not IsInt($iTimeoutMs) Or ($iTimeoutMs < 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If Not $bAutomaticMode And Not IsBool($bRegistryFree) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not __LO_IntIsBetween($iTimeoutMs, 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$sOfficePortablePath = StringRegExpReplace($sOfficePortablePath, "^\s+|\s+$", "")
 	If ($sOfficePortablePath = "") Then
@@ -962,60 +961,30 @@ Func _LO_InitializePortable($sOfficePortablePath, $bRegistryFree = Default, $iTi
 	EndIf
 
 	$sOfficePortablePath = _PathFull($sOfficePortablePath)
-	If Not FileExists($sOfficePortablePath & "\App") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not FileExists($sOfficePortablePath & "\App") Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
-	Local $sProgramDir = $sOfficePortablePath & "\App\libreoffice\program"
-	Local $sExecutable = $sProgramDir & "\soffice.exe"
+	$sProgramDir = $sOfficePortablePath & "\App\libreoffice\program"
+	$sExecutable = $sProgramDir & "\soffice.exe"
 	If Not FileExists($sExecutable) Then
-		$sExecutable = $sOfficePortablePath & "\App\openoffice\program\soffice.exe"
-		If Not FileExists($sExecutable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		$sProgramDir = $sOfficePortablePath & "\App\openoffice\program"
+		$sExecutable = $sProgramDir & "\soffice.exe"
+		If Not FileExists($sExecutable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 		If Not $bAutomaticMode And $bRegistryFree Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-		__LO_SetPortableServiceManager($sExecutable, $iTimeoutMs)
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
-		Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-	EndIf
-
-	If Not $bAutomaticMode And Not $bRegistryFree Then
-		__LO_SetPortableServiceManager($sExecutable, $iTimeoutMs)
+		__LO_SetPortableServiceManager($sOfficePortablePath, $sProgramDir, False, $iTimeoutMs)
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 		Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 	EndIf
 
-	Local $sGuid = _WinAPI_CreateGUID()
-	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+	If Not $bAutomaticMode And Not $bRegistryFree Then
+		__LO_SetPortableServiceManager($sOfficePortablePath, $sProgramDir, $bRegistryFree, $iTimeoutMs)
+		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+		Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+	EndIf
 
-	Local $sPipe = "pipe,name=Au3LibreOffice-" & StringTrimRight(StringTrimLeft($sGuid, 1), 1) & ";urp;"
-	Local $sProfile = _LO_PathConvert($sOfficePortablePath & "\Data\settings", $LO_PATHCONV_OFFICE_RETURN)
-	Run('"' & $sExecutable & '" "-env:UserInstallation=' & $sProfile & '" --headless --norestore --nologo --accept="' & $sPipe & '"', $sProgramDir, @SW_HIDE)
-	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+	__LO_SetPortableServiceManager($sOfficePortablePath, $sProgramDir, $bRegistryFree, $iTimeoutMs)
+		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
-	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
-	#forceref $oCOM_ErrorHandler
-	Local Const $sServiceManagerCLSID = "{82154420-0FBF-11D4-8313-005004526AB4}"
-	Local $oBootstrap, $oResolver, $oContext, $oServiceManager
-	Local $hTimer = TimerInit()
-
-	Do
-		If Not IsObj($oResolver) Then
-			$oBootstrap = ObjCreate($sServiceManagerCLSID)
-			If IsObj($oBootstrap) Then $oResolver = $oBootstrap.createInstance("com.sun.star.bridge.UnoUrlResolver")
-		EndIf
-
-		If IsObj($oResolver) Then
-			$oContext = $oResolver.resolve("uno:" & $sPipe & "StarOffice.ComponentContext")
-			If IsObj($oContext) Then
-				$oServiceManager = $oContext.getServiceManager()
-				If IsObj($oServiceManager) Then
-					__LO_ServiceManager($oServiceManager, True, True)
-					If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
-					Return SetError($__LO_STATUS_SUCCESS, 0, 1)
-				EndIf
-			EndIf
-		EndIf
-		Sleep(100)
-	Until TimerDiff($hTimer) >= $iTimeoutMs
-
-	Return SetError($__LO_STATUS_INIT_ERROR, IsObj($oResolver) ? 2 : 1, 0)
+ Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LO_InitializePortable
 
 ; #FUNCTION# ====================================================================================================================
