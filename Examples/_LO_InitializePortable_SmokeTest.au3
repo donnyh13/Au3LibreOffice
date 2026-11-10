@@ -1,14 +1,23 @@
 #include "..\LibreOffice.au3"
 
-If $CmdLine[0] <> 1 Then
-	ConsoleWrite("Usage: AutoIt3.exe " & @ScriptName & " <LibreOffice Portable root>" & @CRLF)
+If ($CmdLine[0] < 1) Or ($CmdLine[0] > 2) Then
+	ConsoleWrite("Usage: AutoIt3.exe " & @ScriptName & " <LibreOffice/OpenOffice Portable root> [registry]" & @CRLF)
 	Exit 2
 EndIf
 
-Exit Example($CmdLine[1])
+Global $g_bRegistryFree = Default
+If $CmdLine[0] = 2 Then
+	If $CmdLine[2] <> "registry" Then
+		ConsoleWrite("The optional second argument must be registry." & @CRLF)
+		Exit 2
+	EndIf
+	$g_bRegistryFree = False
+EndIf
 
-Func Example($sPortableRoot)
-	_LO_InitializePortable($sPortableRoot)
+Exit Example($CmdLine[1], $g_bRegistryFree)
+
+Func Example($sPortableRoot, $bRegistryFree = Default)
+	_LO_InitializePortable($sPortableRoot, $bRegistryFree)
 	If @error Then Return _ExampleError("_LO_InitializePortable", @error, @extended)
 
 	Local $oManager = __LO_ServiceManager()

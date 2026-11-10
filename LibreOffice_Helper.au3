@@ -941,6 +941,7 @@ EndFunc   ;==>_LO_GradientMulticolorModify
 ; Modified ......: mLipok
 ; Remarks .......: LibreOffice Portable defaults to a local UNO pipe and uses the Data\settings profile in the Portable root.
 ;                  OpenOffice Portable always uses the existing registry-based method. This method may create temporary COM registration in HKCU.
+;                  OpenOffice starts with single-dash options and skips the first-start wizard for unattended initialization.
 ;                  The timeout controls polling and cannot interrupt a COM call already in progress.
 ;                  If a Portable connection is lost, the UDF attempts to reconnect using the last successful settings.
 ;                  Passing an empty path does not close the Portable process.

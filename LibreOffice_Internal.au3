@@ -457,7 +457,8 @@ Func __LO_ServiceManager($oServiceManager = Null, $bPortable = Null)
 
 		Else
 			If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-			If Not $oServiceManager.supportsService("com.sun.star.lang.ServiceManager") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+			; OpenOffice exposes RegistryServiceManager instead of ServiceManager.
+			If Not $oServiceManager.supportsService("com.sun.star.lang.ServiceManager") And Not $oServiceManager.supportsService("com.sun.star.lang.RegistryServiceManager") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 			$oStaticServiceManager = $oServiceManager
 		EndIf
@@ -465,7 +466,7 @@ Func __LO_ServiceManager($oServiceManager = Null, $bPortable = Null)
 		Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 	EndIf
 
-	If IsObj($oStaticServiceManager) Then ; Test if the Object is still valid.
+	If IsObj($oStaticServiceManager) Then ; Test COM liveness; OpenOffice returns False for this service name.
 		If Not IsBool($oStaticServiceManager.supportsService("com.sun.star.lang.ServiceManager")) Then $oStaticServiceManager = Null
 	EndIf
 
@@ -533,7 +534,7 @@ Func __LO_SetPortableServiceManager($sPortableLO_Path = Null, $sProgramDir = Nul
 	Local $iError = 0, $iPort = 2002, $iSocket, $iErrorRet
 	Local $hTimer
 	Local $oReg_ServiceManager, $oURLResolver, $oCompContext, $oPortable_ServiceManager, $oBootstrap, $oResolver, $oContext
-	Local $sExecutable, $sProfile
+	Local $sExecutable, $sProfile, $sStartOptions, $sListenOptions
 	Local Const $__eReg_LocalServer32 = 2 ; Make sure to sync this.
 	Local Enum $__eReg_KeyName, $__eReg_ValueName, $__eReg_Type, $__eReg_Value
 	Local Const $sServiceManagerCLSID = "{82154420-0FBF-11D4-8313-005004526AB4}"
@@ -609,7 +610,14 @@ Func __LO_SetPortableServiceManager($sPortableLO_Path = Null, $sProgramDir = Nul
 		If Not IsObj($oPortable_ServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, IsObj($oResolver) ? 2 : 1, 0)
 
 	Else     ; Registry method.
-		$asRegKeys[$__eReg_LocalServer32][$__eReg_Value] = '"' & $sExecutable & '" --nodefault --nologo'
+		$sStartOptions = "--nodefault --nologo"
+		$sListenOptions = "--headless --norestore --nologo --accept="
+		If ($sProgramDir = $sPortableLO_Path & "\App\openoffice\program") Then
+			; OpenOffice requires single-dash options. Avoid blocking COM activation on the welcome wizard.
+			$sStartOptions = "-nodefault -nologo -nofirststartwizard"
+			$sListenOptions = "-headless -norestore -nologo -nofirststartwizard -accept="
+		EndIf
+		$asRegKeys[$__eReg_LocalServer32][$__eReg_Value] = '"' & $sExecutable & '" ' & $sStartOptions
 
 		RegRead($sHKLM & $asRegKeysMain[1], "") ; Classes are shared, so I only need to check one place.
 		If @error Then ; Seems like no LibreOffice is installed, add temp Registry.
@@ -649,7 +657,7 @@ Func __LO_SetPortableServiceManager($sPortableLO_Path = Null, $sProgramDir = Nul
 		WEnd
 
 		; Start LibreOffice Portable in listening mode
-		Run('"' & $sExecutable & '" --headless --norestore --nologo --accept="socket,host=127.0.0.1,port=' & $iPort & ',tcpNoDelay=1;urp;"', "", @SW_HIDE)
+		Run('"' & $sExecutable & '" ' & $sListenOptions & '"socket,host=127.0.0.1,port=' & $iPort & ',tcpNoDelay=1;urp;"', "", @SW_HIDE)
 		If (@error <> 0) Then
 			If $bTempReg Then
 				__LO_DeleteTempReg()
