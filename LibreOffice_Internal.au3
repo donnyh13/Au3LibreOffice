@@ -418,10 +418,9 @@ EndFunc   ;==>__LO_NumIsBetween
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LO_ServiceManager
 ; Description ...: Set or Retrieve a stored Service Manager Object for use in the UDF.
-; Syntax ........: __LO_ServiceManager([$oServiceManager = Null[, $bPortable = Null[, $bPortableNoRegistry = False]]])
+; Syntax ........: __LO_ServiceManager([$oServiceManager = Null[, $bPortable = Null]])
 ; Parameters ....: $oServiceManager     - [optional] Default is Null. A ServiceManager Object. Typically this is used to store a Portable Service Manager Object.
 ;                  $bPortable           - [optional] Default is Null. If True, a Portable LibreOffice ServiceManager will be stored.
-;                  $bPortableNoRegistry - [optional] Default is False. If True, a lost connection must be reinitialized by the caller.
 ; Return values .: Success: 1 or Object
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully cleared stored ServiceManager.
 ;                  @Error: 0, @Extended: 0, Return: Object = Success. Returning ServiceManager Object.
@@ -429,7 +428,7 @@ EndFunc   ;==>__LO_NumIsBetween
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $bPortable not a Boolean.
 ;                  @Error: 1, @Extended: 2 = $oServiceManager not an Object.
-;                  @Error: 1, @Extended: 3 =Object called in $oServiceManager not a ServiceManager Object.
+;                  @Error: 1, @Extended: 3 = Object called in $oServiceManager not a ServiceManager Object.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create a ServiceManager.
 ; Author ........: donnyh13
@@ -439,13 +438,12 @@ EndFunc   ;==>__LO_NumIsBetween
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LO_ServiceManager($oServiceManager = Null, $bPortable = Null, $bPortableNoRegistry = False)
+Func __LO_ServiceManager($oServiceManager = Null, $bPortable = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
 	Local Static $oStaticServiceManager
 	Local Static $bIsPortable = False
-	Local Static $bIsPortableNoRegistry = False
 
 	If ($bPortable <> Null) Then
 		If Not IsBool($bPortable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
@@ -464,7 +462,6 @@ Func __LO_ServiceManager($oServiceManager = Null, $bPortable = Null, $bPortableN
 			$oStaticServiceManager = $oServiceManager
 		EndIf
 
-		$bIsPortableNoRegistry = $bPortableNoRegistry
 		Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 	EndIf
 
@@ -473,7 +470,6 @@ Func __LO_ServiceManager($oServiceManager = Null, $bPortable = Null, $bPortableN
 	EndIf
 
 	If Not IsObj($oStaticServiceManager) Then
-		If $bIsPortableNoRegistry Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 		If $bIsPortable Then
 			; Try to create the ServiceManager again for the portable version.
 			__LO_SetPortableServiceManager()
@@ -491,8 +487,10 @@ EndFunc   ;==>__LO_ServiceManager
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LO_SetPortableServiceManager
 ; Description ...: Create and store a Portable LibreOffice ServiceManager Object.
-; Syntax ........: __LO_SetPortableServiceManager([$sPortableLO_Path = Null[, $iTimeoutMs = 15000]])
-; Parameters ....: $sPortableLO_Path    - [optional] Default is Null. A path to the Portable LibreOffice soffice.exe file.
+; Syntax ........: __LO_SetPortableServiceManager([$sPortableLO_Path = Null[, $sProgramDir = Null[, $bRegistryFree = False[, $iTimeoutMs = 15000]]]])
+; Parameters ....: $sPortableLO_Path    - [optional] Default is Null. Portable root containing the App folder. Pass an empty string to clear the stored connection.
+;                  $sProgramDir         - [optional] Default is Null. A path to the Portable LibreOffice directory containing the soffice.exe file.
+;                  $bRegistryFree       - [optional] Default is False. If True, the Registry-Free method is used. Else the Registry method.
 ;                  $iTimeoutMs          - [optional] Startup polling timeout in milliseconds. Reconnection reuses the last successful timeout.
 ; Return values .: Success: 1, 2
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Created and stored Portable LibreOffice ServiceManager.
@@ -500,188 +498,241 @@ EndFunc   ;==>__LO_ServiceManager
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $sPortableLO_Path not a String.
-;                  @Error: 1, @Extended: 2 = Path called in $sPortableLO_Path doesn't exist.
+;                  @Error: 1, @Extended: 2 = $sProgramDir not a String.
+;                  @Error: 1, @Extended: 3 = Path called in $sPortableLO_Path doesn't exist.
 ;                  --Initialization Errors--
-;                  @Error: 2, @Extended: 1 = Failed to create "com.sun.star.ServiceManager" Object.
-;                  @Error: 2, @Extended: 2 = Failed to create "com.sun.star.bridge.UnoUrlResolver" Object.
+;                  @Error: 2, @Extended: 1 = Timed out obtaining a COM ServiceManager / UNO URL resolver in registry-free mode.
+;                  @Error: 2, @Extended: 2 = Timed out connecting to the requested instance in registry-free mode.
+;                  @Error: 2, @Extended: 3 = Failed to store the registry-free ServiceManager.
+;                  @Error: 2, @Extended: 4 = Failed to create "com.sun.star.ServiceManager" Object.
+;                  @Error: 2, @Extended: 5 = Failed to create "com.sun.star.bridge.UnoUrlResolver" Object.
 ;                  --Processing Errors--
-;                  @Error: 3, @Extended: 1 = No stored Portable LibreOffice path.
+;                  @Error: 3, @Extended: 1 = No stored Portable LibreOffice or Program Directory path.
 ;                  @Error: 3, @Extended: 2 = Stored Portable LibreOffice path no longer exists.
-;                  @Error: 3, @Extended: 3 = Failed to add temporary Registry keys.
-;                  @Error: 3, @Extended: 4 = Failed to start Portable LibreOffice in listening mode.
-;                  @Error: 3, @Extended: 5 = Portable LibreOffice failed to start in listening mode
-;                  @Error: 3, @Extended: 6 = Failed to connect to Portable LibreOffice.
-;                  @Error: 3, @Extended: 7 = Failed to retrieve ServiceManager from Portable LibreOffice.
-; Author ........: donnyh13
+;                  @Error: 3, @Extended: 3 = Failed to generate the UNO pipe name.
+;                  @Error: 3, @Extended: 4 = Failed to launch LibreOffice Portable in registry-free mode.
+;                  @Error: 3, @Extended: 5 = Failed to add temporary Registry keys.
+;                  @Error: 3, @Extended: 6 = Failed to start Portable LibreOffice in listening mode.
+;                  @Error: 3, @Extended: 7 = Portable LibreOffice failed to start in listening mode
+;                  @Error: 3, @Extended: 8 = Failed to connect to Portable LibreOffice.
+;                  @Error: 3, @Extended: 9 = Failed to retrieve ServiceManager from Portable LibreOffice.
+; Author ........: mLipok, donnyh13
 ; Modified ......:
 ; Remarks .......: If the COM Error "Binary URP bridge already disposed" is encountered, any running soffice.exe/soffice.bin processes need to be closed via TaskManager.
 ; Related .......: __LO_ServiceManager
 ; Link ..........:
 ; Example .......: No
 ; ===============================================================================================================================
-Func __LO_SetPortableServiceManager($sPortableLO_Path = Null, $iTimeoutMs = 15000)
+Func __LO_SetPortableServiceManager($sPortableLO_Path = Null, $sProgramDir = Null, $bRegistryFree = False, $iTimeoutMs = 15000)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local Static $sStaticPortablePath = ""
+	Local Static $sStaticPortablePath = "", $sStaticProgramDir
 	Local Static $iStaticTimeoutMs = 15000
-	Local Static $bTempReg = False
+	Local Static $bTempReg = False, $bStaticIsRegFree = False
 	Local $iError = 0, $iPort = 2002, $iSocket, $iErrorRet
 	Local $hTimer
-	Local $oReg_ServiceManager, $oURLResolver, $oCompContext, $oPortable_ServiceManager
+	Local $oReg_ServiceManager, $oURLResolver, $oCompContext, $oPortable_ServiceManager, $oBootstrap, $oResolver, $oContext, $oServiceManager
+	Local $sExecutable, $sProfile
 	Local Const $__eReg_LocalServer32 = 2 ; Make sure to sync this.
 	Local Enum $__eReg_KeyName, $__eReg_ValueName, $__eReg_Type, $__eReg_Value
+	Local Const $sServiceManagerCLSID = "{82154420-0FBF-11D4-8313-005004526AB4}"
 	Local Const $sHKCU = (@OSArch = "X86") ? ("HKCU") : ("HKCU64")
 	Local Const $sHKLM = (@OSArch = "X86") ? ("HKLM") : ("HKLM64")
-	Local $asRegKeysMain[2] = ["\Software\Classes\CLSID\{82154420-0FBF-11d4-8313-005004526AB4}", _
+	Local $asRegKeysMain[2] = ["\Software\Classes\CLSID\" & $sServiceManagerCLSID, _
 			"\Software\Classes\com.sun.star.ServiceManager"]
-	Local $asRegKeys[11][4] = [["\Software\Classes\CLSID\{82154420-0FBF-11d4-8313-005004526AB4}", "", "REG_SZ", "LibreOffice Service Manager (Ver 1.0)"], _
-			["\Software\Classes\CLSID\{82154420-0FBF-11d4-8313-005004526AB4}", "AppID", "REG_SZ", "{82154420-0FBF-11d4-8313-005004526AB4}"], _
-			["\Software\Classes\CLSID\{82154420-0FBF-11d4-8313-005004526AB4}\LocalServer32", "", "REG_SZ", ""], _
-			["\Software\Classes\CLSID\{82154420-0FBF-11d4-8313-005004526AB4}\NotInsertable", "", "REG_SZ", ""], _
-			["\Software\Classes\CLSID\{82154420-0FBF-11d4-8313-005004526AB4}\ProgID", "", "REG_SZ", "com.sun.star.ServiceManager.1"], _
-			["\Software\Classes\CLSID\{82154420-0FBF-11d4-8313-005004526AB4}\Programmable", "", "REG_SZ", ""], _
-			["\Software\Classes\CLSID\{82154420-0FBF-11d4-8313-005004526AB4}\VersionIndependentProgID", "", "REG_SZ", "com.sun.star.ServiceManager"], _
+	Local $asRegKeys[11][4] = [["\Software\Classes\CLSID\" & $sServiceManagerCLSID, "", "REG_SZ", "LibreOffice Service Manager (Ver 1.0)"], _
+			["\Software\Classes\CLSID\" & $sServiceManagerCLSID, "AppID", "REG_SZ", $sServiceManagerCLSID], _
+			["\Software\Classes\CLSID\" & $sServiceManagerCLSID & "\LocalServer32", "", "REG_SZ", ""], _
+			["\Software\Classes\CLSID\" & $sServiceManagerCLSID & "\NotInsertable", "", "REG_SZ", ""], _
+			["\Software\Classes\CLSID\" & $sServiceManagerCLSID & "\ProgID", "", "REG_SZ", "com.sun.star.ServiceManager.1"], _
+			["\Software\Classes\CLSID\" & $sServiceManagerCLSID & "\Programmable", "", "REG_SZ", ""], _
+			["\Software\Classes\CLSID\" & $sServiceManagerCLSID & "\VersionIndependentProgID", "", "REG_SZ", "com.sun.star.ServiceManager"], _
 			["\Software\Classes\com.sun.star.ServiceManager", "", "REG_SZ", "LibreOffice Service Manager"], _
-			["\Software\Classes\com.sun.star.ServiceManager\CLSID", "", "REG_SZ", "{82154420-0FBF-11d4-8313-005004526AB4}"], _
+			["\Software\Classes\com.sun.star.ServiceManager\CLSID", "", "REG_SZ", $sServiceManagerCLSID], _
 			["\Software\Classes\com.sun.star.ServiceManager\CurVer", "", "REG_SZ", "com.sun.star.ServiceManager.1"], _
 			["\Software\Classes\com.sun.star.ServiceManager\NotInsertable", "", "REG_SZ", ""]]
 
 	If ($sPortableLO_Path <> Null) Then
 		If Not IsString($sPortableLO_Path) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+		If Not IsString($sProgramDir) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 		If ($sPortableLO_Path = "") Then
 			$sStaticPortablePath = ""
+			$sStaticProgramDir = ""
+			$bStaticIsRegFree = False
 			$iStaticTimeoutMs = 15000
 			__LO_ServiceManager(Default, False) ; Clear any stored ServiceManager, and set Boolean for Portable to False.
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, 2)
 		EndIf
-		If Not FileExists($sPortableLO_Path) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+		$sExecutable = $sProgramDir & "\soffice.exe"
+		$sProfile = _LO_PathConvert($sPortableLO_Path & "\Data\settings", $LO_PATHCONV_OFFICE_RETURN)
+		If Not FileExists($sExecutable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	Else
-		If ($sStaticPortablePath = "") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
-		If Not FileExists($sStaticPortablePath) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-		$sPortableLO_Path = $sStaticPortablePath
+		If ($sStaticPortablePath = "") Or ($sStaticProgramDir = "") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+		$sProgramDir = $sStaticProgramDir
+		$sExecutable = $sProgramDir & "\soffice.exe"
+		$sProfile = _LO_PathConvert($sStaticPortablePath & "\Data\settings", $LO_PATHCONV_OFFICE_RETURN)
+		If Not FileExists($sExecutable) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 		$iTimeoutMs = $iStaticTimeoutMs
+		$bRegistryFree = $bStaticIsRegFree
 	EndIf
 
-	$asRegKeys[$__eReg_LocalServer32][$__eReg_Value] = '"' & $sPortableLO_Path & '" --nodefault --nologo'
+	If $bRegistryFree Then
+		Local $sGuid = _WinAPI_CreateGUID()
+		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	RegRead($sHKLM & $asRegKeysMain[1], "") ; Classes are shared, so I only need to check one place.
-	If @error Then ; Seems like no LibreOffice is installed, add temp Registry.
-		For $i = 0 To UBound($asRegKeys) - 1
-			RegWrite($sHKCU & $asRegKeys[$i][$__eReg_KeyName], $asRegKeys[$i][$__eReg_ValueName], $asRegKeys[$i][$__eReg_Type], $asRegKeys[$i][$__eReg_Value])
-			$iError = (@error > 0) ? ($iError + 1) : ($iError)
-		Next
+		Local $sPipe = "pipe,name=Au3LibreOffice-" & StringTrimRight(StringTrimLeft($sGuid, 1), 1) & ";urp;"
+		Run('"' & $sExecutable & '" "-env:UserInstallation=' & $sProfile & '" --headless --norestore --nologo --accept="' & $sPipe & '"', $sProgramDir, @SW_HIDE)
+		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
-		__LO_DeleteTempReg($asRegKeysMain) ; Set array of main Temp keys to delete.
-		If ($iError > 0) Then ; If there was an error writing the Reg Keys, delete any that were written and return.
-			__LO_DeleteTempReg()
+		$hTimer = TimerInit()
 
-			Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+		Do
+			If Not IsObj($oResolver) Then
+				$oBootstrap = ObjCreate($sServiceManagerCLSID)
+				If IsObj($oBootstrap) Then $oResolver = $oBootstrap.createInstance("com.sun.star.bridge.UnoUrlResolver")
+			EndIf
+
+			If IsObj($oResolver) Then
+				$oContext = $oResolver.resolve("uno:" & $sPipe & "StarOffice.ComponentContext")
+				If IsObj($oContext) Then
+					$oServiceManager = $oContext.getServiceManager()
+					If IsObj($oServiceManager) Then
+						__LO_ServiceManager($oServiceManager, True)
+						If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
+						Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+					EndIf
+				EndIf
+			EndIf
+			Sleep(100)
+		Until TimerDiff($hTimer) >= $iTimeoutMs
+
+		Return SetError($__LO_STATUS_INIT_ERROR, IsObj($oResolver) ? 2 : 1, 0)
+
+	Else     ; Registry method.
+		$asRegKeys[$__eReg_LocalServer32][$__eReg_Value] = '"' & $sExecutable & '" --nodefault --nologo'
+
+		RegRead($sHKLM & $asRegKeysMain[1], "") ; Classes are shared, so I only need to check one place.
+		If @error Then ; Seems like no LibreOffice is installed, add temp Registry.
+			For $i = 0 To UBound($asRegKeys) - 1
+				RegWrite($sHKCU & $asRegKeys[$i][$__eReg_KeyName], $asRegKeys[$i][$__eReg_ValueName], $asRegKeys[$i][$__eReg_Type], $asRegKeys[$i][$__eReg_Value])
+				$iError = (@error > 0) ? ($iError + 1) : ($iError)
+			Next
+
+			__LO_DeleteTempReg($asRegKeysMain) ; Set array of main Temp keys to delete.
+			If ($iError > 0) Then ; If there was an error writing the Reg Keys, delete any that were written and return.
+				__LO_DeleteTempReg()
+
+				Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+			EndIf
+
+			OnAutoItExitRegister("__LO_DeleteTempReg")
+			$bTempReg = True
 		EndIf
 
-		OnAutoItExitRegister("__LO_DeleteTempReg")
-		$bTempReg = True
-	EndIf
+		$oReg_ServiceManager = ObjCreate("com.sun.star.ServiceManager") ; Create a ServiceManager from the one registered in Registry.
+		If Not IsObj($oReg_ServiceManager) Then
+			If $bTempReg Then
+				__LO_DeleteTempReg()
+				If (@error = 0) Then OnAutoItExitUnRegister("__LO_DeleteTempReg")
+				$bTempReg = False
+			EndIf
 
-	$oReg_ServiceManager = ObjCreate("com.sun.star.ServiceManager") ; Create a ServiceManager from the one registered in Registry.
-	If Not IsObj($oReg_ServiceManager) Then
-		If $bTempReg Then
-			__LO_DeleteTempReg()
-			If (@error = 0) Then OnAutoItExitUnRegister("__LO_DeleteTempReg")
-			$bTempReg = False
+			Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
 		EndIf
 
-		Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-	EndIf
+		TCPStartup()
 
-	TCPStartup()
+		; Find an unused port.
+		While (TCPConnect("127.0.0.1", $iPort) > 0)
+			Sleep(10)
+			$iPort += 1
+		WEnd
 
-	; Find an unused port.
-	While (TCPConnect("127.0.0.1", $iPort) > 0)
-		Sleep(10)
-		$iPort += 1
-	WEnd
+		; Start LibreOffice Portable in listening mode
+		Run('"' & $sExecutable & '" --headless --norestore --nologo --accept="socket,host=127.0.0.1,port=' & $iPort & ',tcpNoDelay=1;urp;"', "", @SW_HIDE)
+		If (@error <> 0) Then
+			If $bTempReg Then
+				__LO_DeleteTempReg()
+				If (@error = 0) Then OnAutoItExitUnRegister("__LO_DeleteTempReg")
+				$bTempReg = False
+			EndIf
+			TCPShutdown()
 
-	; Start LibreOffice Portable in listening mode
-	Run('"' & $sPortableLO_Path & '" --headless --norestore --nologo --accept="socket,host=127.0.0.1,port=' & $iPort & ',tcpNoDelay=1;urp;"', "", @SW_HIDE)
-	If (@error <> 0) Then
-		If $bTempReg Then
-			__LO_DeleteTempReg()
-			If (@error = 0) Then OnAutoItExitUnRegister("__LO_DeleteTempReg")
-			$bTempReg = False
+			Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
 		EndIf
+
+		$hTimer = TimerInit()
+
+		; Wait until LO is initialized and listening.
+		Do
+			Sleep(10)
+			$iSocket = TCPConnect("127.0.0.1", $iPort)
+			$iErrorRet = @error
+		Until (($iErrorRet = 0) And ($iSocket > 0)) Or (TimerDiff($hTimer) >= $iTimeoutMs)
+		If ($iSocket > 0) Then TCPCloseSocket($iSocket)
 		TCPShutdown()
 
-		Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
-	EndIf
+		If ($iErrorRet <> 0) Or ($iSocket <= 0) Then ; Error initializing LO.
+			If $bTempReg Then
+				__LO_DeleteTempReg()
+				If (@error = 0) Then OnAutoItExitUnRegister("__LO_DeleteTempReg")
+				$bTempReg = False
+			EndIf
 
-	$hTimer = TimerInit()
+			Return SetError($__LO_STATUS_PROCESSING_ERROR, 7, 0)
+		EndIf
 
-	; Wait until LO is initialized and listening.
-	Do
-		Sleep(10)
-		$iSocket = TCPConnect("127.0.0.1", $iPort)
-		$iErrorRet = @error
-	Until (($iErrorRet = 0) And ($iSocket > 0)) Or (TimerDiff($hTimer) >= $iTimeoutMs)
-	If ($iSocket > 0) Then TCPCloseSocket($iSocket)
-	TCPShutdown()
+		; Create the URL Resolver.
+		$oURLResolver = $oReg_ServiceManager.createInstance("com.sun.star.bridge.UnoUrlResolver")
+		If Not IsObj($oURLResolver) Then
+			If $bTempReg Then
+				__LO_DeleteTempReg()
+				If (@error = 0) Then OnAutoItExitUnRegister("__LO_DeleteTempReg")
+				$bTempReg = False
+			EndIf
 
-	If ($iErrorRet <> 0) Or ($iSocket <= 0) Then ; Error initializing LO.
-		If $bTempReg Then
+			Return SetError($__LO_STATUS_INIT_ERROR, 5, 0)
+		EndIf
+
+		$oCompContext = $oURLResolver.resolve("uno:socket,host=localhost,port=" & $iPort & ",tcpNoDelay=1;urp;StarOffice.ComponentContext")
+
+		If Not IsObj($oCompContext) Then
+			If $bTempReg Then
+				__LO_DeleteTempReg()
+				If (@error = 0) Then OnAutoItExitUnRegister("__LO_DeleteTempReg")
+				$bTempReg = False
+			EndIf
+
+			Return SetError($__LO_STATUS_PROCESSING_ERROR, 8, 0)
+		EndIf
+
+		$oPortable_ServiceManager = $oCompContext.getServiceManager() ; Get ServiceManager of Portable LO.
+		If Not IsObj($oPortable_ServiceManager) Then
+			If $bTempReg Then
+				__LO_DeleteTempReg()
+				If (@error = 0) Then OnAutoItExitUnRegister("__LO_DeleteTempReg")
+				$bTempReg = False
+			EndIf
+
+			Return SetError($__LO_STATUS_PROCESSING_ERROR, 9, 0)
+		EndIf
+
+		If $bTempReg Then ; Clean up Temp Registry.
 			__LO_DeleteTempReg()
 			If (@error = 0) Then OnAutoItExitUnRegister("__LO_DeleteTempReg")
 			$bTempReg = False
 		EndIf
 
-		Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
-	EndIf
-
-	; Create the URL Resolver.
-	$oURLResolver = $oReg_ServiceManager.createInstance("com.sun.star.bridge.UnoUrlResolver")
-	If Not IsObj($oURLResolver) Then
-		If $bTempReg Then
-			__LO_DeleteTempReg()
-			If (@error = 0) Then OnAutoItExitUnRegister("__LO_DeleteTempReg")
-			$bTempReg = False
-		EndIf
-
-		Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
-	EndIf
-
-	$oCompContext = $oURLResolver.resolve("uno:socket,host=localhost,port=" & $iPort & ",tcpNoDelay=1;urp;StarOffice.ComponentContext")
-
-	If Not IsObj($oCompContext) Then
-		If $bTempReg Then
-			__LO_DeleteTempReg()
-			If (@error = 0) Then OnAutoItExitUnRegister("__LO_DeleteTempReg")
-			$bTempReg = False
-		EndIf
-
-		Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
-	EndIf
-
-	$oPortable_ServiceManager = $oCompContext.getServiceManager() ; Get ServiceManager of Portable LO.
-	If Not IsObj($oPortable_ServiceManager) Then
-		If $bTempReg Then
-			__LO_DeleteTempReg()
-			If (@error = 0) Then OnAutoItExitUnRegister("__LO_DeleteTempReg")
-			$bTempReg = False
-		EndIf
-
-		Return SetError($__LO_STATUS_PROCESSING_ERROR, 7, 0)
 	EndIf
 
 	__LO_ServiceManager($oPortable_ServiceManager, True) ; Set the stored ServiceManager.
 	$sStaticPortablePath = $sPortableLO_Path
+	$sStaticProgramDir = $sProgramDir
+	$bStaticIsRegFree = $bRegistryFree
 	$iStaticTimeoutMs = $iTimeoutMs
-
-	If $bTempReg Then ; Clean up Temp Registry.
-		__LO_DeleteTempReg()
-		If (@error = 0) Then OnAutoItExitUnRegister("__LO_DeleteTempReg")
-		$bTempReg = False
-	EndIf
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>__LO_SetPortableServiceManager
