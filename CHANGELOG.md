@@ -18,6 +18,20 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 |    **v0.0.0.2**  | [Change Log](#0002---2023-07-16)   | [v0.0.0.2][v0.0.0.2]        | 2023-07-16     | [Compare][v0.0.0.2-Compare]|
 |    **v0.0.0.1**  | [Change Log](#0001---2023-07-02)   | [v0.0.0.1][v0.0.0.1]        | 2023-07-02     |                            |
 
+## [0.11.0] - 2027
+
+### LibreOfficeUDF
+
+#### Changed
+
+- Added Registry-Free method for initializing LibreOffice Portable. (@mLipok).
+
+#### Fixed
+
+- Typos in Registry keys. (@mLipok).
+- Missing quotation marks in path. (@mLipok).
+- Initializing OpenOffice portable would fail due to incompatible flags. (@mLipok).
+
 ## [0.10.0] - 2026-08-23
 
 ### LibreOfficeUDF
