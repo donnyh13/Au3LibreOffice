@@ -18,6 +18,24 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 |    **v0.0.0.2**  | [Change Log](#0002---2023-07-16)   | [v0.0.0.2][v0.0.0.2]        | 2023-07-16     | [Compare][v0.0.0.2-Compare]|
 |    **v0.0.0.1**  | [Change Log](#0001---2023-07-02)   | [v0.0.0.1][v0.0.0.1]        | 2023-07-02     |                            |
 
+## [0.11.0] - 2027
+
+### LibreOfficeUDF
+
+#### Changed
+
+- Added registry-free initialization for LibreOffice Portable and OpenOffice Portable. (@mLipok, @donnyh13).
+- Added a configurable startup timeout and automatic reconnection using the last successful Portable connection settings. (@mLipok).
+
+#### Fixed
+
+- Typos in Registry keys. (@mLipok).
+- Fixed Portable initialization when the executable path contains spaces. (@mLipok).
+- Initializing OpenOffice portable would fail due to incompatible flags. (@mLipok).
+- Fixed COM initialization errors when using 32-bit OpenOffice Portable alongside installed 64-bit LibreOffice. (@mLipok).
+- Fixed _LO_Terminate() failing to close an instance with only its Start Center open, while preserving protection for open documents. (@mLipok).
+- Fixed explicit registry-free initialization being replaced with the registry-based method and restored rejection of invalid initialization-mode arguments. (@mLipok).
+
 ## [0.10.0] - 2026-08-23
 
 ### LibreOfficeUDF
