@@ -1205,6 +1205,7 @@ EndFunc   ;==>_LO_PrintersGetNamesAlt
 ;                  $iSleep              - [optional] Default is 250. The amount of time to sleep before perofrming the terminate command, in milliseconds. See remarks.
 ; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Terminate command was successfuly processed. Returning True if all Documents agree to be terminated.
+;                  Returns False if documents remain open with $bForceClose = False, or termination is vetoed.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $bForceClose not a Boolean.
@@ -1215,6 +1216,7 @@ EndFunc   ;==>_LO_PrintersGetNamesAlt
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $bForceClose is called with False, and there are no open Documents, the background instance of soffice.bin will be terminated.
+;                  The Start Center alone does not count as an open document.
 ;                  If $bForceClose is called with True, all opened documents are closed, any documents with unsaved changes will have a save dialog initiated for the user to interact with.
 ;                  If this function was not used, a left-over instance of soffice.bin would remain running after automating LibreOffice.
 ;                  Some Online sources recommend to allow a minimum of 500ms sleep before terminating the LibreOffice instance to allow it finish closing any documents etc., otherwise the "Document Recovery" mode will be triggered upon next startup.
@@ -1226,8 +1228,8 @@ Func _LO_Terminate($bForceClose = False, $iSleep = 250)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oServiceManager, $oDesktop
-	Local $bTerminated
+	Local $oServiceManager, $oDesktop, $oEnumeration, $oComponent
+	Local $bTerminated = False
 
 	If Not IsBool($bForceClose) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not __LO_IntIsBetween($iSleep, 0) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -1238,10 +1240,19 @@ Func _LO_Terminate($bForceClose = False, $iSleep = 250)
 	$oDesktop = $oServiceManager.createInstance("com.sun.star.frame.Desktop")
 	If Not IsObj($oDesktop) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-	If Not $oDesktop.getComponents.hasElements() Or $bForceClose Then ; no L.O open, or force it to close.
-		Sleep($iSleep) ; Sleep to make sure LO has time to finish any processes it may be doing, otherwise document recovery mode may be triggered at the next startup.
-		$bTerminated = $oDesktop.Terminate()
+	If Not $bForceClose Then
+		$oEnumeration = $oDesktop.getComponents.createEnumeration()
+		If Not IsObj($oEnumeration) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+		While $oEnumeration.hasMoreElements()
+			$oComponent = $oEnumeration.nextElement()
+			If Not IsObj($oComponent) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+			If Not $oComponent.supportsService("com.sun.star.frame.StartModule") Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
+			$oComponent = Null
+		WEnd
+		$oEnumeration = Null
 	EndIf
+	Sleep($iSleep) ; Allow pending document-close operations to finish before terminating.
+	$bTerminated = $oDesktop.Terminate()
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $bTerminated)
 EndFunc   ;==>_LO_Terminate

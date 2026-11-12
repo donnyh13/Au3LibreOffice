@@ -29,6 +29,7 @@
 ; __LO_SetPortableServiceManager
 ; __LO_SetPropertyValue
 ; __LO_StylesGetNames
+; __LO_PortableBootstrap
 ; __LO_TestObjCOM
 ; __LO_VarsAreNull
 ; __LO_VersionCheck
@@ -416,6 +417,40 @@ Func __LO_NumIsBetween($nTest, $nMin, $nMax = 0, $vNot = "", $vIncl = "")
 EndFunc   ;==>__LO_NumIsBetween
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LO_PortableBootstrap
+; Description ...: Creates a COM bootstrap matching the Portable executable architecture.
+; Syntax ........: __LO_PortableBootstrap($sExecutable)
+; Parameters ....: $sExecutable - Full path to the Portable soffice.exe file.
+; Return values .: Success: Object. Failure: 0 and sets @Error to 2, @Extended to 4.
+; Author ........: mLipok
+; Remarks .......: The Portable server must be started first. Architecture selection prevents a running 64-bit LibreOffice from supplying the bridge for 32-bit OpenOffice.
+; ===============================================================================================================================
+Func __LO_PortableBootstrap($sExecutable)
+	Local Const $sIID_IDispatch = "{00020400-0000-0000-C000-000000000046}"
+	Local $aBinary = DllCall("kernel32.dll", "bool", "GetBinaryTypeW", "wstr", $sExecutable, "dword*", 0)
+	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
+	If Not $aBinary[0] Or (($aBinary[2] <> 0) And ($aBinary[2] <> 6)) Then Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
+
+	Local $iContext = ($aBinary[2] = 6) ? 0x80004 : 0x40004 ; LOCAL_SERVER plus ACTIVATE_64_BIT_SERVER or ACTIVATE_32_BIT_SERVER.
+	Local $tClass = DllStructCreate("byte[16]"), $tInterface = DllStructCreate("byte[16]")
+	DllCall("ole32.dll", "long", "CLSIDFromString", "wstr", "{82154420-0FBF-11D4-8313-005004526AB4}", "struct*", $tClass)
+	DllCall("ole32.dll", "long", "CLSIDFromString", "wstr", $sIID_IDispatch, "struct*", $tInterface)
+	Local $aCreate = DllCall("ole32.dll", "long", "CoCreateInstance", "struct*", $tClass, "ptr", 0, "dword", $iContext, "struct*", $tInterface, "ptr*", 0)
+	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
+	If $aCreate[0] <> 0 Then Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
+
+	Local $oBootstrap = ObjCreateInterface($aCreate[5], $sIID_IDispatch, Default)
+	If Not IsObj($oBootstrap) Then
+		Local $tObject = DllStructCreate("ptr", $aCreate[5])
+		Local $tVTable = DllStructCreate("ptr QueryInterface;ptr AddRef;ptr Release", DllStructGetData($tObject, 1))
+		DllCallAddress("ulong", DllStructGetData($tVTable, "Release"), "ptr", $aCreate[5])
+		Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
+	EndIf
+	; The AutoIt wrapper owns the IDispatch reference returned by CoCreateInstance.
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oBootstrap)
+EndFunc   ;==>__LO_PortableBootstrap
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LO_ServiceManager
 ; Description ...: Set or Retrieve a stored Service Manager Object for use in the UDF.
 ; Syntax ........: __LO_ServiceManager([$oServiceManager = Null[, $bPortable = Null]])
@@ -593,7 +628,7 @@ Func __LO_SetPortableServiceManager($sPortableLO_Path = Null, $sProgramDir = Nul
 
 		Do
 			If Not IsObj($oResolver) Then
-				$oBootstrap = ObjCreate($sServiceManagerCLSID)
+				$oBootstrap = __LO_PortableBootstrap($sExecutable)
 				If IsObj($oBootstrap) Then $oResolver = $oBootstrap.createInstance("com.sun.star.bridge.UnoUrlResolver")
 			EndIf
 
@@ -637,17 +672,6 @@ Func __LO_SetPortableServiceManager($sPortableLO_Path = Null, $sProgramDir = Nul
 			$bTempReg = True
 		EndIf
 
-		$oReg_ServiceManager = ObjCreate("com.sun.star.ServiceManager") ; Create a ServiceManager from the one registered in Registry.
-		If Not IsObj($oReg_ServiceManager) Then
-			If $bTempReg Then
-				__LO_DeleteTempReg()
-				If (@error = 0) Then OnAutoItExitUnRegister("__LO_DeleteTempReg")
-				$bTempReg = False
-			EndIf
-
-			Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
-		EndIf
-
 		TCPStartup()
 
 		; Find an unused port.
@@ -688,6 +712,18 @@ Func __LO_SetPortableServiceManager($sPortableLO_Path = Null, $sProgramDir = Nul
 			EndIf
 
 			Return SetError($__LO_STATUS_PROCESSING_ERROR, 7, 0)
+		EndIf
+
+		; Activate the target architecture after the Portable server is ready.
+		$oReg_ServiceManager = __LO_PortableBootstrap($sExecutable)
+		If Not IsObj($oReg_ServiceManager) Then
+			If $bTempReg Then
+				__LO_DeleteTempReg()
+				If (@error = 0) Then OnAutoItExitUnRegister("__LO_DeleteTempReg")
+				$bTempReg = False
+			EndIf
+
+			Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
 		EndIf
 
 		; Create the URL Resolver.
