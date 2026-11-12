@@ -952,9 +952,10 @@ EndFunc   ;==>_LO_GradientMulticolorModify
 ; ===============================================================================================================================
 Func _LO_InitializePortable($sOfficePortablePath, $bRegistryFree = Default, $iTimeoutMs = 15000)
 	Local $sProgramDir, $sExecutable
-	$bRegistryFree = ($bRegistryFree = Default) ? (True) : (False)
+	Local $bAutomaticMode = (IsKeyword($bRegistryFree) = 1)
 	If Not IsString($sOfficePortablePath) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not IsBool($bRegistryFree) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not $bAutomaticMode And Not IsBool($bRegistryFree) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If $bAutomaticMode Then $bRegistryFree = True
 	If Not __LO_IntIsBetween($iTimeoutMs, 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 	$sOfficePortablePath = StringRegExpReplace($sOfficePortablePath, "^\s+|\s+$", "")
