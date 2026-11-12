@@ -12,7 +12,7 @@
 ; AutoIt Version : v3.3.16.1
 ; Description ...: Internal functions for interacting with LibreOffice.
 ; Author(s) .....: donnyh13, mLipok
-; Dll ...........:
+; Dll ...........: kernel32.dll, ole32.dll
 ;
 ; ===============================================================================================================================
 
@@ -616,12 +616,21 @@ Func __LO_SetPortableServiceManager($sPortableLO_Path = Null, $sProgramDir = Nul
 		$bRegistryFree = $bStaticIsRegFree
 	EndIf
 
+	$sStartOptions = "--nodefault --nologo"
+	$sListenOptions = "--headless --norestore --nologo --accept="
+	If ($sProgramDir = $sPortableLO_Path & "\App\openoffice\program") Then
+		; OpenOffice requires single-dash options. Avoid blocking COM activation on the welcome wizard.
+		$sStartOptions = "-nodefault -nologo -nofirststartwizard"
+		$sListenOptions = "-headless -norestore -nologo -nofirststartwizard -accept="
+	EndIf
+
 	If $bRegistryFree Then
 		Local $sGuid = _WinAPI_CreateGUID()
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 		Local $sPipe = "pipe,name=Au3LibreOffice-" & StringTrimRight(StringTrimLeft($sGuid, 1), 1) & ";urp;"
-		Run('"' & $sExecutable & '" "-env:UserInstallation=' & $sProfile & '" --headless --norestore --nologo --accept="' & $sPipe & '"', $sProgramDir, @SW_HIDE)
+;~ 		Run('"' & $sExecutable & '" "-env:UserInstallation=' & $sProfile & '" --headless --norestore --nologo --accept="' & $sPipe & '"', $sProgramDir, @SW_HIDE)
+		Run('"' & $sExecutable & '" "-env:UserInstallation=' & $sProfile & '" ' & $sListenOptions & '"' & $sPipe & '"', $sProgramDir, @SW_HIDE)
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
 		$hTimer = TimerInit()
@@ -645,13 +654,6 @@ Func __LO_SetPortableServiceManager($sPortableLO_Path = Null, $sProgramDir = Nul
 		If Not IsObj($oPortable_ServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, IsObj($oResolver) ? 2 : 1, 0)
 
 	Else     ; Registry method.
-		$sStartOptions = "--nodefault --nologo"
-		$sListenOptions = "--headless --norestore --nologo --accept="
-		If ($sProgramDir = $sPortableLO_Path & "\App\openoffice\program") Then
-			; OpenOffice requires single-dash options. Avoid blocking COM activation on the welcome wizard.
-			$sStartOptions = "-nodefault -nologo -nofirststartwizard"
-			$sListenOptions = "-headless -norestore -nologo -nofirststartwizard -accept="
-		EndIf
 		$asRegKeys[$__eReg_LocalServer32][$__eReg_Value] = '"' & $sExecutable & '" ' & $sStartOptions
 
 		RegRead($sHKLM & $asRegKeysMain[1], "") ; Classes are shared, so I only need to check one place.
