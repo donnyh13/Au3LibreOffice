@@ -16,22 +16,25 @@ Func Example()
 	$oLibContainer = _LOBasic_MacroLibContainerGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Library Container Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	_LOBasic_MacroLibraryPasswordChange($oLibContainer, "Standard", "", "AutoIt")
+	_LOBasic_MacroLibraryCreate($oLibContainer, "Au3_Test")
+	If @error Then _ERROR($oDoc, "Failed to create a Library. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	_LOBasic_MacroLibraryPasswordChange($oLibContainer, "Au3_Test", "", "AutoIt")
 	If @error Then _ERROR($oDoc, "Failed to apply a password to library. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	$bPassword = _LOBasic_MacroLibraryHasPassword($oLibContainer, "Standard")
+	$bPassword = _LOBasic_MacroLibraryHasPassword($oLibContainer, "Au3_Test")
 	If @error Then _ERROR($oDoc, "Failed to check if a Library is password protected. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Is the ""Standard"" Document Library password protected? True/False: " & $bPassword & @CRLF & _
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Is the ""Au3_Test"" Document Library password protected? True/False: " & $bPassword & @CRLF & _
 			"Press ok to remove the password.")
 
-	_LOBasic_MacroLibraryPasswordChange($oLibContainer, "Standard", "AutoIt", "")
+	_LOBasic_MacroLibraryPasswordChange($oLibContainer, "Au3_Test", "AutoIt", "")
 	If @error Then _ERROR($oDoc, "Failed to apply a password to library. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	$bPassword = _LOBasic_MacroLibraryHasPassword($oLibContainer, "Standard")
+	$bPassword = _LOBasic_MacroLibraryHasPassword($oLibContainer, "Au3_Test")
 	If @error Then _ERROR($oDoc, "Failed to check if a Library is password protected. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Now is the ""Standard"" Document Library password protected? True/False: " & $bPassword)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Now is the ""Au3_Test"" Document Library password protected? True/False: " & $bPassword)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

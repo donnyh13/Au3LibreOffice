@@ -22,13 +22,13 @@ Func Example()
 	$oLibContainer = _LOBasic_MacroLibContainerGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Library Container Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	_LOBasic_MacroModuleCreate($oLibContainer, "Standard", "AutoIt-Macro1")
+	_LOBasic_MacroModuleCreate($oLibContainer, "Standard", "AutoIt_Macro1")
 	If @error Then _ERROR($oDoc, "Failed to create a module. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	_LOBasic_MacroModuleMacros($oLibContainer, "Standard", "AutoIt-Macro1", $sMacro)
+	_LOBasic_MacroModuleMacros($oLibContainer, "Standard", "AutoIt_Macro1", $sMacro)
 	If @error Then _ERROR($oDoc, "Failed to set the Macros contained in a Module. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	$sExecuteLink = _LOBasic_MacroExecuteLinkCreate($oLibContainer, "Standard", "AutoIt-Macro1", "AutoIt_Test")
+	$sExecuteLink = _LOBasic_MacroExecuteLinkCreate($oLibContainer, "Standard", "AutoIt_Macro1", "AutoIt_Test")
 	If @error Then _ERROR($oDoc, "Failed to create a Macro Execution link. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; Retrieve an Array of All events

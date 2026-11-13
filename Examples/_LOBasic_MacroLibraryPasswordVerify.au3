@@ -20,10 +20,10 @@ Func Example()
 	$oLibContainer = _LOBasic_MacroLibContainerGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Library Container Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	_LOBasic_MacroLibraryCreate($oLibContainer, "Au3-Test")
+	_LOBasic_MacroLibraryCreate($oLibContainer, "Au3_Test")
 	If @error Then _ERROR($oDoc, "Failed to create a Library. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	_LOBasic_MacroLibraryPasswordChange($oLibContainer, "Au3-Test", "", "AutoIt")
+	_LOBasic_MacroLibraryPasswordChange($oLibContainer, "Au3_Test", "", "AutoIt")
 	If @error Then _ERROR($oDoc, "Failed to apply a password to library. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	; save The New Blank Doc To Desktop Directory using a unique temporary name.
@@ -50,13 +50,13 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I have opened a Document with a password protected Library. Press ok to unlock the library using its password.")
 
-	_LOBasic_MacroLibraryPasswordVerify($oLibContainer, "Au3-Test", "AutoIt")
+	_LOBasic_MacroLibraryPasswordVerify($oLibContainer, "Au3_Test", "AutoIt")
 	If @error Then _ERROR($oDoc, "Failed to verify Library password. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	$bVerified = _LOBasic_MacroLibraryPasswordIsVerified($oLibContainer, "Au3-Test")
+	$bVerified = _LOBasic_MacroLibraryPasswordIsVerified($oLibContainer, "Au3_Test")
 	If @error Then _ERROR($oDoc, "Failed to check if a Library has been verified by its password. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Has the ""Au3-Test"" Document Library been verified by its password? True/False: " & $bVerified)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Has the ""Au3_Test"" Document Library been verified by its password? True/False: " & $bVerified)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

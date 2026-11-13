@@ -17,7 +17,7 @@ Func Example()
 	$oLibContainer = _LOBasic_MacroLibContainerGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Library Container Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	_LOBasic_MacroLibraryCreate($oLibContainer, "Au3-Library")
+	_LOBasic_MacroLibraryCreate($oLibContainer, "Au3_Library")
 	If @error Then _ERROR($oDoc, "Failed to create a Library. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	$asLibraries = _LOBasic_MacroLibrariesGetNames($oLibContainer)

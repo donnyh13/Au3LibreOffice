@@ -17,10 +17,10 @@ Func Example()
 	$oLibContainer = _LOBasic_MacroLibContainerGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Library Container Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	_LOBasic_MacroModuleCreate($oLibContainer, "Standard", "AutoIt-Macro1")
+	_LOBasic_MacroModuleCreate($oLibContainer, "Standard", "AutoIt_Macro1")
 	If @error Then _ERROR($oDoc, "Failed to create a module. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	_LOBasic_MacroModuleCreate($oLibContainer, "Standard", "AutoIt-Macro2", "Sub Test123" & @LF & "MsgBox ""Hello World!""" & @LF & "End Sub")
+	_LOBasic_MacroModuleCreate($oLibContainer, "Standard", "AutoIt_Macro2", "Sub Test123" & @LF & "MsgBox ""Hello World!""" & @LF & "End Sub")
 	If @error Then _ERROR($oDoc, "Failed to create a module. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	$asModules = _LOBasic_MacroModulesGetNames($oLibContainer, "Standard")

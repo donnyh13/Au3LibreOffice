@@ -17,7 +17,7 @@ Func Example()
 	$oLibContainer = _LOBasic_MacroLibContainerGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Library Container Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	_LOBasic_MacroLibraryCreate($oLibContainer, "Au3-Test")
+	_LOBasic_MacroLibraryCreate($oLibContainer, "Au3_Test")
 	If @error Then _ERROR($oDoc, "Failed to create a Library. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	$asLibraries = _LOBasic_MacroLibrariesGetNames($oLibContainer)
@@ -28,9 +28,9 @@ Func Example()
 	Next
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Document contains the following Libraries:" & @CRLF & $sLibraries & @CRLF & @CRLF & _
-			"Press ok to rename the ""Au3-Test"" library.")
+			"Press ok to rename the ""Au3_Test"" library.")
 
-	_LOBasic_MacroLibraryRename($oLibContainer, "Au3-Test", "Au3_Library")
+	_LOBasic_MacroLibraryRename($oLibContainer, "Au3_Test", "Au3_Library")
 	If @error Then _ERROR($oDoc, "Failed to rename Library. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	$asLibraries = _LOBasic_MacroLibrariesGetNames($oLibContainer)

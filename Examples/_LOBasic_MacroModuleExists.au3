@@ -16,13 +16,13 @@ Func Example()
 	$oLibContainer = _LOBasic_MacroLibContainerGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Library Container Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	_LOBasic_MacroModuleCreate($oLibContainer, "Standard", "AutoIt-Macro1")
+	_LOBasic_MacroModuleCreate($oLibContainer, "Standard", "AutoIt_Macro1")
 	If @error Then _ERROR($oDoc, "Failed to create a module. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	$bExists = _LOBasic_MacroModuleExists($oLibContainer, "Standard", "AutoIt-Macro1")
+	$bExists = _LOBasic_MacroModuleExists($oLibContainer, "Standard", "AutoIt_Macro1")
 	If @error Then _ERROR($oDoc, "Failed to check if a Module exists. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Does the ""Standard"" Document Library contain a Module named ""AutoIt-Macro1""? True/False: " & $bExists)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Does the ""Standard"" Document Library contain a Module named ""AutoIt_Macro1""? True/False: " & $bExists)
 
 	$bExists = _LOBasic_MacroModuleExists($oLibContainer, "Standard", "Test-Module")
 	If @error Then _ERROR($oDoc, "Failed to check if a Module exists. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)

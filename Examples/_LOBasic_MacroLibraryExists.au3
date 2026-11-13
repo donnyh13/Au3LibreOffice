@@ -21,10 +21,10 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Does the Document contain a Library called ""Standard""? True/False: " & $bExists)
 
-	$bExists = _LOBasic_MacroLibraryExists($oLibContainer, "Au3-Library")
+	$bExists = _LOBasic_MacroLibraryExists($oLibContainer, "Au3_Library")
 	If @error Then _ERROR($oDoc, "Failed to check if a Library exists. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "Does the Document contain a Library called ""Au3-Library""? True/False: " & $bExists)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Does the Document contain a Library called ""Au3_Library""? True/False: " & $bExists)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

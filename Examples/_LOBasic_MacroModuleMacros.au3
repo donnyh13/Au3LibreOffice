@@ -16,16 +16,16 @@ Func Example()
 	$oLibContainer = _LOBasic_MacroLibContainerGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Library Container Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	_LOBasic_MacroModuleCreate($oLibContainer, "Standard", "AutoIt-Macro1")
+	_LOBasic_MacroModuleCreate($oLibContainer, "Standard", "AutoIt_Macro1")
 	If @error Then _ERROR($oDoc, "Failed to create a module. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	_LOBasic_MacroModuleMacros($oLibContainer, "Standard", "AutoIt-Macro1", $sNewMacros)
+	_LOBasic_MacroModuleMacros($oLibContainer, "Standard", "AutoIt_Macro1", $sNewMacros)
 	If @error Then _ERROR($oDoc, "Failed to set the Macros contained in a Module. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	$sMacros = _LOBasic_MacroModuleMacros($oLibContainer, "Standard", "AutoIt-Macro1")
+	$sMacros = _LOBasic_MacroModuleMacros($oLibContainer, "Standard", "AutoIt_Macro1")
 	If @error Then _ERROR($oDoc, "Failed to retrieve the Macros contained in a Module. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	MsgBox($MB_OK + $MB_TOPMOST, Default, "The ""AutoIt-Macro1"" Module contained in the ""Standard"" Document Library contains the following Macros: " & @CRLF & $sMacros)
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The ""AutoIt_Macro1"" Module contained in the ""Standard"" Document Library contains the following Macros: " & @CRLF & $sMacros)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
 

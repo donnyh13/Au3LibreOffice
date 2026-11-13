@@ -17,7 +17,7 @@ Func Example()
 	$oLibContainer = _LOBasic_MacroLibContainerGetObj($oDoc)
 	If @error Then _ERROR($oDoc, "Failed to retrieve Library Container Object. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
-	_LOBasic_MacroModuleCreate($oLibContainer, "Standard", "AutoIt-Macro1")
+	_LOBasic_MacroModuleCreate($oLibContainer, "Standard", "AutoIt_Macro1")
 	If @error Then _ERROR($oDoc, "Failed to create a module. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	$asModules = _LOBasic_MacroModulesGetNames($oLibContainer, "Standard")
@@ -28,9 +28,9 @@ Func Example()
 	Next
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The ""Standard"" Document Library contains the following Modules:" & @CRLF & $sModules & @CRLF & @CRLF & _
-			"Press ok to rename ""AutoIt-Macro1"".")
+			"Press ok to rename ""AutoIt_Macro1"".")
 
-	_LOBasic_MacroModuleRename($oLibContainer, "Standard", "AutoIt-Macro1", "AutoIt-TestModule")
+	_LOBasic_MacroModuleRename($oLibContainer, "Standard", "AutoIt_Macro1", "AutoIt_TestModule")
 	If @error Then _ERROR($oDoc, "Failed to rename Module. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	$asModules = _LOBasic_MacroModulesGetNames($oLibContainer, "Standard")
