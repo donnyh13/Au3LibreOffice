@@ -47,7 +47,7 @@
 ;                  @Error: 0, @Extended: 0, Return: String = Success. Returning current Field display content in String format.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oField not a map.
+;                  @Error: 1, @Extended: 1 = $mField not a map.
 ;                  @Error: 1, @Extended: 2 = $bFieldName not a Boolean.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Field's current display.
@@ -266,7 +266,7 @@ EndFunc   ;==>_LOCalc_FieldGetAnchor
 ;                  $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
 ;                  $sURL                - The URL/Hyperlink Address.
 ;                  $sText               - [optional] Default is "". The Text to display instead of the URL. "" means the URL itself is displayed.
-;                  $sTargetFrame        - [optional] Default is "". Enter the name of the frame that you want the linked file to open in. Leave blank to skip.
+;                  $sTargetFrame        - [optional] Default is "". Enter the name of the frame that you want the linked file to open in. Pass an empty string to skip.
 ;                  $bOverwrite          - [optional] Default is False. If True, any content selected by the Cursor is overwritten.
 ; Return values .: Success: Map
 ;                  @Error: 0, @Extended: 0, Return: Map = Success. Successfully inserted the field, returning a map containing the Field's Object.
@@ -323,10 +323,10 @@ EndFunc   ;==>_LOCalc_FieldHyperlinkInsert
 ; Name ..........: _LOCalc_FieldHyperlinkModify
 ; Description ...: Set or Retrieve the settings of a Hyperlink/URL field.
 ; Syntax ........: _LOCalc_FieldHyperlinkModify(ByRef $mHyperlinkField[, $sURL = Null[, $sText = Null[, $sTargetFrame = Null]]])
-; Parameters ....: $mHyperlinkField     - A Hyperlink/URL Map containing the Field Field Object returned by a previous _LOCalc_FieldHyperlinkInsert or _LOCalc_FieldsGetList function.
+; Parameters ....: $mHyperlinkField     - A Hyperlink/URL Map containing the Field Object returned by a previous _LOCalc_FieldHyperlinkInsert or _LOCalc_FieldsGetList function.
 ;                  $sURL                - [optional] Default is Null. The URL/Hyperlink Address.
 ;                  $sText               - [optional] Default is Null. The Text to display instead of the URL. "" means the URL itself is displayed.
-;                  $sTargetFrame        - [optional] Default is Null. If True, any content selected by the Cursor is overwritten.
+;                  $sTargetFrame        - [optional] Default is Null. Enter the name of the frame that you want the linked file to open in. Pass an empty string to skip.
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
@@ -489,21 +489,21 @@ EndFunc   ;==>_LOCalc_FieldPageNumberInsert
 ; Description ...: Retrieve an Array of maps containing Field Objects present in a Cell or Header/Footer.
 ; Syntax ........: _LOCalc_FieldsGetList(ByRef $oTextCursor[, $iType = $LOC_FIELD_TYPE_ALL[, $bFieldTypeNum = True]])
 ; Parameters ....: $oTextCursor         - A Text Cursor Object returned by a previous _LOCalc_PageStyleFooterCreateTextCursor, _LOCalc_PageStyleHeaderCreateTextCursor, or _LOCalc_CellCreateTextCursor function.
-;                  $iType               - [optional] (1-255) Default is $LOC_FIELD_TYPE_ALL. The type of Field to search for. See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3. Can be BitOr'd together.
+;                  $iType               - [optional] (1-127) Default is $LOC_FIELD_TYPE_ALL. The type of Field to search for. See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3. Can be BitOr'd together.
 ;                  $bFieldTypeNum       - [optional] Default is True. If True, adds a column to the array that has the Field Type Constant Integer for that particular Field, to assist in identifying the Field type. See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning Array of maps containing Text Field Objects with @Extended set to number of results. See Remarks for Array sizing.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTextCursor not an Object.
-;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 1 or greater than 255. (The total of all Constants added together.) See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 1 or greater than 127. (The total of all Constants added together.) See Constants, $LOC_FIELD_TYPE_* as defined in LibreOfficeCalc_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = $bFieldTypeNum not a Boolean.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create enumeration of paragraphs in Cell.
 ;                  @Error: 2, @Extended: 2 = Failed to create enumeration of Text Portions in Paragraph.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to identify requested Field Types.
-;                  @Error: 3, @Extended: 2 = Failed to retrieve Text Fields Object/
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Text Fields Object.
 ;                  @Error: 3, @Extended: 3 = Failed to retrieve total count of Fields.
 ;                  @Error: 3, @Extended: 4 = Failed to retrieve Text Field Object.
 ;                  @Error: 3, @Extended: 5 = More fields found than total count of Fields. Try creating a new cursor, and trying again.
@@ -530,9 +530,7 @@ Func _LOCalc_FieldsGetList(ByRef $oTextCursor, $iType = $LOC_FIELD_TYPE_ALL, $bF
 	Local $avTextFields[1]
 
 	If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not __LO_IntIsBetween($iType, $LOC_FIELD_TYPE_ALL, 255) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
-
-	; 255 is all possible Consts added together
+	If Not __LO_IntIsBetween($iType, $LOC_FIELD_TYPE_DATE_TIME, $LOC_FIELD_TYPE_ALL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	If Not IsBool($bFieldTypeNum) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	; When a Text Cursor has been used to insert Strings previous to inserting or looking for a Field, the fields sometimes are not able to be identified.

@@ -1,0 +1,60 @@
+#include <MsgBoxConstants.au3>
+
+#include "..\LibreOfficeDraw.au3"
+
+Example()
+
+Func Example()
+	Local $oDoc, $oPage, $oShape
+	Local $iHMM
+	Local $avSettings
+
+	; Create a New, visible, Blank LibreOffice Document.
+	$oDoc = _LODraw_DocCreate(True, False)
+	If @error Then _ERROR($oDoc, "Failed to Create a new Draw Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Retrieve the current Page.
+	$oPage = _LODraw_PageCurrent($oDoc)
+	If @error Then _ERROR($oDoc, "Failed to retrieve current page. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Insert a Folded Corner Shape into the document, 3000 Wide by 6000 High, 12000X, 4300Y.
+	$oShape = _LODraw_DrawShapeInsert($oPage, $LOD_DRAWSHAPE_TYPE_BASIC_FOLDED_CORNER, 3000, 6000, 12000, 4300)
+	If @error Then _ERROR($oDoc, "Failed to create a Shape. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Convert 1/8" to Hundredths of a Millimeter (HMM)
+	$iHMM = _LO_UnitConvert(.125, $LO_CONVERT_UNIT_INCH_HMM)
+	If @error Then _ERROR($oDoc, "Failed to convert from inches to Hundredths of a Millimeter (HMM). Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Modify the Shape Line Properties settings to: Set the Line Style to $LOD_SHAPE_LINE_STYLE_3_DASHES_3_DOTS, Line Color to $LO_COLOR_MAGENTA,
+	; Width = 1/8", Transparency = 50%, Corner Style = $LOD_SHAPE_LINE_JOINT_BEVEL, Cap Style = $LOD_SHAPE_LINE_CAP_FLAT
+	_LODraw_ShapeLineProperties($oShape, $LOD_SHAPE_LINE_STYLE_3_DASHES_3_DOTS, $LO_COLOR_MAGENTA, $iHMM, 50, $LOD_SHAPE_LINE_JOINT_BEVEL, $LOD_SHAPE_LINE_CAP_FLAT)
+	If @error Then _ERROR($oDoc, "Failed to set Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Retrieve the current Shape settings. Return will be an array in order of function parameters.
+	$avSettings = _LODraw_ShapeLineProperties($oShape)
+	If @error Then _ERROR($oDoc, "Failed to retrieve Shape settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "The Shape's Line Properties settings are as follows: " & @CRLF & _
+			"The Line Style is (See UDF Constants): " & $avSettings[0] & @CRLF & _
+			"The Line color is (as a RGB Color Integer): " & $avSettings[1] & @CRLF & _
+			"The Line's Width is, in Hundredths of a Millimeter (HMM): " & $avSettings[2] & @CRLF & _
+			"The Line's transparency percentage is: " & $avSettings[3] & @CRLF & _
+			"The Line Corner Style is, (See UDF Constants): " & $avSettings[4] & @CRLF & _
+			"The Line Cap Style is, (See UDF Constants): " & $avSettings[5])
+
+	MsgBox($MB_OK + $MB_TOPMOST, Default, "Press ok to close the document.")
+
+	; Close the document.
+	_LODraw_DocClose($oDoc, False)
+	If @error Then _ERROR($oDoc, "Failed to close opened L.O. Document. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+
+	; Close the background LibreOffice instance if all Documents are closed.
+	_LO_Terminate()
+	If @error Then Return _ERROR($oDoc, "Failed to Terminate LibreOffice. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
+EndFunc
+
+Func _ERROR($oDoc, $sErrorText)
+	MsgBox($MB_OK + $MB_ICONERROR + $MB_TOPMOST, "Error", $sErrorText)
+	If IsObj($oDoc) Then _LODraw_DocClose($oDoc, False)
+	Exit
+EndFunc

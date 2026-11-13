@@ -46,7 +46,7 @@
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_ComError_UserFunction
-; Description ...: Set a UserFunction to receive the Fired COM Error Error outside of the UDF.
+; Description ...: Set a UserFunction to receive the Fired COM Error outside of the UDF.
 ; Syntax ........: _LOCalc_ComError_UserFunction([$vUserFunction = Default[, $vParam1 = Null[, $vParam2 = Null[, $vParam3 = Null[, $vParam4 = Null[, $vParam5 = Null]]]]]])
 ; Parameters ....: $vUserFunction       - [optional] a Function or Keyword. Default is Default. Accepts a Function, or the Keyword Default and Null. If called with a User function, the function may have up to 5 required parameters.
 ;                  $vParam1             - [optional] Default is Null. Any optional parameter to be called with the user function.
@@ -749,7 +749,7 @@ EndFunc   ;==>_LOCalc_FormatKeyDelete
 ;                  $iFormatKey          - The Format Key to look for.
 ;                  $iFormatType         - [optional] (0-15881) Default is $LOC_FORMAT_KEYS_ALL. The Format Key type to search in. Values can be BitOr'd together. See Constants, $LOC_FORMAT_KEYS_* as defined in LibreOfficeCalc_Constants.au3.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the Format Key exists in document, True is returned, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Format Key exists in document, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
@@ -1286,7 +1286,7 @@ EndFunc   ;==>_LOCalc_SortFieldCreate
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOCalc_SortFieldModify
-; Description ...: Modify or retrieve the settings for a Sort Field previously created by _LOCalc_SortFieldCreate.
+; Description ...: Set or Retrieve the settings for a Sort Field previously created by _LOCalc_SortFieldCreate.
 ; Syntax ........: _LOCalc_SortFieldModify(ByRef $tSortField[, $iIndex = Null[, $iDataType = Null[, $bAscending = Null[, $bCaseSensitive = Null]]]])
 ; Parameters ....: $tSortField          - A Sort Field Struct created by a previous _LOCalc_SortFieldCreate function.
 ;                  $iIndex              - [optional] Default is Null. The Column or Row to perform the sort upon. 0 Based. 0 is the first Column/Row in the Cell Range.

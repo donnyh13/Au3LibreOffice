@@ -324,7 +324,7 @@ EndFunc   ;==>_LOWriter_CursorGetType
 ; Description ...: Moves a Text or View cursor to another View or Text Cursor Position or Range.
 ; Syntax ........: _LOWriter_CursorGoToRange(ByRef $oCursor, ByRef $oRange[, $bSelect = False])
 ; Parameters ....: $oCursor             - A Text or View Cursor Object returned from any Cursor Object creation or retrieval functions.
-;                  $oRange              - A Text or View Cursor Object returned from any Cursor Object creation or retrieval functions to move $oCursor to.
+;                  $oRange              - A Text or View Cursor, or Paragraph or Paragraph portion Object returned from any Cursor Object creation or retrieval functions, to move $oCursor to.
 ;                  $bSelect             - [optional] Default is False. If True, the selection is expanded or created from original cursor location to Range location.
 ; Return values .: Success: 1
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Cursor successfully moved to $oRange position.
@@ -335,13 +335,15 @@ EndFunc   ;==>_LOWriter_CursorGetType
 ;                  @Error: 1, @Extended: 3 = $bSelect not a Boolean.
 ;                  @Error: 1, @Extended: 4 = $oCursor not a Text or View Cursor.
 ;                  @Error: 1, @Extended: 5 = $oRange is a Table Cursor, and is not supported.
+;                  --Initialization Errors--
+;                  @Error: 2, @Extended: 1 = Failed to create a Text Cursor at Paragraph Object's position.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Error determining $oCursor cursor type.
 ;                  @Error: 3, @Extended: 2 = Error determining $oRange cursor type.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If the Cursor being used as a range has anything selected, the selection will be selected in the Cursor called in $oCursor also.
-; Related .......: _LOWriter_CursorMove, _LOWriter_CursorViewCursorCurrPage, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
+; Related .......: _LOWriter_CursorMove, _LOWriter_CursorViewCursorCurrPage, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor, _LOWriter_CursorParObjCreateList
 ; Link ..........:
 ; Example .......: Yes
 ; ===============================================================================================================================
@@ -350,6 +352,7 @@ Func _LOWriter_CursorGoToRange(ByRef $oCursor, ByRef $oRange, $bSelect = False)
 	#forceref $oCOM_ErrorHandler
 
 	Local $iCursorType, $iRangeType
+	Local $oGoToRange = $oRange
 
 	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oRange) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -363,7 +366,13 @@ Func _LOWriter_CursorGoToRange(ByRef $oCursor, ByRef $oRange, $bSelect = False)
 	If ($iCursorType <> $LOW_CURTYPE_TEXT_CURSOR) And ($iCursorType <> $LOW_CURTYPE_VIEW_CURSOR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If ($iRangeType = $LOW_CURTYPE_TABLE_CURSOR) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
-	$oCursor.gotoRange($oRange, $bSelect)
+	If ($iCursorType = $LOW_CURTYPE_TEXT_CURSOR) And (($iRangeType = $LOW_CURTYPE_PARAGRAPH) Or ($iRangeType = $LOW_CURTYPE_TEXT_PORTION)) Then
+		; When the cursor is a TextCursor, and the range is a Paragraph or Text portion of a Paragraph, gotoRange throws a COM Error, so I found I can create a Text Cursor at the same location, and then it will work.
+		$oGoToRange = $oRange.Text.createTextCursorByRange($oRange)
+		If Not IsObj($oGoToRange) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+	EndIf
+
+	$oCursor.gotoRange($oGoToRange, $bSelect)
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_CursorGoToRange
@@ -769,11 +778,13 @@ EndFunc   ;==>_LOWriter_CursorParObjCopy
 ;                  @Error: 1, @Extended: 2 = $bTableCheck not a Boolean.
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create Enumeration of Paragraphs.
+;                  @Error: 2, @Extended: 2 = Failed to create TextCursor at ViewCursor's position.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: $oCursor can be either a ViewCursor or a TextCursor, the paragraphs are enumerated for the area the cursor is currently within, for example, the ViewCursor is currently in a Table, the enumeration of paragraphs would be for the Cell the cursor was presently in.
 ;                  In the main document the enumeration would be for the entire Text Body, in the Header, it would for the that Header for that Page Style etc.
 ;                  The different possible areas are: Text Body, Table Cell, Header, Footer, Footnote, Endnote, Frame.
+;                  If the cursor has data selected, only the paragraph(s) within that selection are returned.
 ;                  Returns an Array of objects for Direct Formatting paragraphs in a document, or for copying and inserting etc.
 ;                  Table Objects returned from this function can be used as a regular Table Object to modify the Table with.
 ; Related .......: _LOWriter_CursorParObjSectionsGet, _LOWriter_DocSelection, _LOWriter_CursorParObjDelete, _LOWriter_CursorViewCursorGetObj, _LOWriter_CursorCreateTextCursor
@@ -784,15 +795,26 @@ Func _LOWriter_CursorParObjCreateList(ByRef $oCursor, $bTableCheck = False)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oEnum, $oPar
+	Local $oEnum, $oPar, $oTextCursor = $oCursor
 	Local $iCount = 0
 	Local $aoParagraphs[1]
 
 	If Not IsObj($oCursor) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsBool($bTableCheck) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	$oEnum = $oCursor.Text.createEnumeration()
-	If Not IsObj($oEnum) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+	If ($oCursor.isCollapsed()) Then
+		$oEnum = $oTextCursor.Text.createEnumeration()
+		If Not IsObj($oEnum) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	Else
+		If (__LOWriter_Internal_CursorGetType($oCursor) = $LOW_CURTYPE_VIEW_CURSOR) Then
+			$oTextCursor = $oCursor.Text.createTextCursorByRange($oCursor)
+			If Not IsObj($oTextCursor) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+		EndIf
+
+		$oEnum = $oTextCursor.createEnumeration()
+		If Not IsObj($oEnum) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+	EndIf
 
 	If ($bTableCheck = True) Then ReDim $aoParagraphs[1][2]
 

@@ -25,6 +25,7 @@
 ; _LO_ConvertColorToLong
 ; _LO_DocConnect
 ; _LO_DocGetType
+; _LO_Events
 ; _LO_GradientMulticolorAdd
 ; _LO_GradientMulticolorDelete
 ; _LO_GradientMulticolorModify
@@ -42,7 +43,7 @@
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LO_ComError_UserFunction
-; Description ...: Set a UserFunction to receive the Fired COM Error Error outside of the UDF.
+; Description ...: Set a UserFunction to receive the Fired COM Error outside of the UDF.
 ; Syntax ........: _LO_ComError_UserFunction([$vUserFunction = Default[, $vParam1 = Null[, $vParam2 = Null[, $vParam3 = Null[, $vParam4 = Null[, $vParam5 = Null]]]]]])
 ; Parameters ....: $vUserFunction       - [optional] a Function or Keyword. Default is Default. Accepts a Function, or the Keyword Default and Null. If called with a User function, the function may have up to 5 required parameters.
 ;                  $vParam1             - [optional] Default is Null. Any optional parameter to be called with the user function.
@@ -130,9 +131,9 @@ EndFunc   ;==>_LO_ComError_UserFunction
 ;                  $iCMYK               - [optional] Default is Null. Convert a RGB Color Integer to C.M.Y.K.
 ; Return values .: Success: String or Array.
 ;                  @Error: 0, @Extended: 1, Return: String = RGB Integer converted To Hexadecimal (as a String). (Without the "0x" prefix)
-;                  @Error: 0, @Extended: 2, Return: Array = Array containing RGB Integer converted To Red, Green, Blue,(RGB). $Array[0] = R, $Array[1] = G, etc.
-;                  @Error: 0, @Extended: 3, Return: Array = Array containing RGB Integer converted To Hue, Saturation, Brightness, (HSB). $Array[0] = H, $Array[1] = S, etc.
-;                  @Error: 0, @Extended: 4, Return: Array = Array containing RGB Integer converted To Cyan, Magenta, Yellow, Black, (CMYK). $Array[0] = C, $Array[1] = M, etc.
+;                  @Error: 0, @Extended: 2, Return: Array = Array containing RGB Integer converted To Red, Green, Blue,(RGB). $aArray[0] = R, $aArray[1] = G, etc.
+;                  @Error: 0, @Extended: 3, Return: Array = Array containing RGB Integer converted To Hue, Saturation, Brightness, (HSB). $aArray[0] = H, $aArray[1] = S, etc.
+;                  @Error: 0, @Extended: 4, Return: Array = Array containing RGB Integer converted To Cyan, Magenta, Yellow, Black, (CMYK). $aArray[0] = C, $aArray[1] = M, etc.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = No parameters set.
@@ -765,6 +766,152 @@ Func _LO_DocGetType(ByRef $oDoc)
 EndFunc   ;==>_LO_DocGetType
 
 ; #FUNCTION# ====================================================================================================================
+; Name ..........: _LO_Events
+; Description ...: Set or Retrieve Events for the LibreOffice application.
+; Syntax ........: _LO_Events([, $asEvents = Null])
+; Parameters ....: $asEvents            - [optional] Default is Null. A two columned array of event settings. See remarks.
+; Return values .: Success: 1 or Array.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current events as a two columned Array. @Extended set to number of events.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $asEvents not an array.
+;                  @Error: 1, @Extended: 2 = $asEvents does not contain 2 columns.
+;                  @Error: 1, @Extended: 3 = Event type value in $asEvents not a String. Returning problem element's index.
+;                  @Error: 1, @Extended: 4 = Event type in $asEvents not supported. Returning problem element's index.
+;                  @Error: 1, @Extended: 5 = Macro execution link in $asEvents not a String. Returning problem element's index.
+;                  --Initialization Errors--
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.ServiceManager" Object.
+;                  @Error: 2, @Extended: 2 = Error creating "com.sun.star.frame.GlobalEventBroadcaster" Object.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve Events Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve array of event names.
+;                  @Error: 3, @Extended: 3 = Failed to retrieve event array.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $asEvents
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: This function temporarily creates a Document and executes a macro in order to modify Event values.
+;                  The expected array must contain two columns, with values in the following order:
+;                  - $aArray[0][0] is the event type name as a string.
+;                  - $aArray[0][1] is the macro execution string returned by a previous _LOBasic_MacroExecuteLinkCreate function. Pass an empty string to disable an event.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+; Related .......: _LO_Events
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LO_Events($asEvents = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local Const $__UBOUND_COLUMNS = 2
+	Local $iError = 0
+	Local $oEvents, $oServiceManager, $oGlobalEvents
+	Local $sCurrEvent
+	Local $asEventNames, $asCurrEvents[0][2]
+	Local $atEvent, $atProps[2]
+
+	$oServiceManager = __LO_ServiceManager()
+	If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+	$oGlobalEvents = $oServiceManager.createInstance("com.sun.star.frame.GlobalEventBroadcaster")
+	If Not IsObj($oGlobalEvents) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+	$oEvents = $oGlobalEvents.getEvents()
+	If Not IsObj($oEvents) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	If __LO_VarsAreNull($asEvents) Then
+		$asEventNames = $oEvents.getElementNames()
+		If Not IsArray($asEventNames) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		ReDim $asCurrEvents[UBound($asEventNames)][2]
+
+		For $i = 0 To UBound($asCurrEvents) - 1
+			Sleep((IsInt($i / $__LOCONST_SLEEP_DIV) ? (10) : (0)))
+
+			$asCurrEvents[$i][0] = $asEventNames[$i]
+
+			$atEvent = $oEvents.getByName($asEventNames[$i])
+			If Not IsArray($atEvent) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+			For $j = 0 To UBound($atEvent) - 1
+				If ($atEvent[$j].Name() = "Script") Then
+					$asCurrEvents[$i][1] = $atEvent[$j].Value()
+					ContinueLoop 2
+				EndIf
+			Next
+
+			$asCurrEvents[$i][1] = "" ; Set macro value to an empty string if no macro was found.
+		Next
+
+		Return SetError($__LO_STATUS_SUCCESS, UBound($asCurrEvents), $asCurrEvents)
+	EndIf
+
+	If Not IsArray($asEvents) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If (UBound($asEvents, $__UBOUND_COLUMNS) <> 2) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	$atProps[0] = __LO_SetPropertyValue("EventType", "Script")
+	$atProps[1] = __LO_SetPropertyValue("Script", "")
+
+	For $i = 0 To UBound($asEvents) - 1
+		Sleep((IsInt($i / $__LOCONST_SLEEP_DIV) ? (10) : (0)))
+
+		If Not IsString($asEvents[$i][0]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, $i)
+		If Not $oEvents.hasByName($asEvents[$i][0]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, $i)
+		If Not IsString($asEvents[$i][1]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, $i)
+
+		$atEvent = $oEvents.getByName($asEvents[$i][0])
+		If Not IsArray($atEvent) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+		$sCurrEvent = ""
+
+		For $j = 0 To UBound($atEvent) - 1
+			If ($atEvent[$j].Name() = "Script") Then
+				$sCurrEvent = $atEvent[$j].Value()
+				ExitLoop
+			EndIf
+		Next
+
+		If ($asEvents[$i][1] = "") And (UBound($atEvent) = 0) Then ; No macro is to be assigned, and none are currently assigned. Skip.
+			ContinueLoop
+
+		Else ; Have to remove a macro, replace it, or a macro is to be assigned.
+			If ($asEvents[$i][1] = $sCurrEvent) Then ; Macro to assign and the current macro are the same, skip it.
+				ContinueLoop
+
+			Else
+				$atProps[1].Value = $asEvents[$i][1]
+				If ($asEvents[$i][1] = "") Then
+					$atProps[0].Value = ""
+
+				Else
+					$atProps[0].Value = "Script"
+				EndIf
+			EndIf
+			; This should work, but throws a COM illegal argument error. It seems properties contained in an array don't work with ReplaceByName/ReplaceByIndex.
+;~ 				$oEvents.replaceByName($asEvents[$i][0], $atProps)
+
+			__LO_EventReplaceScript($oEvents, $asEvents[$i][0], $atProps)
+
+			$atEvent = $oEvents.getByName($asEvents[$i][0])
+			If Not IsArray($atEvent) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+			$sCurrEvent = ""
+
+			For $j = 0 To UBound($atEvent) - 1
+				If ($atEvent[$j].Name() = "Script") Then
+					$sCurrEvent = $atEvent[$j].Value()
+					ExitLoop
+				EndIf
+			Next
+			$iError = ($asEvents[$i][1] = $sCurrEvent) ? ($iError) : (BitOR($iError, 1))
+		EndIf
+	Next
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LO_Events
+
+; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LO_GradientMulticolorAdd
 ; Description ...: Add a ColorStop to a Gradient ColorStop Array.
 ; Syntax ........: _LO_GradientMulticolorAdd(ByRef $avColorStops, $iIndex, $nStopOffset, $iColor)
@@ -924,18 +1071,27 @@ EndFunc   ;==>_LO_GradientMulticolorModify
 ; Return values .: Success: 1.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  @Error: 1, @Extended: 1 = $sOfficePortablePath is not a string.
-;                  @Error: 1, @Extended: 2 = The Portable root does not contain the App folder.
-;                  @Error: 1, @Extended: 3 = Portable soffice.exe not found.
-;                  @Error: 1, @Extended: 4 = $bRegistryFree is neither a Boolean nor Default.
-;                  @Error: 1, @Extended: 5 = $iTimeoutMs is not a positive integer.
-;                  @Error: 2, @Extended: 1 = Timed out obtaining a COM ServiceManager / UNO URL resolver in registry-free mode.
-;                  @Error: 2, @Extended: 2 = Timed out connecting to the requested instance in registry-free mode.
-;                  @Error: 2, @Extended: 3 = Failed to store the registry-free ServiceManager.
-;                  @Error: 3, @Extended: 1 = Failed to clear the stored Portable ServiceManager.
-;                  @Error: 3, @Extended: 2 = Failed to initialize LibreOffice Portable using the registry-based method.
-;                  @Error: 3, @Extended: 3 = Failed to initialize OpenOffice Portable.
-;                  @Error: 3, @Extended: 4 = Failed to generate the UNO pipe name.
-;                  @Error: 3, @Extended: 5 = Failed to launch LibreOffice Portable in registry-free mode.
+;                  @Error: 1, @Extended: 2 = $bRegistryFree is neither a Boolean nor Default.
+;                  @Error: 1, @Extended: 3 = $iTimeoutMs is not a positive integer.
+;                  @Error: 1, @Extended: 4 = The Portable root does not contain the App folder.
+;                  @Error: 1, @Extended: 5 = Portable soffice.exe not found.
+;                  @Error: 2, @Extended: 1 = Failed to generate the UNO pipe name.
+;                  @Error: 2, @Extended: 2 = Timed out creating a COM ServiceManager / UNO URL resolver in registry-free mode.
+;                  @Error: 2, @Extended: 3 = Failed to Bootstrap sOffice.exe executable Object.
+;                  @Error: 2, @Extended: 4 = Failed to create "com.sun.star.bridge.UnoUrlResolver" Object.
+;                  @Error: 3, @Extended: 1 = No stored Portable LibreOffice or Program Directory path.
+;                  @Error: 3, @Extended: 2 = Stored Portable LibreOffice path no longer exists.
+;                  @Error: 3, @Extended: 3 = Failed to launch LibreOffice Portable in registry-free mode.
+;                  @Error: 3, @Extended: 4 = Timed out connecting to the requested instance in registry-free mode.
+;                  @Error: 3, @Extended: 5 = Failed to add temporary Registry keys.
+;                  @Error: 3, @Extended: 6 = Failed to start Portable LibreOffice in listening mode.
+;                  @Error: 3, @Extended: 7 = Portable LibreOffice failed to start in listening mode
+;                  @Error: 3, @Extended: 8 = Failed to connect to Portable LibreOffice.
+;                  @Error: 3, @Extended: 9 = Failed to retrieve ServiceManager from Portable LibreOffice.
+;                  @Error: 3, @Extended: 10 = Failed to store the Portable ServiceManager.
+;                  @Error: 3, @Extended: 11 = Failed to clear the stored Portable ServiceManager.
+;                  @Error: 3, @Extended: 12 = Failed to initialize OpenOffice Portable.
+;                  @Error: 3, @Extended: 13 = Failed to initialize LibreOffice Portable using the registry-based method.
 ; Author ........: mLipok, donnyh13
 ; Modified ......: mLipok
 ; Remarks .......: LibreOffice Portable defaults to a local UNO pipe and uses the Data\settings profile in the Portable root.
@@ -954,36 +1110,40 @@ Func _LO_InitializePortable($sOfficePortablePath, $bRegistryFree = Default, $iTi
 	Local $sProgramDir, $sExecutable
 	Local $bAutomaticMode = (IsKeyword($bRegistryFree) = 1)
 	If Not IsString($sOfficePortablePath) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not $bAutomaticMode And Not IsBool($bRegistryFree) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not $bAutomaticMode And Not IsBool($bRegistryFree) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
 	If $bAutomaticMode Then $bRegistryFree = True
-	If Not __LO_IntIsBetween($iTimeoutMs, 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If Not __LO_IntIsBetween($iTimeoutMs, 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$sOfficePortablePath = StringRegExpReplace($sOfficePortablePath, "^\s+|\s+$", "")
 	If ($sOfficePortablePath = "") Then
 		__LO_SetPortableServiceManager("")
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 11, 0)
+
 		Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 	EndIf
 
 	$sOfficePortablePath = _PathFull($sOfficePortablePath)
-	If Not FileExists($sOfficePortablePath & "\App") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not FileExists($sOfficePortablePath & "\App") Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 	$sProgramDir = $sOfficePortablePath & "\App\libreoffice\program"
 	$sExecutable = $sProgramDir & "\soffice.exe"
 	If Not FileExists($sExecutable) Then
 		$sProgramDir = $sOfficePortablePath & "\App\openoffice\program"
 		$sExecutable = $sProgramDir & "\soffice.exe"
-		If Not FileExists($sExecutable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not FileExists($sExecutable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
 		__LO_SetPortableServiceManager($sOfficePortablePath, $sProgramDir, $bRegistryFree, $iTimeoutMs)
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 12, 0)
+
 		Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 	EndIf
 
 	__LO_SetPortableServiceManager($sOfficePortablePath, $sProgramDir, $bRegistryFree, $iTimeoutMs)
 	Local $iError = @error, $iExtended = @extended
 	If $iError Then
-		If Not $bRegistryFree Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-		If $iError = $__LO_STATUS_PROCESSING_ERROR Then Return SetError($iError, $iExtended + 1, 0)
+		If Not $bRegistryFree Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 13, 0)
+
 		Return SetError($iError, $iExtended, 0)
 	EndIf
 
@@ -1211,6 +1371,9 @@ EndFunc   ;==>_LO_PrintersGetNamesAlt
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create a ServiceManager Object.
 ;                  @Error: 2, @Extended: 2 = Failed to create a com.sun.star.frame.Desktop Object.
+;                  @Error: 2, @Extended: 3 = Failed to create an enumeration of open documents.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve component Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $bForceClose is called with False, and there are no open Documents, the background instance of soffice.bin will be terminated.
@@ -1240,10 +1403,12 @@ Func _LO_Terminate($bForceClose = False, $iSleep = 250)
 
 	If Not $bForceClose Then
 		$oEnumeration = $oDesktop.getComponents.createEnumeration()
-		If Not IsObj($oEnumeration) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+		If Not IsObj($oEnumeration) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
+
 		While $oEnumeration.hasMoreElements()
 			$oComponent = $oEnumeration.nextElement()
-			If Not IsObj($oComponent) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+			If Not IsObj($oComponent) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
 			If Not $oComponent.supportsService("com.sun.star.frame.StartModule") Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
 			$oComponent = Null
 		WEnd

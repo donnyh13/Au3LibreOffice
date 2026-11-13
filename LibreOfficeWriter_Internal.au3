@@ -123,7 +123,7 @@
 ;                  $vVar7               - [optional] Default is Null. The variable to test if it is set to Default keyword.
 ;                  $vVar8               - [optional] Default is Null. The variable to test if it is set to Default keyword.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = If Any parameters are equal to Default, True is returned. Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Returning True if Any parameters are equal to Default, else False.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -473,7 +473,7 @@ EndFunc   ;==>__LOWriter_CharBorder
 ;                  @Error: 1, @Extended: 2 = $iAll not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iTop not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iBottom not an Integer.
-;                  @Error: 1, @Extended: 5 = $Left not an Integer.
+;                  @Error: 1, @Extended: 5 = $iLeft not an Integer.
 ;                  @Error: 1, @Extended: 6 = $iRight not an Integer.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
@@ -738,7 +738,7 @@ EndFunc   ;==>__LOWriter_CharFont
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve old Transparency value.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $FontColor
+;                  |                               1 = Error setting $iFontColor
 ;                  |                               2 = Error setting $iTransparency.
 ;                  |                               4 = Error setting $iHighlight
 ;                  --Version Related Errors--
@@ -1409,7 +1409,7 @@ EndFunc   ;==>__LOWriter_CreatePoint
 ;                  $bIsDate             - [optional] Default is False. If True, the comparison is two Date Structures.
 ;                  $bIsTime             - [optional] Default is False. If True, the comparison is two Time Structures.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the Dates/Times in $tDateStruct1 and $tDateStruct2 are the same, True is returned. Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Dates/Times in $tDateStruct1 and $tDateStruct2 are the same, else False.
 ;                  Failure: False and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $tDateStruct1 not an Object.
@@ -1851,9 +1851,10 @@ EndFunc   ;==>__LOWriter_FilterNameGet
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Setting was successfully updated or added.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $aArray not an Array.
+;                  @Error: 1, @Extended: 1 = $atArray not an Array.
 ;                  @Error: 1, @Extended: 2 = $tSetting not an Object.
-;                  @Error: 1, @Extended: 3 = $sSettingName not a String.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Setting Name not a String.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1872,7 +1873,7 @@ Func __LOWriter_FindFormatAddSetting(ByRef $atArray, $tSetting)
 	If Not IsObj($tSetting) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$sSettingName = $tSetting.Name()
-	If Not IsString($sSettingName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If Not IsString($sSettingName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	For $i = 0 To UBound($atArray) - 1
 		If $atArray[$i].Name() = $sSettingName Then
@@ -1902,7 +1903,7 @@ EndFunc   ;==>__LOWriter_FindFormatAddSetting
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Setting was either not found or was successfully deleted.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $aArray not an Array
+;                  @Error: 1, @Extended: 1 = $atArray not an Array
 ;                  @Error: 1, @Extended: 2 = $sSettingName not a String.
 ; Author ........: donnyh13
 ; Modified ......:
@@ -2164,13 +2165,13 @@ EndFunc   ;==>__LOWriter_FormConGetObj
 ; Description ...: Identify the type of Control being called, or return the Service name of a control type.
 ; Syntax ........: __LOWriter_FormConIdentify($oObj[, $iControlType = Null])
 ; Parameters ....: $oObj                - A Control object returned by a previous _LOWriter_FormConInsert, _LOWriter_FormConTableConColumnAdd or _LOWriter_FormConsGetList function.
-;                  $iControlType        - [optional] (1-524288) Default is Null. The Control Type Constant. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iControlType        - [optional] (1-2097151) Default is Null. The Control Type Constant. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Integer or String
 ;                  @Error: 0, @Extended: 0, Return: Integer = Success. Returning Constant value for Control type.
 ;                  @Error: 0, @Extended: 1, Return: String = Success. Returning requested Control type's service name.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oObj not an Object, and $iControlType not an Integer, less than 1 or greater than 524288. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 1 = $oObj not an Object, and $iControlType not an Integer, less than 1 or greater than 2097151. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to identify Control, or return requested Service name.
 ; Author ........: donnyh13
@@ -2184,11 +2185,12 @@ Func __LOWriter_FormConIdentify($oObj, $iControlType = Null)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $avControls[20][2] = [["com.sun.star.form.component.CheckBox", $LOW_FORM_CON_TYPE_CHECK_BOX], ["com.sun.star.form.component.ComboBox", $LOW_FORM_CON_TYPE_COMBO_BOX], _
+	Local $avControls[21][2] = [["com.sun.star.form.component.CheckBox", $LOW_FORM_CON_TYPE_CHECK_BOX], ["com.sun.star.form.component.ComboBox", $LOW_FORM_CON_TYPE_COMBO_BOX], _
 			["com.sun.star.form.component.CurrencyField", $LOW_FORM_CON_TYPE_CURRENCY_FIELD], ["com.sun.star.form.component.DateField", $LOW_FORM_CON_TYPE_DATE_FIELD], _
 			["com.sun.star.form.component.FileControl", $LOW_FORM_CON_TYPE_FILE_SELECTION], ["com.sun.star.form.component.FormattedField", $LOW_FORM_CON_TYPE_FORMATTED_FIELD], _
 			["com.sun.star.form.component.GroupBox", $LOW_FORM_CON_TYPE_GROUP_BOX], ["com.sun.star.form.component.GroupBox", $LOW_FORM_CON_TYPE_GROUPED_CONTROL], _ ; This will never match as the previous group box will be tested first. This is added here for completeness of the constants and for creating a grouped control. com.sun.star.drawing.GroupShape
-			["com.sun.star.form.component.ImageButton", $LOW_FORM_CON_TYPE_IMAGE_BUTTON], ["com.sun.star.form.component.DatabaseImageControl", $LOW_FORM_CON_TYPE_IMAGE_CONTROL], _ ; This seems to be used instead of this--> "com.sun.star.form.control.ImageControl"
+			["com.sun.star.form.component.HiddenControl", $LOW_FORM_CON_TYPE_HIDDEN_CONTROL], ["com.sun.star.form.component.ImageButton", $LOW_FORM_CON_TYPE_IMAGE_BUTTON], _
+			["com.sun.star.form.component.DatabaseImageControl", $LOW_FORM_CON_TYPE_IMAGE_CONTROL], _ ; This seems to be used instead of this--> "com.sun.star.form.control.ImageControl"
 			["com.sun.star.form.component.FixedText", $LOW_FORM_CON_TYPE_LABEL], ["com.sun.star.form.component.ListBox", $LOW_FORM_CON_TYPE_LIST_BOX], _
 			["com.sun.star.form.component.NavigationToolBar", $LOW_FORM_CON_TYPE_NAV_BAR], ["com.sun.star.form.component.NumericField", $LOW_FORM_CON_TYPE_NUMERIC_FIELD], _
 			["com.sun.star.form.component.RadioButton", $LOW_FORM_CON_TYPE_OPTION_BUTTON], ["com.sun.star.form.component.PatternField", $LOW_FORM_CON_TYPE_PATTERN_FIELD], _
@@ -2206,6 +2208,10 @@ Func __LOWriter_FormConIdentify($oObj, $iControlType = Null)
 		ElseIf $oObj.supportsService("com.sun.star.drawing.GroupShape") Then ; If a Group shape, it is a Grouped control.
 
 			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_FORM_CON_TYPE_GROUPED_CONTROL)
+
+		ElseIf $oObj.supportsService("com.sun.star.form.component.HiddenControl") Then
+
+			Return SetError($__LO_STATUS_SUCCESS, 0, $LOW_FORM_CON_TYPE_HIDDEN_CONTROL)
 
 		Else     ; Normal control housed in a shape.
 			For $i = 0 To UBound($avControls) - 1
@@ -4280,10 +4286,10 @@ EndFunc   ;==>__LOWriter_InternalComErrorHandler
 ; Syntax ........: __LOWriter_IsCellRange(ByRef $oCell)
 ; Parameters ....: $oCell               - A Table Cell or Cell Range Object returned by a previous _LOWriter_TableCellGetObjByCursor, _LOWriter_TableCellGetObjByName, or _LOWriter_TableCellGetObjByPosition function.
 ; Return values .: Success: Boolean.
-;                  @Error: 0, @Extended: 0, Return: Boolean = If the cell object is a Cell Range, True is returned. Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Returning True if the cell object is a Cell Range, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oTable not an Object.
+;                  @Error: 1, @Extended: 1 = $oCell not an Object.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to determine if Cell Object is a Range.
 ; Author ........: donnyh13
@@ -4398,7 +4404,7 @@ EndFunc   ;==>__LOWriter_NumRuleCreateMap
 ;                  @Error: 0, @Extended: 1, Return: String = Success. A String used for modifying ListFormat Numbering Style setting.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oNumRules not an Object.
+;                  @Error: 1, @Extended: 1 = $atNumLevel not an Array.
 ;                  @Error: 1, @Extended: 2 = $iLevel not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iSubLevels not an Integer.
 ;                  --Initialization Errors--
@@ -5567,7 +5573,7 @@ EndFunc   ;==>__LOWriter_ParAreaTransparencyGradientMulti
 ;                  @Error: 1, @Extended: 2 = $iAll not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iTop not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iBottom not an Integer.
-;                  @Error: 1, @Extended: 5 = $Left not an Integer.
+;                  @Error: 1, @Extended: 5 = $iLeft not an Integer.
 ;                  @Error: 1, @Extended: 6 = $iRight not an Integer.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
@@ -5658,7 +5664,7 @@ EndFunc   ;==>__LOWriter_ParBorderPadding
 ;                  @Error: 1, @Extended: 2 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 3 = $iNumChar not an Integer, less than 0 or greater than 9.
 ;                  @Error: 1, @Extended: 4 = $iLines not an Integer, less than 0, equal to 1 or greater than 9
-;                  @Error: 1, @Extended: 5 = $iSpaceTxt not an Integer, or less than 0.
+;                  @Error: 1, @Extended: 5 = $iSpcTxt not an Integer, or less than 0.
 ;                  @Error: 1, @Extended: 6 = $bWholeWord not a Boolean.
 ;                  @Error: 1, @Extended: 7 = $sCharStyle not a String.
 ;                  @Error: 1, @Extended: 8 = Character Style called in $sCharStyle not found in current document.
@@ -5901,8 +5907,8 @@ EndFunc   ;==>__LOWriter_ParHyphenation
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
-;                  @Error: 1, @Extended: 2 = $iBeforeText not an Integer, less than -9998989 or greater than 17094.
-;                  @Error: 1, @Extended: 3 = $iAfterText not an Integer, less than -9998989 or greater than 17094.
+;                  @Error: 1, @Extended: 2 = $iBeforeTxt not an Integer, less than -9998989 or greater than 17094.
+;                  @Error: 1, @Extended: 3 = $iAfterTxt not an Integer, less than -9998989 or greater than 17094.
 ;                  @Error: 1, @Extended: 4 = $iFirstLine not an Integer, less than -57785 or greater than 17094.
 ;                  @Error: 1, @Extended: 5 = $bAutoFirstLine not a Boolean.
 ;                  --Property Setting Errors--
@@ -6231,7 +6237,7 @@ EndFunc   ;==>__LOWriter_ParShadow
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
 ;                  @Error: 1, @Extended: 2 = $iAbovePar not an Integer, less than 0 or greater than 10008.
 ;                  @Error: 1, @Extended: 3 = $iBelowPar not an Integer, less than 0 or greater than 10008.
-;                  @Error: 1, @Extended: 4 = $bAddSpc not a Boolean.
+;                  @Error: 1, @Extended: 4 = $bAddSpace not a Boolean.
 ;                  @Error: 1, @Extended: 5 = $iLineSpcMode not an Integer, less than 0 or greater than 3. See Constants, $LOW_PAR_LINE_SPC_MODE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error: 1, @Extended: 6 = $iLineSpcHeight not an Integer.
 ;                  @Error: 1, @Extended: 7 = $iLineSpcMode set to 0(Proportional) and $iLineSpcHeight less than 6(%) or greater than 65535(%).
@@ -6595,7 +6601,7 @@ EndFunc   ;==>__LOWriter_ParTabStopDelete
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LOWriter_ParTabStopMod
-; Description ...: Modify or retrieve the properties of an existing TabStop.
+; Description ...: Set or Retrieve the properties of an existing TabStop.
 ; Syntax ........: __LOWriter_ParTabStopMod(ByRef $oObj, $iTabStop[, $iPosition = Null[, $iAlignment = Null[, $iDecChar = Null[, $iFillChar = Null]]]])
 ; Parameters ....: $oObj                - Paragraph Style Object or a Cursor or Paragraph Object.
 ;                  $iTabStop            - The Tab position of the TabStop to modify. See Remarks.
@@ -8740,7 +8746,7 @@ Func __LOWriter_ShapeLineStyleName($iLineStyle = Null, $sLineStyle = Null)
 	$asLineStyles[$LOW_SHAPE_LINE_STYLE_ULTRAFINE_DASHED] = "Ultrafine Dashed"
 	$asLineStyles[$LOW_SHAPE_LINE_STYLE_FINE_DASHED] = "Fine Dashed"
 	$asLineStyles[$LOW_SHAPE_LINE_STYLE_DASHED] = "Dashed (var)"
-	$asLineStyles[$LOW_SHAPE_LINE_STYLE_SPARSE_DASH] = "Line Style 9"
+	$asLineStyles[$LOW_SHAPE_LINE_STYLE_SPARSE_DASH] = "Sparse Dash"
 	$asLineStyles[$LOW_SHAPE_LINE_STYLE_3_DASHES_3_DOTS] = "3 Dashes 3 Dots (var)"
 	$asLineStyles[$LOW_SHAPE_LINE_STYLE_ULTRAFINE_2_DOTS_3_DASHES] = "Ultrafine 2 Dots 3 Dashes"
 	$asLineStyles[$LOW_SHAPE_LINE_STYLE_2_DOTS_1_DASH] = "2 Dots 1 Dash"
@@ -9588,7 +9594,7 @@ EndFunc   ;==>__LOWriter_TableBorder
 ; Parameters ....: $oTable              - A Table Object returned by a previous _LOWriter_TableInsert, _LOWriter_TableGetObjByCursor, or _LOWriter_TableGetObjByName function.
 ;                  $sCellName           - The requested cell name.
 ; Return values .: Success: Boolean.
-;                  @Error: 0, @Extended: 0, Return: Boolean = If the table contains the requested Cell Name, True is returned. Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Returning True if the table contains the requested Cell Name, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
