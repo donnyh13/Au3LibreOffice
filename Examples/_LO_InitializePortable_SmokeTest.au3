@@ -28,6 +28,7 @@ Func Example($sPortableRoot, $bRegistryFree = Default)
 	Local $sExpected = _PathFull($sPortableRoot) & "\Data\settings\user"
 	If _LO_PathConvert($sProfile, $LO_PATHCONV_PCPATH_RETURN) <> $sExpected Then
 		ConsoleWrite("Unexpected LibreOffice profile: " & $sProfile & @CRLF)
+
 		Return 1
 	EndIf
 	ConsoleWrite("Portable profile verified: " & $sProfile & @CRLF)
@@ -56,10 +57,12 @@ Func Example($sPortableRoot, $bRegistryFree = Default)
 
 	Local $bTerminated = _LO_Terminate()
 	If @error Or Not $bTerminated Then Return _ExampleError("_LO_Terminate", @error, @extended)
+
 	Return ($bCalc And $bWriter) ? 0 : 1
-EndFunc   ;==>Example
+EndFunc
 
 Func _ExampleError($sStep, $iError, $iExtended)
 	ConsoleWrite($sStep & " failed. @error=" & $iError & " @extended=" & $iExtended & @CRLF)
+
 	Return 1
-EndFunc   ;==>_ExampleError
+EndFunc
