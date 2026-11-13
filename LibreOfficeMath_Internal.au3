@@ -66,7 +66,7 @@ Func __LOMath_FilterNameGet(ByRef $sDocSavePath, $bExportFilters = False)
 	$msSaveAsFilters[".sxm"] = "StarOffice XML (Math"
 
 	If $bExportFilters Then
-		$msExportFilters[".pdf"] = "Math_pdf_Export"
+		$msExportFilters[".pdf"] = "math_pdf_Export"
 	EndIf
 
 	If StringInStr($sDocSavePath, "file:///") Then ;  If L.O. URl Then
