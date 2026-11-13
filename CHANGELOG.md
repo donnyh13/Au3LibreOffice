@@ -30,12 +30,17 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 #### Changed
 
-- Added Registry-Free method for initializing LibreOffice Portable. (@mLipok).
+- Added registry-free initialization for LibreOffice Portable and OpenOffice Portable. (@mLipok, @donnyh13).
+- Added a configurable startup timeout and automatic reconnection using the last successful Portable connection settings. (@mLipok).
 
 #### Fixed
 
-- Typo in Registry key. (@mLipok).
-- Missing quotation marks in path. (@mLipok).
+- Typos in Registry keys. (@mLipok).
+- Fixed Portable initialization when the executable path contains spaces. (@mLipok).
+- Initializing OpenOffice portable would fail due to incompatible flags. (@mLipok).
+- Fixed COM initialization errors when using 32-bit OpenOffice Portable alongside installed 64-bit LibreOffice. (@mLipok).
+- Fixed _LO_Terminate() failing to close an instance with only its Start Center open, while preserving protection for open documents. (@mLipok).
+- Fixed explicit registry-free initialization being replaced with the registry-based method and restored rejection of invalid initialization-mode arguments. (@mLipok).
 
 ### LibreOfficeBase
 
