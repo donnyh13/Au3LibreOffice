@@ -562,9 +562,11 @@ Func __LO_PortableBootstrap($sExecutable)
 		Local $tObject = DllStructCreate("ptr", $aCreate[5])
 		Local $tVTable = DllStructCreate("ptr QueryInterface;ptr AddRef;ptr Release", DllStructGetData($tObject, 1))
 		DllCallAddress("ulong", DllStructGetData($tVTable, "Release"), "ptr", $aCreate[5])
+
 		Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
 	EndIf
 	; The AutoIt wrapper owns the IDispatch reference returned by CoCreateInstance.
+
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oBootstrap)
 EndFunc   ;==>__LO_PortableBootstrap
 
@@ -610,6 +612,7 @@ Func __LO_ServiceManager($oServiceManager = Null, $bPortable = Null)
 
 		Else
 			If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
 			; OpenOffice exposes RegistryServiceManager instead of ServiceManager.
 			If Not $oServiceManager.supportsService("com.sun.star.lang.ServiceManager") And Not $oServiceManager.supportsService("com.sun.star.lang.RegistryServiceManager") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
@@ -720,16 +723,20 @@ Func __LO_SetPortableServiceManager($sPortableLO_Path = Null, $sProgramDir = Nul
 			Return SetError($__LO_STATUS_SUCCESS, 0, 2)
 		EndIf
 		If Not IsString($sProgramDir) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
 		$sExecutable = $sProgramDir & "\soffice.exe"
 		$sProfile = _LO_PathConvert($sPortableLO_Path & "\Data\settings", $LO_PATHCONV_OFFICE_RETURN)
 		If Not FileExists($sExecutable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
 	Else
 		If ($sStaticPortablePath = "") Or ($sStaticProgramDir = "") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
 		$sPortableLO_Path = $sStaticPortablePath
 		$sProgramDir = $sStaticProgramDir
 		$sExecutable = $sProgramDir & "\soffice.exe"
 		$sProfile = _LO_PathConvert($sStaticPortablePath & "\Data\settings", $LO_PATHCONV_OFFICE_RETURN)
 		If Not FileExists($sExecutable) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
 		$iTimeoutMs = $iStaticTimeoutMs
 		$bRegistryFree = $bStaticIsRegFree
 	EndIf
@@ -886,11 +893,11 @@ Func __LO_SetPortableServiceManager($sPortableLO_Path = Null, $sProgramDir = Nul
 			If (@error = 0) Then OnAutoItExitUnRegister("__LO_DeleteTempReg")
 			$bTempReg = False
 		EndIf
-
 	EndIf
 
 	__LO_ServiceManager($oPortable_ServiceManager, True) ; Set the stored ServiceManager.
 	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
+
 	$sStaticPortablePath = $sPortableLO_Path
 	$sStaticProgramDir = $sProgramDir
 	$bStaticIsRegFree = $bRegistryFree

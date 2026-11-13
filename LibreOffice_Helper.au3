@@ -1102,6 +1102,7 @@ Func _LO_InitializePortable($sOfficePortablePath, $bRegistryFree = Default, $iTi
 	Local $bAutomaticMode = (IsKeyword($bRegistryFree) = 1)
 	If Not IsString($sOfficePortablePath) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $bAutomaticMode And Not IsBool($bRegistryFree) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
 	If $bAutomaticMode Then $bRegistryFree = True
 	If Not __LO_IntIsBetween($iTimeoutMs, 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
@@ -1109,6 +1110,7 @@ Func _LO_InitializePortable($sOfficePortablePath, $bRegistryFree = Default, $iTi
 	If ($sOfficePortablePath = "") Then
 		__LO_SetPortableServiceManager("")
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
 		Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 	EndIf
 
@@ -1121,8 +1123,10 @@ Func _LO_InitializePortable($sOfficePortablePath, $bRegistryFree = Default, $iTi
 		$sProgramDir = $sOfficePortablePath & "\App\openoffice\program"
 		$sExecutable = $sProgramDir & "\soffice.exe"
 		If Not FileExists($sExecutable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
 		__LO_SetPortableServiceManager($sOfficePortablePath, $sProgramDir, $bRegistryFree, $iTimeoutMs)
 		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
 		Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 	EndIf
 
@@ -1130,7 +1134,9 @@ Func _LO_InitializePortable($sOfficePortablePath, $bRegistryFree = Default, $iTi
 	Local $iError = @error, $iExtended = @extended
 	If $iError Then
 		If Not $bRegistryFree Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
 		If $iError = $__LO_STATUS_PROCESSING_ERROR Then Return SetError($iError, $iExtended + 1, 0)
+
 		Return SetError($iError, $iExtended, 0)
 	EndIf
 
@@ -1388,9 +1394,11 @@ Func _LO_Terminate($bForceClose = False, $iSleep = 250)
 	If Not $bForceClose Then
 		$oEnumeration = $oDesktop.getComponents.createEnumeration()
 		If Not IsObj($oEnumeration) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
 		While $oEnumeration.hasMoreElements()
 			$oComponent = $oEnumeration.nextElement()
 			If Not IsObj($oComponent) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
 			If Not $oComponent.supportsService("com.sun.star.frame.StartModule") Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
 			$oComponent = Null
 		WEnd
