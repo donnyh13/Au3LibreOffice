@@ -187,17 +187,17 @@ EndFunc   ;==>_LOBasic_MacroExecuteLinkCreate
 ; Description ...: Set or Retrieve Macro execution link values.
 ; Syntax ........: _LOBasic_MacroExecuteLinkModify($sMacroLink[, $sLibrary = Null[, $sModule = Null[, $sMacro = Null[, $sLanguageType = Null[, $bMacroInDoc = Null]]]]])
 ; Parameters ....: $sMacroLink          - The Macro Execution Link to modify.
-;                  $sLibrary            - The Library name containing the Module. See remarks.
-;                  $sModule             - The Module name containing the Macro. See remarks.
-;                  $sMacro              - The Macro to execute.
-;                  $sLanguageType       - The language type of the Macro. Usually this is "Basic".
-;                  $bMacroInDoc         - If True, the Macro to be called is contained in a Document, Else it is stored in the LibreOffice Application library.
+;                  $sLibrary            - [optional] Default is Null. The Library name containing the Module. See remarks.
+;                  $sModule             - [optional] Default is Null. The Module name containing the Macro. See remarks.
+;                  $sMacro              - [optional] Default is Null. The Macro to execute.
+;                  $sLanguageType       - [optional] Default is Null. The language type of the Macro. Usually this is "Basic".
+;                  $bMacroInDoc         - [optional] Default is Null. If True, the Macro to be called is contained in a Document, Else it is stored in the LibreOffice Application library.
 ; Return values .: Success: String or Array.
 ;                  @Error: 0, @Extended: 0, Return: String = Success. Settings were successfully set. Returning new Macro Execution link.
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 5 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oLibContainer not a String.
+;                  @Error: 1, @Extended: 1 = $sMacroLink not a String.
 ;                  @Error: 1, @Extended: 2 = $sLibrary not a String.
 ;                  @Error: 1, @Extended: 3 = Name called in $sLibrary contains invalid characters or starts with an invalid character.
 ;                  @Error: 1, @Extended: 4 = $sModule not a String.
@@ -256,33 +256,33 @@ Func _LOBasic_MacroExecuteLinkModify($sMacroLink, $sLibrary = Null, $sModule = N
 	If ($sLibrary <> Null) Then
 		If Not IsString($sLibrary) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, $sMacroLink)
 		If Not StringRegExp($sLibrary, "^[a-zA-Z_]\w+$") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, $sMacroLink)
-		$sCurrLib = $sLibrary
 
+		$sCurrLib = $sLibrary
 	EndIf
 
 	If ($sModule <> Null) Then
 		If Not IsString($sModule) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, $sMacroLink)
 		If Not StringRegExp($sModule, "^[a-zA-Z_]\w+$") Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, $sMacroLink)
-		$sCurrModule = $sModule
 
+		$sCurrModule = $sModule
 	EndIf
 
 	If ($sMacro <> Null) Then
 		If Not IsString($sMacro) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, $sMacroLink)
-		$sCurrMacro = $sMacro
 
+		$sCurrMacro = $sMacro
 	EndIf
 
 	If ($sLanguageType <> Null) Then
 		If Not IsString($sLanguageType) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, $sMacroLink)
-		$sCurrLangType = $sLanguageType
 
+		$sCurrLangType = $sLanguageType
 	EndIf
 
 	If ($bMacroInDoc <> Null) Then
 		If Not IsBool($bMacroInDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 8, $sMacroLink)
-		$bCurrInDoc = $bMacroInDoc
 
+		$bCurrInDoc = $bMacroInDoc
 	EndIf
 
 	$sNewMacroLink = "vnd.sun.star.script:" & $sCurrLib & "." & $sCurrModule & "." & $sCurrMacro & "?language=" & $sCurrLangType & "&location=" & (($bMacroInDoc) ? ("document") : ("application"))
