@@ -1071,18 +1071,27 @@ EndFunc   ;==>_LO_GradientMulticolorModify
 ; Return values .: Success: 1.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  @Error: 1, @Extended: 1 = $sOfficePortablePath is not a string.
-;                  @Error: 1, @Extended: 2 = The Portable root does not contain the App folder.
-;                  @Error: 1, @Extended: 3 = Portable soffice.exe not found.
-;                  @Error: 1, @Extended: 4 = $bRegistryFree is neither a Boolean nor Default.
-;                  @Error: 1, @Extended: 5 = $iTimeoutMs is not a positive integer.
-;                  @Error: 2, @Extended: 1 = Timed out obtaining a COM ServiceManager / UNO URL resolver in registry-free mode.
-;                  @Error: 2, @Extended: 2 = Timed out connecting to the requested instance in registry-free mode.
-;                  @Error: 2, @Extended: 3 = Failed to store the registry-free ServiceManager.
-;                  @Error: 3, @Extended: 1 = Failed to clear the stored Portable ServiceManager.
-;                  @Error: 3, @Extended: 2 = Failed to initialize LibreOffice Portable using the registry-based method.
-;                  @Error: 3, @Extended: 3 = Failed to initialize OpenOffice Portable.
-;                  @Error: 3, @Extended: 4 = Failed to generate the UNO pipe name.
-;                  @Error: 3, @Extended: 5 = Failed to launch LibreOffice Portable in registry-free mode.
+;                  @Error: 1, @Extended: 2 = $bRegistryFree is neither a Boolean nor Default.
+;                  @Error: 1, @Extended: 3 = $iTimeoutMs is not a positive integer.
+;                  @Error: 1, @Extended: 4 = The Portable root does not contain the App folder.
+;                  @Error: 1, @Extended: 5 = Portable soffice.exe not found.
+;                  @Error: 2, @Extended: 1 = Failed to generate the UNO pipe name.
+;                  @Error: 2, @Extended: 2 = Timed out creating a COM ServiceManager / UNO URL resolver in registry-free mode.
+;                  @Error: 2, @Extended: 3 = Failed to Bootstrap sOffice.exe executable Object.
+;                  @Error: 2, @Extended: 4 = Failed to create "com.sun.star.bridge.UnoUrlResolver" Object.
+;                  @Error: 3, @Extended: 1 = No stored Portable LibreOffice or Program Directory path.
+;                  @Error: 3, @Extended: 2 = Stored Portable LibreOffice path no longer exists.
+;                  @Error: 3, @Extended: 3 = Failed to launch LibreOffice Portable in registry-free mode.
+;                  @Error: 3, @Extended: 4 = Timed out connecting to the requested instance in registry-free mode.
+;                  @Error: 3, @Extended: 5 = Failed to add temporary Registry keys.
+;                  @Error: 3, @Extended: 6 = Failed to start Portable LibreOffice in listening mode.
+;                  @Error: 3, @Extended: 7 = Portable LibreOffice failed to start in listening mode
+;                  @Error: 3, @Extended: 8 = Failed to connect to Portable LibreOffice.
+;                  @Error: 3, @Extended: 9 = Failed to retrieve ServiceManager from Portable LibreOffice.
+;                  @Error: 3, @Extended: 10 = Failed to store the Portable ServiceManager.
+;                  @Error: 3, @Extended: 11 = Failed to clear the stored Portable ServiceManager.
+;                  @Error: 3, @Extended: 12 = Failed to initialize OpenOffice Portable.
+;                  @Error: 3, @Extended: 13 = Failed to initialize LibreOffice Portable using the registry-based method.
 ; Author ........: mLipok, donnyh13
 ; Modified ......: mLipok
 ; Remarks .......: LibreOffice Portable defaults to a local UNO pipe and uses the Data\settings profile in the Portable root.
@@ -1101,31 +1110,31 @@ Func _LO_InitializePortable($sOfficePortablePath, $bRegistryFree = Default, $iTi
 	Local $sProgramDir, $sExecutable
 	Local $bAutomaticMode = (IsKeyword($bRegistryFree) = 1)
 	If Not IsString($sOfficePortablePath) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
-	If Not $bAutomaticMode And Not IsBool($bRegistryFree) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+	If Not $bAutomaticMode And Not IsBool($bRegistryFree) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	If $bAutomaticMode Then $bRegistryFree = True
-	If Not __LO_IntIsBetween($iTimeoutMs, 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If Not __LO_IntIsBetween($iTimeoutMs, 1) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 	$sOfficePortablePath = StringRegExpReplace($sOfficePortablePath, "^\s+|\s+$", "")
 	If ($sOfficePortablePath = "") Then
 		__LO_SetPortableServiceManager("")
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 11, 0)
 
 		Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 	EndIf
 
 	$sOfficePortablePath = _PathFull($sOfficePortablePath)
-	If Not FileExists($sOfficePortablePath & "\App") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not FileExists($sOfficePortablePath & "\App") Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 	$sProgramDir = $sOfficePortablePath & "\App\libreoffice\program"
 	$sExecutable = $sProgramDir & "\soffice.exe"
 	If Not FileExists($sExecutable) Then
 		$sProgramDir = $sOfficePortablePath & "\App\openoffice\program"
 		$sExecutable = $sProgramDir & "\soffice.exe"
-		If Not FileExists($sExecutable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+		If Not FileExists($sExecutable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		__LO_SetPortableServiceManager($sOfficePortablePath, $sProgramDir, $bRegistryFree, $iTimeoutMs)
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 12, 0)
 
 		Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 	EndIf
@@ -1133,9 +1142,7 @@ Func _LO_InitializePortable($sOfficePortablePath, $bRegistryFree = Default, $iTi
 	__LO_SetPortableServiceManager($sOfficePortablePath, $sProgramDir, $bRegistryFree, $iTimeoutMs)
 	Local $iError = @error, $iExtended = @extended
 	If $iError Then
-		If Not $bRegistryFree Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
-
-		If $iError = $__LO_STATUS_PROCESSING_ERROR Then Return SetError($iError, $iExtended + 1, 0)
+		If Not $bRegistryFree Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 13, 0)
 
 		Return SetError($iError, $iExtended, 0)
 	EndIf
@@ -1364,6 +1371,9 @@ EndFunc   ;==>_LO_PrintersGetNamesAlt
 ;                  --Initialization Errors--
 ;                  @Error: 2, @Extended: 1 = Failed to create a ServiceManager Object.
 ;                  @Error: 2, @Extended: 2 = Failed to create a com.sun.star.frame.Desktop Object.
+;                  @Error: 2, @Extended: 3 = Failed to create an enumeration of open documents.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve component Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If $bForceClose is called with False, and there are no open Documents, the background instance of soffice.bin will be terminated.
@@ -1393,11 +1403,11 @@ Func _LO_Terminate($bForceClose = False, $iSleep = 250)
 
 	If Not $bForceClose Then
 		$oEnumeration = $oDesktop.getComponents.createEnumeration()
-		If Not IsObj($oEnumeration) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+		If Not IsObj($oEnumeration) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
 
 		While $oEnumeration.hasMoreElements()
 			$oComponent = $oEnumeration.nextElement()
-			If Not IsObj($oComponent) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+			If Not IsObj($oComponent) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 			If Not $oComponent.supportsService("com.sun.star.frame.StartModule") Then Return SetError($__LO_STATUS_SUCCESS, 0, False)
 			$oComponent = Null
