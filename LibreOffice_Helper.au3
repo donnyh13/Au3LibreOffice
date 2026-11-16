@@ -1069,6 +1069,7 @@ EndFunc   ;==>_LO_GradientMulticolorModify
 ;                                        True requires registry-free initialization. False selects the registry-based method.
 ;                  $iTimeoutMs          - [optional] Default is 15000. Positive integer in milliseconds for startup polling.
 ; Return values .: Success: 1.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Initialized Portable LibreOffice or OpenOffice, or cleared the stored connection.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  @Error: 1, @Extended: 1 = $sOfficePortablePath is not a string.
 ;                  @Error: 1, @Extended: 2 = $bRegistryFree is neither a Boolean nor Default.
