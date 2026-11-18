@@ -10,12 +10,12 @@ This [AutoIt](https://www.autoitscript.com/) UDF for [LibreOffice API/SDK](https
 
 Au3LibreOffice UDF currently provides support for the following LibreOffice components:
 
-- **Writer**
-- **Calc**
 - **Base**
-- ~~Impress~~ ***Development Pending***
-
-Support for other components will be provided as time permits.
+- **Calc**
+- **Draw**
+- **Impress**
+- **Math**
+- **Writer**
 
 ## Release
 
@@ -36,7 +36,7 @@ Distributed under the MIT License. See the [LICENSE](LICENSE) for more informati
 ## Notes
 
 - ~~This UDF currently works **only** with the **INSTALLED** version of LibreOffice. The **Portable** version will **Not work**.~~
-- `_LO_InitializePortable($sOfficePortablePath)` defaults to registry-free initialization for LibreOffice Portable and the registry-based method for OpenOffice Portable. Pass `True` as the second argument to require registry-free initialization or `False` to select the registry-based method. The optional third argument controls startup polling in milliseconds (default: 15000).
+- `_LO_InitializePortable($sOfficePortablePath)` defaults to registry-free initialization for LibreOffice Portable and OpenOffice Portable. Pass `True` as the second argument to require registry-free initialization or `False` to select the registry-based method. The optional third argument controls startup polling in milliseconds (default: 15000).
 - For those using AutoIt versions **older** than ***3.3.16.1,*** some functions use Maps, which will **Not** be recognized as proper syntax in the older AutoIt versions.
 - LibreOffice uses Hundredths of a Millimeter (100th MM) for sizing internally, all functions in this UDF, unless otherwise stated, use these units. A converter has been created for converting Inches, Centimeters, Printer’s Points, and Millimeters to/from 100th MMs, for all sizing needs. `_LO_UnitConvert`.
 - LibreOffice uses RGB color value as a long integer for all color settings, A converter has also been created for converting from/to Hex; (R)ed, (G)reen, (Blue); (H)ue, (S)aturation, and (B)rightness; and (C)yan, (M)agenta, (Y)ellow, Blac(K); to/from long integer RGB color value. `_LO_ConvertColorFromLong`, and `_LO_ConvertColorToLong`.

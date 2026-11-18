@@ -387,7 +387,7 @@ EndFunc   ;==>_LOWriter_NumStyleCustomize
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oNumStyle           - A Numbering Style object returned by a previous _LOWriter_NumStyleCreate, or _LOWriter_NumStyleGetObjByName function.
 ; Return values .: Success: 1
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. $sNumStyle was successfully deleted.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. $oNumStyle was successfully deleted.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
@@ -396,9 +396,9 @@ EndFunc   ;==>_LOWriter_NumStyleCustomize
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Error retrieving "Numbering Styles" Object.
 ;                  @Error: 3, @Extended: 2 = Error retrieving Numbering Style Name.
-;                  @Error: 3, @Extended: 3 = $sNumStyle is not a User-Created Numbering Style and cannot be deleted.
-;                  @Error: 3, @Extended: 4 = $sNumStyle is in use and cannot be deleted.
-;                  @Error: 3, @Extended: 5 = $sNumStyle still exists after deletion attempt.
+;                  @Error: 3, @Extended: 3 = $oNumStyle is not a User-Created Numbering Style and cannot be deleted.
+;                  @Error: 3, @Extended: 4 = $oNumStyle is in use and cannot be deleted.
+;                  @Error: 3, @Extended: 5 = $oNumStyle still exists after deletion attempt.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -524,7 +524,7 @@ EndFunc   ;==>_LOWriter_NumStyleGetObjByName
 ;                  @Error: 1, @Extended: 7 = $bHidden not a Boolean.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
-;                  |                               1 = Error setting $sNewParStyleName
+;                  |                               1 = Error setting $sNewNumStyleName
 ;                  |                               2 = Error setting $bHidden
 ;                  --Version Related Errors--
 ;                  @Error: 6, @Extended: 1 = Current LibreOffice version lower than 4.0.

@@ -63,7 +63,7 @@
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ComError_UserFunction
-; Description ...: Set a UserFunction to receive the Fired COM Error Error outside of the UDF.
+; Description ...: Set a UserFunction to receive the Fired COM Error outside of the UDF.
 ; Syntax ........: _LOWriter_ComError_UserFunction([$vUserFunction = Default[, $vParam1 = Null[, $vParam2 = Null[, $vParam3 = Null[, $vParam4 = Null[, $vParam5 = Null]]]]]])
 ; Parameters ....: $vUserFunction       - [optional] Default is Default. Accepts a Function, or the Keyword Default and Null. If called with a User function, the function may have up to 5 required parameters.
 ;                  $vParam1             - [optional] Default is Null. Any optional parameter to be called with the user function.
@@ -242,7 +242,7 @@ EndFunc   ;==>_LOWriter_DateFormatKeyDelete
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $iFormatKey          - The Date Format Key to check for.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the Date/Time Format already exists in document, True is Returned. Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Date/Time Format already exists in document, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
@@ -2267,7 +2267,7 @@ EndFunc   ;==>_LOWriter_FormatKeyDelete
 ;                  $iFormatKey          - The Format Key to look for.
 ;                  $iFormatType         - [optional] (0-15881) Default is $LOW_FORMAT_KEYS_ALL. The Format Key type to search in. Values can be BitOr'd together. See Constants, $LOW_FORMAT_KEYS_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the Format Key exists in document, True is Returned. Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Format Key exists in document, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.

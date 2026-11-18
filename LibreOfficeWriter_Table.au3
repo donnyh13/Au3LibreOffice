@@ -212,7 +212,7 @@ EndFunc   ;==>_LOWriter_TableBorderColor
 ;                  @Error: 1, @Extended: 1 = $oTable not an Object.
 ;                  @Error: 1, @Extended: 2 = $iTop not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iBottom not an Integer.
-;                  @Error: 1, @Extended: 4 = $Left not an Integer.
+;                  @Error: 1, @Extended: 4 = $iLeft not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iRight not an Integer.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Error retrieving TableBorderDistances Object.
@@ -616,7 +616,7 @@ EndFunc   ;==>_LOWriter_TableCellBorderColor
 ;                  @Error: 1, @Extended: 1 = $oCell an Object.
 ;                  @Error: 1, @Extended: 2 = $iTop not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iBottom not an Integer.
-;                  @Error: 1, @Extended: 4 = $Left not an Integer.
+;                  @Error: 1, @Extended: 4 = $iLeft not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iRight not an Integer.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
@@ -1985,7 +1985,7 @@ EndFunc   ;==>_LOWriter_TableDelete
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or_LOWriter_DocCreate function.
 ;                  $sTableName          - The Table name to search for.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If a table was found matching $sTableName, True is returned, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if a table was found matching $sTableName, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
@@ -2737,7 +2737,7 @@ EndFunc   ;==>_LOWriter_TableStyleCurrent
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sTableStyle         - The Table Style Name to search for.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the Document contains the Table style called in $sTableStyle, True is returned, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Document contains the Table style called in $sTableStyle, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.

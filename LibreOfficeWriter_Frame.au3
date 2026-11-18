@@ -176,7 +176,7 @@ EndFunc   ;==>_LOWriter_FrameAreaFillStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FrameAreaGradient
-; Description ...: Modify or retrieve the settings for Frame Background color Gradient.
+; Description ...: Set or Retrieve the settings for Frame Background color Gradient.
 ; Syntax ........: _LOWriter_FrameAreaGradient(ByRef $oDoc, ByRef $oFrame[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oFrame              - A Frame object returned by a previous _LOWriter_FrameCreate, _LOWriter_FrameGetObjByName, or _LOWriter_FrameGetObjByCursor function.
@@ -934,7 +934,7 @@ EndFunc   ;==>_LOWriter_FrameBorderColor
 ;                  @Error: 1, @Extended: 2 = $iAll not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iTop not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iBottom not an Integer.
-;                  @Error: 1, @Extended: 5 = $Left not an Integer.
+;                  @Error: 1, @Extended: 5 = $iLeft not an Integer.
 ;                  @Error: 1, @Extended: 6 = $iRight not an Integer.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
@@ -1600,7 +1600,7 @@ EndFunc   ;==>_LOWriter_FrameDelete
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sFrameName          - The Frame name to search for.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Search was successful, If Frame was found matching $sFrameName True is Returned, else False
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Search was successful, Returning True if Frame was found matching $sFrameName else False
 ;                  @Error: 0, @Extended: 1, Return: Boolean = Success. Search was successful, Frame found matching $sFrameName listed as a shape.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
@@ -2322,7 +2322,7 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaFillStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FrameStyleAreaGradient
-; Description ...: Modify or retrieve the settings for Frame Style Background color Gradient.
+; Description ...: Set or Retrieve the settings for Frame Style Background color Gradient.
 ; Syntax ........: _LOWriter_FrameStyleAreaGradient(ByRef $oDoc, ByRef $oFrameStyle[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
@@ -2662,7 +2662,7 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaGradientMulticolor
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FrameStyleAreaTransparency
-; Description ...: Modify or retrieve Transparency settings for a Frame style.
+; Description ...: Set or Retrieve Transparency settings for a Frame style.
 ; Syntax ........: _LOWriter_FrameStyleAreaTransparency(ByRef $oFrameStyle[, $iTransparency = Null])
 ; Parameters ....: $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
@@ -2714,7 +2714,7 @@ EndFunc   ;==>_LOWriter_FrameStyleAreaTransparency
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FrameStyleAreaTransparencyGradient
-; Description ...: Modify or retrieve the Frame Style transparency gradient settings.
+; Description ...: Set or Retrieve the Frame Style transparency gradient settings.
 ; Syntax ........: _LOWriter_FrameStyleAreaTransparencyGradient(ByRef $oDoc, ByRef $oFrameStyle[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
@@ -3093,7 +3093,7 @@ EndFunc   ;==>_LOWriter_FrameStyleBorderColor
 ;                  @Error: 1, @Extended: 3 = $iAll not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iTop not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iBottom not an Integer.
-;                  @Error: 1, @Extended: 6 = $Left not an Integer.
+;                  @Error: 1, @Extended: 6 = $iLeft not an Integer.
 ;                  @Error: 1, @Extended: 7 = $iRight not an Integer.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
@@ -3289,7 +3289,7 @@ EndFunc   ;==>_LOWriter_FrameStyleBorderWidth
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FrameStyleColumnSeparator
-; Description ...: Modify or retrieve Frame Style Column Separator line settings.
+; Description ...: Set or Retrieve Frame Style Column Separator line settings.
 ; Syntax ........: _LOWriter_FrameStyleColumnSeparator(ByRef $oFrameStyle[, $bSeparatorOn = Null[, $iStyle = Null[, $iWidth = Null[, $iColor = Null[, $iHeight = Null[, $iPosition = Null]]]]]])
 ; Parameters ....: $oFrameStyle         - A Frame Style object returned by a previous _LOWriter_FrameStyleCreate, or _LOWriter_FrameStyleGetObjByName function.
 ;                  $bSeparatorOn        - [optional] Default is Null. If True, add a separator line between two or more columns.
@@ -3736,7 +3736,7 @@ EndFunc   ;==>_LOWriter_FrameStyleCurrent
 ;                  $bForceDelete        - [optional] Default is False. If True, Frame style will be deleted regardless of whether it is in use or not.
 ;                  $sReplacementStyle   - [optional] Default is "Frame". The Frame style to use instead of the one being deleted if the Frame style being deleted was already applied to a Frame in the document.
 ; Return values .: Success: 1
-;                  @Error: 0, @Extended: 0, Return: 1 = Success. Frame Style called in $sFrameStyle was successfully deleted.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Frame Style called in $oFrameStyle was successfully deleted.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
@@ -3748,9 +3748,9 @@ EndFunc   ;==>_LOWriter_FrameStyleCurrent
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Error retrieving "FrameStyles" Object.
 ;                  @Error: 3, @Extended: 2 = Error retrieving Frame Style Name.
-;                  @Error: 3, @Extended: 3 = $sFrameStyle is not a User-Created Frame Style and cannot be deleted.
-;                  @Error: 3, @Extended: 4 = $sFrameStyle is in use and $bForceDelete is False.
-;                  @Error: 3, @Extended: 5 = $sFrameStyle still exists after deletion attempt.
+;                  @Error: 3, @Extended: 3 = $oFrameStyle is not a User-Created Frame Style and cannot be deleted.
+;                  @Error: 3, @Extended: 4 = $oFrameStyle is in use and $bForceDelete is False.
+;                  @Error: 3, @Extended: 5 = $oFrameStyle still exists after deletion attempt.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:

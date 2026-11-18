@@ -775,8 +775,8 @@ EndFunc   ;==>_LOBase_ReportConLabelGeneral
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oLabel not an Object.
-;                  @Error: 1, @Extended: 2 = Object called in $oLabel not a Label Control.
+;                  @Error: 1, @Extended: 1 = $oLine not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oLine not a Line Control.
 ;                  @Error: 1, @Extended: 3 = $sName not a String.
 ;                  @Error: 1, @Extended: 4 = $iVertAlign not an Integer, less than 0 or greater than 2. See Constants $LOB_ALIGN_VERT_* as defined in LibreOfficeBase_Constants.au3.
 ;                  @Error: 1, @Extended: 5 = $iOrient not an Integer, less than 0 or greater than 1. See Constants $LOB_REP_CON_LINE_* as defined in LibreOfficeBase_Constants.au3.
@@ -2331,7 +2331,7 @@ EndFunc   ;==>_LOBase_ReportDocHeader
 ;                  @Error: 0, @Extended: 1, Return: Boolean = Success. Returning True if the document has been modified since last being saved, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oReportDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $bModified not a Boolean.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to query Document whether it has been modified.

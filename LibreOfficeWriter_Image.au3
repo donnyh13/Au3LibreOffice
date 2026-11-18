@@ -154,7 +154,7 @@ EndFunc   ;==>_LOWriter_ImageAreaFillStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ImageAreaGradient
-; Description ...: Modify or retrieve the settings for an Image Background color Gradient.
+; Description ...: Set or Retrieve the settings for an Image Background color Gradient.
 ; Syntax ........: _LOWriter_ImageAreaGradient(ByRef $oDoc, ByRef $oImage[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oImage              - A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
@@ -490,7 +490,7 @@ EndFunc   ;==>_LOWriter_ImageAreaGradientMulticolor
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ImageAreaTransparency
-; Description ...: Modify or retrieve Transparency settings for an Image's background color.
+; Description ...: Set or Retrieve Transparency settings for an Image's background color.
 ; Syntax ........: _LOWriter_ImageAreaTransparency(ByRef $oImage[, $iTransparency = Null])
 ; Parameters ....: $oImage              - A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
 ;                  $iTransparency       - [optional] (0-100) Default is Null. The color transparency. 0% is fully opaque and 100% is fully transparent.
@@ -540,7 +540,7 @@ EndFunc   ;==>_LOWriter_ImageAreaTransparency
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ImageAreaTransparencyGradient
-; Description ...: Modify or retrieve the Image's background transparency gradient settings.
+; Description ...: Set or Retrieve the Image's background transparency gradient settings.
 ; Syntax ........: _LOWriter_ImageAreaTransparencyGradient(ByRef $oDoc, ByRef $oImage[, $iType = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iStart = Null[, $iEnd = Null]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oImage              - A Image object returned by a previous _LOWriter_ImageInsert, or _LOWriter_ImageGetObjByName function.
@@ -912,7 +912,7 @@ EndFunc   ;==>_LOWriter_ImageBorderColor
 ;                  @Error: 1, @Extended: 2 = $iAll not an Integer.
 ;                  @Error: 1, @Extended: 3 = $iTop not an Integer.
 ;                  @Error: 1, @Extended: 4 = $iBottom not an Integer.
-;                  @Error: 1, @Extended: 5 = $Left not an Integer.
+;                  @Error: 1, @Extended: 5 = $iLeft not an Integer.
 ;                  @Error: 1, @Extended: 6 = $iRight not an Integer.
 ;                  --Property Setting Errors--
 ;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for the following values:
@@ -1379,7 +1379,7 @@ EndFunc   ;==>_LOWriter_ImageDelete
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sImageName          - The Image name to search for.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Search was successful, If an Image was found matching $sImageName, True is returned, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Search was successful, Returning True if an Image was found matching $sImageName, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
@@ -1900,7 +1900,7 @@ Func _LOWriter_ImageOptionsName(ByRef $oDoc, ByRef $oImage, $sName = Null, $sAlt
 	If Not IsObj($oDoc) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not IsObj($oImage) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
-	If __LO_VarsAreNull($sName, $sAltText, $sDesc) Then
+	If __LO_VarsAreNull($sName, $sAltText, $sDesc, $bDecorative) Then
 		If __LO_VersionCheck(7.6) Then
 			__LO_ArrayFill($asName, $oImage.Name(), $oImage.Title(), $oImage.Description(), $oImage.Decorative())
 

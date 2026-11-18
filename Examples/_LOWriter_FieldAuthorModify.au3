@@ -35,7 +35,7 @@ Func Example()
 	If @error Then _ERROR($oDoc, "Failed to retrieve field settings. Error:" & @error & " Extended:" & @extended & " On Line: " & @ScriptLineNumber)
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "The current Field settings are: " & @CRLF & _
-			"The Author Field's content fixed? True/False: " & $avSettings[0] & @CRLF & _
+			"Is the Author Field's content fixed? True/False: " & $avSettings[0] & @CRLF & _
 			"The Author is: " & $avSettings[1] & @CRLF & _
 			"Is the Author's full name shown? True/False: " & $avSettings[2])
 

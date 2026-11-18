@@ -201,7 +201,7 @@ EndFunc   ;==>_LOCalc_RangeClearContents
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
-;                  @Error: 1, @Extended: 2 = $iColumns not an Integer, less than 0 or greater than number of Columns contained in the Range.
+;                  @Error: 1, @Extended: 2 = $iColumn not an Integer, less than 0 or greater than number of Columns contained in the Range.
 ;                  @Error: 1, @Extended: 3 = $iCount not an Integer, or less than 1.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Columns Object.
@@ -1619,7 +1619,7 @@ EndFunc   ;==>_LOCalc_RangeFilterClear
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oRange not an Object.
 ;                  @Error: 1, @Extended: 2 = $oSrchDescript not an Object.
-;                  @Error: 1, @Extended: 3 = $oSrchDescriptObject not a Search Descriptor Object.
+;                  @Error: 1, @Extended: 3 = Object called in $oSrchDescript not a Search Descriptor Object.
 ;                  @Error: 1, @Extended: 4 = $sSearchString not a String.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Search did not return an Object, something went wrong.
@@ -4906,7 +4906,7 @@ EndFunc   ;==>_LOCalc_RangeRowGetObjByPosition
 ;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 2 Element Array with values in order of function parameters.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oColumn not an Object.
+;                  @Error: 1, @Extended: 1 = $oRow not an Object.
 ;                  @Error: 1, @Extended: 2 = $bOptimal not a Boolean.
 ;                  @Error: 1, @Extended: 3 = $iHeight not an Integer, less than 0 or greater than 34464.
 ;                  --Property Setting Errors--

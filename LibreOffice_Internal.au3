@@ -21,6 +21,7 @@
 ; __LO_ArrayFill
 ; __LO_CreateStruct
 ; __LO_DeleteTempReg
+; __LO_EventReplaceScript
 ; __LO_InternalComErrorHandler
 ; __LO_IntIsBetween
 ; __LO_IsObjInvalid
@@ -211,6 +212,123 @@ Func __LO_DeleteTempReg($asRegKeys = Null)
 EndFunc   ;==>__LO_DeleteTempReg
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
+; Name ..........: __LO_EventReplaceScript
+; Description ...: Internal function for modifying Event settings.
+; Syntax ........: __LO_EventReplaceScript(ByRef $oEvents, $sName, $atEvent[, $oDoc = null])
+; Parameters ....: $oEvents             - A Document or Application events Object.
+;                  $sName               - The Event type name.
+;                  $atEvent             - An array of event properties.
+;                  $oDoc                - [optional] Default is null. If the event is stored in a Document, the Document Object can be passed here.
+; Return values .: Success: 1
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Successfully set the requested settings.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oEvents not an Object.
+;                  @Error: 1, @Extended: 2 = $sName not a String.
+;                  @Error: 1, @Extended: 3 = $atEvent not an array.
+;                  --Initialization Errors--
+;                  @Error: 2, @Extended: 1 = Error creating "com.sun.star.ServiceManager" Object.
+;                  @Error: 2, @Extended: 2 = Error creating "com.sun.star.frame.Desktop" Object.
+;                  @Error: 2, @Extended: 3 = Error Creating document.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Error retrieving Standard Macro Library.
+;                  @Error: 3, @Extended: 2 = Error creating Macro in Document.
+;                  @Error: 3, @Extended: 3 = Error retrieving Script Object.
+;                  @Error: 3, @Extended: 4 = Error deleting ReplaceByName Macro from Document.
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: This works, but only with the work-around method of inserting a macro into the Document.
+; Related .......:
+; Link ..........:
+; Example .......: No
+; ===============================================================================================================================
+Func __LO_EventReplaceScript(ByRef $oEvents, $sName, $atEvent, $oDoc = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LO_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $sNumStyleScript = "Function ReplaceByName(oEvents As Object, sName As String, vSettings As Variant)" & @CRLF & _
+			"oEvents.replaceByName(sName,vSettings)" & @CRLF & _
+			"ReplaceByName = oEvents" & @CRLF & _
+			"End Function"
+	Local $oServiceManager, $oDesktop, $oStandardLibrary, $oScript, $oNumStyleDoc
+	Local $aDummyArray[0], $avParamArray[3]
+	Local $atProperties[3]
+	Local $bNumDocOpen = False
+	Local Const $iMacroExecMode_ALWAYS_EXECUTE_NO_WARN = 4, $iURLFrameCreate = 8 ; Frame will be created if not found
+	Local $vProperty
+
+	If Not IsObj($oEvents) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If Not IsArray($atEvent) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	If IsObj($oDoc) Then
+		; Retrieving the BasicLibrary.Standard Object fails when using a newly opened document, I found a workaround by updating the following setting.
+		$oDoc.BasicLibraries.VBACompatibilityMode = $oDoc.BasicLibraries.VBACompatibilityMode()
+
+		$oStandardLibrary = $oDoc.BasicLibraries.Standard()
+		If Not IsObj($oStandardLibrary) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then $oStandardLibrary.removeByName("AU3LibreOffice_UDF_Macros")
+
+		$oStandardLibrary.insertByName("AU3LibreOffice_UDF_Macros", $sNumStyleScript)
+	EndIf
+
+	If Not IsObj($oDoc) Or Not $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then ; If creating my Mod. Script fails, open a new document and create a script in there.
+		$oServiceManager = __LO_ServiceManager()
+		If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+		$oDesktop = $oServiceManager.createInstance("com.sun.star.frame.Desktop")
+		If Not IsObj($oDesktop) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
+
+		$vProperty = __LO_SetPropertyValue("Hidden", True)
+		If Not @error Then $atProperties[0] = $vProperty
+
+		$vProperty = __LO_SetPropertyValue("MacroExecutionMode", $iMacroExecMode_ALWAYS_EXECUTE_NO_WARN)
+		If Not @error Then $atProperties[1] = $vProperty
+
+		$vProperty = __LO_SetPropertyValue("ReadOnly", True)
+		If Not @error Then $atProperties[2] = $vProperty
+
+		$oNumStyleDoc = $oDesktop.loadComponentFromURL("private:factory/swriter", "_blank", $iURLFrameCreate, $atProperties)
+		If Not IsObj($oNumStyleDoc) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
+
+		; Retrieving the BasicLibrary.Standard Object fails when using a newly opened document, I found a workaround by updating the following setting.
+		$oNumStyleDoc.BasicLibraries.VBACompatibilityMode = $oNumStyleDoc.BasicLibraries.VBACompatibilityMode()
+
+		$oStandardLibrary = $oNumStyleDoc.BasicLibraries.Standard()
+		If Not IsObj($oStandardLibrary) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+		$oStandardLibrary.insertByName("AU3LibreOffice_UDF_Macros", $sNumStyleScript)
+		If Not $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		$oScript = $oNumStyleDoc.getScriptProvider().getScript("vnd.sun.star.script:Standard.AU3LibreOffice_UDF_Macros.ReplaceByName?language=Basic&location=document")
+		If Not IsObj($oScript) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+		$bNumDocOpen = True
+
+	Else
+		$oScript = $oDoc.getScriptProvider().getScript("vnd.sun.star.script:Standard.AU3LibreOffice_UDF_Macros.ReplaceByName?language=Basic&location=document")
+		If Not IsObj($oScript) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+	EndIf
+
+	$avParamArray[0] = $oEvents
+	$avParamArray[1] = $sName
+	$avParamArray[2] = $atEvent
+
+	$oEvents = $oScript.Invoke($avParamArray, $aDummyArray, $aDummyArray)
+
+	If ($bNumDocOpen = True) Then
+		$oNumStyleDoc.Close(True)
+
+	Else
+		If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then $oStandardLibrary.removeByName("AU3LibreOffice_UDF_Macros")
+		If $oStandardLibrary.hasByName("AU3LibreOffice_UDF_Macros") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+	EndIf
+
+	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
+EndFunc   ;==>__LO_EventReplaceScript
+
+; #INTERNAL_USE_ONLY# ===========================================================================================================
 ; Name ..........: __LO_InternalComErrorHandler
 ; Description ...: ComError Handler
 ; Syntax ........: __LO_InternalComErrorHandler(ByRef $oComError)
@@ -280,7 +398,7 @@ EndFunc   ;==>__LO_InternalComErrorHandler
 ;                  $vNot                - [optional] Default is "". Can be a single number, or a String of numbers separated by ":". Defines numbers inside the min/max range that are not allowed.
 ;                  $vIncl               - [optional] Default is "". Can be a single number, or a String of numbers separated by ":". Defines numbers Outside the min/max range that are allowed.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = If the input is between Min and Max or is an allowed number, and not one of the disallowed numbers, True is returned. Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Returning True if the input is between Min and Max or is an allowed number, and not one of the disallowed numbers, else False.
 ;                  Failure: False and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $iTest not an Integer.
@@ -368,7 +486,7 @@ EndFunc   ;==>__LO_IsObjInvalid
 ;                  $vNot                - [optional] Default is "". Can be a single number, or a String of numbers separated by ":". Defines numbers inside the min/max range that are not allowed.
 ;                  $vIncl               - [optional] Default is "". Can be a single number, or a String of numbers separated by ":". Defines numbers Outside the min/max range that are allowed.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = If the input is between Min and Max or is an allowed number, and not one of the disallowed numbers, True is returned. Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Returning True if the input is between Min and Max or is an allowed number, and not one of the disallowed numbers, else False.
 ;                  Failure: False and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $nTest not a Number.
@@ -420,33 +538,48 @@ EndFunc   ;==>__LO_NumIsBetween
 ; Name ..........: __LO_PortableBootstrap
 ; Description ...: Creates a COM bootstrap matching the Portable executable architecture.
 ; Syntax ........: __LO_PortableBootstrap($sExecutable)
-; Parameters ....: $sExecutable - Full path to the Portable soffice.exe file.
-; Return values .: Success: Object. Failure: 0 and sets @Error to 2, @Extended to 4.
+; Parameters ....: $sExecutable         - Full path to the Portable soffice.exe file.
+; Return values .: Success: Object
+;                  @Error: 0, @Extended: 0, Return: Object = Success.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Initialization Errors--
+;                  @Error: 2, @Extended: 1 = Failed to create an instance of Executable.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to perform DLL call with kernel32.
+;                  @Error: 3, @Extended: 2 = Unexpected data returned from DLL call.
+;                  @Error: 3, @Extended: 3 = Failed to perform DLL call with ole32.
+;                  @Error: 3, @Extended: 4 = Unexpected data returned from DLL call.
 ; Author ........: mLipok
+; Modified ......:
 ; Remarks .......: The Portable server must be started first. Architecture selection prevents a running 64-bit LibreOffice from supplying the bridge for 32-bit OpenOffice.
+; Related .......: __LO_SetPortableServiceManager
+; Link ..........:
+; Example .......: No
 ; ===============================================================================================================================
 Func __LO_PortableBootstrap($sExecutable)
 	Local Const $sIID_IDispatch = "{00020400-0000-0000-C000-000000000046}"
 	Local $aBinary = DllCall("kernel32.dll", "bool", "GetBinaryTypeW", "wstr", $sExecutable, "dword*", 0)
-	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
-	If Not $aBinary[0] Or (($aBinary[2] <> 0) And ($aBinary[2] <> 6)) Then Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
+	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+	If Not $aBinary[0] Or (($aBinary[2] <> 0) And ($aBinary[2] <> 6)) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	Local $iContext = ($aBinary[2] = 6) ? 0x80004 : 0x40004 ; LOCAL_SERVER plus ACTIVATE_64_BIT_SERVER or ACTIVATE_32_BIT_SERVER.
+	Local $iContext = ($aBinary[2] = 6) ? (0x80004) : (0x40004) ; LOCAL_SERVER plus ACTIVATE_64_BIT_SERVER or ACTIVATE_32_BIT_SERVER.
 	Local $tClass = DllStructCreate("byte[16]"), $tInterface = DllStructCreate("byte[16]")
 	DllCall("ole32.dll", "long", "CLSIDFromString", "wstr", "{82154420-0FBF-11D4-8313-005004526AB4}", "struct*", $tClass)
 	DllCall("ole32.dll", "long", "CLSIDFromString", "wstr", $sIID_IDispatch, "struct*", $tInterface)
 	Local $aCreate = DllCall("ole32.dll", "long", "CoCreateInstance", "struct*", $tClass, "ptr", 0, "dword", $iContext, "struct*", $tInterface, "ptr*", 0)
-	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
-	If $aCreate[0] <> 0 Then Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
+	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+	If $aCreate[0] <> 0 Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
 	Local $oBootstrap = ObjCreateInterface($aCreate[5], $sIID_IDispatch, Default)
 	If Not IsObj($oBootstrap) Then
 		Local $tObject = DllStructCreate("ptr", $aCreate[5])
 		Local $tVTable = DllStructCreate("ptr QueryInterface;ptr AddRef;ptr Release", DllStructGetData($tObject, 1))
 		DllCallAddress("ulong", DllStructGetData($tVTable, "Release"), "ptr", $aCreate[5])
-		Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
+
+		Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 	EndIf
 	; The AutoIt wrapper owns the IDispatch reference returned by CoCreateInstance.
+
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oBootstrap)
 EndFunc   ;==>__LO_PortableBootstrap
 
@@ -492,6 +625,7 @@ Func __LO_ServiceManager($oServiceManager = Null, $bPortable = Null)
 
 		Else
 			If Not IsObj($oServiceManager) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
 			; OpenOffice exposes RegistryServiceManager instead of ServiceManager.
 			If Not $oServiceManager.supportsService("com.sun.star.lang.ServiceManager") And Not $oServiceManager.supportsService("com.sun.star.lang.RegistryServiceManager") Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
@@ -527,7 +661,7 @@ EndFunc   ;==>__LO_ServiceManager
 ; Parameters ....: $sPortableLO_Path    - [optional] Default is Null. Portable root containing the App folder. Pass an empty string to clear the stored connection.
 ;                  $sProgramDir         - [optional] Default is Null. A path to the Portable LibreOffice directory containing the soffice.exe file.
 ;                  $bRegistryFree       - [optional] Default is False. If True, the Registry-Free method is used. Else the Registry method.
-;                  $iTimeoutMs          - [optional] Startup polling timeout in milliseconds. Reconnection reuses the last successful timeout.
+;                  $iTimeoutMs          - [optional] Default is 15000. Startup polling timeout in milliseconds. Reconnection reuses the last successful timeout.
 ; Return values .: Success: 1, 2
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Created and stored Portable LibreOffice ServiceManager.
 ;                  @Error: 0, @Extended: 0, Return: 2 = Success. Cleared stored Portable LibreOffice path.
@@ -537,21 +671,21 @@ EndFunc   ;==>__LO_ServiceManager
 ;                  @Error: 1, @Extended: 2 = $sProgramDir not a String.
 ;                  @Error: 1, @Extended: 3 = Path called in $sPortableLO_Path doesn't exist.
 ;                  --Initialization Errors--
-;                  @Error: 2, @Extended: 1 = Timed out obtaining a COM ServiceManager / UNO URL resolver in registry-free mode.
-;                  @Error: 2, @Extended: 2 = Timed out connecting to the requested instance in registry-free mode.
-;                  @Error: 2, @Extended: 3 = Failed to store the Portable ServiceManager.
-;                  @Error: 2, @Extended: 4 = Failed to create "com.sun.star.ServiceManager" Object.
-;                  @Error: 2, @Extended: 5 = Failed to create "com.sun.star.bridge.UnoUrlResolver" Object.
+;                  @Error: 2, @Extended: 1 = Failed to generate the UNO pipe name.
+;                  @Error: 2, @Extended: 2 = Timed out creating a COM ServiceManager / UNO URL resolver in registry-free mode.
+;                  @Error: 2, @Extended: 3 = Failed to Bootstrap sOffice.exe executable Object.
+;                  @Error: 2, @Extended: 4 = Failed to create "com.sun.star.bridge.UnoUrlResolver" Object.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = No stored Portable LibreOffice or Program Directory path.
 ;                  @Error: 3, @Extended: 2 = Stored Portable LibreOffice path no longer exists.
-;                  @Error: 3, @Extended: 3 = Failed to generate the UNO pipe name.
-;                  @Error: 3, @Extended: 4 = Failed to launch LibreOffice Portable in registry-free mode.
+;                  @Error: 3, @Extended: 3 = Failed to launch LibreOffice Portable in registry-free mode.
+;                  @Error: 3, @Extended: 4 = Timed out connecting to the requested instance in registry-free mode.
 ;                  @Error: 3, @Extended: 5 = Failed to add temporary Registry keys.
 ;                  @Error: 3, @Extended: 6 = Failed to start Portable LibreOffice in listening mode.
 ;                  @Error: 3, @Extended: 7 = Portable LibreOffice failed to start in listening mode
 ;                  @Error: 3, @Extended: 8 = Failed to connect to Portable LibreOffice.
 ;                  @Error: 3, @Extended: 9 = Failed to retrieve ServiceManager from Portable LibreOffice.
+;                  @Error: 3, @Extended: 10 = Failed to store the Portable ServiceManager.
 ; Author ........: mLipok, donnyh13
 ; Modified ......:
 ; Remarks .......: If the COM Error "Binary URP bridge already disposed" is encountered, any running soffice.exe/soffice.bin processes need to be closed via TaskManager.
@@ -602,16 +736,20 @@ Func __LO_SetPortableServiceManager($sPortableLO_Path = Null, $sProgramDir = Nul
 			Return SetError($__LO_STATUS_SUCCESS, 0, 2)
 		EndIf
 		If Not IsString($sProgramDir) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
 		$sExecutable = $sProgramDir & "\soffice.exe"
 		$sProfile = _LO_PathConvert($sPortableLO_Path & "\Data\settings", $LO_PATHCONV_OFFICE_RETURN)
 		If Not FileExists($sExecutable) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
 	Else
 		If ($sStaticPortablePath = "") Or ($sStaticProgramDir = "") Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
 		$sPortableLO_Path = $sStaticPortablePath
 		$sProgramDir = $sStaticProgramDir
 		$sExecutable = $sProgramDir & "\soffice.exe"
 		$sProfile = _LO_PathConvert($sStaticPortablePath & "\Data\settings", $LO_PATHCONV_OFFICE_RETURN)
 		If Not FileExists($sExecutable) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
 		$iTimeoutMs = $iStaticTimeoutMs
 		$bRegistryFree = $bStaticIsRegFree
 	EndIf
@@ -626,12 +764,11 @@ Func __LO_SetPortableServiceManager($sPortableLO_Path = Null, $sProgramDir = Nul
 
 	If $bRegistryFree Then
 		Local $sGuid = _WinAPI_CreateGUID()
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+		If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
 
 		Local $sPipe = "pipe,name=Au3LibreOffice-" & StringTrimRight(StringTrimLeft($sGuid, 1), 1) & ";urp;"
-;~ 		Run('"' & $sExecutable & '" "-env:UserInstallation=' & $sProfile & '" --headless --norestore --nologo --accept="' & $sPipe & '"', $sProgramDir, @SW_HIDE)
 		Run('"' & $sExecutable & '" "-env:UserInstallation=' & $sProfile & '" ' & $sListenOptions & '"' & $sPipe & '"', $sProgramDir, @SW_HIDE)
-		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+		If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 		$hTimer = TimerInit()
 
@@ -651,7 +788,7 @@ Func __LO_SetPortableServiceManager($sPortableLO_Path = Null, $sProgramDir = Nul
 			Sleep(100)
 		Until TimerDiff($hTimer) >= $iTimeoutMs
 
-		If Not IsObj($oPortable_ServiceManager) Then Return SetError($__LO_STATUS_INIT_ERROR, IsObj($oResolver) ? 2 : 1, 0)
+		If Not IsObj($oPortable_ServiceManager) Then Return (IsObj($oResolver)) ? (SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)) : (SetError($__LO_STATUS_INIT_ERROR, 2, 0))
 
 	Else     ; Registry method.
 		$asRegKeys[$__eReg_LocalServer32][$__eReg_Value] = '"' & $sExecutable & '" ' & $sStartOptions
@@ -725,7 +862,7 @@ Func __LO_SetPortableServiceManager($sPortableLO_Path = Null, $sProgramDir = Nul
 				$bTempReg = False
 			EndIf
 
-			Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
+			Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
 		EndIf
 
 		; Create the URL Resolver.
@@ -737,7 +874,7 @@ Func __LO_SetPortableServiceManager($sPortableLO_Path = Null, $sProgramDir = Nul
 				$bTempReg = False
 			EndIf
 
-			Return SetError($__LO_STATUS_INIT_ERROR, 5, 0)
+			Return SetError($__LO_STATUS_INIT_ERROR, 4, 0)
 		EndIf
 
 		$oCompContext = $oURLResolver.resolve("uno:socket,host=localhost,port=" & $iPort & ",tcpNoDelay=1;urp;StarOffice.ComponentContext")
@@ -768,11 +905,11 @@ Func __LO_SetPortableServiceManager($sPortableLO_Path = Null, $sProgramDir = Nul
 			If (@error = 0) Then OnAutoItExitUnRegister("__LO_DeleteTempReg")
 			$bTempReg = False
 		EndIf
-
 	EndIf
 
 	__LO_ServiceManager($oPortable_ServiceManager, True) ; Set the stored ServiceManager.
-	If @error Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
+	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 10, 0)
+
 	$sStaticPortablePath = $sPortableLO_Path
 	$sStaticProgramDir = $sProgramDir
 	$bStaticIsRegFree = $bRegistryFree
@@ -1003,7 +1140,7 @@ EndFunc   ;==>__LO_TestObjCOM
 ;                  $vVar31              - [optional] Default is Null. A variable to test.
 ;                  $vVar32              - [optional] Default is Null. A variable to test.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = If All parameters are Equal to Null, True is returned. Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Returning True if All parameters are Equal to Null, else False.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -1045,7 +1182,7 @@ EndFunc   ;==>__LO_VarsAreNull
 ; Syntax ........: __LO_VersionCheck($fRequiredVersion)
 ; Parameters ....: $fRequiredVersion    - The version of LibreOffice required.
 ; Return values .: Success: Boolean.
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the Current L.O. version is greater than or equal to the required version, then True is returned, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Current L.O. version is greater than or equal to the required version, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $fRequiredVersion not a Number.

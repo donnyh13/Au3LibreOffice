@@ -485,7 +485,7 @@ EndFunc   ;==>_LOBase_FormDocGetName
 ;                  @Error: 0, @Extended: 1, Return: Boolean = Success. Returning True if the document has been modified since last being saved, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
-;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
+;                  @Error: 1, @Extended: 1 = $oFormDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $bModified not a Boolean.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to query Document whether it has been modified.

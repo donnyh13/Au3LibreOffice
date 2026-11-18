@@ -39,6 +39,7 @@
 ; _LOWriter_FormConDateFieldGeneral
 ; _LOWriter_FormConDateFieldValue
 ; _LOWriter_FormConDelete
+; _LOWriter_FormConEvents
 ; _LOWriter_FormConFileSelFieldGeneral
 ; _LOWriter_FormConFileSelFieldValue
 ; _LOWriter_FormConFormattedFieldData
@@ -46,6 +47,7 @@
 ; _LOWriter_FormConFormattedFieldValue
 ; _LOWriter_FormConGetParent
 ; _LOWriter_FormConGroupBoxGeneral
+; _LOWriter_FormConHiddenGeneral
 ; _LOWriter_FormConImageButtonGeneral
 ; _LOWriter_FormConImageControlData
 ; _LOWriter_FormConImageControlGeneral
@@ -102,6 +104,7 @@
 ; _LOWriter_FormConTimeFieldValue
 ; _LOWriter_FormDelete
 ; _LOWriter_FormDocSettings
+; _LOWriter_FormEvents
 ; _LOWriter_FormGetObjByIndex
 ; _LOWriter_FormParent
 ; _LOWriter_FormPropertiesData
@@ -177,10 +180,10 @@ Func _LOWriter_FormAdd(ByRef $oObj, $sName)
 		$iCount += 1
 	WEnd
 
-	$oInsertObj.insertByName($sTempName, $oForm)
-	If Not $oInsertObj.hasByName($sTempName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+	$oInsertObj.insertByName($sTempName & $iCount, $oForm)
+	If Not $oInsertObj.hasByName($sTempName & $iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	$oForm = $oInsertObj.getByName($sTempName)
+	$oForm = $oInsertObj.getByName($sTempName & $iCount)
 	If Not IsObj($oForm) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
 	$oForm.Name = $sName
@@ -2436,7 +2439,9 @@ EndFunc   ;==>_LOWriter_FormConDateFieldValue
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Control's parent Object.
 ;                  @Error: 3, @Extended: 2 = Cannot delete the last control in a Grouped control.
-;                  @Error: 3, @Extended: 3 = Failed to delete the Control.
+;                  @Error: 3, @Extended: 3 = Failed to rename Hidden Control.
+;                  @Error: 3, @Extended: 4 = Failed to delete Hidden Control by name.
+;                  @Error: 3, @Extended: 5 = Failed to delete the Control.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: You cannot delete the last control contained in a Grouped Control.
@@ -2449,6 +2454,8 @@ Func _LOWriter_FormConDelete(ByRef $oControl)
 	#forceref $oCOM_ErrorHandler
 
 	Local $oParent
+	Local $sTempName = "AutoIt_CONTROL_"
+	Local $iCount = 1
 
 	If Not IsObj($oControl) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
@@ -2456,14 +2463,386 @@ Func _LOWriter_FormConDelete(ByRef $oControl)
 	If Not IsObj($oParent) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 	If ($oParent.supportsService("com.sun.star.drawing.GroupShape") And ($oParent.Count() = 1)) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	$oParent.remove($oControl)
+	If $oControl.supportsService("com.sun.star.drawing.ControlShape") Or $oControl.supportsService("com.sun.star.drawing.GroupShape") Then
+		$oParent.remove($oControl)
 
-	If IsObj($oControl.Parent()) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0) ; Parent will be Null when the control is deleted.
+	Else ; Hidden Control
+		; Create a Unique name.
+		While $oParent.hasByName($sTempName & $iCount)
+			$iCount += 1
+		WEnd
+
+		; Rename the Control.
+		$oControl.Name = $sTempName & $iCount
+		If Not ($oControl.Name() = $sTempName & $iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+		$oParent.removeByName($sTempName & $iCount)
+
+		If $oParent.hasByName($sTempName & $iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+	EndIf
+
+	If IsObj($oControl.Parent()) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0) ; Parent will be Null when the control is deleted.
 
 	$oControl = Null
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, 1)
 EndFunc   ;==>_LOWriter_FormConDelete
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_FormConEvents
+; Description ...: Set or Retrieve events for a Form control.
+; Syntax ........: _LOWriter_FormConEvents(ByRef $oControl[, $asEvents = Null])
+; Parameters ....: $oControl            - A Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $asEvents            - [optional] Default is Null. A three columned array of event settings. See remarks.
+; Return values .: Success: 1 or Array.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current events as a three columned Array. @Extended set to number of events.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oControl not an Object.
+;                  @Error: 1, @Extended: 2 = Can't set or retrieve events for a hidden control.
+;                  @Error: 1, @Extended: 3 = $asEvents not an array.
+;                  @Error: 1, @Extended: 4 = $asEvents does not contain 3 columns.
+;                  @Error: 1, @Extended: 5 = Event type value in $asEvents not a String. Returning problem element's index.
+;                  @Error: 1, @Extended: 6 = Macro execution link in $asEvents not a String. Returning problem element's index.
+;                  @Error: 1, @Extended: 7 = Event listener type in $asEvents not a String. Returning problem element's index.
+;                  --Initialization Errors--
+;                  @Error: 2, @Extended: 1 = Failed to create a "com.sun.star.script.ScriptEventDescriptor" struct.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to retrieve control's parent form or table Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve shape's control Object.
+;                  @Error: 3, @Extended: 3 = Failed to identify Control's index location.
+;                  @Error: 3, @Extended: 4 = Failed to retrieve array of events.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $asEvents
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: The expected array must contain three columns, with values in the following order:
+;                  - $aArray[0][0] is the event type name as a string, normally matching one of the Form Control Event constants (See below for potential exceptions). See Constants $LOW_FORM_CON_EVENT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  - $aArray[0][1] is the macro execution string returned by a previous _LOBasic_MacroExecuteLinkCreate function. Pass an empty string to disable an event.
+;                  - $aArray[0][2] is the Event Listener type, this is required to register new events. This should always be already filled in, and should not need to be modified. It is also found in the description for each event name Constant.
+;                  There is no way to retrieve programmatically all event types available to be set, therefore I have made a prefilled list of event types matching the Form Control Event constants $LOW_FORM_CON_EVENT_*. If LibreOffice adds new events, and these are set and active, they will be added to the end of the events array with all necessary information.
+;                  Thanks to LibreOffice forum user Ratslinger for event information, https://ask.libreoffice.org/t/how-to-access-the-settings-under-the-events-tab-of-a-form-control-to-get-set-the-routines/47798
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_FormConEvents(ByRef $oControl, $asEvents = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local Const $__UBOUND_COLUMNS = 2
+	Local $oParent, $oParentControl = $oControl
+	Local $iError = 0, $iConIndex
+	Local $tEventDesc
+	Local $atCurrEvents
+	Local $asScriptEvents[0], $asControlEvents[0][3]
+
+	If Not IsObj($oControl) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If Not ($oControl.Parent.supportsService("com.sun.star.form.component.GridControl")) And $oControl.supportsService("com.sun.star.form.component.HiddenControl") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+
+	If $oControl.Parent.supportsService("com.sun.star.form.component.GridControl") Then
+		$oParent = $oControl.Parent() ; Events are stored in the Grid control (Table) instead of the form when working with table control columns.
+
+	Else
+		$oParent = $oControl ; Identify the parent Form.
+
+		Do
+			$oParent = _LOWriter_FormConGetParent($oParent)
+			If Not IsObj($oParent) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+		Until $oParent.supportsService("com.sun.star.form.component.Form") ; The parent could be a group shape, so cycle through till I hit the parent form.
+	EndIf
+
+	If Not IsObj($oParent) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	If $oControl.Parent.supportsService("com.sun.star.form.component.GridControl") Then
+		$oParentControl = $oControl
+
+	ElseIf $oControl.supportsService("com.sun.star.drawing.ControlShape") Then
+		$oParentControl = $oControl.Control() ; All shapes besides group shapes I have to compare the .Control Object, not the Shape Object.
+
+	ElseIf $oControl.supportsService("com.sun.star.drawing.GroupShape") Then
+		If Not ($oControl.Count() > 0) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+		$oParentControl = $oControl.getByIndex(0).Control() ; Retrieve the GroupBox control obj.
+	EndIf
+
+	If Not IsObj($oParentControl) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	For $i = 0 To $oParent.getCount() - 1
+		If ($oParent.getByIndex($i) = $oParentControl) Then
+			$iConIndex = $i
+			ExitLoop
+		EndIf
+
+		Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+	Next
+
+	If Not IsInt($iConIndex) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
+
+	$atCurrEvents = $oParent.getScriptEvents($iConIndex)
+	If Not IsArray($atCurrEvents) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+	If __LO_VarsAreNull($asEvents) Then
+		Switch __LOWriter_FormConIdentify($oControl)
+			Case $LOW_FORM_CON_TYPE_CHECK_BOX
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_ACTION_EXECUTE, _
+						$LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, $LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, _
+						$LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, _
+						$LOW_FORM_CON_EVENT_RESET_AFTER, $LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_STATUS_CHANGED)
+
+			Case $LOW_FORM_CON_TYPE_COMBO_BOX
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_ACTION_EXECUTE, _
+						$LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, $LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, _
+						$LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, _
+						$LOW_FORM_CON_EVENT_RESET_AFTER, $LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_STATUS_CHANGED, $LOW_FORM_CON_EVENT_UPDATE_AFTER, $LOW_FORM_CON_EVENT_UPDATE_BEFORE, $LOW_FORM_CON_EVENT_TEXT_MODIFIED, _
+						$LOW_FORM_CON_EVENT_ERROR_OCCURRED)
+
+			Case $LOW_FORM_CON_TYPE_CURRENCY_FIELD
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, _
+						$LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, _
+						$LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, $LOW_FORM_CON_EVENT_RESET_AFTER, _
+						$LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_UPDATE_AFTER, $LOW_FORM_CON_EVENT_UPDATE_BEFORE, $LOW_FORM_CON_EVENT_TEXT_MODIFIED)
+
+			Case $LOW_FORM_CON_TYPE_DATE_FIELD
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, _
+						$LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, _
+						$LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, $LOW_FORM_CON_EVENT_RESET_AFTER, _
+						$LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_UPDATE_AFTER, $LOW_FORM_CON_EVENT_UPDATE_BEFORE, $LOW_FORM_CON_EVENT_TEXT_MODIFIED)
+
+			Case $LOW_FORM_CON_TYPE_FILE_SELECTION
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, _
+						$LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, _
+						$LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, $LOW_FORM_CON_EVENT_RESET_AFTER, _
+						$LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_TEXT_MODIFIED)
+
+			Case $LOW_FORM_CON_TYPE_FORMATTED_FIELD
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, _
+						$LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, _
+						$LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, $LOW_FORM_CON_EVENT_RESET_AFTER, _
+						$LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_UPDATE_AFTER, $LOW_FORM_CON_EVENT_UPDATE_BEFORE, $LOW_FORM_CON_EVENT_TEXT_MODIFIED, _
+						$LOW_FORM_CON_EVENT_ERROR_OCCURRED)
+
+			Case $LOW_FORM_CON_TYPE_GROUP_BOX, $LOW_FORM_CON_TYPE_GROUPED_CONTROL
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, _
+						$LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, _
+						$LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, _
+						$LOW_FORM_CON_EVENT_FOCUS_LOST)
+
+			Case $LOW_FORM_CON_TYPE_IMAGE_BUTTON
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_ACTION_APPROVE, _
+						$LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, $LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, _
+						$LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, _
+						$LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST)
+
+			Case $LOW_FORM_CON_TYPE_IMAGE_CONTROL
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, _
+						$LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, _
+						$LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, $LOW_FORM_CON_EVENT_RESET_AFTER, _
+						$LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST)
+
+			Case $LOW_FORM_CON_TYPE_LABEL
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, _
+						$LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, _
+						$LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, _
+						$LOW_FORM_CON_EVENT_FOCUS_LOST)
+
+			Case $LOW_FORM_CON_TYPE_LIST_BOX
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_ACTION_EXECUTE, _
+						$LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, $LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, _
+						$LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, _
+						$LOW_FORM_CON_EVENT_RESET_AFTER, $LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_STATUS_CHANGED, $LOW_FORM_CON_EVENT_UPDATE_AFTER, $LOW_FORM_CON_EVENT_UPDATE_BEFORE, $LOW_FORM_CON_EVENT_CHANGED, _
+						$LOW_FORM_CON_EVENT_ERROR_OCCURRED)
+
+			Case $LOW_FORM_CON_TYPE_NAV_BAR
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, _
+						$LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, _
+						$LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, _
+						$LOW_FORM_CON_EVENT_FOCUS_LOST)
+
+			Case $LOW_FORM_CON_TYPE_NUMERIC_FIELD
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, _
+						$LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, _
+						$LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, $LOW_FORM_CON_EVENT_RESET_AFTER, _
+						$LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_UPDATE_AFTER, $LOW_FORM_CON_EVENT_UPDATE_BEFORE, $LOW_FORM_CON_EVENT_TEXT_MODIFIED)
+
+			Case $LOW_FORM_CON_TYPE_OPTION_BUTTON
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_ACTION_EXECUTE, _
+						$LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, $LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, _
+						$LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, _
+						$LOW_FORM_CON_EVENT_RESET_AFTER, $LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_STATUS_CHANGED)
+
+			Case $LOW_FORM_CON_TYPE_PATTERN_FIELD
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, _
+						$LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, _
+						$LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, $LOW_FORM_CON_EVENT_RESET_AFTER, _
+						$LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_UPDATE_AFTER, $LOW_FORM_CON_EVENT_UPDATE_BEFORE, $LOW_FORM_CON_EVENT_TEXT_MODIFIED)
+
+			Case $LOW_FORM_CON_TYPE_PUSH_BUTTON
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_ACTION_EXECUTE, _
+						$LOW_FORM_CON_EVENT_ACTION_APPROVE, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, $LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, _
+						$LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, _
+						$LOW_FORM_CON_EVENT_RESET_AFTER, $LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_STATUS_CHANGED)
+
+			Case $LOW_FORM_CON_TYPE_TABLE_CONTROL
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, _
+						$LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, _
+						$LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, $LOW_FORM_CON_EVENT_RESET_AFTER, _
+						$LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_UPDATE_AFTER, $LOW_FORM_CON_EVENT_UPDATE_BEFORE, $LOW_FORM_CON_EVENT_ERROR_OCCURRED)
+
+			Case $LOW_FORM_CON_TYPE_TEXT_BOX
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, _
+						$LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, _
+						$LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, $LOW_FORM_CON_EVENT_RESET_AFTER, _
+						$LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_UPDATE_AFTER, $LOW_FORM_CON_EVENT_UPDATE_BEFORE, $LOW_FORM_CON_EVENT_TEXT_MODIFIED, _
+						$LOW_FORM_CON_EVENT_CHANGED)
+
+			Case $LOW_FORM_CON_TYPE_TIME_FIELD
+				__LO_ArrayFill($asScriptEvents, $LOW_FORM_CON_EVENT_KEY_PRESSED, $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE, _
+						$LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, _
+						$LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED, $LOW_FORM_CON_EVENT_RESET_AFTER, _
+						$LOW_FORM_CON_EVENT_RESET_PRIOR, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED, $LOW_FORM_CON_EVENT_FOCUS_LOST, _
+						$LOW_FORM_CON_EVENT_UPDATE_AFTER, $LOW_FORM_CON_EVENT_UPDATE_BEFORE, $LOW_FORM_CON_EVENT_TEXT_MODIFIED)
+
+			Case Else
+				; error
+		EndSwitch
+
+		ReDim $asControlEvents[UBound($asScriptEvents)][3]
+
+		For $i = 0 To UBound($asControlEvents) - 1
+			Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+			$asControlEvents[$i][0] = $asScriptEvents[$i]
+			For $j = 0 To UBound($atCurrEvents) - 1
+				If (($atCurrEvents[$j].EventMethod()) = $asControlEvents[$i][0]) Then
+					$asControlEvents[$i][1] = $atCurrEvents[$j].ScriptCode()
+					$asControlEvents[$i][2] = $atCurrEvents[$j].ListenerType()
+					ContinueLoop 2
+				EndIf
+			Next
+			; If not set in Events, set the Macro link to an empty string.
+			$asControlEvents[$i][1] = ""
+
+			; Set the appropriate listener type.
+			Switch $asControlEvents[$i][0]
+				Case $LOW_FORM_CON_EVENT_ACTION_APPROVE
+					$asControlEvents[$i][2] = "XApproveActionListener"
+
+				Case $LOW_FORM_CON_EVENT_ACTION_EXECUTE
+					$asControlEvents[$i][2] = "XActionListener"
+
+				Case $LOW_FORM_CON_EVENT_CHANGED
+					$asControlEvents[$i][2] = "XChangeListener"
+
+				Case $LOW_FORM_CON_EVENT_ERROR_OCCURRED
+					$asControlEvents[$i][2] = "XSQLErrorListener"
+
+				Case $LOW_FORM_CON_EVENT_FOCUS_LOST, $LOW_FORM_CON_EVENT_FOCUS_RECEIVED
+					$asControlEvents[$i][2] = "XFocusListener"
+
+				Case $LOW_FORM_CON_EVENT_KEY_RELEASED, $LOW_FORM_CON_EVENT_KEY_PRESSED
+					$asControlEvents[$i][2] = "XKeyListener"
+
+				Case $LOW_FORM_CON_EVENT_MOUSE_BTN_PRESSED, $LOW_FORM_CON_EVENT_MOUSE_BTN_RELEASED, $LOW_FORM_CON_EVENT_MOUSE_INSIDE, $LOW_FORM_CON_EVENT_MOUSE_OUTSIDE
+					$asControlEvents[$i][2] = "XMouseListener"
+
+				Case $LOW_FORM_CON_EVENT_MOUSE_MOVED, $LOW_FORM_CON_EVENT_MOUSE_MOVED_WITH_BTN_PRESSED
+					$asControlEvents[$i][2] = "XMouseMotionListener"
+
+				Case $LOW_FORM_CON_EVENT_RESET_AFTER, $LOW_FORM_CON_EVENT_RESET_PRIOR
+					$asControlEvents[$i][2] = "XResetListener"
+
+				Case $LOW_FORM_CON_EVENT_STATUS_CHANGED
+					$asControlEvents[$i][2] = "XItemListener"
+
+				Case $LOW_FORM_CON_EVENT_TEXT_MODIFIED
+					$asControlEvents[$i][2] = "XTextListener"
+
+				Case $LOW_FORM_CON_EVENT_UPDATE_AFTER, $LOW_FORM_CON_EVENT_UPDATE_BEFORE
+					$asControlEvents[$i][2] = "XUpdateListener"
+			EndSwitch
+		Next
+
+		; Cycle through and make sure there aren't any event types I don't know about, add them to the array if there are.
+		For $i = 0 To UBound($atCurrEvents) - 1
+			Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+
+			For $j = 0 To UBound($asControlEvents) - 1
+				If (($atCurrEvents[$i].EventMethod()) = $asControlEvents[$j][0]) Then ContinueLoop 2
+			Next
+
+			ReDim $asControlEvents[UBound($asControlEvents) + 1][3]
+			$asControlEvents[UBound($asControlEvents) - 1][0] = $atCurrEvents[$i].EventMethod()
+			$asControlEvents[UBound($asControlEvents) - 1][1] = $atCurrEvents[$i].ScriptCode()
+			$asControlEvents[UBound($asControlEvents) - 1][2] = $atCurrEvents[$i].ListenerType()
+		Next
+
+		Return SetError($__LO_STATUS_SUCCESS, UBound($asControlEvents), $asControlEvents)
+	EndIf
+
+	If Not IsArray($asEvents) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+	If (UBound($asEvents, $__UBOUND_COLUMNS) <> 3) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+	For $i = 0 To UBound($asEvents) - 1
+		Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+		If Not IsString($asEvents[$i][0]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, $i)
+		If Not IsString($asEvents[$i][1]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, $i)
+		If Not IsString($asEvents[$i][2]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 7, $i)
+
+		For $j = 0 To UBound($atCurrEvents) - 1
+			If (($atCurrEvents[$j].EventMethod()) = $asEvents[$i][0]) Then
+				If (($atCurrEvents[$j].ScriptCode()) = $asEvents[$i][1]) Then ContinueLoop 2 ; Event is assigned to a macro, and the macro strings are the same, skip it.
+
+				; Remove the event entry. If the event needs modified, the first step is to remove it.
+				$oParent.revokeScriptEvent($iConIndex, $atCurrEvents[$j].ListenerType(), $atCurrEvents[$j].EventMethod(), $atCurrEvents[$j].AddListenerParam())
+			EndIf
+		Next
+
+		If ($asEvents[$i][1] = "") Then ContinueLoop ; If Macro event is blank, skip it, otherwise insert the event.
+		$tEventDesc = __LO_CreateStruct("com.sun.star.script.ScriptEventDescriptor")
+		If Not IsObj($tEventDesc) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+		With $tEventDesc
+			.AddListenerParam = ""
+			.EventMethod = $asEvents[$i][0]
+			.ListenerType = $asEvents[$i][2]
+			.ScriptCode = $asEvents[$i][1]
+			.ScriptType = "Script"
+		EndWith
+
+		$oParent.registerScriptEvent($iConIndex, $tEventDesc)
+	Next
+
+	$atCurrEvents = $oParent.getScriptEvents($iConIndex)
+	If Not IsArray($atCurrEvents) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+
+	For $i = 0 To UBound($asEvents) - 1
+		Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+		For $j = 0 To UBound($atCurrEvents) - 1
+			If ($asEvents[$i][0] = $atCurrEvents[$j].EventMethod()) Then
+				$iError = (($asEvents[$i][1] = $atCurrEvents[$j].ScriptCode())) ? ($iError) : (BitOR($iError, 1))
+				ContinueLoop 2
+			EndIf
+		Next
+		If ($asEvents[$i][1] <> "") Then $iError = BitOR($iError, 1) ; If the script reaches here when the macro string isn't empty, an event failed to be added, so indicate an error.
+	Next
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LOWriter_FormConEvents
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FormConFileSelFieldGeneral
@@ -3420,29 +3799,32 @@ Func _LOWriter_FormConGetParent(ByRef $oControl)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $oOldParent
+	Local $oParent
 
 	If Not IsObj($oControl) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If $oControl.supportsService("com.sun.star.drawing.ControlShape") Then
-		$oOldParent = $oControl.Control.Parent()
+		$oParent = $oControl.Control.Parent()
+
+	ElseIf $oControl.supportsService("com.sun.star.form.component.HiddenControl") Then
+		$oParent = $oControl.Parent()
 
 	ElseIf $oControl.supportsService("com.sun.star.drawing.GroupShape") Then     ; If shape is a grouped control
 		For $i = 0 To $oControl.Count() - 1
 			If $oControl.getByIndex($i).supportsService("com.sun.star.drawing.ControlShape") Then ; Retrieve the controls contained in the grouped control, to find the parent form.
-				$oOldParent = $oControl.getByIndex($i).Control.Parent()
-				If IsObj($oOldParent) Then ExitLoop
+				$oParent = $oControl.getByIndex($i).Control.Parent()
+				If IsObj($oParent) Then ExitLoop
 			EndIf
 		Next
 
-		If Not IsObj($oOldParent) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+		If Not IsObj($oParent) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	Else
 
 		Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 	EndIf
 
-	Return SetError($__LO_STATUS_SUCCESS, 0, $oOldParent)
+	Return SetError($__LO_STATUS_SUCCESS, 0, $oParent)
 EndFunc   ;==>_LOWriter_FormConGetParent
 
 ; #FUNCTION# ====================================================================================================================
@@ -3622,6 +4004,91 @@ Func _LOWriter_FormConGroupBoxGeneral(ByRef $oGroupBox, $sName = Null, $sLabel =
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_FormConGroupBoxGeneral
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_FormConHiddenGeneral
+; Description ...: Set or Retrieve general Hidden control settings.
+; Syntax ........: _LOWriter_FormConHiddenGeneral(ByRef $oHidden[, $sName = Null[, $sValue = Null[, $sAddInfo = Null]]])
+; Parameters ....: $oHidden             - A Hidden Control object returned by a previous _LOWriter_FormConInsert or _LOWriter_FormConsGetList function.
+;                  $sName               - [optional] Default is Null. The name of the Hidden control.
+;                  $sValue              - [optional] Default is Null. The Value of the control.
+;                  $sAddInfo            - [optional] Default is Null. Additional information text.
+; Return values .: Success: 1 or Array
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: 1, Return: Array = Success. All optional parameters were called with Null, returning current settings in a 3 Element Array with values in order of function parameters.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oHidden not an Object.
+;                  @Error: 1, @Extended: 2 = Object called in $oHidden not a Hidden Control.
+;                  @Error: 1, @Extended: 3 = $sName not a String.
+;                  @Error: 1, @Extended: 4 = $sValue not a String.
+;                  @Error: 1, @Extended: 5 = $sAddInfo not a String.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to identify Control type.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $sName
+;                  |                               2 = Error setting $sValue
+;                  |                               4 = Error setting $sAddInfo
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  To skip parameters: Pass the Null keyword to any optional parameter.
+;                  Call any optional parameter with Default keyword to reset the value to default. This can include a default of "Null", or "Default", etc., that is otherwise impossible to set.
+;                  Some parameters cannot be returned to default using the Default keyword, namely: $sName, $sValue, $sAddInfo.
+; Related .......: _LOWriter_FormConInsert, _LOWriter_FormConsGetList, _LO_ConvertColorFromLong, _LO_ConvertColorToLong
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_FormConHiddenGeneral(ByRef $oHidden, $sName = Null, $sValue = Null, $sAddInfo = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local $iError = 0
+	Local $avControl[3]
+
+	If Not IsObj($oHidden) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If (__LOWriter_FormConIdentify($oHidden) <> $LOW_FORM_CON_TYPE_HIDDEN_CONTROL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	If __LO_VarsAreNull($sName, $sValue, $sAddInfo) Then
+		__LO_ArrayFill($avControl, $oHidden.Name(), $oHidden.HiddenValue(), $oHidden.Tag())
+
+		Return SetError($__LO_STATUS_SUCCESS, 1, $avControl)
+	EndIf
+
+	If ($sName = Default) Then
+		$iError = BitOR($iError, 1) ; Can't Default Name.
+
+	ElseIf ($sName <> Null) Then
+		If Not IsString($sName) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+		$oHidden.Name = $sName
+		$iError = ($oHidden.Name() = $sName) ? ($iError) : (BitOR($iError, 1))
+	EndIf
+
+	If ($sValue = Default) Then
+		$iError = BitOR($iError, 2)
+
+	ElseIf ($sValue <> Null) Then
+		If Not IsString($sValue) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+
+		$oHidden.HiddenValue = $sValue
+		$iError = ($oHidden.HiddenValue() = $sValue) ? ($iError) : (BitOR($iError, 2))
+	EndIf
+
+	If ($sAddInfo = Default) Then
+		$iError = BitOR($iError, 4)
+
+	ElseIf ($sAddInfo <> Null) Then
+		If Not IsString($sAddInfo) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+
+		$oHidden.Tag = $sAddInfo
+		$iError = ($oHidden.Tag() = $sAddInfo) ? ($iError) : (BitOR($iError, 4))
+	EndIf
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LOWriter_FormConHiddenGeneral
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FormConImageButtonGeneral
@@ -4357,7 +4824,7 @@ EndFunc   ;==>_LOWriter_FormConImageControlGeneral
 ; Description ...: Insert a control into a form and document.
 ; Syntax ........: _LOWriter_FormConInsert(ByRef $oParentForm, $iControl, $iX, $iY, $iWidth, $iHeight[, $sName = ""])
 ; Parameters ....: $oParentForm         - A Form object returned by a previous _LOWriter_FormAdd, _LOWriter_FormGetObjByIndex or _LOWriter_FormsGetList function.
-;                  $iControl            - (1-524288) The control type to insert. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iControl            - (1-1048576) The control type to insert. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  $iX                  - The X Coordinate, in Hundredths of a Millimeter (HMM).
 ;                  $iY                  - The Y Coordinate, in Hundredths of a Millimeter (HMM).
 ;                  $iWidth              - The Width of the control, in Hundredths of a Millimeter (HMM).
@@ -4370,7 +4837,7 @@ EndFunc   ;==>_LOWriter_FormConImageControlGeneral
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oParentForm not an Object.
 ;                  @Error: 1, @Extended: 2 = Object called in $oParentForm not a Form Object.
-;                  @Error: 1, @Extended: 3 = $iControl not an Integer, less than 1 or greater than 524288. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 3 = $iControl not an Integer, less than 1 or greater than 1048576. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error: 1, @Extended: 4 = $iX not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iY not an Integer.
 ;                  @Error: 1, @Extended: 6 = $iWidth not an Integer.
@@ -4384,12 +4851,16 @@ EndFunc   ;==>_LOWriter_FormConImageControlGeneral
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Form parent document Object.
 ;                  @Error: 3, @Extended: 2 = Parent Document is ReadOnly.
 ;                  @Error: 3, @Extended: 3 = Failed to retrieve Control Service name.
-;                  @Error: 3, @Extended: 4 = Failed to retrieve Shape Position Structure.
-;                  @Error: 3, @Extended: 5 = Failed to retrieve Shape Size Structure.
+;                  @Error: 3, @Extended: 4 = Failed to insert Hidden Control.
+;                  @Error: 3, @Extended: 5 = Failed to retrieve Hidden Control's Object.
+;                  @Error: 3, @Extended: 6 = Failed to rename Hidden Control.
+;                  @Error: 3, @Extended: 7 = Failed to retrieve Shape Size Structure.
+;                  @Error: 3, @Extended: 8 = Failed to retrieve Shape Position Structure.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: When inserting a Grouped Control, a Group box will be automatically created and inserted into it.
 ;                  I have not found a reliable and working way to add controls to a Group of Controls.
+;                  X, Y, Width and Height are ignored for Hidden Controls. Enter any value for them when inserting.
 ; Related .......: _LOWriter_FormConsGetList, _LOWriter_FormConDelete, _LO_UnitConvert
 ; Link ..........:
 ; Example .......: Yes
@@ -4401,7 +4872,8 @@ Func _LOWriter_FormConInsert(ByRef $oParentForm, $iControl, $iX, $iY, $iWidth, $
 	Local $oControl, $oShape, $oGroupShape, $oDoc
 	Local $sControl, $sShapeName
 	Local $tPos, $tSize
-	Local $iCount = 1
+	Local $sTempName = "AutoIt_CONTROL_"
+	Local $iNameCount = 1, $iCount = 1
 
 	If Not IsObj($oParentForm) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not $oParentForm.supportsService("com.sun.star.form.component.Form") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -4429,26 +4901,25 @@ Func _LOWriter_FormConInsert(ByRef $oParentForm, $iControl, $iX, $iY, $iWidth, $
 
 	If $oDoc.IsReadOnly() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
-	$iCount = 0
+	If ($iControl <> $LOW_FORM_CON_TYPE_HIDDEN_CONTROL) Then
+		$iCount = 0
 
-	Do
-		$iCount += 1
-		For $i = 0 To $oDoc.DrawPage.Count() - 1
-			If ($oDoc.DrawPage.getByIndex($i).Name() = "AU3_FORM_SHAPE_" & $iCount) Then ExitLoop
-			Sleep((IsInt(($i / $__LOWCONST_SLEEP_DIV))) ? (10) : (0))
-		Next
-	Until ($i >= $oDoc.DrawPage.Count())
+		Do
+			$iCount += 1
+			For $i = 0 To $oDoc.DrawPage.Count() - 1
+				If ($oDoc.DrawPage.getByIndex($i).Name() = "AU3_FORM_SHAPE_" & $iCount) Then ExitLoop
+				Sleep((IsInt(($i / $__LOWCONST_SLEEP_DIV))) ? (10) : (0))
+			Next
+		Until ($i >= $oDoc.DrawPage.Count())
 
-	$sShapeName = "AU3_FORM_SHAPE_" & $iCount
+		$sShapeName = "AU3_FORM_SHAPE_" & $iCount
+	EndIf
 
 	$sControl = __LOWriter_FormConIdentify(Null, $iControl)
 	If @error Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
 	$oControl = $oDoc.createInstance($sControl)
 	If Not IsObj($oControl) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
-
-	$oShape = $oDoc.createInstance("com.sun.star.drawing.ControlShape")
-	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
 	$oControl.Name = $sName
 
@@ -4469,60 +4940,79 @@ Func _LOWriter_FormConInsert(ByRef $oParentForm, $iControl, $iX, $iY, $iWidth, $
 			$oControl.Label = "Push Button"
 	EndSwitch
 
-	$tSize = $oShape.Size()
-	If Not IsObj($tSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+	If ($iControl = $LOW_FORM_CON_TYPE_HIDDEN_CONTROL) Then
+		While $oParentForm.hasByName($sTempName & $iNameCount)
+			$iNameCount += 1
+		WEnd
 
-	$tSize.Width = $iWidth
-	$tSize.Height = $iHeight
+		$oParentForm.insertByName($sTempName & $iNameCount, $oControl)
+		If Not $oParentForm.hasByName($sTempName & $iNameCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
-	$oShape.Size = $tSize
+		$oShape = $oParentForm.getByName($sTempName & $iNameCount)
+		If Not IsObj($oShape) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
-	$oShape.Control = $oControl
-	$oShape.Name = $sShapeName
+		$oShape.Name = $sName
+		If ($oShape.Name() <> $sName) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
 
-	If ($iControl = $LOW_FORM_CON_TYPE_GROUPED_CONTROL) Then
-		$oGroupShape = $oDoc.createInstance("com.sun.star.drawing.GroupShape")
-		If Not IsObj($oGroupShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
+	Else
+		$oShape = $oDoc.createInstance("com.sun.star.drawing.ControlShape")
+		If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 2, 0)
 
-		$tSize = $oGroupShape.Size()
-		If Not IsObj($tSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+		$tSize = $oShape.Size()
+		If Not IsObj($tSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 7, 0)
 
 		$tSize.Width = $iWidth
 		$tSize.Height = $iHeight
 
-		$oGroupShape.Size = $tSize
+		$oShape.Size = $tSize
 
-		$oDoc.DrawPage.Add($oGroupShape)
-		$oGroupShape.Add($oShape)
+		$oShape.Control = $oControl
+		$oShape.Name = $sShapeName
 
-		$oGroupShape.AnchorType = $LOW_ANCHOR_AT_PARAGRAPH ; Have to set anchor after insertion.
+		If ($iControl = $LOW_FORM_CON_TYPE_GROUPED_CONTROL) Then
+			$oGroupShape = $oDoc.createInstance("com.sun.star.drawing.GroupShape")
+			If Not IsObj($oGroupShape) Then Return SetError($__LO_STATUS_INIT_ERROR, 3, 0)
 
-		$tPos = $oGroupShape.Position()
-		If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
+			$tSize = $oGroupShape.Size()
+			If Not IsObj($tSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 7, 0)
+
+			$tSize.Width = $iWidth
+			$tSize.Height = $iHeight
+
+			$oGroupShape.Size = $tSize
+
+			$oDoc.DrawPage.Add($oGroupShape)
+			$oGroupShape.Add($oShape)
+
+			$oGroupShape.AnchorType = $LOW_ANCHOR_AT_PARAGRAPH ; Have to set anchor after insertion.
+
+			$tPos = $oGroupShape.Position()
+			If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 8, 0)
+
+			$tPos.X = $iX
+			$tPos.Y = $iY
+
+			$oGroupShape.Position = $tPos
+
+			$oGroupShape.getByIndex(0).Control.setParent($oParentForm) ; Have to set parent form after otherwise a COM Error is triggered.
+
+			Return SetError($__LO_STATUS_SUCCESS, 1, $oGroupShape)
+
+		Else ; Non-Group Box Control
+			$oDoc.DrawPage.Add($oShape)
+			$oShape.Control.SetParent($oParentForm)
+			$oShape.AnchorType = $LOW_ANCHOR_AT_PARAGRAPH
+		EndIf
+
+		; Have to set Position after insertion.
+		$tPos = $oShape.Position()
+		If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 8, 0)
 
 		$tPos.X = $iX
 		$tPos.Y = $iY
 
-		$oGroupShape.Position = $tPos
-
-		$oGroupShape.getByIndex(0).Control.setParent($oParentForm) ; Have to set parent form after otherwise a COM Error is triggered.
-
-		Return SetError($__LO_STATUS_SUCCESS, 1, $oGroupShape)
-
-	Else ; Non-Group Box Control
-		$oDoc.DrawPage.Add($oShape)
-		$oShape.Control.SetParent($oParentForm)
-		$oShape.AnchorType = $LOW_ANCHOR_AT_PARAGRAPH
+		$oShape.Position = $tPos
 	EndIf
-
-	; Have to set Position after insertion.
-	$tPos = $oShape.Position()
-	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
-
-	$tPos.X = $iX
-	$tPos.Y = $iY
-
-	$oShape.Position = $tPos
 
 	Return SetError($__LO_STATUS_SUCCESS, 0, $oShape)
 EndFunc   ;==>_LOWriter_FormConInsert
@@ -7229,10 +7719,11 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldValue
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oControl not an Object.
-;                  @Error: 1, @Extended: 2 = $iX not an Integer.
-;                  @Error: 1, @Extended: 3 = $iY not an Integer.
-;                  @Error: 1, @Extended: 4 = $iAnchor not an Integer, less than 0 or greater than 4. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3.
-;                  @Error: 1, @Extended: 5 = $bProtectPos not a Boolean.
+;                  @Error: 1, @Extended: 2 = Cannot set or retrieve position for a Hidden Control.
+;                  @Error: 1, @Extended: 3 = $iX not an Integer.
+;                  @Error: 1, @Extended: 4 = $iY not an Integer.
+;                  @Error: 1, @Extended: 5 = $iAnchor not an Integer, less than 0 or greater than 4. See Constants, $LOW_ANCHOR_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 6 = $bProtectPos not a Boolean.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Control's Position Structure.
 ;                  --Property Setting Errors--
@@ -7244,6 +7735,7 @@ EndFunc   ;==>_LOWriter_FormConPatternFieldValue
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+;                  You cannot Set or Retrieve Position values for a Hidden Control.
 ; Related .......: _LO_UnitConvert, _LOWriter_FormConSize
 ; Link ..........:
 ; Example .......: Yes
@@ -7257,6 +7749,7 @@ Func _LOWriter_FormConPosition(ByRef $oControl, $iX = Null, $iY = Null, $iAnchor
 	Local $tPos
 
 	If Not IsObj($oControl) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If $oControl.supportsService("com.sun.star.form.component.HiddenControl") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$tPos = $oControl.Position()
 	If Not IsObj($tPos) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
@@ -7269,13 +7762,13 @@ Func _LOWriter_FormConPosition(ByRef $oControl, $iX = Null, $iY = Null, $iAnchor
 
 	If ($iX <> Null) Or ($iY <> Null) Then
 		If ($iX <> Null) Then
-			If Not IsInt($iX) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+			If Not IsInt($iX) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 			$tPos.X = $iX
 		EndIf
 
 		If ($iY <> Null) Then
-			If Not IsInt($iY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+			If Not IsInt($iY) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 			$tPos.Y = $iY
 		EndIf
@@ -7287,14 +7780,14 @@ Func _LOWriter_FormConPosition(ByRef $oControl, $iX = Null, $iY = Null, $iAnchor
 	EndIf
 
 	If ($iAnchor <> Null) Then
-		If Not __LO_IntIsBetween($iAnchor, $LOW_ANCHOR_AT_PARAGRAPH, $LOW_ANCHOR_AT_CHARACTER) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not __LO_IntIsBetween($iAnchor, $LOW_ANCHOR_AT_PARAGRAPH, $LOW_ANCHOR_AT_CHARACTER) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oControl.AnchorType = $iAnchor
 		$iError = ($oControl.AnchorType() = $iAnchor) ? ($iError) : (BitOR($iError, 4))
 	EndIf
 
 	If ($bProtectPos <> Null) Then
-		If Not IsBool($bProtectPos) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+		If Not IsBool($bProtectPos) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 		$oControl.MoveProtect = $bProtectPos
 		$iError = ($oControl.MoveProtect() = $bProtectPos) ? ($iError) : (BitOR($iError, 8))
@@ -7876,20 +8369,22 @@ EndFunc   ;==>_LOWriter_FormConPushButtonState
 ; Description ...: Retrieve an array of Control Objects contained in a Document or a Form.
 ; Syntax ........: _LOWriter_FormConsGetList(ByRef $oObj[, $iType = $LOW_FORM_CON_TYPE_ALL])
 ; Parameters ....: $oObj                - Either a Document Object or a Form object, or a Grouped Control. See Remarks. A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function, or a Form Object returned from a previous _LOWriter_FormsGetList, or _LOWriter_FormAdd function. Also a Grouped Control or Group Box returned from a _LOWriter_FormConsGetList function.
-;                  $iType               - [optional] (1-1048575) Default is $LOW_FORM_CON_TYPE_ALL. The type of control(s) to return in the array. Can be BitOr'd together. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  $iType               - [optional] (1-2097151) Default is $LOW_FORM_CON_TYPE_ALL. The type of control(s) to return in the array. Can be BitOr'd together. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ; Return values .: Success: Array
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. Returning a 2D array of Control Objects in the first column, and the type of Control in the second column, corresponding to the Constants $LOW_FORM_CON_* as defined in LibreOfficeWriter_Constants.au3
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oObj not an Object.
-;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 1 or greater than 1048575. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 2 = $iType not an Integer, less than 1 or greater than 2097151. See Constants $LOW_FORM_CON_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error: 1, @Extended: 3 = Called Object in $oObj, not a Document Object, not a Form Object, and not a Grouped Control.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to identify parent document of Form.
 ;                  @Error: 3, @Extended: 2 = Failed to retrieve Draw Page object.
 ;                  @Error: 3, @Extended: 3 = Failed to retrieve Shape Object.
 ;                  @Error: 3, @Extended: 4 = Failed to identify Control type.
-;                  @Error: 3, @Extended: 5 = Failed to retrieve Control Object.
+;                  @Error: 3, @Extended: 5 = Failed to retrieve Form Control Object.
+;                  @Error: 3, @Extended: 6 = Failed to retrieve Form Object.
+;                  @Error: 3, @Extended: 7 = Failed to retrieve Control Object.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......: If a Document object is called in $oObj, all the controls are returned (except controls in a Grouped Control). If a Form Object is called in $oObj, only the controls contained in the Form are returned. And if a Grouped control is called, only controls in the group are returned.
@@ -7903,9 +8398,9 @@ Func _LOWriter_FormConsGetList(ByRef $oObj, $iType = $LOW_FORM_CON_TYPE_ALL)
 	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
 	#forceref $oCOM_ErrorHandler
 
-	Local $aoControls[0][2]
-	Local $oShapes, $oShape, $oDoc, $oControl
-	Local $iCount = 0, $iControlType
+	Local $aoControls[0][2], $aoForms[0]
+	Local $oShapes, $oShape, $oDoc, $oControl, $oCurrObj
+	Local $iCount = 0, $iControlType, $iArrayCount = 0
 
 	If Not IsObj($oObj) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 	If Not __LO_IntIsBetween($iType, $LOW_FORM_CON_TYPE_CHECK_BOX, $LOW_FORM_CON_TYPE_ALL) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
@@ -7953,6 +8448,21 @@ Func _LOWriter_FormConsGetList(ByRef $oObj, $iType = $LOW_FORM_CON_TYPE_ALL)
 			Sleep((IsInt(($i / $__LOWCONST_SLEEP_DIV))) ? (10) : (0))
 		Next
 
+		If BitAND($iType, $LOW_FORM_CON_TYPE_HIDDEN_CONTROL) Then ; Only do this if searching for Hidden Controls. All other controls will be identified already, only hidden controls are stored solely in forms.
+			For $i = 0 To $oObj.Count() - 1
+				$oCurrObj = $oObj.getByIndex($i)
+				If Not IsObj($oCurrObj) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+
+				If $oCurrObj.supportsService("com.sun.star.form.component.HiddenControl") Then
+					If ($iCount <= UBound($aoControls)) Then ReDim $aoControls[$iCount + 1][2]
+					$aoControls[$iCount][0] = $oCurrObj
+					$aoControls[$iCount][1] = $LOW_FORM_CON_TYPE_HIDDEN_CONTROL
+					$iCount += 1
+				EndIf
+				Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+			Next
+		EndIf
+
 	ElseIf $oObj.supportsService("com.sun.star.text.TextDocument") Then ; Get all controls in document.
 		$oShapes = $oObj.DrawPage()
 		If Not IsObj($oShapes) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
@@ -7976,12 +8486,42 @@ Func _LOWriter_FormConsGetList(ByRef $oObj, $iType = $LOW_FORM_CON_TYPE_ALL)
 			Sleep((IsInt(($i / $__LOWCONST_SLEEP_DIV))) ? (10) : (0))
 		Next
 
+		If BitAND($iType, $LOW_FORM_CON_TYPE_HIDDEN_CONTROL) Then ; Only do this if searching for Hidden Controls. All other controls will be identified already, only hidden controls are stored solely in forms.
+			ReDim $aoForms[$oObj.DrawPage.Forms.Count()]
+
+			For $i = 0 To $oObj.DrawPage.Forms.Count() - 1
+				$aoForms[$i] = $oObj.DrawPage.Forms.getByIndex($i)
+				If Not IsObj($aoForms[$i]) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
+			Next
+
+			While ($iArrayCount < UBound($aoForms))
+				For $i = 0 To $aoForms[$iArrayCount].Count() - 1
+					$oCurrObj = $aoForms[$iArrayCount].getByIndex($i)
+					If Not IsObj($oCurrObj) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+
+					If $oCurrObj.supportsService("com.sun.star.form.component.Form") Then
+						ReDim $aoForms[UBound($aoForms) + 1]
+						$aoForms[UBound($aoForms) - 1] = $oCurrObj
+
+					ElseIf $oCurrObj.supportsService("com.sun.star.form.component.HiddenControl") Then
+						If ($iCount <= UBound($aoControls)) Then ReDim $aoControls[$iCount + 1][2]
+						$aoControls[$iCount][0] = $oCurrObj
+						$aoControls[$iCount][1] = $LOW_FORM_CON_TYPE_HIDDEN_CONTROL
+						$iCount += 1
+					EndIf
+					Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+				Next
+
+				$iArrayCount += 1
+			WEnd
+		EndIf
+
 	ElseIf $oObj.supportsService("com.sun.star.drawing.GroupShape") Then
 		ReDim $aoControls[$oObj.Count()][2]
 
 		For $i = 0 To $oObj.Count() - 1
 			$oControl = $oObj.getByIndex($i)
-			If Not IsObj($oControl) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+			If Not IsObj($oControl) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 7, 0)
 
 			If $oControl.supportsService("com.sun.star.drawing.ControlShape") Then
 				$iControlType = __LOWriter_FormConIdentify($oControl)
@@ -8020,9 +8560,10 @@ EndFunc   ;==>_LOWriter_FormConsGetList
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oControl not an Object.
-;                  @Error: 1, @Extended: 2 = $iWidth not an Integer, or less than 51.
-;                  @Error: 1, @Extended: 3 = $iHeight not an Integer, or less than 51.
-;                  @Error: 1, @Extended: 4 = $bProtectSize not a Boolean.
+;                  @Error: 1, @Extended: 2 = Cannot set or retrieve size for a Hidden Control.
+;                  @Error: 1, @Extended: 3 = $iWidth not an Integer, or less than 51.
+;                  @Error: 1, @Extended: 4 = $iHeight not an Integer, or less than 51.
+;                  @Error: 1, @Extended: 5 = $bProtectSize not a Boolean.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Control Size Structure.
 ;                  --Property Setting Errors--
@@ -8035,6 +8576,7 @@ EndFunc   ;==>_LOWriter_FormConsGetList
 ; Remarks .......: To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
 ;                  To skip parameters: Pass the Null keyword to any optional parameter.
 ;                  I have skipped Keep Ratio, as currently it seems unable to be set for controls.
+;                  You cannot Set or Retrieve size values for a Hidden Control.
 ; Related .......: _LO_UnitConvert, _LOWriter_FormConPosition
 ; Link ..........:
 ; Example .......: Yes
@@ -8048,6 +8590,7 @@ Func _LOWriter_FormConSize(ByRef $oControl, $iWidth = Null, $iHeight = Null, $bP
 	Local $tSize
 
 	If Not IsObj($oControl) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+	If $oControl.supportsService("com.sun.star.form.component.HiddenControl") Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
 
 	$tSize = $oControl.Size()
 	If Not IsObj($tSize) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
@@ -8060,13 +8603,13 @@ Func _LOWriter_FormConSize(ByRef $oControl, $iWidth = Null, $iHeight = Null, $bP
 
 	If ($iWidth <> Null) Or ($iHeight <> Null) Then
 		If ($iWidth <> Null) Then ; Min 51
-			If Not __LO_IntIsBetween($iWidth, 51) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+			If Not __LO_IntIsBetween($iWidth, 51) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 
 			$tSize.Width = $iWidth
 		EndIf
 
 		If ($iHeight <> Null) Then
-			If Not __LO_IntIsBetween($iHeight, 51) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+			If Not __LO_IntIsBetween($iHeight, 51) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 
 			$tSize.Height = $iHeight
 		EndIf
@@ -8078,7 +8621,7 @@ Func _LOWriter_FormConSize(ByRef $oControl, $iWidth = Null, $iHeight = Null, $bP
 	EndIf
 
 	If ($bProtectSize <> Null) Then
-		If Not IsBool($bProtectSize) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
+		If Not IsBool($bProtectSize) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 
 		$oControl.SizeProtect = $bProtectSize
 		$iError = ($oControl.SizeProtect() = $bProtectSize) ? ($iError) : (BitOR($iError, 4))
@@ -13852,6 +14395,155 @@ Func _LOWriter_FormDocSettings(ByRef $oDoc, $bFormDesignMode = Null, $bOpenInDes
 
 	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
 EndFunc   ;==>_LOWriter_FormDocSettings
+
+; #FUNCTION# ====================================================================================================================
+; Name ..........: _LOWriter_FormEvents
+; Description ...: Set or Retrieve events for a Form.
+; Syntax ........: _LOWriter_FormEvents(ByRef $oForm[, $asEvents = Null])
+; Parameters ....: $oForm               - A Form object returned by a previous _LOWriter_FormAdd, _LOWriter_FormGetObjByIndex or _LOWriter_FormsGetList function.
+;                  $asEvents            - [optional] Default is Null. A three columned array of event settings. See remarks.
+; Return values .: Success: 1 or Array.
+;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
+;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current events as a three columned Array. @Extended set to number of events.
+;                  --Input Errors--
+;                  @Error: 1, @Extended: 1 = $oForm not an Object.
+;                  @Error: 1, @Extended: 2 = $asEvents not an array.
+;                  @Error: 1, @Extended: 3 = $asEvents does not contain 3 columns.
+;                  @Error: 1, @Extended: 4 = Event type value in $asEvents not a String. Returning problem element's index.
+;                  @Error: 1, @Extended: 5 = Macro execution link in $asEvents not a String. Returning problem element's index.
+;                  @Error: 1, @Extended: 6 = Event listener type in $asEvents not a String. Returning problem element's index.
+;                  --Initialization Errors--
+;                  @Error: 2, @Extended: 1 = Failed to create a "com.sun.star.script.ScriptEventDescriptor" struct.
+;                  --Processing Errors--
+;                  @Error: 3, @Extended: 1 = Failed to identify Form's index location.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve array of events.
+;                  --Property Setting Errors--
+;                  @Error: 4, @Extended: ? = Some settings were not successfully set. Use BitAND to test @Extended for following values:
+;                  |                               1 = Error setting $asEvents
+; Author ........: donnyh13
+; Modified ......:
+; Remarks .......: The expected array must contain three columns, with values in the following order:
+;                  - $aArray[0][0] is the event type name as a string, normally matching one of the Form Event constants (See below for potential exceptions). See Constants $LOW_FORM_EVENT_* as defined in LibreOfficeWriter_Constants.au3.
+;                  - $aArray[0][1] is the macro execution string returned by a previous _LOBasic_MacroExecuteLinkCreate function. Pass an empty string to disable an event.
+;                  - $aArray[0][2] is the Event Listener type, this is required to register new events. This should always be already filled in, and should not need to be modified. It is also found in the description for each event name Constant.
+;                  There is no way to retrieve programmatically all event types available to be set, therefore I have made a prefilled list of event types matching the Form Event constants $LOW_FORM_EVENT_*. If LibreOffice adds new events, and these are set and active, they will be added to the end of the events array with all necessary information.
+;                  To retrieve the current value(s): Omit all optional parameters, or pass Null for each parameter.
+; Related .......:
+; Link ..........:
+; Example .......: Yes
+; ===============================================================================================================================
+Func _LOWriter_FormEvents(ByRef $oForm, $asEvents = Null)
+	Local $oCOM_ErrorHandler = ObjEvent("AutoIt.Error", __LOWriter_InternalComErrorHandler)
+	#forceref $oCOM_ErrorHandler
+
+	Local Const $__UBOUND_COLUMNS = 2
+	Local $oParentForm
+	Local $iError = 0, $iFormIndex
+	Local $tEventDesc
+	Local $atCurrEvents
+	Local $asFormEvents[15][3] = [[$LOW_FORM_EVENT_CONFIRM_DELETION, "", "XConfirmDeleteListener"], [$LOW_FORM_EVENT_ERROR_OCCURRED, "", "XSQLErrorListener"], _
+			[$LOW_FORM_EVENT_FILL_PARAMS, "", "XDatabaseParameterListener"], [$LOW_FORM_EVENT_LOADING_WHEN, "", "XLoadListener"], _
+			[$LOW_FORM_EVENT_RECORD_ACTION_AFTER, "", "XRowSetListener"], [$LOW_FORM_EVENT_RECORD_ACTION_BEFORE, "", "XRowSetApproveListener"], _
+			[$LOW_FORM_EVENT_RECORD_CHANGE_AFTER, "", "XRowSetListener"], [$LOW_FORM_EVENT_RECORD_CHANGE_BEFORE, "", "XRowSetApproveListener"], _
+			[$LOW_FORM_EVENT_RELOAD_BEFORE, "", "XLoadListener"], [$LOW_FORM_EVENT_RELOAD_WHEN, "", "XLoadListener"], [$LOW_FORM_EVENT_RESET_AFTER, "", "XResetListener"], _
+			[$LOW_FORM_EVENT_RESET_PRIOR, "", "XResetListener"], [$LOW_FORM_EVENT_SUBMIT_BEFORE, "", "XSubmitListener"], [$LOW_FORM_EVENT_UNLOAD_BEFORE, "", "XLoadListener"], _
+			[$LOW_FORM_EVENT_UNLOAD_WHEN, "", "XLoadListener"]]
+
+	If Not IsObj($oForm) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
+
+	$oParentForm = $oForm.Parent()
+
+	For $i = 0 To $oParentForm.getCount() - 1
+		If ($oParentForm.getByIndex($i) = $oForm) Then
+			$iFormIndex = $i
+			ExitLoop
+		EndIf
+
+		Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+	Next
+
+	If Not IsInt($iFormIndex) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
+
+	$atCurrEvents = $oParentForm.getScriptEvents($iFormIndex)
+	If Not IsArray($atCurrEvents) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	If __LO_VarsAreNull($asEvents) Then
+		For $i = 0 To UBound($asFormEvents) - 1
+			Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+			For $j = 0 To UBound($atCurrEvents) - 1
+				If (($atCurrEvents[$j].EventMethod()) = $asFormEvents[$i][0]) Then
+					$asFormEvents[$i][1] = $atCurrEvents[$j].ScriptCode()
+					ContinueLoop 2
+				EndIf
+			Next
+		Next
+
+		; Cycle through and make sure there aren't any event types I don't know about, add them to the array if there are.
+		For $i = 0 To UBound($atCurrEvents) - 1
+			Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+
+			For $j = 0 To UBound($asFormEvents) - 1
+				If (($atCurrEvents[$i].EventMethod()) = $asFormEvents[$j][0]) Then ContinueLoop 2
+			Next
+
+			ReDim $asFormEvents[UBound($asFormEvents) + 1][3]
+			$asFormEvents[UBound($asFormEvents) - 1][0] = $atCurrEvents[$i].EventMethod()
+			$asFormEvents[UBound($asFormEvents) - 1][1] = $atCurrEvents[$i].ScriptCode()
+			$asFormEvents[UBound($asFormEvents) - 1][2] = $atCurrEvents[$i].ListenerType()
+		Next
+
+		Return SetError($__LO_STATUS_SUCCESS, UBound($asFormEvents), $asFormEvents)
+	EndIf
+
+	If Not IsArray($asEvents) Then Return SetError($__LO_STATUS_INPUT_ERROR, 2, 0)
+	If (UBound($asEvents, $__UBOUND_COLUMNS) <> 3) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
+
+	For $i = 0 To UBound($asEvents) - 1
+		Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+		If Not IsString($asEvents[$i][0]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, $i)
+		If Not IsString($asEvents[$i][1]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, $i)
+		If Not IsString($asEvents[$i][2]) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, $i)
+
+		For $j = 0 To UBound($atCurrEvents) - 1
+			If (($atCurrEvents[$j].EventMethod()) = $asEvents[$i][0]) Then
+				If (($atCurrEvents[$j].ScriptCode()) = $asEvents[$i][1]) Then ContinueLoop 2 ; Event is assigned to a macro, and the macro strings are the same, skip it.
+
+				; Remove the event entry. If the event needs modified, the first step is to remove it.
+				$oParentForm.revokeScriptEvent($iFormIndex, $atCurrEvents[$j].ListenerType(), $atCurrEvents[$j].EventMethod(), $atCurrEvents[$j].AddListenerParam())
+			EndIf
+		Next
+
+		If ($asEvents[$i][1] = "") Then ContinueLoop ; Macro event is blank, skip it, otherwise insert the event.
+		$tEventDesc = __LO_CreateStruct("com.sun.star.script.ScriptEventDescriptor")
+		If Not IsObj($tEventDesc) Then Return SetError($__LO_STATUS_INIT_ERROR, 1, 0)
+
+		With $tEventDesc
+			.AddListenerParam = ""
+			.EventMethod = $asEvents[$i][0]
+			.ListenerType = $asEvents[$i][2]
+			.ScriptCode = $asEvents[$i][1]
+			.ScriptType = "Script"
+		EndWith
+
+		$oParentForm.registerScriptEvent($iFormIndex, $tEventDesc)
+	Next
+
+	$atCurrEvents = $oParentForm.getScriptEvents($iFormIndex)
+	If Not IsArray($atCurrEvents) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
+
+	For $i = 0 To UBound($asEvents) - 1
+		Sleep((IsInt($i / $__LOWCONST_SLEEP_DIV) ? (10) : (0)))
+		For $j = 0 To UBound($atCurrEvents) - 1
+			If ($asEvents[$i][0] = $atCurrEvents[$j].EventMethod()) Then
+				$iError = (($asEvents[$i][1] = $atCurrEvents[$j].ScriptCode())) ? ($iError) : (BitOR($iError, 1))
+				ContinueLoop 2
+			EndIf
+		Next
+		If ($asEvents[$i][1] <> "") Then $iError = BitOR($iError, 1) ; If the script reaches here when the macro string isn't empty, an event failed to be added, so indicate an error.
+	Next
+
+	Return ($iError > 0) ? (SetError($__LO_STATUS_PROP_SETTING_ERROR, $iError, 0)) : (SetError($__LO_STATUS_SUCCESS, 0, 1))
+EndFunc   ;==>_LOWriter_FormEvents
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_FormGetObjByIndex

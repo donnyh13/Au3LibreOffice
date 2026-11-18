@@ -1513,7 +1513,7 @@ EndFunc   ;==>_LOCalc_CellStyleEffect
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOCalc_DocOpen, _LOCalc_DocConnect, or _LOCalc_DocCreate function.
 ;                  $sCellStyle          - The Cell Style Name to search for.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If the Document contains the Cell style called in $sCellStyle, True is returned, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if the Document contains the Cell style called in $sCellStyle, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
@@ -2140,7 +2140,7 @@ EndFunc   ;==>_LOCalc_CellStyleTextOrient
 ;                  @Error: 1, @Extended: 1 = $oCellStyle not an Object.
 ;                  @Error: 1, @Extended: 2 = $bAutoWrapText not a Boolean.
 ;                  @Error: 1, @Extended: 3 = $bHyphen not a Boolean.
-;                  @Error: 1, @Extended: 4 = $bShrinkToFitnot a Boolean.
+;                  @Error: 1, @Extended: 4 = $bShrinkToFit not a Boolean.
 ;                  @Error: 1, @Extended: 5 = $iTextDirection not an Integer, less than 0 or greater than 1, but not equal to 4. See Constants, $LOC_PAR_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [LibreOffice Default is 4]
 ;                  @Error: 1, @Extended: 6 = $oCellStyle is not a Cell Style object.
 ;                  --Property Setting Errors--
@@ -2330,7 +2330,7 @@ EndFunc   ;==>_LOCalc_CellTextOrient
 ;                  @Error: 1, @Extended: 1 = $oCell not an Object.
 ;                  @Error: 1, @Extended: 2 = $bAutoWrapText not a Boolean.
 ;                  @Error: 1, @Extended: 3 = $bHyphen not a Boolean.
-;                  @Error: 1, @Extended: 4 = $bShrinkToFitnot a Boolean.
+;                  @Error: 1, @Extended: 4 = $bShrinkToFit not a Boolean.
 ;                  @Error: 1, @Extended: 5 = $iTextDirection not an Integer, less than 0 or greater than 1, but not equal to 4. See Constants, $LOC_PAR_TXT_DIR_* as defined in LibreOfficeCalc_Constants.au3. [LibreOffice Default is 4]
 ;                  @Error: 1, @Extended: 6 = $oCell does not support Character properties, or Table Column, or Table Row service.
 ;                  --Property Setting Errors--

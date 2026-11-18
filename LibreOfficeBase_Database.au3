@@ -377,7 +377,7 @@ EndFunc   ;==>_LOBase_DatabaseGetObjByURL
 ; Syntax ........: _LOBase_DatabaseIsReadOnly(ByRef $oDBase)
 ; Parameters ....: $oDBase              - A Database object returned by a previous _LOBase_DatabaseGetObjByDoc or _LOBase_DatabaseGetObjByURL function.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If Database is currently Read-Only, True is returned. Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if Database is currently Read-Only, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDBase not an Object.
@@ -741,7 +741,7 @@ EndFunc   ;==>_LOBase_DatabaseRegisteredAdd
 ; Syntax ........: _LOBase_DatabaseRegisteredExists($sName)
 ; Parameters ....: $sName               - The Database name to look for.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If Registered Database with called name exists, True is returned. Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if Registered Database with called name exists, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $sName not a String.
@@ -867,7 +867,7 @@ EndFunc   ;==>_LOBase_DatabaseRegisteredRemoveByName
 ; Syntax ........: _LOBase_DatabaseRequiresPassword(ByRef $oDBase)
 ; Parameters ....: $oDBase              - A Database object returned by a previous _LOBase_DatabaseGetObjByDoc or _LOBase_DatabaseGetObjByURL function.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If Database requires a password to connect to it, True is returned. Else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if Database requires a password to connect to it, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDBase not an Object.

@@ -87,7 +87,7 @@ Func _LOWriter_ShapeAreaColor(ByRef $oShape, $iColor = Null)
 	If Not IsObj($oShape) Then Return SetError($__LO_STATUS_INPUT_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($iColor) Then
-		If ($oShape.FillStyle() = $LOW_AREA_FILL_STYLE_SOLID) Then ; If FillStyle is set to solid, then return current color value, else return LOW_COLOR_OFF (Probably a Gradient it used or otherwise.).
+		If ($oShape.FillStyle() = $LOW_AREA_FILL_STYLE_SOLID) Then ; If FillStyle is set to solid, then return current color value, else return $LO_COLOR_OFF (Probably a Gradient is used or otherwise).
 			$iCurColor = __LOWriter_ColorRemoveAlpha($oShape.FillColor())
 			If Not IsInt($iCurColor) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
@@ -153,7 +153,7 @@ EndFunc   ;==>_LOWriter_ShapeAreaFillStyle
 
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: _LOWriter_ShapeAreaGradient
-; Description ...: Modify or retrieve the settings for Shape Background color Gradient.
+; Description ...: Set or Retrieve the settings for Shape Background color Gradient.
 ; Syntax ........: _LOWriter_ShapeAreaGradient(ByRef $oDoc, ByRef $oShape[, $sGradientName = Null[, $iType = Null[, $iIncrement = Null[, $iXCenter = Null[, $iYCenter = Null[, $iAngle = Null[, $iTransitionStart = Null[, $iFromColor = Null[, $iToColor = Null[, $iFromIntense = Null[, $iToIntense = Null]]]]]]]]]]])
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $oShape              - A Shape object returned by a previous _LOWriter_ShapeInsert, or _LOWriter_ShapeGetObjByName function.
@@ -880,7 +880,7 @@ EndFunc   ;==>_LOWriter_ShapeDelete
 ; Parameters ....: $oDoc                - A Document object returned by a previous _LOWriter_DocOpen, _LOWriter_DocConnect, or _LOWriter_DocCreate function.
 ;                  $sShapeName          - The Shape name to search for.
 ; Return values .: Success: Boolean
-;                  @Error: 0, @Extended: 0, Return: Boolean = Success. If a Shape was found matching $sShapeName, True is returned, else False.
+;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning True if a Shape was found matching $sShapeName, else False.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
@@ -1253,7 +1253,7 @@ EndFunc   ;==>_LOWriter_ShapeInsert
 ;                  @Error: 1, @Extended: 5 = $bStartCenter not a Boolean.
 ;                  @Error: 1, @Extended: 6 = $bSync not a Boolean.
 ;                  @Error: 1, @Extended: 7 = $vEndStyle not a String, and not an Integer.
-;                  @Error: 1, @Extended: 8 = $vSEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOW_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
+;                  @Error: 1, @Extended: 8 = $vEndStyle is an Integer, but less than 0 or greater than 32. See constants $LOW_SHAPE_LINE_ARROW_TYPE_* as defined in LibreOfficeWriter_Constants.au3.
 ;                  @Error: 1, @Extended: 9 = $iEndWidth not an Integer, less than 0 or greater than 5004.
 ;                  @Error: 1, @Extended: 10 = $bEndCenter not a Boolean.
 ;                  --Processing Errors--
@@ -2082,8 +2082,8 @@ EndFunc   ;==>_LOWriter_ShapePointsGetCount
 ;                  @Error: 1, @Extended: 3 = $iPoint not an Integer, less than 1 or greater than number of points in the shape.
 ;                  @Error: 1, @Extended: 4 = $iX not an Integer.
 ;                  @Error: 1, @Extended: 5 = $iY not an Integer
-;                  @Error: 1, @Extended: 6 = $PointType not an Integer, less than 0 or greater than 3, or equal to 2.
-;                  @Error: 1, @Extended: 7 = $PointType called with other than Normal while $iPoint is referencing first or last point.
+;                  @Error: 1, @Extended: 6 = $iPointType not an Integer, less than 0 or greater than 3, or equal to 2.
+;                  @Error: 1, @Extended: 7 = $iPointType called with other than Normal while $iPoint is referencing first or last point.
 ;                  @Error: 1, @Extended: 8 = $bIsCurve not a Boolean.
 ;                  @Error: 1, @Extended: 9 = $bIsCurve cannot be set for last point in a shape.
 ;                  --Processing Errors--
