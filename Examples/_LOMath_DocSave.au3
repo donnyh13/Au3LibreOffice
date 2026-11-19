@@ -15,7 +15,7 @@ Func Example()
 
 	MsgBox($MB_OK + $MB_TOPMOST, Default, "I will now save the new Math Document to the desktop folder.")
 
-	$sFilePathName = _TempFile(@DesktopDir & "\", "TestExportDoc_", ".odt")
+	$sFilePathName = _TempFile(@DesktopDir & "\", "TestExportDoc_", ".odf")
 
 	; save The New Blank Doc To Desktop Directory using a unique temporary name.
 	$sPath = _LOMath_DocSaveAs($oDoc, $sFilePathName)

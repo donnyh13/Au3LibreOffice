@@ -11,6 +11,7 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 |  Version         |  Changes                           |  Download                   |   Released     |  Compare on GitHub         |
 |:-----------------|:----------------------------------:|:---------------------------:|:--------------:|:---------------------------|
+|    **v1.0.1**    | [Change Log](#101---2027)          | [v1.0.1][v1.0.1]            | _unreleased_   | [Compare][v1.0.1-Compare]  |
 |    **v1.0.0**    | [Change Log](#100---2026-11-18)    | [v1.0.0][v1.0.0]            | 2026-11-18     | [Compare][v1.0.0-Compare]  |
 |    **v0.10.0**   | [Change Log](#0100---2026-08-23)   | [v0.10.0][v0.10.0]          | 2026-08-23     | [Compare][v0.10.0-Compare] |
 |    **v0.9.1**    | [Change Log](#091---2023-10-28)    | [v0.9.1][v0.9.1]            | 2023-10-28     | [Compare][v0.9.1-Compare]  |
@@ -18,6 +19,14 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 |    **v0.0.0.3**  | [Change Log](#0003---2023-08-10)   | [v0.0.0.3][v0.0.0.3]        | 2023-08-10     | [Compare][v0.0.0.3-Compare]|
 |    **v0.0.0.2**  | [Change Log](#0002---2023-07-16)   | [v0.0.0.2][v0.0.0.2]        | 2023-07-16     | [Compare][v0.0.0.2-Compare]|
 |    **v0.0.0.1**  | [Change Log](#0001---2023-07-02)   | [v0.0.0.1][v0.0.0.1]        | 2023-07-02     |                            |
+
+## [1.0.1] - 2027
+
+### LibreOfficeMath
+
+#### Fixed
+
+- Wrong extension in `_LOMath_DocSave` example.
 
 ## [1.0.0] - 2026-11-18
 
@@ -4105,6 +4114,7 @@ Thanks @danp2 and @Sven-Seyfert. All above mentioned MD documents were based on 
 
 ---
 
+[v1.0.1-Compare]: https://github.com/donnyh13/Au3LibreOffice/compare/v1.0.0...main
 [v1.0.0-Compare]: https://github.com/donnyh13/Au3LibreOffice/compare/v0.10.0...v1.0.0
 [v0.10.0-Compare]: https://github.com/donnyh13/Au3LibreOffice/compare/v0.9.1...v0.10.0
 [v0.9.1-Compare]: https://github.com/donnyh13/Au3LibreOffice/compare/v0.9.0...v0.9.1
@@ -4112,6 +4122,7 @@ Thanks @danp2 and @Sven-Seyfert. All above mentioned MD documents were based on 
 [v0.0.0.3-Compare]: https://github.com/donnyh13/Au3LibreOffice/compare/v0.0.0.2...v0.0.0.3
 [v0.0.0.2-Compare]: https://github.com/donnyh13/Au3LibreOffice/compare/v0.0.0.1...v0.0.0.2
 
+[v1.0.1]: https://github.com/donnyh13/Au3LibreOffice
 [v1.0.0]: https://github.com/donnyh13/Au3LibreOffice/releases/tag/v1.0.0
 [v0.10.0]: https://github.com/donnyh13/Au3LibreOffice/releases/tag/v0.10.0
 [v0.9.1]: https://github.com/donnyh13/Au3LibreOffice/releases/tag/v0.9.1
