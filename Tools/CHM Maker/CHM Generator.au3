@@ -72,7 +72,7 @@ Global Enum $__g_Const_Constant, $__g_Const_Value, $__g_Const_Desc
 #EndRegion Global Variables
 
 #Region GUI Creation & Main Loop
-$hGUI = GUICreate($sAppName, 400, 535, -1, -1, -1, $WS_EX_TOPMOST)
+$hGUI = GUICreate($sAppName, 400, 540, -1, -1, -1, $WS_EX_TOPMOST)
 
 GUICtrlCreateLabel("Au3 Library File(s):", 20, 5, -1, 15)
 $idLibraryFile_Button = GUICtrlCreateButton("...", 360, 20, 20, 20)
@@ -137,7 +137,7 @@ GUICtrlSetColor(-1, $COLOR_RED)
 $idGenerateDocs_Button = GUICtrlCreateButton("Generate", 20, 480, 60, 20)
 $idExit_Button = GUICtrlCreateButton("Exit", 100, 480, 60, 20)
 
-GUICtrlCreateLabel("Credits and Thanks to: (Mr)CreatoR, water, Jos and the AutoIt team.", 5, 505, 390, 27)
+GUICtrlCreateLabel("Credits and Thanks to:" & @CRLF & "(Mr)CreatoR, water, Jos and the AutoIt team.", 5, 510, 390, 27)
 GUICtrlSetFont(-1, 8.5, 800, 0, "Georgia")
 GUICtrlSetColor(-1, $COLOR_TEAL)
 
@@ -602,6 +602,9 @@ Func _AU3Lib_GenerateDocs_Proc(ByRef $asFiles)
 				$sReturn_Failure = StringRegExpReplace($sReturn_Failure, '(?i)\|(?:(.+?))', '\1')
 				$sReturn_Failure = StringRegExpReplace($sReturn_Failure, '<br>\h*\+', '')
 
+				$sReturn_Success = __ProcessReturnValues($sReturn_Success, $sFuncName)
+				$sReturn_Failure = __ProcessReturnValues($sReturn_Failure, $sFuncName)
+
 				$sReturn_Success = StringRegExpReplace($sReturn_Success, "(?i)((?|\@Error|\@Extended|Return):)", "<b>\1</b>")
 				$sReturn_Failure = StringRegExpReplace($sReturn_Failure, "(?i)((?|\@Error|\@Extended):)", "<b>\1</b>")
 
@@ -675,13 +678,11 @@ Func _AU3Lib_GenerateDocs_Proc(ByRef $asFiles)
 						'  <table class="noborder">' & @CRLF & _ ;~ modified
 						'    <tr>' & @CRLF & _
 						'      <td style="width:10%" class="valign-top">Success:</td>' & @CRLF & _
-						'      <td style="width:90%">' & $sReturn_Success & '</td>' & @CRLF & _
-						'    </tr>' & @CRLF & _
+						'      <td style="width:90%">' & $sReturn_Success & @CRLF & _
+						'  <table class="noborder">' & @CRLF & _ ;~ modified
 						'    <tr>' & @CRLF & _
-						'      <td class="valign-top">Failure:</td>' & @CRLF & _
-						'      <td>' & $sReturn_Failure & '</td>' & @CRLF & _
-						'    </tr>' & @CRLF & _
-						'  </table>' & @CRLF
+						'      <td style="width:10%" class="valign-top">Failure:</td>' & @CRLF & _
+						'      <td style="width:90%">' & $sReturn_Failure & @CRLF
 
 				If $aHeaders[$i][$__g_Header_Remarks] <> '' Then ;~ modified
 					$sRemarks = StringReplace($aHeaders[$i][$__g_Header_Remarks], @CRLF, '<br>' & @CRLF)
@@ -1547,6 +1548,139 @@ Func _SendSciTE_GetInfo($My_Hwnd, $hSciTE_hwnd, $sCmd)
 	Return $sSciTECmd
 EndFunc   ;==>_SendSciTE_GetInfo
 #EndRegion ; The following Scite functions are copied and modified from AutoItWrapper. Credits to Jos.
+
+Func __ProcessReturnValues($sValues, $sFuncName)
+	Local $asSplit, $asRegExp
+	Local $sProcessed = "", $sErrType = ""
+	Local $iLastErrorVal = -1
+	Local $avErrTypes[6][2] = [[1, "Input"], [2, "Initialization"], [3, "Processing"], [4, "Property Setting"], [5, "Printer Related"], [6, "Version Related"]]
+
+	$asSplit = StringSplit($sValues, @CRLF, $STR_ENTIRESPLIT)
+
+	; This should always be a return value/type. e.g. 1, array etc. or a "0 and sets @Error and @Extended to non-zero".
+	; If it's not, don't process it and return.
+	; The @Error: @Extended: have colons after them, so they wont be mistaken for the @Error and @Extended in the failure descrription.
+	If StringRegExp($asSplit[1], "(?i)(?|\@Error:|\@Extended:)") Then
+		$sProcessed = $sValues & '</td>' & @CRLF & _ ; End the column and row and table.
+				'    </tr>' & @CRLF & _
+				'  </table>' & @CRLF
+		ConsoleWrite("! " & $sFuncName & ": @Error: or @Extended: in return value, skip processing: " & $asSplit[1] & @CRLF)
+	Else
+		$sProcessed &= $asSplit[1] & '</td>' & @CRLF & _ ; End the success/failure column and row and table.
+				'    </tr>' & @CRLF & _
+				'  </table>' & @CRLF ; This should always be a return value/type. e.g. 1, array etc. or a "0 and sets @Error and @Extended to non-zero".
+
+		If StringRegExp($sValues, "(?i)\@Error:.*\@Extended:.*Return:") Then ; Dealing with success values.
+			If ($asSplit[0] > 1) Then
+				$sProcessed &= _
+						'  <table>' & @CRLF & _
+						'  <tr class="yellowbold">' & @CRLF & _
+						'    <td colspan="3">Success(@Error: 0)</td>' & @CRLF & _
+						'  </tr>' & @CRLF & _
+						'  <tr>' & @CRLF & _
+						'    <th style="width:15%">@Extended:</th>' & @CRLF & _
+						'    <th style="width:20%">Return:</th>' & @CRLF & _
+						'    <th style="width:65%">Description</th>' & @CRLF & _
+						'  </tr>' & @CRLF
+				For $i = 2 To $asSplit[0] ; start at 2 to skip the return value type.
+					$sProcessed &= '  <tr>' & @CRLF
+
+					$asRegExp = StringRegExp($asSplit[$i], "(?i)\@Error:.*\@Extended:\s*+([\-\d\?]+),?\s*+Return:\s*+(.*)\s*+\=\s*+(.+)$", $STR_REGEXPARRAYGLOBALMATCH)
+					If IsArray($asRegExp) Then
+						$sProcessed &= '    <td>' & $asRegExp[0] & '</td>' & @CRLF & _
+								'    <td>' & $asRegExp[1] & '</td>' & @CRLF & _
+								'    <td>' & $asRegExp[2] & '</td>' & @CRLF & _
+								'  </tr>' & @CRLF
+					Else
+						$sProcessed &= '    <td colspan="2"><br /></td>' & @CRLF & _
+								'    <td>' & $asSplit[$i] & '</td>' & @CRLF & _
+								'  </tr>' & @CRLF
+						ConsoleWrite("! " & $sFuncName & ": Failed to identify @Error:, @Extended:, and Return: Success values, Adding to description: " & $asSplit[$i] & @CRLF)
+					EndIf
+
+				Next
+				$sProcessed &= '  </table>' & @CRLF
+			Else
+				ConsoleWrite("! " & $sFuncName & ": Only one line in Success return value, skipping: " & $sValues & @CRLF)
+			EndIf
+
+		ElseIf StringRegExp($sValues, "(?i)\@Error:.*\@Extended:") Then ; Dealing with error values.
+			If ($asSplit[0] > 1) Then
+				$sProcessed &= '  <table>' & @CRLF
+				For $i = 2 To $asSplit[0] ; start at 2 to skip the return value type.
+
+					$asRegExp = StringRegExp($asSplit[$i], "(?i)\@Error:\s*+(\d+),?\s*+\@Extended:\s*+([\-\d\?]+),?\s*+\=\s*+(.+)$", $STR_REGEXPARRAYGLOBALMATCH)
+					If IsArray($asRegExp) Then
+						If (Int($asRegExp[0]) <> $iLastErrorVal) Then ; Start a new table heading for a new error.
+							$sErrType = ""
+							For $j = 0 To UBound($avErrTypes) - 1
+								If (Int($asRegExp[0]) = $avErrTypes[$j][0]) Then
+									$sErrType = $avErrTypes[$j][1]
+									$iLastErrorVal = Int($asRegExp[0])
+									ExitLoop
+								EndIf
+							Next
+
+							If ($sErrType = "") Then ConsoleWrite("! " & $sFuncName & ": Failed to identify error type: " & $asRegExp[0] & @CRLF)
+
+							$sProcessed &= '  <tr class="yellowbold">' & @CRLF & _
+									'    <td colspan="2">' & $sErrType & ' Error(@Error: ' & $asRegExp[0] & ')</td>' & @CRLF & _
+									'  </tr>' & @CRLF & _
+									'  <tr>' & @CRLF & _
+									'    <th style="width:15%">@Extended:</th>' & @CRLF & _
+									'    <th style="width:85%">Description</th>' & @CRLF & _
+									'  </tr>' & @CRLF & _
+									'  <tr>' & @CRLF & _
+									'    <td>' & $asRegExp[1] & '</td>' & @CRLF & _
+									'    <td>' & $asRegExp[2] & '</td>' & @CRLF & _
+									'  </tr>' & @CRLF
+						Else ; Adding to last row
+							$sProcessed &= '  <tr>' & @CRLF & _
+									'    <td>' & $asRegExp[1] & '</td>' & @CRLF & _
+									'    <td>' & $asRegExp[2] & '</td>' & @CRLF & _
+									'  </tr>' & @CRLF
+						EndIf
+
+					Else ; Check if it is a Property setting error list.
+						$asRegExp = StringRegExp($asSplit[$i], "^\s*([\-\d]+)\s*+\=\s*+(.+)$", $STR_REGEXPARRAYGLOBALMATCH)
+						If IsArray($asRegExp) Then ; Adding to last row
+							$sProcessed &= '  <tr>' & @CRLF & _
+									'    <td>' & $asRegExp[0] & '</td>' & @CRLF & _
+									'    <td>' & $asRegExp[1] & '</td>' & @CRLF & _
+									'  </tr>' & @CRLF
+;~ 							ConsoleWrite("+ " & $sFuncName & ": Adding Property errors: " & $asSplit[$i] & @CRLF)
+						Else
+							If Not StringRegExp($asSplit[$i], "^\s*\-\-[\w ]*\-\-\<br\>\s*$") Then ; Check if I'm not skipping my internal error headings.
+								$sProcessed &= '  <tr>' & @CRLF & _
+										'    <td><br /></td>' & @CRLF & _
+										'    <td>' & $asSplit[$i] & '</td>' & @CRLF & _
+										'  </tr>'
+								ConsoleWrite("! " & $sFuncName & ": Failed to identify @Error:, @Extended: Error values, Adding to description: " & $asSplit[$i] & @CRLF)
+
+							Else
+;~ 								ConsoleWrite("> " & $sFuncName & ": Skipping internal error heading: " & $asSplit[$i] & @CRLF)
+							EndIf
+
+						EndIf
+
+					EndIf
+
+				Next
+				$sProcessed &= '  </table>' & @CRLF
+			Else
+				ConsoleWrite("! " & $sFuncName & ": Only one line in Error return value, skipping: " & $sValues & @CRLF)
+			EndIf
+
+		Else ; just return the values
+			$sProcessed = $sValues & '</td>' & @CRLF & _ ; End the column and row and table.
+				'    </tr>' & @CRLF & _
+				'  </table>' & @CRLF
+			ConsoleWrite("! " & $sFuncName & ": No @Error: or @Extended: values in return value, skipping: " & $sValues & @CRLF)
+		EndIf
+	EndIf
+
+	Return $sProcessed
+EndFunc   ;==>__ProcessReturnValues
 
 Func __Timer($bInitialize = False)
 	Local $iDiff, $iSeconds, $iMinutes, $iHours

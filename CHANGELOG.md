@@ -22,6 +22,16 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 ## [1.0.1] - 2027
 
+### LibreOfficeUDF
+
+#### Changed
+
+- Modified CHM maker to produce clearer error description formatting.
+
+#### Styled
+
+- Fixed a few headers with bad error description formatting.
+
 ### LibreOfficeMath
 
 #### Fixed
