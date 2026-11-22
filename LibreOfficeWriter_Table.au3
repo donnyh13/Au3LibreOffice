@@ -1822,7 +1822,7 @@ EndFunc   ;==>_LOWriter_TableCursor
 ;                  $iColumn             - [optional] Default is Null. The desired Column, See Remarks.
 ;                  $iRow                - [optional] Default is Null. The desired Row, See Remarks.
 ; Return values .: Success: Array or String.
-;                  @Error 0 @Extended 1 Return Array of Arrays = Array of Table data.
+;                  @Error: 0, @Extended: 1, Return: Array of Arrays = Array of Table data.
 ;                  @Error: 0, @Extended: 2, Return: Array = Returning a specific row of data.
 ;                  @Error: 0, @Extended: 3, Return: Array = Returning a specific column of data.
 ;                  @Error: 0, @Extended: 4, Return: String = Returning the data of a specific cell.

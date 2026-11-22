@@ -776,6 +776,7 @@ EndFunc   ;==>_LOWriter_DocDescription
 ; Return values .: Success: 1 or Array.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Settings were successfully set.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. All optional parameters were called with Null, returning current events as a two columned Array. @Extended set to number of events.
+;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oDoc not an Object.
 ;                  @Error: 1, @Extended: 2 = $asEvents not an array.
@@ -3413,12 +3414,12 @@ EndFunc   ;==>_LOWriter_DocSaveAs
 ;                  $oObj                - Default is Null. A selectable object. A Text Cursor with text selected, A ViewCursor with Text Selected, a Table Cursor with cells selected, a Shape or Frame Object, etc.
 ;                  $bReturnMultiAsObj   - [optional] Default is False. If True, when Multiple selections are present, they will be returned as a single Object. See Remarks.
 ; Return values .: Success: 1, Object or Array
-;                  @Error 0 @Extended -6 Return Object = Success. The current selection is within a Table, returning a Table Cursor Object.
-;                  @Error 0 @Extended -5 Return Object = Success. The current selection was a Frame, returning a Frame Object.
-;                  @Error 0 @Extended -4 Return Object = Success. The current selection was a Shape, returning a Shape Object.
-;                  @Error 0 @Extended -3 Return Object = Success. The current selection was a Chart or other OLE object, returning the Object.
-;                  @Error 0 @Extended -2 Return Object = Success. The current selection was an Image, returning a Image Object.
-;                  @Error 0 @Extended -1 Return Object = Success. The current selection is multiple disconnected selections and $bReturnMultiAsObj was True, Returning a single Object.
+;                  @Error: 0, @Extended: -6, Return: Object = Success. The current selection is within a Table, returning a Table Cursor Object.
+;                  @Error: 0, @Extended: -5, Return: Object = Success. The current selection was a Frame, returning a Frame Object.
+;                  @Error: 0, @Extended: -4, Return: Object = Success. The current selection was a Shape, returning a Shape Object.
+;                  @Error: 0, @Extended: -3, Return: Object = Success. The current selection was a Chart or other OLE object, returning the Object.
+;                  @Error: 0, @Extended: -2, Return: Object = Success. The current selection was an Image, returning a Image Object.
+;                  @Error: 0, @Extended: -1, Return: Object = Success. The current selection is multiple disconnected selections and $bReturnMultiAsObj was True, Returning a single Object.
 ;                  @Error: 0, @Extended: 0, Return: 1 = Success. Object called in $oObj successfully selected.
 ;                  @Error: 0, @Extended: 1, Return: Object = Success. The current selection is a single span of text. Returning a Text Cursor.
 ;                  @Error: 0, @Extended: ?, Return: Array = Success. The current selection is multiple disconnected selections. Returning an Array of Text Cursors. @Extended is set to number of results.

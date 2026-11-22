@@ -1256,7 +1256,7 @@ EndFunc   ;==>_LOBase_ReportDelete
 ; Syntax ........: _LOBase_ReportDocClose(ByRef $oReportDoc[, $bForceClose = False])
 ; Parameters ....: $oReportDoc          - A Report Document object returned by a previous _LOBase_ReportDocConnect, _LOBase_ReportDocOpen or _LOBase_ReportCreate function.
 ;                  $bForceClose         - [optional] Default is False. If True, the Report document will be closed regardless if there are unsaved changes. See remarks.
-; Return values .: Boolean
+; Return values .: Success: Boolean
 ;                  @Error: 0, @Extended: 0, Return: Boolean = Success. Returning a Boolean value of whether the Report Document was successfully closed (True), or not.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
