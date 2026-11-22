@@ -471,7 +471,7 @@ EndFunc   ;==>_LODraw_DrawShapeDimensionSettings
 ;                  @Error: 0, @Extended: 9, Return: Integer = Success. Shape is a $LOD_DRAWSHAPE_TYPE_LINE_DIMENSION Shape.
 ;                  @Error: 0, @Extended: 10, Return: Integer = Success. Shape is a *_LINE_POLYGON, or *_LINE_POLYGON_45 Type Shape. Returning $LOD_DRAWSHAPE_TYPE_LINE_POLYGON Constant Value. See Remarks #2.
 ;                  @Error: 0, @Extended: 11, Return: Integer = Success. Shape is a *_LINE_POLYGON_FILLED, or *_LINE_POLYGON_45_FILLED Type Shape. Returning $LOD_DRAWSHAPE_TYPE_LINE_POLYGON_FILLED Constant Value. See Remarks #2.
-;                  @Error: 0, @Extended: 11, Return: Integer = Success. Shape is a $LOD_DRAWSHAPE_TYPE_3D_* Type Shape. Returning $LOD_DRAWSHAPE_TYPE_3D_CONE Constant Value. See Remarks #5.
+;                  @Error: 0, @Extended: 12, Return: Integer = Success. Shape is a $LOD_DRAWSHAPE_TYPE_3D_* Type Shape. Returning $LOD_DRAWSHAPE_TYPE_3D_CONE Constant Value. See Remarks #5.
 ;                  Failure: 0 and sets @Error and @Extended to non-zero.
 ;                  --Input Errors--
 ;                  @Error: 1, @Extended: 1 = $oShape not an Object.
