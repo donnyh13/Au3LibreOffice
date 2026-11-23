@@ -1712,8 +1712,9 @@ Func __Timer($bInitialize = False)
 		$iMinutes = ($iMinutes - Int($iHours * 60))
 	EndIf
 
-	$sTime = ((IsNumber($iHours)) ? ($iHours & ":") : ("")) & ((IsNumber($iMinutes)) ? ($iMinutes & ":") : ("")) & ((IsNumber($iSeconds)) ? ($iSeconds) : (""))
+	$sTime = ((IsNumber($iHours)) ? ($iHours & ":") : ("")) & ((IsNumber($iMinutes)) ? ($iMinutes & ":") : ("")) & ((IsNumber($iSeconds)) ? (StringFormat("%02d", $iSeconds)) : (""))
 
+	If Not IsNumber($iMinutes) Then $sTime = StringRegExpReplace($sTime, "^0", "") ; If no minutes, drop any leading 0's.
 	If Not IsNumber($iMinutes) Then $sTime &= " seconds" ; If no minutes, append seconds to the time for clarity.
 
 	Return $sTime
