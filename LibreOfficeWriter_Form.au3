@@ -14668,7 +14668,7 @@ Func _LOWriter_FormParent(ByRef $oForm, $oParent = Null)
 
 	If Not IsObj($oParent) Then Return SetError($__LO_STATUS_INPUT_ERROR, 3, 0)
 	If Not $oParent.supportsService("com.sun.star.form.component.Form") And Not $oParent.supportsService("com.sun.star.text.TextDocument") Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
-	If ($oForm.Parent() = $oParent) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
+	If ($oParent.supportsService("com.sun.star.form.component.Form") And ($oForm.Parent() = $oParent)) Or ($oParent.supportsService("com.sun.star.text.TextDocument") And ($oForm.Parent() = $oParent.DrawPage.Forms())) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If ($oForm = $oParent) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
 
 	If Not $oDestParent.supportsService("com.sun.star.form.component.Form") Then $oDestParent = $oParent.DrawPage.Forms() ; Destination is a document.
