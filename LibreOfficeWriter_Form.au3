@@ -14148,9 +14148,8 @@ EndFunc   ;==>_LOWriter_FormConTimeFieldValue
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve parent Object.
 ;                  @Error: 3, @Extended: 2 = Failed to retrieve parent Document Object.
 ;                  @Error: 3, @Extended: 3 = Parent Document is Read Only.
-;                  @Error: 3, @Extended: 4 = Failed to retrieve Forms Object.
-;                  @Error: 3, @Extended: 5 = Failed to modify Form name.
-;                  @Error: 3, @Extended: 6 = Failed to delete form.
+;                  @Error: 3, @Extended: 4 = Failed to modify Form name.
+;                  @Error: 3, @Extended: 5 = Failed to delete form.
 ; Author ........: donnyh13
 ; Modified ......:
 ; Remarks .......:
@@ -14181,11 +14180,6 @@ Func _LOWriter_FormDelete(ByRef $oForm)
 
 	If $oDoc.IsReadOnly() Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)
 
-	If $oParent.supportsService("com.sun.star.text.TextDocument") Then
-		$oParent = $oParent.DrawPage.Forms()
-		If Not IsObj($oParent) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
-	EndIf
-
 	; Create a Unique name.
 	While $oParent.hasByName($sTempName & $iCount)
 		$iCount += 1
@@ -14193,11 +14187,11 @@ Func _LOWriter_FormDelete(ByRef $oForm)
 
 	; Rename the form.
 	$oForm.Name = $sTempName & $iCount
-	If Not ($oForm.Name() = $sTempName & $iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
+	If Not ($oForm.Name() = $sTempName & $iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 4, 0)
 
 	$oParent.removeByName($sTempName & $iCount)
 
-	If $oParent.hasByName($sTempName & $iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 6, 0)
+	If $oParent.hasByName($sTempName & $iCount) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 5, 0)
 
 	$oForm = Null
 
@@ -14627,7 +14621,7 @@ EndFunc   ;==>_LOWriter_FormGetObjByIndex
 ;                  @Error: 2, @Extended: 1 = Failed to clone the form Object.
 ;                  --Processing Errors--
 ;                  @Error: 3, @Extended: 1 = Failed to retrieve Form's parent Object.
-;                  @Error: 3, @Extended: 2 = Failed to retrieve Document's Forms Object.
+;                  @Error: 3, @Extended: 2 = Failed to retrieve Forms collection parent Document Object.
 ;                  @Error: 3, @Extended: 3 = Failed to retrieve Destination Parent Object.
 ;                  @Error: 3, @Extended: 4 = Failed to retrieve Form's name.
 ;                  @Error: 3, @Extended: 5 = Failed to rename Form.
@@ -14659,7 +14653,10 @@ Func _LOWriter_FormParent(ByRef $oForm, $oParent = Null)
 	If Not IsObj($oOldParent) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 1, 0)
 
 	If __LO_VarsAreNull($oParent) Then
-		If $oOldParent.supportsService("com.sun.star.text.TextDocument") Then ; Parent is a Document.
+		If $oOldParent.supportsService("com.sun.star.form.Forms") Then ; Parent is a Document because this is the "Forms" collection.
+
+			$oOldParent = $oOldParent.getParent() ; Get the actual Doc Object.
+			If Not IsObj($oOldParent) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 			Return SetError($__LO_STATUS_SUCCESS, 1, $oOldParent)
 
@@ -14673,9 +14670,6 @@ Func _LOWriter_FormParent(ByRef $oForm, $oParent = Null)
 	If Not $oParent.supportsService("com.sun.star.form.component.Form") And Not $oParent.supportsService("com.sun.star.text.TextDocument") Then Return SetError($__LO_STATUS_INPUT_ERROR, 4, 0)
 	If ($oForm.Parent() = $oParent) Then Return SetError($__LO_STATUS_INPUT_ERROR, 5, 0)
 	If ($oForm = $oParent) Then Return SetError($__LO_STATUS_INPUT_ERROR, 6, 0)
-
-	If $oOldParent.supportsService("com.sun.star.text.TextDocument") Then $oOldParent = $oOldParent.DrawPage.Forms()
-	If Not IsObj($oOldParent) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 2, 0)
 
 	If Not $oDestParent.supportsService("com.sun.star.form.component.Form") Then $oDestParent = $oParent.DrawPage.Forms() ; Destination is a document.
 	If Not IsObj($oDestParent) Then Return SetError($__LO_STATUS_PROCESSING_ERROR, 3, 0)

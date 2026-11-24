@@ -38,6 +38,12 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 - Wrong extension in `_LOMath_DocSave` example.
 
+### LibreOfficeWriter
+
+#### Fixed
+
+- `_LOWriter_FormParent` and `_LOWriter_FormDelete` were assuming a top-level form's parent was a Document Object, rather than the actual Forms collection Object.
+
 ## [1.0.0] - 2026-11-18
 
 ### LibreOfficeUDF
